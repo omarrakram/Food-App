@@ -6,8 +6,14 @@
  * without involving the model. Everything here is pure and unit-tested.
  */
 
-/** Arabic diacritics (harakat), superscript alef and tatweel carry no signal. */
-const ARABIC_DIACRITICS = /[\u064b-\u0652\u0670\u0640]/g;
+/**
+ * Arabic combining marks that carry no matching signal: harakat, superscript
+ * alef, tatweel, and — importantly — the hamza and maddah marks (U+0653-U+0655)
+ * that NFD decomposition splits `أ` and `آ` into. Without those last three, an
+ * NFD-decomposed alef-hamza leaves a stray mark that later becomes a space,
+ * and "أرز" stops matching "ارز".
+ */
+const ARABIC_DIACRITICS = /[\u064b-\u0655\u0670\u0640]/g;
 
 /** Latin combining marks left over after NFD decomposition. */
 const LATIN_COMBINING = /[\u0300-\u036f]/g;
@@ -76,7 +82,14 @@ function stripArabic(input: string): string {
 function singularise(word: string): string {
   if (word.length <= 3) return word;
   if (word.endsWith('ies') && word.length > 4) return `${word.slice(0, -3)}y`;
-  if (word.endsWith('ses') || word.endsWith('xes') || word.endsWith('hes')) {
+  // "-oes" belongs here too: without it "tomatoes" becomes "tomatoe" and never
+  // matches "tomato", which is the single most common ingredient in the app.
+  if (
+    word.endsWith('ses') ||
+    word.endsWith('xes') ||
+    word.endsWith('hes') ||
+    word.endsWith('oes')
+  ) {
     return word.slice(0, -2);
   }
   if (word.endsWith('s') && !word.endsWith('ss') && !word.endsWith('us')) {

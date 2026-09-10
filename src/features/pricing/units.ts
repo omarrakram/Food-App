@@ -38,16 +38,52 @@ export function isCountableUnit(unit: Unit): boolean {
 }
 
 /**
+ * How much one countable unit of a specific ingredient weighs — and, crucially,
+ * *which* countable unit that is.
+ *
+ * The unit matters: 60 g is the weight of one BUNCH of parsley, and using it to
+ * convert "1 clove" would silently produce a number that means nothing. Pairing
+ * the weight with its unit makes an unconvertible request return null instead.
+ */
+export type PerPieceWeight = {
+  unit: Unit;
+  grams: number;
+};
+
+/**
+ * Derives the per-piece weight for a catalogue entry.
+ *
+ * `gramsPerPiece` is quoted for whichever countable unit the ingredient is
+ * naturally counted in: its `defaultUnit` when that is countable (slices of
+ * bread, cloves of garlic), otherwise its `priceUnit` (yogurt is measured in
+ * grams but sold by the pot). When neither is countable there is no per-piece
+ * weight at all.
+ */
+export function perPieceWeightFor(
+  entry: { defaultUnit: Unit; priceUnit: Unit; gramsPerPiece: number | null } | null | undefined,
+): PerPieceWeight | null {
+  if (!entry || entry.gramsPerPiece === null) return null;
+
+  if (isCountableUnit(entry.defaultUnit)) {
+    return { unit: entry.defaultUnit, grams: entry.gramsPerPiece };
+  }
+  if (isCountableUnit(entry.priceUnit)) {
+    return { unit: entry.priceUnit, grams: entry.gramsPerPiece };
+  }
+  return null;
+}
+
+/**
  * Converts a quantity to grams.
  *
- * `gramsPerPiece` is required for countable units; when it is missing we return
- * null rather than inventing a weight — the caller then falls back to a
- * per-unit price instead of a per-kilo one.
+ * Returns null when the conversion is not defined — a countable unit with no
+ * matching per-piece weight. Callers must treat null as "cannot convert" and
+ * fall back to a whole-unit price rather than inventing a weight.
  */
 export function toGrams(
   quantity: number,
   unit: Unit,
-  gramsPerPiece: number | null,
+  perPiece: PerPieceWeight | null,
 ): number | null {
   if (!Number.isFinite(quantity) || quantity < 0) return null;
 
@@ -55,8 +91,10 @@ export function toGrams(
   if (absolute !== undefined) return quantity * absolute;
 
   if (PER_PIECE_UNITS.has(unit)) {
-    if (gramsPerPiece === null) return null;
-    return quantity * gramsPerPiece;
+    // Only the ingredient's OWN countable unit converts. A per-bunch weight
+    // says nothing about a clove.
+    if (!perPiece || perPiece.unit !== unit) return null;
+    return quantity * perPiece.grams;
   }
 
   return null;

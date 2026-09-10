@@ -16,6 +16,14 @@ module.exports = defineConfig([
     },
   },
   {
+    // Jest's module factories must be lazy, which `require()` is and `import`
+    // is not — the mock has to be constructed at call time, after hoisting.
+    files: ['jest.setup.ts', '**/__mocks__/**'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
     // Build scripts are Node programs, not React Native code: they have Node
     // globals and printing to stdout is their entire output contract.
     files: ['scripts/**/*.{ts,mjs,js}'],

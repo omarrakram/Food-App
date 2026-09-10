@@ -10,7 +10,7 @@ import type {
 } from '@/types/domain';
 
 import { priceBookFor, type PriceBook, type PriceQuote } from './price-book';
-import { scaleQuantity, toGrams } from './units';
+import { perPieceWeightFor, scaleQuantity, toGrams, type PerPieceWeight } from './units';
 
 /**
  * The budget engine.
@@ -61,7 +61,7 @@ export type RecipeCostEstimate = {
 export function costOfIngredient(
   ingredient: Pick<RecipeIngredient, 'quantity' | 'unit' | 'name'>,
   quote: PriceQuote,
-  gramsPerPiece: number | null,
+  perPiece: PerPieceWeight | null,
 ): { amountMinor: number; lowMinor: number; highMinor: number; isApproximate: boolean } {
   const quantity = ingredient.quantity;
   const unit: Unit | null = ingredient.unit;
@@ -79,8 +79,8 @@ export function costOfIngredient(
     return { amountMinor: 0, lowMinor: 0, highMinor: 0, isApproximate: true };
   }
 
-  const neededGrams = toGrams(quantity, unit, gramsPerPiece);
-  const quotedGrams = toGrams(quote.quantity, quote.unit, gramsPerPiece);
+  const neededGrams = toGrams(quantity, unit, perPiece);
+  const quotedGrams = toGrams(quote.quantity, quote.unit, perPiece);
 
   if (neededGrams !== null && quotedGrams !== null && quotedGrams > 0) {
     return scaleFrom(neededGrams / quotedGrams, false);
@@ -137,7 +137,7 @@ export function estimateRecipeCost(
     const cost = costOfIngredient(
       { ...ingredient, quantity: scaledQuantity },
       quote,
-      catalogueEntry?.gramsPerPiece ?? null,
+      perPieceWeightFor(catalogueEntry),
     );
 
     return {

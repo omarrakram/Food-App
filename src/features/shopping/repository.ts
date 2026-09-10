@@ -18,7 +18,7 @@ import type {
   Unit,
 } from '@/types/domain';
 
-import { toGrams, unitLabel } from '@/features/pricing/units';
+import { perPieceWeightFor, toGrams, unitLabel } from '@/features/pricing/units';
 
 /**
  * Shopping list.
@@ -103,11 +103,10 @@ export function mergeQuantities(
     return { quantity: existing.quantity + addition.quantity, unit: existing.unit };
   }
 
-  const catalogue = resolveIngredient(existing.name);
-  const gramsPerPiece = catalogue?.gramsPerPiece ?? null;
-  const existingGrams = existing.unit ? toGrams(existing.quantity, existing.unit, gramsPerPiece) : null;
-  const additionGrams = toGrams(addition.quantity, addition.unit, gramsPerPiece);
-  const oneExistingUnit = existing.unit ? toGrams(1, existing.unit, gramsPerPiece) : null;
+  const perPiece = perPieceWeightFor(resolveIngredient(existing.name));
+  const existingGrams = existing.unit ? toGrams(existing.quantity, existing.unit, perPiece) : null;
+  const additionGrams = toGrams(addition.quantity, addition.unit, perPiece);
+  const oneExistingUnit = existing.unit ? toGrams(1, existing.unit, perPiece) : null;
 
   if (existingGrams !== null && additionGrams !== null && oneExistingUnit) {
     const totalGrams = existingGrams + additionGrams;
@@ -212,11 +211,10 @@ export function estimateListTotal(
       unpricedCount += 1;
       continue;
     }
-    const catalogue = resolveIngredient(item.name);
     const cost = costOfIngredient(
       { name: item.name, quantity: item.quantity, unit: item.unit },
       quote,
-      catalogue?.gramsPerPiece ?? null,
+      perPieceWeightFor(resolveIngredient(item.name)),
     );
     totalMinor += cost.amountMinor;
   }

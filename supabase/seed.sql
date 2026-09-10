@@ -552,6 +552,10 @@ values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'gluten') on conflict do nothing
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'aish') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'aish baladi') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'eish') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'eish baladi') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'pita') on conflict do nothing;
