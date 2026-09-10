@@ -11,5 +11,8 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
-  "exclude": ["node_modules", "dist", "supabase/functions"]
+  // `scripts/` and `supabase/functions/` are Node and Deno programs. They are
+  // type-checked by their own configs, because React Native module resolution
+  // cannot resolve Node built-ins or Deno's URL imports.
+  "exclude": ["node_modules", "dist", "coverage", "scripts", "supabase/functions"]
 }

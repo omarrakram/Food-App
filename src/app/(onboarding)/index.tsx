@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Screen, ScreenFooter } from '@/components/ui/screen';
 import { Stepper } from '@/components/ui/stepper';
 import { Text } from '@/components/ui/text';
+import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useI18n } from '@/i18n';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
@@ -88,6 +89,7 @@ export default function OnboardingScreen() {
   const { t } = useI18n();
   const router = useRouter();
   const { preferences, completeOnboarding } = usePreferences();
+  const { isEnabled: authEnabled, status: authStatus } = useAuth();
 
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState<Draft>({});
@@ -144,6 +146,13 @@ export default function OnboardingScreen() {
 
   const finish = async () => {
     await completeOnboarding(draft);
+    // A guest who has just told us their diet, allergies and goals is the best
+    // moment to offer an account — their answers are the thing worth keeping.
+    // It stays an offer: `welcome` has a "look around first" route out.
+    if (authEnabled && authStatus === 'signed_out') {
+      router.replace('/(auth)/welcome');
+      return;
+    }
     router.replace('/');
   };
 

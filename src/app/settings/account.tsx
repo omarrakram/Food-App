@@ -1,0 +1,134 @@
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Alert, View } from 'react-native';
+
+import { Button } from '@/components/ui/button';
+import { ListGroup, ListRow } from '@/components/ui/list-row';
+import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
+import { Text } from '@/components/ui/text';
+import { useToast } from '@/components/ui/toast';
+import { useAuth } from '@/features/auth/auth-provider';
+import { usePreferences } from '@/features/preferences/preferences-provider';
+import { useI18n } from '@/i18n';
+import { presentError } from '@/lib/errors';
+import { useTheme } from '@/theme';
+
+export default function AccountSettingsScreen() {
+  const theme = useTheme();
+  const { t } = useI18n();
+  const router = useRouter();
+  const toast = useToast();
+  const { user, isEnabled, signOut, deleteAccount } = useAuth();
+  const { resetPreferences } = usePreferences();
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const confirmSignOut = () => {
+    Alert.alert(t('profile.signOutConfirm'), undefined, [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('profile.signOut'),
+        style: 'destructive',
+        onPress: () => {
+          void (async () => {
+            await signOut();
+            await resetPreferences();
+            router.replace('/(auth)/welcome');
+          })();
+        },
+      },
+    ]);
+  };
+
+  const confirmDelete = () => {
+    // Two-step, and the destructive label is explicit about permanence.
+    Alert.alert(t('profile.deleteAccountConfirm'), t('profile.deleteAccountBody'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('profile.deleteAccountAction'),
+        style: 'destructive',
+        onPress: () => {
+          void (async () => {
+            setIsDeleting(true);
+            try {
+              await deleteAccount();
+              await resetPreferences();
+              router.replace('/(auth)/welcome');
+            } catch (error) {
+              const presented = presentError(error);
+              toast.show({ message: t(presented.titleKey, presented.values), tone: 'danger' });
+            } finally {
+              setIsDeleting(false);
+            }
+          })();
+        },
+      },
+    ]);
+  };
+
+  if (!isEnabled) {
+    return (
+      <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.lg}>
+        <ScreenHeader title={t('profile.account')} />
+        <Text variant="body" color="textSecondary">
+          {t('profile.signInPrompt')}
+        </Text>
+      </ScreenScroll>
+    );
+  }
+
+  if (!user) {
+    return (
+      <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.lg}>
+        <ScreenHeader title={t('profile.account')} />
+        <Text variant="body" color="textSecondary">
+          {t('profile.signInPrompt')}
+        </Text>
+        <Button
+          label={t('auth.signIn')}
+          onPress={() => router.push('/(auth)/sign-in')}
+          size="lg"
+          testID="account-sign-in"
+        />
+      </ScreenScroll>
+    );
+  }
+
+  return (
+    <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.xl}>
+      <ScreenHeader title={t('profile.account')} />
+
+      <ListGroup>
+        <ListRow title={t('auth.email')} icon="mail-outline" value={user.email ?? ''} />
+        <ListRow
+          title={t('auth.password')}
+          icon="key-outline"
+          onPress={() => router.push('/(auth)/reset-password')}
+          testID="account-change-password"
+        />
+      </ListGroup>
+
+      <View style={{ gap: theme.spacing.sm }}>
+        <Button
+          label={t('profile.signOut')}
+          variant="secondary"
+          icon="log-out-outline"
+          onPress={confirmSignOut}
+          size="lg"
+          testID="account-sign-out"
+        />
+        <Button
+          label={t('profile.deleteAccount')}
+          variant="danger"
+          icon="trash-outline"
+          onPress={confirmDelete}
+          loading={isDeleting}
+          size="lg"
+          testID="account-delete"
+        />
+        <Text variant="footnote" color="textTertiary" align="center">
+          {t('profile.deleteAccountBody')}
+        </Text>
+      </View>
+    </ScreenScroll>
+  );
+}

@@ -1,9 +1,11 @@
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
+import { Button } from '@/components/ui/button';
 import { ListGroup, ListRow } from '@/components/ui/list-row';
 import { ScreenScroll } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
+import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useShoppingList } from '@/features/shopping/hooks';
 import { useI18n } from '@/i18n';
@@ -15,6 +17,7 @@ export default function ProfileScreen() {
   const { t } = useI18n();
   const router = useRouter();
   const { preferences } = usePreferences();
+  const { user, isEnabled: authEnabled } = useAuth();
   const shoppingList = useShoppingList();
 
   const uncheckedCount = (shoppingList.data ?? []).filter((item) => !item.isChecked).length;
@@ -38,12 +41,30 @@ export default function ProfileScreen() {
           </Text>
         </View>
         <Text variant="title2">{preferences.displayName ?? t('profile.guest')}</Text>
-        {preferences.city ? (
+        {user?.email ? (
+          <Text variant="footnote" color="textSecondary">
+            {user.email}
+          </Text>
+        ) : preferences.city ? (
           <Text variant="footnote" color="textSecondary">
             {preferences.city}
           </Text>
         ) : null}
       </View>
+
+      {authEnabled && !user ? (
+        <View style={{ gap: theme.spacing.sm }}>
+          <Text variant="callout" color="textSecondary" align="center">
+            {t('profile.signInPrompt')}
+          </Text>
+          <Button
+            label={t('auth.getStarted')}
+            onPress={() => router.push('/(auth)/welcome')}
+            size="lg"
+            testID="profile-sign-in"
+          />
+        </View>
+      ) : null}
 
       <ListGroup>
         <ListRow

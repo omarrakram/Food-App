@@ -15,4 +15,21 @@ module.exports = defineConfig([
       'import/no-unresolved': 'off',
     },
   },
+  {
+    // Build scripts are Node programs, not React Native code: they have Node
+    // globals and printing to stdout is their entire output contract.
+    files: ['scripts/**/*.{ts,mjs,js}'],
+    languageOptions: {
+      globals: {
+        Buffer: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
+        __dirname: 'readonly',
+      },
+    },
+    rules: {
+      'no-console': 'off',
+      'no-undef': 'off',
+    },
+  },
 ]);

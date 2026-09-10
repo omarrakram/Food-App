@@ -1,0 +1,23 @@
+{
+  // Node-flavoured config for the build scripts. Separate from the app's
+  // tsconfig because React Native module resolution cannot resolve Node
+  // built-ins, and these files import the app's catalogues by relative
+  // `.ts` path for Node's type-stripping loader.
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["../src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.mjs"]
+}

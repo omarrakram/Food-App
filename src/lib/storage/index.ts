@@ -16,6 +16,8 @@ export const StorageKeys = {
   recentIngredients: 'akla.recent.ingredients',
   recentSearches: 'akla.recent.searches',
   lastBudget: 'akla.recent.budget',
+  /** User ids whose guest data has already been copied to the server. */
+  migratedUsers: 'akla.migration.users',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];

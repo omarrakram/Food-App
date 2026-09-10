@@ -1,39 +1,44 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
+import { useRepositories } from '@/features/data/repositories';
 import { usePantryItems } from '@/features/pantry/hooks';
 import { usePreferences, requestDefaultsFrom } from '@/features/preferences/preferences-provider';
 import { toAppError } from '@/lib/errors';
 import type { MealRequest, Recipe, RecipeMatch } from '@/types/domain';
 
-import { localRecipeRepository } from './repository';
 import { rankRecipes } from './rank';
 
-const catalogueKey = ['akla', 'recipes', 'catalogue'] as const;
+const catalogueKey = (scope: string) => ['akla', 'recipes', 'catalogue', scope] as const;
 
 export function useRecipeCatalogue() {
+  const { recipes, scopeKey } = useRepositories();
+
   return useQuery({
-    queryKey: catalogueKey,
+    queryKey: catalogueKey(scopeKey),
     queryFn: async () => {
       try {
-        return await localRecipeRepository.catalogue();
+        return await recipes.catalogue();
       } catch (error) {
         throw toAppError(error, 'database');
       }
     },
-    // The bundled catalogue never changes within a session.
-    staleTime: Infinity,
+    // Catalogue content is stable within a session; the repository already
+    // falls back to the bundled set when the network is unavailable.
+    staleTime: 5 * 60_000,
   });
 }
 
 export function useRecipe(recipeId: string | undefined) {
+  const { recipes, scopeKey } = useRepositories();
+
   return useQuery({
-    queryKey: ['akla', 'recipe', recipeId ?? 'none'] as const,
+    queryKey: ['akla', 'recipe', scopeKey, recipeId ?? 'none'] as const,
     enabled: Boolean(recipeId),
     queryFn: async () => {
       if (!recipeId) return null;
       try {
-        return await localRecipeRepository.byId(recipeId);
+        return await recipes.byId(recipeId);
       } catch (error) {
         throw toAppError(error, 'not_found');
       }
