@@ -1,0 +1,272 @@
+import { Ionicons } from '@expo/vector-icons';
+import { useMemo, useState } from 'react';
+import { View } from 'react-native';
+
+import { PriceTag } from '@/components/recipe/price-tag';
+import { Button, IconButton } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { PressScale } from '@/components/ui/press-scale';
+import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
+import { Divider } from '@/components/ui/section';
+import { Sheet } from '@/components/ui/sheet';
+import { SkeletonList } from '@/components/ui/skeleton';
+import { EmptyState, ErrorState } from '@/components/ui/states';
+import { Text } from '@/components/ui/text';
+import { useToast } from '@/components/ui/toast';
+import { CATEGORY_ORDER } from '@/features/pantry/repository';
+import { formatQuantity } from '@/features/pricing/units';
+import { useShoppingList, useShoppingMutations, useShoppingTotal } from '@/features/shopping/hooks';
+import { useI18n } from '@/i18n';
+import { env } from '@/lib/config/env';
+import { presentError } from '@/lib/errors';
+import { useTheme } from '@/theme';
+import type { ShoppingListItem } from '@/types/domain';
+
+function Row({
+  item,
+  onToggle,
+  onRemove,
+}: {
+  item: ShoppingListItem;
+  onToggle: () => void;
+  onRemove: () => void;
+}) {
+  const theme = useTheme();
+  const { t, formatNumber } = useI18n();
+  const quantityLabel = formatQuantity(item.quantity, item.unit, (value) => formatNumber(value));
+
+  return (
+    <PressScale
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: item.isChecked }}
+      accessibilityLabel={item.name}
+      onPress={onToggle}
+      haptic="selection"
+      scaleTo={0.99}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: theme.spacing.md,
+        paddingVertical: theme.spacing.md,
+      }}
+      testID={`shopping-item-${item.id}`}
+    >
+      <Ionicons
+        name={item.isChecked ? 'checkbox' : 'square-outline'}
+        size={22}
+        color={item.isChecked ? theme.colors.success : theme.colors.borderStrong}
+      />
+      <View style={{ flex: 1, gap: 1 }}>
+        <Text
+          variant="body"
+          color={item.isChecked ? 'textTertiary' : 'text'}
+          style={item.isChecked ? { textDecorationLine: 'line-through' } : undefined}
+        >
+          {item.name}
+        </Text>
+        {item.sourceRecipeIds.length > 1 ? (
+          <Text variant="micro" color="textTertiary">
+            {t('shopping.mergedNotice')}
+          </Text>
+        ) : null}
+      </View>
+      {quantityLabel ? (
+        <Text variant="subhead" color="textSecondary">
+          {quantityLabel}
+        </Text>
+      ) : null}
+      <PressScale
+        accessibilityRole="button"
+        accessibilityLabel={t('common.remove')}
+        onPress={onRemove}
+        hitSlop={10}
+        scaleTo={0.85}
+      >
+        <Ionicons name="close" size={18} color={theme.colors.textTertiary} />
+      </PressScale>
+    </PressScale>
+  );
+}
+
+export default function ShoppingListScreen() {
+  const theme = useTheme();
+  const { t } = useI18n();
+  const toast = useToast();
+
+  const { data: items, isLoading, isError, error, refetch } = useShoppingList();
+  const { add, toggle, remove, clearChecked } = useShoppingMutations();
+  const total = useShoppingTotal(items);
+
+  const [addOpen, setAddOpen] = useState(false);
+  const [newItem, setNewItem] = useState('');
+  const [orderOpen, setOrderOpen] = useState(false);
+
+  const grouped = useMemo(() => {
+    if (!items) return [];
+    const buckets = new Map<string, ShoppingListItem[]>();
+    for (const item of items) {
+      const bucket = buckets.get(item.category);
+      if (bucket) bucket.push(item);
+      else buckets.set(item.category, [item]);
+    }
+    return CATEGORY_ORDER.filter((category) => buckets.has(category)).map((category) => ({
+      category,
+      items: buckets.get(category) ?? [],
+    }));
+  }, [items]);
+
+  const checkedCount = (items ?? []).filter((item) => item.isChecked).length;
+
+  const handleAdd = () => {
+    const name = newItem.trim();
+    if (!name) return;
+    add.mutate({ name });
+    setNewItem('');
+    setAddOpen(false);
+  };
+
+  return (
+    <>
+      <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.lg}>
+        <ScreenHeader
+          title={t('shopping.title')}
+          right={
+            <IconButton
+              icon="add"
+              onPress={() => setAddOpen(true)}
+              accessibilityLabel={t('shopping.addItem')}
+              size={40}
+              testID="shopping-add"
+            />
+          }
+        />
+
+        {isLoading ? (
+          <SkeletonList count={5} variant="row" />
+        ) : isError ? (
+          <ErrorState
+            title={t(presentError(error).titleKey)}
+            body={t(presentError(error).bodyKey)}
+            action={{ label: t('common.retry'), onPress: () => void refetch() }}
+          />
+        ) : (items?.length ?? 0) === 0 ? (
+          <EmptyState
+            icon="cart-outline"
+            title={t('shopping.empty')}
+            body={t('shopping.emptyBody')}
+            action={{ label: t('shopping.addItem'), onPress: () => setAddOpen(true) }}
+            testID="shopping-empty"
+          />
+        ) : (
+          <>
+            {total ? (
+              <View
+                style={{
+                  gap: theme.spacing.xs,
+                  padding: theme.spacing.lg,
+                  borderRadius: theme.radius.lg,
+                  backgroundColor: theme.colors.surface,
+                  ...theme.elevation(1),
+                }}
+              >
+                <Text variant="caption" color="textTertiary">
+                  {t('shopping.estimatedTotal')}
+                </Text>
+                <PriceTag priced={total.priced} size="lg" />
+                <Text variant="micro" color="textTertiary">
+                  {t('shopping.estimatedTotalNote')}
+                </Text>
+              </View>
+            ) : null}
+
+            {grouped.map((group) => (
+              <View key={group.category} style={{ gap: theme.spacing.xs }}>
+                <Text variant="caption" color="textTertiary">
+                  {t(`category.${group.category}` as const)}
+                </Text>
+                {group.items.map((item, index) => (
+                  <View key={item.id}>
+                    <Row
+                      item={item}
+                      onToggle={() => toggle.mutate({ id: item.id, isChecked: !item.isChecked })}
+                      onRemove={() => remove.mutate(item.id)}
+                    />
+                    {index < group.items.length - 1 ? <Divider /> : null}
+                  </View>
+                ))}
+              </View>
+            ))}
+
+            <View style={{ gap: theme.spacing.sm, marginTop: theme.spacing.md }}>
+              {checkedCount > 0 ? (
+                <Button
+                  label={t('shopping.clearChecked')}
+                  variant="secondary"
+                  icon="trash-outline"
+                  onPress={() =>
+                    clearChecked.mutate(undefined, {
+                      onSuccess: () =>
+                        toast.show({ message: t('shopping.checked', { count: checkedCount }) }),
+                    })
+                  }
+                  size="md"
+                  fullWidth
+                  testID="shopping-clear-checked"
+                />
+              ) : null}
+
+              <Button
+                label={t('shopping.orderAll')}
+                icon="bag-handle-outline"
+                variant="ghost"
+                onPress={() => setOrderOpen(true)}
+                size="md"
+                fullWidth
+                testID="shopping-order"
+              />
+            </View>
+          </>
+        )}
+      </ScreenScroll>
+
+      <Sheet
+        visible={addOpen}
+        onClose={() => setAddOpen(false)}
+        title={t('shopping.addItem')}
+        scrollable={false}
+        footer={
+          <Button
+            label={t('common.add')}
+            onPress={handleAdd}
+            disabled={!newItem.trim()}
+            size="lg"
+            testID="shopping-add-submit"
+          />
+        }
+      >
+        <Input
+          value={newItem}
+          onChangeText={setNewItem}
+          placeholder={t('cook.inputPlaceholder')}
+          autoFocus
+          autoCapitalize="none"
+          onSubmitEditing={handleAdd}
+          testID="shopping-add-input"
+        />
+      </Sheet>
+
+      <Sheet
+        visible={orderOpen}
+        onClose={() => setOrderOpen(false)}
+        title={t('grocery.notAvailableTitle')}
+        scrollable={false}
+      >
+        <Text variant="body" color="textSecondary">
+          {env.enableGroceryOrdering
+            ? t('shopping.orderUnavailable')
+            : t('grocery.notAvailableBody', { country: env.defaultCountry })}
+        </Text>
+      </Sheet>
+    </>
+  );
+}
