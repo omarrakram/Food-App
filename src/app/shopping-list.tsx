@@ -13,11 +13,12 @@ import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState, ErrorState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
+import { isOrderingAvailable } from '@/features/grocery/registry';
 import { CATEGORY_ORDER } from '@/features/pantry/repository';
 import { formatQuantity } from '@/features/pricing/units';
+import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useShoppingList, useShoppingMutations, useShoppingTotal } from '@/features/shopping/hooks';
 import { useI18n } from '@/i18n';
-import { env } from '@/lib/config/env';
 import { presentError } from '@/lib/errors';
 import { useTheme } from '@/theme';
 import type { ShoppingListItem } from '@/types/domain';
@@ -93,7 +94,11 @@ export default function ShoppingListScreen() {
   const { t } = useI18n();
   const toast = useToast();
 
+  const { preferences } = usePreferences();
   const { data: items, isLoading, isError, error, refetch } = useShoppingList();
+  // Asks the provider registry rather than a flag: ordering is available only
+  // when a real provider is registered, enabled AND serves this country.
+  const orderingAvailable = isOrderingAvailable(preferences.country);
   const { add, toggle, remove, clearChecked } = useShoppingMutations();
   const total = useShoppingTotal(items);
 
@@ -262,9 +267,9 @@ export default function ShoppingListScreen() {
         scrollable={false}
       >
         <Text variant="body" color="textSecondary">
-          {env.enableGroceryOrdering
+          {orderingAvailable
             ? t('shopping.orderUnavailable')
-            : t('grocery.notAvailableBody', { country: env.defaultCountry })}
+            : t('grocery.notAvailableBody', { country: preferences.country })}
         </Text>
       </Sheet>
     </>

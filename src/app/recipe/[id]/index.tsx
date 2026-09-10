@@ -26,8 +26,8 @@ import { formatQuantity, scaleQuantity } from '@/features/pricing/units';
 import { useRecipe } from '@/features/recipes/hooks';
 import { useIsSaved, useRecordHistory, useToggleSave } from '@/features/saved/hooks';
 import { useShoppingMutations } from '@/features/shopping/hooks';
+import { isOrderingAvailable } from '@/features/grocery/registry';
 import { useI18n } from '@/i18n';
-import { env } from '@/lib/config/env';
 import { divideMoney } from '@/lib/format/money';
 import { useTheme } from '@/theme';
 import type { IngredientMatch, Recipe } from '@/types/domain';
@@ -575,7 +575,7 @@ export default function RecipeDetailScreen() {
       >
         <View style={{ gap: theme.spacing.md }}>
           <Text variant="body" color="textSecondary">
-            {env.enableGroceryOrdering
+            {isOrderingAvailable(preferences.country)
               ? t('grocery.notAvailableBody', { country: preferences.country })
               : t('recipe.orderComingSoonBody')}
           </Text>

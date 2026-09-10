@@ -345,6 +345,9 @@ export type RecipeMatch = {
  * Shaped now for a future where each line maps onto a real store product.
  * The `store*` fields stay null until a `GroceryProvider` fills them in.
  */
+/** Stock state a store reports for a product. */
+export type Availability = 'in_stock' | 'low_stock' | 'out_of_stock' | 'unknown';
+
 export type ShoppingListItem = {
   id: string;
   listId: string;
@@ -364,7 +367,7 @@ export type ShoppingListItem = {
   storeProductId: string | null;
   sku: string | null;
   livePriceMinor: number | null;
-  availability: 'in_stock' | 'low_stock' | 'out_of_stock' | 'unknown' | null;
+  availability: Availability | null;
 
   createdAt: string;
   updatedAt: string;
