@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
+import { requestSuggestions } from '@/features/ai/client';
+import { useAuth } from '@/features/auth/auth-provider';
 import { useRepositories } from '@/features/data/repositories';
+import { expiringSoonItems } from '@/features/ingredients/freshness';
 import { usePantryItems } from '@/features/pantry/hooks';
 import { usePreferences, requestDefaultsFrom } from '@/features/preferences/preferences-provider';
+import { env } from '@/lib/config/env';
 import { toAppError } from '@/lib/errors';
 import type { MealRequest, Recipe, RecipeMatch } from '@/types/domain';
 
 import { rankRecipes } from './rank';
+import { requestFingerprint } from './request-params';
 
 const catalogueKey = (scope: string) => ['akla', 'recipes', 'catalogue', scope] as const;
 
@@ -79,7 +84,17 @@ export function useMealRequest(overrides: Partial<MealRequest> & Pick<MealReques
  * results, it does not replace them — so the app still answers "what can I
  * eat?" with no network and no API key.
  */
-export function useLocalSuggestions(request: MealRequest, limit = 20): {
+export function useLocalSuggestions(
+  request: MealRequest,
+  limit = 20,
+  /**
+   * Extra recipes to rank alongside the catalogue — currently AI-generated
+   * ones. They go THROUGH `rankRecipes`, not around it, so the allergen and
+   * diet filters apply to generated recipes exactly as they do to curated
+   * ones. This is the second of the two allergen checks.
+   */
+  extraRecipes: readonly Recipe[] = [],
+): {
   matches: RecipeMatch[];
   isLoading: boolean;
   recipes: Recipe[];
@@ -89,11 +104,11 @@ export function useLocalSuggestions(request: MealRequest, limit = 20): {
 
   const matches = useMemo(() => {
     if (!catalogue.data) return [];
-    return rankRecipes(catalogue.data, request, {
+    return rankRecipes([...catalogue.data, ...extraRecipes], request, {
       pantryItems: pantry.data ?? [],
       limit,
     });
-  }, [catalogue.data, pantry.data, request, limit]);
+  }, [catalogue.data, pantry.data, request, limit, extraRecipes]);
 
   return {
     matches,
@@ -103,22 +118,76 @@ export function useLocalSuggestions(request: MealRequest, limit = 20): {
 }
 
 /**
+ * AI-generated recipes for a request.
+ *
+ * Supplements the catalogue, never replaces it. Disabled when signed out or
+ * unconfigured, and a failure resolves to an empty list plus an error the
+ * caller may surface — the results screen still has local matches to show.
+ */
+export function useAiSuggestions(request: MealRequest, enabled: boolean) {
+  const pantry = usePantryItems();
+  const { recipes: repository } = useRepositories();
+
+  const expiring = useMemo(
+    () => expiringSoonItems(pantry.data ?? []).map((item) => item.ingredientName),
+    [pantry.data],
+  );
+
+  const fingerprint = useMemo(() => requestFingerprint(request), [request]);
+
+  return useQuery({
+    queryKey: ['akla', 'ai', 'suggest', fingerprint] as const,
+    enabled,
+    // A generation costs real money, so the same request within a session is
+    // answered from cache rather than regenerated.
+    staleTime: 30 * 60_000,
+    gcTime: 60 * 60_000,
+    retry: false,
+    queryFn: async () => {
+      const result = await requestSuggestions({ request, expiringSoon: expiring });
+      // Cache generated recipes locally so their detail pages resolve after
+      // the results screen is gone.
+      if (result.recipes.length > 0) {
+        await repository.cacheGenerated(result.recipes);
+      }
+      return result;
+    },
+  });
+}
+
+/**
  * The suggestion entry point every results screen uses.
  *
- * Phase 2 answers purely from the local catalogue. Phase 6 layers AI-generated
- * recipes on top inside this same hook (see `useAiSuggestions`), so screens do
- * not change when generation is switched on.
+ * Answers from the local catalogue immediately, then merges generated recipes
+ * in when they arrive. The local answer is never gated on the network: "what
+ * can I cook?" resolves offline, with or without an API key.
  */
 export function useMealSuggestions(request: MealRequest, limit = 20) {
-  const local = useLocalSuggestions(request, limit);
+  const { status } = useAuth();
   const catalogue = useRecipeCatalogue();
+
+  // Generation needs a signed-in caller: the edge function derives the user
+  // from their JWT to rate-limit and account for the call.
+  const aiEnabled = status === 'signed_in' && env.hasSupabase;
+  const ai = useAiSuggestions(request, aiEnabled);
+
+  const generated = ai.data?.recipes ?? EMPTY_RECIPES;
+  const local = useLocalSuggestions(request, limit, generated);
 
   return {
     matches: local.matches,
     isLoading: local.isLoading,
+    /** True while generation is still in flight but local results already show. */
+    isGenerating: ai.isFetching,
     error: catalogue.error ?? undefined,
+    /** Set when generation failed. Local results are unaffected. */
+    generationError: ai.data?.error ?? null,
     refetch: () => {
       void catalogue.refetch();
+      if (aiEnabled) void ai.refetch();
     },
   };
 }
+
+/** Stable identity so the memo in `useLocalSuggestions` does not thrash. */
+const EMPTY_RECIPES: readonly Recipe[] = [];

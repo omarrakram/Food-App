@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
 
 import { Badge } from '@/components/ui/badge';
 import { Chip } from '@/components/ui/chip';
@@ -38,6 +38,10 @@ export type ResultsViewProps = {
   matches: RecipeMatch[];
   isLoading: boolean;
   error?: unknown;
+  /** True while AI generation is still running behind already-shown results. */
+  isGenerating?: boolean;
+  /** Set when generation failed. Non-blocking: local results still render. */
+  generationError?: unknown;
   onRetry?: () => void;
   onAdjust?: () => void;
   /** Extra content rendered above the list, e.g. the budget summary. */
@@ -56,6 +60,8 @@ export function ResultsView({
   matches,
   isLoading,
   error,
+  isGenerating = false,
+  generationError,
   onRetry,
   onAdjust,
   header,
@@ -125,9 +131,21 @@ export function ResultsView({
           gap: theme.spacing.sm,
         }}
       >
-        <Text variant="footnote" color="textSecondary">
-          {t('results.count', { count: sorted.length })}
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
+          <Text variant="footnote" color="textSecondary">
+            {t('results.count', { count: sorted.length })}
+          </Text>
+          {isGenerating ? (
+            // Generation runs behind results that are already useful, so this
+            // is an ambient hint rather than a spinner over the whole screen.
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <ActivityIndicator size="small" color={theme.colors.textTertiary} />
+              <Text variant="micro" color="textTertiary">
+                {t('results.generatingMore')}
+              </Text>
+            </View>
+          ) : null}
+        </View>
         {request.budgetMinor !== null ? (
           <Badge label={t('budget.estimateNoticeShort')} tone="neutral" icon="information-circle" />
         ) : null}
@@ -149,6 +167,23 @@ export function ResultsView({
           />
         ))}
       </ScrollView>
+
+      {generationError ? (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: theme.spacing.sm,
+            padding: theme.spacing.md,
+            borderRadius: theme.radius.md,
+            backgroundColor: theme.colors.surfaceAlt,
+          }}
+        >
+          <Text variant="footnote" color="textSecondary" style={{ flex: 1 }}>
+            {t(presentError(generationError).bodyKey, presentError(generationError).values)}
+          </Text>
+        </View>
+      ) : null}
 
       <View style={{ gap: theme.layout.cardGap }}>
         {sorted.map((match) => (

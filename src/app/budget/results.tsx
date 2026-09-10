@@ -22,7 +22,8 @@ export default function BudgetResultsScreen() {
   const params = useLocalSearchParams();
 
   const request = useMemo(() => decodeRequest(params, preferences), [params, preferences]);
-  const { matches, isLoading, error, refetch } = useMealSuggestions(request);
+  const { matches, isLoading, error, isGenerating, generationError, refetch } =
+    useMealSuggestions(request);
 
   const locale = language === 'ar' ? 'ar-EG' : 'en-US';
   const budgetLabel = request.budgetMinor
@@ -74,6 +75,8 @@ export default function BudgetResultsScreen() {
           matches={matches}
           isLoading={isLoading}
           error={error}
+          isGenerating={isGenerating}
+          generationError={generationError}
           onRetry={refetch}
           onAdjust={() => router.back()}
           header={header}

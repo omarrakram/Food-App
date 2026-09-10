@@ -122,6 +122,7 @@ export const en = {
   'results.count_other': '{count} ideas',
   'results.generating': 'Finding meals you can actually make…',
   'results.generatingSub': 'Checking your ingredients, preferences and budget',
+  'results.generatingMore': 'Finding more ideas…',
   'results.empty': 'No meals matched',
   'results.emptyBody': 'Try removing a filter, raising your budget, or adding one more ingredient.',
   'results.matchFull': 'You have everything',

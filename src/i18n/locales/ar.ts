@@ -96,6 +96,7 @@ export const ar: Partial<Record<TranslationKey, string>> = {
 
   'results.title': 'وجبات تناسبك',
   'results.generating': 'نبحث عن وجبات تقدر تعملها فعلًا…',
+  'results.generatingMore': 'نبحث عن أفكار أخرى…',
   'results.empty': 'لا توجد وجبات مطابقة',
   'results.emptyBody': 'جرّب إزالة فلتر، أو رفع الميزانية، أو إضافة مكوّن آخر.',
   'results.matchFull': 'كل المكوّنات متوفرة عندك',

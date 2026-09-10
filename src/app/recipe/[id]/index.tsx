@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PriceTag } from '@/components/recipe/price-tag';
+import { RecipePlaceholder } from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
@@ -229,18 +230,22 @@ export default function RecipeDetailScreen() {
     <>
       <ScreenScroll padded={false} edges={{ top: false }} bottomInset={theme.spacing.huge}>
         <View style={{ position: 'relative' }}>
-          <Image
-            source={recipe.imageUrl}
-            contentFit="cover"
-            transition={250}
-            cachePolicy="memory-disk"
-            accessibilityIgnoresInvertColors
-            style={{
-              width: '100%',
-              aspectRatio: theme.layout.heroImageAspect,
-              backgroundColor: theme.colors.surfaceAlt,
-            }}
-          />
+          {recipe.imageUrl ? (
+            <Image
+              source={recipe.imageUrl}
+              contentFit="cover"
+              transition={250}
+              cachePolicy="memory-disk"
+              accessibilityIgnoresInvertColors
+              style={{
+                width: '100%',
+                aspectRatio: theme.layout.heroImageAspect,
+                backgroundColor: theme.colors.surfaceAlt,
+              }}
+            />
+          ) : (
+            <RecipePlaceholder aspectRatio={theme.layout.heroImageAspect} />
+          )}
           <LinearGradient
             colors={['rgba(0,0,0,0.35)', 'rgba(0,0,0,0)']}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120 }}

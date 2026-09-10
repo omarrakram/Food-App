@@ -18,7 +18,8 @@ export default function CookResultsScreen() {
   const params = useLocalSearchParams();
 
   const request = useMemo(() => decodeRequest(params, preferences), [params, preferences]);
-  const { matches, isLoading, error, refetch } = useMealSuggestions(request);
+  const { matches, isLoading, error, isGenerating, generationError, refetch } =
+    useMealSuggestions(request);
 
   return (
     <ScreenScroll bottomInset={theme.spacing.xxl} contentGap={theme.spacing.md}>
@@ -29,6 +30,8 @@ export default function CookResultsScreen() {
           matches={matches}
           isLoading={isLoading}
           error={error}
+          isGenerating={isGenerating}
+          generationError={generationError}
           onRetry={refetch}
           onAdjust={() => router.back()}
         />

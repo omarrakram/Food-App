@@ -1,0 +1,60 @@
+# Edge functions
+
+Server-side operations. **Every secret the app depends on lives here and only
+here** — the mobile bundle can reach none of it.
+
+| Function | Purpose |
+|---|---|
+| `ai-suggest` | Generates recipes for a meal request |
+| `ai-interpret` | Decomposes a natural-language query the deterministic parser could not |
+
+## Why these are functions and not client code
+
+The Anthropic API key cannot be shipped in an app bundle. Everything else
+follows from that: the caller is identified from their Supabase JWT, rate
+limits are counted from a table clients cannot write to, and prompts stay
+server-side so they are neither exposed nor editable.
+
+## Secrets
+
+```bash
+supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+supabase secrets set ANTHROPIC_MODEL=claude-opus-5          # optional
+supabase secrets set ANTHROPIC_EFFORT=medium                # low|medium|high|xhigh|max
+supabase secrets set AI_RATE_LIMIT_PER_HOUR=30
+supabase secrets set AI_RATE_LIMIT_PER_DAY=150
+supabase secrets set ALLOWED_ORIGINS=https://app.example.com   # web builds only
+```
+
+`SUPABASE_URL`, `SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are
+injected by the platform.
+
+## Deploy
+
+```bash
+supabase functions deploy ai-suggest
+supabase functions deploy ai-interpret
+```
+
+## Local
+
+```bash
+supabase functions serve --env-file supabase/functions/.env
+```
+
+`supabase/functions/.env` is git-ignored. It is the only place a real API key
+should ever sit on a developer machine.
+
+## Shared schema
+
+`_shared/anthropic.ts` and both functions import the response contract from
+`src/features/ai/schema.ts` — the same module the app validates against. One
+Zod schema generates both the JSON Schema sent to the model and the validation
+applied to its reply, so the constraint and the check cannot disagree.
+
+## Behaviour under failure
+
+Nothing here is load-bearing for the product. If the key is missing, the model
+declines, the response fails validation twice, or the user is rate-limited, the
+function returns a stable error code and the app answers from its local
+catalogue instead. "What can I cook?" always gets an answer.

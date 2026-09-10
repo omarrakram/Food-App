@@ -65,7 +65,8 @@ export default function SearchScreen() {
     [baseRequest, interpretation, submitted],
   );
 
-  const { matches, isLoading, error, refetch } = useMealSuggestions(request);
+  const { matches, isLoading, error, isGenerating, generationError, refetch } =
+    useMealSuggestions(request);
 
   const locale = language === 'ar' ? 'ar-EG' : 'en-US';
 
@@ -168,6 +169,8 @@ export default function SearchScreen() {
             matches={matches}
             isLoading={isLoading}
             error={error}
+            isGenerating={isGenerating}
+            generationError={generationError}
             onRetry={refetch}
             onAdjust={() => setSubmitted('')}
           />

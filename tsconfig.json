@@ -4,6 +4,11 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
+    // `src/features/ai/schema.ts` is loaded by both Metro and the Deno runtime
+    // that executes the edge functions. Deno requires explicit file extensions
+    // on relative imports, so that module writes them; this flag lets the app's
+    // type-checker accept the same source.
+    "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./src/*"],
