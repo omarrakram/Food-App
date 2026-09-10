@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'claude/**']
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: Typecheck, lint, test, bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck (app and build scripts)
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test:ci
+
+      - name: Verify the generated seed is in step with its TypeScript source
+        run: |
+          npm run seed:generate
+          git diff --exit-code supabase/seed.sql \
+            || (echo "::error::supabase/seed.sql is stale. Run 'npm run seed:generate' and commit." && exit 1)
+
+      - name: Production bundle
+        run: npx expo export --platform web
+        env:
+          # Deliberately unset Supabase credentials: the bundle must build, and
+          # the app must run, without a backend configured.
+          EXPO_PUBLIC_APP_ENV: preview
+
+  database:
+    name: Migrations, seed and RLS policies
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install psql
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Apply migrations, seed, and run the RLS suite
+        run: ./scripts/db-test.sh
+        env:
+          PGHOST: localhost
+          PGPORT: '5432'
+          PGUSER: postgres
+          PGPASSWORD: postgres

@@ -261,6 +261,8 @@ $$;
 set request.jwt.claim.sub = '11111111-1111-1111-1111-111111111111';
 
 do $$
+declare
+  affected integer;
 begin
   perform pg_temp.assert(
     (select count(*) from public.recipes
@@ -275,6 +277,29 @@ begin
     insert into public.recipe_steps (recipe_id, step_number, instruction)
     values ('55555555-5555-5555-5555-555555555555', 2, 'injected')
   $stmt$, 'alice cannot add steps to basem recipe');
+
+  -- A client must not be able to push its own recipe into everyone else's
+  -- Discover feed: `is_public` is what the read policy keys on.
+  perform pg_temp.assert_rejected($stmt$
+    insert into public.recipes (title, source, created_by, is_public)
+    values ('Published by a client', 'user',
+            '11111111-1111-1111-1111-111111111111', true)
+  $stmt$, 'a client cannot insert a public recipe');
+
+  insert into public.recipes (id, title, source, created_by, is_public)
+  values ('66666666-6666-6666-6666-666666666666', 'Alice private recipe', 'user',
+          '11111111-1111-1111-1111-111111111111', false);
+
+  perform pg_temp.assert_rejected($stmt$
+    update public.recipes set is_public = true
+    where id = '66666666-6666-6666-6666-666666666666'
+  $stmt$, 'a client cannot publish its own recipe afterwards');
+
+  -- The row itself is still editable, just not publishable.
+  update public.recipes set title = 'Renamed'
+  where id = '66666666-6666-6666-6666-666666666666';
+  get diagnostics affected = row_count;
+  perform pg_temp.assert(affected = 1, 'a client can still edit its own private recipe');
 end
 $$;
 
