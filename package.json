@@ -27,7 +27,9 @@
     "fn:serve": "supabase functions serve --env-file supabase/functions/.env",
     "fn:deploy": "supabase functions deploy",
     "eas:build:preview": "eas build --profile preview",
-    "eas:build:prod": "eas build --profile production"
+    "eas:build:prod": "eas build --profile production",
+    "seed:generate": "node --experimental-strip-types --no-warnings scripts/generate-seed.ts",
+    "db:test": "./scripts/db-test.sh"
   },
   "jest": {
     "preset": "jest-expo",
