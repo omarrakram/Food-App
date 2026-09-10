@@ -1,56 +1,236 @@
-# Welcome to your Expo app 👋
+# Akla
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Know what to eat, tonight.**
 
-## Get started
+A mobile app that answers *"what should I eat?"* from what is already in your
+kitchen, what is in your wallet, and what your body and diet allow. Built for
+Egypt first, in EGP, with the architecture to add other markets.
 
-1. Install dependencies
+> **Akla** is a working name (Egyptian Arabic: *أكلة*, "a dish"). Renaming it
+> touches three files — see PROJECT_STATUS.md § Renaming.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## Documentation
 
-   ```bash
-   npx expo start
-   ```
+| File | Read it for |
+|---|---|
+| **PROJECT_STATUS.md** | **Start here.** Current state, what is next, known issues, credentials needed |
+| ARCHITECTURE.md | How the system fits together and why the boundaries sit where they do |
+| PRODUCT_SPEC.md | What the product does and the rules it will not break |
+| DATABASE_SCHEMA.md | Tables, policies, indexes, and the reasoning |
+| DEVELOPMENT_PLAN.md | The ten phases and their exit criteria |
+| TEST_PLAN.md | What is tested, what is not yet, and the rules |
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Stack
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6
+(strict) · Supabase (Postgres, Auth, Edge Functions) · TanStack Query 5 · Zod 4
+· Reanimated 4 · EAS Build
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Local development
+
+### Requirements
+- Node 22+
+- An iOS or Android device with Expo Go, or a simulator
+- *(optional)* Docker + Supabase CLI for a local database
+- *(optional)* Postgres client (`psql`) to run the database test suite
+
+### Setup
 
 ```bash
-npm run reset-project
+git clone <repo> && cd Food-App
+npm install
+cp .env.example .env.local
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+`.env.local` is optional. **With no Supabase credentials the app still runs
+fully** — pantry, recipes, budgeting, shopping list and cooking mode all work
+on local storage, and sign-in hides itself. Fill it in when you want accounts
+and sync.
 
-### Other setup steps
+### Run
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+npx expo start          # then press i / a, or scan the QR code
+npx expo start --ios
+npx expo start --android
+npx expo start --web
+```
 
-## Learn more
+> **In restricted network environments** (including Claude Code Web), prefix
+> Expo CLI commands with `EXPO_OFFLINE=1`. `api.expo.dev` is commonly blocked,
+> and offline mode resolves versions from the local SDK manifest instead.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Checks
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm run typecheck     # app + build scripts
+npm run lint
+npm test
+npm run verify        # all three
 
-## Join the community
+npm run format
+```
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Database
+
+### Against a hosted Supabase project
+
+```bash
+npx supabase link --project-ref YOUR_PROJECT_REF
+npm run db:push          # apply migrations
+psql "$DATABASE_URL" -f supabase/seed.sql
+npm run db:types         # regenerate src/lib/supabase/database.types.ts
+```
+
+### Locally
+
+```bash
+npm run db:start         # supabase start
+npm run db:reset         # re-apply migrations + seed
+```
+
+### Regenerating the seed
+
+`supabase/seed.sql` is **generated** — the app bundles the same ingredient and
+recipe data for offline use, and generation is what stops the two drifting.
+
+```bash
+npm run seed:generate    # from src/features/{ingredients,recipes}
+```
+
+Edit `src/features/ingredients/catalogue.ts` or
+`src/features/recipes/fixtures.ts`, regenerate, and commit both.
+
+### Database and RLS test suite
+
+```bash
+PGHOST=/tmp PGPORT=5432 PGUSER=postgres ./scripts/db-test.sh
+```
+
+Applies every migration and the seed to a throwaway database and runs 37
+assertions covering cross-user isolation, forged foreign keys, reference-data
+immutability, rate-limit tamper resistance and account-deletion cascade. Plain
+Postgres is enough — `supabase/tests/00_platform_shim.sql` recreates the pieces
+of the Supabase platform the schema depends on.
+
+---
+
+## Edge functions
+
+Secrets live only here, never in the app bundle.
+
+```bash
+npx supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+npx supabase functions deploy
+
+# locally
+npm run fn:serve         # reads supabase/functions/.env (git-ignored)
+```
+
+---
+
+## Environment variables
+
+`.env.example` documents every variable. The rule that matters:
+
+- `EXPO_PUBLIC_*` is **embedded in the shipped app bundle**. Only the Supabase
+  URL, the anon key, feature flags and OAuth client ids belong there. The anon
+  key is safe *only because RLS is enabled on every table*.
+- Everything else — `ANTHROPIC_API_KEY`, the service-role key, grocery provider
+  credentials — is a Supabase Function secret and must never be prefixed with
+  `EXPO_PUBLIC_`.
+
+`src/lib/config/env.ts` can only read `EXPO_PUBLIC_*` variables, so a secret
+cannot be imported into client code by accident.
+
+---
+
+## Production builds
+
+```bash
+npm install -g eas-cli
+eas login
+eas init                                    # writes the project id into app.json
+
+eas build --profile preview  --platform all      # internal distribution
+eas build --profile production --platform all    # store-ready
+
+eas submit --platform ios
+eas submit --platform android
+```
+
+`eas.json` is not committed yet — see PROJECT_STATUS.md § Phase 10.
+
+---
+
+## Project structure
+
+```
+src/
+  app/                Expo Router routes — thin, no business logic
+  components/
+    ui/               Design system
+    recipe/ pantry/   Feature components
+    navigation/
+  features/
+    auth/             Session, validation, error mapping
+    data/             Repository wiring, guest-data migration
+    ingredients/      Catalogue, normalisation, matching, freshness
+    pantry/ saved/ shopping/    Repositories + query hooks
+    pricing/          Units, price book, deterministic cost estimation
+    recipes/          Fixtures, ranking, row mapping
+    search/           Deterministic query interpretation
+    preferences/
+  i18n/               Typed translations (en source of truth, ar partial)
+  lib/                config, errors, format, logger, storage, supabase
+  theme/              Tokens + palettes
+  types/              Domain vocabulary
+supabase/
+  migrations/         9 migrations
+  functions/          Edge functions (Phase 6)
+  tests/              Platform shim + RLS suite
+  seed.sql            GENERATED
+scripts/              Seed generation, database test runner
+```
+
+---
+
+## Definition of done for the MVP
+
+| | Status |
+|---|---|
+| App launches, navigation works | ✅ |
+| Signup / login / reset / delete account | ✅ |
+| Onboarding | ✅ |
+| Pantry | ✅ |
+| Ingredient-based meal generation | ✅ local catalogue · ⬜ AI |
+| Budget-based meal generation | ✅ local catalogue · ⬜ AI |
+| Recipe detail + cooking mode | ✅ |
+| Shopping list | ✅ |
+| Saved recipes | ✅ |
+| Preferences | ✅ |
+| Supabase migrations + RLS | ✅ (37 assertions passing) |
+| Claude calls server-side only | ⬜ Phase 6 |
+| No secrets in the client | ✅ |
+| Loading / error / empty states | ✅ |
+| Type checking passes | ✅ |
+| Linting passes | ✅ |
+| Unit tests pass | ⬜ Phase 10 |
+| Production build | ✅ web verified · ⬜ native (needs EAS project) |
+| EAS configuration | ⬜ Phase 10 |
+| `.env.example` complete | ✅ |
+| Grocery-provider architecture | ✅ schema + reserved fields · ◐ adapter module |
+
+---
+
+## Licence
+
+Unpublished. All rights reserved.
