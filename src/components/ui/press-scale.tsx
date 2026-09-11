@@ -3,6 +3,7 @@ import { Platform, Pressable, type PressableProps, type ViewStyle } from 'react-
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
+  useReducedMotion,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
@@ -54,10 +55,21 @@ export function PressScale({
   const theme = useTheme();
   const pressProgress = useSharedValue(0);
 
+  /**
+   * Honours "Reduce Motion".
+   *
+   * Someone who turns that on is usually telling the system that movement
+   * makes them unwell. The press feedback stays — it just becomes a dim rather
+   * than a scale, so the control still visibly responds without anything
+   * moving.
+   */
+  const reduceMotion = useReducedMotion();
+  const effectiveScaleTo = reduceMotion ? 1 : scaleTo;
+
   const animatedStyle = useAnimatedStyle(() => {
     const pressDim = 1 - pressProgress.get() * (1 - dimTo);
     return {
-      transform: [{ scale: 1 - pressProgress.get() * (1 - scaleTo) }],
+      transform: [{ scale: 1 - pressProgress.get() * (1 - effectiveScaleTo) }],
       opacity: (disabled ? disabledOpacity : 1) * pressDim,
     };
   });
@@ -68,7 +80,13 @@ export function PressScale({
   };
 
   const handlePressOut: NonNullable<PressableProps['onPressOut']> = (event) => {
-    pressProgress.set(withSpring(0, { damping: 18, stiffness: 260 }));
+    // A spring overshoots, which is the part reduced motion is asking us not
+    // to do; a straight fade releases just as clearly.
+    pressProgress.set(
+      reduceMotion
+        ? withTiming(0, { duration: theme.duration.instant })
+        : withSpring(0, { damping: 18, stiffness: 260 }),
+    );
     onPressOut?.(event);
   };
 

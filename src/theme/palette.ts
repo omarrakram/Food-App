@@ -57,6 +57,17 @@ export type Palette = {
   textOnPrimary: string;
 
   primary: string;
+  /**
+   * Background for a FILLED button, which carries a text label.
+   *
+   * Separate from `primary` because the two have different jobs: the accent
+   * has to stay vivid for icons, borders and progress, while a label sitting
+   * on top has to clear 4.5:1. White on paprika500 is 3.48:1 — the brand
+   * colour is simply too light to put text on.
+   */
+  primaryStrong: string;
+  successStrong: string;
+  dangerStrong: string;
   primaryPressed: string;
   primarySoft: string;
   primarySoftText: string;
@@ -109,6 +120,9 @@ export const palettes: Record<ColorScheme, Palette> = {
     textOnPrimary: '#FFFFFF',
 
     primary: brand.paprika500,
+    primaryStrong: brand.paprika600,
+    successStrong: brand.basil600,
+    dangerStrong: brand.chili600,
     primaryPressed: brand.paprika600,
     primarySoft: brand.paprika50,
     primarySoftText: brand.paprika700,
@@ -153,9 +167,12 @@ export const palettes: Record<ColorScheme, Palette> = {
     text: '#F7F2EC',
     textSecondary: '#B3A79C',
     textTertiary: '#8A7E74',
-    textOnPrimary: '#FFFFFF',
+    textOnPrimary: '#1A1614',
 
     primary: brand.paprika400,
+    primaryStrong: brand.paprika400,
+    successStrong: brand.basil400,
+    dangerStrong: brand.chili400,
     primaryPressed: brand.paprika300,
     primarySoft: '#3A2318',
     primarySoftText: brand.paprika200,

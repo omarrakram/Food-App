@@ -5,6 +5,7 @@ import { useTheme } from '@/theme';
 
 import { PressScale } from './press-scale';
 import { Text } from './text';
+import { hitSlopFor } from './touch-target';
 
 export type ChipProps = {
   label: string;
@@ -38,6 +39,8 @@ export function Chip({
 }: ChipProps) {
   const theme = useTheme();
   const height = size === 'sm' ? 32 : 40;
+  // The pill stays small; the thumb target does not. See touch-target.ts.
+  const hitSlop = hitSlopFor(height);
   const paddingH = size === 'sm' ? theme.spacing.md : theme.spacing.lg;
 
   const toneColors = {
@@ -77,6 +80,7 @@ export function Chip({
       disabled={disabled || (!onPress && !onRemove)}
       onPress={onRemove ?? onPress}
       haptic="selection"
+      hitSlop={hitSlop}
       scaleTo={0.94}
       disabledOpacity={0.45}
       style={[

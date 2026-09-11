@@ -4,6 +4,7 @@ import { ActivityIndicator, View, type ViewStyle } from 'react-native';
 import { useTheme } from '@/theme';
 
 import { PressScale } from './press-scale';
+import { hitSlopFor } from './touch-target';
 import { Text, type TextColor } from './text';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
@@ -51,11 +52,11 @@ export function Button({
   const stretch = fullWidth ?? size === 'lg';
 
   const surface: Record<ButtonVariant, { bg: string; border: string; fg: TextColor }> = {
-    primary: { bg: theme.colors.primary, border: 'transparent', fg: 'textOnPrimary' },
+    primary: { bg: theme.colors.primaryStrong, border: 'transparent', fg: 'textOnPrimary' },
     secondary: { bg: theme.colors.surfaceAlt, border: theme.colors.border, fg: 'text' },
     ghost: { bg: 'transparent', border: 'transparent', fg: 'primary' },
-    danger: { bg: theme.colors.danger, border: 'transparent', fg: 'textOnPrimary' },
-    success: { bg: theme.colors.success, border: 'transparent', fg: 'textOnPrimary' },
+    danger: { bg: theme.colors.dangerStrong, border: 'transparent', fg: 'textOnPrimary' },
+    success: { bg: theme.colors.successStrong, border: 'transparent', fg: 'textOnPrimary' },
   };
   const { bg, border, fg } = surface[variant];
   const foreground = theme.colors[fg];
@@ -73,6 +74,8 @@ export function Button({
       disabled={isDisabled}
       onPress={onPress}
       haptic={variant === 'ghost' ? 'selection' : 'light'}
+      // The small size is 36pt tall by design; the touch target is not.
+      hitSlop={hitSlopFor(dims.height)}
       scaleTo={0.97}
       disabledOpacity={0.45}
       style={[
