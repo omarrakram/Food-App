@@ -15,6 +15,7 @@ const base: MealRequest = {
   maxCalories: null,
   query: null,
   dietaryPreference: 'none',
+  dietFlags: [],
   allergens: [],
   dislikedIngredients: [],
   appliances: [],

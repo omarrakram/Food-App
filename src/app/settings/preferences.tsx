@@ -1,10 +1,10 @@
-import { useState } from 'react';
+
 import { View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
-import { Input } from '@/components/ui/input';
 import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
+import { TagInput } from '@/components/ui/tag-input';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { usePreferences } from '@/features/preferences/preferences-provider';
@@ -13,10 +13,12 @@ import { useTheme } from '@/theme';
 import {
   ALLERGENS,
   CUISINES,
-  DIETARY_PREFERENCES,
+  DIET_FLAGS,
+  EATING_STYLES,
   GOALS,
   type Allergen,
   type Cuisine,
+  type DietFlag,
 } from '@/types/domain';
 
 function Group({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
@@ -44,8 +46,6 @@ export default function PreferencesSettingsScreen() {
   const toast = useToast();
   const { preferences, updatePreferences } = usePreferences();
 
-  const [dislikeDraft, setDislikeDraft] = useState('');
-
   const toggleAllergen = (allergen: Allergen) => {
     const next = preferences.allergens.includes(allergen)
       ? preferences.allergens.filter((entry) => entry !== allergen)
@@ -60,33 +60,42 @@ export default function PreferencesSettingsScreen() {
     void updatePreferences({ preferredCuisines: next });
   };
 
-  const addDislike = () => {
-    const value = dislikeDraft.trim().toLowerCase();
-    if (!value || preferences.dislikedIngredients.includes(value)) {
-      setDislikeDraft('');
-      return;
-    }
-    void updatePreferences({ dislikedIngredients: [...preferences.dislikedIngredients, value] });
-    setDislikeDraft('');
+  const toggleDietFlag = (flag: DietFlag) => {
+    const next = preferences.dietFlags.includes(flag)
+      ? preferences.dietFlags.filter((entry) => entry !== flag)
+      : [...preferences.dietFlags, flag];
+    void updatePreferences({ dietFlags: next });
   };
 
   return (
     <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.xxl}>
       <ScreenHeader title={t('profile.preferences')} />
 
-      <Group title={t('onboarding.dietTitle')}>
-        {DIETARY_PREFERENCES.map((diet) => (
+      <Group title={t('onboarding.eatingStyleLabel')}>
+        {EATING_STYLES.map((style) => (
           <Chip
-            key={diet}
-            label={t(`diet.${diet}` as const)}
-            selected={preferences.dietaryPreference === diet}
-            onPress={() => void updatePreferences({ dietaryPreference: diet })}
-            testID={`pref-diet-${diet}`}
+            key={style}
+            label={t(`diet.${style}` as const)}
+            selected={preferences.dietaryPreference === style}
+            onPress={() => void updatePreferences({ dietaryPreference: style })}
+            testID={`pref-diet-${style}`}
           />
         ))}
       </Group>
 
-      <Group title={t('onboarding.allergyTitle')} subtitle={t('onboarding.allergyBody')}>
+      <Group title={t('onboarding.dietFlagsLabel')} subtitle={t('onboarding.dietFlagsHint')}>
+        {DIET_FLAGS.map((flag: DietFlag) => (
+          <Chip
+            key={flag}
+            label={t(`diet.${flag}` as const)}
+            selected={preferences.dietFlags.includes(flag)}
+            onPress={() => toggleDietFlag(flag)}
+            testID={`pref-dietflag-${flag}`}
+          />
+        ))}
+      </Group>
+
+      <Group title={t('onboarding.allergyLabel')} subtitle={t('onboarding.allergyBody')}>
         {ALLERGENS.map((allergen) => (
           <Chip
             key={allergen}
@@ -99,7 +108,7 @@ export default function PreferencesSettingsScreen() {
         ))}
       </Group>
 
-      <Group title={t('onboarding.goalTitle')}>
+      <Group title={t('onboarding.goalLabel')}>
         {GOALS.map((goal) => (
           <Chip
             key={goal}
@@ -111,7 +120,7 @@ export default function PreferencesSettingsScreen() {
         ))}
       </Group>
 
-      <Group title={t('onboarding.cuisineTitle')} subtitle={t('onboarding.cuisineBody')}>
+      <Group title={t('onboarding.cuisineLabel')} subtitle={t('onboarding.cuisineBody')}>
         {CUISINES.map((cuisine) => (
           <Chip
             key={cuisine}
@@ -125,38 +134,17 @@ export default function PreferencesSettingsScreen() {
 
       <View style={{ gap: theme.spacing.sm }}>
         <View style={{ gap: 2 }}>
-          <Text variant="headline">{t('onboarding.dislikeTitle')}</Text>
+          <Text variant="headline">{t('onboarding.dislikeLabel')}</Text>
           <Text variant="footnote" color="textSecondary">
             {t('onboarding.dislikeBody')}
           </Text>
         </View>
-        <Input
-          value={dislikeDraft}
-          onChangeText={setDislikeDraft}
-          onSubmitEditing={addDislike}
+        <TagInput
+          values={preferences.dislikedIngredients}
+          onChange={(dislikedIngredients) => void updatePreferences({ dislikedIngredients })}
           placeholder={t('onboarding.dislikePlaceholder')}
-          returnKeyType="done"
-          autoCapitalize="none"
           testID="pref-dislike-input"
         />
-        {preferences.dislikedIngredients.length > 0 ? (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-            {preferences.dislikedIngredients.map((name) => (
-              <Chip
-                key={name}
-                label={name}
-                selected
-                onRemove={() =>
-                  void updatePreferences({
-                    dislikedIngredients: preferences.dislikedIngredients.filter(
-                      (entry) => entry !== name,
-                    ),
-                  })
-                }
-              />
-            ))}
-          </View>
-        ) : null}
       </View>
 
       <Button

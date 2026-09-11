@@ -10,7 +10,12 @@ import {
 
 import { currencyForCountry } from '@/lib/format/money';
 import { getItem, removeItem, setItem, StorageKeys } from '@/lib/storage';
-import { DEFAULT_PREFERENCES, type UserPreferences } from '@/types/domain';
+import {
+  DEFAULT_PREFERENCES,
+  toDietFlags,
+  toEatingStyle,
+  type UserPreferences,
+} from '@/types/domain';
 
 /**
  * User preferences, local-first.
@@ -62,6 +67,16 @@ export function mergePreferences(
   }
   // Household size must stay sane; the UI clamps too, but this is the guard.
   next.householdSize = Math.min(20, Math.max(1, next.householdSize));
+
+  // Diet migration. Earlier builds stored one value for both the eating style
+  // and the halal/keto flags, so someone who picked "halal" had their
+  // vegetarian answer overwritten. Recover what we can: a stored flag becomes a
+  // flag, anything that is not a style becomes "none", and nothing already
+  // migrated is touched twice.
+  const rawDiet: string = next.dietaryPreference;
+  next.dietaryPreference = toEatingStyle(rawDiet);
+  next.dietFlags = Array.from(new Set([...(next.dietFlags ?? []), ...toDietFlags(rawDiet)]));
+
   return next;
 }
 
@@ -178,6 +193,7 @@ export function requestDefaultsFrom(preferences: UserPreferences) {
     country: preferences.country,
     servings: preferences.householdSize,
     dietaryPreference: preferences.dietaryPreference,
+    dietFlags: preferences.dietFlags,
     allergens: preferences.allergens,
     dislikedIngredients: preferences.dislikedIngredients,
     appliances: preferences.appliances,

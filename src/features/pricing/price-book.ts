@@ -102,3 +102,19 @@ export function priceBookFor(country: CountryCode, currency: CurrencyCode): Pric
 export function registerPriceBook(country: CountryCode, book: PriceBook): void {
   BOOKS[country] = book;
 }
+
+/**
+ * Whether we can quote prices in this country at all.
+ *
+ * Budget features are only honest where a real survey exists. Rather than keep
+ * a second list in the UI that can drift, this reads the registry itself: a
+ * country is supported exactly when a book has been registered for it.
+ */
+export function isCountrySupported(country: CountryCode): boolean {
+  return BOOKS[country] !== undefined;
+}
+
+/** Countries the UI may offer as fully working today. */
+export function supportedCountries(): CountryCode[] {
+  return Object.keys(BOOKS) as CountryCode[];
+}

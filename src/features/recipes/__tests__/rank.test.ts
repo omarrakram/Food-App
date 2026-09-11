@@ -5,6 +5,7 @@ import {
   containsDislikedIngredient,
   rankRecipes,
   satisfiesDiet,
+  satisfiesDietFlags,
   sortMatches,
   violatesAllergens,
 } from '../rank';
@@ -25,6 +26,7 @@ function baseRequest(overrides: Partial<MealRequest> = {}): MealRequest {
     maxCalories: null,
     query: null,
     dietaryPreference: 'none',
+    dietFlags: [],
     allergens: [],
     dislikedIngredients: [],
     appliances: [],
@@ -355,5 +357,61 @@ describe('sortMatches', () => {
     sortMatches(matches, 'cheapest');
 
     expect(matches.map((entry) => entry.recipe.id)).toEqual(original);
+  });
+});
+
+/**
+ * Before the split, diet was a single value: choosing "halal" overwrote
+ * "vegetarian", so the app silently stopped honouring the eating style. These
+ * pin the two down as independent constraints that compose.
+ */
+describe('diet flags compose with the eating style', () => {
+  const ketoFriendly = makeRecipe({
+    id: 'keto-ok',
+    dietTags: [],
+    nutrition: { calories: 400, proteinGrams: 30, carbsGrams: 10, fatGrams: 20, fiberGrams: 4 },
+  });
+  const carbHeavy = makeRecipe({
+    id: 'carb-heavy',
+    dietTags: [],
+    nutrition: { calories: 700, proteinGrams: 20, carbsGrams: 90, fatGrams: 15, fiberGrams: 6 },
+  });
+
+  it('applies keto as its own constraint', () => {
+    expect(satisfiesDietFlags(ketoFriendly, ['keto'])).toBe(true);
+    expect(satisfiesDietFlags(carbHeavy, ['keto'])).toBe(false);
+  });
+
+  it('requires EVERY flag to pass, not just one', () => {
+    // Curated, so halal passes; carb-heavy, so keto must fail the pair.
+    expect(satisfiesDietFlags(carbHeavy, ['halal'])).toBe(true);
+    expect(satisfiesDietFlags(carbHeavy, ['halal', 'keto'])).toBe(false);
+  });
+
+  it('treats no flags as no constraint', () => {
+    expect(satisfiesDietFlags(carbHeavy, [])).toBe(true);
+  });
+
+  it('EXCLUDES via flags during ranking even when the eating style allows it', () => {
+    const request = baseRequest({ dietaryPreference: 'none', dietFlags: ['keto'] });
+    const outcomes = applyConstraints([ketoFriendly, carbHeavy], request);
+
+    expect(outcomes.find((entry) => entry.recipe.id === 'keto-ok')?.excludedBy).toBeNull();
+    expect(outcomes.find((entry) => entry.recipe.id === 'carb-heavy')?.excludedBy).toBe('diet');
+  });
+
+  it('enforces the style and the flag together', () => {
+    const meaty = makeRecipe({
+      id: 'meaty',
+      dietTags: [],
+      ingredients: [ingredient('chicken breast')],
+      nutrition: { calories: 400, proteinGrams: 40, carbsGrams: 5, fatGrams: 15, fiberGrams: 2 },
+    });
+    const request = baseRequest({ dietaryPreference: 'vegetarian', dietFlags: ['keto'] });
+    const outcomes = applyConstraints([meaty, ketoFriendly], request);
+
+    // Keto alone would admit the chicken; vegetarian is still in force.
+    expect(outcomes.find((entry) => entry.recipe.id === 'meaty')?.excludedBy).toBe('diet');
+    expect(outcomes.find((entry) => entry.recipe.id === 'keto-ok')?.excludedBy).toBeNull();
   });
 });

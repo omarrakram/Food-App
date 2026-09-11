@@ -10,7 +10,8 @@
 // --- Money & markets -------------------------------------------------------
 
 /** ISO-3166-1 alpha-2. Egypt is the launch market; the list grows over time. */
-export type CountryCode = 'EG' | 'SA' | 'AE' | 'US' | 'GB';
+export const COUNTRY_CODES = ['EG', 'SA', 'AE', 'GB', 'US'] as const;
+export type CountryCode = (typeof COUNTRY_CODES)[number];
 
 /** ISO-4217. */
 export type CurrencyCode = 'EGP' | 'SAR' | 'AED' | 'USD' | 'GBP';
@@ -44,6 +45,24 @@ export type PricedAmount = {
 
 // --- Preferences -----------------------------------------------------------
 
+/**
+ * Diet is two independent things, and collapsing them into one list was wrong.
+ *
+ * An eating style says which foods are off the table, and the four values are
+ * genuinely exclusive: you are not vegan *and* pescatarian. Halal and keto are
+ * orthogonal — a halal keto vegetarian is an ordinary person, not an edge
+ * case — so they are flags that coexist with any style and with each other.
+ *
+ * `DIETARY_PREFERENCES` remains the union of both, because a recipe's
+ * `dietTags` legitimately carries "vegan" and "halal" side by side, and the
+ * database column and the model contract are both typed on it.
+ */
+export const EATING_STYLES = ['none', 'vegetarian', 'vegan', 'pescatarian'] as const;
+export type EatingStyle = (typeof EATING_STYLES)[number];
+
+export const DIET_FLAGS = ['halal', 'keto'] as const;
+export type DietFlag = (typeof DIET_FLAGS)[number];
+
 export const DIETARY_PREFERENCES = [
   'none',
   'vegetarian',
@@ -54,6 +73,18 @@ export const DIETARY_PREFERENCES = [
   'other',
 ] as const;
 export type DietaryPreference = (typeof DIETARY_PREFERENCES)[number];
+
+/** Narrows a stored value written before styles and flags were separated. */
+export function toEatingStyle(value: string | null | undefined): EatingStyle {
+  return (EATING_STYLES as readonly string[]).includes(value ?? '')
+    ? (value as EatingStyle)
+    : 'none';
+}
+
+/** Recovers flags from a legacy single-choice value such as 'halal'. */
+export function toDietFlags(value: string | null | undefined): DietFlag[] {
+  return (DIET_FLAGS as readonly string[]).includes(value ?? '') ? [value as DietFlag] : [];
+}
 
 export const ALLERGENS = [
   'nuts',
@@ -119,7 +150,10 @@ export type UserPreferences = {
   city: string | null;
   currency: CurrencyCode;
   householdSize: number;
-  dietaryPreference: DietaryPreference;
+  /** Exclusive: vegetarian, vegan and pescatarian cannot combine. */
+  dietaryPreference: EatingStyle;
+  /** Independent of the style and of each other: halal, keto. */
+  dietFlags: DietFlag[];
   /** Hard constraints. Never relaxed, never overridden by the model. */
   allergens: Allergen[];
   /** Soft constraints — free-text ingredient names the user avoids. */
@@ -144,6 +178,7 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
   currency: 'EGP',
   householdSize: 2,
   dietaryPreference: 'none',
+  dietFlags: [],
   allergens: [],
   dislikedIngredients: [],
   primaryGoal: 'good_food',
@@ -406,7 +441,8 @@ export type MealRequest = {
   /** Free-text query, present for `mode === 'search'`. */
   query: string | null;
   /** Copied from preferences at request time so results are reproducible. */
-  dietaryPreference: DietaryPreference;
+  dietaryPreference: EatingStyle;
+  dietFlags: DietFlag[];
   allergens: Allergen[];
   dislikedIngredients: string[];
   appliances: Appliance[];

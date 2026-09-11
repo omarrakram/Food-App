@@ -25,7 +25,7 @@ export default function KitchenSettingsScreen() {
       <ScreenHeader title={t('profile.kitchen')} />
 
       <View style={{ gap: theme.spacing.sm }}>
-        <Text variant="headline">{t('onboarding.appliancesTitle')}</Text>
+        <Text variant="headline">{t('onboarding.appliancesLabel')}</Text>
         <Text variant="footnote" color="textSecondary">
           {t('onboarding.appliancesBody')}
         </Text>
@@ -43,9 +43,9 @@ export default function KitchenSettingsScreen() {
       </View>
 
       <View style={{ gap: theme.spacing.sm }}>
-        <Text variant="headline">{t('onboarding.skillTitle')}</Text>
+        <Text variant="headline">{t('onboarding.skillLabel')}</Text>
         <Text variant="footnote" color="textSecondary">
-          {t('onboarding.skillBody')}
+          {t('onboarding.kitchenBody')}
         </Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
           {SKILL_LEVELS.map((level) => (

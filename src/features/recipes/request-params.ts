@@ -112,6 +112,7 @@ export function requestFingerprint(request: MealRequest): string {
     request.query ?? '',
     request.servings,
     request.dietaryPreference,
+    [...(request.dietFlags ?? [])].sort().join(','),
     [...request.allergens].sort().join(','),
   ].join('~');
 }

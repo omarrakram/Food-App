@@ -109,6 +109,7 @@ export async function requestSuggestions(input: SuggestInput): Promise<SuggestRe
       // server-side, so a preference edit takes effect on the next request.
       allergens: request.allergens,
       dietaryPreference: request.dietaryPreference,
+      dietFlags: request.dietFlags,
       dislikedIngredients: request.dislikedIngredients,
       appliances: request.appliances,
       skillLevel: request.skillLevel,

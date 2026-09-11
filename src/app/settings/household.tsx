@@ -6,18 +6,12 @@ import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { Stepper } from '@/components/ui/stepper';
 import { Text } from '@/components/ui/text';
 import { usePreferences } from '@/features/preferences/preferences-provider';
+import { isCountrySupported } from '@/features/pricing/price-book';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
-import type { CountryCode } from '@/types/domain';
+import { COUNTRY_CODES, type CountryCode } from '@/types/domain';
 
 /** Markets we can price for today. Others are accepted but priced as "unknown". */
-const COUNTRIES: { code: CountryCode; label: string }[] = [
-  { code: 'EG', label: 'Egypt' },
-  { code: 'SA', label: 'Saudi Arabia' },
-  { code: 'AE', label: 'UAE' },
-  { code: 'GB', label: 'United Kingdom' },
-  { code: 'US', label: 'United States' },
-];
 
 export default function HouseholdSettingsScreen() {
   const theme = useTheme();
@@ -46,16 +40,23 @@ export default function HouseholdSettingsScreen() {
       <View style={{ gap: theme.spacing.sm }}>
         <Text variant="headline">{t('onboarding.country')}</Text>
         <Text variant="footnote" color="textSecondary">
-          {t('onboarding.locationBody')}
+          {t('onboarding.householdBody')}
         </Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-          {COUNTRIES.map((country) => (
+          {COUNTRY_CODES.map((code: CountryCode) => (
             <Chip
-              key={country.code}
-              label={country.label}
-              selected={preferences.country === country.code}
-              onPress={() => void updatePreferences({ country: country.code })}
-              testID={`country-${country.code}`}
+              key={code}
+              label={
+                isCountrySupported(code)
+                  ? t(`country.${code}` as const)
+                  : `${t(`country.${code}` as const)} · ${t('common.comingSoon')}`
+              }
+              selected={preferences.country === code}
+              // Only Egypt has a real price survey; the rest would make the
+              // budget features quietly wrong.
+              disabled={!isCountrySupported(code)}
+              onPress={() => void updatePreferences({ country: code })}
+              testID={`country-${code}`}
             />
           ))}
         </View>

@@ -2,6 +2,7 @@ import {
   ALLERGENS,
   APPLIANCES,
   CUISINES,
+  DIET_FLAGS,
   DIETARY_PREFERENCES,
   MEAL_TYPES,
   SKILL_LEVELS,
@@ -54,6 +55,9 @@ function buildPayload(body: Record<string, unknown>) {
     // value from a tampered client cannot become free-text in the prompt.
     allergensToAvoid: sanitiseEnumList(body.allergens, ALLERGENS),
     diet: sanitiseEnum(body.dietaryPreference, DIETARY_PREFERENCES) ?? 'none',
+    // Halal and keto are independent of the eating style, so they travel as
+    // their own narrowed list rather than overwriting `diet`.
+    dietFlags: sanitiseEnumList(body.dietFlags, DIET_FLAGS),
     dislikedIngredients: sanitiseList(body.dislikedIngredients, 20, 60),
     availableAppliances: sanitiseEnumList(body.appliances, APPLIANCES),
     skillLevel: sanitiseEnum(body.skillLevel, SKILL_LEVELS) ?? 'intermediate',

@@ -4,7 +4,9 @@ import { currencyForCountry } from '@/lib/format/money';
 import { toAppError } from '@/lib/errors';
 import type { Database } from '@/lib/supabase/database.types';
 import type { CountryCode, CurrencyCode, UserPreferences } from '@/types/domain';
-import { DEFAULT_PREFERENCES } from '@/types/domain';
+import { DEFAULT_PREFERENCES,
+  toDietFlags,
+  toEatingStyle } from '@/types/domain';
 
 /**
  * Reads and writes `user_preferences` and its satellite tables.
@@ -40,7 +42,8 @@ export async function fetchRemotePreferences(
       city: profile.data.city,
       currency: (prefs.data?.currency as CurrencyCode) ?? currencyForCountry(country),
       householdSize: prefs.data?.household_size ?? DEFAULT_PREFERENCES.householdSize,
-      dietaryPreference: prefs.data?.dietary_preference ?? DEFAULT_PREFERENCES.dietaryPreference,
+      dietaryPreference: toEatingStyle(prefs.data?.dietary_preference),
+      dietFlags: toDietFlags(prefs.data?.dietary_preference),
       primaryGoal: prefs.data?.primary_goal ?? DEFAULT_PREFERENCES.primaryGoal,
       skillLevel: prefs.data?.skill_level ?? DEFAULT_PREFERENCES.skillLevel,
       dailyCalorieTarget: prefs.data?.daily_calorie_target ?? null,

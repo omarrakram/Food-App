@@ -8,6 +8,7 @@ import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import { budgetVerdict, estimateRecipeCost, toPricedAmount } from '@/features/pricing/estimate';
 import type {
   Allergen,
+  DietFlag,
   DietaryPreference,
   MealRequest,
   PantryItem,
@@ -106,6 +107,17 @@ export function satisfiesDiet(recipe: Recipe, diet: DietaryPreference): boolean 
   }
 }
 
+/**
+ * Diet flags are checked on top of the eating style, not instead of it.
+ *
+ * Each flag is its own constraint, so a halal keto user must satisfy both —
+ * previously only one diet value could be held at a time, and choosing "halal"
+ * silently discarded "vegetarian".
+ */
+export function satisfiesDietFlags(recipe: Recipe, flags: readonly DietFlag[]): boolean {
+  return flags.every((flag) => satisfiesDiet(recipe, flag));
+}
+
 /** A recipe the user has no way to cook is not a suggestion. */
 export function canCookWithAppliances(
   recipe: Recipe,
@@ -156,6 +168,9 @@ export function applyConstraints(recipes: readonly Recipe[], request: MealReques
       return { recipe, excludedBy: 'allergen' as const };
     }
     if (!satisfiesDiet(recipe, request.dietaryPreference)) {
+      return { recipe, excludedBy: 'diet' as const };
+    }
+    if (!satisfiesDietFlags(recipe, request.dietFlags ?? [])) {
       return { recipe, excludedBy: 'diet' as const };
     }
     if (!canCookWithAppliances(recipe, request.appliances)) {

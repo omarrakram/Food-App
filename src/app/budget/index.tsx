@@ -85,6 +85,7 @@ export default function BudgetScreen() {
       maxCalories: filters.maxCalories,
       query: null,
       dietaryPreference: preferences.dietaryPreference,
+      dietFlags: preferences.dietFlags,
       allergens: preferences.allergens,
       dislikedIngredients: preferences.dislikedIngredients,
       appliances: preferences.appliances,
