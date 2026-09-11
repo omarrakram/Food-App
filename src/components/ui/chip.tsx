@@ -10,9 +10,20 @@ import { hitSlopFor } from './touch-target';
 export type ChipProps = {
   label: string;
   selected?: boolean;
+  /**
+   * How loudly a selected chip announces itself.
+   *
+   * `soft` is the default tint, right for a filter among filters. `solid`
+   * fills the pill with the brand colour, for the places where "I have picked
+   * this" has to be readable at a glance against a screen full of unselected
+   * pills that also look like pills.
+   */
+  emphasis?: 'soft' | 'solid';
   onPress?: () => void;
   /** Shows an X on the right; fires `onRemove` instead of `onPress`. */
   onRemove?: () => void;
+  /** Overrides the label for screen readers, e.g. "remove tomatoes". */
+  accessibilityLabel?: string;
   icon?: keyof typeof Ionicons.glyphMap;
   size?: 'sm' | 'md';
   disabled?: boolean;
@@ -28,8 +39,10 @@ export type ChipProps = {
 export function Chip({
   label,
   selected = false,
+  emphasis = 'soft',
   onPress,
   onRemove,
+  accessibilityLabel,
   icon,
   size = 'md',
   disabled = false,
@@ -51,8 +64,19 @@ export function Chip({
     danger: { bg: theme.colors.dangerSoft, fg: theme.colors.dangerSoftText },
   }[tone];
 
-  const background = selected ? toneColors.bg : theme.colors.surface;
-  const foreground = selected ? toneColors.fg : theme.colors.textSecondary;
+  // `primaryStrong` rather than `primary`: the brand colour is too light to
+  // put a label on and clear 4.5:1. See palette.ts.
+  const isSolid = selected && emphasis === 'solid';
+  const background = isSolid
+    ? theme.colors.primaryStrong
+    : selected
+      ? toneColors.bg
+      : theme.colors.surface;
+  const foreground = isSolid
+    ? theme.colors.textOnPrimary
+    : selected
+      ? toneColors.fg
+      : theme.colors.textSecondary;
   const borderColor = selected ? 'transparent' : theme.colors.border;
 
   const content = (
@@ -75,7 +99,7 @@ export function Chip({
     <PressScale
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={label}
+      accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ selected, disabled }}
       disabled={disabled || (!onPress && !onRemove)}
       onPress={onRemove ?? onPress}

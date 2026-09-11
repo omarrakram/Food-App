@@ -6,30 +6,42 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-11 |
-| **Current phase** | Post-review refinement pass complete. Remaining work is credential-gated. |
+| **Current phase** | Manual-QA regression pass complete. Remaining work is credential-gated. |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
-| **Launch market** | Egypt · EGP · English and Arabic, both complete |
+| **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
 
 ---
 
 ## Last known passing state
 
-Verified at commit `4fa46a2` on `claude/expo-rn-setup-mom5gw` (also the
-repository's default branch):
+Verified on `claude/expo-rn-setup-mom5gw` (also the repository's default
+branch):
 
 | Check | Command | Result |
 |---|---|---|
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 361/361 across 21 suites |
+| Unit + component tests | `npm test` | **pass**, 394/394 across 23 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 45/45 assertions |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
+| Catalogue / price / type drift | `ingredients:import --check`, `prices:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 14 screens, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 53 interaction checks, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
+
+### The test suite runs on two platforms
+
+`npm test` runs two Jest projects. `native` is the component suite as before.
+`web` runs `*.web.test.tsx` under `jest-expo/web`, where `.web.tsx` wins module
+resolution exactly as it does in Metro.
+
+That project exists because of a real crash: a `.web.tsx` file re-exported from
+`'./date-field'`, which on web resolves back to **itself**. TypeScript and the
+native Jest project both resolve that specifier to the `.tsx` sibling, so
+neither could see it. Only a web-platform resolver can.
 
 ### Running the database suite in this sandbox
 
@@ -59,9 +71,12 @@ PGHOST=/tmp PGPORT=55432 PGUSER=postgres ./scripts/db-test.sh
 
 ## End-to-end verification
 
-`npm run smoke:web` exports the web bundle, serves it, and walks a headless
-browser from onboarding through cooking mode, the budget flow and every tab,
-capturing 14 screenshots and failing on any page error.
+`npm run smoke:web` exports the web bundle, serves it, and drives a headless
+browser through what a person actually does — not just what routes exist. 53
+assertions cover onboarding, the pantry add/edit/delete flow from **both**
+entry points, ingredient selection and removal, opening and clearing filters,
+saving a shopping-list item, switching language and reading the result, and a
+deep link surviving a reload.
 
 It needs a browser driver, deliberately not a dependency of the app:
 
@@ -73,11 +88,16 @@ npm run smoke:web
 `CHROMIUM_PATH` and `PLAYWRIGHT_CORE` override discovery when a browser already
 exists (which is how it runs in this sandbox).
 
-**It has caught six bugs no unit test would have.** Most recently: a servings
-stepper reading "2 2 people", and every disabled control drawing at full
-opacity. Two notes for whoever runs it next — React Native Web's `TextInput`
-ignores Playwright's `fill()` (use `pressSequentially`), and blocked remote
-image requests are the sandbox's egress policy, not the app.
+**It has caught eight bugs no unit test would have.** Most recently: the pantry
+add sheet crashing into the error boundary, and `Alert.alert` silently doing
+nothing on web so every confirmation in the app was dead.
+
+It used to only visit routes, and reported green while tapping "+" on the
+Pantry crashed. Visiting a route proves the route renders and nothing more, so
+every check here now asserts on the *result* of an interaction. Two further
+notes for whoever runs it next — React Native Web's `TextInput` ignores
+Playwright's `fill()` (use `pressSequentially`), and blocked remote image
+requests are the sandbox's egress policy, not the app.
 
 ---
 
@@ -183,6 +203,17 @@ phone browser that is not signed in to claude.ai gets a 404.
 
 No known crashes. No known data-loss paths. No open security findings.
 
+### Fixed in this pass
+
+| Was | Root cause | Fix |
+|---|---|---|
+| Pantry "+" crashed into the error boundary | `date-field.web.tsx` re-exported from `'./date-field'`, which on web resolves to **itself** — the re-export became a getter returning itself and the first call blew the stack | Helpers moved to `date-field.shared.ts`, which has no platform suffix and so cannot be resolved to a platform variant. Covered by a web-platform Jest project and by the smoke test |
+| Every confirmation in the app did nothing on web | `Alert.alert` is a silent no-op in react-native-web — exiting cooking mode, signing out, deleting an account and clearing history were all dead | `src/lib/confirm.ts`: the platform dialog on native, `window.confirm` on web |
+| Arabic UI rendered in English | Recipe content, ingredient names and units were data and code, not dictionary keys | See "Localisation" |
+| Discover's zero-result state had no way out | The collection filter had no "everything" state to return to | An "Everything" chip, and a one-tap reset inside the empty state whenever a collection is active |
+| Selected ingredients were easy to miss | A soft tint, a few pixels from rows of unselected pills that are also pill-shaped | Solid fill, a tick, and an explicit "remove {name}" accessibility label |
+| An Arabic keyboard could not search | Every pattern in `interpretQuery` was `\d`, which is ASCII-only | Arabic-Indic digits normalised before parsing |
+
 ---
 
 ## Architectural decisions worth not re-litigating
@@ -212,19 +243,70 @@ No known crashes. No known data-loss paths. No open security findings.
 12. **Deep links are a hosting concern.** The web build is configured for the
     path it is served from; nothing rewrites the URL at runtime, because doing
     so breaks React Navigation.
+13. **A module with two platform implementations keeps its shared code in a
+    third file with no platform suffix.** `'./x'` inside `x.web.tsx` resolves
+    to itself on web; a suffix-free module cannot be resolved to a variant, so
+    the ambiguity cannot come back. This cost the pantry add screen once.
+14. **Ingredient names are stored in English and translated at render.**
+    Matching, pricing and the shopping list all key off one spelling; a pantry
+    written in Arabic must still match a recipe written in English.
 
 ---
 
 ## Localisation
 
-**Both locales are complete: 468 keys, English and Arabic.** `ar` is typed as a
-total record, so a missing translation is a compile error, and seven runtime
-assertions cover what types cannot — empty values, stale keys, both halves of
-every plural, invented placeholders, and English left in place.
+**Key parity was never the finish line.** The dictionary hit 468/468 while the
+rendered Arabic app still showed English everywhere it mattered: every recipe
+title, description and cooking step; every ingredient name; every unit ("300 g",
+"4 cloves"); the search examples; the expiry and protein filter chips; the
+currency code. A rendered audit of every major screen found **158 lines of
+Latin script**; it now finds one, and that one is deliberate.
+
+Four layers, because the English came from four different places:
+
+1. **UI copy** — `src/i18n/locales/{en,ar}.ts`. `ar` is typed as a total
+   record, so a missing translation is a compile error, and seven runtime
+   assertions cover what types cannot: empty values, stale keys, both halves of
+   every plural, invented placeholders, and English left in place.
+2. **Ingredient names** — `data/ingredients/catalogue.csv` carries `name_ar`
+   for all 257 entries. Names are **stored** canonically in English so matching
+   stays language-blind (an Arabic pantry must still match an English recipe);
+   `features/ingredients/display.ts` is the only thing that turns one into what
+   the user reads.
+3. **Recipe content** — titles, descriptions, steps and safety notes have their
+   own Arabic columns (`title_ar`, `description_ar`, `instruction_ar`,
+   `safety_note_ar`) in the fixtures, the migrations and the seed.
+   `features/recipes/localise.ts` chooses between them, and also holds the
+   shared phrasebook for preparations ("finely chopped" → «مفروم ناعم»), which
+   are repeated vocabulary rather than per-recipe prose.
+4. **Units and money** — `unitLabel` and `formatQuantity` take the translator;
+   `currencySymbol` renders ج.م rather than "EGP".
+
+**Nullable on purpose.** An AI-generated recipe comes back in one language, and
+machine-translating a cooking step — where "simmer" and "boil" are different
+instructions, and a safety note is a safety note — is not something to do
+silently. Null means "no Arabic yet" and the renderer falls back to English.
+
+Three things stop this regressing:
+
+- An **ESLint rule** (`no-restricted-syntax`, `src/**/*.tsx`) fails the build
+  when a literal English string reaches a user-facing prop. Every leak above
+  was invisible to the dictionary check because none of it was ever a key.
+- `features/recipes/__tests__/localise.test.ts` asserts every curated recipe,
+  step, safety note (**including its temperatures**), ingredient name and
+  preparation phrase has Arabic.
+- `npm run smoke:web` reads the rendered Arabic recipe, cook and pantry screens
+  and fails on any Latin character.
+
+**The one deliberate exception** is "English" on the language picker: a language
+is named in its own language. It is listed in the parity test's
+`intentionallyLatin` set along with the brand names and an email example.
 
 Arabic is written for an Egyptian consumer rather than transliterated. The
 `_one` plural forms deliberately omit `{count}`, because Arabic lexicalises the
-singular («طبق واحد»).
+singular («طبق واحد»). `interpretQuery` normalises Arabic-Indic digits before
+parsing, so "أقل من ١٥٠ جنيه" is understood — before that every number pattern
+was `\d`, which is ASCII-only, and an Arabic keyboard produced nothing.
 
 RTL applies at native startup, so the Language screen detects a pending
 direction change and offers the restart directly (expo-updates on native, a

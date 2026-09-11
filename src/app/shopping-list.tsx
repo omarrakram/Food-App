@@ -15,6 +15,7 @@ import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { isOrderingAvailable } from '@/features/grocery/registry';
 import { CATEGORY_ORDER } from '@/features/pantry/repository';
+import { useIngredientName } from '@/features/ingredients/display';
 import { formatQuantity } from '@/features/pricing/units';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useShoppingList, useShoppingMutations, useShoppingTotal } from '@/features/shopping/hooks';
@@ -34,13 +35,15 @@ function Row({
 }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
-  const quantityLabel = formatQuantity(item.quantity, item.unit, (value) => formatNumber(value));
+  const displayName = useIngredientName();
+  const name = displayName(item.name);
+  const quantityLabel = formatQuantity(item.quantity, item.unit, { t, formatNumber });
 
   return (
     <PressScale
       accessibilityRole="checkbox"
       accessibilityState={{ checked: item.isChecked }}
-      accessibilityLabel={item.name}
+      accessibilityLabel={name}
       onPress={onToggle}
       haptic="selection"
       scaleTo={0.99}
@@ -63,7 +66,7 @@ function Row({
           color={item.isChecked ? 'textTertiary' : 'text'}
           style={item.isChecked ? { textDecorationLine: 'line-through' } : undefined}
         >
-          {item.name}
+          {name}
         </Text>
         {item.sourceRecipeIds.length > 1 ? (
           <Text variant="micro" color="textTertiary">
@@ -277,7 +280,7 @@ export default function ShoppingListScreen() {
         <Text variant="body" color="textSecondary">
           {orderingAvailable
             ? t('shopping.orderUnavailable')
-            : t('grocery.notAvailableBody', { country: preferences.country })}
+            : t('grocery.notAvailableBody', { country: t(`country.${preferences.country}` as const) })}
         </Text>
       </Sheet>
     </>

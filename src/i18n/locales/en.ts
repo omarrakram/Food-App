@@ -90,6 +90,7 @@ export const en = {
   'cook.suggestions': 'Common ingredients',
   'cook.selected_one': '{count} ingredient',
   'cook.selected_other': '{count} ingredients',
+  'cook.removeIngredient': 'Remove {name}',
   'cook.findMeals': 'Find meals',
   'cook.needMoreIngredients': 'Add at least one ingredient to continue',
   'cook.filtersWithCount_one': 'Narrow it down · 1 applied',
@@ -104,6 +105,8 @@ export const en = {
   'cook.calories': 'Calorie target',
   'cook.protein': 'Protein target',
   'cook.cuisine': 'Cuisine',
+  'cook.proteinAtLeast': '{grams}g+',
+  'cook.caloriesUnder': 'under {calories}',
   'cook.anyTime': 'Any time',
   'cook.anyMeal': 'Any meal',
   'cook.anyCuisine': 'Any cuisine',
@@ -137,6 +140,7 @@ export const en = {
   'results.generatingMore': 'Finding more ideas…',
   'results.empty': 'No meals matched',
   'results.emptyBody': 'Try removing a filter, raising your budget, or adding one more ingredient.',
+  'results.clearFilters': 'Show everything',
   'results.matchFull': 'You have everything',
   'results.match': 'You have {have}/{total} ingredients',
   'results.missing_one': '{count} missing',
@@ -229,6 +233,10 @@ export const en = {
   'pantry.cookFromPantry': 'Cook from pantry',
   'pantry.scanComingSoon': 'Scanning is coming soon',
 
+  'pantry.expiry3Days': '3 days',
+  'pantry.expiry1Week': '1 week',
+  'pantry.expiry1Month': '1 month',
+
   // --- Categories ---------------------------------------------------------
   'category.protein': 'Protein',
   'category.vegetables': 'Vegetables',
@@ -242,10 +250,44 @@ export const en = {
   'category.pantry': 'Pantry',
   'category.other': 'Other',
 
+  // --- Units --------------------------------------------------------------
+  // Every unit carries both plural forms: Arabic pluralises units English does
+  // not (فص / فصوص), and `t()` picks the variant from the quantity.
+  'unit.g_one': 'g',
+  'unit.g_other': 'g',
+  'unit.kg_one': 'kg',
+  'unit.kg_other': 'kg',
+  'unit.ml_one': 'ml',
+  'unit.ml_other': 'ml',
+  'unit.l_one': 'L',
+  'unit.l_other': 'L',
+  'unit.piece_one': 'piece',
+  'unit.piece_other': 'pieces',
+  'unit.clove_one': 'clove',
+  'unit.clove_other': 'cloves',
+  'unit.slice_one': 'slice',
+  'unit.slice_other': 'slices',
+  'unit.bunch_one': 'bunch',
+  'unit.bunch_other': 'bunches',
+  'unit.can_one': 'can',
+  'unit.can_other': 'cans',
+  'unit.pack_one': 'pack',
+  'unit.pack_other': 'packs',
+  'unit.tbsp_one': 'tbsp',
+  'unit.tbsp_other': 'tbsp',
+  'unit.tsp_one': 'tsp',
+  'unit.tsp_other': 'tsp',
+  'unit.cup_one': 'cup',
+  'unit.cup_other': 'cups',
+  'unit.pinch_one': 'pinch',
+  'unit.pinch_other': 'pinches',
+  'unit.toTaste': 'to taste',
+
   // --- Discover -----------------------------------------------------------
   'discover.title': 'Discover',
   'discover.subtitle': 'Collections worth cooking',
   'discover.searchPlaceholder': 'Search recipes or ask for something',
+  'discover.allCollections': 'Everything',
   'discover.collectionQuick': 'Quick meals',
   'discover.collectionUnder100': 'Under 100 EGP',
   'discover.collectionUnder200': 'Under 200 EGP',
@@ -270,6 +312,12 @@ export const en = {
   'search.noResults': 'Nothing matched that',
   'search.noResultsBody': 'Try fewer words, or describe the meal differently.',
   'search.examples': 'Try one of these',
+
+  'search.example1': 'something cheesy under 150 EGP',
+  'search.example2': 'high protein meal using chicken',
+  'search.example3': 'dinner in 20 minutes',
+  'search.example4': 'something Egyptian for four people',
+  'search.example5': 'healthy breakfast with eggs',
 
   // --- Saved --------------------------------------------------------------
   'saved.title': 'Saved',

@@ -39,15 +39,36 @@
     "smoke:web": "node scripts/smoke-web.mjs"
   },
   "jest": {
-    "preset": "jest-expo",
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest.setup.ts"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/.expo/",
-      "/dist/",
-      "/supabase/functions/"
+    "projects": [
+      {
+        "displayName": "native",
+        "preset": "jest-expo",
+        "setupFilesAfterEnv": [
+          "<rootDir>/jest.setup.ts"
+        ],
+        "testPathIgnorePatterns": [
+          "/node_modules/",
+          "/.expo/",
+          "/dist/",
+          "/supabase/functions/",
+          "\\.web\\.test\\.[jt]sx?$"
+        ],
+        "transformIgnorePatterns": [
+          "node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg|@supabase/.*|isows))"
+        ],
+        "resolver": "react-native-worklets/jest/resolver.js"
+      },
+      {
+        "displayName": "web",
+        "preset": "jest-expo/web",
+        "setupFilesAfterEnv": [
+          "<rootDir>/jest.setup.ts"
+        ],
+        "testMatch": [
+          "<rootDir>/src/**/*.web.test.[jt]s?(x)"
+        ],
+        "resolver": "react-native-worklets/jest/resolver.js"
+      }
     ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
@@ -55,11 +76,7 @@
       "!src/app/**",
       "!src/**/__tests__/**",
       "!src/**/__mocks__/**"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg|@supabase/.*|isows))"
-    ],
-    "resolver": "react-native-worklets/jest/resolver.js"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
@@ -108,6 +125,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^22.20.2",
     "@types/react": "~19.2.2",
+    "@types/react-dom": "~19.2.0",
     "deno": "^2.9.6",
     "eslint": "^9.39.5",
     "eslint-config-expo": "^57.0.2",

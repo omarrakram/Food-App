@@ -208,6 +208,12 @@ export function toDomainRecipe(
     slug: null,
     title: generated.title,
     description: generated.description,
+    // The model answers in one language. We do not machine-translate a recipe
+    // behind the user's back — a mistranslated step is a bad dinner and a
+    // mistranslated safety note is worse — so the renderer falls back to what
+    // the model actually wrote.
+    titleAr: null,
+    descriptionAr: null,
     // Generated recipes have no photograph. The card and detail screens both
     // render a themed placeholder for a null image rather than a broken one.
     imageUrl: null,
@@ -239,9 +245,11 @@ export function toDomainRecipe(
       id: makeId(),
       stepNumber: index + 1,
       instruction: step.instruction,
+      instructionAr: null,
       durationMinutes: step.durationMinutes,
       ingredientRefs: step.ingredientRefs,
       safetyNote: step.safetyNote,
+      safetyNoteAr: null,
     })),
     allergens: generated.allergens,
     dietTags: generated.dietTags,

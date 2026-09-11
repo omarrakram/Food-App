@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { IconButton } from '@/components/ui/button';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
+import { useRecipeText } from '@/features/recipes/localise';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
@@ -60,6 +61,7 @@ export function RecipeCard({
 }: RecipeCardProps) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const recipeText = useRecipeText();
   const { recipe } = match;
 
   const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
@@ -76,7 +78,7 @@ export function RecipeCard({
     <PressScale
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={`${recipe.title}. ${recipe.description}`}
+      accessibilityLabel={`${recipeText.title(recipe)}. ${recipeText.description(recipe)}`}
       onPress={onPress}
       haptic="light"
       scaleTo={0.985}
@@ -141,10 +143,10 @@ export function RecipeCard({
       <View style={{ padding: theme.spacing.lg, gap: theme.spacing.sm }}>
         <View style={{ gap: 3 }}>
           <Text variant="title3" lines={1}>
-            {recipe.title}
+            {recipeText.title(recipe)}
           </Text>
           <Text variant="footnote" color="textSecondary" lines={2}>
-            {recipe.description}
+            {recipeText.description(recipe)}
           </Text>
         </View>
 
@@ -230,13 +232,14 @@ export function RecipeCardCompact({
 }: RecipeCardCompactProps) {
   const theme = useTheme();
   const t = useI18n().t;
+  const recipeText = useRecipeText();
   const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
 
   return (
     <PressScale
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={recipe.title}
+      accessibilityLabel={recipeText.title(recipe)}
       onPress={onPress}
       haptic="light"
       scaleTo={0.96}
@@ -253,7 +256,7 @@ export function RecipeCardCompact({
 
       <View style={{ gap: 1 }}>
         <Text variant="subhead" lines={2}>
-          {recipe.title}
+          {recipeText.title(recipe)}
         </Text>
         <Text variant="caption" color="textTertiary">
           {t('common.min', { count: totalMinutes })}

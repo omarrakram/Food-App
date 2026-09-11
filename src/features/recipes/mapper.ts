@@ -22,12 +22,12 @@ import type {
  */
 
 export const RECIPE_SELECT = `
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings,
   calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public, created_at, updated_at,
   recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order),
-  recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs),
+  recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs),
   recipe_meal_types (meal_type),
   recipe_diet_tags (diet),
   recipe_allergens (allergen),
@@ -63,9 +63,11 @@ function toStep(row: RecipeStepRow): RecipeStep {
     id: row.id,
     stepNumber: row.step_number,
     instruction: row.instruction,
+    instructionAr: row.instruction_ar,
     durationMinutes: row.duration_minutes,
     ingredientRefs: row.ingredient_refs ?? [],
     safetyNote: row.safety_note,
+    safetyNoteAr: row.safety_note_ar,
   };
 }
 
@@ -74,7 +76,9 @@ export function rowsToRecipe(row: RecipeQueryRow): Recipe {
     id: row.id,
     slug: row.slug,
     title: row.title,
+    titleAr: row.title_ar,
     description: row.description,
+    descriptionAr: row.description_ar,
     imageUrl: row.image_url,
     source: row.source,
     cuisine: row.cuisine,

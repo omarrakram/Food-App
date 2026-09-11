@@ -86,7 +86,18 @@ export function StateView({
 
       {action || secondaryAction ? (
         <View style={{ gap: theme.spacing.sm, marginTop: theme.spacing.sm, alignItems: 'center' }}>
-          {action ? <Button label={action.label} onPress={action.onPress} size="md" /> : null}
+          {action ? (
+            <Button
+              label={action.label}
+              onPress={action.onPress}
+              size="md"
+              // Derived from the state's own testID so the primary recovery
+              // action is reachable in tests. An empty state whose button
+              // cannot be pressed by a test is an empty state whose button
+              // nobody notices is broken.
+              testID={testID ? `${testID}-action` : undefined}
+            />
+          ) : null}
           {secondaryAction ? (
             <Button
               label={secondaryAction.label}

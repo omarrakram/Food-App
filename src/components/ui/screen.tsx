@@ -146,7 +146,7 @@ export function ScreenHeader({
   const theme = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { isRTL } = useI18n();
+  const { isRTL, t } = useI18n();
 
   const handleBack = () => {
     if (onBack) {
@@ -181,7 +181,7 @@ export function ScreenHeader({
           <IconButton
             icon={isRTL ? 'chevron-forward' : 'chevron-back'}
             onPress={handleBack}
-            accessibilityLabel="Back"
+            accessibilityLabel={t('common.back')}
             variant="secondary"
             testID="screen-header-back"
           />

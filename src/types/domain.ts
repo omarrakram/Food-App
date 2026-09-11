@@ -310,12 +310,23 @@ export type RecipeStep = {
   id: string;
   stepNumber: number;
   instruction: string;
+  /**
+   * Arabic instruction.
+   *
+   * Null for a recipe the model generated: it answers in one language, and
+   * machine-translating a cooking step — where "simmer" and "boil" are
+   * different instructions — is not something to do silently. The renderer
+   * falls back to `instruction`.
+   */
+  instructionAr: string | null;
   /** Minutes this step takes, when the recipe specifies it. */
   durationMinutes: number | null;
   /** Ingredient names relevant to this step; surfaced in cooking mode. */
   ingredientRefs: string[];
   /** Food-safety note attached to this step (temperatures, handling). */
   safetyNote: string | null;
+  /** Arabic safety note. SAFETY-CRITICAL: hand-written, never generated. */
+  safetyNoteAr: string | null;
 };
 
 export type NutritionPerServing = {
@@ -332,7 +343,11 @@ export type Recipe = {
   id: string;
   slug: string | null;
   title: string;
+  /** Arabic title. Null for AI recipes; the renderer falls back to `title`. */
+  titleAr: string | null;
   description: string;
+  /** Arabic description. Null for AI recipes. */
+  descriptionAr: string | null;
   imageUrl: string | null;
   source: RecipeSource;
   cuisine: Cuisine | null;

@@ -117,6 +117,7 @@ export function Sheet({
                 onPress={onClose}
                 accessibilityLabel={t('common.close')}
                 size={34}
+                testID={testID ? `${testID}-close` : undefined}
               />
             </View>
           ) : null}

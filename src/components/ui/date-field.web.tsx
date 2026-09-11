@@ -5,15 +5,11 @@ import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
 import { Button } from './button';
-import { parseISODate, toISODate, type DateFieldProps } from './date-field';
+import { parseISODate, toISODate, type DateFieldProps } from './date-field.shared';
 import { Text } from './text';
 
-export { parseISODate, toISODate } from './date-field';
-export type { DateFieldProps } from './date-field';
-
-
 /**
- * Web build of {@link DateField}.
+ * Web build of `DateField`.
  *
  * `@react-native-community/datetimepicker` has no web implementation, and a
  * free-text `YYYY-MM-DD` box is the thing we are trying to get rid of. A real
@@ -21,9 +17,21 @@ export type { DateFieldProps } from './date-field';
  * formatting, and — the point — makes an impossible date unenterable.
  *
  * `unstable_createElement` is react-native-web's supported escape hatch for
- * rendering a DOM element; it is the same mechanism the library uses
- * internally for its own inputs.
+ * rendering a DOM element; it is the same mechanism the library uses internally
+ * for its own inputs.
+ *
+ * IMPORTANT: every shared import here comes from `date-field.shared`, which has
+ * no platform suffix. Importing from `'./date-field'` looks equivalent and is
+ * not — on web Metro resolves that specifier back to THIS file, which made the
+ * re-exported `toISODate` a getter returning itself. The first call recursed
+ * until the stack overflowed and took the pantry add screen down with it.
  */
+
+// Re-exported from the suffix-free module, never from a sibling that could
+// resolve back to this one.
+export { formatDateForDisplay, parseISODate, toISODate } from './date-field.shared';
+export type { DateFieldProps } from './date-field.shared';
+
 export function DateField({
   label,
   value,
@@ -40,10 +48,11 @@ export function DateField({
     value: value ?? '',
     min: minimumDate ? toISODate(minimumDate) : undefined,
     'data-testid': testID,
+    'aria-label': label,
     onChange: (event: { target: { value: string } }) => {
       const next = event.target.value;
-      // An empty field clears the date; anything the browser hands back that
-      // is not a real calendar day is ignored rather than stored.
+      // An empty field clears the date; anything the browser hands back that is
+      // not a real calendar day is ignored rather than stored.
       if (!next) {
         onChange(null);
         return;

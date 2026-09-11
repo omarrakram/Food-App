@@ -42,7 +42,7 @@ export function PriceTag({
   testID,
 }: PriceTagProps) {
   const theme = useTheme();
-  const { t, language } = useI18n();
+  const { t, locale } = useI18n();
   const [explainerOpen, setExplainerOpen] = useState(false);
 
   // No figure at all, or a figure we could not assemble from any real data.
@@ -57,7 +57,6 @@ export function PriceTag({
     );
   }
 
-  const locale = language === 'ar' ? 'ar-EG' : 'en-US';
   const { text, isEstimate } = formatPricedAmount(priced, { locale });
 
   const variant = size === 'lg' ? 'title3' : size === 'md' ? 'bodyMedium' : 'caption';

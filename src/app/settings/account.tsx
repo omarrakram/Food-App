@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { ListGroup, ListRow } from '@/components/ui/list-row';
@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/toast';
 import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useI18n } from '@/i18n';
+import { confirmAction } from '@/lib/confirm';
 import { presentError } from '@/lib/errors';
 import { useTheme } from '@/theme';
 
@@ -23,46 +24,44 @@ export default function AccountSettingsScreen() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const confirmSignOut = () => {
-    Alert.alert(t('profile.signOutConfirm'), undefined, [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('profile.signOut'),
-        style: 'destructive',
-        onPress: () => {
-          void (async () => {
-            await signOut();
-            await resetPreferences();
-            router.replace('/(auth)/welcome');
-          })();
-        },
-      },
-    ]);
+    void (async () => {
+      const confirmed = await confirmAction({
+        title: t('profile.signOutConfirm'),
+        confirmLabel: t('profile.signOut'),
+        cancelLabel: t('common.cancel'),
+        destructive: true,
+      });
+      if (!confirmed) return;
+      await signOut();
+      await resetPreferences();
+      router.replace('/(auth)/welcome');
+    })();
   };
 
   const confirmDelete = () => {
     // Two-step, and the destructive label is explicit about permanence.
-    Alert.alert(t('profile.deleteAccountConfirm'), t('profile.deleteAccountBody'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('profile.deleteAccountAction'),
-        style: 'destructive',
-        onPress: () => {
-          void (async () => {
-            setIsDeleting(true);
-            try {
-              await deleteAccount();
-              await resetPreferences();
-              router.replace('/(auth)/welcome');
-            } catch (error) {
-              const presented = presentError(error);
-              toast.show({ message: t(presented.titleKey, presented.values), tone: 'danger' });
-            } finally {
-              setIsDeleting(false);
-            }
-          })();
-        },
-      },
-    ]);
+    void (async () => {
+      const confirmed = await confirmAction({
+        title: t('profile.deleteAccountConfirm'),
+        message: t('profile.deleteAccountBody'),
+        confirmLabel: t('profile.deleteAccountAction'),
+        cancelLabel: t('common.cancel'),
+        destructive: true,
+      });
+      if (!confirmed) return;
+
+      setIsDeleting(true);
+      try {
+        await deleteAccount();
+        await resetPreferences();
+        router.replace('/(auth)/welcome');
+      } catch (error) {
+        const presented = presentError(error);
+        toast.show({ message: t(presented.titleKey, presented.values), tone: 'danger' });
+      } finally {
+        setIsDeleting(false);
+      }
+    })();
   };
 
   // No backend configured. This is the state every preview build is in, and

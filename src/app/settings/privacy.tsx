@@ -1,4 +1,4 @@
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { ListGroup, ListRow } from '@/components/ui/list-row';
@@ -8,6 +8,7 @@ import { useToast } from '@/components/ui/toast';
 import { useRepositories } from '@/features/data/repositories';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useI18n } from '@/i18n';
+import { confirmAction } from '@/lib/confirm';
 import { useTheme } from '@/theme';
 
 export default function PrivacySettingsScreen() {
@@ -18,17 +19,18 @@ export default function PrivacySettingsScreen() {
   const { history } = useRepositories();
 
   const clearHistory = () => {
-    Alert.alert(t('profile.privacy'), t('saved.emptyRecentBody'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      {
-        text: t('common.clearAll'),
-        style: 'destructive',
-        onPress: () => {
-          void history.clear();
-          toast.show({ message: t('common.done'), tone: 'success' });
-        },
-      },
-    ]);
+    void (async () => {
+      const confirmed = await confirmAction({
+        title: t('profile.privacy'),
+        message: t('saved.emptyRecentBody'),
+        confirmLabel: t('common.clearAll'),
+        cancelLabel: t('common.cancel'),
+        destructive: true,
+      });
+      if (!confirmed) return;
+      await history.clear();
+      toast.show({ message: t('common.done'), tone: 'success' });
+    })();
   };
 
   return (

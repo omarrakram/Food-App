@@ -1,3 +1,4 @@
+import type { Translate } from '@/i18n';
 import type { Unit } from '@/types/domain';
 
 /**
@@ -165,60 +166,58 @@ export function formatKitchenNumber(
   return whole === 0 ? glyph : `${formatNumber(whole)}${glyph}`;
 }
 
-/** Renders a quantity + unit the way a recipe would write it. */
+/**
+ * Everything `formatQuantity` needs from the active locale.
+ *
+ * Both come from `useI18n()`. They are passed in rather than read here because
+ * this module is also used by pricing code that runs outside React.
+ */
+export type QuantityFormatters = {
+  t: Translate;
+  formatNumber: (value: number) => string;
+};
+
+/** Renders a quantity + unit the way a recipe would write it, in the user's language. */
 export function formatQuantity(
   quantity: number | null,
   unit: Unit | null,
-  formatNumber: (value: number) => string,
+  { t, formatNumber }: QuantityFormatters,
 ): string {
-  if (unit === 'to_taste') return 'to taste';
-  if (quantity === null) return unit ? unitLabel(unit) : '';
+  if (unit === 'to_taste') return t('unit.toTaste');
+  if (quantity === null) return unit ? unitLabel(unit, 1, t) : '';
 
   const rounded = roundForKitchen(quantity);
   const numeric = formatKitchenNumber(rounded, formatNumber);
 
   if (!unit || unit === 'piece') return numeric;
   // Anything below one takes the singular: "½ bunch", not "½ bunches".
-  return `${numeric} ${unitLabel(unit, rounded < 1 ? 1 : rounded)}`;
+  const label = unitLabel(unit, rounded < 1 ? 1 : rounded, t);
+  return label ? `${numeric} ${label}` : numeric;
 }
 
-export function unitLabel(unit: Unit, quantity = 1): string {
-  const plural = quantity !== 1;
-  switch (unit) {
-    case 'g':
-      return 'g';
-    case 'kg':
-      return 'kg';
-    case 'ml':
-      return 'ml';
-    case 'l':
-      return 'L';
-    case 'piece':
-      return '';
-    case 'clove':
-      return plural ? 'cloves' : 'clove';
-    case 'slice':
-      return plural ? 'slices' : 'slice';
-    case 'bunch':
-      return plural ? 'bunches' : 'bunch';
-    case 'can':
-      return plural ? 'cans' : 'can';
-    case 'pack':
-      return plural ? 'packs' : 'pack';
-    case 'tbsp':
-      return 'tbsp';
-    case 'tsp':
-      return 'tsp';
-    case 'cup':
-      return plural ? 'cups' : 'cup';
-    case 'pinch':
-      return plural ? 'pinches' : 'pinch';
-    case 'to_taste':
-      return 'to taste';
-    default: {
-      // Exhaustiveness guard: adding a Unit without a label fails the build.
-      const exhaustive: never = unit;
-      return exhaustive;
-    }
-  }
+/**
+ * The locale's name for a unit.
+ *
+ * `piece` is deliberately unlabelled in both languages — a recipe says
+ * "3 onions", never "3 pieces onions" — so it returns an empty string rather
+ * than an empty translation, which the locale parity test would reject.
+ */
+export function unitLabel(unit: Unit, quantity: number, t: Translate): string {
+  if (unit === 'piece') return '';
+  if (unit === 'to_taste') return t('unit.toTaste');
+  // `count` selects the _one / _other variant; Arabic pluralises units that
+  // English does not (فص / فصوص), so every unit key carries both forms.
+  return t(`unit.${unit}`, { count: quantity });
+}
+
+/**
+ * The unit's own name, for a picker rather than a quantity.
+ *
+ * `unitLabel` returns nothing for `piece` because "3 pieces onions" is not how
+ * a recipe reads — but a chip in the unit picker still has to say what it is,
+ * so this one always names the unit.
+ */
+export function unitName(unit: Unit, t: Translate): string {
+  if (unit === 'to_taste') return t('unit.toTaste');
+  return t(`unit.${unit}`, { count: 1 });
 }

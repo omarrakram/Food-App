@@ -18,7 +18,7 @@ import type {
   Unit,
 } from '@/types/domain';
 
-import { perPieceWeightFor, toGrams, unitLabel } from '@/features/pricing/units';
+import { perPieceWeightFor, toGrams } from '@/features/pricing/units';
 
 /**
  * Shopping list.
@@ -252,4 +252,3 @@ export function estimateListTotal(
   };
 }
 
-export { unitLabel };

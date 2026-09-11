@@ -25,6 +25,17 @@ const SYMBOLS: Record<CurrencyCode, { en: string; ar: string }> = {
   GBP: { en: '£', ar: '£' },
 };
 
+/**
+ * The currency's symbol in the active locale.
+ *
+ * Arabic writes ج.م, not "EGP". Anywhere a bare currency code was rendered
+ * beside a number this is what belongs there instead.
+ */
+export function currencySymbol(currency: CurrencyCode, locale: string): string {
+  const symbols = SYMBOLS[currency];
+  return locale.startsWith('ar') ? symbols.ar : symbols.en;
+}
+
 export function minorUnitFactor(currency: CurrencyCode): number {
   return MINOR_UNITS[currency];
 }
@@ -99,7 +110,7 @@ export function formatMoney(value: Money, options: FormatMoneyOptions = {}): str
     numeric = major.toFixed(fractionDigits);
   }
 
-  const symbol = useArabic ? SYMBOLS[value.currency].ar : SYMBOLS[value.currency].en;
+  const symbol = currencySymbol(value.currency, useArabic ? 'ar' : 'en');
   // Symbol currencies read better prefixed; ISO codes read better suffixed.
   const isSymbolCurrency = symbol === '$' || symbol === '£';
   return isSymbolCurrency ? `${symbol}${numeric}` : `${numeric} ${symbol}`;

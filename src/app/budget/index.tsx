@@ -11,7 +11,13 @@ import { Text } from '@/components/ui/text';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { encodeRequest } from '@/features/recipes/request-params';
 import { useI18n } from '@/i18n';
-import { formatMoney, fromMajor, parseMoneyInput, toMajor } from '@/lib/format/money';
+import {
+  currencySymbol,
+  formatMoney,
+  fromMajor,
+  parseMoneyInput,
+  toMajor,
+} from '@/lib/format/money';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
 import { useTheme } from '@/theme';
 
@@ -29,7 +35,7 @@ const MIN_BUDGET_MAJOR = 10;
 
 export default function BudgetScreen() {
   const theme = useTheme();
-  const { t, language } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const { preferences } = usePreferences();
 
@@ -63,7 +69,6 @@ export default function BudgetScreen() {
   const minimum = fromMajor(MIN_BUDGET_MAJOR, preferences.currency);
   const isValid = parsed !== null && parsed.amountMinor >= minimum.amountMinor;
   const presets = PRESETS_BY_CURRENCY[preferences.currency] ?? PRESETS_BY_CURRENCY.EGP ?? [];
-  const locale = language === 'ar' ? 'ar-EG' : 'en-US';
 
   const handleSubmit = () => {
     if (!parsed || !isValid) {
@@ -111,7 +116,7 @@ export default function BudgetScreen() {
             }}
             keyboardType="decimal-pad"
             placeholder="150"
-            suffix={preferences.currency}
+            suffix={currencySymbol(preferences.currency, locale)}
             leadingIcon="wallet-outline"
             autoFocus
             error={touched && !isValid && amount.length > 0
@@ -152,7 +157,7 @@ export default function BudgetScreen() {
             }}
           >
             <Text variant="footnote" style={{ color: theme.colors.infoSoftText, flex: 1 }}>
-              {t('budget.estimateNotice', { country: preferences.country })}
+              {t('budget.estimateNotice', { country: t(`country.${preferences.country}` as const) })}
             </Text>
           </View>
         </View>

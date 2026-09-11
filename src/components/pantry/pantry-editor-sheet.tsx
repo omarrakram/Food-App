@@ -8,9 +8,11 @@ import { Input } from '@/components/ui/input';
 import { ListRow } from '@/components/ui/list-row';
 import { Sheet } from '@/components/ui/sheet';
 import { Text } from '@/components/ui/text';
+import { useIngredientName } from '@/features/ingredients/display';
 import { todayISO } from '@/features/ingredients/freshness';
 import { resolveIngredient, searchIngredients } from '@/features/ingredients/matching';
 import { CATEGORY_ORDER, type CreatePantryInput } from '@/features/pantry/repository';
+import { unitName } from '@/features/pricing/units';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 import { UNITS, type IngredientCategory, type PantryItem, type Unit } from '@/types/domain';
@@ -21,9 +23,9 @@ const COMMON_UNITS: Unit[] = ['g', 'kg', 'ml', 'l', 'piece', 'pack', 'can', 'bun
 /** Quick expiry presets, in days from today. */
 const EXPIRY_PRESETS = [
   { days: 1, labelKey: 'pantry.expiresTomorrow' as const },
-  { days: 3, labelKey: null, label: '3d' },
-  { days: 7, labelKey: null, label: '1w' },
-  { days: 30, labelKey: null, label: '1m' },
+  { days: 3, labelKey: 'pantry.expiry3Days' as const },
+  { days: 7, labelKey: 'pantry.expiry1Week' as const },
+  { days: 30, labelKey: 'pantry.expiry1Month' as const },
 ];
 
 function isoInDays(days: number): string {
@@ -51,6 +53,7 @@ export type PantryEditorSheetProps = {
 export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEditorSheetProps) {
   const theme = useTheme();
   const { t } = useI18n();
+  const displayName = useIngredientName();
 
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState('');
@@ -140,7 +143,10 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
 
   const unitsToShow = showAllUnits ? UNITS : COMMON_UNITS;
   const isPerishable = resolveIngredient(trimmedName)?.isPerishable ?? false;
-  const detailsSummary = [t(`category.${category}` as const), unit ?? t('pantry.noUnit')].join(' · ');
+  const detailsSummary = [
+    t(`category.${category}` as const),
+    unit ? unitName(unit, t) : t('pantry.noUnit'),
+  ].join(' · ');
 
   return (
     <Sheet
@@ -179,7 +185,7 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
             {suggestions.map((suggestion) => (
               <Chip
                 key={suggestion.slug}
-                label={suggestion.name}
+                label={displayName(suggestion.name)}
                 size="sm"
                 onPress={() => applySuggestion(suggestion.name)}
                 testID={`pantry-suggestion-${suggestion.slug}`}
@@ -216,7 +222,7 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
                 {unitsToShow.map((candidate) => (
                   <Chip
                     key={candidate}
-                    label={candidate}
+                    label={unitName(candidate, t)}
                     size="sm"
                     selected={unit === candidate}
                     onPress={() => {
@@ -265,7 +271,7 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
             />
             {inferredFrom ? (
               <Text variant="micro" color="textTertiary">
-                {t('pantry.detailsInferred', { name: inferredFrom })}
+                {t('pantry.detailsInferred', { name: displayName(inferredFrom) })}
               </Text>
             ) : null}
           </View>
@@ -287,7 +293,7 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
               return (
                 <Chip
                   key={preset.days}
-                  label={preset.labelKey ? t(preset.labelKey) : (preset.label ?? '')}
+                  label={t(preset.labelKey)}
                   size="sm"
                   selected={expiresOn === iso}
                   onPress={() => setExpiresOn(iso)}

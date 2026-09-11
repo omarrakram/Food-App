@@ -127,17 +127,20 @@ for (const recipe of RECIPE_FIXTURES) {
   lines.push(
     `-- ${recipe.title}`,
     `insert into public.recipes (`,
-    `  id, slug, title, description, image_url, source, cuisine, difficulty,`,
+    `  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,`,
     `  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,`,
     `  created_by, is_public)`,
-    `values (${lit(recipe.id)}, ${lit(recipe.slug)}, ${lit(recipe.title)}, ${lit(recipe.description)},`,
+    `values (${lit(recipe.id)}, ${lit(recipe.slug)}, ${lit(recipe.title)}, ${lit(recipe.titleAr)},`,
+    `  ${lit(recipe.description)}, ${lit(recipe.descriptionAr)},`,
     `  ${lit(recipe.imageUrl)}, ${lit(recipe.source)}, ${lit(recipe.cuisine)}, ${lit(recipe.difficulty)},`,
     `  ${lit(recipe.prepMinutes)}, ${lit(recipe.cookMinutes)}, ${lit(recipe.baseServings)},`,
     `  ${lit(recipe.nutrition.calories)}, ${lit(recipe.nutrition.proteinGrams)}, ${lit(recipe.nutrition.carbsGrams)},`,
     `  ${lit(recipe.nutrition.fatGrams)}, ${lit(recipe.nutrition.fiberGrams)}, null, true)`,
     `on conflict (id) do update set`,
     `  title = excluded.title,`,
+    `  title_ar = excluded.title_ar,`,
     `  description = excluded.description,`,
+    `  description_ar = excluded.description_ar,`,
     `  image_url = excluded.image_url,`,
     `  cuisine = excluded.cuisine,`,
     `  difficulty = excluded.difficulty,`,
@@ -186,8 +189,8 @@ for (const recipe of RECIPE_FIXTURES) {
   lines.push(`delete from public.recipe_steps where recipe_id = ${lit(recipe.id)};`);
   for (const step of recipe.steps) {
     lines.push(
-      `insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)`,
-      `values (${lit(step.id)}, ${lit(recipe.id)}, ${lit(step.stepNumber)}, ${lit(step.instruction)}, ${lit(step.durationMinutes)}, ${lit(step.safetyNote)}, ${textArray(step.ingredientRefs)});`,
+      `insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)`,
+      `values (${lit(step.id)}, ${lit(recipe.id)}, ${lit(step.stepNumber)}, ${lit(step.instruction)}, ${lit(step.instructionAr)}, ${lit(step.durationMinutes)}, ${lit(step.safetyNote)}, ${lit(step.safetyNoteAr)}, ${textArray(step.ingredientRefs)});`,
     );
   }
   lines.push('');

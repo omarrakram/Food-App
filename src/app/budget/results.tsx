@@ -16,7 +16,7 @@ import { useTheme } from '@/theme';
 
 export default function BudgetResultsScreen() {
   const theme = useTheme();
-  const { t, language } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const { preferences } = usePreferences();
   const params = useLocalSearchParams();
@@ -25,7 +25,6 @@ export default function BudgetResultsScreen() {
   const { matches, isLoading, error, isGenerating, generationError, refetch } =
     useMealSuggestions(request);
 
-  const locale = language === 'ar' ? 'ar-EG' : 'en-US';
   const budgetLabel = request.budgetMinor
     ? formatMoney(money(request.budgetMinor, request.currency), { locale })
     : null;

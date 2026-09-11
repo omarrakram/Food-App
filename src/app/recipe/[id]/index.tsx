@@ -21,13 +21,15 @@ import { buildAvailabilityIndex, matchRecipeIngredients } from '@/features/ingre
 import { usePantryItems } from '@/features/pantry/hooks';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { estimateRecipeCost, toPricedAmount } from '@/features/pricing/estimate';
+import { useIngredientName } from '@/features/ingredients/display';
+import { useRecipeText } from '@/features/recipes/localise';
 import { formatQuantity, scaleQuantity } from '@/features/pricing/units';
 import { useRecipe } from '@/features/recipes/hooks';
 import { useIsSaved, useRecordHistory, useToggleSave } from '@/features/saved/hooks';
 import { useShoppingMutations } from '@/features/shopping/hooks';
 import { isOrderingAvailable } from '@/features/grocery/registry';
 import { useI18n } from '@/i18n';
-import { divideMoney } from '@/lib/format/money';
+import { divideMoney, formatMoney } from '@/lib/format/money';
 import { RecipeImage } from '@/components/recipe/recipe-image';
 import { useTheme } from '@/theme';
 import type { IngredientMatch, Recipe } from '@/types/domain';
@@ -57,12 +59,14 @@ function IngredientLine({
 }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const displayName = useIngredientName();
+  const recipeText = useRecipeText();
 
   const ingredient = recipe.ingredients.find((entry) => entry.id === match.recipeIngredientId);
   if (!ingredient) return null;
 
   const scaled = scaleQuantity(ingredient.quantity, recipe.baseServings, servings);
-  const quantityLabel = formatQuantity(scaled, ingredient.unit, (value) => formatNumber(value));
+  const quantityLabel = formatQuantity(scaled, ingredient.unit, { t, formatNumber });
 
   return (
     <View
@@ -81,10 +85,10 @@ function IngredientLine({
       />
       <View style={{ flex: 1, gap: 1 }}>
         <Text variant="body">
-          {ingredient.name}
+          {displayName(ingredient.name)}
           {ingredient.preparation ? (
             <Text variant="body" color="textTertiary">
-              {` · ${ingredient.preparation}`}
+              {` · ${recipeText.preparation(ingredient.preparation)}`}
             </Text>
           ) : null}
         </Text>
@@ -111,7 +115,8 @@ function IngredientLine({
 
 export default function RecipeDetailScreen() {
   const theme = useTheme();
-  const { t, formatNumber } = useI18n();
+  const { t, formatNumber, locale } = useI18n();
+  const recipeText = useRecipeText();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const toast = useToast();
@@ -226,7 +231,7 @@ export default function RecipeDetailScreen() {
   };
 
   const safetyNotes = recipe.steps
-    .map((step) => step.safetyNote)
+    .map((step) => recipeText.safetyNote(step))
     .filter((note): note is string => Boolean(note));
 
   return (
@@ -278,9 +283,9 @@ export default function RecipeDetailScreen() {
           }}
         >
           <View style={{ gap: theme.spacing.sm }}>
-            <Text variant="title1">{recipe.title}</Text>
+            <Text variant="title1">{recipeText.title(recipe)}</Text>
             <Text variant="callout" color="textSecondary">
-              {recipe.description}
+              {recipeText.description(recipe)}
             </Text>
           </View>
 
@@ -381,7 +386,7 @@ export default function RecipeDetailScreen() {
               <PriceTag priced={priced} size="lg" />
               <Text variant="micro" color="textTertiary">
                 {t('recipe.costPerServing', {
-                  value: `~${formatNumber(perServing.amountMinor / 100)} ${preferences.currency}`,
+                  value: `~${formatMoney(perServing, { locale })}`,
                 })}
               </Text>
             </View>
@@ -469,9 +474,9 @@ export default function RecipeDetailScreen() {
                         color={isDone ? 'textTertiary' : 'text'}
                         style={isDone ? { textDecorationLine: 'line-through' } : undefined}
                       >
-                        {step.instruction}
+                        {recipeText.instruction(step)}
                       </Text>
-                      {step.safetyNote ? (
+                      {recipeText.safetyNote(step) ? (
                         <View
                           style={{
                             flexDirection: 'row',
@@ -489,7 +494,7 @@ export default function RecipeDetailScreen() {
                             variant="footnote"
                             style={{ color: theme.colors.warningSoftText, flex: 1 }}
                           >
-                            {step.safetyNote}
+                            {recipeText.safetyNote(step)}
                           </Text>
                         </View>
                       ) : null}
@@ -568,7 +573,7 @@ export default function RecipeDetailScreen() {
         <View style={{ gap: theme.spacing.md }}>
           <Text variant="body" color="textSecondary">
             {isOrderingAvailable(preferences.country)
-              ? t('grocery.notAvailableBody', { country: preferences.country })
+              ? t('grocery.notAvailableBody', { country: t(`country.${preferences.country}` as const) })
               : t('recipe.orderComingSoonBody')}
           </Text>
           <Button

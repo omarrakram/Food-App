@@ -773,7 +773,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     defaultUnit: 'tsp',
     gramsPerPiece: 2,
     allergens: [],
-    aliases: ['كزبره ناشفه'],
+    aliases: ['ground coriander', 'كزبره ناشفه'],
     isCommonStaple: true,
     isPerishable: false,
   },

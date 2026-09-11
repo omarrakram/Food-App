@@ -30,6 +30,8 @@ export type Translate = (key: TranslationKey, values?: TranslateValues) => strin
 
 type I18nContextValue = {
   language: Language;
+  /** BCP 47 tag for `Intl` and for anything that formats money or dates. */
+  locale: string;
   isRTL: boolean;
   setLanguage: (next: Language) => void;
   t: Translate;
@@ -129,6 +131,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const locale = language === 'ar' ? 'ar-EG' : 'en-US';
     return {
       language,
+      locale,
       isRTL: isRTLLanguage(language),
       setLanguage,
       t: createTranslator(language),

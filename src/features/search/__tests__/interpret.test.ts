@@ -1,3 +1,5 @@
+import { createTranslator } from '@/i18n';
+
 import { applyInterpretation, interpretQuery, LOW_CONFIDENCE } from '../interpret';
 import type { MealRequest } from '@/types/domain';
 
@@ -272,5 +274,61 @@ describe('exclusions survive into the request', () => {
 
     expect(applied.allergens).toEqual(['nuts']);
     expect(applied.dietaryPreference).toBe('vegan');
+  });
+});
+
+describe('Arabic numerals', () => {
+  // An Arabic keyboard produces ١٥٠, and every number pattern in this module is
+  // `\d`, which is ASCII-only. Before this, "أقل من ١٥٠ جنيه" understood
+  // nothing at all — no budget, no time, no servings.
+  it('reads a budget written in Arabic-Indic digits', () => {
+    const result = interpretQuery('حاجة بالجبنة بأقل من ١٥٠ جنيه', 'EGP');
+    expect(result.budgetMinor).toBe(15000);
+  });
+
+  it('reads a cooking time written in Arabic-Indic digits', () => {
+    expect(interpretQuery('عشاء في ٢٠ دقيقة', 'EGP').maxMinutes).toBe(20);
+  });
+
+  it('still reads ASCII digits', () => {
+    expect(interpretQuery('dinner in 20 minutes', 'EGP').maxMinutes).toBe(20);
+  });
+});
+
+describe('the seeded examples are not decoration', () => {
+  // Every example chip on the search screen submits its own text. One the
+  // parser cannot read teaches the user a phrasing that does not work — which
+  // is exactly what the Arabic ones would have done if they were translated
+  // without being checked against the patterns.
+  //
+  // Read from the dictionaries rather than copied, so editing an example in
+  // ar.ts without checking it against the parser fails here.
+  const keys = [
+    'search.example1',
+    'search.example2',
+    'search.example3',
+    'search.example4',
+    'search.example5',
+  ] as const;
+
+  const examples = (['en', 'ar'] as const).flatMap((language) => {
+    const t = createTranslator(language);
+    return keys.map((key) => [`${language}: ${t(key)}`, t(key)] as const);
+  });
+
+  it.each(examples)('understands %s', (_label, example) => {
+    const result = interpretQuery(example, 'EGP');
+    const understood =
+      result.budgetMinor !== null ||
+      result.maxMinutes !== null ||
+      result.servings !== null ||
+      result.cuisine !== null ||
+      result.mealType !== null ||
+      result.ingredients.length > 0 ||
+      result.tags.length > 0 ||
+      result.minProteinGrams !== null ||
+      result.maxCalories !== null;
+
+    expect(understood).toBe(true);
   });
 });

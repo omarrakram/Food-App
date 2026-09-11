@@ -19,20 +19,26 @@ import { formatMoney, money } from '@/lib/format/money';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
 import { useTheme } from '@/theme';
 
-/** Seeded examples so an empty search screen still teaches what it can do. */
-const EXAMPLES = [
-  'something cheesy under 150 EGP',
-  'high protein meal using chicken',
-  'dinner in 20 minutes',
-  'something Egyptian for four people',
-  'healthy breakfast with eggs',
-];
+/**
+ * Seeded examples so an empty search screen still teaches what it can do.
+ *
+ * Translated rather than transliterated, and the Arabic versions are written
+ * against the patterns `interpretQuery` actually recognises — an example chip
+ * that the parser cannot read teaches the user the wrong thing.
+ */
+const EXAMPLE_KEYS = [
+  'search.example1',
+  'search.example2',
+  'search.example3',
+  'search.example4',
+  'search.example5',
+] as const;
 
 const MAX_RECENT = 6;
 
 export default function SearchScreen() {
   const theme = useTheme();
-  const { t, language } = useI18n();
+  const { t, locale } = useI18n();
   const { preferences } = usePreferences();
 
   const [draft, setDraft] = useState('');
@@ -68,7 +74,6 @@ export default function SearchScreen() {
   const { matches, isLoading, error, isGenerating, generationError, refetch } =
     useMealSuggestions(request);
 
-  const locale = language === 'ar' ? 'ar-EG' : 'en-US';
 
   const chips = useMemo(() => {
     if (!interpretation) return [];
@@ -137,14 +142,14 @@ export default function SearchScreen() {
               {t('search.examples')}
             </Text>
             <View style={{ gap: theme.spacing.sm }}>
-              {EXAMPLES.map((example) => (
+              {EXAMPLE_KEYS.map((key) => (
                 <Chip
-                  key={example}
-                  label={example}
+                  key={key}
+                  label={t(key)}
                   icon="sparkles-outline"
-                  onPress={() => submit(example)}
+                  onPress={() => submit(t(key))}
                   style={{ alignSelf: 'flex-start' }}
-                  testID={`search-example-${example.slice(0, 8)}`}
+                  testID={`search-example-${key.slice(-1)}`}
                 />
               ))}
             </View>

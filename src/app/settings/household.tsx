@@ -8,6 +8,7 @@ import { Text } from '@/components/ui/text';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { isCountrySupported } from '@/features/pricing/price-book';
 import { useI18n } from '@/i18n';
+import { currencySymbol } from '@/lib/format/money';
 import { useTheme } from '@/theme';
 import { COUNTRY_CODES, type CountryCode } from '@/types/domain';
 
@@ -15,7 +16,7 @@ import { COUNTRY_CODES, type CountryCode } from '@/types/domain';
 
 export default function HouseholdSettingsScreen() {
   const theme = useTheme();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { preferences, updatePreferences } = usePreferences();
 
   return (
@@ -61,7 +62,7 @@ export default function HouseholdSettingsScreen() {
           ))}
         </View>
         <Text variant="micro" color="textTertiary">
-          {preferences.currency}
+          {currencySymbol(preferences.currency, locale)}
         </Text>
       </View>
 

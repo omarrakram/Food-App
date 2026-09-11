@@ -6,6 +6,58 @@
  */
 import { cleanup, configure } from '@testing-library/react-native';
 
+/**
+ * `MessageChannel` in the web test environment.
+ *
+ * React's scheduler reaches for it to yield between units of work, and jsdom
+ * does not provide it. The scheduler only uses `port2.postMessage` and
+ * `port1.onmessage`, so a macrotask hop is a faithful stand-in.
+ */
+if (typeof (globalThis as { MessageChannel?: unknown }).MessageChannel === 'undefined') {
+  type Listener = ((event: { data: unknown }) => void) | null;
+
+  class PolyfilledMessageChannel {
+    port1: { onmessage: Listener } = { onmessage: null };
+    port2: { postMessage: (data: unknown) => void };
+
+    constructor() {
+      this.port2 = {
+        postMessage: (data: unknown) => {
+          setTimeout(() => this.port1.onmessage?.({ data }), 0);
+        },
+      };
+    }
+  }
+
+  (globalThis as { MessageChannel?: unknown }).MessageChannel = PolyfilledMessageChannel;
+}
+
+
+/**
+ * `window.matchMedia` in the web test environment.
+ *
+ * jsdom does not implement it, and react-native-web/reanimated call it at
+ * import time to read `prefers-reduced-motion` — so the web Jest project
+ * cannot even load a component without this. Reporting "no preference" matches
+ * a default browser, which is what these tests are describing.
+ */
+if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: (query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    }),
+  });
+}
+
+
 // React Native Testing Library v14 registers its matchers automatically, so
 // there is nothing to import for `toBeOnTheScreen` and friends.
 //

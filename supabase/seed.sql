@@ -1296,6 +1296,8 @@ on conflict (slug) do update set
   is_perishable = excluded.is_perishable;
 
 insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e91ff6e3-9e21-594c-ae83-0109c1289947', 'ground coriander') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e91ff6e3-9e21-594c-ae83-0109c1289947', 'كزبره ناشفه') on conflict do nothing;
 insert into public.ingredient_price_estimates (
   ingredient_id, country, currency, unit, quantity,
@@ -5202,17 +5204,20 @@ on conflict (ingredient_id, country, unit, quantity) do update set
 
 -- Koshari
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 'koshari', 'Koshari', 'Egypt in a bowl: rice, lentils and pasta under spiced tomato sauce and a mountain of crisp onions.',
+values ('1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 'koshari', 'Koshari', 'كشري',
+  'Egypt in a bowl: rice, lentils and pasta under spiced tomato sauce and a mountain of crisp onions.', 'مصر في طبق: رز وعدس ومكرونة تحت صلصة طماطم متبّلة وجبل من البصل المقرمش.',
   null, 'curated', 'egyptian', 'medium',
   15, 40, 4,
   610, 19, 108,
   12, 11, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5269,30 +5274,33 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('902ae457-a8d6-5f20-8451-688c8e30cc62', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', (select id from public.ingredients where name = 'chili flakes' limit 1), 'chili flakes', 1, 'tsp', null, true, 11);
 
 delete from public.recipe_steps where recipe_id = '1fb1aacf-2ec9-53e9-b5af-88026bbd0153';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('dd484155-d106-59e5-8f4c-4c8a567f6366', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 1, 'Fry the sliced onions in oil over medium heat until deep golden and crisp, about 15 minutes. Lift onto paper and keep the oil.', 15, null, '{"onions","vegetable oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('2eeb5362-4952-56cc-a95d-4d9c3180721a', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 2, 'Simmer the lentils in plenty of water for 15 minutes until just tender, then drain.', 15, null, '{"red lentils"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('9c8c0751-33a3-5c32-89cb-e235625c235f', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 3, 'Cook the rice with a spoon of the onion oil and a good pinch of salt until fluffy. Boil the pasta separately until al dente.', 18, null, '{"rice","pasta"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('15208706-879c-5281-bcf5-e0e7df186920', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 4, 'For the sauce, fry the garlic for 30 seconds, add tomato paste, cumin and 250ml water. Simmer 10 minutes, then stir in the vinegar.', 12, null, '{"garlic","tomato paste","cumin","vinegar"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('108a2376-b3e0-5b4c-8b7f-1c6b008b6602', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 5, 'Layer rice, lentils and pasta in bowls. Ladle over the sauce and finish with the crisp onions and chickpeas.', 5, null, '{"chickpeas"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('dd484155-d106-59e5-8f4c-4c8a567f6366', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 1, 'Fry the sliced onions in oil over medium heat until deep golden and crisp, about 15 minutes. Lift onto paper and keep the oil.', 'حمّر البصل المقطّع شرايح في الزيت على نار متوسطة لحد ما يبقى دهبي غامق ومقرمش، حوالي ١٥ دقيقة. ارفعه على ورق واحتفظ بالزيت.', 15, null, null, '{"onions","vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('2eeb5362-4952-56cc-a95d-4d9c3180721a', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 2, 'Simmer the lentils in plenty of water for 15 minutes until just tender, then drain.', 'اسلق العدس في مية كتير ١٥ دقيقة لحد ما يطرى، وبعدين صفّيه.', 15, null, null, '{"red lentils"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9c8c0751-33a3-5c32-89cb-e235625c235f', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 3, 'Cook the rice with a spoon of the onion oil and a good pinch of salt until fluffy. Boil the pasta separately until al dente.', 'اطبخ الرز بمعلقة من زيت البصل ورشة ملح كويسة لحد ما يفرفر. واسلق المكرونة لوحدها لحد ما تستوي وتفضل متماسكة.', 18, null, null, '{"rice","pasta"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('15208706-879c-5281-bcf5-e0e7df186920', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 4, 'For the sauce, fry the garlic for 30 seconds, add tomato paste, cumin and 250ml water. Simmer 10 minutes, then stir in the vinegar.', 'للصلصة، حمّر التوم ٣٠ ثانية، وبعدين ضيف صلصة الطماطم والكمون و٢٥٠ مل مية. سيبها تغلي ١٠ دقايق، وبعدين قلّب الخل فيها.', 12, null, null, '{"garlic","tomato paste","cumin","vinegar"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('108a2376-b3e0-5b4c-8b7f-1c6b008b6602', '1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 5, 'Layer rice, lentils and pasta in bowls. Ladle over the sauce and finish with the crisp onions and chickpeas.', 'رصّ الرز والعدس والمكرونة في الأطباق. صبّ الصلصة فوقهم وزيّن بالبصل المقرمش والحمص.', 5, null, null, '{"chickpeas"}');
 
 -- Tomato & Feta Shakshuka
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('87739e1b-f3cc-51cb-851f-51010ddf3583', 'shakshuka', 'Tomato & Feta Shakshuka', 'Eggs poached in a garlicky tomato sauce with crumbled white cheese. Ready before the bread is toasted.',
+values ('87739e1b-f3cc-51cb-851f-51010ddf3583', 'shakshuka', 'Tomato & Feta Shakshuka', 'شكشوكة بالطماطم والجبنة البيضا',
+  'Eggs poached in a garlicky tomato sauce with crumbled white cheese. Ready before the bread is toasted.', 'بيض مطبوخ في صلصة طماطم بالتوم مع جبنة بيضا مفتّتة. جاهزة قبل ما العيش يسخن.',
   null, 'curated', 'egyptian', 'easy',
   5, 15, 2,
   380, 22, 18,
   25, 4, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5345,28 +5353,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('db5287e4-a0c3-5ba4-9fa8-43df57399f45', '87739e1b-f3cc-51cb-851f-51010ddf3583', (select id from public.ingredients where name = 'coriander' limit 1), 'coriander', 1, 'bunch', 'chopped', true, 9);
 
 delete from public.recipe_steps where recipe_id = '87739e1b-f3cc-51cb-851f-51010ddf3583';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('1d38ac13-afaa-5757-963d-9b3c5155d14d', '87739e1b-f3cc-51cb-851f-51010ddf3583', 1, 'Soften the onion in olive oil for 4 minutes, then add the garlic and cumin and cook another minute.', 5, null, '{"onions","garlic","cumin","olive oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('9898930e-6be6-5e7f-97a1-7f99cd52be25', '87739e1b-f3cc-51cb-851f-51010ddf3583', 2, 'Add the tomatoes and a pinch of salt. Simmer 8 minutes until the sauce thickens and darkens.', 8, null, '{"tomatoes"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b578d474-9e4c-5b2a-8d8e-aece3f5e83f1', '87739e1b-f3cc-51cb-851f-51010ddf3583', 3, 'Make four wells and crack an egg into each. Cover and cook 4–5 minutes.', 5, 'Cook eggs until the whites are completely set. Runny yolks are only safe with pasteurised eggs.', '{"eggs"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('4cd2ed9f-1e66-596d-a9f1-62d02596a48c', '87739e1b-f3cc-51cb-851f-51010ddf3583', 4, 'Scatter over the white cheese and coriander and take it straight to the table with bread.', 1, null, '{"white cheese","coriander","baladi bread"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('1d38ac13-afaa-5757-963d-9b3c5155d14d', '87739e1b-f3cc-51cb-851f-51010ddf3583', 1, 'Soften the onion in olive oil for 4 minutes, then add the garlic and cumin and cook another minute.', 'شوّح البصل في زيت الزيتون ٤ دقايق، وبعدين ضيف التوم والكمون واطبخهم دقيقة كمان.', 5, null, null, '{"onions","garlic","cumin","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9898930e-6be6-5e7f-97a1-7f99cd52be25', '87739e1b-f3cc-51cb-851f-51010ddf3583', 2, 'Add the tomatoes and a pinch of salt. Simmer 8 minutes until the sauce thickens and darkens.', 'ضيف الطماطم ورشة ملح. سيبها تغلي ٨ دقايق لحد ما الصلصة تتقل ولونها يغمق.', 8, null, null, '{"tomatoes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b578d474-9e4c-5b2a-8d8e-aece3f5e83f1', '87739e1b-f3cc-51cb-851f-51010ddf3583', 3, 'Make four wells and crack an egg into each. Cover and cook 4–5 minutes.', 'اعمل أربع حفر وكسّر بيضة في كل واحدة. غطّي الطاسة واطبخ ٤–٥ دقايق.', 5, 'Cook eggs until the whites are completely set. Runny yolks are only safe with pasteurised eggs.', 'اطبخ البيض لحد ما البياض يستوي تمامًا. الصفار السايح مأمون بس مع البيض المبستر.', '{"eggs"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('4cd2ed9f-1e66-596d-a9f1-62d02596a48c', '87739e1b-f3cc-51cb-851f-51010ddf3583', 4, 'Scatter over the white cheese and coriander and take it straight to the table with bread.', 'رشّ الجبنة البيضا والكزبرة وقدّمها على طول مع العيش.', 1, null, null, '{"white cheese","coriander","baladi bread"}');
 
 -- Creamy Chicken Pasta
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('9686e1c2-ed74-5df2-b356-f51d1102819e', 'creamy-chicken-pasta', 'Creamy Chicken Pasta', 'One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.',
+values ('9686e1c2-ed74-5df2-b356-f51d1102819e', 'creamy-chicken-pasta', 'Creamy Chicken Pasta', 'مكرونة بالفراخ والكريمة',
+  'One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.', 'طاسة واحدة في نص الأسبوع. فراخ مشوّحة وكريمة بالتوم وجبنة رومي بتفرق.',
   null, 'curated', 'italian', 'easy',
   10, 20, 3,
   650, 48, 62,
   22, 4, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5415,28 +5426,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('157818ce-5d3b-5c6e-bb62-d2c837d8d061', '9686e1c2-ed74-5df2-b356-f51d1102819e', (select id from public.ingredients where name = 'parsley' limit 1), 'parsley', 1, 'bunch', 'chopped', true, 8);
 
 delete from public.recipe_steps where recipe_id = '9686e1c2-ed74-5df2-b356-f51d1102819e';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('43ce1c13-6cff-50f6-a651-df3e46b6773e', '9686e1c2-ed74-5df2-b356-f51d1102819e', 1, 'Boil the pasta in well-salted water. Reserve a cup of the water before draining.', 10, null, '{"pasta"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('7ba5ec9b-ae1b-5b95-80c8-0ed5907afb6a', '9686e1c2-ed74-5df2-b356-f51d1102819e', 2, 'Season the chicken and sear in butter over high heat until golden on both sides.', 7, 'Cook chicken until it reaches 74°C / 165°F and no pink remains. Wash hands and the board after handling raw poultry.', '{"chicken breast","butter","black pepper"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('82471a02-4b87-525e-b167-e414024093d8', '9686e1c2-ed74-5df2-b356-f51d1102819e', 3, 'Lower the heat, add the garlic for 30 seconds, then pour in the cream and let it bubble for 2 minutes.', 3, null, '{"garlic","cooking cream"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('9f33b44d-35a7-54c7-a6e6-52d175e1342a', '9686e1c2-ed74-5df2-b356-f51d1102819e', 4, 'Toss in the pasta with a splash of its water and the grated cheese until glossy. Finish with parsley.', 3, null, '{"roumy cheese","parsley"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('43ce1c13-6cff-50f6-a651-df3e46b6773e', '9686e1c2-ed74-5df2-b356-f51d1102819e', 1, 'Boil the pasta in well-salted water. Reserve a cup of the water before draining.', 'اسلق المكرونة في مية مملّحة كويس. شيل كوباية من ميتها قبل ما تصفّيها.', 10, null, null, '{"pasta"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('7ba5ec9b-ae1b-5b95-80c8-0ed5907afb6a', '9686e1c2-ed74-5df2-b356-f51d1102819e', 2, 'Season the chicken and sear in butter over high heat until golden on both sides.', 'تبّل الفراخ وشوّحها في الزبدة على نار عالية لحد ما تتحمّر من الناحيتين.', 7, 'Cook chicken until it reaches 74°C / 165°F and no pink remains. Wash hands and the board after handling raw poultry.', 'اطبخ الفراخ لحد ما توصل ٧٤°م / ١٦٥°ف ومايفضلش فيها لون وردي. اغسل إيديك واللوح بعد ما تلمس فراخ نية.', '{"chicken breast","butter","black pepper"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('82471a02-4b87-525e-b167-e414024093d8', '9686e1c2-ed74-5df2-b356-f51d1102819e', 3, 'Lower the heat, add the garlic for 30 seconds, then pour in the cream and let it bubble for 2 minutes.', 'هدّي النار، ضيف التوم ٣٠ ثانية، وبعدين صبّ الكريمة وسيبها تغلي دقيقتين.', 3, null, null, '{"garlic","cooking cream"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9f33b44d-35a7-54c7-a6e6-52d175e1342a', '9686e1c2-ed74-5df2-b356-f51d1102819e', 4, 'Toss in the pasta with a splash of its water and the grated cheese until glossy. Finish with parsley.', 'قلّب المكرونة مع شوية من ميتها والجبنة المبشورة لحد ما تلمع. زيّن بالبقدونس.', 3, null, null, '{"roumy cheese","parsley"}');
 
 -- Foul with Eggs & Olive Oil
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('21ede411-5505-5763-ba65-89cd1b643330', 'foul-with-eggs', 'Foul with Eggs & Olive Oil', 'The breakfast that runs the country. Warm fava beans, cumin, lemon and a soft-boiled egg on top.',
+values ('21ede411-5505-5763-ba65-89cd1b643330', 'foul-with-eggs', 'Foul with Eggs & Olive Oil', 'فول بالبيض وزيت الزيتون',
+  'The breakfast that runs the country. Warm fava beans, cumin, lemon and a soft-boiled egg on top.', 'فطار البلد كلها. فول سخن وكمون وليمون وبيضة نص استواء فوقه.',
   null, 'curated', 'egyptian', 'easy',
   5, 10, 2,
   420, 24, 44,
   17, 14, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5487,28 +5501,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('6a5a1861-ed6c-5dbc-a31e-8a025667e12f', '21ede411-5505-5763-ba65-89cd1b643330', (select id from public.ingredients where name = 'chili flakes' limit 1), 'chili flakes', 1, 'tsp', null, true, 8);
 
 delete from public.recipe_steps where recipe_id = '21ede411-5505-5763-ba65-89cd1b643330';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('dca76d8c-0cf2-541b-9d56-4c821ebdf400', '21ede411-5505-5763-ba65-89cd1b643330', 1, 'Warm the fava beans in a pan with a splash of their liquid, mashing about half of them.', 6, null, '{"fava beans"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('7609b514-a4d6-5734-a1a0-f75a65e0e1d5', '21ede411-5505-5763-ba65-89cd1b643330', 2, 'Boil the eggs for 7 minutes for a just-set yolk, then peel under cold water.', 7, 'Boil eggs for at least 7 minutes so the white is fully set.', '{"eggs"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('c7850d32-5c84-52a5-8f63-f57eb97e1283', '21ede411-5505-5763-ba65-89cd1b643330', 3, 'Season the foul with cumin, salt and lemon juice, then pour olive oil generously over the top.', 2, null, '{"cumin","lemon","olive oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('30cfcc61-9a45-5532-8f92-53afd0c7b6b9', '21ede411-5505-5763-ba65-89cd1b643330', 4, 'Halve the eggs onto the beans, scatter tomato and chilli, and scoop it all up with warm bread.', 1, null, '{"tomatoes","chili flakes","baladi bread"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('dca76d8c-0cf2-541b-9d56-4c821ebdf400', '21ede411-5505-5763-ba65-89cd1b643330', 1, 'Warm the fava beans in a pan with a splash of their liquid, mashing about half of them.', 'سخّن الفول في حلة مع شوية من ميته، واهرس نصه تقريبًا.', 6, null, null, '{"fava beans"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('7609b514-a4d6-5734-a1a0-f75a65e0e1d5', '21ede411-5505-5763-ba65-89cd1b643330', 2, 'Boil the eggs for 7 minutes for a just-set yolk, then peel under cold water.', 'اسلق البيض ٧ دقايق عشان الصفار يستوي ويفضل طري، وبعدين قشّره تحت مية باردة.', 7, 'Boil eggs for at least 7 minutes so the white is fully set.', 'اسلق البيض ٧ دقايق على الأقل عشان البياض يستوي تمامًا.', '{"eggs"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c7850d32-5c84-52a5-8f63-f57eb97e1283', '21ede411-5505-5763-ba65-89cd1b643330', 3, 'Season the foul with cumin, salt and lemon juice, then pour olive oil generously over the top.', 'تبّل الفول بالكمون والملح وعصير الليمون، وبعدين صبّ زيت الزيتون فوقه بسخاء.', 2, null, null, '{"cumin","lemon","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('30cfcc61-9a45-5532-8f92-53afd0c7b6b9', '21ede411-5505-5763-ba65-89cd1b643330', 4, 'Halve the eggs onto the beans, scatter tomato and chilli, and scoop it all up with warm bread.', 'حط البيض مقسوم نصين على الفول، رشّ طماطم وشطة، وكل الحكاية بعيش سخن.', 1, null, null, '{"tomatoes","chili flakes","baladi bread"}');
 
 -- Molokhia with Chicken
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('58b509eb-55b9-5a32-bd7a-29b443785ebb', 'molokhia-with-chicken', 'Molokhia with Chicken', 'Silky green molokhia over rice, with poached chicken and a hit of garlic-coriander taqleya.',
+values ('58b509eb-55b9-5a32-bd7a-29b443785ebb', 'molokhia-with-chicken', 'Molokhia with Chicken', 'ملوخية بالفراخ',
+  'Silky green molokhia over rice, with poached chicken and a hit of garlic-coriander taqleya.', 'ملوخية خضرا ناعمة على الرز، مع فراخ مسلوقة وتقلية توم وكزبرة.',
   null, 'curated', 'egyptian', 'medium',
   15, 45, 4,
   540, 42, 52,
   16, 6, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5557,30 +5574,33 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('f9d54c34-f3d3-56db-969a-c5b351478abe', '58b509eb-55b9-5a32-bd7a-29b443785ebb', (select id from public.ingredients where name = 'lemon' limit 1), 'lemon', 1, 'piece', 'wedges to serve', true, 9);
 
 delete from public.recipe_steps where recipe_id = '58b509eb-55b9-5a32-bd7a-29b443785ebb';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b917eea5-fdf1-5558-b1c1-290a0b302687', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 1, 'Simmer the chicken with the onion and bay leaves in 1.5L water for 35 minutes. Skim, then lift out the chicken and keep the broth.', 35, 'Poultry must reach 74°C / 165°F throughout. The juices should run clear.', '{"chicken thighs","onions","bay leaf"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('de13d378-0896-563d-87fb-225a81934a20', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 2, 'Cook the rice while the chicken simmers.', 18, null, '{"rice"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('0566f528-ed8a-5e56-8843-c837e902463a', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 3, 'Bring 1L of the broth to a gentle simmer and stir in the molokhia. Keep it just below the boil for 5 minutes — hard boiling splits it.', 6, null, '{"molokhia"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('29c74540-34b8-5dc1-8fdd-c6310dd1f9c3', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 4, 'For the taqleya, fry the garlic and ground coriander in butter until fragrant and golden, then tip the whole lot into the molokhia. It will hiss.', 3, null, '{"garlic","ground coriander","butter"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('a24e535e-72d0-5bea-ac59-433d1a307771', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 5, 'Serve the molokhia over rice with the chicken alongside and lemon to squeeze.', 2, null, '{"lemon"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b917eea5-fdf1-5558-b1c1-290a0b302687', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 1, 'Simmer the chicken with the onion and bay leaves in 1.5L water for 35 minutes. Skim, then lift out the chicken and keep the broth.', 'اسلق الفراخ مع البصل وورق اللورا في ١.٥ لتر مية ٣٥ دقيقة. ارفع الرغوة، وبعدين شيل الفراخ واحتفظ بالشوربة.', 35, 'Poultry must reach 74°C / 165°F throughout. The juices should run clear.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية.', '{"chicken thighs","onions","bay leaf"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('de13d378-0896-563d-87fb-225a81934a20', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 2, 'Cook the rice while the chicken simmers.', 'اطبخ الرز والفراخ لسه بتستوي.', 18, null, null, '{"rice"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('0566f528-ed8a-5e56-8843-c837e902463a', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 3, 'Bring 1L of the broth to a gentle simmer and stir in the molokhia. Keep it just below the boil for 5 minutes — hard boiling splits it.', 'سخّن ١ لتر من الشوربة على نار هادية وقلّب الملوخية فيها. خليها تحت الغليان بـ٥ دقايق — الغليان القوي بيفصّلها.', 6, null, null, '{"molokhia"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('29c74540-34b8-5dc1-8fdd-c6310dd1f9c3', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 4, 'For the taqleya, fry the garlic and ground coriander in butter until fragrant and golden, then tip the whole lot into the molokhia. It will hiss.', 'للتقلية، حمّر التوم والكزبرة الناشفة في الزبدة لحد ما ريحتها تطلع ولونها يدهب، وبعدين كبّها كلها في الملوخية. هتشّ.', 3, null, null, '{"garlic","ground coriander","butter"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('a24e535e-72d0-5bea-ac59-433d1a307771', '58b509eb-55b9-5a32-bd7a-29b443785ebb', 5, 'Serve the molokhia over rice with the chicken alongside and lemon to squeeze.', 'قدّم الملوخية على الرز والفراخ جنبها وليمون تعصره.', 2, null, null, '{"lemon"}');
 
 -- Air Fryer Spiced Chicken
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('dd63a595-f6f8-5570-b92f-9cb339e3ab47', 'air-fryer-spiced-chicken', 'Air Fryer Spiced Chicken', 'Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.',
+values ('dd63a595-f6f8-5570-b92f-9cb339e3ab47', 'air-fryer-spiced-chicken', 'Air Fryer Spiced Chicken', 'فراخ متبّلة في الإير فراير',
+  'Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.', 'عشرين دقيقة في الإير فراير، ومفيش طاسة زيت تغسلها بعدين. مقرمشة من بره وطرية من جوه.',
   null, 'curated', 'mediterranean', 'easy',
   8, 18, 2,
   410, 52, 6,
   19, 1, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5627,26 +5647,29 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('ea0272e1-dbf9-5dcc-ba4f-791e387f2282', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', (select id from public.ingredients where name = 'yogurt' limit 1), 'yogurt', 100, 'g', 'to serve', true, 7);
 
 delete from public.recipe_steps where recipe_id = 'dd63a595-f6f8-5570-b92f-9cb339e3ab47';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('2805c2b1-620f-53f4-9e3a-106361f3d6af', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 1, 'Toss the chicken with oil, lemon juice, garlic, paprika, cumin and salt. Leave 5 minutes if you have it.', 8, 'Marinate in the fridge, never on the counter, and discard any marinade that touched raw chicken.', '{"chicken thighs","olive oil","lemon","garlic","paprika","cumin"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('832b36e5-5649-5c81-b21e-704d1285db7a', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 2, 'Air fry at 200°C for 18 minutes, turning once halfway.', 18, 'Check the thickest piece reaches 74°C / 165°F before serving.', '{}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('fc24eb03-03ee-5f03-912d-18ad1bd99630', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 3, 'Rest for 3 minutes, then serve with cold yogurt.', 3, null, '{"yogurt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('2805c2b1-620f-53f4-9e3a-106361f3d6af', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 1, 'Toss the chicken with oil, lemon juice, garlic, paprika, cumin and salt. Leave 5 minutes if you have it.', 'قلّب الفراخ مع الزيت وعصير الليمون والتوم والبابريكا والكمون والملح. سيبها ٥ دقايق لو معاك وقت.', 8, 'Marinate in the fridge, never on the counter, and discard any marinade that touched raw chicken.', 'تبّل في التلاجة، مش على الرخامة أبدًا، وارمي أي تتبيلة لمست فراخ نية.', '{"chicken thighs","olive oil","lemon","garlic","paprika","cumin"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('832b36e5-5649-5c81-b21e-704d1285db7a', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 2, 'Air fry at 200°C for 18 minutes, turning once halfway.', 'اقليها في الإير فراير على ٢٠٠ درجة ١٨ دقيقة، مع تقليبها مرة في النص.', 18, 'Check the thickest piece reaches 74°C / 165°F before serving.', 'اتأكد إن أتخن قطعة وصلت ٧٤°م / ١٦٥°ف قبل ما تقدّم.', '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('fc24eb03-03ee-5f03-912d-18ad1bd99630', 'dd63a595-f6f8-5570-b92f-9cb339e3ab47', 3, 'Rest for 3 minutes, then serve with cold yogurt.', 'سيبها ترتاح ٣ دقايق، وبعدين قدّمها مع زبادي بارد.', 3, null, null, '{"yogurt"}');
 
 -- Egyptian Lentil Soup
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('d4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 'egyptian-lentil-soup', 'Egyptian Lentil Soup', 'Blended red lentils with cumin and a squeeze of lemon. Cheap, filling, and better than it has any right to be.',
+values ('d4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 'egyptian-lentil-soup', 'Egyptian Lentil Soup', 'شوربة عدس مصرية',
+  'Blended red lentils with cumin and a squeeze of lemon. Cheap, filling, and better than it has any right to be.', 'عدس أصفر مضروب بالكمون وعصرة ليمون. رخيصة وشبعانة وأحلى مما تتخيّل.',
   null, 'curated', 'egyptian', 'easy',
   8, 30, 4,
   290, 16, 44,
   6, 12, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5696,28 +5719,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('f58b5aa6-21b1-5cba-98cb-4243bd20dbf5', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', (select id from public.ingredients where name = 'vegetable oil' limit 1), 'vegetable oil', 20, 'ml', null, false, 7);
 
 delete from public.recipe_steps where recipe_id = 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('9078234f-3437-5677-8280-3a19ee01f146', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 1, 'Soften the onion, carrot and potato in oil for 6 minutes.', 6, null, '{"onions","carrots","potatoes","vegetable oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('a941b1f2-0bf1-5cd7-b74e-a473b7f987ca', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 2, 'Add the lentils, cumin and 1.2L water. Simmer 25 minutes until everything collapses.', 25, null, '{"red lentils","cumin"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('29e79ca9-8d93-51aa-a7df-e60176804a0f', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 3, 'Blend until completely smooth, loosening with hot water if needed. Season well.', 3, 'Blend hot liquid in batches with the lid vented, or it will erupt.', '{}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('c52f7794-c039-58e3-8499-0d3a2634f961', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 4, 'Serve with lemon wedges and, if you like, fried bread croutons.', 2, null, '{"lemon"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9078234f-3437-5677-8280-3a19ee01f146', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 1, 'Soften the onion, carrot and potato in oil for 6 minutes.', 'شوّح البصل والجزر والبطاطس في الزيت ٦ دقايق.', 6, null, null, '{"onions","carrots","potatoes","vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('a941b1f2-0bf1-5cd7-b74e-a473b7f987ca', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 2, 'Add the lentils, cumin and 1.2L water. Simmer 25 minutes until everything collapses.', 'ضيف العدس والكمون و١.٢ لتر مية. سيبها تغلي ٢٥ دقيقة لحد ما كل حاجة تستوي تمامًا.', 25, null, null, '{"red lentils","cumin"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('29e79ca9-8d93-51aa-a7df-e60176804a0f', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 3, 'Blend until completely smooth, loosening with hot water if needed. Season well.', 'اضربها في الخلاط لحد ما تبقى ناعمة خالص، وخفّفها بمية سخنة لو احتاجت. ظبّط الملح كويس.', 3, 'Blend hot liquid in batches with the lid vented, or it will erupt.', 'اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور.', '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c52f7794-c039-58e3-8499-0d3a2634f961', 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 4, 'Serve with lemon wedges and, if you like, fried bread croutons.', 'قدّمها مع فصوص ليمون، ولو حبيت، عيش محمّر مكعبات.', 2, null, null, '{"lemon"}');
 
 -- Cold Tuna Pasta Salad
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('4da2bb15-01c8-5380-bca5-a81bca47d744', 'tuna-pasta-salad', 'Cold Tuna Pasta Salad', 'Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.',
+values ('4da2bb15-01c8-5380-bca5-a81bca47d744', 'tuna-pasta-salad', 'Cold Tuna Pasta Salad', 'سلطة مكرونة بالتونة',
+  'Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.', 'اسلق المكرونة وخلاص، مفيش حاجة تانية عايزة نار. تونة وليمون وخيار، وبروتين يكفّيك لحد العشا.',
   null, 'curated', 'mediterranean', 'easy',
   10, 10, 2,
   480, 34, 58,
   13, 5, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5767,26 +5793,29 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('75497d82-e4b2-5670-86d1-4e6e5317e321', '4da2bb15-01c8-5380-bca5-a81bca47d744', (select id from public.ingredients where name = 'green onion' limit 1), 'green onion', 1, 'bunch', 'sliced', true, 7);
 
 delete from public.recipe_steps where recipe_id = '4da2bb15-01c8-5380-bca5-a81bca47d744';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('451eda01-56d8-5a9e-8327-d21234a3e179', '4da2bb15-01c8-5380-bca5-a81bca47d744', 1, 'Boil the pasta, drain and rinse under cold water so it stops cooking.', 10, null, '{"pasta"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('09f24fe6-0409-511d-8ad6-15ceadef4d58', '4da2bb15-01c8-5380-bca5-a81bca47d744', 2, 'Whisk the lemon juice with olive oil, salt and pepper.', 2, null, '{"lemon","olive oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('e8b8db18-e3f3-5bbc-b697-3a2b056a924a', '4da2bb15-01c8-5380-bca5-a81bca47d744', 3, 'Fold everything together and chill for 10 minutes if you can wait.', 4, 'Keep it refrigerated and eat within two days.', '{"canned tuna","cucumber","tomatoes","green onion"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('451eda01-56d8-5a9e-8327-d21234a3e179', '4da2bb15-01c8-5380-bca5-a81bca47d744', 1, 'Boil the pasta, drain and rinse under cold water so it stops cooking.', 'اسلق المكرونة وصفّيها واشطفها بمية باردة عشان تبطّل استواء.', 10, null, null, '{"pasta"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('09f24fe6-0409-511d-8ad6-15ceadef4d58', '4da2bb15-01c8-5380-bca5-a81bca47d744', 2, 'Whisk the lemon juice with olive oil, salt and pepper.', 'اخفق عصير الليمون مع زيت الزيتون والملح والفلفل.', 2, null, null, '{"lemon","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e8b8db18-e3f3-5bbc-b697-3a2b056a924a', '4da2bb15-01c8-5380-bca5-a81bca47d744', 3, 'Fold everything together and chill for 10 minutes if you can wait.', 'قلّب كل حاجة مع بعض وسيبها في التلاجة ١٠ دقايق لو تقدر تستنى.', 4, 'Keep it refrigerated and eat within two days.', 'سيبها في التلاجة وكلها في خلال يومين.', '{"canned tuna","cucumber","tomatoes","green onion"}');
 
 -- Grilled Cheese & Tomato Toastie
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('9b2f8525-e61b-5436-9bec-5920a094aba5', 'egyptian-cheese-toastie', 'Grilled Cheese & Tomato Toastie', 'Four ingredients and five minutes. Dangerously good at midnight.',
+values ('9b2f8525-e61b-5436-9bec-5920a094aba5', 'egyptian-cheese-toastie', 'Grilled Cheese & Tomato Toastie', 'توست بالجبنة والطماطم',
+  'Four ingredients and five minutes. Dangerously good at midnight.', 'أربع مكوّنات وخمس دقايق. خطر في نص الليل.',
   null, 'curated', 'american', 'easy',
   3, 6, 1,
   430, 19, 38,
   23, 3, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5821,7 +5850,7 @@ insert into public.recipe_tags (recipe_id, tag) values ('9b2f8525-e61b-5436-9bec
 
 delete from public.recipe_ingredients where recipe_id = '9b2f8525-e61b-5436-9bec-5920a094aba5';
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order)
-values ('326c211e-2bdf-505f-b245-e091bad76f68', '9b2f8525-e61b-5436-9bec-5920a094aba5', (select id from public.ingredients where name = 'sliced bread' limit 1), 'sliced bread', 2, 'slice', null, false, 1);
+values ('326c211e-2bdf-505f-b245-e091bad76f68', '9b2f8525-e61b-5436-9bec-5920a094aba5', (select id from public.ingredients where name = 'toast bread' limit 1), 'toast bread', 2, 'slice', null, false, 1);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order)
 values ('90581560-012e-5535-bf3e-6601135532ea', '9b2f8525-e61b-5436-9bec-5920a094aba5', (select id from public.ingredients where name = 'mozzarella' limit 1), 'mozzarella', 60, 'g', 'grated', false, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order)
@@ -5832,24 +5861,27 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('b99a7134-2308-5766-ae04-190651c557e2', '9b2f8525-e61b-5436-9bec-5920a094aba5', (select id from public.ingredients where name = 'black pepper' limit 1), 'black pepper', 1, 'pinch', null, true, 5);
 
 delete from public.recipe_steps where recipe_id = '9b2f8525-e61b-5436-9bec-5920a094aba5';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b71b4dbb-c643-5468-9e8c-e6a5e9196316', '9b2f8525-e61b-5436-9bec-5920a094aba5', 1, 'Butter the outsides of both slices. Pile the cheese and tomato inside and press together.', 3, null, '{"sliced bread","butter","mozzarella","tomatoes"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('6a16d112-8470-5508-a349-c8b9db71dbcd', '9b2f8525-e61b-5436-9bec-5920a094aba5', 2, 'Cook in a dry pan over medium-low heat, 3 minutes a side, pressing down, until deep gold and molten inside.', 6, null, '{"black pepper"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b71b4dbb-c643-5468-9e8c-e6a5e9196316', '9b2f8525-e61b-5436-9bec-5920a094aba5', 1, 'Butter the outsides of both slices. Pile the cheese and tomato inside and press together.', 'دهّن وش الشريحتين بالزبدة من بره. حط الجبنة والطماطم في النص واضغط عليهم.', 3, null, null, '{"toast bread","butter","mozzarella","tomatoes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('6a16d112-8470-5508-a349-c8b9db71dbcd', '9b2f8525-e61b-5436-9bec-5920a094aba5', 2, 'Cook in a dry pan over medium-low heat, 3 minutes a side, pressing down, until deep gold and molten inside.', 'اطبخه في طاسة ناشفة على نار متوسطة هادية، ٣ دقايق لكل وش مع الضغط، لحد ما يبقى دهبي غامق والجبنة سايحة جوه.', 6, null, null, '{"black pepper"}');
 
 -- Kofta in Tomato Tagine
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('fb4570db-ea7f-5a98-978c-0587afe70b00', 'kofta-tagine', 'Kofta in Tomato Tagine', 'Beef kofta baked in a thick tomato sauce with potatoes. Sunday food on a Tuesday.',
+values ('fb4570db-ea7f-5a98-978c-0587afe70b00', 'kofta-tagine', 'Kofta in Tomato Tagine', 'طاجن كفتة بالطماطم',
+  'Beef kofta baked in a thick tomato sauce with potatoes. Sunday food on a Tuesday.', 'كفتة لحمة متحمّرة في صلصة طماطم تقيلة مع بطاطس. أكل الجمعة في يوم تلات.',
   null, 'curated', 'egyptian', 'medium',
   20, 40, 4,
   620, 38, 34,
   36, 5, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5898,28 +5930,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('a1331dc3-971e-5791-acec-a51689a0cd2a', 'fb4570db-ea7f-5a98-978c-0587afe70b00', (select id from public.ingredients where name = 'vegetable oil' limit 1), 'vegetable oil', 40, 'ml', null, false, 9);
 
 delete from public.recipe_steps where recipe_id = 'fb4570db-ea7f-5a98-978c-0587afe70b00';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('419d006a-a083-580d-82a0-04459c2b1a1b', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 1, 'Mix the beef with grated onion, parsley, cumin, salt and pepper. Shape into fingers.', 12, 'Wash hands and surfaces after handling raw mince, and keep it away from anything eaten raw.', '{"ground beef","onions","parsley","cumin"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('e5772958-b6d2-55ed-981d-8861cb7bc597', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 2, 'Brown the kofta quickly in oil, then set aside. Fry the potato slices in the same pan until golden.', 12, null, '{"vegetable oil","potatoes"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('e77a96cf-19d4-5b8c-b757-b222289827bb', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 3, 'Fry the sliced onion and garlic, add tomato paste, blended tomatoes and 200ml water. Simmer 8 minutes.', 10, null, '{"garlic","tomato paste","tomatoes"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('53281d1d-d6b8-57ba-a626-57cf0a540808', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 4, 'Layer potatoes and kofta in a baking dish, pour over the sauce and bake at 200°C for 25 minutes.', 25, 'Ground beef must reach 71°C / 160°F all the way through.', '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('419d006a-a083-580d-82a0-04459c2b1a1b', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 1, 'Mix the beef with grated onion, parsley, cumin, salt and pepper. Shape into fingers.', 'اخلط اللحمة المفرومة مع البصل المبشور والبقدونس والكمون والملح والفلفل. شكّلها أصابع.', 12, 'Wash hands and surfaces after handling raw mince, and keep it away from anything eaten raw.', 'اغسل إيديك والأسطح بعد ما تلمس لحمة مفرومة نية، وابعدها عن أي حاجة هتتاكل نية.', '{"ground beef","onions","parsley","cumin"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e5772958-b6d2-55ed-981d-8861cb7bc597', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 2, 'Brown the kofta quickly in oil, then set aside. Fry the potato slices in the same pan until golden.', 'حمّر الكفتة بسرعة في الزيت وبعدين ارفعها. اقلي شرايح البطاطس في نفس الطاسة لحد ما تتحمّر.', 12, null, null, '{"vegetable oil","potatoes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e77a96cf-19d4-5b8c-b757-b222289827bb', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 3, 'Fry the sliced onion and garlic, add tomato paste, blended tomatoes and 200ml water. Simmer 8 minutes.', 'حمّر البصل الشرايح والتوم، ضيف صلصة الطماطم والطماطم المضروبة و٢٠٠ مل مية. سيبها تغلي ٨ دقايق.', 10, null, null, '{"garlic","tomato paste","tomatoes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('53281d1d-d6b8-57ba-a626-57cf0a540808', 'fb4570db-ea7f-5a98-978c-0587afe70b00', 4, 'Layer potatoes and kofta in a baking dish, pour over the sauce and bake at 200°C for 25 minutes.', 'رصّ البطاطس والكفتة في صينية، صبّ الصلصة فوقهم واخبزهم على ٢٠٠ درجة ٢٥ دقيقة.', 25, 'Ground beef must reach 71°C / 160°F all the way through.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره.', '{}');
 
 -- Banana & Peanut Butter Oats
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 'banana-peanut-oats', 'Banana & Peanut Butter Oats', 'Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.',
+values ('2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 'banana-peanut-oats', 'Banana & Peanut Butter Oats', 'شوفان بالموز وزبدة الفول السوداني',
+  'Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.', 'خمس دقايق وطبق واحد، ويقعّدك لحد الغدا. حلو من غير ما تحط سكر.',
   null, 'curated', 'american', 'easy',
   2, 5, 1,
   450, 17, 58,
   17, 8, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -5967,24 +6002,27 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('580fac56-dbaf-58da-84e1-845f0aacb33a', '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', (select id from public.ingredients where name = 'honey' limit 1), 'honey', 1, 'tsp', null, true, 6);
 
 delete from public.recipe_steps where recipe_id = '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('14a4a275-2a29-544a-ab3f-10aa9b39f6ac', '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 1, 'Simmer the oats in milk with a pinch of salt for 4 minutes, stirring, until creamy.', 5, null, '{"oats","milk"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b6d41cf8-7062-5e69-a46c-ac8b67f96544', '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 2, 'Stir in half the banana so it melts into the oats. Top with the rest, peanut butter, cinnamon and honey.', 2, null, '{"bananas","peanut butter","cinnamon","honey"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('14a4a275-2a29-544a-ab3f-10aa9b39f6ac', '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 1, 'Simmer the oats in milk with a pinch of salt for 4 minutes, stirring, until creamy.', 'اطبخ الشوفان في اللبن مع رشة ملح ٤ دقايق مع التقليب لحد ما يبقى كريمي.', 5, null, null, '{"oats","milk"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b6d41cf8-7062-5e69-a46c-ac8b67f96544', '2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 2, 'Stir in half the banana so it melts into the oats. Top with the rest, peanut butter, cinnamon and honey.', 'قلّب نص الموزة جوه لحد ما تدوب في الشوفان. زيّن بالباقي وزبدة الفول السوداني والقرفة والعسل.', 2, null, null, '{"bananas","peanut butter","cinnamon","honey"}');
 
 -- Quick Vegetable Fried Rice
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('090dc093-13f3-579f-8d50-f69bd9c03bdd', 'quick-vegetable-fried-rice', 'Quick Vegetable Fried Rice', 'The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.',
+values ('090dc093-13f3-579f-8d50-f69bd9c03bdd', 'quick-vegetable-fried-rice', 'Quick Vegetable Fried Rice', 'أرز مقلي بالخضار',
+  'The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.', 'أحسن حاجة تعملها برز امبارح. خمستاشر دقيقة وطاسة واحدة وأي خضار عندك.',
   null, 'curated', 'asian', 'easy',
   8, 10, 2,
   470, 16, 68,
   14, 6, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -6033,28 +6071,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('0a9c058d-8172-5747-ae76-1f4e220dd5dc', '090dc093-13f3-579f-8d50-f69bd9c03bdd', (select id from public.ingredients where name = 'vegetable oil' limit 1), 'vegetable oil', 30, 'ml', null, false, 7);
 
 delete from public.recipe_steps where recipe_id = '090dc093-13f3-579f-8d50-f69bd9c03bdd';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('dcab610d-c935-5c01-96b0-ffb470a1bfbc', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 1, 'Scramble the eggs quickly in hot oil and set aside.', 2, null, '{"eggs","vegetable oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('fccd116a-5558-57a0-a23c-e5d373e3bab0', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 2, 'Stir-fry the carrot and peas for 3 minutes, then add the garlic for 30 seconds.', 4, null, '{"carrots","green peas","garlic"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('46d2eba7-1a37-56ee-ad0e-8ac946fa9b1d', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 3, 'Add the cold rice, breaking up clumps, and fry hard for 4 minutes until it starts to catch.', 4, 'Only use rice that was cooled quickly and refrigerated, and reheat it once until piping hot.', '{"rice"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('16781e6e-983b-5037-abc5-e4a963e196bf', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 4, 'Fold the egg back in with the green onions and season.', 1, null, '{"green onion"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('dcab610d-c935-5c01-96b0-ffb470a1bfbc', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 1, 'Scramble the eggs quickly in hot oil and set aside.', 'اعمل البيض سكرامبل بسرعة في زيت سخن وارفعه.', 2, null, null, '{"eggs","vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('fccd116a-5558-57a0-a23c-e5d373e3bab0', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 2, 'Stir-fry the carrot and peas for 3 minutes, then add the garlic for 30 seconds.', 'شوّح الجزر والبسلة ٣ دقايق، وبعدين ضيف التوم ٣٠ ثانية.', 4, null, null, '{"carrots","green peas","garlic"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('46d2eba7-1a37-56ee-ad0e-8ac946fa9b1d', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 3, 'Add the cold rice, breaking up clumps, and fry hard for 4 minutes until it starts to catch.', 'ضيف الرز البارد وفكّك التكتّلات، واقليه على نار عالية ٤ دقايق لحد ما يبدأ يتحمّر.', 4, 'Only use rice that was cooled quickly and refrigerated, and reheat it once until piping hot.', 'استخدم بس رز اتبرّد بسرعة واتحط في التلاجة، وسخّنه مرة واحدة بس لحد ما يبقى سخن جدًا.', '{"rice"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('16781e6e-983b-5037-abc5-e4a963e196bf', '090dc093-13f3-579f-8d50-f69bd9c03bdd', 4, 'Fold the egg back in with the green onions and season.', 'رجّع البيض مع البصل الأخضر وظبّط الملح.', 1, null, null, '{"green onion"}');
 
 -- Okra Stew with Beef
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('fc8ac722-5f05-5687-af65-f7247e6a3086', 'okra-stew', 'Okra Stew with Beef', 'Slow-cooked bamya in garlicky tomato, the way it should be. Serve with rice and bread.',
+values ('fc8ac722-5f05-5687-af65-f7247e6a3086', 'okra-stew', 'Okra Stew with Beef', 'بامية باللحمة',
+  'Slow-cooked bamya in garlicky tomato, the way it should be. Serve with rice and bread.', 'بامية على نار هادية في طماطم بالتوم، زي ما المفروض تكون. قدّمها مع رز وعيش.',
   null, 'curated', 'egyptian', 'medium',
   15, 75, 4,
   520, 36, 30,
   28, 8, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -6103,28 +6144,31 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('6229b50a-e5cd-56e5-a18e-0bb613f4796b', 'fc8ac722-5f05-5687-af65-f7247e6a3086', (select id from public.ingredients where name = 'lemon' limit 1), 'lemon', 1, 'piece', 'juiced', true, 9);
 
 delete from public.recipe_steps where recipe_id = 'fc8ac722-5f05-5687-af65-f7247e6a3086';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('8755310e-e206-5e00-80b6-06938ecaf7db', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 1, 'Brown the beef hard in oil, then add the onion and cook until soft.', 10, 'Keep raw beef separate from anything served uncooked.', '{"beef cubes","vegetable oil","onions"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('e3e597ac-0ead-5248-b9d8-ed6054c2a679', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 2, 'Add water to cover and simmer, covered, for 50 minutes until the beef gives way.', 50, null, '{}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b1c7dc23-ebde-571f-9e96-3babb1d8f456', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 3, 'Stir in the blended tomatoes, paste and half the garlic. Add the okra and simmer 20 minutes without stirring much.', 20, null, '{"tomatoes","tomato paste","garlic","okra"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('b239cbdb-a735-5d5f-94e8-bbf76fe8fb9f', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 4, 'Fry the remaining garlic with the coriander and tip it in. Finish with lemon juice.', 3, null, '{"coriander","lemon"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('8755310e-e206-5e00-80b6-06938ecaf7db', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 1, 'Brown the beef hard in oil, then add the onion and cook until soft.', 'حمّر اللحمة كويس في الزيت، وبعدين ضيف البصل واطبخه لحد ما يطرى.', 10, 'Keep raw beef separate from anything served uncooked.', 'خلي اللحمة النية بعيدة عن أي حاجة هتتقدّم من غير طبخ.', '{"beef cubes","vegetable oil","onions"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e3e597ac-0ead-5248-b9d8-ed6054c2a679', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 2, 'Add water to cover and simmer, covered, for 50 minutes until the beef gives way.', 'ضيف مية تغطّيها وسيبها تغلي مغطية ٥٠ دقيقة لحد ما اللحمة تطرى.', 50, null, null, '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b1c7dc23-ebde-571f-9e96-3babb1d8f456', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 3, 'Stir in the blended tomatoes, paste and half the garlic. Add the okra and simmer 20 minutes without stirring much.', 'قلّب الطماطم المضروبة والصلصة ونص التوم. ضيف البامية وسيبها تغلي ٢٠ دقيقة من غير تقليب كتير.', 20, null, null, '{"tomatoes","tomato paste","garlic","okra"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('b239cbdb-a735-5d5f-94e8-bbf76fe8fb9f', 'fc8ac722-5f05-5687-af65-f7247e6a3086', 4, 'Fry the remaining garlic with the coriander and tip it in. Finish with lemon juice.', 'حمّر باقي التوم مع الكزبرة وكبّها فوق. زيّن بعصير الليمون.', 3, null, null, '{"coriander","lemon"}');
 
 -- Zucchini & Egg Skillet
 insert into public.recipes (
-  id, slug, title, description, image_url, source, cuisine, difficulty,
+  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('4dd7d8f6-c800-5842-8a72-c6956ffe803c', 'zucchini-egg-skillet', 'Zucchini & Egg Skillet', 'Green, quick and barely any money. What to cook when the fridge is nearly empty.',
+values ('4dd7d8f6-c800-5842-8a72-c6956ffe803c', 'zucchini-egg-skillet', 'Zucchini & Egg Skillet', 'كوسة بالبيض في الطاسة',
+  'Green, quick and barely any money. What to cook when the fridge is nearly empty.', 'خضرا وسريعة وبتكلّف ولا حاجة. اللي تعمله لما التلاجة تكون فاضية.',
   null, 'curated', 'mediterranean', 'easy',
   5, 12, 2,
   300, 20, 12,
   20, 4, null, true)
 on conflict (id) do update set
   title = excluded.title,
+  title_ar = excluded.title_ar,
   description = excluded.description,
+  description_ar = excluded.description_ar,
   image_url = excluded.image_url,
   cuisine = excluded.cuisine,
   difficulty = excluded.difficulty,
@@ -6172,12 +6216,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quant
 values ('d7b89b0c-cb3a-52cb-8f27-e6cd10b56a53', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', (select id from public.ingredients where name = 'white cheese' limit 1), 'white cheese', 50, 'g', 'crumbled', true, 6);
 
 delete from public.recipe_steps where recipe_id = '4dd7d8f6-c800-5842-8a72-c6956ffe803c';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('98601997-0309-5077-93ce-963c52782d7e', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 1, 'Fry the onion and zucchini in olive oil over medium-high heat for 8 minutes until browned at the edges.', 8, null, '{"onions","zucchini","olive oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('c0be3103-065d-5d72-bb29-05bccee678da', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 2, 'Add the garlic for 30 seconds, then pour in the eggs and stir gently until just set.', 4, 'Cook until the eggs are set with no runny liquid.', '{"garlic","eggs"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, duration_minutes, safety_note, ingredient_refs)
-values ('32b49c7c-0042-5ba9-8db9-d59619b10002', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 3, 'Crumble the cheese over and serve straight from the pan.', 1, null, '{"white cheese"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('98601997-0309-5077-93ce-963c52782d7e', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 1, 'Fry the onion and zucchini in olive oil over medium-high heat for 8 minutes until browned at the edges.', 'اقلي البصل والكوسة في زيت الزيتون على نار عالية شوية ٨ دقايق لحد ما يتحمّروا من الأطراف.', 8, null, null, '{"onions","zucchini","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c0be3103-065d-5d72-bb29-05bccee678da', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 2, 'Add the garlic for 30 seconds, then pour in the eggs and stir gently until just set.', 'ضيف التوم ٣٠ ثانية، وبعدين صبّ البيض وقلّب برفق لحد ما يستوي.', 4, 'Cook until the eggs are set with no runny liquid.', 'اطبخه لحد ما البيض يستوي ومايفضلش فيه سايل.', '{"garlic","eggs"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('32b49c7c-0042-5ba9-8db9-d59619b10002', '4dd7d8f6-c800-5842-8a72-c6956ffe803c', 3, 'Crumble the cheese over and serve straight from the pan.', 'فتّت الجبنة فوق وقدّمه من الطاسة على طول.', 1, null, null, '{"white cheese"}');
 
 -- === Grocery providers =====================================================
 --

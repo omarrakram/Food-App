@@ -231,8 +231,24 @@ function findAllTags(text: string): string[] {
 }
 
 /** Parses a free-text query into structured constraints. */
+/**
+ * Rewrites Arabic-Indic digits as ASCII.
+ *
+ * Every number pattern below is `\d`, which in JavaScript matches ASCII only.
+ * An Arabic keyboard produces ١٥٠, so "أقل من ١٥٠ جنيه" parsed to nothing at
+ * all — the budget, the cooking time and the serving count all silently
+ * disappeared for anyone typing in their own numerals.
+ */
+function toAsciiDigits(value: string): string {
+  return value.replace(/[\u0660-\u0669\u06F0-\u06F9]/g, (digit) => {
+    const code = digit.charCodeAt(0);
+    const base = code >= 0x06f0 ? 0x06f0 : 0x0660;
+    return String(code - base);
+  });
+}
+
 export function interpretQuery(query: string, currency: CurrencyCode): Interpretation {
-  const text = query.trim();
+  const text = toAsciiDigits(query.trim());
 
   const budgetMinor = extractBudget(text, currency);
   const maxMinutes = extractMinutes(text);

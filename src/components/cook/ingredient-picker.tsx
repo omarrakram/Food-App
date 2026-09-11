@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
+import { useIngredientName } from '@/features/ingredients/display';
 import { resolveIngredient, searchIngredients } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import { useI18n } from '@/i18n';
@@ -51,6 +52,9 @@ export function IngredientPicker({
 }: IngredientPickerProps) {
   const theme = useTheme();
   const { t } = useI18n();
+  // Names are stored canonically in English so matching stays language-blind;
+  // this turns them into what the user reads. See features/ingredients/display.
+  const displayName = useIngredientName();
   const [query, setQuery] = useState('');
 
   const selectedKeys = useMemo(
@@ -165,7 +169,7 @@ export function IngredientPicker({
           {autocomplete.map((candidate) => (
             <Chip
               key={candidate.slug}
-              label={candidate.name}
+              label={displayName(candidate.name)}
               icon="add"
               size="sm"
               onPress={() => addIngredient(candidate.name)}
@@ -184,9 +188,15 @@ export function IngredientPicker({
             {selected.map((name) => (
               <Chip
                 key={name}
-                label={name}
+                label={displayName(name)}
                 selected
+                // Solid fill and a tick, because these sit a few pixels away
+                // from rows of unselected pills that are also pill-shaped. A
+                // soft tint was not telling anyone what they had chosen.
+                emphasis="solid"
+                icon="checkmark"
                 onRemove={() => removeIngredient(name)}
+                accessibilityLabel={t('cook.removeIngredient', { name: displayName(name) })}
                 testID={`selected-${normaliseIngredientName(name)}`}
               />
             ))}
@@ -210,7 +220,7 @@ export function IngredientPicker({
             {pantrySuggestions.map((item) => (
               <Chip
                 key={item.id}
-                label={item.ingredientName}
+                label={displayName(item.ingredientName)}
                 icon="add"
                 size="sm"
                 onPress={() => addIngredient(item.ingredientName)}
@@ -230,7 +240,7 @@ export function IngredientPicker({
             {starters.slice(0, 10).map((name) => (
               <Chip
                 key={name}
-                label={name}
+                label={displayName(name)}
                 size="sm"
                 onPress={() => addIngredient(name)}
                 testID={`starter-${normaliseIngredientName(name)}`}

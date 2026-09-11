@@ -2,17 +2,20 @@ import { Ionicons } from '@expo/vector-icons';
 import { useKeepAwake } from 'expo-keep-awake';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
-import { Alert, Platform, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { Button, IconButton } from '@/components/ui/button';
 import { Screen, ScreenFooter } from '@/components/ui/screen';
 import { EmptyState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
+import { useIngredientName } from '@/features/ingredients/display';
+import { useRecipeText } from '@/features/recipes/localise';
 import { formatQuantity, scaleQuantity } from '@/features/pricing/units';
 import { useRecipe } from '@/features/recipes/hooks';
 import { useRecordHistory } from '@/features/saved/hooks';
 import { useI18n } from '@/i18n';
+import { confirmAction } from '@/lib/confirm';
 import { useTheme } from '@/theme';
 
 /**
@@ -29,6 +32,8 @@ import { useTheme } from '@/theme';
 export default function CookingModeScreen() {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const displayName = useIngredientName();
+  const recipeText = useRecipeText();
   const router = useRouter();
   const { id, servings } = useLocalSearchParams<{ id: string; servings?: string }>();
 
@@ -76,10 +81,15 @@ export default function CookingModeScreen() {
       return;
     }
 
-    Alert.alert(t('cooking.exitConfirmTitle'), t('cooking.exitConfirmBody'), [
-      { text: t('common.cancel'), style: 'cancel' },
-      { text: t('cooking.exit'), style: 'destructive', onPress: () => router.back() },
-    ]);
+    void confirmAction({
+      title: t('cooking.exitConfirmTitle'),
+      message: t('cooking.exitConfirmBody'),
+      confirmLabel: t('cooking.exit'),
+      cancelLabel: t('common.cancel'),
+      destructive: true,
+    }).then((confirmed) => {
+      if (confirmed) router.back();
+    });
   };
 
   /**
@@ -154,7 +164,7 @@ export default function CookingModeScreen() {
         */}
         <View style={{ flex: 1, alignItems: 'center', gap: 1 }}>
           <Text variant="micro" color="textTertiary" numberOfLines={1}>
-            {recipe.title}
+            {recipeText.title(recipe)}
           </Text>
           <Text variant="subhead" color="textSecondary">
             {t('recipe.step', { current: step.stepNumber, total: recipe.steps.length })}
@@ -191,7 +201,7 @@ export default function CookingModeScreen() {
         style={{ flex: 1, gap: theme.spacing.xl }}
       >
         <Text variant="title1" style={{ lineHeight: 38 }}>
-          {step.instruction}
+          {recipeText.instruction(step)}
         </Text>
 
         {step.durationMinutes ? (
@@ -203,7 +213,7 @@ export default function CookingModeScreen() {
           </View>
         ) : null}
 
-        {step.safetyNote ? (
+        {recipeText.safetyNote(step) ? (
           <View
             style={{
               flexDirection: 'row',
@@ -215,7 +225,7 @@ export default function CookingModeScreen() {
           >
             <Ionicons name="shield-checkmark" size={19} color={theme.colors.warningSoftText} />
             <Text variant="callout" style={{ color: theme.colors.warningSoftText, flex: 1 }}>
-              {step.safetyNote}
+              {recipeText.safetyNote(step)}
             </Text>
           </View>
         ) : null}
@@ -236,13 +246,13 @@ export default function CookingModeScreen() {
                 }}
               >
                 <Text variant="bodyMedium" style={{ flex: 1 }}>
-                  {ingredient.name}
+                  {displayName(ingredient.name)}
                 </Text>
                 <Text variant="bodyMedium" color="textSecondary">
                   {formatQuantity(
                     scaleQuantity(ingredient.quantity, recipe.baseServings, targetServings),
                     ingredient.unit,
-                    (value) => formatNumber(value),
+                    { t, formatNumber },
                   )}
                 </Text>
               </View>

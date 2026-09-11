@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { daysUntil, freshnessOf } from '@/features/ingredients/freshness';
+import { useIngredientName } from '@/features/ingredients/display';
 import { formatQuantity } from '@/features/pricing/units';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
@@ -53,19 +54,21 @@ export function PantryRow({
 }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const displayName = useIngredientName();
   const expiryLabel = useExpiryLabel();
 
   const status = freshnessOf(item.expiresOn);
   const isExpired = status === 'expired';
   const isUrgent = status === 'expiring_soon' || status === 'expires_today';
 
-  const quantityLabel = formatQuantity(item.quantity, item.unit, (value) => formatNumber(value));
+  const quantityLabel = formatQuantity(item.quantity, item.unit, { t, formatNumber });
+  const name = displayName(item.ingredientName);
 
   return (
     <PressScale
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={`${item.ingredientName}${quantityLabel ? `, ${quantityLabel}` : ''}`}
+      accessibilityLabel={`${name}${quantityLabel ? `, ${quantityLabel}` : ''}`}
       onPress={onPress}
       haptic="selection"
       scaleTo={0.99}
@@ -106,7 +109,7 @@ export function PantryRow({
       <View style={{ flex: 1, gap: 3 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.xs }}>
           <Text variant="bodyMedium" lines={1} style={{ flexShrink: 1 }}>
-            {item.ingredientName}
+            {name}
           </Text>
           {item.isStaple ? <Badge label={t('pantry.staple')} tone="neutral" /> : null}
         </View>

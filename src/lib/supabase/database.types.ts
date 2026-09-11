@@ -149,7 +149,9 @@ export type RecipeRow = {
   id: string;
   slug: string | null;
   title: string;
+  title_ar: string | null;
   description: string;
+  description_ar: string | null;
   image_url: string | null;
   source: RecipeSourceEnum;
   cuisine: CuisineEnum | null;
@@ -185,8 +187,10 @@ export type RecipeStepRow = {
   recipe_id: string;
   step_number: number;
   instruction: string;
+  instruction_ar: string | null;
   duration_minutes: number | null;
   safety_note: string | null;
+  safety_note_ar: string | null;
   ingredient_refs: string[];
 };
 

@@ -6,56 +6,19 @@ import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
 import { Button } from './button';
+import {
+  formatDateForDisplay,
+  parseISODate,
+  toISODate,
+  type DateFieldProps,
+} from './date-field.shared';
 import { Text } from './text';
 
-export type DateFieldProps = {
-  label?: string;
-  /** ISO `YYYY-MM-DD`, or null for "no date". */
-  value: string | null;
-  onChange: (next: string | null) => void;
-  /** Earliest date the user may pick. Defaults to today. */
-  minimumDate?: Date;
-  clearLabel?: string;
-  testID?: string;
-};
-
-/** `YYYY-MM-DD` in local time. `toISOString` would shift across midnight. */
-export function toISODate(date: Date): string {
-  const month = `${date.getMonth() + 1}`.padStart(2, '0');
-  const day = `${date.getDate()}`.padStart(2, '0');
-  return `${date.getFullYear()}-${month}-${day}`;
-}
-
-/**
- * Parses an ISO date STRICTLY.
- *
- * `new Date('2026-02-31')` happily returns 3 March, so a typo silently becomes
- * a real but wrong date. This rejects anything that does not round-trip, which
- * is the only way to catch a day that does not exist in that month.
- */
-export function parseISODate(value: string): Date | null {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
-  const [year, month, day] = value.split('-').map(Number) as [number, number, number];
-  const date = new Date(year, month - 1, day);
-  if (
-    date.getFullYear() !== year ||
-    date.getMonth() !== month - 1 ||
-    date.getDate() !== day
-  ) {
-    return null;
-  }
-  return date;
-}
-
-function formatForDisplay(iso: string, locale: string): string {
-  const parsed = parseISODate(iso);
-  if (!parsed) return iso;
-  try {
-    return new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(parsed);
-  } catch {
-    return iso;
-  }
-}
+// Re-exported so callers can keep importing helpers from './date-field'.
+// Safe here because the native file's own imports never round-trip through a
+// platform-resolved specifier.
+export { formatDateForDisplay, parseISODate, toISODate } from './date-field.shared';
+export type { DateFieldProps } from './date-field.shared';
 
 /**
  * Date entry backed by the platform's own picker.
@@ -90,7 +53,7 @@ export function DateField({
 
       <View style={{ flexDirection: 'row', gap: theme.spacing.sm, alignItems: 'center' }}>
         <Button
-          label={value ? formatForDisplay(value, locale) : t('pantry.pickDate')}
+          label={value ? formatDateForDisplay(value, locale) : t('pantry.pickDate')}
           icon="calendar-outline"
           variant="secondary"
           size="md"

@@ -98,7 +98,7 @@ export function ServingsField({
  */
 export function RequestFilters({ value, onChange, showNutrition = true }: RequestFiltersProps) {
   const theme = useTheme();
-  const { t } = useI18n();
+  const { t, formatNumber } = useI18n();
 
   return (
     <View style={{ gap: theme.spacing.lg }}>
@@ -171,7 +171,7 @@ export function RequestFilters({ value, onChange, showNutrition = true }: Reques
             {PROTEIN_OPTIONS.map((grams) => (
               <Chip
                 key={grams}
-                label={`${grams}g+`}
+                label={t('cook.proteinAtLeast', { grams: formatNumber(grams) })}
                 size="sm"
                 selected={value.minProteinGrams === grams}
                 onPress={() => onChange({ minProteinGrams: grams })}
@@ -190,7 +190,7 @@ export function RequestFilters({ value, onChange, showNutrition = true }: Reques
             {CALORIE_OPTIONS.map((calories) => (
               <Chip
                 key={calories}
-                label={`< ${calories}`}
+                label={t('cook.caloriesUnder', { calories: formatNumber(calories) })}
                 size="sm"
                 selected={value.maxCalories === calories}
                 onPress={() => onChange({ maxCalories: calories })}

@@ -1,4 +1,4 @@
-import { parseISODate, toISODate } from '../date-field';
+import { parseISODate, toISODate } from '../date-field.shared';
 
 /**
  * Expiry dates used to be free text in a `YYYY-MM-DD` box, which asks the user

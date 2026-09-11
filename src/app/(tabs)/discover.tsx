@@ -38,7 +38,11 @@ export default function DiscoverScreen() {
   const theme = useTheme();
   const { t } = useI18n();
   const router = useRouter();
-  const [activeCollection, setActiveCollection] = useState<string>(COLLECTIONS[0].slug);
+  // `null` is the whole catalogue. It exists so the zero-result state has
+  // something to recover TO: before this, a collection that matched nothing
+  // left the user reading "No meals matched" with no way back except guessing
+  // that another chip might help.
+  const [activeCollection, setActiveCollection] = useState<string | null>(COLLECTIONS[0].slug);
 
   // Discover browses the whole catalogue: no ingredient or budget constraint,
   // only the user's own hard constraints (allergens, diet, appliances).
@@ -94,6 +98,12 @@ export default function DiscoverScreen() {
           gap: theme.spacing.sm,
         }}
       >
+        <Chip
+          label={t('discover.allCollections')}
+          selected={activeCollection === null}
+          onPress={() => setActiveCollection(null)}
+          testID="collection-all"
+        />
         {COLLECTIONS.map((entry) => (
           <Chip
             key={entry.slug}
@@ -113,6 +123,15 @@ export default function DiscoverScreen() {
             icon="search-outline"
             title={t('results.empty')}
             body={t('results.emptyBody')}
+            // Only offered when a collection is actually narrowing things: an
+            // empty catalogue with no filter on has nothing to clear, and a
+            // button that changes nothing is worse than no button.
+            action={
+              activeCollection !== null
+                ? { label: t('results.clearFilters'), onPress: () => setActiveCollection(null) }
+                : undefined
+            }
+            testID="discover-empty"
           />
         ) : (
           visible.map((match) => <SaveableCard key={match.recipe.id} match={match} />)

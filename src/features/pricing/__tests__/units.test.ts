@@ -1,3 +1,5 @@
+import { createTranslator } from '@/i18n';
+
 import {
   formatKitchenNumber,
   formatQuantity,
@@ -7,7 +9,13 @@ import {
   scaleQuantity,
   toGrams,
   unitLabel,
+  unitName,
 } from '../units';
+
+// Real dictionaries, not stubs: the point of these helpers is that they read
+// the same as a recipe does in each language.
+const en = createTranslator('en');
+const ar = createTranslator('ar');
 
 describe('toGrams', () => {
   it('converts absolute mass and volume units', () => {
@@ -120,23 +128,49 @@ describe('scaleQuantity', () => {
 
 describe('formatQuantity', () => {
   const format = (value: number) => String(value);
+  const english = { t: en, formatNumber: format };
 
   it('omits the unit for countable pieces', () => {
-    expect(formatQuantity(3, 'piece', format)).toBe('3');
+    expect(formatQuantity(3, 'piece', english)).toBe('3');
   });
 
   it('pluralises countable units', () => {
-    expect(formatQuantity(1, 'clove', format)).toBe('1 clove');
-    expect(formatQuantity(3, 'clove', format)).toBe('3 cloves');
+    expect(formatQuantity(1, 'clove', english)).toBe('1 clove');
+    expect(formatQuantity(3, 'clove', english)).toBe('3 cloves');
   });
 
   it('renders "to taste" as words', () => {
-    expect(formatQuantity(1, 'to_taste', format)).toBe('to taste');
+    expect(formatQuantity(1, 'to_taste', english)).toBe('to taste');
   });
 
   it('handles an unknown quantity', () => {
-    expect(formatQuantity(null, 'g', format)).toBe('g');
-    expect(formatQuantity(null, null, format)).toBe('');
+    expect(formatQuantity(null, 'g', english)).toBe('g');
+    expect(formatQuantity(null, null, english)).toBe('');
+  });
+});
+
+describe('formatQuantity in Arabic', () => {
+  // An Arabic reader was getting "300 g" and "4 cloves" in the middle of an
+  // otherwise Arabic recipe, because the unit table was hard-coded English.
+  const arabic = { t: ar, formatNumber: (value: number) => String(value) };
+
+  it('writes the unit in Arabic', () => {
+    expect(formatQuantity(300, 'g', arabic)).toBe('300 جم');
+    expect(formatQuantity(120, 'ml', arabic)).toBe('120 مل');
+  });
+
+  it('pluralises the way Arabic does', () => {
+    expect(formatQuantity(1, 'clove', arabic)).toBe('1 فص');
+    expect(formatQuantity(4, 'clove', arabic)).toBe('4 فصوص');
+    expect(formatQuantity(3, 'tbsp', arabic)).toBe('3 ملاعق كبيرة');
+  });
+
+  it('translates "to taste"', () => {
+    expect(formatQuantity(1, 'to_taste', arabic)).toBe('حسب الرغبة');
+  });
+
+  it('leaves a bare count for pieces in both languages', () => {
+    expect(formatQuantity(3, 'piece', arabic)).toBe('3');
   });
 });
 
@@ -144,9 +178,22 @@ describe('unitLabel', () => {
   it('covers every unit without throwing', () => {
     // The exhaustiveness guard in unitLabel makes this a compile-time check
     // too; this asserts the runtime side.
-    expect(unitLabel('kg')).toBe('kg');
-    expect(unitLabel('l')).toBe('L');
-    expect(unitLabel('pinch', 2)).toBe('pinches');
+    expect(unitLabel('kg', 1, en)).toBe('kg');
+    expect(unitLabel('l', 1, en)).toBe('L');
+    expect(unitLabel('pinch', 2, en)).toBe('pinches');
+  });
+
+  it('says nothing for a piece, which a recipe never spells out', () => {
+    expect(unitLabel('piece', 3, en)).toBe('');
+    expect(unitLabel('piece', 3, ar)).toBe('');
+  });
+});
+
+describe('unitName', () => {
+  it('names the unit for a picker, including the one with no suffix', () => {
+    expect(unitName('piece', en)).toBe('piece');
+    expect(unitName('piece', ar)).toBe('حبة');
+    expect(unitName('g', ar)).toBe('جم');
   });
 });
 
@@ -179,7 +226,7 @@ describe('formatKitchenNumber', () => {
 });
 
 describe('formatQuantity uses fractions and the right plural', () => {
-  const plain = (value: number) => String(value);
+  const plain = { t: en, formatNumber: (value: number) => String(value) };
 
   it('says "½ bunch", not "0.5 bunches"', () => {
     expect(formatQuantity(0.5, 'bunch', plain)).toBe('½ bunch');
