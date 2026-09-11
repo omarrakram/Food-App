@@ -32,6 +32,9 @@ jobs:
       - name: Unit tests
         run: npm run test:ci
 
+      - name: Verify the generated ingredient catalogue matches its CSV
+        run: npm run ingredients:import -- --check
+
       - name: Verify imported price data matches the survey CSV
         run: npm run prices:import -- --check
 

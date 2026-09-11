@@ -5,7 +5,9 @@ import {
   resolveIngredient,
   searchIngredients,
 } from '../matching';
+import { INGREDIENT_CATALOGUE } from '../catalogue';
 import { todayISO } from '../freshness';
+import { normaliseIngredientName } from '../normalise';
 import type { PantryItem, RecipeIngredient } from '@/types/domain';
 
 const NOW = new Date('2026-09-10T12:00:00');
@@ -219,5 +221,126 @@ describe('matchRecipeIngredients', () => {
     const result = matchRecipeIngredients(recipe, index);
 
     expect(result.usesExpiringItems).toContain('p-tomato');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Catalogue breadth and integrity.
+//
+// The catalogue grew from 69 ingredients to a few hundred, and that growth is
+// exactly when alias collisions start to bite: two entries claiming one word
+// means the matcher silently binds it to whichever loaded first. One of these
+// caught a real regression — the alias "whole rice" normalises to "rice",
+// because "whole" is a noise word, so brown rice took over the word "rice" and
+// every rice recipe lost its price.
+// ---------------------------------------------------------------------------
+
+describe('catalogue integrity', () => {
+  it('recognises a few hundred ingredients', () => {
+    expect(INGREDIENT_CATALOGUE.length).toBeGreaterThanOrEqual(250);
+  });
+
+  it('has NO two ingredients claiming the same normalised term', () => {
+    const owner = new Map<string, string>();
+    const collisions: string[] = [];
+
+    for (const ingredient of INGREDIENT_CATALOGUE) {
+      for (const term of [ingredient.name, ...ingredient.aliases]) {
+        const key = normaliseIngredientName(term);
+        if (!key) continue;
+        const existing = owner.get(key);
+        if (existing && existing !== ingredient.slug) {
+          collisions.push(`"${term}" -> "${key}": ${existing} vs ${ingredient.slug}`);
+        } else {
+          owner.set(key, ingredient.slug);
+        }
+      }
+    }
+
+    expect(collisions).toEqual([]);
+  });
+
+  it('gives every ingredient a unique slug', () => {
+    const slugs = INGREDIENT_CATALOGUE.map((entry) => entry.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+
+  it('gives every ingredient an Arabic name', () => {
+    const missing = INGREDIENT_CATALOGUE.filter((entry) => !entry.nameAr.trim());
+    expect(missing.map((entry) => entry.slug)).toEqual([]);
+  });
+
+  it('classifies common foods properly rather than dumping them in "other"', () => {
+    // Salmon landing in "other" was the symptom of a catalogue too small to
+    // contain it at all.
+    const expectations: Record<string, string> = {
+      salmon: 'protein',
+      tofu: 'protein',
+      mushrooms: 'vegetables',
+      avocado: 'vegetables',
+      mango: 'fruit',
+      'white cheese': 'dairy',
+      quinoa: 'carbs',
+      turmeric: 'spices',
+    };
+
+    for (const [name, category] of Object.entries(expectations)) {
+      expect(resolveIngredient(name)?.category).toBe(category);
+    }
+  });
+
+  it('carries allergens on the foods that have them', () => {
+    expect(resolveIngredient('salmon')?.allergens).toContain('fish');
+    expect(resolveIngredient('calamari')?.allergens).toContain('shellfish');
+    expect(resolveIngredient('tofu')?.allergens).toContain('soy');
+    expect(resolveIngredient('cashews')?.allergens).toContain('nuts');
+    expect(resolveIngredient('peanuts')?.allergens).toContain('peanuts');
+    expect(resolveIngredient('tahini')?.allergens).toContain('sesame');
+  });
+});
+
+describe('resolving English and Arabic names', () => {
+  const cases: [string, string][] = [
+    ['salmon', 'salmon'],
+    ['سالمون', 'salmon'],
+    ['bouri', 'mullet'],
+    ['بوري', 'mullet'],
+    ['mushroom', 'mushroom'],
+    ['عيش الغراب', 'mushroom'],
+    ['batata', 'sweet-potato'],
+    ['بطاطا', 'sweet-potato'],
+    ['arnabeet', 'cauliflower'],
+    ['قرنبيط', 'cauliflower'],
+    ['gargeer', 'rocket'],
+    ['جرجير', 'rocket'],
+    ['samna', 'ghee'],
+    ['سمنة', 'ghee'],
+    ['كركم', 'turmeric'],
+    ['حبهان', 'cardamom'],
+    ['زبيب', 'raisins'],
+    ['فستق', 'pistachios'],
+    ['سمسم', 'sesame-seeds'],
+    ['مشروم', 'mushroom'],
+    ['كابوريا', 'crab'],
+  ];
+
+  it.each(cases)('resolves %s to %s', (input, slug) => {
+    expect(resolveIngredient(input)?.slug).toBe(slug);
+  });
+
+  it('still resolves the words the original catalogue owned', () => {
+    // Regression guard: the expansion must not steal an existing meaning.
+    expect(resolveIngredient('rice')?.slug).toBe('rice');
+    expect(resolveIngredient('pepper')?.slug).toBe('black-pepper');
+    expect(resolveIngredient('bread')?.slug).toBe('baladi-bread');
+    expect(resolveIngredient('coriander')?.slug).toBe('coriander');
+    expect(resolveIngredient('chicken')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('pasta')?.slug).toBe('pasta');
+  });
+
+  it('tolerates the spelling variants people actually type', () => {
+    expect(resolveIngredient('tomatos')?.slug).toBe('tomatoes');
+    expect(resolveIngredient('Mushrooms')?.slug).toBe('mushroom');
+    expect(resolveIngredient('  avocado  ')?.slug).toBe('avocado');
   });
 });

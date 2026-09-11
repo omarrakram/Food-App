@@ -28,6 +28,7 @@
     "fn:deploy": "supabase functions deploy",
     "eas:build:preview": "eas build --profile preview",
     "eas:build:prod": "eas build --profile production",
+    "ingredients:import": "node --experimental-strip-types --no-warnings scripts/import-ingredients.ts",
     "prices:import": "node --experimental-strip-types --no-warnings scripts/import-prices.ts",
     "seed:generate": "node --experimental-strip-types --no-warnings scripts/generate-seed.ts",
     "db:test": "./scripts/db-test.sh",
