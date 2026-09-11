@@ -5,7 +5,12 @@ import {
   type AvailabilityIndex,
 } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
-import { budgetVerdict, estimateRecipeCost, toPricedAmount } from '@/features/pricing/estimate';
+import {
+  budgetVerdict,
+  estimateRecipeCost,
+  toPricedAmount,
+  toSpendAmount,
+} from '@/features/pricing/estimate';
 import type {
   Allergen,
   DietFlag,
@@ -270,7 +275,11 @@ export function rankRecipes(
       servings: request.servings,
       country: request.country,
       currency: request.currency,
+      // What the cook already has is what makes "I have 150 EGP" answerable:
+      // the question is about their wallet, not the dish's worth.
+      ownedIngredientIds: match.availableIngredients.map((entry) => entry.recipeIngredientId),
     });
+    const spendMinor = estimate.toBuy?.totalMinor ?? estimate.totalMinor;
 
     const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
     const cuisineBonus = request.cuisine && recipe.cuisine === request.cuisine ? 1 : 0.5;
@@ -278,7 +287,7 @@ export function rankRecipes(
 
     const score =
       weights.match * (match.matchPercent / 100) +
-      weights.budget * budgetScore(estimate.totalMinor, request.budgetMinor) +
+      weights.budget * budgetScore(spendMinor, request.budgetMinor) +
       weights.time * timeScore(totalMinutes, request.maxMinutes) +
       weights.expiring * expiringBonus +
       weights.cuisine * cuisineBonus +
@@ -291,7 +300,10 @@ export function rankRecipes(
       requiredCount: match.requiredCount,
       missingIngredients: match.missingIngredients,
       availableIngredients: match.availableIngredients,
-      estimatedCost: estimate.coverage > 0 ? toPricedAmount(estimate) : null,
+      // Both figures travel: the dish's full cost, and what this cook still
+      // has to spend. Rendering one as the other is how a budget lies.
+      estimatedCost: toPricedAmount(estimate),
+      estimatedSpend: toSpendAmount(estimate),
       usesExpiringItems: match.usesExpiringItems,
       score: Math.round(score * 100) / 100,
     };

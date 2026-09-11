@@ -52,24 +52,30 @@ describe('perPieceWeightFor', () => {
   it('quotes the weight against the ingredient own countable unit', () => {
     // Garlic is counted in cloves.
     expect(
-      perPieceWeightFor({ defaultUnit: 'clove', priceUnit: 'kg', gramsPerPiece: 5 }),
+      perPieceWeightFor({ defaultUnit: 'clove', gramsPerPiece: 5 }, 'kg'),
     ).toEqual({ unit: 'clove', grams: 5 });
   });
 
-  it('falls back to the price unit when the default unit is not countable', () => {
-    // Yogurt is measured in grams but sold by the pot.
-    expect(
-      perPieceWeightFor({ defaultUnit: 'g', priceUnit: 'piece', gramsPerPiece: 105 }),
-    ).toEqual({ unit: 'piece', grams: 105 });
+  it('falls back to the QUOTED unit when the default unit is not countable', () => {
+    // Yogurt is measured in grams but sold by the pot. The quoted unit now
+    // arrives from the price row rather than the catalogue entry.
+    expect(perPieceWeightFor({ defaultUnit: 'g', gramsPerPiece: 105 }, 'piece')).toEqual({
+      unit: 'piece',
+      grams: 105,
+    });
+  });
+
+  it('returns null when no quoted unit is supplied and the default is not countable', () => {
+    expect(perPieceWeightFor({ defaultUnit: 'g', gramsPerPiece: 105 })).toBeNull();
   });
 
   it('returns null when neither unit is countable', () => {
-    expect(perPieceWeightFor({ defaultUnit: 'g', priceUnit: 'kg', gramsPerPiece: 100 })).toBeNull();
+    expect(perPieceWeightFor({ defaultUnit: 'g', gramsPerPiece: 100 }, 'kg')).toBeNull();
   });
 
   it('returns null when there is no weight at all', () => {
     expect(
-      perPieceWeightFor({ defaultUnit: 'piece', priceUnit: 'kg', gramsPerPiece: null }),
+      perPieceWeightFor({ defaultUnit: 'piece', gramsPerPiece: null }, 'kg'),
     ).toBeNull();
     expect(perPieceWeightFor(null)).toBeNull();
   });

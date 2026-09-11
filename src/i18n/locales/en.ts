@@ -115,6 +115,7 @@ export const en = {
   'budget.estimateNotice':
     'Prices are estimates based on typical {country} supermarket prices — not live store prices.',
   'budget.estimateNoticeShort': 'Estimated prices, not live store prices',
+  'budget.needsChecking': '{count} need a price check',
   'budget.withinBudget': 'Within budget',
   'budget.slightlyOver': 'Slightly over',
   'budget.overBudget': 'Over budget',
@@ -273,6 +274,7 @@ export const en = {
   'shopping.clearChecked': 'Clear checked',
   'shopping.estimatedTotal': 'Estimated total',
   'shopping.estimatedTotalNote': 'Estimate only — final store prices may differ.',
+  'shopping.orderComingSoon': 'Ordering — coming soon',
   'shopping.orderAll': 'Order ingredients',
   'shopping.orderUnavailable': 'Delivery partners are not live yet',
   'shopping.mergedNotice': 'Combined with what was already on your list',
@@ -506,7 +508,16 @@ export const en = {
   'price.estimateExplainerBody':
     'We calculate cost from typical supermarket prices for your country, updated periodically. We are not connected to a live store yet, so treat every figure as a guide rather than a receipt.',
   'price.lastUpdated': 'Price data updated {date}',
-  'price.unavailable': 'No price data',
+  'price.toBuy': 'still to buy',
+  'price.unavailable': 'Price estimate unavailable',
+  'price.estimateUnavailable': 'Estimate unavailable',
+  'price.partialOne': '1 item has no estimate',
+  'price.partialOther': '{count} items have no estimate',
+  'price.pricedItemsOnly': 'for priced items',
+  'price.staleWarning': 'These estimates are over {months} months old and may be out of date.',
+  'price.dataAge': 'Based on a price survey from {date}.',
+  'price.incompleteExplainer':
+    'Some ingredients have no price in our data, so this total is lower than the real cost. We will not guess a figure to fill the gap.',
 
   // --- Grocery ordering (future) -----------------------------------------
   'grocery.title': 'Order ingredients',

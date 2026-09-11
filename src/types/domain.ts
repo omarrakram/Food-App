@@ -32,6 +32,15 @@ export type Money = {
  */
 export type PriceSource = 'estimate' | 'live';
 
+/**
+ * How much of a total we were actually able to price.
+ *
+ * This is the difference between "this costs 85 pounds" and "the part we can
+ * price costs 85 pounds". A total assembled from incomplete data can only ever
+ * grow, so it may never be presented as a finished figure.
+ */
+export type EstimateCompleteness = 'complete' | 'partial' | 'unavailable';
+
 export type PricedAmount = {
   money: Money;
   source: PriceSource;
@@ -41,6 +50,13 @@ export type PricedAmount = {
   lastUpdated?: string;
   /** True when we had no price data at all and fell back to a category default. */
   isFallback?: boolean;
+  /**
+   * Whether every required input had a price. Absent means complete — live
+   * store prices are complete by construction.
+   */
+  completeness?: EstimateCompleteness;
+  /** How many required items had no price. Drives "1 item has no estimate". */
+  unpricedCount?: number;
 };
 
 // --- Preferences -----------------------------------------------------------
@@ -367,7 +383,13 @@ export type RecipeMatch = {
   missingIngredients: IngredientMatch[];
   availableIngredients: IngredientMatch[];
   /** Deterministically computed by the pricing engine — never by the model. */
+  /** What the whole dish costs to make, ignoring what the cook owns. */
   estimatedCost: PricedAmount | null;
+  /**
+   * What this cook still has to buy. Equal to `estimatedCost` when the pantry
+   * is unknown. This — not the full cost — is what a budget is judged against.
+   */
+  estimatedSpend: PricedAmount | null;
   /** Pantry items this recipe would use up before they expire. */
   usesExpiringItems: string[];
   /** Composite ranking score; higher is better. */

@@ -55,7 +55,59 @@ describe('PriceTag', () => {
   it('says so plainly when there is no price data', async () => {
     const view = await render(<PriceTag priced={null} testID="price" />);
 
-    expect(view.getByTestId('price')).toHaveTextContent('No price data');
+    expect(view.getByTestId('price')).toHaveTextContent('Price estimate unavailable');
+  });
+
+  it('REFUSES to show a number when nothing could be priced', async () => {
+    // The shopping-list bug: a salmon fillet we have no price for totalled
+    // "~0 EGP", which reads as free rather than unknown.
+    const view = await render(
+      <PriceTag
+        priced={{
+          money: fromMajor(0, 'EGP'),
+          source: 'estimate',
+          completeness: 'unavailable',
+          unpricedCount: 1,
+        }}
+        testID="price"
+      />,
+    );
+
+    expect(view.getByTestId('price')).toHaveTextContent('Price estimate unavailable');
+    expect(view.queryByText(/0 EGP/)).toBeNull();
+  });
+
+  it('marks a partial total as covering only the priced items', async () => {
+    const view = await render(
+      <PriceTag
+        priced={{
+          money: fromMajor(85, 'EGP'),
+          source: 'estimate',
+          completeness: 'partial',
+          unpricedCount: 1,
+        }}
+        testID="price"
+      />,
+    );
+
+    expect(view.getByTestId('price')).toHaveTextContent('~85 EGP');
+    expect(view.getByTestId('price-partial')).toHaveTextContent('1 item has no estimate');
+  });
+
+  it('pluralises the unpriced-item note', async () => {
+    const view = await render(
+      <PriceTag
+        priced={{
+          money: fromMajor(85, 'EGP'),
+          source: 'estimate',
+          completeness: 'partial',
+          unpricedCount: 3,
+        }}
+        testID="price"
+      />,
+    );
+
+    expect(view.getByTestId('price-partial')).toHaveTextContent('3 items have no estimate');
   });
 
   it('exposes the estimate distinction to screen readers, not just visually', async () => {

@@ -1,4 +1,5 @@
 import { INGREDIENT_CATALOGUE, type CatalogueIngredient } from '@/features/ingredients/catalogue';
+import { PRICE_DATA, PRICE_DATA_DATE } from './price-data';
 import { resolveIngredient } from '@/features/ingredients/matching';
 import type { CountryCode, CurrencyCode, Unit } from '@/types/domain';
 
@@ -42,33 +43,43 @@ export interface PriceBook {
  * scheduled job that writes into `ingredient_price_estimates` replaces this
  * bundled fallback once the backend is live.
  */
-export const BUNDLED_PRICE_DATE = '2026-08-01';
+export const BUNDLED_PRICE_DATE = PRICE_DATA_DATE;
 
+/**
+ * Prices from the imported survey, looked up by ingredient slug.
+ *
+ * Recognising an ingredient and pricing it are separate problems, and the data
+ * is separate to match: the catalogue can know about a thousand foods while the
+ * survey covers a few hundred. An ingredient with no row here has no price —
+ * which the estimator reports honestly rather than treating as free.
+ */
 class BundledPriceBook implements PriceBook {
   readonly country: CountryCode;
   readonly currency: CurrencyCode;
-  readonly lastUpdated = BUNDLED_PRICE_DATE;
+  readonly lastUpdated = PRICE_DATA_DATE;
 
-  private readonly index: Map<string, CatalogueIngredient>;
+  private readonly bySlug: Map<string, CatalogueIngredient>;
 
   constructor(country: CountryCode, currency: CurrencyCode) {
     this.country = country;
     this.currency = currency;
-    this.index = new Map(INGREDIENT_CATALOGUE.map((item) => [item.name, item]));
+    this.bySlug = new Map(INGREDIENT_CATALOGUE.map((item) => [item.name, item]));
   }
 
   quote(ingredientName: string): PriceQuote | null {
-    const resolved = resolveIngredient(ingredientName);
-    const entry = resolved ?? this.index.get(ingredientName);
+    const entry = resolveIngredient(ingredientName) ?? this.bySlug.get(ingredientName);
     if (!entry) return null;
 
+    const row = PRICE_DATA[entry.slug];
+    if (!row) return null;
+
     return {
-      amountMinor: entry.priceAvgMinor,
+      amountMinor: row.avgMinor,
       currency: this.currency,
-      unit: entry.priceUnit,
-      quantity: entry.priceQuantity,
-      lowMinor: entry.priceLowMinor,
-      highMinor: entry.priceHighMinor,
+      unit: row.unit,
+      quantity: row.quantity,
+      lowMinor: row.lowMinor,
+      highMinor: row.highMinor,
       lastUpdated: this.lastUpdated,
     };
   }
@@ -117,4 +128,32 @@ export function isCountrySupported(country: CountryCode): boolean {
 /** Countries the UI may offer as fully working today. */
 export function supportedCountries(): CountryCode[] {
   return Object.keys(BOOKS) as CountryCode[];
+}
+
+/**
+ * How long bundled survey prices stay trustworthy.
+ *
+ * Egyptian grocery prices move fast enough that half a year old is worth
+ * saying out loud. This is a disclosure threshold, not an expiry: stale data is
+ * still shown, still labelled an estimate, and never silently replaced with an
+ * invented figure.
+ */
+export const PRICE_STALE_AFTER_DAYS = 180;
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+/** Whole days since an ISO date, or null when it cannot be parsed. */
+export function priceDataAgeDays(lastUpdated: string, now: Date = new Date()): number | null {
+  const then = Date.parse(lastUpdated);
+  if (Number.isNaN(then)) return null;
+  return Math.floor((now.getTime() - then) / MS_PER_DAY);
+}
+
+export function isPriceDataStale(
+  lastUpdated: string,
+  now: Date = new Date(),
+  thresholdDays: number = PRICE_STALE_AFTER_DAYS,
+): boolean {
+  const age = priceDataAgeDays(lastUpdated, now);
+  return age !== null && age > thresholdDays;
 }

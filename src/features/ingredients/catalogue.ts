@@ -29,18 +29,18 @@ export type CatalogueIngredient = {
   isCommonStaple: boolean;
   /** Spoils quickly; expiry dates are enforced strictly for these. */
   isPerishable: boolean;
-  /**
-   * Typical Egyptian retail price, in PIASTRES per the `priceUnit` below.
-   * These seed `ingredient_price_estimates`; they are estimates, never live
-   * prices, and are dated in the seed file.
-   */
-  priceLowMinor: number;
-  priceAvgMinor: number;
-  priceHighMinor: number;
-  /** Unit the prices above are quoted per. */
-  priceUnit: Unit;
-  priceQuantity: number;
 };
+
+/*
+ * NOTE: prices deliberately do NOT live here.
+ *
+ * Recognising an ingredient and knowing what it costs are separate problems
+ * with separate data. Keeping them in one record meant every new ingredient
+ * needed a price before it could be added — which is how you end up inventing
+ * figures to fill a table. Prices live in data/prices/eg.csv, are imported by
+ * `npm run prices:import`, and are keyed by the slug above. An ingredient with
+ * no price row is a normal, supported state.
+ */
 
 /**
  * Prices reflect typical Cairo supermarket shelf prices and are illustrative
@@ -60,11 +60,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['chicken', 'chicken breasts', 'firakh', 'farkha', 'فراخ', 'صدر فراخ', 'دجاج'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 16000,
-    priceAvgMinor: 19000,
-    priceHighMinor: 23000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'chicken-thigh',
@@ -77,11 +72,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['chicken thigh', 'drumsticks', 'أوراك', 'وراك فراخ'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 11000,
-    priceAvgMinor: 13500,
-    priceHighMinor: 16000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'ground-beef',
@@ -94,11 +84,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['minced beef', 'mince', 'minced meat', 'kofta meat', 'لحمة مفرومه', 'مفروم'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 32000,
-    priceAvgMinor: 38000,
-    priceHighMinor: 45000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'beef-cubes',
@@ -111,11 +96,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['stewing beef', 'beef chunks', 'لحمة', 'لحم بقري'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 34000,
-    priceAvgMinor: 40000,
-    priceHighMinor: 48000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'eggs',
@@ -128,11 +108,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['egg', 'beid', 'بيضة', 'بيضه'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 450,
-    priceAvgMinor: 550,
-    priceHighMinor: 700,
-    priceUnit: 'piece',
-    priceQuantity: 1,
   },
   {
     slug: 'tuna-can',
@@ -145,11 +120,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['tuna', 'tuna can', 'تونه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 4500,
-    priceAvgMinor: 5800,
-    priceHighMinor: 7500,
-    priceUnit: 'can',
-    priceQuantity: 1,
   },
   {
     slug: 'tilapia',
@@ -162,11 +132,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['fish', 'bolti', 'بلطى', 'سمك'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 9000,
-    priceAvgMinor: 12000,
-    priceHighMinor: 15000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'shrimp',
@@ -179,11 +144,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['prawns', 'gambari', 'جمبرى'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 32000,
-    priceAvgMinor: 42000,
-    priceHighMinor: 55000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'sausage',
@@ -196,11 +156,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['sogo2', 'sogok', 'سجق بلدي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 22000,
-    priceAvgMinor: 27000,
-    priceHighMinor: 33000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'liver',
@@ -213,11 +168,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['kebda', 'كبده', 'كبدة اسكندراني'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 20000,
-    priceAvgMinor: 24000,
-    priceHighMinor: 29000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Legumes / pulses (Egyptian staples) --------------------------------
@@ -232,11 +182,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['foul', 'ful', 'ful medames', 'foul medames', 'فول مدمس'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 3500,
-    priceAvgMinor: 4500,
-    priceHighMinor: 6000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'lentils',
@@ -249,11 +194,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['lentil', 'ads', 'عدس أصفر', 'عدس احمر'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 5000,
-    priceAvgMinor: 6500,
-    priceHighMinor: 8500,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'chickpeas',
@@ -266,11 +206,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['garbanzo', 'hummus beans', 'حمص حب'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 6000,
-    priceAvgMinor: 7500,
-    priceHighMinor: 9500,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'white-beans',
@@ -283,11 +218,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['fasolia', 'cannellini', 'فاصوليا'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 5500,
-    priceAvgMinor: 7000,
-    priceHighMinor: 9000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'black-eyed-peas',
@@ -300,11 +230,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['lobia', 'لوبيا مجففة'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 5500,
-    priceAvgMinor: 7000,
-    priceHighMinor: 9000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Carbs ---------------------------------------------------------------
@@ -319,11 +244,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['egyptian rice', 'white rice', 'roz', 'رز'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 3000,
-    priceAvgMinor: 3800,
-    priceHighMinor: 5000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'pasta',
@@ -336,11 +256,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['macaroni', 'spaghetti', 'penne', 'makarona', 'مكرونه'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 2200,
-    priceAvgMinor: 3000,
-    priceHighMinor: 4200,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'baladi-bread',
@@ -363,11 +278,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     ],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 100,
-    priceAvgMinor: 150,
-    priceHighMinor: 300,
-    priceUnit: 'piece',
-    priceQuantity: 1,
   },
   {
     slug: 'toast-bread',
@@ -380,11 +290,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['toast', 'white bread', 'sandwich bread', 'توست'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 2500,
-    priceAvgMinor: 3500,
-    priceHighMinor: 4500,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'potatoes',
@@ -397,11 +302,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['potato', 'batates', 'بطاطا'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 1200,
-    priceAvgMinor: 1800,
-    priceHighMinor: 2600,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'bulgur',
@@ -414,11 +314,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['borghol', 'cracked wheat', 'برغل ناعم'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 4000,
-    priceAvgMinor: 5200,
-    priceHighMinor: 6800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'flour',
@@ -431,11 +326,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['all purpose flour', 'plain flour', 'دقيق فاخر'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 1800,
-    priceAvgMinor: 2400,
-    priceHighMinor: 3200,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'vermicelli',
@@ -448,11 +338,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['sha3reya', 'shaareya', 'شعريه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 2500,
-    priceAvgMinor: 3200,
-    priceHighMinor: 4200,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
 
   // --- Vegetables ----------------------------------------------------------
@@ -467,11 +352,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['tomato', 'oota', 'طماطم حمراء', 'قوطة'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 1000,
-    priceAvgMinor: 1600,
-    priceHighMinor: 2600,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'onions',
@@ -484,11 +364,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['onion', 'basal', 'بصل أحمر', 'بصل أبيض'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 1200,
-    priceAvgMinor: 1800,
-    priceHighMinor: 2800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'garlic',
@@ -501,11 +376,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['toum', 'tom', 'garlic cloves', 'فص ثوم'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 6000,
-    priceAvgMinor: 8000,
-    priceHighMinor: 11000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'cucumber',
@@ -518,11 +388,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['cucumbers', 'khiar', 'خيار بلدي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1200,
-    priceAvgMinor: 1800,
-    priceHighMinor: 2800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'bell-pepper',
@@ -535,11 +400,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['capsicum', 'peppers', 'sweet pepper', 'فلفل رومي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 2500,
-    priceAvgMinor: 3500,
-    priceHighMinor: 5000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'zucchini',
@@ -552,11 +412,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['courgette', 'kosa', 'كوسه'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1400,
-    priceAvgMinor: 2000,
-    priceHighMinor: 3000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'eggplant',
@@ -569,11 +424,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['aubergine', 'betingan', 'بتنجان'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1200,
-    priceAvgMinor: 1800,
-    priceHighMinor: 2800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'carrots',
@@ -586,11 +436,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['carrot', 'gazar', 'جزر بلدي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1400,
-    priceAvgMinor: 2000,
-    priceHighMinor: 3000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'molokhia',
@@ -603,11 +448,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['mulukhiyah', 'jute leaves', 'ملوخيه', 'ملوخية مفرومة'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 2500,
-    priceAvgMinor: 3500,
-    priceHighMinor: 4800,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'okra',
@@ -620,11 +460,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['bamya', 'lady fingers', 'باميه'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 3000,
-    priceAvgMinor: 4200,
-    priceHighMinor: 5800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'spinach',
@@ -637,11 +472,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['sabanekh', 'سبانخ مفرومة'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1500,
-    priceAvgMinor: 2200,
-    priceHighMinor: 3200,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'lettuce',
@@ -654,11 +484,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['khass', 'romaine', 'خس بلدي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 1000,
-    priceAvgMinor: 1500,
-    priceHighMinor: 2200,
-    priceUnit: 'piece',
-    priceQuantity: 1,
   },
   {
     slug: 'parsley',
@@ -671,11 +496,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['ba2dounes', 'بقدونس أخضر'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 300,
-    priceAvgMinor: 500,
-    priceHighMinor: 800,
-    priceUnit: 'bunch',
-    priceQuantity: 1,
   },
   {
     slug: 'coriander',
@@ -688,11 +508,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['cilantro', 'kozbara', 'كزبره خضراء'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 300,
-    priceAvgMinor: 500,
-    priceHighMinor: 800,
-    priceUnit: 'bunch',
-    priceQuantity: 1,
   },
   {
     slug: 'green-onion',
@@ -705,11 +520,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['scallion', 'spring onion', 'بصل اخضر'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 400,
-    priceAvgMinor: 700,
-    priceHighMinor: 1000,
-    priceUnit: 'bunch',
-    priceQuantity: 1,
   },
   {
     slug: 'green-peas',
@@ -722,11 +532,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['peas', 'besella', 'بسله'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 4000,
-    priceAvgMinor: 5200,
-    priceHighMinor: 6800,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Fruit ---------------------------------------------------------------
@@ -741,11 +546,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['lemons', 'lime', 'lamoun', 'ليمون أخضر'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 2000,
-    priceAvgMinor: 3000,
-    priceHighMinor: 5000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'bananas',
@@ -758,11 +558,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['banana', 'moz', 'موزة'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 2000,
-    priceAvgMinor: 2800,
-    priceHighMinor: 4000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'dates',
@@ -775,11 +570,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['balah', 'tamr', 'بلح'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 6000,
-    priceAvgMinor: 9000,
-    priceHighMinor: 14000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'apples',
@@ -792,11 +582,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['apple', 'tofah', 'تفاحة'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 5000,
-    priceAvgMinor: 7000,
-    priceHighMinor: 10000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Dairy ---------------------------------------------------------------
@@ -811,11 +596,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['laban', 'full cream milk', 'حليب'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 3500,
-    priceAvgMinor: 4500,
-    priceHighMinor: 5800,
-    priceUnit: 'l',
-    priceQuantity: 1,
   },
   {
     slug: 'white-cheese',
@@ -828,11 +608,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['feta', 'gebna beida', 'domiati', 'جبنه بيضاء', 'جبنة فيتا'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 9000,
-    priceAvgMinor: 12000,
-    priceHighMinor: 16000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'mozzarella',
@@ -845,11 +620,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['mozarella', 'pizza cheese', 'جبنة موتزاريلا', 'جبنه موزاريلا'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 18000,
-    priceAvgMinor: 23000,
-    priceHighMinor: 29000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'roumy-cheese',
@@ -862,11 +632,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['romy', 'ras cheese', 'جبنه رومي'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 28000,
-    priceAvgMinor: 34000,
-    priceHighMinor: 42000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'yogurt',
@@ -879,11 +644,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['zabady', 'plain yoghurt', 'زبادى'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 800,
-    priceAvgMinor: 1100,
-    priceHighMinor: 1500,
-    priceUnit: 'piece',
-    priceQuantity: 1,
   },
   {
     slug: 'cream',
@@ -896,11 +656,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['heavy cream', 'double cream', 'krema', 'كريمه'],
     isCommonStaple: false,
     isPerishable: true,
-    priceLowMinor: 4500,
-    priceAvgMinor: 6000,
-    priceHighMinor: 8000,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'butter',
@@ -913,11 +668,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['zebda', 'زبده'],
     isCommonStaple: true,
     isPerishable: true,
-    priceLowMinor: 28000,
-    priceAvgMinor: 36000,
-    priceHighMinor: 46000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Pantry / sauces / fats ---------------------------------------------
@@ -932,11 +682,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['zeit zeitoun', 'extra virgin olive oil', 'زيت الزيتون'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 30000,
-    priceAvgMinor: 42000,
-    priceHighMinor: 60000,
-    priceUnit: 'l',
-    priceQuantity: 1,
   },
   {
     slug: 'sunflower-oil',
@@ -949,11 +694,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['oil', 'sunflower oil', 'cooking oil', 'زيت عباد الشمس'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 6500,
-    priceAvgMinor: 8000,
-    priceHighMinor: 10000,
-    priceUnit: 'l',
-    priceQuantity: 1,
   },
   {
     slug: 'tomato-paste',
@@ -966,11 +706,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['salsa', 'tomato puree', 'صلصه'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 2000,
-    priceAvgMinor: 2800,
-    priceHighMinor: 3800,
-    priceUnit: 'can',
-    priceQuantity: 1,
   },
   {
     slug: 'vinegar',
@@ -983,11 +718,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['khal', 'white vinegar', 'خل أبيض'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 1500,
-    priceAvgMinor: 2200,
-    priceHighMinor: 3000,
-    priceUnit: 'l',
-    priceQuantity: 1,
   },
   {
     slug: 'tahini',
@@ -1000,11 +730,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['tehina', 'sesame paste', 'طحينه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 6000,
-    priceAvgMinor: 8000,
-    priceHighMinor: 11000,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'honey',
@@ -1017,11 +742,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['asal', 'عسل نحل'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 12000,
-    priceAvgMinor: 18000,
-    priceHighMinor: 28000,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'sugar',
@@ -1034,11 +754,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['sokkar', 'white sugar', 'سكر أبيض'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 2800,
-    priceAvgMinor: 3400,
-    priceHighMinor: 4200,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'peanut-butter',
@@ -1051,11 +766,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['pb', 'زبده فول سوداني'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 12000,
-    priceAvgMinor: 16000,
-    priceHighMinor: 22000,
-    priceUnit: 'pack',
-    priceQuantity: 1,
   },
   {
     slug: 'oats',
@@ -1068,11 +778,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['oatmeal', 'rolled oats', 'شوفان مجروش'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 7000,
-    priceAvgMinor: 9500,
-    priceHighMinor: 13000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'walnuts',
@@ -1085,11 +790,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['walnut', 'ein gamal', 'عين الجمل'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 45000,
-    priceAvgMinor: 60000,
-    priceHighMinor: 80000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 
   // --- Spices --------------------------------------------------------------
@@ -1104,11 +804,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['malh', 'table salt', 'ملح طعام'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 500,
-    priceAvgMinor: 800,
-    priceHighMinor: 1200,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'black-pepper',
@@ -1121,11 +816,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['pepper', 'felfel eswed', 'فلفل اسود'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 20000,
-    priceAvgMinor: 28000,
-    priceHighMinor: 38000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'cumin',
@@ -1138,11 +828,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['kamoun', 'كمون مطحون'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 15000,
-    priceAvgMinor: 20000,
-    priceHighMinor: 28000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'paprika',
@@ -1155,11 +840,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['sweet paprika', 'فلفل أحمر مطحون'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 14000,
-    priceAvgMinor: 19000,
-    priceHighMinor: 26000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'coriander-ground',
@@ -1172,11 +852,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['dry coriander', 'كزبره ناشفه'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 10000,
-    priceAvgMinor: 14000,
-    priceHighMinor: 19000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'cinnamon',
@@ -1189,11 +864,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['erfa', 'قرفه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 16000,
-    priceAvgMinor: 22000,
-    priceHighMinor: 30000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'bay-leaf',
@@ -1206,11 +876,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['laurel', 'ورق لوري'],
     isCommonStaple: true,
     isPerishable: false,
-    priceLowMinor: 8000,
-    priceAvgMinor: 12000,
-    priceHighMinor: 18000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'chili-flakes',
@@ -1223,11 +888,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['shatta', 'red pepper flakes', 'شطه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 14000,
-    priceAvgMinor: 19000,
-    priceHighMinor: 26000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
   {
     slug: 'dukkah',
@@ -1240,11 +900,6 @@ export const INGREDIENT_CATALOGUE: CatalogueIngredient[] = [
     aliases: ['duqqa', 'دقه'],
     isCommonStaple: false,
     isPerishable: false,
-    priceLowMinor: 18000,
-    priceAvgMinor: 24000,
-    priceHighMinor: 32000,
-    priceUnit: 'kg',
-    priceQuantity: 1,
   },
 ];
 

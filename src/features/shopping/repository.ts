@@ -1,7 +1,7 @@
 import { resolveIngredient } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import { priceBookFor } from '@/features/pricing/price-book';
-import { costOfIngredient } from '@/features/pricing/estimate';
+import { completenessOf, costOfIngredient } from '@/features/pricing/estimate';
 import { money } from '@/lib/format/money';
 import {
   LocalCollection,
@@ -116,6 +116,18 @@ export function mergeQuantities(
   return { quantity: existing.quantity, unit: existing.unit };
 }
 
+/**
+ * The key two list lines must share to be the same thing.
+ *
+ * Normalising the typed name alone leaves "aubergine" and "eggplant" as two
+ * lines, so this resolves through the ingredient catalogue first and only
+ * falls back to the raw name for things the catalogue does not know.
+ */
+export function mergeKeyFor(name: string): string {
+  const resolved = resolveIngredient(name);
+  return normaliseIngredientName(resolved?.name ?? name);
+}
+
 export class LocalShoppingRepository implements ShoppingRepository {
   private readonly collection = new LocalCollection<ShoppingListItem>(
     LocalCollectionKeys.shoppingList,
@@ -132,8 +144,8 @@ export class LocalShoppingRepository implements ShoppingRepository {
 
   async add(input: AddShoppingItemInput): Promise<ShoppingListItem> {
     const items = await this.collection.list();
-    const key = normaliseIngredientName(input.name);
-    const existing = items.find((item) => normaliseIngredientName(item.name) === key);
+    const key = mergeKeyFor(input.name);
+    const existing = items.find((item) => mergeKeyFor(item.name) === key);
 
     if (existing) {
       const merged = mergeQuantities(existing, {
@@ -203,6 +215,7 @@ export function estimateListTotal(
   const book = priceBookFor(country, currency);
   let totalMinor = 0;
   let unpricedCount = 0;
+  let pricedCount = 0;
 
   for (const item of items) {
     if (item.isChecked) continue;
@@ -214,10 +227,17 @@ export function estimateListTotal(
     const cost = costOfIngredient(
       { name: item.name, quantity: item.quantity, unit: item.unit },
       quote,
-      perPieceWeightFor(resolveIngredient(item.name)),
+      perPieceWeightFor(resolveIngredient(item.name), quote.unit),
     );
     totalMinor += cost.amountMinor;
+    pricedCount += 1;
   }
+
+  // The count of unpriced items was already being tracked here, but it never
+  // reached the rendered amount — so a list holding nothing but a salmon
+  // fillet we cannot price totalled "~0 EGP", which reads as free. The total
+  // now carries how much of itself it actually covers.
+  const completeness = completenessOf(pricedCount, pricedCount + unpricedCount);
 
   return {
     priced: {
@@ -225,6 +245,8 @@ export function estimateListTotal(
       source: 'estimate',
       lastUpdated: book.lastUpdated,
       isFallback: unpricedCount > 0,
+      completeness,
+      unpricedCount,
     },
     unpricedCount,
   };

@@ -60,15 +60,21 @@ export type PerPieceWeight = {
  * weight at all.
  */
 export function perPieceWeightFor(
-  entry: { defaultUnit: Unit; priceUnit: Unit; gramsPerPiece: number | null } | null | undefined,
+  entry: { defaultUnit: Unit; gramsPerPiece: number | null } | null | undefined,
+  /**
+   * Unit the price is quoted in, when one is known. Prices no longer live on
+   * the catalogue entry, so the caller supplies it — a quote in `piece` still
+   * needs a per-piece weight to convert against.
+   */
+  quotedUnit?: Unit | null,
 ): PerPieceWeight | null {
   if (!entry || entry.gramsPerPiece === null) return null;
 
   if (isCountableUnit(entry.defaultUnit)) {
     return { unit: entry.defaultUnit, grams: entry.gramsPerPiece };
   }
-  if (isCountableUnit(entry.priceUnit)) {
-    return { unit: entry.priceUnit, grams: entry.gramsPerPiece };
+  if (quotedUnit && isCountableUnit(quotedUnit)) {
+    return { unit: quotedUnit, grams: entry.gramsPerPiece };
   }
   return null;
 }

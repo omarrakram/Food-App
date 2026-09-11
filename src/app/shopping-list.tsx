@@ -220,11 +220,19 @@ export default function ShoppingListScreen() {
                 />
               ) : null}
 
+              {/*
+                Ordering is a future feature: the only provider that exists is
+                a mock, and `enabledProvidersFor` never returns it. An active
+                ghost button that opens a sheet saying "not available" is a
+                tap spent to learn nothing, so the unavailable state says so on
+                its face and cannot be pressed.
+              */}
               <Button
-                label={t('shopping.orderAll')}
+                label={orderingAvailable ? t('shopping.orderAll') : t('shopping.orderComingSoon')}
                 icon="bag-handle-outline"
                 variant="ghost"
-                onPress={() => setOrderOpen(true)}
+                onPress={orderingAvailable ? () => setOrderOpen(true) : undefined}
+                disabled={!orderingAvailable}
                 size="md"
                 fullWidth
                 testID="shopping-order"

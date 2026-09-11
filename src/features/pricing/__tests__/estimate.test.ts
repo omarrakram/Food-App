@@ -180,3 +180,169 @@ describe('budgetVerdict', () => {
     expect(budgetVerdict(99999, 0)).toBe('within');
   });
 });
+
+// ---------------------------------------------------------------------------
+// Price completeness.
+//
+// The bug these exist for: a shopping list containing salmon — which we have
+// no price for — displayed a total of "~0 EGP" and counted as within budget.
+// An incomplete total is a floor, not an answer, and the UI must be able to
+// tell the difference.
+// ---------------------------------------------------------------------------
+
+describe('estimate completeness', () => {
+  const twoLineRecipe: Pick<Recipe, 'ingredients' | 'baseServings'> = {
+    baseServings: 2,
+    ingredients: [
+      line({ id: 'a', name: 'rice', quantity: 300, unit: 'g' }),
+      line({ id: 'b', name: 'salmon', quantity: 200, unit: 'g' }),
+    ],
+  };
+
+  it('reports complete when every required ingredient is priced', () => {
+    const book = new FakePriceBook({ rice: perKiloQuote, salmon: perKiloQuote });
+    const estimate = estimateRecipeCost(twoLineRecipe, { priceBook: book });
+
+    expect(estimate.completeness).toBe('complete');
+    expect(estimate.unpricedCount).toBe(0);
+    expect(estimate.totalMinor).toBe(5000);
+  });
+
+  it('reports PARTIAL when one ingredient has no price, and does not count it as free', () => {
+    const book = new FakePriceBook({ rice: perKiloQuote });
+    const estimate = estimateRecipeCost(twoLineRecipe, { priceBook: book });
+
+    expect(estimate.completeness).toBe('partial');
+    expect(estimate.unpricedCount).toBe(1);
+    // The total covers rice only. It is a floor, and the verdict must say so.
+    expect(estimate.totalMinor).toBe(3000);
+  });
+
+  it('reports UNAVAILABLE when nothing could be priced, rather than a confident zero', () => {
+    const estimate = estimateRecipeCost(twoLineRecipe, { priceBook: new FakePriceBook({}) });
+
+    expect(estimate.completeness).toBe('unavailable');
+    expect(estimate.totalMinor).toBe(0);
+    expect(estimate.unpricedCount).toBe(2);
+  });
+
+  it('distinguishes a legitimate zero cost from an unknown one', () => {
+    // "Salt to taste" has no quantity: genuinely free, and genuinely known.
+    const freeRecipe: Pick<Recipe, 'ingredients' | 'baseServings'> = {
+      baseServings: 2,
+      ingredients: [line({ id: 'salt', name: 'salt', quantity: null, unit: 'to_taste' })],
+    };
+    const estimate = estimateRecipeCost(freeRecipe, {
+      priceBook: new FakePriceBook({ salt: perKiloQuote }),
+    });
+
+    expect(estimate.totalMinor).toBe(0);
+    expect(estimate.completeness).toBe('complete');
+    expect(budgetVerdict(0, 15000, estimate.completeness)).toBe('within');
+  });
+
+  it('carries completeness onto the PricedAmount the UI renders from', () => {
+    const partial = toPricedAmount(
+      estimateRecipeCost(twoLineRecipe, { priceBook: new FakePriceBook({ rice: perKiloQuote }) }),
+    );
+
+    expect(partial.completeness).toBe('partial');
+    expect(partial.unpricedCount).toBe(1);
+  });
+});
+
+describe('budgetVerdict with incomplete data', () => {
+  it('NEVER says "within" on a partial total, because the figure can only grow', () => {
+    expect(budgetVerdict(3000, 15000, 'partial')).toBe('unknown');
+    expect(budgetVerdict(3000, 15000, 'unavailable')).toBe('unknown');
+  });
+
+  it('still says "over" on a partial total — adding the missing prices cannot help', () => {
+    expect(budgetVerdict(20000, 15000, 'partial')).toBe('over');
+  });
+
+  it('gives a definitive verdict only on complete data', () => {
+    expect(budgetVerdict(3000, 15000, 'complete')).toBe('within');
+    expect(budgetVerdict(16000, 15000, 'complete')).toBe('slightly_over');
+    expect(budgetVerdict(30000, 15000, 'complete')).toBe('over');
+  });
+
+  it('defaults to treating a total as complete, so existing callers keep their meaning', () => {
+    expect(budgetVerdict(3000, 15000)).toBe('within');
+  });
+});
+
+describe('what the cook still has to buy', () => {
+  const recipe: Pick<Recipe, 'ingredients' | 'baseServings'> = {
+    baseServings: 2,
+    ingredients: [
+      line({ id: 'have', name: 'rice', quantity: 300, unit: 'g' }),
+      line({ id: 'need', name: 'beef', quantity: 500, unit: 'g' }),
+    ],
+  };
+  const book = new FakePriceBook({ rice: perKiloQuote, beef: perKiloQuote });
+
+  it('excludes owned ingredients from the amount still to spend', () => {
+    const estimate = estimateRecipeCost(recipe, { priceBook: book, ownedIngredientIds: ['have'] });
+
+    expect(estimate.totalMinor).toBe(8000); // whole dish
+    expect(estimate.toBuy?.totalMinor).toBe(5000); // just the beef
+    expect(estimate.toBuy?.ownedCount).toBe(1);
+    expect(estimate.toBuy?.completeness).toBe('complete');
+  });
+
+  it('leaves toBuy null when the pantry is unknown, rather than assuming it is empty', () => {
+    const estimate = estimateRecipeCost(recipe, { priceBook: book });
+
+    expect(estimate.toBuy).toBeNull();
+  });
+
+  it('is complete when the only unpriced ingredient is one they already own', () => {
+    const partialBook = new FakePriceBook({ beef: perKiloQuote });
+    const estimate = estimateRecipeCost(recipe, {
+      priceBook: partialBook,
+      ownedIngredientIds: ['have'],
+    });
+
+    // The dish as a whole cannot be priced, but their shopping trip can.
+    expect(estimate.completeness).toBe('partial');
+    expect(estimate.toBuy?.completeness).toBe('complete');
+    expect(estimate.toBuy?.totalMinor).toBe(5000);
+  });
+
+  it('is partial when something they need has no price', () => {
+    const partialBook = new FakePriceBook({ rice: perKiloQuote });
+    const estimate = estimateRecipeCost(recipe, {
+      priceBook: partialBook,
+      ownedIngredientIds: ['have'],
+    });
+
+    expect(estimate.toBuy?.completeness).toBe('unavailable');
+    expect(estimate.toBuy?.unpricedCount).toBe(1);
+    expect(budgetVerdict(estimate.toBuy?.totalMinor ?? 0, 15000, estimate.toBuy?.completeness)).toBe(
+      'unknown',
+    );
+  });
+
+  it('scales the shopping portion with servings', () => {
+    const forTwo = estimateRecipeCost(recipe, { priceBook: book, ownedIngredientIds: ['have'] });
+    const forFour = estimateRecipeCost(recipe, {
+      priceBook: book,
+      ownedIngredientIds: ['have'],
+      servings: 4,
+    });
+
+    expect(forFour.toBuy?.totalMinor).toBe((forTwo.toBuy?.totalMinor ?? 0) * 2);
+  });
+
+  it('costs nothing to buy when the cook owns everything', () => {
+    const estimate = estimateRecipeCost(recipe, {
+      priceBook: book,
+      ownedIngredientIds: ['have', 'need'],
+    });
+
+    expect(estimate.toBuy?.totalMinor).toBe(0);
+    expect(estimate.toBuy?.completeness).toBe('complete');
+    expect(budgetVerdict(0, 15000, estimate.toBuy?.completeness)).toBe('within');
+  });
+});

@@ -32,6 +32,9 @@ jobs:
       - name: Unit tests
         run: npm run test:ci
 
+      - name: Verify imported price data matches the survey CSV
+        run: npm run prices:import -- --check
+
       - name: Verify the generated seed is in step with its TypeScript source
         run: |
           npm run seed:generate

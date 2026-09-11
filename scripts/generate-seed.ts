@@ -15,6 +15,7 @@
 import { writeFileSync } from 'node:fs';
 
 import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
+import { PRICE_DATA, PRICE_DATA_DATE } from '../src/features/pricing/price-data.ts';
 import { RECIPE_FIXTURES } from '../src/features/recipes/fixtures.ts';
 
 import { uuidv5 } from './uuid.mjs';
@@ -24,7 +25,6 @@ const SEED_COUNTRY = 'EG';
 const SEED_CURRENCY = 'EGP';
 
 /** Date the bundled price estimates were last reviewed. */
-const PRICE_REVIEW_DATE = '2026-08-01';
 
 /** Escapes a value as a SQL literal. Nulls become the keyword NULL. */
 function lit(value: string | number | boolean | null | undefined): string {
@@ -56,7 +56,7 @@ lines.push(
   '-- against a populated database refreshes rather than duplicates.',
   '--',
   '-- PRICES IN THIS FILE ARE ESTIMATES, not live store prices. They reflect',
-  `-- typical ${SEED_COUNTRY} supermarket shelf prices as reviewed on ${PRICE_REVIEW_DATE}`,
+  `-- typical ${SEED_COUNTRY} supermarket shelf prices as reviewed on ${PRICE_DATA_DATE}`,
   '-- and must always be surfaced to users with the estimate treatment.',
   '-- ---------------------------------------------------------------------------',
   '',
@@ -98,19 +98,25 @@ for (const ingredient of INGREDIENT_CATALOGUE) {
     );
   }
 
-  lines.push(
-    `insert into public.ingredient_price_estimates (`,
-    `  ingredient_id, country, currency, unit, quantity,`,
-    `  estimated_low_minor, estimated_avg_minor, estimated_high_minor, origin, last_updated)`,
-    `values (${lit(id)}, ${lit(SEED_COUNTRY)}, ${lit(SEED_CURRENCY)}, ${lit(ingredient.priceUnit)}, ${lit(ingredient.priceQuantity)},`,
-    `  ${lit(ingredient.priceLowMinor)}, ${lit(ingredient.priceAvgMinor)}, ${lit(ingredient.priceHighMinor)}, 'bundled_seed', ${lit(PRICE_REVIEW_DATE)})`,
-    `on conflict (ingredient_id, country, unit, quantity) do update set`,
-    `  estimated_low_minor = excluded.estimated_low_minor,`,
-    `  estimated_avg_minor = excluded.estimated_avg_minor,`,
-    `  estimated_high_minor = excluded.estimated_high_minor,`,
-    `  last_updated = excluded.last_updated;`,
-    '',
-  );
+  // Prices come from the imported survey, not the catalogue. An ingredient
+  // with no row simply gets no price estimate — the app renders that honestly,
+  // and seeding a fabricated one would be the only way to break it.
+  const price = PRICE_DATA[ingredient.slug];
+  if (price) {
+    lines.push(
+      `insert into public.ingredient_price_estimates (`,
+      `  ingredient_id, country, currency, unit, quantity,`,
+      `  estimated_low_minor, estimated_avg_minor, estimated_high_minor, origin, last_updated)`,
+      `values (${lit(id)}, ${lit(SEED_COUNTRY)}, ${lit(SEED_CURRENCY)}, ${lit(price.unit)}, ${lit(price.quantity)},`,
+      `  ${lit(price.lowMinor)}, ${lit(price.avgMinor)}, ${lit(price.highMinor)}, 'bundled_seed', ${lit(PRICE_DATA_DATE)})`,
+      `on conflict (ingredient_id, country, unit, quantity) do update set`,
+      `  estimated_low_minor = excluded.estimated_low_minor,`,
+      `  estimated_avg_minor = excluded.estimated_avg_minor,`,
+      `  estimated_high_minor = excluded.estimated_high_minor,`,
+      `  last_updated = excluded.last_updated;`,
+      '',
+    );
+  }
 }
 
 // --- Recipes ---------------------------------------------------------------

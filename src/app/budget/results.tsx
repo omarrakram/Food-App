@@ -30,18 +30,33 @@ export default function BudgetResultsScreen() {
     ? formatMoney(money(request.budgetMinor, request.currency), { locale })
     : null;
 
-  const withinCount = useMemo(
-    () =>
-      request.budgetMinor === null
-        ? 0
-        : matches.filter(
-            (match) =>
-              match.estimatedCost !== null &&
-              budgetVerdict(match.estimatedCost.money.amountMinor, request.budgetMinor ?? 0) ===
-                'within',
-          ).length,
-    [matches, request.budgetMinor],
-  );
+  /**
+   * Counted against what the cook still has to BUY, not what the dish is
+   * worth — "I have 150 EGP" is a question about their wallet. A recipe whose
+   * price data is incomplete lands in `unknown` rather than being quietly
+   * counted as affordable.
+   */
+  const tally = useMemo(() => {
+    if (request.budgetMinor === null) return { within: 0, unknown: 0 };
+
+    let within = 0;
+    let unknown = 0;
+    for (const match of matches) {
+      const spend = match.estimatedSpend ?? match.estimatedCost;
+      if (!spend) {
+        unknown += 1;
+        continue;
+      }
+      const verdict = budgetVerdict(
+        spend.money.amountMinor,
+        request.budgetMinor ?? 0,
+        spend.completeness ?? 'complete',
+      );
+      if (verdict === 'within') within += 1;
+      else if (verdict === 'unknown') unknown += 1;
+    }
+    return { within, unknown };
+  }, [matches, request.budgetMinor]);
 
   const header = budgetLabel ? (
     <View
@@ -60,7 +75,8 @@ export default function BudgetResultsScreen() {
           {budgetLabel} · {t('common.servings', { count: request.servings })}
         </Text>
         <Text variant="footnote" style={{ color: theme.colors.successSoftText }}>
-          {t('budget.withinBudget')}: {withinCount}
+          {t('budget.withinBudget')}: {tally.within}
+          {tally.unknown > 0 ? ` · ${t('budget.needsChecking', { count: tally.unknown })}` : ''}
         </Text>
       </View>
     </View>

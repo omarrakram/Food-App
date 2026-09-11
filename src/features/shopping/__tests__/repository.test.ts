@@ -1,12 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {
-  buildShoppingItem,
-  estimateListTotal,
-  LocalShoppingRepository,
-  mergeQuantities,
-  LOCAL_LIST_ID,
-} from '../repository';
+import { LOCAL_LIST_ID, LocalShoppingRepository, buildShoppingItem, estimateListTotal, mergeKeyFor, mergeQuantities } from '../repository';
 import type { ShoppingListItem } from '@/types/domain';
 
 describe('mergeQuantities', () => {
@@ -200,5 +194,79 @@ describe('estimateListTotal', () => {
 
   it('returns zero for an empty list rather than throwing', () => {
     expect(estimateListTotal([], 'EG', 'EGP').priced.money.amountMinor).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The reported bug: a list holding a salmon fillet we cannot price showed a
+// header total of roughly 0 EGP and read as though the shopping was free.
+// ---------------------------------------------------------------------------
+
+describe('a total that cannot be completed', () => {
+  const item = (overrides: Partial<ShoppingListItem>): ShoppingListItem => ({
+    ...buildShoppingItem({ name: 'rice' }, LOCAL_LIST_ID),
+    ...overrides,
+  });
+
+  it('REFUSES to call an all-unpriced list zero', () => {
+    const total = estimateListTotal(
+      [item({ name: 'nothing-we-know-about', quantity: 1, unit: 'piece' })],
+      'EG',
+      'EGP',
+    );
+
+    expect(total.priced.completeness).toBe('unavailable');
+    expect(total.unpricedCount).toBe(1);
+  });
+
+  it('marks a partly-priced list partial, so the header cannot claim a final figure', () => {
+    const total = estimateListTotal(
+      [
+        item({ id: '1', name: 'rice', quantity: 500, unit: 'g' }),
+        item({ id: '2', name: 'nothing-we-know-about', quantity: 1, unit: 'piece' }),
+      ],
+      'EG',
+      'EGP',
+    );
+
+    expect(total.priced.completeness).toBe('partial');
+    expect(total.priced.unpricedCount).toBe(1);
+    expect(total.priced.money.amountMinor).toBeGreaterThan(0);
+  });
+
+  it('is complete when every line is priced', () => {
+    const total = estimateListTotal([item({ name: 'rice', quantity: 500, unit: 'g' })], 'EG', 'EGP');
+
+    expect(total.priced.completeness).toBe('complete');
+    expect(total.priced.unpricedCount).toBe(0);
+  });
+
+  it('ignores checked items when judging completeness', () => {
+    const total = estimateListTotal(
+      [
+        item({ id: '1', name: 'rice', quantity: 500, unit: 'g' }),
+        item({ id: '2', name: 'nothing-we-know-about', isChecked: true }),
+      ],
+      'EG',
+      'EGP',
+    );
+
+    // The unknown item is already in the basket, so it cannot spoil the total.
+    expect(total.priced.completeness).toBe('complete');
+  });
+});
+
+describe('merging duplicate lines', () => {
+  it('treats catalogue aliases as the same ingredient', () => {
+    // Both resolve to the same catalogue entry, so they must share a line.
+    expect(mergeKeyFor('aubergine')).toBe(mergeKeyFor('eggplant'));
+  });
+
+  it('keeps genuinely different ingredients apart', () => {
+    expect(mergeKeyFor('rice')).not.toBe(mergeKeyFor('beef'));
+  });
+
+  it('falls back to the typed name for things the catalogue does not know', () => {
+    expect(mergeKeyFor('Some Invented Thing')).toBe(mergeKeyFor('some invented thing'));
   });
 });

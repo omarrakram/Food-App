@@ -2,6 +2,7 @@ import { resolveIngredient } from '@/features/ingredients/matching';
 import { money } from '@/lib/format/money';
 import type {
   CountryCode,
+  EstimateCompleteness,
   CurrencyCode,
   PricedAmount,
   Recipe,
@@ -32,6 +33,18 @@ export type IngredientCostLine = {
   isOptional: boolean;
 };
 
+/** The part of a recipe's cost the cook still has to go out and buy. */
+export type ShoppingPortion = {
+  totalMinor: number;
+  lowMinor: number;
+  highMinor: number;
+  /** Items they need but we cannot price. */
+  unpricedCount: number;
+  completeness: EstimateCompleteness;
+  /** How many required ingredients they already have. */
+  ownedCount: number;
+};
+
 export type RecipeCostEstimate = {
   currency: CurrencyCode;
   /** Total for `servings`, excluding optional ingredients. */
@@ -44,8 +57,30 @@ export type RecipeCostEstimate = {
   unpricedCount: number;
   /** Share of required ingredients we could price, 0–1. */
   coverage: number;
+  /**
+   * Whether the total is a finished figure. `partial` means real ingredients
+   * are missing from it; `unavailable` means we priced nothing at all.
+   */
+  completeness: EstimateCompleteness;
+  /**
+   * Cost of only the ingredients the cook lacks. Null when no pantry
+   * information was supplied — absent is not the same as "you own nothing".
+   */
+  toBuy: ShoppingPortion | null;
   lastUpdated: string;
 };
+
+/**
+ * Classifies a total by how much of it we could price.
+ *
+ * A recipe whose every line is genuinely free ("salt to taste") is complete at
+ * zero — that is a real answer. A recipe we simply have no data for is not.
+ */
+export function completenessOf(pricedCount: number, totalCount: number): EstimateCompleteness {
+  if (totalCount === 0) return 'complete';
+  if (pricedCount === 0) return 'unavailable';
+  return pricedCount === totalCount ? 'complete' : 'partial';
+}
 
 /**
  * Cost of one recipe ingredient at a given serving count.
@@ -101,6 +136,12 @@ export type EstimateOptions = {
   priceBook?: PriceBook;
   /** Include ingredients marked optional. Default false. */
   includeOptional?: boolean;
+  /**
+   * Recipe-ingredient ids the cook already has. Supplying this produces the
+   * `toBuy` breakdown; omitting it leaves `toBuy` null rather than pretending
+   * the pantry is empty.
+   */
+  ownedIngredientIds?: Iterable<string>;
 };
 
 export function estimateRecipeCost(
@@ -137,7 +178,7 @@ export function estimateRecipeCost(
     const cost = costOfIngredient(
       { ...ingredient, quantity: scaledQuantity },
       quote,
-      perPieceWeightFor(catalogueEntry),
+      perPieceWeightFor(catalogueEntry, quote.unit),
     );
 
     return {
@@ -156,6 +197,9 @@ export function estimateRecipeCost(
   const lowMinor = priced.reduce((sum, line) => sum + (line.lowMinor ?? 0), 0);
   const highMinor = priced.reduce((sum, line) => sum + (line.highMinor ?? 0), 0);
 
+  const owned = options.ownedIngredientIds ? new Set(options.ownedIngredientIds) : null;
+  const toBuy = owned ? shoppingPortion(lines, owned) : null;
+
   return {
     currency,
     totalMinor,
@@ -165,7 +209,33 @@ export function estimateRecipeCost(
     lines,
     unpricedCount: lines.length - priced.length,
     coverage: lines.length === 0 ? 1 : priced.length / lines.length,
+    completeness: completenessOf(priced.length, lines.length),
+    toBuy,
     lastUpdated: book.lastUpdated,
+  };
+}
+
+/**
+ * Narrows a cost to the lines the cook does not already have.
+ *
+ * "I have 150 EGP" is a question about what leaves their wallet, not about
+ * what the dish is worth. When we know the pantry, the honest answer is the
+ * cost of the gaps.
+ */
+function shoppingPortion(
+  lines: readonly IngredientCostLine[],
+  ownedIds: ReadonlySet<string>,
+): ShoppingPortion {
+  const needed = lines.filter((line) => !ownedIds.has(line.ingredientId));
+  const pricedNeeded = needed.filter((line) => line.amountMinor !== null);
+
+  return {
+    totalMinor: pricedNeeded.reduce((sum, line) => sum + (line.amountMinor ?? 0), 0),
+    lowMinor: pricedNeeded.reduce((sum, line) => sum + (line.lowMinor ?? 0), 0),
+    highMinor: pricedNeeded.reduce((sum, line) => sum + (line.highMinor ?? 0), 0),
+    unpricedCount: needed.length - pricedNeeded.length,
+    completeness: completenessOf(pricedNeeded.length, needed.length),
+    ownedCount: lines.length - needed.length,
   };
 }
 
@@ -180,16 +250,57 @@ export function toPricedAmount(estimate: RecipeCostEstimate): PricedAmount {
     source: 'estimate',
     lastUpdated: estimate.lastUpdated,
     isFallback: estimate.coverage < 1,
+    completeness: estimate.completeness,
+    unpricedCount: estimate.unpricedCount,
   };
 }
 
-export type BudgetVerdict = 'within' | 'slightly_over' | 'over';
+/**
+ * The figure a budget question should actually be answered with.
+ *
+ * Falls back to the full recipe cost when no pantry information was supplied,
+ * because an unknown pantry must not be read as an empty one.
+ */
+export function toSpendAmount(estimate: RecipeCostEstimate): PricedAmount {
+  const portion = estimate.toBuy;
+  if (!portion) return toPricedAmount(estimate);
+
+  return {
+    money: money(portion.totalMinor, estimate.currency),
+    source: 'estimate',
+    lastUpdated: estimate.lastUpdated,
+    isFallback: portion.completeness !== 'complete',
+    completeness: portion.completeness,
+    unpricedCount: portion.unpricedCount,
+  };
+}
+
+export type BudgetVerdict = 'within' | 'slightly_over' | 'over' | 'unknown';
 
 /** Tolerance band for "slightly over" — 15% above the stated budget. */
 export const BUDGET_TOLERANCE = 0.15;
 
-export function budgetVerdict(totalMinor: number, budgetMinor: number): BudgetVerdict {
+/**
+ * Whether a recipe fits a budget.
+ *
+ * The completeness argument is what keeps this honest. An incomplete total is
+ * a floor: the real figure can only be higher. So "over" remains safe to
+ * assert on partial data — adding the missing prices cannot bring it back
+ * under — while "within" never is, and becomes `unknown` instead.
+ *
+ * Callers that pass no completeness are asserting the total is finished.
+ */
+export function budgetVerdict(
+  totalMinor: number,
+  budgetMinor: number,
+  completeness: EstimateCompleteness = 'complete',
+): BudgetVerdict {
   if (budgetMinor <= 0) return 'within';
+
+  if (completeness !== 'complete') {
+    return totalMinor > budgetMinor ? 'over' : 'unknown';
+  }
+
   if (totalMinor <= budgetMinor) return 'within';
   if (totalMinor <= budgetMinor * (1 + BUDGET_TOLERANCE)) return 'slightly_over';
   return 'over';

@@ -5,6 +5,7 @@ import { View, type ViewStyle } from 'react-native';
 import { PressScale } from '@/components/ui/press-scale';
 import { Sheet } from '@/components/ui/sheet';
 import { Text, type TextColor } from '@/components/ui/text';
+import { isPriceDataStale, PRICE_STALE_AFTER_DAYS } from '@/features/pricing/price-book';
 import { useI18n } from '@/i18n';
 import { formatPricedAmount } from '@/lib/format/money';
 import { useTheme } from '@/theme';
@@ -44,7 +45,11 @@ export function PriceTag({
   const { t, language } = useI18n();
   const [explainerOpen, setExplainerOpen] = useState(false);
 
-  if (!priced) {
+  // No figure at all, or a figure we could not assemble from any real data.
+  // Either way the honest answer is words, not a number: "~0 EGP" reads as
+  // free, and that is how a salmon fillet ended up looking like it cost
+  // nothing.
+  if (!priced || priced.completeness === 'unavailable') {
     return (
       <Text variant="footnote" color="textTertiary" style={style} testID={testID}>
         {t('price.unavailable')}
@@ -59,18 +64,35 @@ export function PriceTag({
   const withLabel = showLabel ?? size !== 'sm';
   const canExplain = (explainable ?? isEstimate) && isEstimate;
 
-  const content = (
+  const isPartial = priced.completeness === 'partial';
+  const unpriced = priced.unpricedCount ?? 0;
+  const partialNote =
+    unpriced === 1 ? t('price.partialOne') : t('price.partialOther', { count: unpriced });
+  const isStale = priced.lastUpdated ? isPriceDataStale(priced.lastUpdated) : false;
+
+  const row = (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
       <Text variant={variant} color={color ?? 'text'} testID={testID}>
         {text}
       </Text>
-      {withLabel && isEstimate ? (
+      {/* A partial total is a floor, so it says what it covers rather than
+          passing itself off as the price of the dish. */}
+      {isPartial && withLabel ? (
+        <Text variant="micro" color="textTertiary">
+          {t('price.pricedItemsOnly')}
+        </Text>
+      ) : null}
+      {withLabel && isEstimate && !isPartial ? (
         <Text variant="micro" color="textTertiary">
           {t('common.estimated')}
         </Text>
       ) : null}
       {canExplain ? (
-        <Ionicons name="information-circle-outline" size={13} color={theme.colors.textTertiary} />
+        <Ionicons
+          name={isPartial || isStale ? 'alert-circle-outline' : 'information-circle-outline'}
+          size={13}
+          color={isPartial ? theme.colors.warningSoftText : theme.colors.textTertiary}
+        />
       ) : null}
       {!isEstimate && priced.storeName ? (
         <Text variant="micro" color="successSoftText">
@@ -79,6 +101,18 @@ export function PriceTag({
       ) : null}
     </View>
   );
+
+  const content =
+    isPartial && withLabel ? (
+      <View style={{ gap: 2 }}>
+        {row}
+        <Text variant="micro" color="warningSoftText" testID={testID ? `${testID}-partial` : undefined}>
+          {partialNote}
+        </Text>
+      </View>
+    ) : (
+      row
+    );
 
   if (!canExplain) {
     return <View style={style}>{content}</View>;
@@ -108,9 +142,19 @@ export function PriceTag({
           <Text variant="body" color="textSecondary">
             {t('price.estimateExplainerBody')}
           </Text>
+          {isPartial ? (
+            <Text variant="body" color="warningSoftText">
+              {t('price.incompleteExplainer')}
+            </Text>
+          ) : null}
           {priced.lastUpdated ? (
             <Text variant="footnote" color="textTertiary">
-              {t('price.lastUpdated', { date: priced.lastUpdated })}
+              {t('price.dataAge', { date: priced.lastUpdated })}
+            </Text>
+          ) : null}
+          {isStale ? (
+            <Text variant="footnote" color="warningSoftText">
+              {t('price.staleWarning', { months: Math.floor(PRICE_STALE_AFTER_DAYS / 30) })}
             </Text>
           ) : null}
         </View>

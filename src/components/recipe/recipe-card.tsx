@@ -94,6 +94,13 @@ export function RecipeCard({
   const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
   const hasEverything = match.missingIngredients.length === 0 && match.requiredCount > 0;
 
+  // Only meaningful once a pantry is known; without one the two figures are
+  // identical and the extra label would be noise.
+  const ownsSomething =
+    match.estimatedSpend !== null &&
+    match.estimatedCost !== null &&
+    match.estimatedSpend.money.amountMinor !== match.estimatedCost.money.amountMinor;
+
   return (
     <PressScale
       testID={testID}
@@ -226,7 +233,22 @@ export function RecipeCard({
             marginTop: 2,
           }}
         >
-          <PriceTag priced={match.estimatedCost} size="md" />
+          {/*
+            When the cook already owns part of the recipe, the number that
+            answers "can I afford this" is what they still have to buy — and it
+            is labelled, so the two figures can never be mistaken for one
+            another.
+          */}
+          {ownsSomething ? (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <PriceTag priced={match.estimatedSpend} size="md" />
+              <Text variant="micro" color="textTertiary">
+                {t('price.toBuy')}
+              </Text>
+            </View>
+          ) : (
+            <PriceTag priced={match.estimatedCost} size="md" />
+          )}
           {showMatch && match.missingIngredients.length > 0 ? (
             <Text variant="caption" color="textTertiary">
               {t('results.missing', { count: match.missingIngredients.length })}

@@ -29,6 +29,7 @@ function asMatch(recipe: Recipe): RecipeMatch {
     missingIngredients: [],
     availableIngredients: [],
     estimatedCost: null,
+    estimatedSpend: null,
     usesExpiringItems: [],
     score: 0,
   };
