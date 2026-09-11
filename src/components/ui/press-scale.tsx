@@ -16,6 +16,15 @@ export type PressScaleProps = PressableProps & {
   scaleTo?: number;
   /** Dim the element while pressed, on top of the scale. */
   dimTo?: number;
+  /**
+   * Opacity applied while `disabled`.
+   *
+   * This lives here rather than in each caller's style because the animated
+   * style is applied LAST in the style array, so an `opacity` set by a caller
+   * is silently overridden. Composing it into the same animated value is the
+   * only way a disabled control actually looks disabled.
+   */
+  disabledOpacity?: number;
   haptic?: 'none' | 'light' | 'medium' | 'selection';
   style?: ViewStyle | ViewStyle[];
 };
@@ -32,6 +41,7 @@ export type PressScaleProps = PressableProps & {
 export function PressScale({
   scaleTo = 0.97,
   dimTo = 1,
+  disabledOpacity = 0.45,
   haptic = 'none',
   onPressIn,
   onPressOut,
@@ -44,10 +54,13 @@ export function PressScale({
   const theme = useTheme();
   const pressProgress = useSharedValue(0);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: 1 - pressProgress.get() * (1 - scaleTo) }],
-    opacity: 1 - pressProgress.get() * (1 - dimTo),
-  }));
+  const animatedStyle = useAnimatedStyle(() => {
+    const pressDim = 1 - pressProgress.get() * (1 - dimTo);
+    return {
+      transform: [{ scale: 1 - pressProgress.get() * (1 - scaleTo) }],
+      opacity: (disabled ? disabledOpacity : 1) * pressDim,
+    };
+  });
 
   const handlePressIn: NonNullable<PressableProps['onPressIn']> = (event) => {
     pressProgress.set(withTiming(1, { duration: theme.duration.instant }));

@@ -78,6 +78,7 @@ export function Chip({
       onPress={onRemove ?? onPress}
       haptic="selection"
       scaleTo={0.94}
+      disabledOpacity={0.45}
       style={[
         {
           height,
@@ -88,7 +89,6 @@ export function Chip({
           borderColor,
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: disabled ? 0.45 : 1,
         },
         style as ViewStyle,
       ]}

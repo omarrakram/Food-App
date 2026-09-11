@@ -52,6 +52,7 @@ export function Stepper({
       onPress={onPress}
       haptic="selection"
       scaleTo={0.88}
+      disabledOpacity={0.35}
       style={{
         width: 36,
         height: 36,
@@ -59,7 +60,6 @@ export function Stepper({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: theme.colors.surface,
-        opacity: enabled ? 1 : 0.35,
       }}
     >
       <Ionicons name={icon} size={18} color={theme.colors.text} />

@@ -59,7 +59,6 @@ export function ListRow({
         gap: theme.spacing.md,
         minHeight: 56,
         paddingVertical: theme.spacing.sm,
-        opacity: disabled ? 0.45 : 1,
       }}
     >
       {icon ? (
@@ -112,8 +111,10 @@ export function ListRow({
   );
 
   if (!onPress || toggle) {
+    // Not pressable, so PressScale is not involved and cannot apply the
+    // disabled dim — do it here instead.
     return (
-      <View testID={testID} style={style}>
+      <View testID={testID} style={[{ opacity: disabled ? 0.45 : 1 }, style]}>
         {content}
       </View>
     );
@@ -129,6 +130,7 @@ export function ListRow({
       onPress={onPress}
       haptic="selection"
       scaleTo={0.99}
+      disabledOpacity={0.45}
       style={style as ViewStyle}
     >
       {content}

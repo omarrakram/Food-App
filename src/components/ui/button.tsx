@@ -74,6 +74,7 @@ export function Button({
       onPress={onPress}
       haptic={variant === 'ghost' ? 'selection' : 'light'}
       scaleTo={0.97}
+      disabledOpacity={0.45}
       style={[
         {
           minHeight: dims.height,
@@ -85,7 +86,6 @@ export function Button({
           alignItems: 'center',
           justifyContent: 'center',
           alignSelf: stretch ? 'stretch' : 'flex-start',
-          opacity: isDisabled ? 0.45 : 1,
           ...(variant === 'primary' || variant === 'danger' ? theme.elevation(1) : {}),
         },
         style as ViewStyle,
@@ -164,6 +164,7 @@ export function IconButton({
       onPress={onPress}
       haptic="light"
       scaleTo={0.9}
+      disabledOpacity={0.4}
       // Expand the touch target to 44pt without growing the visual circle.
       hitSlop={Math.max(0, (theme.hitSize.min - size) / 2)}
       style={[
@@ -174,7 +175,6 @@ export function IconButton({
           backgroundColor: backgrounds[variant],
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: disabled ? 0.4 : 1,
         },
         style as ViewStyle,
       ]}

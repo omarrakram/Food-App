@@ -19,6 +19,12 @@ void SplashScreen.preventAutoHideAsync();
 /**
  * Routing gate.
  *
+ * NOTE on paths: the onboarding screen is `(onboarding)/onboarding.tsx`, not
+ * `index.tsx`. A group's `index` resolves to `/` — the same path as
+ * `(tabs)/index` — and Expo Router then serves one of them for `/`, which made
+ * finishing onboarding navigate straight back into it. Route groups may not
+ * both contain an `index`.
+ *
  * Three states decide where a user belongs:
  *
  *   no session + auth enabled       -> (auth), unless they chose to browse
@@ -45,7 +51,7 @@ function useRouteGate(isReady: boolean) {
     if (!hasCompletedOnboarding) {
       // Onboarding collects the constraints every screen depends on, so it
       // comes first for guests and signed-in users alike.
-      if (!inOnboarding && !inAuth) router.replace('/(onboarding)');
+      if (!inOnboarding && !inAuth) router.replace('/onboarding');
       return;
     }
 
