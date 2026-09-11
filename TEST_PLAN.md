@@ -138,15 +138,42 @@ their pantry, or seeing someone else's data.
 
 ---
 
-## 3. Component tests — to write
+## 3. Component tests
 
-- **PriceTag** renders `~` and the "Estimated" label for an estimate, and
-  neither for a live price. *This is the test that keeps the product rule true.*
+### Implemented
+- **PriceTag** (5) — an estimate renders `~` plus the "Estimated" label and a
+  screen-reader label saying so; a live price renders neither and names the
+  store. *This is the test that keeps the product rule true.*
+- **EmptyState / ErrorState** (5) — title, body, actions, and the combined
+  screen-reader announcement.
+- **Stepper** (6) — increment, decrement, custom step, disabled at both bounds,
+  value and suffix rendering, grouped accessibility label.
+
+### Still to write
 - **Pantry** shows an empty state, adds an item, shows the expired badge.
 - **RecipeCard** shows the match badge and the missing-ingredient count.
 - **Onboarding** advances, allows skipping optional steps, blocks on the name.
-- **Error states** render for offline / AI unavailable / rate limited.
 - **Cooking mode** moves between steps and finishes.
+
+### Two constraints worth knowing before writing more
+
+Both were found the hard way; ignoring either produces a failure that looks
+like the component is broken when it is not.
+
+1. **`render` is asynchronous in RNTL v14.** `const view = await render(<X/>)`.
+   Without the await, `screen` reports "render function has not been called"
+   and the returned object has no query methods.
+
+2. **At most ONE `fireEvent.press` per test.** `PressScale` drives a Reanimated
+   spring on press. Under Reanimated 4's Jest mock with RNTL v14's async
+   render, a second press in the same test leaves state behind that makes every
+   later render *in that file* resolve to an empty tree — the symptom is an
+   "unable to find" on an element that definitely renders. Split presses across
+   tests.
+
+`src/test-utils/render.tsx` wraps components in the real provider stack, and
+`jest.setup.ts` re-applies RNTL's configuration per test because the library's
+automatic cleanup resets it.
 
 ---
 

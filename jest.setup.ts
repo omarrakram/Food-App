@@ -4,8 +4,31 @@
  * Native modules are mocked here rather than in individual tests, so a suite
  * that only exercises pure logic never has to know they exist.
  */
+import { cleanup, configure } from '@testing-library/react-native';
+
 // React Native Testing Library v14 registers its matchers automatically, so
 // there is nothing to import for `toBeOnTheScreen` and friends.
+//
+// `defaultIncludeHiddenElements` matters for this app: several components wrap
+// their contents in an `accessible` container so a screen reader announces the
+// group as one element (the Stepper, the pantry row, the state views). That
+// correctly hides the descendants from the accessibility tree — and, by
+// default, from RNTL's queries too. Including them lets tests assert on the
+// inner structure while the components keep the grouping that makes them
+// usable with a screen reader.
+// Applied per test, not once: the library's automatic cleanup resets its
+// configuration between tests, so a single call at setup time would silently
+// stop applying after the first test in every file.
+beforeEach(() => {
+  configure({ defaultIncludeHiddenElements: true });
+});
+
+// `render` and `cleanup` are both asynchronous in v14, and the automatic
+// cleanup does not await. Awaiting it here means each test starts from a
+// genuinely empty tree.
+afterEach(async () => {
+  await cleanup();
+});
 
 // expo-localization reads device settings that do not exist under Jest.
 jest.mock('expo-localization', () => ({

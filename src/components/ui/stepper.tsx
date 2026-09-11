@@ -40,8 +40,11 @@ export function Stepper({
     enabled: boolean,
     onPress: () => void,
     label: string,
+    /** Stable hook for tests; a11y queries alone are fragile for a disabled control. */
+    buttonTestID: string | undefined,
   ) => (
     <PressScale
+      testID={buttonTestID}
       accessibilityRole="button"
       accessibilityLabel={label}
       accessibilityState={{ disabled: !enabled }}
@@ -81,11 +84,23 @@ export function Stepper({
         style,
       ]}
     >
-      {button('remove', canDecrement, () => onChange(value - step), `${accessibilityLabel} minus`)}
+      {button(
+        'remove',
+        canDecrement,
+        () => onChange(value - step),
+        `${accessibilityLabel} minus`,
+        testID ? `${testID}-decrement` : undefined,
+      )}
       <View style={{ minWidth: suffix ? 72 : 32, alignItems: 'center' }}>
         <Text variant="bodyMedium">{suffix ? `${value} ${suffix}` : value}</Text>
       </View>
-      {button('add', canIncrement, () => onChange(value + step), `${accessibilityLabel} plus`)}
+      {button(
+        'add',
+        canIncrement,
+        () => onChange(value + step),
+        `${accessibilityLabel} plus`,
+        testID ? `${testID}-increment` : undefined,
+      )}
     </View>
   );
 }
