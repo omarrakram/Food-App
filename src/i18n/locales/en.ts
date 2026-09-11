@@ -330,6 +330,8 @@ export const en = {
 
   'language.english': 'English',
   'language.arabic': 'العربية',
+  'language.restartNow': 'Restart now',
+  'language.directionApplied': 'Layout direction matches your language.',
   'language.restartNotice': 'Restart the app to finish switching layout direction.',
 
   // --- Auth ---------------------------------------------------------------
