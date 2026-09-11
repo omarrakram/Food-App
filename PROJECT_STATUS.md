@@ -29,7 +29,7 @@ branch):
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / type drift | `ingredients:import --check`, `prices:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 53 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 55 interaction checks, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
 ### The test suite runs on two platforms
@@ -74,9 +74,9 @@ PGHOST=/tmp PGPORT=55432 PGUSER=postgres ./scripts/db-test.sh
 `npm run smoke:web` exports the web bundle, serves it, and drives a headless
 browser through what a person actually does — not just what routes exist. 53
 assertions cover onboarding, the pantry add/edit/delete flow from **both**
-entry points, ingredient selection and removal, opening and clearing filters,
-saving a shopping-list item, switching language and reading the result, and a
-deep link surviving a reload.
+entry points and its staple rules, ingredient selection and removal, opening
+and clearing filters, saving a shopping-list item, switching language and
+reading the rendered Arabic back, and a deep link surviving a reload.
 
 It needs a browser driver, deliberately not a dependency of the app:
 
@@ -203,6 +203,11 @@ phone browser that is not signed in to claude.ai gets a 404.
 | 6 | AI-generated recipes render in English for an Arabic reader | Deliberate. The model answers in one language and we do not machine-translate a cooking step or a safety note behind the user's back. Asking the model for Arabic directly is the fix, and is a feature, not a bug fix |
 
 No known crashes. No known data-loss paths. No open security findings.
+
+Deep links under the GitHub Pages subpath are checked separately, by serving
+`dist/` behind `/Food-App` exactly as Pages does: the root, a tab deep link, a
+nested settings route, a reload of each, and an unknown path landing on the
+`404.html` copy of `index.html` rather than a blank page.
 
 ### Fixed in this pass
 

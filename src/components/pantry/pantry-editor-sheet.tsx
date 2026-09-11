@@ -315,6 +315,7 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
           the row explains itself rather than silently disappearing.
         */}
         <ListRow
+          testID="pantry-editor-staple"
           title={t('pantry.staple')}
           subtitle={isPerishable ? t('pantry.stapleNotForPerishable') : t('pantry.stapleHint')}
           icon="star-outline"

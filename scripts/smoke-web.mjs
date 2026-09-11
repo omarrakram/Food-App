@@ -280,6 +280,23 @@ async function main() {
     await type('pantry-editor-quantity', '500');
     check('expiry field renders', await visible('pantry-editor-expiry', 4000));
 
+    // A perishable is never an "always assume I have this" staple, and the row
+    // says so rather than silently disappearing.
+    const stapleRow = async () => locate('pantry-editor-staple').innerText().catch(() => '');
+    check(
+      'a perishable cannot be marked a staple',
+      /goes off|تاريخ|بتبوظ/i.test(await stapleRow()),
+      (await stapleRow()).replace(/\n/g, ' ').trim(),
+    );
+
+    await type('pantry-editor-name', 'salt', { clear: true });
+    check(
+      'a cupboard staple can be',
+      /always assume|افترض/i.test(await stapleRow()),
+      (await stapleRow()).replace(/\n/g, ' ').trim(),
+    );
+    await type('pantry-editor-name', 'milk', { clear: true });
+
     const beforeSave = errorCount();
     await tap('pantry-editor-submit');
     await page.waitForTimeout(1200);
