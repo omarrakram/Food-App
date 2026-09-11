@@ -10,19 +10,20 @@ their pantry, or seeing someone else's data.
 
 | Layer | Tool | Runs where |
 |---|---|---|
-| Database + RLS | `psql` assertions | `./scripts/db-test.sh` — **written, 37 passing** |
-| Unit (pure logic) | Jest | `npm test` — **to be written** |
-| Component | Jest + Testing Library | `npm test` — **to be written** |
+| Database + RLS | `psql` assertions | `./scripts/db-test.sh` — **40 passing** |
+| Unit (pure logic) | Jest | `npm test` — **passing**, part of 239 |
+| Component | Jest + Testing Library | `npm test` — **passing**, part of 239 |
 | Static | `tsc --noEmit`, ESLint | `npm run typecheck`, `npm run lint` — **passing** |
 | Bundle | `expo export` | manual / CI — **passing** |
-| End-to-end | Maestro or Detox | not planned for V1 |
+| Whole-app smoke | headless Chromium over the web export | `npm run smoke:web` — **14 screens, no page errors** |
+| End-to-end on device | Maestro or Detox | not planned for V1 — the web smoke run covers the same flows without a simulator |
 
 ---
 
 ## 1. Database and Row Level Security — implemented
 
 `supabase/tests/01_rls_test.sql`, run against a throwaway Postgres by
-`./scripts/db-test.sh`. 37 assertions covering:
+`./scripts/db-test.sh`. 40 assertions covering:
 
 - the signup trigger creating profile, preferences and a default list
 - a user reading only their own pantry, preferences and profile
@@ -41,7 +42,7 @@ their pantry, or seeing someone else's data.
 
 ---
 
-## 2. Unit tests — to write
+## 2. Unit tests — implemented
 
 ### Allergy enforcement · highest priority
 `features/recipes/rank.ts`
@@ -184,6 +185,46 @@ Against a local Supabase or a mocked client:
 - guest builds a pantry → signs in → pantry is preserved
 - sign-out clears the local cache
 - account deletion removes everything
+
+---
+
+## 5. Whole-app smoke — implemented
+
+`npm run smoke:web` (`scripts/smoke-web.mjs`). Exports the web bundle, serves
+it on an ephemeral port, and drives a headless browser through onboarding →
+home → cook-with-what-I-have → results → recipe detail → cooking mode → budget
+→ every tab → shopping list. It captures 14 screenshots and exits non-zero on
+any page error, so it can gate a release.
+
+**Why this layer exists.** Jest renders components in isolation; it cannot see
+a style that another style overwrites at composition time, a route that
+collides with another route, or a number that is correct but dishonest. Each of
+those shipped past a green suite, and each was obvious within seconds of
+something clicking through the product:
+
+| Found | Class of bug |
+|---|---|
+| Every disabled control at full opacity | Style composition across components |
+| Onboarding looping back to step one | Route resolution |
+| "~142.04 EGP" for a survey estimate | Correct value, wrong claim |
+| Two focus rings per text field | Platform rendering |
+
+Requires a browser driver, kept out of `package.json` so one script does not
+land in every contributor's install:
+
+```bash
+npm i -D playwright-core && npx playwright install chromium
+npm run smoke:web
+```
+
+`CHROMIUM_PATH` / `PLAYWRIGHT_CORE` point it at an existing browser.
+`SMOKE_OUT` chooses where screenshots land; `--keep` leaves `dist/` behind.
+
+Two traps worth knowing. React Native Web's `TextInput` ignores Playwright's
+`fill()` — the DOM value changes but React never sees it, so use
+`pressSequentially()`. And remote image hosts may be blocked by a corporate or
+sandbox proxy; the script filters those console errors, since they describe the
+network rather than the app.
 
 ---
 

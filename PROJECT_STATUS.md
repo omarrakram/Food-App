@@ -15,17 +15,17 @@ previous session's context.
 
 ## Last known passing state
 
-Verified at commit `b1f9af0` (HEAD of `claude/expo-rn-setup-mom5gw`):
+Verified at commit `9d72f4d` (HEAD of `claude/expo-rn-setup-mom5gw`):
 
 | Check | Command | Result |
 |---|---|---|
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 235/235 across 16 suites |
+| Unit + component tests | `npm test` | **pass**, 239/239 across 16 suites |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 40/40 assertions |
 | Web production bundle | `EXPO_OFFLINE=1 npx expo export --platform web` | **pass** |
-| Full flow walked in a browser | headless Chromium against the web export | **pass** — onboarding → home → cook → results → recipe → cooking mode → budget → pantry → discover → profile |
+| Full flow walked in a browser | `npm run smoke:web` | **pass** — 14 screens, no page errors |
 | `npm run verify` | typecheck + lint + test | **pass** |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
@@ -44,10 +44,23 @@ the shared schema module they import** (`src/features/ai/schema.ts`, covered by
 
 ## End-to-end verification
 
-The unit suite does not render the app as a whole, so the web export is served
-and driven with headless Chromium (`/opt/pw-browsers/chromium-1194/...` in this
-environment) through the full flow. **It has caught two bugs no unit test
-would have**, both fixed in `b1f9af0`:
+The Jest suite renders components; it never renders the app. `npm run smoke:web`
+does: it exports the web bundle, serves it, and walks a headless browser from
+onboarding through cooking mode, the budget flow and every tab, capturing 14
+screenshots and failing on any page error.
+
+It needs a browser driver, deliberately **not** a dependency of the app:
+
+```bash
+npm i -D playwright-core && npx playwright install chromium
+npm run smoke:web            # add --keep to leave dist/ in place
+```
+
+`CHROMIUM_PATH` and `PLAYWRIGHT_CORE` override discovery when a browser is
+already on the machine (which is how it runs in this sandbox).
+
+**It has paid for itself four times.** None of these were visible to a unit
+test; all are fixed:
 
 1. Every disabled control rendered at full opacity — `PressScale`'s animated
    style is applied after the static one, so the wrapper's
@@ -58,11 +71,18 @@ would have**, both fixed in `b1f9af0`:
    `(tabs)/index.tsx` both resolve to `/`. The onboarding screen is now
    **`(onboarding)/onboarding.tsx`** and the gate in `src/app/_layout.tsx`
    replaces to `/onboarding`. *Route groups may not both contain an `index`.*
+3. Estimates read "~142.04 EGP", claiming piastre precision for a survey figure
+   scaled by a serving count. `formatPricedAmount` now rounds estimates to
+   whole units; live prices keep their piastres. Amounts under one unit keep
+   decimals, so a 50-piastre pinch of salt is not doubled to "~1 EGP".
+4. Every text field drew two focus rings on web — react-native-web's DOM
+   `<input>` outline inside the component's own focused border. Reset on web
+   only.
 
 Two notes for whoever runs this next. React Native Web's `TextInput` ignores
 Playwright's `fill()` — use `pressSequentially()`, which is what a user does
-anyway. And the only console errors in a clean run are blocked Unsplash image
-requests, which is this environment's egress proxy, not the app.
+anyway. And blocked `images.unsplash.com` requests are this environment's
+egress proxy, not the app; the script filters them out.
 
 ---
 
@@ -169,7 +189,9 @@ fixed during review (SECURITY_REVIEW.md finding 1).
    percentage, cost, allergen safety and expiry are deterministic code. Claude
    generates and interprets; it does not price or adjudicate safety.
 3. **`PriceTag` is the only price renderer.** That is what makes
-   "estimated ≠ live" enforceable rather than a convention.
+   "estimated ≠ live" enforceable rather than a convention. Displayed
+   precision is part of that claim: estimates render to whole units, live
+   prices to the piastre.
 4. **Money is an integer count of minor units.** No floats.
 5. **Allergens filter, never rank** — and are applied twice, once to the
    catalogue and again after AI generation, through the same code path.
@@ -202,6 +224,7 @@ npm run verify                      # typecheck + lint + test
 npm run seed:generate               # regenerate supabase/seed.sql from TS
 ./scripts/db-test.sh                # migrations + seed + 40 RLS assertions
 python3 scripts/generate-icons.py   # regenerate the placeholder icons
+npm run smoke:web                   # export + walk the whole app in a browser
 EXPO_OFFLINE=1 npx expo export --platform web
 ```
 
