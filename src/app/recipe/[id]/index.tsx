@@ -93,8 +93,11 @@ function IngredientLine({
             {t('safety.expiredExcluded')}
           </Text>
         ) : match.matchedVia === 'assumed_staple' ? (
+          // Ticked because it is a staple we assume, not because the cook
+          // told us they have it. Worth saying: otherwise an assumption is
+          // indistinguishable from inventory.
           <Text variant="micro" color="textTertiary">
-            {t('pantry.stapleHint')}
+            {t('pantry.stapleAssumed')}
           </Text>
         ) : null}
       </View>

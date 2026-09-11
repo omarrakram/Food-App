@@ -174,7 +174,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: 90,
     allergens: ['gluten'],
     aliases: ['aish', 'aish baladi', 'eish', 'eish baladi', 'pita', 'flatbread', 'bread', 'عيش', 'خبز'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -390,7 +390,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: null,
     allergens: ['dairy'],
     aliases: ['zebda', 'زبده'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -1062,7 +1062,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: 55,
     allergens: ['eggs'],
     aliases: ['egg', 'beid', 'بيضة', 'بيضه'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -1602,7 +1602,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: 60,
     allergens: [],
     aliases: ['lemons', 'lime', 'lamoun', 'ليمون أخضر'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -1734,7 +1734,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: null,
     allergens: ['dairy'],
     aliases: ['laban', 'full cream milk', 'حليب'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -2838,7 +2838,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: 120,
     allergens: [],
     aliases: ['tomato', 'oota', 'طماطم حمراء', 'قوطة'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -3030,7 +3030,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: null,
     allergens: ['dairy'],
     aliases: ['feta', 'gebna beida', 'domiati', 'جبنه بيضاء', 'جبنة فيتا'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {
@@ -3078,7 +3078,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     gramsPerPiece: 105,
     allergens: ['dairy'],
     aliases: ['zabady', 'plain yoghurt', 'زبادى'],
-    isCommonStaple: true,
+    isCommonStaple: false,
     isPerishable: true,
   },
   {

@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
+import { DateField } from '@/components/ui/date-field';
 import { Input } from '@/components/ui/input';
 import { ListRow } from '@/components/ui/list-row';
 import { Sheet } from '@/components/ui/sheet';
@@ -58,6 +59,10 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
   const [expiresOn, setExpiresOn] = useState<string | null>(null);
   const [isStaple, setIsStaple] = useState(false);
   const [showAllUnits, setShowAllUnits] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [inferredFrom, setInferredFrom] = useState<string | null>(null);
+  /** Fields the user has changed by hand; inference must not overwrite these. */
+  const [touched, setTouched] = useState({ unit: false, category: false, staple: false });
 
   // Reset the form each time the sheet opens on a different item, so a previous
   // edit never leaks in. Done during render (React's documented "adjust state
@@ -76,18 +81,44 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
     setExpiresOn(item?.expiresOn ?? null);
     setIsStaple(item?.isStaple ?? false);
     setShowAllUnits(false);
+    setShowDetails(false);
+    setInferredFrom(item ? null : null);
+    setTouched({ unit: false, category: false, staple: false });
   }
 
   const suggestions = useMemo(() => (item ? [] : searchIngredients(name, 6)), [name, item]);
 
+  /**
+   * Fills in what the catalogue already knows.
+   *
+   * Eggs are a protein counted in pieces; milk is dairy in millilitres. Making
+   * someone classify every ordinary item by hand is work the app can do, so
+   * inference runs on every name change — not only when a suggestion chip is
+   * tapped, which is the path most people never take. Anything the user has
+   * deliberately changed is left alone (`touched`).
+   */
+  const applyInference = (rawName: string) => {
+    const resolved = resolveIngredient(rawName);
+    if (!resolved) {
+      setInferredFrom(null);
+      return;
+    }
+    setInferredFrom(resolved.name);
+    if (!touched.category) setCategory(resolved.category);
+    if (!touched.unit) setUnit(resolved.defaultUnit);
+    // A perishable is never an "always assume I have this" staple.
+    if (!touched.staple) setIsStaple(resolved.isCommonStaple && !resolved.isPerishable);
+  };
+
+  const handleNameChange = (next: string) => {
+    setName(next);
+    applyInference(next);
+  };
+
   const applySuggestion = (suggestionName: string) => {
     const resolved = resolveIngredient(suggestionName);
     setName(resolved?.name ?? suggestionName);
-    if (resolved) {
-      setCategory(resolved.category);
-      setUnit((current) => current ?? resolved.defaultUnit);
-      setIsStaple(resolved.isCommonStaple);
-    }
+    applyInference(resolved?.name ?? suggestionName);
   };
 
   const trimmedName = name.trim();
@@ -108,6 +139,8 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
   };
 
   const unitsToShow = showAllUnits ? UNITS : COMMON_UNITS;
+  const isPerishable = resolveIngredient(trimmedName)?.isPerishable ?? false;
+  const detailsSummary = [t(`category.${category}` as const), unit ?? t('pantry.noUnit')].join(' · ');
 
   return (
     <Sheet
@@ -127,9 +160,9 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
     >
       <View style={{ gap: theme.spacing.lg }}>
         <Input
-          label={t('cook.inputPlaceholder')}
+          label={t('pantry.itemName')}
           value={name}
-          onChangeText={setName}
+          onChangeText={handleNameChange}
           placeholder={t('cook.inputPlaceholder')}
           autoFocus={!item}
           autoCapitalize="none"
@@ -167,42 +200,76 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
           />
         </View>
 
-        <View style={{ gap: theme.spacing.sm }}>
-          <Text variant="subhead" color="textSecondary">
-            {t('pantry.unit')}
-          </Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-            {unitsToShow.map((candidate) => (
-              <Chip
-                key={candidate}
-                label={candidate}
-                size="sm"
-                selected={unit === candidate}
-                onPress={() => setUnit(unit === candidate ? null : candidate)}
-              />
-            ))}
-            {!showAllUnits ? (
-              <Chip label="…" size="sm" onPress={() => setShowAllUnits(true)} />
+        {/*
+          Unit and category are inferred from the catalogue, so they are shown
+          as a summary rather than as two more decisions to make. Anyone who
+          disagrees opens the section and changes them; most people never need
+          to.
+        */}
+        {showDetails ? (
+          <>
+            <View style={{ gap: theme.spacing.sm }}>
+              <Text variant="subhead" color="textSecondary">
+                {t('pantry.unit')}
+              </Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+                {unitsToShow.map((candidate) => (
+                  <Chip
+                    key={candidate}
+                    label={candidate}
+                    size="sm"
+                    selected={unit === candidate}
+                    onPress={() => {
+                      setTouched((current) => ({ ...current, unit: true }));
+                      setUnit(unit === candidate ? null : candidate);
+                    }}
+                    testID={`pantry-unit-${candidate}`}
+                  />
+                ))}
+                {!showAllUnits ? (
+                  <Chip label="…" size="sm" onPress={() => setShowAllUnits(true)} />
+                ) : null}
+              </View>
+            </View>
+
+            <View style={{ gap: theme.spacing.sm }}>
+              <Text variant="subhead" color="textSecondary">
+                {t('pantry.category')}
+              </Text>
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+                {CATEGORY_ORDER.map((candidate) => (
+                  <Chip
+                    key={candidate}
+                    label={t(`category.${candidate}` as const)}
+                    size="sm"
+                    selected={category === candidate}
+                    onPress={() => {
+                      setTouched((current) => ({ ...current, category: true }));
+                      setCategory(candidate);
+                    }}
+                    testID={`pantry-category-${candidate}`}
+                  />
+                ))}
+              </View>
+            </View>
+          </>
+        ) : (
+          <View style={{ gap: 2 }}>
+            <Button
+              label={detailsSummary}
+              icon="chevron-down"
+              variant="ghost"
+              size="sm"
+              onPress={() => setShowDetails(true)}
+              testID="pantry-editor-details"
+            />
+            {inferredFrom ? (
+              <Text variant="micro" color="textTertiary">
+                {t('pantry.detailsInferred', { name: inferredFrom })}
+              </Text>
             ) : null}
           </View>
-        </View>
-
-        <View style={{ gap: theme.spacing.sm }}>
-          <Text variant="subhead" color="textSecondary">
-            {t('pantry.category')}
-          </Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-            {CATEGORY_ORDER.map((candidate) => (
-              <Chip
-                key={candidate}
-                label={t(`category.${candidate}` as const)}
-                size="sm"
-                selected={category === candidate}
-                onPress={() => setCategory(candidate)}
-              />
-            ))}
-          </View>
-        </View>
+        )}
 
         <View style={{ gap: theme.spacing.sm }}>
           <Text variant="subhead" color="textSecondary">
@@ -228,21 +295,34 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
               );
             })}
           </View>
-          <Input
-            value={expiresOn ?? ''}
-            onChangeText={(value) => setExpiresOn(value.trim() ? value.trim() : null)}
-            placeholder="YYYY-MM-DD"
-            autoCapitalize="none"
-            hint={t('common.optional')}
+          <DateField
+            value={expiresOn}
+            onChange={setExpiresOn}
+            minimumDate={new Date()}
             testID="pantry-editor-expiry"
           />
         </View>
 
+        {/*
+          "Always assume I have this" makes sense for salt and oil. It does not
+          make sense for eggs, which is why a perishable cannot be marked one —
+          the row explains itself rather than silently disappearing.
+        */}
         <ListRow
           title={t('pantry.staple')}
-          subtitle={t('pantry.stapleHint')}
+          subtitle={isPerishable ? t('pantry.stapleNotForPerishable') : t('pantry.stapleHint')}
           icon="star-outline"
-          toggle={{ value: isStaple, onChange: setIsStaple }}
+          toggle={
+            isPerishable
+              ? undefined
+              : {
+                  value: isStaple,
+                  onChange: (next) => {
+                    setTouched((current) => ({ ...current, staple: true }));
+                    setIsStaple(next);
+                  },
+                }
+          }
         />
       </View>
     </Sheet>

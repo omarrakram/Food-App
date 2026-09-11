@@ -147,6 +147,11 @@ export function buildAvailabilityIndex(
   if (assumeCommonStaples) {
     for (const ingredient of INGREDIENT_CATALOGUE) {
       if (!ingredient.isCommonStaple) continue;
+      // FOOD SAFETY / HONESTY: never assume a perishable is in the kitchen.
+      // Salt and oil keep; eggs, milk and bread do not, and quietly counting
+      // them as present recommends meals the cook cannot actually make. The
+      // importer rejects this combination too — this is the second lock.
+      if (ingredient.isPerishable) continue;
       const key = normaliseIngredientName(ingredient.name);
       // A staple the user has explicitly marked expired stays excluded.
       if (available.has(key) || expired.has(key)) continue;

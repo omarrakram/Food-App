@@ -31,6 +31,8 @@ export function useExpiryLabel() {
     if (!expiresOn) return null;
     const days = daysUntil(expiresOn);
     if (days === null) return null;
+    // Four states, each readable on its own without the row for context:
+    // "Expired", "Expires today", "Expires tomorrow", "N days left".
     if (days < 0) return t('pantry.expiredDaysAgo', { count: Math.abs(days) });
     if (days === 0) return t('pantry.expiresToday');
     if (days === 1) return t('pantry.expiresTomorrow');

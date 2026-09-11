@@ -183,6 +183,13 @@ function parse(text: string): Entry[] {
       claimedTerms.set(key, slug);
     }
 
+    // "Always assume I have this" cannot be true of something that goes off.
+    // Assuming a fresh egg is in the fridge is how a recipe gets recommended
+    // for ingredients the cook does not have.
+    if (stapleText === '1' && perishableText === '1') {
+      fail('an ingredient cannot be both a common staple and perishable');
+    }
+
     entries.push({
       slug,
       name,

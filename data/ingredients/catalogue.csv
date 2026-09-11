@@ -3,7 +3,7 @@ chicken-breast,chicken breast,صدور فراخ,protein,g,180,,chicken|chicken b
 chicken-thigh,chicken thighs,أوراك فراخ,protein,g,130,,chicken thigh|drumsticks|أوراك|وراك فراخ,0,1
 ground-beef,ground beef,لحمة مفرومة,protein,g,,,minced beef|mince|minced meat|kofta meat|لحمة مفرومه|مفروم,0,1
 beef-cubes,beef cubes,لحمة مكعبات,protein,g,,,stewing beef|beef chunks|لحمة|لحم بقري,0,1
-eggs,eggs,بيض,protein,piece,55,eggs,egg|beid|بيضة|بيضه,1,1
+eggs,eggs,بيض,protein,piece,55,eggs,egg|beid|بيضة|بيضه,0,1
 tuna-can,canned tuna,تونة,protein,can,140,fish,tuna|tuna can|تونه,0,0
 tilapia,tilapia,بلطي,protein,g,300,fish,fish|bolti|بلطى|سمك,0,1
 shrimp,shrimp,جمبري,protein,g,12,shellfish,prawns|gambari|جمبرى,0,1
@@ -16,13 +16,13 @@ white-beans,white beans,فاصوليا بيضاء,pantry,g,,,fasolia|cannellini|
 black-eyed-peas,black-eyed peas,لوبيا,pantry,g,,,lobia|لوبيا مجففة,0,0
 rice,rice,أرز,carbs,g,,,egyptian rice|white rice|roz|رز,1,0
 pasta,pasta,مكرونة,carbs,g,,gluten,macaroni|spaghetti|penne|makarona|مكرونه,1,0
-baladi-bread,baladi bread,عيش بلدي,bakery,piece,90,gluten,aish|aish baladi|eish|eish baladi|pita|flatbread|bread|عيش|خبز,1,1
+baladi-bread,baladi bread,عيش بلدي,bakery,piece,90,gluten,aish|aish baladi|eish|eish baladi|pita|flatbread|bread|عيش|خبز,0,1
 toast-bread,toast bread,عيش توست,bakery,slice,30,gluten,toast|white bread|sandwich bread|توست,0,1
 potatoes,potatoes,بطاطس,vegetables,g,150,,potato|batates,1,0
 bulgur,bulgur,برغل,carbs,g,,gluten,borghol|cracked wheat|برغل ناعم,0,0
 flour,flour,دقيق,pantry,g,,gluten,all purpose flour|plain flour|دقيق فاخر,1,0
 vermicelli,vermicelli,شعرية,carbs,g,,gluten,sha3reya|shaareya|شعريه,0,0
-tomatoes,tomatoes,طماطم,vegetables,piece,120,,tomato|oota|طماطم حمراء|قوطة,1,1
+tomatoes,tomatoes,طماطم,vegetables,piece,120,,tomato|oota|طماطم حمراء|قوطة,0,1
 onions,onions,بصل,vegetables,piece,110,,onion|basal|بصل أحمر|بصل أبيض,1,0
 garlic,garlic,ثوم,vegetables,clove,5,,toum|tom|garlic cloves|فص ثوم,1,0
 cucumber,cucumber,خيار,vegetables,piece,100,,cucumbers|khiar|خيار بلدي,0,1
@@ -38,17 +38,17 @@ parsley,parsley,بقدونس,vegetables,bunch,60,,ba2dounes|بقدونس أخض�
 coriander,coriander,كزبرة,vegetables,bunch,50,,cilantro|kozbara|كزبره خضراء,0,1
 green-onion,green onion,بصل أخضر,vegetables,bunch,80,,scallion|spring onion|بصل اخضر,0,1
 green-peas,green peas,بسلة,frozen,g,,,peas|besella|بسله,0,0
-lemon,lemon,ليمون,fruit,piece,60,,lemons|lime|lamoun|ليمون أخضر,1,1
+lemon,lemon,ليمون,fruit,piece,60,,lemons|lime|lamoun|ليمون أخضر,0,1
 bananas,bananas,موز,fruit,piece,120,,banana|moz|موزة,0,1
 dates,dates,تمر,fruit,piece,8,,balah|tamr|بلح,0,0
 apples,apples,تفاح,fruit,piece,160,,apple|tofah|تفاحة,0,1
-milk,milk,لبن,dairy,ml,,dairy,laban|full cream milk|حليب,1,1
-white-cheese,white cheese,جبنة بيضاء,dairy,g,,dairy,feta|gebna beida|domiati|جبنه بيضاء|جبنة فيتا,1,1
+milk,milk,لبن,dairy,ml,,dairy,laban|full cream milk|حليب,0,1
+white-cheese,white cheese,جبنة بيضاء,dairy,g,,dairy,feta|gebna beida|domiati|جبنه بيضاء|جبنة فيتا,0,1
 mozzarella,mozzarella,موتزاريلا,dairy,g,,dairy,mozarella|pizza cheese|جبنة موتزاريلا|جبنه موزاريلا,0,1
 roumy-cheese,roumy cheese,جبنة رومي,dairy,g,,dairy,romy|ras cheese|جبنه رومي,0,1
-yogurt,yogurt,زبادي,dairy,g,105,dairy,zabady|plain yoghurt|زبادى,1,1
+yogurt,yogurt,زبادي,dairy,g,105,dairy,zabady|plain yoghurt|زبادى,0,1
 cream,cooking cream,كريمة طهي,dairy,ml,,dairy,heavy cream|double cream|krema|كريمه,0,1
-butter,butter,زبدة,dairy,g,,dairy,zebda|زبده,1,1
+butter,butter,زبدة,dairy,g,,dairy,zebda|زبده,0,1
 olive-oil,olive oil,زيت زيتون,sauces,ml,,,zeit zeitoun|extra virgin olive oil|زيت الزيتون,1,0
 sunflower-oil,vegetable oil,زيت,sauces,ml,,,oil|sunflower oil|cooking oil|زيت عباد الشمس,1,0
 tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,salsa|tomato puree|صلصه,1,0

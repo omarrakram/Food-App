@@ -41,11 +41,14 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#FFFBF7",
-          "dark": { "backgroundColor": "#141210" },
+          "dark": {
+            "backgroundColor": "#141210"
+          },
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 160
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,
