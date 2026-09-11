@@ -29,7 +29,8 @@
     "eas:build:preview": "eas build --profile preview",
     "eas:build:prod": "eas build --profile production",
     "seed:generate": "node --experimental-strip-types --no-warnings scripts/generate-seed.ts",
-    "db:test": "./scripts/db-test.sh"
+    "db:test": "./scripts/db-test.sh",
+    "smoke:web": "node scripts/smoke-web.mjs"
   },
   "jest": {
     "preset": "jest-expo",

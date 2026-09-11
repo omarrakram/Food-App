@@ -82,6 +82,52 @@ describe('formatPricedAmount', () => {
     expect(result.isEstimate).toBe(false);
     expect(result.text).toBe('126 EGP');
   });
+
+  it('ROUNDS an estimate to whole units, because 2dp claims a precision we lack', () => {
+    // A bundled survey figure scaled by servings lands on numbers like this.
+    // Showing "~142.04 EGP" would assert we know the price to the piastre.
+    expect(formatPricedAmount({ money: fromMajor(142.04, 'EGP'), source: 'estimate' }).text).toBe(
+      '~142 EGP',
+    );
+    expect(formatPricedAmount({ money: fromMajor(126.5, 'EGP'), source: 'estimate' }).text).toBe(
+      '~127 EGP',
+    );
+  });
+
+  it('keeps the piastres on a live price, which really is exact', () => {
+    const result = formatPricedAmount({
+      money: fromMajor(142.04, 'EGP'),
+      source: 'live',
+      storeName: 'Example Market',
+    });
+
+    expect(result.text).toBe('142.04 EGP');
+  });
+
+  it('keeps decimals below one unit, where rounding would distort', () => {
+    // A pinch of salt at 50 piastres is cheap, not free ("~0 EGP") and not
+    // twice its price ("~1 EGP").
+    expect(formatPricedAmount({ money: money(50, 'EGP'), source: 'estimate' }).text).toBe(
+      '~0.50 EGP',
+    );
+    expect(formatPricedAmount({ money: money(99, 'EGP'), source: 'estimate' }).text).toBe(
+      '~0.99 EGP',
+    );
+    // One whole unit and up rounds normally.
+    expect(formatPricedAmount({ money: money(100, 'EGP'), source: 'estimate' }).text).toBe(
+      '~1 EGP',
+    );
+    expect(formatPricedAmount({ money: money(0, 'EGP'), source: 'estimate' }).text).toBe('~0 EGP');
+  });
+
+  it('rounds for display only, leaving the underlying amount exact', () => {
+    // The shopping list totals from these integers; if rendering mutated them
+    // a 40-line list would drift by a pound.
+    const exact = fromMajor(142.04, 'EGP');
+    formatPricedAmount({ money: exact, source: 'estimate' });
+
+    expect(exact.amountMinor).toBe(14204);
+  });
 });
 
 describe('parseMoneyInput', () => {

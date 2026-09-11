@@ -1,9 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { forwardRef, useState } from 'react';
 import {
+  Platform,
   TextInput,
   View,
   type TextInputProps,
+  type TextStyle,
   type ViewStyle,
   type TextInput as RNTextInput,
 } from 'react-native';
@@ -13,6 +15,16 @@ import { useTheme } from '@/theme';
 
 import { PressScale } from './press-scale';
 import { Text } from './text';
+
+/**
+ * react-native-web renders `TextInput` as a DOM `<input>`, which draws the
+ * browser's own focus ring inside the border this component already colours on
+ * focus — two rings, one field. `outlineStyle` is a web-only style that RN's
+ * types do not model, hence the cast; on native this is null and costs
+ * nothing.
+ */
+const WEB_FOCUS_RING_RESET =
+  Platform.OS === 'web' ? ({ outlineStyle: 'none' } as unknown as TextStyle) : null;
 
 export type InputProps = Omit<TextInputProps, 'style'> & {
   label?: string;
@@ -96,14 +108,17 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
             setIsFocused(false);
             onBlur?.(event);
           }}
-          style={{
-            flex: 1,
-            paddingVertical: theme.spacing.md,
-            fontSize: theme.typography.body.fontSize,
-            lineHeight: theme.typography.body.lineHeight,
-            color: theme.colors.text,
-            textAlign: isRTL ? 'right' : 'left',
-          }}
+          style={[
+            {
+              flex: 1,
+              paddingVertical: theme.spacing.md,
+              fontSize: theme.typography.body.fontSize,
+              lineHeight: theme.typography.body.lineHeight,
+              color: theme.colors.text,
+              textAlign: isRTL ? 'right' : 'left',
+            },
+            WEB_FOCUS_RING_RESET,
+          ]}
           {...rest}
         />
 

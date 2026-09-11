@@ -106,16 +106,43 @@ export function formatMoney(value: Money, options: FormatMoneyOptions = {}): str
 }
 
 /**
+ * Rounds an estimate to whole currency units.
+ *
+ * Displayed precision is a claim about confidence. "~142.04 EGP" says we know
+ * the price to the piastre; we do not — it is a bundled survey figure scaled
+ * by a serving count. "~142 EGP" says what we actually mean. Live prices keep
+ * their minor units, because those are real to the piastre.
+ *
+ * The arithmetic itself stays exact: this rounds at the point of rendering
+ * only, so a shopping list still totals from the unrounded integers.
+ */
+function displayPrecision(priced: PricedAmount): Money {
+  if (priced.source !== 'estimate') return priced.money;
+
+  const factor = minorUnitFactor(priced.money.currency);
+
+  // Below one whole unit, rounding distorts more than it clarifies: a pinch of
+  // salt at 50 piastres would become either "~0 EGP" (free) or "~1 EGP"
+  // (double). Sub-unit amounts keep their decimals.
+  if (priced.money.amountMinor !== 0 && Math.abs(priced.money.amountMinor) < factor) {
+    return priced.money;
+  }
+
+  return money(Math.round(priced.money.amountMinor / factor) * factor, priced.money.currency);
+}
+
+/**
  * Formats a price with its provenance made explicit.
  *
  * Product rule: an estimated price is NEVER shown as if it were a real store
- * price. `~` plus the word "Estimated" in nearby copy is the minimum.
+ * price. `~`, whole-unit precision, and the word "Estimated" in nearby copy
+ * are the minimum.
  */
 export function formatPricedAmount(
   priced: PricedAmount,
   options: FormatMoneyOptions = {},
 ): { text: string; isEstimate: boolean } {
-  const text = formatMoney(priced.money, options);
+  const text = formatMoney(displayPrecision(priced), options);
   if (priced.source === 'estimate') {
     return { text: `~${text}`, isEstimate: true };
   }

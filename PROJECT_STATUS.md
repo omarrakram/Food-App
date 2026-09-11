@@ -15,16 +15,17 @@ previous session's context.
 
 ## Last known passing state
 
-Verified at commit `eac91b5` + the icon commit:
+Verified at commit `b1f9af0` (HEAD of `claude/expo-rn-setup-mom5gw`):
 
 | Check | Command | Result |
 |---|---|---|
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 232/232 across 15 suites |
+| Unit + component tests | `npm test` | **pass**, 235/235 across 16 suites |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 40/40 assertions |
 | Web production bundle | `EXPO_OFFLINE=1 npx expo export --platform web` | **pass** |
+| Full flow walked in a browser | headless Chromium against the web export | **pass** — onboarding → home → cook → results → recipe → cooking mode → budget → pantry → discover → profile |
 | `npm run verify` | typecheck + lint + test | **pass** |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
@@ -38,6 +39,30 @@ works; the npm registry is reachable; `WebFetch` to `platform.claude.com` works.
 Deno is not installed here, so the edge functions are **type-checked only by
 the shared schema module they import** (`src/features/ai/schema.ts`, covered by
 27 tests). Run `supabase functions serve` locally before relying on them.
+
+---
+
+## End-to-end verification
+
+The unit suite does not render the app as a whole, so the web export is served
+and driven with headless Chromium (`/opt/pw-browsers/chromium-1194/...` in this
+environment) through the full flow. **It has caught two bugs no unit test
+would have**, both fixed in `b1f9af0`:
+
+1. Every disabled control rendered at full opacity — `PressScale`'s animated
+   style is applied after the static one, so the wrapper's
+   `opacity: disabled ? 0.45 : 1` was overwritten each frame. Disabled opacity
+   now lives inside `PressScale` (`disabledOpacity`) and composes with the
+   press dim in the worklet.
+2. Finishing onboarding bounced back to step one — `(onboarding)/index.tsx` and
+   `(tabs)/index.tsx` both resolve to `/`. The onboarding screen is now
+   **`(onboarding)/onboarding.tsx`** and the gate in `src/app/_layout.tsx`
+   replaces to `/onboarding`. *Route groups may not both contain an `index`.*
+
+Two notes for whoever runs this next. React Native Web's `TextInput` ignores
+Playwright's `fill()` — use `pressSequentially()`, which is what a user does
+anyway. And the only console errors in a clean run are blocked Unsplash image
+requests, which is this environment's egress proxy, not the app.
 
 ---
 
