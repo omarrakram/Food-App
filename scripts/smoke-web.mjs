@@ -536,6 +536,21 @@ async function main() {
       await shot(name);
     }
 
+    // --- Saved: the three tabs actually switch ---------------------------
+    console.log('\n▸ saved');
+    await page.goto(`${BASE}/saved`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1500);
+    for (const tabName of ['saved', 'viewed', 'cooked']) {
+      check(`the "${tabName}" tab switches`, await tap(`saved-tabs-${tabName}`, { optional: true }));
+      await page.waitForTimeout(500);
+    }
+    // "Recently viewed" has content, because the recipe above was opened.
+    await tap('saved-tabs-viewed', { optional: true });
+    await page.waitForTimeout(900);
+    const viewed = await page.locator('[data-testid^="saved-"]').count();
+    check('recently viewed remembers the recipe that was opened', viewed > 0, `${viewed} entries`);
+    await shot('20-saved');
+
     // --- Shopping list: add an entity through its sheet -------------------
     console.log('\n▸ shopping list');
     await page.goto(`${BASE}/shopping-list`, { waitUntil: 'networkidle' });

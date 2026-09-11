@@ -54,6 +54,9 @@ export function SegmentedControl<T extends string>({
         return (
           <PressScale
             key={option.value}
+            // Per-segment so a test can actually switch tabs. The container
+            // testID alone only proves the control rendered.
+            testID={testID ? `${testID}-${option.value}` : undefined}
             accessibilityRole="tab"
             accessibilityLabel={option.label}
             accessibilityState={{ selected: isSelected }}

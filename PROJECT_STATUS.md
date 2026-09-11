@@ -29,7 +29,7 @@ branch):
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / type drift | `ingredients:import --check`, `prices:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 55 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 59 interaction checks, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
 ### The test suite runs on two platforms
@@ -74,7 +74,8 @@ PGHOST=/tmp PGPORT=55432 PGUSER=postgres ./scripts/db-test.sh
 `npm run smoke:web` exports the web bundle, serves it, and drives a headless
 browser through what a person actually does — not just what routes exist. 53
 assertions cover onboarding, the pantry add/edit/delete flow from **both**
-entry points and its staple rules, ingredient selection and removal, opening
+entry points and its staple rules, ingredient selection and removal, the Saved
+tabs, opening
 and clearing filters, saving a shopping-list item, switching language and
 reading the rendered Arabic back, and a deep link surviving a reload.
 
