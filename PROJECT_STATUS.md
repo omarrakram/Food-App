@@ -6,101 +6,89 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-11 |
-| **Current phase** | All 10 phases implemented. Remaining work is credential-gated or polish. |
+| **Current phase** | Post-review refinement pass complete. Remaining work is credential-gated. |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
-| **Launch market** | Egypt · EGP · English UI with partial Arabic |
+| **Launch market** | Egypt · EGP · English and Arabic, both complete |
 
 ---
 
 ## Last known passing state
 
-Verified at commit `9d72f4d` (HEAD of `claude/expo-rn-setup-mom5gw`):
+Verified at commit `4fa46a2` on `claude/expo-rn-setup-mom5gw` (also the
+repository's default branch):
 
 | Check | Command | Result |
 |---|---|---|
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 239/239 across 16 suites |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 40/40 assertions |
-| Web production bundle | `EXPO_OFFLINE=1 npx expo export --platform web` | **pass** |
-| Full flow walked in a browser | `npm run smoke:web` | **pass** — 14 screens, no page errors |
-| `npm run verify` | typecheck + lint + test | **pass** |
+| Unit + component tests | `npm test` | **pass**, 361/361 across 21 suites |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 45/45 assertions |
+| Edge function types | `npm run fn:check` | **pass** |
+| Edge function tests | `npm run fn:test` | **pass**, 5/5 |
+| Web production bundle | `npx expo export --platform web` | **pass** |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 14 screens, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
-### Environment note (Claude Code Web)
+### Running the database suite in this sandbox
 
-`api.expo.dev` and `docs.expo.dev` are blocked by this environment's egress
-proxy. **Prefix every Expo CLI command with `EXPO_OFFLINE=1`** — it resolves
-versions from `node_modules/expo/bundledNativeModules.json` instead. `WebSearch`
-works; the npm registry is reachable; `WebFetch` to `platform.claude.com` works.
+No Postgres runs by default. Start one as the `postgres` user (initdb refuses
+to run as root):
 
-Deno is not installed here, so the edge functions are **type-checked only by
-the shared schema module they import** (`src/features/ai/schema.ts`, covered by
-27 tests). Run `supabase functions serve` locally before relying on them.
+```bash
+export PATH=/usr/lib/postgresql/16/bin:$PATH
+useradd -m postgres 2>/dev/null; mkdir -p /tmp/pgdata; chown postgres /tmp/pgdata
+su postgres -c "PATH=$PATH initdb -D /tmp/pgdata -U postgres -A trust"
+su postgres -c "PATH=$PATH pg_ctl -D /tmp/pgdata -o '-k /tmp -p 55432 -c listen_addresses=127.0.0.1' -l /tmp/pg.log start"
+PGHOST=/tmp PGPORT=55432 PGUSER=postgres ./scripts/db-test.sh
+```
+
+### Environment notes (Claude Code Web)
+
+- `api.expo.dev` and `docs.expo.dev` are blocked. **Prefix Expo CLI commands
+  with `EXPO_OFFLINE=1`** — it resolves versions from
+  `node_modules/expo/bundledNativeModules.json` instead.
+- `images.unsplash.com` and `deno.land` are blocked. Deno is installed from npm
+  (`deno@2.9.6`) instead, and `--min-dep-age 0` is required because the sandbox
+  pins a minimum dependency age.
+- **Docker is unavailable**, so `supabase gen types` cannot run here. CI runs it
+  instead — see "Database types" below.
 
 ---
 
 ## End-to-end verification
 
-The Jest suite renders components; it never renders the app. `npm run smoke:web`
-does: it exports the web bundle, serves it, and walks a headless browser from
-onboarding through cooking mode, the budget flow and every tab, capturing 14
-screenshots and failing on any page error.
+`npm run smoke:web` exports the web bundle, serves it, and walks a headless
+browser from onboarding through cooking mode, the budget flow and every tab,
+capturing 14 screenshots and failing on any page error.
 
-It needs a browser driver, deliberately **not** a dependency of the app:
+It needs a browser driver, deliberately not a dependency of the app:
 
 ```bash
 npm i -D playwright-core && npx playwright install chromium
-npm run smoke:web            # add --keep to leave dist/ in place
+npm run smoke:web
 ```
 
-`CHROMIUM_PATH` and `PLAYWRIGHT_CORE` override discovery when a browser is
-already on the machine (which is how it runs in this sandbox).
+`CHROMIUM_PATH` and `PLAYWRIGHT_CORE` override discovery when a browser already
+exists (which is how it runs in this sandbox).
 
-**It has paid for itself four times.** None of these were visible to a unit
-test; all are fixed:
-
-1. Every disabled control rendered at full opacity — `PressScale`'s animated
-   style is applied after the static one, so the wrapper's
-   `opacity: disabled ? 0.45 : 1` was overwritten each frame. Disabled opacity
-   now lives inside `PressScale` (`disabledOpacity`) and composes with the
-   press dim in the worklet.
-2. Finishing onboarding bounced back to step one — `(onboarding)/index.tsx` and
-   `(tabs)/index.tsx` both resolve to `/`. The onboarding screen is now
-   **`(onboarding)/onboarding.tsx`** and the gate in `src/app/_layout.tsx`
-   replaces to `/onboarding`. *Route groups may not both contain an `index`.*
-3. Estimates read "~142.04 EGP", claiming piastre precision for a survey figure
-   scaled by a serving count. `formatPricedAmount` now rounds estimates to
-   whole units; live prices keep their piastres. Amounts under one unit keep
-   decimals, so a 50-piastre pinch of salt is not doubled to "~1 EGP".
-4. Every text field drew two focus rings on web — react-native-web's DOM
-   `<input>` outline inside the component's own focused border. Reset on web
-   only.
-
-Two notes for whoever runs this next. React Native Web's `TextInput` ignores
-Playwright's `fill()` — use `pressSequentially()`, which is what a user does
-anyway. And blocked `images.unsplash.com` requests are this environment's
-egress proxy, not the app; the script filters them out.
+**It has caught six bugs no unit test would have.** Most recently: a servings
+stepper reading "2 2 people", and every disabled control drawing at full
+opacity. Two notes for whoever runs it next — React Native Web's `TextInput`
+ignores Playwright's `fill()` (use `pressSequentially`), and blocked remote
+image requests are the sandbox's egress policy, not the app.
 
 ---
 
 ## What is built
 
-### Foundation
-Design tokens, semantic light/dark palettes, persisted theme preference; typed
-i18n (English source of truth, partial Arabic with English fallback, plurals,
-RTL detection); a full UI kit (Text, Button, Card, Chip, Badge, Input, Stepper,
-SegmentedControl, ListRow, Sheet, Toast, Skeleton, empty/error states, Screen
-containers).
-
 ### Screens
-Bottom tabs (Home, Discover, Pantry, Saved, Profile) with a custom animated tab
-bar; cook-with-what-I-have and eat-within-my-budget flows with a shared sortable
-results view; recipe detail with have/need split, serving scaling and step
-check-off; distraction-free cooking mode; natural-language search; shopping
-list; 11-step resumable onboarding; seven settings screens; auth screens.
+Bottom tabs (Home, Discover, Pantry, Saved, Profile); cook-with-what-I-have and
+eat-within-my-budget flows with a shared sortable results view; recipe detail
+with have/need split, serving scaling and step check-off; distraction-free
+cooking mode; natural-language search; shopping list; **six-step** onboarding;
+seven settings screens; auth screens.
 
 ### Domain engines — pure, offline, unit-tested
 | Module | Responsibility |
@@ -108,57 +96,78 @@ list; 11-step resumable onboarding; seven settings screens; auth screens.
 | `ingredients/normalise.ts` | Arabic-aware canonicalisation, prompt sanitisation |
 | `ingredients/matching.ts` | Alias resolution, availability index, match percentage |
 | `ingredients/freshness.ts` | Expiry buckets; expired items never counted |
-| `pricing/units.ts` | Unit conversion, serving scaling, kitchen rounding |
-| `pricing/price-book.ts` | `PriceBook` interface + bundled Egyptian estimates |
-| `pricing/estimate.ts` | Deterministic costing, budget verdicts |
-| `recipes/rank.ts` | Hard filters (allergens, diet, appliances) + weighted ranking |
-| `search/interpret.ts` | Deterministic constraint extraction from free text |
+| `pricing/units.ts` | Unit conversion, serving scaling, kitchen fractions |
+| `pricing/price-book.ts` | `PriceBook` interface, country support, staleness |
+| `pricing/estimate.ts` | Deterministic costing, completeness, budget verdicts |
+| `recipes/rank.ts` | Hard filters (allergens, diet, flags, appliances) + ranking |
+| `search/interpret.ts` | Deterministic constraint extraction, incl. exclusions |
 | `grocery/` | `GroceryProvider` adapter + registry + mock |
 | `ai/schema.ts` | The model contract; generates its own JSON Schema |
 
-### Data
-10 migrations; RLS on every table with a test that fails if a new table arrives
-without it; `supabase/seed.sql` **generated** from the TypeScript catalogues
-(69 ingredients, 14 recipes); local and Supabase repositories behind one
-interface per collection; guest→account migration on first sign-in.
+### Data, and where it lives
+Everything a person edits is a data file, not code:
 
-### Auth
-Email signup with confirmation, sign-in, password reset, password update,
-resend confirmation, sign-out, permanent account deletion.
+| Data | Source | Generated into | Command |
+|---|---|---|---|
+| Ingredients (257) | `data/ingredients/catalogue.csv` | `catalogue.generated.ts` | `npm run ingredients:import` |
+| Prices (69) | `data/prices/eg.csv` | `pricing/price-data.ts` | `npm run prices:import` |
+| Database seed | the two above | `supabase/seed.sql` | `npm run seed:generate` |
 
-### AI
-`ai-suggest` and `ai-interpret` edge functions calling Claude with a JSON Schema
-constraint, Zod validation, one informed retry, then fallback to local results.
-Rate-limited and accounted per user. The key exists only server-side.
+Each importer validates and refuses bad input, and CI fails on drift. **257
+ingredients recognised, 69 priced** — recognition and pricing are deliberately
+separate concerns, and an unpriced ingredient is a supported state.
 
 ### Release
-`eas.json` (development / preview / production), `EAS.md`, CI running
-typecheck + lint + tests + bundle + a seed-drift check + the database suite on
-a real Postgres, and `SECURITY_REVIEW.md`.
+`eas.json`, `EAS.md`, CI (typecheck, lint, tests, Deno check + tests, three
+drift checks, bundle, database suite, database-type drift), a GitHub Pages
+preview workflow, and `SECURITY_REVIEW.md`.
+
+---
+
+## Preview status
+
+**Phone preview is one click away and blocked on that click.**
+
+`.github/workflows/preview.yml` builds the app and deploys it to GitHub Pages
+at `https://omarrakram.github.io/Food-App/`. The repository is public so Pages
+is free, deep links and refresh work (the export is built for the subpath it is
+served from, and Expo's static output writes one HTML file per route), and the
+workflow refuses to publish if the bundle contains a secret-shaped string.
+
+Every run so far has failed at one step: **GitHub Pages is not enabled.**
+Creating a Pages site is not something a workflow's own `GITHUB_TOKEN` may do
+(`Resource not accessible by integration`), and a PAT that could would be a far
+larger credential than this warrants.
+
+> **The one action needed:** repository **Settings → Pages → Build and
+> deployment → Source: GitHub Actions**. Then re-run the "Web preview"
+> workflow. Nothing else is required — no account, no key, no install.
+
+The earlier Claude Artifact is not a substitute: artifacts are private, so a
+phone browser that is not signed in to claude.ai gets a 404.
 
 ---
 
 ## Remaining work
 
 ### Credential-gated (nothing to build until these exist)
-1. **Supabase project** — accounts, sync and edge functions are inert without
+1. **GitHub Pages enabled** — one click, above. Blocks the phone preview.
+2. **Supabase project** — accounts, sync and edge functions are inert without
    it. The app runs fully on local data meanwhile.
-2. **`ANTHROPIC_API_KEY`** — generation is inert without it; local catalogue
-   results still answer every screen.
-3. **EAS project id** — `npx eas init`, then native builds work.
-4. **Apple / Google developer accounts** — store submission.
-5. **Grocery provider agreements** — a commercial blocker, not a technical one.
+3. **`ANTHROPIC_API_KEY`** — generation is inert; local catalogue results still
+   answer every screen.
+4. **EAS project id** — `npx eas init`, then native builds work.
+5. **Apple / Google developer accounts** — store submission.
+6. **Grocery provider agreements** — commercial, not technical.
 
 ### Buildable now
 | Item | Notes |
 |---|---|
-| Component tests for Pantry, RecipeCard, Onboarding, Cooking mode | Harness and conventions are in place; see TEST_PLAN.md § 3 for the two RNTL v14 traps |
+| Recipe photography | `RecipeImage` is the single seam; set `imageUrl` and every screen picks it up. Until then a designed branded fallback is used |
+| Price survey refresh | Edit `data/prices/eg.csv`, run `npm run prices:import -- --date=YYYY-MM-DD` |
+| Designed app icon | Current mark is generated by `scripts/generate-icons.py` |
 | Integration tests against a local Supabase | Sign-up → onboarding → pantry → suggestions; guest→account migration |
-| Arabic translation completion | ~40% covered; untranslated keys fall back to English |
-| Recipe imagery | Unsplash URLs need replacing with owned/licensed assets on a CDN |
-| Designed app icon | Current mark is generated by `scripts/generate-icons.py` — intentional-looking, but placeholder |
 | Apple / Google sign-in | Scaffolded; `socialAuthAvailability()` returns false without client ids |
-| Price survey | Estimates are illustrative, dated 2026-08-01 |
 
 ---
 
@@ -166,42 +175,60 @@ a real Postgres, and `SECURITY_REVIEW.md`.
 
 | # | Issue | Impact |
 |---|---|---|
-| 1 | Recipe images are hot-linked Unsplash URLs | Fine for development; licence review needed before launch |
-| 2 | Arabic covers ~40% of keys | Falls back to English; nothing breaks |
-| 3 | RTL needs an app restart | Stated in the UI; `I18nManager.forceRTL` cannot apply live |
-| 4 | `database.types.ts` is hand-maintained | Drift is a runtime error TypeScript cannot catch. `npm run db:types` once a project exists |
-| 5 | Price estimates are illustrative | Always rendered as estimates, so honest — but needs a real survey |
-| 6 | Guest-saved AI recipes do not migrate on sign-in | They have no server row to reference; catalogue recipes do migrate |
-| 7 | Edge functions are not executed in CI | No Deno in this environment. Their shared schema module is unit-tested; run `supabase functions serve` before trusting a change |
-| 8 | Rate-limit counters fail open | Deliberate — see SECURITY_REVIEW.md finding 2 |
+| 1 | Price estimates are illustrative, surveyed 2026-08-01 | Always rendered as estimates, with a staleness warning past 180 days — but needs a real survey before launch |
+| 2 | 188 of 257 ingredients have no price | By design. The UI says "Price estimate unavailable" rather than guessing |
+| 3 | `database.types.ts` is hand-maintained | CI now diffs it against the real schema, so drift fails the build rather than surfacing at runtime |
+| 4 | Recipe imagery is a branded placeholder | Deliberate: no hot-linking, no licence exposure. Needs owned assets |
+| 5 | Edge functions are type-checked and unit-tested but never executed against Claude in CI | Needs an API key. Run `supabase functions serve` before trusting a change |
 
-No known crashes. No known data-loss paths. One security finding was found and
-fixed during review (SECURITY_REVIEW.md finding 1).
+No known crashes. No known data-loss paths. No open security findings.
 
 ---
 
 ## Architectural decisions worth not re-litigating
 
 1. **Local-first behind one interface per collection.** The app works fully
-   signed out; sign-in is a migration, not a reset; no screen knows whether it
-   reads AsyncStorage or Postgres.
+   signed out; sign-in is a migration, not a reset.
 2. **The model never decides a fact software can compute.** Availability, match
-   percentage, cost, allergen safety and expiry are deterministic code. Claude
-   generates and interprets; it does not price or adjudicate safety.
-3. **`PriceTag` is the only price renderer.** That is what makes
-   "estimated ≠ live" enforceable rather than a convention. Displayed
-   precision is part of that claim: estimates render to whole units, live
-   prices to the piastre.
-4. **Money is an integer count of minor units.** No floats.
-5. **Allergens filter, never rank** — and are applied twice, once to the
-   catalogue and again after AI generation, through the same code path.
-6. **RLS is the entire client-side security boundary**, so it is tested like
-   one: 40 assertions including forged foreign keys and a coverage check.
-7. **Seed data is generated from TypeScript**, and CI fails if it drifts.
-8. **Recipe ids are deterministic UUIDv5**, so a recipe saved offline is the
-   same row after sign-in.
-9. **The budget reaches the model as a band, never an amount** — a model shown
-   prices starts quoting them.
+   percentage, cost, allergen safety and expiry are deterministic code.
+3. **`PriceTag` is the only price renderer**, and a price carries its own
+   completeness. A total assembled from incomplete data can only grow, so
+   "over budget" stays assertable and "within budget" does not.
+4. **Money is an integer count of minor units.** Estimates render to whole
+   units; live prices keep their piastres.
+5. **Diet is two things.** An exclusive eating style, and flags (halal, keto)
+   that coexist with it and each other.
+6. **Allergens filter, never rank** — applied to the catalogue and again after
+   AI generation, through the same code path.
+7. **A perishable is never an assumed staple.** Enforced in the data, in the
+   availability engine, and in the importer.
+8. **RLS is the entire client-side security boundary**, so it is tested like
+   one: 45 assertions including forged foreign keys and a coverage check.
+9. **Recognition and pricing are separate data.** Adding a food must never
+   require inventing a price for it.
+10. **Recipe ids are deterministic UUIDv5**, so a recipe saved offline is the
+    same row after sign-in.
+11. **The budget reaches the model as a band, never an amount.**
+12. **Deep links are a hosting concern.** The web build is configured for the
+    path it is served from; nothing rewrites the URL at runtime, because doing
+    so breaks React Navigation.
+
+---
+
+## Localisation
+
+**Both locales are complete: 468 keys, English and Arabic.** `ar` is typed as a
+total record, so a missing translation is a compile error, and seven runtime
+assertions cover what types cannot — empty values, stale keys, both halves of
+every plural, invented placeholders, and English left in place.
+
+Arabic is written for an Egyptian consumer rather than transliterated. The
+`_one` plural forms deliberately omit `{count}`, because Arabic lexicalises the
+singular («طبق واحد»).
+
+RTL applies at native startup, so the Language screen detects a pending
+direction change and offers the restart directly (expo-updates on native, a
+plain reload on web).
 
 ---
 
@@ -221,13 +248,16 @@ cp .env.example .env.local          # optional — the app runs without it
 
 EXPO_OFFLINE=1 npx expo start       # EXPO_OFFLINE only needed behind a proxy
 npm run verify                      # typecheck + lint + test
-npm run seed:generate               # regenerate supabase/seed.sql from TS
-./scripts/db-test.sh                # migrations + seed + 40 RLS assertions
-python3 scripts/generate-icons.py   # regenerate the placeholder icons
 npm run smoke:web                   # export + walk the whole app in a browser
-EXPO_OFFLINE=1 npx expo export --platform web
-```
 
-The database suite needs a Postgres reachable via `PGHOST`/`PGPORT`;
-`supabase/tests/00_platform_shim.sql` recreates `auth.users`, `auth.uid()` and
-the Supabase roles, so plain Postgres is enough.
+npm run fn:check                    # type-check the edge functions (Deno)
+npm run fn:test                     # run their tests
+
+npm run ingredients:import          # data/ingredients/catalogue.csv -> TS
+npm run prices:import               # data/prices/eg.csv -> TS
+npm run seed:generate               # regenerate supabase/seed.sql
+./scripts/db-test.sh                # migrations + seed + 45 RLS assertions
+
+npm run db:types:from-url           # regenerate Supabase types (needs Docker)
+python3 scripts/generate-icons.py   # regenerate the placeholder icons
+```
