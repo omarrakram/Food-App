@@ -151,3 +151,126 @@ describe('applyInterpretation', () => {
     expect(request.budgetMinor).toBeNull();
   });
 });
+
+// ---------------------------------------------------------------------------
+// The queries a person actually types. Every one of these runs locally and
+// deterministically: no paid call is made to understand a search box.
+// ---------------------------------------------------------------------------
+
+describe('the phrases people type', () => {
+  const parse = (query: string) => interpretQuery(query, 'EGP');
+
+  it('"high protein dinner under 150 EGP"', () => {
+    const result = parse('high protein dinner under 150 EGP');
+
+    expect(result.minProteinGrams).toBe(30);
+    expect(result.mealType).toBe('dinner');
+    expect(result.budgetMinor).toBe(15000);
+  });
+
+  it('"dinner in 20 minutes"', () => {
+    const result = parse('dinner in 20 minutes');
+
+    expect(result.mealType).toBe('dinner');
+    expect(result.maxMinutes).toBe(20);
+  });
+
+  it('"Egyptian food for four people"', () => {
+    const result = parse('Egyptian food for four people');
+
+    expect(result.cuisine).toBe('egyptian');
+    expect(result.servings).toBe(4);
+  });
+
+  it('"something beefy" — a vague query is understood weakly, not wrongly', () => {
+    const result = parse('something beefy');
+
+    // Nothing is invented: no budget, no time, no meal type.
+    expect(result.budgetMinor).toBeNull();
+    expect(result.maxMinutes).toBeNull();
+    expect(result.mealType).toBeNull();
+    expect(result.confidence).toBeLessThan(LOW_CONFIDENCE);
+  });
+
+  it('finds the ingredient a query asks for', () => {
+    expect(parse('pasta with tomatoes').ingredients).toEqual(
+      expect.arrayContaining(['pasta', 'tomatoes']),
+    );
+  });
+
+  it('EXCLUDES what a query rules out instead of searching for it', () => {
+    const result = parse('something without chicken');
+
+    expect(result.excludedIngredients).toContain('chicken breast');
+    // The critical half: "without chicken" must not become "with chicken".
+    expect(result.ingredients).not.toContain('chicken breast');
+  });
+
+  it('handles the other ways people phrase an exclusion', () => {
+    expect(parse('pasta with no mushrooms').excludedIngredients).toContain('mushrooms');
+    // "dairy" is an allergen rather than an ingredient, so the phrase to test
+    // is one naming an actual food.
+    expect(parse('dinner free of milk, quick').excludedIngredients).toContain('milk');
+    expect(parse('حاجة بدون بصل').excludedIngredients).toContain('onions');
+  });
+
+  it('keeps the positive ingredients when a query does both', () => {
+    const result = parse('rice with chicken but without tomatoes');
+
+    expect(result.ingredients).toContain('rice');
+    expect(result.excludedIngredients).toContain('tomatoes');
+    expect(result.ingredients).not.toContain('tomatoes');
+  });
+
+  it('tolerates typos and spelling variants', () => {
+    expect(parse('tomatos and eggs').ingredients).toEqual(
+      expect.arrayContaining(['tomatoes', 'eggs']),
+    );
+  });
+
+  it('resolves Arabic ingredient names', () => {
+    expect(parse('عايز أكلة فيها فراخ').ingredients).toContain('chicken breast');
+  });
+
+  it('reads calories and cooking time together', () => {
+    const result = parse('light lunch under 30 minutes');
+
+    expect(result.maxCalories).toBe(500);
+    expect(result.maxMinutes).toBe(30);
+    expect(result.mealType).toBe('lunch');
+  });
+
+  it('never returns a budget it did not see', () => {
+    expect(parse('quick pasta').budgetMinor).toBeNull();
+  });
+});
+
+describe('exclusions survive into the request', () => {
+  it('adds them to the list the ranker already filters on', () => {
+    const interpretation = interpretQuery('something without chicken', 'EGP');
+    const applied = applyInterpretation(base, interpretation, 'something without chicken');
+
+    expect(applied.dislikedIngredients).toContain('chicken breast');
+  });
+
+  it('does not drop the user’s standing dislikes', () => {
+    const withDislike = { ...base, dislikedIngredients: ['liver'] };
+    const interpretation = interpretQuery('pasta without mushrooms', 'EGP');
+    const applied = applyInterpretation(withDislike, interpretation, 'pasta without mushrooms');
+
+    expect(applied.dislikedIngredients).toEqual(expect.arrayContaining(['liver', 'mushrooms']));
+  });
+
+  it('leaves allergies and diet untouched — they are enforced separately', () => {
+    const guardedRequest = {
+      ...base,
+      allergens: ['nuts' as const],
+      dietaryPreference: 'vegan' as const,
+    };
+    const interpretation = interpretQuery('dinner without onions', 'EGP');
+    const applied = applyInterpretation(guardedRequest, interpretation, 'dinner without onions');
+
+    expect(applied.allergens).toEqual(['nuts']);
+    expect(applied.dietaryPreference).toBe('vegan');
+  });
+});

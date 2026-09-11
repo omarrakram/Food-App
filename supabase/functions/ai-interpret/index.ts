@@ -49,8 +49,11 @@ Deno.serve(async (request: Request): Promise<Response> => {
 
   const verdict = await checkRateLimit(admin, caller.userId);
   if (!verdict.allowed) {
+    // Reported separately so the client can say "we could not check" rather
+    // than "you have used your quota", and retry sooner.
     return errorResponse('rate_limited', origin, {
       retryAfterMinutes: verdict.retryAfterMinutes,
+      reason: verdict.reason,
     });
   }
 

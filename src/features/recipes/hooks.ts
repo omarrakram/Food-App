@@ -143,8 +143,8 @@ export function useAiSuggestions(request: MealRequest, enabled: boolean) {
     staleTime: 30 * 60_000,
     gcTime: 60 * 60_000,
     retry: false,
-    queryFn: async () => {
-      const result = await requestSuggestions({ request, expiringSoon: expiring });
+    queryFn: async ({ signal }) => {
+      const result = await requestSuggestions({ request, expiringSoon: expiring, signal });
       // Cache generated recipes locally so their detail pages resolve after
       // the results screen is gone.
       if (result.recipes.length > 0) {

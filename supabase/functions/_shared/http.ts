@@ -11,14 +11,38 @@
 /**
  * Origins allowed to call these functions.
  *
- * The mobile app sends no Origin header, so it is unaffected. The web build
- * does, which is why the list is configurable rather than hard-coded — set
- * ALLOWED_ORIGINS to a comma-separated list in production.
+ * The mobile app sends no Origin header and is unaffected by any of this — CORS
+ * is a browser mechanism. Only the web build is governed here.
+ *
+ * Set ALLOWED_ORIGINS to a comma-separated list in any deployment that serves
+ * a web client.
  */
 const allowedOrigins = (Deno.env.get('ALLOWED_ORIGINS') ?? '')
   .split(',')
   .map((entry) => entry.trim())
   .filter(Boolean);
+
+/**
+ * Localhost origins permitted while developing.
+ *
+ * Named explicitly rather than reached by echoing whatever Origin arrives.
+ * Development convenience should be a development rule, not a permissive
+ * production fallback that nobody notices is still in place.
+ */
+const DEV_ORIGIN_PATTERN = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/;
+
+/** Deno deploy sets this; locally `supabase functions serve` does not. */
+const isProduction = (Deno.env.get('ENVIRONMENT') ?? Deno.env.get('DENO_DEPLOYMENT_ID') ?? '') !== '';
+
+export function isOriginAllowed(origin: string | null): boolean {
+  // No Origin at all is a native app or a server-to-server call, not a
+  // cross-site browser request. Nothing to allow or deny.
+  if (!origin) return true;
+  if (allowedOrigins.includes(origin)) return true;
+  // Localhost is allowed only when no allow-list is configured AND we are not
+  // running in a deployment — i.e. genuinely on a developer's machine.
+  return allowedOrigins.length === 0 && !isProduction && DEV_ORIGIN_PATTERN.test(origin);
+}
 
 export function corsHeaders(origin: string | null): Record<string, string> {
   const headers: Record<string, string> = {
@@ -27,11 +51,11 @@ export function corsHeaders(origin: string | null): Record<string, string> {
     Vary: 'Origin',
   };
 
-  if (allowedOrigins.length === 0) {
-    // No allow-list configured: development. Echo the origin so local web
-    // builds work, but never in a deployment that sets ALLOWED_ORIGINS.
-    headers['Access-Control-Allow-Origin'] = origin ?? '*';
-  } else if (origin && allowedOrigins.includes(origin)) {
+  // Previously this echoed any Origin back whenever ALLOWED_ORIGINS was unset,
+  // which turns a forgotten environment variable into "every website may call
+  // this with the visitor's credentials". An unlisted origin now simply gets
+  // no allow header, and the browser refuses the response.
+  if (origin && isOriginAllowed(origin)) {
     headers['Access-Control-Allow-Origin'] = origin;
   }
 

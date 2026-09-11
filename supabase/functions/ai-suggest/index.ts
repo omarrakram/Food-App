@@ -96,8 +96,11 @@ Deno.serve(async (request: Request): Promise<Response> => {
       status: 'rate_limited',
       retryCount: 0,
     });
+    // Reported separately so the client can say "we could not check" rather
+    // than "you have used your quota", and retry sooner.
     return errorResponse('rate_limited', origin, {
       retryAfterMinutes: verdict.retryAfterMinutes,
+      reason: verdict.reason,
     });
   }
 

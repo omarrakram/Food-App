@@ -261,6 +261,7 @@ export const en = {
   'discover.collectionTrending': 'Trending',
 
   // --- Search -------------------------------------------------------------
+  'search.without': 'no {ingredient}',
   'search.title': 'Search',
   'search.placeholder': 'Try “something cheesy under 150 EGP”',
   'search.recent': 'Recent searches',

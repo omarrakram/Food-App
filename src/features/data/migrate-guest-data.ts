@@ -90,9 +90,10 @@ export async function migrateGuestData(
     }
 
     for (const entry of savedRecipes) {
-      // A saved AI recipe has no server-side row to reference yet, so only
-      // catalogue recipes migrate. The local snapshot is left in place for the
-      // rest rather than silently dropped.
+      // Generated recipes migrate too. `save` writes the recipe row first when
+      // one is needed — owned by this user and private — so a guest who saved
+      // an AI suggestion still has it after signing in. It used to be dropped
+      // on the floor here because the foreign key had nothing to point at.
       await targets.saved.save(entry.recipe);
     }
 

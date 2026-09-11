@@ -300,6 +300,40 @@ begin
   where id = '66666666-6666-6666-6666-666666666666';
   get diagnostics affected = row_count;
   perform pg_temp.assert(affected = 1, 'a client can still edit its own private recipe');
+
+  -- Saving a generated recipe writes the recipe row first, so that path has
+  -- to obey exactly the same rules as any other client insert.
+  insert into public.recipes (id, title, source, created_by, is_public)
+  values ('66666666-6666-6666-6666-666666666667', 'Generated dinner', 'ai_generated',
+          '11111111-1111-1111-1111-111111111111', false);
+
+  insert into public.recipe_ingredients (recipe_id, name, quantity, unit)
+  values ('66666666-6666-6666-6666-666666666667', 'rice', 200, 'g');
+  get diagnostics affected = row_count;
+  perform pg_temp.assert(affected = 1, 'a client can write ingredients for its own recipe');
+
+  insert into public.saved_recipes (user_id, recipe_id)
+  values ('11111111-1111-1111-1111-111111111111',
+          '66666666-6666-6666-6666-666666666667');
+  get diagnostics affected = row_count;
+  perform pg_temp.assert(affected = 1, 'a client can save the generated recipe it just wrote');
+
+  perform pg_temp.assert_rejected($stmt$
+    insert into public.recipes (title, source, created_by, is_public)
+    values ('Generated and published', 'ai_generated',
+            '11111111-1111-1111-1111-111111111111', true)
+  $stmt$, 'saving a generated recipe cannot publish it either');
+
+  perform pg_temp.assert_rejected($stmt$
+    insert into public.recipes (title, source, created_by, is_public)
+    values ('Owned by someone else', 'ai_generated',
+            '22222222-2222-2222-2222-222222222222', false)
+  $stmt$, 'a client cannot write a recipe owned by another user');
+
+  perform pg_temp.assert_rejected($stmt$
+    insert into public.recipe_ingredients (recipe_id, name, quantity, unit)
+    values ('33333333-3333-3333-3333-333333333333', 'smuggled', 1, 'g')
+  $stmt$, 'a client cannot add ingredients to a recipe it does not own');
 end
 $$;
 

@@ -26,6 +26,8 @@ export type Interpretation = {
   mealType: MealType | null;
   cuisine: Cuisine | null;
   ingredients: string[];
+  /** Foods the query explicitly rules out: "without chicken", "بدون بصل". */
+  excludedIngredients: string[];
   tags: string[];
   /** 0–1. Below `LOW_CONFIDENCE` the caller should consider the AI fallback. */
   confidence: number;
@@ -177,6 +179,40 @@ function extractIngredients(text: string): string[] {
   return [...new Set(found)];
 }
 
+/**
+ * Phrases that turn what follows into an exclusion.
+ *
+ * "something without chicken" is a different request from "something with
+ * chicken", and reading only the ingredient names would invert it.
+ */
+const NEGATION_PATTERNS = [
+  /\bwithout\s+([^,.;]+)/gi,
+  /\bno\s+([^,.;]+)/gi,
+  /\bnot?\s+with\s+([^,.;]+)/gi,
+  /\bhold\s+the\s+([^,.;]+)/gi,
+  /\bfree\s+of\s+([^,.;]+)/gi,
+  /بدون\s+([^,.;،]+)/g,
+  /من\s*غير\s+([^,.;،]+)/g,
+];
+
+/**
+ * Splits a query into the part that asks for things and the part that rules
+ * them out, so the same extractor can run over each.
+ */
+function splitNegations(text: string): { positive: string; negative: string } {
+  let negative = '';
+  let positive = text;
+
+  for (const pattern of NEGATION_PATTERNS) {
+    positive = positive.replace(pattern, (_match, captured: string) => {
+      negative += ` ${captured} `;
+      return ' ';
+    });
+  }
+
+  return { positive, negative };
+}
+
 function findKeyword<T>(text: string, table: Record<string, T>): T | null {
   const haystack = ` ${text.toLowerCase()} `;
   for (const [keyword, value] of Object.entries(table)) {
@@ -203,7 +239,11 @@ export function interpretQuery(query: string, currency: CurrencyCode): Interpret
   const servings = extractServings(text);
   const cuisine = findKeyword(text, CUISINE_KEYWORDS);
   const mealType = findKeyword(text, MEAL_KEYWORDS);
-  const ingredients = extractIngredients(text);
+  // Exclusions are lifted out first so "without chicken" cannot be read as a
+  // request FOR chicken by the positive extractor.
+  const { positive, negative } = splitNegations(text);
+  const ingredients = extractIngredients(positive);
+  const excludedIngredients = extractIngredients(negative);
   const tags = findAllTags(text);
 
   const highProtein = /high[- ]?protein|protein[- ]?rich|بروتين/i.test(text);
@@ -217,6 +257,7 @@ export function interpretQuery(query: string, currency: CurrencyCode): Interpret
     cuisine !== null,
     mealType !== null,
     ingredients.length > 0,
+    excludedIngredients.length > 0,
     tags.length > 0,
     highProtein,
     lowCalorie,
@@ -231,6 +272,7 @@ export function interpretQuery(query: string, currency: CurrencyCode): Interpret
     mealType,
     cuisine,
     ingredients,
+    excludedIngredients,
     tags,
     confidence: Math.min(1, signals / 3),
   };
@@ -247,6 +289,12 @@ export function applyInterpretation(
     mode: 'search',
     query,
     ingredients: interpretation.ingredients.length > 0 ? interpretation.ingredients : base.ingredients,
+    // An exclusion the user typed is a constraint for this search, so it joins
+    // the disliked list the ranker already filters on — allergies and diet
+    // still apply on top, never instead.
+    dislikedIngredients: [
+      ...new Set([...base.dislikedIngredients, ...interpretation.excludedIngredients]),
+    ],
     budgetMinor: interpretation.budgetMinor ?? base.budgetMinor,
     maxMinutes: interpretation.maxMinutes ?? base.maxMinutes,
     minProteinGrams: interpretation.minProteinGrams ?? base.minProteinGrams,
@@ -267,6 +315,8 @@ export function describeInterpretation(
     meal: (meal: MealType) => string;
     cuisine: (cuisine: Cuisine) => string;
     highProtein: string;
+    /** Renders an exclusion, e.g. "no chicken". */
+    without: (ingredient: string) => string;
   },
 ): string[] {
   const parts: string[] = [];
@@ -277,5 +327,8 @@ export function describeInterpretation(
   if (interpretation.servings !== null) parts.push(labels.servings(interpretation.servings));
   if (interpretation.minProteinGrams !== null) parts.push(labels.highProtein);
   parts.push(...interpretation.ingredients);
+  // Shown like every other chip so an exclusion the user typed is visible and
+  // removable rather than an invisible filter.
+  parts.push(...interpretation.excludedIngredients.map(labels.without));
   return parts;
 }

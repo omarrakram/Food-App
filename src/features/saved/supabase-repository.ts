@@ -59,6 +59,15 @@ export class SupabaseSavedRepository implements SavedRepository {
   }
 
   async save(recipe: Recipe): Promise<SavedRecipe> {
+    // `saved_recipes.recipe_id` is a foreign key, so the recipe has to exist
+    // before it can be saved. A curated recipe always does; a generated one
+    // only lives in the local cache, so saving it used to fail on the
+    // constraint — and a guest's generated recipes were dropped at sign-in for
+    // the same reason.
+    if (recipe.source !== 'curated') {
+      await this.ensureRecipeRow(recipe);
+    }
+
     const { data, error } = await this.client
       .from('saved_recipes')
       .upsert(
@@ -70,6 +79,90 @@ export class SupabaseSavedRepository implements SavedRepository {
 
     if (error) throw toAppError(error, 'database');
     return { id: data.id, recipeId: data.recipe_id, recipe, savedAt: data.created_at };
+  }
+
+  /**
+   * Writes a generated recipe the caller owns, so it can be referenced.
+   *
+   * Ownership and visibility are not negotiable here: `created_by` is the
+   * caller and `is_public` is false, which is what RLS requires of a
+   * user-owned row. A client cannot publish into anyone else's Discover feed
+   * by saving a recipe.
+   *
+   * Idempotent by primary key — the recipe id is a deterministic UUIDv5 of its
+   * content, so re-saving the same generated recipe updates rather than
+   * duplicates.
+   */
+  private async ensureRecipeRow(recipe: Recipe): Promise<void> {
+    const { error: recipeError } = await this.client.from('recipes').upsert(
+      {
+        id: recipe.id,
+        slug: null,
+        title: recipe.title,
+        description: recipe.description,
+        image_url: recipe.imageUrl,
+        source: recipe.source,
+        cuisine: recipe.cuisine,
+        difficulty: recipe.difficulty,
+        prep_minutes: recipe.prepMinutes,
+        cook_minutes: recipe.cookMinutes,
+        base_servings: recipe.baseServings,
+        calories: recipe.nutrition.calories,
+        protein_g: recipe.nutrition.proteinGrams,
+        carbs_g: recipe.nutrition.carbsGrams,
+        fat_g: recipe.nutrition.fatGrams,
+        fiber_g: recipe.nutrition.fiberGrams,
+        created_by: this.userId,
+        is_public: false,
+      },
+      { onConflict: 'id' },
+    );
+    if (recipeError) throw toAppError(recipeError, 'database');
+
+    // Children are replaced wholesale rather than diffed: the recipe is
+    // immutable content addressed by its id, so there is nothing to merge.
+    await this.client.from('recipe_ingredients').delete().eq('recipe_id', recipe.id);
+    await this.client.from('recipe_steps').delete().eq('recipe_id', recipe.id);
+    await this.client.from('recipe_allergens').delete().eq('recipe_id', recipe.id);
+
+    if (recipe.ingredients.length > 0) {
+      const { error } = await this.client.from('recipe_ingredients').insert(
+        recipe.ingredients.map((ingredient, index) => ({
+          recipe_id: recipe.id,
+          ingredient_id: ingredient.ingredientId,
+          name: ingredient.name,
+          quantity: ingredient.quantity,
+          unit: ingredient.unit,
+          preparation: ingredient.preparation,
+          is_optional: ingredient.isOptional,
+          sort_order: ingredient.sortOrder || index,
+        })),
+      );
+      if (error) throw toAppError(error, 'database');
+    }
+
+    if (recipe.steps.length > 0) {
+      const { error } = await this.client.from('recipe_steps').insert(
+        recipe.steps.map((step, index) => ({
+          recipe_id: recipe.id,
+          step_number: step.stepNumber || index + 1,
+          instruction: step.instruction,
+          duration_minutes: step.durationMinutes,
+          safety_note: step.safetyNote,
+          ingredient_refs: step.ingredientRefs,
+        })),
+      );
+      if (error) throw toAppError(error, 'database');
+    }
+
+    // SAFETY-CRITICAL: the allergen rows drive the hard exclusion, so a
+    // generated recipe that loses them would stop being filtered.
+    if (recipe.allergens.length > 0) {
+      const { error } = await this.client
+        .from('recipe_allergens')
+        .insert(recipe.allergens.map((allergen) => ({ recipe_id: recipe.id, allergen })));
+      if (error) throw toAppError(error, 'database');
+    }
   }
 
   async unsave(recipeId: string): Promise<void> {

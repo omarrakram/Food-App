@@ -31,6 +31,8 @@
     "ingredients:import": "node --experimental-strip-types --no-warnings scripts/import-ingredients.ts",
     "prices:import": "node --experimental-strip-types --no-warnings scripts/import-prices.ts",
     "seed:generate": "node --experimental-strip-types --no-warnings scripts/generate-seed.ts",
+    "fn:check": "deno check --min-dep-age 0 --config supabase/functions/deno.json supabase/functions/ai-suggest/index.ts supabase/functions/ai-interpret/index.ts",
+    "fn:test": "deno test --min-dep-age 0 --allow-env --config supabase/functions/deno.json supabase/functions/",
     "db:test": "./scripts/db-test.sh",
     "smoke:web": "node scripts/smoke-web.mjs"
   },
@@ -104,6 +106,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^22.20.2",
     "@types/react": "~19.2.2",
+    "deno": "^2.9.6",
     "eslint": "^9.39.5",
     "eslint-config-expo": "^57.0.2",
     "eslint-config-prettier": "^10.1.8",

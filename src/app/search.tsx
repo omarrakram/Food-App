@@ -80,6 +80,7 @@ export default function SearchScreen() {
       meal: (meal) => t(`meal.${meal}` as const),
       cuisine: (cuisine) => t(`cuisine.${cuisine}` as const),
       highProtein: t('budget.highProtein'),
+      without: (ingredient) => t('search.without', { ingredient }),
     });
   }, [interpretation, preferences.currency, locale, t]);
 

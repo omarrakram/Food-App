@@ -52,6 +52,8 @@ export type SuggestInput = {
   request: MealRequest;
   /** Names of pantry items close to their date, so the model prioritises them. */
   expiringSoon?: string[];
+  /** Aborts the request when the caller no longer needs the answer. */
+  signal?: AbortSignal;
 };
 
 /** Maps an edge-function error code onto the app's error taxonomy. */
@@ -94,6 +96,10 @@ export async function requestSuggestions(input: SuggestInput): Promise<SuggestRe
   const { request } = input;
 
   const { data, error } = await supabase.functions.invoke('ai-suggest', {
+    // Cancellation matters here in a way it does not for a free endpoint: if
+    // the user changes the request or leaves the screen, the superseded
+    // generation is abandoned rather than paid for and thrown away.
+    signal: input.signal,
     body: {
       mode: request.mode,
       ingredients: request.ingredients,

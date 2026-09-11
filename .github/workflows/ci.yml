@@ -32,6 +32,13 @@ jobs:
       - name: Unit tests
         run: npm run test:ci
 
+      - name: Edge functions — type check and test
+        # The functions run on Deno, not in the app bundle, so nothing else in
+        # this job would catch a type error or a broken template literal there.
+        run: |
+          npm run fn:check
+          npm run fn:test
+
       - name: Verify the generated ingredient catalogue matches its CSV
         run: npm run ingredients:import -- --check
 
