@@ -253,7 +253,7 @@ values ('965777eb-29fc-512f-9380-7eb75a4968f9', 'baking soda') on conflict do no
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('965777eb-29fc-512f-9380-7eb75a4968f9', 'بيكربونات') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'baladi-bread', 'baladi bread', 'عيش بلدي', 'bakery', 'piece', 90, true, true)
+values ('e6a3d50c-1f05-5538-b3f6-addf15cdb864', 'baladi-bread', 'baladi bread', 'عيش بلدي', 'bakery', 'piece', 90, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -657,7 +657,7 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('225dd824-7869-5423-a591-a160525db16a', 'butter', 'butter', 'زبدة', 'dairy', 'g', null, true, true)
+values ('225dd824-7869-5423-a591-a160525db16a', 'butter', 'butter', 'زبدة', 'dairy', 'g', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -1768,7 +1768,7 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('d23e596f-1070-5eb8-89e2-f186f8c67253', 'eggs', 'eggs', 'بيض', 'protein', 'piece', 55, true, true)
+values ('d23e596f-1070-5eb8-89e2-f186f8c67253', 'eggs', 'eggs', 'بيض', 'protein', 'piece', 55, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -2631,7 +2631,7 @@ values ('ede0bfaf-e78d-5879-afee-177a0dc3c7a4', 'korrat') on conflict do nothing
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('ede0bfaf-e78d-5879-afee-177a0dc3c7a4', 'leeks') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('2719c6c9-4810-5b00-a255-8f3c01fadc1c', 'lemon', 'lemon', 'ليمون', 'fruit', 'piece', 60, true, true)
+values ('2719c6c9-4810-5b00-a255-8f3c01fadc1c', 'lemon', 'lemon', 'ليمون', 'fruit', 'piece', 60, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -2866,7 +2866,7 @@ values ('bb97f936-e44a-557d-8df0-260309a8a42b', 'شمام') on conflict do nothi
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('bb97f936-e44a-557d-8df0-260309a8a42b', 'كانتالوب') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('3dac1eb5-c9cb-5ad3-8054-d696f54a2826', 'milk', 'milk', 'لبن', 'dairy', 'ml', null, true, true)
+values ('3dac1eb5-c9cb-5ad3-8054-d696f54a2826', 'milk', 'milk', 'لبن', 'dairy', 'ml', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -4720,7 +4720,7 @@ values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'passata') on conflict do nothin
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'صوص طماطم مطبوخ') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('e40147a0-afff-5cc5-809e-690b81481ae3', 'tomatoes', 'tomatoes', 'طماطم', 'vegetables', 'piece', 120, true, true)
+values ('e40147a0-afff-5cc5-809e-690b81481ae3', 'tomatoes', 'tomatoes', 'طماطم', 'vegetables', 'piece', 120, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -5060,7 +5060,7 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('9a32ad33-12e7-5d02-b6bb-6284ebe2bf64', 'white-cheese', 'white cheese', 'جبنة بيضاء', 'dairy', 'g', null, true, true)
+values ('9a32ad33-12e7-5d02-b6bb-6284ebe2bf64', 'white-cheese', 'white cheese', 'جبنة بيضاء', 'dairy', 'g', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -5141,7 +5141,7 @@ values ('0582d882-4c5d-52e7-9099-6e635915100e', 'khamira') on conflict do nothin
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('0582d882-4c5d-52e7-9099-6e635915100e', 'instant yeast') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('c73b0dd3-c4cf-564c-9114-079b380ba23e', 'yogurt', 'yogurt', 'زبادي', 'dairy', 'g', 105, true, true)
+values ('c73b0dd3-c4cf-564c-9114-079b380ba23e', 'yogurt', 'yogurt', 'زبادي', 'dairy', 'g', 105, false, true)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -5206,7 +5206,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('1fb1aacf-2ec9-53e9-b5af-88026bbd0153', 'koshari', 'Koshari', 'Egypt in a bowl: rice, lentils and pasta under spiced tomato sauce and a mountain of crisp onions.',
-  'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'medium',
+  null, 'curated', 'egyptian', 'medium',
   15, 40, 4,
   610, 19, 108,
   12, 11, null, true)
@@ -5286,7 +5286,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('87739e1b-f3cc-51cb-851f-51010ddf3583', 'shakshuka', 'Tomato & Feta Shakshuka', 'Eggs poached in a garlicky tomato sauce with crumbled white cheese. Ready before the bread is toasted.',
-  'https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'easy',
+  null, 'curated', 'egyptian', 'easy',
   5, 15, 2,
   380, 22, 18,
   25, 4, null, true)
@@ -5359,8 +5359,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('9686e1c2-ed74-5df2-b356-f51d1102819e', 'creamy-chicken-pasta', 'Creamy Chicken Pasta', 'Weeknight pasta in one pan — seared chicken, garlic cream and enough parmesan-style cheese to matter.',
-  'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=70', 'curated', 'italian', 'easy',
+values ('9686e1c2-ed74-5df2-b356-f51d1102819e', 'creamy-chicken-pasta', 'Creamy Chicken Pasta', 'One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.',
+  null, 'curated', 'italian', 'easy',
   10, 20, 3,
   650, 48, 62,
   22, 4, null, true)
@@ -5430,7 +5430,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('21ede411-5505-5763-ba65-89cd1b643330', 'foul-with-eggs', 'Foul with Eggs & Olive Oil', 'The breakfast that runs the country. Warm fava beans, cumin, lemon and a soft-boiled egg on top.',
-  'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'easy',
+  null, 'curated', 'egyptian', 'easy',
   5, 10, 2,
   420, 24, 44,
   17, 14, null, true)
@@ -5502,7 +5502,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('58b509eb-55b9-5a32-bd7a-29b443785ebb', 'molokhia-with-chicken', 'Molokhia with Chicken', 'Silky green molokhia over rice, with poached chicken and a hit of garlic-coriander taqleya.',
-  'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'medium',
+  null, 'curated', 'egyptian', 'medium',
   15, 45, 4,
   540, 42, 52,
   16, 6, null, true)
@@ -5573,8 +5573,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('dd63a595-f6f8-5570-b92f-9cb339e3ab47', 'air-fryer-spiced-chicken', 'Air Fryer Spiced Chicken', 'Twenty minutes, one appliance, no oil splatter. Crisp outside, still juicy inside.',
-  'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=70', 'curated', 'mediterranean', 'easy',
+values ('dd63a595-f6f8-5570-b92f-9cb339e3ab47', 'air-fryer-spiced-chicken', 'Air Fryer Spiced Chicken', 'Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.',
+  null, 'curated', 'mediterranean', 'easy',
   8, 18, 2,
   410, 52, 6,
   19, 1, null, true)
@@ -5639,8 +5639,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('d4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 'egyptian-lentil-soup', 'Egyptian Lentil Soup', 'Cheap, filling and quietly excellent. Blended red lentils with cumin and a squeeze of lemon.',
-  'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'easy',
+values ('d4e3adc0-dfd4-5eaa-bb81-28ee3f27627b', 'egyptian-lentil-soup', 'Egyptian Lentil Soup', 'Blended red lentils with cumin and a squeeze of lemon. Cheap, filling, and better than it has any right to be.',
+  null, 'curated', 'egyptian', 'easy',
   8, 30, 4,
   290, 16, 44,
   6, 12, null, true)
@@ -5710,8 +5710,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('4da2bb15-01c8-5380-bca5-a81bca47d744', 'tuna-pasta-salad', 'Cold Tuna Pasta Salad', 'No-cook-but-the-pasta lunch. Tuna, lemon, cucumber and enough protein to get you to dinner.',
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=70', 'curated', 'mediterranean', 'easy',
+values ('4da2bb15-01c8-5380-bca5-a81bca47d744', 'tuna-pasta-salad', 'Cold Tuna Pasta Salad', 'Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.',
+  null, 'curated', 'mediterranean', 'easy',
   10, 10, 2,
   480, 34, 58,
   13, 5, null, true)
@@ -5779,8 +5779,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('9b2f8525-e61b-5436-9bec-5920a094aba5', 'egyptian-cheese-toastie', 'Grilled Cheese & Tomato Toastie', 'Four ingredients, five minutes, dangerously good at midnight.',
-  'https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format&fit=crop&w=900&q=70', 'curated', 'american', 'easy',
+values ('9b2f8525-e61b-5436-9bec-5920a094aba5', 'egyptian-cheese-toastie', 'Grilled Cheese & Tomato Toastie', 'Four ingredients and five minutes. Dangerously good at midnight.',
+  null, 'curated', 'american', 'easy',
   3, 6, 1,
   430, 19, 38,
   23, 3, null, true)
@@ -5843,7 +5843,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('fb4570db-ea7f-5a98-978c-0587afe70b00', 'kofta-tagine', 'Kofta in Tomato Tagine', 'Beef kofta baked in a thick tomato sauce with potatoes. Sunday food on a Tuesday.',
-  'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'medium',
+  null, 'curated', 'egyptian', 'medium',
   20, 40, 4,
   620, 38, 34,
   36, 5, null, true)
@@ -5913,7 +5913,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('2a0a84e2-b258-5bf9-addf-8aa1ea3b495c', 'banana-peanut-oats', 'Banana & Peanut Butter Oats', 'Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.',
-  'https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=900&q=70', 'curated', 'american', 'easy',
+  null, 'curated', 'american', 'easy',
   2, 5, 1,
   450, 17, 58,
   17, 8, null, true)
@@ -5978,7 +5978,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('090dc093-13f3-579f-8d50-f69bd9c03bdd', 'quick-vegetable-fried-rice', 'Quick Vegetable Fried Rice', 'The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.',
-  'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=70', 'curated', 'asian', 'easy',
+  null, 'curated', 'asian', 'easy',
   8, 10, 2,
   470, 16, 68,
   14, 6, null, true)
@@ -6048,7 +6048,7 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('fc8ac722-5f05-5687-af65-f7247e6a3086', 'okra-stew', 'Okra Stew with Beef', 'Slow-cooked bamya in garlicky tomato, the way it should be. Serve with rice and bread.',
-  'https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=900&q=70', 'curated', 'egyptian', 'medium',
+  null, 'curated', 'egyptian', 'medium',
   15, 75, 4,
   520, 36, 30,
   28, 8, null, true)
@@ -6117,8 +6117,8 @@ insert into public.recipes (
   id, slug, title, description, image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('4dd7d8f6-c800-5842-8a72-c6956ffe803c', 'zucchini-egg-skillet', 'Zucchini & Egg Skillet', 'Cheap, green and quick. What to make when the fridge is nearly empty.',
-  'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=900&q=70', 'curated', 'mediterranean', 'easy',
+values ('4dd7d8f6-c800-5842-8a72-c6956ffe803c', 'zucchini-egg-skillet', 'Zucchini & Egg Skillet', 'Green, quick and barely any money. What to cook when the fridge is nearly empty.',
+  null, 'curated', 'mediterranean', 'easy',
   5, 12, 2,
   300, 20, 12,
   20, 4, null, true)

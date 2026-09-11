@@ -151,10 +151,24 @@ export function ResultsView({
         ) : null}
       </View>
 
+      {/*
+        Bleeds past the screen padding on purpose. Constrained to it, the last
+        option ("Most protein") was clipped at the padding boundary with no
+        hint that anything lay beyond. Running to the edge is what makes a
+        horizontal list read as scrollable, and the trailing padding leaves the
+        final chip somewhere to land.
+      */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ gap: theme.spacing.sm }}
+        style={{
+          marginHorizontal: -theme.layout.screenPadding,
+          flexGrow: 0,
+        }}
+        contentContainerStyle={{
+          gap: theme.spacing.sm,
+          paddingHorizontal: theme.layout.screenPadding,
+        }}
       >
         {sortOptions.map((option) => (
           <Chip

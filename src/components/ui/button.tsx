@@ -146,7 +146,11 @@ export function IconButton({
   const backgrounds: Record<typeof variant, string> = {
     secondary: theme.colors.surfaceAlt,
     ghost: 'transparent',
-    onImage: 'rgba(0,0,0,0.42)',
+    // Lighter than it was: a 42%-black disc over a recipe card read as a
+    // heavy dark blob competing with the food. This is enough scrim for a
+    // white glyph to stay legible without becoming the loudest thing on the
+    // card.
+    onImage: 'rgba(0,0,0,0.28)',
   };
   const foreground = active
     ? theme.colors.primary

@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
@@ -7,7 +6,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PriceTag } from '@/components/recipe/price-tag';
-import { RecipePlaceholder } from '@/components/recipe/recipe-card';
+import {} from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
@@ -29,6 +28,7 @@ import { useShoppingMutations } from '@/features/shopping/hooks';
 import { isOrderingAvailable } from '@/features/grocery/registry';
 import { useI18n } from '@/i18n';
 import { divideMoney } from '@/lib/format/money';
+import { RecipeImage } from '@/components/recipe/recipe-image';
 import { useTheme } from '@/theme';
 import type { IngredientMatch, Recipe } from '@/types/domain';
 
@@ -233,22 +233,11 @@ export default function RecipeDetailScreen() {
     <>
       <ScreenScroll padded={false} edges={{ top: false }} bottomInset={theme.spacing.huge}>
         <View style={{ position: 'relative' }}>
-          {recipe.imageUrl ? (
-            <Image
-              source={recipe.imageUrl}
-              contentFit="cover"
-              transition={250}
-              cachePolicy="memory-disk"
-              accessibilityIgnoresInvertColors
-              style={{
-                width: '100%',
-                aspectRatio: theme.layout.heroImageAspect,
-                backgroundColor: theme.colors.surfaceAlt,
-              }}
-            />
-          ) : (
-            <RecipePlaceholder aspectRatio={theme.layout.heroImageAspect} />
-          )}
+          <RecipeImage
+            recipe={recipe}
+            aspectRatio={theme.layout.heroImageAspect}
+            glyphSize={52}
+          />
           <LinearGradient
             colors={['rgba(0,0,0,0.35)', 'rgba(0,0,0,0)']}
             style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120 }}

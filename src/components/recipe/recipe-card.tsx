@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, type ViewStyle } from 'react-native';
 
@@ -9,12 +8,11 @@ import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
+
+import { RecipeImage } from './recipe-image';
 import type { Recipe, RecipeMatch } from '@/types/domain';
 
 import { PriceTag } from './price-tag';
-
-/** Neutral blurhash so images fade in from a warm tone, not a grey block. */
-const PLACEHOLDER_HASH = 'L6PZfSjE.AyE_3t7t7R**0o#DgR4';
 
 function MetaPill({
   icon,
@@ -34,33 +32,6 @@ function MetaPill({
   );
 }
 
-/** Stand-in artwork for a recipe with no photograph. */
-export function RecipePlaceholder({ aspectRatio }: { aspectRatio: number }) {
-  const theme = useTheme();
-  return (
-    <LinearGradient
-      colors={
-        theme.scheme === 'dark'
-          ? ['#3A2318', '#211D1A']
-          : [theme.colors.primarySoft, theme.colors.surfaceAlt]
-      }
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={{
-        width: '100%',
-        aspectRatio,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Ionicons
-        name="restaurant-outline"
-        size={36}
-        color={theme.colors.primarySoftText}
-      />
-    </LinearGradient>
-  );
-}
 
 export type RecipeCardProps = {
   match: RecipeMatch;
@@ -120,27 +91,7 @@ export function RecipeCard({
       ]}
     >
       <View style={{ position: 'relative' }}>
-        {recipe.imageUrl ? (
-          <Image
-            source={recipe.imageUrl}
-            placeholder={{ blurhash: PLACEHOLDER_HASH }}
-            contentFit="cover"
-            transition={220}
-            // Recipe photos repeat across screens; caching them avoids a
-            // refetch every time the feed re-renders.
-            cachePolicy="memory-disk"
-            accessibilityIgnoresInvertColors
-            style={{
-              width: '100%',
-              aspectRatio: theme.layout.cardImageAspect,
-              backgroundColor: theme.colors.surfaceAlt,
-            }}
-          />
-        ) : (
-          // Generated recipes have no photograph. A designed placeholder in the
-          // brand palette reads as intentional; a broken image frame does not.
-          <RecipePlaceholder aspectRatio={theme.layout.cardImageAspect} />
-        )}
+        <RecipeImage recipe={recipe} aspectRatio={theme.layout.cardImageAspect} />
 
         <LinearGradient
           colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.45)']}
@@ -292,23 +243,7 @@ export function RecipeCardCompact({
       style={{ width, gap: theme.spacing.sm }}
     >
       <View style={{ position: 'relative', borderRadius: theme.radius.md, overflow: 'hidden' }}>
-        {recipe.imageUrl ? (
-          <Image
-            source={recipe.imageUrl}
-            placeholder={{ blurhash: PLACEHOLDER_HASH }}
-            contentFit="cover"
-            transition={200}
-            cachePolicy="memory-disk"
-            accessibilityIgnoresInvertColors
-            style={{
-              width: '100%',
-              aspectRatio: 1,
-              backgroundColor: theme.colors.surfaceAlt,
-            }}
-          />
-        ) : (
-          <RecipePlaceholder aspectRatio={1} />
-        )}
+        <RecipeImage recipe={recipe} aspectRatio={1} glyphSize={28} />
         {badge ? (
           <View style={{ position: 'absolute', left: 6, bottom: 6 }}>
             <Badge label={badge} tone="primary" />

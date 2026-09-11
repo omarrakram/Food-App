@@ -16,7 +16,15 @@ import type { Recipe } from '@/types/domain';
  * type-stripping loader.
  */
 
-const IMG = (id: string) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&q=70`;
+/*
+ * Recipe photography is not shipped yet.
+ *
+ * These used to hot-link Unsplash, which is someone else's bandwidth and
+ * someone else's licence. `imageUrl: null` routes every recipe through
+ * `RecipeImage`'s branded fallback instead, which is a designed state rather
+ * than a missing one. When licensed, self-hosted photography exists, set the
+ * URL here and every screen picks it up.
+ */
 
 export const RECIPE_FIXTURES: Recipe[] = [
   {
@@ -25,7 +33,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     title: 'Koshari',
     description:
       'Egypt in a bowl: rice, lentils and pasta under spiced tomato sauce and a mountain of crisp onions.',
-    imageUrl: IMG('1512058564366-18510be2db19'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['lunch', 'dinner'],
@@ -65,7 +73,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'shakshuka',
     title: 'Tomato & Feta Shakshuka',
     description: 'Eggs poached in a garlicky tomato sauce with crumbled white cheese. Ready before the bread is toasted.',
-    imageUrl: IMG('1590412200988-a436970781fa'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['breakfast', 'dinner'],
@@ -101,8 +109,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: '9686e1c2-ed74-5df2-b356-f51d1102819e',
     slug: 'creamy-chicken-pasta',
     title: 'Creamy Chicken Pasta',
-    description: 'Weeknight pasta in one pan — seared chicken, garlic cream and enough parmesan-style cheese to matter.',
-    imageUrl: IMG('1621996346565-e3dbc646d9a9'),
+    description: 'One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'italian',
     mealTypes: ['dinner'],
@@ -138,7 +146,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'foul-with-eggs',
     title: 'Foul with Eggs & Olive Oil',
     description: 'The breakfast that runs the country. Warm fava beans, cumin, lemon and a soft-boiled egg on top.',
-    imageUrl: IMG('1528735602780-2552fd46c7af'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['breakfast'],
@@ -174,7 +182,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'molokhia-with-chicken',
     title: 'Molokhia with Chicken',
     description: 'Silky green molokhia over rice, with poached chicken and a hit of garlic-coriander taqleya.',
-    imageUrl: IMG('1547592180-85f173990554'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['lunch', 'dinner'],
@@ -211,8 +219,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: 'dd63a595-f6f8-5570-b92f-9cb339e3ab47',
     slug: 'air-fryer-spiced-chicken',
     title: 'Air Fryer Spiced Chicken',
-    description: 'Twenty minutes, one appliance, no oil splatter. Crisp outside, still juicy inside.',
-    imageUrl: IMG('1598515214211-89d3c73ae83b'),
+    description: 'Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'mediterranean',
     mealTypes: ['lunch', 'dinner'],
@@ -245,8 +253,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: 'd4e3adc0-dfd4-5eaa-bb81-28ee3f27627b',
     slug: 'egyptian-lentil-soup',
     title: 'Egyptian Lentil Soup',
-    description: 'Cheap, filling and quietly excellent. Blended red lentils with cumin and a squeeze of lemon.',
-    imageUrl: IMG('1547592166-23ac45744acd'),
+    description: 'Blended red lentils with cumin and a squeeze of lemon. Cheap, filling, and better than it has any right to be.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['lunch', 'dinner'],
@@ -280,8 +288,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: '4da2bb15-01c8-5380-bca5-a81bca47d744',
     slug: 'tuna-pasta-salad',
     title: 'Cold Tuna Pasta Salad',
-    description: 'No-cook-but-the-pasta lunch. Tuna, lemon, cucumber and enough protein to get you to dinner.',
-    imageUrl: IMG('1512621776951-a57141f2eefd'),
+    description: 'Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'mediterranean',
     mealTypes: ['lunch', 'snack'],
@@ -314,8 +322,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: '9b2f8525-e61b-5436-9bec-5920a094aba5',
     slug: 'egyptian-cheese-toastie',
     title: 'Grilled Cheese & Tomato Toastie',
-    description: 'Four ingredients, five minutes, dangerously good at midnight.',
-    imageUrl: IMG('1528736235302-52922df5c122'),
+    description: 'Four ingredients and five minutes. Dangerously good at midnight.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'american',
     mealTypes: ['snack', 'breakfast'],
@@ -346,7 +354,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'kofta-tagine',
     title: 'Kofta in Tomato Tagine',
     description: 'Beef kofta baked in a thick tomato sauce with potatoes. Sunday food on a Tuesday.',
-    imageUrl: IMG('1544025162-d76694265947'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['dinner'],
@@ -383,7 +391,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'banana-peanut-oats',
     title: 'Banana & Peanut Butter Oats',
     description: 'Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.',
-    imageUrl: IMG('1517673400267-0251440c45dc'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'american',
     mealTypes: ['breakfast'],
@@ -415,7 +423,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'quick-vegetable-fried-rice',
     title: 'Quick Vegetable Fried Rice',
     description: 'The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.',
-    imageUrl: IMG('1603133872878-684f208fb84b'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'asian',
     mealTypes: ['lunch', 'dinner'],
@@ -450,7 +458,7 @@ export const RECIPE_FIXTURES: Recipe[] = [
     slug: 'okra-stew',
     title: 'Okra Stew with Beef',
     description: 'Slow-cooked bamya in garlicky tomato, the way it should be. Serve with rice and bread.',
-    imageUrl: IMG('1574484284002-952d92456975'),
+    imageUrl: null,
     source: 'curated',
     cuisine: 'egyptian',
     mealTypes: ['lunch', 'dinner'],
@@ -486,8 +494,8 @@ export const RECIPE_FIXTURES: Recipe[] = [
     id: '4dd7d8f6-c800-5842-8a72-c6956ffe803c',
     slug: 'zucchini-egg-skillet',
     title: 'Zucchini & Egg Skillet',
-    description: 'Cheap, green and quick. What to make when the fridge is nearly empty.',
-    imageUrl: IMG('1482049016688-2d3e1b311543'),
+    description: 'Green, quick and barely any money. What to cook when the fridge is nearly empty.',
+    imageUrl: null,
     source: 'curated',
     cuisine: 'mediterranean',
     mealTypes: ['breakfast', 'lunch'],
