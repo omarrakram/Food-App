@@ -65,12 +65,52 @@ export default function AccountSettingsScreen() {
     ]);
   };
 
+  // No backend configured. This is the state every preview build is in, and
+  // it used to render a header over one line of text — which reads as a screen
+  // that failed to load rather than a product that works offline. Say what is
+  // true instead: the data is real, it is on this device, and nothing is
+  // pretending to be an account.
   if (!isEnabled) {
     return (
       <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.lg}>
         <ScreenHeader title={t('profile.account')} />
-        <Text variant="body" color="textSecondary">
-          {t('profile.signInPrompt')}
+
+        <View
+          style={{
+            gap: theme.spacing.sm,
+            padding: theme.spacing.lg,
+            borderRadius: theme.radius.lg,
+            backgroundColor: theme.colors.surfaceAlt,
+          }}
+        >
+          <Text variant="headline">{t('account.localTitle')}</Text>
+          <Text variant="body" color="textSecondary">
+            {t('account.localBody')}
+          </Text>
+        </View>
+
+        <ListGroup>
+          <ListRow
+            title={t('account.localWhatWorks')}
+            subtitle={t('account.localWhatWorksSub')}
+            icon="checkmark-circle-outline"
+            iconTone="success"
+          />
+          <ListRow
+            title={t('account.localWhatDoesNot')}
+            subtitle={t('account.localWhatDoesNotSub')}
+            icon="cloud-offline-outline"
+          />
+          <ListRow
+            title={t('profile.privacy')}
+            subtitle={t('account.localPrivacySub')}
+            icon="shield-checkmark-outline"
+            onPress={() => router.push('/settings/privacy')}
+          />
+        </ListGroup>
+
+        <Text variant="micro" color="textTertiary">
+          {t('account.localFooter')}
         </Text>
       </ScreenScroll>
     );

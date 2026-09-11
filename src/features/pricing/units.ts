@@ -132,6 +132,39 @@ export function roundForKitchen(value: number): number {
   return Math.round(value / 10) * 10;
 }
 
+/**
+ * The fractions a recipe is written with.
+ *
+ * `roundForKitchen` already snaps to quarters and halves, so these are the only
+ * fractional values that can reach here. A recipe says "½ bunch", never
+ * "0.5 bunches" — the decimal reads like a measurement taken off a scale.
+ */
+const FRACTION_GLYPHS: Record<string, string> = {
+  '0.25': '¼',
+  '0.5': '½',
+  '0.75': '¾',
+};
+
+/**
+ * Formats a kitchen amount, preferring a fraction over a decimal.
+ *
+ * The whole part still goes through `formatNumber` so Arabic gets Arabic-Indic
+ * digits; only the fractional remainder becomes a glyph, which reads correctly
+ * in both scripts.
+ */
+export function formatKitchenNumber(
+  value: number,
+  formatNumber: (value: number) => string,
+): string {
+  if (Number.isInteger(value)) return formatNumber(value);
+
+  const whole = Math.floor(value);
+  const glyph = FRACTION_GLYPHS[(value - whole).toFixed(2).replace(/0$/, '')];
+  if (!glyph) return formatNumber(value);
+
+  return whole === 0 ? glyph : `${formatNumber(whole)}${glyph}`;
+}
+
 /** Renders a quantity + unit the way a recipe would write it. */
 export function formatQuantity(
   quantity: number | null,
@@ -142,10 +175,11 @@ export function formatQuantity(
   if (quantity === null) return unit ? unitLabel(unit) : '';
 
   const rounded = roundForKitchen(quantity);
-  const numeric = Number.isInteger(rounded) ? formatNumber(rounded) : formatNumber(rounded);
+  const numeric = formatKitchenNumber(rounded, formatNumber);
 
   if (!unit || unit === 'piece') return numeric;
-  return `${numeric} ${unitLabel(unit, rounded)}`;
+  // Anything below one takes the singular: "½ bunch", not "½ bunches".
+  return `${numeric} ${unitLabel(unit, rounded < 1 ? 1 : rounded)}`;
 }
 
 export function unitLabel(unit: Unit, quantity = 1): string {

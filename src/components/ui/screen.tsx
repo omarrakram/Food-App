@@ -50,6 +50,12 @@ export function Screen({
           paddingTop: edges.top ? insets.top : 0,
           paddingBottom: edges.bottom ? insets.bottom : 0,
           paddingHorizontal: padded ? theme.layout.screenPadding : 0,
+          // Keeps a phone layout at phone proportions on a wide browser.
+          // `alignSelf: center` rather than margins so it composes inside a
+          // flex parent; on any real device the cap is never reached.
+          width: '100%',
+          maxWidth: theme.layout.contentMaxWidth,
+          alignSelf: 'center',
         },
         style,
       ]}
@@ -96,6 +102,11 @@ export function ScreenScroll({
             paddingBottom: (edges.bottom ? insets.bottom : 0) + bottomInset + theme.spacing.xxl,
             paddingHorizontal: padded ? theme.layout.screenPadding : 0,
             gap: contentGap,
+            // Same cap as `Screen`, applied to the content rather than the
+            // scroller so the scrollbar stays where the window edge is.
+            width: '100%',
+            maxWidth: theme.layout.contentMaxWidth,
+            alignSelf: 'center',
           },
           style,
         ]}

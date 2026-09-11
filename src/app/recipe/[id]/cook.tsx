@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useKeepAwake } from 'expo-keep-awake';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { useMemo, useRef, useState } from 'react';
+import { Alert, Platform, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { Button, IconButton } from '@/components/ui/button';
@@ -36,7 +36,9 @@ export default function CookingModeScreen() {
   const recordHistory = useRecordHistory();
   const [stepIndex, setStepIndex] = useState(0);
   const [finished, setFinished] = useState(false);
+  const hasLoggedRef = useRef(false);
 
+  // Keeps the screen on while someone is cooking with their hands full.
   useKeepAwake();
 
   const targetServings = useMemo(() => {
@@ -61,14 +63,35 @@ export default function CookingModeScreen() {
   const step = recipe.steps[stepIndex];
   const isLastStep = stepIndex === recipe.steps.length - 1;
 
+  /**
+   * Asks before discarding progress — and only then.
+   *
+   * Confirming an exit from step one, where there is nothing to lose, trains
+   * people to dismiss the dialog without reading it, which is exactly when it
+   * stops protecting anything.
+   */
   const confirmExit = () => {
+    if (stepIndex === 0) {
+      router.back();
+      return;
+    }
+
     Alert.alert(t('cooking.exitConfirmTitle'), t('cooking.exitConfirmBody'), [
       { text: t('common.cancel'), style: 'cancel' },
       { text: t('cooking.exit'), style: 'destructive', onPress: () => router.back() },
     ]);
   };
 
+  /**
+   * Writes the cooked entry exactly once.
+   *
+   * `finished` flips in the same render pass, but a double tap can land two
+   * presses before React re-renders, and each one would append a separate
+   * history row for the same meal. The ref settles synchronously.
+   */
   const handleFinish = () => {
+    if (hasLoggedRef.current) return;
+    hasLoggedRef.current = true;
     recordHistory.mutate({ recipe, kind: 'cooked' });
     setFinished(true);
   };
@@ -124,9 +147,19 @@ export default function CookingModeScreen() {
           accessibilityLabel={t('cooking.exit')}
           testID="cooking-exit"
         />
-        <Text variant="subhead" color="textSecondary">
-          {t('recipe.step', { current: step.stepNumber, total: recipe.steps.length })}
-        </Text>
+        {/*
+          The step counter with the dish above it: enough to know what you are
+          cooking after a pause, without turning a distraction-free screen into
+          a header.
+        */}
+        <View style={{ flex: 1, alignItems: 'center', gap: 1 }}>
+          <Text variant="micro" color="textTertiary" numberOfLines={1}>
+            {recipe.title}
+          </Text>
+          <Text variant="subhead" color="textSecondary">
+            {t('recipe.step', { current: step.stepNumber, total: recipe.steps.length })}
+          </Text>
+        </View>
         <View style={{ width: 40 }} />
       </View>
 
@@ -239,9 +272,17 @@ export default function CookingModeScreen() {
             testID="cooking-next"
           />
         </View>
-        <Text variant="micro" color="textTertiary" align="center">
-          {t('cooking.keepAwake')}
-        </Text>
+        {/*
+          Claimed only on the platforms where it is true. expo-keep-awake maps
+          to the browser Wake Lock API on web, which needs a secure context and
+          can be refused — promising a screen that stays on and then letting it
+          sleep mid-recipe is worse than saying nothing.
+        */}
+        {Platform.OS === 'ios' || Platform.OS === 'android' ? (
+          <Text variant="micro" color="textTertiary" align="center">
+            {t('cooking.keepAwake')}
+          </Text>
+        ) : null}
       </ScreenFooter>
     </Screen>
   );

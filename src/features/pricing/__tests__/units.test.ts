@@ -1,4 +1,5 @@
 import {
+  formatKitchenNumber,
   formatQuantity,
   isCountableUnit,
   perPieceWeightFor,
@@ -146,5 +147,55 @@ describe('unitLabel', () => {
     expect(unitLabel('kg')).toBe('kg');
     expect(unitLabel('l')).toBe('L');
     expect(unitLabel('pinch', 2)).toBe('pinches');
+  });
+});
+
+describe('formatKitchenNumber', () => {
+  const plain = (value: number) => String(value);
+
+  it('writes the fractions a recipe would write', () => {
+    expect(formatKitchenNumber(0.5, plain)).toBe('½');
+    expect(formatKitchenNumber(0.25, plain)).toBe('¼');
+    expect(formatKitchenNumber(0.75, plain)).toBe('¾');
+  });
+
+  it('writes mixed numbers without a decimal point', () => {
+    expect(formatKitchenNumber(1.5, plain)).toBe('1½');
+    expect(formatKitchenNumber(2.25, plain)).toBe('2¼');
+  });
+
+  it('leaves whole numbers alone', () => {
+    expect(formatKitchenNumber(3, plain)).toBe('3');
+  });
+
+  it('falls back to the decimal for anything with no clean fraction', () => {
+    expect(formatKitchenNumber(1.3, plain)).toBe('1.3');
+  });
+
+  it('routes the whole part through the locale formatter', () => {
+    // Arabic gets Arabic-Indic digits; only the remainder becomes a glyph.
+    expect(formatKitchenNumber(2.5, () => '٢')).toBe('٢½');
+  });
+});
+
+describe('formatQuantity uses fractions and the right plural', () => {
+  const plain = (value: number) => String(value);
+
+  it('says "½ bunch", not "0.5 bunches"', () => {
+    expect(formatQuantity(0.5, 'bunch', plain)).toBe('½ bunch');
+  });
+
+  it('keeps the plural above one', () => {
+    expect(formatQuantity(2, 'clove', plain)).toBe('2 cloves');
+    expect(formatQuantity(1.5, 'clove', plain)).toBe('1½ cloves');
+  });
+
+  it('keeps the singular at exactly one', () => {
+    expect(formatQuantity(1, 'clove', plain)).toBe('1 clove');
+  });
+
+  it('never drops the unit', () => {
+    expect(formatQuantity(250, 'g', plain)).toBe('250 g');
+    expect(formatQuantity(0.5, 'l', plain)).toBe('½ L');
   });
 });

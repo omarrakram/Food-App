@@ -89,16 +89,26 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
   const insets = useSafeAreaInsets();
 
   return (
+    // The bar itself spans the window so its background and border reach the
+    // edges; the buttons inside are capped to the same width as every screen,
+    // so five tabs do not stretch across a desktop monitor.
     <View
       style={{
-        flexDirection: 'row',
         backgroundColor: theme.colors.tabBarBackground,
         borderTopWidth: 1,
         borderTopColor: theme.colors.tabBarBorder,
         paddingBottom: Math.max(insets.bottom, Platform.OS === 'ios' ? 0 : theme.spacing.sm),
         minHeight: theme.layout.tabBarHeight,
+        alignItems: 'center',
       }}
     >
+      <View
+        style={{
+          flexDirection: 'row',
+          width: '100%',
+          maxWidth: theme.layout.contentMaxWidth,
+        }}
+      >
       {state.routes.map((route, index) => {
         const options: Partial<BottomTabNavigationOptions> = descriptors[route.key]?.options ?? {};
         const label =
@@ -133,6 +143,7 @@ export function AppTabBar({ state, descriptors, navigation }: BottomTabBarProps)
           />
         );
       })}
+      </View>
     </View>
   );
 }

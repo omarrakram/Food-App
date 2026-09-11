@@ -86,6 +86,15 @@ export const zIndex = {
 /** Layout constants shared by screens. */
 export const layout = {
   screenPadding: spacing.xl,
+  /**
+   * Widest the app's content is ever laid out.
+   *
+   * This is a phone product. On a wide browser an unconstrained layout stretches
+   * a bottom tab bar and a recipe card across 1400px, which is neither the
+   * design nor a useful thing to review. Centring at a phone-ish width shows
+   * the real proportions; native is unaffected because no phone is this wide.
+   */
+  contentMaxWidth: 480,
   cardGap: spacing.lg,
   maxContentWidth: 640,
   tabBarHeight: 60,
