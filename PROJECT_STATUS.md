@@ -146,22 +146,23 @@ preview workflow, and `SECURITY_REVIEW.md`.
 
 ## Preview status
 
-**Phone preview is one click away and blocked on that click.**
+**Live at https://omarrakram.github.io/Food-App/** — open it on a phone, no
+install, no account, no key.
 
-`.github/workflows/preview.yml` builds the app and deploys it to GitHub Pages
-at `https://omarrakram.github.io/Food-App/`. The repository is public so Pages
-is free, deep links and refresh work (the export is built for the subpath it is
-served from, and Expo's static output writes one HTML file per route), and the
-workflow refuses to publish if the bundle contains a secret-shaped string.
+`.github/workflows/preview.yml` builds and deploys on every push to
+`claude/expo-rn-setup-mom5gw` (markdown-only changes excluded). Pages is
+enabled and deploying; nothing manual is needed again unless the repository's
+Pages source is changed.
 
-Every run so far has failed at one step: **GitHub Pages is not enabled.**
-Creating a Pages site is not something a workflow's own `GITHUB_TOKEN` may do
-(`Resource not accessible by integration`), and a PAT that could would be a far
-larger credential than this warrants.
+Deep links and refresh work because the export is built for the subpath it is
+served from (`EXPO_WEB_BASE_URL` → `experiments.baseUrl`) and Expo's static
+output writes one HTML file per route. `404.html` is a copy of `index.html`, so
+a stale bookmark reaches the app rather than GitHub's error page. Nothing
+rewrites the URL at runtime — doing so breaks React Navigation.
 
-> **The one action needed:** repository **Settings → Pages → Build and
-> deployment → Source: GitHub Actions**. Then re-run the "Web preview"
-> workflow. Nothing else is required — no account, no key, no install.
+The workflow refuses to publish if the bundle contains a secret-shaped string;
+no secrets are provided to it, and the app falls back to its bundled catalogue
+without a backend.
 
 The earlier Claude Artifact is not a substitute: artifacts are private, so a
 phone browser that is not signed in to claude.ai gets a 404.
@@ -171,14 +172,13 @@ phone browser that is not signed in to claude.ai gets a 404.
 ## Remaining work
 
 ### Credential-gated (nothing to build until these exist)
-1. **GitHub Pages enabled** — one click, above. Blocks the phone preview.
-2. **Supabase project** — accounts, sync and edge functions are inert without
+1. **Supabase project** — accounts, sync and edge functions are inert without
    it. The app runs fully on local data meanwhile.
-3. **`ANTHROPIC_API_KEY`** — generation is inert; local catalogue results still
+2. **`ANTHROPIC_API_KEY`** — generation is inert; local catalogue results still
    answer every screen.
-4. **EAS project id** — `npx eas init`, then native builds work.
-5. **Apple / Google developer accounts** — store submission.
-6. **Grocery provider agreements** — commercial, not technical.
+3. **EAS project id** — `npx eas init`, then native builds work.
+4. **Apple / Google developer accounts** — store submission.
+5. **Grocery provider agreements** — commercial, not technical.
 
 ### Buildable now
 | Item | Notes |
@@ -200,6 +200,7 @@ phone browser that is not signed in to claude.ai gets a 404.
 | 3 | `database.types.ts` is hand-maintained | CI now diffs it against the real schema, so drift fails the build rather than surfacing at runtime |
 | 4 | Recipe imagery is a branded placeholder | Deliberate: no hot-linking, no licence exposure. Needs owned assets |
 | 5 | Edge functions are type-checked and unit-tested but never executed against Claude in CI | Needs an API key. Run `supabase functions serve` before trusting a change |
+| 6 | AI-generated recipes render in English for an Arabic reader | Deliberate. The model answers in one language and we do not machine-translate a cooking step or a safety note behind the user's back. Asking the model for Arabic directly is the fix, and is a feature, not a bug fix |
 
 No known crashes. No known data-loss paths. No open security findings.
 
@@ -330,7 +331,8 @@ cp .env.example .env.local          # optional — the app runs without it
 
 EXPO_OFFLINE=1 npx expo start       # EXPO_OFFLINE only needed behind a proxy
 npm run verify                      # typecheck + lint + test
-npm run smoke:web                   # export + walk the whole app in a browser
+npm run smoke:web                   # export + drive the app in a real browser
+npm test -- --selectProjects web     # the web-platform Jest project on its own
 
 npm run fn:check                    # type-check the edge functions (Deno)
 npm run fn:test                     # run their tests
