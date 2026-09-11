@@ -24,6 +24,7 @@
     "db:push": "supabase db push",
     "db:diff": "supabase db diff",
     "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts",
+    "db:types:check": "node --experimental-strip-types --no-warnings scripts/check-db-types.ts",
     "db:types:from-url": "supabase gen types typescript --db-url \"${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/akla_test}\" > src/lib/supabase/database.types.ts",
     "fn:serve": "supabase functions serve --env-file supabase/functions/.env",
     "fn:deploy": "supabase functions deploy",

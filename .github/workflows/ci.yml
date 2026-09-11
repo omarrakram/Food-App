@@ -39,6 +39,13 @@ jobs:
           npm run fn:check
           npm run fn:test
 
+      - name: Check database.types.ts against the migrations
+        # Hand-maintained types are the one place the app can be wrong in a way
+        # TypeScript cannot see: a renamed column type-checks and fails at
+        # runtime. This reads the migrations directly, so it needs no database
+        # and no Docker.
+        run: npm run db:types:check
+
       - name: Verify the generated ingredient catalogue matches its CSV
         run: npm run ingredients:import -- --check
 
@@ -89,26 +96,4 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Check src/lib/supabase/database.types.ts against the real schema
-        # The types were hand-written, which makes them the one place the app
-        # can be wrong in a way TypeScript cannot see: a renamed column type-
-        # checks perfectly and fails at runtime. The generator needs Docker,
-        # which CI has and the dev sandbox does not, so this is where drift is
-        # caught.
-        run: |
-          set -euo pipefail
-          npx --yes supabase@2 gen types typescript \
-            --db-url "postgresql://postgres:postgres@localhost:5432/akla_test" \
-            > /tmp/database.types.generated.ts
-
-          if ! diff -u src/lib/supabase/database.types.ts /tmp/database.types.generated.ts; then
-            echo "::error::database.types.ts no longer matches the migrations."
-            echo "::error::Regenerate with 'npm run db:types:from-url' and commit the result."
-            exit 1
-          fi
-          echo "Database types match the schema."
 
