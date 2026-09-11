@@ -46,11 +46,55 @@ function FilterGroup({ label, children }: { label: string; children: React.React
   );
 }
 
+/** How many of the optional constraints the user has actually set. */
+export function activeFilterCount(value: RequestFiltersValue): number {
+  return [value.mealType, value.cuisine, value.maxMinutes, value.minProteinGrams, value.maxCalories]
+    .filter((entry) => entry !== null)
+    .length;
+}
+
 /**
- * Optional constraints shared by the ingredient and budget flows.
+ * Servings, which stays on the screen.
  *
- * Everything here is opt-in: the primary action works with none of it set, so
- * the screen never feels like a form.
+ * It is the one constraint nearly everyone sets and the one that changes every
+ * quantity and price downstream, so it earns its place next to the primary
+ * action. Everything else is behind `RequestFilters`.
+ */
+export function ServingsField({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (servings: number) => void;
+}) {
+  const theme = useTheme();
+  const { t } = useI18n();
+
+  return (
+    <View style={{ gap: theme.spacing.sm }}>
+      <Text variant="caption" color="textTertiary">
+        {t('cook.servings')}
+      </Text>
+      <Stepper
+        value={value}
+        onChange={onChange}
+        min={1}
+        max={12}
+        suffix={t('common.peopleUnit', { count: value })}
+        accessibilityLabel={t('cook.servings')}
+        testID="filter-servings"
+      />
+    </View>
+  );
+}
+
+/**
+ * The secondary constraints, shown on demand.
+ *
+ * These used to sit open on the cook screen, so the first thing between a
+ * hungry person and a recipe was six groups of chips. Ingredients are the
+ * task; meal type, cuisine, time and nutrition targets are refinements, and
+ * refinements belong behind a control you only open if you want them.
  */
 export function RequestFilters({ value, onChange, showNutrition = true }: RequestFiltersProps) {
   const theme = useTheme();
@@ -58,20 +102,6 @@ export function RequestFilters({ value, onChange, showNutrition = true }: Reques
 
   return (
     <View style={{ gap: theme.spacing.lg }}>
-      <View style={{ gap: theme.spacing.sm }}>
-        <Text variant="caption" color="textTertiary">
-          {t('cook.servings')}
-        </Text>
-        <Stepper
-          value={value.servings}
-          onChange={(servings) => onChange({ servings })}
-          min={1}
-          max={12}
-          accessibilityLabel={t('cook.servings')}
-          testID="filter-servings"
-        />
-      </View>
-
       <FilterGroup label={t('cook.maxTime')}>
         <Chip
           label={t('cook.anyTime')}

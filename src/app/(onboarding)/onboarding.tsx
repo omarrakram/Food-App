@@ -214,7 +214,7 @@ export default function OnboardingScreen() {
                   onChange={(householdSize) => patch({ householdSize })}
                   min={1}
                   max={12}
-                  suffix={t('common.people', { count: draft.householdSize ?? preferences.householdSize })}
+                  suffix={t('common.peopleUnit', { count: draft.householdSize ?? preferences.householdSize })}
                   accessibilityLabel={t('onboarding.householdLabel')}
                   testID="onboarding-household"
                 />

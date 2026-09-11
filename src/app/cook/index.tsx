@@ -4,9 +4,15 @@ import { useMemo, useState } from 'react';
 import { View } from 'react-native';
 
 import { IngredientPicker } from '@/components/cook/ingredient-picker';
-import { RequestFilters, type RequestFiltersValue } from '@/components/cook/request-filters';
+import {
+  activeFilterCount,
+  RequestFilters,
+  ServingsField,
+  type RequestFiltersValue,
+} from '@/components/cook/request-filters';
 import { Button } from '@/components/ui/button';
 import { Screen, ScreenFooter, ScreenHeader, ScreenScroll } from '@/components/ui/screen';
+import { Sheet } from '@/components/ui/sheet';
 import { Text } from '@/components/ui/text';
 import { usePantryItems } from '@/features/pantry/hooks';
 import { usePreferences } from '@/features/preferences/preferences-provider';
@@ -33,6 +39,7 @@ export default function CookScreen() {
     staleTime: Infinity,
   });
 
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [hasSeeded, setHasSeeded] = useState(false);
   const [filters, setFilters] = useState<RequestFiltersValue>({
@@ -86,6 +93,8 @@ export default function CookScreen() {
     router.push({ pathname: '/cook/results', params: query });
   };
 
+  const filterCount = activeFilterCount(filters);
+
   const footerHint = useMemo(
     () => (canSubmit ? null : t('cook.needMoreIngredients')),
     [canSubmit, t],
@@ -105,14 +114,70 @@ export default function CookScreen() {
           testID="cook-ingredient-picker"
         />
 
-        <View style={{ gap: theme.spacing.md }}>
-          <Text variant="title3">{t('cook.filtersTitle')}</Text>
-          <RequestFilters
-            value={filters}
-            onChange={(patch) => setFilters((current) => ({ ...current, ...patch }))}
+        {/*
+          Servings stays; everything else is one tap away. A hungry person
+          should not have to walk past six groups of chips to ask for food.
+        */}
+        <View style={{ gap: theme.spacing.lg }}>
+          <ServingsField
+            value={filters.servings}
+            onChange={(servings) => setFilters((current) => ({ ...current, servings }))}
+          />
+
+          <Button
+            label={
+              filterCount > 0
+                ? t('cook.filtersWithCount', { count: filterCount })
+                : t('cook.filtersTitle')
+            }
+            icon="options-outline"
+            variant="secondary"
+            size="md"
+            fullWidth
+            onPress={() => setFiltersOpen(true)}
+            testID="cook-filters"
           />
         </View>
       </ScreenScroll>
+
+      <Sheet
+        visible={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        title={t('cook.filtersTitle')}
+        footer={
+          <View style={{ gap: theme.spacing.sm }}>
+            {filterCount > 0 ? (
+              <Button
+                label={t('cook.clearFilters')}
+                variant="ghost"
+                size="md"
+                onPress={() =>
+                  setFilters((current) => ({
+                    servings: current.servings,
+                    mealType: null,
+                    cuisine: null,
+                    maxMinutes: null,
+                    minProteinGrams: null,
+                    maxCalories: null,
+                  }))
+                }
+                testID="cook-filters-clear"
+              />
+            ) : null}
+            <Button
+              label={t('common.done')}
+              size="lg"
+              onPress={() => setFiltersOpen(false)}
+              testID="cook-filters-done"
+            />
+          </View>
+        }
+      >
+        <RequestFilters
+          value={filters}
+          onChange={(patch) => setFilters((current) => ({ ...current, ...patch }))}
+        />
+      </Sheet>
 
       <ScreenFooter>
         {footerHint ? (

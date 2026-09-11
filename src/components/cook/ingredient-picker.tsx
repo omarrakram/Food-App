@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { Input } from '@/components/ui/input';
 import { Text } from '@/components/ui/text';
@@ -74,6 +75,26 @@ export function IngredientPicker({
     [onChange, selected, selectedKeys],
   );
 
+  /** Adds several at once without each call fighting the previous state. */
+  const addMany = useCallback(
+    (names: readonly string[]) => {
+      const next = [...selected];
+      const seen = new Set(selectedKeys);
+      for (const raw of names) {
+        const trimmed = raw.trim();
+        if (!trimmed) continue;
+        const name = resolveIngredient(trimmed)?.name ?? trimmed;
+        const key = normaliseIngredientName(name);
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        next.push(name);
+      }
+      onChange(next);
+      setQuery('');
+    },
+    [onChange, selected, selectedKeys],
+  );
+
   const removeIngredient = useCallback(
     (name: string) => {
       onChange(selected.filter((entry) => entry !== name));
@@ -103,18 +124,41 @@ export function IngredientPicker({
 
   return (
     <View style={{ gap: theme.spacing.lg }} testID={testID}>
+      {/*
+        Typing is a primary way in, not a fallback, so the field is labelled
+        and sits above every suggestion list rather than competing with them.
+      */}
       <Input
+        label={t('cook.inputLabel')}
         value={query}
         onChangeText={setQuery}
         onSubmitEditing={() => addIngredient(query)}
         placeholder={t('cook.inputPlaceholder')}
-        leadingIcon="add-circle-outline"
+        leadingIcon="search"
+        trailingIcon={query.trim() ? 'add-circle' : undefined}
+        onTrailingIconPress={query.trim() ? () => addIngredient(query) : undefined}
         returnKeyType="done"
         autoCapitalize="none"
         autoCorrect={false}
         blurOnSubmit={false}
         testID="ingredient-input"
       />
+
+      {/*
+        One tap for "everything I already told you I have", which is the whole
+        point of keeping a pantry.
+      */}
+      {pantrySuggestions.length > 0 ? (
+        <Button
+          label={t('cook.usePantry', { count: pantrySuggestions.length })}
+          icon="file-tray-full-outline"
+          variant="secondary"
+          size="md"
+          fullWidth
+          onPress={() => addMany(pantrySuggestions.map((item) => item.ingredientName))}
+          testID="cook-use-pantry"
+        />
+      ) : null}
 
       {autocomplete.length > 0 ? (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>

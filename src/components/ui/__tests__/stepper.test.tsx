@@ -115,4 +115,21 @@ describe('Stepper', () => {
 
     expect(suffixed.getByText('3 servings')).toBeTruthy();
   });
+
+  it('prints the value ONCE when given a unit suffix', async () => {
+    // Regression: the suffix was fed a pluralised string that already
+    // contained the number, so the stepper read "2 2 people".
+    const view = await render(
+      <Stepper
+        value={2}
+        onChange={jest.fn()}
+        suffix="people"
+        accessibilityLabel="Servings"
+        testID="unit"
+      />,
+    );
+
+    expect(view.getByText('2 people')).toBeTruthy();
+    expect(view.queryByText('2 2 people')).toBeNull();
+  });
 });
