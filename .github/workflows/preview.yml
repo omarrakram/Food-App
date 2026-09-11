@@ -1,0 +1,91 @@
+name: Web preview
+
+# Publishes the current build to GitHub Pages so it can be opened and tested on
+# a phone — no install, no credentials, no sign-in.
+#
+# The app is usable entirely on local data, so this preview needs no secrets and
+# none are provided to it: Supabase and Anthropic are deliberately absent, the
+# app falls back to its bundled catalogue, and the bundle is checked for
+# secret-shaped strings before it is published.
+#
+# Deep links and refresh work because the export is configured for the subpath
+# it is actually served from (EXPO_WEB_BASE_URL), and Expo's static output
+# writes one HTML file per route. Nothing rewrites the URL at runtime.
+
+on:
+  push:
+    branches: [claude/expo-rn-setup-mom5gw]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel a half-finished deployment; let the running one land first.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          # Creates the Pages site on first run so no manual setup is needed.
+          enablement: true
+
+      - name: Build the web bundle
+        run: npx expo export --platform web
+        env:
+          # The repository name is the subpath a project site is served from.
+          EXPO_WEB_BASE_URL: ${{ steps.pages.outputs.base_path }}
+
+      - name: Add an SPA fallback
+        # Expo's static output already writes one HTML file per route, so deep
+        # links resolve directly. This only catches paths with no file of their
+        # own — a stale bookmark, say — and hands them to the app rather than
+        # to GitHub's 404 page.
+        run: cp dist/index.html dist/404.html
+
+      - name: Refuse to publish anything secret
+        # This bundle becomes a public URL. A leaked key would be public with
+        # it, so the check is a gate rather than a report.
+        run: |
+          set -euo pipefail
+          bundle=$(find dist -name '*.js' -type f)
+          for pattern in 'sk-ant-' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
+            if grep -rqF "$pattern" $bundle; then
+              echo "::error::Refusing to publish: found '$pattern' in the web bundle."
+              exit 1
+            fi
+          done
+          echo "No secret-shaped strings in the bundle."
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
