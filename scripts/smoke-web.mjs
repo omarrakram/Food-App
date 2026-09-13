@@ -473,10 +473,15 @@ async function main() {
     // see any of this: recipe titles, steps, ingredient names and unit labels
     // all came from data and all rendered in English while the app reported
     // 468/468 keys translated.
+    // The user's own name is Latin because THEY typed it in Latin during
+    // onboarding, and it is rendered in the drawer on every screen. It is data,
+    // not an untranslated string, so it is excluded by name rather than by
+    // weakening the check — everything else Latin is still a failure.
+    const OWN_NAME = 'Omar';
     const latinLines = async () => {
       const text = await bodyText();
       return [...new Set(text.split('\n').map((line) => line.trim()).filter(Boolean))].filter(
-        (line) => /[A-Za-z]/.test(line),
+        (line) => /[A-Za-z]/.test(line) && line !== OWN_NAME && line !== OWN_NAME[0],
       );
     };
 
@@ -520,6 +525,78 @@ async function main() {
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
+
+    // --- The drawer -------------------------------------------------------
+    // The drawer is invisible until something opens it, which makes it exactly
+    // the kind of thing that can be wired up wrong and still look fine in a
+    // screenshot. It is also where the RTL bug lived: `drawerPosition` set on
+    // top of React Navigation's own RTL flip pushed the whole content pane off
+    // the viewport, so every button on every screen became unclickable in
+    // Arabic while nothing looked broken.
+    console.log('\n▸ drawer');
+    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+
+    /**
+     * "Closed" is a position, not a visibility.
+     *
+     * React Navigation keeps the drawer mounted and slides it off-screen with
+     * a transform, so Playwright reports it `visible` either way and a
+     * visibility assertion passes whatever the drawer is doing. Its box has to
+     * be outside the viewport instead. (This is also why the drawer content
+     * sets `aria-hidden` when closed: it is on the page the whole time.)
+     */
+    const drawerBox = async () => {
+      const box = await locate('app-drawer').boundingBox();
+      return box ? { ...box, viewport: page.viewportSize() } : null;
+    };
+
+    const closed = await drawerBox();
+    check(
+      'the drawer starts off-screen',
+      closed !== null && closed.x + closed.width <= 1,
+      closed ? `x=${Math.round(closed.x)} w=${Math.round(closed.width)}` : 'missing',
+    );
+
+    check('home offers a way to open the drawer', await tap('home-open-drawer'));
+    await page.waitForTimeout(900);
+    const opened = await drawerBox();
+    check(
+      'the drawer slides into view',
+      opened !== null && opened.x >= -1 && opened.width > 200,
+      opened ? `x=${Math.round(opened.x)} w=${Math.round(opened.width)}` : 'missing',
+    );
+    check('the drawer shows who is signed in', await visible('drawer-identity', 4000));
+    await shot('18b-drawer');
+
+    check('the drawer reaches the shopping list', await tap('drawer-shopping'));
+    await page.waitForTimeout(1600);
+    check(
+      'the drawer row actually navigated',
+      await visible('shopping-add', 6000),
+      page.url().replace(BASE, ''),
+    );
+
+    // The content pane must stay on screen with the drawer closed. This is the
+    // assertion that would have caught the RTL displacement: it fails whenever
+    // the drawer displaces its sibling rather than sliding over it.
+    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1500);
+    const paneOnScreen = await page.evaluate(() => {
+      const el = document.querySelector('[data-testid="home-open-drawer"]');
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { x: r.left, y: r.top, w: window.innerWidth, h: window.innerHeight };
+    });
+    check(
+      'the closed drawer does not displace the screen behind it',
+      paneOnScreen !== null &&
+        paneOnScreen.x >= 0 &&
+        paneOnScreen.x < paneOnScreen.w &&
+        paneOnScreen.y >= 0 &&
+        paneOnScreen.y < paneOnScreen.h,
+      paneOnScreen ? `at ${Math.round(paneOnScreen.x)},${Math.round(paneOnScreen.y)}` : 'missing',
+    );
 
     // --- The remaining screens -------------------------------------------
     console.log('\n▸ remaining screens');

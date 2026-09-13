@@ -3,6 +3,7 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { DrawerButton } from '@/components/navigation/drawer-button';
 import { RecipeCard } from '@/components/recipe/recipe-card';
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
@@ -71,11 +72,14 @@ export default function DiscoverScreen() {
       onEndReached={fetchNextPage}
     >
       <View style={{ paddingHorizontal: theme.layout.screenPadding, gap: theme.spacing.lg, paddingTop: theme.spacing.md }}>
-        <View style={{ gap: 2 }}>
-          <Text variant="title1">{t('discover.title')}</Text>
-          <Text variant="callout" color="textSecondary">
-            {t('discover.subtitle')}
-          </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: theme.spacing.md }}>
+          <DrawerButton testID="discover-open-drawer" />
+          <View style={{ gap: 2, flex: 1 }}>
+            <Text variant="title1">{t('discover.title')}</Text>
+            <Text variant="callout" color="textSecondary">
+              {t('discover.subtitle')}
+            </Text>
+          </View>
         </View>
 
         <PressScale

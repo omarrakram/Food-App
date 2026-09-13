@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { useMemo } from 'react';
 import { View } from 'react-native';
 
+import { DrawerButton } from '@/components/navigation/drawer-button';
 import { RecipeCardCompact } from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
 import { PressScale } from '@/components/ui/press-scale';
@@ -108,11 +109,14 @@ export default function HomeScreen() {
   return (
     <ScreenScroll bottomInset={theme.layout.tabBarHeight} contentGap={theme.spacing.xxl}>
       <View style={{ gap: theme.spacing.lg, paddingTop: theme.spacing.md }}>
-        <View style={{ gap: 2 }}>
-          <Text variant="callout" color="textSecondary">
-            {name ? `${greeting}, ${name}` : greeting}
-          </Text>
-          <Text variant="display">{t('home.question')}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: theme.spacing.md }}>
+          <DrawerButton testID="home-open-drawer" />
+          <View style={{ gap: 2, flex: 1 }}>
+            <Text variant="callout" color="textSecondary">
+              {name ? `${greeting}, ${name}` : greeting}
+            </Text>
+            <Text variant="display">{t('home.question')}</Text>
+          </View>
         </View>
 
         <PressScale

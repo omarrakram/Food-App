@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-13 |
-| **Current phase** | Product build-out. Phases A–G complete; **H + P (drawer navigation) is the next task**. See "Build-out progress". |
+| **Current phase** | Product build-out. Phases A–H and P complete; **I–K (friends, messaging, sharing) is the next task**. See "Build-out progress". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -26,8 +26,8 @@ because each depends on the one before it.
 | C | `RecipeConstraints` with genuine hard filtering | **done** — one model, hard filters, honest relaxations |
 | D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
 | E–G | Auth hardening, profiles, storage uploads | **done** — guest choice, expiry, handles, avatars |
-| H, P | Drawer navigation and information architecture | **NEXT** — not started |
-| I–K | Friends, 1-to-1 messaging, recipe sharing | not started |
+| H, P | Drawer navigation and information architecture | **done** — drawer wraps the tabs |
+| I–K | Friends, 1-to-1 messaging, recipe sharing | **NEXT** — not started |
 | L–N | Community submissions, moderation, admin | not started |
 | O | In-app notifications | not started |
 | Q–U | Privacy, security, performance, preview, tests | not started |
@@ -237,6 +237,50 @@ unawaited one and upload nothing useful.
 
 ---
 
+### Phases H and P — a drawer around the tabs
+
+`app/(drawer)/(tabs)/` — the drawer wraps the tab group rather than replacing
+it. Both are route GROUPS, so every URL is unchanged and the deep links still
+resolve. The drawer contains exactly one route, the tab group, because it is a
+way of REACHING screens rather than a second place for them to live; its rows
+push onto the root stack.
+
+The information-architecture decision (P) is the reason it exists. Five bottom
+tabs is the right size for the core food experience, and the moment Friends,
+Messages, Submit a Recipe and Admin Review need a home the tempting move is a
+sixth tab and then a seventh — which is how "What should I eat?" stops being
+the obvious thing on screen. The tabs keep the food; everything secondary,
+social or account-shaped goes in the drawer.
+
+Rows appear only when their destination exists. `SOCIAL_ROWS` is an empty array
+today: a greyed-out "Friends" that does nothing teaches the user the app is
+unfinished, while an absent one teaches nothing, which is correct until Phase I
+lands. Adding them is one array literal.
+
+Two things worth not re-deriving:
+
+**`drawerPosition` is deliberately not set.** React Navigation already flips
+the drawer to the right when `I18nManager.isRTL`, so `isRTL ? 'right' : 'left'`
+double-flips it — and on web that did not merely mirror the drawer, it
+displaced the entire content pane off the viewport. A 390pt-wide screen
+rendered its pantry-editor close button at x=653, so every control on every
+screen became unclickable in Arabic while nothing looked broken in a
+screenshot. The smoke suite now asserts the content pane stays on screen.
+
+**A closed drawer is off-screen, not hidden.** React Navigation keeps it
+mounted and slides it away with a transform, so it is in the DOM and in the
+accessibility tree the whole time. `AppDrawerContent` sets `aria-hidden` /
+`accessibilityElementsHidden` when `useDrawerStatus()` is not `open`; without
+that a screen-reader user anywhere in the app could swipe into "Home, Discover,
+Pantry, Log out" with no drawer visible. It is also why the smoke suite
+asserts the drawer's POSITION rather than its visibility — a visibility
+assertion passes whatever the drawer is doing.
+
+`/settings/about` came with the drawer's Help row, and it does something the
+brief's Phase T also wants: it reports which capabilities are actually live —
+accounts, sync, AI — reading what `env` resolved rather than what someone
+intended. A status screen that lies is worse than none.
+
 ---
 
 ## Last known passing state
@@ -255,7 +299,7 @@ branch):
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 59 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 66 interaction checks, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
 ### The test suite runs on two platforms
@@ -301,9 +345,9 @@ PGHOST=/tmp PGPORT=55432 PGUSER=postgres ./scripts/db-test.sh
 browser through what a person actually does — not just what routes exist. 53
 assertions cover onboarding, the pantry add/edit/delete flow from **both**
 entry points and its staple rules, ingredient selection and removal, the Saved
-tabs, opening
-and clearing filters, saving a shopping-list item, switching language and
-reading the rendered Arabic back, and a deep link surviving a reload.
+tabs, opening and clearing filters, saving a shopping-list item, opening the
+drawer and navigating from it, switching language and reading the rendered
+Arabic back, and a deep link surviving a reload.
 
 It needs a browser driver, deliberately not a dependency of the app:
 
@@ -315,9 +359,11 @@ npm run smoke:web
 `CHROMIUM_PATH` and `PLAYWRIGHT_CORE` override discovery when a browser already
 exists (which is how it runs in this sandbox).
 
-**It has caught eight bugs no unit test would have.** Most recently: the pantry
-add sheet crashing into the error boundary, and `Alert.alert` silently doing
-nothing on web so every confirmation in the app was dead.
+**It has caught nine bugs no unit test would have.** Most recently: a drawer
+`drawerPosition` that double-flipped under RTL and pushed every screen off the
+viewport in Arabic, the pantry add sheet crashing into the error boundary, and
+`Alert.alert` silently doing nothing on web so every confirmation in the app
+was dead.
 
 It used to only visit routes, and reported green while tapping "+" on the
 Pantry crashed. Visiting a route proves the route renders and nothing more, so
@@ -417,34 +463,35 @@ picks up.
 
 ### THE SINGLE NEXT ACTION
 
-**Phase H + P — the left drawer, and the information architecture around it.**
+**Phase I — friends.** It unblocks J (messaging), K (sharing to a friend) and
+the `friends` visibility setting that already exists but currently resolves
+strictly narrower than `public`.
 
-The brief is specific: a drawer ALONGSIDE the bottom tabs, not replacing them.
-Bottom navigation stays the core food experience ("What should I eat?" must
-remain the obvious thing on screen); the drawer carries the secondary, social
-and account surfaces that would otherwise be crammed into five tabs.
+What it needs:
 
-Drawer contents, in order: avatar, display name, @username · Home · Discover ·
-Pantry · Shopping List · Saved · Friends · Messages · Submit a Recipe ·
-Profile · Settings · Help/About · Admin Review (only when the user's
-server-side role is moderator or admin) · Log out.
-
-Most of the leaves do not exist yet — Friends, Messages, Submit a Recipe and
-Admin Review are Phases I–N. Build the drawer with the routes that exist and
-add the rest as their phases land, rather than shipping dead rows.
-
-Practical notes: this needs Expo Router's drawer layout
-(`react-native-drawer-layout` / `@react-navigation/drawer`, neither installed
-yet — use `EXPO_OFFLINE=1 npx expo install`), and it must handle RTL, safe
-areas, and web. The avatar and handle at the top come from
-`useOwnProfile()`, which already exists.
+1. `friend_requests` and `friendships` as normalised tables, plus `blocks`.
+   Store a friendship once, not twice — a `(least(a,b), greatest(a,b))` unique
+   key is the usual way, and it makes "are these two friends?" a single lookup.
+2. Constraints that make the impossible states impossible in Postgres rather
+   than in the client: no self-request, no duplicate pending request in either
+   direction, no duplicate friendship, no request between blocked users.
+3. RLS: a user reads only requests they sent or received, and only their own
+   friendships. **Never client-side.** Adversarial tests in a new
+   `supabase/tests/05_friends_test.sql`, in the style of the existing four.
+4. Search by handle — `SupabaseProfileRepository.search()` already exists and
+   paginates.
+5. Send / accept / decline / cancel / unfriend, and block / unblock. Three
+   lists: Friends, Incoming, Sent.
+6. Then widen the `friends` branch in the `public_profiles` view. That is one
+   line and it is deliberately the LAST step, not the first.
+7. Add the `Friends` row to `SOCIAL_ROWS` in `drawer-content.tsx`.
 
 ### What is NOT done, and is deliberately waiting
 
-- **Roles.** `Admin Review` needs a server-authoritative role (USER /
-  MODERATOR / ADMIN). That is Phase N and the brief is explicit that it must
-  not be a client-side boolean. The drawer should read a role it is given, not
-  invent one.
+- **Roles.** The drawer's `Admin Review` row needs a server-authoritative role
+  (USER / MODERATOR / ADMIN). That is Phase N and the brief is explicit it must
+  not be a client-side boolean. `SOCIAL_ROWS` in `drawer-content.tsx` is empty
+  precisely so no row appears before its destination and its permission do.
 - **`visibility = 'friends'`** resolves strictly narrower than `public` in the
   `public_profiles` view, because there is no friendship table yet. Widening
   that line is a deliberate part of Phase I.

@@ -21,9 +21,13 @@ void SplashScreen.preventAutoHideAsync();
  *
  * NOTE on paths: the onboarding screen is `(onboarding)/onboarding.tsx`, not
  * `index.tsx`. A group's `index` resolves to `/` — the same path as
- * `(tabs)/index` — and Expo Router then serves one of them for `/`, which made
- * finishing onboarding navigate straight back into it. Route groups may not
- * both contain an `index`.
+ * `(drawer)/(tabs)/index` — and Expo Router then serves one of them for `/`,
+ * which made finishing onboarding navigate straight back into it. Route groups
+ * may not both contain an `index`.
+ *
+ * The tab group lives under `(drawer)` so the drawer wraps it. Both are route
+ * GROUPS, so every URL is unchanged: `/`, `/discover`, `/pantry` and the rest
+ * resolve exactly as before, and so do the deep links.
  *
  * Four states decide where a user belongs:
  *
@@ -108,7 +112,7 @@ function RootNavigator() {
           animation: 'slide_from_right',
         }}
       >
-        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(drawer)" />
         <Stack.Screen name="(auth)" options={{ animation: 'fade' }} />
         <Stack.Screen name="(onboarding)" options={{ animation: 'fade', gestureEnabled: false }} />
         <Stack.Screen name="cook" />
