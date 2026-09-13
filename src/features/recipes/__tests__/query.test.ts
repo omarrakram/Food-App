@@ -3,10 +3,12 @@ import { RECIPE_FIXTURES } from '../fixtures';
 import { checkRecipe, buildIndexFor } from '../filter';
 import {
   applyPlanLocally,
+  constraintsFingerprint,
   decodeCursor,
   encodeCursor,
   MAX_PAGE_SIZE,
   pageLocally,
+  planFingerprint,
   planQuery,
 } from '../query';
 
@@ -198,5 +200,85 @@ describe('the whole catalogue is never fetched at once', () => {
       first.recipes.some((earlier) => earlier.id === recipe.id),
     );
     expect(overlap).toEqual([]);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The cache key. This is the one the reported bug looked like: a user changes
+// their ingredients, presses the button, and is handed the previous answer.
+// ---------------------------------------------------------------------------
+
+describe('the cache key cannot serve one search the answer to another', () => {
+  it('separates two different kitchens', () => {
+    const a = emptyConstraints({ availableIngredients: ['chicken breast', 'rice', 'tomatoes'] });
+    const b = emptyConstraints({ availableIngredients: ['banana', 'oats', 'milk'] });
+
+    expect(constraintsFingerprint(a)).not.toBe(constraintsFingerprint(b));
+  });
+
+  it('separates the same kitchen at different gap budgets', () => {
+    const available = ['chicken breast', 'rice'];
+    const keys = [0, 1, 2].map((maxMissingIngredients) =>
+      constraintsFingerprint(
+        emptyConstraints({
+          availableIngredients: available,
+          pantryMode: maxMissingIngredients === 0 ? 'strict' : 'partial',
+          maxMissingIngredients,
+        }),
+      ),
+    );
+
+    expect(new Set(keys).size).toBe(3);
+  });
+
+  it('is stable under the order the user happened to type things in', () => {
+    // Otherwise the same question asked twice is two cache entries, and the
+    // second one pays for a refetch that changes nothing.
+    const a = emptyConstraints({ availableIngredients: ['rice', 'tomatoes', 'eggs'] });
+    const b = emptyConstraints({ availableIngredients: ['eggs', 'rice', 'tomatoes'] });
+
+    expect(constraintsFingerprint(a)).toBe(constraintsFingerprint(b));
+  });
+
+  it('covers EVERY field of the constraints', () => {
+    // The guard that matters. A new constraint added without a line in the
+    // fingerprint is a field that can change the results while two searches go
+    // on sharing a cache entry — which is precisely the shape of the bug this
+    // whole pass exists to fix, and it would not show up in any other test.
+    const base = emptyConstraints();
+    const untouched: string[] = [];
+
+    for (const key of Object.keys(base) as (keyof typeof base)[]) {
+      const current = base[key];
+      // A different value of the right type for each field shape.
+      const changed =
+        typeof current === 'boolean' ? !current
+        : typeof current === 'number' ? current + 7
+        : Array.isArray(current) ? [...current, 'sentinel-value']
+        : typeof current === 'string' ? `${current}-sentinel`
+        : current === null ? 'sentinel-value'
+        : current;
+
+      const mutated = { ...base, [key]: changed };
+      if (constraintsFingerprint(mutated) === constraintsFingerprint(base)) {
+        untouched.push(String(key));
+      }
+    }
+
+    expect(untouched).toEqual([]);
+  });
+
+  it('is not the plan fingerprint — the plan is only the SQL half', () => {
+    // Two searches the database cannot tell apart, because the kitchen and the
+    // gap budget are evaluated client-side. Keying on the plan alone is what
+    // would let one serve the other's rows.
+    const a = emptyConstraints({ availableIngredients: ['chicken breast'] });
+    const b = emptyConstraints({ availableIngredients: ['banana'] });
+
+    const plan = (constraints: typeof a) =>
+      planFingerprint(planQuery({ constraints }));
+
+    expect(plan(a)).toBe(plan(b));
+    expect(constraintsFingerprint(a)).not.toBe(constraintsFingerprint(b));
   });
 });

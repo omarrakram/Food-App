@@ -684,14 +684,35 @@ async function main() {
           .slice(0, 10)
           .map((node) => (node.innerText || '').split('\n')[0]),
       );
+      // The gap count the card itself is showing. Read from the rendered text
+      // rather than recomputed here, so the table below reports what a user
+      // would actually see rather than what the engine believes.
+      const missing = await page.evaluate(() =>
+        [...document.querySelectorAll('[data-testid^="result-"]')].map((node) => {
+          const found = /(\d+)\s*(?:missing|ناقص)/i.exec(node.innerText || '');
+          return found ? Number(found[1]) : 0;
+        }),
+      );
       const empty = (await page.locator('[data-testid="results-empty"]').count()) > 0;
-      return { ids, selected, titles, empty };
+      return { ids, selected, titles, missing, empty };
+    };
+
+    /** One row of the evidence table this hotfix has to produce. */
+    const rows = [];
+    const record = (input, mode, result) => {
+      const counts = [...new Set(result.missing)].sort((a, b) => a - b);
+      rows.push(
+        `| ${input} | ${mode} | ${result.ids.length} | ` +
+          `${result.titles.join('; ') || '—'} | ` +
+          `${counts.length ? counts.join(', ') : '—'} |`,
+      );
+      return result;
     };
 
     const CASE_A = ['chicken breast', 'rice', 'tomatoes'];
     const CASE_C = ['banana', 'oats', 'milk'];
 
-    const relaxedA = await cookWith(CASE_A, 'missing2');
+    const relaxedA = record('chicken, rice, tomato', '≤2 missing', await cookWith(CASE_A, 'missing2'));
     check(
       'the picker accepted the first ingredient set',
       relaxedA.selected === CASE_A.length,
@@ -701,7 +722,7 @@ async function main() {
       `${relaxedA.ids.length} results`);
     await shot('17e-cook-case-a');
 
-    const relaxedC = await cookWith(CASE_C, 'missing2');
+    const relaxedC = record('banana, oats, milk', '≤2 missing', await cookWith(CASE_C, 'missing2'));
     check('banana, oats, milk returns something', relaxedC.ids.length > 0,
       `${relaxedC.ids.length} results`);
     await shot('17f-cook-case-c');
@@ -723,7 +744,7 @@ async function main() {
     );
 
     // Exact mode is a different, stricter answer — not the same list reordered.
-    const exactC = await cookWith(CASE_C, 'strict');
+    const exactC = record('banana, oats, milk', 'exact', await cookWith(CASE_C, 'strict'));
     check(
       'exact mode is stricter than allowing two missing',
       exactC.ids.length <= relaxedC.ids.length,
@@ -741,8 +762,8 @@ async function main() {
     // the rendered app rather than two of them standing in for the set.
     const CASE_B = ['eggs', 'white cheese', 'tomatoes'];
     const CASE_D = ['ground beef', 'pasta', 'tomatoes'];
-    const relaxedB = await cookWith(CASE_B, 'missing2');
-    const relaxedD = await cookWith(CASE_D, 'missing2');
+    const relaxedB = record('eggs, white cheese, tomato', '≤2 missing', await cookWith(CASE_B, 'missing2'));
+    const relaxedD = record('ground beef, pasta, tomato', '≤2 missing', await cookWith(CASE_D, 'missing2'));
 
     const answers = [relaxedA, relaxedB, relaxedC, relaxedD].map((result) => result.ids.join('|'));
     check(
@@ -754,7 +775,7 @@ async function main() {
     // ALIASES. The user does not know our vocabulary. "Minced meat" and
     // "macaroni" are what a person says; `ground-beef` and `pasta` are what the
     // catalogue calls them, and the answer must not depend on which was typed.
-    const aliased = await cookWith(['minced meat', 'macaroni', 'tomato'], 'missing2');
+    const aliased = record('minced meat, macaroni, tomato (aliases)', '≤2 missing', await cookWith(['minced meat', 'macaroni', 'tomato'], 'missing2'));
     check(
       'colloquial names resolve to the same recipes as catalogue names',
       aliased.ids.join('|') === relaxedD.ids.join('|'),
@@ -764,7 +785,7 @@ async function main() {
     // ZERO RESULTS. The failure this whole hotfix is about was a screen that
     // always found something. Asking for a dish from one unusual ingredient in
     // exact mode must be allowed to answer "nothing", and say so.
-    const nothing = await cookWith(['anchovies'], 'strict');
+    const nothing = record('anchovies', 'exact', await cookWith(['anchovies'], 'strict'));
     check(
       'an unanswerable request returns nothing rather than something',
       nothing.ids.length === 0,
@@ -772,6 +793,25 @@ async function main() {
     );
     check('and the empty state explains it', nothing.empty);
     await shot('17h-cook-zero-results');
+
+    // Exact mode for the remaining three, so the table covers both modes for
+    // every case rather than sampling one of each.
+    const exactA = record('chicken, rice, tomato', 'exact', await cookWith(CASE_A, 'strict'));
+    const exactB = record('eggs, white cheese, tomato', 'exact', await cookWith(CASE_B, 'strict'));
+    const exactD = record('ground beef, pasta, tomato', 'exact', await cookWith(CASE_D, 'strict'));
+
+    // THE definition of exact: zero missing, or it does not belong here.
+    const exactGaps = [exactA, exactB, exactC, exactD].flatMap((result) => result.missing);
+    check(
+      'exact mode returns only recipes with nothing missing',
+      exactGaps.every((count) => count === 0),
+      exactGaps.length ? `gaps seen: ${[...new Set(exactGaps)].join(', ')}` : 'no results to check',
+    );
+
+    console.log('\n   what the four cases actually returned:');
+    console.log('   | Input | Mode | Results | First 10 titles | Missing counts |');
+    console.log('   |---|---|---|---|---|');
+    for (const row of rows) console.log(`   ${row}`);
 
     // --- Hard constraints, end to end -------------------------------------
     // The product promise, driven through the UI rather than asserted in a

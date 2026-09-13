@@ -272,6 +272,10 @@ export function constraintsFingerprint(constraints: RecipeConstraints): string {
     constraints.minProteinGrams ?? '',
     sorted(constraints.appliances),
     sorted(constraints.tags),
+    // Ranking only, never a filter — but ranking is the ORDER the user sees,
+    // and two searches that differ only in it must not share one cached,
+    // already-ordered answer.
+    sorted(constraints.preferredCuisines),
     constraints.servings,
     constraints.budgetMinor ?? '',
     constraints.currency,

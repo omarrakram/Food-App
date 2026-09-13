@@ -352,13 +352,71 @@ async function fromCommonsSearch(name: string): Promise<Candidate[]> {
   );
 }
 
-function usable(candidate: Candidate): boolean {
-  if (!['image/jpeg', 'image/png'].includes(candidate.mime)) return false;
+/**
+ * Titles that describe something other than a plate of the finished dish.
+ *
+ * Every one of these was found in the acquired set, not imagined. A Commons
+ * category is a good signal and not a perfect one: `Category:Bruschetta`
+ * contained an Armenian-language infographic laying out the ingredients, and
+ * `Category:Chocolate chip cookies` a novelty cookie cake iced with "SPOT
+ * CHECK THE PLANET — BOOM!". Both are genuinely about the dish. Neither is a
+ * photograph of it.
+ */
+const NOT_A_DISH =
+  /ingredient|uncooked|\braw\b|types? of|variet|assortment|infographic|diagram|chart|\blabel\b|\blogo\b|\bmenu\b|packag|storefront|signage/i;
+
+/**
+ * Meats and drinks that must not appear in a photograph of a recipe without
+ * them.
+ *
+ * Two different reasons, one rule. A photograph of a carnitas quesadilla on a
+ * black bean quesadilla is simply the wrong dish — and in a catalogue built
+ * for Egypt, illustrating a recipe with pork or alcohol is worse than wrong.
+ * `HARAM` is refused outright; the rest only when the recipe does not contain
+ * them, so "Halal Beef Lasagne" still illustrates a beef lasagne.
+ */
+const HARAM = /\bpork\b|bacon|carnitas|chorizo|prosciutto|salami|\bham\b|lardo|\bwine\b|\bbeer\b|\bvodka\b|\brum\b/i;
+const PROTEINS = [
+  'chicken', 'beef', 'lamb', 'mutton', 'goat', 'veal', 'deer', 'venison',
+  'duck', 'turkey', 'fish', 'salmon', 'tuna', 'seafood', 'shrimp', 'prawn',
+  'squid', 'calamari', 'mussel', 'crab', 'lobster', 'anchov',
+];
+
+/**
+ * Is this a photograph of THIS dish, as best a title can tell us?
+ *
+ * The size and licence half is mechanical. The rest is the lesson of two runs:
+ * a candidate can be correctly categorised, correctly licensed, plainly about
+ * the right subject — and still be the wrong picture to put on a recipe card.
+ */
+function usable(candidate: Candidate, recipe: (typeof RECIPE_CATALOGUE)[number]): boolean {
+  // JPEG only. On Commons a PNG of food is almost always a diagram, a cutout
+  // on white or a poster; the two PNGs an earlier run acquired were exactly
+  // that, and no JPEG it acquired was.
+  if (candidate.mime !== 'image/jpeg') return false;
   if (Math.min(candidate.width, candidate.height) < MIN_EDGE) return false;
   // "trademarked", "personality rights" — a free licence on the photograph does
   // not make the thing photographed free to use commercially.
   if (candidate.restrictions) return false;
-  return candidate.licence !== null;
+  if (candidate.licence === null) return false;
+
+  const title = candidate.title.replace(/^File:/, '').replace(/\.\w+$/, '').replace(/_/g, ' ');
+
+  // A title with no word in it cannot be checked against anything, and an
+  // archive serial number is what an un-curated bulk upload looks like.
+  if (!/[A-Za-z]{3,}(?![A-Za-z0-9])/.test(title)) return false;
+
+  if (NOT_A_DISH.test(title)) return false;
+  if (HARAM.test(title)) return false;
+
+  // A protein the recipe does not contain means a different dish — "Thai fried
+  // rice with seafood" is not the chicken fried rice it was chosen for.
+  const inRecipe = recipe.ingredients.map((line) => line.name.toLowerCase()).join(' ');
+  for (const protein of PROTEINS) {
+    if (title.toLowerCase().includes(protein) && !inRecipe.includes(protein)) return false;
+  }
+
+  return true;
 }
 
 /**
@@ -423,7 +481,7 @@ async function* candidatesFor(
         continue;
       }
       for (const candidate of found) {
-        if (seen.has(candidate.url) || !usable(candidate)) continue;
+        if (seen.has(candidate.url) || !usable(candidate, recipe)) continue;
         seen.add(candidate.url);
         yield candidate;
       }
