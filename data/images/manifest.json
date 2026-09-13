@@ -71,20 +71,6 @@
       "acquiredAt": "2026-09-13T15:34:18.879Z"
     },
     {
-      "recipeSlug": "beef-burger-homemade",
-      "path": "beef-burger-homemade.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:RedDot_Burger.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg",
-      "creator": "Hongreddotbrewhouse",
-      "license": "CC-BY-SA-3.0",
-      "attribution": "Hongreddotbrewhouse · CC-BY-SA-3.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 667,
-      "bytes": 220612,
-      "sha256": "3705d3a847a867a6b88f3c647b1d00b1826807148b4ba51654ac64491aa0be74",
-      "acquiredAt": "2026-09-13T15:34:24.442Z"
-    },
-    {
       "recipeSlug": "beef-tacos",
       "path": "beef-tacos.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Argentine-style_hand-chopped_roasted_beef_tacos,_with_mozzarella,_caramelized_onions,_and_salsas.jpg",
@@ -435,48 +421,6 @@
       "acquiredAt": "2026-09-13T15:35:58.830Z"
     },
     {
-      "recipeSlug": "kunafa-cheese",
-      "path": "kunafa-cheese.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Cheese_kunafa_at_Agasi%2C_Lajpat_Nagar%2C_Delhi_%282025-10-04%29.jpg",
-      "creator": "Contrapunctus-1",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 750,
-      "bytes": 316070,
-      "sha256": "c8544bd10c2eefe0b197c044a10c950ecfba862e2cf44abea09b69a8f4e3bfc7",
-      "acquiredAt": "2026-09-13T15:36:03.152Z"
-    },
-    {
-      "recipeSlug": "lasagne-beef",
-      "path": "lasagne-beef.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Halal_Beef_Lasagne_and_Cauliflowers_-_Foodilic_2024-08-12.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Halal_Beef_Lasagne_and_Cauliflowers_-_Foodilic_2024-08-12.jpg",
-      "creator": "Andy Li",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "width": 1000,
-      "height": 750,
-      "bytes": 185504,
-      "sha256": "c9e7d28e0eaaa764cf8ebb6524ab95a9ce09007f3ad72b4c4a8681f771510358",
-      "acquiredAt": "2026-09-13T15:36:10.304Z"
-    },
-    {
-      "recipeSlug": "lentil-soup-lemon",
-      "path": "lentil-soup-lemon.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Levantine_Lentil_Soup_winter_Newton_Massachusetts_New_England.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Levantine_Lentil_Soup_winter_Newton_Massachusetts_New_England.jpg",
-      "creator": "EgorovaSvetlana",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "EgorovaSvetlana · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 750,
-      "bytes": 192348,
-      "sha256": "ee064d7d463acb96a86ca2bf0deaf8d4dde877dfe7389e687c5874d88c20354c",
-      "acquiredAt": "2026-09-13T15:36:14.791Z"
-    },
-    {
       "recipeSlug": "mac-and-cheese-baked",
       "path": "mac-and-cheese-baked.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg",
@@ -561,20 +505,6 @@
       "acquiredAt": "2026-09-13T15:36:27.961Z"
     },
     {
-      "recipeSlug": "menemen",
-      "path": "menemen.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Menemen.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Menemen.jpg",
-      "creator": "https://www.flickr.com/people/sarah_c_murray/",
-      "license": "CC-BY-2.0",
-      "attribution": "https://www.flickr.com/people/sarah_c_murray/ · CC-BY-2.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 664,
-      "bytes": 472176,
-      "sha256": "33f55ce95fe46d709812c6936983593b386e6c0022097228e5ebc1e025d021cb",
-      "acquiredAt": "2026-09-13T15:36:29.346Z"
-    },
-    {
       "recipeSlug": "mexican-rice",
       "path": "mexican-rice.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Mexican_rice_144235.jpg",
@@ -645,20 +575,6 @@
       "acquiredAt": "2026-09-13T15:36:41.149Z"
     },
     {
-      "recipeSlug": "okra-stew",
-      "path": "okra-stew.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Bamia-Ocras_tomate_%28cropped%29.JPG",
-      "creator": "Tamorlan",
-      "license": "CC-BY-SA-3.0",
-      "attribution": "Tamorlan · CC-BY-SA-3.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 755,
-      "bytes": 327016,
-      "sha256": "ffa85bea121f2f812536382eb71ed4724b8ed7354eef853031862aeaf976df7e",
-      "acquiredAt": "2026-09-13T15:36:41.461Z"
-    },
-    {
       "recipeSlug": "om-ali",
       "path": "om-ali.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Umm_Ali.JPG",
@@ -671,20 +587,6 @@
       "bytes": 327616,
       "sha256": "50c51514807a9cd517383c23a21010e587d6b1475c7ec9684f2f0a49b7c7bed9",
       "acquiredAt": "2026-09-13T15:36:42.416Z"
-    },
-    {
-      "recipeSlug": "overnight-oats",
-      "path": "overnight-oats.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dorset_Cereals_muesli.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Dorset_Cereals_muesli.jpg",
-      "creator": "Mx. Granger",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "width": 1000,
-      "height": 773,
-      "bytes": 381614,
-      "sha256": "f95c9c24d64bce6adaf2780c63b2fec24756a0c1edf1c79562bb41473c90f6c1",
-      "acquiredAt": "2026-09-13T15:36:45.239Z"
     },
     {
       "recipeSlug": "palak-paneer-style",
@@ -757,20 +659,6 @@
       "acquiredAt": "2026-09-13T15:36:52.815Z"
     },
     {
-      "recipeSlug": "risotto-mushroom",
-      "path": "risotto-mushroom.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mushroom_Risotto_(4789415965).jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Mushroom_Risotto_%284789415965%29.jpg",
-      "creator": "Katrin Gilger",
-      "license": "CC-BY-SA-2.0",
-      "attribution": "Katrin Gilger · CC-BY-SA-2.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 668,
-      "bytes": 237810,
-      "sha256": "55dedd846d8e14234b38cc61a73820648305cd179b3dba58f54330297e0e140d",
-      "acquiredAt": "2026-09-13T15:37:02.265Z"
-    },
-    {
       "recipeSlug": "roz-bel-laban",
       "path": "roz-bel-laban.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
@@ -797,20 +685,6 @@
       "bytes": 447006,
       "sha256": "08fb579c5ce32394145d63d849d7c246e9849747e4c899730f1cfc255f4c3a61",
       "acquiredAt": "2026-09-13T15:37:10.787Z"
-    },
-    {
-      "recipeSlug": "scrambled-eggs-soft",
-      "path": "scrambled-eggs-soft.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_don_of_Nakau.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Fried_oysters_with_soft_scrambled_eggs_don_of_Nakau.jpg",
-      "creator": "毒島みるく",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "width": 1000,
-      "height": 925,
-      "bytes": 475381,
-      "sha256": "900ac9f1e8c88cf9db82200211fbac62eca4fa6bc6c27d43d5f9a6f43449dccb",
-      "acquiredAt": "2026-09-13T15:37:24.065Z"
     },
     {
       "recipeSlug": "shakshuka",
@@ -867,20 +741,6 @@
       "bytes": 444572,
       "sha256": "0aaad64eff64b981ffc304982d7e96c5698afd3c99d8223bbf495ffc63bb300a",
       "acquiredAt": "2026-09-13T15:37:49.456Z"
-    },
-    {
-      "recipeSlug": "sutlac-baked",
-      "path": "sutlac-baked.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Kheer_with_condensed_milk..JPG",
-      "creator": "Shivangisj",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 750,
-      "bytes": 144885,
-      "sha256": "e92757982c7103312c71700b8a51dd90ba8cdcac2d0d087309c57c0aa8fff970",
-      "acquiredAt": "2026-09-13T15:37:56.780Z"
     },
     {
       "recipeSlug": "tabbouleh",
@@ -993,20 +853,6 @@
       "bytes": 499151,
       "sha256": "42729e7974f0dbff9d156039de012663da8f750d3a3f2f2ef17fe0574d455b9d",
       "acquiredAt": "2026-09-13T15:38:34.416Z"
-    },
-    {
-      "recipeSlug": "warak-enab",
-      "path": "warak-enab.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Warak_enab.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/Warak_enab.jpg",
-      "creator": "شيماء جلال",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "شيماء جلال · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 1333,
-      "bytes": 507098,
-      "sha256": "358d702a9b9cb2515660d591265d43a27750a3cd2f51e734ad7883fb9a3333be",
-      "acquiredAt": "2026-09-13T15:38:36.514Z"
     }
   ],
   "skipped": [
@@ -1029,6 +875,10 @@
     {
       "recipeSlug": "bean-burrito-bowl",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "beef-burger-homemade",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "beef-noodle-stirfry",
@@ -1155,6 +1005,10 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "kunafa-cheese",
+      "reason": "refused on review"
+    },
+    {
       "recipeSlug": "labneh-bowl",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1163,8 +1017,16 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "lasagne-beef",
+      "reason": "refused on review"
+    },
+    {
       "recipeSlug": "lemon-herb-couscous",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "lentil-soup-lemon",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "lentil-spinach-soup-indian",
@@ -1177,6 +1039,10 @@
     {
       "recipeSlug": "margherita-flatbread",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "menemen",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "mesaqaa",
@@ -1195,8 +1061,16 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "okra-stew",
+      "reason": "duplicate photograph"
+    },
+    {
       "recipeSlug": "orange-olive-oil-cake",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "overnight-oats",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "pasta-tuna-lemon",
@@ -1213,6 +1087,10 @@
     {
       "recipeSlug": "ratatouille-tray",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "risotto-mushroom",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "roast-chicken-potatoes",
@@ -1245,6 +1123,10 @@
     {
       "recipeSlug": "sayadeya",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "scrambled-eggs-soft",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "sesame-noodles-cold",
@@ -1295,6 +1177,10 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "sutlac-baked",
+      "reason": "duplicate photograph"
+    },
+    {
       "recipeSlug": "sweet-potato-fries-airfryer",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1341,6 +1227,10 @@
     {
       "recipeSlug": "turkish-white-bean-salad",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "warak-enab",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "white-bean-stew",

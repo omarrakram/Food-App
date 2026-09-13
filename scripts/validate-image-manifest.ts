@@ -170,6 +170,41 @@ function main(): void {
     }
   }
 
+  // A photograph refused on review must never come back — including by hand.
+  const rejectedPath = join(ROOT, 'data', 'images', 'rejected.json');
+  if (existsSync(rejectedPath)) {
+    const refused = new Map(
+      (
+        JSON.parse(readFileSync(rejectedPath, 'utf8')) as {
+          files: { title: string; reason: string }[];
+        }
+      ).files.map((entry) => [
+        entry.title.replace(/^File:/, '').replace(/ /g, '_').toLowerCase(),
+        entry.reason,
+      ]),
+    );
+    for (const image of manifest.images) {
+      const name = decodeURIComponent(image.originalUrl.split('/').pop() ?? '').toLowerCase();
+      const reason = refused.get(name);
+      if (reason) {
+        problems.push(`${image.recipeSlug}: uses a photograph refused on review — ${reason}`);
+      }
+    }
+  }
+
+  // One photograph, one recipe. Two cards in a feed showing the same picture
+  // makes the catalogue look fabricated, and it was: the same bowl of rice
+  // pudding illustrated both roz bel laban and sutlac.
+  const byFile = new Map<string, string[]>();
+  for (const image of manifest.images) {
+    byFile.set(image.sha256, [...(byFile.get(image.sha256) ?? []), image.recipeSlug]);
+  }
+  for (const [, slugs] of byFile) {
+    if (slugs.length > 1) {
+      problems.push(`the same photograph illustrates ${slugs.join(' and ')}`);
+    }
+  }
+
   const covered = manifest.images.length;
   const total = recipeSlugs.size;
 

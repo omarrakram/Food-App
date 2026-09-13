@@ -36,6 +36,27 @@ import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts
 const ROOT = join(import.meta.dirname, '..');
 const ASSET_DIR = join(ROOT, 'assets', 'recipes');
 const MANIFEST = join(ROOT, 'data', 'images', 'manifest.json');
+const REJECTED = join(ROOT, 'data', 'images', 'rejected.json');
+
+/**
+ * Files a human looked at and refused.
+ *
+ * THE CHECKS ABOVE CANNOT SEE THE PICTURE. They read a title, a licence and a
+ * pixel count, and everything on this list passed all three: a burger
+ * photographed beside a glass of beer, an aerial view of the Turkish town of
+ * Menemen for the dish named after it, a grape vine for stuffed vine leaves, a
+ * heap of dry muesli for overnight oats. No rule reading a filename catches
+ * any of those. Someone has to look, and when they do, the answer has to
+ * stick — so it is written down here with the reason, rather than corrected by
+ * hand in a manifest that the next run would overwrite.
+ */
+function rejectedTitles(): Map<string, string> {
+  if (!existsSync(REJECTED)) return new Map();
+  const parsed = JSON.parse(readFileSync(REJECTED, 'utf8')) as {
+    files: { title: string; reason: string }[];
+  };
+  return new Map(parsed.files.map((entry) => [entry.title.toLowerCase(), entry.reason]));
+}
 
 /** Commons wants a real contact in the agent string; anonymous bulk gets blocked. */
 const USER_AGENT =
@@ -462,6 +483,8 @@ function dishNames(recipe: (typeof RECIPE_CATALOGUE)[number]): string[] {
 async function* candidatesFor(
   recipe: (typeof RECIPE_CATALOGUE)[number],
   note: (message: string) => void,
+  refused: ReadonlyMap<string, string>,
+  used: ReadonlySet<string>,
 ): AsyncGenerator<Candidate> {
   const names = dishNames(recipe);
   const sources: [string, (name: string) => Promise<Candidate[]>][] = [
@@ -483,6 +506,15 @@ async function* candidatesFor(
       for (const candidate of found) {
         if (seen.has(candidate.url) || !usable(candidate, recipe)) continue;
         seen.add(candidate.url);
+        const why = refused.get(candidate.title.toLowerCase());
+        if (why) {
+          note(`${candidate.title}: refused on review — ${why}`);
+          continue;
+        }
+        if (used.has(candidate.url)) {
+          note(`${candidate.title}: already illustrates another recipe`);
+          continue;
+        }
         yield candidate;
       }
       // Wikimedia asks for a gap between generated queries.
@@ -662,6 +694,13 @@ async function main(): Promise<void> {
   mkdirSync(ASSET_DIR, { recursive: true });
   const manifest = readManifest();
   const have = new Set(manifest.images.map((entry) => entry.recipeSlug));
+  const refused = rejectedTitles();
+
+  // No photograph may illustrate two recipes. Seeded from the manifest as well
+  // as this run, so a partial re-acquisition cannot reintroduce a duplicate the
+  // last one already placed — which is how the same bowl of rice pudding came
+  // to be both roz bel laban and sutlac.
+  const usedFiles = new Set(manifest.images.map((entry) => entry.originalUrl));
 
   const todo = RECIPE_CATALOGUE.filter(
     (recipe) => recipe.slug !== null && (force || !have.has(recipe.slug)),
@@ -684,7 +723,7 @@ async function main(): Promise<void> {
     // its single best photograph happens to 404. Capped so one unlucky dish
     // cannot spend the whole run's request budget.
     let tried = 0;
-    for await (const candidate of candidatesFor(recipe, note)) {
+    for await (const candidate of candidatesFor(recipe, note, refused, usedFiles)) {
       const result = await fetchImage(candidate);
       if ('bytes' in result) {
         picked = candidate;
@@ -733,6 +772,7 @@ async function main(): Promise<void> {
       sha256: createHash('sha256').update(got.bytes).digest('hex'),
       acquiredAt: new Date().toISOString(),
     });
+    usedFiles.add(picked.url);
     console.log(
       `  ✓ ${slug}  ${picked.licence!.spdx}  ${width}px  ${picked.title}`,
     );

@@ -1,0 +1,50 @@
+{
+  "comment": "Commons files a human has looked at and refused, and why. The fetcher never chooses one of these again and the validator refuses a manifest containing one. This list exists because the automatic checks cannot see the picture: they read a title, a licence and a pixel count. Everything below passed all three and was still wrong.",
+  "files": [
+    {
+      "title": "File:RedDot Burger.jpg",
+      "rejectedFor": "beef-burger-homemade",
+      "reason": "A glass of beer in frame and bacon in the burger. This catalogue is built for Egypt; neither belongs on a recipe card, and no rule reading a filename can see them."
+    },
+    {
+      "title": "File:Menemen.jpg",
+      "rejectedFor": "menemen",
+      "reason": "An aerial photograph of the Turkish town of Menemen. The dish is named after the place, so its Commons category is mostly landscapes."
+    },
+    {
+      "title": "File:Warak enab.jpg",
+      "rejectedFor": "warak-enab",
+      "reason": "A grape vine growing in a garden. Warak enab is the stuffed leaf, not the plant it came from."
+    },
+    {
+      "title": "File:Dorset Cereals muesli.jpg",
+      "rejectedFor": "overnight-oats",
+      "reason": "A heap of dry muesli. Raw ingredients rather than a bowl of anything, and branded packaging cereal at that."
+    },
+    {
+      "title": "File:Cheese kunafa at Agasi, Lajpat Nagar, Delhi (2025-10-04).jpg",
+      "rejectedFor": "kunafa-cheese",
+      "reason": "A pale flat pancake. Correctly named and not recognisable as kunafa, which is orange shredded pastry."
+    },
+    {
+      "title": "File:Halal Beef Lasagne and Cauliflowers - Foodilic 2024-08-12.jpg",
+      "rejectedFor": "lasagne-beef",
+      "reason": "A canteen tray where the lasagne is a brown lump beside yellow cauliflower. Accurately titled, unappetising, and unrecognisable as the dish."
+    },
+    {
+      "title": "File:Levantine Lentil Soup winter Newton Massachusetts New England.jpg",
+      "rejectedFor": "lentil-soup-lemon",
+      "reason": "A featureless pale disc filling the frame. Nothing in it reads as soup."
+    },
+    {
+      "title": "File:Mushroom Risotto (4789415965).jpg",
+      "rejectedFor": "risotto-mushroom",
+      "reason": "A pan of raw mushrooms with cured meat through it. Not risotto, and the meat is not something this catalogue would serve."
+    },
+    {
+      "title": "File:Fried oysters with soft scrambled eggs don of Nakau.jpg",
+      "rejectedFor": "scrambled-eggs-soft",
+      "reason": "Breaded fried oysters on rice. The title mentions scrambled eggs; the photograph is a seafood donburi."
+    }
+  ]
+}

@@ -48,13 +48,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "secretlondon123 from London, England · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Batata_harra.jpg",
   },
-  "beef-burger-homemade": {
-    source: require('../../../assets/recipes/beef-burger-homemade.jpg') as number,
-    creator: "Hongreddotbrewhouse",
-    license: "CC-BY-SA-3.0",
-    attribution: "Hongreddotbrewhouse · CC-BY-SA-3.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:RedDot_Burger.jpg",
-  },
   "beef-tacos": {
     source: require('../../../assets/recipes/beef-tacos.jpg') as number,
     creator: "Horacio Cambeiro",
@@ -230,27 +223,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Dina Said · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
   },
-  "kunafa-cheese": {
-    source: require('../../../assets/recipes/kunafa-cheese.jpg') as number,
-    creator: "Contrapunctus-1",
-    license: "CC-BY-SA-4.0",
-    attribution: "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
-  },
-  "lasagne-beef": {
-    source: require('../../../assets/recipes/lasagne-beef.jpg') as number,
-    creator: "Andy Li",
-    license: "CC0-1.0",
-    attribution: null,
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Halal_Beef_Lasagne_and_Cauliflowers_-_Foodilic_2024-08-12.jpg",
-  },
-  "lentil-soup-lemon": {
-    source: require('../../../assets/recipes/lentil-soup-lemon.jpg') as number,
-    creator: "EgorovaSvetlana",
-    license: "CC-BY-SA-4.0",
-    attribution: "EgorovaSvetlana · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Levantine_Lentil_Soup_winter_Newton_Massachusetts_New_England.jpg",
-  },
   "mac-and-cheese-baked": {
     source: require('../../../assets/recipes/mac-and-cheese-baked.jpg') as number,
     creator: "Texasfoodgawker",
@@ -293,13 +265,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
   },
-  "menemen": {
-    source: require('../../../assets/recipes/menemen.jpg') as number,
-    creator: "https://www.flickr.com/people/sarah_c_murray/",
-    license: "CC-BY-2.0",
-    attribution: "https://www.flickr.com/people/sarah_c_murray/ · CC-BY-2.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Menemen.jpg",
-  },
   "mexican-rice": {
     source: require('../../../assets/recipes/mexican-rice.jpg') as number,
     creator: "Ralf Peter Reimann",
@@ -335,26 +300,12 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "avlxyz · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Baba_ganoush_closeup.jpg",
   },
-  "okra-stew": {
-    source: require('../../../assets/recipes/okra-stew.jpg') as number,
-    creator: "Tamorlan",
-    license: "CC-BY-SA-3.0",
-    attribution: "Tamorlan · CC-BY-SA-3.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
-  },
   "om-ali": {
     source: require('../../../assets/recipes/om-ali.jpg') as number,
     creator: "Miansari66",
     license: "CC0-1.0",
     attribution: null,
     sourcePage: "https://commons.wikimedia.org/wiki/File:Umm_Ali.JPG",
-  },
-  "overnight-oats": {
-    source: require('../../../assets/recipes/overnight-oats.jpg') as number,
-    creator: "Mx. Granger",
-    license: "CC0-1.0",
-    attribution: null,
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Dorset_Cereals_muesli.jpg",
   },
   "palak-paneer-style": {
     source: require('../../../assets/recipes/palak-paneer-style.jpg') as number,
@@ -391,13 +342,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
   },
-  "risotto-mushroom": {
-    source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
-    creator: "Katrin Gilger",
-    license: "CC-BY-SA-2.0",
-    attribution: "Katrin Gilger · CC-BY-SA-2.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Mushroom_Risotto_(4789415965).jpg",
-  },
   "roz-bel-laban": {
     source: require('../../../assets/recipes/roz-bel-laban.jpg') as number,
     creator: "Shivangisj",
@@ -411,13 +355,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
-  },
-  "scrambled-eggs-soft": {
-    source: require('../../../assets/recipes/scrambled-eggs-soft.jpg') as number,
-    creator: "毒島みるく",
-    license: "CC0-1.0",
-    attribution: null,
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_don_of_Nakau.jpg",
   },
   "shakshuka": {
     source: require('../../../assets/recipes/shakshuka.jpg') as number,
@@ -446,13 +383,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
-  },
-  "sutlac-baked": {
-    source: require('../../../assets/recipes/sutlac-baked.jpg') as number,
-    creator: "Shivangisj",
-    license: "CC-BY-SA-4.0",
-    attribution: "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
   },
   "tabbouleh": {
     source: require('../../../assets/recipes/tabbouleh.jpg') as number,
@@ -509,12 +439,5 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "Srujanabotcha · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Golden_Vegetable_Spring_Rolls_Served_with_Dipping_Sauce.jpg",
-  },
-  "warak-enab": {
-    source: require('../../../assets/recipes/warak-enab.jpg') as number,
-    creator: "شيماء جلال",
-    license: "CC-BY-SA-4.0",
-    attribution: "شيماء جلال · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Warak_enab.jpg",
   },
 };
