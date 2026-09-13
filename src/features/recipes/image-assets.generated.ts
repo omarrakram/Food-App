@@ -34,6 +34,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Shisma · CC-BY-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
   },
+  "banana-milkshake": {
+    source: require('../../../assets/recipes/banana-milkshake.jpg') as number,
+    creator: "Hazel Nicholson from Coventry, United Kingdom",
+    license: "CC-BY-2.0",
+    attribution: "Hazel Nicholson from Coventry, United Kingdom · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Five_Guys_banana_milkshake_(40878734941).jpg",
+  },
   "basbousa": {
     source: require('../../../assets/recipes/basbousa.jpg') as number,
     creator: "stu_spivack",
@@ -230,6 +237,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Dina Said · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
   },
+  "kunafa-cheese": {
+    source: require('../../../assets/recipes/kunafa-cheese.jpg') as number,
+    creator: "Ayshamarjana",
+    license: "CC-BY-SA-4.0",
+    attribution: "Ayshamarjana · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Cream_cheese_kunafa.jpg",
+  },
   "mac-and-cheese-baked": {
     source: require('../../../assets/recipes/mac-and-cheese-baked.jpg') as number,
     creator: "Texasfoodgawker",
@@ -272,6 +286,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
   },
+  "menemen": {
+    source: require('../../../assets/recipes/menemen.jpg') as number,
+    creator: "Samizambak",
+    license: "CC-BY-SA-4.0",
+    attribution: "Samizambak · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Menemen_Emiralem_Strawberry.jpg",
+  },
   "mexican-rice": {
     source: require('../../../assets/recipes/mexican-rice.jpg') as number,
     creator: "Ralf Peter Reimann",
@@ -285,6 +306,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "Daniel Ziegener · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Minestrone_soup_(5).jpg",
+  },
+  "muhallabia": {
+    source: require('../../../assets/recipes/muhallabia.jpg') as number,
+    creator: "Jktab",
+    license: "CC-BY-SA-4.0",
+    attribution: "Jktab · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Mhallabiyyeh_(Arabic_milk_pudding).jpg",
   },
   "muhammara": {
     source: require('../../../assets/recipes/muhammara.jpg') as number,
@@ -355,6 +383,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-2.0",
     attribution: "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
+  },
+  "risotto-mushroom": {
+    source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
+    creator: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+    license: "CC-BY-SA-4.0",
+    attribution: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG",
   },
   "roz-bel-laban": {
     source: require('../../../assets/recipes/roz-bel-laban.jpg') as number,

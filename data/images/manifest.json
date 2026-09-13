@@ -43,6 +43,20 @@
       "acquiredAt": "2026-09-13T15:34:15.932Z"
     },
     {
+      "recipeSlug": "banana-milkshake",
+      "path": "banana-milkshake.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Five_Guys_banana_milkshake_(40878734941).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Five_Guys_banana_milkshake_%2840878734941%29.jpg",
+      "creator": "Hazel Nicholson from Coventry, United Kingdom",
+      "license": "CC-BY-2.0",
+      "attribution": "Hazel Nicholson from Coventry, United Kingdom · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 372858,
+      "sha256": "14efc7eb6174d6f5eb92ccb9785bd4ad7e25dd8f45331c683ab6a3efe99730fd",
+      "acquiredAt": "2026-09-13T23:35:34.098Z"
+    },
+    {
       "recipeSlug": "basbousa",
       "path": "basbousa.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Basboosa.jpg",
@@ -435,6 +449,20 @@
       "acquiredAt": "2026-09-13T15:35:58.830Z"
     },
     {
+      "recipeSlug": "kunafa-cheese",
+      "path": "kunafa-cheese.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cream_cheese_kunafa.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Cream_cheese_kunafa.jpg",
+      "creator": "Ayshamarjana",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Ayshamarjana · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 750115,
+      "sha256": "b5e8bd362b1dd4e8d29279db7dbf2b29d8f7c6af506ef4635af54a02e0b6a959",
+      "acquiredAt": "2026-09-13T23:37:50.914Z"
+    },
+    {
       "recipeSlug": "mac-and-cheese-baked",
       "path": "mac-and-cheese-baked.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg",
@@ -519,6 +547,20 @@
       "acquiredAt": "2026-09-13T15:36:27.961Z"
     },
     {
+      "recipeSlug": "menemen",
+      "path": "menemen.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Menemen_Emiralem_Strawberry.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Menemen_Emiralem_Strawberry.jpg",
+      "creator": "Samizambak",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Samizambak · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 563,
+      "bytes": 282291,
+      "sha256": "ee148dc57760b6040439aae3c0d7405e9247981edc88e5786d4d712990281846",
+      "acquiredAt": "2026-09-13T23:36:06.413Z"
+    },
+    {
       "recipeSlug": "mexican-rice",
       "path": "mexican-rice.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Mexican_rice_144235.jpg",
@@ -545,6 +587,20 @@
       "bytes": 263020,
       "sha256": "55995f9169b6deb97b9552babd652f35eee03ddd7e3e7028aa27d85f4f2e542b",
       "acquiredAt": "2026-09-13T15:36:32.337Z"
+    },
+    {
+      "recipeSlug": "muhallabia",
+      "path": "muhallabia.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mhallabiyyeh_(Arabic_milk_pudding).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Mhallabiyyeh_%28Arabic_milk_pudding%29.jpg",
+      "creator": "Jktab",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Jktab · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 138351,
+      "sha256": "6d8ba623f163c59bb15492ce44ea6930089539738a36c0bf9395df42be46df45",
+      "acquiredAt": "2026-09-13T23:35:44.143Z"
     },
     {
       "recipeSlug": "muhammara",
@@ -685,6 +741,20 @@
       "bytes": 244528,
       "sha256": "dcdd5510d5362376ea191525a0b056e9b8489fc522786d55b642428b29f98b1d",
       "acquiredAt": "2026-09-13T15:36:52.815Z"
+    },
+    {
+      "recipeSlug": "risotto-mushroom",
+      "path": "risotto-mushroom.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom%2C_Trimingham.JPG",
+      "creator": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 805,
+      "bytes": 280439,
+      "sha256": "43ded7bf85607a9b22243b58b1c81c752d4d21b537c40d3d29dbecbd362eecc9",
+      "acquiredAt": "2026-09-13T23:39:15.524Z"
     },
     {
       "recipeSlug": "roz-bel-laban",
@@ -1043,10 +1113,6 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
-      "recipeSlug": "kunafa-cheese",
-      "reason": "refused on review"
-    },
-    {
       "recipeSlug": "labneh-bowl",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1064,7 +1130,7 @@
     },
     {
       "recipeSlug": "lentil-soup-lemon",
-      "reason": "File:Levantine Lentil soup Winter Newton Massachusetts New England.jpg: refused on review — A featureless pale disc filling the frame. Nothing in it reads as soup."
+      "reason": "File:Levantine Lentil Soup winter Newton Massachusetts New England.jpg: refused on review — A featureless pale disc filling the frame. Nothing in it reads as soup."
     },
     {
       "recipeSlug": "lentil-spinach-soup-indian",
@@ -1077,10 +1143,6 @@
     {
       "recipeSlug": "margherita-flatbread",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "menemen",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "mesaqaa",
@@ -1099,8 +1161,12 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "oatmeal-banana",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
       "recipeSlug": "okra-stew",
-      "reason": "File:Bamia-Ocras tomate (cropped).JPG: already illustrates another recipe"
+      "reason": "no relevant openly-licensed image found"
     },
     {
       "recipeSlug": "orange-olive-oil-cake",
@@ -1121,10 +1187,6 @@
     {
       "recipeSlug": "ratatouille-tray",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "risotto-mushroom",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "roast-chicken-potatoes",
@@ -1160,7 +1222,7 @@
     },
     {
       "recipeSlug": "scrambled-eggs-soft",
-      "reason": "refused on review"
+      "reason": "no relevant openly-licensed image found"
     },
     {
       "recipeSlug": "sesame-noodles-cold",
@@ -1260,7 +1322,7 @@
     },
     {
       "recipeSlug": "warak-enab",
-      "reason": "File:Warak enab.jpg: refused on review — A grape vine growing in a garden. Warak enab is the stuffed leaf, not the plant it came from."
+      "reason": "no relevant openly-licensed image found"
     },
     {
       "recipeSlug": "white-bean-stew",
