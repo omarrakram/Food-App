@@ -37,7 +37,8 @@
     "fn:check": "deno check --min-dep-age 0 --config supabase/functions/deno.json supabase/functions/ai-suggest/index.ts supabase/functions/ai-interpret/index.ts",
     "fn:test": "deno test --min-dep-age 0 --allow-env --config supabase/functions/deno.json supabase/functions/",
     "db:test": "./scripts/db-test.sh",
-    "smoke:web": "node scripts/smoke-web.mjs"
+    "smoke:web": "node scripts/smoke-web.mjs",
+    "recipes:audit": "node --experimental-strip-types --no-warnings scripts/audit-recipes.ts"
   },
   "jest": {
     "projects": [

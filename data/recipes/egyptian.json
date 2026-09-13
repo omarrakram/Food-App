@@ -4611,5 +4611,305 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "samak-mashwi-mullet",
+    "title": "Grilled Mullet with Cumin",
+    "titleAr": "بوري مشوي بالكمون",
+    "description": "Whole mullet rubbed with cumin and garlic and grilled until the skin blisters. What the Nile fish stalls do.",
+    "descriptionAr": "بوري صحيح متتبّل بكمون وتوم ومشوي لحد ما القشرة تتقرمش. زي ما بيعملوه على عربيات السمك.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 22,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 38,
+      "carbs": 4,
+      "fat": 17,
+      "fiber": 1
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "egyptian",
+      "high-protein",
+      "healthy",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/samak-mashwi-mullet.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "mullet",
+        "quantity": 1200,
+        "unit": "g",
+        "prep": "cleaned and scored"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the garlic, cumin, half the lemon juice, olive oil and salt into a paste.",
+        "textAr": "اخلط التوم والكمون ونص عصير الليمون وزيت الزيتون والملح لحد ما يبقوا عجينة.",
+        "minutes": 5,
+        "uses": [
+          "garlic",
+          "cumin",
+          "lemon",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rub it into the scores and inside the cavity. Rest 10 minutes.",
+        "textAr": "ادهن الخلطة في الفتحات وجوه السمكة. سيبها ١٠ دقايق.",
+        "minutes": 10,
+        "uses": [
+          "mullet"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roast at 220°C for 20–22 minutes until the skin blisters and the flesh flakes.",
+        "textAr": "اشويها على ٢٢٠ درجة من ٢٠ لـ ٢٢ دقيقة لحد ما القشرة تتقرمش واللحمة تتفتّت.",
+        "minutes": 22,
+        "uses": [
+          "mullet"
+        ],
+        "safety": "Cook fish until it flakes and is opaque all the way through — 63°C at the thickest part.",
+        "safetyAr": "اطبخ السمك لحد ما يتفتّت ويبقى لونه فاتح من جوه — ٦٣°م في أتخن جزء."
+      },
+      {
+        "text": "Finish with the rest of the lemon, the coriander and the chilli.",
+        "textAr": "رشّ باقي الليمون والكزبرة والشطة.",
+        "minutes": 2,
+        "uses": [
+          "lemon",
+          "coriander",
+          "chili-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "calamari-alexandria",
+    "title": "Alexandria Fried Calamari",
+    "titleAr": "كاليماري إسكندراني",
+    "description": "Rings in seasoned flour, fried hot and fast, eaten with tahini and a hard squeeze of lemon.",
+    "descriptionAr": "حلقات في دقيق متبّل، مقلية على نار عالية وبسرعة، وبتتاكل بالطحينة وليمون كتير.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 10,
+    "servings": 4,
+    "nutrition": {
+      "calories": 380,
+      "protein": 26,
+      "carbs": 28,
+      "fat": 18,
+      "fiber": 1
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "shellfish",
+      "gluten",
+      "sesame"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "high-protein",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/calamari-alexandria.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "calamari",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "sliced into rings"
+      },
+      {
+        "slug": "flour",
+        "quantity": 120,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "paprika",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 500,
+        "unit": "ml",
+        "prep": "for frying",
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "wedged"
+      },
+      {
+        "slug": "tahini",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Pat the rings completely dry — wet calamari spits and steams instead of frying.",
+        "textAr": "نشّف الحلقات كويس — الكاليماري المبلول بيطقطق وبيسلق بدل ما يتحمّر.",
+        "minutes": 5,
+        "uses": [
+          "calamari"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss them through the flour with the cumin, paprika and salt.",
+        "textAr": "قلّبهم في الدقيق مع الكمون والبابريكا والملح.",
+        "minutes": 4,
+        "uses": [
+          "flour",
+          "cumin",
+          "paprika",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry in batches at 180°C for 90 seconds each. Longer turns them to rubber.",
+        "textAr": "اقليهم على دفعات على ١٨٠ درجة، ٩٠ ثانية للدفعة. أكتر من كده بيبقوا زي الأستيك.",
+        "minutes": 8,
+        "uses": [
+          "calamari",
+          "sunflower-oil"
+        ],
+        "safety": "Hot oil: lower the rings in away from you and never fill the pan past a third.",
+        "safetyAr": "زيت سخن: نزّل الحلقات بعيد عنك وما تملاش الطاسة أكتر من تلتها."
+      },
+      {
+        "text": "Loosen the tahini with a little water and serve with the lemon.",
+        "textAr": "خفّف الطحينة بشوية مية وقدّمها مع الليمون.",
+        "minutes": 2,
+        "uses": [
+          "tahini",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

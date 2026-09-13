@@ -27,6 +27,12 @@ import type { Recipe, RecipeStep } from '@/types/domain';
  * apart. `npm test` fails if a fixture uses a phrase that is missing here.
  */
 const PREPARATION_AR: Record<string, string> = {
+  'sliced into rings': 'مقطّع حلقات',
+  wedged: 'مقطّع أرباع',
+  'scrubbed and debearded': 'متغسّل ومتنضّف',
+  cleaned: 'متنضّف',
+  pitted: 'منزوع النوى',
+  'drained and rinsed': 'مصفّى ومغسول',
   rinsed: 'مغسول',
   'small elbows': 'كوع صغير',
   'thinly sliced': 'شرايح رفيعة',

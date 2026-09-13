@@ -1289,5 +1289,173 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "fish-tacos-cabbage",
+    "title": "Fish Tacos with Cabbage Slaw",
+    "titleAr": "تاكو سمك بسلطة الكرنب",
+    "description": "Spiced tilapia, sharp cabbage, yogurt instead of crema. Ten minutes at the pan.",
+    "descriptionAr": "بلطي متبّل وكرنب حامضي وزبادي بدل الكريمة. عشر دقايق على الطاسة.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 10,
+    "servings": 4,
+    "nutrition": {
+      "calories": 420,
+      "protein": 34,
+      "carbs": 38,
+      "fat": 14,
+      "fiber": 6
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish",
+      "gluten",
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "high-protein",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/fish-tacos-cabbage.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tilapia",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "tortilla",
+        "quantity": 8,
+        "unit": "piece",
+        "prep": "warmed"
+      },
+      {
+        "slug": "cabbage",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "shredded"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the cabbage with half the lemon juice and a pinch of the salt. Leave it to soften.",
+        "textAr": "قلّب الكرنب مع نص عصير الليمون ورشة ملح. سيبه يطرّي.",
+        "minutes": 5,
+        "uses": [
+          "cabbage",
+          "lemon",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir the rest of the lemon into the yogurt with half the coriander.",
+        "textAr": "قلّب باقي الليمون في الزبادي مع نص الكزبرة.",
+        "minutes": 3,
+        "uses": [
+          "yogurt",
+          "lemon",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rub the fish with paprika, cumin and salt, then fry 3 minutes a side until opaque.",
+        "textAr": "تبّل السمك بالبابريكا والكمون والملح، وحمّره ٣ دقايق على كل وش لحد ما يبيضّ.",
+        "minutes": 8,
+        "uses": [
+          "tilapia",
+          "paprika",
+          "cumin",
+          "salt",
+          "olive-oil"
+        ],
+        "safety": "Cook fish until it flakes and is opaque all the way through — 63°C at the thickest part.",
+        "safetyAr": "اطبخ السمك لحد ما يتفتّت ويبقى لونه فاتح من جوه — ٦٣°م في أتخن جزء."
+      },
+      {
+        "text": "Fill the warm tortillas with fish, slaw, yogurt and the last of the coriander.",
+        "textAr": "احشي التورتيلا الدافية بالسمك والكرنب والزبادي وباقي الكزبرة.",
+        "minutes": 3,
+        "uses": [
+          "tortilla",
+          "tilapia",
+          "cabbage",
+          "yogurt",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

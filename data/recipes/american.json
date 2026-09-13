@@ -2139,24 +2139,24 @@
   },
   {
     "slug": "smoothie-protein-banana",
-    "title": "Banana Peanut Protein Smoothie",
-    "titleAr": "سموذي موز وفول سوداني",
-    "description": "Three minutes, one blender, and it holds until lunch.",
-    "descriptionAr": "تلات دقايق وخلاط واحد وبيقعّدك لحد الغدا.",
+    "title": "Banana Date Yogurt Smoothie",
+    "titleAr": "سموذي موز وبلح بالزبادي",
+    "description": "Frozen banana, dates and thick yogurt. Sweet without sugar, and thick enough to need a spoon.",
+    "descriptionAr": "موز مجمّد وبلح وزبادي تقيل. حلو من غير سكر، وتقيل لدرجة إنك محتاج معلقة.",
     "cuisine": "american",
     "mealTypes": [
       "breakfast",
       "snack"
     ],
     "difficulty": "easy",
-    "prepMinutes": 4,
+    "prepMinutes": 8,
     "cookMinutes": 0,
     "servings": 1,
     "nutrition": {
-      "calories": 420,
-      "protein": 20,
-      "carbs": 48,
-      "fat": 18,
+      "calories": 330,
+      "protein": 14,
+      "carbs": 58,
+      "fat": 6,
       "fiber": 6
     },
     "dietTags": [
@@ -2164,19 +2164,15 @@
       "halal"
     ],
     "allergens": [
-      "dairy",
-      "gluten",
-      "peanuts"
+      "dairy"
     ],
-    "appliances": [
-      "blender"
-    ],
+    "appliances": [],
     "tags": [
-      "breakfast",
-      "no-cook",
       "quick",
-      "beginner",
-      "high-protein"
+      "breakfast",
+      "healthy",
+      "no-cook",
+      "beginner"
     ],
     "image": {
       "path": "curated/smoothie-protein-banana.jpg",
@@ -2194,29 +2190,22 @@
         "prep": "frozen"
       },
       {
-        "slug": "milk",
-        "quantity": 250,
-        "unit": "ml",
-        "prep": null
-      },
-      {
-        "slug": "peanut-butter",
-        "quantity": 2,
-        "unit": "tbsp",
-        "prep": null
-      },
-      {
-        "slug": "oats",
-        "quantity": 30,
+        "slug": "yogurt",
+        "quantity": 200,
         "unit": "g",
         "prep": null
       },
       {
-        "slug": "honey",
-        "quantity": 1,
-        "unit": "tbsp",
-        "prep": null,
-        "optional": true
+        "slug": "dates",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "pitted"
+      },
+      {
+        "slug": "milk",
+        "quantity": 120,
+        "unit": "ml",
+        "prep": null
       },
       {
         "slug": "cinnamon",
@@ -2229,25 +2218,36 @@
     ],
     "steps": [
       {
-        "text": "Put everything in the blender with the liquid at the bottom.",
-        "textAr": "حط كل حاجة في الخلاط والسايل تحت.",
-        "minutes": 2,
+        "text": "Soak the dates in the milk for 5 minutes so they blend smooth.",
+        "textAr": "انقع البلح في اللبن ٥ دقايق علشان يتفرم ناعم.",
+        "minutes": 5,
         "uses": [
-          "milk",
-          "bananas",
-          "peanut-butter",
-          "oats",
-          "honey",
-          "cinnamon"
+          "dates",
+          "milk"
         ],
         "safety": null,
         "safetyAr": null
       },
       {
-        "text": "Blend for 60 seconds until completely smooth.",
-        "textAr": "اضربه ٦٠ ثانية لحد ما يبقى ناعم تمامًا.",
+        "text": "Blend the frozen banana, yogurt, dates and milk until thick.",
+        "textAr": "اضرب الموز المجمّد والزبادي والبلح واللبن لحد ما يبقى تقيل.",
         "minutes": 2,
-        "uses": [],
+        "uses": [
+          "bananas",
+          "yogurt",
+          "dates",
+          "milk"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour into a tall glass and dust with cinnamon.",
+        "textAr": "صبّه في كوباية طويلة ورشّ عليه قرفة.",
+        "minutes": 1,
+        "uses": [
+          "cinnamon"
+        ],
         "safety": null,
         "safetyAr": null
       }

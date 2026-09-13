@@ -2448,5 +2448,302 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "sardines-baked-lemon",
+    "title": "Baked Sardines with Lemon and Oregano",
+    "titleAr": "سردين بالفرن بالليمون والأوريجانو",
+    "description": "Cheap, oily, quick. Twelve minutes in a hot oven and nothing else asked of you.",
+    "descriptionAr": "رخيص ودسم وسريع. اتناشر دقيقة في فرن سخن ومش عايز منك حاجة تانية.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 12,
+    "servings": 3,
+    "nutrition": {
+      "calories": 340,
+      "protein": 30,
+      "carbs": 3,
+      "fat": 23,
+      "fiber": 1
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "healthy",
+      "high-protein",
+      "quick",
+      "budget",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/sardines-baked-lemon.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "sardines",
+        "quantity": 800,
+        "unit": "g",
+        "prep": "cleaned"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "oregano",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "sliced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 0.5,
+        "unit": "bunch",
+        "prep": "chopped"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Lay the sardines in one layer with the lemon slices tucked between them.",
+        "textAr": "رصّ السردين في صف واحد وحطّ شرائح الليمون بينهم.",
+        "minutes": 5,
+        "uses": [
+          "sardines",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Scatter the garlic and oregano, then the oil and salt.",
+        "textAr": "رشّ التوم والأوريجانو، وبعدين الزيت والملح.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "oregano",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 220°C for 12 minutes until the skin crisps and the flesh flakes.",
+        "textAr": "اخبزهم على ٢٢٠ درجة ١٢ دقيقة لحد ما القشرة تتقرمش واللحمة تتفتّت.",
+        "minutes": 12,
+        "uses": [
+          "sardines"
+        ],
+        "safety": "Cook fish until it flakes and is opaque all the way through — 63°C at the thickest part.",
+        "safetyAr": "اطبخ السمك لحد ما يتفتّت ويبقى لونه فاتح من جوه — ٦٣°م في أتخن جزء."
+      },
+      {
+        "text": "Shower with parsley and eat straight from the tray.",
+        "textAr": "رشّ البقدونس وكُل من الصينية على طول.",
+        "minutes": 1,
+        "uses": [
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mussels-tomato-broth",
+    "title": "Mussels in Tomato Broth",
+    "titleAr": "بلح البحر في شوربة طماطم",
+    "description": "One pan, eight minutes, and a broth worth tearing bread for.",
+    "descriptionAr": "طاسة واحدة وتمن دقايق وشوربة تستاهل تغمّس فيها العيش.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 12,
+    "cookMinutes": 12,
+    "servings": 3,
+    "nutrition": {
+      "calories": 300,
+      "protein": 26,
+      "carbs": 18,
+      "fat": 13,
+      "fiber": 3
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "shellfish",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "quick",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/mussels-tomato-broth.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "mussels",
+        "quantity": 1000,
+        "unit": "g",
+        "prep": "scrubbed and debearded"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "sliced"
+      },
+      {
+        "slug": "chili-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "baladi-bread",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "to serve",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Discard any mussel that is open and will not close when tapped.",
+        "textAr": "ارمي أي بلح بحر مفتوح ومش بيقفل لما تخبط عليه.",
+        "minutes": 5,
+        "uses": [
+          "mussels"
+        ],
+        "safety": "An open mussel before cooking, or a closed one after, is not safe to eat.",
+        "safetyAr": "بلح البحر المفتوح قبل الطبخ أو المقفول بعده مش مأمون للأكل."
+      },
+      {
+        "text": "Soften the garlic and chilli in the oil for 2 minutes without colouring them.",
+        "textAr": "شوّح التوم والشطة في الزيت دقيقتين من غير ما يتحمّروا.",
+        "minutes": 2,
+        "uses": [
+          "garlic",
+          "chili-pepper",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the tomatoes and salt and simmer 5 minutes into a loose sauce.",
+        "textAr": "ضيف الطماطم والملح وسيبهم ٥ دقايق لحد ما يبقوا صلصة سايحة.",
+        "minutes": 5,
+        "uses": [
+          "tomatoes",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Tip in the mussels, cover, and steam 5 minutes until they open. Throw away any that stay shut.",
+        "textAr": "حطّ بلح البحر وغطّي وسيبه ٥ دقايق لحد ما يفتح. ارمي أي واحدة فضلت مقفولة.",
+        "minutes": 5,
+        "uses": [
+          "mussels"
+        ],
+        "safety": "A mussel still closed after steaming should be thrown away, not forced.",
+        "safetyAr": "اللي فضل مقفول بعد الطبخ يترمي، ما يتفتحش بالعافية."
+      },
+      {
+        "text": "Scatter the parsley and serve with bread for the broth.",
+        "textAr": "رشّ البقدونس وقدّمه مع العيش علشان الشوربة.",
+        "minutes": 1,
+        "uses": [
+          "parsley",
+          "baladi-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]
