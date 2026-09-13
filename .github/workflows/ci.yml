@@ -58,6 +58,9 @@ jobs:
         # titles all fail here rather than reaching a user.
         run: npm run recipes:import -- --check
 
+      - name: Validate the recipe image manifest
+        run: npm run images:check
+
       - name: Verify the generated seed is in step with its TypeScript source
         run: |
           npm run seed:generate

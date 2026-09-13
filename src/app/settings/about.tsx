@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
 import { ListGroup, ListRow } from '@/components/ui/list-row';
@@ -26,6 +27,7 @@ import { useTheme } from '@/theme';
 export default function AboutScreen() {
   const theme = useTheme();
   const { t, formatNumber, formatDate } = useI18n();
+  const router = useRouter();
   const { isEnabled: authEnabled } = useAuth();
 
   return (
@@ -121,6 +123,15 @@ export default function AboutScreen() {
           </ListGroup>
         </Section>
       )}
+
+      <ListGroup>
+        <ListRow
+          title={t('about.credits')}
+          icon="images-outline"
+          onPress={() => router.push('/settings/credits')}
+          testID="about-credits"
+        />
+      </ListGroup>
 
       <Text variant="micro" color="textTertiary">
         {t('about.estimatesNotice')}

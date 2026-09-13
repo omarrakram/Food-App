@@ -3,6 +3,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, type ViewStyle } from 'react-native';
 
+import { localRecipeImage } from '@/features/recipes/images';
 import { useTheme } from '@/theme';
 import type { Cuisine, Recipe } from '@/types/domain';
 
@@ -58,7 +59,7 @@ function gradientFor(seed: string, isDark: boolean): [string, string] {
 }
 
 export type RecipeImageProps = {
-  recipe: Pick<Recipe, 'id' | 'imageUrl' | 'cuisine'>;
+  recipe: Pick<Recipe, 'id' | 'slug' | 'imageUrl' | 'cuisine'>;
   /** Width-to-height ratio. Always set, so layout never depends on the asset. */
   aspectRatio: number;
   /** Fallback glyph size. Cards want a smaller mark than a detail hero. */
@@ -89,10 +90,16 @@ export function RecipeImage({
     overflow: 'hidden' as const,
   };
 
-  if (recipe.imageUrl) {
+  // Bundled first: it cannot 404, needs no configuration, and works offline.
+  // A remote URL is the fallback for community photos and for a CDN we have
+  // not populated yet.
+  const bundled = localRecipeImage(recipe.slug);
+  const source = bundled?.source ?? recipe.imageUrl;
+
+  if (source) {
     return (
       <Image
-        source={recipe.imageUrl}
+        source={source}
         contentFit="cover"
         transition={220}
         // Recipe photos repeat across screens; caching them avoids a refetch

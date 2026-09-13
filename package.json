@@ -38,7 +38,10 @@
     "fn:test": "deno test --min-dep-age 0 --allow-env --config supabase/functions/deno.json supabase/functions/",
     "db:test": "./scripts/db-test.sh",
     "smoke:web": "node scripts/smoke-web.mjs",
-    "recipes:audit": "node --experimental-strip-types --no-warnings scripts/audit-recipes.ts"
+    "recipes:audit": "node --experimental-strip-types --no-warnings scripts/audit-recipes.ts",
+    "images:fetch": "node --experimental-strip-types --no-warnings scripts/fetch-recipe-images.ts",
+    "images:check": "node --experimental-strip-types --no-warnings scripts/validate-image-manifest.ts",
+    "images:index": "node --experimental-strip-types --no-warnings scripts/generate-image-index.ts"
   },
   "jest": {
     "projects": [

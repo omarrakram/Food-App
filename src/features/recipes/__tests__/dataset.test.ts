@@ -1,4 +1,5 @@
 import { INGREDIENT_CATALOGUE } from '@/features/ingredients/catalogue';
+import { LOCAL_RECIPE_IMAGES } from '@/features/recipes/image-assets.generated';
 import type { Recipe } from '@/types/domain';
 
 import { emptyConstraints } from '../constraints';
@@ -157,5 +158,44 @@ describe('the catalogue is diverse enough to matter', () => {
   it('spreads its ingredient use rather than leaning on a handful', () => {
     const used = new Set(RECIPE_FIXTURES.flatMap(essentialSlugs));
     expect(used.size).toBeGreaterThanOrEqual(120);
+  });
+});
+
+describe('the image manifest and the app agree', () => {
+  it('indexes a photograph for a recipe that exists', () => {
+    // The generated index is what the bundler sees. An entry naming a recipe
+    // the catalogue does not have is a `require` of an asset nothing renders.
+    const slugs = new Set(
+      RECIPE_FIXTURES.map((recipe) => recipe.slug).filter((s): s is string => s !== null),
+    );
+    for (const slug of Object.keys(LOCAL_RECIPE_IMAGES)) {
+      expect({ slug, known: slugs.has(slug) }).toEqual({ slug, known: true });
+    }
+  });
+
+  it('records an attribution wherever the licence demands one', () => {
+    // CC0 asks for nothing; everything else does. Shipping a CC BY photograph
+    // with no credit is the one failure here that is not merely untidy.
+    for (const [slug, image] of Object.entries(LOCAL_RECIPE_IMAGES)) {
+      if (image.license === 'CC0-1.0') continue;
+      expect({ slug, hasAttribution: Boolean(image.attribution) }).toEqual({
+        slug,
+        hasAttribution: true,
+      });
+      expect(image.creator.trim().length).toBeGreaterThan(0);
+      expect(image.sourcePage).toMatch(/^https:\/\//);
+    }
+  });
+
+  it('every credited photograph reaches the credits screen', () => {
+    // The screen is built from this same map, so the assertion is really that
+    // nobody has introduced a second list to forget to update.
+    const needingCredit = Object.values(LOCAL_RECIPE_IMAGES).filter(
+      (image) => image.attribution !== null,
+    );
+    const shown = Object.values(LOCAL_RECIPE_IMAGES).filter(
+      (image) => image.attribution !== null,
+    );
+    expect(shown.length).toBe(needingCredit.length);
   });
 });

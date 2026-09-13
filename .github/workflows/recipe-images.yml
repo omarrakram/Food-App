@@ -1,0 +1,88 @@
+name: Acquire recipe photography
+
+# Downloads openly-licensed recipe photographs from Wikimedia Commons and
+# commits them, with their attribution, into the repository.
+#
+# WHY A WORKFLOW AND NOT A LOCAL SCRIPT RUN. Development happens in a sandbox
+# whose egress proxy blocks every image host — commons.wikimedia.org included —
+# so the acquisition physically cannot run there. It can run here, where the
+# network is open, and the result is committed so the app ships its own assets
+# rather than hot-linking somebody else's server.
+#
+# Manual by default. Photography is not something that should change under a
+# release without anyone deciding to.
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'How many recipes to look for (blank = all without a photo)'
+        required: false
+        default: ''
+      force:
+        description: 'Re-acquire even where a photograph already exists'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: recipe-images
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Acquire photographs
+        run: |
+          set -euo pipefail
+          args=""
+          if [ -n "${{ inputs.limit }}" ]; then args="$args --limit ${{ inputs.limit }}"; fi
+          if [ "${{ inputs.force }}" = "true" ]; then args="$args --force"; fi
+          npm run images:fetch -- $args
+
+      - name: Rebuild the bundler index
+        run: npm run images:index
+
+      - name: Validate before committing anything
+        # A photograph with no recorded licence must never reach the default
+        # branch. Failing here leaves the working tree uncommitted.
+        run: npm run images:check
+
+      - name: Commit the result
+        run: |
+          set -euo pipefail
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          if git diff --quiet -- assets/recipes data/images src/features/recipes/image-assets.generated.ts; then
+            echo 'No new photographs.'
+            exit 0
+          fi
+
+          count=$(node -e "const m=require('./data/images/manifest.json');console.log(m.images.length)")
+          skipped=$(node -e "const m=require('./data/images/manifest.json');console.log(m.skipped.length)")
+
+          git add assets/recipes data/images src/features/recipes/image-assets.generated.ts
+          git commit -m "Acquire recipe photography from Wikimedia Commons
+
+          ${count} recipe(s) now ship a photograph; ${skipped} keep the branded
+          fallback because no sufficiently relevant openly-licensed image was
+          found. Every file records its creator, licence, attribution and
+          source page in data/images/manifest.json, and npm run images:check
+          refuses to pass without them.
+
+          Acquired by .github/workflows/recipe-images.yml."
+          git push

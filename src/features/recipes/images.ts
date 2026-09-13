@@ -1,6 +1,8 @@
 import { env } from '@/lib/config/env';
 import type { Recipe, RecipeImageMeta } from '@/types/domain';
 
+import { LOCAL_RECIPE_IMAGES, type LocalRecipeImage } from './image-assets.generated';
+
 /**
  * Where a recipe photograph actually comes from at runtime.
  *
@@ -19,13 +21,36 @@ import type { Recipe, RecipeImageMeta } from '@/types/domain';
 export const RECIPE_IMAGE_BUCKET = 'recipe-images';
 
 /**
+ * The photograph shipped inside the app for this recipe, if there is one.
+ *
+ * Bundled assets beat every remote source. They cannot 404, they need no
+ * configuration, they work on a train, and they are ours — which is the whole
+ * point of downloading them rather than hot-linking Wikimedia.
+ *
+ * Acquired by `npm run images:fetch` and indexed by `npm run images:index`.
+ */
+export function localRecipeImage(slug: string | null | undefined): LocalRecipeImage | null {
+  if (!slug) return null;
+  return LOCAL_RECIPE_IMAGES[slug] ?? null;
+}
+
+/**
  * Attribution the licence obliges us to display.
  *
  * Returned rather than rendered here so the caller decides placement, but it
  * must be shown wherever the photograph is the subject of the screen — the
  * recipe detail hero, not a 60px thumbnail in a list.
  */
-export function imageAttribution(image: RecipeImageMeta | null): string | null {
+export function imageAttribution(
+  image: RecipeImageMeta | null,
+  slug?: string | null,
+): string | null {
+  // A bundled photograph carries the licence it was acquired under, which is
+  // the one that actually obliges us — the recipe row's metadata describes the
+  // placeholder it replaced.
+  const local = localRecipeImage(slug);
+  if (local) return local.attribution;
+
   if (!image) return null;
   if (image.attribution) return image.attribution;
   if (image.creator && image.license !== 'CC0-1.0') {
