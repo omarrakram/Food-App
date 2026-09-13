@@ -165,6 +165,8 @@ export type RecipeRow = {
   difficulty: DifficultyEnum;
   prep_minutes: number;
   cook_minutes: number;
+  /** Generated: prep_minutes + cook_minutes. Read-only, indexed, filterable. */
+  total_minutes: number;
   base_servings: number;
   calories: number | null;
   protein_g: number | null;

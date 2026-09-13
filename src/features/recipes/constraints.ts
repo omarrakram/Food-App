@@ -113,6 +113,14 @@ export type RecipeConstraints = {
   maxMinutes: number | null;
   maxCalories: number | null;
   minProteinGrams: number | null;
+  /**
+   * Collection tags the recipe must carry, e.g. `quick`, `high-protein`.
+   *
+   * These are curated groupings rather than user safety rules, but they are
+   * still HARD: a Discover collection that quietly includes recipes outside it
+   * is not a collection. Relaxable, unlike the safety constraints.
+   */
+  tags: string[];
 
   // --- Pantry -------------------------------------------------------------
   pantryMode: PantryMode;
@@ -145,6 +153,7 @@ export function emptyConstraints(overrides: Partial<RecipeConstraints> = {}): Re
     maxMinutes: null,
     maxCalories: null,
     minProteinGrams: null,
+    tags: [],
     pantryMode: 'off',
     availableIngredients: [],
     servings: 2,

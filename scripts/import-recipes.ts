@@ -462,8 +462,12 @@ function validate(entries: { file: string; recipe: RawRecipe }[]): void {
 function emitIngredient(recipeId: string, line: RawIngredient, index: number): string {
   const entry = CATALOGUE_BY_SLUG.get(line.slug)!;
   const id = uuidv5(`recipe-ingredient:${recipeId}:${line.slug}`);
+  // The SAME derivation the seed generator uses, so a bundled recipe line and
+  // its Postgres row agree on which catalogue ingredient they mean. The
+  // catalogue's natural key is the slug; the uuid is derived from it.
+  const ingredientId = uuidv5(`ingredient:${entry.slug}`);
   return (
-    `    { id: '${id}', ingredientId: '${entry.id}', slug: '${entry.slug}', ` +
+    `    { id: '${id}', ingredientId: '${ingredientId}', slug: '${entry.slug}', ` +
     `name: ${ts(entry.name)}, quantity: ${line.quantity ?? 'null'}, ` +
     `unit: ${ts(line.unit ?? null)}, preparation: ${ts(line.prep ?? null)}, ` +
     `isOptional: ${Boolean(line.optional)}, isGarnish: ${Boolean(line.garnish)}, ` +
@@ -552,7 +556,20 @@ function emit(entries: { file: string; recipe: RawRecipe }[]): string {
 
 // --- Main ------------------------------------------------------------------
 
-function main(): void {
+/**
+ * Formats the generated source with the repository's own Prettier config.
+ *
+ * Without this, `npm run format` reformats the generated file and
+ * `recipes:import --check` then reports drift that is not drift — two CI
+ * checks contradicting each other, with no change to the data behind either.
+ */
+async function format(source: string): Promise<string> {
+  const prettier = await import('prettier');
+  const config = await prettier.resolveConfig(OUTPUT);
+  return prettier.format(source, { ...config, filepath: OUTPUT, parser: 'typescript' });
+}
+
+async function main(): Promise<void> {
   const check = process.argv.includes('--check');
 
   let entries: { file: string; recipe: RawRecipe }[];
@@ -568,7 +585,7 @@ function main(): void {
     throw error;
   }
 
-  const output = emit(entries);
+  const output = await format(emit(entries));
 
   if (check) {
     const current = readFileSync(OUTPUT, 'utf8');
@@ -599,4 +616,4 @@ function main(): void {
   console.log(`  ${spread}`);
 }
 
-main();
+void main();

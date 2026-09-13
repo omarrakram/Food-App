@@ -55,6 +55,7 @@ export type FilterReason =
   | 'time'
   | 'calories'
   | 'protein'
+  | 'tag'
   | 'pantry';
 
 export type FilterOutcome = { recipe: Recipe; excludedBy: FilterReason | null };
@@ -195,55 +196,71 @@ export function rankRecipes(
     options.availability ??
     buildAvailabilityIndex(options.pantryItems ?? [], request.ingredients, { now: options.now });
 
-  const weights = WEIGHTS[request.mode];
   // The SAME index the filter used, so a recipe cannot pass strict pantry mode
   // against one view of the kitchen and be scored against another.
   const survivors = applyConstraints(recipes, request, { availability: index }).filter(
     (outcome) => !outcome.excludedBy,
   );
 
-  const matches: RecipeMatch[] = survivors.map(({ recipe }) => {
-    const match = matchRecipeIngredients(recipe, index);
-    const estimate = estimateRecipeCost(recipe, {
-      servings: request.servings,
-      country: request.country,
-      currency: request.currency,
-      // What the cook already has is what makes "I have 150 EGP" answerable:
-      // the question is about their wallet, not the dish's worth.
-      ownedIngredientIds: match.availableIngredients.map((entry) => entry.recipeIngredientId),
-    });
-    const spendMinor = estimate.toBuy?.totalMinor ?? estimate.totalMinor;
-
-    const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
-    const cuisineBonus = request.cuisine && recipe.cuisine === request.cuisine ? 1 : 0.5;
-    const expiringBonus = match.usesExpiringItems.length > 0 ? 1 : 0;
-
-    const score =
-      weights.match * (match.matchPercent / 100) +
-      weights.budget * budgetScore(spendMinor, request.budgetMinor) +
-      weights.time * timeScore(totalMinutes, request.maxMinutes) +
-      weights.expiring * expiringBonus +
-      weights.cuisine * cuisineBonus +
-      weights.difficulty * difficultyScore(recipe, request.skillLevel);
-
-    return {
-      recipe,
-      matchPercent: match.matchPercent,
-      haveCount: match.haveCount,
-      requiredCount: match.requiredCount,
-      missingIngredients: match.missingIngredients,
-      availableIngredients: match.availableIngredients,
-      // Both figures travel: the dish's full cost, and what this cook still
-      // has to spend. Rendering one as the other is how a budget lies.
-      estimatedCost: toPricedAmount(estimate),
-      estimatedSpend: toSpendAmount(estimate),
-      usesExpiringItems: match.usesExpiringItems,
-      score: Math.round(score * 100) / 100,
-    };
-  });
+  const matches = survivors.map(({ recipe }) => describeMatch(recipe, request, index));
 
   const ordered = matches.sort((a, b) => b.score - a.score);
   return options.limit ? ordered.slice(0, options.limit) : ordered;
+}
+
+/**
+ * Prices and scores ONE recipe against a request, without filtering or sorting.
+ *
+ * Discover needs this: it browses a page the database already ordered by
+ * recency, so re-sorting by score would shuffle page two into page one and
+ * make the list jump as the user scrolls. It still wants the cost, the time
+ * and the pantry coverage — the facts a card is made of.
+ *
+ * This performs NO safety filtering. Callers must have run the hard filter.
+ */
+export function describeMatch(
+  recipe: Recipe,
+  request: MealRequest,
+  index: AvailabilityIndex,
+): RecipeMatch {
+  const weights = WEIGHTS[request.mode];
+  const match = matchRecipeIngredients(recipe, index);
+  const estimate = estimateRecipeCost(recipe, {
+    servings: request.servings,
+    country: request.country,
+    currency: request.currency,
+    // What the cook already has is what makes "I have 150 EGP" answerable:
+    // the question is about their wallet, not the dish's worth.
+    ownedIngredientIds: match.availableIngredients.map((entry) => entry.recipeIngredientId),
+  });
+  const spendMinor = estimate.toBuy?.totalMinor ?? estimate.totalMinor;
+
+  const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
+  const cuisineBonus = request.cuisine && recipe.cuisine === request.cuisine ? 1 : 0.5;
+  const expiringBonus = match.usesExpiringItems.length > 0 ? 1 : 0;
+
+  const score =
+    weights.match * (match.matchPercent / 100) +
+    weights.budget * budgetScore(spendMinor, request.budgetMinor) +
+    weights.time * timeScore(totalMinutes, request.maxMinutes) +
+    weights.expiring * expiringBonus +
+    weights.cuisine * cuisineBonus +
+    weights.difficulty * difficultyScore(recipe, request.skillLevel);
+
+  return {
+    recipe,
+    matchPercent: match.matchPercent,
+    haveCount: match.haveCount,
+    requiredCount: match.requiredCount,
+    missingIngredients: match.missingIngredients,
+    availableIngredients: match.availableIngredients,
+    // Both figures travel: the dish's full cost, and what this cook still
+    // has to spend. Rendering one as the other is how a budget lies.
+    estimatedCost: toPricedAmount(estimate),
+    estimatedSpend: toSpendAmount(estimate),
+    usesExpiringItems: match.usesExpiringItems,
+    score: Math.round(score * 100) / 100,
+  };
 }
 
 export type SortMode = 'best' | 'cheapest' | 'fastest' | 'protein';

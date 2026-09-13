@@ -356,6 +356,25 @@ describe('the ordinary filters are filters, not hints', () => {
     for (const recipe of results) expect(recipe.mealTypes).toContain('breakfast');
   });
 
+  it('honours a collection tag', () => {
+    // Discover's collections are a hard constraint, not a sort key: a "Quick
+    // meals" list containing a two-hour braise is not a collection.
+    const results = surviving(RECIPE_FIXTURES, emptyConstraints({ tags: ['quick'] }));
+    expect(results.length).toBeGreaterThan(0);
+    for (const recipe of results) expect(recipe.tags).toContain('quick');
+  });
+
+  it('requires every tag, not any of them', () => {
+    const both = surviving(
+      RECIPE_FIXTURES,
+      emptyConstraints({ tags: ['quick', 'high-protein'] }),
+    );
+    for (const recipe of both) {
+      expect(recipe.tags).toContain('quick');
+      expect(recipe.tags).toContain('high-protein');
+    }
+  });
+
   it('honours cuisine', () => {
     const results = surviving(RECIPE_FIXTURES, emptyConstraints({ cuisine: 'italian' }));
     expect(results.length).toBeGreaterThan(0);
@@ -399,6 +418,33 @@ describe('the ordinary filters are filters, not hints', () => {
       expect({ slug: recipe.slug, dairy: recipe.allergens.includes('dairy') }).toEqual({
         slug: recipe.slug,
         dairy: false,
+      });
+    }
+  });
+
+  it('knows every meat in the catalogue is meat', () => {
+    // REGRESSION: the meat list was six hard-coded slugs written when the
+    // catalogue had fourteen recipes. Adding beef steak, lamb, veal, turkey
+    // and duck to the ingredient catalogue silently made all of them vegan as
+    // far as the diet check was concerned, and a vegan user was shown a beef
+    // stir-fry. It is derived from the catalogue now.
+    const vegan = surviving(RECIPE_FIXTURES, emptyConstraints({ eatingStyle: 'vegan' }));
+    const vegetarian = surviving(
+      RECIPE_FIXTURES,
+      emptyConstraints({ eatingStyle: 'vegetarian' }),
+    );
+
+    for (const meat of ['beef-steak', 'lamb', 'veal', 'turkey', 'duck', 'chicken-thigh']) {
+      const leakedVegan = vegan.filter((recipe) =>
+        recipe.ingredients.some((line) => line.slug === meat),
+      );
+      const leakedVegetarian = vegetarian.filter((recipe) =>
+        recipe.ingredients.some((line) => line.slug === meat),
+      );
+      expect({ meat, vegan: leakedVegan.map((r) => r.slug) }).toEqual({ meat, vegan: [] });
+      expect({ meat, vegetarian: leakedVegetarian.map((r) => r.slug) }).toEqual({
+        meat,
+        vegetarian: [],
       });
     }
   });

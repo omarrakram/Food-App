@@ -71,8 +71,21 @@ export default function SearchScreen() {
     [baseRequest, interpretation, submitted],
   );
 
-  const { matches, isLoading, error, isGenerating, generationError, refetch } =
-    useMealSuggestions(request);
+  // Search is the one flow where the request genuinely narrows the catalogue,
+  // so it goes through the database query path rather than ranking everything
+  // in memory. See `useMealSuggestions`.
+  const {
+    matches,
+    relaxations,
+    isLoading,
+    error,
+    isGenerating,
+    generationError,
+    hasMore,
+    isLoadingMore,
+    loadMore,
+    refetch,
+  } = useMealSuggestions(request, 20, { source: 'query' });
 
 
   const chips = useMemo(() => {
@@ -179,6 +192,10 @@ export default function SearchScreen() {
             generationError={generationError}
             onRetry={refetch}
             onAdjust={() => setSubmitted('')}
+            relaxations={relaxations}
+            hasMore={hasMore}
+            isLoadingMore={isLoadingMore}
+            onLoadMore={loadMore}
           />
         </>
       )}

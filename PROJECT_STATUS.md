@@ -5,8 +5,8 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-11 |
-| **Current phase** | Product build-out. Phase A (recipe catalogue) complete; see "Build-out progress". |
+| **Last updated** | 2026-09-13 |
+| **Current phase** | Product build-out. Phases A–D complete; **E is the next task**. See "Build-out progress". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -23,9 +23,9 @@ because each depends on the one before it.
 |---|---|---|
 | A | 150+ structured recipes with an import/validation pipeline | **done** — 153 recipes |
 | B | Recipe image architecture with provenance and licensing | **done** — manifest + resolver; assets pending |
-| C | `RecipeConstraints` with genuine hard filtering | in progress |
-| D | Database-backed recipe search | not started |
-| E–G | Auth hardening, profiles, storage uploads | not started |
+| C | `RecipeConstraints` with genuine hard filtering | **done** — one model, hard filters, honest relaxations |
+| D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
+| E–G | Auth hardening, profiles, storage uploads | **NEXT** — not started |
 | H, P | Drawer navigation and information architecture | not started |
 | I–K | Friends, 1-to-1 messaging, recipe sharing | not started |
 | L–N | Community submissions, moderation, admin | not started |
@@ -64,6 +64,99 @@ those were real gaps for server-side filtering.
 
 `npm run recipes:import -- --check` runs in CI.
 
+### Phase C — one constraint model, and it actually removes things
+
+`src/features/recipes/constraints.ts` is the single shape every surface builds:
+Cook, Budget, Discover, natural-language search and the saved preferences all
+produce a `RecipeConstraints`, and `toConstraints(request)` is the only bridge
+from the UI-level `MealRequest`. Five filters honouring slightly different
+subsets of the user's requirements is exactly how "no bell pepper" returns a
+recipe with bell pepper in it.
+
+**HARD constraints remove; SOFT preferences only re-order.** `filter.ts` scores
+nothing. `rank.ts` cannot resurrect anything the filter removed. Safety checks
+run first so the reason shown for an empty result is the most important one.
+
+Three severities, and the difference is load-bearing:
+
+| Severity | Garnishes and optionals | Overridable |
+|---|---|---|
+| `allergy` | checked | never |
+| `hard_avoid` | checked | never |
+| `dislike` | not checked | yes, by the user |
+
+An allergy does not care that the peanuts were a topping, and "leave it off" is
+not a decision an app may make for someone. A dislike is a preference, so a
+disliked garnish is tolerable once the user says so.
+
+Exclusion is by canonical slug, so "bell pepper" also excludes capsicum, red
+pepper, green pepper and «فلفل ألوان». Required ingredients genuinely constrain
+rather than boost. `pantryMode: 'strict'` answers "what can I cook right now"
+against essentials only — not optional, not garnish, not a background staple —
+and an expired pantry item is not available.
+
+When nothing matches, `suggestRelaxations` offers specific non-safety
+constraints to drop with an honest per-constraint count ("drop the 20-minute
+limit → 34 recipes"). `without()` has **no case** for a safety reason, so a
+caller that asks for one gets the constraints back unchanged and the option
+never appears.
+
+### Phase D — the database does the narrowing
+
+`query.ts` turns constraints into a `QueryPlan`: the subset a SQL query can
+answer over an index. `RecipeRepository.search(plan)` returns one page.
+`SupabaseRecipeRepository` pushes the plan into PostgREST;
+`LocalRecipeRepository` runs the identical plan over the bundle, and a
+property test asserts the plan is **never stricter than the constraints** — a
+plan that wrongly drops a recipe silently denies a valid result and nothing
+downstream would notice. That test is what caught the vegan/meat bug below.
+
+**The client-side safety filter re-runs on every page.** Deliberate
+duplication: the offline fallback has no SQL, an AI-generated recipe never
+passes through SQL, and a query is a thing that can be got wrong. The database
+narrows; it does not protect.
+
+Only ABSOLUTE restrictions become SQL exclusions — a dislike stays client-side
+so changing your mind costs no round trip.
+
+Paging is keyset (`created_at|id`), not offset: an offset re-reads and re-skips
+rows every page and shifts under the user when a recipe is approved mid-scroll.
+`DEFAULT_PAGE_SIZE` 24, `MAX_PAGE_SIZE` 60 as a hard ceiling.
+
+Two PostgREST limitations shaped the SQL:
+
+- it cannot filter on an expression, so `recipes.total_minutes` is a **stored
+  generated column** rather than an index on `prep_minutes + cook_minutes`;
+- it cannot express "no child row matches", so exclusions resolve the offending
+  recipe ids first and then `not.in` against them. Two round trips beats
+  reading the whole table.
+
+Discover and search both paginate now. Discover pushes the collection tag into
+the query (`constraints.tags`) rather than filtering a fetched page — filtering
+after the fact is how a page of 24 becomes 3 visible cards. Search uses
+`useMealSuggestions(request, 20, { source: 'query' })`; the full catalogue is
+fetched on that path **only** when a search comes back empty, to count honest
+relaxation options.
+
+Two real bugs this phase found:
+
+- **`MEAT_SLUGS` was six hard-coded slugs** written when the catalogue had 14
+  recipes. Beef steak, lamb, veal, turkey and duck were added to the ingredient
+  catalogue later and were silently vegan as far as the diet check was
+  concerned — a vegan user was shown a beef stir-fry. Both meat and seafood
+  sets are derived from `INGREDIENT_CATALOGUE` now, with a named regression
+  test.
+- **Every generated ingredient line carried `ingredientId: 'undefined'`** — the
+  importer emitted `entry.id` and catalogue entries have no `id`. Nothing read
+  it, so nothing failed; the first symptom would have been saving a recipe,
+  where it is written into a `uuid` column. It is now the same
+  `uuidv5('ingredient:<slug>')` the seed generator uses, so the bundle and
+  Postgres agree on identity.
+
+The importer also formats its output with the repo's Prettier now, because
+`npm run format` and `recipes:import --check` were otherwise able to contradict
+each other with no change to the data behind either.
+
 ---
 
 ## Last known passing state
@@ -76,11 +169,11 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 394/394 across 23 suites, 2 projects |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 45/45 assertions |
+| Unit + component tests | `npm test` | **pass**, 477/477 across 27 suites, 2 projects |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 45 RLS + 18 query-surface assertions |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
-| Catalogue / price / type drift | `ingredients:import --check`, `prices:import --check`, `db:types:check` | **pass** |
+| Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
 | Whole-app browser walk | `npm run smoke:web` | **pass**, 59 interaction checks, no page errors |
 | Native production build | `eas build` | **not run** — needs an EAS project id |

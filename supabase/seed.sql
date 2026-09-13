@@ -498,7 +498,15 @@ values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'capsicum') on conflict do nothi
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'sweet pepper') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
+values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'red pepper') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'green pepper') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'yellow pepper') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
 values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'فلفل رومي') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('78ef052e-515f-5357-ae04-8c6071acb1c2', 'فلفل حلو') on conflict do nothing;
 insert into public.ingredient_price_estimates (
   ingredient_id, country, currency, unit, quantity,
   estimated_low_minor, estimated_avg_minor, estimated_high_minor, origin, last_updated)

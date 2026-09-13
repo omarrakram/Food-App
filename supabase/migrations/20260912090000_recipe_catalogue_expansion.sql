@@ -98,3 +98,20 @@ comment on column public.recipe_ingredients.slug is
 comment on column public.recipes.image_path is
   'Path inside the recipe-images bucket. Never a URL: the host is resolved at '
   'render time so storage can move without a migration.';
+
+-- --------------------------------------------------------------------------
+-- Total time as a real column
+-- --------------------------------------------------------------------------
+-- `recipes_total_time_idx` indexes the EXPRESSION `prep_minutes + cook_minutes`,
+-- which the query planner uses happily — but PostgREST cannot express a filter
+-- on an expression, so the client could not push "under 30 minutes" into SQL
+-- and was filtering it in JavaScript after fetching everything.
+--
+-- A stored generated column is the same value with a name the API can filter
+-- on, and Postgres keeps it correct on every write.
+
+alter table public.recipes
+  add column if not exists total_minutes integer
+  generated always as (prep_minutes + cook_minutes) stored;
+
+create index if not exists recipes_total_minutes_idx on public.recipes (total_minutes);

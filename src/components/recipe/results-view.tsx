@@ -58,6 +58,7 @@ const RELAXATION_LABEL: Record<RejectionReason, TranslationKey | null> = {
   cuisine: 'results.relaxCuisine',
   time: 'results.relaxTime',
   calories: 'results.relaxCalories',
+  tag: 'results.relaxCollection',
   protein: 'results.relaxProtein',
   pantry: 'results.relaxPantry',
 };
@@ -81,6 +82,10 @@ export type ResultsViewProps = {
   onRelax?: (relaxation: Relaxation) => void;
   /** Extra content rendered above the list, e.g. the budget summary. */
   header?: React.ReactNode;
+  /** Another page exists for this query. Only the paginated source sets it. */
+  hasMore?: boolean;
+  isLoadingMore?: boolean;
+  onLoadMore?: () => void;
 };
 
 /**
@@ -102,6 +107,9 @@ export function ResultsView({
   relaxations = [],
   onRelax,
   header,
+  hasMore = false,
+  isLoadingMore = false,
+  onLoadMore,
 }: ResultsViewProps) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
@@ -276,6 +284,20 @@ export function ResultsView({
         {sorted.map((match) => (
           <ResultCard key={match.recipe.id} match={match} showMatch={request.mode !== 'search'} />
         ))}
+        {/*
+          The sort control re-orders what has been FETCHED, so a paginated
+          result set has to say that more exists rather than let "24 results"
+          read as the whole answer.
+        */}
+        {hasMore && onLoadMore ? (
+          <Button
+            variant="secondary"
+            label={t('results.loadMore')}
+            loading={isLoadingMore}
+            onPress={onLoadMore}
+            testID="results-load-more"
+          />
+        ) : null}
       </View>
 
       <Text variant="micro" color="textTertiary" align="center">

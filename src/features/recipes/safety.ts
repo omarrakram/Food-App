@@ -1,3 +1,4 @@
+import { INGREDIENT_CATALOGUE } from '@/features/ingredients/catalogue';
 import { resolveIngredient } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import type { Allergen, DietFlag, DietaryPreference, Recipe } from '@/types/domain';
@@ -23,16 +24,62 @@ const DIET_FORBIDDEN_TAGS: Partial<Record<DietaryPreference, Allergen[]>> = {
   vegetarian: ['fish', 'shellfish'],
 };
 
-const MEAT_SLUGS = new Set([
-  'chicken-breast',
-  'chicken-thigh',
-  'ground-beef',
-  'beef-cubes',
-  'sausage',
-  'liver',
+/**
+ * Catalogue proteins that are not animal flesh.
+ *
+ * The ONLY hand-maintained list here, and it is the safe direction to
+ * maintain by hand: forgetting to add one makes a vegan dish look non-vegan,
+ * which is a missing result rather than a broken promise.
+ */
+const PLANT_PROTEIN_SLUGS: ReadonlySet<string> = new Set([
+  'eggs',
+  'egg-white',
+  'egg-yolk',
+  'tofu',
+  'chickpeas',
+  'lentils',
+  'green-lentils',
+  'split-peas',
+  'white-beans',
+  'kidney-beans',
+  'black-eyed-peas',
+  'fava-beans',
+  'soybeans',
+  'edamame',
+  'falafel-mix',
 ]);
 
-const SEAFOOD_SLUGS = new Set(['tilapia', 'shrimp', 'tuna-can']);
+/**
+ * Seafood, derived from the catalogue's own allergen tagging.
+ *
+ * Every fish carries the `fish` allergen and every shellfish the `shellfish`
+ * one, so the catalogue already knows this and there is nothing to keep in
+ * step by hand.
+ */
+const SEAFOOD_SLUGS: ReadonlySet<string> = new Set(
+  INGREDIENT_CATALOGUE.filter(
+    (entry) => entry.allergens.includes('fish') || entry.allergens.includes('shellfish'),
+  ).map((entry) => entry.slug),
+);
+
+/**
+ * Meat, derived from the catalogue rather than listed.
+ *
+ * This USED to be six hard-coded slugs written when the catalogue had
+ * fourteen recipes in it. Adding beef steak, lamb, veal, turkey, duck and the
+ * rest to the ingredient catalogue silently made every one of them vegan as
+ * far as this check was concerned — a vegan user would have been shown a beef
+ * stir-fry. Deriving it means a new protein is covered the moment it is
+ * added.
+ */
+const MEAT_SLUGS: ReadonlySet<string> = new Set(
+  INGREDIENT_CATALOGUE.filter(
+    (entry) =>
+      entry.category === 'protein' &&
+      !PLANT_PROTEIN_SLUGS.has(entry.slug) &&
+      !SEAFOOD_SLUGS.has(entry.slug),
+  ).map((entry) => entry.slug),
+);
 
 function recipeIngredientSlugs(recipe: Recipe): Set<string> {
   const slugs = new Set<string>();

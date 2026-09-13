@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import type { ReactNode } from 'react';
+import { useCallback, useRef, type ReactNode } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   View,
+  type NativeScrollEvent,
+  type NativeSyntheticEvent,
   type ScrollViewProps,
   type ViewStyle,
 } from 'react-native';
@@ -70,6 +72,16 @@ export type ScreenScrollProps = ScreenProps &
     /** Extra bottom padding so content clears the tab bar / sticky footer. */
     bottomInset?: number;
     contentGap?: number;
+    /**
+     * Fired once per approach to the bottom, for paginated screens.
+     *
+     * A plain ScrollView has no such callback, and re-firing it on every scroll
+     * event would queue a dozen page fetches for one flick. The latch below
+     * clears only after the user scrolls back up out of the threshold.
+     */
+    onEndReached?: () => void;
+    /** How close to the bottom counts as "the end", in points. */
+    onEndReachedThreshold?: number;
   };
 
 /** Scrollable screen with sensible keyboard + inset behaviour. */
@@ -80,12 +92,32 @@ export function ScreenScroll({
   background = 'background',
   bottomInset = 0,
   contentGap,
+  onEndReached,
+  onEndReachedThreshold = 320,
+  onScroll,
+  scrollEventThrottle,
   style,
   testID,
   ...scrollProps
 }: ScreenScrollProps) {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
+  const atEnd = useRef(false);
+
+  const handleScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      onScroll?.(event);
+      if (!onEndReached) return;
+
+      const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+      const distance = contentSize.height - layoutMeasurement.height - contentOffset.y;
+      const reached = distance <= onEndReachedThreshold;
+
+      if (reached && !atEnd.current) onEndReached();
+      atEnd.current = reached;
+    },
+    [onScroll, onEndReached, onEndReachedThreshold],
+  );
 
   return (
     <KeyboardAvoidingView
@@ -110,6 +142,8 @@ export function ScreenScroll({
           },
           style,
         ]}
+        onScroll={onEndReached ? handleScroll : onScroll}
+        scrollEventThrottle={scrollEventThrottle ?? (onEndReached ? 96 : undefined)}
         {...scrollProps}
       >
         {children}

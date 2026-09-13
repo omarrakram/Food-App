@@ -33,6 +33,9 @@ export function toConstraints(request: MealRequest): RecipeConstraints {
     maxMinutes: request.maxMinutes,
     maxCalories: request.maxCalories,
     minProteinGrams: request.minProteinGrams,
+    // Collections are chosen on a screen rather than saved in preferences, so
+    // a request never carries one; callers add them to the constraints.
+    tags: [],
     pantryMode: request.pantryMode,
     availableIngredients: request.ingredients,
     servings: request.servings,

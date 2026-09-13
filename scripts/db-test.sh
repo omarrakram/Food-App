@@ -35,16 +35,18 @@ echo "-> seed"
 psql -d "${DB}" -v ON_ERROR_STOP=1 -q -f supabase/seed.sql
 
 echo "-> tests"
-# Capture first, then filter: piping psql straight into a filter would hide the
-# ERROR line that tells you which assertion failed.
-output="$(psql -d "${DB}" -v ON_ERROR_STOP=1 -f supabase/tests/01_rls_test.sql 2>&1)" || {
-  echo "${output}" | sed 's/^psql:[^ ]* //'
-  echo ""
-  echo "DATABASE TESTS FAILED"
-  exit 1
-}
+for suite in supabase/tests/0[1-9]*.sql; do
+  # Capture first, then filter: piping psql straight into a filter would hide
+  # the ERROR line that tells you which assertion failed.
+  output="$(psql -d "${DB}" -v ON_ERROR_STOP=1 -f "${suite}" 2>&1)" || {
+    echo "${output}" | sed 's/^psql:[^ ]* //'
+    echo ""
+    echo "DATABASE TESTS FAILED ($(basename "${suite}"))"
+    exit 1
+  }
 
-echo "${output}" | sed -e 's/^psql:[^ ]* //' -e '/^NOTICE:  /!d' -e 's/^NOTICE:  //'
+  echo "${output}" | sed -e 's/^psql:[^ ]* //' -e '/^NOTICE:  /!d' -e 's/^NOTICE:  //'
+done
 
 echo ""
 echo "database tests passed"

@@ -2,6 +2,7 @@ import { LocalCollection, LocalCollectionKeys } from '@/lib/storage/local-collec
 import type { Recipe } from '@/types/domain';
 
 import { RECIPE_FIXTURES, RECIPES_BY_ID } from './fixtures';
+import { applyPlanLocally, pageLocally, type QueryPlan, type RecipePage } from './query';
 
 /**
  * Recipe access.
@@ -16,6 +17,15 @@ export interface RecipeRepository {
   /** All recipes available for local ranking. */
   catalogue(): Promise<Recipe[]>;
   byId(id: string): Promise<Recipe | null>;
+  /**
+   * One page of recipes matching a query plan.
+   *
+   * The database implementation pushes the plan into SQL; the local one runs
+   * the identical plan over the bundle. Both are paginated, because a screen
+   * that renders 150 cards is slow whether the rows came from Postgres or a
+   * JavaScript array.
+   */
+  search(plan: QueryPlan): Promise<RecipePage>;
   /** Persists AI-generated recipes so their detail pages resolve later. */
   cacheGenerated(recipes: readonly Recipe[]): Promise<void>;
 }
@@ -36,6 +46,11 @@ export class LocalRecipeRepository implements RecipeRepository {
     if (curated) return curated;
     const cached = await this.generated.list();
     return cached.find((recipe) => recipe.id === id) ?? null;
+  }
+
+  async search(plan: QueryPlan): Promise<RecipePage> {
+    const all = await this.catalogue();
+    return pageLocally(applyPlanLocally(all, plan), plan);
   }
 
   async cacheGenerated(recipes: readonly Recipe[]): Promise<void> {

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
 import { requestSuggestions } from '@/features/ai/client';
@@ -11,18 +11,34 @@ import { env } from '@/lib/config/env';
 import { toAppError } from '@/lib/errors';
 import type { MealRequest, Recipe, RecipeMatch } from '@/types/domain';
 
-import { suggestRelaxations, type Relaxation } from './filter';
+import { buildIndexFor, checkRecipe, suggestRelaxations, type Relaxation } from './filter';
+import {
+  planQuery,
+  planFingerprint,
+  DEFAULT_PAGE_SIZE,
+  MAX_PAGE_SIZE,
+  type RecipePage,
+} from './query';
 import { toConstraints } from './to-constraints';
-import { rankRecipes } from './rank';
+import { describeMatch, rankRecipes } from './rank';
 import { requestFingerprint } from './request-params';
 
 const catalogueKey = (scope: string) => ['akla', 'recipes', 'catalogue', scope] as const;
 
-export function useRecipeCatalogue() {
+/**
+ * The whole catalogue, for the screens that rank it as a set.
+ *
+ * `enabled` exists so a screen that is normally served by the paginated query
+ * path can still reach for the full set on the one occasion it needs it —
+ * counting honest relaxation options for an empty result — without paying for
+ * that fetch on every search that worked.
+ */
+export function useRecipeCatalogue(enabled = true) {
   const { recipes, scopeKey } = useRepositories();
 
   return useQuery({
     queryKey: catalogueKey(scopeKey),
+    enabled,
     queryFn: async () => {
       try {
         return await recipes.catalogue();
@@ -79,12 +95,52 @@ export function useMealRequest(overrides: Partial<MealRequest> & Pick<MealReques
 }
 
 /**
+ * Ranks and prices a pool of recipes, and explains an empty result.
+ *
+ * Shared by the two ways a screen gets its pool: the whole catalogue (ranking
+ * is the product) and one page of a database query (the query already did the
+ * narrowing). Splitting it out is what keeps the two paths honest — the same
+ * hard filter, the same pricing, the same relaxation logic either way.
+ */
+function useRanked(
+  pool: readonly Recipe[] | undefined,
+  request: MealRequest,
+  limit: number,
+  extraRecipes: readonly Recipe[],
+  /**
+   * The set relaxation counts are measured against. Must be the WIDEST set
+   * available, not the narrowed page: "drop the time limit → 34 recipes" is a
+   * lie if it was counted over the twenty-four rows a query already returned.
+   */
+  relaxationPool: readonly Recipe[] | undefined,
+): { matches: RecipeMatch[]; relaxations: Relaxation[] } {
+  const pantry = usePantryItems();
+
+  const matches = useMemo(() => {
+    if (!pool) return [];
+    return rankRecipes([...pool, ...extraRecipes], request, {
+      pantryItems: pantry.data ?? [],
+      limit,
+    });
+  }, [pool, pantry.data, request, limit, extraRecipes]);
+
+  const relaxations = useMemo(() => {
+    if (matches.length > 0 || !relaxationPool) return [];
+    return suggestRelaxations([...relaxationPool, ...extraRecipes], toConstraints(request), {
+      pantryItems: pantry.data ?? [],
+    });
+  }, [matches.length, relaxationPool, extraRecipes, request, pantry.data]);
+
+  return { matches, relaxations };
+}
+
+/**
  * Local recipe suggestions.
  *
  * Deliberately deterministic and offline: the curated catalogue is filtered,
- * priced and ranked on-device. AI generation (Phase 6) supplements these
- * results, it does not replace them — so the app still answers "what can I
- * eat?" with no network and no API key.
+ * priced and ranked on-device. AI generation supplements these results, it does
+ * not replace them — so the app still answers "what can I eat?" with no
+ * network and no API key.
  */
 export function useLocalSuggestions(
   request: MealRequest,
@@ -110,21 +166,13 @@ export function useLocalSuggestions(
 } {
   const catalogue = useRecipeCatalogue();
   const pantry = usePantryItems();
-
-  const matches = useMemo(() => {
-    if (!catalogue.data) return [];
-    return rankRecipes([...catalogue.data, ...extraRecipes], request, {
-      pantryItems: pantry.data ?? [],
-      limit,
-    });
-  }, [catalogue.data, pantry.data, request, limit, extraRecipes]);
-
-  const relaxations = useMemo(() => {
-    if (matches.length > 0 || !catalogue.data) return [];
-    return suggestRelaxations([...catalogue.data, ...extraRecipes], toConstraints(request), {
-      pantryItems: pantry.data ?? [],
-    });
-  }, [matches.length, catalogue.data, extraRecipes, request, pantry.data]);
+  const { matches, relaxations } = useRanked(
+    catalogue.data,
+    request,
+    limit,
+    extraRecipes,
+    catalogue.data,
+  );
 
   return {
     matches,
@@ -175,33 +223,65 @@ export function useAiSuggestions(request: MealRequest, enabled: boolean) {
 /**
  * The suggestion entry point every results screen uses.
  *
- * Answers from the local catalogue immediately, then merges generated recipes
- * in when they arrive. The local answer is never gated on the network: "what
- * can I cook?" resolves offline, with or without an API key.
+ * Answers locally first, then merges generated recipes in when they arrive.
+ * The local answer is never gated on the network: "what can I cook?" resolves
+ * offline, with or without an API key.
+ *
+ * `source` picks where the pool comes from, and the two are genuinely
+ * different problems:
+ *
+ *   `catalogue` — cook and budget mode. The request barely narrows anything
+ *     (everyone can cook with what they have), so the answer is "rank the
+ *     whole set and show the top twenty" and the ORDER is the product.
+ *   `query`     — search. The request is highly selective, so the database
+ *     does the narrowing over its indexes and only a page comes back. Fetching
+ *     the catalogue to find nine matching recipes is the thing this avoids.
  */
-export function useMealSuggestions(request: MealRequest, limit = 20) {
+export function useMealSuggestions(
+  request: MealRequest,
+  limit = 20,
+  options: { source?: 'catalogue' | 'query' } = {},
+) {
   const { status } = useAuth();
-  const catalogue = useRecipeCatalogue();
+  const { source = 'catalogue' } = options;
 
   // Generation needs a signed-in caller: the edge function derives the user
   // from their JWT to rate-limit and account for the call.
   const aiEnabled = status === 'signed_in' && env.hasSupabase;
   const ai = useAiSuggestions(request, aiEnabled);
-
   const generated = ai.data?.recipes ?? EMPTY_RECIPES;
-  const local = useLocalSuggestions(request, limit, generated);
+
+  const search = useRecipeSearch(request, {
+    pageSize: MAX_PAGE_SIZE,
+    enabled: source === 'query',
+  });
+
+  // The full catalogue is fetched on the query path ONLY to count relaxation
+  // options once a search has come back empty. That is the one moment the
+  // wider set is worth its cost, and by then the user is stuck anyway.
+  const needsWiderSet =
+    source === 'catalogue' || (!search.isLoading && search.matches.length === 0);
+  const catalogue = useRecipeCatalogue(needsWiderSet);
+
+  const pool = source === 'query' ? search.recipes : catalogue.data;
+  const { matches, relaxations } = useRanked(pool, request, limit, generated, catalogue.data);
 
   return {
-    matches: local.matches,
-    relaxations: local.relaxations,
-    isLoading: local.isLoading,
+    matches,
+    relaxations,
+    isLoading: source === 'query' ? search.isLoading : catalogue.isLoading,
     /** True while generation is still in flight but local results already show. */
     isGenerating: ai.isFetching,
-    error: catalogue.error ?? undefined,
+    error: (source === 'query' ? search.error : catalogue.error) ?? undefined,
     /** Set when generation failed. Local results are unaffected. */
     generationError: ai.data?.error ?? null,
+    /** More pages exist for this query. Only ever true on the `query` source. */
+    hasMore: source === 'query' && search.hasNextPage,
+    isLoadingMore: search.isFetchingNextPage,
+    loadMore: search.fetchNextPage,
     refetch: () => {
-      void catalogue.refetch();
+      if (source === 'query') search.refetch();
+      else void catalogue.refetch();
       if (aiEnabled) void ai.refetch();
     },
   };
@@ -209,3 +289,102 @@ export function useMealSuggestions(request: MealRequest, limit = 20) {
 
 /** Stable identity so the memo in `useLocalSuggestions` does not thrash. */
 const EMPTY_RECIPES: readonly Recipe[] = [];
+
+/**
+ * A paginated, database-filtered slice of the catalogue.
+ *
+ * The other suggestion hooks pull the whole catalogue and rank it in memory,
+ * which is the right shape for "what should I eat tonight?" — the answer is
+ * twenty recipes and the ordering IS the product. Browsing is the opposite
+ * shape: hundreds of rows, no meaningful global order beyond recency, and a
+ * user who will look at the first dozen. So this one pushes the constraints
+ * into SQL and walks pages, keeping the order the database returned.
+ *
+ * The client-side hard filter still runs on every page. The database narrows;
+ * it does not protect. A plan that is subtly wrong, a row whose declared
+ * allergens are stale, or the offline fallback path must not be able to put an
+ * allergen on screen.
+ */
+export function useRecipeSearch(
+  request: MealRequest,
+  options: { tags?: readonly string[]; pageSize?: number; enabled?: boolean } = {},
+): {
+  matches: RecipeMatch[];
+  /** The same recipes, for callers that want to rank them themselves. */
+  recipes: Recipe[];
+  isLoading: boolean;
+  isFetchingNextPage: boolean;
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
+  /** True when the database could not answer and the bundled catalogue did. */
+  isFallback: boolean;
+  error: unknown;
+  refetch: () => void;
+} {
+  const { recipes: repository, scopeKey } = useRepositories();
+  const pantry = usePantryItems();
+  const { tags = EMPTY_TAGS, pageSize = DEFAULT_PAGE_SIZE, enabled = true } = options;
+
+  const constraints = useMemo(
+    () => ({ ...toConstraints(request), tags: [...tags] }),
+    [request, tags],
+  );
+
+  const plan = useMemo(
+    () => planQuery({ constraints, limit: pageSize }),
+    [constraints, pageSize],
+  );
+
+  const query = useInfiniteQuery({
+    queryKey: ['akla', 'recipes', 'search', scopeKey, planFingerprint(plan)] as const,
+    enabled,
+    initialPageParam: null as string | null,
+    getNextPageParam: (last: RecipePage) => last.nextCursor,
+    queryFn: async ({ pageParam }) => {
+      try {
+        return await repository.search({ ...plan, cursor: pageParam });
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+
+  const pages = query.data?.pages ?? EMPTY_PAGES;
+
+  const matches = useMemo(() => {
+    const index = buildIndexFor(constraints, { pantryItems: pantry.data ?? [] });
+    const seen = new Set<string>();
+    const kept: RecipeMatch[] = [];
+    for (const page of pages) {
+      for (const recipe of page.recipes) {
+        // A cursor page can repeat a row when the catalogue changed under the
+        // scroll; two cards for one recipe is a visible bug, so dedupe here.
+        if (seen.has(recipe.id)) continue;
+        seen.add(recipe.id);
+        if (checkRecipe(recipe, constraints, index) !== null) continue;
+        kept.push(describeMatch(recipe, request, index));
+      }
+    }
+    return kept;
+  }, [pages, constraints, request, pantry.data]);
+
+  return {
+    matches,
+    recipes: useMemo(() => matches.map((match) => match.recipe), [matches]),
+    isLoading: query.isLoading || pantry.isLoading,
+    isFetchingNextPage: query.isFetchingNextPage,
+    hasNextPage: query.hasNextPage,
+    fetchNextPage: () => {
+      if (query.hasNextPage && !query.isFetchingNextPage) void query.fetchNextPage();
+    },
+    isFallback: pages.some((page) => page.isFallback),
+    error: query.error ?? undefined,
+    refetch: () => {
+      void query.refetch();
+    },
+  };
+}
+
+/** Stable identities so the memos above do not thrash. */
+const EMPTY_PAGES: readonly RecipePage[] = [];
+const EMPTY_TAGS: readonly string[] = [];

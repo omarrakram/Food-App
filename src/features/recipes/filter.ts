@@ -42,6 +42,7 @@ export const REJECTION_REASONS = [
   'time',
   'calories',
   'protein',
+  'tag',
   'pantry',
 ] as const;
 export type RejectionReason = (typeof REJECTION_REASONS)[number];
@@ -217,6 +218,10 @@ export function checkRecipe(
     return { reason: 'protein', detail: String(constraints.minProteinGrams) };
   }
 
+  for (const tag of constraints.tags) {
+    if (!recipe.tags.includes(tag)) return { reason: 'tag', detail: tag };
+  }
+
   if (constraints.pantryMode === 'strict') {
     const unavailable = findUnavailableEssential(recipe, index);
     if (unavailable) return { reason: 'pantry', detail: unavailable };
@@ -272,6 +277,8 @@ function without(constraints: RecipeConstraints, reason: RejectionReason): Recip
       return { ...constraints, maxCalories: null };
     case 'protein':
       return { ...constraints, minProteinGrams: null };
+    case 'tag':
+      return { ...constraints, tags: [] };
     case 'pantry':
       return { ...constraints, pantryMode: 'partial' };
     default:

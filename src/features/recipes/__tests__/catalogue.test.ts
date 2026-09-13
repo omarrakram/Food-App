@@ -173,3 +173,43 @@ describe('the catalogue is varied enough to answer more than one question', () =
     expect(new Set(normalised).size).toBe(normalised.length);
   });
 });
+
+describe('the generated catalogue carries real database keys', () => {
+  const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+
+  it('gives every ingredient line the catalogue ingredient it refers to', () => {
+    // REGRESSION: the importer emitted `entry.id` for this, and catalogue
+    // entries have no `id` — every one of the 1,318 lines shipped the literal
+    // string 'undefined'. Nothing in the app read it, so nothing failed; the
+    // first symptom would have been saving a recipe, where it is written into
+    // a uuid column in Postgres.
+    for (const recipe of RECIPE_FIXTURES) {
+      for (const line of recipe.ingredients) {
+        expect(line.ingredientId).toMatch(UUID);
+      }
+    }
+  });
+
+  it('gives one ingredient one id everywhere it appears', () => {
+    // The id is derived from the slug, exactly as the seed generator derives
+    // it, so the bundled catalogue and the seeded database agree on identity.
+    const byId = new Map<string, string>();
+    for (const recipe of RECIPE_FIXTURES) {
+      for (const line of recipe.ingredients) {
+        if (!line.slug) continue;
+        const seen = byId.get(line.slug);
+        if (seen) expect(line.ingredientId).toBe(seen);
+        else byId.set(line.slug, line.ingredientId ?? '');
+      }
+    }
+    expect(byId.size).toBeGreaterThan(150);
+  });
+
+  it('gives every recipe ingredient line its own row id', () => {
+    for (const recipe of RECIPE_FIXTURES) {
+      const ids = recipe.ingredients.map((line) => line.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const id of ids) expect(id).toMatch(UUID);
+    }
+  });
+});

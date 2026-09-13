@@ -42,7 +42,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '39d86f42-66be-5745-9d1d-0780f8957313',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 500,
@@ -56,7 +56,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '675a7929-b9fd-54fd-83b8-c45dd9ee51b7',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -70,7 +70,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2324107b-e775-5368-89b0-fc233243482e',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -84,7 +84,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0ec26749-d0fe-5b6b-bc1a-f332bb495d69',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -98,7 +98,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5edb4678-5172-5dc3-b687-5f5ba6361376',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 20,
@@ -112,7 +112,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c5d4a1f4-5256-556a-b820-b05dc9aa2b9c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -126,7 +126,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '653465d7-4518-5622-878d-a9e8a99e0040',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 100,
@@ -207,7 +207,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd4871f8b-b71a-50eb-9884-881e06bb9188',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 500,
@@ -221,7 +221,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a1e365fc-e2f8-5868-8881-3a9e55b0d533',
-        ingredientId: 'undefined',
+        ingredientId: '7b1c0cd6-49ae-50b5-9688-b61b0b8be677',
         slug: 'cauliflower',
         name: 'cauliflower',
         quantity: 1,
@@ -235,7 +235,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '63c74e57-1aa4-5fda-bcd4-90887fe39c40',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -249,7 +249,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'def7b6d1-a7e8-5bef-a623-8bd8c4de1234',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -263,7 +263,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '15e8d064-2987-558e-bc7c-d69ca009fcd1',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 20,
@@ -277,7 +277,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '09757944-47fa-5d47-bbb6-718aeb6d13f8',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 1,
@@ -291,7 +291,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1d6c9261-5f1a-5388-8ea9-401007497d54',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -305,7 +305,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be23899c-c260-5269-82b8-36a441958955',
-        ingredientId: 'undefined',
+        ingredientId: 'e91ff6e3-9e21-594c-ae83-0109c1289947',
         slug: 'coriander-ground',
         name: 'coriander seeds',
         quantity: 1,
@@ -319,7 +319,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '133a6e85-7b19-5f35-a6d7-eb2800176d41',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 4,
@@ -333,7 +333,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9dbf0714-9258-5997-8af5-1a574cc2c27e',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -347,7 +347,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd4c7ea2e-d4d7-5f57-9d26-f81616f2781d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -428,7 +428,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'cb5f28a1-658a-5e5f-8862-efb2cec89d1b',
-        ingredientId: 'undefined',
+        ingredientId: '65cff741-7c92-5462-abf6-78f16907b2ba',
         slug: 'salmon',
         name: 'salmon',
         quantity: 400,
@@ -442,7 +442,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6ba1ca75-dff1-5dc6-8320-a48805e6172b',
-        ingredientId: 'undefined',
+        ingredientId: 'd9b6af4a-dac9-5bf9-b6e3-297e2544cbfc',
         slug: 'zucchini',
         name: 'zucchini',
         quantity: 1,
@@ -456,7 +456,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd7ec89c0-77ba-5885-8c9a-7938e098ecb1',
-        ingredientId: 'undefined',
+        ingredientId: '615b9251-07aa-5024-9988-45ddcafff504',
         slug: 'cherry-tomato',
         name: 'cherry tomatoes',
         quantity: 200,
@@ -470,7 +470,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cfde982e-74d2-5757-b925-09e93fb182a4',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -484,7 +484,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8072ff63-d015-5f43-a6c3-196e878f8a22',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -498,7 +498,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0f941e15-7e40-5de6-9e60-28af666edc0c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -512,7 +512,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '289d07d0-7ee3-5f10-970a-b4c1ebf075b2',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -526,7 +526,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7bcfe668-5084-5eea-923d-3178babe80ca',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 1,
@@ -540,7 +540,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1b0efcdf-7189-5a27-af76-ae07967e610c',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -618,7 +618,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7c9c5f09-8bf9-587e-a698-0e2586cf817f',
-        ingredientId: 'undefined',
+        ingredientId: '7a231039-350a-57aa-b447-18f738e0ecf7',
         slug: 'okra',
         name: 'okra',
         quantity: 600,
@@ -632,7 +632,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '739c04a1-f3d0-5b28-b34b-7487ceb07551',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -646,7 +646,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f019f701-1f3b-5721-9f56-83d25fda0091',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -660,7 +660,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8b9a4ce1-14bd-5c6f-96b9-0b6f0d90c8d7',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -674,7 +674,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4fb79e6e-7c4f-57b9-b7ff-23554e602a44',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -688,7 +688,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '63a33f5f-4635-5b37-a8c1-4f4d82fc33d9',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -702,7 +702,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a727b9bc-4618-55d9-9a2e-8bd64c4a27de',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 45,
@@ -716,7 +716,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8a6f2c0f-633a-59fd-b3bb-9e0f9ed73fa9',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -730,7 +730,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '65c541f7-2215-5f0a-914e-709494559519',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -822,7 +822,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '318d3660-75ba-5512-a4b6-1cad4e8c68a1',
-        ingredientId: 'undefined',
+        ingredientId: 'b0c80673-dd67-5b0f-bae1-d88c90288a76',
         slug: 'bananas',
         name: 'bananas',
         quantity: 4,
@@ -836,7 +836,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '17b9c49e-6ac8-5e36-b2de-a25dccc47724',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 250,
@@ -850,7 +850,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dbc067c6-4321-5288-a8a5-1ef831765501',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 150,
@@ -864,7 +864,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cd3891f1-30d6-59e3-b339-ae315a2e89dd',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -878,7 +878,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a5913f49-fd80-56a6-a582-dcfdb6deb570',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 110,
@@ -892,7 +892,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bd66996b-bf90-5450-b01c-7bfdde9260eb',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 2,
@@ -906,7 +906,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '86442ac9-1257-56c0-bf2c-cfd7dc479d30',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -920,7 +920,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2913506f-ec44-5b83-9baf-62ef5908e1dc',
-        ingredientId: 'undefined',
+        ingredientId: '51c5f714-4931-5e47-b5c6-28d14b1d6845',
         slug: 'walnuts',
         name: 'walnuts',
         quantity: 60,
@@ -934,7 +934,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f636e9ec-afd7-5949-a8c7-8df4980047f7',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -1014,7 +1014,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '246dda79-eaa8-5a22-8ad3-f0e30d030f6d',
-        ingredientId: 'undefined',
+        ingredientId: '9036f0e7-e328-5f27-984d-214be30e6562',
         slug: 'oats',
         name: 'oats',
         quantity: 60,
@@ -1028,7 +1028,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f85ac0c-dc2f-583c-9ee0-b1be430990bc',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 250,
@@ -1042,7 +1042,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '41c1f591-2ec8-5390-b6fa-f3d8ccade717',
-        ingredientId: 'undefined',
+        ingredientId: 'b0c80673-dd67-5b0f-bae1-d88c90288a76',
         slug: 'bananas',
         name: 'bananas',
         quantity: 1,
@@ -1056,7 +1056,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6a79f851-151e-54a0-be71-0f4f02c4782d',
-        ingredientId: 'undefined',
+        ingredientId: '651ea366-fa00-56e8-a0da-8dc2edfcb4d3',
         slug: 'peanut-butter',
         name: 'peanut butter',
         quantity: 1,
@@ -1070,7 +1070,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c914f390-589e-5f7a-9494-410105972143',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -1084,7 +1084,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0ae792fc-3ed7-5d5f-b011-2161856366de',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -1156,7 +1156,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '64bdd7cc-082a-57ba-aaf6-8eaae25cf8f8',
-        ingredientId: 'undefined',
+        ingredientId: 'b92c252c-f087-505f-96d2-1909a010a426',
         slug: 'semolina',
         name: 'semolina',
         quantity: 400,
@@ -1170,7 +1170,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '44f94ab8-4258-5091-a4b5-e8bc2c6f37e6',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 250,
@@ -1184,7 +1184,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '17fa8181-a788-5b7f-b669-c846851f26eb',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 300,
@@ -1198,7 +1198,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '65d337c4-be56-53a7-9b5d-470996729be7',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 150,
@@ -1212,7 +1212,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b30b6f94-17bf-5ef8-b52e-8922e14647f8',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 2,
@@ -1226,7 +1226,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4b5bf51b-1222-51ee-95fd-bebb5eba9d7f',
-        ingredientId: 'undefined',
+        ingredientId: '34af8120-6d67-58e6-aad4-b346bef1706a',
         slug: 'almonds',
         name: 'almonds',
         quantity: 40,
@@ -1240,7 +1240,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c901ef43-b47f-5a06-a487-873e3a118bcc',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 0.5,
@@ -1254,7 +1254,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '416477e9-78b3-5e6b-9c0e-3aee9e8e1dca',
-        ingredientId: 'undefined',
+        ingredientId: '9403731a-5892-5950-b46f-f04c60d7cca2',
         slug: 'coconut-flakes',
         name: 'desiccated coconut',
         quantity: 40,
@@ -1344,7 +1344,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '58f02e2c-1c10-5a8c-bdb8-8b09bbecae07',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 800,
@@ -1358,7 +1358,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e3f7ef8-642b-577b-b541-9bdb9b58a638',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -1372,7 +1372,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '13b2c8ae-c913-5848-a01f-6b695ef223b2',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -1386,7 +1386,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '27e74563-addb-5c8d-9559-73f88bab181d',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -1400,7 +1400,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd823ee8-37c3-5472-adb9-c66b8eabe5b3',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -1414,7 +1414,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ac0702f6-e23b-5342-a1ca-8bf7e53bd7f8',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -1428,7 +1428,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db4136b4-693c-5180-9264-3c48efdd3cc5',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -1499,7 +1499,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '922d3d50-cc1f-5e18-a57e-37adf618aaeb',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 8,
@@ -1513,7 +1513,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '62d311e2-561d-5379-95b3-a27be8b3502e',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 400,
@@ -1527,7 +1527,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ff36e7e4-4edb-5a3e-84b7-ecad6d526bfc',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -1541,7 +1541,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '23784805-64f1-59bb-b747-2a473bac4e2d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -1555,7 +1555,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be173642-49d7-5349-96e5-3e2c84011344',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -1569,7 +1569,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '76777f98-00cd-5b76-9fe6-59381273b443',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -1583,7 +1583,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '004cd47d-7f8b-5e99-b2e7-674b9d40307b',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 60,
@@ -1597,7 +1597,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c89c8586-9fb6-591b-9d96-475b57a664c0',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 1,
@@ -1611,7 +1611,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '61a74c18-58c7-5004-acf7-a6bef447d914',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -1702,7 +1702,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7c416d8e-c1af-52f8-8ddb-97bccf833cbd',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 300,
@@ -1716,7 +1716,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8a7645e2-29ab-5e5f-b8a6-fd46ce8dffd4',
-        ingredientId: 'undefined',
+        ingredientId: '1bfd2e36-1e4e-584e-8a7b-8af0913707fb',
         slug: 'kidney-beans',
         name: 'kidney beans',
         quantity: 480,
@@ -1730,7 +1730,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '169a847a-497b-5fa8-8afe-7bccc41891a7',
-        ingredientId: 'undefined',
+        ingredientId: '5623f855-66df-5f6a-a9ae-2a79b4419a25',
         slug: 'corn',
         name: 'sweetcorn',
         quantity: 200,
@@ -1744,7 +1744,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '829271ef-45b8-5244-8a80-79f0eac8ef61',
-        ingredientId: 'undefined',
+        ingredientId: 'f3defe72-4661-5cce-8c0e-79dc298214d2',
         slug: 'avocado',
         name: 'avocado',
         quantity: 1,
@@ -1758,7 +1758,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd28ac40d-0b4b-5986-8b05-1a8cd497b61e',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -1772,7 +1772,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2ae06397-b656-5057-bd49-575ea6c2392f',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -1786,7 +1786,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd306a65-f83e-53f5-9073-c44bfcf7f21a',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -1800,7 +1800,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9b202931-cb08-5634-aa11-1c1afb8fcd5d',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 1,
@@ -1814,7 +1814,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fa072af3-baa2-5fbe-a29b-817baa6fb6fb',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -1828,7 +1828,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c444ac8-8f0f-5106-a944-92f8cb9a4d34',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -1842,7 +1842,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae7a083a-ad62-51ee-9c57-13035be54903',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -1856,7 +1856,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7d4e2722-0143-5659-897d-c8fa79887b55',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -1935,7 +1935,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2c08f0b8-0711-5cc3-ab9f-a962b0fcd971',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 600,
@@ -1949,7 +1949,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e098df97-1d97-5631-96b7-5297275acbfb',
-        ingredientId: 'undefined',
+        ingredientId: 'df40dfec-b14e-57ac-8072-14bb4cc8345d',
         slug: 'toast-bread',
         name: 'toast bread',
         quantity: 8,
@@ -1963,7 +1963,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8e310b64-1808-5d8f-a4c4-ad88f4f9bf6a',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 4,
@@ -1977,7 +1977,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '16a76607-c97d-5ab3-b158-d3a0ff81c33c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -1991,7 +1991,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1006a230-303c-5ead-82ff-9385d06448c9',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 4,
@@ -2005,7 +2005,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '41421163-0944-5c60-942c-4875c7e16dbb',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -2019,7 +2019,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ace2ec35-d661-53ab-8c19-e201c4c513ac',
-        ingredientId: 'undefined',
+        ingredientId: '993065a0-6eaf-5913-b5c2-28e1754ceda0',
         slug: 'pickles',
         name: 'pickles',
         quantity: 60,
@@ -2033,7 +2033,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c1f57542-f37e-55ae-850a-17e210c524c8',
-        ingredientId: 'undefined',
+        ingredientId: '0bc711d8-dcbf-540a-b279-b696fa54361a',
         slug: 'mayonnaise',
         name: 'mayonnaise',
         quantity: 3,
@@ -2047,7 +2047,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9ff42c77-331b-59fa-9641-e767ae0d7d08',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 1,
@@ -2061,7 +2061,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '71e41bd4-1efa-558c-9251-f9a8048884ba',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -2075,7 +2075,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1f040830-5f88-5961-9369-d85005b42922',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -2162,7 +2162,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7cbd33b2-6139-550c-ad8e-384a28489682',
-        ingredientId: 'undefined',
+        ingredientId: 'c9fad558-b367-5f02-87fe-4d654e63abb8',
         slug: 'noodles',
         name: 'noodles',
         quantity: 300,
@@ -2176,7 +2176,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '807cd597-717e-5b5b-ac99-09f6bd4e8c73',
-        ingredientId: 'undefined',
+        ingredientId: '5f45f2f3-a082-5836-8f14-c6356e2ca4e2',
         slug: 'beef-steak',
         name: 'beef steak',
         quantity: 350,
@@ -2190,7 +2190,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a14687b0-eed8-5ad7-8743-48d728b5a093',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -2204,7 +2204,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6d3242e5-4960-5057-ba30-3b9593cf10b7',
-        ingredientId: 'undefined',
+        ingredientId: 'b08ffc55-817a-518c-8c67-5c9e99ca482c',
         slug: 'broccoli',
         name: 'broccoli',
         quantity: 200,
@@ -2218,7 +2218,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '18ef805d-ba30-5d7f-8606-be410c85d95f',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -2232,7 +2232,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae379b1d-ce48-5930-92cc-a7d4a931e72e',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -2246,7 +2246,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cec9f342-e4fd-51b0-b483-684d33e5665c',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 20,
@@ -2260,7 +2260,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9c0b8357-76bb-5648-a63a-c51d3676cb11',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 4,
@@ -2274,7 +2274,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '344405bb-ab6d-57aa-a683-8e815b661b6a',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -2288,7 +2288,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6950c797-3e83-57bd-86cc-fda8952d8df6',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -2302,7 +2302,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '755d7b9f-179b-5ff4-815a-54fddcba5e42',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -2394,7 +2394,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '5209bdf8-8286-52df-a1d1-560118c5dd0a',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 600,
@@ -2408,7 +2408,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7f830e70-7822-5a11-8fbd-f0083886b457',
-        ingredientId: 'undefined',
+        ingredientId: 'b70dc41b-b703-561c-b79f-760d9dd98422',
         slug: 'tortilla',
         name: 'tortilla',
         quantity: 8,
@@ -2422,7 +2422,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '202ba039-5833-5899-84ff-d574ae3b9200',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -2436,7 +2436,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '40fdab35-d4d7-5c0f-8be6-5706e1b53e93',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -2450,7 +2450,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9aed9b66-345a-5786-8a46-e6110464b814',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 1,
@@ -2464,7 +2464,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5d5f1e0a-f495-584e-b045-42850d1eca01',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -2478,7 +2478,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3c334547-57c2-5723-958b-a9bad71d00fc',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -2492,7 +2492,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eab356eb-7459-58e2-b943-166fbfb64954',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 4,
@@ -2506,7 +2506,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29261897-a937-5d6b-86a9-c64051dbdae0',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -2520,7 +2520,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aa409a67-b1f5-557d-b0dd-5981ec400ba2',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 100,
@@ -2534,7 +2534,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9c403bac-9540-5e68-bc32-45fd4bc7d765',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -2548,7 +2548,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '84323eae-d145-5944-8bbd-88a144a9ddcc',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -2626,7 +2626,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '02edc26b-d507-516d-a213-1f537d113f4f',
-        ingredientId: 'undefined',
+        ingredientId: '156215ce-a6a3-57e2-bb3c-39262bfebd0b',
         slug: 'split-peas',
         name: 'split peas',
         quantity: 300,
@@ -2640,7 +2640,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2d72a063-29f8-568d-8892-703158ddb743',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -2654,7 +2654,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bf8caa77-1f59-5cab-9b75-145ff525a2e7',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 1,
@@ -2668,7 +2668,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5e176a7-bbb9-5f58-86a1-544909b6930f',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -2682,7 +2682,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9126bcb0-c775-570c-9b7f-9575a3b6d8cf',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -2696,7 +2696,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae893372-f814-57ae-82cb-9ba2b403f44c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -2710,7 +2710,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f4810d40-0ce0-57f4-b5ac-f4803fff5169',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -2724,7 +2724,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f4298ce-6b8a-5172-8520-eb3b45a9cd41',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 60,
@@ -2738,7 +2738,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '15f75a1a-af8a-537b-8b31-47258554da49',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -2818,7 +2818,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'fbeaf200-d7ff-559c-ab9c-721b554135ab',
-        ingredientId: 'undefined',
+        ingredientId: 'b70dc41b-b703-561c-b79f-760d9dd98422',
         slug: 'tortilla',
         name: 'tortilla',
         quantity: 4,
@@ -2832,7 +2832,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5eab88f6-eebe-5658-8be8-fb8d414dd314',
-        ingredientId: 'undefined',
+        ingredientId: '1bfd2e36-1e4e-584e-8a7b-8af0913707fb',
         slug: 'kidney-beans',
         name: 'kidney beans',
         quantity: 400,
@@ -2846,7 +2846,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4dee6cf0-fbed-5885-8058-13246260340b',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 150,
@@ -2860,7 +2860,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd24012c6-5b76-56ba-9712-8d9eb1f10cb4',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -2874,7 +2874,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db015604-b790-5c52-bd71-45ec2df9a84c',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -2888,7 +2888,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c8179e49-9de0-5d2e-87e1-4eaa5faa547b',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 1,
@@ -2902,7 +2902,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd8482631-0b65-523f-ba5c-b99474dbbefe',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 1,
@@ -2916,7 +2916,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '53f3ef94-81b4-5748-8ac8-817bed7ec96c',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -2930,7 +2930,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '73eda359-9388-56b5-87ab-2b33e1e069e5',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.75,
@@ -3016,7 +3016,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c8e9b904-f8f7-5397-a87a-f2b5ec45066c',
-        ingredientId: 'undefined',
+        ingredientId: '07b412de-52d5-5dec-ad63-03e776cedf61',
         slug: 'baguette',
         name: 'baguette',
         quantity: 1,
@@ -3030,7 +3030,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e930e01-912b-5a9d-a271-7147d088bd2b',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -3044,7 +3044,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db178677-c58e-5f97-9002-8f33df40d049',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -3058,7 +3058,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '85caaf10-bd8b-56bb-b3a5-92c2778551e9',
-        ingredientId: 'undefined',
+        ingredientId: '16a27abe-5658-5d31-91f2-45f2ef055243',
         slug: 'basil',
         name: 'basil',
         quantity: 10,
@@ -3072,7 +3072,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6f6385f3-35e5-55fb-ba6c-fc9fb5d6537b',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -3086,7 +3086,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1556d6f2-fbb9-5ab2-9d85-cae3d763c992',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.75,
@@ -3100,7 +3100,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a16b5d23-1ddf-5ac3-9449-425020917670',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 0.5,
@@ -3181,7 +3181,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd2a68c73-d2e3-59bf-824a-c5f2995409e6',
-        ingredientId: 'undefined',
+        ingredientId: '30cc0f54-6cd0-5a97-9484-ceb5905b301c',
         slug: 'chicken-wings',
         name: 'chicken wings',
         quantity: 1,
@@ -3195,7 +3195,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '30d6b329-03d1-5d2a-b2a1-7ad41dbb92dd',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 1,
@@ -3209,7 +3209,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7194e944-2667-5626-92a3-dddc645e575f',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -3223,7 +3223,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3eb16f74-74ab-500a-8bb8-03ea95a0c2c5',
-        ingredientId: 'undefined',
+        ingredientId: 'b22943f1-547a-57f8-afc4-af7cccf06371',
         slug: 'garlic-powder',
         name: 'garlic powder',
         quantity: 2,
@@ -3237,7 +3237,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6fdded45-39d0-566b-a291-b15decdae20c',
-        ingredientId: 'undefined',
+        ingredientId: 'b469340f-fa3b-5b05-9b91-d37774ef9e10',
         slug: 'hot-sauce',
         name: 'hot sauce',
         quantity: 80,
@@ -3251,7 +3251,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4db8cfff-25b9-542a-a900-1260a8d019ce',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 40,
@@ -3265,7 +3265,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0a49f02a-2f7e-54a5-bae8-22aa41d0fc9f',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -3279,7 +3279,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '26b20caa-afa9-5639-b58f-1a40b8679d2e',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -3367,7 +3367,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'a460d0a6-595f-5473-a0c8-9c66a580e6ca',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 800,
@@ -3381,7 +3381,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b00dfd71-20f8-5349-aa29-73b4760a52fa',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 250,
@@ -3395,7 +3395,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29612f0c-c2d3-530e-ab2d-944ab6843f18',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 5,
@@ -3409,7 +3409,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '644fbb69-e678-536c-9f8f-416539fef896',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -3423,7 +3423,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4fce1f1c-1a4b-5b23-be06-24d03e944959',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -3437,7 +3437,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd783f25e-f76b-5bfd-94d8-7e519affbcec',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 25,
@@ -3451,7 +3451,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '423d9d29-b981-55b0-bdad-0b299202103c',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 2,
@@ -3465,7 +3465,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de635706-4abb-5f3e-bb61-767ada494ec6',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -3479,7 +3479,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '22468f4b-854c-561a-952b-e9c1af9f99c2',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -3493,7 +3493,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd94d009-00c8-51f6-8639-618f2c9d659a',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 80,
@@ -3507,7 +3507,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2012ca25-c803-5f9f-8267-f3f86dcac9df',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -3598,7 +3598,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '078e1f04-6078-50d4-b3b9-a0bf9d727927',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 500,
@@ -3612,7 +3612,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd748c94-847b-5bac-8267-3fbd6ac89939',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 2,
@@ -3626,7 +3626,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '902ebf3b-3c9b-5695-8b17-3ea107728c6f',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -3640,7 +3640,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e3879f79-139c-5275-8a09-8549c05f9cc2',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 2,
@@ -3654,7 +3654,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b46ba14c-3b13-52c9-a373-e0804f0b2378',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 2,
@@ -3668,7 +3668,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ec99f5fe-b1c6-55fd-864e-55be95562fe8',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -3682,7 +3682,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bf81a291-947b-5b63-ad11-65d3db9568b3',
-        ingredientId: 'undefined',
+        ingredientId: '20a7c32a-0627-51c6-bcba-510b8353eab5',
         slug: 'ice',
         name: 'ice',
         quantity: 6,
@@ -3696,7 +3696,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd6dd2af5-cf1c-5854-a4ed-4a24c6ec8239',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -3766,7 +3766,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ba1e8ef7-ab34-5378-91f3-096ae6b64271',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 400,
@@ -3780,7 +3780,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '864bea35-5a9b-5185-9a5c-0f002040ef9f',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 1,
@@ -3794,7 +3794,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '81a864d9-b84d-5073-9ef5-f810c4648a31',
-        ingredientId: 'undefined',
+        ingredientId: 'df40dfec-b14e-57ac-8072-14bb4cc8345d',
         slug: 'toast-bread',
         name: 'toast bread',
         quantity: 3,
@@ -3808,7 +3808,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bdc8e2f8-de9e-5509-95ac-b1133d555c32',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 40,
@@ -3822,7 +3822,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '401b6411-906f-5773-a09a-5f1cee768582',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 120,
@@ -3836,7 +3836,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '910e5753-3e78-5346-a430-97462259a41d',
-        ingredientId: 'undefined',
+        ingredientId: '0bc711d8-dcbf-540a-b279-b696fa54361a',
         slug: 'mayonnaise',
         name: 'mayonnaise',
         quantity: 1,
@@ -3850,7 +3850,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '50eaeb5f-bc6d-590f-9453-551f062eb01e',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -3864,7 +3864,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7dc2a3ad-348f-5fe3-80fd-7187f43f85e7',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -3878,7 +3878,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a8e15e75-fb29-509f-83ee-86467b0697f2',
-        ingredientId: 'undefined',
+        ingredientId: '167c646a-986c-5286-bed5-80e1c6bca1f2',
         slug: 'mustard',
         name: 'mustard',
         quantity: 1,
@@ -3892,7 +3892,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ba7580f8-eedc-532e-ad17-b504a3f1381e',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -3906,7 +3906,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9fc1f99d-0866-57a2-a320-08588c67cbee',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -3993,7 +3993,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7f465cdd-000e-5c42-a607-acbc34d453cc',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -4007,7 +4007,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0a60bdf6-77f1-5061-96f6-dba92bd73a48',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 200,
@@ -4021,7 +4021,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5595a22c-4775-50b5-883d-f5228a4a0544',
-        ingredientId: 'undefined',
+        ingredientId: '16a27abe-5658-5d31-91f2-45f2ef055243',
         slug: 'basil',
         name: 'basil',
         quantity: 15,
@@ -4035,7 +4035,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f91eb6c9-5f14-52e5-a995-af709754ed90',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -4049,7 +4049,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e15142b-6dec-5a5a-a0f9-8c61fc774f2b',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -4063,7 +4063,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1cb7fad6-4e3b-5bca-97c5-fb606f3fa3c5',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 0.5,
@@ -4133,7 +4133,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2a23afc0-ff2e-5898-a2bc-b80015f94773',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 250,
@@ -4147,7 +4147,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c80d4ee2-6f4f-5915-982d-2fd2dfee0c94',
-        ingredientId: 'undefined',
+        ingredientId: '41bcfb82-6c8e-559f-a765-02792252f095',
         slug: 'bacon-beef',
         name: 'beef bacon',
         quantity: 150,
@@ -4161,7 +4161,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '828fd23c-76e0-5d3e-acb0-52592485faf0',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -4175,7 +4175,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '788b7016-9819-579c-b007-2dd7098764f3',
-        ingredientId: 'undefined',
+        ingredientId: '836d444f-b191-5935-8b0f-5f9243ac2817',
         slug: 'egg-yolk',
         name: 'egg yolks',
         quantity: 1,
@@ -4189,7 +4189,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '16d04276-97d6-5cc7-9517-ce401c0a24c0',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 80,
@@ -4203,7 +4203,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd6817ea2-47ba-5036-8ad9-432d76503251',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 2,
@@ -4217,7 +4217,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd79bfef7-0c82-523e-8dce-44ed07cc5bc7',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -4296,7 +4296,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'de2842ff-778b-576a-8363-f5a66721b204',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 480,
@@ -4310,7 +4310,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0263c5b0-bae9-5401-a983-5edbc8ddf0c0',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -4324,7 +4324,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9caba71d-7323-56ad-b6cc-fee2bfc43b32',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -4338,7 +4338,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '160ef2ce-818c-5bc6-9d5e-1c4bd4c8906f',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -4352,7 +4352,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '10846c70-ef1b-5d7b-aa55-20f9900288be',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 25,
@@ -4366,7 +4366,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c72c9d87-9abe-5d91-b8cd-62c976615873',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 2,
@@ -4380,7 +4380,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '500be20c-9fbe-5ceb-92f5-a54491c5db5b',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 1,
@@ -4394,7 +4394,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '30e00c35-b409-51a6-80c0-dd6814a4d0b3',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -4408,7 +4408,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5386e71f-49d2-5332-9643-496e66518397',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -4422,7 +4422,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be244450-08d2-5a54-bca9-d149695c09e5',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -4436,7 +4436,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a347d672-6659-51bc-a10a-3653cbcf6549',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -4527,7 +4527,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e89ccca9-36ca-5cb4-bb88-abba8531148e',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 700,
@@ -4541,7 +4541,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8ff31e7f-30c0-5bff-9b6f-196aec3f16c3',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 3,
@@ -4555,7 +4555,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1753eb28-db3c-53a4-aa5d-629e603734d4',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -4569,7 +4569,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '657e7e93-5d72-5656-b167-e7e0d0411d0b',
-        ingredientId: 'undefined',
+        ingredientId: 'b70dc41b-b703-561c-b79f-760d9dd98422',
         slug: 'tortilla',
         name: 'tortilla',
         quantity: 8,
@@ -4583,7 +4583,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6174ea87-ed4d-5afd-af32-f672b5c30eb5',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -4597,7 +4597,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '74615dc4-fe23-5baa-af5c-97b7e2cfc311',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -4611,7 +4611,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cd6ac04c-e993-5e31-9ea2-79795700d5d3',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -4625,7 +4625,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8c4794e1-86be-5ea0-8e65-b4242a847e9d',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 1,
@@ -4639,7 +4639,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c652fcac-1049-5e95-a445-a6cc85111d5d',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -4653,7 +4653,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5f7952ba-85b7-591a-9c57-3a5879e2d77a',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -4667,7 +4667,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b13aff43-14d5-5cca-8956-8a5eefe5a693',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -4746,7 +4746,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd4f3b271-c984-5987-a448-e47ebdca1d96',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 500,
@@ -4760,7 +4760,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '723c9672-6514-5c83-a29b-d7624a0dc3ee',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 300,
@@ -4774,7 +4774,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1328cb37-c4be-5e0c-a4d5-06151555b0c8',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -4788,7 +4788,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c4d34bc7-0bf3-5010-b9d3-970f28ecbc52',
-        ingredientId: 'undefined',
+        ingredientId: '88e88f2c-7649-5b7b-9464-0a7dcaec2ea3',
         slug: 'green-peas',
         name: 'green peas',
         quantity: 100,
@@ -4802,7 +4802,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0d297711-a409-517c-abac-a136aa0cceb1',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -4816,7 +4816,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd53d0322-86db-5e97-8192-71cb40f8a466',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -4830,7 +4830,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4128906f-cb24-5c95-918c-d660b9f5b512',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -4844,7 +4844,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '755e6b55-1c0e-52ac-a0d8-42985acf2ffd',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 3,
@@ -4858,7 +4858,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6647f874-c98b-5c73-b19f-e198d108347d',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -4872,7 +4872,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c9192e7-e17d-51df-b224-e5065ccff35c',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -4964,7 +4964,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'b0f0ef8a-1cfe-506a-9eee-a21a235efd06',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 700,
@@ -4978,7 +4978,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7780d5a7-6a3e-55f1-b1ff-a0ead6290370',
-        ingredientId: 'undefined',
+        ingredientId: '99aa380c-5bae-56ef-a4aa-1dad274fc11f',
         slug: 'breadcrumbs',
         name: 'breadcrumbs',
         quantity: 120,
@@ -4992,7 +4992,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '820b3cfb-f160-5d16-b7f0-4c02a94de5bb',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -5006,7 +5006,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '504e9df2-cd4f-52de-a469-f0b7fc6342a1',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 50,
@@ -5020,7 +5020,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7604b330-6855-5c63-943c-80bfe9f61dd5',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 200,
@@ -5034,7 +5034,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07f1e627-4cca-533c-be0f-165c895ac590',
-        ingredientId: 'undefined',
+        ingredientId: '19bc7acd-f4cd-5aa4-9934-0e3bee41439b',
         slug: 'tomato-sauce',
         name: 'tomato sauce',
         quantity: 400,
@@ -5048,7 +5048,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7b25ce7d-db9e-512a-bdc0-e37947e28a8b',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 1,
@@ -5062,7 +5062,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5151795-6b17-52c7-ae89-0067581a3b09',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -5076,7 +5076,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b33c1f80-8795-5c54-8200-75ab43b3d158',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -5156,7 +5156,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '0ae211b9-8292-5a66-b6dc-5ff35343e53a',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 480,
@@ -5170,7 +5170,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a1c80ec7-5497-550d-9759-f9f4ccb077dc',
-        ingredientId: 'undefined',
+        ingredientId: '781128dc-5989-5b4e-b363-a183808a68de',
         slug: 'spinach',
         name: 'spinach',
         quantity: 300,
@@ -5184,7 +5184,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3160911c-f1de-5f0f-8177-569e61dcbd3d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -5198,7 +5198,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1a34daa3-0478-5624-87ef-2ab50a172d9e',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -5212,7 +5212,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a178c88b-ae60-5cca-ab11-1480a8038674',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -5226,7 +5226,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '733fb060-1945-5f76-8d8a-619ef7ee86a3',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -5240,7 +5240,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e84bac1a-298c-5396-82c3-edfe46f61517',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -5254,7 +5254,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'acbcd487-bd66-5d53-a578-4a5e18d64fde',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -5333,7 +5333,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '346eb296-3194-518b-a8c2-5205fbda22b5',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 700,
@@ -5347,7 +5347,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '57d472d9-3d8b-5267-9d1f-dad5a98b9bd8',
-        ingredientId: 'undefined',
+        ingredientId: '1bfd2e36-1e4e-584e-8a7b-8af0913707fb',
         slug: 'kidney-beans',
         name: 'kidney beans',
         quantity: 480,
@@ -5361,7 +5361,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1aa4845c-799e-57b4-a7bd-f2373d9cbfcb',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 6,
@@ -5375,7 +5375,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8082a30a-e81a-52be-af2b-03cc885292dc',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -5389,7 +5389,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1dc7576f-a601-57d3-81bb-cce6ea5ed591',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 2,
@@ -5403,7 +5403,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e63abe2-df0e-5353-8794-4054aaaaddcd',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -5417,7 +5417,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd03a90e0-e2de-5679-a93c-10c7cac0e0e8',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 2,
@@ -5431,7 +5431,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5bac4b20-6298-50e8-b50a-1e8ed17a86e5',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -5445,7 +5445,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '89b0b0ae-9df2-570f-8538-819a1e18aca7',
-        ingredientId: 'undefined',
+        ingredientId: '97edb046-61e8-5aea-a36e-faa9f3e60b68',
         slug: 'cocoa',
         name: 'cocoa powder',
         quantity: 1,
@@ -5459,7 +5459,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f93f1d2e-fb66-56bc-9211-e9a2f0215cfb',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -5473,7 +5473,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b2a14f3e-54de-5cd3-8e40-956bfeba7cb7',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -5487,7 +5487,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '27203051-0537-5e12-a11f-eced698e63ee',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -5577,7 +5577,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e21c3023-de62-57ee-a3bd-de01dec4b5cf',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 280,
@@ -5591,7 +5591,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f192846-1d78-5fa9-935b-f18d8caa5973',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 170,
@@ -5605,7 +5605,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8a4006dc-3e06-5314-9431-32f2eef097c2',
-        ingredientId: 'undefined',
+        ingredientId: 'd18cc290-549b-55df-a5f0-0a8d9f1761fc',
         slug: 'brown-sugar',
         name: 'brown sugar',
         quantity: 150,
@@ -5619,7 +5619,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0fad2912-3980-5cda-b760-adf47508569c',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 80,
@@ -5633,7 +5633,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8cddc5d1-82a9-5bac-b536-a2011a15e139',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 1,
@@ -5647,7 +5647,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bca8aaa2-e050-5fc1-9ee5-70a32c72206f',
-        ingredientId: 'undefined',
+        ingredientId: '5a99cb03-83cb-5458-88a4-72a52e481bd3',
         slug: 'chocolate',
         name: 'chocolate',
         quantity: 200,
@@ -5661,7 +5661,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b9e0eb61-ccb8-511f-b135-d5a315184f95',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 1,
@@ -5675,7 +5675,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2a73b614-3d3a-594f-aded-3676acc37a95',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -5689,7 +5689,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e8b41dc0-68d0-57c4-8a38-c773a9c1631e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -5772,7 +5772,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '696876ea-9655-53c0-99c8-b33c3fdfbae9',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 3,
@@ -5786,7 +5786,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7043ebd9-c9d8-5b9f-ae6b-1b575e339cbb',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 1,
@@ -5800,7 +5800,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bee56ec0-88ce-536a-9e47-40e4df85c960',
-        ingredientId: 'undefined',
+        ingredientId: '615b9251-07aa-5024-9988-45ddcafff504',
         slug: 'cherry-tomato',
         name: 'cherry tomatoes',
         quantity: 200,
@@ -5814,7 +5814,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '093e2cc6-9081-5d92-9751-526913b8f4eb',
-        ingredientId: 'undefined',
+        ingredientId: 'f3defe72-4661-5cce-8c0e-79dc298214d2',
         slug: 'avocado',
         name: 'avocado',
         quantity: 1,
@@ -5828,7 +5828,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cf67b287-e505-5f96-8dbc-b721233acac5',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 80,
@@ -5842,7 +5842,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b7b090b1-794a-50ca-8fc6-fb19a8a2ebeb',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -5856,7 +5856,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '14e72588-fe0a-509f-b918-5be1367574f6',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 80,
@@ -5870,7 +5870,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3c7c95de-7eb3-5520-8e0b-3d75a3f4b994',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -5884,7 +5884,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4d4b935b-83e7-56ca-8c6d-238a5110f57c',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -5898,7 +5898,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0d7b0088-b985-58f7-be86-e4ca869fe0a3',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.75,
@@ -5976,7 +5976,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7ba48e52-ff20-53cc-8a2b-e85fcd01c097',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 700,
@@ -5990,7 +5990,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '70d671a1-d88f-5ae7-8522-c013111e02a3',
-        ingredientId: 'undefined',
+        ingredientId: 'a18c7b0c-1711-5f07-920f-3f7101294ac2',
         slug: 'coconut-milk',
         name: 'coconut milk',
         quantity: 400,
@@ -6004,7 +6004,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2374f4cf-3664-55c3-a008-7ea174a791ef',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -6018,7 +6018,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '97318139-3510-5214-8e30-5997770298c1',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -6032,7 +6032,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fbc33426-f420-55d7-b3bb-1944d5167b08',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 25,
@@ -6046,7 +6046,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5d7b19f9-f69f-5145-904a-3bf97703835b',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 2,
@@ -6060,7 +6060,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e07eb16-d491-59b4-97ed-9681e51192c8',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -6074,7 +6074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b44c15a9-df82-56a4-a917-1ae6fe7a2c9a',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -6088,7 +6088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '27c8ea59-11ea-5bab-83cc-cc07a4dc1877',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -6102,7 +6102,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd9cf3946-3f6b-55b2-a6b6-7cd6de234546',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -6182,7 +6182,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4190b366-7852-5c06-9cad-63d966034bf7',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 180,
@@ -6196,7 +6196,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07e329cb-4ece-5234-b6ca-93417e968c82',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 400,
@@ -6210,7 +6210,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f646229-c718-5230-b25f-c0548efa2a20',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 30,
@@ -6224,7 +6224,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f8c6ecd-f33d-51a2-9285-417ec77ed54b',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -6238,7 +6238,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd974ff25-3ec8-50bb-b6f5-af524e02ff1b',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -6252,7 +6252,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c9001c1-f7fd-5fec-8e90-506b8c7f9a43',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -6266,7 +6266,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b7a42496-4012-58d4-8cf1-422abc24b9ba',
-        ingredientId: 'undefined',
+        ingredientId: '50aefb00-b1a0-5140-a347-9b1cab6762b9',
         slug: 'white-pepper',
         name: 'white pepper',
         quantity: 0.5,
@@ -6280,7 +6280,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '24a6477a-c035-5485-9c43-647d1af0c957',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -6294,7 +6294,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2eb31bb0-0a70-5313-b6ce-8913f2909063',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -6375,7 +6375,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e94c1982-75dc-52f9-a89a-2d20c5fac8c8',
-        ingredientId: 'undefined',
+        ingredientId: '5623f855-66df-5f6a-a9ae-2a79b4419a25',
         slug: 'corn',
         name: 'sweetcorn',
         quantity: 400,
@@ -6389,7 +6389,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5a4616d-ca47-5563-b77e-ed6393e92c4b',
-        ingredientId: 'undefined',
+        ingredientId: 'f3defe72-4661-5cce-8c0e-79dc298214d2',
         slug: 'avocado',
         name: 'avocado',
         quantity: 2,
@@ -6403,7 +6403,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '45af5eda-a7c4-5713-8991-d12d0ec4b250',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -6417,7 +6417,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3542e3a3-f66e-56aa-8780-8e6f5d582c69',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -6431,7 +6431,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0803a9ed-c74c-5506-8252-2020b06da35f',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -6445,7 +6445,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '576a47cb-b0e9-5541-9a23-da5bad8ae0c2',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 0.5,
@@ -6459,7 +6459,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f7f6ee6d-b64c-57b5-8600-e89ee06af18e',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -6473,7 +6473,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '950c26d4-533a-5590-b983-78a59862930e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -6550,7 +6550,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '29c1f566-763f-5aab-9509-c9f745d31acc',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 450,
@@ -6564,7 +6564,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '81efaa05-d48f-5e9f-853e-7bcac53381d7',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 300,
@@ -6578,7 +6578,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1de1492c-9096-56a3-b83f-dbe8e6c5fcf9',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 200,
@@ -6592,7 +6592,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b48657f5-1872-525e-abff-0e6f4ccb7d48',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -6606,7 +6606,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '359d0fe7-7a4a-52e4-a9d9-e579a5ed999e',
-        ingredientId: 'undefined',
+        ingredientId: '64932368-b4af-5ffb-a74d-e12869645f63',
         slug: 'roumy-cheese',
         name: 'roumy cheese',
         quantity: 60,
@@ -6620,7 +6620,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '45a3ee5b-90b6-58a3-a1d5-5b2e2a91303f',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 20,
@@ -6634,7 +6634,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '770a7327-c547-5b71-831a-e1e76f9898bc',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -6648,7 +6648,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bab66abc-c376-5887-a483-d48479441117',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -6743,7 +6743,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4a5a09ca-6904-5759-969e-d5ab2d880507',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 400,
@@ -6757,7 +6757,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ac71523c-b6c9-569e-9fb5-6a1aa379851c',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -6771,7 +6771,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f1d7dc9f-d739-5e6e-8e39-c8fffdf15593',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 3,
@@ -6785,7 +6785,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c955d614-fe5f-5598-a1eb-3cf3d0c3c955',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -6799,7 +6799,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f4dffe1-765f-5f28-b2a1-ba9de01c1305',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 0.25,
@@ -6813,7 +6813,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '013c5a89-65d4-5ad9-881c-49e490df3644',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -6882,7 +6882,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '3700adc3-3532-574f-8f35-2a7db865fd81',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 300,
@@ -6896,7 +6896,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '10315f78-3c93-54c1-882b-826882a7310d',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 1,
@@ -6910,7 +6910,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6e2f9817-e455-55e3-8550-aecffc6d67e5',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 50,
@@ -6924,7 +6924,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c658f640-8bbc-5e86-8b42-fc9d39f60cfc',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -6938,7 +6938,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '036dbd83-73bb-5a83-8a46-586fb8d70668',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -6952,7 +6952,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cd42e337-dd58-5ca1-b014-a6069ff98827',
-        ingredientId: 'undefined',
+        ingredientId: '17c794db-92ee-54f2-9083-58f18bbb3774',
         slug: 'chili-pepper',
         name: 'chili pepper',
         quantity: 1,
@@ -6966,7 +6966,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8a3f1501-1f3b-5a53-9e3c-e52eabc9646d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -6980,7 +6980,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eee10c8b-4744-5781-8055-101d5b323e3f',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -6994,7 +6994,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2b6f72aa-f314-57c6-bdf2-87f2dffe7731',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -7074,7 +7074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '76d3e77d-d2df-5c97-a82f-8a41a1f0e421',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -7088,7 +7088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '253ee90e-56df-55e3-b152-43ed5ae67f02',
-        ingredientId: 'undefined',
+        ingredientId: '47610a55-d80c-5dd9-9bb4-a0d9df375767',
         slug: 'edamame',
         name: 'edamame',
         quantity: 200,
@@ -7102,7 +7102,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e6993b87-55c8-5b66-8453-faf6115c6921',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -7116,7 +7116,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '89158498-afc5-5d3c-b083-c813f14d5f3d',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -7130,7 +7130,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f8bad437-183b-5953-96db-8a183599f0bd',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 2,
@@ -7144,7 +7144,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '33cc4b1f-e88f-575d-98a2-9fd7c8501adb',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -7158,7 +7158,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e0ef894b-9d84-5b68-9a22-c4aad5113cd8',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -7172,7 +7172,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9d3afc3e-87af-5448-a672-d764bf758785',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 1,
@@ -7257,7 +7257,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '32700cf2-5d54-54f7-aa3f-336ff7b425e2',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 3,
@@ -7271,7 +7271,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e230be08-95e0-50f7-a286-17261959a1a8',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 2,
@@ -7285,7 +7285,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'efc52506-5c17-5239-be30-7f918b03a150',
-        ingredientId: 'undefined',
+        ingredientId: '72a9dc59-00ff-56eb-a001-1a339a073985',
         slug: 'cornflour',
         name: 'cornflour',
         quantity: 1,
@@ -7299,7 +7299,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '48d3a1c8-f105-5126-853f-f37224663f89',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 2,
@@ -7313,7 +7313,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f468cfb-42db-5d9f-b704-dd0271646bcf',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 10,
@@ -7327,7 +7327,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be89ed2f-084b-509f-a723-ccceddf242eb',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 1,
@@ -7341,7 +7341,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c913bce6-750f-5bea-bb41-46a96092ecf4',
-        ingredientId: 'undefined',
+        ingredientId: '50aefb00-b1a0-5140-a347-9b1cab6762b9',
         slug: 'white-pepper',
         name: 'white pepper',
         quantity: 0.5,
@@ -7355,7 +7355,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3327da3f-dbd0-5826-8375-d5f946656c60',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -7435,7 +7435,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4241dacb-eda6-50af-a834-9a8784a4d861',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 6,
@@ -7449,7 +7449,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f6ca2107-171d-59de-ad32-006c873fef57',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -7463,7 +7463,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e4451569-3d93-5416-9bd8-734179e02391',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 4,
@@ -7477,7 +7477,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0dc09a7b-2ab8-5f2b-8516-2a615d4c3272',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 3,
@@ -7491,7 +7491,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '55955118-ac45-5ef0-a8f6-1b607e2a520e',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 1,
@@ -7505,7 +7505,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'efd5a4af-b865-5311-b8c7-b0688985b917',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -7519,7 +7519,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a806dc51-fb1a-526a-bde6-b5b0ea299996',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 0.5,
@@ -7533,7 +7533,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ffe41b48-e9d4-5c18-8ffa-06acb6fd78ba',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -7613,7 +7613,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '0079077d-3d8d-5a44-9262-2c5f9b79c780',
-        ingredientId: 'undefined',
+        ingredientId: 'df40dfec-b14e-57ac-8072-14bb4cc8345d',
         slug: 'toast-bread',
         name: 'toast bread',
         quantity: 2,
@@ -7627,7 +7627,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '91a9dfd9-4465-5db2-926b-49cd4225aec1',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 60,
@@ -7641,7 +7641,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9a052344-f71b-5fea-941d-445ea7eb13af',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 1,
@@ -7655,7 +7655,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3a7be630-3985-55ae-ac54-0f595866db2c',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 10,
@@ -7669,7 +7669,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fcd9cd5c-4f2b-58ac-b78d-5f8a56ae621d',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -7741,7 +7741,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd8c83f1b-e316-5d36-b636-57163adaa279',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 250,
@@ -7755,7 +7755,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e6b9fc90-1d5f-5d59-a64e-7cff3c52fd32',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -7769,7 +7769,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '87314184-6ed1-540c-831d-1cb94f727e70',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -7783,7 +7783,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b55f7748-277d-548e-85f6-b73978761cca',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 1,
@@ -7797,7 +7797,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0f85721e-c431-5dd9-ac32-db48a7c31426',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -7811,7 +7811,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c0116cf-7b3c-5e3a-bad0-a7fd06b5842c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -7825,7 +7825,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e44f61a5-92cf-5944-bf83-2b4f991a4085',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 20,
@@ -7918,7 +7918,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '093b08e0-8d4e-5f7f-a9e9-9df924aa040a',
-        ingredientId: 'undefined',
+        ingredientId: '91b4a320-ff6e-5600-b87f-51be146f4889',
         slug: 'beef-cubes',
         name: 'beef cubes',
         quantity: 800,
@@ -7932,7 +7932,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd1ccba07-9def-5268-952d-02f360620838',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -7946,7 +7946,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '60715891-fc7e-58e7-96cd-f9c419f89419',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 3,
@@ -7960,7 +7960,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '936474ab-06c4-504d-b81b-fee3a1c616ac',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 3,
@@ -7974,7 +7974,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '80594b08-1171-5ac7-a0e8-240f98574f7c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 8,
@@ -7988,7 +7988,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7d2ecff9-4b22-5e75-b6d8-c4b0193f3954',
-        ingredientId: 'undefined',
+        ingredientId: '9c4ff58a-5537-5daf-9e7e-f7b25c512ac1',
         slug: 'vinegar',
         name: 'vinegar',
         quantity: 60,
@@ -8002,7 +8002,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0edfaf52-62dc-554e-99a5-e43d371cac58',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 60,
@@ -8016,7 +8016,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '04e33f22-df07-56cd-82f9-987a8322c8a8',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 2,
@@ -8030,7 +8030,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e8a1e92d-e53a-507e-9c7e-a20137be7ac6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -8122,7 +8122,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd5838565-9170-545b-9355-3c52b1461483',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 480,
@@ -8136,7 +8136,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e0af564-1935-5559-87ed-9a81b7065c7a',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 400,
@@ -8150,7 +8150,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '44a85bdd-feeb-57c7-99be-527282dbd348',
-        ingredientId: 'undefined',
+        ingredientId: '38e5db88-f285-5d22-b85d-3c6a25a39d6d',
         slug: 'pita-bread',
         name: 'pita bread',
         quantity: 2,
@@ -8164,7 +8164,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '309fb71c-709a-5182-98c9-32f795f2c90f',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -8178,7 +8178,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e4b49c3-0fca-5730-9c14-59087b6cb5b0',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 2,
@@ -8192,7 +8192,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd4127114-350d-5704-88c7-660c7b5d7fa4',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -8206,7 +8206,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cc39b9e3-bca1-59d9-9a57-457da7d7e27d',
-        ingredientId: 'undefined',
+        ingredientId: '60a87a1f-8328-5665-aaa8-3a292f89973e',
         slug: 'pine-nuts',
         name: 'pine nuts',
         quantity: 40,
@@ -8220,7 +8220,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e04c8994-7478-5da9-9840-2b24e2663d86',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 2,
@@ -8234,7 +8234,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '47d88bf8-4d02-574c-add1-12118b741f34',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -8313,7 +8313,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1c7716bf-55c0-549a-82ce-4a952efb2ff3',
-        ingredientId: 'undefined',
+        ingredientId: '38e5db88-f285-5d22-b85d-3c6a25a39d6d',
         slug: 'pita-bread',
         name: 'pita bread',
         quantity: 2,
@@ -8327,7 +8327,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd8516c63-c611-54e6-a93c-f11b0267fc24',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 1,
@@ -8341,7 +8341,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0b6add75-5c0a-584f-801a-ca2c8e62401e',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -8355,7 +8355,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8d2c8e0e-12f9-5a17-b783-18c36b77d5b2',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 2,
@@ -8369,7 +8369,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9be385bf-0743-5479-bc11-abf51e0c3d27',
-        ingredientId: 'undefined',
+        ingredientId: '7cbd0857-78d7-500f-85d8-a7fff0101843',
         slug: 'radish',
         name: 'radish',
         quantity: 5,
@@ -8383,7 +8383,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0096a93d-3c85-550b-940c-067d6a0a9502',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -8397,7 +8397,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8c1b797c-e67c-5dd6-8db8-c3e0b3e91e24',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 3,
@@ -8411,7 +8411,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '299a2897-8471-571f-899f-60c7fcf2c82a',
-        ingredientId: 'undefined',
+        ingredientId: 'e14c57c0-53b0-55c2-824b-94910dda15f7',
         slug: 'sumac',
         name: 'sumac',
         quantity: 2,
@@ -8425,7 +8425,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b84231f4-39d1-5cf3-9cec-18041654b5aa',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -8439,7 +8439,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1ebb6ee2-caf6-5735-a585-017ed163b959',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -8453,7 +8453,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3376844f-051b-5cd1-960d-c05c1dd869d2',
-        ingredientId: 'undefined',
+        ingredientId: 'a4f1b9f0-eab6-592e-9c1d-3733618701a8',
         slug: 'pomegranate-molasses',
         name: 'pomegranate molasses',
         quantity: 1,
@@ -8467,7 +8467,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2e6cb6ca-491f-539d-953a-1541a3279724',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -8546,7 +8546,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '801ad1a7-0004-5811-988a-268d7348f70c',
-        ingredientId: 'undefined',
+        ingredientId: 'f30b9211-c4bd-5f0c-9c3a-264b4d908839',
         slug: 'phyllo',
         name: 'filo pastry',
         quantity: 400,
@@ -8560,7 +8560,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '453c601c-76c2-542c-9f16-d7cd8b8593fe',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 120,
@@ -8574,7 +8574,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a59cf4b7-c2f6-53d9-be53-3fd17abcb7da',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 250,
@@ -8588,7 +8588,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b2e18965-6895-5e82-acd2-8055605e1547',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 150,
@@ -8602,7 +8602,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0197a6b8-e3b8-5e1e-8534-ba5e0bb6f770',
-        ingredientId: 'undefined',
+        ingredientId: '98288ac2-4169-590f-bbb2-70ce8cea11cb',
         slug: 'nigella',
         name: 'nigella seeds',
         quantity: 1,
@@ -8682,7 +8682,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'fa554766-f786-5609-8070-da993dcbab2b',
-        ingredientId: 'undefined',
+        ingredientId: 'b42074ec-d1c0-5417-85ea-33a22cb747df',
         slug: 'fava-beans',
         name: 'fava beans',
         quantity: 400,
@@ -8696,7 +8696,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '89965989-2390-5781-b26c-2448083a7411',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 3,
@@ -8710,7 +8710,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a08f04de-f874-56c2-8bbc-e1e1fe47fc75',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -8724,7 +8724,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e03a76c-67ab-5229-854e-84e4bde28569',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -8738,7 +8738,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ccc4b556-9e97-576c-af8c-be350937d00c',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -8752,7 +8752,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9bd2b518-fa91-54c1-92e7-b0a1d1830e66',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 2,
@@ -8766,7 +8766,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fc4f4c96-46eb-5976-bd0c-d4f8769d4c36',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 1,
@@ -8780,7 +8780,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '51930aad-7cb2-5921-9743-4654f722507e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -8860,7 +8860,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '0a6e4507-4a2f-53fe-9f30-53d718aae66e',
-        ingredientId: 'undefined',
+        ingredientId: 'b42074ec-d1c0-5417-85ea-33a22cb747df',
         slug: 'fava-beans',
         name: 'fava beans',
         quantity: 400,
@@ -8874,7 +8874,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a491db42-7ae1-5e4a-b3f3-946b860a7c53',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -8888,7 +8888,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c0ba403e-265a-57ed-92e5-f4a645dbbdc1',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 30,
@@ -8902,7 +8902,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4440757b-2782-5b10-806f-8c3e53ab6922',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -8916,7 +8916,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '180f3528-a15f-506e-a567-a33af5b298df',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -8930,7 +8930,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '698e308e-b91c-5072-9a12-e36c4a117e2a',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 2,
@@ -8944,7 +8944,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'af4f1144-f6e1-553d-a723-8db159f0052b',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 1,
@@ -8958,7 +8958,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1423c5ed-0424-5774-9d9b-9b93f9a97cd2',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -9052,7 +9052,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '93e02ea0-90fd-59e7-8718-546c02406c88',
-        ingredientId: 'undefined',
+        ingredientId: 'b42074ec-d1c0-5417-85ea-33a22cb747df',
         slug: 'fava-beans',
         name: 'fava beans',
         quantity: 400,
@@ -9066,7 +9066,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8083e15b-0537-50d7-812d-dd9959c735a4',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 30,
@@ -9080,7 +9080,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd1713569-ccde-5c3c-9321-bfec717f7ea9',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -9094,7 +9094,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e1f5db6-9258-5015-8836-2c36a262a1ba',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -9108,7 +9108,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd4c6acf7-04ce-5bca-96c4-9fc2dac961ab',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -9122,7 +9122,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be935f7a-a0ef-59be-a641-119913abc23f',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 2,
@@ -9200,7 +9200,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '6d1a3ab1-a325-50bb-b559-5dd070924d5a',
-        ingredientId: 'undefined',
+        ingredientId: '8a5babf4-d5f6-5b1b-9c80-c2a7f282ee77',
         slug: 'green-beans',
         name: 'green beans',
         quantity: 500,
@@ -9214,7 +9214,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e7ffc117-0cd1-5896-8c3b-bcd705b7f6d5',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -9228,7 +9228,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b8b5646f-6b49-51e5-965f-9a04ca2fc5d4',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -9242,7 +9242,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '74618788-2e9c-5601-8699-fb9b15171622',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -9256,7 +9256,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a6ec62a0-c77d-587d-80c8-7b5ca261f51d',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -9270,7 +9270,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '82b5d8c6-c655-56b0-aaab-373017c90897',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -9284,7 +9284,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a707916c-a294-5bed-8a51-d746ade051d8',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 1,
@@ -9354,7 +9354,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '25fe9d7f-2a3c-5b26-87c6-79a60da766c5',
-        ingredientId: 'undefined',
+        ingredientId: '5f45f2f3-a082-5836-8f14-c6356e2ca4e2',
         slug: 'beef-steak',
         name: 'beef steak',
         quantity: 450,
@@ -9368,7 +9368,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c2213e80-1465-534b-bc07-f3cdbe5a26ef',
-        ingredientId: 'undefined',
+        ingredientId: 'b08ffc55-817a-518c-8c67-5c9e99ca482c',
         slug: 'broccoli',
         name: 'broccoli',
         quantity: 400,
@@ -9382,7 +9382,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'df8771fe-53cd-58c7-b609-8bce88924a3c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -9396,7 +9396,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '588fdec1-cbf0-5d32-b391-acb299705c2d',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 30,
@@ -9410,7 +9410,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '185dd75d-252d-5518-95a1-4aa04de8bbdf',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 4,
@@ -9424,7 +9424,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6832cd27-683d-55a4-900e-e52f737f1df6',
-        ingredientId: 'undefined',
+        ingredientId: '72a9dc59-00ff-56eb-a001-1a339a073985',
         slug: 'cornflour',
         name: 'cornflour',
         quantity: 1,
@@ -9438,7 +9438,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6e962d55-eee5-5c1f-bac8-3df6af82dd13',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -9452,7 +9452,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e9e08dc-e8b3-5205-b8cc-bab82c32443f',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -9466,7 +9466,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '43398f9c-dc6b-5483-93ca-5f370fd9dd5a',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -9557,7 +9557,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'eab86c5a-4342-5c3a-9a87-425a090e7fcb',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 1,
@@ -9571,7 +9571,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '19d9fcce-2ff2-543d-9ce7-176550ace100',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 250,
@@ -9585,7 +9585,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2a7ad698-f702-522a-a603-6eedf0f3a0c1',
-        ingredientId: 'undefined',
+        ingredientId: '836d444f-b191-5935-8b0f-5f9243ac2817',
         slug: 'egg-yolk',
         name: 'egg yolks',
         quantity: 1,
@@ -9599,7 +9599,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e9952ed-0425-5bb6-acff-29bfd369cf4e',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 100,
@@ -9613,7 +9613,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bf0e4a0e-7f67-5860-889b-0a9d967543c6',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 60,
@@ -9627,7 +9627,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '686db424-2ba7-508e-8835-a8aed707e34a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -9641,7 +9641,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de99b1f4-6ffe-5937-8649-cc2241479922',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -9732,7 +9732,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2210572b-1ef9-5c23-93ec-2ab726a4cc9e',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -9746,7 +9746,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4964ca14-e898-5953-b4f9-c285ee097a92',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -9760,7 +9760,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bf835755-9aba-57cc-8952-3a3779cddfe1',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -9774,7 +9774,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd426b0f6-f75b-548b-b06e-714a76f85b59',
-        ingredientId: 'undefined',
+        ingredientId: '804bb65b-4972-5597-8b96-9c9d904eb0d9',
         slug: 'olives',
         name: 'olives',
         quantity: 80,
@@ -9788,7 +9788,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '52f6bb44-2e47-5e3e-86b5-7431deeec1c6',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 200,
@@ -9802,7 +9802,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ed4e6c86-edfa-5555-b380-3e273401a583',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 2,
@@ -9816,7 +9816,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c836ec70-2725-57b7-95be-45f94b3b8609',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 5,
@@ -9830,7 +9830,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c1b6f50f-a5dd-55b9-ae7e-1387d5a3596c',
-        ingredientId: 'undefined',
+        ingredientId: '9c4ff58a-5537-5daf-9e7e-f7b25c512ac1',
         slug: 'vinegar',
         name: 'vinegar',
         quantity: 1,
@@ -9844,7 +9844,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'edf72a82-eae4-5fcf-a9ed-db78506f699d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -9913,7 +9913,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '070cbf12-3718-593f-949f-3828b0ba389e',
-        ingredientId: 'undefined',
+        ingredientId: '2c9476d9-e5a4-56f7-849c-7ef90a79ab60',
         slug: 'sea-bream',
         name: 'sea bream',
         quantity: 2,
@@ -9927,7 +9927,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '66e1b61e-9c48-5fa3-b71a-8aad6b318199',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -9941,7 +9941,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9565e730-cbe8-5200-aa18-2f56406e428a',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -9955,7 +9955,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '441fa78b-3307-5fd8-bc10-ddbf0274cc5a',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -9969,7 +9969,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '10de1f1f-692b-5443-b27f-3a130ccc9f39',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -9983,7 +9983,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e3abf04-ae2b-538f-b331-dc4306ae36f5',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -9997,7 +9997,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f156d86-0b41-5f91-8bdb-227ce7c5fee9',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -10078,7 +10078,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ac97fb2c-d150-5b32-86d7-4446af494ec6',
-        ingredientId: 'undefined',
+        ingredientId: 'f3defe72-4661-5cce-8c0e-79dc298214d2',
         slug: 'avocado',
         name: 'avocado',
         quantity: 3,
@@ -10092,7 +10092,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5815c0a6-39f7-5b33-b742-27193323f299',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -10106,7 +10106,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e58e8f46-8894-5a2e-a197-863db209bb1d',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.25,
@@ -10120,7 +10120,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '13cfed75-aa2a-5402-b50d-9e3bf334ab7d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 1,
@@ -10134,7 +10134,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '539589f9-a199-5391-8874-a04de1db213f',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -10148,7 +10148,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '16552a79-23cd-5cd0-baa4-72d4295d8da3',
-        ingredientId: 'undefined',
+        ingredientId: '17c794db-92ee-54f2-9083-58f18bbb3774',
         slug: 'chili-pepper',
         name: 'chili pepper',
         quantity: 1,
@@ -10162,7 +10162,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '468432e5-8f7d-5043-9b8b-778ca65f3069',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -10231,7 +10231,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '539f944b-38d6-58c5-8df9-a6d510c17cca',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 4,
@@ -10245,7 +10245,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e62f0690-42b6-59c7-aa01-d87a5bbabfd5',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 500,
@@ -10259,7 +10259,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8018bd15-a85f-5116-85c7-17102e1ad3e8',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -10273,7 +10273,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2e668130-f018-5c8b-b416-110f4848a602',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -10287,7 +10287,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1259a971-7768-5456-bbc8-bd0551d83421',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -10301,7 +10301,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c7f909a7-5b3e-58fa-9e3d-ac8684de09fa',
-        ingredientId: 'undefined',
+        ingredientId: '17c794db-92ee-54f2-9083-58f18bbb3774',
         slug: 'chili-pepper',
         name: 'chili pepper',
         quantity: 1,
@@ -10315,7 +10315,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7afdccaf-ffde-54cf-a595-f9dbabbca457',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -10329,7 +10329,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '930aa343-30a4-5ede-bbc2-888183477487',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -10343,7 +10343,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '18375a02-7f2c-5466-878a-0bebcf803e84',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -10434,7 +10434,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'fdd02d25-acae-5acc-97fd-b7635b652892',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 3,
@@ -10448,7 +10448,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b288a4e3-105e-559d-ad3b-fab3d520482f',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 60,
@@ -10462,7 +10462,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c114d6d5-5902-5dc3-977f-90eeb9d90441',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 1,
@@ -10476,7 +10476,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae99e444-4992-5454-b353-5bbc605465f9',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 1,
@@ -10490,7 +10490,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd43f5900-4755-5f7f-a03f-de58b83d985d',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 15,
@@ -10504,7 +10504,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f4a8486-ffbc-5be6-ab57-351b17a39386',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.25,
@@ -10518,7 +10518,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '81edf6c6-b39f-551d-96a9-9ac88c0a187c',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 0.25,
@@ -10596,7 +10596,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '130c115d-cb96-50c9-8bb1-4936fa243098',
-        ingredientId: 'undefined',
+        ingredientId: 'b70dc41b-b703-561c-b79f-760d9dd98422',
         slug: 'tortilla',
         name: 'tortilla',
         quantity: 2,
@@ -10610,7 +10610,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '049b84fd-6488-5ba1-acf0-c68876bfe467',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -10624,7 +10624,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3c976aec-09c1-5fd2-a214-827fb63c1255',
-        ingredientId: 'undefined',
+        ingredientId: '1bfd2e36-1e4e-584e-8a7b-8af0913707fb',
         slug: 'kidney-beans',
         name: 'kidney beans',
         quantity: 400,
@@ -10638,7 +10638,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '00040151-34f7-550a-b5cb-71dfbf28749e',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -10652,7 +10652,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '451f0746-c1c2-5748-ad45-40a4dc9393ad',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -10666,7 +10666,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd8777d7-67ce-588d-b809-f71a22973314',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -10680,7 +10680,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5f5c5455-86e1-5926-8f41-323c9e388213',
-        ingredientId: 'undefined',
+        ingredientId: 'd442863d-1403-58eb-9144-9f39fe485618',
         slug: 'chili-powder',
         name: 'chili powder',
         quantity: 1,
@@ -10694,7 +10694,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '11796d32-90ee-5cde-b986-1156a20fb9ed',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -10708,7 +10708,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '73c4e7b5-3189-5aa6-96a3-a47ddb18faf6',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -10722,7 +10722,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '50637788-2444-581f-b67a-24d90a061fc2',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -10736,7 +10736,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f1982cc9-106d-5166-a589-541cd9c42e0e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -10825,7 +10825,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '91dd557c-11fb-5e7b-812c-1c9a757f3843',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 480,
@@ -10839,7 +10839,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7d7ee4dc-dba3-52ed-9737-3b3e82ae68e8',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 90,
@@ -10853,7 +10853,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '877fafed-c9af-54fa-814b-74b48f80eb8c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -10867,7 +10867,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1352a4cb-6d4b-5e8d-ac2a-5541aecd62b4',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -10881,7 +10881,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '447c7a98-6c4b-5a72-8ea5-47a039ce3809',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -10895,7 +10895,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b6b8967e-1245-58d8-91a5-bcd2b394636c',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -10909,7 +10909,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '83a82f8b-3da5-5dc3-b60e-d956f710c984',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -10923,7 +10923,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f628e559-20ab-5438-98e2-a14a659e4ff2',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 0.5,
@@ -11006,7 +11006,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'db19d73f-d3be-500f-b56a-c787c2f98283',
-        ingredientId: 'undefined',
+        ingredientId: '91b4a320-ff6e-5600-b87f-51be146f4889',
         slug: 'beef-cubes',
         name: 'beef cubes',
         quantity: 800,
@@ -11020,7 +11020,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '67fbd1a6-c847-5a95-a617-84b0b4fca193',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 3,
@@ -11034,7 +11034,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '33723cf2-e52a-5d8d-8f53-af1e0f2b460e',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 60,
@@ -11048,7 +11048,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8d0c8c4a-2251-52fa-a9ac-09bbf2276593',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -11062,7 +11062,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f2668c39-387f-594b-8d7e-60c6c24d32f6',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 2,
@@ -11076,7 +11076,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '798c49c9-5927-592d-93fc-3f60f64eb33b',
-        ingredientId: 'undefined',
+        ingredientId: '38932f4b-eeef-5ea6-bb8d-73ed8c6908bc',
         slug: 'cardamom',
         name: 'cardamom',
         quantity: 3,
@@ -11090,7 +11090,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a6438920-5cbd-556d-b965-981961f0ede9',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -11104,7 +11104,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '74525183-2bc1-5776-afce-05e291b6c100',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -11185,7 +11185,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'f2f7b526-8043-5dfe-b0c6-69dc8bf17bb4',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 600,
@@ -11199,7 +11199,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07501540-0e0a-5976-aa4f-ff04fb799fbe',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -11213,7 +11213,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db7cb748-d118-548c-b0a9-c304ef59549d',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -11227,7 +11227,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6f963c76-f780-5022-b99c-9e7831b99f21',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 4,
@@ -11241,7 +11241,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dccf7a00-0b5f-57a5-a701-925b3a269c84',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -11255,7 +11255,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c5ae9072-5ae5-54db-9f19-7ee69204cc8c',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -11269,7 +11269,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9a03c714-20a9-547b-a031-d418e4bf1d6f',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -11283,7 +11283,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1368ee0f-7a21-53aa-8a15-8e366ce0598f',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -11297,7 +11297,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '08a7b16e-e949-5a30-abb3-9cb1dd1f8a4f',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -11311,7 +11311,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '53472b0f-aea9-5ed6-b3e5-03a22c430970',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -11401,7 +11401,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '97c3561f-e4ad-54b3-b800-9fcb4fefe77e',
-        ingredientId: 'undefined',
+        ingredientId: '4ec6c756-782a-5827-9afe-6cf7162ee36f',
         slug: 'bulgur',
         name: 'bulgur',
         quantity: 400,
@@ -11415,7 +11415,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e100a12f-2f37-5893-ba42-ad58dd409aa5',
-        ingredientId: 'undefined',
+        ingredientId: 'a0b111f9-f84e-5d50-8f64-f6c5d9829653',
         slug: 'lamb',
         name: 'lamb',
         quantity: 600,
@@ -11429,7 +11429,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7b6d0464-7a26-5740-90e2-c5852587e04e',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -11443,7 +11443,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3e3879dc-6930-5955-b993-66bf3431c9bc',
-        ingredientId: 'undefined',
+        ingredientId: '60a87a1f-8328-5665-aaa8-3a292f89973e',
         slug: 'pine-nuts',
         name: 'pine nuts',
         quantity: 60,
@@ -11457,7 +11457,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '96dc7f93-ff03-5950-808e-567d07a5915f',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -11471,7 +11471,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cb128d0b-3cf3-5a10-928d-6c3501d4d6e6',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -11485,7 +11485,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f83e3b48-ae6d-58a6-8d8e-2b75839f57d4',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 80,
@@ -11499,7 +11499,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ef69740e-f81e-577b-9f57-e29466f10192',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -11513,7 +11513,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ab584c2e-1b03-57d4-823f-c940ae573e4a',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -11605,7 +11605,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '30e194a7-4e5b-5537-a869-2a40fa41b526',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -11619,7 +11619,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '729ba456-4647-5343-8ef1-065eade98864',
-        ingredientId: 'undefined',
+        ingredientId: '2a5746f8-a258-559b-8bf5-67e2a1f0bdb8',
         slug: 'cabbage',
         name: 'cabbage',
         quantity: 300,
@@ -11633,7 +11633,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '85e65ed3-4469-5f4b-8465-600e97d33357',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -11647,7 +11647,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4a1b5fa4-aef2-591c-8e19-fa8d09adc672',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -11661,7 +11661,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6df9d7e7-b53a-5d1d-8564-368d53e4806e',
-        ingredientId: 'undefined',
+        ingredientId: 'b469340f-fa3b-5b05-9b91-d37774ef9e10',
         slug: 'hot-sauce',
         name: 'hot sauce',
         quantity: 2,
@@ -11675,7 +11675,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b690183d-71a0-5eeb-8e9f-3b6965742e81',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -11689,7 +11689,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7f1ebb94-7efb-54c7-8a58-b0d95a420a61',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -11703,7 +11703,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0cd2d115-1119-543f-9e8f-e2a4287981c1',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -11717,7 +11717,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6256edf5-0fc1-5899-b1b9-28c03307ef11',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 2,
@@ -11799,7 +11799,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '668db678-8b3b-580c-83f6-1d3c7e1ed71e',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 600,
@@ -11813,7 +11813,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fdf9cf27-55ea-5e01-9063-10df33beda8a',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -11827,7 +11827,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '05fc098d-b437-50bd-bc42-21df43424b46',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -11841,7 +11841,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ac77b743-eeda-5647-a14f-7642d5d55cb4',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 3,
@@ -11855,7 +11855,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bd2b555b-caea-5856-a233-bcc76640485d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -11869,7 +11869,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e75b037a-a7c8-5109-992c-691887987608',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -11883,7 +11883,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2c96ca7b-ce9b-5091-8917-69cc3c4b8b76',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -11897,7 +11897,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bdd7e9ae-15b2-587a-90ee-6015add600c5',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -11911,7 +11911,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c21e2c8c-c77c-5011-8537-31c37db49a96',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 40,
@@ -12010,7 +12010,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1c7416c2-f26c-5fdf-b2e7-7921b1295a8b',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 300,
@@ -12024,7 +12024,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a4b7e701-0f01-543f-b209-c0e9e11f621a',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 200,
@@ -12038,7 +12038,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6d10514d-1446-5a82-b547-6ae3d1dcc70c',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 150,
@@ -12052,7 +12052,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '371be2b1-b4fb-5e57-a4b7-5eaac8dfbc7e',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 3,
@@ -12066,7 +12066,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b8a0116d-a9dc-5167-9343-fcf2d7134a17',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 3,
@@ -12080,7 +12080,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '52d188ea-e82e-5b16-9719-01266b3cfbe4',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -12094,7 +12094,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '20d7665f-07e6-57e7-8cc6-d8666e5d43af',
-        ingredientId: 'undefined',
+        ingredientId: '9c4ff58a-5537-5daf-9e7e-f7b25c512ac1',
         slug: 'vinegar',
         name: 'vinegar',
         quantity: 30,
@@ -12108,7 +12108,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '13d60827-6bf1-53c3-bcee-be229ede7ae8',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -12122,7 +12122,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '264e8d8b-31e8-5c06-a1d1-47947f0e2274',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 120,
@@ -12136,7 +12136,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0414bc6a-b659-54dd-ab1d-a9dc2b357996',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 150,
@@ -12150,7 +12150,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a2f955f9-6011-5bcd-8e7e-b8ab20446577',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -12258,7 +12258,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2ac46ffa-a9ba-5c06-a589-9f201b239dc5',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 200,
@@ -12272,7 +12272,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '057a8e0d-a7df-5b58-ab80-1d97ca3db86a',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 300,
@@ -12286,7 +12286,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '94b49b37-c44e-518b-a62b-920d3033bd44',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 3,
@@ -12300,7 +12300,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd5864bb4-e088-5182-9d91-678d58f85f4c',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -12314,7 +12314,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c1bafb51-d223-5b07-bcff-6ae72c2704ae',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 100,
@@ -12328,7 +12328,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '08de3acc-fe43-59c1-bff8-3496467f1f94',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -12419,7 +12419,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'db5f6a36-bf47-5dbb-8ea5-408a45650064',
-        ingredientId: 'undefined',
+        ingredientId: 'f30b9211-c4bd-5f0c-9c3a-264b4d908839',
         slug: 'phyllo',
         name: 'filo pastry',
         quantity: 500,
@@ -12433,7 +12433,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '706f8378-e692-5b7a-91ca-79fef3c5ad60',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 400,
@@ -12447,7 +12447,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '28f39e9f-7e86-5a00-8971-b32b74a24bb3',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 200,
@@ -12461,7 +12461,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8a5fd0b0-a70b-592a-8c32-db01a94f6ea9',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 180,
@@ -12475,7 +12475,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0ce50dcc-9f6a-5279-88ea-29fdad86305b',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 350,
@@ -12489,7 +12489,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4cfd6c3d-2b9c-5041-a1bb-4b8aafd1a887',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 0.5,
@@ -12503,7 +12503,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '06aa24b9-77de-5cc4-a4cb-fd07dd5d1a87',
-        ingredientId: 'undefined',
+        ingredientId: '0b3fe32c-136e-57da-a26f-857da4b58c47',
         slug: 'rose-water',
         name: 'rose water',
         quantity: 1,
@@ -12517,7 +12517,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1c47b1ca-e960-57c7-a4a2-dd6814edab4c',
-        ingredientId: 'undefined',
+        ingredientId: '0ee00d5a-d5c5-50cb-ad34-95ff6fb8be4b',
         slug: 'pistachios',
         name: 'pistachios',
         quantity: 40,
@@ -12609,7 +12609,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e7581713-8e3c-5a1a-a485-0abc1daa6979',
-        ingredientId: 'undefined',
+        ingredientId: '0fd7b795-27e6-535c-a6c9-ee3ec974db10',
         slug: 'labneh',
         name: 'labneh',
         quantity: 250,
@@ -12623,7 +12623,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f1d0937-2a13-50c2-9eea-c2b74f89ba36',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -12637,7 +12637,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5861035f-63a1-599a-acf1-88b750598a23',
-        ingredientId: 'undefined',
+        ingredientId: 'feed5445-7974-5a39-b323-c91c932226ff',
         slug: 'thyme-dried',
         name: 'thyme',
         quantity: 2,
@@ -12651,7 +12651,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b3290f0e-deab-5139-89af-3a00072a4e56',
-        ingredientId: 'undefined',
+        ingredientId: '804bb65b-4972-5597-8b96-9c9d904eb0d9',
         slug: 'olives',
         name: 'olives',
         quantity: 40,
@@ -12665,7 +12665,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '16e97fe3-197b-5500-b073-e6d2478a080c',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -12679,7 +12679,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '00516576-d505-5e75-9dce-d6b418cf0576',
-        ingredientId: 'undefined',
+        ingredientId: '38e5db88-f285-5d22-b85d-3c6a25a39d6d',
         slug: 'pita-bread',
         name: 'pita bread',
         quantity: 2,
@@ -12748,7 +12748,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '77289705-a0c8-542e-ada5-3436dbb74c98',
-        ingredientId: 'undefined',
+        ingredientId: 'a0b111f9-f84e-5d50-8f64-f6c5d9829653',
         slug: 'lamb',
         name: 'lamb',
         quantity: 800,
@@ -12762,7 +12762,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c522f4e5-cae3-5272-9623-689175ef6e19',
-        ingredientId: 'undefined',
+        ingredientId: '633de6f0-a44f-51f6-9137-2cabff8d7639',
         slug: 'freekeh',
         name: 'freekeh',
         quantity: 400,
@@ -12776,7 +12776,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cf1661ca-617c-51c9-921e-95e2a8745432',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -12790,7 +12790,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a0b50bde-eb36-56fa-a988-4e0f446149cb',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -12804,7 +12804,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e4fd3792-72e1-520c-9ffb-eef974e373ba',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -12818,7 +12818,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e5c1e277-a30d-59a9-8b17-3a63165151b5',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 60,
@@ -12832,7 +12832,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7277e0a6-dbe6-59db-b483-9da8c50353ba',
-        ingredientId: 'undefined',
+        ingredientId: '34af8120-6d67-58e6-aad4-b346bef1706a',
         slug: 'almonds',
         name: 'almonds',
         quantity: 60,
@@ -12846,7 +12846,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29e662cb-d6ef-5fae-b566-0c0a0e195765',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 2,
@@ -12860,7 +12860,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '70d8d586-2f62-5dbe-9da8-674daf846da6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -12941,7 +12941,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '5aedd314-2203-55d3-b8bf-7d0dbdd6d7f2',
-        ingredientId: 'undefined',
+        ingredientId: '2a02a532-0bbc-5ff2-8865-b36dd27c6890',
         slug: 'lasagne-sheets',
         name: 'lasagne sheets',
         quantity: 350,
@@ -12955,7 +12955,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7fcab8d5-11da-5265-b5d6-a0b7ad6749dd',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 600,
@@ -12969,7 +12969,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aec3105a-8388-515e-8726-951587fa51ef',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 6,
@@ -12983,7 +12983,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e7084a1f-56d4-5d7d-b701-7c64a9407dd5',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -12997,7 +12997,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b4366618-4625-558c-9019-4b50c25cb099',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -13011,7 +13011,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9b0f8a86-6a7f-5ae6-bcc3-8623e6676296',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -13025,7 +13025,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2d4665e1-d230-51ec-930f-0bf1301143ca',
-        ingredientId: 'undefined',
+        ingredientId: 'f25cd75f-32d4-5223-b318-7f60e5c7dbff',
         slug: 'celery',
         name: 'celery',
         quantity: 1,
@@ -13039,7 +13039,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5ad1e39a-5101-56f7-8868-e7b584e2c2ba',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 800,
@@ -13053,7 +13053,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c569ef5b-3969-5133-b54f-7b6b3802f079',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 70,
@@ -13067,7 +13067,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b991e4d5-2dfe-517f-b904-d58c636a7b5f',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 70,
@@ -13081,7 +13081,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '482b9168-e918-5325-9c76-49205a4e0003',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 80,
@@ -13095,7 +13095,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '403ae9ed-ee6e-520a-9358-812b383a11b0',
-        ingredientId: 'undefined',
+        ingredientId: '489af5ea-b8c1-5000-bb16-3617719130fa',
         slug: 'nutmeg',
         name: 'nutmeg',
         quantity: 0.5,
@@ -13109,7 +13109,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '49a4f73e-d767-5b0c-86b3-a5f6b7ef619f',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -13123,7 +13123,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3745c86d-a3c5-5503-a0ce-e07e746c20fb',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -13224,7 +13224,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '41687fce-0043-5a19-9785-56c0f7c8da89',
-        ingredientId: 'undefined',
+        ingredientId: '459b4571-2c39-5fe5-b0a1-104cf078db65',
         slug: 'couscous',
         name: 'couscous',
         quantity: 300,
@@ -13238,7 +13238,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '560a9f8b-9c6f-5571-b1b7-47d9e8689fab',
-        ingredientId: 'undefined',
+        ingredientId: '34af8120-6d67-58e6-aad4-b346bef1706a',
         slug: 'almonds',
         name: 'almonds',
         quantity: 60,
@@ -13252,7 +13252,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6e28cf8b-d3cc-5fea-a456-9e856edad003',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -13266,7 +13266,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6aced25d-0bb5-5ae7-9441-7f587b8d4d4c',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 3,
@@ -13280,7 +13280,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0223b8bf-8b59-5586-bd9d-806b8f154d09',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -13294,7 +13294,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f56e9763-a07f-5ac3-8457-02f4c29c9b04',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -13308,7 +13308,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '59436c0d-9f74-508f-9c6b-b4a68c0f7739',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -13322,7 +13322,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b445c190-0308-5181-bc83-bd3b2b710c1a',
-        ingredientId: 'undefined',
+        ingredientId: 'd87c81b9-8e1d-5374-8183-b84ff0f17544',
         slug: 'raisins',
         name: 'raisins',
         quantity: 40,
@@ -13336,7 +13336,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6e8e4950-c0f5-5e1d-ad4b-a0233ee8e32a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -13414,7 +13414,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '121f0242-d445-5089-b3a4-849a9340a2a2',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 250,
@@ -13428,7 +13428,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '76aa8acc-ddf3-5232-877b-9a26cce0c92c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -13442,7 +13442,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b8be9148-2a27-5d72-86b1-99f8dca03583',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -13456,7 +13456,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1f126fde-01a3-5141-804a-580fae56cf96',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -13470,7 +13470,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fd194498-1cc5-5df7-860c-01b3c6fb5a7c',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 1,
@@ -13484,7 +13484,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4c551c8b-90fe-5cab-b5f4-0d759b68c830',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -13498,7 +13498,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4b34921a-b8e5-59ce-8358-e59fab97bd53',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -13512,7 +13512,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9bbb21cd-dbbf-5caa-b854-8b397425de46',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -13526,7 +13526,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e261bf43-2206-5a04-938a-1f04bec8f08c',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -13604,7 +13604,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c37e98eb-a755-5220-82a5-c49c0497c604',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 250,
@@ -13618,7 +13618,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd40ba24-d373-589d-b876-351dd9b07433',
-        ingredientId: 'undefined',
+        ingredientId: '781128dc-5989-5b4e-b363-a183808a68de',
         slug: 'spinach',
         name: 'spinach',
         quantity: 250,
@@ -13632,7 +13632,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e8425a41-f64c-5e99-876c-4c212df48b71',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -13646,7 +13646,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '446a1111-6250-5952-bf0a-470b8bf1116d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -13660,7 +13660,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'af9c3e1d-8251-5197-a473-ea745a78cb79',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 20,
@@ -13674,7 +13674,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5491485d-e5fe-50e2-a04f-d27852643cea',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 1,
@@ -13688,7 +13688,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '88619321-ee36-5a4f-86ae-1c16b085ded8',
-        ingredientId: 'undefined',
+        ingredientId: 'a18c7b0c-1711-5f07-920f-3f7101294ac2',
         slug: 'coconut-milk',
         name: 'coconut milk',
         quantity: 150,
@@ -13702,7 +13702,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e6cf301d-f3c2-5e34-b8c9-e61ba35df040',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -13716,7 +13716,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aa48f421-c2e4-5601-beb9-3973bb3bd59c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -13730,7 +13730,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '412e1636-ef44-58a4-b409-9ec15ba91614',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -13810,7 +13810,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'a6fb8878-a352-5617-ba65-e16f1f1d7ab7',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 450,
@@ -13824,7 +13824,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4250a6b5-5304-5b54-9997-e792553bb08f',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 250,
@@ -13838,7 +13838,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e352b07-39be-51cc-90dd-dc8dc45702d6',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 150,
@@ -13852,7 +13852,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '50c1db60-8896-5425-a33f-001bc50a2c8b',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 60,
@@ -13866,7 +13866,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0a325a36-e9a6-5a07-b836-0e87b3c66fed',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 700,
@@ -13880,7 +13880,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3556dfa8-e0d5-5e13-a997-b97b112e1cf9',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 60,
@@ -13894,7 +13894,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6a3f57aa-7862-5c34-99c4-e1b192c837af',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 60,
@@ -13908,7 +13908,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3ee756cd-7b2f-5cbd-a555-945cac451856',
-        ingredientId: 'undefined',
+        ingredientId: '99aa380c-5bae-56ef-a4aa-1dad274fc11f',
         slug: 'breadcrumbs',
         name: 'breadcrumbs',
         quantity: 60,
@@ -13922,7 +13922,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e258c5b8-0121-51ee-b5fa-f3a12e646eed',
-        ingredientId: 'undefined',
+        ingredientId: '167c646a-986c-5286-bed5-80e1c6bca1f2',
         slug: 'mustard',
         name: 'mustard',
         quantity: 1,
@@ -13936,7 +13936,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '68d05a4e-6908-546e-a09c-83e6ae842a34',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -13950,7 +13950,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7a108877-9041-5872-a309-4513986daea0',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -14040,7 +14040,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e34ac362-2773-57eb-8d9b-64fdbb38c389',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 500,
@@ -14054,7 +14054,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '44e8e5b3-4f01-52bd-b304-83a37d7c20db',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 500,
@@ -14068,7 +14068,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '91dcb795-4857-5cc6-b088-a626e712fc2b',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -14082,7 +14082,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '98308a13-fed6-5fd3-83cb-05b099cc244c',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -14096,7 +14096,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bd4586e5-df88-5d88-8a9c-2d2bc014bb3d',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 80,
@@ -14110,7 +14110,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6137345e-d276-5b18-abdd-38d3cd89f262',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 80,
@@ -14124,7 +14124,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1dfe54ed-6f7d-53d9-9d88-758f41356e41',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 1,
@@ -14138,7 +14138,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6eee5d3e-f3a1-50de-9f95-b99871abf021',
-        ingredientId: 'undefined',
+        ingredientId: '489af5ea-b8c1-5000-bb16-3617719130fa',
         slug: 'nutmeg',
         name: 'nutmeg',
         quantity: 0.5,
@@ -14152,7 +14152,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f0a8c7a-7836-56be-84ce-7cc71dc2b0ad',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -14166,7 +14166,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a610924d-37b3-54f2-aab7-3b6ab587ec41',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -14261,7 +14261,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '3e9c7ed2-66b3-5df3-83fa-7363efc97e50',
-        ingredientId: 'undefined',
+        ingredientId: '2a5746f8-a258-559b-8bf5-67e2a1f0bdb8',
         slug: 'cabbage',
         name: 'cabbage',
         quantity: 1,
@@ -14275,7 +14275,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '735a1b8d-0084-554b-84f0-0f75850dcea4',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -14289,7 +14289,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f30c8b6b-1590-5fe4-9bd3-2554ce7c7c54',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -14303,7 +14303,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cd624c8b-31bb-538d-9b68-ea265d11d560',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -14317,7 +14317,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd40c265e-1089-5854-8332-573bca74f58f',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 1,
@@ -14331,7 +14331,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '41891122-a123-5724-b9f1-f27c4a899625',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -14345,7 +14345,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a3f6b746-8748-5172-9f2d-1aa2b04af246',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -14359,7 +14359,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e88c636-83aa-5c97-bfa2-f9dca59e81f9',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 60,
@@ -14373,7 +14373,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bc770c4c-9937-5dfa-9373-899f4738110a',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -14387,7 +14387,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1996a5f1-414f-5944-a533-d78598109ebd',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -14401,7 +14401,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '31b0a17c-b930-5d14-b109-d910a59fc817',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -14516,7 +14516,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '52cfa26e-35aa-52e6-84be-e003b5e60efd',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 500,
@@ -14530,7 +14530,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ddf41cbe-8b04-596d-856e-b1b6adc8eb5d',
-        ingredientId: 'undefined',
+        ingredientId: '0582d882-4c5d-52e7-9099-6e635915100e',
         slug: 'yeast',
         name: 'yeast',
         quantity: 7,
@@ -14544,7 +14544,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6b304f92-a0e0-5f40-838b-d25964c8af5e',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 1,
@@ -14558,7 +14558,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e5522e2-4de3-524b-bf87-f8865d6e3ff1',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -14572,7 +14572,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aa6dcda1-ee35-5b2d-b151-e930da8c73bd',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 120,
@@ -14586,7 +14586,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '09e1da45-a6ac-55a9-b318-5f5a1954a231',
-        ingredientId: 'undefined',
+        ingredientId: 'feed5445-7974-5a39-b323-c91c932226ff',
         slug: 'thyme-dried',
         name: 'thyme',
         quantity: 6,
@@ -14600,7 +14600,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0be270af-71cd-5d48-80ed-fc67fa517f81',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 2,
@@ -14614,7 +14614,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2ba0c180-1b7f-517b-8a97-d28c9aa44629',
-        ingredientId: 'undefined',
+        ingredientId: 'e14c57c0-53b0-55c2-824b-94910dda15f7',
         slug: 'sumac',
         name: 'sumac',
         quantity: 1,
@@ -14705,7 +14705,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '002cf341-9e86-506d-9347-1794c535529a',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 250,
@@ -14719,7 +14719,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a969b5d2-922e-59ce-a776-53f2efdd3b39',
-        ingredientId: 'undefined',
+        ingredientId: 'a18c7b0c-1711-5f07-920f-3f7101294ac2',
         slug: 'coconut-milk',
         name: 'coconut milk',
         quantity: 300,
@@ -14733,7 +14733,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5f5ee029-4e1f-5b6d-9dbb-36da27f42d93',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 80,
@@ -14747,7 +14747,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fcaa04df-f70c-5a2d-a190-de694ffae084',
-        ingredientId: 'undefined',
+        ingredientId: 'f22a9a7d-76b2-5a91-be55-51304d813075',
         slug: 'mango',
         name: 'mango',
         quantity: 2,
@@ -14761,7 +14761,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8fd37388-b0da-5705-8a12-c2c0e926fde6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -14775,7 +14775,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4479ed95-ceca-51a3-b14d-8cd60433521a',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 1,
@@ -14856,7 +14856,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e7bbd788-4b15-5b09-840f-756b47d472ec',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 800,
@@ -14870,7 +14870,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bbaf6c50-5c49-5a8a-b795-7e4e033616b4',
-        ingredientId: 'undefined',
+        ingredientId: 'cd49b1fa-b192-5748-87c2-1ba3433bd02e',
         slug: 'eggplant',
         name: 'eggplant',
         quantity: 2,
@@ -14884,7 +14884,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fc28b772-74c9-5651-96f3-26d38a65885c',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 450,
@@ -14898,7 +14898,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f9ec1fb8-f75f-5e92-8d2b-4f7cb76a7c0f',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -14912,7 +14912,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f706782c-5367-5988-ba0f-2d4f50f72c2c',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -14926,7 +14926,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '20cdd579-4cd0-5586-81f4-933b21c3253e',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 1,
@@ -14940,7 +14940,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eb9bf449-733e-573b-8afb-000ede11b06d',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -14954,7 +14954,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '207f00d6-764a-5694-8835-64e36e857cb3',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 100,
@@ -14968,7 +14968,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c721a659-f803-5f0d-9ac6-3bfb7777b16f',
-        ingredientId: 'undefined',
+        ingredientId: '60a87a1f-8328-5665-aaa8-3a292f89973e',
         slug: 'pine-nuts',
         name: 'pine nuts',
         quantity: 40,
@@ -14982,7 +14982,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '88897d33-2695-55ea-a7da-0ce172521b51',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -15074,7 +15074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '9e63542d-a1ad-5820-8535-e5036bf441a3',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 300,
@@ -15088,7 +15088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7c3af79d-5930-53cb-ad7d-f508e48c3bf7',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 2,
@@ -15102,7 +15102,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5d05e577-4c65-5c49-a954-77b7d66ee6ef',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 200,
@@ -15116,7 +15116,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f14aebb-71d7-54e0-ac54-b8c9026f15c9',
-        ingredientId: 'undefined',
+        ingredientId: '19bc7acd-f4cd-5aa4-9934-0e3bee41439b',
         slug: 'tomato-sauce',
         name: 'tomato sauce',
         quantity: 150,
@@ -15130,7 +15130,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd26477a8-44f3-5fa1-a9c4-1536595cd24c',
-        ingredientId: 'undefined',
+        ingredientId: '65985480-861f-533c-b9a1-8d8a53af28fd',
         slug: 'mozzarella',
         name: 'mozzarella',
         quantity: 200,
@@ -15144,7 +15144,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f361a680-6c7f-5f44-8878-242a5b6888fc',
-        ingredientId: 'undefined',
+        ingredientId: '16a27abe-5658-5d31-91f2-45f2ef055243',
         slug: 'basil',
         name: 'basil',
         quantity: 10,
@@ -15158,7 +15158,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2e6dee99-2e71-5952-9fee-7b17b3dc9245',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -15172,7 +15172,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ab8404c7-67df-5015-a8d0-51b7dfaf09cd',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -15252,7 +15252,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '38d85ba5-b967-5f76-ba1c-9d749de6ca16',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -15266,7 +15266,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de6c1eaa-b9fa-51d2-9e75-241b36a747c2',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -15280,7 +15280,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e0467fc-b867-5b0d-85dd-1e9cca872800',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 1,
@@ -15294,7 +15294,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '01b22fcd-364a-57f6-bcfb-de85c8dd3d82',
-        ingredientId: 'undefined',
+        ingredientId: '17c794db-92ee-54f2-9083-58f18bbb3774',
         slug: 'chili-pepper',
         name: 'chili pepper',
         quantity: 1,
@@ -15308,7 +15308,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de2ccad8-5223-5283-b63e-deeeb065bdd5',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -15322,7 +15322,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a62bf021-9b7c-53f2-9dc0-3243355738b1',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 0.25,
@@ -15336,7 +15336,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b22395d7-cd2a-5917-af0d-e4e26fa56860',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 0.5,
@@ -15350,7 +15350,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9c77d179-72c8-581a-9682-8bc34dd26ec4',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -15364,7 +15364,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4346671b-43c5-551c-a8ab-0995da6c48cb',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -15443,7 +15443,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '8062ec5c-d906-5700-b875-192317c1b698',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -15457,7 +15457,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1180e719-db72-5f91-82a0-ebb9a742590f',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 2,
@@ -15471,7 +15471,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '65181844-4efc-5c67-84be-7cb23cc5d0f9',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -15485,7 +15485,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a026f24c-e935-5537-8c87-378d428b6c9b',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -15499,7 +15499,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'afc41884-a928-53f2-9238-8705879777e2',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 1,
@@ -15513,7 +15513,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '540a1200-6de0-5b7d-8ff0-4d770e4915a9',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -15527,7 +15527,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e1b90cc-d04a-5065-bfe9-65f1a1938c53',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 2,
@@ -15541,7 +15541,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6231ec87-edd4-56d8-9635-6b325983b81a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -15621,7 +15621,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1955b594-02f5-5023-b618-efa33b810f8c',
-        ingredientId: 'undefined',
+        ingredientId: 'cd49b1fa-b192-5748-87c2-1ba3433bd02e',
         slug: 'eggplant',
         name: 'eggplant',
         quantity: 3,
@@ -15635,7 +15635,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bc32e47e-95b4-5984-a321-4d032a008999',
-        ingredientId: 'undefined',
+        ingredientId: '8676cb9e-a396-5680-9b40-cf12961494d5',
         slug: 'ground-beef',
         name: 'ground beef',
         quantity: 300,
@@ -15649,7 +15649,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2966c516-6ff4-5349-a91c-eaab322585b1',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -15663,7 +15663,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '406caba9-8ad8-51fb-ad3e-43524cc2586d',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -15677,7 +15677,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5fcc4ca2-3d10-5bac-98d2-16d2aec62e8c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -15691,7 +15691,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5767a211-4000-5bc0-b024-92829cacfa1c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -15705,7 +15705,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'edd6e84e-d83a-539a-b203-5685b7afd4cd',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -15719,7 +15719,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5d982c3-ceb9-5447-a0dd-7ad4cc317a9d',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 150,
@@ -15733,7 +15733,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5969a054-3f46-5847-990a-3b921d9324fa',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -15747,7 +15747,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ab2ac8a0-b96a-58e5-967f-6c230c0734ac',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -15839,7 +15839,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ac552119-954f-5703-b5e8-4eb011023bb0',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 350,
@@ -15853,7 +15853,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '16dbe80b-799a-5cd8-a2cb-de68cbd42276',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -15867,7 +15867,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0093dac4-b8b6-5dda-a1d4-852c57a31341',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -15881,7 +15881,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2c4931b5-83f7-5ade-9ad9-6cf523147947',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -15895,7 +15895,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2d69229a-7194-510d-a852-4df1a3abe5f5',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -15909,7 +15909,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '32b7e6a0-f0b5-518b-951d-ab64cd74ae94',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -15923,7 +15923,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '12a3845a-5172-5fca-865a-f95092b39873',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -15937,7 +15937,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '268d38c1-993b-5549-afc9-e9ef64c59712',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -15951,7 +15951,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '53baa0d6-b0bc-5afd-a3d0-0c05f39ce4b2',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 3,
@@ -15965,7 +15965,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '66302f7b-0216-5987-9b05-fc0ada41e908',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -16046,7 +16046,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '71a0bf02-0ce1-56ad-8afa-f149ccfe43ae',
-        ingredientId: 'undefined',
+        ingredientId: 'ffc46f32-2758-5d17-851f-0a8890d69dc2',
         slug: 'white-beans',
         name: 'white beans',
         quantity: 400,
@@ -16060,7 +16060,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '042ee827-b8a1-5005-9f02-7e3fd80f9e70',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 120,
@@ -16074,7 +16074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '14112124-ccc9-57f3-8a9e-6172fcd80d9a',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -16088,7 +16088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c610de54-1f71-5b60-b5df-2e53c9a300e9',
-        ingredientId: 'undefined',
+        ingredientId: 'f25cd75f-32d4-5223-b318-7f60e5c7dbff',
         slug: 'celery',
         name: 'celery',
         quantity: 2,
@@ -16102,7 +16102,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '15d46278-c74d-51bd-8030-4c78f1ae8c79',
-        ingredientId: 'undefined',
+        ingredientId: 'd9b6af4a-dac9-5bf9-b6e3-297e2544cbfc',
         slug: 'zucchini',
         name: 'zucchini',
         quantity: 1,
@@ -16116,7 +16116,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ba2e0195-31b2-587f-b37f-c14ab9193d6f',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -16130,7 +16130,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f4a1d0f-173c-5ea6-9021-65baa0e8b9b8',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -16144,7 +16144,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '034872e9-d4d4-5e5c-8117-4c1d65b0e37a',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -16158,7 +16158,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cc558f47-09f1-53d3-9ccb-9a432d1d3d5c',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 2,
@@ -16172,7 +16172,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '90649d30-71b2-5ec8-b5ca-01c096e5241f',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -16186,7 +16186,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a0d29f72-fb5f-522c-b657-66106318a311',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 1,
@@ -16200,7 +16200,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c38a8465-0891-50e2-9f46-ff117a13ac27',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -16280,7 +16280,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '74cb66db-8e9d-5e4a-870c-18b0e80bf3dc',
-        ingredientId: 'undefined',
+        ingredientId: '833a50a8-f3f6-57b5-9d44-cfce4b211a46',
         slug: 'tofu',
         name: 'tofu',
         quantity: 300,
@@ -16294,7 +16294,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '23dcdb47-dd3e-5e63-b3d6-1c9607c80498',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 4,
@@ -16308,7 +16308,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '365cf777-2231-5c10-bd82-cbc34deff024',
-        ingredientId: 'undefined',
+        ingredientId: '69c59795-3632-591f-a683-c285c86e5ccd',
         slug: 'mushroom',
         name: 'mushrooms',
         quantity: 150,
@@ -16322,7 +16322,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '01e62a96-d870-5e80-90c0-e3a1a6826f63',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 15,
@@ -16336,7 +16336,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07dbcfd1-91ce-506d-8247-bd5dd40e1f3f',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -16350,7 +16350,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '923d9892-69a4-5073-bf9e-271b7f5a3b8a',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 3,
@@ -16364,7 +16364,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fbef97bd-f7e7-5052-8290-2e1e5e80a0a7',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 2,
@@ -16378,7 +16378,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '93f13258-5d13-5288-bce7-877dd89dd822',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -16457,7 +16457,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '0e3c56f9-02c6-5df4-89c3-631f86db05a8',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 700,
@@ -16471,7 +16471,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c9c8581c-1f65-5c58-bf54-5af53d254414',
-        ingredientId: 'undefined',
+        ingredientId: 'a5743bf8-6d35-57d3-a398-e9effe63e2e9',
         slug: 'molokhia',
         name: 'molokhia',
         quantity: 400,
@@ -16485,7 +16485,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '97b1a80d-6603-54e5-8b49-d80df899b72d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 8,
@@ -16499,7 +16499,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c120d3d-4521-5c7f-8bab-41c853619f34',
-        ingredientId: 'undefined',
+        ingredientId: 'e91ff6e3-9e21-594c-ae83-0109c1289947',
         slug: 'coriander-ground',
         name: 'coriander seeds',
         quantity: 2,
@@ -16513,7 +16513,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ef22167d-a278-5e12-ac86-404ac4bd4df7',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 300,
@@ -16527,7 +16527,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8be5e0e0-7109-59c3-87f5-0dccc3253751',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -16541,7 +16541,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd634134c-cd40-5f42-a647-b4fd0d4379dd',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 2,
@@ -16555,7 +16555,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '54b155fa-0668-5620-b76e-f352af19c319',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 30,
@@ -16569,7 +16569,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '61a6f08b-ebde-5667-9e81-ef40e7ef687a',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -16675,7 +16675,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'be01d654-80be-50aa-a8d8-c97c9f7b9184',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 4,
@@ -16689,7 +16689,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dfaae9c1-9db0-5974-8e05-928899080268',
-        ingredientId: 'undefined',
+        ingredientId: '51c5f714-4931-5e47-b5c6-28d14b1d6845',
         slug: 'walnuts',
         name: 'walnuts',
         quantity: 150,
@@ -16703,7 +16703,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7d8cba72-432e-5492-95e8-b5d6983a3222',
-        ingredientId: 'undefined',
+        ingredientId: '99aa380c-5bae-56ef-a4aa-1dad274fc11f',
         slug: 'breadcrumbs',
         name: 'breadcrumbs',
         quantity: 40,
@@ -16717,7 +16717,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cb73ef1a-f8d8-5923-bf1e-b87b4eb20130',
-        ingredientId: 'undefined',
+        ingredientId: 'a4f1b9f0-eab6-592e-9c1d-3733618701a8',
         slug: 'pomegranate-molasses',
         name: 'pomegranate molasses',
         quantity: 2,
@@ -16731,7 +16731,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a0055763-10a6-5276-9e41-ddb7840cf634',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -16745,7 +16745,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b80eaeaf-e374-5148-bc8c-a05af28cbc4b',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -16759,7 +16759,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8708fc5a-7179-51e5-95fe-a75759d3d4d8',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -16773,7 +16773,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0697b16f-b5ca-5376-85e0-8c8d8d354be4',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -16787,7 +16787,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eed05496-df45-532b-885f-c1e13e5c45a2',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -16865,7 +16865,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2ecb987d-daef-511c-b540-6e71163d7baa',
-        ingredientId: 'undefined',
+        ingredientId: '1828c1d9-8e2d-5790-b9ab-c47ef0be5514',
         slug: 'green-lentils',
         name: 'green lentils',
         quantity: 250,
@@ -16879,7 +16879,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '91f83f68-b573-5d95-853f-691d5ebdfea3',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 250,
@@ -16893,7 +16893,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '94c6a796-0ed5-59b6-b9ad-15aabb71d959',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 4,
@@ -16907,7 +16907,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c087b3c1-2337-5d1a-a451-72512f2aeec6',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -16921,7 +16921,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '82f213a6-c193-5322-8384-b9b6b36831c5',
-        ingredientId: 'undefined',
+        ingredientId: 'e91ff6e3-9e21-594c-ae83-0109c1289947',
         slug: 'coriander-ground',
         name: 'coriander seeds',
         quantity: 1,
@@ -16935,7 +16935,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f6885b18-ecb2-51ac-a582-c650b84a205e',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 80,
@@ -16949,7 +16949,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '77d674bb-a911-53be-929c-24dd3317ad2e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -17037,7 +17037,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '67e26e55-96f9-5391-a6b5-50b6108d3436',
-        ingredientId: 'undefined',
+        ingredientId: 'cd49b1fa-b192-5748-87c2-1ba3433bd02e',
         slug: 'eggplant',
         name: 'eggplant',
         quantity: 3,
@@ -17051,7 +17051,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fba6bba0-d453-5fc8-a339-ada0ab5808bc',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 60,
@@ -17065,7 +17065,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aa26a3b8-9ac7-5bf6-a3ef-ae8960f084f4',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -17079,7 +17079,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7563945e-364d-571b-bb25-93333a59b857',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -17093,7 +17093,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd998aff8-dbf7-5494-b317-b0cdc444bdbf',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -17107,7 +17107,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c573ae47-3f6b-51d1-a603-d25955cb94e3',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 2,
@@ -17121,7 +17121,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '14bbb4d9-eec9-5a58-b1c7-1e79c6b1941d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -17201,7 +17201,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'cd60f01a-63ef-5033-a810-2d79c487d6c3',
-        ingredientId: 'undefined',
+        ingredientId: '91b4a320-ff6e-5600-b87f-51be146f4889',
         slug: 'beef-cubes',
         name: 'beef cubes',
         quantity: 600,
@@ -17215,7 +17215,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '25048b9a-d6de-57a7-ba84-512fae26dd85',
-        ingredientId: 'undefined',
+        ingredientId: '7a231039-350a-57aa-b447-18f738e0ecf7',
         slug: 'okra',
         name: 'okra',
         quantity: 500,
@@ -17229,7 +17229,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1a001e7f-c095-54b7-93f8-416316e122c4',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -17243,7 +17243,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b1db17c3-ce07-5e3e-9cc9-31584d94c861',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -17257,7 +17257,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f4b752bc-215c-5e7e-b043-6fa32127eb5c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -17271,7 +17271,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f1fcd45e-01cd-5ecd-9427-6b38671f6386',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -17285,7 +17285,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b29e5013-cb52-550b-aef1-afad1aa1c89a',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -17299,7 +17299,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '735a0cb3-2169-53c4-8cb8-618e07b2341d',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 40,
@@ -17313,7 +17313,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd78ccbb2-a03c-5c39-b37f-b8b926ba7374',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -17406,7 +17406,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'bc60b09e-c2e2-575d-ac9b-2f4d06b52d00',
-        ingredientId: 'undefined',
+        ingredientId: 'fe59c7f5-2c14-5da3-9561-82db130cdf9a',
         slug: 'puff-pastry',
         name: 'puff pastry',
         quantity: 400,
@@ -17420,7 +17420,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a38f4702-f2df-5dc6-aa6d-b397e40f42cc',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 750,
@@ -17434,7 +17434,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b93ac126-8c25-54f8-afa2-fe840af817f8',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 100,
@@ -17448,7 +17448,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a20e5ffc-60bf-58e4-b386-b7a7707c9ef3',
-        ingredientId: 'undefined',
+        ingredientId: '9403731a-5892-5950-b46f-f04c60d7cca2',
         slug: 'coconut-flakes',
         name: 'desiccated coconut',
         quantity: 40,
@@ -17462,7 +17462,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '44a425ac-6caf-562d-a34d-c5df6933cd4a',
-        ingredientId: 'undefined',
+        ingredientId: '34af8120-6d67-58e6-aad4-b346bef1706a',
         slug: 'almonds',
         name: 'almonds',
         quantity: 50,
@@ -17476,7 +17476,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5716ac26-d5e9-535e-8d05-10b59bb4ae99',
-        ingredientId: 'undefined',
+        ingredientId: 'd87c81b9-8e1d-5374-8183-b84ff0f17544',
         slug: 'raisins',
         name: 'raisins',
         quantity: 40,
@@ -17490,7 +17490,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2bc3d8cc-8ac9-5181-8ba9-1b76cd612d57',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 200,
@@ -17504,7 +17504,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f2c0597-afa4-5750-825c-981b30ab4fac',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -17596,7 +17596,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'e3673033-1cab-558e-bc92-3fea9a3fc7a2',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 250,
@@ -17610,7 +17610,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7ffaed8f-58f0-5678-806a-4df9de7b80c7',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 220,
@@ -17624,7 +17624,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0cdb8f52-670f-5bca-aeb4-07e2477f51c2',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 3,
@@ -17638,7 +17638,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '298838ee-1153-5314-8eea-bbf1af036f4c',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 180,
@@ -17652,7 +17652,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '93ec2139-263e-530c-9caa-ab1d47f5b680',
-        ingredientId: 'undefined',
+        ingredientId: 'becb77ef-523e-572f-b7a7-0e4131915c81',
         slug: 'oranges',
         name: 'oranges',
         quantity: 2,
@@ -17666,7 +17666,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dad1454d-2a4c-59be-a5fb-1b31a59ab091',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 2,
@@ -17680,7 +17680,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eec5d8dc-4a36-5242-88b4-5547685d84d2',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -17694,7 +17694,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c8f875c4-151e-58f4-b850-edb6e55ef18f',
-        ingredientId: 'undefined',
+        ingredientId: '2d1315c2-59de-5a06-8819-2099d9d9775e',
         slug: 'icing-sugar',
         name: 'icing sugar',
         quantity: 2,
@@ -17774,7 +17774,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '54516a98-0db1-529b-b467-d22a53b61764',
-        ingredientId: 'undefined',
+        ingredientId: '9036f0e7-e328-5f27-984d-214be30e6562',
         slug: 'oats',
         name: 'oats',
         quantity: 60,
@@ -17788,7 +17788,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '55f55312-42de-5319-bd33-3cd2bbf57a9f',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 200,
@@ -17802,7 +17802,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '31c22316-c68a-5f43-a076-ce19697b4942',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 80,
@@ -17816,7 +17816,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9ba2f61c-edc0-5b2b-8fa3-681b54b16d24',
-        ingredientId: 'undefined',
+        ingredientId: '3d31d7a9-6d54-5457-92a2-d4eeb49701f5',
         slug: 'chia',
         name: 'chia seeds',
         quantity: 1,
@@ -17830,7 +17830,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '85381982-e3b9-5a06-a747-4c8703ff2712',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -17844,7 +17844,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3706cdd5-2e5f-5a45-aef2-decb74bb550b',
-        ingredientId: 'undefined',
+        ingredientId: 'b0c80673-dd67-5b0f-bae1-d88c90288a76',
         slug: 'bananas',
         name: 'bananas',
         quantity: 1,
@@ -17858,7 +17858,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b1b6106c-d02b-5e3c-abe2-61b1e42df955',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 0.25,
@@ -17927,7 +17927,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '96ef8b98-4900-55a1-88f1-c24d8f42815c',
-        ingredientId: 'undefined',
+        ingredientId: '781128dc-5989-5b4e-b363-a183808a68de',
         slug: 'spinach',
         name: 'spinach',
         quantity: 600,
@@ -17941,7 +17941,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '409fc349-d4d0-5dc0-8ab9-86912f1299a3',
-        ingredientId: 'undefined',
+        ingredientId: 'c6df2411-2374-57c6-9d4f-354313a83828',
         slug: 'halloumi',
         name: 'halloumi',
         quantity: 300,
@@ -17955,7 +17955,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3c082d22-408d-513e-8897-240036cd77b2',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -17969,7 +17969,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7a365735-f873-5605-aaa2-16ff1f01baf3',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -17983,7 +17983,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '74e6f428-fff9-571d-aae0-25e4e8a07de0',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 20,
@@ -17997,7 +17997,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4d729110-4676-5cb0-9d71-ebf987c1924b',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 80,
@@ -18011,7 +18011,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '45102ff3-cdc9-51f9-a23d-7dfd9d0a172f',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 1,
@@ -18025,7 +18025,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '61e41fc2-210a-541b-b86a-102f6229ba5f',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -18039,7 +18039,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd7e39e49-86a7-5075-a205-3b8c29e397d6',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -18053,7 +18053,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f1f0fc81-9684-5ae5-8bdd-99d1fdd7a9d5',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -18143,7 +18143,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'cc069df2-5426-5aec-8c1d-ce4a1436b3d0',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 280,
@@ -18157,7 +18157,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '48ea36c7-910e-586f-9cd6-8c8d411750c5',
-        ingredientId: 'undefined',
+        ingredientId: '1597b3fc-7452-5246-a91f-93c327fc9633',
         slug: 'buttermilk',
         name: 'buttermilk',
         quantity: 350,
@@ -18171,7 +18171,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae36f5f3-5552-5e6a-b35f-4817490a86b9',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -18185,7 +18185,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3fb9edfc-d5dd-54a4-9344-6de50776b9ae',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 40,
@@ -18199,7 +18199,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '478370ba-1c7e-567c-854f-ff8e40e99957',
-        ingredientId: 'undefined',
+        ingredientId: '965777eb-29fc-512f-9380-7eb75a4968f9',
         slug: 'baking-powder',
         name: 'baking powder',
         quantity: 2,
@@ -18213,7 +18213,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5d9cfbed-505d-56f6-9577-9ee71cbc651f',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -18227,7 +18227,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '27fc09aa-392d-5541-b606-e865793c1382',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -18241,7 +18241,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c86ec9a8-b3e2-599a-b746-cadb7a2bb652',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 3,
@@ -18255,7 +18255,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b6cdd567-6720-5ba1-ad27-16a18f972b35',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -18344,7 +18344,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ee06d81f-7c4e-5650-b419-00dffe92213e',
-        ingredientId: 'undefined',
+        ingredientId: 'df1a789f-1930-5053-a908-ee94e695ed3b',
         slug: 'chickpeas',
         name: 'chickpeas',
         quantity: 480,
@@ -18358,7 +18358,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'da067e36-b474-5a3c-a51b-c94b90fc9120',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 200,
@@ -18372,7 +18372,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3fb80056-0ac3-5d79-aa46-cd4070d011e1',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 2,
@@ -18386,7 +18386,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'aecc73a2-dd72-5296-b541-966830b22d0d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -18400,7 +18400,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b6a93e7e-814e-5949-a9da-805c4786b08f',
-        ingredientId: 'undefined',
+        ingredientId: '553e84b4-b96e-58a5-85f8-6080e2baee36',
         slug: 'rosemary',
         name: 'rosemary',
         quantity: 1,
@@ -18414,7 +18414,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4b890f0f-a3c0-5fec-b510-49f2429460fe',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -18428,7 +18428,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4a164367-6198-5342-9c28-79ecf45ec878',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -18442,7 +18442,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ace98f3a-eba0-572a-9b59-c12d6d13e9cd',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -18456,7 +18456,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a7642871-c024-5fd6-8138-d5881a68622a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -18538,7 +18538,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'a1a335b2-5146-5378-a06f-b138925f187f',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 400,
@@ -18552,7 +18552,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '25ea092e-cce9-581c-8487-b3d87908adcc',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 8,
@@ -18566,7 +18566,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '011acf74-1d5b-579a-99f3-7be0194b8bb2',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -18580,7 +18580,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3dc30abd-6cb7-5204-8160-cc91618ff588',
-        ingredientId: 'undefined',
+        ingredientId: '16a27abe-5658-5d31-91f2-45f2ef055243',
         slug: 'basil',
         name: 'basil',
         quantity: 1,
@@ -18594,7 +18594,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c73fe3b9-d4a6-5f32-a943-03011971d515',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 5,
@@ -18608,7 +18608,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '45d0ea11-ca5c-52cd-87b4-b70b7d2a8159',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 0.5,
@@ -18622,7 +18622,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '68b11550-bc1d-5a52-b673-e7a765ecf70c',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -18702,7 +18702,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'a7cfc5ea-d821-53b5-b413-eb6a028e14b7',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 250,
@@ -18716,7 +18716,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '87f877d5-d919-50c0-8a6d-8fef3bd26a5a',
-        ingredientId: 'undefined',
+        ingredientId: '67433159-103d-5d03-88e1-f62ded98b9de',
         slug: 'tuna-can',
         name: 'canned tuna',
         quantity: 200,
@@ -18730,7 +18730,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '98866621-9e18-5e99-a081-a7ceb89722ea',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -18744,7 +18744,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2ff0c023-9616-5c48-996d-c146cc3f4b21',
-        ingredientId: 'undefined',
+        ingredientId: '12e1e253-f166-56b3-a64c-3f146a3a99cb',
         slug: 'capers',
         name: 'capers',
         quantity: 2,
@@ -18758,7 +18758,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '448e0249-647c-506c-85f4-0617adb1f19e',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -18772,7 +18772,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e45f66e2-832e-5c2f-8fbe-aab6dbfc1a99',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -18786,7 +18786,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a9f73b4d-7c47-58f7-901f-66c4908d5060',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -18800,7 +18800,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '13f0b63a-c80e-5c21-a432-b7dc03a36836',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -18814,7 +18814,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fec15b81-125a-52cc-86d9-f4722da9fa49',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -18893,7 +18893,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '79ef6940-6426-5d45-8bf6-974dbe3ab72d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 5,
@@ -18907,7 +18907,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3bdaaab7-bd55-506a-96eb-a4800bd15a8b',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -18921,7 +18921,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7747fb18-7ca6-5ddf-844b-ed7176f1aace',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 5,
@@ -18935,7 +18935,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0993d9b5-7d39-55e4-93f5-e960ce704a43',
-        ingredientId: 'undefined',
+        ingredientId: '17c794db-92ee-54f2-9083-58f18bbb3774',
         slug: 'chili-pepper',
         name: 'chili pepper',
         quantity: 1,
@@ -18949,7 +18949,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fb3b33f6-0f38-5f86-a940-a9d32d3dd5a6',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -18963,7 +18963,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6571b252-f1c2-5243-b538-8602ab9a4146',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -19031,7 +19031,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '331d8f16-5d8c-5243-aa80-46a4cb6ee8c3',
-        ingredientId: 'undefined',
+        ingredientId: 'd981c000-5755-5282-b0fa-82a3beec9c92',
         slug: 'cornmeal',
         name: 'cornmeal',
         quantity: 250,
@@ -19045,7 +19045,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0637d2ec-fc4c-52ce-9538-b764a29ee98b',
-        ingredientId: 'undefined',
+        ingredientId: '69c59795-3632-591f-a683-c285c86e5ccd',
         slug: 'mushroom',
         name: 'mushrooms',
         quantity: 400,
@@ -19059,7 +19059,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1c3b87ce-30a5-57a3-b546-2f84be0bc3c0',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -19073,7 +19073,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2a62af1d-0d59-510f-95e5-0b0b247b2133',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -19087,7 +19087,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'df93e4e4-48ee-52b4-8433-0dc724d5546e',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 60,
@@ -19101,7 +19101,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0d60a1ed-0430-5485-8f1f-95eb8756d5b6',
-        ingredientId: 'undefined',
+        ingredientId: 'feed5445-7974-5a39-b323-c91c932226ff',
         slug: 'thyme-dried',
         name: 'thyme',
         quantity: 1,
@@ -19115,7 +19115,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fa8cf896-4942-5d1f-9d1b-608c6b77ab2f',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -19129,7 +19129,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a74b413e-915a-5c00-8e15-95c32b0cef76',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -19211,7 +19211,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'b8f03f95-8777-5f03-ab32-cf0cb2523bc3',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -19225,7 +19225,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1d70068e-e28d-5cb7-8b6c-c1c5f25d81d4',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -19239,7 +19239,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b588c6db-f9c1-53d7-9d5c-02c73fd099ca',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -19253,7 +19253,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e4358ad1-3e3c-503e-b1a7-e6eab4182d7e',
-        ingredientId: 'undefined',
+        ingredientId: '88e88f2c-7649-5b7b-9464-0a7dcaec2ea3',
         slug: 'green-peas',
         name: 'green peas',
         quantity: 100,
@@ -19267,7 +19267,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8df71380-00e8-5215-9a62-5a1cafe685ed',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -19281,7 +19281,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '077878f9-c857-50e0-a21a-a471050eef24',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 1,
@@ -19295,7 +19295,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a42e9d85-59a7-5a5e-9213-30bb40731474',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 30,
@@ -19389,7 +19389,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'cbe7a7b8-9793-53f1-99ab-d3b8cb07553b',
-        ingredientId: 'undefined',
+        ingredientId: 'cd49b1fa-b192-5748-87c2-1ba3433bd02e',
         slug: 'eggplant',
         name: 'eggplant',
         quantity: 1,
@@ -19403,7 +19403,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '670ec538-da0c-5d8e-b7b2-aca6a87053bc',
-        ingredientId: 'undefined',
+        ingredientId: 'd9b6af4a-dac9-5bf9-b6e3-297e2544cbfc',
         slug: 'zucchini',
         name: 'zucchini',
         quantity: 2,
@@ -19417,7 +19417,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '47f7b48d-c58c-590b-b545-34c08713cb26',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 2,
@@ -19431,7 +19431,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '174c0f9b-bf36-5e0a-8ab8-3c17aec34d37',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -19445,7 +19445,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0b4c6d92-54b6-507d-88a2-c5f581dba61b',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -19459,7 +19459,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f827443d-ab07-5dda-aae9-f6f0cc06cdc5',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -19473,7 +19473,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '980bd080-9665-5c07-94f7-f2906ffb41de',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 2,
@@ -19487,7 +19487,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dae261d5-78b1-5e00-98b6-625f30b03a3a',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 5,
@@ -19501,7 +19501,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5397c3b3-eefe-50af-8605-b520a4ff23e6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -19582,7 +19582,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4bd1196f-ffc0-54c9-abf9-f7554fbc1911',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 350,
@@ -19596,7 +19596,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3641020e-5b5e-5c84-b87c-ebf27ed860a0',
-        ingredientId: 'undefined',
+        ingredientId: '69c59795-3632-591f-a683-c285c86e5ccd',
         slug: 'mushroom',
         name: 'mushrooms',
         quantity: 400,
@@ -19610,7 +19610,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4726d728-266c-58a7-b637-d3245aa84c36',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -19624,7 +19624,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e8e9eb17-56c8-5186-9e8f-809e289c37fa',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -19638,7 +19638,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f0a04c1-1b2e-52a3-a95a-a891dd92acb0',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 2,
@@ -19652,7 +19652,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '61c07cde-6135-523b-8ed6-46022c6ff323',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 60,
@@ -19666,7 +19666,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '39b36730-c479-5fc2-af7d-a67ad800a529',
-        ingredientId: 'undefined',
+        ingredientId: '398fa874-3c36-581d-9458-98a1557b9f98',
         slug: 'parmesan',
         name: 'parmesan',
         quantity: 70,
@@ -19680,7 +19680,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b98caa0c-b554-52d9-8eb4-a5008edf21d4',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -19694,7 +19694,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1f03a2d5-04ea-56bc-8ff2-20288540aed2',
-        ingredientId: 'undefined',
+        ingredientId: 'feed5445-7974-5a39-b323-c91c932226ff',
         slug: 'thyme-dried',
         name: 'thyme',
         quantity: 1,
@@ -19708,7 +19708,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '238c3531-f242-546f-852f-c7e3b86ffc53',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -19798,7 +19798,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1b59ed57-8850-5f08-b23c-af2339c5997d',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 1,
@@ -19812,7 +19812,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '28a8956c-b71d-5d0b-bd7a-5a5422388c2a',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 800,
@@ -19826,7 +19826,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eb015d26-a57a-5ef6-9b7e-4d3cc64d790a',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -19840,7 +19840,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '955d7e42-833e-5a49-a18b-e5616d70302c',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 8,
@@ -19854,7 +19854,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ea54377f-4a93-5d38-8689-94e00fdfd9a4',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -19868,7 +19868,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '28b29dae-cd4e-5815-a823-4a074e47b2c8',
-        ingredientId: 'undefined',
+        ingredientId: '553e84b4-b96e-58a5-85f8-6080e2baee36',
         slug: 'rosemary',
         name: 'rosemary',
         quantity: 2,
@@ -19882,7 +19882,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '84df5222-9dd0-5f52-b2aa-7fcea1e374e0',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -19896,7 +19896,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f8b342e-4e92-5bae-938d-858060f151db',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -19910,7 +19910,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3f75b524-ee7a-5110-9dee-fb5c2c7e51d3',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -19924,7 +19924,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ca3bba8b-f724-5da8-a99e-af2b2d01030a',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -20004,7 +20004,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '84121299-9634-518c-96d1-abaca6985e54',
-        ingredientId: 'undefined',
+        ingredientId: '7b1c0cd6-49ae-50b5-9688-b61b0b8be677',
         slug: 'cauliflower',
         name: 'cauliflower',
         quantity: 1,
@@ -20018,7 +20018,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2767febb-a801-541b-8523-2be43a090267',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 60,
@@ -20032,7 +20032,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '18f4ec45-ec84-53a3-856c-0fa4652ade17',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -20046,7 +20046,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3d2def52-f983-523c-afdc-b517c05783bc',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -20060,7 +20060,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0ed54aef-e85f-57dc-9b1f-436bdb407871',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -20074,7 +20074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ba450e65-78e7-5fd7-a5f6-13de000dfbc5',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -20088,7 +20088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c4ff095f-dca4-5645-b6a2-f6fbca53ba6a',
-        ingredientId: 'undefined',
+        ingredientId: '276f6fd0-9024-541b-826f-8b7db611d310',
         slug: 'pomegranate',
         name: 'pomegranate',
         quantity: 60,
@@ -20102,7 +20102,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '33506e8c-edac-5e30-ae1a-3bf443858b92',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 2,
@@ -20116,7 +20116,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c8673d9d-aab4-5ca8-902d-ac65cd423b01',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -20197,7 +20197,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '145f6528-1992-5b22-889c-d368bb70a627',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 120,
@@ -20211,7 +20211,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '097afffa-dc17-5c8f-a791-890e469e88a4',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 1,
@@ -20225,7 +20225,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e670fba1-8a9e-5d17-bd78-6fd48aab9645',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 90,
@@ -20239,7 +20239,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db8e3c49-33cd-59f6-9d09-43575e068b85',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -20253,7 +20253,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5362bd61-e564-57da-8cf0-b3a2377de4e3',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -20267,7 +20267,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ade7a1ce-be25-5008-b59b-348d0995f823',
-        ingredientId: 'undefined',
+        ingredientId: '0ee00d5a-d5c5-50cb-ad34-95ff6fb8be4b',
         slug: 'pistachios',
         name: 'pistachios',
         quantity: 30,
@@ -20357,7 +20357,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c9d592c2-d6a5-5b0d-bcbe-0e315fddc4e9',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -20371,7 +20371,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '957592e2-f024-5d6d-b377-d533c6cfd7c8',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 700,
@@ -20385,7 +20385,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '14c09f24-3c66-5291-b6f1-30eb76c28f75',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 250,
@@ -20399,7 +20399,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '11db2c13-488b-52c1-a846-a62352a3b71d',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 60,
@@ -20413,7 +20413,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3eb0c313-7186-5e3c-bc2b-ecafd49057f9',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 2,
@@ -20427,7 +20427,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '13de1f27-82b8-5e18-bd4a-0901608a3f3c',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -20508,7 +20508,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7c0b7995-e7cf-5186-ac9d-f8eae47a9836',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -20522,7 +20522,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9c555bd1-586c-5db6-8e12-a35840d2f3c9',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 2,
@@ -20536,7 +20536,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '47a79d05-f620-516f-b50e-4b2ffc4e43df',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -20550,7 +20550,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ca4007f2-9132-56e4-9db0-9c2f3b7f655e',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -20564,7 +20564,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07b9f980-5518-523c-8c05-ae23ca34c0d8',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -20578,7 +20578,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '46da7e31-0a19-5afc-8026-4080bfecd1c4',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -20592,7 +20592,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '57814938-a3cf-5374-b11b-d11c7a35b099',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -20661,7 +20661,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'd4857086-70d3-59a4-9db7-8b8bf949072c',
-        ingredientId: 'undefined',
+        ingredientId: '33610539-a756-5801-81a2-5811f3056d49',
         slug: 'rocket',
         name: 'rocket',
         quantity: 200,
@@ -20675,7 +20675,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'df160ffb-41a6-5624-81ec-fc977ea7c7ff',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -20689,7 +20689,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd4243b24-fd50-56d8-a898-2dbc82d4f4d5',
-        ingredientId: 'undefined',
+        ingredientId: 'e14c57c0-53b0-55c2-824b-94910dda15f7',
         slug: 'sumac',
         name: 'sumac',
         quantity: 2,
@@ -20703,7 +20703,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ffe85496-fa77-5e2f-880d-90fbac5d3b73',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -20717,7 +20717,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0fc7aaac-fe04-589d-ac51-171bee3eb4e6',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -20731,7 +20731,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c8447e3f-84f4-5516-8985-9d8e866be24b',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -20800,7 +20800,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7a200215-a272-518b-91c3-5dd664d60f36',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 500,
@@ -20814,7 +20814,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '822bd0d5-cd08-5e46-bb29-b8ab1eef7e47',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 2,
@@ -20828,7 +20828,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '99a8b0e1-829b-51e5-b3d8-7f5a6af38f97',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -20842,7 +20842,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '58791e38-eb3d-5276-97b2-1acccb5f7b16',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 2,
@@ -20856,7 +20856,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'be34ce56-b9f4-52f8-9c4e-a31731417fde',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -20870,7 +20870,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f38e18c5-417a-58a3-86eb-9126abcbf3bc',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 1,
@@ -20939,7 +20939,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1f70f3cb-8d94-57b7-9b31-bb8c404e9843',
-        ingredientId: 'undefined',
+        ingredientId: 'aed9f555-75b3-530e-b8d6-5f779fcec439',
         slug: 'sea-bass',
         name: 'sea bass',
         quantity: 700,
@@ -20953,7 +20953,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a2ce7139-bb2e-5dcf-9c17-180a63205c3c',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 350,
@@ -20967,7 +20967,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '92bd35e0-fbc5-51f0-8eb1-9e1eaf48a2da',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 4,
@@ -20981,7 +20981,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '59b1ed08-9c50-586c-b4ce-035a20ea7c74',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -20995,7 +20995,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '01514439-7b5f-5088-8877-bf2eb1b3d17f',
-        ingredientId: 'undefined',
+        ingredientId: 'e91ff6e3-9e21-594c-ae83-0109c1289947',
         slug: 'coriander-ground',
         name: 'coriander seeds',
         quantity: 1,
@@ -21009,7 +21009,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9414d314-cc7b-55f4-bf05-2531cd7d8720',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 0.5,
@@ -21023,7 +21023,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ecc89229-5859-53b5-ac90-94b8c1266b18',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 80,
@@ -21037,7 +21037,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '12d01782-1b36-59a1-87c9-8b66bcad3b91',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -21051,7 +21051,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0582a021-dcf8-52ac-b7ac-1686d2580f47',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -21153,7 +21153,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '75241833-4944-5c39-8dcd-2f23477abd2b',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 5,
@@ -21167,7 +21167,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b737aa3e-9453-5cc3-a0e4-d8092a8df932',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 25,
@@ -21181,7 +21181,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c4bd0f67-4776-587a-b3f6-dd7dc734c4ff',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 2,
@@ -21195,7 +21195,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1bbad845-d480-57c4-a9b7-60f5caf36625',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 1,
@@ -21209,7 +21209,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b780c6f3-e47c-5799-9327-c8142bd73930',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -21223,7 +21223,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4cd42301-6651-5f15-aa4f-5b1cbb8df763',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 0.5,
@@ -21303,7 +21303,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '535d8abe-1a20-56a0-b991-00402f6761bf',
-        ingredientId: 'undefined',
+        ingredientId: 'c9fad558-b367-5f02-87fe-4d654e63abb8',
         slug: 'noodles',
         name: 'noodles',
         quantity: 300,
@@ -21317,7 +21317,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3651f403-8e3a-57d0-80cc-f3d9ca1c6934',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 3,
@@ -21331,7 +21331,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'daf3c1d8-482a-5f9b-aa8b-26120534f58b',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 3,
@@ -21345,7 +21345,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b79fa905-e709-5ed3-baff-91ec5909139f',
-        ingredientId: 'undefined',
+        ingredientId: '3fe5f55e-6a71-53be-9b5f-af6cf3594773',
         slug: 'vinegar-apple',
         name: 'apple cider vinegar',
         quantity: 2,
@@ -21359,7 +21359,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f64e135-819b-5d9a-8996-a8c97a6273cc',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -21373,7 +21373,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5e230ac2-5a40-5c41-8841-9fd52fa7ab92',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -21387,7 +21387,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd33be4e4-62fb-5661-adac-a573c24e3791',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -21401,7 +21401,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7dbded27-9e07-5e62-9e30-e38fc4075057',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -21415,7 +21415,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1a7fe586-e315-5ebc-b55b-fe0dc2d43f5b',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -21429,7 +21429,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3a083934-83e1-528a-b863-de7a23b684da',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -21515,7 +21515,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'b0220a42-c2dc-5987-8cb9-e0e8b94d62e1',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 500,
@@ -21529,7 +21529,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2f8d93ac-fce3-572d-91bc-d2c24eab90e3',
-        ingredientId: 'undefined',
+        ingredientId: '0582d882-4c5d-52e7-9099-6e635915100e',
         slug: 'yeast',
         name: 'yeast',
         quantity: 7,
@@ -21543,7 +21543,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1d77f71b-26e4-5588-b4c1-8013e2d47669',
-        ingredientId: 'undefined',
+        ingredientId: 'a0b111f9-f84e-5d50-8f64-f6c5d9829653',
         slug: 'lamb',
         name: 'lamb',
         quantity: 400,
@@ -21557,7 +21557,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c55ee8b4-b01d-5a62-8326-7847158929be',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -21571,7 +21571,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '07cd50ae-4b81-52e4-a20f-50db2984a6d8',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -21585,7 +21585,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f9fbe800-03de-5e7d-8885-dd35110f8083',
-        ingredientId: 'undefined',
+        ingredientId: 'a4f1b9f0-eab6-592e-9c1d-3733618701a8',
         slug: 'pomegranate-molasses',
         name: 'pomegranate molasses',
         quantity: 1,
@@ -21599,7 +21599,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9a7df62a-2f07-5fa6-9be5-22ae58691e13',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 1.5,
@@ -21613,7 +21613,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f6d82868-65e5-5bf9-ba5a-954245b3c646',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 60,
@@ -21627,7 +21627,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '573a608c-3ce4-5d1d-bc38-4fdfce3301d5',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -21641,7 +21641,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f7c86a11-fed6-54ec-b7ae-2044910d2cc7',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -21725,7 +21725,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4fe7f000-c90f-5e36-a3b5-6ea0fc47053a',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -21739,7 +21739,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a1d91955-3946-5590-8aa2-28d79413682c',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -21753,7 +21753,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cedb3b8b-2466-503b-a06f-ad67aec06932',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -21767,7 +21767,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7cb0b74b-fec2-59f3-adcd-72472a88d4b0',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -21781,7 +21781,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6fbbe019-240c-56f2-ba81-fedccbee690b',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 80,
@@ -21795,7 +21795,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2604ace4-302c-5324-b7df-fe8f4e0d9708',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -21809,7 +21809,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '046d4289-6544-5b8b-8fd9-a5873419eac0',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 30,
@@ -21823,7 +21823,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '619f46af-76f1-5bf1-82f1-e1ca92b95089',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 2,
@@ -21837,7 +21837,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5a7711b8-4883-5dd1-a69f-3f2a34f03bf2',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -21931,7 +21931,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '26094440-6ab3-5457-9057-ac05d19a2bad',
-        ingredientId: 'undefined',
+        ingredientId: '71b8319b-c9b8-5d56-9a09-25c14de89842',
         slug: 'sausage',
         name: 'beef sausage',
         quantity: 250,
@@ -21945,7 +21945,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '02a9e704-a788-5413-913a-a50bb29ca019',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -21959,7 +21959,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ccc7de88-2a61-5ae6-927e-3df91f94a510',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -21973,7 +21973,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '33436026-f15a-5ada-a796-2f73ac868707',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -21987,7 +21987,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1baf3aee-85b8-59fe-9436-b778175f56b2',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -22001,7 +22001,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ad7d922f-e1ee-5c1d-9af2-f990cb007567',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -22015,7 +22015,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69a8d9cb-de25-5cd4-8287-f30ac69dedf4',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -22029,7 +22029,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29b47921-944c-521f-90a3-36bb8edd313a',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 2,
@@ -22043,7 +22043,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9d795c2c-ddc1-5001-9df4-91658255d96a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -22124,7 +22124,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '8f8e0e6a-6f8f-5a40-9015-cf185cbc9c0e',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 700,
@@ -22138,7 +22138,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29a4c96e-1ae5-5d1d-bb05-12847a8bf60d',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 100,
@@ -22152,7 +22152,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '66e5ba76-c95a-55e1-9c63-ff6ad298aca6',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -22166,7 +22166,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '385424c3-cdc6-5ae6-8907-39f226e43e77',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -22180,7 +22180,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'feadc1c8-a4aa-5fe6-beb5-2f63a4522187',
-        ingredientId: 'undefined',
+        ingredientId: '91354e33-081d-56bf-8d2b-6af8074769f9',
         slug: 'mixed-spice',
         name: 'mixed spice',
         quantity: 2,
@@ -22194,7 +22194,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cf089cfd-e330-5c9e-a2b7-c11e8b37b74c',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -22208,7 +22208,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b30fd52a-4778-5d4d-a2d8-d364d72a6adf',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 0.5,
@@ -22222,7 +22222,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6c4a0841-d604-561b-a533-15b49f200632',
-        ingredientId: 'undefined',
+        ingredientId: '9c4ff58a-5537-5daf-9e7e-f7b25c512ac1',
         slug: 'vinegar',
         name: 'vinegar',
         quantity: 2,
@@ -22236,7 +22236,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '47f2264a-6557-53db-821b-52cd8abb7ad7',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -22250,7 +22250,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1f694a9b-1ee8-588e-878e-815065eae5f4',
-        ingredientId: 'undefined',
+        ingredientId: '38e5db88-f285-5d22-b85d-3c6a25a39d6d',
         slug: 'pita-bread',
         name: 'pita bread',
         quantity: 4,
@@ -22264,7 +22264,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c88218fa-5dbb-5d62-9d7d-4b2b1d8a4684',
-        ingredientId: 'undefined',
+        ingredientId: '993065a0-6eaf-5913-b5c2-28e1754ceda0',
         slug: 'pickles',
         name: 'pickles',
         quantity: 60,
@@ -22278,7 +22278,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '54c268a5-a165-5e22-8091-c57f3a2b6dea',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -22370,7 +22370,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '08a0453d-080c-5ffc-a96d-2d9a708b0298',
-        ingredientId: 'undefined',
+        ingredientId: '71b8319b-c9b8-5d56-9a09-25c14de89842',
         slug: 'sausage',
         name: 'beef sausage',
         quantity: 500,
@@ -22384,7 +22384,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '021578eb-747b-53e1-9817-06d122883bd4',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 600,
@@ -22398,7 +22398,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f2ad30ef-e4fa-51de-9294-185edc15ebf0',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 2,
@@ -22412,7 +22412,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5b2b4c4-80b0-51e1-962d-1d210417c6b9',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 2,
@@ -22426,7 +22426,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '87ad93b0-54dc-5d5f-9da4-4c37b8c8c88d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -22440,7 +22440,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7c53a927-b740-5bb8-9f8c-7e423f765755',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -22454,7 +22454,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4fa225ca-043b-54df-8d5b-280db11db9fc',
-        ingredientId: 'undefined',
+        ingredientId: 'c82dd522-2bda-5cd1-94d9-12cb6478e10a',
         slug: 'oregano',
         name: 'oregano',
         quantity: 1,
@@ -22468,7 +22468,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bab620f8-6198-59d1-a793-a00e18eb25bb',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -22482,7 +22482,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8ae5b74d-efc5-5d5e-897b-364214067820',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -22559,7 +22559,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1771604b-2f99-5e0d-935d-13b79f1f0956',
-        ingredientId: 'undefined',
+        ingredientId: 'abc19e56-a348-56a8-ab46-db49badb7ccb',
         slug: 'chicken-breast',
         name: 'chicken breast',
         quantity: 800,
@@ -22573,7 +22573,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a5959932-9ab7-53d9-a6e7-9d41b7a4047d',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 200,
@@ -22587,7 +22587,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '18dc939a-2cf1-5a8c-ab6c-4804aa86fbfd',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -22601,7 +22601,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '654bfbf9-5ed9-599b-90f4-0e4e22549fea',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -22615,7 +22615,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a2f0a6f1-14a9-5726-bdf4-fe477dce729a',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -22629,7 +22629,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fa5e8e69-f7a1-5a11-a2c7-ed8b874d8d59',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -22643,7 +22643,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4b3d049a-754a-556d-8273-c3443da40093',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -22657,7 +22657,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4e1350cd-0678-5961-91e1-f77f6dd9ad86',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -22671,7 +22671,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cff5fd80-6e93-5469-a3df-1e168d2f39e7',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -22764,7 +22764,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'f2e4d336-b596-5ac8-8fa4-e3b441125cf4',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 300,
@@ -22778,7 +22778,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a5a6471d-4460-540d-bcbd-492e524f5790',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -22792,7 +22792,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69b1ea7c-017c-5049-bd1d-1bcbbeabeaf9',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -22806,7 +22806,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6b659967-3fed-5ed8-84cb-5c6535c51d01',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -22820,7 +22820,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '156a5713-7be0-5641-a896-e8ca0930e20f',
-        ingredientId: 'undefined',
+        ingredientId: '68401d47-3758-5402-9e21-6867ffa93d2e',
         slug: 'turmeric',
         name: 'turmeric',
         quantity: 0.5,
@@ -22834,7 +22834,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fcb2c2a4-e877-5111-9e63-bee8ae1d34aa',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -22848,7 +22848,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cb567c9e-83b0-5d32-aff5-d60e3d978bed',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -22862,7 +22862,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '88b45167-257c-58f8-aa4d-49a17a16a5b1',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -22876,7 +22876,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '23a0bfe8-0a94-5bd3-8283-8ce5a43c156c',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -22955,7 +22955,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'daaa9426-5b54-558c-b625-4ecf819259c2',
-        ingredientId: 'undefined',
+        ingredientId: '125df92b-d09e-5f70-ac61-291a686ef2b8',
         slug: 'vermicelli',
         name: 'vermicelli',
         quantity: 150,
@@ -22969,7 +22969,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '00905bf6-3b8a-5a13-9ed7-72687e032631',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 2,
@@ -22983,7 +22983,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '983f9a26-7ef6-5cce-afe3-ceb0df0e10ee',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 30,
@@ -22997,7 +22997,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'db66c22a-ba4b-579d-ba29-08e85c632dd2',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -23011,7 +23011,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd344a825-542b-59a7-9648-056fec49b90f',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -23025,7 +23025,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '96b080c0-b22a-5943-9d48-f0b76c19d78d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -23039,7 +23039,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '68eb1e48-467a-58fe-9ece-ce5ac29dca2d',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 3,
@@ -23118,7 +23118,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1e763b96-cd63-5282-bb90-b42e12779323',
-        ingredientId: 'undefined',
+        ingredientId: 'd77e3210-5799-5fba-b1c0-a879328f4332',
         slug: 'shrimp',
         name: 'shrimp',
         quantity: 400,
@@ -23132,7 +23132,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dff8727c-21ca-5564-bd57-3101fd03282d',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 8,
@@ -23146,7 +23146,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '96452265-6f11-5c84-ad65-6461d51e3559',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -23160,7 +23160,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2f087ece-c4a8-56e5-810d-99ca697751b8',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 80,
@@ -23174,7 +23174,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dbdcdffa-35f3-54ad-8884-a21ac43e90c8',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 3,
@@ -23188,7 +23188,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '472f792c-163b-5092-9a88-a9d8217e8906',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -23202,7 +23202,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '06b4a2d8-3fab-5362-bf23-ae6ccec086ae',
-        ingredientId: 'undefined',
+        ingredientId: '07b412de-52d5-5dec-ad63-03e776cedf61',
         slug: 'baguette',
         name: 'baguette',
         quantity: 0.5,
@@ -23216,7 +23216,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4477bf63-89af-5211-b226-16b0533f05ef',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -23299,7 +23299,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '32a7ed0b-4bef-5f40-9d59-7dce42cbe9b2',
-        ingredientId: 'undefined',
+        ingredientId: 'd77e3210-5799-5fba-b1c0-a879328f4332',
         slug: 'shrimp',
         name: 'shrimp',
         quantity: 300,
@@ -23313,7 +23313,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5f3cf217-b61c-5eb4-abac-965c476d9412',
-        ingredientId: 'undefined',
+        ingredientId: 'c9fad558-b367-5f02-87fe-4d654e63abb8',
         slug: 'noodles',
         name: 'noodles',
         quantity: 200,
@@ -23327,7 +23327,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f24e9ec2-2097-5453-b4b4-0e08db05702d',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 2,
@@ -23341,7 +23341,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a045ff85-cf88-5d8c-b448-64dcad313d56',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 25,
@@ -23355,7 +23355,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b1b9f2d2-c997-5b68-a39e-2a7658686e69',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -23369,7 +23369,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de1969a2-211b-5eb4-b7a8-30640b3aef33',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -23383,7 +23383,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '635c1237-3fef-5b43-a5f3-5b59f1a62f78',
-        ingredientId: 'undefined',
+        ingredientId: '781128dc-5989-5b4e-b363-a183808a68de',
         slug: 'spinach',
         name: 'spinach',
         quantity: 100,
@@ -23397,7 +23397,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2ebb453f-c1d9-5874-896e-935b2a79e2a8',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -23411,7 +23411,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bab3306c-9797-5623-9502-5396d4e11482',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -23425,7 +23425,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3b23b330-cd13-5db1-9bc8-9fda14835d02',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 0.5,
@@ -23511,7 +23511,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '110552d2-d8a4-5956-a62e-d04e2284e1b1',
-        ingredientId: 'undefined',
+        ingredientId: 'b0c80673-dd67-5b0f-bae1-d88c90288a76',
         slug: 'bananas',
         name: 'bananas',
         quantity: 2,
@@ -23525,7 +23525,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1bd45300-4f4e-53c3-b24b-6f9d520e2ace',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 250,
@@ -23539,7 +23539,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9f5b685a-fcb0-5485-89cf-8d78b443eb3d',
-        ingredientId: 'undefined',
+        ingredientId: '651ea366-fa00-56e8-a0da-8dc2edfcb4d3',
         slug: 'peanut-butter',
         name: 'peanut butter',
         quantity: 2,
@@ -23553,7 +23553,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fd1d6e50-ebf2-50dc-b8c2-c74f8e694b58',
-        ingredientId: 'undefined',
+        ingredientId: '9036f0e7-e328-5f27-984d-214be30e6562',
         slug: 'oats',
         name: 'oats',
         quantity: 30,
@@ -23567,7 +23567,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '83dd31ca-f223-5e25-a19c-fa0d6b4c6529',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -23581,7 +23581,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '65b7e3b0-af3d-521d-a605-49ea7a4aad1a',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 0.25,
@@ -23649,7 +23649,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '061c4f1a-382f-5c6b-aa57-3b46728e9bea',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 250,
@@ -23663,7 +23663,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5b3f8efb-b640-5bcc-9444-29d8a6658d68',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -23677,7 +23677,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f969e802-5f8e-55a4-8124-8f52dac715d7',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -23691,7 +23691,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'abebc501-dcd9-501c-8d24-45de8b4cd2fe',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 60,
@@ -23705,7 +23705,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3b84cf2d-da79-5946-92d2-15679f9cc2de',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -23719,7 +23719,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fb274bce-e705-5ff1-b701-7a7809aaaa1a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -23803,7 +23803,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'dc670482-e482-5b79-8dd2-3f85586ca938',
-        ingredientId: 'undefined',
+        ingredientId: 'f30b9211-c4bd-5f0c-9c3a-264b4d908839',
         slug: 'phyllo',
         name: 'filo pastry',
         quantity: 300,
@@ -23817,7 +23817,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1c91afb5-d624-5af3-89ad-22b77520e353',
-        ingredientId: 'undefined',
+        ingredientId: '781128dc-5989-5b4e-b363-a183808a68de',
         slug: 'spinach',
         name: 'spinach',
         quantity: 500,
@@ -23831,7 +23831,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '405f9bb2-f0d4-56ac-84dc-a4d1381d2536',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 250,
@@ -23845,7 +23845,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69799a4b-63e8-5a87-8e10-03a2753503aa',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 4,
@@ -23859,7 +23859,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a3117047-e1b9-52d6-8793-fc9b8788df79',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 4,
@@ -23873,7 +23873,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a65c3188-ff9e-533b-a4d2-b995237ce0df',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 1,
@@ -23887,7 +23887,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b7de4575-25b1-5b48-9d7c-ad08d2b2e1e4',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 100,
@@ -23901,7 +23901,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f5490f7a-be2c-5cb3-b3b6-e8d7a7b4fa61',
-        ingredientId: 'undefined',
+        ingredientId: '489af5ea-b8c1-5000-bb16-3617719130fa',
         slug: 'nutmeg',
         name: 'nutmeg',
         quantity: 0.25,
@@ -23915,7 +23915,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fae7640c-6a5a-5fc8-bd34-425af44a35c3',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -24004,7 +24004,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '8cbb7548-fd5d-5b16-9ca2-8a20726bbc9b',
-        ingredientId: 'undefined',
+        ingredientId: 'de2b2e4d-d63e-5611-be1a-7034f3d1cf50',
         slug: 'basmati-rice',
         name: 'basmati rice',
         quantity: 350,
@@ -24018,7 +24018,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69f8a2db-5650-5743-a0f0-d5d6f5dc2503',
-        ingredientId: 'undefined',
+        ingredientId: '88e88f2c-7649-5b7b-9464-0a7dcaec2ea3',
         slug: 'green-peas',
         name: 'green peas',
         quantity: 150,
@@ -24032,7 +24032,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '26f0d20b-529d-5af2-b742-e3ca3327e6d4',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 2,
@@ -24046,7 +24046,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a98f863d-6842-596b-8291-5650247eb32e',
-        ingredientId: 'undefined',
+        ingredientId: '38932f4b-eeef-5ea6-bb8d-73ed8c6908bc',
         slug: 'cardamom',
         name: 'cardamom',
         quantity: 3,
@@ -24060,7 +24060,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '71e25d8a-fe8b-5d6d-850f-c25cf0522aa6',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 1,
@@ -24074,7 +24074,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8b8977af-60f9-5d04-a14e-43a0f64df3cc',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 40,
@@ -24088,7 +24088,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8d96a1fb-4631-515e-acb1-d9d8bd5cda00',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -24167,7 +24167,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ef3d01ee-2dff-53ac-813c-400d35d204ef',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 6,
@@ -24181,7 +24181,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2be925b7-465f-5113-97b6-351468664ce6',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 300,
@@ -24195,7 +24195,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '200cf098-8c96-50fd-9225-c632a5c6349d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -24209,7 +24209,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29b740c7-4064-5ff3-aef5-05414da75565',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -24223,7 +24223,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '12a36383-b5fb-59a1-8023-d6276d6bd239',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -24237,7 +24237,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f65edef0-8c21-53d0-95ae-6ad1eb1e35d9',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 2,
@@ -24251,7 +24251,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f67139cc-4546-55ea-a422-be50983b5dcf',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -24265,7 +24265,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '272bb397-acad-57b5-a7d9-cf0970886812',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 60,
@@ -24279,7 +24279,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f1454e34-9b40-5c3f-80ac-4847eb0ad3ee',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -24293,7 +24293,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ed36361e-ad9f-5cd8-9b5e-ff331ec893d1',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -24385,7 +24385,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c6a60db3-890e-5d08-bcc9-8b0fc5b8f14d',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 120,
@@ -24399,7 +24399,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4c41906a-d3ac-5eec-8d60-9b7b84d13694',
-        ingredientId: 'undefined',
+        ingredientId: '3dac1eb5-c9cb-5ad3-8054-d696f54a2826',
         slug: 'milk',
         name: 'milk',
         quantity: 1,
@@ -24413,7 +24413,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '392c52d3-a0bb-5a50-a964-f297c2a71841',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 120,
@@ -24427,7 +24427,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de023190-21f3-51a8-a89c-e5295d7d1b56',
-        ingredientId: 'undefined',
+        ingredientId: '72a9dc59-00ff-56eb-a001-1a339a073985',
         slug: 'cornflour',
         name: 'cornflour',
         quantity: 2,
@@ -24441,7 +24441,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '89b99d42-6569-5d56-8c6b-ee7fca3288dd',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -24455,7 +24455,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4f397d3c-6e9b-5898-a1fc-ea3a707487f0',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 1,
@@ -24534,7 +24534,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'b031b821-0c85-5cd1-a537-357e7925007b',
-        ingredientId: 'undefined',
+        ingredientId: '058432a1-fea0-5498-a6fe-bf2242554cc7',
         slug: 'sweet-potato',
         name: 'sweet potato',
         quantity: 600,
@@ -24548,7 +24548,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'df58b87f-96ad-56eb-9380-26316cb8687c',
-        ingredientId: 'undefined',
+        ingredientId: '72a9dc59-00ff-56eb-a001-1a339a073985',
         slug: 'cornflour',
         name: 'cornflour',
         quantity: 2,
@@ -24562,7 +24562,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '023405b7-fec9-5fff-9829-969ca7c1856b',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 1,
@@ -24576,7 +24576,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '80a82a15-9654-58d8-ad4e-2cd293f395b2',
-        ingredientId: 'undefined',
+        ingredientId: 'b22943f1-547a-57f8-afc4-af7cccf06371',
         slug: 'garlic-powder',
         name: 'garlic powder',
         quantity: 1,
@@ -24590,7 +24590,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4f57daf1-accf-53f9-8d98-39361d952875',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -24604,7 +24604,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f958bece-c6fd-5c02-ad52-6301c7eb4fb2',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -24685,7 +24685,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'b440fd34-ee47-56af-81cc-715d0d07c83a',
-        ingredientId: 'undefined',
+        ingredientId: '833a50a8-f3f6-57b5-9d44-cfce4b211a46',
         slug: 'tofu',
         name: 'tofu',
         quantity: 450,
@@ -24699,7 +24699,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3814b715-8a51-5c95-b77e-119881e6a832',
-        ingredientId: 'undefined',
+        ingredientId: '72a9dc59-00ff-56eb-a001-1a339a073985',
         slug: 'cornflour',
         name: 'cornflour',
         quantity: 60,
@@ -24713,7 +24713,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd2fdf913-54a6-543e-97a3-4b6ef151311e',
-        ingredientId: 'undefined',
+        ingredientId: 'aa17a5f3-3c9e-5f36-890a-fe7b9bbef6dc',
         slug: 'pineapple',
         name: 'pineapple',
         quantity: 200,
@@ -24727,7 +24727,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3e81b673-5434-5335-a5f8-90bb610db18f',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -24741,7 +24741,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9a762232-9dea-5a31-96f6-5b77c3feff78',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -24755,7 +24755,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2ed8c146-a6d0-5bf5-b6ac-6079597b8c72',
-        ingredientId: 'undefined',
+        ingredientId: 'e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d',
         slug: 'ketchup',
         name: 'ketchup',
         quantity: 3,
@@ -24769,7 +24769,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c58b8b16-6415-5342-9afa-dadb565cd7b6',
-        ingredientId: 'undefined',
+        ingredientId: '3fe5f55e-6a71-53be-9b5f-af6cf3594773',
         slug: 'vinegar-apple',
         name: 'apple cider vinegar',
         quantity: 3,
@@ -24783,7 +24783,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a7f2dbf0-18a0-5e5d-960a-4e1829545c9e',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 2,
@@ -24797,7 +24797,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1f7feb9a-d497-5b3e-b29d-15530de186bd',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -24811,7 +24811,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '292b79f7-180b-5626-8d4e-6bf44cad47ca',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 4,
@@ -24890,7 +24890,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c784a4aa-817b-55fb-9c3d-5c386b21f381',
-        ingredientId: 'undefined',
+        ingredientId: 'fef923d6-4194-5567-ab7a-615419c7b06a',
         slug: 'falafel-mix',
         name: 'falafel mix',
         quantity: 400,
@@ -24904,7 +24904,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '442b881c-e10c-5cca-bc15-956021b709f2',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 1,
@@ -24918,7 +24918,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bd399be5-62dd-5535-82ef-b1cf0464e318',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -24932,7 +24932,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8d525052-0d8e-56d8-b9c4-7ed79e8831ce',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -24946,7 +24946,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '51c50490-11c5-5513-8b1e-9fc95727dc22',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -24960,7 +24960,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b6c0ed11-fcc4-5646-8702-b83a7226e084',
-        ingredientId: 'undefined',
+        ingredientId: 'e91ff6e3-9e21-594c-ae83-0109c1289947',
         slug: 'coriander-ground',
         name: 'coriander seeds',
         quantity: 2,
@@ -24974,7 +24974,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de950abc-0159-56ab-b476-6e8619ec3e27',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -24988,7 +24988,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8f4b1d39-2ffb-5f8d-ad5d-7fb430c25c1c',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 2,
@@ -25002,7 +25002,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a0af2b3c-abca-5aa3-bccd-4610381946ee',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 400,
@@ -25016,7 +25016,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5395e1f6-6597-5f2b-8359-9aa4f56bdc72',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -25107,7 +25107,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7cf27004-a616-5e0f-a85c-c84a5f4c5222',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 3,
@@ -25121,7 +25121,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b9022713-b5e6-5085-8468-421c8cca0662',
-        ingredientId: 'undefined',
+        ingredientId: '4ec6c756-782a-5827-9afe-6cf7162ee36f',
         slug: 'bulgur',
         name: 'bulgur',
         quantity: 60,
@@ -25135,7 +25135,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8244f982-b445-579f-aeab-7dd28e3083a5',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 3,
@@ -25149,7 +25149,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cb38c0a3-bcda-5e5b-b180-caaf043446f6',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 1,
@@ -25163,7 +25163,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '177bf2e3-04e1-5f49-b2b0-2cbda0d9ee71',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 3,
@@ -25177,7 +25177,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd1bd451c-6b9a-58b1-805d-b26caac193d5',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -25191,7 +25191,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e52e4816-2845-5f95-a635-d42c362473c4',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -25205,7 +25205,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '854ad148-11a0-55d8-afcd-75b94c1bc2d0',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -25283,7 +25283,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'c7540654-c1b1-5026-bd0f-a4f62703b84c',
-        ingredientId: 'undefined',
+        ingredientId: 'e6a3d50c-1f05-5538-b3f6-addf15cdb864',
         slug: 'baladi-bread',
         name: 'baladi bread',
         quantity: 2,
@@ -25297,7 +25297,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '58ffcde9-01d3-5261-8734-98773c8cf4a9',
-        ingredientId: 'undefined',
+        ingredientId: 'fef923d6-4194-5567-ab7a-615419c7b06a',
         slug: 'falafel-mix',
         name: 'falafel mix',
         quantity: 200,
@@ -25311,7 +25311,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4204323e-317d-575b-964a-5a26d16ec80d',
-        ingredientId: 'undefined',
+        ingredientId: '48afeda5-6d2e-5ad9-93b8-c4e6307a2d33',
         slug: 'tahini',
         name: 'tahini',
         quantity: 3,
@@ -25325,7 +25325,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8e96e46a-a473-515a-83b4-d25051ef0840',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 1,
@@ -25339,7 +25339,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1ec0723b-972d-5e26-985e-fa8609be95b6',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -25353,7 +25353,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '97b3d04e-ca2a-5870-9c73-a092bce585d7',
-        ingredientId: 'undefined',
+        ingredientId: '8dc6119d-aee8-5c61-8c7a-d52f26e70a2d',
         slug: 'lettuce',
         name: 'lettuce',
         quantity: 4,
@@ -25367,7 +25367,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd6a1af18-e9e3-5cfb-88d0-fe5e8d56ed1c',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 0.5,
@@ -25381,7 +25381,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '338aa064-1678-57ac-8db7-0e17b51e174b',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -25451,7 +25451,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '75bfb27a-7cf1-5d0c-aa9e-34bf85934fd5',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 900,
@@ -25465,7 +25465,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f949406c-77a0-5db6-88f7-97e0210c8702',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 250,
@@ -25479,7 +25479,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1550846a-b092-5bcd-876a-e83a3816fbb6',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -25493,7 +25493,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '79a076b9-af68-58ca-ba0b-69a8ecca62ac',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 6,
@@ -25507,7 +25507,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'afd5326d-ff47-59e2-91d5-429199719d93',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 30,
@@ -25521,7 +25521,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4fd76fc5-019c-5fc6-ac1a-920f230cc91d',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -25535,7 +25535,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '75a57225-225b-5cf2-9f1a-77b2e1af07b3',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 1,
@@ -25549,7 +25549,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '25565ee2-8de2-51ef-98e0-684ae26c7786',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -25563,7 +25563,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c1c7048b-0f4a-5382-886f-d8aea207a58e',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -25577,7 +25577,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f7493310-49aa-59fe-acd0-4cbc710f405a',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -25658,7 +25658,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '67b06be4-0ec3-5f2a-9ec4-3ff3febbc173',
-        ingredientId: 'undefined',
+        ingredientId: '9e434947-7e6a-538a-a1a8-51b5b0c6355d',
         slug: 'chicken-thigh',
         name: 'chicken thighs',
         quantity: 700,
@@ -25672,7 +25672,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bbe216f8-9add-55a9-991a-5f51cfc9c200',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 80,
@@ -25686,7 +25686,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2012183c-5dd4-5f4c-b7a4-5915db647acb',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 3,
@@ -25700,7 +25700,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '843d8d26-2637-52f2-879b-3a1889c5a211',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -25714,7 +25714,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5b1cf017-ad30-5fdd-90ca-16959ec825a7',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 20,
@@ -25728,7 +25728,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '147d2f08-690b-5c29-ae73-52caf0a3e4fd',
-        ingredientId: 'undefined',
+        ingredientId: '3fe5f55e-6a71-53be-9b5f-af6cf3594773',
         slug: 'vinegar-apple',
         name: 'apple cider vinegar',
         quantity: 2,
@@ -25742,7 +25742,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3d5b1645-601c-572f-83af-176d4f504dec',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -25756,7 +25756,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '11328215-87cd-5162-ae8e-ea10558bd04a',
-        ingredientId: 'undefined',
+        ingredientId: '4bcee270-941c-5f70-84f8-5398933e495b',
         slug: 'sesame-seeds',
         name: 'sesame seeds',
         quantity: 1,
@@ -25770,7 +25770,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e98852b0-408a-5c39-a046-281cf7e2c898',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 2,
@@ -25848,7 +25848,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '1e11d70b-569c-5741-ae47-33a93aae20f6',
-        ingredientId: 'undefined',
+        ingredientId: '2a5746f8-a258-559b-8bf5-67e2a1f0bdb8',
         slug: 'cabbage',
         name: 'cabbage',
         quantity: 300,
@@ -25862,7 +25862,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ec7376db-edc2-59e8-9277-a813b1b66a74',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -25876,7 +25876,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '479ddfcf-9c98-5a74-b85f-b89e510b5721',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -25890,7 +25890,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5620a094-63f9-51ac-881d-85a5dcb07078',
-        ingredientId: 'undefined',
+        ingredientId: 'd61afade-87ce-5f49-aac0-fd391ddb6a06',
         slug: 'peanuts',
         name: 'peanuts',
         quantity: 60,
@@ -25904,7 +25904,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1692ca47-516c-5f66-ae1b-2fa78c2a901e',
-        ingredientId: 'undefined',
+        ingredientId: '651ea366-fa00-56e8-a0da-8dc2edfcb4d3',
         slug: 'peanut-butter',
         name: 'peanut butter',
         quantity: 2,
@@ -25918,7 +25918,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2b4dce7e-8c32-56b3-888e-fda3693681ba',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -25932,7 +25932,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b70d5cdd-2466-52f4-86f5-81662a738893',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 2,
@@ -25946,7 +25946,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0f04285f-f36f-5794-8e44-5fee3f045191',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -25960,7 +25960,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5a842bb1-38cb-5e5f-a9c2-edbe96a8998b',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -25974,7 +25974,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd0acaa20-41e1-560f-96a7-a94aa3f35fef',
-        ingredientId: 'undefined',
+        ingredientId: 'fee96739-abf8-5cca-aac6-a27423853ecb',
         slug: 'coriander',
         name: 'coriander',
         quantity: 4,
@@ -26045,7 +26045,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ef960c02-1d24-5058-a887-9df33fe553ef',
-        ingredientId: 'undefined',
+        ingredientId: '159aeeb4-a876-5985-9cf9-a37d3d91bfb7',
         slug: 'cream-cheese',
         name: 'cream cheese',
         quantity: 300,
@@ -26059,7 +26059,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7f99b144-e283-5fe7-859a-4bbee8f76a34',
-        ingredientId: 'undefined',
+        ingredientId: 'c61337a3-b441-5075-9cbc-2d271dd11695',
         slug: 'cream',
         name: 'cooking cream',
         quantity: 200,
@@ -26073,7 +26073,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '01dd817b-8372-5571-b8cc-094f5db3fd1c',
-        ingredientId: 'undefined',
+        ingredientId: '1adc1ada-479e-5b3a-bdeb-4b3f054afcc7',
         slug: 'sugar',
         name: 'sugar',
         quantity: 80,
@@ -26087,7 +26087,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5825b5fd-5236-5af3-955b-eb670b351940',
-        ingredientId: 'undefined',
+        ingredientId: 'b63c278c-0c81-5d06-a42e-3d8a65446f4b',
         slug: 'coffee',
         name: 'coffee',
         quantity: 200,
@@ -26101,7 +26101,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7a7036b4-c558-59bd-9a49-8a060dd66cba',
-        ingredientId: 'undefined',
+        ingredientId: 'df40dfec-b14e-57ac-8072-14bb4cc8345d',
         slug: 'toast-bread',
         name: 'toast bread',
         quantity: 4,
@@ -26115,7 +26115,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '20f3be92-d677-5db5-adf1-6182afe12e63',
-        ingredientId: 'undefined',
+        ingredientId: '97edb046-61e8-5aea-a36e-faa9f3e60b68',
         slug: 'cocoa',
         name: 'cocoa powder',
         quantity: 2,
@@ -26129,7 +26129,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a651e2db-2e4d-5a05-beb2-868e6ba7b33f',
-        ingredientId: 'undefined',
+        ingredientId: '3f6b34cf-d03c-5a28-b7fb-27b77c9200f3',
         slug: 'vanilla',
         name: 'vanilla',
         quantity: 1,
@@ -26211,7 +26211,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '2c966510-e5b2-534b-a0fe-7bc73ae6a666',
-        ingredientId: 'undefined',
+        ingredientId: '67433159-103d-5d03-88e1-f62ded98b9de',
         slug: 'tuna-can',
         name: 'canned tuna',
         quantity: 200,
@@ -26225,7 +26225,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b479108b-9f65-58a8-97a6-77049ec1f6b8',
-        ingredientId: 'undefined',
+        ingredientId: 'df40dfec-b14e-57ac-8072-14bb4cc8345d',
         slug: 'toast-bread',
         name: 'toast bread',
         quantity: 4,
@@ -26239,7 +26239,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '94ce64a0-8bb3-5f78-8c68-835dd22ef578',
-        ingredientId: 'undefined',
+        ingredientId: '06ed6ebf-3b98-5817-9972-27f4278e91c7',
         slug: 'cheddar',
         name: 'cheddar cheese',
         quantity: 100,
@@ -26253,7 +26253,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1fa6337e-e550-5a2d-9024-54002a3f89e5',
-        ingredientId: 'undefined',
+        ingredientId: '0bc711d8-dcbf-540a-b279-b696fa54361a',
         slug: 'mayonnaise',
         name: 'mayonnaise',
         quantity: 3,
@@ -26267,7 +26267,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a31d5a56-acbd-5f5d-88c8-cbf3b379399b',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.25,
@@ -26281,7 +26281,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '610b8ca3-cc88-568b-a3ec-7fb6d62ef81e',
-        ingredientId: 'undefined',
+        ingredientId: '993065a0-6eaf-5913-b5c2-28e1754ceda0',
         slug: 'pickles',
         name: 'pickles',
         quantity: 30,
@@ -26295,7 +26295,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '19516115-6ab7-524c-b739-3c10ba064aae',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 20,
@@ -26309,7 +26309,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f69fc5b0-d949-5d90-8c82-91cb22608a44',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 0.5,
@@ -26389,7 +26389,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '6f1a1243-e267-5934-a742-dc2c024514fc',
-        ingredientId: 'undefined',
+        ingredientId: '84719e99-9939-50f6-81d9-c7c3234a3200',
         slug: 'pasta',
         name: 'pasta',
         quantity: 200,
@@ -26403,7 +26403,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '101e1443-63a4-5fda-b2c0-cd094c6922a3',
-        ingredientId: 'undefined',
+        ingredientId: '67433159-103d-5d03-88e1-f62ded98b9de',
         slug: 'tuna-can',
         name: 'canned tuna',
         quantity: 2,
@@ -26417,7 +26417,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fee0ab3a-db2c-5f47-9d95-39c49abbb7e0',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 1,
@@ -26431,7 +26431,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b7402024-030d-50c5-86a2-ee1fb6992c4c',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -26445,7 +26445,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'af8e9291-f09f-5694-8a85-3f6d0d70dfa7',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -26459,7 +26459,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd65da282-527a-557b-ba41-96a2cc80e396',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 30,
@@ -26473,7 +26473,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5130b0ed-b519-5ce0-8f03-6befbb76d611',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 1,
@@ -26551,7 +26551,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4a468a23-a908-51cb-895f-b81781d6c407',
-        ingredientId: 'undefined',
+        ingredientId: '67433159-103d-5d03-88e1-f62ded98b9de',
         slug: 'tuna-can',
         name: 'canned tuna',
         quantity: 200,
@@ -26565,7 +26565,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a925cf86-8b7d-5df7-901e-ee6f3905d75a',
-        ingredientId: 'undefined',
+        ingredientId: 'ffc46f32-2758-5d17-851f-0a8890d69dc2',
         slug: 'white-beans',
         name: 'white beans',
         quantity: 400,
@@ -26579,7 +26579,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69baa9d5-fdff-5bf6-854a-1c0500975f1d',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -26593,7 +26593,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3a85824f-f8ee-5f2e-8f99-afc4a4cc14d6',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -26607,7 +26607,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8c79fde0-c8ef-54f1-b803-7843e2602de7',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -26621,7 +26621,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'afe87e28-caf0-52d3-ad8a-f278aba51259',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -26635,7 +26635,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'de1d29ef-9c05-5e59-89f9-94e0d1c423d4',
-        ingredientId: 'undefined',
+        ingredientId: '12e1e253-f166-56b3-a64c-3f146a3a99cb',
         slug: 'capers',
         name: 'capers',
         quantity: 1,
@@ -26649,7 +26649,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd9bbe398-0fb3-5bf3-ab22-4d843f041cf4',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -26726,7 +26726,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '5c282324-68cb-5575-a12f-545597bc0e11',
-        ingredientId: 'undefined',
+        ingredientId: '4ec6c756-782a-5827-9afe-6cf7162ee36f',
         slug: 'bulgur',
         name: 'bulgur',
         quantity: 350,
@@ -26740,7 +26740,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bdfaf115-6ab6-59cc-bb90-89c180e1d133',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -26754,7 +26754,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '51934dc2-d2de-53d9-8058-6c295a307e3c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -26768,7 +26768,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '63a2c021-84d7-5ca9-8d99-15a4657bd332',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -26782,7 +26782,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '54e8255e-8f31-57b3-b0be-50178c04f63b',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -26796,7 +26796,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e823cbcf-7915-5b9a-80d9-9135231c8753',
-        ingredientId: 'undefined',
+        ingredientId: 'd31efc56-6ee3-58da-b81e-5e11c8e06fbe',
         slug: 'stock-cube',
         name: 'stock cube',
         quantity: 1,
@@ -26810,7 +26810,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '328bc01b-7e01-59b5-91e8-1607bbde9fb2',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -26824,7 +26824,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '067bef93-9c02-5217-8ffa-86cf315f39d6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -26906,7 +26906,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '485b5493-9e4a-534e-a397-3de05c051cbd',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 300,
@@ -26920,7 +26920,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3419b46a-8725-5b5c-9aa2-1c472c080fb2',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -26934,7 +26934,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5c64fadd-5d12-5a13-b773-4ca0e8da8095',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -26948,7 +26948,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '760686f3-8253-585c-9d31-978b6b4d6195',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -26962,7 +26962,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3fda721f-13ce-5e50-9af9-9bcfa8953900',
-        ingredientId: 'undefined',
+        ingredientId: '79fd1023-cde1-5dbc-99bb-92034b146c5f',
         slug: 'chili-flakes',
         name: 'chili flakes',
         quantity: 1,
@@ -26976,7 +26976,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2bdb02e8-19b5-5137-800d-54fb8e8ddd49',
-        ingredientId: 'undefined',
+        ingredientId: '9c4ff58a-5537-5daf-9e7e-f7b25c512ac1',
         slug: 'vinegar',
         name: 'vinegar',
         quantity: 1,
@@ -26990,7 +26990,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6a86b4bf-d997-59f1-8df4-e8b75d5d766d',
-        ingredientId: 'undefined',
+        ingredientId: '33ebbf28-5dfb-522e-8bf9-d89af2f0969f',
         slug: 'dill',
         name: 'dill',
         quantity: 2,
@@ -27004,7 +27004,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'adafc8a1-7ca4-5442-b988-584a74f0f0e9',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.5,
@@ -27085,7 +27085,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '5ec3105f-5249-588d-aa07-bf21e0441c29',
-        ingredientId: 'undefined',
+        ingredientId: '9ca996d4-9688-5782-949b-0ac53c5023a2',
         slug: 'lentils',
         name: 'red lentils',
         quantity: 280,
@@ -27099,7 +27099,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c8c4e63d-29c3-5340-aca9-c509b35ae1fb',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -27113,7 +27113,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b733d7a7-29a0-5fcc-a324-28d71872dd43',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 1,
@@ -27127,7 +27127,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9b6e8dff-9c94-5c36-a5e9-742e307e63f4',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 1,
@@ -27141,7 +27141,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '96a20165-8618-5587-a402-088a367fc27b',
-        ingredientId: 'undefined',
+        ingredientId: '225dd824-7869-5423-a591-a160525db16a',
         slug: 'butter',
         name: 'butter',
         quantity: 50,
@@ -27155,7 +27155,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ecb9ff99-aece-57e7-9c85-4c8a4a493fd5',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 2,
@@ -27169,7 +27169,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd8f75d07-9f32-5b9d-935a-fbb201642a1e',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 1,
@@ -27183,7 +27183,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0e909048-d6a4-5567-b39a-fa6326fba54d',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -27197,7 +27197,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c162434f-6122-5ca2-9b4d-b6ad9c45fdc4',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -27277,7 +27277,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '634d60f7-74f4-527d-a768-6078ed9a51c6',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -27291,7 +27291,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '12c24ad7-39f1-5d07-8f74-9502dbaa43ba',
-        ingredientId: 'undefined',
+        ingredientId: 'aecbcc48-c9eb-531d-ba39-fada505cee0f',
         slug: 'cucumber',
         name: 'cucumber',
         quantity: 2,
@@ -27305,7 +27305,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2e9be313-e126-51c6-bad7-2ed10b6efdd9',
-        ingredientId: 'undefined',
+        ingredientId: '78ef052e-515f-5357-ae04-8c6071acb1c2',
         slug: 'bell-pepper',
         name: 'bell pepper',
         quantity: 1,
@@ -27319,7 +27319,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6a82f09d-3a8d-5fa8-be32-b5f68306e43c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -27333,7 +27333,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'baa21e9c-d25d-514d-a1d3-fa533a8ecd53',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 5,
@@ -27347,7 +27347,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '90fb8f1e-beaa-5180-ba09-d373622b6232',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -27361,7 +27361,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cf98edb7-59af-5b40-8b0e-12e9a865c015',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 3,
@@ -27375,7 +27375,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c29a692b-475d-53bd-9aa8-d97ca3bdf737',
-        ingredientId: 'undefined',
+        ingredientId: 'e14c57c0-53b0-55c2-824b-94910dda15f7',
         slug: 'sumac',
         name: 'sumac',
         quantity: 1,
@@ -27389,7 +27389,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '97c956de-b899-5f41-b92e-418b3452cee8',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 0.75,
@@ -27458,7 +27458,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'facd71c8-9d51-5ed0-9809-f8eba9ee99f5',
-        ingredientId: 'undefined',
+        ingredientId: '7c337e3e-26fe-5688-93b0-2548578356ef',
         slug: 'flour',
         name: 'flour',
         quantity: 400,
@@ -27472,7 +27472,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c1abbac4-bfd7-5c4f-9aab-42988f27cf7d',
-        ingredientId: 'undefined',
+        ingredientId: '0582d882-4c5d-52e7-9099-6e635915100e',
         slug: 'yeast',
         name: 'yeast',
         quantity: 5,
@@ -27486,7 +27486,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '74e295cc-f3a4-5e3b-b98a-4f08dd178754',
-        ingredientId: 'undefined',
+        ingredientId: 'a0b111f9-f84e-5d50-8f64-f6c5d9829653',
         slug: 'lamb',
         name: 'lamb',
         quantity: 350,
@@ -27500,7 +27500,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e007fccf-3e07-5745-9653-2c3e198d4fe9',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -27514,7 +27514,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '0fd5bd15-68f7-526e-8ca8-d1c3096b6f0d',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 4,
@@ -27528,7 +27528,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '58e493a3-1bc4-5460-bc28-3ea61130ab79',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -27542,7 +27542,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bac8ed6d-7132-55bb-8f22-2cf785e7d003',
-        ingredientId: 'undefined',
+        ingredientId: '170daaf4-de33-55da-b958-5bd619406b74',
         slug: 'paprika',
         name: 'paprika',
         quantity: 2,
@@ -27556,7 +27556,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '35c27174-63c6-5035-ad0b-5e8ff23066e7',
-        ingredientId: 'undefined',
+        ingredientId: '92246389-2519-50a1-92ed-519d3cd5632d',
         slug: 'cumin',
         name: 'cumin',
         quantity: 1,
@@ -27570,7 +27570,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '957e73f7-aad2-5fa3-a188-8f51d0a801b2',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 2,
@@ -27584,7 +27584,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4720dff3-ad22-5333-ab09-df5a154f40cc',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -27667,7 +27667,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '0dbb5f01-94fc-53e8-bf7a-e6f93aa89786',
-        ingredientId: 'undefined',
+        ingredientId: 'ffc46f32-2758-5d17-851f-0a8890d69dc2',
         slug: 'white-beans',
         name: 'white beans',
         quantity: 480,
@@ -27681,7 +27681,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7de0a432-8f88-53aa-8db3-136e5228057e',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 2,
@@ -27695,7 +27695,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c94e2337-42f7-5b81-aff1-80bbdb1db329',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 0.5,
@@ -27709,7 +27709,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '84ffaf0e-50b7-54be-af2c-cb48eeb1630d',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -27723,7 +27723,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '5f729f99-5fe0-53f5-a30d-ff1921d3ee10',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 5,
@@ -27737,7 +27737,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b5d7ea32-814d-5337-aa94-f9504ed30cdb',
-        ingredientId: 'undefined',
+        ingredientId: '804bb65b-4972-5597-8b96-9c9d904eb0d9',
         slug: 'olives',
         name: 'olives',
         quantity: 50,
@@ -27751,7 +27751,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '818a78ed-b4ed-5717-82db-444ad08524c6',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 2,
@@ -27765,7 +27765,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ea68f61d-930f-5bed-aa64-c81a5a1d8f73',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -27779,7 +27779,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c5d2a359-58eb-5608-b06a-bb199ca9d108',
-        ingredientId: 'undefined',
+        ingredientId: 'e14c57c0-53b0-55c2-824b-94910dda15f7',
         slug: 'sumac',
         name: 'sumac',
         quantity: 1,
@@ -27793,7 +27793,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '21588485-4589-59e4-aa7e-3dbd1eec656e',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1,
@@ -27872,7 +27872,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '8ce97eaf-7cd8-5247-b456-c8597812c514',
-        ingredientId: 'undefined',
+        ingredientId: 'de2b2e4d-d63e-5611-be1a-7034f3d1cf50',
         slug: 'basmati-rice',
         name: 'basmati rice',
         quantity: 450,
@@ -27886,7 +27886,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '8c09c4e7-4e41-5c14-82b2-679c6b2d3f31',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -27900,7 +27900,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '7e85fdfb-93a7-5988-9af8-8ef8d5f282b8',
-        ingredientId: 'undefined',
+        ingredientId: '88e88f2c-7649-5b7b-9464-0a7dcaec2ea3',
         slug: 'green-peas',
         name: 'green peas',
         quantity: 150,
@@ -27914,7 +27914,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '4a11df5b-d3e8-501b-b64d-f537a70990f4',
-        ingredientId: 'undefined',
+        ingredientId: 'e8a8e935-9ff9-5797-9bde-48bfbca72a83',
         slug: 'potatoes',
         name: 'potatoes',
         quantity: 2,
@@ -27928,7 +27928,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ce2a090c-e9b8-5a8c-9ed0-91f385669167',
-        ingredientId: 'undefined',
+        ingredientId: '7b1c0cd6-49ae-50b5-9688-b61b0b8be677',
         slug: 'cauliflower',
         name: 'cauliflower',
         quantity: 200,
@@ -27942,7 +27942,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'a756eb86-e8de-5d45-8fd1-d8c970b7eb50',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 200,
@@ -27956,7 +27956,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'eb8b83d6-cb69-5080-a542-c0edcdb8e19f',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 3,
@@ -27970,7 +27970,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ba84efb5-5b49-5f62-8ead-0f582648f595',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 5,
@@ -27984,7 +27984,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '3e8e9685-95d0-5111-8716-c8eee075d447',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 25,
@@ -27998,7 +27998,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'f53e35e7-af01-5a1c-bd83-082b69a89498',
-        ingredientId: 'undefined',
+        ingredientId: 'b8eef3f7-4cfd-5041-8ef6-3c5fb7ec41ae',
         slug: 'curry-powder',
         name: 'curry powder',
         quantity: 2,
@@ -28012,7 +28012,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ae83eda1-56e7-5f17-beb8-ada5f317a9bc',
-        ingredientId: 'undefined',
+        ingredientId: '38932f4b-eeef-5ea6-bb8d-73ed8c6908bc',
         slug: 'cardamom',
         name: 'cardamom',
         quantity: 4,
@@ -28026,7 +28026,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '6f8e63c1-27d0-516c-97ba-7cda371fdf04',
-        ingredientId: 'undefined',
+        ingredientId: '4cf5f33f-4504-5cbc-b479-216d2a96ca55',
         slug: 'ghee',
         name: 'ghee',
         quantity: 60,
@@ -28040,7 +28040,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd4ad9f0e-6e80-52f4-ab16-6867bf79dfe5',
-        ingredientId: 'undefined',
+        ingredientId: '4a89c3c2-bb8b-5353-962f-01e5647f3173',
         slug: 'saffron',
         name: 'saffron',
         quantity: 0.25,
@@ -28054,7 +28054,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c592bdcc-480b-5fec-83bb-ea96a1bb4da6',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 2,
@@ -28157,7 +28157,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '4d49cc8f-5e71-589c-8408-d95e78fc9346',
-        ingredientId: 'undefined',
+        ingredientId: 'f30b9211-c4bd-5f0c-9c3a-264b4d908839',
         slug: 'phyllo',
         name: 'filo pastry',
         quantity: 250,
@@ -28171,7 +28171,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2b1470a8-07d4-5837-aad0-23c259bbe652',
-        ingredientId: 'undefined',
+        ingredientId: '2a5746f8-a258-559b-8bf5-67e2a1f0bdb8',
         slug: 'cabbage',
         name: 'cabbage',
         quantity: 300,
@@ -28185,7 +28185,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bd7df8a7-6806-50fc-8530-cae091e87fa9',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -28199,7 +28199,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '1e8dd2ac-4461-588f-bad7-8534d3c14804',
-        ingredientId: 'undefined',
+        ingredientId: '7bf5a425-217a-5592-a266-7b6a15ba9793',
         slug: 'green-onion',
         name: 'green onion',
         quantity: 4,
@@ -28213,7 +28213,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2e818082-b0bf-5093-b499-f7355fdef877',
-        ingredientId: 'undefined',
+        ingredientId: '69c59795-3632-591f-a683-c285c86e5ccd',
         slug: 'mushroom',
         name: 'mushrooms',
         quantity: 150,
@@ -28227,7 +28227,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cfee3e22-2cbe-5053-9d78-c6359dcfcbaf',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 3,
@@ -28241,7 +28241,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e9b444e9-47c2-5751-b37a-27b83c677c3d',
-        ingredientId: 'undefined',
+        ingredientId: '249185ac-4309-576b-a64f-a6f905955158',
         slug: 'ginger',
         name: 'ginger',
         quantity: 15,
@@ -28255,7 +28255,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '465eed90-f4d8-5936-83b9-3b350da998a4',
-        ingredientId: 'undefined',
+        ingredientId: 'd2030f31-c9c5-57b5-b0a8-2e88bfeae7a3',
         slug: 'soy-sauce',
         name: 'soy sauce',
         quantity: 3,
@@ -28269,7 +28269,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '484d3ac7-456f-56ea-b82b-e441219c2a72',
-        ingredientId: 'undefined',
+        ingredientId: '4c8970c1-eebd-52c7-94d0-21b38c8f50ae',
         slug: 'sesame-oil',
         name: 'sesame oil',
         quantity: 1,
@@ -28283,7 +28283,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '512c016a-ff53-58aa-9101-670200c821fc',
-        ingredientId: 'undefined',
+        ingredientId: 'e73ba4ed-484e-50aa-a8ff-90d1516c3b5c',
         slug: 'sunflower-oil',
         name: 'vegetable oil',
         quantity: 3,
@@ -28372,7 +28372,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: 'ca4b970a-e995-5782-a17d-75e6834151b8',
-        ingredientId: 'undefined',
+        ingredientId: 'eafffe31-b9ee-5a22-b353-b464c2d8d32e',
         slug: 'rice',
         name: 'rice',
         quantity: 400,
@@ -28386,7 +28386,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '53b5c8e4-5205-56f9-a30c-bf3fa0ec3d78',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 2,
@@ -28400,7 +28400,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '36a68181-238f-5e21-ba76-651971d8341d',
-        ingredientId: 'undefined',
+        ingredientId: '06a6e131-e1c8-5a90-aa0f-dde5ff75009a',
         slug: 'parsley',
         name: 'parsley',
         quantity: 1,
@@ -28414,7 +28414,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c5fff2ee-434e-5fd9-9f67-033927166661',
-        ingredientId: 'undefined',
+        ingredientId: '70292abd-20c5-524d-a238-4b1a6e318853',
         slug: 'mint',
         name: 'mint',
         quantity: 3,
@@ -28428,7 +28428,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'c9ddbf28-ab33-50b9-ac99-ebb3cfe9904c',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -28442,7 +28442,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '93ab3b6f-f61b-59ae-bf79-6ef19c2c5376',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 3,
@@ -28456,7 +28456,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'fd8caeff-62bf-511e-a9cb-b27a6313e535',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 80,
@@ -28470,7 +28470,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'acb6bb47-1678-57a4-a00b-401703d7686d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -28484,7 +28484,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'b7b546c4-d721-5d2b-9e23-95fef4382edb',
-        ingredientId: 'undefined',
+        ingredientId: '6dd4ed68-50a0-5c64-acf5-ec0df3e1280b',
         slug: 'black-pepper',
         name: 'black pepper',
         quantity: 1,
@@ -28584,7 +28584,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '907a17c4-5931-5831-9d20-024f73cce089',
-        ingredientId: 'undefined',
+        ingredientId: 'ffc46f32-2758-5d17-851f-0a8890d69dc2',
         slug: 'white-beans',
         name: 'white beans',
         quantity: 500,
@@ -28598,7 +28598,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd6aedbd6-9a85-595b-ba55-969ba911c76b',
-        ingredientId: 'undefined',
+        ingredientId: 'e40147a0-afff-5cc5-809e-690b81481ae3',
         slug: 'tomatoes',
         name: 'tomatoes',
         quantity: 4,
@@ -28612,7 +28612,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '391aedb7-12cb-55c7-9e84-acc07546e718',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -28626,7 +28626,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '145d5244-a3c3-51cc-842a-dd6db24a7b39',
-        ingredientId: 'undefined',
+        ingredientId: '63fa022d-0328-5eb2-8ca3-7dc727c15ad0',
         slug: 'carrots',
         name: 'carrots',
         quantity: 2,
@@ -28640,7 +28640,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '9de2c0c1-7712-5b37-921b-5db321f7df8e',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 4,
@@ -28654,7 +28654,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '2d853007-3528-5fbc-9eff-94c87b331252',
-        ingredientId: 'undefined',
+        ingredientId: 'd25879ab-da91-515e-babe-3284473de9ba',
         slug: 'tomato-paste',
         name: 'tomato paste',
         quantity: 1,
@@ -28668,7 +28668,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'af556463-2b51-5e61-b7d4-a54b5099293b',
-        ingredientId: 'undefined',
+        ingredientId: 'e04fb4e8-8469-5ddd-8144-bf1d7f7e8a70',
         slug: 'bay-leaf',
         name: 'bay leaf',
         quantity: 2,
@@ -28682,7 +28682,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '281356cf-dc68-534c-8a86-192dabd48360',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 4,
@@ -28696,7 +28696,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'e53c18d8-0207-537c-8ba9-ba5d675ac609',
-        ingredientId: 'undefined',
+        ingredientId: '2719c6c9-4810-5b00-a255-8f3c01fadc1c',
         slug: 'lemon',
         name: 'lemon',
         quantity: 1,
@@ -28710,7 +28710,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'ab1167e8-35fd-5c81-a9b7-9ad29374539d',
-        ingredientId: 'undefined',
+        ingredientId: '9d122ba9-b8aa-547f-9473-838a4f54941f',
         slug: 'salt',
         name: 'salt',
         quantity: 1.5,
@@ -28791,7 +28791,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '7ac30a08-6938-517b-9e88-1a8435b9c6fe',
-        ingredientId: 'undefined',
+        ingredientId: 'c73b0dd3-c4cf-564c-9114-079b380ba23e',
         slug: 'yogurt',
         name: 'yogurt',
         quantity: 250,
@@ -28805,7 +28805,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '69bba79b-315d-511b-8a7f-f36cf804d04a',
-        ingredientId: 'undefined',
+        ingredientId: '6b3d1bfe-2832-5820-9e49-95f14aab1728',
         slug: 'strawberry',
         name: 'strawberries',
         quantity: 100,
@@ -28819,7 +28819,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'da5275b3-c179-5de3-bdce-b88986cef576',
-        ingredientId: 'undefined',
+        ingredientId: '51c5f714-4931-5e47-b5c6-28d14b1d6845',
         slug: 'walnuts',
         name: 'walnuts',
         quantity: 20,
@@ -28833,7 +28833,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '243e6a86-5809-57ad-854e-6015fb74692e',
-        ingredientId: 'undefined',
+        ingredientId: 'e328adbb-b25c-5fbc-988d-611990b3c25a',
         slug: 'honey',
         name: 'honey',
         quantity: 1,
@@ -28847,7 +28847,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'dd5b3542-d618-5b05-ae34-ae903dfe181f',
-        ingredientId: 'undefined',
+        ingredientId: '3d31d7a9-6d54-5457-92a2-d4eeb49701f5',
         slug: 'chia',
         name: 'chia seeds',
         quantity: 1,
@@ -28861,7 +28861,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '77d475df-4935-5bd0-84f8-9737a0f2c387',
-        ingredientId: 'undefined',
+        ingredientId: '99e02842-bcf9-53b3-a960-9c0c297a888d',
         slug: 'cinnamon',
         name: 'cinnamon',
         quantity: 0.25,
@@ -28929,7 +28929,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
     ingredients: [
       {
         id: '9ba4175b-9a2b-552f-8b92-6176abc52ab8',
-        ingredientId: 'undefined',
+        ingredientId: 'd9b6af4a-dac9-5bf9-b6e3-297e2544cbfc',
         slug: 'zucchini',
         name: 'zucchini',
         quantity: 2,
@@ -28943,7 +28943,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '29a82ae8-85e0-59c3-bbda-b13552dabebd',
-        ingredientId: 'undefined',
+        ingredientId: 'd23e596f-1070-5eb8-89e2-f186f8c67253',
         slug: 'eggs',
         name: 'eggs',
         quantity: 4,
@@ -28957,7 +28957,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'd35c9c95-39e2-504b-b7cf-66b48b0febfe',
-        ingredientId: 'undefined',
+        ingredientId: '438a1460-58d0-5879-83c7-d5ec71c4ba7f',
         slug: 'onions',
         name: 'onions',
         quantity: 1,
@@ -28971,7 +28971,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'cabe97bd-3eff-5bf5-8145-0e0348fe9a6e',
-        ingredientId: 'undefined',
+        ingredientId: '1c4b93c3-e8fc-5aa0-97fe-c7496937af4b',
         slug: 'garlic',
         name: 'garlic',
         quantity: 2,
@@ -28985,7 +28985,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: '618dea3c-f253-53b6-b4b8-b84074f4e228',
-        ingredientId: 'undefined',
+        ingredientId: 'c87fb714-805c-5f3f-bd0f-a0a965ecf0e3',
         slug: 'olive-oil',
         name: 'olive oil',
         quantity: 25,
@@ -28999,7 +28999,7 @@ export const RECIPE_CATALOGUE: Recipe[] = [
       },
       {
         id: 'bc9f552c-3e1d-5842-a387-aa5597ae5771',
-        ingredientId: 'undefined',
+        ingredientId: '9a32ad33-12e7-5d02-b6bb-6284ebe2bf64',
         slug: 'white-cheese',
         name: 'white cheese',
         quantity: 50,

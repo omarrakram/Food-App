@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { RecipeCard } from '@/components/recipe/recipe-card';
+import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { PressScale } from '@/components/ui/press-scale';
 import { ScreenScroll } from '@/components/ui/screen';
@@ -12,7 +13,7 @@ import { SkeletonList } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
 import { useIsSaved, useToggleSave } from '@/features/saved/hooks';
 import { COLLECTIONS } from '@/features/recipes/fixtures';
-import { useLocalSuggestions, useMealRequest } from '@/features/recipes/hooks';
+import { useMealRequest, useRecipeSearch } from '@/features/recipes/hooks';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 import type { RecipeMatch } from '@/types/domain';
@@ -45,18 +46,30 @@ export default function DiscoverScreen() {
   const [activeCollection, setActiveCollection] = useState<string | null>(COLLECTIONS[0].slug);
 
   // Discover browses the whole catalogue: no ingredient or budget constraint,
-  // only the user's own hard constraints (allergens, diet, appliances).
+  // only the user's own hard constraints (allergens, diet, appliances) plus
+  // whichever collection is selected.
   const request = useMealRequest(useMemo(() => ({ mode: 'search' as const }), []));
-  const { matches, isLoading } = useLocalSuggestions(request, 200);
-
   const collection = COLLECTIONS.find((entry) => entry.slug === activeCollection);
-  const visible = useMemo(
-    () => (collection ? matches.filter((m) => m.recipe.tags.includes(collection.tag)) : matches),
-    [matches, collection],
+
+  // The collection goes INTO the query rather than filtering a fetched page.
+  // Filtering after the fact is how a page of twenty-four turns into three
+  // visible cards and an infinite scroll that looks broken.
+  const tags = useMemo(() => (collection ? [collection.tag] : []), [collection]);
+
+  const { matches, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } = useRecipeSearch(
+    request,
+    { tags },
   );
 
   return (
-    <ScreenScroll bottomInset={theme.layout.tabBarHeight} padded={false} contentGap={theme.spacing.lg}>
+    <ScreenScroll
+      bottomInset={theme.layout.tabBarHeight}
+      padded={false}
+      contentGap={theme.spacing.lg}
+      // Prefetching one screen early means the next page is usually already
+      // there by the time the user reaches the bottom of this one.
+      onEndReached={fetchNextPage}
+    >
       <View style={{ paddingHorizontal: theme.layout.screenPadding, gap: theme.spacing.lg, paddingTop: theme.spacing.md }}>
         <View style={{ gap: 2 }}>
           <Text variant="title1">{t('discover.title')}</Text>
@@ -118,7 +131,7 @@ export default function DiscoverScreen() {
       <View style={{ paddingHorizontal: theme.layout.screenPadding, gap: theme.layout.cardGap }}>
         {isLoading ? (
           <SkeletonList count={3} />
-        ) : visible.length === 0 ? (
+        ) : matches.length === 0 ? (
           <EmptyState
             icon="search-outline"
             title={t('results.empty')}
@@ -134,7 +147,24 @@ export default function DiscoverScreen() {
             testID="discover-empty"
           />
         ) : (
-          visible.map((match) => <SaveableCard key={match.recipe.id} match={match} />)
+          <>
+            {matches.map((match) => (
+              <SaveableCard key={match.recipe.id} match={match} />
+            ))}
+            {/* An explicit control as well as the scroll trigger: on the web
+                preview the list is short enough that the end-reached callback
+                may never fire, and a catalogue that stops at 24 with no way
+                forward reads as a bug. */}
+            {hasNextPage ? (
+              <Button
+                variant="secondary"
+                label={t('discover.loadMore')}
+                loading={isFetchingNextPage}
+                onPress={fetchNextPage}
+                testID="discover-load-more"
+              />
+            ) : null}
+          </>
         )}
       </View>
     </ScreenScroll>
