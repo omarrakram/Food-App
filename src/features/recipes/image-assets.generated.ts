@@ -13,4 +13,18 @@ export type LocalRecipeImage = {
 };
 
 export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
+  "aloo-gobi": {
+    source: require('../../../assets/recipes/aloo-gobi.jpg') as number,
+    creator: "Daderot",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Curry_roasted_cauliflower_and_haricots_verts,_roasted_garlic_celeriac_puree,_beef_bourguignon,_and_chicken_thigh_with_sweet_potato_and_apple_-_Boston,_MA.jpg",
+  },
+  "banana-bread": {
+    source: require('../../../assets/recipes/banana-bread.jpg') as number,
+    creator: "Shisma",
+    license: "CC-BY-4.0",
+    attribution: "Shisma · CC-BY-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Banana_bread_3.jpg",
+  },
 };

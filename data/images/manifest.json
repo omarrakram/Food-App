@@ -1,29 +1,50 @@
 {
-  "images": [],
-  "skipped": [
-    {
-      "recipeSlug": "air-fryer-spiced-chicken",
-      "reason": "no sufficiently licensed image found"
-    },
+  "images": [
     {
       "recipeSlug": "aloo-gobi",
-      "reason": "download failed or file too large"
-    },
-    {
-      "recipeSlug": "baked-salmon-vegetables",
-      "reason": "download failed or file too large"
-    },
-    {
-      "recipeSlug": "bamia-vegetarian",
-      "reason": "no sufficiently licensed image found"
+      "path": "aloo-gobi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Curry_roasted_cauliflower_and_haricots_verts,_roasted_garlic_celeriac_puree,_beef_bourguignon,_and_chicken_thigh_with_sweet_potato_and_apple_-_Boston,_MA.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Curry_roasted_cauliflower_and_haricots_verts%2C_roasted_garlic_celeriac_puree%2C_beef_bourguignon%2C_and_chicken_thigh_with_sweet_potato_and_apple_-_Boston%2C_MA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Daderot",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 2268,
+      "height": 2268,
+      "bytes": 1756072,
+      "sha256": "08a5cf76e031f8ce6c04b04a81dfec0d3fbdede674056a45201008076f3fe455",
+      "acquiredAt": "2026-09-13T14:52:44.787Z"
     },
     {
       "recipeSlug": "banana-bread",
-      "reason": "download failed or file too large"
+      "path": "banana-bread.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Banana_bread_3.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Banana_bread_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "creator": "Shisma",
+      "license": "CC-BY-4.0",
+      "attribution": "Shisma · CC-BY-4.0 · Wikimedia Commons",
+      "width": 4032,
+      "height": 3024,
+      "bytes": 5371428,
+      "sha256": "b16fbb14b6feb492eddb2c259b119f0a81c48af143ccb4e43c470dd8ce181ada",
+      "acquiredAt": "2026-09-13T14:52:48.831Z"
+    }
+  ],
+  "skipped": [
+    {
+      "recipeSlug": "air-fryer-spiced-chicken",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "baked-salmon-vegetables",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "bamia-vegetarian",
+      "reason": "no relevant openly-licensed image found"
     },
     {
       "recipeSlug": "banana-peanut-oats",
-      "reason": "no sufficiently licensed image found"
+      "reason": "no relevant openly-licensed image found"
     },
     {
       "recipeSlug": "basbousa",
