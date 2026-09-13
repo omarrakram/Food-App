@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-13 |
-| **Current phase** | Product build-out. Phases A–H and P complete; **I–K (friends, messaging, sharing) is the next task**. See "Build-out progress". |
+| **Current phase** | Product build-out. A–I complete, J half-done (schema only); **the next task is the messaging UI**. See "Build-out progress". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -27,7 +27,9 @@ because each depends on the one before it.
 | D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
 | E–G | Auth hardening, profiles, storage uploads | **done** — guest choice, expiry, handles, avatars |
 | H, P | Drawer navigation and information architecture | **done** — drawer wraps the tabs |
-| I–K | Friends, 1-to-1 messaging, recipe sharing | **NEXT** — not started |
+| I | Friends, requests, blocking | **done** — schema, RLS, screen |
+| J | 1-to-1 messaging | **schema done, no UI** — see "Where this session stopped" |
+| K | Recipe sharing and deep links | not started |
 | L–N | Community submissions, moderation, admin | not started |
 | O | In-app notifications | not started |
 | Q–U | Privacy, security, performance, preview, tests | not started |
@@ -293,13 +295,14 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 539/539 across 31 suites, 2 projects |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 108 assertions across four files |
+| Unit + component tests | `npm test` | **pass**, 544/544 across 33 suites, 2 projects |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 171 assertions across six files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 66 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 72 interaction checks, no page errors |
+| The published Pages build | `npm run smoke:web -- --base <url>` | **pass**, all 72 against the `/Food-App` subpath build |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
 ### The test suite runs on two platforms
@@ -455,36 +458,75 @@ without a backend.
 The earlier Claude Artifact is not a substitute: artifacts are private, so a
 phone browser that is not signed in to claude.ai gets a 404.
 
+### What the preview can and cannot show
+
+Everything that runs on device works: the whole 153-recipe catalogue, hard
+constraint filtering, strict and partial pantry modes, budget estimation,
+Discover, the pantry, Saved, the shopping list, the drawer, and both languages.
+
+Everything that needs a server is inert and **says so** rather than pretending:
+sign-in, profiles and handles, avatar upload, friends, messaging, and AI
+generation. `/settings/about` reports which of those are live, reading what
+`env` actually resolved.
+
+### Verifying the deployed build from this sandbox
+
+`omarrakram.github.io` is blocked by the egress proxy here, so the live page
+cannot be fetched from a session. What CAN be verified, and is:
+
+```bash
+EXPO_OFFLINE=1 EXPO_WEB_BASE_URL=/Food-App npx expo export --platform web
+cp dist/index.html dist/404.html
+# serve dist/ under /Food-App/ on some port, then:
+npm run smoke:web -- --base http://127.0.0.1:8099/Food-App
+```
+
+That is the same build the workflow publishes, under the same subpath, driven
+by the same 72 assertions — which covers the things that actually differ
+between a local run and a deployment: the base path, the per-route HTML, the
+404 fallback, and assets resolving under a subpath. Whether GitHub is serving
+it is then a question for the deployment API:
+
+```bash
+curl -s .../deployments?environment=github-pages\&per_page=1   # newest sha
+curl -s .../deployments/<id>/statuses                          # state: success
+```
+
 ## Where this session stopped
 
-**Latest commit on `claude/expo-rn-setup-mom5gw`: see `git log -1`.** Phases A
-through G are complete and verified. Everything below is where a new session
-picks up.
+**Latest commit: see `git log -1` on `claude/expo-rn-setup-mom5gw`.** Phases A
+through I are complete and verified. Phase J has its schema and its proofs but
+no user interface.
 
 ### THE SINGLE NEXT ACTION
 
-**Phase I — friends.** It unblocks J (messaging), K (sharing to a friend) and
-the `friends` visibility setting that already exists but currently resolves
-strictly narrower than `public`.
+**The messaging UI.** Everything underneath it exists and is tested —
+`supabase/migrations/20260913120000_messaging.sql` plus 25 adversarial
+assertions in `supabase/tests/06_messaging_test.sql`. What is missing is the
+client half, and it mirrors Phase I exactly:
 
-What it needs:
+1. `src/features/messages/repository.ts` — the interface, verb-shaped:
+   `conversations()`, `messages(conversationId, cursor)`, `send(...)`,
+   `markRead(...)`, `startWith(userId)`. A `LocalMessagesRepository` that
+   returns nothing and refuses every write, as `LocalFriendsRepository` does.
+2. `supabase-repository.ts` — the real one. Read profiles through
+   `public_profiles`, never `profiles`. Use `start_conversation()` and
+   `unread_counts()`; do not reimplement either client-side.
+3. **Paginate the thread.** `messages_thread_idx` is
+   `(conversation_id, created_at desc, id desc)`, so reuse the keyset cursor
+   from `features/recipes/query.ts` rather than inventing a second scheme.
+4. Two screens: a conversation list (avatar, name, the preview the trigger
+   maintains, unread badge) and a thread (bubbles, send box, retry on failure,
+   timestamps, empty state).
+5. Supabase Realtime on `messages` filtered by `conversation_id`. The RLS
+   policies already apply to Realtime, so a non-member receives nothing.
+6. Add `Messages` to `SOCIAL_ROWS` in `drawer-content.tsx` — one line, and only
+   once the screens exist.
 
-1. `friend_requests` and `friendships` as normalised tables, plus `blocks`.
-   Store a friendship once, not twice — a `(least(a,b), greatest(a,b))` unique
-   key is the usual way, and it makes "are these two friends?" a single lookup.
-2. Constraints that make the impossible states impossible in Postgres rather
-   than in the client: no self-request, no duplicate pending request in either
-   direction, no duplicate friendship, no request between blocked users.
-3. RLS: a user reads only requests they sent or received, and only their own
-   friendships. **Never client-side.** Adversarial tests in a new
-   `supabase/tests/05_friends_test.sql`, in the style of the existing four.
-4. Search by handle — `SupabaseProfileRepository.search()` already exists and
-   paginates.
-5. Send / accept / decline / cancel / unfriend, and block / unblock. Three
-   lists: Friends, Incoming, Sent.
-6. Then widen the `friends` branch in the `public_profiles` view. That is one
-   line and it is deliberately the LAST step, not the first.
-7. Add the `Friends` row to `SOCIAL_ROWS` in `drawer-content.tsx`.
+Then **Phase K** (sharing): `messages.shared_recipe_id` is already there and is
+a reference by design, so the card renders the recipe as it is now. The deep
+link is `akla://recipe/{id}` plus the web URL, and the rule to keep is that a
+private or unapproved recipe must not resolve through a public link.
 
 ### What is NOT done, and is deliberately waiting
 
@@ -492,9 +534,10 @@ What it needs:
   (USER / MODERATOR / ADMIN). That is Phase N and the brief is explicit it must
   not be a client-side boolean. `SOCIAL_ROWS` in `drawer-content.tsx` is empty
   precisely so no row appears before its destination and its permission do.
-- **`visibility = 'friends'`** resolves strictly narrower than `public` in the
-  `public_profiles` view, because there is no friendship table yet. Widening
-  that line is a deliberate part of Phase I.
+- **Blocking and `friends` visibility are done.** The `public_profiles` view
+  resolves `friends` through `are_friends()` now, and excludes anyone either
+  party has blocked. `blocked_profiles()` is the narrow exception that keeps
+  the block list readable by its owner.
 - **Recipe photographs.** The image architecture, provenance columns and
   buckets are all in place and every recipe carries licensed metadata, but no
   actual image files have been produced. `RecipeImage` is the single seam.
