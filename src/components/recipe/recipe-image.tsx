@@ -96,6 +96,15 @@ export function RecipeImage({
   const bundled = localRecipeImage(recipe.slug);
   const source = bundled?.source ?? recipe.imageUrl;
 
+  // A default test id, distinct for a photograph and for the fallback.
+  //
+  // Not decoration: "are there real photographs on this screen, or is every
+  // card a gradient?" is a question the product now has to be able to answer
+  // about a DEPLOYED build, and counting these in the DOM is how the smoke
+  // test answers it. Without them the two states are indistinguishable to
+  // anything but a human eye.
+  const mark = recipe.slug ?? recipe.id;
+
   if (source) {
     return (
       <Image
@@ -107,7 +116,7 @@ export function RecipeImage({
         cachePolicy="memory-disk"
         accessibilityIgnoresInvertColors
         style={[frame, style as object]}
-        testID={testID}
+        testID={testID ?? `recipe-photo-${mark}`}
       />
     );
   }
@@ -115,7 +124,7 @@ export function RecipeImage({
   const [from, to] = gradientFor(recipe.id, theme.scheme === 'dark');
 
   return (
-    <View style={[frame, style]} testID={testID}>
+    <View style={[frame, style]} testID={testID ?? `recipe-fallback-${mark}`}>
       <LinearGradient
         colors={[from, to]}
         start={{ x: 0, y: 0 }}

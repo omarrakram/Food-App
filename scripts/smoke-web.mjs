@@ -423,6 +423,72 @@ async function main() {
     );
     await shot('06-cook-results');
 
+    // --- Photographs -------------------------------------------------------
+    // "Are there real photographs on this screen, or is every card a branded
+    // gradient?" is the question the preview has to be able to answer, and
+    // "the export blocked remote images" is no longer an explanation for the
+    // absence: the assets are bundled, so they are part of the build.
+    //
+    // Counting the marks is not enough on its own — an <img> pointing at a
+    // missing file still renders an element. `naturalWidth` is the browser
+    // saying it decoded actual pixels.
+    console.log('\n▸ photographs');
+
+    const photoAudit = async (label) => {
+      await page.waitForTimeout(900);
+      return page.evaluate(() => {
+        const nodes = [...document.querySelectorAll('[data-testid^="recipe-photo-"]')];
+        const fallbacks = document.querySelectorAll('[data-testid^="recipe-fallback-"]').length;
+        let decoded = 0;
+        for (const node of nodes) {
+          const img = node.tagName === 'IMG' ? node : node.querySelector('img');
+          if (img && img.naturalWidth > 0) decoded += 1;
+        }
+        return { photos: nodes.length, decoded, fallbacks };
+      }).then((result) => ({ ...result, label }));
+    };
+
+    await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(2000);
+    // Scrolling matters: the grid is virtualised, so an unscrolled page only
+    // ever proves the first screenful.
+    await page.evaluate(() => window.scrollTo(0, 1200));
+    const discoverPhotos = await photoAudit('discover');
+    check(
+      'the catalogue shows real photographs, not only the fallback',
+      discoverPhotos.photos > 0,
+      `${discoverPhotos.photos} photos, ${discoverPhotos.fallbacks} fallbacks`,
+    );
+    check(
+      'and the browser actually decoded them',
+      discoverPhotos.photos === 0 || discoverPhotos.decoded === discoverPhotos.photos,
+      `${discoverPhotos.decoded} of ${discoverPhotos.photos} decoded`,
+    );
+    await shot('05a-discover-photos');
+
+    // The hero on a recipe that has one. Finding it through the DOM rather
+    // than hard-coding a slug keeps this honest as coverage changes.
+    const photographed = await page.evaluate(() => {
+      const node = document.querySelector('[data-testid^="recipe-photo-"]');
+      return node?.getAttribute('data-testid')?.replace('recipe-photo-', '') ?? null;
+    });
+    if (photographed) {
+      const card = page.locator(`[data-testid^="recipe-photo-${photographed}"]`).first();
+      await card.click().catch(() => {});
+      await page.waitForTimeout(2200);
+      const hero = await photoAudit('detail');
+      check(
+        'a recipe detail hero shows its photograph',
+        hero.decoded > 0,
+        `${hero.decoded} decoded on ${photographed}`,
+      );
+      await shot('05b-recipe-hero-photo');
+      await page.goBack();
+      await page.waitForTimeout(1200);
+    } else {
+      check('a recipe detail hero shows its photograph', false, 'no photographed recipe found');
+    }
+
     // --- Recipe detail and cooking mode ----------------------------------
     console.log('\n▸ recipe');
     const firstResult = page.locator('[data-testid^="result-"]').first();
