@@ -121,13 +121,62 @@ describe('confidence', () => {
   });
 });
 
+describe('the residual left for a title search', () => {
+  // The rule: what the interpreter understood becomes a constraint, and only
+  // what it did NOT understand may be matched against a recipe title.
+
+  it('is empty when the whole query was understood', () => {
+    expect(parse('chicken without bell pepper').keywords).toBe('');
+    expect(parse('dinner in 20 minutes').keywords).toBe('');
+    expect(parse('egyptian breakfast for 4 people').keywords).toBe('');
+  });
+
+  it('keeps a dish name the interpreter has no other use for', () => {
+    // The case that makes this worth doing rather than just dropping the
+    // title filter whenever anything was understood.
+    expect(parse('koshari under 30 minutes').keywords).toBe('koshari');
+    expect(parse('shakshuka for breakfast').keywords).toBe('shakshuka');
+  });
+
+  it('keeps a plain dish-name search as it was', () => {
+    expect(parse('koshari').keywords).toBe('koshari');
+  });
+
+  it('turns a bare ingredient name into a constraint rather than a title', () => {
+    // "molokhia" is in the ingredient catalogue, so it is understood — and
+    // requiring the ingredient finds every molokhia recipe, including the ones
+    // whose titles do not contain the word.
+    const interpretation = parse('molokhia');
+    expect(interpretation.ingredients).toContain('molokhia');
+    expect(interpretation.keywords).toBe('');
+  });
+
+  it('drops the negated food, not just the word "without"', () => {
+    // Leaving "bell pepper" in the residual would search for a title
+    // containing the very thing the user ruled out.
+    const keywords = parse('koshari without bell pepper').keywords;
+    expect(keywords).toBe('koshari');
+    expect(keywords).not.toContain('pepper');
+  });
+
+  it('drops an alias the user typed as surely as the canonical name', () => {
+    expect(parse('pasta with capsicum').keywords).not.toContain('capsicum');
+  });
+});
+
 describe('applyInterpretation', () => {
   it('layers extracted constraints onto the base request', () => {
     const query = 'high protein Egyptian dinner under 150 EGP in 30 minutes for 4 people';
     const request = applyInterpretation(base, parse(query), query);
 
     expect(request.mode).toBe('search');
-    expect(request.query).toBe(query);
+    // REGRESSION: this used to assert the RAW query survived into
+    // `request.query`. Once the query became a title filter in the database
+    // layer, that made every structured search return nothing — no recipe is
+    // called "high protein Egyptian dinner under 150 EGP in 30 minutes for 4
+    // people". Everything here was understood, so there is no title left to
+    // look for.
+    expect(request.query).toBeNull();
     expect(request.budgetMinor).toBe(15000);
     expect(request.maxMinutes).toBe(30);
     expect(request.servings).toBe(4);

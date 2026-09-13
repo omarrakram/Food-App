@@ -29,6 +29,19 @@ export type Interpretation = {
   /** Foods the query explicitly rules out: "without chicken", "بدون بصل". */
   excludedIngredients: string[];
   tags: string[];
+  /**
+   * What is left of the query after everything understood has been lifted out.
+   *
+   * This — not the raw query — is what may be matched against a recipe TITLE.
+   * "chicken without bell pepper" is fully understood, so its residual is
+   * empty and there is no title to search for; "koshari under 30 minutes"
+   * leaves "koshari", which is exactly the dish the user named.
+   *
+   * Matching the raw string instead returns nothing for any query with
+   * structure in it, because no recipe is called "chicken without bell
+   * pepper".
+   */
+  keywords: string;
   /** 0–1. Below `LOW_CONFIDENCE` the caller should consider the AI fallback. */
   confidence: number;
 };
@@ -213,6 +226,67 @@ function splitNegations(text: string): { positive: string; negative: string } {
   return { positive, negative };
 }
 
+/**
+ * Words that carry no dish in them.
+ *
+ * Only the connectives an interpreted query leaves behind — this is not a
+ * general stopword list, and it must not grow into one: a word removed here is
+ * a word nobody can ever search for.
+ */
+const RESIDUAL_NOISE = new Set([
+  'a', 'an', 'and', 'any', 'for', 'i', 'in', 'is', 'it', 'me', 'my', 'of', 'on',
+  'or', 'please', 'quick', 'quickly', 'something', 'that', 'the', 'to', 'want',
+  'with', 'within',
+  'عايز', 'عاوز', 'اكل', 'أكل', 'حاجة', 'في', 'من', 'مع', 'و',
+]);
+
+/**
+ * The query minus everything the interpreter understood.
+ *
+ * Removes the negation clauses, the recognised ingredient names, the numeric
+ * phrases and every keyword table's entries, then drops the connectives. What
+ * survives is a dish name or nothing.
+ */
+function residualKeywords(
+  text: string,
+  matched: { negative: string; ingredients: readonly string[] },
+): string {
+  let rest = ` ${text.toLowerCase()} `;
+
+  // Whole negation clauses, not just the ingredient inside them: "without" is
+  // as much a part of what we understood as "bell pepper" is.
+  for (const pattern of NEGATION_PATTERNS) rest = rest.replace(pattern, ' ');
+
+  // Every spelling of every ingredient we matched, so an alias the user typed
+  // ("capsicum") is removed as surely as the canonical name.
+  for (const name of matched.ingredients) {
+    const entry = INGREDIENT_CATALOGUE.find((candidate) => candidate.name === name);
+    if (!entry) continue;
+    for (const spelling of [entry.name, entry.nameAr, ...entry.aliases]) {
+      if (spelling.length < 3) continue;
+      rest = rest.replaceAll(spelling.toLowerCase(), ' ');
+    }
+  }
+
+  for (const table of [CUISINE_KEYWORDS, MEAL_KEYWORDS, TAG_KEYWORDS]) {
+    for (const keyword of Object.keys(table)) rest = rest.replaceAll(keyword, ' ');
+  }
+
+  // Numbers and the units they came with: "under 30 minutes", "150 EGP",
+  // "for 4". Leaving the bare digits behind would match nothing anyway.
+  rest = rest
+    .replace(/\b(under|below|less than|max|maximum|up to|within|over|at least)\b/gi, ' ')
+    .replace(/\b(minutes?|mins?|hours?|hrs?|people|persons?|servings?|egp|sar|aed|gbp|usd|pounds?|جنيه|دقيقة|دقايق|ساعة|أفراد|اشخاص|أشخاص)\b/gi, ' ')
+    .replace(/\b(high|low)[- ]?(protein|cal|calorie|calories)\b/gi, ' ')
+    .replace(/[\d٠-٩]+/g, ' ');
+
+  return rest
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((word) => word.length > 1 && !RESIDUAL_NOISE.has(word))
+    .join(' ')
+    .trim();
+}
+
 function findKeyword<T>(text: string, table: Record<string, T>): T | null {
   const haystack = ` ${text.toLowerCase()} `;
   for (const [keyword, value] of Object.entries(table)) {
@@ -290,6 +364,7 @@ export function interpretQuery(query: string, currency: CurrencyCode): Interpret
     ingredients,
     excludedIngredients,
     tags,
+    keywords: residualKeywords(text, { negative, ingredients }),
     confidence: Math.min(1, signals / 3),
   };
 }
@@ -303,7 +378,11 @@ export function applyInterpretation(
   return {
     ...base,
     mode: 'search',
-    query,
+    // The RESIDUAL, not the raw query. `query` becomes a title filter
+    // downstream, and no recipe is called "chicken without bell pepper" — so
+    // passing the raw string returns nothing for any query with structure in
+    // it. The `query` argument is kept for the caller's own display.
+    query: interpretation.keywords || null,
     ingredients: interpretation.ingredients.length > 0 ? interpretation.ingredients : base.ingredients,
     // An exclusion the user typed is a constraint for this search, so it joins
     // the disliked list the ranker already filters on — allergies and diet

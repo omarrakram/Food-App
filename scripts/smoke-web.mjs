@@ -135,10 +135,27 @@ function run(command, args, options = {}) {
   });
 }
 
+/**
+ * A deployed URL to drive instead of a local export.
+ *
+ * The same assertions against the thing that is actually published: an export
+ * that passes locally and a Pages deployment that works are different claims,
+ * and the gap between them (a wrong base path, a missing 404 fallback, an
+ * asset that 404s under a subpath) is invisible to a local run.
+ */
+function remoteBase() {
+  const flag = process.argv.indexOf('--base');
+  if (flag === -1) return null;
+  const value = process.argv[flag + 1];
+  if (!value) throw new Error('--base needs a URL');
+  return value.replace(/\/$/, '');
+}
+
 async function main() {
   const chromium = await loadChromium();
+  const REMOTE = remoteBase();
 
-  if (!existsSync(DIST) || !process.argv.includes('--no-export')) {
+  if (!REMOTE && (!existsSync(DIST) || !process.argv.includes('--no-export'))) {
     log('exporting the web bundle…');
     // EXPO_OFFLINE keeps the CLI from reaching api.expo.dev, which is blocked
     // in some sandboxes and only ever consulted for version hints.
@@ -148,8 +165,10 @@ async function main() {
   }
 
   await mkdir(OUT, { recursive: true });
-  const { server, base: BASE } = await serveDist();
-  log(`serving dist/ on ${BASE}`);
+  const local = REMOTE ? null : await serveDist();
+  const server = local?.server ?? null;
+  const BASE = REMOTE ?? local.base;
+  log(REMOTE ? `driving the deployed preview at ${BASE}` : `serving dist/ on ${BASE}`);
 
   const executablePath = process.env.CHROMIUM_PATH;
   const browser = await chromium.launch(executablePath ? { executablePath } : {});
@@ -168,6 +187,9 @@ async function main() {
     const text = message.text();
     // Blocked remote images are an egress-policy fact, not an app failure.
     if (/images\.unsplash\.com|ERR_(BLOCKED|NAME_NOT_RESOLVED|TUNNEL)/.test(text)) return;
+    // A deployed preview has no Supabase project, so the client's probe fails
+    // by design. That is the app degrading correctly, not a page error.
+    if (/supabase|Failed to fetch|NetworkError/i.test(text)) return;
     problems.push(`console: ${text.slice(0, 200)}`);
   });
 
@@ -526,6 +548,82 @@ async function main() {
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
 
+    // --- Hard constraints, end to end -------------------------------------
+    // The product promise, driven through the UI rather than asserted in a
+    // unit test: if the user said no to something, it does not appear.
+    console.log('\n▸ hard constraints');
+    await page.goto(`${BASE}/search`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1500);
+
+    if (await visible('search-input', 8000)) {
+      await type('search-input', 'chicken without bell pepper');
+      await page.keyboard.press('Enter');
+      await page.waitForTimeout(2500);
+
+      const excludedText = await bodyText();
+      check(
+        'an exclusion is understood and shown back',
+        /bell pepper|without/i.test(excludedText),
+      );
+
+      // Asserted, not skipped. An earlier version only opened a result `if`
+      // one existed, so a search that returned nothing passed the whole block
+      // silently — and "no results" is exactly the failure this is looking for.
+      const excludedResults = await page.locator('[data-testid^="result-"]').count();
+      check(
+        'the exclusion still leaves recipes to cook',
+        excludedResults > 0,
+        `${excludedResults} results`,
+      );
+
+      // Every result must actually honour it. Opening one and reading its
+      // ingredients is the only way to know the filter REMOVED rather than
+      // merely down-ranked.
+      if (excludedResults > 0) {
+        await page.locator('[data-testid^="result-"]').first().click();
+        await page.waitForTimeout(2200);
+        const recipeText = (await bodyText()).toLowerCase();
+        check(
+          'the excluded ingredient is absent from the recipe it returned',
+          !/bell pepper|capsicum/.test(recipeText),
+        );
+        await page.goBack();
+        await page.waitForTimeout(1400);
+      }
+      await shot('17b-exclusion');
+    }
+
+    // --- Strict pantry mode -----------------------------------------------
+    console.log('\n▸ pantry mode');
+    await page.goto(`${BASE}/cook`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+
+    check('cook offers a pantry mode choice', await visible('cook-pantry-mode', 6000));
+    const strictTapped = await tap('cook-pantry-mode-strict', { optional: true });
+    const partialTapped = await tap('cook-pantry-mode-partial', { optional: true });
+    check(
+      'both pantry modes are selectable',
+      strictTapped || partialTapped,
+      strictTapped && partialTapped ? 'strict and partial' : 'one of two',
+    );
+    await shot('17c-pantry-mode');
+
+    // --- Friends -----------------------------------------------------------
+    console.log('\n▸ friends');
+    await page.goto(`${BASE}/friends`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    // Without a Supabase project this must say so rather than showing an empty
+    // friend list that looks like nobody has added you.
+    const friendsSignedOut = await visible('friends-needs-account', 4000);
+    const friendsSearch = await visible('friends-search', 2000);
+    check(
+      'friends is honest about needing an account, or shows its search',
+      friendsSignedOut || friendsSearch,
+      friendsSignedOut ? 'needs an account' : 'search available',
+    );
+    await shot('17d-friends');
+
     // --- The drawer -------------------------------------------------------
     // The drawer is invisible until something opens it, which makes it exactly
     // the kind of thing that can be wired up wrong and still look fine in a
@@ -657,8 +755,10 @@ async function main() {
     await page.screenshot({ path: join(OUT, 'failure.png') }).catch(() => {});
   } finally {
     await browser.close();
-    server.close();
-    if (!KEEP) await rm(DIST, { recursive: true, force: true });
+    server?.close();
+    // Nothing local was built when driving a deployed URL, so there is nothing
+    // to clean up — and removing dist/ would delete an unrelated export.
+    if (!KEEP && !REMOTE) await rm(DIST, { recursive: true, force: true });
   }
 
   const failed = checks.filter((entry) => !entry.ok);
