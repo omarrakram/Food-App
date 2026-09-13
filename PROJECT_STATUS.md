@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-13 |
-| **Current phase** | Product build-out. A–I complete, J half-done (schema only); **the next task is the messaging UI**. See "Build-out progress". |
+| **Current phase** | **CORE PRODUCT CORRECTNESS HOTFIX.** A–I are complete; J–U are paused. Manual testing found the central feature — "what can I cook with what I have" — returning the same answer whatever the user selected. See "The hotfix" below. |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -19,20 +19,135 @@ The product is moving past MVP: a real catalogue, real filtering, accounts,
 profiles, social features and community submissions. Phases run in order
 because each depends on the one before it.
 
+**A new milestone sits between I and J and everything after J waits on it.**
+The roadmap is unchanged otherwise; nothing below has been dropped or
+reordered.
+
 | Phase | What | State |
 |---|---|---|
-| A | 150+ structured recipes with an import/validation pipeline | **done** — 153 recipes |
-| B | Recipe image architecture with provenance and licensing | **done** — manifest + resolver; assets pending |
+| A | 150+ structured recipes with an import/validation pipeline | **done** — 158 recipes |
+| B | Recipe image architecture with provenance and licensing | **done** — manifest, resolver, validator, credits screen |
 | C | `RecipeConstraints` with genuine hard filtering | **done** — one model, hard filters, honest relaxations |
 | D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
 | E–G | Auth hardening, profiles, storage uploads | **done** — guest choice, expiry, handles, avatars |
 | H, P | Drawer navigation and information architecture | **done** — drawer wraps the tabs |
 | I | Friends, requests, blocking | **done** — schema, RLS, screen |
-| J | 1-to-1 messaging | **schema done, no UI** — see "Where this session stopped" |
+| **HOTFIX** | **Core product correctness: matching, and real photographs** | **in progress** — see "The hotfix" |
+| J | 1-to-1 messaging | **schema done, no UI** — paused behind the hotfix |
 | K | Recipe sharing and deep links | not started |
 | L–N | Community submissions, moderation, admin | not started |
 | O | In-app notifications | not started |
 | Q–U | Privacy, security, performance, preview, tests | not started |
+
+### Why A–I are marked done
+
+Not from memory. Each row above is a phase whose code is committed on
+`claude/expo-rn-setup-mom5gw`, whose tests are in the suite that runs on every
+push, and whose screens the interaction smoke test drives. Where a phase is
+partly credential-gated (E–G need a Supabase project) the built half is
+complete and the inert half is named under "Credentials this needs".
+
+The one correction this pass made to the table: the catalogue is 158 recipes,
+not 153. Five seafood dishes were added after the dataset audit found the
+protein spread too narrow.
+
+---
+
+## The hotfix
+
+### What was reported
+
+Manual testing of the real, rendered app found the central feature broken:
+
+- "I can make this now" returned **the same 2 recipes** whatever was selected.
+- Relaxed mode returned **the same ~20 recipes** whatever was selected.
+- Recipe cards had no photographs.
+
+The `RecipeConstraints` work was real and its unit tests passed. They passed
+because they tested the filter in isolation, and the fault was in what the
+screen handed it.
+
+### The root cause — three faults compounding
+
+**1. The wrong staple flag.** `buildAvailabilityIndex` treated
+`isCommonStaple` as "assume the user has this". That flag is a pantry-UI
+convenience marking 47 cupboard items — including **rice, pasta, potatoes,
+onions, red lentils, fava beans, flour and sugar**. With those assumed, three
+recipes were cookable from a completely empty kitchen, so they matched every
+search ever made. Fixed by `isAssumedOnHand`: a seasoning, a cooking medium, an
+aromatic or a small keeping cupboard support may be assumed; anything that
+forms the substance of a dish may not, and no perishable ever may.
+
+**2. Relaxed mode applied no constraint at all.** `checkRecipe` consulted the
+pantry only when `pantryMode === 'strict'`. `partial` skipped the check
+entirely and returned the top twenty by rank — which is why it looked like a
+fixed list. A mode named after a thing it does not do is not a relaxation of
+it. Replaced by an explicit gap budget: `strict` is 0 missing, and the UI now
+offers 0, 1 or 2 as three real answers.
+
+**3. Nothing required a result to use what you had.** With a generous assumed
+set, a recipe made entirely of assumed items satisfies every gap budget for
+every input. `manakish-zaatar` was returned for all four test cases.
+`mustUseSomethingAvailable` closes it: an ingredients-mode search must use at
+least one thing the user actually named.
+
+### Measured, before and after
+
+| Kitchen | Exact before | Exact after | ≤2 missing before | ≤2 missing after |
+|---|---|---|---|---|
+| chicken, rice, tomato | 1 | 0 | 20 | 26 |
+| eggs, white cheese, tomato | 4 | 1 (shakshuka) | 20 | 24 |
+| banana, oats, milk | 4 (incl. **koshari**) | 0 | 20 | 6 |
+| ground beef, pasta, tomato | 4 | 0 | 20 | 16 |
+
+Before: every relaxed search returned the same twenty. After: four different
+answers, and banana/oats/milk no longer suggests koshari.
+
+### What was NOT the cause, checked rather than assumed
+
+- **The URL round trip was intact.** Ingredients, pantry mode and exclusions
+  all survive `encodeRequest` → `decodeRequest`.
+- **Caching was not a contributor.** The cook path ranks in a `useMemo` over
+  the catalogue, keyed on a request object that changes with the URL params.
+  The cache key was hardened anyway (`constraintsFingerprint`, 22 fields), so
+  two ingredient sets cannot share a cached response.
+- **Pagination was half a contributor.** SQL filters before `LIMIT`, correctly.
+  But the client-side safety filter runs after, so a page of 24 could lose 20
+  and render 4 cards. A top-up effect now fetches further pages until the page
+  is full or 300 rows have been examined.
+
+### Two more faults found while proving it
+
+- **An expired pantry item could still be cooked with.** Opening Cook from the
+  pantry seeded every item into the picker, and a picked ingredient is trusted
+  absolutely — so the food-safety rule was defeated by our own screen. Cook now
+  seeds only what is in date, and the engine keeps `available` and `expired`
+  disjoint rather than allowing both at once.
+- **A test named "cook returns results" passed on zero results.** Renamed to
+  say what it asserts.
+
+### Where the photographs stand
+
+`npm run images:fetch` acquires them from Wikimedia Commons under a strict
+licence allowlist and `.github/workflows/recipe-images.yml` runs it, because
+this sandbox's egress proxy blocks every Wikimedia host. Four runs were needed
+and each failed differently — the log is the only diagnostic available, which
+is why every failure now carries its HTTP status and the server's own
+explanation:
+
+1. **0 of 158.** Asked for a 1200px render of every file including 900px ones;
+   MediaWiki does not upscale, it answers 404.
+2. **2 of 6, one of them wrong.** Scoring candidates by shared words gave aloo
+   gobi a photograph of beef bourguignon — every word it scored on was really
+   there. Replaced by three ranked sources (the dish's Wikipedia article, the
+   Commons category, then a phrase match) and by searching the **slug**, which
+   is the dish's name, rather than the title, which is an English gloss.
+3. **45 of 158, all full-size originals** totalling 21.5MB. Commons appends
+   `?utm_source=…` to the file URL, which ended up inside the thumbnail path,
+   so every thumbnail 404'd and the original-file fallback caught it silently.
+4. **In progress.** Every thumbnail request was returning HTTP 400; the
+   hand-built CDN path is now a fallback behind `Special:FilePath?width=`,
+   MediaWiki's own documented way to ask for a file at a size.
 
 ### Phase A — the recipe catalogue
 
@@ -41,9 +156,20 @@ into `src/features/recipes/catalogue.generated.ts` by `npm run recipes:import`
 and into `supabase/seed.sql` by `npm run seed:generate`. Adding a recipe is a
 JSON object; it is never a TypeScript literal in a component.
 
-153 recipes: egyptian 32, levantine 22, american 18, asian 18, mediterranean
-18, italian 16, indian 11, mexican 9, turkish 9. Every one carries an English
+158 recipes: egyptian 34, levantine 22, mediterranean 20, american 18, asian
+18, italian 16, indian 11, mexican 10, turkish 9. Every one carries an English
 and an Arabic title, description and every cooking step.
+
+`npm run recipes:audit` reports the spread, because a hundred and fifty
+chicken traybakes pass every structural check and make the product useless.
+Current numbers: 8.6 ingredients per recipe on average (min 5, max 14); 172 of
+the 257 catalogue ingredients used; 103 vegetarian, 52 vegan, 65 Egyptian or
+Levantine; and by lead protein eggs 25, legumes 25, chicken 17, beef 12, fish
+10, dairy-led 8, lamb 4, seafood 4. Eight pairs share 70% or more of their
+essential ingredients, the closest being `salata-baladi` and
+`turkish-shepherd-salad` at 0.88 — genuinely the same salad under two names,
+and the two are kept because the seasoning and the audience differ. Nothing
+reaches the 0.9 that `dataset.test.ts` fails on.
 
 **Every ingredient line references the canonical ingredient catalogue by slug.**
 That is what makes exclusion, requirement, pantry matching, pricing and Arabic
@@ -414,7 +540,7 @@ Everything a person edits is a data file, not code:
 |---|---|---|---|
 | Ingredients (257) | `data/ingredients/catalogue.csv` | `catalogue.generated.ts` | `npm run ingredients:import` |
 | Prices (69) | `data/prices/eg.csv` | `pricing/price-data.ts` | `npm run prices:import` |
-| Recipes (153) | `data/recipes/*.json` | `recipes/catalogue.generated.ts` | `npm run recipes:import` |
+| Recipes (158) | `data/recipes/*.json` | `recipes/catalogue.generated.ts` | `npm run recipes:import` |
 | Database seed | the three above | `supabase/seed.sql` | `npm run seed:generate` |
 
 Each importer validates and refuses bad input, and CI fails on drift. **257
@@ -460,8 +586,8 @@ phone browser that is not signed in to claude.ai gets a 404.
 
 ### What the preview can and cannot show
 
-Everything that runs on device works: the whole 153-recipe catalogue, hard
-constraint filtering, strict and partial pantry modes, budget estimation,
+Everything that runs on device works: the whole 158-recipe catalogue, hard
+constraint filtering, all three gap budgets, budget estimation,
 Discover, the pantry, Saved, the shopping list, the drawer, and both languages.
 
 Everything that needs a server is inert and **says so** rather than pretending:
@@ -482,7 +608,7 @@ npm run smoke:web -- --base http://127.0.0.1:8099/Food-App
 ```
 
 That is the same build the workflow publishes, under the same subpath, driven
-by the same 72 assertions — which covers the things that actually differ
+by the same 81 assertions — which covers the things that actually differ
 between a local run and a deployment: the base path, the per-route HTML, the
 404 fallback, and assets resolving under a subpath. Whether GitHub is serving
 it is then a question for the deployment API:
@@ -495,12 +621,39 @@ curl -s .../deployments/<id>/statuses                          # state: success
 ## Where this session stopped
 
 **Latest commit: see `git log -1` on `claude/expo-rn-setup-mom5gw`.** Phases A
-through I are complete and verified. Phase J has its schema and its proofs but
-no user interface.
+through I are complete and verified. The correctness hotfix is in progress:
+the matching engine is fixed and proven through the rendered app; the
+photographs are still being acquired.
 
 ### THE SINGLE NEXT ACTION
 
-**The messaging UI.** Everything underneath it exists and is tested —
+**Finish the photograph acquisition, then verify it in the deployed preview.**
+
+`.github/workflows/recipe-images.yml` (manual dispatch, no inputs = every
+recipe) is the only place it can run — this sandbox's proxy blocks
+`commons.wikimedia.org` and `upload.wikimedia.org`, verified by probing them,
+so the workflow log is the whole diagnostic. Read the "Acquire photographs"
+step with a large `tail_lines`; the per-recipe failure lines now name the HTTP
+status and the server's explanation.
+
+After a run:
+
+1. `git pull` — the workflow commits the assets, the manifest and the
+   generated index itself, and validates before committing so a photograph
+   with no recorded licence cannot reach the branch.
+2. Check the weight: `node -e "…manifest.json…"` should show a mean well under
+   the 900KB cap. Three runs in a row silently kept full-size originals.
+3. Re-export and re-deploy the Pages preview, and confirm photographs actually
+   render there — the brief is explicit that a preview limitation is no longer
+   an acceptable explanation for their absence.
+4. Recipes with no sufficiently relevant openly-licensed image keep the branded
+   fallback and are listed in `manifest.skipped` with the reason. That is the
+   designed outcome, not a failure to chase to 100%: attaching a photograph of
+   a different dish tells the user something false about what they are cooking.
+
+### THEN, and only then: the messaging UI
+
+Everything underneath it exists and is tested —
 `supabase/migrations/20260913120000_messaging.sql` plus 25 adversarial
 assertions in `supabase/tests/06_messaging_test.sql`. What is missing is the
 client half, and it mirrors Phase I exactly:
@@ -538,9 +691,12 @@ private or unapproved recipe must not resolve through a public link.
   resolves `friends` through `are_friends()` now, and excludes anyone either
   party has blocked. `blocked_profiles()` is the narrow exception that keeps
   the block list readable by its owner.
-- **Recipe photographs.** The image architecture, provenance columns and
-  buckets are all in place and every recipe carries licensed metadata, but no
-  actual image files have been produced. `RecipeImage` is the single seam.
+- **Recipe photographs for every recipe.** The pipeline is complete and the
+  acquisition runs; what will not happen is 100% coverage. Many recipes here
+  are ordinary weeknight cooking with descriptive names — "Tray-Baked Salmon
+  and Vegetables", "Air Fryer Spiced Chicken" — and no openly-licensed
+  photograph of that specific dish exists. Those keep the branded fallback and
+  are named in `manifest.skipped`. `RecipeImage` is the single seam.
 - **Avatars in the preview.** `EXPO_PUBLIC_DEMO_MODE` exists in `env.ts` but no
   seeded demo users use it yet; that is Phase T.
 
