@@ -9,7 +9,7 @@ import { Text } from '@/components/ui/text';
 import { budgetVerdict } from '@/features/pricing/estimate';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useMealSuggestions } from '@/features/recipes/hooks';
-import { decodeRequest } from '@/features/recipes/request-params';
+import { decodeRequest, encodeRequest, relaxRequest } from '@/features/recipes/request-params';
 import { useI18n } from '@/i18n';
 import { formatMoney, money } from '@/lib/format/money';
 import { useTheme } from '@/theme';
@@ -22,7 +22,7 @@ export default function BudgetResultsScreen() {
   const params = useLocalSearchParams();
 
   const request = useMemo(() => decodeRequest(params, preferences), [params, preferences]);
-  const { matches, isLoading, error, isGenerating, generationError, refetch } =
+  const { matches, relaxations, isLoading, error, isGenerating, generationError, refetch } =
     useMealSuggestions(request);
 
   const budgetLabel = request.budgetMinor
@@ -94,6 +94,13 @@ export default function BudgetResultsScreen() {
           generationError={generationError}
           onRetry={refetch}
           onAdjust={() => router.back()}
+          relaxations={relaxations}
+          onRelax={(relaxation) =>
+            router.replace({
+              pathname: '/budget/results',
+              params: encodeRequest(relaxRequest(request, relaxation.reason)),
+            })
+          }
           header={header}
         />
       </View>

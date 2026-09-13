@@ -522,10 +522,39 @@ export type ShoppingList = {
  * screen, the ingredient screen, or natural-language search. Everything
  * downstream (matching, pricing, AI prompt) consumes this shape only.
  */
+/**
+ * A request from one of the app's entry points.
+ *
+ * This is the UI-level shape. `toConstraints()` in
+ * `features/recipes/request-params` turns it into the canonical
+ * `RecipeConstraints`, which is what every filter and query actually reads —
+ * see `features/recipes/constraints.ts`.
+ */
 export type MealRequest = {
   mode: 'ingredients' | 'budget' | 'search';
   /** Ingredient names the user says they have. */
   ingredients: string[];
+  /**
+   * Ingredients the result MUST contain. A requirement, not a preference:
+   * "something with chicken and rice" returns nothing without both.
+   */
+  requiredIngredients: string[];
+  /**
+   * Ingredients to keep out, each with its own severity. Allergies and hard
+   * avoids are absolute; dislikes can be overridden by the user.
+   */
+  excludedIngredients: {
+    slug: string | null;
+    label: string;
+    severity: 'allergy' | 'hard_avoid' | 'dislike';
+  }[];
+  /**
+   * How strictly the pantry limits results. `strict` means every returned
+   * recipe is cookable right now.
+   */
+  pantryMode: 'off' | 'partial' | 'strict';
+  /** Set when the user has chosen to see recipes containing a disliked food. */
+  allowDislikedIngredients: boolean;
   /** Budget ceiling in minor units. */
   budgetMinor: number | null;
   currency: CurrencyCode;

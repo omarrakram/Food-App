@@ -293,7 +293,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     defaultUnit: 'piece',
     gramsPerPiece: 140,
     allergens: [],
-    aliases: ['capsicum', 'sweet pepper', 'فلفل رومي'],
+    aliases: ['capsicum', 'sweet pepper', 'red pepper', 'green pepper', 'yellow pepper', 'فلفل رومي', 'فلفل حلو'],
     isCommonStaple: false,
     isPerishable: true,
   },

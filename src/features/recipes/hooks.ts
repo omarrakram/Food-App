@@ -11,6 +11,8 @@ import { env } from '@/lib/config/env';
 import { toAppError } from '@/lib/errors';
 import type { MealRequest, Recipe, RecipeMatch } from '@/types/domain';
 
+import { suggestRelaxations, type Relaxation } from './filter';
+import { toConstraints } from './to-constraints';
 import { rankRecipes } from './rank';
 import { requestFingerprint } from './request-params';
 
@@ -98,6 +100,13 @@ export function useLocalSuggestions(
   matches: RecipeMatch[];
   isLoading: boolean;
   recipes: Recipe[];
+  /**
+   * What the user could give up to get results, when nothing matched.
+   *
+   * Computed only on an empty result set, because it costs one filter pass per
+   * blocking constraint. Never contains an allergy, a diet or a hard avoid.
+   */
+  relaxations: Relaxation[];
 } {
   const catalogue = useRecipeCatalogue();
   const pantry = usePantryItems();
@@ -110,10 +119,18 @@ export function useLocalSuggestions(
     });
   }, [catalogue.data, pantry.data, request, limit, extraRecipes]);
 
+  const relaxations = useMemo(() => {
+    if (matches.length > 0 || !catalogue.data) return [];
+    return suggestRelaxations([...catalogue.data, ...extraRecipes], toConstraints(request), {
+      pantryItems: pantry.data ?? [],
+    });
+  }, [matches.length, catalogue.data, extraRecipes, request, pantry.data]);
+
   return {
     matches,
     isLoading: catalogue.isLoading || pantry.isLoading,
     recipes: catalogue.data ?? [],
+    relaxations,
   };
 }
 
@@ -176,6 +193,7 @@ export function useMealSuggestions(request: MealRequest, limit = 20) {
 
   return {
     matches: local.matches,
+    relaxations: local.relaxations,
     isLoading: local.isLoading,
     /** True while generation is still in flight but local results already show. */
     isGenerating: ai.isFetching,

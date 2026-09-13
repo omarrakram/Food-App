@@ -1,25 +1,18 @@
 import {
   buildAvailabilityIndex,
   matchRecipeIngredients,
-  resolveIngredient,
   type AvailabilityIndex,
 } from '@/features/ingredients/matching';
-import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import {
   budgetVerdict,
   estimateRecipeCost,
   toPricedAmount,
   toSpendAmount,
 } from '@/features/pricing/estimate';
-import type {
-  Allergen,
-  DietFlag,
-  DietaryPreference,
-  MealRequest,
-  PantryItem,
-  Recipe,
-  RecipeMatch,
-} from '@/types/domain';
+import type { MealRequest, PantryItem, Recipe, RecipeMatch } from '@/types/domain';
+
+import { filterRecipes, type RejectionReason } from './filter';
+import { toConstraints } from './to-constraints';
 
 /**
  * Recipe filtering and ranking.
@@ -34,120 +27,23 @@ import type {
  */
 
 // --- Hard constraints ------------------------------------------------------
+// Moved to `safety.ts` so `filter.ts` can use them too. Re-exported because
+// callers and tests import them from here.
+import {
+  canCookWithAppliances,
+  containsDislikedIngredient,
+  satisfiesDiet,
+  satisfiesDietFlags,
+  violatesAllergens,
+} from './safety';
 
-/**
- * Diets that forbid whole ingredient categories. A recipe qualifies either by
- * carrying the tag explicitly or by containing no forbidden ingredient.
- */
-const DIET_FORBIDDEN_TAGS: Partial<Record<DietaryPreference, Allergen[]>> = {
-  vegan: ['dairy', 'eggs', 'fish', 'shellfish'],
-  vegetarian: ['fish', 'shellfish'],
+export {
+  canCookWithAppliances,
+  containsDislikedIngredient,
+  satisfiesDiet,
+  satisfiesDietFlags,
+  violatesAllergens,
 };
-
-const MEAT_SLUGS = new Set([
-  'chicken-breast',
-  'chicken-thigh',
-  'ground-beef',
-  'beef-cubes',
-  'sausage',
-  'liver',
-]);
-
-const SEAFOOD_SLUGS = new Set(['tilapia', 'shrimp', 'tuna-can']);
-
-function recipeIngredientSlugs(recipe: Recipe): Set<string> {
-  const slugs = new Set<string>();
-  for (const ingredient of recipe.ingredients) {
-    const resolved = resolveIngredient(ingredient.name);
-    if (resolved) slugs.add(resolved.slug);
-  }
-  return slugs;
-}
-
-/**
- * ALLERGY SAFETY: a declared allergen is an absolute exclusion.
- *
- * We check both the recipe's declared allergen list and the allergens implied
- * by its ingredients, so a mis-tagged recipe still gets caught. We never reason
- * about "only a trace" or "they could substitute".
- */
-export function violatesAllergens(recipe: Recipe, allergens: readonly Allergen[]): boolean {
-  if (allergens.length === 0) return false;
-  const declared = new Set<Allergen>(recipe.allergens);
-  for (const ingredient of recipe.ingredients) {
-    const resolved = resolveIngredient(ingredient.name);
-    resolved?.allergens.forEach((allergen) => declared.add(allergen));
-  }
-  return allergens.some((allergen) => declared.has(allergen));
-}
-
-export function satisfiesDiet(recipe: Recipe, diet: DietaryPreference): boolean {
-  if (diet === 'none' || diet === 'other') return true;
-  if (recipe.dietTags.includes(diet)) return true;
-
-  const slugs = recipeIngredientSlugs(recipe);
-  const forbiddenAllergens = DIET_FORBIDDEN_TAGS[diet] ?? [];
-
-  const hasForbiddenAllergen = forbiddenAllergens.some((allergen) =>
-    recipe.allergens.includes(allergen),
-  );
-
-  switch (diet) {
-    case 'vegan':
-    case 'vegetarian': {
-      const hasMeat = [...slugs].some((slug) => MEAT_SLUGS.has(slug));
-      const hasSeafood = [...slugs].some((slug) => SEAFOOD_SLUGS.has(slug));
-      return !hasMeat && !hasSeafood && !hasForbiddenAllergen;
-    }
-    case 'pescatarian':
-      return ![...slugs].some((slug) => MEAT_SLUGS.has(slug));
-    case 'halal':
-      // Our curated set contains no pork or alcohol; an untagged recipe from
-      // the model is treated as not-yet-verified rather than assumed halal.
-      return recipe.dietTags.includes('halal') || recipe.source === 'curated';
-    case 'keto':
-      return (recipe.nutrition.carbsGrams ?? 999) <= 25;
-    default:
-      return true;
-  }
-}
-
-/**
- * Diet flags are checked on top of the eating style, not instead of it.
- *
- * Each flag is its own constraint, so a halal keto user must satisfy both —
- * previously only one diet value could be held at a time, and choosing "halal"
- * silently discarded "vegetarian".
- */
-export function satisfiesDietFlags(recipe: Recipe, flags: readonly DietFlag[]): boolean {
-  return flags.every((flag) => satisfiesDiet(recipe, flag));
-}
-
-/** A recipe the user has no way to cook is not a suggestion. */
-export function canCookWithAppliances(
-  recipe: Recipe,
-  appliances: readonly string[],
-): boolean {
-  if (appliances.length === 0) return true;
-  return recipe.requiredAppliances.every((required) => appliances.includes(required));
-}
-
-/** Soft preference, applied as a filter only when the user was explicit. */
-export function containsDislikedIngredient(
-  recipe: Recipe,
-  disliked: readonly string[],
-): boolean {
-  if (disliked.length === 0) return false;
-  const dislikedKeys = new Set(disliked.map(normaliseIngredientName).filter(Boolean));
-  return recipe.ingredients.some((ingredient) => {
-    if (ingredient.isOptional) return false;
-    const resolved = resolveIngredient(ingredient.name);
-    const key = resolved
-      ? normaliseIngredientName(resolved.name)
-      : normaliseIngredientName(ingredient.name);
-    return dislikedKeys.has(key);
-  });
-}
 
 export type FilterReason =
   | 'allergen'
@@ -158,16 +54,52 @@ export type FilterReason =
   | 'cuisine'
   | 'time'
   | 'calories'
-  | 'protein';
+  | 'protein'
+  | 'pantry';
 
 export type FilterOutcome = { recipe: Recipe; excludedBy: FilterReason | null };
 
 /**
- * Applies every constraint in the request. Returns each recipe with the reason
- * it was excluded (or null) so the UI can explain an empty result set instead
- * of just saying "nothing found".
+ * Applies every constraint in the request.
+ *
+ * Thin wrapper over `filterRecipes`, kept because callers and tests speak in
+ * `MealRequest`. The rejection reasons are the filter's, mapped onto the older
+ * vocabulary — the filter is the single implementation.
  */
-export function applyConstraints(recipes: readonly Recipe[], request: MealRequest): FilterOutcome[] {
+export function applyConstraints(
+  recipes: readonly Recipe[],
+  request: MealRequest,
+  options: {
+    availability?: AvailabilityIndex;
+    pantryItems?: readonly PantryItem[];
+    now?: Date;
+  } = {},
+): FilterOutcome[] {
+  const constraints = toConstraints(request);
+  return filterRecipes(recipes, constraints, options).map((verdict) => ({
+    recipe: verdict.recipe,
+    excludedBy: verdict.rejection ? toFilterReason(verdict.rejection.reason) : null,
+  }));
+}
+
+function toFilterReason(reason: RejectionReason): FilterReason {
+  switch (reason) {
+    case 'excluded_ingredient':
+    case 'disliked_ingredient':
+      return 'disliked';
+    case 'missing_required_ingredient':
+    case 'pantry':
+      return 'pantry';
+    default:
+      return reason;
+  }
+}
+
+/** Kept for tests that assert the old per-check behaviour directly. */
+export function applyConstraintsLegacy(
+  recipes: readonly Recipe[],
+  request: MealRequest,
+): FilterOutcome[] {
   return recipes.map((recipe) => {
     if (violatesAllergens(recipe, request.allergens)) {
       return { recipe, excludedBy: 'allergen' as const };
@@ -196,10 +128,7 @@ export function applyConstraints(recipes: readonly Recipe[], request: MealReques
     if (request.maxCalories && (recipe.nutrition.calories ?? 0) > request.maxCalories) {
       return { recipe, excludedBy: 'calories' as const };
     }
-    if (
-      request.minProteinGrams &&
-      (recipe.nutrition.proteinGrams ?? 0) < request.minProteinGrams
-    ) {
+    if (request.minProteinGrams && (recipe.nutrition.proteinGrams ?? 0) < request.minProteinGrams) {
       return { recipe, excludedBy: 'protein' as const };
     }
     return { recipe, excludedBy: null };
@@ -267,7 +196,11 @@ export function rankRecipes(
     buildAvailabilityIndex(options.pantryItems ?? [], request.ingredients, { now: options.now });
 
   const weights = WEIGHTS[request.mode];
-  const survivors = applyConstraints(recipes, request).filter((outcome) => !outcome.excludedBy);
+  // The SAME index the filter used, so a recipe cannot pass strict pantry mode
+  // against one view of the kitchen and be scored against another.
+  const survivors = applyConstraints(recipes, request, { availability: index }).filter(
+    (outcome) => !outcome.excludedBy,
+  );
 
   const matches: RecipeMatch[] = survivors.map(({ recipe }) => {
     const match = matchRecipeIngredients(recipe, index);

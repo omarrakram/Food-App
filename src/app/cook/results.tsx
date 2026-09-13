@@ -6,7 +6,7 @@ import { ResultsView } from '@/components/recipe/results-view';
 import { ScreenScroll, ScreenHeader } from '@/components/ui/screen';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useMealSuggestions } from '@/features/recipes/hooks';
-import { decodeRequest } from '@/features/recipes/request-params';
+import { decodeRequest, encodeRequest, relaxRequest } from '@/features/recipes/request-params';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
@@ -18,7 +18,7 @@ export default function CookResultsScreen() {
   const params = useLocalSearchParams();
 
   const request = useMemo(() => decodeRequest(params, preferences), [params, preferences]);
-  const { matches, isLoading, error, isGenerating, generationError, refetch } =
+  const { matches, relaxations, isLoading, error, isGenerating, generationError, refetch } =
     useMealSuggestions(request);
 
   return (
@@ -34,6 +34,15 @@ export default function CookResultsScreen() {
           generationError={generationError}
           onRetry={refetch}
           onAdjust={() => router.back()}
+          relaxations={relaxations}
+          // Re-navigates rather than mutating state, so the relaxed search is
+          // its own history entry and Back returns to the strict one.
+          onRelax={(relaxation) =>
+            router.replace({
+              pathname: '/cook/results',
+              params: encodeRequest(relaxRequest(request, relaxation.reason)),
+            })
+          }
         />
       </View>
     </ScreenScroll>

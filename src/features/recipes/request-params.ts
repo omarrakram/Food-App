@@ -1,12 +1,9 @@
-import type {
-  Cuisine,
-  MealRequest,
-  MealType,
-  UserPreferences,
-} from '@/types/domain';
+import type { Cuisine, MealRequest, MealType, UserPreferences } from '@/types/domain';
 import { CUISINES, MEAL_TYPES } from '@/types/domain';
 
 import { requestDefaultsFrom } from '@/features/preferences/preferences-provider';
+
+import type { RejectionReason } from './filter';
 
 /**
  * URL-parameter encoding for a meal request.
@@ -31,6 +28,17 @@ export function encodeRequest(request: MealRequest): RequestParams {
   if (request.minProteinGrams !== null) params.protein = String(request.minProteinGrams);
   if (request.maxCalories !== null) params.calories = String(request.maxCalories);
   if (request.query) params.q = request.query;
+  if (request.requiredIngredients.length > 0) {
+    params.must = request.requiredIngredients.join('|');
+  }
+  // Only the user's own explicit exclusions travel in the URL, and only their
+  // labels. Allergies come from the profile at decode time and are never
+  // encoded, so a shared link can neither leak nor drop someone's allergy.
+  const avoid = request.excludedIngredients
+    .filter((entry) => entry.severity !== 'allergy')
+    .map((entry) => `${entry.severity === 'hard_avoid' ? '!' : ''}${entry.label}`);
+  if (avoid.length > 0) params.avoid = avoid.join('|');
+  if (request.pantryMode !== 'off') params.pantry = request.pantryMode;
   params.servings = String(request.servings);
 
   return params;
@@ -83,6 +91,35 @@ export function decodeRequest(
 
   const servings = parseIntOrNull(first(params.servings));
 
+  const splitList = (value: string | undefined) =>
+    value
+      ? value
+          .split('|')
+          .map((entry) => entry.trim())
+          .filter(Boolean)
+          .slice(0, 20)
+      : [];
+
+  const rawPantry = first(params.pantry);
+  const pantryMode: MealRequest['pantryMode'] =
+    rawPantry === 'strict' || rawPantry === 'partial' ? rawPantry : 'off';
+
+  // The user's own avoid list from the link, plus everything their profile
+  // says. Profile dislikes are `dislike`; a saved allergy is an allergy and
+  // is applied through `allergens` as well, so it cannot be lost here.
+  const excludedIngredients: MealRequest['excludedIngredients'] = [
+    ...splitList(first(params.avoid)).map((label) => ({
+      slug: null,
+      label: label.startsWith('!') ? label.slice(1) : label,
+      severity: (label.startsWith('!') ? 'hard_avoid' : 'dislike') as 'hard_avoid' | 'dislike',
+    })),
+    ...defaults.dislikedIngredients.map((label) => ({
+      slug: null,
+      label,
+      severity: 'dislike' as const,
+    })),
+  ];
+
   return {
     ...defaults,
     mode,
@@ -94,6 +131,9 @@ export function decodeRequest(
     minProteinGrams: parseIntOrNull(first(params.protein)),
     maxCalories: parseIntOrNull(first(params.calories)),
     query: first(params.q)?.slice(0, 200) ?? null,
+    requiredIngredients: splitList(first(params.must)),
+    excludedIngredients,
+    pantryMode,
     servings: servings && servings > 0 ? Math.min(servings, 20) : defaults.servings,
   };
 }
@@ -114,5 +154,45 @@ export function requestFingerprint(request: MealRequest): string {
     request.dietaryPreference,
     [...(request.dietFlags ?? [])].sort().join(','),
     [...request.allergens].sort().join(','),
+    [...request.requiredIngredients].sort().join(','),
+    request.excludedIngredients
+      .map((entry) => `${entry.severity}:${entry.label}`)
+      .sort()
+      .join(','),
+    request.pantryMode,
+    request.allowDislikedIngredients ? '1' : '0',
   ].join('~');
+}
+
+/**
+ * Drops one non-safety constraint from a request.
+ *
+ * Used by the empty-results screen when the user accepts a relaxation offer.
+ * SAFETY: there is deliberately no case for `allergen`, `diet` or
+ * `excluded_ingredient` — the default returns the request untouched, so even a
+ * caller that asked for one gets no change rather than an unsafe result set.
+ */
+export function relaxRequest(request: MealRequest, reason: RejectionReason): MealRequest {
+  switch (reason) {
+    case 'disliked_ingredient':
+      return { ...request, allowDislikedIngredients: true };
+    case 'missing_required_ingredient':
+      return { ...request, requiredIngredients: [] };
+    case 'appliance':
+      return { ...request, appliances: [] };
+    case 'meal_type':
+      return { ...request, mealType: null };
+    case 'cuisine':
+      return { ...request, cuisine: null };
+    case 'time':
+      return { ...request, maxMinutes: null };
+    case 'calories':
+      return { ...request, maxCalories: null };
+    case 'protein':
+      return { ...request, minProteinGrams: null };
+    case 'pantry':
+      return { ...request, pantryMode: 'partial' };
+    default:
+      return request;
+  }
 }

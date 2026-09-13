@@ -26,7 +26,12 @@ export const RECIPES_BY_ID = new Map(RECIPE_FIXTURES.map((recipe) => [recipe.id,
 export const COLLECTIONS = [
   { slug: 'quick', tag: 'quick', labelKey: 'discover.collectionQuick', emoji: '⚡' },
   { slug: 'under-100', tag: 'under-100', labelKey: 'discover.collectionUnder100', emoji: '💸' },
-  { slug: 'high-protein', tag: 'high-protein', labelKey: 'discover.collectionHighProtein', emoji: '💪' },
+  {
+    slug: 'high-protein',
+    tag: 'high-protein',
+    labelKey: 'discover.collectionHighProtein',
+    emoji: '💪',
+  },
   { slug: 'healthy', tag: 'healthy', labelKey: 'discover.collectionHealthy', emoji: '🥗' },
   { slug: 'egyptian', tag: 'egyptian', labelKey: 'discover.collectionEgyptian', emoji: '🇪🇬' },
   { slug: 'italian', tag: 'italian', labelKey: 'discover.collectionItalian', emoji: '🍝' },

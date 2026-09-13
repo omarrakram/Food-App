@@ -14,6 +14,7 @@ import {
   DEFAULT_PREFERENCES,
   toDietFlags,
   toEatingStyle,
+  type MealRequest,
   type UserPreferences,
 } from '@/types/domain';
 
@@ -198,5 +199,12 @@ export function requestDefaultsFrom(preferences: UserPreferences) {
     dislikedIngredients: preferences.dislikedIngredients,
     appliances: preferences.appliances,
     skillLevel: preferences.skillLevel,
+    // Defaults for the constraint fields no screen has set yet. A request
+    // built from preferences alone requires nothing and excludes nothing
+    // beyond the allergens and dislikes already above.
+    requiredIngredients: [] as string[],
+    excludedIngredients: [] as MealRequest['excludedIngredients'],
+    pantryMode: 'off' as const,
+    allowDislikedIngredients: false,
   } as const;
 }

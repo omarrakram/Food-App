@@ -1,0 +1,232 @@
+import { resolveIngredient } from '@/features/ingredients/matching';
+import { normaliseIngredientName } from '@/features/ingredients/normalise';
+import type {
+  Allergen,
+  Appliance,
+  CountryCode,
+  Cuisine,
+  CurrencyCode,
+  DietFlag,
+  EatingStyle,
+  MealType,
+  Recipe,
+  RecipeIngredient,
+  SkillLevel,
+} from '@/types/domain';
+
+/**
+ * What the user asked for, in one shape.
+ *
+ * Every surface that narrows the catalogue — "cook with what I have", the
+ * budget flow, Discover, natural-language search, the saved preferences — ends
+ * up here. One model, because the alternative is five filters that each
+ * honour a slightly different subset of the user's requirements, which is
+ * exactly how "no bell pepper" ends up returning a recipe with bell pepper.
+ *
+ * The split that matters is HARD vs SOFT:
+ *
+ *   HARD constraints REMOVE a recipe. They are never traded off, never
+ *   down-weighted, and never quietly relaxed to fill a page.
+ *   SOFT preferences only change the ORDER of what survived.
+ *
+ * If nothing survives, the answer is "nothing matches all of this", plus an
+ * offer to relax specific non-safety constraints — never a page of results
+ * that ignore one of them.
+ */
+
+// --- Ingredient restrictions -----------------------------------------------
+
+/**
+ * Why an ingredient is unwanted. The severity decides whether it can ever be
+ * overridden, so it is part of the data rather than a flag at the call site.
+ */
+export const RESTRICTION_SEVERITIES = ['allergy', 'hard_avoid', 'dislike'] as const;
+export type RestrictionSeverity = (typeof RESTRICTION_SEVERITIES)[number];
+
+export type IngredientRestriction = {
+  /** Canonical catalogue slug when the ingredient is known to us. */
+  slug: string | null;
+  /** What to show the user — their words, or the catalogue's. */
+  label: string;
+  severity: RestrictionSeverity;
+};
+
+/** An allergy or a hard avoid can never be overridden to fill a results page. */
+export function isAbsolute(restriction: IngredientRestriction): boolean {
+  return restriction.severity === 'allergy' || restriction.severity === 'hard_avoid';
+}
+
+/**
+ * Turns free text into a restriction, resolving it to a canonical slug when we
+ * recognise it.
+ *
+ * Resolving matters more here than anywhere else in the app: a user who types
+ * "bell pepper" must also exclude capsicum, red pepper and «فلفل ألوان», and
+ * the only thing that knows those are the same food is the catalogue.
+ */
+export function toRestriction(
+  input: string,
+  severity: RestrictionSeverity,
+): IngredientRestriction | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+  const resolved = resolveIngredient(trimmed);
+  return { slug: resolved?.slug ?? null, label: resolved?.name ?? trimmed, severity };
+}
+
+// --- The model -------------------------------------------------------------
+
+/**
+ * How strictly the user's pantry limits the results.
+ *
+ * `strict` is the honest answer to "what can I cook right now": nothing is
+ * returned that needs a shop. `partial` still ranks by coverage but admits
+ * recipes with gaps, and the UI says how many are missing. `off` ignores the
+ * pantry entirely, which is what Discover wants.
+ */
+export const PANTRY_MODES = ['off', 'partial', 'strict'] as const;
+export type PantryMode = (typeof PANTRY_MODES)[number];
+
+export type RecipeConstraints = {
+  // --- Hard: safety and identity -----------------------------------------
+  /** SAFETY-CRITICAL. Absolute exclusions, never relaxable. */
+  allergens: Allergen[];
+  /** Exclusive eating style. */
+  eatingStyle: EatingStyle;
+  /** Independent flags, checked on top of the style. */
+  dietFlags: DietFlag[];
+  /** Foods to keep out, each with its own severity. */
+  excludedIngredients: IngredientRestriction[];
+  /**
+   * When true, `dislike`-severity restrictions stop filtering and only
+   * down-rank. Allergies and hard avoids are unaffected.
+   */
+  allowDislikedIngredients: boolean;
+
+  // --- Hard: explicit requirements ---------------------------------------
+  /** The recipe MUST contain all of these. Slugs, or free text we resolve. */
+  requiredIngredients: string[];
+  /** Appliances the user actually has. Empty means "do not filter on this". */
+  appliances: Appliance[];
+  mealType: MealType | null;
+  cuisine: Cuisine | null;
+  maxMinutes: number | null;
+  maxCalories: number | null;
+  minProteinGrams: number | null;
+
+  // --- Pantry -------------------------------------------------------------
+  pantryMode: PantryMode;
+  /** Ingredients the user says they have right now, beyond the pantry. */
+  availableIngredients: string[];
+
+  // --- Soft: ranking only -------------------------------------------------
+  servings: number;
+  budgetMinor: number | null;
+  currency: CurrencyCode;
+  country: CountryCode;
+  skillLevel: SkillLevel;
+  /** Cuisines the user tends to like. Ranking only, never a filter. */
+  preferredCuisines: Cuisine[];
+  /** Free-text query, for search mode. */
+  query: string | null;
+};
+
+export function emptyConstraints(overrides: Partial<RecipeConstraints> = {}): RecipeConstraints {
+  return {
+    allergens: [],
+    eatingStyle: 'none',
+    dietFlags: [],
+    excludedIngredients: [],
+    allowDislikedIngredients: false,
+    requiredIngredients: [],
+    appliances: [],
+    mealType: null,
+    cuisine: null,
+    maxMinutes: null,
+    maxCalories: null,
+    minProteinGrams: null,
+    pantryMode: 'off',
+    availableIngredients: [],
+    servings: 2,
+    budgetMinor: null,
+    currency: 'EGP',
+    country: 'EG',
+    skillLevel: 'intermediate',
+    preferredCuisines: [],
+    query: null,
+    ...overrides,
+  };
+}
+
+// --- Canonical ingredient identity -----------------------------------------
+
+/**
+ * The canonical slug for a recipe ingredient line.
+ *
+ * Curated and community recipes carry a slug from the importer. An
+ * AI-generated one carries only a name, so it is resolved through the
+ * catalogue's alias index — the same path a user's typed ingredient takes,
+ * which is what keeps "capsicum" and "bell pepper" one thing on both sides.
+ */
+export function ingredientSlug(line: Pick<RecipeIngredient, 'slug' | 'name'>): string | null {
+  if (line.slug) return line.slug;
+  return resolveIngredient(line.name)?.slug ?? null;
+}
+
+/** Every canonical slug a recipe contains, garnishes and optionals included. */
+export function recipeSlugs(recipe: Pick<Recipe, 'ingredients'>): Set<string> {
+  const slugs = new Set<string>();
+  for (const line of recipe.ingredients) {
+    const slug = ingredientSlug(line);
+    if (slug) slugs.add(slug);
+  }
+  return slugs;
+}
+
+/**
+ * Does this recipe contain the named ingredient?
+ *
+ * Falls back to normalised-name comparison when neither side resolves to the
+ * catalogue, so a user excluding something we have never heard of still gets
+ * an exact-name exclusion rather than nothing at all.
+ */
+export function recipeContains(
+  recipe: Pick<Recipe, 'ingredients'>,
+  wanted: string,
+  options: { includeOptional?: boolean } = {},
+): boolean {
+  const { includeOptional = true } = options;
+  const lines = includeOptional
+    ? recipe.ingredients
+    : recipe.ingredients.filter((line) => !line.isOptional && !line.isGarnish);
+
+  const resolved = resolveIngredient(wanted);
+  const wantedSlug = resolved?.slug ?? null;
+  const wantedKey = normaliseIngredientName(resolved?.name ?? wanted);
+
+  return lines.some((line) => {
+    if (wantedSlug) {
+      const slug = ingredientSlug(line);
+      if (slug && slug === wantedSlug) return true;
+    }
+    if (!wantedKey) return false;
+    const lineResolved = resolveIngredient(line.name);
+    const lineKey = normaliseIngredientName(lineResolved?.name ?? line.name);
+    return lineKey === wantedKey;
+  });
+}
+
+/**
+ * Lines a cook genuinely has to have in the kitchen tonight.
+ *
+ * Not optional, not a garnish, not a background staple. This is the set
+ * `pantryMode: 'strict'` is asserted against, and getting it wrong in either
+ * direction is a bad product: too wide and "recipes I can make now" tells
+ * someone to go and buy salt; too narrow and it tells them they can make a
+ * dish they have no chicken for.
+ */
+export function essentialIngredients(recipe: Pick<Recipe, 'ingredients'>): RecipeIngredient[] {
+  return recipe.ingredients.filter(
+    (line) => !line.isOptional && !line.isGarnish && !line.isPantryStaple,
+  );
+}

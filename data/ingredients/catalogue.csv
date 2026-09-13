@@ -26,7 +26,7 @@ tomatoes,tomatoes,طماطم,vegetables,piece,120,,tomato|oota|طماطم حمر
 onions,onions,بصل,vegetables,piece,110,,onion|basal|بصل أحمر|بصل أبيض,1,0
 garlic,garlic,ثوم,vegetables,clove,5,,toum|tom|garlic cloves|فص ثوم,1,0
 cucumber,cucumber,خيار,vegetables,piece,100,,cucumbers|khiar|خيار بلدي,0,1
-bell-pepper,bell pepper,فلفل ألوان,vegetables,piece,140,,capsicum|sweet pepper|فلفل رومي,0,1
+bell-pepper,bell pepper,فلفل ألوان,vegetables,piece,140,,capsicum|sweet pepper|red pepper|green pepper|yellow pepper|فلفل رومي|فلفل حلو,0,1
 zucchini,zucchini,كوسة,vegetables,piece,160,,courgette|kosa|كوسه,0,1
 eggplant,eggplant,باذنجان,vegetables,piece,220,,aubergine|betingan|بتنجان,0,1
 carrots,carrots,جزر,vegetables,piece,70,,carrot|gazar|جزر بلدي,0,1

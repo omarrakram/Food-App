@@ -8,7 +8,7 @@ import { Chip } from '@/components/ui/chip';
 import { Input } from '@/components/ui/input';
 import { Screen, ScreenFooter, ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
-import { usePreferences } from '@/features/preferences/preferences-provider';
+import { requestDefaultsFrom, usePreferences } from '@/features/preferences/preferences-provider';
 import { encodeRequest } from '@/features/recipes/request-params';
 import { useI18n } from '@/i18n';
 import {
@@ -77,11 +77,10 @@ export default function BudgetScreen() {
     }
     void setItem(StorageKeys.lastBudget, parsed.amountMinor);
     const query = encodeRequest({
+      ...requestDefaultsFrom(preferences),
       mode: 'budget',
       ingredients: [],
       budgetMinor: parsed.amountMinor,
-      currency: preferences.currency,
-      country: preferences.country,
       servings: filters.servings,
       mealType: filters.mealType,
       cuisine: filters.cuisine,
@@ -89,12 +88,6 @@ export default function BudgetScreen() {
       minProteinGrams: filters.minProteinGrams,
       maxCalories: filters.maxCalories,
       query: null,
-      dietaryPreference: preferences.dietaryPreference,
-      dietFlags: preferences.dietFlags,
-      allergens: preferences.allergens,
-      dislikedIngredients: preferences.dislikedIngredients,
-      appliances: preferences.appliances,
-      skillLevel: preferences.skillLevel,
     });
     router.push({ pathname: '/budget/results', params: query });
   };

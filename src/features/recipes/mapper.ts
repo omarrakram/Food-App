@@ -1,8 +1,4 @@
-import type {
-  RecipeIngredientRow,
-  RecipeRow,
-  RecipeStepRow,
-} from '@/lib/supabase/database.types';
+import type { RecipeIngredientRow, RecipeRow, RecipeStepRow } from '@/lib/supabase/database.types';
 import type {
   Allergen,
   Appliance,

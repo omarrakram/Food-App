@@ -3,16 +3,23 @@ import { useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState, ErrorState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { sortMatches, type SortMode } from '@/features/recipes/rank';
 import { useIsSaved, useToggleSave } from '@/features/saved/hooks';
-import { useI18n } from '@/i18n';
+import { useI18n, type TranslationKey } from '@/i18n';
 import { presentError } from '@/lib/errors';
 import { useTheme } from '@/theme';
+import type { RejectionReason, Relaxation } from '@/features/recipes/filter';
 import type { MealRequest, RecipeMatch } from '@/types/domain';
+
+/**
+ * What dropping each constraint is offered as. Keyed by rejection reason so a
+ * new constraint cannot be added without deciding how to word it.
+ */
 
 import { RecipeCard } from './recipe-card';
 
@@ -33,6 +40,28 @@ function ResultCard({ match, showMatch }: { match: RecipeMatch; showMatch: boole
   );
 }
 
+/**
+ * How each droppable constraint is offered.
+ *
+ * Keyed by every rejection reason so a new constraint cannot be added without
+ * deciding how to word it — and the safety reasons map to `null`, which is the
+ * type system saying they are never offered.
+ */
+const RELAXATION_LABEL: Record<RejectionReason, TranslationKey | null> = {
+  allergen: null,
+  diet: null,
+  excluded_ingredient: null,
+  disliked_ingredient: 'results.relaxDisliked',
+  missing_required_ingredient: 'results.relaxRequired',
+  appliance: 'results.relaxAppliance',
+  meal_type: 'results.relaxMealType',
+  cuisine: 'results.relaxCuisine',
+  time: 'results.relaxTime',
+  calories: 'results.relaxCalories',
+  protein: 'results.relaxProtein',
+  pantry: 'results.relaxPantry',
+};
+
 export type ResultsViewProps = {
   request: MealRequest;
   matches: RecipeMatch[];
@@ -44,6 +73,12 @@ export type ResultsViewProps = {
   generationError?: unknown;
   onRetry?: () => void;
   onAdjust?: () => void;
+  /**
+   * Non-safety constraints the user could drop, offered when nothing matched.
+   * Never contains an allergy, a diet or a hard avoid.
+   */
+  relaxations?: Relaxation[];
+  onRelax?: (relaxation: Relaxation) => void;
   /** Extra content rendered above the list, e.g. the budget summary. */
   header?: React.ReactNode;
 };
@@ -64,6 +99,8 @@ export function ResultsView({
   generationError,
   onRetry,
   onAdjust,
+  relaxations = [],
+  onRelax,
   header,
 }: ResultsViewProps) {
   const theme = useTheme();
@@ -101,14 +138,50 @@ export function ResultsView({
 
   if (sorted.length === 0) {
     return (
-      <EmptyState
-        icon="restaurant-outline"
-        title={t('results.empty')}
-        body={t('results.emptyBody')}
-        action={onAdjust ? { label: t('common.edit'), onPress: onAdjust } : undefined}
-        testID="results-empty"
-        fullHeight
-      />
+      <View style={{ gap: theme.spacing.lg }}>
+        <EmptyState
+          icon="restaurant-outline"
+          title={t('results.empty')}
+          body={t('results.emptyBody')}
+          action={onAdjust ? { label: t('common.edit'), onPress: onAdjust } : undefined}
+          testID="results-empty"
+        />
+
+        {/*
+          What the user could give up, and what it would get them.
+
+          Shown rather than applied: the app does not decide on someone's
+          behalf which of their requirements matters least. And this list can
+          never contain an allergy, a diet or a hard avoid — `suggestRelaxations`
+          refuses to build one, so there is no path from an empty page to
+          quietly serving unsafe food.
+        */}
+        {relaxations.length > 0 ? (
+          <View style={{ gap: theme.spacing.sm }} testID="results-relaxations">
+            <Text variant="caption" color="textTertiary">
+              {t('results.relaxTitle')}
+            </Text>
+            {relaxations
+              .map((relaxation) => ({ relaxation, key: RELAXATION_LABEL[relaxation.reason] }))
+              .filter(
+                (entry): entry is { relaxation: Relaxation; key: TranslationKey } =>
+                  entry.key !== null,
+              )
+              .slice(0, 3)
+              .map(({ relaxation, key }) => (
+                <Button
+                  key={relaxation.reason}
+                  label={t(key, { count: relaxation.wouldReturn })}
+                  variant="secondary"
+                  size="md"
+                  fullWidth
+                  onPress={() => onRelax?.(relaxation)}
+                  testID={`results-relax-${relaxation.reason}`}
+                />
+              ))}
+          </View>
+        ) : null}
+      </View>
     );
   }
 
@@ -201,11 +274,7 @@ export function ResultsView({
 
       <View style={{ gap: theme.layout.cardGap }}>
         {sorted.map((match) => (
-          <ResultCard
-            key={match.recipe.id}
-            match={match}
-            showMatch={request.mode !== 'search'}
-          />
+          <ResultCard key={match.recipe.id} match={match} showMatch={request.mode !== 'search'} />
         ))}
       </View>
 

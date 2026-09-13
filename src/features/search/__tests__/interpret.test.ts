@@ -22,6 +22,10 @@ const base: MealRequest = {
   dislikedIngredients: [],
   appliances: [],
   skillLevel: 'intermediate',
+  requiredIngredients: [],
+  excludedIngredients: [],
+  pantryMode: 'off',
+  allowDislikedIngredients: false,
 };
 
 const parse = (query: string) => interpretQuery(query, 'EGP');

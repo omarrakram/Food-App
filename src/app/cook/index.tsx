@@ -12,10 +12,11 @@ import {
 } from '@/components/cook/request-filters';
 import { Button } from '@/components/ui/button';
 import { Screen, ScreenFooter, ScreenHeader, ScreenScroll } from '@/components/ui/screen';
+import { SegmentedControl } from '@/components/ui/segmented-control';
 import { Sheet } from '@/components/ui/sheet';
 import { Text } from '@/components/ui/text';
 import { usePantryItems } from '@/features/pantry/hooks';
-import { usePreferences } from '@/features/preferences/preferences-provider';
+import { requestDefaultsFrom, usePreferences } from '@/features/preferences/preferences-provider';
 import { encodeRequest } from '@/features/recipes/request-params';
 import { useI18n } from '@/i18n';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
@@ -41,6 +42,13 @@ export default function CookScreen() {
 
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);
+  /**
+   * The difference between "what can I cook RIGHT NOW" and "what could I cook
+   * with a quick shop". Defaults to strict, because someone who has just typed
+   * out their fridge is asking the first question, and answering the second
+   * one without saying so is how a results page stops being trustworthy.
+   */
+  const [strictPantry, setStrictPantry] = useState(true);
   const [hasSeeded, setHasSeeded] = useState(false);
   const [filters, setFilters] = useState<RequestFiltersValue>({
     servings: preferences.householdSize,
@@ -71,11 +79,11 @@ export default function CookScreen() {
     if (!canSubmit) return;
     void setItem(StorageKeys.recentIngredients, ingredients.slice(0, 20));
     const query = encodeRequest({
+      ...requestDefaultsFrom(preferences),
       mode: 'ingredients',
       ingredients,
       budgetMinor: null,
-      currency: preferences.currency,
-      country: preferences.country,
+      pantryMode: strictPantry ? 'strict' : 'partial',
       servings: filters.servings,
       mealType: filters.mealType,
       cuisine: filters.cuisine,
@@ -83,12 +91,6 @@ export default function CookScreen() {
       minProteinGrams: filters.minProteinGrams,
       maxCalories: filters.maxCalories,
       query: null,
-      dietaryPreference: preferences.dietaryPreference,
-      dietFlags: preferences.dietFlags,
-      allergens: preferences.allergens,
-      dislikedIngredients: preferences.dislikedIngredients,
-      appliances: preferences.appliances,
-      skillLevel: preferences.skillLevel,
     });
     router.push({ pathname: '/cook/results', params: query });
   };
@@ -119,6 +121,19 @@ export default function CookScreen() {
           should not have to walk past six groups of chips to ask for food.
         */}
         <View style={{ gap: theme.spacing.lg }}>
+          <SegmentedControl<'strict' | 'partial'>
+            options={[
+              { value: 'strict', label: t('cook.modeStrict') },
+              { value: 'partial', label: t('cook.modePartial') },
+            ]}
+            value={strictPantry ? 'strict' : 'partial'}
+            onChange={(mode) => setStrictPantry(mode === 'strict')}
+            testID="cook-pantry-mode"
+          />
+          <Text variant="footnote" color="textSecondary">
+            {strictPantry ? t('cook.modeStrictHint') : t('cook.modePartialHint')}
+          </Text>
+
           <ServingsField
             value={filters.servings}
             onChange={(servings) => setFilters((current) => ({ ...current, servings }))}

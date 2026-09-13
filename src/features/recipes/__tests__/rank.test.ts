@@ -32,6 +32,10 @@ function baseRequest(overrides: Partial<MealRequest> = {}): MealRequest {
     dislikedIngredients: [],
     appliances: [],
     skillLevel: 'intermediate',
+    requiredIngredients: [],
+    excludedIngredients: [],
+    pantryMode: 'off',
+    allowDislikedIngredients: false,
     ...overrides,
   };
 }
