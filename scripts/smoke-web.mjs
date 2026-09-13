@@ -470,11 +470,15 @@ async function main() {
         const decoded = shown.filter((node) => {
           const img = node.tagName === 'IMG' ? node : node.querySelector('img');
           return img && img.complete && img.naturalWidth > 0;
-        }).length;
+        });
+        const slugOf = (node) =>
+          (node.getAttribute('data-testid') || '').replace('recipe-photo-', '');
         return {
           photos: document.querySelectorAll('[data-testid^="recipe-photo-"]').length,
           onScreen: shown.length,
-          decoded,
+          decoded: decoded.length,
+          slugs: shown.map(slugOf),
+          decodedSlugs: decoded.map(slugOf),
           fallbacks: document.querySelectorAll('[data-testid^="recipe-fallback-"]').length,
         };
       })()`);
@@ -483,20 +487,41 @@ async function main() {
 
     await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(2000);
-    // Scrolling matters: the grid is virtualised, so an unscrolled page only
-    // ever proves the first screenful.
-    await page.evaluate(() => window.scrollTo(0, 1200));
-    const discoverPhotos = await photoAudit('discover');
+
+    // Walked rather than sampled. The grid is virtualised and a phone viewport
+    // holds about one card, so auditing where the page happens to be proves
+    // one photograph — which is not the claim being made. This scrolls through
+    // several screenfuls and accumulates, so "the catalogue shows real
+    // photographs" is a statement about the catalogue.
+    const seenPhotos = new Set();
+    const decodedPhotos = new Set();
+    let fallbacksSeen = 0;
+    for (let step = 0; step < 20; step += 1) {
+      // `window.scrollTo` does nothing here: React Native Web renders a list
+      // as its own overflow container, so the document never scrolls and a
+      // walk built on it audits the same screenful ten times. A wheel event
+      // over the list is what a finger does.
+      await page.mouse.move(195, 500);
+      await page.mouse.wheel(0, 700);
+      await page.waitForTimeout(500);
+      const audit = await photoAudit('discover');
+      for (const slug of audit.decodedSlugs) decodedPhotos.add(slug);
+      for (const slug of audit.slugs) seenPhotos.add(slug);
+      fallbacksSeen = Math.max(fallbacksSeen, audit.fallbacks);
+    }
+
     check(
       'the catalogue shows real photographs, not only the fallback',
-      discoverPhotos.photos > 0,
-      `${discoverPhotos.photos} photos, ${discoverPhotos.fallbacks} fallbacks`,
+      decodedPhotos.size >= 8,
+      `${decodedPhotos.size} decoded across the grid, ${fallbacksSeen} fallbacks`,
     );
     check(
-      'and the browser actually decoded every one that is on screen',
-      discoverPhotos.onScreen > 0 && discoverPhotos.decoded === discoverPhotos.onScreen,
-      `${discoverPhotos.decoded} of ${discoverPhotos.onScreen} on screen decoded`,
+      'and every photograph it rendered actually decoded',
+      seenPhotos.size > 0 && decodedPhotos.size === seenPhotos.size,
+      `${decodedPhotos.size} of ${seenPhotos.size}`,
     );
+    await page.mouse.wheel(0, -9000);
+    await page.waitForTimeout(700);
     await shot('05a-discover-photos');
 
     // The hero on a recipe that has one. Finding it through the DOM rather
