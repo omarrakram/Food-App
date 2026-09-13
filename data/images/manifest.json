@@ -1,1 +1,637 @@
-{"images": [], "skipped": []}
+{
+  "images": [],
+  "skipped": [
+    {
+      "recipeSlug": "air-fryer-spiced-chicken",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "aloo-gobi",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "baked-salmon-vegetables",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "bamia-vegetarian",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "banana-bread",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "banana-peanut-oats",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "basbousa",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "batata-harra",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "batates-mahshia",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "bean-burrito-bowl",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "beef-burger-homemade",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "beef-noodle-stirfry",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "beef-tacos",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "bessara",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "black-bean-quesadilla",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "bruschetta-tomato",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "buffalo-less-baked-wings",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "butter-chicken-light",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "cacik",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "caesar-less-chicken-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "calamari-alexandria",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "caprese-stack",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "carbonara-beef",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "chana-masala",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "chicken-fajitas",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "chicken-fried-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "chicken-parm-oven",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "chickpea-spinach-curryless",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "chili-con-carne-beef",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "chocolate-chip-cookies",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "cobb-style-bowl",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "coconut-chicken-curry",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "congee-chicken",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "corn-avocado-salad",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "creamy-chicken-pasta",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "cucumber-raita",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "dal-tadka",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "edamame-rice-bowl",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "egg-drop-soup",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "eggah-baladi",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "egyptian-cheese-toastie",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "egyptian-lentil-soup",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "fattah-lahma",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "fatteh-hummus",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "fattoush",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "feteer-cheese",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "fish-tacos-cabbage",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "foul-shami",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "foul-with-eggs",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "ful-medames-classic",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "garlic-green-beans",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "ginger-garlic-broccoli-beef",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "gnocchi-butter-sage",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "greek-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "grilled-sea-bream",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "guacamole",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "hawawshi",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "herb-omelette-feta",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "huevos-rancheros",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "hummus-classic",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "kabab-halla",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "kafta-bil-sanieh",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "kibbeh-bil-sanieh",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "kimchi-less-cabbage-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "kofta-tagine",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "koshari",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "koshari-lentil-rice",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "kunafa-cheese",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "labneh-bowl",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "lamb-freekeh",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "lasagne-beef",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "lemon-herb-couscous",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "lentil-soup-lemon",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "lentil-spinach-soup-indian",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "mac-and-cheese-baked",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "macarona-bechamel",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mahshi-cabbage",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "manakish-zaatar",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mango-sticky-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "maqluba",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "margherita-flatbread",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "masala-omelette",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "menemen",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mesaqaa",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mexican-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "minestrone",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "miso-less-tofu-soup",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "molokhia-with-chicken",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "muhammara",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mujadara",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mussels-tomato-broth",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "mutabbal",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "okra-stew",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "om-ali",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "orange-olive-oil-cake",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "overnight-oats",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "palak-paneer-style",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "pancakes-buttermilk",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "pasta-e-ceci",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "pasta-pomodoro",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "pasta-tuna-lemon",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "pico-de-gallo",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "polenta-mushroom",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "quick-vegetable-fried-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "ratatouille-tray",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "risotto-mushroom",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "roast-chicken-potatoes",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "roasted-cauliflower-tahini",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "roz-bel-laban",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "ruz-moammar",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "salata-baladi",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "salatet-rocca",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "salatet-zabadi",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "samak-mashwi-mullet",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "sardines-baked-lemon",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "sayadeya",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "scrambled-eggs-soft",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "sesame-noodles-cold",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "sfiha-lamb",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shakshuka",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shakshuka-suez",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shawarma-chicken",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "sheet-pan-sausage-veg",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "shish-tawook",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shorbet-adas-red",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shorbet-lisan-asfour",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "shrimp-garlic",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "shrimp-noodle-soup",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "smoothie-protein-banana",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "spaghetti-aglio-olio",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "spanakopita-triangles",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "spiced-rice-peas",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "stuffed-peppers-rice",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "sutlac-baked",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "sweet-potato-fries-airfryer",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "sweet-sour-tofu",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "taameya",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tabbouleh",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tameya-sandwich",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tandoori-style-chicken",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "teriyaki-less-chicken",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "thai-style-peanut-salad",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "tiramisu-quick",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tuna-melt",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tuna-pasta-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "tuna-white-bean-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "turkish-bulgur-pilaf",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "turkish-eggs-yogurt",
+      "reason": "no sufficiently licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-lentil-soup",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "turkish-shepherd-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "turkish-stuffed-flatbread",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "turkish-white-bean-salad",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "vegetable-biryani",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "vegetable-spring-rolls",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "warak-enab",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "white-bean-stew",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "yogurt-berry-bowl",
+      "reason": "download failed or file too large"
+    },
+    {
+      "recipeSlug": "zucchini-egg-skillet",
+      "reason": "no sufficiently licensed image found"
+    }
+  ]
+}
