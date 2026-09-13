@@ -794,6 +794,21 @@ async function main() {
     check('and the empty state explains it', nothing.empty);
     await shot('17h-cook-zero-results');
 
+    // An honest "nothing" still owes the user a way forward. Exact mode on
+    // banana/oats/milk finds nothing, and allowing gaps finds six — so the
+    // empty state has to offer that rather than leaving them at a dead end.
+    const deadEnd = await cookWith(CASE_C, 'strict');
+    if (deadEnd.ids.length === 0) {
+      const offered = await page.locator('[data-testid^="results-relax-"]').count();
+      check('a dead end offers the constraint worth dropping', offered > 0, `${offered} offers`);
+      if (offered > 0) {
+        await page.locator('[data-testid^="results-relax-"]').first().click();
+        await page.waitForTimeout(2400);
+        const after = await page.locator('[data-testid^="result-"]').count();
+        check('and taking the offer actually produces recipes', after > 0, `${after} results`);
+      }
+    }
+
     // Exact mode for the remaining three, so the table covers both modes for
     // every case rather than sampling one of each.
     const exactA = record('chicken, rice, tomato', 'exact', await cookWith(CASE_A, 'strict'));
@@ -806,6 +821,22 @@ async function main() {
       'exact mode returns only recipes with nothing missing',
       exactGaps.every((count) => count === 0),
       exactGaps.length ? `gaps seen: ${[...new Set(exactGaps)].join(', ')}` : 'no results to check',
+    );
+
+    // And the middle setting is a budget of ONE, not "some". This is the mode
+    // that used to be "partial" and applied no constraint whatsoever.
+    const oneA = record('chicken, rice, tomato', '≤1 missing', await cookWith(CASE_A, 'missing1'));
+    const oneD = record('ground beef, pasta, tomato', '≤1 missing', await cookWith(CASE_D, 'missing1'));
+    const oneGaps = [...oneA.missing, ...oneD.missing];
+    check(
+      'allowing one missing returns only recipes missing one or none',
+      oneGaps.every((count) => count <= 1),
+      oneGaps.length ? `gaps seen: ${[...new Set(oneGaps)].join(', ')}` : 'no results to check',
+    );
+    check(
+      'and it sits between exact and allowing two',
+      exactA.ids.length <= oneA.ids.length && oneA.ids.length <= relaxedA.ids.length,
+      `${exactA.ids.length} ≤ ${oneA.ids.length} ≤ ${relaxedA.ids.length}`,
     );
 
     console.log('\n   what the four cases actually returned:');
