@@ -1007,6 +1007,34 @@ async function main() {
     );
     await shot('17i-cook-from-pantry');
 
+    // --- Which build is this? ----------------------------------------------
+    // The first question worth answering about a bug reported against a hosted
+    // URL, and the one that cannot be answered by looking at the page. Without
+    // this, "is the preview even the code I fixed?" is a guess — and a stale
+    // Pages deployment looks exactly like a fix that did not work.
+    console.log('\n▸ build identity');
+    await page.goto(`${BASE}/settings/about`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const readOut = async (testId) =>
+      (await page.locator(`[data-testid="${testId}"]`).first().innerText().catch(() => '')).trim();
+
+    const commit = await readOut('about-commit');
+    check('the build names the commit it was built from', /[0-9a-f]{7}/i.test(commit), commit);
+    check('and when it was built', /\d{4}/.test(await readOut('about-built-at')));
+
+    const recipeLine = await readOut('about-recipe-count');
+    check(
+      'and how many recipes it actually contains',
+      /\d{2,}/.test(recipeLine),
+      recipeLine.replace(/\n/g, ' '),
+    );
+    check(
+      'and how many ingredients',
+      /\d{2,}/.test(await readOut('about-ingredient-count')),
+    );
+    await shot('17j-about-build');
+
     // --- Friends -----------------------------------------------------------
     console.log('\n▸ friends');
     await page.goto(`${BASE}/friends`, { waitUntil: 'networkidle' });
