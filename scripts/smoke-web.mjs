@@ -548,6 +548,103 @@ async function main() {
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
 
+    // --- Matching, driven through the real UI ------------------------------
+    //
+    // The bug that made this section necessary: every ingredient selection
+    // returned the same recipes. Unit tests on the filter all passed, because
+    // the filter was only one of three things wrong — and none of the others
+    // were visible below the rendered app. So this selects ingredients the way
+    // a person does, reads the recipe ids off the screen, and compares.
+    console.log('\n▸ matching through the UI');
+
+    /**
+     * Runs one search from the Cook screen and returns the rendered ids.
+     *
+     * Starts by clearing whatever the screen seeded itself with — the picker
+     * remembers the last search, and a test that inherits it is measuring the
+     * previous case.
+     */
+    const cookWith = async (ingredients, missingMode) => {
+      await page.goto(`${BASE}/cook`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1500);
+
+      for (let guard = 0; guard < 30; guard += 1) {
+        const chip = page.locator('[data-testid^="selected-"]').first();
+        if ((await chip.count()) === 0) break;
+        await chip.click();
+        await page.waitForTimeout(120);
+      }
+
+      for (const name of ingredients) {
+        await type('ingredient-input', name, { clear: true });
+        const option = page.locator('[data-testid^="autocomplete-"]').first();
+        if ((await option.count()) === 0) continue;
+        await option.click();
+        await page.waitForTimeout(250);
+      }
+
+      const selected = await page.locator('[data-testid^="selected-"]').count();
+      await tap(`cook-pantry-mode-${missingMode}`, { optional: true });
+      await tap('cook-submit');
+      await page.waitForTimeout(2600);
+
+      const ids = await page.evaluate(() =>
+        [...document.querySelectorAll('[data-testid^="result-"]')].map((node) =>
+          node.getAttribute('data-testid'),
+        ),
+      );
+      return { ids, selected };
+    };
+
+    const CASE_A = ['chicken breast', 'rice', 'tomatoes'];
+    const CASE_C = ['banana', 'oats', 'milk'];
+
+    const relaxedA = await cookWith(CASE_A, 'missing2');
+    check(
+      'the picker accepted the first ingredient set',
+      relaxedA.selected === CASE_A.length,
+      `${relaxedA.selected} of ${CASE_A.length} chips`,
+    );
+    check('chicken, rice, tomato returns something', relaxedA.ids.length > 0,
+      `${relaxedA.ids.length} results`);
+    await shot('17e-cook-case-a');
+
+    const relaxedC = await cookWith(CASE_C, 'missing2');
+    check('banana, oats, milk returns something', relaxedC.ids.length > 0,
+      `${relaxedC.ids.length} results`);
+    await shot('17f-cook-case-c');
+
+    // THE assertion. Two kitchens with nothing in common produced identical
+    // lists, and every unit test passed while they did.
+    const sameList = relaxedA.ids.join('|') === relaxedC.ids.join('|');
+    check(
+      'two disjoint ingredient sets do NOT return the same recipes',
+      !sameList,
+      sameList ? 'identical' : `${relaxedA.ids.length} vs ${relaxedC.ids.length}`,
+    );
+
+    const overlap = relaxedA.ids.filter((id) => relaxedC.ids.includes(id)).length;
+    check(
+      'and their overlap is small rather than incidental',
+      overlap / Math.max(1, Math.min(relaxedA.ids.length, relaxedC.ids.length)) < 0.5,
+      `${overlap} shared`,
+    );
+
+    // Exact mode is a different, stricter answer — not the same list reordered.
+    const exactC = await cookWith(CASE_C, 'strict');
+    check(
+      'exact mode is stricter than allowing two missing',
+      exactC.ids.length <= relaxedC.ids.length,
+      `${exactC.ids.length} exact vs ${relaxedC.ids.length} relaxed`,
+    );
+    for (const id of exactC.ids) {
+      if (!relaxedC.ids.includes(id)) {
+        check('every exact result also appears when gaps are allowed', false, id);
+        break;
+      }
+    }
+    await shot('17g-cook-exact');
+
     // --- Hard constraints, end to end -------------------------------------
     // The product promise, driven through the UI rather than asserted in a
     // unit test: if the user said no to something, it does not appear.
