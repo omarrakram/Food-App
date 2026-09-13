@@ -130,6 +130,32 @@ export type BlockRow = {
   created_at: string;
 };
 
+export type ConversationRow = {
+  id: string;
+  created_at: string;
+  /** Denormalised from the newest message, maintained by a trigger. */
+  last_message_at: string;
+  last_message_body: string | null;
+};
+
+export type ConversationMemberRow = {
+  conversation_id: string;
+  user_id: string;
+  joined_at: string;
+  last_read_at: string;
+};
+
+export type MessageRow = {
+  id: string;
+  conversation_id: string;
+  sender_id: string;
+  body: string;
+  /** A reference, never copied content. */
+  shared_recipe_id: string | null;
+  created_at: string;
+  edited_at: string | null;
+};
+
 export type ProfileRow = {
   id: string;
   display_name: string | null;
@@ -358,6 +384,24 @@ export type Database = {
       // route to a row is `accept_friend_request`.
       friendships: Table<FriendshipRow, never, never>;
       blocks: Table<BlockRow, { blocker_id: string; blocked_id: string }, never>;
+      // No write policy: created by `start_conversation`, previewed by a
+      // trigger, and touched by nothing else.
+      conversations: Table<ConversationRow, never, never>;
+      conversation_members: Table<
+        ConversationMemberRow,
+        never,
+        Pick<ConversationMemberRow, 'last_read_at'>
+      >;
+      messages: Table<
+        MessageRow,
+        {
+          conversation_id: string;
+          sender_id: string;
+          body: string;
+          shared_recipe_id?: string | null;
+        },
+        Pick<MessageRow, 'body' | 'edited_at'>
+      >;
       saved_recipes: Table<SavedRecipeRow, { user_id: string; recipe_id: string }>;
       recipe_history: Table<
         RecipeHistoryRow,
@@ -397,6 +441,13 @@ export type Database = {
       accept_friend_request: { Args: { request_id: string }; Returns: undefined };
       block_user: { Args: { target: string }; Returns: undefined };
       blocked_profiles: { Args: Record<string, never>; Returns: PublicProfileRow[] };
+      is_conversation_member: { Args: { conversation: string; who: string }; Returns: boolean };
+      conversation_partner: { Args: { conversation: string }; Returns: string | null };
+      start_conversation: { Args: { partner: string }; Returns: string };
+      unread_counts: {
+        Args: Record<string, never>;
+        Returns: { conversation_id: string; unread: number }[];
+      };
     };
     Enums: {
       dietary_preference: DietaryPreferenceEnum;
