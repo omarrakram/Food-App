@@ -41,7 +41,8 @@ const MANIFEST = join(ROOT, 'data', 'images', 'manifest.json');
 const USER_AGENT =
   'AklaRecipeApp/1.0 (https://github.com/omarrakram/Food-App; recipe photography acquisition)';
 
-const API = 'https://commons.wikimedia.org/w/api.php';
+const COMMONS = 'https://commons.wikimedia.org/w/api.php';
+const WIKIPEDIA = 'https://en.wikipedia.org/w/api.php';
 
 type Licence = { spdx: string; needsAttribution: boolean };
 
@@ -132,15 +133,13 @@ function readManifest(): Manifest {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function api(params: Record<string, string>): Promise<unknown> {
-  const url = new URL(API);
-  for (const [key, value] of Object.entries({ format: 'json', ...params })) {
+async function api(endpoint: string, params: Record<string, string>): Promise<unknown> {
+  const url = new URL(endpoint);
+  for (const [key, value] of Object.entries({ format: 'json', origin: '*', ...params })) {
     url.searchParams.set(key, value);
   }
   const response = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
-  if (!response.ok) {
-    throw new Error(`Commons ${response.status} for ${url.searchParams.get('gsrsearch') ?? ''}`);
-  }
+  if (!response.ok) throw new Error(`HTTP ${response.status} from ${new URL(endpoint).host}`);
   return response.json();
 }
 
@@ -168,95 +167,183 @@ function plain(value: string | undefined): string {
     .trim();
 }
 
-async function search(term: string, limit: number): Promise<Candidate[]> {
-  const data = (await api({
-    action: 'query',
-    generator: 'search',
-    gsrsearch: `filetype:bitmap ${term}`,
-    gsrnamespace: '6',
-    gsrlimit: String(limit),
-    prop: 'imageinfo',
-    iiprop: 'url|size|mime|extmetadata',
-  })) as {
-    query?: {
-      pages?: Record<
-        string,
-        {
-          title: string;
-          index?: number;
-          imageinfo?: {
-            url: string;
-            descriptionurl: string;
-            width: number;
-            height: number;
-            mime: string;
-            extmetadata?: Record<string, { value?: string }>;
-          }[];
-        }
-      >;
-    };
-  };
+/** Minimum usable size. Below this it is a thumbnail, not a hero image. */
+const MIN_EDGE = 640;
 
-  // `pages` comes back as an object keyed by page id, in no useful order. The
-  // generator's own `index` is the search ranking, and the ranking is most of
-  // what makes a result relevant — so sort by it rather than by hash order.
+/** Strips a title down to comparable words. */
+function normalise(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Reads one file's licence, size and provenance from Commons. */
+function toCandidate(
+  title: string,
+  info: {
+    url: string;
+    descriptionurl: string;
+    width: number;
+    height: number;
+    mime: string;
+    extmetadata?: Record<string, { value?: string }>;
+  },
+): Candidate {
+  const meta = info.extmetadata ?? {};
+  return {
+    title,
+    url: info.url,
+    descriptionUrl: info.descriptionurl,
+    width: info.width,
+    height: info.height,
+    mime: info.mime,
+    licence: resolveLicence(
+      plain(meta.License?.value).toLowerCase(),
+      plain(meta.LicenseShortName?.value),
+    ),
+    artist: plain(meta.Artist?.value) || 'Unknown',
+    restrictions: plain(meta.Restrictions?.value),
+  };
+}
+
+type ImageInfoPages = {
+  query?: {
+    pages?: Record<
+      string,
+      {
+        title: string;
+        index?: number;
+        missing?: string;
+        imageinfo?: {
+          url: string;
+          descriptionurl: string;
+          width: number;
+          height: number;
+          mime: string;
+          extmetadata?: Record<string, { value?: string }>;
+        }[];
+      }
+    >;
+  };
+};
+
+function candidatesFrom(data: ImageInfoPages): Candidate[] {
+  // `pages` comes back keyed by page id, in no useful order. The generator's
+  // own `index` is the search ranking, and the ranking is most of what makes a
+  // result relevant — so sort by it rather than by hash order.
   const pages = Object.values(data.query?.pages ?? {}).sort(
     (a, b) => (a.index ?? 0) - (b.index ?? 0),
   );
   const candidates: Candidate[] = [];
-
   for (const page of pages) {
     const info = page.imageinfo?.[0];
-    if (!info) continue;
-    const meta = info.extmetadata ?? {};
-    candidates.push({
-      title: page.title,
-      url: info.url,
-      descriptionUrl: info.descriptionurl,
-      width: info.width,
-      height: info.height,
-      mime: info.mime,
-      licence: resolveLicence(
-        plain(meta.License?.value).toLowerCase(),
-        plain(meta.LicenseShortName?.value),
-      ),
-      artist: plain(meta.Artist?.value) || 'Unknown',
-      restrictions: plain(meta.Restrictions?.value),
-    });
+    if (info) candidates.push(toCandidate(page.title, info));
   }
   return candidates;
 }
 
-/** Minimum usable size. Below this it is a thumbnail, not a hero image. */
-const MIN_EDGE = 640;
+const IMAGE_INFO = { prop: 'imageinfo', iiprop: 'url|size|mime|extmetadata' };
 
-/** Words that say nothing about which dish this is. */
-const STOPWORDS = new Set([
-  'quick', 'easy', 'baked', 'grilled', 'fried', 'simple', 'weeknight', 'classic',
-  'with', 'and', 'the', 'in', 'of', 'a', 'style', 'homemade', 'roasted', 'creamy',
-  'spiced', 'fresh', 'one', 'pan', 'pot', 'sheet', 'air', 'fryer', 'slow',
-]);
+/**
+ * SOURCE 1 — the lead photograph of the dish's own Wikipedia article.
+ *
+ * The highest-precision source there is. An encyclopaedia article about koshari
+ * is illustrated with a photograph of koshari, chosen and argued over by people
+ * who know what it should look like. Nothing a keyword search returns comes
+ * close to that.
+ *
+ * The article's categories are checked before its picture is trusted, because
+ * "Turkey" is a bird, a country and a dinner, and only one of those belongs on
+ * a recipe card.
+ */
+const FOOD_CATEGORY =
+  /food|cuisine|dish|cake|bread|dessert|soup|stew|salad|snack|beverage|drink|confection|pastr|meat|vegetab|rice|noodle|pasta|sandwich|breakfast|curr|sweet|cheese|seafood|fish/i;
 
-function tokens(text: string): string[] {
-  return text
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N} ]/gu, ' ')
-    .split(/\s+/)
-    .filter((word) => word.length > 2 && !STOPWORDS.has(word));
+async function fromWikipediaArticle(name: string): Promise<Candidate[]> {
+  const article = (await api(WIKIPEDIA, {
+    action: 'query',
+    titles: name,
+    redirects: '1',
+    prop: 'pageimages|categories',
+    piprop: 'name',
+    cllimit: 'max',
+    clshow: '!hidden',
+  })) as {
+    query?: {
+      pages?: Record<
+        string,
+        { missing?: string; pageimage?: string; categories?: { title: string }[] }
+      >;
+    };
+  };
+
+  const page = Object.values(article.query?.pages ?? {})[0];
+  if (!page || page.missing !== undefined || !page.pageimage) return [];
+
+  const categories = (page.categories ?? []).map((entry) => entry.title).join(' ');
+  if (!FOOD_CATEGORY.test(categories)) return [];
+
+  const file = (await api(COMMONS, {
+    action: 'query',
+    titles: `File:${page.pageimage}`,
+    ...IMAGE_INFO,
+  })) as ImageInfoPages;
+  return candidatesFrom(file);
 }
 
 /**
- * Is this file plausibly a picture of THIS dish?
+ * SOURCE 2 — the files Commons itself files under the dish.
  *
- * Commons' search matches the whole file page — description, categories, the
- * uploader's notes — so a result can rank well while being a photograph of the
- * restaurant's front door. Requiring the file's own title to name something the
- * recipe names is a coarse filter, but it is the difference between "a photo of
- * koshari" and "a photo taken in Cairo".
+ * A Commons category is a human judgement that these pictures are of this
+ * thing. `Category:Basbousa` contains photographs of basbousa; it does not
+ * contain a photograph of a Boston restaurant's tasting menu that happens to
+ * mention semolina in its description. That is the whole difference between a
+ * category and a text search.
  */
-function relevance(candidate: Candidate, wanted: readonly string[]): number {
-  const title = new Set(tokens(candidate.title.replace(/^File:/, '')));
-  return wanted.filter((word) => title.has(word)).length;
+async function fromCommonsCategory(name: string): Promise<Candidate[]> {
+  const data = (await api(COMMONS, {
+    action: 'query',
+    generator: 'categorymembers',
+    gcmtitle: `Category:${name}`,
+    gcmtype: 'file',
+    gcmlimit: '24',
+    ...IMAGE_INFO,
+  })) as ImageInfoPages;
+  return candidatesFrom(data);
+}
+
+/**
+ * SOURCE 3 — full-text search, and it may only return a file that NAMES the dish.
+ *
+ * THIS IS WHERE THE SECOND RUN WENT WRONG. Searching "Potato and Cauliflower
+ * Curry" and taking the best-scoring licensed hit produced, for aloo gobi, a
+ * photograph captioned "Curry roasted cauliflower and haricots verts, roasted
+ * garlic celeriac puree, beef bourguignon, and chicken thigh with sweet potato
+ * and apple". Every word it scored on was real. The picture was of something
+ * else entirely.
+ *
+ * Scoring by shared words cannot tell those apart, so this no longer scores.
+ * The file's own title must CONTAIN the dish's name as a phrase. A gloss like
+ * "Tray-Baked Salmon and Vegetables" will therefore match nothing, and that is
+ * the correct outcome: the honest fallback beats a confident wrong picture.
+ */
+async function fromCommonsSearch(name: string): Promise<Candidate[]> {
+  const data = (await api(COMMONS, {
+    action: 'query',
+    generator: 'search',
+    gsrsearch: `filetype:bitmap ${name}`,
+    gsrnamespace: '6',
+    gsrlimit: '16',
+    ...IMAGE_INFO,
+  })) as ImageInfoPages;
+
+  const phrase = normalise(name);
+  if (phrase.split(' ').length < 2) return [];
+  return candidatesFrom(data).filter((candidate) =>
+    normalise(candidate.title.replace(/^File:/, '').replace(/\.\w+$/, '')).includes(phrase),
+  );
 }
 
 function usable(candidate: Candidate): boolean {
@@ -269,18 +356,75 @@ function usable(candidate: Candidate): boolean {
 }
 
 /**
- * Search terms for a recipe, most specific first.
+ * Trailing slug segments that describe OUR version rather than the dish.
  *
- * The Arabic title is tried too: Commons has better coverage of Egyptian and
- * Levantine dishes under their own names than under an English gloss.
+ * `butter-chicken-light` is a lighter butter chicken, and butter chicken is
+ * what a photograph of it looks like. Dropping the qualifier is what turns an
+ * unsearchable slug into the name of a real dish.
  */
-function searchTerms(recipe: (typeof RECIPE_CATALOGUE)[number]): string[] {
-  const title = recipe.title.replace(/[^\p{L}\p{N} ]/gu, ' ').trim();
-  const withoutQualifiers = title
-    .replace(/\b(quick|easy|baked|grilled|fried|simple|weeknight|classic)\b/gi, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return [...new Set([title, withoutQualifiers, recipe.titleAr ?? ''].filter(Boolean))];
+const QUALIFIERS = new Set([
+  'vegetarian', 'light', 'homemade', 'oven', 'easy', 'quick', 'healthy',
+  'simple', 'baked', 'grilled', 'fried', 'style', 'recipe', 'classic', 'quick',
+]);
+
+/**
+ * The names this dish might be photographed under, most specific first.
+ *
+ * THE SLUG COMES FIRST, and that is not an accident. `aloo-gobi` is the dish's
+ * name; its title, "Potato and Cauliflower Curry", is an English gloss written
+ * so an Egyptian home cook knows what they are getting. Searching the gloss
+ * finds pictures of curry. Searching the name finds pictures of aloo gobi.
+ */
+function dishNames(recipe: (typeof RECIPE_CATALOGUE)[number]): string[] {
+  const slug = (recipe.slug ?? '').split('-');
+  const names = [slug.join(' ')];
+
+  const trimmed = [...slug];
+  while (trimmed.length > 1 && QUALIFIERS.has(trimmed[trimmed.length - 1]!)) trimmed.pop();
+  if (trimmed.length !== slug.length) names.push(trimmed.join(' '));
+
+  names.push(recipe.title.replace(/[^\p{L}\p{N} ]/gu, ' ').replace(/\s+/g, ' ').trim());
+  return [...new Set(names.filter((name) => name.length > 2))];
+}
+
+/**
+ * Every candidate for this recipe, best source first.
+ *
+ * Ordered rather than merged: an article's lead photograph is better evidence
+ * than a category, and a category is better evidence than a phrase match. The
+ * first source that yields something publishable wins, so a weaker source is
+ * only ever consulted because the stronger ones had nothing.
+ */
+async function* candidatesFor(
+  recipe: (typeof RECIPE_CATALOGUE)[number],
+  note: (message: string) => void,
+): AsyncGenerator<Candidate> {
+  const names = dishNames(recipe);
+  const sources: [string, (name: string) => Promise<Candidate[]>][] = [
+    ['wikipedia', fromWikipediaArticle],
+    ['category', fromCommonsCategory],
+    ['search', fromCommonsSearch],
+  ];
+
+  const seen = new Set<string>();
+  for (const [label, lookup] of sources) {
+    for (const name of names) {
+      let found: Candidate[] = [];
+      try {
+        found = await lookup(name);
+      } catch (error) {
+        note(`${label} "${name}": ${String(error)}`);
+        continue;
+      }
+      for (const candidate of found) {
+        if (seen.has(candidate.url) || !usable(candidate)) continue;
+        seen.add(candidate.url);
+        yield candidate;
+      }
+      // Wikimedia asks for a gap between generated queries.
+      await sleep(200);
+    }
+  }
 }
 
 /** Downloads are capped so a 40MB TIFF cannot land in the repository. */
@@ -402,43 +546,28 @@ async function main(): Promise<void> {
 
   for (const recipe of todo) {
     const slug = recipe.slug!;
-    const wanted = tokens(recipe.title);
-    let picked: { candidate: Candidate; licence: Licence } | null = null;
+    let picked: Candidate | null = null;
     let bytes: Buffer | null = null;
     let downloadedFrom = '';
     const notes: string[] = [];
+    const note = (message: string) => notes.push(message);
 
-    for (const term of searchTerms(recipe)) {
-      let candidates: Candidate[] = [];
-      try {
-        candidates = await search(term, 12);
-      } catch (error) {
-        notes.push(`search "${term}" failed: ${String(error)}`);
-        continue;
+    // Walks the sources in order and stops at the first candidate that both
+    // qualifies and actually downloads — so a recipe is not abandoned because
+    // its single best photograph happens to 404. Capped so one unlucky dish
+    // cannot spend the whole run's request budget.
+    let tried = 0;
+    for await (const candidate of candidatesFor(recipe, note)) {
+      const result = await fetchImage(candidate);
+      if ('bytes' in result) {
+        picked = candidate;
+        bytes = result.bytes;
+        downloadedFrom = result.url;
+        break;
       }
-
-      // Best relevance first, search ranking breaking ties — then take the
-      // first one that actually downloads, rather than giving up on a recipe
-      // because its top hit happened to 404.
-      const ranked = candidates
-        .filter(usable)
-        .map((candidate, index) => ({ candidate, index, score: relevance(candidate, wanted) }))
-        .filter((entry) => entry.score > 0)
-        .sort((a, b) => b.score - a.score || a.index - b.index);
-
-      for (const entry of ranked.slice(0, 4)) {
-        const result = await fetchImage(entry.candidate);
-        if ('bytes' in result) {
-          picked = { candidate: entry.candidate, licence: entry.candidate.licence! };
-          bytes = result.bytes;
-          downloadedFrom = result.url;
-          break;
-        }
-        notes.push(`${entry.candidate.title}: ${result.error}`);
-      }
-      if (picked) break;
-      // Commons asks for a gap between generator searches.
-      await sleep(250);
+      notes.push(`${candidate.title}: ${result.error}`);
+      tried += 1;
+      if (tried >= 6) break;
     }
 
     if (!picked || !bytes) {
@@ -450,25 +579,25 @@ async function main(): Promise<void> {
       continue;
     }
 
-    const extension = picked.candidate.mime === 'image/png' ? 'png' : 'jpg';
+    const extension = picked.mime === 'image/png' ? 'png' : 'jpg';
     const relative = `${slug}.${extension}`;
     writeFileSync(join(ASSET_DIR, relative), bytes);
 
     // The width we actually got, derived from the URL we actually used, so the
     // manifest describes the file on disk rather than the file we asked for.
     const asked = /\/(\d+)px-[^/]+$/.exec(downloadedFrom);
-    const width = asked ? Number(asked[1]) : picked.candidate.width;
-    const height = Math.round(picked.candidate.height * (width / picked.candidate.width));
+    const width = asked ? Number(asked[1]) : picked.width;
+    const height = Math.round(picked.height * (width / picked.width));
 
     found.push({
       recipeSlug: slug,
       path: relative,
-      sourcePage: picked.candidate.descriptionUrl,
-      originalUrl: picked.candidate.url,
-      creator: picked.candidate.artist,
-      license: picked.licence.spdx,
-      attribution: picked.licence.needsAttribution
-        ? `${picked.candidate.artist} · ${picked.licence.spdx} · Wikimedia Commons`
+      sourcePage: picked.descriptionUrl,
+      originalUrl: picked.url,
+      creator: picked.artist,
+      license: picked.licence!.spdx,
+      attribution: picked.licence!.needsAttribution
+        ? `${picked.artist} · ${picked.licence!.spdx} · Wikimedia Commons`
         : null,
       width,
       height,
@@ -477,7 +606,7 @@ async function main(): Promise<void> {
       acquiredAt: new Date().toISOString(),
     });
     console.log(
-      `  ✓ ${slug}  ${picked.licence.spdx}  ${width}px  ${picked.candidate.title}`,
+      `  ✓ ${slug}  ${picked.licence!.spdx}  ${width}px  ${picked.title}`,
     );
   }
 
