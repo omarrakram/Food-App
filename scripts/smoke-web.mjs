@@ -170,7 +170,19 @@ async function main() {
   const BASE = REMOTE ?? local.base;
   log(REMOTE ? `driving the deployed preview at ${BASE}` : `serving dist/ on ${BASE}`);
 
-  const executablePath = process.env.CHROMIUM_PATH;
+  /**
+   * Which Chromium to drive.
+   *
+   * Playwright looks for the exact build its own version pins, and a sandbox
+   * that ships a pre-installed browser is rarely on that exact build — so an
+   * npm update to Playwright breaks the smoke test with "Executable doesn't
+   * exist", which reads like a missing dependency and is not one. The stable
+   * symlink beside the versioned directories is the environment's answer to
+   * that, so it is used when Playwright's own pin is absent.
+   */
+  const preinstalled = '/opt/pw-browsers/chromium';
+  const executablePath =
+    process.env.CHROMIUM_PATH ?? (existsSync(preinstalled) ? preinstalled : undefined);
   const browser = await chromium.launch(executablePath ? { executablePath } : {});
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
@@ -399,8 +411,16 @@ async function main() {
     await tap('cook-submit');
     await page.waitForTimeout(2400);
     const results = await page.locator('[data-testid^="result-"]').count();
-    check('cook returns results', results > 0 || (await visible('results-empty', 2000)),
-      `${results} results`);
+    // Named for what it actually asserts. The chips here are whatever the
+    // "common ingredients" row happened to offer, so an empty answer is a
+    // legitimate one — but a check called "returns results" that passes on
+    // zero is a check nobody can read, and this one did for a while.
+    const emptyShown = await visible('results-empty', 2000);
+    check(
+      'cook answers — with recipes, or with an empty state that says why',
+      results > 0 || emptyShown,
+      results > 0 ? `${results} results` : 'no match, empty state shown',
+    );
     await shot('06-cook-results');
 
     // --- Recipe detail and cooking mode ----------------------------------
@@ -593,7 +613,13 @@ async function main() {
           node.getAttribute('data-testid'),
         ),
       );
-      return { ids, selected };
+      const titles = await page.evaluate(() =>
+        [...document.querySelectorAll('[data-testid^="result-"]')]
+          .slice(0, 10)
+          .map((node) => (node.innerText || '').split('\n')[0]),
+      );
+      const empty = (await page.locator('[data-testid="results-empty"]').count()) > 0;
+      return { ids, selected, titles, empty };
     };
 
     const CASE_A = ['chicken breast', 'rice', 'tomatoes'];
@@ -644,6 +670,42 @@ async function main() {
       }
     }
     await shot('17g-cook-exact');
+
+    // The other two of the four reported cases, so all four are driven through
+    // the rendered app rather than two of them standing in for the set.
+    const CASE_B = ['eggs', 'white cheese', 'tomatoes'];
+    const CASE_D = ['ground beef', 'pasta', 'tomatoes'];
+    const relaxedB = await cookWith(CASE_B, 'missing2');
+    const relaxedD = await cookWith(CASE_D, 'missing2');
+
+    const answers = [relaxedA, relaxedB, relaxedC, relaxedD].map((result) => result.ids.join('|'));
+    check(
+      'all four ingredient sets give four different answers',
+      new Set(answers).size === 4,
+      [relaxedA, relaxedB, relaxedC, relaxedD].map((r) => r.ids.length).join(' / '),
+    );
+
+    // ALIASES. The user does not know our vocabulary. "Minced meat" and
+    // "macaroni" are what a person says; `ground-beef` and `pasta` are what the
+    // catalogue calls them, and the answer must not depend on which was typed.
+    const aliased = await cookWith(['minced meat', 'macaroni', 'tomato'], 'missing2');
+    check(
+      'colloquial names resolve to the same recipes as catalogue names',
+      aliased.ids.join('|') === relaxedD.ids.join('|'),
+      `${aliased.ids.length} vs ${relaxedD.ids.length}`,
+    );
+
+    // ZERO RESULTS. The failure this whole hotfix is about was a screen that
+    // always found something. Asking for a dish from one unusual ingredient in
+    // exact mode must be allowed to answer "nothing", and say so.
+    const nothing = await cookWith(['anchovies'], 'strict');
+    check(
+      'an unanswerable request returns nothing rather than something',
+      nothing.ids.length === 0,
+      nothing.ids.length === 0 ? 'empty' : nothing.titles.join(', '),
+    );
+    check('and the empty state explains it', nothing.empty);
+    await shot('17h-cook-zero-results');
 
     // --- Hard constraints, end to end -------------------------------------
     // The product promise, driven through the UI rather than asserted in a
@@ -696,14 +758,59 @@ async function main() {
     await page.waitForTimeout(1600);
 
     check('cook offers a pantry mode choice', await visible('cook-pantry-mode', 6000));
-    const strictTapped = await tap('cook-pantry-mode-strict', { optional: true });
-    const partialTapped = await tap('cook-pantry-mode-partial', { optional: true });
-    check(
-      'both pantry modes are selectable',
-      strictTapped || partialTapped,
-      strictTapped && partialTapped ? 'strict and partial' : 'one of two',
-    );
+    // Three modes, named for the number they differ by. The old two-way toggle
+    // named its second option "partial" and applied no constraint at all.
+    const modes = ['strict', 'missing1', 'missing2'];
+    const tapped = [];
+    for (const mode of modes) {
+      if (await tap(`cook-pantry-mode-${mode}`, { optional: true })) tapped.push(mode);
+    }
+    check('every gap budget is selectable', tapped.length === modes.length, tapped.join(', '));
     await shot('17c-pantry-mode');
+
+    // PANTRY AS THE SOURCE OF AVAILABILITY. Cooking from the pantry must arrive
+    // with the pantry already selected — and must NOT arrive with anything the
+    // user's own dates say has gone off.
+    //
+    // Written straight into storage because the pantry editor REFUSES a date in
+    // the past, which is correct and makes an expired row unreachable through
+    // the UI. A real one gets there by sitting in the pantry until its date
+    // passes, and this is the only honest way to reproduce that in a test.
+    const pantryRow = (name, expiresOn) => ({
+      id: `smoke-${name}`,
+      userId: 'local',
+      ingredientId: '',
+      ingredientName: name,
+      category: 'other',
+      quantity: 1,
+      unit: null,
+      expiresOn,
+      isStaple: false,
+      note: null,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+
+    await page.evaluate(
+      ([rows]) => window.localStorage.setItem('akla.local.pantry', JSON.stringify(rows)),
+      [[pantryRow('tomatoes', null), pantryRow('chicken breast', '2020-01-01')]],
+    );
+
+    await page.goto(`${BASE}/cook?fromPantry=1`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(2200);
+    const seeded = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-testid^="selected-"]')]
+        .map((node) => node.getAttribute('data-testid') ?? '')
+        .join(' ')
+        .toLowerCase(),
+    );
+    check('opening Cook from the pantry pre-selects the pantry', /tomato/.test(seeded), seeded);
+    check(
+      'FOOD SAFETY: and never pre-selects something already expired',
+      !/chicken/.test(seeded),
+      seeded,
+    );
+    await shot('17i-cook-from-pantry');
 
     // --- Friends -----------------------------------------------------------
     console.log('\n▸ friends');
