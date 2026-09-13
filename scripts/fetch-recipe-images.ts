@@ -21,6 +21,11 @@
  * photo keeps the branded fallback and is named in the report. Attaching a
  * picture of "some soup" to reach a round number is worse than an honest
  * placeholder: it tells the user something false about what they are cooking.
+ *
+ * THIS SCRIPT CANNOT RUN IN THE DEVELOPMENT SANDBOX — its egress proxy blocks
+ * every Wikimedia host. It runs in `.github/workflows/recipe-images.yml`, where
+ * the network is open. That makes its log the only diagnostic available, so
+ * every failure below reports its HTTP status and URL rather than a boolean.
  */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -38,27 +43,66 @@ const USER_AGENT =
 
 const API = 'https://commons.wikimedia.org/w/api.php';
 
+type Licence = { spdx: string; needsAttribution: boolean };
+
 /**
  * Licences we may publish under, and what each obliges.
  *
- * The keys are matched against Commons' machine-readable `LicenseShortName`.
+ * Matched against Commons' MACHINE-READABLE `License` field (`cc-by-sa-4.0`,
+ * `cc0`, `pd`) in preference to the human-facing `LicenseShortName`, which is
+ * localised, inconsistently punctuated, and sometimes absent altogether.
+ *
  * Deliberately a strict allowlist rather than a denylist of the bad ones: a
  * licence we have not heard of is one we have not read.
  */
-const ACCEPTABLE_LICENCES: Record<string, { spdx: string; needsAttribution: boolean }> = {
+const ACCEPTABLE_LICENCES: Record<string, Licence> = {
   cc0: { spdx: 'CC0-1.0', needsAttribution: false },
-  'public domain': { spdx: 'CC0-1.0', needsAttribution: false },
-  'cc by 1.0': { spdx: 'CC-BY-1.0', needsAttribution: true },
-  'cc by 2.0': { spdx: 'CC-BY-2.0', needsAttribution: true },
-  'cc by 2.5': { spdx: 'CC-BY-2.5', needsAttribution: true },
-  'cc by 3.0': { spdx: 'CC-BY-3.0', needsAttribution: true },
-  'cc by 4.0': { spdx: 'CC-BY-4.0', needsAttribution: true },
-  'cc by-sa 1.0': { spdx: 'CC-BY-SA-1.0', needsAttribution: true },
-  'cc by-sa 2.0': { spdx: 'CC-BY-SA-2.0', needsAttribution: true },
-  'cc by-sa 2.5': { spdx: 'CC-BY-SA-2.5', needsAttribution: true },
-  'cc by-sa 3.0': { spdx: 'CC-BY-SA-3.0', needsAttribution: true },
-  'cc by-sa 4.0': { spdx: 'CC-BY-SA-4.0', needsAttribution: true },
+  pd: { spdx: 'CC0-1.0', needsAttribution: false },
+  'cc-by-1.0': { spdx: 'CC-BY-1.0', needsAttribution: true },
+  'cc-by-2.0': { spdx: 'CC-BY-2.0', needsAttribution: true },
+  'cc-by-2.5': { spdx: 'CC-BY-2.5', needsAttribution: true },
+  'cc-by-3.0': { spdx: 'CC-BY-3.0', needsAttribution: true },
+  'cc-by-4.0': { spdx: 'CC-BY-4.0', needsAttribution: true },
+  'cc-by-sa-1.0': { spdx: 'CC-BY-SA-1.0', needsAttribution: true },
+  'cc-by-sa-2.0': { spdx: 'CC-BY-SA-2.0', needsAttribution: true },
+  'cc-by-sa-2.5': { spdx: 'CC-BY-SA-2.5', needsAttribution: true },
+  'cc-by-sa-3.0': { spdx: 'CC-BY-SA-3.0', needsAttribution: true },
+  'cc-by-sa-4.0': { spdx: 'CC-BY-SA-4.0', needsAttribution: true },
 };
+
+/**
+ * Resolves whatever Commons said about the licence into one we can publish.
+ *
+ * Three shapes have to be understood. The machine-readable tag (`cc-by-sa-4.0`).
+ * A multi-licence tag, where the uploader offered several versions at once
+ * (`cc-by-sa-3.0,2.5,2.0,1.0`) and we may pick any — the first is the most
+ * recent. And the human string ("CC BY-SA 4.0", "Public domain") for the older
+ * files that carry no machine tag.
+ */
+function resolveLicence(machine: string, human: string): Licence | null {
+  const direct = ACCEPTABLE_LICENCES[machine];
+  if (direct) return direct;
+
+  // `cc-by-sa-3.0,2.5,2.0,1.0` — offered under all of them, so take the first.
+  const multi = /^(cc-by(?:-sa)?)-(\d\.\d)(?:,[\d.]+)*$/.exec(machine);
+  if (multi) {
+    const resolved = ACCEPTABLE_LICENCES[`${multi[1]}-${multi[2]}`];
+    if (resolved) return resolved;
+  }
+
+  // Public-domain tags are a family: `pd-old-100`, `pd-us`, `pd-self`, `pdm-owner`.
+  if (/^pdm?(-|$)/.test(machine)) return { spdx: 'CC0-1.0', needsAttribution: false };
+
+  const normalised = human.toLowerCase().replace(/\s+/g, ' ').trim();
+  if (normalised === 'cc0' || normalised.startsWith('public domain')) {
+    return { spdx: 'CC0-1.0', needsAttribution: false };
+  }
+  const spelled = /^cc by(-sa)? (\d\.\d)/.exec(normalised);
+  if (spelled) {
+    return ACCEPTABLE_LICENCES[`cc-by${spelled[1] ?? ''}-${spelled[2]}`] ?? null;
+  }
+  return null;
+}
 
 export type ImageRecord = {
   recipeSlug: string;
@@ -86,13 +130,17 @@ function readManifest(): Manifest {
   return JSON.parse(readFileSync(MANIFEST, 'utf8')) as Manifest;
 }
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function api(params: Record<string, string>): Promise<unknown> {
   const url = new URL(API);
   for (const [key, value] of Object.entries({ format: 'json', ...params })) {
     url.searchParams.set(key, value);
   }
   const response = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
-  if (!response.ok) throw new Error(`Commons ${response.status} for ${url.searchParams.get('gsrsearch') ?? ''}`);
+  if (!response.ok) {
+    throw new Error(`Commons ${response.status} for ${url.searchParams.get('gsrsearch') ?? ''}`);
+  }
   return response.json();
 }
 
@@ -103,8 +151,9 @@ type Candidate = {
   width: number;
   height: number;
   mime: string;
-  licenceKey: string;
+  licence: Licence | null;
   artist: string;
+  restrictions: string;
 };
 
 /** Strips the HTML Commons returns in its metadata fields. */
@@ -134,6 +183,7 @@ async function search(term: string, limit: number): Promise<Candidate[]> {
         string,
         {
           title: string;
+          index?: number;
           imageinfo?: {
             url: string;
             descriptionurl: string;
@@ -147,7 +197,12 @@ async function search(term: string, limit: number): Promise<Candidate[]> {
     };
   };
 
-  const pages = Object.values(data.query?.pages ?? {});
+  // `pages` comes back as an object keyed by page id, in no useful order. The
+  // generator's own `index` is the search ranking, and the ranking is most of
+  // what makes a result relevant — so sort by it rather than by hash order.
+  const pages = Object.values(data.query?.pages ?? {}).sort(
+    (a, b) => (a.index ?? 0) - (b.index ?? 0),
+  );
   const candidates: Candidate[] = [];
 
   for (const page of pages) {
@@ -161,8 +216,12 @@ async function search(term: string, limit: number): Promise<Candidate[]> {
       width: info.width,
       height: info.height,
       mime: info.mime,
-      licenceKey: plain(meta.LicenseShortName?.value).toLowerCase(),
+      licence: resolveLicence(
+        plain(meta.License?.value).toLowerCase(),
+        plain(meta.LicenseShortName?.value),
+      ),
       artist: plain(meta.Artist?.value) || 'Unknown',
+      restrictions: plain(meta.Restrictions?.value),
     });
   }
   return candidates;
@@ -171,10 +230,42 @@ async function search(term: string, limit: number): Promise<Candidate[]> {
 /** Minimum usable size. Below this it is a thumbnail, not a hero image. */
 const MIN_EDGE = 640;
 
-function acceptable(candidate: Candidate): { spdx: string; needsAttribution: boolean } | null {
-  if (!['image/jpeg', 'image/png', 'image/webp'].includes(candidate.mime)) return null;
-  if (Math.min(candidate.width, candidate.height) < MIN_EDGE) return null;
-  return ACCEPTABLE_LICENCES[candidate.licenceKey] ?? null;
+/** Words that say nothing about which dish this is. */
+const STOPWORDS = new Set([
+  'quick', 'easy', 'baked', 'grilled', 'fried', 'simple', 'weeknight', 'classic',
+  'with', 'and', 'the', 'in', 'of', 'a', 'style', 'homemade', 'roasted', 'creamy',
+  'spiced', 'fresh', 'one', 'pan', 'pot', 'sheet', 'air', 'fryer', 'slow',
+]);
+
+function tokens(text: string): string[] {
+  return text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N} ]/gu, ' ')
+    .split(/\s+/)
+    .filter((word) => word.length > 2 && !STOPWORDS.has(word));
+}
+
+/**
+ * Is this file plausibly a picture of THIS dish?
+ *
+ * Commons' search matches the whole file page — description, categories, the
+ * uploader's notes — so a result can rank well while being a photograph of the
+ * restaurant's front door. Requiring the file's own title to name something the
+ * recipe names is a coarse filter, but it is the difference between "a photo of
+ * koshari" and "a photo taken in Cairo".
+ */
+function relevance(candidate: Candidate, wanted: readonly string[]): number {
+  const title = new Set(tokens(candidate.title.replace(/^File:/, '')));
+  return wanted.filter((word) => title.has(word)).length;
+}
+
+function usable(candidate: Candidate): boolean {
+  if (!['image/jpeg', 'image/png'].includes(candidate.mime)) return false;
+  if (Math.min(candidate.width, candidate.height) < MIN_EDGE) return false;
+  // "trademarked", "personality rights" — a free licence on the photograph does
+  // not make the thing photographed free to use commercially.
+  if (candidate.restrictions) return false;
+  return candidate.licence !== null;
 }
 
 /**
@@ -192,22 +283,59 @@ function searchTerms(recipe: (typeof RECIPE_CATALOGUE)[number]): string[] {
   return [...new Set([title, withoutQualifiers, recipe.titleAr ?? ''].filter(Boolean))];
 }
 
-/** Downloads the file, capped so a 40MB TIFF cannot land in the repository. */
+/** Downloads are capped so a 40MB TIFF cannot land in the repository. */
 const MAX_BYTES = 6 * 1024 * 1024;
 
-async function download(url: string): Promise<Buffer | null> {
-  const response = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
-  if (!response.ok) return null;
-  const buffer = Buffer.from(await response.arrayBuffer());
-  return buffer.byteLength > MAX_BYTES ? null : buffer;
+/** What a JPEG and a PNG start with. An HTML error page starts with neither. */
+function looksLikeImage(bytes: Buffer): boolean {
+  if (bytes.byteLength < 8) return false;
+  const jpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const png =
+    bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
+  return jpeg || png;
+}
+
+type Fetched = { bytes: Buffer; url: string } | { error: string };
+
+/**
+ * One GET, with the status reported rather than swallowed.
+ *
+ * Retries only what retrying can fix: Commons rate-limits bulk clients with a
+ * 429 and occasionally 503s a thumbnail render that has not finished yet. A 404
+ * is an answer, not a hiccup, and re-asking is just rude.
+ */
+async function get(url: string, attempt = 1): Promise<Fetched> {
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: { 'user-agent': USER_AGENT, accept: 'image/jpeg,image/png,image/*' },
+    });
+  } catch (error) {
+    if (attempt >= 3) return { error: `network: ${String(error)}` };
+    await sleep(attempt * 1000);
+    return get(url, attempt + 1);
+  }
+
+  if (response.status === 429 || response.status >= 500) {
+    if (attempt >= 3) return { error: `HTTP ${response.status}` };
+    await sleep(attempt * 2000);
+    return get(url, attempt + 1);
+  }
+  if (!response.ok) return { error: `HTTP ${response.status}` };
+
+  const bytes = Buffer.from(await response.arrayBuffer());
+  if (bytes.byteLength > MAX_BYTES) {
+    return { error: `${(bytes.byteLength / 1024 / 1024).toFixed(1)}MB exceeds the cap` };
+  }
+  if (!looksLikeImage(bytes)) return { error: 'response was not image data' };
+  return { bytes, url };
 }
 
 /**
- * A thumbnail URL from Commons at a sane width.
+ * A thumbnail URL from Commons at a given width.
  *
- * Asking Commons to resize is both kinder to their bandwidth and how we avoid
- * needing an image library in this script: the file that lands is already the
- * size the app wants.
+ *     .../wikipedia/commons/8/8f/Koshari.jpg
+ *     .../wikipedia/commons/thumb/8/8f/Koshari.jpg/1200px-Koshari.jpg
  */
 function thumbUrl(original: string, width: number): string {
   const marker = '/commons/';
@@ -215,10 +343,43 @@ function thumbUrl(original: string, width: number): string {
   if (index === -1) return original;
   const tail = original.slice(index + marker.length);
   const name = tail.split('/').pop() ?? '';
-  return `${original.slice(0, index)}/commons/thumb/${tail}/${width}px-${name}`;
+  return `${original.slice(0, index)}/commons/thumb/${tail}/${Math.round(width)}px-${name}`;
 }
 
 const TARGET_WIDTH = 1200;
+
+/**
+ * Gets the bytes for a candidate at a sensible size.
+ *
+ * THIS IS WHERE THE FIRST RUN FAILED, 118 times out of 118. It asked for a
+ * 1200px render of every file including the ones that were 900px wide, and
+ * MediaWiki does not upscale — it answers 404. So the width asked for is now
+ * never larger than the file actually is, with the untouched original as the
+ * last resort.
+ *
+ * Asking Commons to resize (rather than shrinking the original here) is both
+ * kinder to their bandwidth and how this script avoids needing an image
+ * library: the file that lands is already the size the app wants.
+ */
+async function fetchImage(candidate: Candidate): Promise<Fetched> {
+  const widths = [...new Set([Math.min(TARGET_WIDTH, candidate.width), 960, 800, 640])]
+    .filter((width) => width <= candidate.width)
+    .sort((a, b) => b - a);
+
+  const errors: string[] = [];
+  for (const width of widths) {
+    const result = await get(thumbUrl(candidate.url, width));
+    if ('bytes' in result) return result;
+    errors.push(`${width}px ${result.error}`);
+  }
+
+  // Every render refused. The original always exists, so try it — it is only
+  // rejected here if it is genuinely too big to keep.
+  const original = await get(candidate.url);
+  if ('bytes' in original) return original;
+  errors.push(`original ${original.error}`);
+  return { error: errors.join('; ') };
+}
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
@@ -241,41 +402,51 @@ async function main(): Promise<void> {
 
   for (const recipe of todo) {
     const slug = recipe.slug!;
-    let picked: { candidate: Candidate; licence: { spdx: string; needsAttribution: boolean } } | null =
-      null;
+    const wanted = tokens(recipe.title);
+    let picked: { candidate: Candidate; licence: Licence } | null = null;
+    let bytes: Buffer | null = null;
+    let downloadedFrom = '';
+    const notes: string[] = [];
 
     for (const term of searchTerms(recipe)) {
       let candidates: Candidate[] = [];
       try {
         candidates = await search(term, 12);
       } catch (error) {
-        console.log(`  ${slug}: search failed (${String(error)})`);
+        notes.push(`search "${term}" failed: ${String(error)}`);
         continue;
       }
-      for (const candidate of candidates) {
-        const licence = acceptable(candidate);
-        if (licence) {
-          picked = { candidate, licence };
+
+      // Best relevance first, search ranking breaking ties — then take the
+      // first one that actually downloads, rather than giving up on a recipe
+      // because its top hit happened to 404.
+      const ranked = candidates
+        .filter(usable)
+        .map((candidate, index) => ({ candidate, index, score: relevance(candidate, wanted) }))
+        .filter((entry) => entry.score > 0)
+        .sort((a, b) => b.score - a.score || a.index - b.index);
+
+      for (const entry of ranked.slice(0, 4)) {
+        const result = await fetchImage(entry.candidate);
+        if ('bytes' in result) {
+          picked = { candidate: entry.candidate, licence: entry.candidate.licence! };
+          bytes = result.bytes;
+          downloadedFrom = result.url;
           break;
         }
+        notes.push(`${entry.candidate.title}: ${result.error}`);
       }
       if (picked) break;
       // Commons asks for a gap between generator searches.
-      await new Promise((resolve) => setTimeout(resolve, 250));
+      await sleep(250);
     }
 
-    if (!picked) {
+    if (!picked || !bytes) {
       // The honest outcome. Reported, not papered over with a stock photo of
       // something else.
-      skipped.push({ recipeSlug: slug, reason: 'no sufficiently licensed image found' });
-      console.log(`  ✗ ${slug}`);
-      continue;
-    }
-
-    const bytes = await download(thumbUrl(picked.candidate.url, TARGET_WIDTH));
-    if (!bytes) {
-      skipped.push({ recipeSlug: slug, reason: 'download failed or file too large' });
-      console.log(`  ✗ ${slug} (download)`);
+      const reason = notes.length > 0 ? notes[0]! : 'no relevant openly-licensed image found';
+      skipped.push({ recipeSlug: slug, reason });
+      console.log(`  ✗ ${slug} — ${reason}`);
       continue;
     }
 
@@ -283,7 +454,12 @@ async function main(): Promise<void> {
     const relative = `${slug}.${extension}`;
     writeFileSync(join(ASSET_DIR, relative), bytes);
 
-    const scale = TARGET_WIDTH / picked.candidate.width;
+    // The width we actually got, derived from the URL we actually used, so the
+    // manifest describes the file on disk rather than the file we asked for.
+    const asked = /\/(\d+)px-[^/]+$/.exec(downloadedFrom);
+    const width = asked ? Number(asked[1]) : picked.candidate.width;
+    const height = Math.round(picked.candidate.height * (width / picked.candidate.width));
+
     found.push({
       recipeSlug: slug,
       path: relative,
@@ -294,21 +470,33 @@ async function main(): Promise<void> {
       attribution: picked.licence.needsAttribution
         ? `${picked.candidate.artist} · ${picked.licence.spdx} · Wikimedia Commons`
         : null,
-      width: Math.min(TARGET_WIDTH, picked.candidate.width),
-      height: Math.round(picked.candidate.height * Math.min(1, scale)),
+      width,
+      height,
       bytes: bytes.byteLength,
       sha256: createHash('sha256').update(bytes).digest('hex'),
       acquiredAt: new Date().toISOString(),
     });
-    console.log(`  ✓ ${slug}  ${picked.licence.spdx}  ${picked.candidate.title}`);
+    console.log(
+      `  ✓ ${slug}  ${picked.licence.spdx}  ${width}px  ${picked.candidate.title}`,
+    );
   }
 
+  // Merged rather than replaced, because a `--limit 5` run knows nothing about
+  // the other hundred and fifty recipes and must not erase what the last full
+  // run recorded about them. A recipe this run photographed stops being skipped;
+  // one it looked at and failed gets its new reason; the rest are left alone.
+  const touched = new Set(todo.map((recipe) => recipe.slug!));
   const merged: Manifest = {
     images: [
       ...manifest.images.filter((entry) => !found.some((f) => f.recipeSlug === entry.recipeSlug)),
       ...found,
     ].sort((a, b) => a.recipeSlug.localeCompare(b.recipeSlug)),
-    skipped: skipped.sort((a, b) => a.recipeSlug.localeCompare(b.recipeSlug)),
+    skipped: [
+      ...manifest.skipped.filter((entry) => !touched.has(entry.recipeSlug)),
+      ...skipped,
+    ]
+      .filter((entry) => !found.some((f) => f.recipeSlug === entry.recipeSlug))
+      .sort((a, b) => a.recipeSlug.localeCompare(b.recipeSlug)),
   };
 
   writeFileSync(MANIFEST, `${JSON.stringify(merged, null, 2)}\n`);
