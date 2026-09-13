@@ -71,6 +71,20 @@
       "acquiredAt": "2026-09-13T15:34:18.879Z"
     },
     {
+      "recipeSlug": "beef-burger-homemade",
+      "path": "beef-burger-homemade.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Beef_Burger_In_Kota_Kinabalu,_Malaysia.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Beef_Burger_In_Kota_Kinabalu%2C_Malaysia.jpg",
+      "creator": "thienzieyung",
+      "license": "CC-BY-2.0",
+      "attribution": "thienzieyung · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 220506,
+      "sha256": "60af991de8f3712d22929aed32ac35f077cc909929f31b8713004f06a61ba035",
+      "acquiredAt": "2026-09-13T20:59:56.689Z"
+    },
+    {
       "recipeSlug": "beef-tacos",
       "path": "beef-tacos.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Argentine-style_hand-chopped_roasted_beef_tacos,_with_mozzarella,_caramelized_onions,_and_salsas.jpg",
@@ -421,6 +435,20 @@
       "acquiredAt": "2026-09-13T15:35:58.830Z"
     },
     {
+      "recipeSlug": "kunafa-cheese",
+      "path": "kunafa-cheese.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Top_view_of_cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Top_view_of_cheese_kunafa_at_Agasi%2C_Lajpat_Nagar%2C_Delhi_%282025-10-04%29.jpg",
+      "creator": "Contrapunctus-1",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 428572,
+      "sha256": "4ea1778a7c4e1a425bc77363ef2251d75b6e4a2559bf756600793cb8483f91c0",
+      "acquiredAt": "2026-09-13T21:01:11.272Z"
+    },
+    {
       "recipeSlug": "mac-and-cheese-baked",
       "path": "mac-and-cheese-baked.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg",
@@ -503,6 +531,20 @@
       "bytes": 308928,
       "sha256": "ccbdf7448238ed3c838c0d170d1c4121696f71bbc1c155a8adee8287bfede26a",
       "acquiredAt": "2026-09-13T15:36:27.961Z"
+    },
+    {
+      "recipeSlug": "menemen",
+      "path": "menemen.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:E22011_at_Ulukent.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5e/E22011_at_Ulukent.jpg",
+      "creator": "B'Tian Denizcan P. Dorsam",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "B'Tian Denizcan P. Dorsam · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 306860,
+      "sha256": "ae24486102d02580f71edfa6f036890b9c96e1185ac2593988f31c405e12b2a2",
+      "acquiredAt": "2026-09-13T21:01:30.564Z"
     },
     {
       "recipeSlug": "mexican-rice",
@@ -589,6 +631,20 @@
       "acquiredAt": "2026-09-13T15:36:42.416Z"
     },
     {
+      "recipeSlug": "overnight-oats",
+      "path": "overnight-oats.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:-2019-02-07_Overnight_Oats,_Cromer.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f3/-2019-02-07_Overnight_Oats%2C_Cromer.JPG",
+      "creator": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 280263,
+      "sha256": "21376e2cbcc255d0673c12ea958c78af5e0f6c55f1667bda5a187e01353805e2",
+      "acquiredAt": "2026-09-13T21:01:47.203Z"
+    },
+    {
       "recipeSlug": "palak-paneer-style",
       "path": "palak-paneer-style.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Palakpaneer_Rayagada_Odisha_0009.jpg",
@@ -659,6 +715,20 @@
       "acquiredAt": "2026-09-13T15:36:52.815Z"
     },
     {
+      "recipeSlug": "risotto-mushroom",
+      "path": "risotto-mushroom.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mushroom_risotto_(3990739885).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Mushroom_risotto_%283990739885%29.jpg",
+      "creator": "Karen and Brad Emerson",
+      "license": "CC-BY-2.0",
+      "attribution": "Karen and Brad Emerson · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 730,
+      "bytes": 426890,
+      "sha256": "a667fc1f685d210fbaf862367e08e15c70a4aa4b4f52b70d4022ec3959568010",
+      "acquiredAt": "2026-09-13T21:02:00.233Z"
+    },
+    {
       "recipeSlug": "roz-bel-laban",
       "path": "roz-bel-laban.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
@@ -685,6 +755,20 @@
       "bytes": 447006,
       "sha256": "08fb579c5ce32394145d63d849d7c246e9849747e4c899730f1cfc255f4c3a61",
       "acquiredAt": "2026-09-13T15:37:10.787Z"
+    },
+    {
+      "recipeSlug": "scrambled-eggs-soft",
+      "path": "scrambled-eggs-soft.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_bowl_of_Matsuya.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/24/Fried_oysters_with_soft_scrambled_eggs_bowl_of_Matsuya.jpg",
+      "creator": "毒島みるく",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 570,
+      "bytes": 283045,
+      "sha256": "a2fabf1178730a8cdf0cf3fa11b19ec20921c172df538e88c046dd9a60811bbf",
+      "acquiredAt": "2026-09-13T21:02:22.465Z"
     },
     {
       "recipeSlug": "shakshuka",
@@ -741,6 +825,20 @@
       "bytes": 444572,
       "sha256": "0aaad64eff64b981ffc304982d7e96c5698afd3c99d8223bbf495ffc63bb300a",
       "acquiredAt": "2026-09-13T15:37:49.456Z"
+    },
+    {
+      "recipeSlug": "sutlac-baked",
+      "path": "sutlac-baked.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Baked_Rice_Pudding_11.06.2025.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Baked_Rice_Pudding_11.06.2025.jpg",
+      "creator": "Wiki leylek",
+      "license": "CC-BY-4.0",
+      "attribution": "Wiki leylek · CC-BY-4.0 · Wikimedia Commons",
+      "width": 900,
+      "height": 1600,
+      "bytes": 139220,
+      "sha256": "f2e3041a393e436da4507c76151abca50f6cf97870481fe6f1e453595c0fc404",
+      "acquiredAt": "2026-09-13T21:02:55.786Z"
     },
     {
       "recipeSlug": "tabbouleh",
@@ -877,10 +975,6 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
-      "recipeSlug": "beef-burger-homemade",
-      "reason": "refused on review"
-    },
-    {
       "recipeSlug": "beef-noodle-stirfry",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1005,10 +1099,6 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
-      "recipeSlug": "kunafa-cheese",
-      "reason": "refused on review"
-    },
-    {
       "recipeSlug": "labneh-bowl",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1018,7 +1108,7 @@
     },
     {
       "recipeSlug": "lasagne-beef",
-      "reason": "refused on review"
+      "reason": "File:Halal Beef Lasagne and Cauliflowers - Foodilic 2024-08-12.jpg: refused on review — A canteen tray where the lasagne is a brown lump beside yellow cauliflower. Accurately titled, unappetising, and unrecognisable as the dish."
     },
     {
       "recipeSlug": "lemon-herb-couscous",
@@ -1026,7 +1116,7 @@
     },
     {
       "recipeSlug": "lentil-soup-lemon",
-      "reason": "refused on review"
+      "reason": "File:Levantine Lentil soup Winter Newton Massachusetts New England.jpg: refused on review — A featureless pale disc filling the frame. Nothing in it reads as soup."
     },
     {
       "recipeSlug": "lentil-spinach-soup-indian",
@@ -1039,10 +1129,6 @@
     {
       "recipeSlug": "margherita-flatbread",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "menemen",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "mesaqaa",
@@ -1062,15 +1148,11 @@
     },
     {
       "recipeSlug": "okra-stew",
-      "reason": "duplicate photograph"
+      "reason": "File:Bamia-Ocras tomate (cropped).JPG: already illustrates another recipe"
     },
     {
       "recipeSlug": "orange-olive-oil-cake",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "overnight-oats",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "pasta-tuna-lemon",
@@ -1087,10 +1169,6 @@
     {
       "recipeSlug": "ratatouille-tray",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "risotto-mushroom",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "roast-chicken-potatoes",
@@ -1123,10 +1201,6 @@
     {
       "recipeSlug": "sayadeya",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "scrambled-eggs-soft",
-      "reason": "refused on review"
     },
     {
       "recipeSlug": "sesame-noodles-cold",
@@ -1175,10 +1249,6 @@
     {
       "recipeSlug": "stuffed-peppers-rice",
       "reason": "no relevant openly-licensed image found"
-    },
-    {
-      "recipeSlug": "sutlac-baked",
-      "reason": "duplicate photograph"
     },
     {
       "recipeSlug": "sweet-potato-fries-airfryer",
@@ -1230,7 +1300,7 @@
     },
     {
       "recipeSlug": "warak-enab",
-      "reason": "refused on review"
+      "reason": "File:Warak enab.jpg: refused on review — A grape vine growing in a garden. Warak enab is the stuffed leaf, not the plant it came from."
     },
     {
       "recipeSlug": "white-bean-stew",

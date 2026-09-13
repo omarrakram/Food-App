@@ -48,6 +48,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "secretlondon123 from London, England · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Batata_harra.jpg",
   },
+  "beef-burger-homemade": {
+    source: require('../../../assets/recipes/beef-burger-homemade.jpg') as number,
+    creator: "thienzieyung",
+    license: "CC-BY-2.0",
+    attribution: "thienzieyung · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Beef_Burger_In_Kota_Kinabalu,_Malaysia.jpg",
+  },
   "beef-tacos": {
     source: require('../../../assets/recipes/beef-tacos.jpg') as number,
     creator: "Horacio Cambeiro",
@@ -223,6 +230,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Dina Said · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
   },
+  "kunafa-cheese": {
+    source: require('../../../assets/recipes/kunafa-cheese.jpg') as number,
+    creator: "Contrapunctus-1",
+    license: "CC-BY-SA-4.0",
+    attribution: "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Top_view_of_cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
+  },
   "mac-and-cheese-baked": {
     source: require('../../../assets/recipes/mac-and-cheese-baked.jpg') as number,
     creator: "Texasfoodgawker",
@@ -264,6 +278,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
+  },
+  "menemen": {
+    source: require('../../../assets/recipes/menemen.jpg') as number,
+    creator: "B'Tian Denizcan P. Dorsam",
+    license: "CC-BY-SA-3.0",
+    attribution: "B'Tian Denizcan P. Dorsam · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:E22011_at_Ulukent.jpg",
   },
   "mexican-rice": {
     source: require('../../../assets/recipes/mexican-rice.jpg') as number,
@@ -307,6 +328,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: null,
     sourcePage: "https://commons.wikimedia.org/wiki/File:Umm_Ali.JPG",
   },
+  "overnight-oats": {
+    source: require('../../../assets/recipes/overnight-oats.jpg') as number,
+    creator: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
+    license: "CC-BY-SA-4.0",
+    attribution: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:-2019-02-07_Overnight_Oats,_Cromer.JPG",
+  },
   "palak-paneer-style": {
     source: require('../../../assets/recipes/palak-paneer-style.jpg') as number,
     creator: "Lopanayak",
@@ -342,6 +370,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
   },
+  "risotto-mushroom": {
+    source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
+    creator: "Karen and Brad Emerson",
+    license: "CC-BY-2.0",
+    attribution: "Karen and Brad Emerson · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Mushroom_risotto_(3990739885).jpg",
+  },
   "roz-bel-laban": {
     source: require('../../../assets/recipes/roz-bel-laban.jpg') as number,
     creator: "Shivangisj",
@@ -355,6 +390,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
+  },
+  "scrambled-eggs-soft": {
+    source: require('../../../assets/recipes/scrambled-eggs-soft.jpg') as number,
+    creator: "毒島みるく",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_bowl_of_Matsuya.jpg",
   },
   "shakshuka": {
     source: require('../../../assets/recipes/shakshuka.jpg') as number,
@@ -383,6 +425,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
+  },
+  "sutlac-baked": {
+    source: require('../../../assets/recipes/sutlac-baked.jpg') as number,
+    creator: "Wiki leylek",
+    license: "CC-BY-4.0",
+    attribution: "Wiki leylek · CC-BY-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Baked_Rice_Pudding_11.06.2025.jpg",
   },
   "tabbouleh": {
     source: require('../../../assets/recipes/tabbouleh.jpg') as number,
