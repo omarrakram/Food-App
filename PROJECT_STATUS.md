@@ -116,24 +116,48 @@ answers, and banana/oats/milk no longer suggests koshari.
   and render 4 cards. A top-up effect now fetches further pages until the page
   is full or 300 rows have been examined.
 
-### Two more faults found while proving it
+### Five more faults, all found by driving the built app
+
+None of these could have been found by a unit test, because each lived
+between two components that were individually correct.
 
 - **An expired pantry item could still be cooked with.** Opening Cook from the
   pantry seeded every item into the picker, and a picked ingredient is trusted
   absolutely — so the food-safety rule was defeated by our own screen. Cook now
   seeds only what is in date, and the engine keeps `available` and `expired`
   disjoint rather than allowing both at once.
+- **A card said "2 missing" in an "allow one missing" list.** The filter and the
+  match aggregate each decided what counted as needed and disagreed: the filter
+  excluded optional lines, garnishes and pantry staples; the match excluded only
+  optional ones. `isNeededLine` is the single definition now — nobody is unable
+  to cook because they are out of parsley to scatter on top.
+- **The "allow a missing ingredient" button was inert.** Relaxation is
+  implemented twice — on the constraints to decide what to offer, on the request
+  to carry it through the URL — and the request half set only
+  `pantryMode: 'partial'`, leaving the budget at zero. `missingBudgetFor('partial', 0)`
+  is zero, because `0 ?? 2` is zero. The empty state offered a way forward and
+  produced the same empty state. Both halves widen by one now, and a test holds
+  them together.
+- **"Include recipes using none of your ingredients" is no longer offered.** It
+  could not be honoured, and it should not be: it abandons the question the user
+  asked, and it is the behaviour that caused the original bug.
+- **Ordering did not say what it did.** Fewest gaps is now a hard primary key
+  rather than one term among six, and how much of what the user NAMED a recipe
+  uses is scored at all — it was not. Coverage asks the opposite question, and
+  the two come apart: "ground beef, pasta, tomato" returned eight recipes with
+  no beef, every one at 100% coverage, because pasta and tomato needs nothing
+  else and a ragu needs six more things.
 - **A test named "cook returns results" passed on zero results.** Renamed to
   say what it asserts.
 
 ### Where the photographs stand
 
 `npm run images:fetch` acquires them from Wikimedia Commons under a strict
-licence allowlist and `.github/workflows/recipe-images.yml` runs it, because
-this sandbox's egress proxy blocks every Wikimedia host. Four runs were needed
-and each failed differently — the log is the only diagnostic available, which
-is why every failure now carries its HTTP status and the server's own
-explanation:
+licence allowlist, and `.github/workflows/recipe-images.yml` runs it, because
+this sandbox's egress proxy blocks every Wikimedia host. Five runs were needed
+and each failed differently — the workflow log is the only diagnostic
+available, which is why every failure now carries its HTTP status and the
+server's own explanation:
 
 1. **0 of 158.** Asked for a 1200px render of every file including 900px ones;
    MediaWiki does not upscale, it answers 404.
@@ -145,269 +169,48 @@ explanation:
 3. **45 of 158, all full-size originals** totalling 21.5MB. Commons appends
    `?utm_source=…` to the file URL, which ended up inside the thumbnail path,
    so every thumbnail 404'd and the original-file fallback caught it silently.
-4. **In progress.** Every thumbnail request was returning HTTP 400; the
-   hand-built CDN path is now a fallback behind `Special:FilePath?width=`,
-   MediaWiki's own documented way to ask for a file at a size.
+4. **72 of 158, correctly sized.** `Special:FilePath?width=` — MediaWiki's own
+   documented way to ask for a file at a size — replaced the hand-built CDN
+   path, which had been returning HTTP 400 for every request.
+5. **61 of 158, after someone looked at them.**
 
-### Phase A — the recipe catalogue
+### The part no rule could do
 
-**The recipes are DATA.** `data/recipes/*.json`, one file per cuisine, compiled
-into `src/features/recipes/catalogue.generated.ts` by `npm run recipes:import`
-and into `supabase/seed.sql` by `npm run seed:generate`. Adding a recipe is a
-JSON object; it is never a TypeScript literal in a component.
+The seventy-two were put side by side as contact sheets and examined. Eleven
+had to go, and not one of them was catchable by a rule that reads a filename:
 
-158 recipes: egyptian 34, levantine 22, mediterranean 20, american 18, asian
-18, italian 16, indian 11, mexican 10, turkish 9. Every one carries an English
-and an Arabic title, description and every cooking step.
+- The burger hero was a good photograph of a burger **standing beside a glass
+  of beer, with bacon in it**. On a catalogue built for Egypt that is
+  disqualifying twice over.
+- `Menemen.jpg` was an **aerial view of the Turkish town** the dish is named
+  after — correctly categorised, entirely wrong.
+- A **grape vine in a garden** for warak enab. A heap of **branded dry muesli**
+  for overnight oats. **Breaded fried oysters** for soft scrambled eggs. A pan
+  of **raw mushrooms with cured meat** for risotto. A pale pancake for kunafa.
+- Two photographs were each doing duty for two recipes.
 
-`npm run recipes:audit` reports the spread, because a hundred and fifty
-chicken traybakes pass every structural check and make the product useless.
-Current numbers: 8.6 ingredients per recipe on average (min 5, max 14); 172 of
-the 257 catalogue ingredients used; 103 vegetarian, 52 vegan, 65 Egyptian or
-Levantine; and by lead protein eggs 25, legumes 25, chicken 17, beef 12, fish
-10, dairy-led 8, lamb 4, seafood 4. Eight pairs share 70% or more of their
-essential ingredients, the closest being `salata-baladi` and
-`turkish-shepherd-salad` at 0.88 — genuinely the same salad under two names,
-and the two are kept because the seasoning and the audience differ. Nothing
-reaches the 0.9 that `dataset.test.ts` fails on.
+`data/images/rejected.json` records the nine refusals **with the reason**; the
+fetcher never chooses them again and `images:check` refuses a manifest
+containing one, including one restored by hand. Duplicates are handled
+separately, because those photographs are fine — no file may illustrate two
+recipes, enforced in the fetcher across runs and in the validator across the
+manifest.
 
-**Every ingredient line references the canonical ingredient catalogue by slug.**
-That is what makes exclusion, requirement, pantry matching, pricing and Arabic
-naming work at all — a free-text ingredient is invisible to every engine in the
-product. `recipe_ingredients` additionally distinguishes three things that
-`is_optional` alone was conflating: optional, garnish, and pantry staple.
+**Coverage fell from 72 to 61 and that is the correct direction.** The brief
+asks for relevance over coverage, and eleven pictures of the wrong thing are
+worth less than none of them. The 97 recipes still on the branded fallback are
+listed in `manifest.skipped` with a reason each; most are ordinary weeknight
+cooking with descriptive names — "Tray-Baked Salmon and Vegetables", "Air Fryer
+Spiced Chicken" — for which no openly-licensed photograph of that specific dish
+exists.
 
-The importer is a gate, not a formatter. It refuses to emit on: a duplicate or
-near-duplicate title (Dice coefficient ≥ 0.86 on normalised titles), an unknown
-ingredient slug, an allergen the ingredients imply but the recipe does not
-declare, a diet tag the ingredients contradict, servings/times/nutrition
-outside believable bounds, a step referencing an ingredient the recipe does not
-list, an untranslated step, or image metadata without a licence.
+**Reviewing the next batch:** build contact sheets and look at them. Nothing
+else finds a beer in the background.
 
-It found four real allergen-declaration bugs in the original 14 recipes on its
-first run: butter, bread, yogurt and cheese present but undeclared. Runtime
-allergen filtering reads ingredient-implied allergens too, so users were
-protected — but the declared list is what feeds the indexed database filter, so
-those were real gaps for server-side filtering.
-
-`npm run recipes:import -- --check` runs in CI.
-
-### Phase C — one constraint model, and it actually removes things
-
-`src/features/recipes/constraints.ts` is the single shape every surface builds:
-Cook, Budget, Discover, natural-language search and the saved preferences all
-produce a `RecipeConstraints`, and `toConstraints(request)` is the only bridge
-from the UI-level `MealRequest`. Five filters honouring slightly different
-subsets of the user's requirements is exactly how "no bell pepper" returns a
-recipe with bell pepper in it.
-
-**HARD constraints remove; SOFT preferences only re-order.** `filter.ts` scores
-nothing. `rank.ts` cannot resurrect anything the filter removed. Safety checks
-run first so the reason shown for an empty result is the most important one.
-
-Three severities, and the difference is load-bearing:
-
-| Severity | Garnishes and optionals | Overridable |
-|---|---|---|
-| `allergy` | checked | never |
-| `hard_avoid` | checked | never |
-| `dislike` | not checked | yes, by the user |
-
-An allergy does not care that the peanuts were a topping, and "leave it off" is
-not a decision an app may make for someone. A dislike is a preference, so a
-disliked garnish is tolerable once the user says so.
-
-Exclusion is by canonical slug, so "bell pepper" also excludes capsicum, red
-pepper, green pepper and «فلفل ألوان». Required ingredients genuinely constrain
-rather than boost. `pantryMode: 'strict'` answers "what can I cook right now"
-against essentials only — not optional, not garnish, not a background staple —
-and an expired pantry item is not available.
-
-When nothing matches, `suggestRelaxations` offers specific non-safety
-constraints to drop with an honest per-constraint count ("drop the 20-minute
-limit → 34 recipes"). `without()` has **no case** for a safety reason, so a
-caller that asks for one gets the constraints back unchanged and the option
-never appears.
-
-### Phase D — the database does the narrowing
-
-`query.ts` turns constraints into a `QueryPlan`: the subset a SQL query can
-answer over an index. `RecipeRepository.search(plan)` returns one page.
-`SupabaseRecipeRepository` pushes the plan into PostgREST;
-`LocalRecipeRepository` runs the identical plan over the bundle, and a
-property test asserts the plan is **never stricter than the constraints** — a
-plan that wrongly drops a recipe silently denies a valid result and nothing
-downstream would notice. That test is what caught the vegan/meat bug below.
-
-**The client-side safety filter re-runs on every page.** Deliberate
-duplication: the offline fallback has no SQL, an AI-generated recipe never
-passes through SQL, and a query is a thing that can be got wrong. The database
-narrows; it does not protect.
-
-Only ABSOLUTE restrictions become SQL exclusions — a dislike stays client-side
-so changing your mind costs no round trip.
-
-Paging is keyset (`created_at|id`), not offset: an offset re-reads and re-skips
-rows every page and shifts under the user when a recipe is approved mid-scroll.
-`DEFAULT_PAGE_SIZE` 24, `MAX_PAGE_SIZE` 60 as a hard ceiling.
-
-Two PostgREST limitations shaped the SQL:
-
-- it cannot filter on an expression, so `recipes.total_minutes` is a **stored
-  generated column** rather than an index on `prep_minutes + cook_minutes`;
-- it cannot express "no child row matches", so exclusions resolve the offending
-  recipe ids first and then `not.in` against them. Two round trips beats
-  reading the whole table.
-
-Discover and search both paginate now. Discover pushes the collection tag into
-the query (`constraints.tags`) rather than filtering a fetched page — filtering
-after the fact is how a page of 24 becomes 3 visible cards. Search uses
-`useMealSuggestions(request, 20, { source: 'query' })`; the full catalogue is
-fetched on that path **only** when a search comes back empty, to count honest
-relaxation options.
-
-Two real bugs this phase found:
-
-- **`MEAT_SLUGS` was six hard-coded slugs** written when the catalogue had 14
-  recipes. Beef steak, lamb, veal, turkey and duck were added to the ingredient
-  catalogue later and were silently vegan as far as the diet check was
-  concerned — a vegan user was shown a beef stir-fry. Both meat and seafood
-  sets are derived from `INGREDIENT_CATALOGUE` now, with a named regression
-  test.
-- **Every generated ingredient line carried `ingredientId: 'undefined'`** — the
-  importer emitted `entry.id` and catalogue entries have no `id`. Nothing read
-  it, so nothing failed; the first symptom would have been saving a recipe,
-  where it is written into a `uuid` column. It is now the same
-  `uuidv5('ingredient:<slug>')` the seed generator uses, so the bundle and
-  Postgres agree on identity.
-
-The importer also formats its output with the repo's Prettier now, because
-`npm run format` and `recipes:import --check` were otherwise able to contradict
-each other with no change to the data behind either.
-
-### Phases E–G — accounts, identity and photographs
-
-**Phase E fixed three conflations**, each of which had a visible symptom.
-
-*Signed out* vs *chose to stay signed out.* A signed-out launch fell through
-the routing gate into onboarding, so nobody ever answered the welcome screen —
-the silent bypass the brief names. `features/auth/guest-mode.ts` records the
-choice and it survives a relaunch; the gate now shows the welcome screen
-exactly once, and a guest is never asked again until they sign in.
-
-*Signed out* vs *expired.* Supabase emits `SIGNED_OUT` whether the user pressed
-a button or a refresh token was rejected. `AuthProvider` keeps a
-`deliberateSignOut` ref so it can tell them apart, and exposes
-`signedOutReason: 'never' | 'guest' | 'signed_out' | 'expired'`. An expired
-session is not a wall — local data keeps working — but the profile screen says
-what happened instead of "Sign in to sync your pantry".
-
-*Cooked history* vs *nothing to migrate.* `migrateGuestData` looked at the
-pantry, saved recipes and shopping list and returned early when all three were
-empty, so a guest who had cooked a dozen recipes and saved none signed up to
-two empty Saved tabs. Cooked and viewed history migrate now. Dislikes
-deliberately do not: they feed ranking rather than a screen, and carrying a
-wrong one across quietly suppresses recipes.
-
-**Phase F is a public half of a profile that cannot leak the private half.**
-
-`profiles` stays own-row-only — no RLS policy was loosened. What another user
-sees is `public_profiles`, a view whose columns are **written out one at a
-time**, so the complete set of things you can learn about somebody is
-reviewable in ten seconds and a sensitive column added to `profiles` later
-cannot leak through a `select *`. A database test asserts the exact eight
-columns; it fails if anyone widens it.
-
-The handle's uniqueness key folds case AND strips dots and underscores.
-`omar.hassan`, `omar_hassan` and `omarhassan` are otherwise three registrations
-that let one person be mistaken for another in a friend request, and the person
-impersonated has no way to notice. The typed form is what gets displayed.
-`username_available()` is a security-definer function returning a boolean for
-one exact handle and never a row, so it cannot be turned into a directory.
-
-Visibility is `public | friends | private`; `friends` currently resolves
-strictly narrower than `public` (the friendship table does not exist yet),
-which is the safe direction to be wrong in. City is opt-in separately, being
-the one field that narrows down where a person actually is.
-
-**Phase G: uploads that never trust the client.**
-
-Three buckets. `avatars` is public — a face next to a name in a friend list
-should not cost a signed URL per row. `recipe-uploads` is **not** public,
-because a submission under review must not be reachable by URL or moderation
-is advisory. `recipe-images` is public and has read policies **only**: a user
-who could write there could publish an image the review queue never saw.
-
-Ownership is by path. Every user-writable object lives under `<uid>/…` and the
-policies compare the first segment to `auth.uid()`, so a client that invents a
-path outside its own folder is rejected by Postgres rather than by a check it
-could skip. 20 database assertions cover it, including traversal-shaped paths.
-
-Client-side, `features/storage/images.ts` holds every rule as a pure function
-and `upload.ts` is a shell with no decisions in it. The order matters: validate
-the ORIGINAL (so a 40MB panorama is rejected before three seconds of
-re-encoding, and so a file cannot sneak past by compressing well), re-encode to
-a bounded JPEG, then upload to a path we generated.
-
-**The user's filename is never used** — not sanitised, not slugified. It is
-attacker-controlled text that would end up in a URL, a Content-Disposition
-header, and a path a storage policy parses to decide ownership; generating the
-whole name removes the class of question. Re-encoding is also what strips EXIF,
-and an avatar is the most likely thing in this app to be published with
-someone's home address attached.
-
-SDK 57 notes for whoever touches this next: `manipulateAsync` is **deprecated**
-— the current API is `ImageManipulator.manipulate(uri)` → `.resize()` →
-`.renderAsync()` → `.saveAsync()`. `ImagePicker.MediaTypeOptions` is deprecated
-too; pass `mediaTypes: ['images']`. `new File(uri).bytes()` returns a
-**Promise**, and the supabase upload signature is loose enough to accept an
-unawaited one and upload nothing useful.
-
----
-
-### Phases H and P — a drawer around the tabs
-
-`app/(drawer)/(tabs)/` — the drawer wraps the tab group rather than replacing
-it. Both are route GROUPS, so every URL is unchanged and the deep links still
-resolve. The drawer contains exactly one route, the tab group, because it is a
-way of REACHING screens rather than a second place for them to live; its rows
-push onto the root stack.
-
-The information-architecture decision (P) is the reason it exists. Five bottom
-tabs is the right size for the core food experience, and the moment Friends,
-Messages, Submit a Recipe and Admin Review need a home the tempting move is a
-sixth tab and then a seventh — which is how "What should I eat?" stops being
-the obvious thing on screen. The tabs keep the food; everything secondary,
-social or account-shaped goes in the drawer.
-
-Rows appear only when their destination exists. `SOCIAL_ROWS` is an empty array
-today: a greyed-out "Friends" that does nothing teaches the user the app is
-unfinished, while an absent one teaches nothing, which is correct until Phase I
-lands. Adding them is one array literal.
-
-Two things worth not re-deriving:
-
-**`drawerPosition` is deliberately not set.** React Navigation already flips
-the drawer to the right when `I18nManager.isRTL`, so `isRTL ? 'right' : 'left'`
-double-flips it — and on web that did not merely mirror the drawer, it
-displaced the entire content pane off the viewport. A 390pt-wide screen
-rendered its pantry-editor close button at x=653, so every control on every
-screen became unclickable in Arabic while nothing looked broken in a
-screenshot. The smoke suite now asserts the content pane stays on screen.
-
-**A closed drawer is off-screen, not hidden.** React Navigation keeps it
-mounted and slides it away with a transform, so it is in the DOM and in the
-accessibility tree the whole time. `AppDrawerContent` sets `aria-hidden` /
-`accessibilityElementsHidden` when `useDrawerStatus()` is not `open`; without
-that a screen-reader user anywhere in the app could swipe into "Home, Discover,
-Pantry, Log out" with no drawer visible. It is also why the smoke suite
-asserts the drawer's POSITION rather than its visibility — a visibility
-assertion passes whatever the drawer is doing.
-
-`/settings/about` came with the drawer's Help row, and it does something the
-brief's Phase T also wants: it reports which capabilities are actually live —
-accounts, sync, AI — reading what `env` resolved rather than what someone
-intended. A status screen that lies is worse than none.
+```bash
+npm run images:fetch   # in CI only; the sandbox proxy blocks Wikimedia
+# then, locally, montage the manifest into sheets of 24 and read them
+```
 
 ---
 
