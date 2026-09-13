@@ -11,10 +11,33 @@
  * The licence checks are the ones that matter. The others are hygiene; that
  * one is the difference between using a photograph and taking it.
  */
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
+
+/**
+ * What the bytes actually are, read from their own header.
+ *
+ * Deliberately duplicated from the fetcher rather than shared: this is the
+ * GATE, and a gate that imports its rule from the thing it is checking can
+ * only ever agree with it.
+ */
+function imageKindOf(bytes: Buffer): 'jpg' | 'png' | 'webp' | null {
+  if (bytes.byteLength < 12) return null;
+  if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'jpg';
+  if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) {
+    return 'png';
+  }
+  if (
+    bytes.subarray(0, 4).toString('latin1') === 'RIFF' &&
+    bytes.subarray(8, 12).toString('latin1') === 'WEBP'
+  ) {
+    return 'webp';
+  }
+  return null;
+}
 
 const ROOT = join(import.meta.dirname, '..');
 const ASSET_DIR = join(ROOT, 'assets', 'recipes');
@@ -95,6 +118,22 @@ function main(): void {
       }
       if (size > MAX_BYTES) {
         problems.push(`${where}: ${image.path} is ${(size / 1e6).toFixed(1)}MB, over the cap`);
+      }
+      // The extension is a claim; the header is the fact. A WebP written into
+      // a `.jpg` decodes nowhere, and an HTML error page saved as an image is
+      // a file of the right size containing no picture at all — both are
+      // failures that only appear when a user opens the screen.
+      const declared = imageKindOf(readFileSync(file));
+      const claimed = image.path.slice(image.path.lastIndexOf('.') + 1).toLowerCase();
+      if (declared === null) {
+        problems.push(`${where}: ${image.path} does not begin like an image file`);
+      } else if (declared !== (claimed === 'jpeg' ? 'jpg' : claimed)) {
+        problems.push(`${where}: ${image.path} is really a ${declared}`);
+      }
+      if (size !== image.bytes) {
+        // Already reported above; the sha is the stronger statement.
+      } else if (createHash('sha256').update(readFileSync(file)).digest('hex') !== image.sha256) {
+        problems.push(`${where}: ${image.path} does not match its recorded SHA-256`);
       }
     }
 
