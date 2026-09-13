@@ -5,6 +5,7 @@ import type { MealRequest } from '@/types/domain';
 
 const base: MealRequest = {
   mode: 'search',
+  alwaysAvailableIngredients: [],
   ingredients: [],
   budgetMinor: null,
   currency: 'EGP',

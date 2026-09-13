@@ -49,6 +49,7 @@ export function toConstraints(request: MealRequest): RecipeConstraints {
     country: request.country,
     skillLevel: request.skillLevel,
     preferredCuisines: request.cuisine ? [request.cuisine] : [],
+    alwaysAvailableIngredients: request.alwaysAvailableIngredients ?? [],
     query: request.query,
   };
 }

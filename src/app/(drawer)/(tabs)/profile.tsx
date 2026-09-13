@@ -95,6 +95,18 @@ export default function ProfileScreen() {
           testID="profile-preferences"
         />
         <ListRow
+          title={t('basics.settingsRow')}
+          subtitle={t('basics.subtitle')}
+          icon="basket-outline"
+          value={
+            preferences.alwaysAvailableIngredients.length > 0
+              ? String(preferences.alwaysAvailableIngredients.length)
+              : undefined
+          }
+          onPress={() => router.push('/settings/basics')}
+          testID="profile-basics"
+        />
+        <ListRow
           title={t('profile.household')}
           subtitle={t('profile.householdSub')}
           icon="people-outline"

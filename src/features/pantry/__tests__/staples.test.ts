@@ -1,5 +1,6 @@
 import {
-  ASSUMED_ON_HAND_SLUGS,
+  UNIVERSAL_BASICS,
+  SUGGESTED_KITCHEN_BASICS,
   INGREDIENT_CATALOGUE,
   INGREDIENTS_BY_SLUG,
 } from '@/features/ingredients/catalogue';
@@ -23,7 +24,7 @@ describe('staple assumptions', () => {
   });
 
   it('does not assume perishables are in the kitchen', () => {
-    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: true });
 
     for (const name of ['eggs', 'milk', 'yogurt', 'butter', 'tomatoes']) {
       expect(index.assumedStaples.has(normaliseIngredientName(name))).toBe(false);
@@ -31,12 +32,29 @@ describe('staple assumptions', () => {
     }
   });
 
-  it('still assumes the things that genuinely keep', () => {
-    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
+  it('assumes water and salt, and those are the whole list', () => {
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: true });
 
-    // Keyed on the canonical name, which is what the index stores.
-    for (const name of ['salt', 'black pepper', 'vegetable oil', 'onions', 'garlic']) {
-      expect(index.assumedStaples.has(normaliseIngredientName(name))).toBe(true);
+    expect([...index.assumedStaples].sort()).toEqual(['salt', 'water']);
+  });
+
+  it('does NOT assume the things a kitchen usually has but can run out of', () => {
+    // REGRESSION, reported from the built app. Someone with rice and tomatoes
+    // opened Tomato Rice and was told they had six of seven ingredients and
+    // needed only coriander, because onions, garlic, stock cube, cumin, tomato
+    // paste and oil were all silently on hand. Every one of those is something
+    // you can be out of, and being out of it is the thing the user opened the
+    // app to find out.
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: true });
+
+    for (const name of [
+      'onions', 'garlic', 'tomato paste', 'stock cube', 'vegetable oil', 'olive oil',
+      'cumin', 'black pepper', 'sugar', 'flour', 'butter', 'milk', 'eggs',
+    ]) {
+      expect({ name, assumed: index.available.has(normaliseIngredientName(name)) }).toEqual({
+        name,
+        assumed: false,
+      });
     }
   });
 
@@ -47,7 +65,7 @@ describe('staple assumptions', () => {
     // for everybody. Three recipes became cookable from a completely empty
     // kitchen, and because they needed nothing they matched every search:
     // "chicken and rice" and "banana and oats" both answered koshari.
-    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: true });
 
     for (const name of ['rice', 'pasta', 'potatoes', 'red lentils', 'fava beans', 'tea']) {
       expect(index.available.has(normaliseIngredientName(name))).toBe(false);
@@ -55,21 +73,36 @@ describe('staple assumptions', () => {
   });
 
   it('names only slugs that exist, so a typo cannot silently do nothing', () => {
-    // `ASSUMED_ON_HAND_SLUGS` is filtered FROM the catalogue, so a misspelled
-    // entry in the source list vanishes without a word — which is how
-    // "vegetable-oil" (really `sunflower-oil`) stopped being assumed while
-    // every test still passed.
-    expect(ASSUMED_ON_HAND_SLUGS.size).toBeGreaterThan(30);
-    for (const slug of ASSUMED_ON_HAND_SLUGS) {
+    // `UNIVERSAL_BASICS` is filtered FROM the catalogue, so a misspelled entry
+    // in the source list vanishes without a word — which is how
+    // "vegetable-oil" (really `sunflower-oil`) once stopped being assumed
+    // while every test still passed.
+    expect([...UNIVERSAL_BASICS].sort()).toEqual(['salt', 'water']);
+    for (const slug of UNIVERSAL_BASICS) {
       expect(INGREDIENTS_BY_SLUG.has(slug)).toBe(true);
-    }
-    for (const slug of ['water', 'olive-oil', 'sunflower-oil', 'onions', 'garlic', 'salt']) {
-      expect(ASSUMED_ON_HAND_SLUGS.has(slug)).toBe(true);
     }
   });
 
+  it('offers a suggested kitchen list without assuming any of it', () => {
+    // The other half of the fix. Oil, onions and cumin are not assumed for
+    // anybody — they are OFFERED, on a screen the user can untick, and only
+    // count once that user has said yes.
+    expect(SUGGESTED_KITCHEN_BASICS.length).toBeGreaterThan(5);
+    for (const slug of SUGGESTED_KITCHEN_BASICS) {
+      expect({ slug, known: INGREDIENTS_BY_SLUG.has(slug) }).toEqual({ slug, known: true });
+      expect({ slug, assumed: UNIVERSAL_BASICS.has(slug) }).toEqual({ slug, assumed: false });
+    }
+  });
+
+  it('counts a configured basic once the user has chosen it', () => {
+    const index = buildAvailabilityIndex([], [], { alwaysAvailable: ['onions', 'olive oil'] });
+
+    expect(index.available.has(normaliseIngredientName('onions'))).toBe(true);
+    expect(index.sourceByName.get(normaliseIngredientName('onions'))).toBe('user_staple');
+  });
+
   it('assumes nothing at all when the caller opts out', () => {
-    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: false });
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: false });
 
     expect(index.assumedStaples.size).toBe(0);
   });
@@ -80,7 +113,7 @@ describe('staple assumptions', () => {
     const perishableStaple = INGREDIENT_CATALOGUE.find((entry) => entry.isPerishable);
     expect(perishableStaple).toBeDefined();
 
-    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
+    const index = buildAvailabilityIndex([], [], { assumeUniversalBasics: true });
     expect(index.assumedStaples.has(normaliseIngredientName(perishableStaple!.name))).toBe(false);
   });
 

@@ -202,6 +202,7 @@ export function requestDefaultsFrom(preferences: UserPreferences) {
     dietFlags: preferences.dietFlags,
     allergens: preferences.allergens,
     dislikedIngredients: preferences.dislikedIngredients,
+    alwaysAvailableIngredients: preferences.alwaysAvailableIngredients,
     appliances: preferences.appliances,
     skillLevel: preferences.skillLevel,
     // Defaults for the constraint fields no screen has set yet. A request

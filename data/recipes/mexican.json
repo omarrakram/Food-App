@@ -93,8 +93,7 @@
         "slug": "chili-powder",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "lemon",
@@ -230,8 +229,7 @@
         "slug": "chili-powder",
         "quantity": 1,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cumin",
@@ -405,8 +403,7 @@
         "slug": "chili-powder",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sunflower-oil",
@@ -559,8 +556,7 @@
         "slug": "chili-powder",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "lemon",
@@ -704,8 +700,7 @@
         "slug": "chili-powder",
         "quantity": 0.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olive-oil",
@@ -957,8 +952,7 @@
         "slug": "chili-powder",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cumin",

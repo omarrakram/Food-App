@@ -1,4 +1,7 @@
-import { INGREDIENT_CATALOGUE } from '@/features/ingredients/catalogue';
+import {
+  INGREDIENT_CATALOGUE,
+  SUGGESTED_KITCHEN_BASICS,
+} from '@/features/ingredients/catalogue';
 import { LOCAL_RECIPE_IMAGES } from '@/features/recipes/image-assets.generated';
 import type { Recipe } from '@/types/domain';
 
@@ -28,9 +31,19 @@ const KITCHENS: Record<string, string[]> = {
   'beef, pasta, tomato': ['ground beef', 'pasta', 'tomatoes'],
 };
 
-function reachable(have: string[], budget: number): Recipe[] {
+/**
+ * What a real user's kitchen looks like.
+ *
+ * Three named ingredients PLUS the cupboard basics they ticked during
+ * onboarding — because the app assumes only water and salt on anybody's
+ * behalf, and a test that models a cook with no oil and no onions is not
+ * modelling a cook. `a bare kitchen is answered honestly` below covers the
+ * other case, where nobody has ticked anything.
+ */
+function reachable(have: string[], budget: number, basics = SUGGESTED_KITCHEN_BASICS): Recipe[] {
   const constraints = emptyConstraints({
     availableIngredients: have,
+    alwaysAvailableIngredients: [...basics],
     pantryMode: budget === 0 ? 'strict' : 'partial',
     maxMissingIngredients: budget,
     mustUseSomethingAvailable: true,
@@ -89,6 +102,7 @@ describe('a small kitchen gets a useful answer', () => {
     for (const have of Object.values(KITCHENS)) {
       const constraints = emptyConstraints({
         availableIngredients: have,
+        alwaysAvailableIngredients: [...SUGGESTED_KITCHEN_BASICS],
         pantryMode: 'partial',
         maxMissingIngredients: 1,
         mustUseSomethingAvailable: true,
@@ -104,6 +118,7 @@ describe('a small kitchen gets a useful answer', () => {
     for (const have of Object.values(KITCHENS)) {
       const constraints = emptyConstraints({
         availableIngredients: have,
+        alwaysAvailableIngredients: [...SUGGESTED_KITCHEN_BASICS],
         pantryMode: 'strict',
         mustUseSomethingAvailable: true,
       });

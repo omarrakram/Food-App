@@ -16,6 +16,7 @@ function baseRequest(overrides: Partial<MealRequest> = {}): MealRequest {
   return {
     mode: 'ingredients',
     ingredients: [],
+    alwaysAvailableIngredients: [],
     maxMissingIngredients: null,
     budgetMinor: null,
     currency: 'EGP',

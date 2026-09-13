@@ -107,7 +107,7 @@ describe('buildAvailabilityIndex', () => {
   it('EXCLUDES expired pantry items and records why', () => {
     const index = buildAvailabilityIndex([pantry('chicken breast', isoOffset(-1))], [], {
       now: NOW,
-      assumeCommonStaples: false,
+      assumeUniversalBasics: false,
     });
 
     expect(index.available.has('chicken breast')).toBe(false);
@@ -157,7 +157,7 @@ describe('buildAvailabilityIndex', () => {
   });
 
   it('can be told not to assume staples', () => {
-    const index = buildAvailabilityIndex([], [], { now: NOW, assumeCommonStaples: false });
+    const index = buildAvailabilityIndex([], [], { now: NOW, assumeUniversalBasics: false });
     expect(index.available.has('salt')).toBe(false);
   });
 });
@@ -175,7 +175,7 @@ describe('matchRecipeIngredients', () => {
   it('counts required ingredients only', () => {
     const index = buildAvailabilityIndex([], ['eggs', 'tomatoes'], {
       now: NOW,
-      assumeCommonStaples: false,
+      assumeUniversalBasics: false,
     });
     const result = matchRecipeIngredients(recipe, index);
 
@@ -189,7 +189,7 @@ describe('matchRecipeIngredients', () => {
   it('reports 100 when everything required is available', () => {
     const index = buildAvailabilityIndex([], ['eggs', 'tomatoes', 'mozzarella'], {
       now: NOW,
-      assumeCommonStaples: false,
+      assumeUniversalBasics: false,
     });
     expect(matchRecipeIngredients(recipe, index).matchPercent).toBe(100);
   });
@@ -204,7 +204,7 @@ describe('matchRecipeIngredients', () => {
   it('marks an expired ingredient missing WITH its reason', () => {
     const index = buildAvailabilityIndex([pantry('eggs', isoOffset(-1))], [], {
       now: NOW,
-      assumeCommonStaples: false,
+      assumeUniversalBasics: false,
     });
     const result = matchRecipeIngredients(recipe, index);
     const eggs = result.matches.find((entry) => entry.name === 'eggs');
@@ -213,12 +213,15 @@ describe('matchRecipeIngredients', () => {
     expect(eggs?.excludedReason).toBe('expired');
   });
 
-  it('labels a staple match so the UI can say it was assumed', () => {
+  it('says an assumed basic came from an assumption, not from the pantry', () => {
     const index = buildAvailabilityIndex([], [], { now: NOW });
     const saltRecipe = { ingredients: [recipeIngredient('salt')] };
     const result = matchRecipeIngredients(saltRecipe, index);
 
-    expect(result.matches[0]?.matchedVia).toBe('assumed_staple');
+    // `matchedVia` is now about how the NAME resolved; where the availability
+    // came from is a separate question with a separate answer, because the two
+    // were conflated and the screen ended up calling an assumption a staple.
+    expect(result.matches[0]?.availableVia).toBe('universal_basic');
   });
 
   it('collects pantry items the recipe would use before they expire', () => {

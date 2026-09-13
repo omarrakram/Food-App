@@ -317,7 +317,17 @@ export function PantryEditorSheet({ visible, onClose, item, onSubmit }: PantryEd
         <ListRow
           testID="pantry-editor-staple"
           title={t('pantry.staple')}
-          subtitle={isPerishable ? t('pantry.stapleNotForPerishable') : t('pantry.stapleHint')}
+          subtitle={
+            isPerishable
+              ? t('pantry.stapleNotForPerishable')
+              : // Says the precedence out loud on the row that sets it. Rice
+                // showing "Staple" and "3 days left" at the same time read as
+                // a contradiction; it is not one, but only because the date
+                // wins, and nothing on screen said so.
+                isStaple && expiresOn
+                ? t('pantry.stapleOverridden')
+                : t('pantry.stapleHint')
+          }
           icon="star-outline"
           toggle={
             isPerishable

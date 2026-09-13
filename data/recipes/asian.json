@@ -405,8 +405,7 @@
         "slug": "curry-powder",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "tomato-paste",
@@ -564,8 +563,7 @@
         "slug": "white-pepper",
         "quantity": 0.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sesame-oil",
@@ -718,8 +716,7 @@
         "quantity": 1,
         "unit": "tsp",
         "prep": null,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       }
     ],
     "steps": [
@@ -851,8 +848,7 @@
         "slug": "white-pepper",
         "quantity": 0.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sesame-oil",
@@ -995,8 +991,7 @@
         "quantity": 1,
         "unit": "tsp",
         "prep": null,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       }
     ],
     "steps": [
@@ -1408,8 +1403,7 @@
         "quantity": 1,
         "unit": "tbsp",
         "prep": null,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       }
     ],
     "steps": [
@@ -2281,8 +2275,7 @@
         "quantity": 1,
         "unit": "tbsp",
         "prep": null,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       },
       {
         "slug": "green-onion",

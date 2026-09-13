@@ -16,7 +16,11 @@
  * It reports rather than fails: the numbers are a judgement call, and a build
  * that breaks because a cuisine gained a recipe helps nobody.
  */
-import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
+import {
+  INGREDIENT_CATALOGUE,
+  SUGGESTED_KITCHEN_BASICS,
+  UNIVERSAL_BASICS,
+} from '../src/features/ingredients/catalogue.ts';
 import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
 
 type Recipe = (typeof RECIPE_CATALOGUE)[number];
@@ -145,6 +149,57 @@ function main(): void {
     recipes.flatMap((r) => essentialSlugs(r)).map((slug) => BY_SLUG.get(slug)?.name ?? slug),
   );
   printTally(new Map([...usage.entries()].slice(0, 15)));
+
+  section('Ingredients excused from the missing count');
+  // WHAT THIS ANSWERS. A line marked `staple` in the recipe data is excused
+  // from "what am I still missing" — so an overbroad flag makes a dish look
+  // more cookable than it is. That is exactly the complaint this audit exists
+  // to catch: a cook holding rice and tomatoes was told Tomato Rice was one
+  // ingredient away.
+  //
+  // Three verdicts, and only the first is free:
+  //   implicit    — water and salt. Assumed for everybody, forever.
+  //   configured  — offered on the onboarding basics screen. Counts only for
+  //                 a user who ticked it.
+  //   ORDINARY    — neither. Excusing it hides a real shopping trip.
+  const stapleLines = new Map<string, number>();
+  for (const recipe of recipes) {
+    for (const line of recipe.ingredients) {
+      if (!line.isPantryStaple || !line.slug) continue;
+      stapleLines.set(line.slug, (stapleLines.get(line.slug) ?? 0) + 1);
+    }
+  }
+  const verdictOf = (slug: string): string => {
+    if (UNIVERSAL_BASICS.has(slug)) return 'implicit';
+    if (SUGGESTED_KITCHEN_BASICS.includes(slug)) return 'configured';
+    return 'ORDINARY';
+  };
+  const ranked = [...stapleLines.entries()].sort((a, b) => b[1] - a[1]);
+  console.log('  recipes   ingredient           verdict     category');
+  for (const [slug, count] of ranked) {
+    const entry = BY_SLUG.get(slug);
+    console.log(
+      `  ${String(count).padStart(7)}   ${slug.padEnd(20)} ${verdictOf(slug).padEnd(11)} ` +
+        `${entry?.category ?? '?'}`,
+    );
+  }
+  const ordinary = ranked.filter(([slug]) => verdictOf(slug) === 'ORDINARY');
+  console.log(
+    `\n  ${stapleLines.size} distinct ingredients excused across ` +
+      `${[...stapleLines.values()].reduce((a, b) => a + b, 0)} lines; ` +
+      `${ordinary.length} of them are ORDINARY ingredients.`,
+  );
+  if (ordinary.length > 0) {
+    console.log(
+      '  Each ORDINARY row is a required ingredient being hidden from the\n' +
+        '  missing count. Either the flag is wrong, or it belongs on the\n' +
+        '  suggested-basics list where a user can decide for themselves.',
+    );
+  }
+
+  section('What the app assumes, for everybody, with nobody asked');
+  console.log(`  ${[...UNIVERSAL_BASICS].sort().join(', ')}`);
+  console.log(`  offered but never assumed: ${SUGGESTED_KITCHEN_BASICS.join(', ')}`);
 
   section('Near-duplicate check (Jaccard over essential ingredients)');
   const SIMILAR = 0.7;

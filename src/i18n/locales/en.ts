@@ -244,9 +244,30 @@ export const en = {
   'pantry.pickDate': 'Pick a date',
   'pantry.expiry': 'Use by',
   'pantry.noExpiry': 'No date',
-  'pantry.staple': 'Staple',
+  // Renamed from "Staple", which read as a category of food rather than a
+  // choice, and sat confusingly beside "3 days left" on the same row. This
+  // says what it does, and the hints below say what still overrides it.
+  'pantry.staple': 'Keep assuming I have this',
+  // Only ever shown for water and salt. Anything else that is ticked names
+  // where it came from instead, because "assumed" was doing work it had not
+  // earned.
+  'onboarding.basicsTitle': 'What is always in your kitchen?',
+  'onboarding.basicsBody':
+    'We only ever assume water and salt. Untick anything you do not keep, so we never tell you a recipe is nearly done when it is not.',
+  'basics.title': 'Basics you always have',
+  'basics.subtitle': 'Tick what is always in your kitchen. Nothing here is assumed until you say so.',
+  'basics.assumedNote':
+    'Water and salt are the only things counted without asking. Everything else has to come from your pantry, from this list, or from what you type into a search.',
+  'basics.settingsRow': 'Basics you always have',
+  'pantry.assumedBasic': 'Assumed — everyone has this',
+  'pantry.fromYourBasics': 'From the basics you always have',
+  'pantry.fromYourPantry': 'In your pantry',
+  'pantry.outOfStock': 'Your pantry says this is finished',
   'pantry.stapleAssumed': 'Pantry staple · assumed',
-  'pantry.stapleHint': 'Always assume I have this',
+  'pantry.stapleHint': 'Counts as available without a quantity or a date',
+  'pantry.stapleOverridden':
+    'A date or a zero quantity still wins — this only stops us asking for them.',
+  'pantry.stapleExpired': 'Past its date, so it is not counted — even as a basic',
   'pantry.category': 'Category',
   'pantry.expiringSoon': 'Expiring soon',
   'pantry.expired': 'Past its date',

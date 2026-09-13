@@ -360,8 +360,7 @@
         "slug": "sumac",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "lemon",
@@ -795,8 +794,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olive-oil",
@@ -944,8 +942,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cinnamon",
@@ -1229,8 +1226,7 @@
         "slug": "thyme-dried",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olives",
@@ -1349,8 +1345,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cinnamon",
@@ -1657,22 +1652,19 @@
         "slug": "thyme-dried",
         "quantity": 6,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sesame-seeds",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sumac",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       }
     ],
     "steps": [
@@ -1793,8 +1785,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "turmeric",
@@ -2349,8 +2340,7 @@
         "slug": "sumac",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "lemon",
@@ -2485,8 +2475,7 @@
         "slug": "mixed-spice",
         "quantity": 1.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olive-oil",
@@ -2624,8 +2613,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "paprika",

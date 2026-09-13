@@ -5632,6 +5632,80 @@ values ('6cb6b23f-0fc1-54e0-b112-cd3af5102c58', 'ea276358-cc05-58c4-b25a-bcca2b2
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('2024a2e1-e0f0-57bb-9992-30a2fa4a0210', 'ea276358-cc05-58c4-b25a-bcca2b2ea85f', 3, 'Bake at 170°C for 55 minutes. A skewer should come out with a crumb or two on it.', 'اخبزها على ١٧٠ درجة ٥٥ دقيقة. السيخ المفروض يطلع وعليه فتافيت بسيطة.', 55, null, null, '{}');
 
+-- Banana Milkshake
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'banana-milkshake', 'Banana Milkshake', 'عصير موز باللبن',
+  'Three ingredients and a blender. Use bananas that have gone spotty — the ones nobody wants to eat are the ones that make this good.', 'تلات حاجات وخلاط. استخدم موز مبقّع — اللي محدش عايز ياكله هو اللي بيطلّع العصير حلو.',
+  'curated/banana-milkshake.jpg', 'generated', 'Akla kitchen',
+  'CC0-1.0', null, null,
+  null, 'curated', 'egyptian', 'easy',
+  5, 0, 2,
+  220, 8, 38,
+  5, 3, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'snack');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'breakfast');
+delete from public.recipe_diet_tags where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'halal');
+delete from public.recipe_allergens where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_allergens (recipe_id, allergen) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'dairy');
+delete from public.recipe_appliances where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_appliances (recipe_id, appliance) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'blender');
+delete from public.recipe_tags where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_tags (recipe_id, tag) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'breakfast');
+insert into public.recipe_tags (recipe_id, tag) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'no-cook');
+insert into public.recipe_tags (recipe_id, tag) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('75c1615b-945c-56df-bc40-d868602d46f1', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', (select id from public.ingredients where slug = 'bananas' limit 1), 'bananas', 'bananas', 2, 'piece', 'peeled, ideally spotty', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('a8c98664-c7bc-5a69-863f-90860f6bda25', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', (select id from public.ingredients where slug = 'milk' limit 1), 'milk', 'milk', 400, 'ml', 'cold', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('3b6a47ac-e007-5269-83a6-8dc65640694c', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 1, 'tbsp', null, true, false, true, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('87c95906-d9f9-5099-90a2-bb068f7a097e', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 0.25, 'tsp', null, true, true, true, null, 4);
+
+delete from public.recipe_steps where recipe_id = '57e58ca0-b2fb-5b9f-ae15-0169d4630324';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('84a26e0c-8351-5456-9700-ac65db93f938', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', 1, 'Break the bananas into the blender and pour the cold milk over them.', 'قطّع الموز في الخلاط وصبّ عليه اللبن البارد.', 2, null, null, '{"bananas","milk"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('20c00599-3db5-549e-9309-7f00b1363e20', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', 2, 'Blend for a full minute — less than that and it is banana in milk rather than a milkshake. Taste, and add the sugar only if the bananas were not ripe enough.', 'اخلط دقيقة كاملة — أقل من كده يبقى موز في لبن مش ميلك شيك. دوق، وضيف السكر بس لو الموز مكانش مستوي كفاية.', 2, null, null, '{"sugar"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e5de83c5-eda6-5b4c-90ce-f5095b9275b3', '57e58ca0-b2fb-5b9f-ae15-0169d4630324', 3, 'Pour into two cold glasses and dust with cinnamon.', 'صبّه في كوبايتين ساقعين ورشّ عليه قرفة.', null, null, null, '{"cinnamon"}');
+
 -- Banana & Peanut Butter Oats
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -5940,7 +6014,7 @@ values ('76777f98-00cd-5b76-9fe6-59381273b443', 'cdfd6850-f006-57fb-8657-4e46345
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('004cd47d-7f8b-5e99-b2e7-674b9d40307b', 'cdfd6850-f006-57fb-8657-4e46345be2d1', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 60, 'ml', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c89c8586-9fb6-591b-9d96-475b57a664c0', 'cdfd6850-f006-57fb-8657-4e46345be2d1', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 1, 'tsp', null, false, false, true, null, 8);
+values ('c89c8586-9fb6-591b-9d96-475b57a664c0', 'cdfd6850-f006-57fb-8657-4e46345be2d1', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('61a74c18-58c7-5004-acf7-a6bef447d914', 'cdfd6850-f006-57fb-8657-4e46345be2d1', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 9);
 
@@ -6026,7 +6100,7 @@ values ('2ae06397-b656-5057-bd49-575ea6c2392f', '157d2636-2689-5116-a22f-81a7046
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('dd306a65-f83e-53f5-9073-c44bfcf7f21a', '157d2636-2689-5116-a22f-81a704678a7e', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9b202931-cb08-5634-aa11-1c1afb8fcd5d', '157d2636-2689-5116-a22f-81a704678a7e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, true, null, 8);
+values ('9b202931-cb08-5634-aa11-1c1afb8fcd5d', '157d2636-2689-5116-a22f-81a704678a7e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('fa072af3-baa2-5fbe-a29b-817baa6fb6fb', '157d2636-2689-5116-a22f-81a704678a7e', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -6284,7 +6358,7 @@ values ('202ba039-5833-5899-84ff-d574ae3b9200', 'b78991fe-00f2-5d27-8586-5f503d9
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('40fdab35-d4d7-5c0f-8be6-5706e1b53e93', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 3, 'clove', 'crushed', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9aed9b66-345a-5786-8a46-e6110464b814', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tbsp', null, false, false, true, null, 5);
+values ('9aed9b66-345a-5786-8a46-e6110464b814', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tbsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5d5f1e0a-f495-584e-b045-42850d1eca01', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -6462,7 +6536,7 @@ values ('d24012c6-5b76-56ba-9712-8d9eb1f10cb4', '7b35519c-74e3-5b4d-a971-8571c82
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('db015604-b790-5c52-bd71-45ec2df9a84c', '7b35519c-74e3-5b4d-a971-8571c82b8d9e', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c8179e49-9de0-5d2e-87e1-4eaa5faa547b', '7b35519c-74e3-5b4d-a971-8571c82b8d9e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, true, null, 6);
+values ('c8179e49-9de0-5d2e-87e1-4eaa5faa547b', '7b35519c-74e3-5b4d-a971-8571c82b8d9e', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('d8482631-0b65-523f-ba5c-b99474dbbefe', '7b35519c-74e3-5b4d-a971-8571c82b8d9e', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 1, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -6622,7 +6696,7 @@ values ('30d6b329-03d1-5d2a-b2a1-7ad41dbb92dd', '86a10262-a7c8-544c-a9b3-2a0de42
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('7194e944-2667-5626-92a3-dddc645e575f', '86a10262-a7c8-544c-a9b3-2a0de42d9d64', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 2, 'tsp', null, false, false, true, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('3eb16f74-74ab-500a-8bb8-03ea95a0c2c5', '86a10262-a7c8-544c-a9b3-2a0de42d9d64', (select id from public.ingredients where slug = 'garlic-powder' limit 1), 'garlic-powder', 'garlic powder', 2, 'tsp', null, false, false, true, null, 4);
+values ('3eb16f74-74ab-500a-8bb8-03ea95a0c2c5', '86a10262-a7c8-544c-a9b3-2a0de42d9d64', (select id from public.ingredients where slug = 'garlic-powder' limit 1), 'garlic-powder', 'garlic powder', 2, 'tsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('6fdded45-39d0-566b-a291-b15decdae20c', '86a10262-a7c8-544c-a9b3-2a0de42d9d64', (select id from public.ingredients where slug = 'hot-sauce' limit 1), 'hot-sauce', 'hot sauce', 80, 'ml', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -6705,7 +6779,7 @@ values ('4fce1f1c-1a4b-5b23-be06-24d03e944959', 'cba21402-c63f-523c-8432-38dbea6
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('d783f25e-f76b-5bfd-94d8-7e519affbcec', 'cba21402-c63f-523c-8432-38dbea6b05da', (select id from public.ingredients where slug = 'ginger' limit 1), 'ginger', 'ginger', 25, 'g', 'grated', false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('423d9d29-b981-55b0-bdad-0b299202103c', 'cba21402-c63f-523c-8432-38dbea6b05da', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, true, null, 7);
+values ('423d9d29-b981-55b0-bdad-0b299202103c', 'cba21402-c63f-523c-8432-38dbea6b05da', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('de635706-4abb-5f3e-bb61-767ada494ec6', 'cba21402-c63f-523c-8432-38dbea6b05da', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 2, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -7198,7 +7272,7 @@ values ('160ef2ce-818c-5bc6-9d5e-1c4bd4c8906f', '56cd0c89-5406-5ab7-a9d3-7cc64c7
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('10846c70-ef1b-5d7b-aa55-20f9900288be', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'ginger' limit 1), 'ginger', 'ginger', 25, 'g', 'grated', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c72c9d87-9abe-5d91-b8cd-62c976615873', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, true, null, 6);
+values ('c72c9d87-9abe-5d91-b8cd-62c976615873', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('500be20c-9fbe-5ceb-92f5-a54491c5db5b', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'turmeric' limit 1), 'turmeric', 'turmeric', 1, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -7288,7 +7362,7 @@ values ('74615dc4-fe23-5baa-af5c-97b7e2cfc311', '4507a461-a073-5187-968d-6b2852b
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('cd6ac04c-e993-5e31-9ea2-79795700d5d3', '4507a461-a073-5187-968d-6b2852b1c781', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('8c4794e1-86be-5ea0-8e65-b4242a847e9d', '4507a461-a073-5187-968d-6b2852b1c781', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, true, null, 8);
+values ('8c4794e1-86be-5ea0-8e65-b4242a847e9d', '4507a461-a073-5187-968d-6b2852b1c781', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c652fcac-1049-5e95-a445-a6cc85111d5d', '4507a461-a073-5187-968d-6b2852b1c781', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -7628,7 +7702,7 @@ values ('1dc7576f-a601-57d3-81bb-cce6ea5ed591', '8ea67265-0903-529c-aa9c-4188b8c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('0e63abe2-df0e-5353-8794-4054aaaaddcd', '8ea67265-0903-529c-aa9c-4188b8cb4725', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 5, 'clove', 'crushed', false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('d03a90e0-e2de-5679-a93c-10c7cac0e0e8', '8ea67265-0903-529c-aa9c-4188b8cb4725', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 2, 'tbsp', null, false, false, true, null, 7);
+values ('d03a90e0-e2de-5679-a93c-10c7cac0e0e8', '8ea67265-0903-529c-aa9c-4188b8cb4725', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 2, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5bac4b20-6298-50e8-b50a-1e8ed17a86e5', '8ea67265-0903-529c-aa9c-4188b8cb4725', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -7724,7 +7798,7 @@ values ('bca8aaa2-e050-5fc1-9ee5-70a32c72206f', '351fa406-303e-526a-83d5-2f541c8
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b9e0eb61-ccb8-511f-b135-d5a315184f95', '351fa406-303e-526a-83d5-2f541c8c5dc7', (select id from public.ingredients where slug = 'baking-powder' limit 1), 'baking-powder', 'baking powder', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('2a73b614-3d3a-594f-aded-3676acc37a95', '351fa406-303e-526a-83d5-2f541c8c5dc7', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 8);
+values ('2a73b614-3d3a-594f-aded-3676acc37a95', '351fa406-303e-526a-83d5-2f541c8c5dc7', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e8b41dc0-68d0-57c4-8a38-c773a9c1631e', '351fa406-303e-526a-83d5-2f541c8c5dc7', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.5, 'tsp', null, false, false, true, null, 9);
 
@@ -7886,7 +7960,7 @@ values ('97318139-3510-5214-8e30-5997770298c1', 'ec2c939a-bfcd-5614-be1b-ba6ebfe
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('fbc33426-f420-55d7-b3bb-1944d5167b08', 'ec2c939a-bfcd-5614-be1b-ba6ebfe7b560', (select id from public.ingredients where slug = 'ginger' limit 1), 'ginger', 'ginger', 25, 'g', 'grated', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('5d7b19f9-f69f-5145-904a-3bf97703835b', 'ec2c939a-bfcd-5614-be1b-ba6ebfe7b560', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, true, null, 6);
+values ('5d7b19f9-f69f-5145-904a-3bf97703835b', 'ec2c939a-bfcd-5614-be1b-ba6ebfe7b560', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5e07eb16-d491-59b4-97ed-9681e51192c8', 'ec2c939a-bfcd-5614-be1b-ba6ebfe7b560', (select id from public.ingredients where slug = 'tomato-paste' limit 1), 'tomato-paste', 'tomato paste', 1, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -7975,7 +8049,7 @@ values ('d974ff25-3ec8-50bb-b6f5-af524e02ff1b', '944bc170-d1ef-5114-a559-acabef5
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5c9001c1-f7fd-5fec-8e90-506b8c7f9a43', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'soy-sauce' limit 1), 'soy-sauce', 'soy sauce', 2, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('b7a42496-4012-58d4-8cf1-422abc24b9ba', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'white-pepper' limit 1), 'white-pepper', 'white pepper', 0.5, 'tsp', null, false, false, true, null, 7);
+values ('b7a42496-4012-58d4-8cf1-422abc24b9ba', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'white-pepper' limit 1), 'white-pepper', 'white pepper', 0.5, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('24a6477a-c035-5485-9c43-647d1af0c957', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -8056,7 +8130,7 @@ values ('3542e3a3-f66e-56aa-8780-8e6f5d582c69', '873d7372-07c6-5d0e-86d5-0b25f90
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('0803a9ed-c74c-5506-8252-2020b06da35f', '873d7372-07c6-5d0e-86d5-0b25f90e5cd0', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 2, 'piece', 'juiced', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('576a47cb-b0e9-5541-9a23-da5bad8ae0c2', '873d7372-07c6-5d0e-86d5-0b25f90e5cd0', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 0.5, 'tsp', null, false, false, true, null, 6);
+values ('576a47cb-b0e9-5541-9a23-da5bad8ae0c2', '873d7372-07c6-5d0e-86d5-0b25f90e5cd0', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 0.5, 'tsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('f7f6ee6d-b64c-57b5-8600-e89ee06af18e', '873d7372-07c6-5d0e-86d5-0b25f90e5cd0', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 2, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -8216,7 +8290,7 @@ values ('f1d7dc9f-d739-5e6e-8e39-c8fffdf15593', '796ea599-eed2-586b-a95a-82f2fe1
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c955d614-fe5f-5598-a1eb-3cf3d0c3c955', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('3f4dffe1-765f-5f28-b2a1-ba9de01c1305', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 0.25, 'tsp', null, true, true, true, null, 5);
+values ('3f4dffe1-765f-5f28-b2a1-ba9de01c1305', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 0.25, 'tsp', null, true, true, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('013c5a89-65d4-5ad9-881c-49e490df3644', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.5, 'tsp', null, false, false, true, null, 6);
 
@@ -8386,7 +8460,7 @@ values ('33cc4b1f-e88f-575d-98a2-9fd7c8501adb', 'cdcaafb5-40a2-59ba-9a01-0e1f0e7
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e0ef894b-9d84-5b68-9a22-c4aad5113cd8', 'cdcaafb5-40a2-59ba-9a01-0e1f0e76135c', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9d3afc3e-87af-5448-a672-d764bf758785', 'cdcaafb5-40a2-59ba-9a01-0e1f0e76135c', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tsp', null, false, true, true, null, 8);
+values ('9d3afc3e-87af-5448-a672-d764bf758785', 'cdcaafb5-40a2-59ba-9a01-0e1f0e76135c', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tsp', null, false, true, false, null, 8);
 
 delete from public.recipe_steps where recipe_id = 'cdcaafb5-40a2-59ba-9a01-0e1f0e76135c';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -8469,7 +8543,7 @@ values ('9f468cfb-42db-5d9f-b704-dd0271646bcf', '05e86e6f-97ae-5380-8c01-6e43d9e
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('be89ed2f-084b-509f-a723-ccceddf242eb', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'soy-sauce' limit 1), 'soy-sauce', 'soy sauce', 1, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c913bce6-750f-5bea-bb41-46a96092ecf4', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'white-pepper' limit 1), 'white-pepper', 'white pepper', 0.5, 'tsp', null, false, false, true, null, 7);
+values ('c913bce6-750f-5bea-bb41-46a96092ecf4', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'white-pepper' limit 1), 'white-pepper', 'white pepper', 0.5, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3327da3f-dbd0-5826-8375-d5f946656c60', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 8);
 
@@ -8969,7 +9043,7 @@ values ('0096a93d-3c85-550b-940c-067d6a0a9502', '0f03c5b2-9953-52c5-a4c9-139eecf
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('8c1b797c-e67c-5dd6-8db8-c3e0b3e91e24', '0f03c5b2-9953-52c5-a4c9-139eecf17986', (select id from public.ingredients where slug = 'mint' limit 1), 'mint', 'mint', 3, 'tbsp', 'chopped', false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('299a2897-8471-571f-899f-60c7fcf2c82a', '0f03c5b2-9953-52c5-a4c9-139eecf17986', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 2, 'tsp', null, false, false, true, null, 8);
+values ('299a2897-8471-571f-899f-60c7fcf2c82a', '0f03c5b2-9953-52c5-a4c9-139eecf17986', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 2, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b84231f4-39d1-5cf3-9cec-18041654b5aa', '0f03c5b2-9953-52c5-a4c9-139eecf17986', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -9053,7 +9127,7 @@ values ('a59cf4b7-c2f6-53d9-be53-3fd17abcb7da', '73cb2f1a-7b6c-55ea-bf97-e05f6c8
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b2e18965-6895-5e82-acd2-8055605e1547', '73cb2f1a-7b6c-55ea-bf97-e05f6c8d0a95', (select id from public.ingredients where slug = 'mozzarella' limit 1), 'mozzarella', 'mozzarella', 150, 'g', 'grated', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('0197a6b8-e3b8-5e1e-8534-ba5e0bb6f770', '73cb2f1a-7b6c-55ea-bf97-e05f6c8d0a95', (select id from public.ingredients where slug = 'nigella' limit 1), 'nigella', 'nigella seeds', 1, 'tsp', null, true, true, true, null, 5);
+values ('0197a6b8-e3b8-5e1e-8534-ba5e0bb6f770', '73cb2f1a-7b6c-55ea-bf97-e05f6c8d0a95', (select id from public.ingredients where slug = 'nigella' limit 1), 'nigella', 'nigella seeds', 1, 'tsp', null, true, true, false, null, 5);
 
 delete from public.recipe_steps where recipe_id = '73cb2f1a-7b6c-55ea-bf97-e05f6c8d0a95';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -9471,7 +9545,7 @@ values ('a6ec62a0-c77d-587d-80c8-7b5ca261f51d', 'd1cefcc8-2123-5038-98ca-09b13da
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('82b5d8c6-c655-56b0-aaab-373017c90897', 'd1cefcc8-2123-5038-98ca-09b13da731d0', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 0.5, 'tsp', null, true, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('a707916c-a294-5bed-8a51-d746ade051d8', 'd1cefcc8-2123-5038-98ca-09b13da731d0', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tsp', null, false, true, true, null, 7);
+values ('a707916c-a294-5bed-8a51-d746ade051d8', 'd1cefcc8-2123-5038-98ca-09b13da731d0', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tsp', null, false, true, false, null, 7);
 
 delete from public.recipe_steps where recipe_id = 'd1cefcc8-2123-5038-98ca-09b13da731d0';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -9951,7 +10025,7 @@ values ('1259a971-7768-5456-bbc8-bd0551d83421', 'e8a2237f-2003-5dcf-b874-46c58bd
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c7f909a7-5b3e-58fa-9e3d-ac8684de09fa', 'e8a2237f-2003-5dcf-b874-46c58bd2653f', (select id from public.ingredients where slug = 'chili-pepper' limit 1), 'chili-pepper', 'chili pepper', 1, 'piece', 'finely chopped', true, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('7afdccaf-ffde-54cf-a595-f9dbabbca457', 'e8a2237f-2003-5dcf-b874-46c58bd2653f', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 7);
+values ('7afdccaf-ffde-54cf-a595-f9dbabbca457', 'e8a2237f-2003-5dcf-b874-46c58bd2653f', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('930aa343-30a4-5ede-bbc2-888183477487', 'e8a2237f-2003-5dcf-b874-46c58bd2653f', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -10116,7 +10190,7 @@ values ('451f0746-c1c2-5748-ad45-40a4dc9393ad', 'fb200189-f912-5e19-a88c-caef438
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('dd8777d7-67ce-588d-b809-f71a22973314', 'fb200189-f912-5e19-a88c-caef438c9fab', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 3, 'clove', 'crushed', false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('5f5c5455-86e1-5926-8f41-323c9e388213', 'fb200189-f912-5e19-a88c-caef438c9fab', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, true, null, 7);
+values ('5f5c5455-86e1-5926-8f41-323c9e388213', 'fb200189-f912-5e19-a88c-caef438c9fab', (select id from public.ingredients where slug = 'chili-powder' limit 1), 'chili-powder', 'chili powder', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('11796d32-90ee-5cde-b986-1156a20fb9ed', 'fb200189-f912-5e19-a88c-caef438c9fab', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -10285,7 +10359,7 @@ values ('8d0c8c4a-2251-52fa-a9ac-09bbf2276593', 'd4a89ce0-43b2-5212-abac-cc0feca
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('f2668c39-387f-594b-8d7e-60c6c24d32f6', 'd4a89ce0-43b2-5212-abac-cc0feca3961a', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 2, 'piece', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('798c49c9-5927-592d-93fc-3f60f64eb33b', 'd4a89ce0-43b2-5212-abac-cc0feca3961a', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 3, 'piece', null, true, false, true, null, 6);
+values ('798c49c9-5927-592d-93fc-3f60f64eb33b', 'd4a89ce0-43b2-5212-abac-cc0feca3961a', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 3, 'piece', null, true, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('a6438920-5cbd-556d-b965-981961f0ede9', 'd4a89ce0-43b2-5212-abac-cc0feca3961a', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -10366,7 +10440,7 @@ values ('dccf7a00-0b5f-57a5-a701-925b3a269c84', 'cea79f2b-126c-52a4-ad51-2e8497c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c5ae9072-5ae5-54db-9f19-7ee69204cc8c', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'tomato-paste' limit 1), 'tomato-paste', 'tomato paste', 2, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9a03c714-20a9-547b-a031-d418e4bf1d6f', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 7);
+values ('9a03c714-20a9-547b-a031-d418e4bf1d6f', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('1368ee0f-7a21-53aa-8a15-8e366ce0598f', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -10450,7 +10524,7 @@ values ('7b6d0464-7a26-5740-90e2-c5852587e04e', '2b36172e-6022-5dbe-99c1-cb90231
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3e3879dc-6930-5955-b993-66bf3431c9bc', '2b36172e-6022-5dbe-99c1-cb90231c8853', (select id from public.ingredients where slug = 'pine-nuts' limit 1), 'pine-nuts', 'pine nuts', 60, 'g', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('96dc7f93-ff03-5950-808e-567d07a5915f', '2b36172e-6022-5dbe-99c1-cb90231c8853', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 5);
+values ('96dc7f93-ff03-5950-808e-567d07a5915f', '2b36172e-6022-5dbe-99c1-cb90231c8853', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('cb128d0b-3cf3-5a10-928d-6c3501d4d6e6', '2b36172e-6022-5dbe-99c1-cb90231c8853', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -10959,7 +11033,7 @@ values ('e7581713-8e3c-5a1a-a485-0abc1daa6979', 'e0e8ef5f-5681-5de0-875a-ee11cb8
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3f1d0937-2a13-50c2-9eea-c2b74f89ba36', 'e0e8ef5f-5681-5de0-875a-ee11cb84e7fa', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('5861035f-63a1-599a-acf1-88b750598a23', 'e0e8ef5f-5681-5de0-875a-ee11cb84e7fa', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 2, 'tsp', null, false, false, true, null, 3);
+values ('5861035f-63a1-599a-acf1-88b750598a23', 'e0e8ef5f-5681-5de0-875a-ee11cb84e7fa', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 2, 'tsp', null, false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b3290f0e-deab-5139-89af-3a00072a4e56', 'e0e8ef5f-5681-5de0-875a-ee11cb84e7fa', (select id from public.ingredients where slug = 'olives' limit 1), 'olives', 'olives', 40, 'g', null, true, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -11036,7 +11110,7 @@ values ('c522f4e5-cae3-5272-9623-689175ef6e19', '3a97c2ee-5987-59c5-878a-448f8a0
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('cf1661ca-617c-51c9-921e-95e2a8745432', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 2, 'piece', 'chopped', false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('a0b50bde-eb36-56fa-a988-4e0f446149cb', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 4);
+values ('a0b50bde-eb36-56fa-a988-4e0f446149cb', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e4fd3792-72e1-520c-9ffb-eef974e373ba', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -11137,7 +11211,7 @@ values ('b991e4d5-2dfe-517f-b904-d58c636a7b5f', 'a8cb1282-643f-5af2-a48b-058ef8d
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('482b9168-e918-5325-9c76-49205a4e0003', 'a8cb1282-643f-5af2-a48b-058ef8d0c101', (select id from public.ingredients where slug = 'parmesan' limit 1), 'parmesan', 'parmesan', 80, 'g', 'grated', false, false, false, null, 11);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('403ae9ed-ee6e-520a-9358-812b383a11b0', 'a8cb1282-643f-5af2-a48b-058ef8d0c101', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.5, 'tsp', null, false, false, true, null, 12);
+values ('403ae9ed-ee6e-520a-9358-812b383a11b0', 'a8cb1282-643f-5af2-a48b-058ef8d0c101', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.5, 'tsp', null, false, false, false, null, 12);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('49a4f73e-d767-5b0c-86b3-a5f6b7ef619f', 'a8cb1282-643f-5af2-a48b-058ef8d0c101', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 13);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -11391,7 +11465,7 @@ values ('446a1111-6250-5952-bf0a-470b8bf1116d', 'e155233f-07b6-5ecc-a575-877578c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('af9c3e1d-8251-5197-a473-ea745a78cb79', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'ginger' limit 1), 'ginger', 'ginger', 20, 'g', 'grated', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('5491485d-e5fe-50e2-a04f-d27852643cea', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, true, null, 6);
+values ('5491485d-e5fe-50e2-a04f-d27852643cea', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('88619321-ee36-5a4f-86ae-1c16b085ded8', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'coconut-milk' limit 1), 'coconut-milk', 'coconut milk', 150, 'ml', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -11572,7 +11646,7 @@ values ('6137345e-d276-5b18-abdd-38d3cd89f262', '3ae1f24a-eee5-5f6a-958f-7f8e1c7
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('1dfe54ed-6f7d-53d9-9d88-758f41356e41', '3ae1f24a-eee5-5f6a-958f-7f8e1c72efbd', (select id from public.ingredients where slug = 'milk' limit 1), 'milk', 'milk', 1, 'l', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('6eee5d3e-f3a1-50de-9f95-b99871abf021', '3ae1f24a-eee5-5f6a-958f-7f8e1c72efbd', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.5, 'tsp', null, false, false, true, null, 8);
+values ('6eee5d3e-f3a1-50de-9f95-b99871abf021', '3ae1f24a-eee5-5f6a-958f-7f8e1c72efbd', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.5, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('8f0a8c7a-7836-56be-84ce-7cc71dc2b0ad', '3ae1f24a-eee5-5f6a-958f-7f8e1c72efbd', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -11748,11 +11822,11 @@ values ('4e5522e2-4de3-524b-bf87-f8865d6e3ff1', '9557f900-3d8c-5cad-ac4a-0562fb0
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('aa6dcda1-ee35-5b2d-b151-e930da8c73bd', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 120, 'ml', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('09e1da45-a6ac-55a9-b318-5f5a1954a231', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 6, 'tbsp', null, false, false, true, null, 6);
+values ('09e1da45-a6ac-55a9-b318-5f5a1954a231', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 6, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('0be270af-71cd-5d48-80ed-fc67fa517f81', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 2, 'tbsp', null, false, false, true, null, 7);
+values ('0be270af-71cd-5d48-80ed-fc67fa517f81', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 2, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('2ba0c180-1b7f-517b-8a97-d28c9aa44629', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, false, false, true, null, 8);
+values ('2ba0c180-1b7f-517b-8a97-d28c9aa44629', '9557f900-3d8c-5cad-ac4a-0562fb03c516', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, false, false, false, null, 8);
 
 delete from public.recipe_steps where recipe_id = '9557f900-3d8c-5cad-ac4a-0562fb03c516';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -11830,7 +11904,7 @@ values ('fcaa04df-f70c-5a2d-a190-de694ffae084', '3740572e-cbe1-547f-9623-b9b61e0
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('8fd37388-b0da-5705-8a12-c2c0e926fde6', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.5, 'tsp', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('4479ed95-ceca-51a3-b14d-8cd60433521a', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tbsp', null, false, true, true, null, 6);
+values ('4479ed95-ceca-51a3-b14d-8cd60433521a', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tbsp', null, false, true, false, null, 6);
 
 delete from public.recipe_steps where recipe_id = '3740572e-cbe1-547f-9623-b9b61e0c6f01';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -11903,7 +11977,7 @@ values ('fc28b772-74c9-5651-96f3-26d38a65885c', 'a48f6b88-8257-5fdd-b663-db30dd3
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('f9ec1fb8-f75f-5e92-8d2b-4f7cb76a7c0f', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'sliced', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('f706782c-5367-5988-ba0f-2d4f50f72c2c', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 5);
+values ('f706782c-5367-5988-ba0f-2d4f50f72c2c', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('20cdd579-4cd0-5586-81f4-933b21c3253e', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'turmeric' limit 1), 'turmeric', 'turmeric', 1, 'tsp', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -12607,6 +12681,85 @@ values ('3bb4f030-130f-5848-ba5f-8b2003df553b', '4b2fa9fa-5de0-5be3-ac0e-278df1c
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('9875c388-4d64-58d9-8a41-94966093c685', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', 5, 'Serve the molokhia over rice with the chicken alongside and lemon to squeeze.', 'قدّم الملوخية على الرز والفراخ جنبها وليمون تعصره.', 2, null, null, '{"lemon"}');
 
+-- Milk Pudding with Pistachios
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'muhallabia', 'Milk Pudding with Pistachios', 'مهلبية',
+  'Set with cornflour, not eggs, so it stays light. The rosewater is what makes it taste like home rather than like custard.', 'بتتماسك بالنشا مش بالبيض، عشان تفضل خفيفة. وماء الورد هو اللي بيخليها بطعم البيت مش طعم الكاسترد.',
+  'curated/muhallabia.jpg', 'generated', 'Akla kitchen',
+  'CC0-1.0', null, null,
+  null, 'curated', 'egyptian', 'easy',
+  5, 12, 4,
+  210, 6, 32,
+  6, 0, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'dessert');
+delete from public.recipe_diet_tags where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'halal');
+delete from public.recipe_allergens where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_allergens (recipe_id, allergen) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'dairy');
+insert into public.recipe_allergens (recipe_id, allergen) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'nuts');
+delete from public.recipe_appliances where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_appliances (recipe_id, appliance) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'stove');
+delete from public.recipe_tags where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_tags (recipe_id, tag) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'dessert');
+insert into public.recipe_tags (recipe_id, tag) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('50662597-6a93-563c-9f99-29123353d916', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'milk' limit 1), 'milk', 'milk', 1, 'l', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('36f4efca-2f39-589b-8161-8ae23f7e9839', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'cornflour' limit 1), 'cornflour', 'cornflour', 60, 'g', 'slaked in a little cold milk', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2db1c931-f5fc-5254-afef-40240d697d10', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 90, 'g', null, false, false, true, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('086b8be3-49a9-5fcb-8d9e-47929be391d8', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5866c849-b7b1-5f39-8560-c0dfab1b06aa', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'pistachios' limit 1), 'pistachios', 'pistachios', 30, 'g', 'chopped', true, true, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('514a4f4f-f81c-579c-9886-912d74d11dca', '69082623-2b42-5725-8c1a-75f9f55e9a92', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, true, true, null, 6);
+
+delete from public.recipe_steps where recipe_id = '69082623-2b42-5725-8c1a-75f9f55e9a92';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('d43d598d-84ca-5fb9-8204-88037d09b4b8', '69082623-2b42-5725-8c1a-75f9f55e9a92', 1, 'Warm 800ml of the milk with the sugar until it steams. Do not let it boil over.', 'سخّن ٨٠٠ مل من اللبن مع السكر لحد ما يطلّع بخار. خلي بالك ميفورش.', 6, null, null, '{"milk","sugar"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('75ce5211-a257-5089-8d27-7523d45d3c88', '69082623-2b42-5725-8c1a-75f9f55e9a92', 2, 'Slake the cornflour in the remaining cold milk until there is not a single lump, then pour it into the pan in a thin stream, whisking the whole time.', 'دوّب النشا في باقي اللبن البارد لحد ما ميبقاش فيه أي كتل، وبعدين صبّه في الحلة على دفعة رفيعة وانت بتقلّب باستمرار.', 3, null, null, '{"cornflour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('54da8237-e872-5d79-80a8-d508877be3b5', '69082623-2b42-5725-8c1a-75f9f55e9a92', 3, 'Cook for 3 to 4 minutes until it thickens enough to coat the back of a spoon, then stir in the vanilla.', 'اطبخ ٣ لـ ٤ دقايق لحد ما تتقل وتغطي ضهر المعلقة، وبعدين قلّب الفانيليا.', 4, null, null, '{"vanilla"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('ccc1c43b-6c9a-59d8-bf6c-ee58e35fd156', '69082623-2b42-5725-8c1a-75f9f55e9a92', 4, 'Pour into bowls and chill for at least 3 hours. Scatter with pistachios and cinnamon before serving.', 'صبّها في أطباق وسيبها في التلاجة ٣ ساعات على الأقل. رشّ عليها الفستق والقرفة قبل التقديم.', null, null, null, '{"pistachios","cinnamon"}');
+
 -- Red Pepper and Walnut Dip
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -12937,6 +13090,83 @@ values ('aadb6c66-cc4c-59c0-bfec-55d9deb91a66', '714a93b7-7b85-5144-9ccc-35e76c9
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('94704669-1506-5585-9ede-e945e48447e9', '714a93b7-7b85-5144-9ccc-35e76c921433', 3, 'Mash with tahini, lemon, garlic and salt. Finish with oil and parsley.', 'اهرسه مع الطحينة والليمون والتوم والملح. زيّنه بالزيت والبقدونس.', 5, null, null, '{"tahini","lemon","garlic","salt","olive oil","parsley"}');
 
+-- Warm Oats with Banana
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'oatmeal-banana', 'Warm Oats with Banana', 'شوفان دافي بالموز',
+  'Five minutes on the stove and it holds you until lunch. Mash half the banana into the pan so it sweetens the whole thing.', 'خمس دقايق على النار وتسندك لحد الغدا. اهرس نص الموزة في الحلة عشان تحلّي الشوفان كله.',
+  'curated/oatmeal-banana.jpg', 'generated', 'Akla kitchen',
+  'CC0-1.0', null, null,
+  null, 'curated', 'american', 'easy',
+  3, 6, 1,
+  340, 12, 58,
+  7, 6, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'breakfast');
+delete from public.recipe_diet_tags where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'halal');
+delete from public.recipe_allergens where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_allergens (recipe_id, allergen) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'dairy');
+insert into public.recipe_allergens (recipe_id, allergen) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'gluten');
+delete from public.recipe_appliances where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_appliances (recipe_id, appliance) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'stove');
+delete from public.recipe_tags where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_tags (recipe_id, tag) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'breakfast');
+insert into public.recipe_tags (recipe_id, tag) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d18597f6-b795-5775-9b10-7ee6065e258f', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'oats' limit 1), 'oats', 'oats', 60, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('62f175e2-8f74-5f61-ac96-97e5198ff113', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'milk' limit 1), 'milk', 'milk', 250, 'ml', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('85a03309-8c3d-5624-9030-5a5ce6cd208d', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'bananas' limit 1), 'bananas', 'bananas', 1, 'piece', 'half mashed, half sliced', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('81709f10-ad99-5145-bee6-288defba8be5', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 0.5, 'tsp', null, false, false, true, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('83d2370a-e832-5709-b418-3fe37a41eadd', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'pinch', null, false, false, true, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('fad2e7c8-32fa-50f5-aa4f-9a90569a1335', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', (select id from public.ingredients where slug = 'honey' limit 1), 'honey', 'honey', 1, 'tbsp', null, true, false, false, null, 6);
+
+delete from public.recipe_steps where recipe_id = 'b70af3de-09dd-5c34-ae6f-ceca97543b60';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('43b920f7-9b2e-583e-8d49-6d1d0c745a63', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', 1, 'Bring the milk and a pinch of salt to a bare simmer. Salt in porridge is the difference between breakfast and wallpaper paste.', 'سخّن اللبن مع رشة ملح لحد ما يبدأ يغلي بهدوء. الملح في الشوفان هو الفرق بين فطار وصمغ.', 2, null, null, '{"milk","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('29c14a9f-9b91-5ba5-88d6-b4ec408777ee', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', 2, 'Stir in the oats and the mashed half banana and cook, stirring, for 4 to 5 minutes until thick.', 'قلّب الشوفان ونص الموزة المهروسة واطبخ مع التقليب ٤ لـ ٥ دقايق لحد ما يتقل.', 5, null, null, '{"oats","bananas"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('fc6af996-b1dc-56c3-a8a5-84da73646e3c', 'b70af3de-09dd-5c34-ae6f-ceca97543b60', 3, 'Take it off the heat, stir through the cinnamon, and top with the sliced banana and honey.', 'ارفعه من على النار، قلّب القرفة، وحطّ فوقه شرايح الموز والعسل.', null, null, null, '{"cinnamon","honey"}');
+
 -- Okra Stew with Beef
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -13172,7 +13402,7 @@ values ('93ec2139-263e-530c-9caa-ab1d47f5b680', '42caf151-914f-5bf9-9351-1d0c8c6
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('dad1454d-2a4c-59be-a5fb-1b31a59ab091', '42caf151-914f-5bf9-9351-1d0c8c61b127', (select id from public.ingredients where slug = 'baking-powder' limit 1), 'baking-powder', 'baking powder', 2, 'tsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('eec5d8dc-4a36-5242-88b4-5547685d84d2', '42caf151-914f-5bf9-9351-1d0c8c61b127', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 7);
+values ('eec5d8dc-4a36-5242-88b4-5547685d84d2', '42caf151-914f-5bf9-9351-1d0c8c61b127', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c8f875c4-151e-58f4-b850-edb6e55ef18f', '42caf151-914f-5bf9-9351-1d0c8c61b127', (select id from public.ingredients where slug = 'icing-sugar' limit 1), 'icing-sugar', 'icing sugar', 2, 'tbsp', null, true, true, false, null, 8);
 
@@ -13331,7 +13561,7 @@ values ('74e6f428-fff9-571d-aae0-25e4e8a07de0', '1284bd24-d074-50e6-b517-9c5a048
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4d729110-4676-5cb0-9d71-ebf987c1924b', '1284bd24-d074-50e6-b517-9c5a048d11ae', (select id from public.ingredients where slug = 'cream' limit 1), 'cream', 'cooking cream', 80, 'ml', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('45102ff3-cdc9-51f9-a23d-7dfd9d0a172f', '1284bd24-d074-50e6-b517-9c5a048d11ae', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, true, null, 7);
+values ('45102ff3-cdc9-51f9-a23d-7dfd9d0a172f', '1284bd24-d074-50e6-b517-9c5a048d11ae', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('61e41fc2-210a-541b-b86a-102f6229ba5f', '1284bd24-d074-50e6-b517-9c5a048d11ae', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -13419,7 +13649,7 @@ values ('478370ba-1c7e-567c-854f-ff8e40e99957', '9aa67479-e5d0-5cb8-90df-0d4721c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5d9cfbed-505d-56f6-9577-9ee71cbc651f', '9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 50, 'g', 'melted', false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('27fc09aa-392d-5541-b606-e865793c1382', '9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 7);
+values ('27fc09aa-392d-5541-b606-e865793c1382', '9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c86ec9a8-b3e2-599a-b746-cadb7a2bb652', '9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', (select id from public.ingredients where slug = 'honey' limit 1), 'honey', 'honey', 3, 'tbsp', null, true, true, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -13501,7 +13731,7 @@ values ('3fb80056-0ac3-5d79-aa46-cd4070d011e1', 'f06c23b5-f6e5-5aa5-9209-e0e1502
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('aecc73a2-dd72-5296-b541-966830b22d0d', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 4, 'clove', 'crushed', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('b6a93e7e-814e-5949-a9da-805c4786b08f', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'rosemary' limit 1), 'rosemary', 'rosemary', 1, 'tsp', null, false, false, true, null, 5);
+values ('b6a93e7e-814e-5949-a9da-805c4786b08f', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'rosemary' limit 1), 'rosemary', 'rosemary', 1, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4b890f0f-a3c0-5fec-b510-49f2429460fe', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'stock-cube' limit 1), 'stock-cube', 'stock cube', 1, 'piece', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -13828,7 +14058,7 @@ values ('2a62af1d-0d59-510f-95e5-0b0b247b2133', '45434653-044d-565f-8e73-6d0c8f3
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('df93e4e4-48ee-52b4-8433-0dc724d5546e', '45434653-044d-565f-8e73-6d0c8f39120b', (select id from public.ingredients where slug = 'parmesan' limit 1), 'parmesan', 'parmesan', 60, 'g', 'grated', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('0d60a1ed-0430-5485-8f1f-95eb8756d5b6', '45434653-044d-565f-8e73-6d0c8f39120b', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 1, 'tsp', null, false, false, true, null, 6);
+values ('0d60a1ed-0430-5485-8f1f-95eb8756d5b6', '45434653-044d-565f-8e73-6d0c8f39120b', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 1, 'tsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('fa8cf896-4942-5d1f-9d1b-608c6b77ab2f', '45434653-044d-565f-8e73-6d0c8f39120b', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -14079,7 +14309,7 @@ values ('39b36730-c479-5fc2-af7d-a67ad800a529', 'fda0ead8-7926-5f23-b5b2-4d99bb2
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b98caa0c-b554-52d9-8eb4-a5008edf21d4', 'fda0ead8-7926-5f23-b5b2-4d99bb2fcd68', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 2, 'tbsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('1f03a2d5-04ea-56bc-8ff2-20288540aed2', 'fda0ead8-7926-5f23-b5b2-4d99bb2fcd68', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 1, 'tsp', null, false, false, true, null, 9);
+values ('1f03a2d5-04ea-56bc-8ff2-20288540aed2', 'fda0ead8-7926-5f23-b5b2-4d99bb2fcd68', (select id from public.ingredients where slug = 'thyme-dried' limit 1), 'thyme-dried', 'thyme', 1, 'tsp', null, false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('238c3531-f242-546f-852f-c7e3b86ffc53', 'fda0ead8-7926-5f23-b5b2-4d99bb2fcd68', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 10);
 
@@ -14158,7 +14388,7 @@ values ('955d7e42-833e-5a49-a18b-e5616d70302c', 'c7b00f88-307f-5a08-a1ad-17ad4ef
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ea54377f-4a93-5d38-8689-94e00fdfd9a4', 'c7b00f88-307f-5a08-a1ad-17ad4ef07e58', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'halved', false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('28b29dae-cd4e-5815-a823-4a074e47b2c8', 'c7b00f88-307f-5a08-a1ad-17ad4ef07e58', (select id from public.ingredients where slug = 'rosemary' limit 1), 'rosemary', 'rosemary', 2, 'tsp', null, false, false, true, null, 6);
+values ('28b29dae-cd4e-5815-a823-4a074e47b2c8', 'c7b00f88-307f-5a08-a1ad-17ad4ef07e58', (select id from public.ingredients where slug = 'rosemary' limit 1), 'rosemary', 'rosemary', 2, 'tsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('84df5222-9dd0-5f52-b2aa-7fcea1e374e0', 'c7b00f88-307f-5a08-a1ad-17ad4ef07e58', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 2, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -14323,7 +14553,7 @@ values ('097afffa-dc17-5c8f-a791-890e469e88a4', '6655c7d5-6607-558e-9e1f-c5b9a92
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e670fba1-8a9e-5d17-bd78-6fd48aab9645', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 90, 'g', null, false, false, true, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('db8e3c49-33cd-59f6-9d09-43575e068b85', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 4);
+values ('db8e3c49-33cd-59f6-9d09-43575e068b85', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('5362bd61-e564-57da-8cf0-b3a2377de4e3', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, true, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -14556,7 +14786,7 @@ values ('d4857086-70d3-59a4-9db7-8b8bf949072c', '24020d00-c5c5-5342-a159-d9791df
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('df160ffb-41a6-5624-81ec-fc977ea7c7ff', '24020d00-c5c5-5342-a159-d9791df4e2af', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'sliced thin', false, false, false, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('d4243b24-fd50-56d8-a898-2dbc82d4f4d5', '24020d00-c5c5-5342-a159-d9791df4e2af', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 2, 'tsp', null, false, false, true, null, 3);
+values ('d4243b24-fd50-56d8-a898-2dbc82d4f4d5', '24020d00-c5c5-5342-a159-d9791df4e2af', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 2, 'tsp', null, false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ffe85496-fa77-5e2f-880d-90fbac5d3b73', '24020d00-c5c5-5342-a159-d9791df4e2af', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -15132,7 +15362,7 @@ values ('07cd50ae-4b81-52e4-a20f-50db2984a6d8', 'e69f8c48-4437-5751-90f0-c2a1090
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('f9fbe800-03de-5e7d-8885-dd35110f8083', 'e69f8c48-4437-5751-90f0-c2a1090d2239', (select id from public.ingredients where slug = 'pomegranate-molasses' limit 1), 'pomegranate-molasses', 'pomegranate molasses', 1, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9a7df62a-2f07-5fa6-9be5-22ae58691e13', 'e69f8c48-4437-5751-90f0-c2a1090d2239', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 1.5, 'tsp', null, false, false, true, null, 7);
+values ('9a7df62a-2f07-5fa6-9be5-22ae58691e13', 'e69f8c48-4437-5751-90f0-c2a1090d2239', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 1.5, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('f6d82868-65e5-5bf9-ba5a-954245b3c646', 'e69f8c48-4437-5751-90f0-c2a1090d2239', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 60, 'ml', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -15383,7 +15613,7 @@ values ('66e5ba76-c95a-55e1-9c63-ff6ad298aca6', '2fe4d7b8-f8c0-5f58-b9a8-520f7d2
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('385424c3-cdc6-5ae6-8907-39f226e43e77', '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 5, 'clove', 'crushed', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('feadc1c8-a4aa-5fe6-beb5-2f63a4522187', '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, true, null, 5);
+values ('feadc1c8-a4aa-5fe6-beb5-2f63a4522187', '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', (select id from public.ingredients where slug = 'mixed-spice' limit 1), 'mixed-spice', 'mixed spice', 2, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('cf089cfd-e330-5c9e-a2b7-c11e8b37b74c', '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 2, 'tsp', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -16134,7 +16364,7 @@ values ('a65c3188-ff9e-533b-a4d2-b995237ce0df', '6c8289bd-36e9-5ae6-b86e-951d380
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('b7de4575-25b1-5b48-9d7c-ad08d2b2e1e4', '6c8289bd-36e9-5ae6-b86e-951d380f9358', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 100, 'g', 'melted', false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('f5490f7a-be2c-5cb3-b3b6-e8d7a7b4fa61', '6c8289bd-36e9-5ae6-b86e-951d380f9358', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.25, 'tsp', null, false, false, true, null, 8);
+values ('f5490f7a-be2c-5cb3-b3b6-e8d7a7b4fa61', '6c8289bd-36e9-5ae6-b86e-951d380f9358', (select id from public.ingredients where slug = 'nutmeg' limit 1), 'nutmeg', 'nutmeg', 0.25, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('fae7640c-6a5a-5fc8-bd34-425af44a35c3', '6c8289bd-36e9-5ae6-b86e-951d380f9358', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.5, 'tsp', null, false, false, true, null, 9);
 
@@ -16211,7 +16441,7 @@ values ('69f8a2db-5650-5743-a0f0-d5d6f5dc2503', '9131b45b-3d9a-59fc-933c-a835072
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('26f0d20b-529d-5af2-b742-e3ca3327e6d4', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, true, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('a98f863d-6842-596b-8291-5650247eb32e', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 3, 'piece', null, false, false, true, null, 4);
+values ('a98f863d-6842-596b-8291-5650247eb32e', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 3, 'piece', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('71e25d8a-fe8b-5d6d-850f-c25cf0522aa6', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 1, 'piece', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -16376,7 +16606,7 @@ values ('392c52d3-a0bb-5a50-a964-f297c2a71841', '60985f48-4330-530b-81bc-a9661f8
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('de023190-21f3-51a8-a89c-e5295d7d1b56', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'cornflour' limit 1), 'cornflour', 'cornflour', 2, 'tbsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('89b99d42-6569-5d56-8c6b-ee7fca3288dd', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 5);
+values ('89b99d42-6569-5d56-8c6b-ee7fca3288dd', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4f397d3c-6e9b-5898-a1fc-ea3a707487f0', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, true, true, null, 6);
 
@@ -16452,7 +16682,7 @@ values ('df58b87f-96ad-56eb-9380-26316cb8687c', '4c9a3716-ea23-5451-9541-344a0c2
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('023405b7-fec9-5fff-9829-969ca7c1856b', '4c9a3716-ea23-5451-9541-344a0c214ee9', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 1, 'tsp', null, false, false, true, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('80a82a15-9654-58d8-ad4e-2cd293f395b2', '4c9a3716-ea23-5451-9541-344a0c214ee9', (select id from public.ingredients where slug = 'garlic-powder' limit 1), 'garlic-powder', 'garlic powder', 1, 'tsp', null, false, false, true, null, 4);
+values ('80a82a15-9654-58d8-ad4e-2cd293f395b2', '4c9a3716-ea23-5451-9541-344a0c214ee9', (select id from public.ingredients where slug = 'garlic-powder' limit 1), 'garlic-powder', 'garlic powder', 1, 'tsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4f57daf1-accf-53f9-8d98-39361d952875', '4c9a3716-ea23-5451-9541-344a0c214ee9', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 2, 'tbsp', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -16626,7 +16856,7 @@ values ('b6c0ed11-fcc4-5646-8702-b83a7226e084', 'bf470081-5b5f-5785-bf51-4be0919
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('de950abc-0159-56ab-b476-6e8619ec3e27', 'bf470081-5b5f-5785-bf51-4be091959a52', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('8f4b1d39-2ffb-5f8d-ad5d-7fb430c25c1c', 'bf470081-5b5f-5785-bf51-4be091959a52', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 2, 'tbsp', null, false, false, true, null, 8);
+values ('8f4b1d39-2ffb-5f8d-ad5d-7fb430c25c1c', 'bf470081-5b5f-5785-bf51-4be091959a52', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 2, 'tbsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('a0af2b3c-abca-5aa3-bccd-4610381946ee', 'bf470081-5b5f-5785-bf51-4be091959a52', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 400, 'ml', 'for frying', false, false, true, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -16872,7 +17102,7 @@ values ('afd5326d-ff47-59e2-91d5-429199719d93', 'aece4c00-570b-52fb-81f7-9642291
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4fd76fc5-019c-5fc6-ac1a-920f230cc91d', 'aece4c00-570b-52fb-81f7-9642291f422d', (select id from public.ingredients where slug = 'paprika' limit 1), 'paprika', 'paprika', 2, 'tbsp', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('75a57225-225b-5cf2-9f1a-77b2e1af07b3', 'aece4c00-570b-52fb-81f7-9642291f422d', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, true, null, 7);
+values ('75a57225-225b-5cf2-9f1a-77b2e1af07b3', 'aece4c00-570b-52fb-81f7-9642291f422d', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 1, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('25565ee2-8de2-51ef-98e0-684ae26c7786', 'aece4c00-570b-52fb-81f7-9642291f422d', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -16961,7 +17191,7 @@ values ('147d2f08-690b-5c29-ae73-52caf0a3e4fd', 'f7a11d74-80b8-5289-bc1b-9dbe32c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3d5b1645-601c-572f-83af-176d4f504dec', 'f7a11d74-80b8-5289-bc1b-9dbe32cf8848', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 2, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('11328215-87cd-5162-ae8e-ea10558bd04a', 'f7a11d74-80b8-5289-bc1b-9dbe32cf8848', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tbsp', null, false, true, true, null, 8);
+values ('11328215-87cd-5162-ae8e-ea10558bd04a', 'f7a11d74-80b8-5289-bc1b-9dbe32cf8848', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tbsp', null, false, true, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e98852b0-408a-5c39-a046-281cf7e2c898', 'f7a11d74-80b8-5289-bc1b-9dbe32cf8848', (select id from public.ingredients where slug = 'green-onion' limit 1), 'green-onion', 'green onion', 2, 'piece', 'sliced', false, false, false, null, 9);
 
@@ -17126,7 +17356,7 @@ values ('7a7036b4-c558-59bd-9a49-8a060dd66cba', 'ea878e73-a2fe-52f1-ae55-04e57af
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('20f3be92-d677-5db5-adf1-6182afe12e63', 'ea878e73-a2fe-52f1-ae55-04e57af0e76d', (select id from public.ingredients where slug = 'cocoa' limit 1), 'cocoa', 'cocoa powder', 2, 'tbsp', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('a651e2db-2e4d-5a05-beb2-868e6ba7b33f', 'ea878e73-a2fe-52f1-ae55-04e57af0e76d', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, true, null, 7);
+values ('a651e2db-2e4d-5a05-beb2-868e6ba7b33f', 'ea878e73-a2fe-52f1-ae55-04e57af0e76d', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 7);
 
 delete from public.recipe_steps where recipe_id = 'ea878e73-a2fe-52f1-ae55-04e57af0e76d';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -17701,7 +17931,7 @@ values ('90fb8f1e-beaa-5180-ba09-d373622b6232', '214abd2f-ea89-545c-8b1a-ca88167
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('cf98edb7-59af-5b40-8b0e-12e9a865c015', '214abd2f-ea89-545c-8b1a-ca88167a097b', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c29a692b-475d-53bd-9aa8-d97ca3bdf737', '214abd2f-ea89-545c-8b1a-ca88167a097b', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, true, false, true, null, 8);
+values ('c29a692b-475d-53bd-9aa8-d97ca3bdf737', '214abd2f-ea89-545c-8b1a-ca88167a097b', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, true, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('97c956de-b899-5f41-b92e-418b3452cee8', '214abd2f-ea89-545c-8b1a-ca88167a097b', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.75, 'tsp', null, false, false, true, null, 9);
 
@@ -17866,7 +18096,7 @@ values ('818a78ed-b4ed-5717-82db-444ad08524c6', '8fd527b5-3020-5247-b342-6fc903c
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ea68f61d-930f-5bed-aa64-c81a5a1d8f73', '8fd527b5-3020-5247-b342-6fc903ce2c4e', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 4, 'tbsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c5d2a359-58eb-5608-b06a-bb199ca9d108', '8fd527b5-3020-5247-b342-6fc903ce2c4e', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, false, false, true, null, 9);
+values ('c5d2a359-58eb-5608-b06a-bb199ca9d108', '8fd527b5-3020-5247-b342-6fc903ce2c4e', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 1, 'tsp', null, false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('21588485-4589-59e4-aa7e-3dbd1eec656e', '8fd527b5-3020-5247-b342-6fc903ce2c4e', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 10);
 
@@ -17952,13 +18182,13 @@ values ('ba84efb5-5b49-5f62-8ead-0f582648f595', 'f5699a73-e8c8-50f4-8426-ef429c4
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3e8e9685-95d0-5111-8716-c8eee075d447', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'ginger' limit 1), 'ginger', 'ginger', 25, 'g', 'grated', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('f53e35e7-af01-5a1c-bd83-082b69a89498', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, true, null, 10);
+values ('f53e35e7-af01-5a1c-bd83-082b69a89498', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'curry-powder' limit 1), 'curry-powder', 'curry powder', 2, 'tbsp', null, false, false, false, null, 10);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('ae83eda1-56e7-5f17-beb8-ada5f317a9bc', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 4, 'piece', null, false, false, true, null, 11);
+values ('ae83eda1-56e7-5f17-beb8-ada5f317a9bc', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'cardamom' limit 1), 'cardamom', 'cardamom', 4, 'piece', null, false, false, false, null, 11);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('6f8e63c1-27d0-516c-97ba-7cda371fdf04', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'ghee' limit 1), 'ghee', 'ghee', 60, 'g', null, false, false, false, null, 12);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('d4ad9f0e-6e80-52f4-ab16-6867bf79dfe5', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'saffron' limit 1), 'saffron', 'saffron', 0.25, 'tsp', null, true, false, true, null, 13);
+values ('d4ad9f0e-6e80-52f4-ab16-6867bf79dfe5', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'saffron' limit 1), 'saffron', 'saffron', 0.25, 'tsp', null, true, false, false, null, 13);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c592bdcc-480b-5fec-83bb-ea96a1bb4da6', 'f5699a73-e8c8-50f4-8426-ef429c4259c7', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 14);
 

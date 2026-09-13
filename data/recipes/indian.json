@@ -241,8 +241,7 @@
         "slug": "curry-powder",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "paprika",
@@ -402,8 +401,7 @@
         "slug": "curry-powder",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "turmeric",
@@ -567,8 +565,7 @@
         "unit": "tsp",
         "prep": null,
         "optional": true,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       },
       {
         "slug": "salt",
@@ -831,8 +828,7 @@
         "slug": "curry-powder",
         "quantity": 1,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "coconut-milk",
@@ -1126,8 +1122,7 @@
         "slug": "curry-powder",
         "quantity": 1,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cumin",
@@ -1270,8 +1265,7 @@
         "slug": "cardamom",
         "quantity": 3,
         "unit": "piece",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "bay-leaf",
@@ -1418,8 +1412,7 @@
         "slug": "curry-powder",
         "quantity": 1,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cumin",
@@ -1587,15 +1580,13 @@
         "slug": "curry-powder",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cardamom",
         "quantity": 4,
         "unit": "piece",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "ghee",
@@ -1608,8 +1599,7 @@
         "quantity": 0.25,
         "unit": "tsp",
         "prep": null,
-        "optional": true,
-        "staple": true
+        "optional": true
       },
       {
         "slug": "salt",

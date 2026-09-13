@@ -195,7 +195,7 @@ export function buildIndexFor(
     buildAvailabilityIndex(
       constraints.pantryMode === 'off' ? [] : (options.pantryItems ?? []),
       constraints.availableIngredients,
-      { now: options.now },
+      { now: options.now, alwaysAvailable: constraints.alwaysAvailableIngredients },
     )
   );
 }

@@ -80,55 +80,83 @@ export const COMMON_STAPLE_SLUGS = INGREDIENT_CATALOGUE.filter((i) => i.isCommon
  * them "staple" for the pantry UI. You can plan a meal around having rice. You
  * cannot plan one around having salt.
  */
-const ALWAYS_ON_HAND_SLUGS: ReadonlySet<string> = new Set([
-  // Cooking media.
-  'water',
-  'olive-oil',
-  'sunflower-oil',
-  'corn-oil',
-  'vinegar',
-  // Aromatics. Present in essentially every kitchen that cooks at all, and
-  // nobody decides what to make based on having an onion. Without these,
-  // "chicken, rice, tomato" matched nothing even allowing a missing
-  // ingredient, because almost every savoury recipe starts with one of them.
-  'onions',
-  'garlic',
-  // Cupboard supports, used in spoonfuls and kept for months. Distinct from
-  // the carbohydrates above: nobody's dinner plan hinges on baking powder.
-  'sugar',
-  'flour',
-  'stock-cube',
-  'yeast',
-  'baking-powder',
-  'tomato-paste',
-]);
+/**
+ * The only things assumed present in every kitchen, ever.
+ *
+ * TWO ENTRIES, AND THAT IS THE POINT. This list was much longer and it made
+ * the product lie. Someone with rice and tomatoes opened Tomato Rice and was
+ * told they had six of seven ingredients and needed only coriander — because
+ * onions, garlic, stock cube, cumin, tomato paste and oil were all silently on
+ * hand. They are not. Every one of those is something you can be out of, and
+ * being out of it is exactly what the user opened the app to find out.
+ *
+ * The test for membership is not "is this common?". Nearly everything in a
+ * kitchen is common. It is: **would anyone ever fail to cook because they
+ * lacked it, and would they want to be told?** Water, no. Salt, no — a kitchen
+ * without salt is not a kitchen, and a results screen that says "you are
+ * missing salt" is noise that trains people to ignore missing-ingredient
+ * counts entirely.
+ *
+ * Everything else — oil, onions, garlic, cumin, pepper, sugar, flour, stock —
+ * is a real ingredient. If a particular cook always has them, that is a fact
+ * about that cook, and they say so: `UserPreferences.alwaysAvailableIngredients`
+ * or a pantry item marked "assume I have this". It is never inferred for them.
+ */
+const UNIVERSAL_BASIC_SLUGS: ReadonlySet<string> = new Set(['water', 'salt']);
 
 /**
  * May this be assumed present without the user saying so?
  *
- * **This is NOT `isCommonStaple`, and conflating the two was a release-blocking
- * bug.** `isCommonStaple` marks a cupboard item for the PANTRY UI — it is what
- * pre-ticks "always assume I have this" when someone adds rice. Reusing it for
- * the matching engine meant rice, pasta, potatoes, onions, garlic, lentils,
- * fava beans, flour, sugar, yeast, stock cubes and tomato paste were all
- * silently on hand for everybody. The consequence was not subtle: three
- * recipes became cookable from a COMPLETELY EMPTY KITCHEN, and since they
- * needed nothing they matched every search — so "what can I cook with chicken
- * and rice" and "what can I cook with banana and oats" both answered koshari.
- *
- * The line drawn here is: can you plan a meal around it? Rice, yes — you can
- * be out of rice, and being out of it changes what you cook. Cumin, no.
- *
- * Only seasonings, cooking media and water. Everything with substance is a
- * real ingredient the user has to actually have, or that counts as missing.
+ * See `UNIVERSAL_BASIC_SLUGS`. The answer is almost always no.
  */
-export function isAssumedOnHand(ingredient: CatalogueIngredient): boolean {
+export function isUniversalBasic(ingredient: CatalogueIngredient): boolean {
   // A perishable is never assumed, whatever else is true of it.
   if (ingredient.isPerishable) return false;
-  return ingredient.category === 'spices' || ALWAYS_ON_HAND_SLUGS.has(ingredient.slug);
+  return UNIVERSAL_BASIC_SLUGS.has(ingredient.slug);
 }
 
-/** Slugs the matching engine treats as present in every kitchen. */
-export const ASSUMED_ON_HAND_SLUGS: ReadonlySet<string> = new Set(
-  INGREDIENT_CATALOGUE.filter(isAssumedOnHand).map((i) => i.slug),
+/**
+ * What the app OFFERS as "things I always have", pre-ticked during onboarding.
+ *
+ * The difference from the list above is who decides. These are suggestions on
+ * a screen the user looks at and can untick; they become available because
+ * somebody chose them, and the app can say so when asked why a recipe counts
+ * as cookable. Nothing here is assumed for a user who has not made that
+ * choice.
+ *
+ * Chosen for an Egyptian kitchen: the things that live in the cupboard beside
+ * the stove and get replaced without thinking about it. Deliberately short —
+ * a list of forty is not reviewed, it is accepted.
+ */
+export const SUGGESTED_KITCHEN_BASICS: readonly string[] = [
+  // The cupboard beside the stove.
+  'sunflower-oil',
+  'olive-oil',
+  'onions',
+  'garlic',
+  'sugar',
+  'flour',
+  'tomato-paste',
+  'stock-cube',
+  'vinegar',
+  // The spice rack. Present in most kitchens that cook Egyptian food, and
+  // nobody abandons a recipe for want of a bay leaf — but that is still a
+  // fact about the cook, not about the world, so it is offered rather than
+  // assumed. Saffron, cardamom and sumac are deliberately NOT here: those are
+  // bought for a dish, and telling someone they have saffron is a lie with
+  // consequences at the till.
+  'black-pepper',
+  'cumin',
+  'cinnamon',
+  'paprika',
+  'chili-flakes',
+  'turmeric',
+  'oregano',
+  'bay-leaf',
+  'coriander-ground',
+];
+
+/** Slugs the matching engine treats as present in every kitchen. Two of them. */
+export const UNIVERSAL_BASICS: ReadonlySet<string> = new Set(
+  INGREDIENT_CATALOGUE.filter(isUniversalBasic).map((i) => i.slug),
 );

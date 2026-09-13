@@ -382,8 +382,7 @@
         "slug": "mixed-spice",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",
@@ -1095,8 +1094,7 @@
         "unit": "tsp",
         "prep": null,
         "optional": true,
-        "garnish": true,
-        "staple": true
+        "garnish": true
       }
     ],
     "steps": [
@@ -1497,8 +1495,7 @@
         "slug": "mixed-spice",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",
@@ -1636,8 +1633,7 @@
         "quantity": 3,
         "unit": "piece",
         "prep": null,
-        "optional": true,
-        "staple": true
+        "optional": true
       },
       {
         "slug": "salt",
@@ -2243,8 +2239,7 @@
         "slug": "nutmeg",
         "quantity": 0.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",
@@ -3163,8 +3158,7 @@
         "slug": "vanilla",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cinnamon",
@@ -4425,8 +4419,7 @@
         "slug": "sesame-seeds",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sunflower-oil",
@@ -4906,6 +4899,253 @@
         "uses": [
           "tahini",
           "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "muhallabia",
+    "title": "Milk Pudding with Pistachios",
+    "titleAr": "مهلبية",
+    "description": "Set with cornflour, not eggs, so it stays light. The rosewater is what makes it taste like home rather than like custard.",
+    "descriptionAr": "بتتماسك بالنشا مش بالبيض، عشان تفضل خفيفة. وماء الورد هو اللي بيخليها بطعم البيت مش طعم الكاسترد.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "dessert"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 12,
+    "servings": 4,
+    "nutrition": {
+      "calories": 210,
+      "protein": 6,
+      "carbs": 32,
+      "fat": 6,
+      "fiber": 0
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "nuts"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "dessert",
+      "comfort",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/muhallabia.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "milk",
+        "quantity": 1,
+        "unit": "l",
+        "prep": null
+      },
+      {
+        "slug": "cornflour",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "slaked in a little cold milk"
+      },
+      {
+        "slug": "sugar",
+        "quantity": 90,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "vanilla",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "pistachios",
+        "quantity": 30,
+        "unit": "g",
+        "prep": "chopped",
+        "optional": true,
+        "garnish": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Warm 800ml of the milk with the sugar until it steams. Do not let it boil over.",
+        "textAr": "سخّن ٨٠٠ مل من اللبن مع السكر لحد ما يطلّع بخار. خلي بالك ميفورش.",
+        "minutes": 6,
+        "uses": [
+          "milk",
+          "sugar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Slake the cornflour in the remaining cold milk until there is not a single lump, then pour it into the pan in a thin stream, whisking the whole time.",
+        "textAr": "دوّب النشا في باقي اللبن البارد لحد ما ميبقاش فيه أي كتل، وبعدين صبّه في الحلة على دفعة رفيعة وانت بتقلّب باستمرار.",
+        "minutes": 3,
+        "uses": [
+          "cornflour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook for 3 to 4 minutes until it thickens enough to coat the back of a spoon, then stir in the vanilla.",
+        "textAr": "اطبخ ٣ لـ ٤ دقايق لحد ما تتقل وتغطي ضهر المعلقة، وبعدين قلّب الفانيليا.",
+        "minutes": 4,
+        "uses": [
+          "vanilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour into bowls and chill for at least 3 hours. Scatter with pistachios and cinnamon before serving.",
+        "textAr": "صبّها في أطباق وسيبها في التلاجة ٣ ساعات على الأقل. رشّ عليها الفستق والقرفة قبل التقديم.",
+        "minutes": null,
+        "uses": [
+          "pistachios",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "banana-milkshake",
+    "title": "Banana Milkshake",
+    "titleAr": "عصير موز باللبن",
+    "description": "Three ingredients and a blender. Use bananas that have gone spotty — the ones nobody wants to eat are the ones that make this good.",
+    "descriptionAr": "تلات حاجات وخلاط. استخدم موز مبقّع — اللي محدش عايز ياكله هو اللي بيطلّع العصير حلو.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "snack",
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 0,
+    "servings": 2,
+    "nutrition": {
+      "calories": 220,
+      "protein": 8,
+      "carbs": 38,
+      "fat": 5,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "blender"
+    ],
+    "tags": [
+      "breakfast",
+      "quick",
+      "no-cook",
+      "budget",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/banana-milkshake.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bananas",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "peeled, ideally spotty"
+      },
+      {
+        "slug": "milk",
+        "quantity": 400,
+        "unit": "ml",
+        "prep": "cold"
+      },
+      {
+        "slug": "sugar",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Break the bananas into the blender and pour the cold milk over them.",
+        "textAr": "قطّع الموز في الخلاط وصبّ عليه اللبن البارد.",
+        "minutes": 2,
+        "uses": [
+          "bananas",
+          "milk"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blend for a full minute — less than that and it is banana in milk rather than a milkshake. Taste, and add the sugar only if the bananas were not ripe enough.",
+        "textAr": "اخلط دقيقة كاملة — أقل من كده يبقى موز في لبن مش ميلك شيك. دوق، وضيف السكر بس لو الموز مكانش مستوي كفاية.",
+        "minutes": 2,
+        "uses": [
+          "sugar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour into two cold glasses and dust with cinnamon.",
+        "textAr": "صبّه في كوبايتين ساقعين ورشّ عليه قرفة.",
+        "minutes": null,
+        "uses": [
+          "cinnamon"
         ],
         "safety": null,
         "safetyAr": null

@@ -918,8 +918,7 @@
         "slug": "nutmeg",
         "quantity": 0.5,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olive-oil",
@@ -1382,8 +1381,7 @@
         "slug": "rosemary",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "stock-cube",
@@ -1810,8 +1808,7 @@
         "slug": "thyme-dried",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "olive-oil",
@@ -1965,8 +1962,7 @@
         "slug": "thyme-dried",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",
@@ -2236,8 +2232,7 @@
         "slug": "vanilla",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       }
     ],
     "steps": [

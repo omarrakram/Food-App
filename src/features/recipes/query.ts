@@ -253,6 +253,7 @@ export function constraintsFingerprint(constraints: RecipeConstraints): string {
   const sorted = (values: readonly string[]) => [...values].sort().join(',');
   return [
     sorted(constraints.availableIngredients),
+    sorted(constraints.alwaysAvailableIngredients),
     sorted(constraints.requiredIngredients),
     constraints.excludedIngredients
       .map((entry) => `${entry.severity}:${entry.slug ?? entry.label}`)

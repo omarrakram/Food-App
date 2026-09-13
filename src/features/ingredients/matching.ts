@@ -6,7 +6,7 @@ import type {
   RecipeIngredient,
 } from '@/types/domain';
 
-import { INGREDIENT_CATALOGUE, isAssumedOnHand, type CatalogueIngredient } from './catalogue';
+import { INGREDIENT_CATALOGUE, isUniversalBasic, type CatalogueIngredient } from './catalogue';
 import { freshnessOf } from './freshness';
 import { normaliseIngredientName, similarityScore } from './normalise';
 
@@ -74,22 +74,36 @@ export function allergensForNames(names: readonly string[]): Allergen[] {
 
 export type AvailabilityOptions = {
   /**
-   * Treat salt/pepper/oil-type ingredients as present even if not listed.
-   * True by default: asking a user to add "salt" to their pantry is friction
-   * with no payoff. Users see these marked "assumed" in the recipe detail.
+   * Assume water and salt. Nothing else — see `isUniversalBasic`.
+   * True by default; tests turn it off to reason about a bare kitchen.
    */
-  assumeCommonStaples?: boolean;
+  assumeUniversalBasics?: boolean;
+  /**
+   * Ingredient names THIS USER said they always have.
+   *
+   * The difference from the universal basics is who decided. These came from
+   * a screen the user looked at and can change, so the app can answer "why
+   * does it think I have onions?" with "because you said so, here".
+   */
+  alwaysAvailable?: readonly string[];
   /** Reference time, injectable for deterministic tests. */
   now?: Date;
 };
+
+/** Where an available ingredient came from. Drives what the UI is allowed to say. */
+export type AvailabilitySource = 'pantry' | 'typed' | 'user_staple' | 'universal_basic';
 
 export type AvailabilityIndex = {
   /** Normalised names the user has. */
   available: Set<string>;
   /** Normalised names deliberately excluded because they are past their date. */
   expired: Set<string>;
-  /** Normalised names covered only by the staple assumption. */
+  /** Normalised names covered only by the two universal basics. */
   assumedStaples: Set<string>;
+  /** Why each available name counts. The UI must never claim more than this. */
+  sourceByName: Map<string, AvailabilitySource>;
+  /** Names in the pantry that are present but used up. */
+  outOfStock: Set<string>;
   /** Pantry item ids keyed by normalised name, for "uses expiring items". */
   itemIdByName: Map<string, string>;
   /** Names that are expiring soon — recipes using them get ranked up. */
@@ -106,18 +120,26 @@ export function buildAvailabilityIndex(
   typedIngredients: readonly string[] = [],
   options: AvailabilityOptions = {},
 ): AvailabilityIndex {
-  const { assumeCommonStaples = true, now = new Date() } = options;
+  const { assumeUniversalBasics = true, alwaysAvailable = [], now = new Date() } = options;
 
   const available = new Set<string>();
   const expired = new Set<string>();
   const assumedStaples = new Set<string>();
   const expiringSoon = new Set<string>();
+  const outOfStock = new Set<string>();
   const itemIdByName = new Map<string, string>();
+  const sourceByName = new Map<string, AvailabilitySource>();
 
-  const addName = (raw: string) => {
+  const addName = (raw: string, source: AvailabilitySource) => {
     const resolved = resolveIngredient(raw);
     const key = resolved ? normaliseIngredientName(resolved.name) : normaliseIngredientName(raw);
-    if (key) available.add(key);
+    if (key) {
+      available.add(key);
+      // First source wins, and they are added strongest-first: something the
+      // user typed is better evidence than something they configured months
+      // ago, which is better evidence than an assumption we made for them.
+      if (!sourceByName.has(key)) sourceByName.set(key, source);
+    }
     return key;
   };
 
@@ -125,7 +147,7 @@ export function buildAvailabilityIndex(
   // what is in front of them right now.
   const typedKeys = new Set<string>();
   for (const typed of typedIngredients) {
-    const key = addName(typed);
+    const key = addName(typed, 'typed');
     if (key) typedKeys.add(key);
   }
 
@@ -136,6 +158,16 @@ export function buildAvailabilityIndex(
       ? normaliseIngredientName(resolved.name)
       : normaliseIngredientName(item.ingredientName);
     if (!key) continue;
+
+    // ZERO IS NOT SOME. A row that exists because the user bought it once and
+    // has since finished it is not an ingredient they have, and "assume I
+    // always have this" does not conjure any back. The flag means the row does
+    // not need a quantity or a date to keep counting — it does not mean the
+    // quantity and the date stop applying when they are there.
+    if (item.quantity !== null && item.quantity <= 0) {
+      if (!typedKeys.has(key)) outOfStock.add(key);
+      continue;
+    }
 
     if (status === 'expired') {
       // FOOD SAFETY: an out-of-date pantry row contributes nothing, and we
@@ -153,30 +185,41 @@ export function buildAvailabilityIndex(
     }
 
     available.add(key);
+    if (!sourceByName.has(key)) {
+      sourceByName.set(key, item.isStaple ? 'user_staple' : 'pantry');
+    }
     itemIdByName.set(key, item.id);
     if (status === 'expiring_soon' || status === 'expires_today') expiringSoon.add(key);
   }
 
-  if (assumeCommonStaples) {
+  // What this user said they always have. An explicit, editable choice, so it
+  // is availability like any other — but it never overrides a pantry row that
+  // says the thing is expired or finished.
+  for (const name of alwaysAvailable) {
+    const resolved = resolveIngredient(name);
+    const key = resolved ? normaliseIngredientName(resolved.name) : normaliseIngredientName(name);
+    if (!key || expired.has(key) || outOfStock.has(key)) continue;
+    addName(name, 'user_staple');
+  }
+
+  if (assumeUniversalBasics) {
     for (const ingredient of INGREDIENT_CATALOGUE) {
-      // `isAssumedOnHand`, NOT `isCommonStaple`. The difference is the whole
-      // bug: the staple flag is a pantry-UI convenience that marks rice,
-      // pasta, potatoes, onions, lentils and flour as cupboard items, and
-      // assuming those made three recipes cookable from an empty kitchen —
-      // which then matched every search, whatever the user had selected.
-      //
-      // FOOD SAFETY / HONESTY is still the other half: never assume a
-      // perishable. `isAssumedOnHand` refuses those outright.
-      if (!isAssumedOnHand(ingredient)) continue;
+      // Water and salt. NOT `isCommonStaple`, which is a pantry-UI convenience
+      // marking forty-seven cupboard items, and not the longer list this used
+      // to carry — onions, garlic, stock, tomato paste, oil, every spice —
+      // which told a user with rice and tomatoes that they had six of the
+      // seven things Tomato Rice needs. They had two.
+      if (!isUniversalBasic(ingredient)) continue;
       const key = normaliseIngredientName(ingredient.name);
-      // Something the user has explicitly marked expired stays excluded.
-      if (available.has(key) || expired.has(key)) continue;
+      // Anything the user has said is expired or finished stays that way.
+      if (available.has(key) || expired.has(key) || outOfStock.has(key)) continue;
       available.add(key);
       assumedStaples.add(key);
+      sourceByName.set(key, 'universal_basic');
     }
   }
 
-  return { available, expired, assumedStaples, itemIdByName, expiringSoon };
+  return { available, expired, assumedStaples, outOfStock, sourceByName, itemIdByName, expiringSoon };
 }
 
 /**
@@ -207,13 +250,14 @@ function matchOne(
     ? normaliseIngredientName(resolved.name)
     : normaliseIngredientName(recipeIngredient.name);
 
-  if (index.expired.has(key)) {
+  if (index.expired.has(key) || index.outOfStock.has(key)) {
     return {
       recipeIngredientId: recipeIngredient.id,
       name: recipeIngredient.name,
       isAvailable: false,
       matchedVia: null,
-      excludedReason: 'expired',
+      availableVia: null,
+      excludedReason: index.expired.has(key) ? 'expired' : 'out_of_stock',
       isOptional: !isNeededLine(recipeIngredient),
     };
   }
@@ -221,17 +265,16 @@ function matchOne(
   const isAvailable = index.available.has(key);
   const matchedVia: IngredientMatch['matchedVia'] = !isAvailable
     ? null
-    : index.assumedStaples.has(key)
-      ? 'assumed_staple'
-      : resolved && normaliseIngredientName(recipeIngredient.name) !== key
-        ? 'alias'
-        : 'exact';
+    : resolved && normaliseIngredientName(recipeIngredient.name) !== key
+      ? 'alias'
+      : 'exact';
 
   return {
     recipeIngredientId: recipeIngredient.id,
     name: recipeIngredient.name,
     isAvailable,
     matchedVia,
+    availableVia: isAvailable ? (index.sourceByName.get(key) ?? 'pantry') : null,
     excludedReason: null,
     // `isOptional` on a MATCH means "not something they must go and buy",
     // which is the union of optional, garnish and pantry staple — not the

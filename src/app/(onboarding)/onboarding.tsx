@@ -3,6 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
+import {
+  INGREDIENTS_BY_SLUG,
+  SUGGESTED_KITCHEN_BASICS,
+} from '@/features/ingredients/catalogue';
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
 import { Input } from '@/components/ui/input';
@@ -49,9 +53,9 @@ import {
 
 type Draft = Partial<UserPreferences>;
 
-type StepId = 'name' | 'household' | 'diet' | 'avoid' | 'taste' | 'kitchen';
+type StepId = 'name' | 'household' | 'diet' | 'avoid' | 'taste' | 'basics' | 'kitchen';
 
-const STEPS: readonly StepId[] = ['name', 'household', 'diet', 'avoid', 'taste', 'kitchen'];
+const STEPS: readonly StepId[] = ['name', 'household', 'diet', 'avoid', 'taste', 'basics', 'kitchen'];
 
 /**
  * Steps that must be answered before moving on.
@@ -134,7 +138,15 @@ export default function OnboardingScreen() {
   };
 
   const finish = async () => {
-    await completeOnboarding(draft);
+    // The basics step shows the suggestions ticked, so pressing straight
+    // through IS a choice — the user saw the list and accepted it. Committing
+    // the default explicitly is what makes that true in the data as well as on
+    // screen; leaving it undefined would silently mean "I have nothing".
+    await completeOnboarding({
+      ...draft,
+      alwaysAvailableIngredients:
+        draft.alwaysAvailableIngredients ?? [...SUGGESTED_KITCHEN_BASICS],
+    });
     // A guest who has just told us their diet, allergies and goals is the best
     // moment to offer an account — their answers are the thing worth keeping.
     // It stays an offer: `welcome` has a "look around first" route out.
@@ -329,6 +341,36 @@ export default function OnboardingScreen() {
                   ))}
                 </View>
               </Field>
+            </View>
+          </StepShell>
+        );
+
+      case 'basics':
+        // The screen that stops the app guessing.
+        //
+        // It assumes water and salt for everybody and nothing else. Everything
+        // here is offered, ticked by default because these really are in most
+        // Egyptian kitchens — but visibly, on a step the user walks through and
+        // can change, so "you have onions" is something they said rather than
+        // something we decided. Getting this wrong told a cook with rice and
+        // tomatoes that they were one ingredient short of dinner.
+        return (
+          <StepShell title={t('onboarding.basicsTitle')} body={t('onboarding.basicsBody')}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+              {SUGGESTED_KITCHEN_BASICS.map((slug) => {
+                const ingredient = INGREDIENTS_BY_SLUG.get(slug);
+                if (!ingredient) return null;
+                const current = draft.alwaysAvailableIngredients ?? [...SUGGESTED_KITCHEN_BASICS];
+                return (
+                  <Chip
+                    key={slug}
+                    label={ingredient.name}
+                    selected={current.includes(slug)}
+                    onPress={() => patch({ alwaysAvailableIngredients: toggle(current, slug) })}
+                    testID={`onboarding-basic-${slug}`}
+                  />
+                );
+              })}
             </View>
           </StepShell>
         );

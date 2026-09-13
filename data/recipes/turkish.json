@@ -337,8 +337,7 @@
         "slug": "vanilla",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cinnamon",
@@ -898,8 +897,7 @@
         "quantity": 1,
         "unit": "tsp",
         "prep": null,
-        "optional": true,
-        "staple": true
+        "optional": true
       },
       {
         "slug": "salt",
@@ -1189,8 +1187,7 @@
         "slug": "sumac",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",

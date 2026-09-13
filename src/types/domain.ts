@@ -174,6 +174,17 @@ export type UserPreferences = {
   allergens: Allergen[];
   /** Soft constraints — free-text ingredient names the user avoids. */
   dislikedIngredients: string[];
+  /**
+   * Ingredient names this user says they always have.
+   *
+   * The honest half of "do I have what this recipe needs". The app assumes
+   * only water and salt on anybody's behalf; everything else a cook always
+   * keeps — oil, onions, garlic, cumin — is a fact about that cook, chosen on
+   * a screen they can see and change. Empty by default, deliberately: an
+   * app that guesses this is an app that tells you you can cook things you
+   * cannot.
+   */
+  alwaysAvailableIngredients: string[];
   primaryGoal: Goal;
   preferredCuisines: Cuisine[];
   skillLevel: SkillLevel;
@@ -197,6 +208,7 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
   dietFlags: [],
   allergens: [],
   dislikedIngredients: [],
+  alwaysAvailableIngredients: [],
   primaryGoal: 'good_food',
   preferredCuisines: [],
   skillLevel: 'intermediate',
@@ -443,10 +455,18 @@ export type IngredientMatch = {
   name: string;
   /** True when the user's pantry (or supplied list) covers this ingredient. */
   isAvailable: boolean;
-  /** Why it counted as available — helps explain the match to the user. */
-  matchedVia: 'exact' | 'alias' | 'staple' | 'assumed_staple' | null;
-  /** Set when we deliberately refused to count a pantry item (e.g. expired). */
-  excludedReason: 'expired' | null;
+  /** How the NAME matched — exact, or through an alias the user typed. */
+  matchedVia: 'exact' | 'alias' | null;
+  /**
+   * WHERE the availability came from, which is a different question.
+   *
+   * The screen must never claim more than this says. "Assumed" is only
+   * honest for water and salt; anything else the cook has is either in their
+   * pantry, typed into this search, or on the always-have list they wrote.
+   */
+  availableVia: 'pantry' | 'typed' | 'user_staple' | 'universal_basic' | null;
+  /** Set when we deliberately refused to count a pantry item. */
+  excludedReason: 'expired' | 'out_of_stock' | null;
   isOptional: boolean;
 };
 
@@ -534,6 +554,13 @@ export type MealRequest = {
   mode: 'ingredients' | 'budget' | 'search';
   /** Ingredient names the user says they have. */
   ingredients: string[];
+  /**
+   * The user's configured always-have list, carried from preferences.
+   *
+   * Separate from `ingredients` because these are not part of the question —
+   * nobody searches for "what can I make with the oil I always have".
+   */
+  alwaysAvailableIngredients: string[];
   /**
    * Ingredients the result MUST contain. A requirement, not a preference:
    * "something with chicken and rice" returns nothing without both.

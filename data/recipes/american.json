@@ -494,8 +494,7 @@
         "slug": "garlic-powder",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "hot-sauce",
@@ -803,8 +802,7 @@
         "slug": "chili-powder",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "cumin",
@@ -988,8 +986,7 @@
         "slug": "vanilla",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "salt",
@@ -1672,8 +1669,7 @@
         "slug": "vanilla",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "honey",
@@ -1807,8 +1803,7 @@
         "slug": "rosemary",
         "quantity": 2,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "paprika",
@@ -2323,8 +2318,7 @@
         "slug": "garlic-powder",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null,
-        "staple": true
+        "prep": null
       },
       {
         "slug": "sunflower-oil",
@@ -2509,6 +2503,129 @@
         "minutes": 8,
         "uses": [
           "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "oatmeal-banana",
+    "title": "Warm Oats with Banana",
+    "titleAr": "شوفان دافي بالموز",
+    "description": "Five minutes on the stove and it holds you until lunch. Mash half the banana into the pan so it sweetens the whole thing.",
+    "descriptionAr": "خمس دقايق على النار وتسندك لحد الغدا. اهرس نص الموزة في الحلة عشان تحلّي الشوفان كله.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 3,
+    "cookMinutes": 6,
+    "servings": 1,
+    "nutrition": {
+      "calories": 340,
+      "protein": 12,
+      "carbs": 58,
+      "fat": 7,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "quick",
+      "budget",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/oatmeal-banana.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "oats",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "milk",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "bananas",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "half mashed, half sliced"
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "pinch",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Bring the milk and a pinch of salt to a bare simmer. Salt in porridge is the difference between breakfast and wallpaper paste.",
+        "textAr": "سخّن اللبن مع رشة ملح لحد ما يبدأ يغلي بهدوء. الملح في الشوفان هو الفرق بين فطار وصمغ.",
+        "minutes": 2,
+        "uses": [
+          "milk",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir in the oats and the mashed half banana and cook, stirring, for 4 to 5 minutes until thick.",
+        "textAr": "قلّب الشوفان ونص الموزة المهروسة واطبخ مع التقليب ٤ لـ ٥ دقايق لحد ما يتقل.",
+        "minutes": 5,
+        "uses": [
+          "oats",
+          "bananas"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Take it off the heat, stir through the cinnamon, and top with the sliced banana and honey.",
+        "textAr": "ارفعه من على النار، قلّب القرفة، وحطّ فوقه شرايح الموز والعسل.",
+        "minutes": null,
+        "uses": [
+          "cinnamon",
+          "honey"
         ],
         "safety": null,
         "safetyAr": null

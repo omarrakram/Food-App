@@ -92,16 +92,33 @@ function IngredientLine({
             </Text>
           ) : null}
         </Text>
+        {/*
+          WHERE the tick came from, never a vaguer word than the truth.
+          This row used to say "Pantry staple · assumed" for onions, garlic,
+          stock cube, cumin and oil in a recipe that never called any of them
+          a staple — the app had simply decided the user had them. It now says
+          which of four things happened, and three of the four name a decision
+          the user actually made.
+        */}
         {match.excludedReason === 'expired' ? (
           <Text variant="micro" color="danger">
             {t('safety.expiredExcluded')}
           </Text>
-        ) : match.matchedVia === 'assumed_staple' ? (
-          // Ticked because it is a staple we assume, not because the cook
-          // told us they have it. Worth saying: otherwise an assumption is
-          // indistinguishable from inventory.
+        ) : match.excludedReason === 'out_of_stock' ? (
+          <Text variant="micro" color="danger">
+            {t('pantry.outOfStock')}
+          </Text>
+        ) : match.availableVia === 'universal_basic' ? (
           <Text variant="micro" color="textTertiary">
-            {t('pantry.stapleAssumed')}
+            {t('pantry.assumedBasic')}
+          </Text>
+        ) : match.availableVia === 'user_staple' ? (
+          <Text variant="micro" color="textTertiary">
+            {t('pantry.fromYourBasics')}
+          </Text>
+        ) : match.availableVia === 'pantry' ? (
+          <Text variant="micro" color="textTertiary">
+            {t('pantry.fromYourPantry')}
           </Text>
         ) : null}
       </View>
@@ -132,6 +149,7 @@ export default function RecipeDetailScreen() {
 
   const [servings, setServings] = useState<number | null>(null);
   const [orderSheetOpen, setOrderSheetOpen] = useState(false);
+  const orderingAvailable = isOrderingAvailable(preferences.country);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
 
   const effectiveServings = servings ?? recipe?.baseServings ?? preferences.householdSize;
@@ -540,12 +558,22 @@ export default function RecipeDetailScreen() {
               />
             ) : null}
 
+            {/*
+              The same rule the shopping list already follows, and this screen
+              did not: an active-looking button that opens a sheet saying
+              "not available yet" is a tap spent to learn nothing, and two
+              screens disagreeing about whether ordering exists is worse than
+              either answer. No provider is configured for any country yet —
+              `enabledProvidersFor` returns none — so the unavailable state
+              says so on its face and cannot be pressed. The sheet and the
+              provider registry stay for when one is.
+            */}
             <Button
-              label={t('recipe.orderIngredients')}
+              label={orderingAvailable ? t('recipe.orderIngredients') : t('shopping.orderComingSoon')}
               icon="bag-handle-outline"
               variant="ghost"
-              onPress={() => setOrderSheetOpen(true)}
-              disabled={false}
+              onPress={orderingAvailable ? () => setOrderSheetOpen(true) : undefined}
+              disabled={!orderingAvailable}
               size="md"
               fullWidth
               testID="recipe-order"
@@ -572,7 +600,7 @@ export default function RecipeDetailScreen() {
       >
         <View style={{ gap: theme.spacing.md }}>
           <Text variant="body" color="textSecondary">
-            {isOrderingAvailable(preferences.country)
+            {orderingAvailable
               ? t('grocery.notAvailableBody', { country: t(`country.${preferences.country}` as const) })
               : t('recipe.orderComingSoonBody')}
           </Text>

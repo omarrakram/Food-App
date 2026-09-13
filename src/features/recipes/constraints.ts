@@ -169,6 +169,15 @@ export type RecipeConstraints = {
   skillLevel: SkillLevel;
   /** Cuisines the user tends to like. Ranking only, never a filter. */
   preferredCuisines: Cuisine[];
+  /**
+   * What this user said they always have.
+   *
+   * Kept apart from `availableIngredients` on purpose. Both make a recipe
+   * cookable, but only the latter is something the user NAMED for this search,
+   * and `mustUseSomethingAvailable` has to mean "uses something you asked
+   * about" — not "uses the oil you told us about in March".
+   */
+  alwaysAvailableIngredients: string[];
   /** Free-text query, for search mode. */
   query: string | null;
 };
@@ -198,6 +207,7 @@ export function emptyConstraints(overrides: Partial<RecipeConstraints> = {}): Re
     country: 'EG',
     skillLevel: 'intermediate',
     preferredCuisines: [],
+    alwaysAvailableIngredients: [],
     query: null,
     ...overrides,
   };

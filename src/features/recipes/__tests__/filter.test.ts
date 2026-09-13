@@ -17,6 +17,7 @@ import {
   buildIndexFor,
   filterRecipes,
   isSafetyReason,
+  missingEssentials,
   pantryCoverage,
   suggestRelaxations,
 } from '../filter';
@@ -421,11 +422,13 @@ describe('relaxed mode admits a BOUNDED number of gaps', () => {
     expect(surviving([manakish!], unrelated)).toHaveLength(0);
 
     // And it is still reachable when the user actually names one of its
-    // ingredients — this is a relevance rule, not a ban.
+    // ingredients — this is a relevance rule, not a ban. Given the whole
+    // ingredient list, so the test is about relevance rather than about how
+    // many cupboard basics this particular cook happens to have ticked.
     const related = emptyConstraints({
       pantryMode: 'partial',
       maxMissingIngredients: 2,
-      availableIngredients: manakish!.ingredients.map((line) => line.name).slice(0, 1),
+      availableIngredients: manakish!.ingredients.map((line) => line.name),
       mustUseSomethingAvailable: true,
     });
     expect(surviving([manakish!], related)).toHaveLength(1);
@@ -611,5 +614,92 @@ describe('when nothing matches', () => {
           : emptyConstraints({ cuisine: 'italian' });
       expect(relaxation.wouldReturn).toBe(surviving(RECIPE_FIXTURES, dropped).length);
     }
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The reported bug, as a test. Somebody with rice and tomatoes opened Tomato
+// Rice and was told they had six of seven ingredients and needed only
+// coriander. They had two of ten.
+// ---------------------------------------------------------------------------
+
+describe('the app never claims the user has something they did not say they have', () => {
+  const tomatoRice = RECIPE_FIXTURES.find((recipe) => recipe.slug === 'mexican-rice')!;
+
+  /** Rice and tomatoes, and a cook who has configured nothing. */
+  const bareKitchen = emptyConstraints({
+    availableIngredients: ['rice', 'tomatoes'],
+    pantryMode: 'partial',
+    maxMissingIngredients: 2,
+    mustUseSomethingAvailable: true,
+  });
+
+  it('counts onion, garlic, tomato paste and stock as missing', () => {
+    const index = buildIndexFor(bareKitchen);
+    const missing = missingEssentials(tomatoRice, index).map((name) => name.toLowerCase());
+
+    for (const needed of ['onions', 'garlic', 'tomato paste', 'stock cube']) {
+      expect({ needed, counted: missing.includes(needed) }).toEqual({ needed, counted: true });
+    }
+  });
+
+  it('and does not offer the recipe at all within a two-ingredient gap', () => {
+    // Seven things short is not "nearly there", and a mode called "allow up to
+    // two missing" that returns it is not telling the truth about itself.
+    expect(surviving([tomatoRice], bareKitchen)).toEqual([]);
+  });
+
+  it('assumes water and salt, and marks them as assumptions', () => {
+    const index = buildIndexFor(bareKitchen);
+
+    expect([...index.assumedStaples].sort()).toEqual(['salt', 'water']);
+    expect(index.sourceByName.get('salt')).toBe('universal_basic');
+    expect(index.sourceByName.get('rice')).toBe('typed');
+  });
+
+  it('counts them once the user has configured them, and says who decided', () => {
+    // The other half. This is not a ban on convenience — it is a rule about
+    // who gets to decide, and once the cook has decided the app uses it.
+    const configured = emptyConstraints({
+      ...bareKitchen,
+      alwaysAvailableIngredients: ['onions', 'garlic', 'tomato paste', 'stock cube', 'cumin',
+        'sunflower oil'],
+    });
+    const index = buildIndexFor(configured);
+    const missing = missingEssentials(tomatoRice, index);
+
+    expect(missing.map((name) => name.toLowerCase())).toEqual(['coriander']);
+    // Keyed on the canonical singular the index stores.
+    expect(index.sourceByName.get('onion')).toBe('user_staple');
+  });
+
+  it('FOOD SAFETY: a configured basic still loses to an expired pantry row', () => {
+    const configured = emptyConstraints({
+      ...bareKitchen,
+      alwaysAvailableIngredients: ['onions'],
+    });
+    const index = buildIndexFor(configured, {
+      pantryItems: [pantryItem('onions', { expiresOn: '2020-01-01' })],
+      now: NOW,
+    });
+
+    expect(index.available.has('onion')).toBe(false);
+    expect(index.expired.has('onion')).toBe(true);
+  });
+
+  it('and to a pantry row that says the thing is finished', () => {
+    // "Assume I have this" is a way of not being asked for a quantity. It is
+    // not a way of having some when the quantity says zero.
+    const configured = emptyConstraints({
+      ...bareKitchen,
+      alwaysAvailableIngredients: ['onions'],
+    });
+    const index = buildIndexFor(configured, {
+      pantryItems: [pantryItem('onions', { quantity: 0, isStaple: true })],
+      now: NOW,
+    });
+
+    expect(index.available.has('onion')).toBe(false);
+    expect(index.outOfStock.has('onion')).toBe(true);
   });
 });
