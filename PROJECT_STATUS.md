@@ -172,7 +172,7 @@ server's own explanation:
 4. **72 of 158, correctly sized.** `Special:FilePath?width=` — MediaWiki's own
    documented way to ask for a file at a size — replaced the hand-built CDN
    path, which had been returning HTTP 400 for every request.
-5. **61 of 158, after someone looked at them.**
+5. **64 of 158, after two rounds of someone looking at them.**
 
 ### The part no rule could do
 
@@ -189,16 +189,16 @@ had to go, and not one of them was catchable by a rule that reads a filename:
   of **raw mushrooms with cured meat** for risotto. A pale pancake for kunafa.
 - Two photographs were each doing duty for two recipes.
 
-`data/images/rejected.json` records the nine refusals **with the reason**; the
+`data/images/rejected.json` records **thirteen refusals with the reason each**; the
 fetcher never chooses them again and `images:check` refuses a manifest
 containing one, including one restored by hand. Duplicates are handled
 separately, because those photographs are fine — no file may illustrate two
 recipes, enforced in the fetcher across runs and in the validator across the
 manifest.
 
-**Coverage fell from 72 to 61 and that is the correct direction.** The brief
+**Coverage settled at 64 of 158, having been 72 before anyone looked, and that is the correct direction.** The brief
 asks for relevance over coverage, and eleven pictures of the wrong thing are
-worth less than none of them. The 97 recipes still on the branded fallback are
+worth less than none of them. The 94 recipes still on the branded fallback are
 listed in `manifest.skipped` with a reason each; most are ordinary weeknight
 cooking with descriptive names — "Tray-Baked Salmon and Vegetables", "Air Fryer
 Spiced Chicken" — for which no openly-licensed photograph of that specific dish
@@ -232,7 +232,7 @@ branch):
 | Web production bundle | `npx expo export --platform web` | **pass** |
 | Image manifest | `npm run images:check` | **pass**, licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
 | Dataset spread | `npm run recipes:audit` | reports only — 158 recipes, no pair over 0.9 Jaccard |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 89 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 93 interaction checks, no page errors |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
@@ -413,7 +413,7 @@ npm run smoke:web -- --base http://127.0.0.1:8099/Food-App
 ```
 
 That is the same build the workflow publishes, under the same subpath, driven
-by the same 81 assertions — which covers the things that actually differ
+by the same 93 assertions — which covers the things that actually differ
 between a local run and a deployment: the base path, the per-route HTML, the
 404 fallback, and assets resolving under a subpath. Whether GitHub is serving
 it is then a question for the deployment API:
@@ -431,6 +431,17 @@ the matching engine is fixed and proven through the rendered app; the
 photographs are still being acquired.
 
 ### THE SINGLE NEXT ACTION
+
+**Phase J: the messaging UI.** The correctness hotfix is finished — the four
+reported cases give four different answers through the rendered app, exact mode
+returns only zero-gap recipes, and 64 recipes carry a reviewed photograph in the
+deployed preview.
+
+What remains on the photographs is not a task, it is a standing practice:
+another acquisition round would add a handful, and every round needs a human to
+look at contact sheets before it ships. See "Where the photographs stand".
+
+#### If you are adding photographs
 
 **Finish the photograph acquisition, then verify it in the deployed preview.**
 
