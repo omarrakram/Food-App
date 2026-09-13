@@ -575,3 +575,49 @@ export type MealRequest = {
   appliances: Appliance[];
   skillLevel: SkillLevel;
 };
+
+// --- Profiles ---------------------------------------------------------------
+
+export const PROFILE_VISIBILITIES = ['public', 'friends', 'private'] as const;
+export type ProfileVisibility = (typeof PROFILE_VISIBILITIES)[number];
+
+/**
+ * A user's public identity.
+ *
+ * Deliberately small, and deliberately separate from `Preferences`. Everything
+ * that could describe someone's health — allergens, dietary preference,
+ * calorie and protein targets, what is in their kitchen — lives in
+ * preferences and the pantry, is never joined onto this, and has no route to
+ * another account. The database enforces that with a hand-enumerated view;
+ * this type is the client-side half of the same promise.
+ */
+export type PublicProfile = {
+  id: string;
+  /** Handle as the user typed it. Null until they claim one. */
+  username: string | null;
+  displayName: string | null;
+  avatarUrl: string | null;
+  bio: string | null;
+  country: CountryCode;
+  /** Null unless the owner opted into showing it. */
+  city: string | null;
+  joinedAt: string;
+};
+
+/** The owner's view of their own profile: the public half plus the settings. */
+export type OwnProfile = PublicProfile & {
+  visibility: ProfileVisibility;
+  showCity: boolean;
+};
+
+/** Everything a user may change about their public identity. */
+export type ProfileEdit = {
+  username?: string | null;
+  displayName?: string | null;
+  bio?: string | null;
+  avatarUrl?: string | null;
+  country?: CountryCode;
+  city?: string | null;
+  visibility?: ProfileVisibility;
+  showCity?: boolean;
+};

@@ -95,6 +95,15 @@ function tablesFromSql(sql: string): Map<string, Set<string>> {
     if (columns.size > 0) tables.set(match[1]!, columns);
   }
 
+  // Views are relations the client queries exactly like tables, so they have
+  // to be in this map or a real view reads as a missing table. Their columns
+  // are aliased expressions rather than declarations, so only the NAME is
+  // recorded — the column-level check below skips a relation with no columns.
+  const views = /create (?:or replace )?view public\.(\w+)\b/gi;
+  while ((match = views.exec(sql)) !== null) {
+    if (!tables.has(match[1]!)) tables.set(match[1]!, new Set());
+  }
+
   // `alter table ... add column` counts too.
   const added = /alter table (?:if exists )?public\.(\w+)\s+add column (?:if not exists )?(\w+)/gi;
   while ((match = added.exec(sql)) !== null) {

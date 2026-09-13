@@ -1,12 +1,14 @@
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
+import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ListGroup, ListRow } from '@/components/ui/list-row';
 import { ScreenScroll } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
 import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
+import { useOwnProfile } from '@/features/profile/hooks';
 import { useShoppingList } from '@/features/shopping/hooks';
 import { useI18n } from '@/i18n';
 import { env } from '@/lib/config/env';
@@ -19,28 +21,23 @@ export default function ProfileScreen() {
   const { preferences } = usePreferences();
   const { user, isEnabled: authEnabled, signedOutReason, acknowledgeExpiry } = useAuth();
   const shoppingList = useShoppingList();
+  const ownProfile = useOwnProfile();
 
   const uncheckedCount = (shoppingList.data ?? []).filter((item) => !item.isChecked).length;
-  const initials = (preferences.displayName ?? t('profile.guest')).trim().charAt(0).toUpperCase();
+  // The profile row is the authority on the display name once there is an
+  // account; preferences hold the guest's copy.
+  const name = ownProfile.data?.displayName ?? preferences.displayName ?? t('profile.guest');
 
   return (
     <ScreenScroll bottomInset={theme.layout.tabBarHeight} contentGap={theme.spacing.xl}>
       <View style={{ alignItems: 'center', gap: theme.spacing.sm, paddingTop: theme.spacing.xl }}>
-        <View
-          style={{
-            width: 76,
-            height: 76,
-            borderRadius: theme.radius.pill,
-            backgroundColor: theme.colors.primarySoft,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text variant="title1" color="primarySoftText">
-            {initials}
+        <Avatar url={ownProfile.data?.avatarUrl} fallback={name} size={76} testID="profile-avatar-view" />
+        <Text variant="title2">{name}</Text>
+        {ownProfile.data?.username ? (
+          <Text variant="footnote" color="textSecondary">
+            @{ownProfile.data.username}
           </Text>
-        </View>
-        <Text variant="title2">{preferences.displayName ?? t('profile.guest')}</Text>
+        ) : null}
         {user?.email ? (
           <Text variant="footnote" color="textSecondary">
             {user.email}
@@ -76,6 +73,17 @@ export default function ProfileScreen() {
           />
         </View>
       ) : null}
+
+      <ListGroup>
+        <ListRow
+          title={t('profile.edit')}
+          subtitle={t('profile.editSub')}
+          icon="person-circle-outline"
+          iconTone="primary"
+          onPress={() => router.push('/settings/profile')}
+          testID="profile-edit"
+        />
+      </ListGroup>
 
       <ListGroup>
         <ListRow

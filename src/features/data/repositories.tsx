@@ -1,6 +1,7 @@
 import { createContext, use, useMemo, type ReactNode } from 'react';
 
 import { LocalPantryRepository, type PantryRepository } from '@/features/pantry/repository';
+import { LocalProfileRepository, type ProfileRepository } from '@/features/profile/repository';
 import { LocalRecipeRepository, type RecipeRepository } from '@/features/recipes/repository';
 import {
   LocalHistoryRepository,
@@ -21,6 +22,7 @@ import { LocalShoppingRepository, type ShoppingRepository } from '@/features/sho
 
 export type Repositories = {
   pantry: PantryRepository;
+  profile: ProfileRepository;
   recipes: RecipeRepository;
   saved: SavedRepository;
   history: HistoryRepository;
@@ -54,6 +56,7 @@ export function RepositoryProvider({
     }
     return {
       pantry: new LocalPantryRepository(),
+      profile: new LocalProfileRepository(),
       recipes: new LocalRecipeRepository(),
       saved: new LocalSavedRepository(),
       history: new LocalHistoryRepository(),

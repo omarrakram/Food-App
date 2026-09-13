@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-13 |
-| **Current phase** | Product build-out. Phases A–D complete; **E is the next task**. See "Build-out progress". |
+| **Current phase** | Product build-out. Phases A–G complete; **H + P (drawer navigation) is the next task**. See "Build-out progress". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -25,8 +25,8 @@ because each depends on the one before it.
 | B | Recipe image architecture with provenance and licensing | **done** — manifest + resolver; assets pending |
 | C | `RecipeConstraints` with genuine hard filtering | **done** — one model, hard filters, honest relaxations |
 | D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
-| E–G | Auth hardening, profiles, storage uploads | **NEXT** — not started |
-| H, P | Drawer navigation and information architecture | not started |
+| E–G | Auth hardening, profiles, storage uploads | **done** — guest choice, expiry, handles, avatars |
+| H, P | Drawer navigation and information architecture | **NEXT** — not started |
 | I–K | Friends, 1-to-1 messaging, recipe sharing | not started |
 | L–N | Community submissions, moderation, admin | not started |
 | O | In-app notifications | not started |
@@ -157,6 +157,86 @@ The importer also formats its output with the repo's Prettier now, because
 `npm run format` and `recipes:import --check` were otherwise able to contradict
 each other with no change to the data behind either.
 
+### Phases E–G — accounts, identity and photographs
+
+**Phase E fixed three conflations**, each of which had a visible symptom.
+
+*Signed out* vs *chose to stay signed out.* A signed-out launch fell through
+the routing gate into onboarding, so nobody ever answered the welcome screen —
+the silent bypass the brief names. `features/auth/guest-mode.ts` records the
+choice and it survives a relaunch; the gate now shows the welcome screen
+exactly once, and a guest is never asked again until they sign in.
+
+*Signed out* vs *expired.* Supabase emits `SIGNED_OUT` whether the user pressed
+a button or a refresh token was rejected. `AuthProvider` keeps a
+`deliberateSignOut` ref so it can tell them apart, and exposes
+`signedOutReason: 'never' | 'guest' | 'signed_out' | 'expired'`. An expired
+session is not a wall — local data keeps working — but the profile screen says
+what happened instead of "Sign in to sync your pantry".
+
+*Cooked history* vs *nothing to migrate.* `migrateGuestData` looked at the
+pantry, saved recipes and shopping list and returned early when all three were
+empty, so a guest who had cooked a dozen recipes and saved none signed up to
+two empty Saved tabs. Cooked and viewed history migrate now. Dislikes
+deliberately do not: they feed ranking rather than a screen, and carrying a
+wrong one across quietly suppresses recipes.
+
+**Phase F is a public half of a profile that cannot leak the private half.**
+
+`profiles` stays own-row-only — no RLS policy was loosened. What another user
+sees is `public_profiles`, a view whose columns are **written out one at a
+time**, so the complete set of things you can learn about somebody is
+reviewable in ten seconds and a sensitive column added to `profiles` later
+cannot leak through a `select *`. A database test asserts the exact eight
+columns; it fails if anyone widens it.
+
+The handle's uniqueness key folds case AND strips dots and underscores.
+`omar.hassan`, `omar_hassan` and `omarhassan` are otherwise three registrations
+that let one person be mistaken for another in a friend request, and the person
+impersonated has no way to notice. The typed form is what gets displayed.
+`username_available()` is a security-definer function returning a boolean for
+one exact handle and never a row, so it cannot be turned into a directory.
+
+Visibility is `public | friends | private`; `friends` currently resolves
+strictly narrower than `public` (the friendship table does not exist yet),
+which is the safe direction to be wrong in. City is opt-in separately, being
+the one field that narrows down where a person actually is.
+
+**Phase G: uploads that never trust the client.**
+
+Three buckets. `avatars` is public — a face next to a name in a friend list
+should not cost a signed URL per row. `recipe-uploads` is **not** public,
+because a submission under review must not be reachable by URL or moderation
+is advisory. `recipe-images` is public and has read policies **only**: a user
+who could write there could publish an image the review queue never saw.
+
+Ownership is by path. Every user-writable object lives under `<uid>/…` and the
+policies compare the first segment to `auth.uid()`, so a client that invents a
+path outside its own folder is rejected by Postgres rather than by a check it
+could skip. 20 database assertions cover it, including traversal-shaped paths.
+
+Client-side, `features/storage/images.ts` holds every rule as a pure function
+and `upload.ts` is a shell with no decisions in it. The order matters: validate
+the ORIGINAL (so a 40MB panorama is rejected before three seconds of
+re-encoding, and so a file cannot sneak past by compressing well), re-encode to
+a bounded JPEG, then upload to a path we generated.
+
+**The user's filename is never used** — not sanitised, not slugified. It is
+attacker-controlled text that would end up in a URL, a Content-Disposition
+header, and a path a storage policy parses to decide ownership; generating the
+whole name removes the class of question. Re-encoding is also what strips EXIF,
+and an avatar is the most likely thing in this app to be published with
+someone's home address attached.
+
+SDK 57 notes for whoever touches this next: `manipulateAsync` is **deprecated**
+— the current API is `ImageManipulator.manipulate(uri)` → `.resize()` →
+`.renderAsync()` → `.saveAsync()`. `ImagePicker.MediaTypeOptions` is deprecated
+too; pass `mediaTypes: ['images']`. `new File(uri).bytes()` returns a
+**Promise**, and the supabase upload signature is loose enough to accept an
+unawaited one and upload nothing useful.
+
+---
+
 ---
 
 ## Last known passing state
@@ -169,8 +249,8 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 477/477 across 27 suites, 2 projects |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 45 RLS + 18 query-surface assertions |
+| Unit + component tests | `npm test` | **pass**, 539/539 across 31 suites, 2 projects |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 108 assertions across four files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
@@ -255,7 +335,8 @@ Bottom tabs (Home, Discover, Pantry, Saved, Profile); cook-with-what-I-have and
 eat-within-my-budget flows with a shared sortable results view; recipe detail
 with have/need split, serving scaling and step check-off; distraction-free
 cooking mode; natural-language search; shopping list; **six-step** onboarding;
-seven settings screens; auth screens.
+seven settings screens; auth screens; edit-profile (`/settings/profile`) and
+another user's public profile (`/u/[username]`).
 
 ### Domain engines — pure, offline, unit-tested
 | Module | Responsibility |
@@ -266,7 +347,13 @@ seven settings screens; auth screens.
 | `pricing/units.ts` | Unit conversion, serving scaling, kitchen fractions |
 | `pricing/price-book.ts` | `PriceBook` interface, country support, staleness |
 | `pricing/estimate.ts` | Deterministic costing, completeness, budget verdicts |
-| `recipes/rank.ts` | Hard filters (allergens, diet, flags, appliances) + ranking |
+| `recipes/constraints.ts` | The one constraint model every surface builds |
+| `recipes/filter.ts` | Hard filtering only. Removes; never scores |
+| `recipes/safety.ts` | Allergen, diet and appliance predicates, derived from the catalogue |
+| `recipes/rank.ts` | Ranking on the survivors. Cannot resurrect anything |
+| `recipes/query.ts` | Constraints → query plan, keyset paging |
+| `profile/handle.ts` | Handle folding and validation, mirroring the DB constraints |
+| `storage/images.ts` | Upload rules, resize targets, generated object paths |
 | `search/interpret.ts` | Deterministic constraint extraction, incl. exclusions |
 | `grocery/` | `GroceryProvider` adapter + registry + mock |
 | `ai/schema.ts` | The model contract; generates its own JSON Schema |
@@ -278,16 +365,24 @@ Everything a person edits is a data file, not code:
 |---|---|---|---|
 | Ingredients (257) | `data/ingredients/catalogue.csv` | `catalogue.generated.ts` | `npm run ingredients:import` |
 | Prices (69) | `data/prices/eg.csv` | `pricing/price-data.ts` | `npm run prices:import` |
-| Database seed | the two above | `supabase/seed.sql` | `npm run seed:generate` |
+| Recipes (153) | `data/recipes/*.json` | `recipes/catalogue.generated.ts` | `npm run recipes:import` |
+| Database seed | the three above | `supabase/seed.sql` | `npm run seed:generate` |
 
 Each importer validates and refuses bad input, and CI fails on drift. **257
 ingredients recognised, 69 priced** — recognition and pricing are deliberately
 separate concerns, and an unpriced ingredient is a supported state.
 
 ### Release
-`eas.json`, `EAS.md`, CI (typecheck, lint, tests, Deno check + tests, three
+`eas.json`, `EAS.md`, CI (typecheck, lint, tests, Deno check + tests, four
 drift checks, bundle, database suite, database-type drift), a GitHub Pages
 preview workflow, and `SECURITY_REVIEW.md`.
+
+The database suite is four files now — `01_rls_test.sql`, `02_query_test.sql`,
+`03_profile_privacy_test.sql`, `04_storage_test.sql` — and `db-test.sh` runs
+every `supabase/tests/0[1-9]*.sql` in order, so adding a fifth needs no script
+change. `00_platform_shim.sql` recreates the `auth` AND `storage` schemas so
+the policies can be exercised against a plain Postgres in CI; it is never
+applied to a real Supabase project.
 
 ---
 
@@ -314,75 +409,83 @@ without a backend.
 The earlier Claude Artifact is not a substitute: artifacts are private, so a
 phone browser that is not signed in to claude.ai gets a 404.
 
----
-
 ## Where this session stopped
 
-**Latest commit on `claude/expo-rn-setup-mom5gw`: `a22d001` — "Search the
-database, not a fetched array".** Pushed. Phases A, B, C and D are complete and
-verified; everything below is the state a new session should pick up from.
+**Latest commit on `claude/expo-rn-setup-mom5gw`: see `git log -1`.** Phases A
+through G are complete and verified. Everything below is where a new session
+picks up.
 
 ### THE SINGLE NEXT ACTION
 
-**Phase E — real Supabase Auth.** Nothing in E–U has been started. E comes
-first because the brief is explicit that social and community work must not
-begin before authentication is solid, and F (profiles), G (storage), I
-(friends), J (chat) and M (submissions) all key off a real `auth.uid()`.
+**Phase H + P — the left drawer, and the information architecture around it.**
 
-What Phase E needs, in order:
+The brief is specific: a drawer ALONGSIDE the bottom tabs, not replacing them.
+Bottom navigation stays the core food experience ("What should I eat?" must
+remain the obvious thing on screen); the drawer carries the secondary, social
+and account surfaces that would otherwise be crammed into five tabs.
 
-1. Email sign-up, sign-in and **email verification** (the current screens sign
-   in but do not verify).
-2. Forgot password and reset password.
-3. Session persistence across restarts, and explicit handling of an **expired**
-   session rather than a silent failure.
-4. Logout and account deletion (`delete_own_account()` already exists and is
-   tested — wire the UI to it).
-5. **Explicit "Continue as guest"**, not the current silent bypass.
-6. **Guest → account migration** for pantry, preferences, saved recipes, cooked
-   history, shopping list and generated recipes. Every repository already has a
-   local and a Supabase implementation behind one interface
-   (`features/data/repositories.ts`), which is the seam this uses.
-7. Structure the provider list so Apple and Google slot in later;
-   `socialAuthAvailability()` is already the gate.
+Drawer contents, in order: avatar, display name, @username · Home · Discover ·
+Pantry · Shopping List · Saved · Friends · Messages · Submit a Recipe ·
+Profile · Settings · Help/About · Admin Review (only when the user's
+server-side role is moderator or admin) · Log out.
 
-No Supabase credentials exist in this sandbox, so build it against the real
-client and verify with the local-repository path plus unit tests, as every
-other phase has.
+Most of the leaves do not exist yet — Friends, Messages, Submit a Recipe and
+Admin Review are Phases I–N. Build the drawer with the routes that exist and
+add the rest as their phases land, rather than shipping dead rows.
+
+Practical notes: this needs Expo Router's drawer layout
+(`react-native-drawer-layout` / `@react-navigation/drawer`, neither installed
+yet — use `EXPO_OFFLINE=1 npx expo install`), and it must handle RTL, safe
+areas, and web. The avatar and handle at the top come from
+`useOwnProfile()`, which already exists.
+
+### What is NOT done, and is deliberately waiting
+
+- **Roles.** `Admin Review` needs a server-authoritative role (USER /
+  MODERATOR / ADMIN). That is Phase N and the brief is explicit that it must
+  not be a client-side boolean. The drawer should read a role it is given, not
+  invent one.
+- **`visibility = 'friends'`** resolves strictly narrower than `public` in the
+  `public_profiles` view, because there is no friendship table yet. Widening
+  that line is a deliberate part of Phase I.
+- **Recipe photographs.** The image architecture, provenance columns and
+  buckets are all in place and every recipe carries licensed metadata, but no
+  actual image files have been produced. `RecipeImage` is the single seam.
+- **Avatars in the preview.** `EXPO_PUBLIC_DEMO_MODE` exists in `env.ts` but no
+  seeded demo users use it yet; that is Phase T.
+
+### Credentials this needs and does not have
+
+Nothing built so far is blocked, but three things are inert without config:
+
+| What | Needs | Behaviour without it |
+|---|---|---|
+| Accounts, profiles, handles, uploads | A Supabase project (`EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`) | `isEnabled` is false; the app runs fully on local data and the UI says so rather than pretending |
+| AI recipe generation | `ANTHROPIC_API_KEY` on the edge functions | Local catalogue answers every screen |
+| Recipe image CDN | `EXPO_PUBLIC_RECIPE_IMAGE_BASE_URL`, or the Supabase Storage host | `resolveRecipeImageUrl` returns null and the branded fallback renders |
 
 ### CI
 
-`a22d001` is the first commit expected to be green since Phase A. Runs 17 and
-18 (`c9a3063`, `d7b0fed`) both **failed on one error**:
+Green as of the last push. Two earlier commits (`c9a3063`, `d7b0fed`) failed on
+a single error — `scripts/import-recipes.ts(466,48): Property 'id' does not
+exist on type 'CatalogueIngredient'` — fixed in `a22d001`. The typecheck step
+runs `tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json` and every later
+step is skipped when it fails, so **run `npm run typecheck`, not `npx tsc
+--noEmit`**: the latter does not cover `scripts/`.
 
-```
-scripts/import-recipes.ts(466,48): error TS2339:
-  Property 'id' does not exist on type 'CatalogueIngredient'
-```
+### Things left undone on purpose
 
-That is the `ingredientId: 'undefined'` bug described under Phase D, fixed in
-`a22d001`. The typecheck step runs `tsc --noEmit && tsc --noEmit -p
-scripts/tsconfig.json` and every later step is skipped when it fails, so those
-two runs proved nothing about the rest of the suite. **Check run 19 before
-assuming green**, and note that `npx tsc --noEmit` alone does not cover
-`scripts/` — run `npm run typecheck`, which does both.
-
-The web preview workflow succeeded on all three commits.
-
-### Deliberately not done in Phase D
-
-- **Cook and Budget still rank the whole catalogue** rather than paging. That
-  is correct, not an oversight: their requests barely narrow anything, the
-  ordering is the product, and `useMealSuggestions` defaults to
-  `source: 'catalogue'` for exactly that reason. Revisit only if the catalogue
-  passes a few thousand recipes.
+- **Cook and Budget rank the whole catalogue** rather than paging. Their
+  requests barely narrow anything and the ordering is the product, so
+  `useMealSuggestions` defaults to `source: 'catalogue'`. Revisit past a few
+  thousand recipes.
 - **`results.relaxCollection`** is wired through `RELAXATION_LABEL` but no
-  screen reaches it yet: Discover recovers from an empty collection with its
-  own "Clear filters" action instead. The label exists because the reason
-  exhausts a `Record<RejectionReason, …>` and mapping it to `null` would have
-  meant "safety, never offered", which is untrue of a collection tag.
-- **`npm run format:check` fails on 88 files** and did so before this session.
-  It is not in CI. The generated recipe catalogue is no longer one of them.
+  screen reaches it: Discover recovers from an empty collection with its own
+  "Clear filters" action. The label exists because the reason has to exhaust a
+  `Record<RejectionReason, …>` and mapping it to `null` would mean "safety,
+  never offered", which is untrue of a collection tag.
+- **`npm run format:check` fails on 88 files** and did before this work began.
+  It is not in CI.
 
 ---
 

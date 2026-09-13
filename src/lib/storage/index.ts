@@ -20,6 +20,8 @@ export const StorageKeys = {
   migratedUsers: 'akla.migration.users',
   /** Set when the user explicitly chose to continue without an account. */
   guestChoice: 'akla.auth.guestChoice',
+  /** A guest's display name, bio and country, before there is an account. */
+  guestProfile: 'akla.guest.profile',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];

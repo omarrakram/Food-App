@@ -75,9 +75,13 @@ describe('Arabic locale parity', () => {
   });
 
   it('is actually in Arabic, not English left in place', () => {
-    // Deliberate exceptions: brand names and an email example are not translated.
+    // Deliberate exceptions: brand names and examples of things that are
+    // themselves Latin — an email address, a username handle — are not
+    // translated. A handle can only contain a-z0-9._, so an Arabic example
+    // would show the user something they cannot type.
     const intentionallyLatin = new Set([
       'auth.emailPlaceholder',
+      'profile.usernamePlaceholder',
       'auth.continueWithApple',
       'auth.continueWithGoogle',
       'language.english',
