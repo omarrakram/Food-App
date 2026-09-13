@@ -137,6 +137,25 @@ describe('buildAvailabilityIndex', () => {
     expect(index.expired.has('milk')).toBe(true);
   });
 
+  it('never reports an ingredient as available AND expired at once', () => {
+    // The two sets are answers to the same question, so an overlap is a
+    // contradiction the caller cannot resolve: the filter would count the
+    // ingredient and the UI would explain that it had gone off.
+    const index = buildAvailabilityIndex([pantry('milk', isoOffset(-2))], ['milk'], { now: NOW });
+
+    for (const key of index.expired) expect(index.available.has(key)).toBe(false);
+  });
+
+  it('lets the user override a stale pantry row by typing the ingredient', () => {
+    // Typing "milk" is a statement about what is in front of them NOW. It
+    // outranks a row they last touched a fortnight ago — silently ignoring a
+    // direct answer is worse than trusting it.
+    const index = buildAvailabilityIndex([pantry('milk', isoOffset(-2))], ['milk'], { now: NOW });
+
+    expect(index.available.has('milk')).toBe(true);
+    expect(index.expired.has('milk')).toBe(false);
+  });
+
   it('can be told not to assume staples', () => {
     const index = buildAvailabilityIndex([], [], { now: NOW, assumeCommonStaples: false });
     expect(index.available.has('salt')).toBe(false);

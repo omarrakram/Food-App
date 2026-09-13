@@ -135,7 +135,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function api(endpoint: string, params: Record<string, string>): Promise<unknown> {
   const url = new URL(endpoint);
-  for (const [key, value] of Object.entries({ format: 'json', origin: '*', ...params })) {
+  for (const [key, value] of Object.entries({ format: 'json', ...params })) {
     url.searchParams.set(key, value);
   }
   const response = await fetch(url, { headers: { 'user-agent': USER_AGENT } });
@@ -194,7 +194,13 @@ function toCandidate(
   const meta = info.extmetadata ?? {};
   return {
     title,
-    url: info.url,
+    // Commons appends its own `?utm_source=...` analytics parameters to the
+    // file URL. Left on, they end up inside the thumbnail path — the filename
+    // is the last path segment, and `Aloo_Ghobi.jpg?utm_source=…` is not a
+    // filename — so every thumbnail 404s and the script silently falls back to
+    // downloading full-size originals. That is how eight photographs came to
+    // weigh 14MB.
+    url: info.url.split('?')[0]!,
     descriptionUrl: info.descriptionurl,
     width: info.width,
     height: info.height,
@@ -427,8 +433,19 @@ async function* candidatesFor(
   }
 }
 
-/** Downloads are capped so a 40MB TIFF cannot land in the repository. */
+/** Absolute transfer cap, so a 40MB TIFF cannot be pulled at all. */
 const MAX_BYTES = 6 * 1024 * 1024;
+
+/**
+ * The most a photograph may weigh once it is in the repository.
+ *
+ * A recipe card shows this at roughly 400px and a detail hero at full width,
+ * so a 4000px original is between four and ten times more picture than any
+ * screen asks for. Every one of those megabytes is cloned by every developer,
+ * pushed into every build and downloaded by every visitor to the web preview,
+ * forever. A photograph over this is re-requested smaller rather than kept.
+ */
+const MAX_STORED_BYTES = 900 * 1024;
 
 /** What a JPEG and a PNG start with. An HTML error page starts with neither. */
 function looksLikeImage(bytes: Buffer): boolean {
@@ -490,7 +507,11 @@ function thumbUrl(original: string, width: number): string {
   return `${original.slice(0, index)}/commons/thumb/${tail}/${Math.round(width)}px-${name}`;
 }
 
-const TARGET_WIDTH = 1200;
+/**
+ * Wide enough for a full-bleed detail hero on a tablet, and no wider. The same
+ * asset is downscaled by the browser and by expo-image for the card grids.
+ */
+const TARGET_WIDTH = 1000;
 
 /**
  * Gets the bytes for a candidate at a sensible size.
@@ -506,22 +527,29 @@ const TARGET_WIDTH = 1200;
  * library: the file that lands is already the size the app wants.
  */
 async function fetchImage(candidate: Candidate): Promise<Fetched> {
-  const widths = [...new Set([Math.min(TARGET_WIDTH, candidate.width), 960, 800, 640])]
+  const widths = [...new Set([Math.min(TARGET_WIDTH, candidate.width), 800, 640])]
     .filter((width) => width <= candidate.width)
     .sort((a, b) => b - a);
 
   const errors: string[] = [];
   for (const width of widths) {
     const result = await get(thumbUrl(candidate.url, width));
-    if ('bytes' in result) return result;
-    errors.push(`${width}px ${result.error}`);
+    if ('error' in result) {
+      errors.push(`${width}px ${result.error}`);
+      continue;
+    }
+    if (result.bytes.byteLength <= MAX_STORED_BYTES) return result;
+    // A render this heavy is a very detailed photograph, not a broken one, so
+    // the next width down is worth asking for rather than giving up.
+    errors.push(`${width}px ${(result.bytes.byteLength / 1024).toFixed(0)}KB too heavy`);
   }
 
-  // Every render refused. The original always exists, so try it — it is only
-  // rejected here if it is genuinely too big to keep.
+  // Every render refused. The original always exists — but it is only worth
+  // keeping if it happens to be small, which for a Commons original it rarely
+  // is. Taking a 4MB one "because it worked" is how the repository doubles.
   const original = await get(candidate.url);
-  if ('bytes' in original) return original;
-  errors.push(`original ${original.error}`);
+  if ('bytes' in original && original.bytes.byteLength <= MAX_STORED_BYTES) return original;
+  errors.push(`original ${'error' in original ? original.error : 'too heavy'}`);
   return { error: errors.join('; ') };
 }
 

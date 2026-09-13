@@ -123,7 +123,11 @@ export function buildAvailabilityIndex(
 
   // Explicitly typed ingredients are always trusted — the user is telling us
   // what is in front of them right now.
-  for (const typed of typedIngredients) addName(typed);
+  const typedKeys = new Set<string>();
+  for (const typed of typedIngredients) {
+    const key = addName(typed);
+    if (key) typedKeys.add(key);
+  }
 
   for (const item of pantryItems) {
     const status = freshnessOf(item.expiresOn, now);
@@ -134,8 +138,17 @@ export function buildAvailabilityIndex(
     if (!key) continue;
 
     if (status === 'expired') {
-      // FOOD SAFETY: do not count it, and remember why so the UI can explain.
-      expired.add(key);
+      // FOOD SAFETY: an out-of-date pantry row contributes nothing, and we
+      // remember why so the UI can explain the absence.
+      //
+      // Unless the user has just told us otherwise. Typing "milk" into the
+      // picker is a statement about what is in front of them now, and it
+      // outranks a row they last touched a fortnight ago — so the row is not
+      // recorded as expired either. What must never happen is the state this
+      // branch used to allow: the same ingredient counted as available AND
+      // reported as expired, which is two contradictory answers to one
+      // question and made the food-safety rule unenforceable.
+      if (!typedKeys.has(key)) expired.add(key);
       continue;
     }
 

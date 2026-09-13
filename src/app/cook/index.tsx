@@ -15,6 +15,7 @@ import { Screen, ScreenFooter, ScreenHeader, ScreenScroll } from '@/components/u
 import { SegmentedControl } from '@/components/ui/segmented-control';
 import { Sheet } from '@/components/ui/sheet';
 import { Text } from '@/components/ui/text';
+import { isSafeToUse } from '@/features/ingredients/freshness';
 import { usePantryItems } from '@/features/pantry/hooks';
 import { requestDefaultsFrom, usePreferences } from '@/features/preferences/preferences-provider';
 import { encodeRequest } from '@/features/recipes/request-params';
@@ -71,7 +72,11 @@ export default function CookScreen() {
   // the chips in place instead of flashing an empty picker.
   const fromPantry = params.fromPantry === '1';
   const seedSource = fromPantry
-    ? pantry.data?.map((item) => item.ingredientName)
+    ? // FOOD SAFETY: only what is still in date. Seeding an expired item would
+      // put it in the picker as though the user had typed it, and a typed
+      // ingredient is trusted absolutely — so the expiry rule the engine
+      // enforces would be quietly defeated on the way in.
+      pantry.data?.filter((item) => isSafeToUse(item)).map((item) => item.ingredientName)
     : recentIngredients.data;
 
   if (!hasSeeded && seedSource !== undefined) {
