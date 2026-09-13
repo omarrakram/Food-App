@@ -316,6 +316,76 @@ phone browser that is not signed in to claude.ai gets a 404.
 
 ---
 
+## Where this session stopped
+
+**Latest commit on `claude/expo-rn-setup-mom5gw`: `a22d001` — "Search the
+database, not a fetched array".** Pushed. Phases A, B, C and D are complete and
+verified; everything below is the state a new session should pick up from.
+
+### THE SINGLE NEXT ACTION
+
+**Phase E — real Supabase Auth.** Nothing in E–U has been started. E comes
+first because the brief is explicit that social and community work must not
+begin before authentication is solid, and F (profiles), G (storage), I
+(friends), J (chat) and M (submissions) all key off a real `auth.uid()`.
+
+What Phase E needs, in order:
+
+1. Email sign-up, sign-in and **email verification** (the current screens sign
+   in but do not verify).
+2. Forgot password and reset password.
+3. Session persistence across restarts, and explicit handling of an **expired**
+   session rather than a silent failure.
+4. Logout and account deletion (`delete_own_account()` already exists and is
+   tested — wire the UI to it).
+5. **Explicit "Continue as guest"**, not the current silent bypass.
+6. **Guest → account migration** for pantry, preferences, saved recipes, cooked
+   history, shopping list and generated recipes. Every repository already has a
+   local and a Supabase implementation behind one interface
+   (`features/data/repositories.ts`), which is the seam this uses.
+7. Structure the provider list so Apple and Google slot in later;
+   `socialAuthAvailability()` is already the gate.
+
+No Supabase credentials exist in this sandbox, so build it against the real
+client and verify with the local-repository path plus unit tests, as every
+other phase has.
+
+### CI
+
+`a22d001` is the first commit expected to be green since Phase A. Runs 17 and
+18 (`c9a3063`, `d7b0fed`) both **failed on one error**:
+
+```
+scripts/import-recipes.ts(466,48): error TS2339:
+  Property 'id' does not exist on type 'CatalogueIngredient'
+```
+
+That is the `ingredientId: 'undefined'` bug described under Phase D, fixed in
+`a22d001`. The typecheck step runs `tsc --noEmit && tsc --noEmit -p
+scripts/tsconfig.json` and every later step is skipped when it fails, so those
+two runs proved nothing about the rest of the suite. **Check run 19 before
+assuming green**, and note that `npx tsc --noEmit` alone does not cover
+`scripts/` — run `npm run typecheck`, which does both.
+
+The web preview workflow succeeded on all three commits.
+
+### Deliberately not done in Phase D
+
+- **Cook and Budget still rank the whole catalogue** rather than paging. That
+  is correct, not an oversight: their requests barely narrow anything, the
+  ordering is the product, and `useMealSuggestions` defaults to
+  `source: 'catalogue'` for exactly that reason. Revisit only if the catalogue
+  passes a few thousand recipes.
+- **`results.relaxCollection`** is wired through `RELAXATION_LABEL` but no
+  screen reaches it yet: Discover recovers from an empty collection with its
+  own "Clear filters" action instead. The label exists because the reason
+  exhausts a `Record<RejectionReason, …>` and mapping it to `null` would have
+  meant "safety, never offered", which is untrue of a collection tag.
+- **`npm run format:check` fails on 88 files** and did so before this session.
+  It is not in CI. The generated recipe catalogue is no longer one of them.
+
+---
+
 ## Remaining work
 
 ### Credential-gated (nothing to build until these exist)
