@@ -1,8 +1,16 @@
 import type { PantryRepository } from '@/features/pantry/repository';
-import type { LocalSavedRepository, SavedRepository } from '@/features/saved/repository';
+import type {
+  HistoryKind,
+  HistoryRepository,
+  LocalSavedRepository,
+  SavedRepository,
+} from '@/features/saved/repository';
 import type { ShoppingRepository } from '@/features/shopping/repository';
 import { LocalPantryRepository } from '@/features/pantry/repository';
-import { LocalSavedRepository as LocalSaved } from '@/features/saved/repository';
+import {
+  LocalHistoryRepository,
+  LocalSavedRepository as LocalSaved,
+} from '@/features/saved/repository';
 import { LocalShoppingRepository } from '@/features/shopping/repository';
 import { logError, logInfo } from '@/lib/logger';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
@@ -27,6 +35,7 @@ export type MigrationTargets = {
   pantry: PantryRepository;
   saved: SavedRepository;
   shopping: ShoppingRepository;
+  history: HistoryRepository;
 };
 
 export type MigrationResult = {
@@ -34,7 +43,19 @@ export type MigrationResult = {
   pantryItems: number;
   savedRecipes: number;
   shoppingItems: number;
+  historyEntries: number;
 };
+
+/**
+ * History kinds worth carrying across.
+ *
+ * `viewed` and `cooked` are the user's record of what they have actually done
+ * and are shown back to them on the Saved screen; losing them at sign-up would
+ * empty two tabs that were full a moment earlier. `disliked` is deliberately
+ * excluded — it feeds ranking rather than a screen, and re-learning it costs
+ * the user nothing while getting it wrong quietly suppresses recipes.
+ */
+const MIGRATED_HISTORY_KINDS: readonly HistoryKind[] = ['cooked', 'viewed'];
 
 async function alreadyMigrated(userId: string): Promise<boolean> {
   const users = (await getItem<string[]>(StorageKeys.migratedUsers)) ?? [];
@@ -57,6 +78,7 @@ export async function migrateGuestData(
     pantryItems: 0,
     savedRecipes: 0,
     shoppingItems: 0,
+    historyEntries: 0,
   };
 
   if (await alreadyMigrated(userId)) return empty;
@@ -64,15 +86,29 @@ export async function migrateGuestData(
   const localPantry = new LocalPantryRepository();
   const localSaved: LocalSavedRepository = new LocalSaved();
   const localShopping = new LocalShoppingRepository();
+  const localHistory = new LocalHistoryRepository();
 
   try {
-    const [pantryItems, savedRecipes, shoppingItems] = await Promise.all([
+    const [pantryItems, savedRecipes, shoppingItems, historyByKind] = await Promise.all([
       localPantry.list(),
       localSaved.list(),
       localShopping.list(),
+      Promise.all(
+        MIGRATED_HISTORY_KINDS.map(async (kind) => ({
+          kind,
+          entries: await localHistory.list(kind),
+        })),
+      ),
     ]);
 
-    if (pantryItems.length === 0 && savedRecipes.length === 0 && shoppingItems.length === 0) {
+    const historyEntries = historyByKind.reduce((total, group) => total + group.entries.length, 0);
+
+    if (
+      pantryItems.length === 0 &&
+      savedRecipes.length === 0 &&
+      shoppingItems.length === 0 &&
+      historyEntries === 0
+    ) {
       await markMigrated(userId);
       return empty;
     }
@@ -109,14 +145,28 @@ export async function migrateGuestData(
       );
     }
 
+    // Oldest first, so the remote store's own recency ordering ends up
+    // matching the local one rather than reversing it.
+    for (const { kind, entries } of historyByKind) {
+      for (const entry of [...entries].reverse()) {
+        await targets.history.record(entry.recipe, kind);
+      }
+    }
+
     // Only now is it safe to drop the local copies.
-    await Promise.all([localPantry.clear(), localSaved.clear(), localShopping.clear()]);
+    await Promise.all([
+      localPantry.clear(),
+      localSaved.clear(),
+      localShopping.clear(),
+      localHistory.clear(),
+    ]);
     await markMigrated(userId);
 
     logInfo('guest_data_migrated', {
       pantryItems: pantryItems.length,
       savedRecipes: savedRecipes.length,
       shoppingItems: shoppingItems.length,
+      historyEntries,
     });
 
     return {
@@ -124,6 +174,7 @@ export async function migrateGuestData(
       pantryItems: pantryItems.length,
       savedRecipes: savedRecipes.length,
       shoppingItems: shoppingItems.length,
+      historyEntries,
     };
   } catch (error) {
     // Leave the local data and the unset marker alone so the next launch

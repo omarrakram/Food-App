@@ -13,7 +13,15 @@ export default function WelcomeScreen() {
   const theme = useTheme();
   const { t } = useI18n();
   const router = useRouter();
-  const { isEnabled } = useAuth();
+  const { isEnabled, continueAsGuest } = useAuth();
+
+  // Recording the choice is the point of this button. Without it a relaunch
+  // would bring the user straight back here, which is the nagging the explicit
+  // choice exists to avoid.
+  const browseAsGuest = async () => {
+    await continueAsGuest();
+    router.replace('/');
+  };
 
   return (
     <Screen edges={{ top: true, bottom: true }}>
@@ -67,7 +75,7 @@ export default function WelcomeScreen() {
           // local data, so we offer the only route that can succeed.
           <Button
             label={t('auth.continueAsGuest')}
-            onPress={() => router.replace('/')}
+            onPress={() => void browseAsGuest()}
             size="lg"
             testID="welcome-guest"
           />
@@ -78,7 +86,7 @@ export default function WelcomeScreen() {
             label={t('auth.continueAsGuest')}
             variant="ghost"
             size="sm"
-            onPress={() => router.replace('/')}
+            onPress={() => void browseAsGuest()}
             fullWidth
             testID="welcome-guest"
           />

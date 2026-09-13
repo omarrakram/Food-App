@@ -295,6 +295,7 @@ export const ar: Record<RawTranslationKey, string> = {
   'auth.name': 'الاسم',
   'auth.forgotPassword': 'نسيت كلمة المرور؟',
   'auth.getStarted': 'ابدأ الآن',
+  'auth.signInAgain': 'سجّل دخول تاني',
 
   'diet.none': 'بدون قيود',
   'diet.vegetarian': 'نباتي',

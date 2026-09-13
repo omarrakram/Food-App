@@ -7,6 +7,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -17,6 +18,7 @@ import { logError, logInfo } from '@/lib/logger';
 import { clearAppStorage } from '@/lib/storage';
 
 import { AuthFailure } from './errors';
+import { chooseGuest, clearGuestChoice, readGuestChoice } from './guest-mode';
 
 /**
  * Authentication.
@@ -29,12 +31,32 @@ import { AuthFailure } from './errors';
 
 export type AuthStatus = 'loading' | 'signed_out' | 'signed_in';
 
+/**
+ * Why there is no session.
+ *
+ * `never` and `signed_out` both mean "use local data", but they are different
+ * to the user: one has never been asked, the other has just been told. And
+ * `expired` is neither — the account still exists and their data is on the
+ * server, so silently behaving like a guest would be a lie.
+ */
+export type SignedOutReason = 'never' | 'guest' | 'signed_out' | 'expired';
+
 export type AuthContextValue = {
   status: AuthStatus;
   session: Session | null;
   user: User | null;
   /** False when no Supabase project is configured; sign-in UI hides itself. */
   isEnabled: boolean;
+  /** Why there is no session. Meaningless while signed in. */
+  signedOutReason: SignedOutReason;
+  /** True once the user has explicitly declined an account. */
+  isGuest: boolean;
+  /** Records the explicit "Continue as guest" choice. */
+  continueAsGuest: () => Promise<void>;
+  /** Forgets the guest choice, e.g. when the user decides to sign up. */
+  leaveGuestMode: () => Promise<void>;
+  /** Dismisses the "your session expired" state without signing in. */
+  acknowledgeExpiry: () => void;
   signUp: (input: { email: string; password: string; displayName: string }) => Promise<{
     needsEmailConfirmation: boolean;
   }>;
@@ -62,6 +84,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
   const [session, setSession] = useState<Session | null>(null);
   const [status, setStatus] = useState<AuthStatus>(supabase ? 'loading' : 'signed_out');
+  const [signedOutReason, setSignedOutReason] = useState<SignedOutReason>('never');
+
+  /**
+   * Set while WE are signing the user out, so the `SIGNED_OUT` event that
+   * follows is not mistaken for an expiry. Supabase emits the same event
+   * whether the user pressed a button or a refresh token was rejected, and
+   * telling those apart is the difference between "See you soon" and "Please
+   * sign in again".
+   */
+  const deliberateSignOut = useRef(false);
+
+  // The stored guest choice, restored before the gate runs so a relaunch does
+  // not bounce a guest back to the welcome screen.
+  useEffect(() => {
+    let cancelled = false;
+    void readGuestChoice().then((choice) => {
+      if (cancelled || !choice) return;
+      setSignedOutReason((current) => (current === 'never' ? 'guest' : current));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!supabase) return;
@@ -82,7 +127,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
     const { data: subscription } = supabase.auth.onAuthStateChange((event, nextSession) => {
-      setSession(nextSession);
+      setSession((previous) => {
+        if (!nextSession && previous) {
+          // A session existed and no longer does. If we did not ask for that,
+          // the refresh token was rejected — expired, revoked, or the password
+          // was changed elsewhere. Either way the user needs telling.
+          setSignedOutReason(deliberateSignOut.current ? 'signed_out' : 'expired');
+          if (!deliberateSignOut.current) logInfo('auth_session_expired', { event });
+          deliberateSignOut.current = false;
+        }
+        return nextSession;
+      });
       setStatus(nextSession ? 'signed_in' : 'signed_out');
       logInfo('auth_state_change', { event });
 
@@ -91,6 +146,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (event === 'SIGNED_OUT' || event === 'SIGNED_IN') {
         void queryClient.invalidateQueries();
       }
+      // Signing in ends the guest period; the migration runs separately.
+      if (event === 'SIGNED_IN') void clearGuestChoice();
     });
 
     return () => {
@@ -132,6 +189,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = useCallback(async () => {
     if (!supabase) return;
+    deliberateSignOut.current = true;
+    setSignedOutReason('signed_out');
     const { error } = await supabase.auth.signOut();
     if (error) logError('auth_sign_out_failed', error);
     // Local caches are per-identity; clearing them on sign-out is what stops
@@ -178,6 +237,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [supabase],
   );
 
+  const continueAsGuest = useCallback(async () => {
+    await chooseGuest();
+    setSignedOutReason('guest');
+  }, []);
+
+  const leaveGuestMode = useCallback(async () => {
+    await clearGuestChoice();
+    setSignedOutReason('never');
+  }, []);
+
+  const acknowledgeExpiry = useCallback(() => {
+    setSignedOutReason((current) => (current === 'expired' ? 'signed_out' : current));
+  }, []);
+
   const deleteAccount = useCallback(async () => {
     if (!supabase) unavailable();
     // The database function derives the user from auth.uid(), so this cannot
@@ -185,6 +258,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { error } = await supabase.rpc('delete_own_account');
     if (error) throw new AuthFailure(error);
 
+    deliberateSignOut.current = true;
+    setSignedOutReason('signed_out');
+    // The account is gone, so its migration marker is meaningless — and
+    // keeping it would stop a re-registration from migrating anything.
+    await clearGuestChoice();
     await supabase.auth.signOut();
     await clearAppStorage();
     queryClient.clear();
@@ -196,6 +274,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       user: session?.user ?? null,
       isEnabled: Boolean(supabase),
+      signedOutReason,
+      isGuest: signedOutReason === 'guest',
+      continueAsGuest,
+      leaveGuestMode,
+      acknowledgeExpiry,
       signUp,
       signIn,
       signOut,
@@ -208,6 +291,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       status,
       session,
       supabase,
+      signedOutReason,
+      continueAsGuest,
+      leaveGuestMode,
+      acknowledgeExpiry,
       signUp,
       signIn,
       signOut,

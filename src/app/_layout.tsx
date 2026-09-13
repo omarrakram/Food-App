@@ -25,21 +25,28 @@ void SplashScreen.preventAutoHideAsync();
  * finishing onboarding navigate straight back into it. Route groups may not
  * both contain an `index`.
  *
- * Three states decide where a user belongs:
+ * Four states decide where a user belongs:
  *
- *   no session + auth enabled       -> (auth), unless they chose to browse
+ *   no session, never asked         -> (auth)/welcome, to make the choice
+ *   no session, chose guest         -> the app, on local data
  *   session (or auth disabled)      -> (onboarding) until it is finished
  *   onboarded                       -> the tabs
  *
- * Guests are deliberately allowed everywhere except (auth): the product works
- * signed out, and forcing an account before someone has seen a single recipe
- * would be the wrong trade.
+ * The first two used to be one state, and that was the "silent bypass": a
+ * signed-out launch fell straight into onboarding, so nobody ever chose
+ * anything and we could not tell a deliberate guest from someone who had never
+ * been asked. Now the welcome screen is shown once, and a guest is a guest
+ * until they sign in — never asked again on relaunch.
+ *
+ * Guests are still allowed everywhere except (auth): the product works signed
+ * out, and forcing an account before someone has seen a single recipe would be
+ * the wrong trade. The choice is about being asked, not about being blocked.
  */
 function useRouteGate(isReady: boolean) {
   const router = useRouter();
   const segments = useSegments();
   const { hasCompletedOnboarding } = usePreferences();
-  const { status } = useAuth();
+  const { status, isEnabled, signedOutReason } = useAuth();
 
   useEffect(() => {
     if (!isReady || status === 'loading') return;
@@ -47,6 +54,15 @@ function useRouteGate(isReady: boolean) {
     const group = segments[0];
     const inAuth = group === '(auth)';
     const inOnboarding = group === '(onboarding)';
+
+    // Ask once. `never` means the welcome screen has not been answered; every
+    // other reason — guest, signed out, expired — means it has, and the user
+    // is free to browse. An expired session shows its notice on the profile
+    // screen rather than a wall, because the app still works on local data.
+    if (isEnabled && status === 'signed_out' && signedOutReason === 'never') {
+      if (!inAuth) router.replace('/(auth)/welcome');
+      return;
+    }
 
     if (!hasCompletedOnboarding) {
       // Onboarding collects the constraints every screen depends on, so it
@@ -64,7 +80,7 @@ function useRouteGate(isReady: boolean) {
     if (inAuth && status === 'signed_in') {
       router.replace('/');
     }
-  }, [isReady, status, hasCompletedOnboarding, segments, router]);
+  }, [isReady, status, isEnabled, signedOutReason, hasCompletedOnboarding, segments, router]);
 }
 
 function RootNavigator() {

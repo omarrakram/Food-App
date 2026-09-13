@@ -17,7 +17,7 @@ export default function ProfileScreen() {
   const { t } = useI18n();
   const router = useRouter();
   const { preferences } = usePreferences();
-  const { user, isEnabled: authEnabled } = useAuth();
+  const { user, isEnabled: authEnabled, signedOutReason, acknowledgeExpiry } = useAuth();
   const shoppingList = useShoppingList();
 
   const uncheckedCount = (shoppingList.data ?? []).filter((item) => !item.isChecked).length;
@@ -54,12 +54,23 @@ export default function ProfileScreen() {
 
       {authEnabled && !user ? (
         <View style={{ gap: theme.spacing.sm }}>
+          {/*
+            An expired session is not the same as being a guest, and saying
+            "Sign in to sync" to someone who WAS signed in five minutes ago
+            reads as though their account is gone. They are told what happened
+            and their local data still works meanwhile.
+          */}
           <Text variant="callout" color="textSecondary" align="center">
-            {t('profile.signInPrompt')}
+            {signedOutReason === 'expired'
+              ? t('auth.error.sessionExpired')
+              : t('profile.signInPrompt')}
           </Text>
           <Button
-            label={t('auth.getStarted')}
-            onPress={() => router.push('/(auth)/welcome')}
+            label={signedOutReason === 'expired' ? t('auth.signInAgain') : t('auth.getStarted')}
+            onPress={() => {
+              acknowledgeExpiry();
+              router.push(signedOutReason === 'expired' ? '/(auth)/sign-in' : '/(auth)/welcome');
+            }}
             size="lg"
             testID="profile-sign-in"
           />

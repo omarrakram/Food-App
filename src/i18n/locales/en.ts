@@ -414,6 +414,7 @@ export const en = {
   'auth.welcomeBody':
     'Akla turns what is already in your kitchen — and what is in your wallet — into meals worth cooking.',
   'auth.getStarted': 'Get started',
+  'auth.signInAgain': 'Sign in again',
   'auth.haveAccount': 'I already have an account',
   'auth.continueAsGuest': 'Look around first',
   'account.localTitle': 'Everything is saved on this device',

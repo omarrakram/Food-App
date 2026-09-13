@@ -18,6 +18,8 @@ export const StorageKeys = {
   lastBudget: 'akla.recent.budget',
   /** User ids whose guest data has already been copied to the server. */
   migratedUsers: 'akla.migration.users',
+  /** Set when the user explicitly chose to continue without an account. */
+  guestChoice: 'akla.auth.guestChoice',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];
