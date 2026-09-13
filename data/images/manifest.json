@@ -1,4 +1,1388 @@
 {
-  "images": [],
-  "skipped": []
+  "images": [
+    {
+      "recipeSlug": "aloo-gobi",
+      "path": "aloo-gobi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aloo_Ghobi.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Aloo_Ghobi.jpg",
+      "creator": "Sapanabehl",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Sapanabehl · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 766,
+      "bytes": 250451,
+      "sha256": "752ebe8148f6b78abdf4a966618aa44fe3c47e6b2b9e6422850250a4f49bc04b",
+      "acquiredAt": "2026-09-13T15:24:14.930Z"
+    },
+    {
+      "recipeSlug": "bamia-vegetarian",
+      "path": "bamia-vegetarian.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Bamia-Ocras_tomate_%28cropped%29.JPG",
+      "creator": "Tamorlan",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Tamorlan · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 755,
+      "bytes": 327016,
+      "sha256": "ffa85bea121f2f812536382eb71ed4724b8ed7354eef853031862aeaf976df7e",
+      "acquiredAt": "2026-09-13T15:24:18.119Z"
+    },
+    {
+      "recipeSlug": "banana-bread",
+      "path": "banana-bread.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Banana_bread_slices.jpg",
+      "creator": "Shisma",
+      "license": "CC-BY-4.0",
+      "attribution": "Shisma · CC-BY-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 263888,
+      "sha256": "5297ebb3b97503d24ef9ade3df37765c5e60fac155515615d66620d7cc8a0197",
+      "acquiredAt": "2026-09-13T15:24:18.566Z"
+    },
+    {
+      "recipeSlug": "basbousa",
+      "path": "basbousa.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Basboosa.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/82/Basboosa.jpg",
+      "creator": "stu_spivack",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "stu_spivack · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 761,
+      "bytes": 233498,
+      "sha256": "9411d3b31cd7abf160cbf204e3e2a69adb7dbb9e661df3637dd008315ad52b96",
+      "acquiredAt": "2026-09-13T15:24:21.239Z"
+    },
+    {
+      "recipeSlug": "batata-harra",
+      "path": "batata-harra.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Batata_harra.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Batata_harra.jpg",
+      "creator": "secretlondon123 from London, England",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "secretlondon123 from London, England · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 230599,
+      "sha256": "af16af850e1a72b76a95ce1f39bdb85e908666b6b4043bb2d34e38ed32cc0c17",
+      "acquiredAt": "2026-09-13T15:24:21.865Z"
+    },
+    {
+      "recipeSlug": "beef-burger-homemade",
+      "path": "beef-burger-homemade.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:RedDot_Burger.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg",
+      "creator": "Hongreddotbrewhouse",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Hongreddotbrewhouse · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 220612,
+      "sha256": "3705d3a847a867a6b88f3c647b1d00b1826807148b4ba51654ac64491aa0be74",
+      "acquiredAt": "2026-09-13T15:24:27.071Z"
+    },
+    {
+      "recipeSlug": "beef-tacos",
+      "path": "beef-tacos.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Argentine-style_hand-chopped_roasted_beef_tacos,_with_mozzarella,_caramelized_onions,_and_salsas.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/Argentine-style_hand-chopped_roasted_beef_tacos%2C_with_mozzarella%2C_caramelized_onions%2C_and_salsas.jpg",
+      "creator": "Horacio Cambeiro",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Horacio Cambeiro · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 378304,
+      "sha256": "8241c506e8af0b82df9afc2509406f312a00924732e59752c6c4b53b7571c311",
+      "acquiredAt": "2026-09-13T15:24:31.919Z"
+    },
+    {
+      "recipeSlug": "bessara",
+      "path": "bessara.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bissara_Moroccan_split_pea_and_fava_bean_soup.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/Bissara_Moroccan_split_pea_and_fava_bean_soup.jpg",
+      "creator": "Ruby Josephine Smith",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Ruby Josephine Smith · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 800,
+      "height": 1200,
+      "bytes": 292940,
+      "sha256": "89cbe03a82f1c955d1f29554f14f2052b1b5f4b5341e763aa2617ae0872c6bc4",
+      "acquiredAt": "2026-09-13T15:24:32.768Z"
+    },
+    {
+      "recipeSlug": "black-bean-quesadilla",
+      "path": "black-bean-quesadilla.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Carnitas_and_Black_Bean_Quesadilla,_Key_West_Florida_2022.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Carnitas_and_Black_Bean_Quesadilla%2C_Key_West_Florida_2022.jpg",
+      "creator": "Cayobo",
+      "license": "CC-BY-2.0",
+      "attribution": "Cayobo · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 759,
+      "bytes": 327578,
+      "sha256": "9a9f5fad21dede9096b3c2d7e966f0dba349cf2119352aa2de44e66992f0f185",
+      "acquiredAt": "2026-09-13T15:24:34.631Z"
+    },
+    {
+      "recipeSlug": "bruschetta-tomato",
+      "path": "bruschetta-tomato.png",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tomato_Bruschetta_ingredients.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/74/Tomato_Bruschetta_ingredients.png",
+      "creator": "GeoO",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "GeoO · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1204,
+      "bytes": 672076,
+      "sha256": "1c626bd7f6b894055ff39bb2dd25113d4140771f2fac2b7e21d3bbf8db197352",
+      "acquiredAt": "2026-09-13T15:24:37.260Z"
+    },
+    {
+      "recipeSlug": "butter-chicken-light",
+      "path": "butter-chicken-light.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/41/Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg",
+      "creator": "Yuvraj Singh 97",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Yuvraj Singh 97 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1332,
+      "bytes": 567885,
+      "sha256": "99ed9679903a120a3e960cd5b58c2076141c3ce7f8a80e2829328ef03f6fdead",
+      "acquiredAt": "2026-09-13T15:24:40.248Z"
+    },
+    {
+      "recipeSlug": "cacik",
+      "path": "cacik.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cacik-1.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/23/Cacik-1.jpg",
+      "creator": "Rainer Zenz",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Rainer Zenz · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 875,
+      "bytes": 237191,
+      "sha256": "85b6d1f06af4dffbf7ba657c81368acd24d0fd011f048cf2b7497bbd0bfd4e00",
+      "acquiredAt": "2026-09-13T15:24:40.597Z"
+    },
+    {
+      "recipeSlug": "chana-masala",
+      "path": "chana-masala.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chana_masala.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Chana_masala.jpg",
+      "creator": "Simon Law (sfllaw) from Montréal , QC , Canada",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Simon Law (sfllaw) from Montréal , QC , Canada · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 288916,
+      "sha256": "7751b5c85344f3f6ac3a3342503439070e60443ec5729b2d159d0ee253ad9a22",
+      "acquiredAt": "2026-09-13T15:24:49.589Z"
+    },
+    {
+      "recipeSlug": "chicken-fajitas",
+      "path": "chicken-fajitas.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chicken_fajita_platter,_Lone_Star_Texas_Grill,_Windsor,_Ontario,_2025-06-14_03.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Chicken_fajita_platter%2C_Lone_Star_Texas_Grill%2C_Windsor%2C_Ontario%2C_2025-06-14_03.jpg",
+      "creator": "Crisco 1492",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Crisco 1492 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 756,
+      "bytes": 365234,
+      "sha256": "6e62809e619aecb3983a70f819e5ecc00516e17e897f86d12fa8b5f3d3aa8072",
+      "acquiredAt": "2026-09-13T15:24:49.978Z"
+    },
+    {
+      "recipeSlug": "chicken-fried-rice",
+      "path": "chicken-fried-rice.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Koh_Mak,_Thailand,_Fried_rice_with_seafood,_Thai_fried_rice.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Koh_Mak%2C_Thailand%2C_Fried_rice_with_seafood%2C_Thai_fried_rice.jpg",
+      "creator": "Vyacheslav Argenberg",
+      "license": "CC-BY-4.0",
+      "attribution": "Vyacheslav Argenberg · CC-BY-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 699,
+      "bytes": 247831,
+      "sha256": "a9d60db4286e22869d4b5decf2341fd1f567c0dd6acf5e561a4c9ad0d3cfe757",
+      "acquiredAt": "2026-09-13T15:24:50.586Z"
+    },
+    {
+      "recipeSlug": "chicken-parm-oven",
+      "path": "chicken-parm-oven.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chicken_parm_at_a_diner.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Chicken_parm_at_a_diner.jpg",
+      "creator": "Oknazevad",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Oknazevad · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 409228,
+      "sha256": "8032e1c134e979a29721848d5f51e6002cb38fc200b070efe71c1b0239417f33",
+      "acquiredAt": "2026-09-13T15:24:51.455Z"
+    },
+    {
+      "recipeSlug": "chocolate-chip-cookies",
+      "path": "chocolate-chip-cookies.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:160920-N-XP344-012_(29776420206).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/160920-N-XP344-012_%2829776420206%29.jpg",
+      "creator": "U.S. Naval Forces Central Command/U.S. Fifth Fleet",
+      "license": "CC-BY-2.0",
+      "attribution": "U.S. Naval Forces Central Command/U.S. Fifth Fleet · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 714,
+      "bytes": 315872,
+      "sha256": "6ce8b1ee2c51af76f78591784aa4caa46fbb8f52bb01555b16cbde7fc4e1a760",
+      "acquiredAt": "2026-09-13T15:24:57.633Z"
+    },
+    {
+      "recipeSlug": "coconut-chicken-curry",
+      "path": "coconut-chicken-curry.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Coconut_Chicken_Curry.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Coconut_Chicken_Curry.jpg",
+      "creator": "TheCulinaryGeek",
+      "license": "CC-BY-2.0",
+      "attribution": "TheCulinaryGeek · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1505,
+      "bytes": 337784,
+      "sha256": "b4a9149fffc35c0782d9ca85db4a41ac151d7e18999f346adcc41320a4c453cb",
+      "acquiredAt": "2026-09-13T15:25:01.700Z"
+    },
+    {
+      "recipeSlug": "congee-chicken",
+      "path": "congee-chicken.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chok_tomyam_(tomyam_congee),_chicken_ver,_Bangkok,_2018-01-21.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Chok_tomyam_%28tomyam_congee%29%2C_chicken_ver%2C_Bangkok%2C_2018-01-21.jpg",
+      "creator": "Bitterschoko",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 1020,
+      "bytes": 370197,
+      "sha256": "7bb28098fcddfec88d178e75453148dfb4a575dc111297a752743918f878877d",
+      "acquiredAt": "2026-09-13T15:25:03.677Z"
+    },
+    {
+      "recipeSlug": "cucumber-raita",
+      "path": "cucumber-raita.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cucumber-raita.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/78/Cucumber-raita.jpg",
+      "creator": "Sonia Goyal",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Sonia Goyal · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 906470,
+      "sha256": "5d6c45f496102272b3ca484cdf6a973b4147660b6691de2606d0e0d117292268",
+      "acquiredAt": "2026-09-13T15:25:08.479Z"
+    },
+    {
+      "recipeSlug": "dal-tadka",
+      "path": "dal-tadka.png",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:3_types_of_lentil.png",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/3_types_of_lentil.png",
+      "creator": "User:Justinc",
+      "license": "CC-BY-SA-2.5",
+      "attribution": "User:Justinc · CC-BY-SA-2.5 · Wikimedia Commons",
+      "width": 800,
+      "height": 459,
+      "bytes": 831352,
+      "sha256": "7e309e8e50c8c552b7a50cb9a572e79bf91ddbaa6df683b364d5d11445b8c38b",
+      "acquiredAt": "2026-09-13T15:25:09.094Z"
+    },
+    {
+      "recipeSlug": "egg-drop-soup",
+      "path": "egg-drop-soup.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:5-Minute_Egg_Drop_Soup-5_(32079790121).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e7/5-Minute_Egg_Drop_Soup-5_%2832079790121%29.jpg",
+      "creator": "Sharon Chen from Austin, United States",
+      "license": "CC-BY-2.0",
+      "attribution": "Sharon Chen from Austin, United States · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 664,
+      "bytes": 826741,
+      "sha256": "878d92bf7191339b3f5ad3c491593219f761dc415cf79a5019ec34b6e787fa26",
+      "acquiredAt": "2026-09-13T15:25:11.691Z"
+    },
+    {
+      "recipeSlug": "fattoush",
+      "path": "fattoush.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fattoush.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Fattoush.JPG",
+      "creator": "Unknown",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 285465,
+      "sha256": "ca2ce540cd0301f7678cc4145d1ab4eccbe2c62ac278d3bc8348328ee52952b8",
+      "acquiredAt": "2026-09-13T15:25:23.372Z"
+    },
+    {
+      "recipeSlug": "ful-medames-classic",
+      "path": "ful-medames-classic.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ful_medames.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Ful_medames.jpg",
+      "creator": "Zachbe at en.wikipedia",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Zachbe at en.wikipedia · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 230987,
+      "sha256": "6e4b8fadfea3e9bd1402cd99bb8264fc6a83e8c1dbddb436fb9df29bb90da779",
+      "acquiredAt": "2026-09-13T15:25:34.208Z"
+    },
+    {
+      "recipeSlug": "garlic-green-beans",
+      "path": "garlic-green-beans.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sauteed_Garlic_Green_Beans_1_2017-02-22.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Sauteed_Garlic_Green_Beans_1_2017-02-22.jpg",
+      "creator": "F ASTILY",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "F ASTILY · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 269131,
+      "sha256": "6aefa66c2957556d268ac4fe5a163ed9f77edc3418012adcb4a76d47d74b8bb7",
+      "acquiredAt": "2026-09-13T15:25:36.121Z"
+    },
+    {
+      "recipeSlug": "greek-salad",
+      "path": "greek-salad.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Greece_Food_Horiatiki.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Greece_Food_Horiatiki.JPG",
+      "creator": "User:Jpatokal",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "User:Jpatokal · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 665,
+      "bytes": 292889,
+      "sha256": "d9cc5483eb67551ca31ce456ae437952089de33321b8114b5afaf484c8d81fba",
+      "acquiredAt": "2026-09-13T15:25:41.121Z"
+    },
+    {
+      "recipeSlug": "guacamole",
+      "path": "guacamole.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Guacamole_IMGP1271.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/64/Guacamole_IMGP1271.jpg",
+      "creator": "Nikodem Nijaki",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Nikodem Nijaki · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 664,
+      "bytes": 191601,
+      "sha256": "4b6fca968467920c845fc99d6d31578025086093169727869366c3b8d83b1255",
+      "acquiredAt": "2026-09-13T15:25:43.841Z"
+    },
+    {
+      "recipeSlug": "hawawshi",
+      "path": "hawawshi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Egyptian_meatloaf.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Egyptian_meatloaf.jpg",
+      "creator": "Mkevy",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Mkevy · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 273597,
+      "sha256": "c51f5ce743a311aaf449c76655670e1b33613334f5b16de96e4915bb27c12680",
+      "acquiredAt": "2026-09-13T15:25:44.491Z"
+    },
+    {
+      "recipeSlug": "huevos-rancheros",
+      "path": "huevos-rancheros.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mmm...huevos_rancheros.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/57/Mmm...huevos_rancheros.jpg",
+      "creator": "jeffreyw",
+      "license": "CC-BY-2.0",
+      "attribution": "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 664,
+      "bytes": 327963,
+      "sha256": "aba6c6d9cce9b4766196a3898179ce30893910878801ffb24ff71ee88077d79f",
+      "acquiredAt": "2026-09-13T15:25:47.139Z"
+    },
+    {
+      "recipeSlug": "hummus-classic",
+      "path": "hummus-classic.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lebanese_style_hummus.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Lebanese_style_hummus.jpg",
+      "creator": "Beyrouthhh at English Wikipedia",
+      "license": "CC-BY-3.0",
+      "attribution": "Beyrouthhh at English Wikipedia · CC-BY-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 563,
+      "bytes": 183608,
+      "sha256": "4de8afa11297d9393f6ede4378b478c21da9c8c22740f2f6320a345c7a73de44",
+      "acquiredAt": "2026-09-13T15:25:48.019Z"
+    },
+    {
+      "recipeSlug": "kibbeh-bil-sanieh",
+      "path": "kibbeh-bil-sanieh.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kibbeh_Bil_Sanieh.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Kibbeh_Bil_Sanieh.jpg",
+      "creator": "Amaiursancho5",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Amaiursancho5 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 666,
+      "bytes": 495432,
+      "sha256": "91debcc09e42a6fb7148faab9604394d1d5f0dd55d65251bc53090fc7772a5bc",
+      "acquiredAt": "2026-09-13T15:25:54.236Z"
+    },
+    {
+      "recipeSlug": "koshari",
+      "path": "koshari.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Egyptian_food_Koshary.jpg",
+      "creator": "Dina Said",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Dina Said · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 693,
+      "bytes": 437216,
+      "sha256": "02503ebdf0537977eb92a90a249135e892bd3490bb57f93810ad66c00dc9ee39",
+      "acquiredAt": "2026-09-13T15:25:59.125Z"
+    },
+    {
+      "recipeSlug": "kunafa-cheese",
+      "path": "kunafa-cheese.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Cheese_kunafa_at_Agasi%2C_Lajpat_Nagar%2C_Delhi_%282025-10-04%29.jpg",
+      "creator": "Contrapunctus-1",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 316070,
+      "sha256": "c8544bd10c2eefe0b197c044a10c950ecfba862e2cf44abea09b69a8f4e3bfc7",
+      "acquiredAt": "2026-09-13T15:26:03.528Z"
+    },
+    {
+      "recipeSlug": "lasagne-beef",
+      "path": "lasagne-beef.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Halal_Beef_Lasagne_and_Cauliflowers_-_Foodilic_2024-08-12.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Halal_Beef_Lasagne_and_Cauliflowers_-_Foodilic_2024-08-12.jpg",
+      "creator": "Andy Li",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 185504,
+      "sha256": "c9e7d28e0eaaa764cf8ebb6524ab95a9ce09007f3ad72b4c4a8681f771510358",
+      "acquiredAt": "2026-09-13T15:26:10.241Z"
+    },
+    {
+      "recipeSlug": "lentil-soup-lemon",
+      "path": "lentil-soup-lemon.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Levantine_Lentil_soup_Winter_Newton_Massachusetts_New_England.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Levantine_Lentil_soup_Winter_Newton_Massachusetts_New_England.jpg",
+      "creator": "EgorovaSvetlana",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "EgorovaSvetlana · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 331942,
+      "sha256": "30ab828b27d559fda51bd3d1dddd4f94eedb83525d4508af5fa0b0ad3363fc1a",
+      "acquiredAt": "2026-09-13T15:26:15.429Z"
+    },
+    {
+      "recipeSlug": "mac-and-cheese-baked",
+      "path": "mac-and-cheese-baked.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Original_Mac_n_Cheese_.jpg",
+      "creator": "Texasfoodgawker",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Texasfoodgawker · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 375165,
+      "sha256": "f378f48a56ca17153d867f68a165c2c2ffc190f5f04681aac2d82c51bb78459a",
+      "acquiredAt": "2026-09-13T15:26:18.298Z"
+    },
+    {
+      "recipeSlug": "macarona-bechamel",
+      "path": "macarona-bechamel.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Macarona_bechamel.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Macarona_bechamel.jpg",
+      "creator": "Zebi2424",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 1000,
+      "bytes": 152430,
+      "sha256": "f3d032245eea4cee981ce507950679a5a00751ae61914f2da2439bfbf981a738",
+      "acquiredAt": "2026-09-13T15:26:19.998Z"
+    },
+    {
+      "recipeSlug": "mahshi-cabbage",
+      "path": "mahshi-cabbage.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:02022_Hungarian_stuffed_cabbage_rolls_in_pickled_cabbage_leaves_with_veal_and_deer_meat.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/11/02022_Hungarian_stuffed_cabbage_rolls_in_pickled_cabbage_leaves_with_veal_and_deer_meat.jpg",
+      "creator": "Silar",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Silar · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 689,
+      "bytes": 250647,
+      "sha256": "0e2106f3fa326bf65bb847c82953bea20af48e7360dfaf8df642603c43b91819",
+      "acquiredAt": "2026-09-13T15:26:22.552Z"
+    },
+    {
+      "recipeSlug": "mango-sticky-rice",
+      "path": "mango-sticky-rice.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mango_sticy_rice_(3859549574).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Mango_sticy_rice_%283859549574%29.jpg",
+      "creator": "Dennis Wong from Hong Kong, Hong Kong",
+      "license": "CC-BY-2.0",
+      "attribution": "Dennis Wong from Hong Kong, Hong Kong · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 166670,
+      "sha256": "9252f67148e1035a4265f14670cd6521585eed9625028965ae9e9b5a5bce8940",
+      "acquiredAt": "2026-09-13T15:26:25.172Z"
+    },
+    {
+      "recipeSlug": "maqluba",
+      "path": "maqluba.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Makluba.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Makluba.JPG",
+      "creator": "Arafataslan",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 405279,
+      "sha256": "52c5c53c62e4f68fe4806e0b49adee3d6428c42acdcee6bfbc9ddf84e0400c9c",
+      "acquiredAt": "2026-09-13T15:26:25.528Z"
+    },
+    {
+      "recipeSlug": "masala-omelette",
+      "path": "masala-omelette.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Masala_omelette.JPG",
+      "creator": "SwingingUvula",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 308928,
+      "sha256": "ccbdf7448238ed3c838c0d170d1c4121696f71bbc1c155a8adee8287bfede26a",
+      "acquiredAt": "2026-09-13T15:26:28.158Z"
+    },
+    {
+      "recipeSlug": "menemen",
+      "path": "menemen.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Menemen.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Menemen.jpg",
+      "creator": "https://www.flickr.com/people/sarah_c_murray/",
+      "license": "CC-BY-2.0",
+      "attribution": "https://www.flickr.com/people/sarah_c_murray/ · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 664,
+      "bytes": 472176,
+      "sha256": "33f55ce95fe46d709812c6936983593b386e6c0022097228e5ebc1e025d021cb",
+      "acquiredAt": "2026-09-13T15:26:29.384Z"
+    },
+    {
+      "recipeSlug": "mexican-rice",
+      "path": "mexican-rice.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mexican_rice_144235.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Mexican_rice_144235.jpg",
+      "creator": "Ralf Peter Reimann",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Ralf Peter Reimann · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 563,
+      "bytes": 350903,
+      "sha256": "72efa7a6e441e61d2563076f81a9e18b907697e8533f31082609a799e86c688b",
+      "acquiredAt": "2026-09-13T15:26:32.081Z"
+    },
+    {
+      "recipeSlug": "minestrone",
+      "path": "minestrone.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Minestrone_soup_(5).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Minestrone_soup_%285%29.jpg",
+      "creator": "Daniel Ziegener",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Daniel Ziegener · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 801,
+      "bytes": 263020,
+      "sha256": "55995f9169b6deb97b9552babd652f35eee03ddd7e3e7028aa27d85f4f2e542b",
+      "acquiredAt": "2026-09-13T15:26:32.446Z"
+    },
+    {
+      "recipeSlug": "muhammara",
+      "path": "muhammara.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Muhammara.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Muhammara.jpg",
+      "creator": "Bazel",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 273585,
+      "sha256": "504489148affee3c8ec9fd329fd73745b3c4d635a84143daf7c2004460f973ae",
+      "acquiredAt": "2026-09-13T15:26:37.893Z"
+    },
+    {
+      "recipeSlug": "mujadara",
+      "path": "mujadara.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mujaddara.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Mujaddara.jpg",
+      "creator": "Bazel",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Bazel · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 334484,
+      "sha256": "c1a7e3ac1c6e385fb29caecd6eb39c00e7fa712efc1f578729cfdccb8f5c63a5",
+      "acquiredAt": "2026-09-13T15:26:38.436Z"
+    },
+    {
+      "recipeSlug": "mutabbal",
+      "path": "mutabbal.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Baba_ganoush_closeup.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/55/Baba_ganoush_closeup.jpg",
+      "creator": "avlxyz",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "avlxyz · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 669,
+      "bytes": 195582,
+      "sha256": "f804ea9f41acdc75ec62b914f4b6dbe7ae2587d2b84b721ed14e29b7fe5983f4",
+      "acquiredAt": "2026-09-13T15:26:41.233Z"
+    },
+    {
+      "recipeSlug": "okra-stew",
+      "path": "okra-stew.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Bamia-Ocras_tomate_%28cropped%29.JPG",
+      "creator": "Tamorlan",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Tamorlan · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 755,
+      "bytes": 327016,
+      "sha256": "ffa85bea121f2f812536382eb71ed4724b8ed7354eef853031862aeaf976df7e",
+      "acquiredAt": "2026-09-13T15:26:41.561Z"
+    },
+    {
+      "recipeSlug": "om-ali",
+      "path": "om-ali.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Umm_Ali.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Umm_Ali.JPG",
+      "creator": "Miansari66",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 327616,
+      "sha256": "50c51514807a9cd517383c23a21010e587d6b1475c7ec9684f2f0a49b7c7bed9",
+      "acquiredAt": "2026-09-13T15:26:42.443Z"
+    },
+    {
+      "recipeSlug": "overnight-oats",
+      "path": "overnight-oats.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dorset_Cereals_muesli.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Dorset_Cereals_muesli.jpg",
+      "creator": "Mx. Granger",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 773,
+      "bytes": 381614,
+      "sha256": "f95c9c24d64bce6adaf2780c63b2fec24756a0c1edf1c79562bb41473c90f6c1",
+      "acquiredAt": "2026-09-13T15:26:45.468Z"
+    },
+    {
+      "recipeSlug": "palak-paneer-style",
+      "path": "palak-paneer-style.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palakpaneer_Rayagada_Odisha_0009.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Palakpaneer_Rayagada_Odisha_0009.jpg",
+      "creator": "Lopanayak",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Lopanayak · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 863,
+      "bytes": 412202,
+      "sha256": "2e5c3928f6c8daa206e406f5fe608ef1323734d453c446dcf426a551641d76f0",
+      "acquiredAt": "2026-09-13T15:26:46.212Z"
+    },
+    {
+      "recipeSlug": "pancakes-buttermilk",
+      "path": "pancakes-buttermilk.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fluffy_Pancakes.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Fluffy_Pancakes.jpg",
+      "creator": "روتانا",
+      "license": "CC-BY-4.0",
+      "attribution": "روتانا · CC-BY-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 994,
+      "bytes": 366182,
+      "sha256": "c5b0e2bcc0836090a17e0165e8008b507c903f8293e60d1af896795d631a5062",
+      "acquiredAt": "2026-09-13T15:26:48.636Z"
+    },
+    {
+      "recipeSlug": "pasta-e-ceci",
+      "path": "pasta-e-ceci.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tortiglioni_con_ceci.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/81/Tortiglioni_con_ceci.jpg",
+      "creator": "Joey Doll",
+      "license": "CC-BY-2.0",
+      "attribution": "Joey Doll · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 165991,
+      "sha256": "626914b844243e571253e3349eec311fd4d830111719de1008720ae1f9a7ca8c",
+      "acquiredAt": "2026-09-13T15:26:49.187Z"
+    },
+    {
+      "recipeSlug": "pasta-pomodoro",
+      "path": "pasta-pomodoro.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Spaghettata.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/Spaghettata.JPG",
+      "creator": "Dr.Conati",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 279106,
+      "sha256": "507775362e690571e9ffa5e3d7b1763a2334362f972980b924d3bf75b36cbeab",
+      "acquiredAt": "2026-09-13T15:26:49.793Z"
+    },
+    {
+      "recipeSlug": "pico-de-gallo",
+      "path": "pico-de-gallo.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/Mmm..._Pico_de_Gallo_%285923456035%29.jpg",
+      "creator": "jeffreyw",
+      "license": "CC-BY-2.0",
+      "attribution": "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 693,
+      "bytes": 244528,
+      "sha256": "dcdd5510d5362376ea191525a0b056e9b8489fc522786d55b642428b29f98b1d",
+      "acquiredAt": "2026-09-13T15:26:52.121Z"
+    },
+    {
+      "recipeSlug": "risotto-mushroom",
+      "path": "risotto-mushroom.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mushroom_Risotto_(4789415965).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Mushroom_Risotto_%284789415965%29.jpg",
+      "creator": "Katrin Gilger",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Katrin Gilger · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 668,
+      "bytes": 237810,
+      "sha256": "55dedd846d8e14234b38cc61a73820648305cd179b3dba58f54330297e0e140d",
+      "acquiredAt": "2026-09-13T15:27:01.783Z"
+    },
+    {
+      "recipeSlug": "roz-bel-laban",
+      "path": "roz-bel-laban.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Kheer_with_condensed_milk..JPG",
+      "creator": "Shivangisj",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 144885,
+      "sha256": "e92757982c7103312c71700b8a51dd90ba8cdcac2d0d087309c57c0aa8fff970",
+      "acquiredAt": "2026-09-13T15:27:07.467Z"
+    },
+    {
+      "recipeSlug": "salata-baladi",
+      "path": "salata-baladi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Salata_baladi.jpg",
+      "creator": "أحمد ناجي",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 447006,
+      "sha256": "08fb579c5ce32394145d63d849d7c246e9849747e4c899730f1cfc255f4c3a61",
+      "acquiredAt": "2026-09-13T15:27:10.301Z"
+    },
+    {
+      "recipeSlug": "scrambled-eggs-soft",
+      "path": "scrambled-eggs-soft.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_don_of_Nakau.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Fried_oysters_with_soft_scrambled_eggs_don_of_Nakau.jpg",
+      "creator": "毒島みるく",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 925,
+      "bytes": 475381,
+      "sha256": "900ac9f1e8c88cf9db82200211fbac62eca4fa6bc6c27d43d5f9a6f43449dccb",
+      "acquiredAt": "2026-09-13T15:27:23.433Z"
+    },
+    {
+      "recipeSlug": "sesame-noodles-cold",
+      "path": "sesame-noodles-cold.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cold_Sesame_Noodles,_shredded_chicken,_pickled_cucumbers,_crispy_garlic,_crushed_peanuts,_scallions,_sesame_dressing,_chicken_broth,_yu_choy_(31967905702).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Cold_Sesame_Noodles%2C_shredded_chicken%2C_pickled_cucumbers%2C_crispy_garlic%2C_crushed_peanuts%2C_scallions%2C_sesame_dressing%2C_chicken_broth%2C_yu_choy_%2831967905702%29.jpg",
+      "creator": "T.Tseng",
+      "license": "CC-BY-2.0",
+      "attribution": "T.Tseng · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 211648,
+      "sha256": "ca6b55995c8edc37d073da62458bd6b9c70eda6e67feb1d570a15cbc40befb70",
+      "acquiredAt": "2026-09-13T15:27:25.959Z"
+    },
+    {
+      "recipeSlug": "shakshuka",
+      "path": "shakshuka.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shakshuka_by_Calliopejen1.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/18/Shakshuka_by_Calliopejen1.jpg",
+      "creator": "Calliopejen1",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Calliopejen1 · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 246946,
+      "sha256": "9b307a73d94d3f31acd07266f6634b4c42d08962bb5bf8bbd2830e440f61dc61",
+      "acquiredAt": "2026-09-13T15:27:28.598Z"
+    },
+    {
+      "recipeSlug": "shawarma-chicken",
+      "path": "shawarma-chicken.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shawarma_Chicken_Roll_at_Indiranagar,_Bangalore,_Karnatak.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Shawarma_Chicken_Roll_at_Indiranagar%2C_Bangalore%2C_Karnatak.jpg",
+      "creator": "Sangram Keshari Senapati",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Sangram Keshari Senapati · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1778,
+      "bytes": 315324,
+      "sha256": "28c7678214d922ddb215dc4e0d919eae76f9383099bc3087829b2c536f73963e",
+      "acquiredAt": "2026-09-13T15:27:32.606Z"
+    },
+    {
+      "recipeSlug": "shish-tawook",
+      "path": "shish-tawook.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tavuk_%C5%9Ei%C5%9F.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Tavuk_%C5%9Ei%C5%9F.jpg",
+      "creator": "Garrett Ziegler",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Garrett Ziegler · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 222203,
+      "sha256": "104902aa9b53ca3b94468713379962f62220184ca7dbd1895c6e1796735181ec",
+      "acquiredAt": "2026-09-13T15:27:35.258Z"
+    },
+    {
+      "recipeSlug": "shrimp-garlic",
+      "path": "shrimp-garlic.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gambas_al_Ajillo_-_Shrimp,_garlic,_white_wine_and_paprika,_Caesar%27s_Restaurante,_Tijuana.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Gambas_al_Ajillo_-_Shrimp%2C_garlic%2C_white_wine_and_paprika%2C_Caesar%27s_Restaurante%2C_Tijuana.jpg",
+      "creator": "T.Tseng",
+      "license": "CC-BY-2.0",
+      "attribution": "T.Tseng · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 231312,
+      "sha256": "dd473ffb7eb72f514f4d086cb13029e3129c86e8053b0982e71ac3170b51962f",
+      "acquiredAt": "2026-09-13T15:27:41.470Z"
+    },
+    {
+      "recipeSlug": "spaghetti-aglio-olio",
+      "path": "spaghetti-aglio-olio.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
+      "creator": "matsuyuki",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 873,
+      "bytes": 444572,
+      "sha256": "0aaad64eff64b981ffc304982d7e96c5698afd3c99d8223bbf495ffc63bb300a",
+      "acquiredAt": "2026-09-13T15:27:48.217Z"
+    },
+    {
+      "recipeSlug": "sutlac-baked",
+      "path": "sutlac-baked.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Kheer_with_condensed_milk..JPG",
+      "creator": "Shivangisj",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 144885,
+      "sha256": "e92757982c7103312c71700b8a51dd90ba8cdcac2d0d087309c57c0aa8fff970",
+      "acquiredAt": "2026-09-13T15:27:55.632Z"
+    },
+    {
+      "recipeSlug": "tabbouleh",
+      "path": "tabbouleh.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tabouleh_1.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Tabouleh_1.JPG",
+      "creator": "Miansari66",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 315947,
+      "sha256": "f8eec952d9338293d22bec5c3218dc15a304a3c9aca2f30c8b3fa88b5ed9e214",
+      "acquiredAt": "2026-09-13T15:28:02.790Z"
+    },
+    {
+      "recipeSlug": "tameya-sandwich",
+      "path": "tameya-sandwich.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tameya_sandwich_Karoleen_Lindberg.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Tameya_sandwich_Karoleen_Lindberg.jpg",
+      "creator": "Losttraveller",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Losttraveller · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 772,
+      "bytes": 217804,
+      "sha256": "24435bd6817dc226f565ec308235cc89e7410e0a2f1d91cd47b74077e4f9ef07",
+      "acquiredAt": "2026-09-13T15:28:04.602Z"
+    },
+    {
+      "recipeSlug": "tiramisu-quick",
+      "path": "tiramisu-quick.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/58/Tiramisu_-_Raffaele_Diomede.jpg",
+      "creator": "Raffaele Diomede from Pordenone, ITALIA",
+      "license": "CC-BY-2.0",
+      "attribution": "Raffaele Diomede from Pordenone, ITALIA · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 220492,
+      "sha256": "2a241d971a71a96b19bd51094975a9b534db2a7a3361c1351cec40262e46109c",
+      "acquiredAt": "2026-09-13T15:28:11.963Z"
+    },
+    {
+      "recipeSlug": "tuna-melt",
+      "path": "tuna-melt.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tuna_melt_sandwich_with_fries.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Tuna_melt_sandwich_with_fries.jpg",
+      "creator": "kweez mcG from London, UK",
+      "license": "CC-BY-2.0",
+      "attribution": "kweez mcG from London, UK · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 301476,
+      "sha256": "b262d80cb964dd31535b2d0338ef3b9dd0217a16d8a4b8592ba4b729a224ce74",
+      "acquiredAt": "2026-09-13T15:28:12.350Z"
+    },
+    {
+      "recipeSlug": "tuna-pasta-salad",
+      "path": "tuna-pasta-salad.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tuna_pasta_salad.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Tuna_pasta_salad.jpg",
+      "creator": "FotoosVanRobin from Netherlands",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "FotoosVanRobin from Netherlands · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1078,
+      "bytes": 849607,
+      "sha256": "6302fb6a79181f3332c4962df03f4b537d4096cd466de203972ddff31c5c6af5",
+      "acquiredAt": "2026-09-13T15:28:14.088Z"
+    },
+    {
+      "recipeSlug": "turkish-lentil-soup",
+      "path": "turkish-lentil-soup.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mercimek_or_Turkish_lentil_soup.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Mercimek_or_Turkish_lentil_soup.jpg",
+      "creator": "E4024",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "E4024 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 275883,
+      "sha256": "9cd11de0bc2c7bf5948948917bac0d443db33802c2e19c21b3d5a6b3d9fbfed2",
+      "acquiredAt": "2026-09-13T15:28:22.597Z"
+    },
+    {
+      "recipeSlug": "vegetable-biryani",
+      "path": "vegetable-biryani.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Vegetable_Biryani_IMG_001.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/09/Vegetable_Biryani_IMG_001.jpg",
+      "creator": "Phadke09",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Phadke09 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 215660,
+      "sha256": "7eaf10912aa999e5537d6da12c8e8f11474a4eb3937ecb2ad63351c3df2951e0",
+      "acquiredAt": "2026-09-13T15:28:31.182Z"
+    },
+    {
+      "recipeSlug": "vegetable-spring-rolls",
+      "path": "vegetable-spring-rolls.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Golden_Vegetable_Spring_Rolls_Served_with_Dipping_Sauce.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Golden_Vegetable_Spring_Rolls_Served_with_Dipping_Sauce.jpg",
+      "creator": "Srujanabotcha",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Srujanabotcha · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 499151,
+      "sha256": "42729e7974f0dbff9d156039de012663da8f750d3a3f2f2ef17fe0574d455b9d",
+      "acquiredAt": "2026-09-13T15:28:33.112Z"
+    },
+    {
+      "recipeSlug": "warak-enab",
+      "path": "warak-enab.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Warak_enab.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/33/Warak_enab.jpg",
+      "creator": "شيماء جلال",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "شيماء جلال · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 507098,
+      "sha256": "358d702a9b9cb2515660d591265d43a27750a3cd2f51e734ad7883fb9a3333be",
+      "acquiredAt": "2026-09-13T15:28:35.261Z"
+    }
+  ],
+  "skipped": [
+    {
+      "recipeSlug": "air-fryer-spiced-chicken",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "baked-salmon-vegetables",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "banana-peanut-oats",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "batates-mahshia",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "bean-burrito-bowl",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "beef-noodle-stirfry",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "buffalo-less-baked-wings",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "caesar-less-chicken-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "calamari-alexandria",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "caprese-stack",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "carbonara-beef",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "chickpea-spinach-curryless",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "chili-con-carne-beef",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "cobb-style-bowl",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "corn-avocado-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "creamy-chicken-pasta",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "edamame-rice-bowl",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "eggah-baladi",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "egyptian-cheese-toastie",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "egyptian-lentil-soup",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "fattah-lahma",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "fatteh-hummus",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "feteer-cheese",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "fish-tacos-cabbage",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "foul-shami",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "foul-with-eggs",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "ginger-garlic-broccoli-beef",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "gnocchi-butter-sage",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "grilled-sea-bream",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "herb-omelette-feta",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "kabab-halla",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "kafta-bil-sanieh",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "kimchi-less-cabbage-rice",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "kofta-tagine",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "koshari-lentil-rice",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "labneh-bowl",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "lamb-freekeh",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "lemon-herb-couscous",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "lentil-spinach-soup-indian",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "manakish-zaatar",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "margherita-flatbread",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "mesaqaa",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "miso-less-tofu-soup",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "molokhia-with-chicken",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "mussels-tomato-broth",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "orange-olive-oil-cake",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "pasta-tuna-lemon",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "polenta-mushroom",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "quick-vegetable-fried-rice",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "ratatouille-tray",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "roast-chicken-potatoes",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "roasted-cauliflower-tahini",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "ruz-moammar",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "salatet-rocca",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "salatet-zabadi",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "samak-mashwi-mullet",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sardines-baked-lemon",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sayadeya",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sfiha-lamb",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "shakshuka-suez",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sheet-pan-sausage-veg",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "shorbet-adas-red",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "shorbet-lisan-asfour",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "shrimp-noodle-soup",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "smoothie-protein-banana",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "spanakopita-triangles",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "spiced-rice-peas",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "stuffed-peppers-rice",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sweet-potato-fries-airfryer",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "sweet-sour-tofu",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "taameya",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "tandoori-style-chicken",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "teriyaki-less-chicken",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "thai-style-peanut-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "tuna-white-bean-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-bulgur-pilaf",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-eggs-yogurt",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-shepherd-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-stuffed-flatbread",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "turkish-white-bean-salad",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "white-bean-stew",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "yogurt-berry-bowl",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "zucchini-egg-skillet",
+      "reason": "no relevant openly-licensed image found"
+    }
+  ]
 }
