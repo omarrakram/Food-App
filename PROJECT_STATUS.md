@@ -55,7 +55,72 @@ protein spread too narrow.
 
 ## The hotfix
 
-### What was reported
+### Round two: the app was still overstating what you have
+
+Reported after the first round landed. Different ingredient selections now
+produced different results — but someone holding **rice and tomatoes** opened
+Tomato Rice and was told they had **six of seven ingredients** and needed only
+coriander. They had two of ten. Onions, garlic, stock cube, cumin, tomato paste
+and oil were all ticked and labelled "Pantry staple · assumed".
+
+**No line in that recipe is marked a staple.** The recipe data was innocent;
+the app had simply decided the user had those things.
+
+#### Four concepts, now kept apart
+
+| | What it is | Who decides |
+|---|---|---|
+| **Pantry** | Rows with a quantity and a date | The user, item by item |
+| **Your basics** | An always-have list, offered in onboarding and editable in settings | The user, on a screen they can see |
+| **Universal** | **Water and salt. That is the whole list.** | Us, and only for these two |
+| **Optional / garnish** | Excused from the missing count | The recipe, where it genuinely says so |
+
+The test for the universal list is not "is this common?" — nearly everything in
+a kitchen is common. It is: *would anyone ever fail to cook because they lacked
+it, and would they want to be told?* Oil, onions, garlic, cumin, sugar, flour
+and stock all fail that test, so none of them are assumed.
+
+#### What changed
+
+- **`isUniversalBasic` replaced `isAssumedOnHand`** and went from ~50
+  ingredients to two.
+- **`UserPreferences.alwaysAvailableIngredients`** — 18 suggestions, ticked by
+  default on a new onboarding step and editable at `/settings/basics`. Saffron,
+  cardamom and sumac are deliberately not offered: those are bought for a dish.
+- **Pantry rows enforce their own rules.** Quantity zero is not "some", and an
+  expired row is not available — "keep assuming I have this" means the row does
+  not *need* a quantity or a date, not that they stop applying when set. That is
+  why rice could show "Staple" and "3 days left" together and read as a
+  contradiction; the date always won and nothing said so. The toggle is renamed
+  and the row now states the precedence.
+- **Every tick names its source** — in your pantry, from your basics, typed
+  into this search, or assumed. Three of the four are decisions the user made.
+- **`npm run recipes:audit`** prints every recipe-level `staple` flag with a
+  verdict: implicit, configured, or **ORDINARY**. Twenty-two came back ORDINARY
+  across 59 lines — saffron, curry powder, sumac, vanilla, nutmeg — each a
+  required ingredient hidden from the missing count. Those flags are stripped
+  and the audit now reports zero ORDINARY rows. That is the invariant: *if we
+  excuse it, either everyone has it or you told us you do.*
+- **The ranker was ignoring the basics.** `rankRecipes` builds its own
+  availability index and was not given them, so ticking or unticking on the
+  settings screen changed nothing on the results screen — the filter knew and
+  the ranker did not. Same for the recipe detail screen. Both fixed, with a
+  test that fails if any path forgets again.
+- **Recipe Detail's "Order ingredients"** looked active and opened a sheet
+  saying "coming soon". It now reads "Ordering — coming soon" and is disabled,
+  matching the shopping list. The provider registry is untouched.
+
+#### The dataset gap this exposed
+
+With honest semantics a banana/oats/milk kitchen reached four recipes, because
+the catalogue had almost nothing you can make from them. Three recipes fill the
+hole rather than the threshold being lowered: **muhallabia** — a staple
+Egyptian dessert missing from an Egypt-first catalogue — warm oats with banana,
+and a banana milkshake. **161 recipes.**
+
+---
+
+### Round one: what was reported
 
 Manual testing of the real, rendered app found the central feature broken:
 

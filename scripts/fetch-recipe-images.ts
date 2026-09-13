@@ -710,6 +710,36 @@ async function fetchImage(candidate: Candidate): Promise<Fetched> {
   return { error: errors.join('; ') };
 }
 
+/**
+ * How likely is a cook to actually see this recipe?
+ *
+ * Coverage is worth less as a percentage than as an answer to "does the app
+ * look photographed when I use it". A run that stops early — because Commons
+ * rate-limits, or because the job times out — should have spent its requests
+ * on the dishes that fill Home, Discover, budget results and the answer to
+ * "what can I cook", not on whatever came first alphabetically.
+ *
+ * Three signals, all already in the data:
+ *   MENA cuisine, because that is the launch market and the shelf people
+ *   recognise; a short essential-ingredient list, because those are the
+ *   recipes a small kitchen reaches and therefore the ones Cook and the budget
+ *   screen keep returning; and easy, because the catalogue skews that way and
+ *   so do the results.
+ */
+function surfacingScore(recipe: (typeof RECIPE_CATALOGUE)[number]): number {
+  const MENA: readonly string[] = ['egyptian', 'levantine', 'turkish'];
+  const essentials = recipe.ingredients.filter(
+    (line) => !line.isOptional && !line.isGarnish && !line.isPantryStaple,
+  ).length;
+
+  let score = 0;
+  if (MENA.includes(recipe.cuisine ?? '')) score += 3;
+  if (essentials <= 4) score += 3;
+  else if (essentials <= 6) score += 2;
+  if (recipe.difficulty === 'easy') score += 1;
+  return score;
+}
+
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const force = args.includes('--force');
@@ -729,7 +759,9 @@ async function main(): Promise<void> {
 
   const todo = RECIPE_CATALOGUE.filter(
     (recipe) => recipe.slug !== null && (force || !have.has(recipe.slug)),
-  ).slice(0, limit === Infinity ? undefined : limit);
+  )
+    .sort((a, b) => surfacingScore(b) - surfacingScore(a))
+    .slice(0, limit === Infinity ? undefined : limit);
 
   console.log(`${todo.length} recipe(s) to look for.\n`);
 

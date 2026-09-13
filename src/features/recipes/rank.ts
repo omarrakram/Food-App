@@ -219,7 +219,14 @@ export function rankRecipes(
 ): RecipeMatch[] {
   const index =
     options.availability ??
-    buildAvailabilityIndex(options.pantryItems ?? [], request.ingredients, { now: options.now });
+    buildAvailabilityIndex(options.pantryItems ?? [], request.ingredients, {
+      now: options.now,
+      // MUST be passed here too. This function builds its own index and for a
+      // while did not carry the user's configured basics into it, so ticking
+      // or unticking them on the settings screen changed nothing at all on the
+      // results screen — the filter knew and the ranker did not.
+      alwaysAvailable: request.alwaysAvailableIngredients,
+    });
 
   // The SAME index the filter used, so a recipe cannot pass strict pantry mode
   // against one view of the kitchen and be scored against another.

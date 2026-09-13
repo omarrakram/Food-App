@@ -453,3 +453,54 @@ describe('ordering puts what you can cook first', () => {
     expect(ranked.length).toBe(2);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Every path that decides what a cook has must be given the same facts.
+// `rankRecipes` builds its OWN availability index, and for a while it did not
+// receive the user's configured basics — so ticking them on the settings
+// screen changed nothing on the results screen. The filter knew and the
+// ranker did not, and the ranker is what the user sees.
+// ---------------------------------------------------------------------------
+
+describe('the ranker sees the same kitchen the filter does', () => {
+  const needsOnion = makeRecipe({
+    id: 'needs-onion',
+    title: 'Onion Soup',
+    ingredients: [
+      makeRecipeIngredient({ name: 'onions' }),
+      makeRecipeIngredient({ name: 'rice' }),
+    ],
+  });
+
+  it('does not offer a recipe whose onion nobody has', () => {
+    const ranked = rankRecipes([needsOnion], baseRequest({
+      ingredients: ['rice'],
+      pantryMode: 'strict',
+      maxMissingIngredients: 0,
+    }));
+
+    expect(ranked).toEqual([]);
+  });
+
+  it('offers it once the cook has configured onions as a basic', () => {
+    const ranked = rankRecipes([needsOnion], baseRequest({
+      ingredients: ['rice'],
+      alwaysAvailableIngredients: ['onions'],
+      pantryMode: 'strict',
+      maxMissingIngredients: 0,
+    }));
+
+    expect(ranked.map((match) => match.recipe.id)).toEqual(['needs-onion']);
+  });
+
+  it('and reports the onion as available rather than missing', () => {
+    const [match] = rankRecipes([needsOnion], baseRequest({
+      ingredients: ['rice'],
+      alwaysAvailableIngredients: ['onions'],
+      pantryMode: 'partial',
+      maxMissingIngredients: 2,
+    }));
+
+    expect(match?.missingIngredients).toEqual([]);
+  });
+});

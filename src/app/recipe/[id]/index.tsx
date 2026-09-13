@@ -163,8 +163,14 @@ export default function RecipeDetailScreen() {
   }, [recipe?.id]);
 
   const availability = useMemo(
-    () => buildAvailabilityIndex(pantry.data ?? [], []),
-    [pantry.data],
+    // The basics belong here as much as on the results screen: without them
+    // this list would tick onions for a cook on Results and then show it as
+    // missing when they opened the recipe.
+    () =>
+      buildAvailabilityIndex(pantry.data ?? [], [], {
+        alwaysAvailable: preferences.alwaysAvailableIngredients,
+      }),
+    [pantry.data, preferences.alwaysAvailableIngredients],
   );
 
   const match = useMemo(

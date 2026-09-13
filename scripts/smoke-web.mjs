@@ -326,7 +326,7 @@ async function main() {
     await type('pantry-editor-name', 'salt', { clear: true });
     check(
       'a cupboard staple can be',
-      /always assume|افترض/i.test(await stapleRow()),
+      /keep assuming|available without a quantity|اعتبرها موجودة|من غير كمية/i.test(await stapleRow()),
       (await stapleRow()).replace(/\n/g, ' ').trim(),
     );
     await type('pantry-editor-name', 'milk', { clear: true });
@@ -461,7 +461,12 @@ async function main() {
               return img && img.complete && img.naturalWidth > 0;
             });
           })()`,
-          { timeout: 10000 },
+          // Short on purpose. A screenful with no photographs on it never
+          // satisfies this, so the wait is spent in full at every such scroll
+          // position — twenty of those at ten seconds is three minutes of the
+          // run doing nothing. Four seconds is still far more than a bundled
+          // asset needs to decode.
+          { timeout: 4000 },
         )
         .catch(() => {});
 
@@ -554,6 +559,26 @@ async function main() {
       await firstResult.click();
       await page.waitForTimeout(1800);
       check('a result opens its recipe', await visible('recipe-start-cooking', 6000));
+
+      // Two screens must not disagree about whether ordering exists. The
+      // shopping list already said "coming soon" and could not be pressed;
+      // this one showed an active "Order ingredients" that opened a sheet
+      // saying the same thing — a tap spent to learn nothing.
+      const orderLabel = await page
+        .locator('[data-testid="recipe-order"]')
+        .first()
+        .innerText()
+        .catch(() => '');
+      const orderDisabled = await page
+        .locator('[data-testid="recipe-order"]')
+        .first()
+        .evaluate((node) => node.getAttribute('aria-disabled') === 'true' || node.disabled === true)
+        .catch(() => false);
+      check(
+        'ordering is shown as unavailable rather than looking functional',
+        /coming soon|قريبًا|قريبا/i.test(orderLabel) && orderDisabled,
+        `${orderLabel.replace(/\n/g, ' ').trim()} · disabled=${orderDisabled}`,
+      );
       await shot('07-recipe-detail');
 
       if (await tap('recipe-start-cooking', { optional: true })) {
@@ -766,6 +791,68 @@ async function main() {
       );
       return result;
     };
+
+    // THE REPORTED CASE, driven through the built app, both ways round.
+    //
+    // Rice and tomatoes. Tomato Rice needs onions, garlic, stock cube, cumin,
+    // tomato paste and oil on top of those, and the screen used to tick all
+    // six as "Pantry staple · assumed" and report "you have 6/7 ingredients".
+    // The rule: nothing is ticked unless it came from the pantry, from the
+    // basics this cook configured, or from the search box.
+    //
+    // Onboarding offers those basics ticked, so a fresh smoke user HAS them —
+    // and for that user, one-short-of-coriander is the honest answer. The test
+    // is therefore the difference between the two users, which is the only
+    // thing that distinguishes a configured choice from a silent assumption.
+    const withBasics = record(
+      'rice, tomatoes (basics ticked in onboarding)',
+      '≤2 missing',
+      await cookWith(['rice', 'tomatoes'], 'missing2'),
+    );
+
+    // Now untick every basic, as a cook who keeps none of them would.
+    await page.goto(`${BASE}/settings/basics`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+    const basicChips = page.locator('[data-testid^="basic-"]');
+    const basicCount = await basicChips.count();
+    check('the basics screen lists what can be configured', basicCount >= 10, `${basicCount} chips`);
+    for (let index = 0; index < basicCount; index += 1) {
+      await basicChips.nth(index).click();
+      await page.waitForTimeout(90);
+    }
+    await shot('17k-basics-unticked');
+
+    const noBasics = record(
+      'rice, tomatoes (nothing configured)',
+      '≤2 missing',
+      await cookWith(['rice', 'tomatoes'], 'missing2'),
+    );
+
+    const stillOffered = noBasics.titles.some((title) => /tomato rice/i.test(title));
+    check(
+      'with nothing configured, rice and tomatoes does NOT offer Tomato Rice',
+      !stillOffered,
+      stillOffered ? 'still offered' : `${noBasics.ids.length} results, none of them that`,
+    );
+    check(
+      'and unticking the basics genuinely narrows the answer',
+      noBasics.ids.length < withBasics.ids.length,
+      `${withBasics.ids.length} with basics vs ${noBasics.ids.length} without`,
+    );
+    check(
+      'while nothing it still offers claims more than two missing',
+      noBasics.missing.every((count) => count <= 2),
+      `gaps: ${[...new Set(noBasics.missing)].sort().join(', ') || 'none'}`,
+    );
+
+    // Put them back, so the rest of the run measures an ordinary user.
+    await page.goto(`${BASE}/settings/basics`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+    const restore = page.locator('[data-testid^="basic-"]');
+    for (let index = 0; index < (await restore.count()); index += 1) {
+      await restore.nth(index).click();
+      await page.waitForTimeout(90);
+    }
 
     const CASE_A = ['chicken breast', 'rice', 'tomatoes'];
     const CASE_C = ['banana', 'oats', 'milk'];

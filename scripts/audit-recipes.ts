@@ -242,17 +242,10 @@ function main(): void {
     'beef, pasta, tomato': ['ground-beef', 'pasta', 'tomatoes'],
     'lentils, rice, onion': ['red-lentils', 'rice', 'onions'],
   };
-  const assumed = new Set(
-    INGREDIENT_CATALOGUE.filter(
-      (i) =>
-        !i.isPerishable &&
-        (i.category === 'spices' ||
-          ['water', 'olive-oil', 'sunflower-oil', 'corn-oil', 'vinegar', 'onions', 'garlic',
-            'sugar', 'flour', 'stock-cube', 'yeast', 'baking-powder', 'tomato-paste'].includes(
-            i.slug,
-          )),
-    ).map((i) => i.slug),
-  );
+  // A realistic cook: the two universal basics plus the suggestions they were
+  // offered during onboarding. Restated here because this script cannot import
+  // the engine — the authoritative numbers come from `dataset.test.ts`.
+  const assumed = new Set<string>([...UNIVERSAL_BASICS, ...SUGGESTED_KITCHEN_BASICS]);
 
   for (const [label, have] of Object.entries(KITCHENS)) {
     const available = new Set([...assumed, ...have]);
