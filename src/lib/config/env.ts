@@ -2,6 +2,9 @@ import Constants from 'expo-constants';
 
 import type { CountryCode, CurrencyCode } from '@/types/domain';
 
+/** What `app.config.js` stamps into `expo.extra` at build time. */
+type BuildStamp = { build?: { commit?: string | null; builtAt?: string | null } };
+
 /**
  * Client environment.
  *
@@ -77,6 +80,17 @@ export const env = {
   googleWebClientId: optional(process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID),
 
   appVersion: Constants.expoConfig?.version ?? '0.0.0',
+
+  /**
+   * Which commit this bundle was built from, and when.
+   *
+   * Stamped by `app.config.js`. It exists so a bug reported against a hosted
+   * URL can be pinned to a commit before anyone starts debugging — "the
+   * preview still does X" and "the preview is three commits behind" look
+   * identical from the outside, and one of them is not a bug.
+   */
+  buildCommit: (Constants.expoConfig?.extra as BuildStamp | undefined)?.build?.commit ?? null,
+  builtAt: (Constants.expoConfig?.extra as BuildStamp | undefined)?.build?.builtAt ?? null,
 } as const;
 
 /**

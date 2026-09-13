@@ -90,6 +90,7 @@ function toFilterReason(reason: RejectionReason): FilterReason {
       return 'disliked';
     case 'missing_required_ingredient':
     case 'pantry':
+    case 'uses_nothing_you_have':
       return 'pantry';
     default:
       return reason;

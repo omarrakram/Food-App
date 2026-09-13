@@ -1,8 +1,17 @@
-import { makeRecipe, makeRecipeIngredient } from '@/test-utils/factories';
+import {
+  makeRecipe,
+  makeRecipeIngredient,
+  makeRecipeWithIngredients,
+} from '@/test-utils/factories';
 import type { PantryItem, Recipe } from '@/types/domain';
 
 import { RECIPE_FIXTURES } from '../fixtures';
-import { emptyConstraints, recipeContains, toRestriction } from '../constraints';
+import {
+  emptyConstraints,
+  essentialIngredients,
+  recipeContains,
+  toRestriction,
+} from '../constraints';
 import {
   checkRecipe,
   buildIndexFor,
@@ -321,14 +330,105 @@ describe('strict pantry mode means the user can actually cook it', () => {
   });
 });
 
-describe('partial pantry mode admits recipes with gaps', () => {
+describe('relaxed mode admits a BOUNDED number of gaps', () => {
   const shakshuka = RECIPE_FIXTURES.find((recipe) => recipe.slug === 'shakshuka')!;
 
-  it('does not filter on availability at all', () => {
-    const results = surviving([shakshuka], emptyConstraints({ pantryMode: 'partial' }), {
+  it('is a gap budget, not an absence of one', () => {
+    // REGRESSION: `partial` used to apply no availability constraint at all,
+    // so it returned the same twenty top-ranked recipes for every possible
+    // input — the symptom that made the whole flow useless. A mode that
+    // ignores the thing it is named after is not a relaxation of it.
+    const empty = surviving([shakshuka], emptyConstraints({ pantryMode: 'partial' }), {
       pantryItems: [],
     });
-    expect(results).toHaveLength(1);
+    expect(empty).toHaveLength(0);
+  });
+
+  it('admits a recipe missing exactly as many as the budget allows', () => {
+    const essentials = essentialIngredients(shakshuka).map((line) => line.name);
+    const allButOne = essentials.slice(0, -1);
+
+    const withinBudget = surviving(
+      [shakshuka],
+      emptyConstraints({
+        pantryMode: 'partial',
+        maxMissingIngredients: 1,
+        availableIngredients: allButOne,
+      }),
+    );
+    expect(withinBudget).toHaveLength(1);
+
+    const overBudget = surviving(
+      [shakshuka],
+      emptyConstraints({
+        pantryMode: 'partial',
+        maxMissingIngredients: 0,
+        availableIngredients: allButOne,
+      }),
+    );
+    expect(overBudget).toHaveLength(0);
+  });
+
+  it('counts gaps rather than merely noticing one', () => {
+    // Built rather than borrowed: a catalogue recipe's gap count depends on
+    // which of its ingredients are assumed on hand, and an off-by-one there
+    // would make this test agree with almost any implementation. Four
+    // ingredients nobody assumes means the arithmetic is exactly four.
+    const fourThings = makeRecipeWithIngredients(
+      ['chicken breast', 'rice', 'carrots', 'green beans'],
+      { slug: 'four-real-things' },
+    );
+
+    const budgets: [number, number, number][] = [
+      // have, budget, expected results
+      [4, 0, 1],
+      [3, 0, 0],
+      [3, 1, 1],
+      [2, 1, 0],
+      [2, 2, 1],
+      [0, 3, 0],
+    ];
+
+    for (const [have, budget, expected] of budgets) {
+      const results = surviving(
+        [fourThings],
+        emptyConstraints({
+          pantryMode: 'partial',
+          maxMissingIngredients: budget,
+          availableIngredients: ['chicken breast', 'rice', 'carrots', 'green beans'].slice(0, have),
+          // Off, so this measures the gap budget and nothing else.
+          mustUseSomethingAvailable: false,
+        }),
+      );
+      expect({ have, budget, got: results.length }).toEqual({ have, budget, got: expected });
+    }
+  });
+
+  it('will not answer with a recipe that uses nothing you named', () => {
+    // REGRESSION: `manakish-zaatar` needs only assumed seasonings, so it was
+    // returned for "chicken, rice, tomato" AND for "banana, oats, milk" —
+    // using nothing from either. A recipe that has nothing to do with what is
+    // in front of you is not an answer to "what can I cook with this".
+    const manakish = RECIPE_FIXTURES.find((recipe) => recipe.slug === 'manakish-zaatar');
+    expect(manakish).toBeDefined();
+
+    const unrelated = emptyConstraints({
+      pantryMode: 'partial',
+      maxMissingIngredients: 2,
+      availableIngredients: ['banana', 'oats', 'milk'],
+      mustUseSomethingAvailable: true,
+    });
+    expect(surviving([manakish!], unrelated)).toHaveLength(0);
+
+    // And it is still reachable when the user actually names one of its
+    // ingredients — this is a relevance rule, not a ban.
+    const related = emptyConstraints({
+      pantryMode: 'partial',
+      maxMissingIngredients: 2,
+      availableIngredients: manakish!.ingredients.map((line) => line.name).slice(0, 1),
+      mustUseSomethingAvailable: true,
+    });
+    expect(surviving([manakish!], related)).toHaveLength(1);
   });
 
   it('reports coverage so the caller can rank and explain the gap', () => {

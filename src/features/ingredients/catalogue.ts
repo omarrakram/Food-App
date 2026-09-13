@@ -66,3 +66,69 @@ export const INGREDIENTS_BY_SLUG = new Map(
 export const COMMON_STAPLE_SLUGS = INGREDIENT_CATALOGUE.filter((i) => i.isCommonStaple).map(
   (i) => i.slug,
 );
+
+/**
+ * Non-seasoning things that are nonetheless always there.
+ *
+ * The line: a thing may be assumed if it is a cooking medium, an aromatic, or
+ * a small-quantity cupboard support that keeps indefinitely. It may NOT be
+ * assumed if it forms the substance of a dish — because that is precisely the
+ * thing you run out of, and precisely the thing the user is telling us about.
+ *
+ * So oil, water, onions and garlic are here; rice, pasta, potatoes, lentils
+ * and fava beans are deliberately not, even though the catalogue marks all of
+ * them "staple" for the pantry UI. You can plan a meal around having rice. You
+ * cannot plan one around having salt.
+ */
+const ALWAYS_ON_HAND_SLUGS: ReadonlySet<string> = new Set([
+  // Cooking media.
+  'water',
+  'olive-oil',
+  'sunflower-oil',
+  'corn-oil',
+  'vinegar',
+  // Aromatics. Present in essentially every kitchen that cooks at all, and
+  // nobody decides what to make based on having an onion. Without these,
+  // "chicken, rice, tomato" matched nothing even allowing a missing
+  // ingredient, because almost every savoury recipe starts with one of them.
+  'onions',
+  'garlic',
+  // Cupboard supports, used in spoonfuls and kept for months. Distinct from
+  // the carbohydrates above: nobody's dinner plan hinges on baking powder.
+  'sugar',
+  'flour',
+  'stock-cube',
+  'yeast',
+  'baking-powder',
+  'tomato-paste',
+]);
+
+/**
+ * May this be assumed present without the user saying so?
+ *
+ * **This is NOT `isCommonStaple`, and conflating the two was a release-blocking
+ * bug.** `isCommonStaple` marks a cupboard item for the PANTRY UI — it is what
+ * pre-ticks "always assume I have this" when someone adds rice. Reusing it for
+ * the matching engine meant rice, pasta, potatoes, onions, garlic, lentils,
+ * fava beans, flour, sugar, yeast, stock cubes and tomato paste were all
+ * silently on hand for everybody. The consequence was not subtle: three
+ * recipes became cookable from a COMPLETELY EMPTY KITCHEN, and since they
+ * needed nothing they matched every search — so "what can I cook with chicken
+ * and rice" and "what can I cook with banana and oats" both answered koshari.
+ *
+ * The line drawn here is: can you plan a meal around it? Rice, yes — you can
+ * be out of rice, and being out of it changes what you cook. Cumin, no.
+ *
+ * Only seasonings, cooking media and water. Everything with substance is a
+ * real ingredient the user has to actually have, or that counts as missing.
+ */
+export function isAssumedOnHand(ingredient: CatalogueIngredient): boolean {
+  // A perishable is never assumed, whatever else is true of it.
+  if (ingredient.isPerishable) return false;
+  return ingredient.category === 'spices' || ALWAYS_ON_HAND_SLUGS.has(ingredient.slug);
+}
+
+/** Slugs the matching engine treats as present in every kitchen. */
+export const ASSUMED_ON_HAND_SLUGS: ReadonlySet<string> = new Set(
+  INGREDIENT_CATALOGUE.filter(isAssumedOnHand).map((i) => i.slug),
+);

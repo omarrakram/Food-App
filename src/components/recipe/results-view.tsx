@@ -59,6 +59,7 @@ const RELAXATION_LABEL: Record<RejectionReason, TranslationKey | null> = {
   time: 'results.relaxTime',
   calories: 'results.relaxCalories',
   tag: 'results.relaxCollection',
+  uses_nothing_you_have: 'results.relaxUnrelated',
   protein: 'results.relaxProtein',
   pantry: 'results.relaxPantry',
 };

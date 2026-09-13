@@ -37,6 +37,11 @@ export function toConstraints(request: MealRequest): RecipeConstraints {
     // a request never carries one; callers add them to the constraints.
     tags: [],
     pantryMode: request.pantryMode,
+    maxMissingIngredients: request.maxMissingIngredients ?? null,
+    // "Cook with what I have" is the flow where a recipe using none of it is
+    // a non-answer. Discover and budget do not supply ingredients, so this is
+    // inert for them.
+    mustUseSomethingAvailable: request.mode === 'ingredients',
     availableIngredients: request.ingredients,
     servings: request.servings,
     budgetMinor: request.budgetMinor,

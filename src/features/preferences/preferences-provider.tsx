@@ -9,7 +9,7 @@ import {
 } from 'react';
 
 import { currencyForCountry } from '@/lib/format/money';
-import { getItem, removeItem, setItem, StorageKeys } from '@/lib/storage';
+import { getItem, removeItem, resetStorageIfStale, setItem, StorageKeys } from '@/lib/storage';
 import {
   DEFAULT_PREFERENCES,
   toDietFlags,
@@ -89,6 +89,11 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
+      // Before anything is read: state written by an older schema is dropped.
+      // Hydrating it and then discovering it is incompatible is how a tester
+      // ends up debugging their own browser rather than the app.
+      await resetStorageIfStale();
+
       const [stored, onboarded] = await Promise.all([
         getItem<Partial<UserPreferences>>(StorageKeys.guestPreferences),
         getItem<boolean>(StorageKeys.onboardingCompleted),
@@ -205,6 +210,7 @@ export function requestDefaultsFrom(preferences: UserPreferences) {
     requiredIngredients: [] as string[],
     excludedIngredients: [] as MealRequest['excludedIngredients'],
     pantryMode: 'off' as const,
+    maxMissingIngredients: null,
     allowDislikedIngredients: false,
   } as const;
 }

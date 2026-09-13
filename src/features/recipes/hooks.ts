@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { requestSuggestions } from '@/features/ai/client';
 import { useAuth } from '@/features/auth/auth-provider';
@@ -11,10 +11,17 @@ import { env } from '@/lib/config/env';
 import { toAppError } from '@/lib/errors';
 import type { MealRequest, Recipe, RecipeMatch } from '@/types/domain';
 
-import { buildIndexFor, checkRecipe, suggestRelaxations, type Relaxation } from './filter';
+import {
+  buildIndexFor,
+  checkRecipe,
+  suggestRelaxations,
+  suppliedKeys,
+  type Relaxation,
+} from './filter';
 import {
   planQuery,
   planFingerprint,
+  constraintsFingerprint,
   DEFAULT_PAGE_SIZE,
   MAX_PAGE_SIZE,
   type RecipePage,
@@ -336,7 +343,16 @@ export function useRecipeSearch(
   );
 
   const query = useInfiniteQuery({
-    queryKey: ['akla', 'recipes', 'search', scopeKey, planFingerprint(plan)] as const,
+    // Both halves: the plan is what SQL sees, the constraints are what the
+    // client filter sees, and either changing must invalidate the answer.
+    queryKey: [
+      'akla',
+      'recipes',
+      'search',
+      scopeKey,
+      planFingerprint(plan),
+      constraintsFingerprint(constraints),
+    ] as const,
     enabled,
     initialPageParam: null as string | null,
     getNextPageParam: (last: RecipePage) => last.nextCursor,
@@ -351,22 +367,49 @@ export function useRecipeSearch(
 
   const pages = query.data?.pages ?? EMPTY_PAGES;
 
-  const matches = useMemo(() => {
+  const { matches, examined } = useMemo(() => {
     const index = buildIndexFor(constraints, { pantryItems: pantry.data ?? [] });
+    const supplied = suppliedKeys(constraints, { pantryItems: pantry.data ?? [] });
     const seen = new Set<string>();
     const kept: RecipeMatch[] = [];
+    let scanned = 0;
+
     for (const page of pages) {
       for (const recipe of page.recipes) {
         // A cursor page can repeat a row when the catalogue changed under the
         // scroll; two cards for one recipe is a visible bug, so dedupe here.
         if (seen.has(recipe.id)) continue;
         seen.add(recipe.id);
-        if (checkRecipe(recipe, constraints, index) !== null) continue;
+        scanned += 1;
+        if (checkRecipe(recipe, constraints, index, { supplied }) !== null) continue;
         kept.push(describeMatch(recipe, request, index));
       }
     }
-    return kept;
+    return { matches: kept, examined: scanned };
   }, [pages, constraints, request, pantry.data]);
+
+  /**
+   * Keep fetching while the client filter is emptying the pages.
+   *
+   * SQL narrows, but it cannot evaluate the kitchen, the gap budget or the
+   * relevance rule — so a page of twenty-four rows can arrive and lose twenty
+   * of them here. Without this the user sees four cards, an idle scroll and no
+   * reason to believe there are more; the page size would be silently
+   * governing the result count rather than the constraints.
+   *
+   * Bounded by the pages already fetched rather than looping: each top-up is
+   * one more request, and React Query re-runs this effect when it lands.
+   */
+  const short = matches.length < pageSize;
+  useEffect(() => {
+    if (!enabled || !short) return;
+    if (!query.hasNextPage || query.isFetchingNextPage) return;
+    // A guard against pathological queries that match almost nothing: past
+    // this we stop and let the empty state explain, rather than walking the
+    // whole catalogue one page at a time.
+    if (examined >= TOP_UP_SCAN_LIMIT) return;
+    void query.fetchNextPage();
+  }, [enabled, short, examined, query]);
 
   return {
     matches,
@@ -384,6 +427,14 @@ export function useRecipeSearch(
     },
   };
 }
+
+/**
+ * How many rows the top-up will walk before giving up.
+ *
+ * A query matching almost nothing must not turn into a slow crawl through the
+ * whole catalogue; past this the empty state is the honest answer.
+ */
+const TOP_UP_SCAN_LIMIT = 300;
 
 /** Stable identities so the memos above do not thrash. */
 const EMPTY_PAGES: readonly RecipePage[] = [];

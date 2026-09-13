@@ -43,12 +43,18 @@ export default function CookScreen() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [ingredients, setIngredients] = useState<string[]>([]);
   /**
-   * The difference between "what can I cook RIGHT NOW" and "what could I cook
-   * with a quick shop". Defaults to strict, because someone who has just typed
-   * out their fridge is asking the first question, and answering the second
-   * one without saying so is how a results page stops being trustworthy.
+   * How many ingredients the user is willing to be missing.
+   *
+   * Three real answers, not two. It used to be a strict/partial toggle where
+   * "partial" applied no kitchen constraint at all — so it returned the same
+   * twenty top-ranked recipes whatever you had selected. A gap budget is a
+   * number, so the modes now differ by that number and nothing else.
+   *
+   * Defaults to 0: someone who has just typed out their fridge is asking what
+   * they can cook RIGHT NOW, and answering a different question without saying
+   * so is how a results page stops being trustworthy.
    */
-  const [strictPantry, setStrictPantry] = useState(true);
+  const [maxMissing, setMaxMissing] = useState(0);
   const [hasSeeded, setHasSeeded] = useState(false);
   const [filters, setFilters] = useState<RequestFiltersValue>({
     servings: preferences.householdSize,
@@ -83,7 +89,8 @@ export default function CookScreen() {
       mode: 'ingredients',
       ingredients,
       budgetMinor: null,
-      pantryMode: strictPantry ? 'strict' : 'partial',
+      pantryMode: maxMissing === 0 ? 'strict' : 'partial',
+      maxMissingIngredients: maxMissing,
       servings: filters.servings,
       mealType: filters.mealType,
       cuisine: filters.cuisine,
@@ -121,17 +128,22 @@ export default function CookScreen() {
           should not have to walk past six groups of chips to ask for food.
         */}
         <View style={{ gap: theme.spacing.lg }}>
-          <SegmentedControl<'strict' | 'partial'>
+          <SegmentedControl<'strict' | 'missing1' | 'missing2'>
             options={[
               { value: 'strict', label: t('cook.modeStrict') },
-              { value: 'partial', label: t('cook.modePartial') },
+              { value: 'missing1', label: t('cook.modeMissing1') },
+              { value: 'missing2', label: t('cook.modeMissing2') },
             ]}
-            value={strictPantry ? 'strict' : 'partial'}
-            onChange={(mode) => setStrictPantry(mode === 'strict')}
+            value={maxMissing === 0 ? 'strict' : maxMissing === 1 ? 'missing1' : 'missing2'}
+            onChange={(mode) =>
+              setMaxMissing(mode === 'strict' ? 0 : mode === 'missing1' ? 1 : 2)
+            }
             testID="cook-pantry-mode"
           />
           <Text variant="footnote" color="textSecondary">
-            {strictPantry ? t('cook.modeStrictHint') : t('cook.modePartialHint')}
+            {maxMissing === 0
+              ? t('cook.modeStrictHint')
+              : t('cook.modeMissingHint', { count: maxMissing })}
           </Text>
 
           <ServingsField

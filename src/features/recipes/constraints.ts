@@ -77,15 +77,32 @@ export function toRestriction(
 // --- The model -------------------------------------------------------------
 
 /**
- * How strictly the user's pantry limits the results.
+ * How strictly the user's kitchen limits the results.
  *
- * `strict` is the honest answer to "what can I cook right now": nothing is
- * returned that needs a shop. `partial` still ranks by coverage but admits
- * recipes with gaps, and the UI says how many are missing. `off` ignores the
- * pantry entirely, which is what Discover wants.
+ * `strict` is the honest answer to "what can I cook right now": every
+ * essential ingredient is on hand and nothing is missing. `partial` admits a
+ * BOUNDED number of gaps — see `maxMissingIngredients` — and the UI says how
+ * many. `off` ignores the kitchen entirely, which is what Discover wants.
+ *
+ * `partial` used to mean "apply no kitchen constraint at all", which is why
+ * it returned the same twenty top-ranked recipes for every possible input.
+ * A mode that ignores the thing it is named after is not a relaxation of it.
  */
 export const PANTRY_MODES = ['off', 'partial', 'strict'] as const;
 export type PantryMode = (typeof PANTRY_MODES)[number];
+
+/** How many gaps `partial` tolerates when the caller does not say. */
+export const DEFAULT_MAX_MISSING = 2;
+
+/** The gap budget a mode implies. `null` means "do not check the kitchen". */
+export function missingBudgetFor(
+  mode: PantryMode,
+  explicit: number | null = null,
+): number | null {
+  if (mode === 'off') return null;
+  if (mode === 'strict') return 0;
+  return explicit ?? DEFAULT_MAX_MISSING;
+}
 
 export type RecipeConstraints = {
   // --- Hard: safety and identity -----------------------------------------
@@ -124,6 +141,23 @@ export type RecipeConstraints = {
 
   // --- Pantry -------------------------------------------------------------
   pantryMode: PantryMode;
+  /**
+   * How many essential ingredients a recipe may be missing.
+   *
+   * `null` defers to `pantryMode`: strict is 0, partial is
+   * `DEFAULT_MAX_MISSING`. Set it to make "allow 1 missing" mean exactly that.
+   */
+  maxMissingIngredients: number | null;
+  /**
+   * Require the recipe to use at least one thing the user actually named.
+   *
+   * Without this a dish made entirely of assumed seasonings satisfies every
+   * search — `manakish-zaatar` was returned for "chicken, rice, tomato" and
+   * for "banana, oats, milk" alike, using nothing from either. Answering "what
+   * can I cook with what I have" with a recipe that uses none of it is not an
+   * answer.
+   */
+  mustUseSomethingAvailable: boolean;
   /** Ingredients the user says they have right now, beyond the pantry. */
   availableIngredients: string[];
 
@@ -155,6 +189,8 @@ export function emptyConstraints(overrides: Partial<RecipeConstraints> = {}): Re
     minProteinGrams: null,
     tags: [],
     pantryMode: 'off',
+    maxMissingIngredients: null,
+    mustUseSomethingAvailable: false,
     availableIngredients: [],
     servings: 2,
     budgetMinor: null,

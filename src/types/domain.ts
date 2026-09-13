@@ -553,6 +553,12 @@ export type MealRequest = {
    * recipe is cookable right now.
    */
   pantryMode: 'off' | 'partial' | 'strict';
+  /**
+   * How many essential ingredients a result may be missing.
+   *
+   * Null defers to `pantryMode`. Set it to make "allow 1 missing" mean one.
+   */
+  maxMissingIngredients: number | null;
   /** Set when the user has chosen to see recipes containing a disliked food. */
   allowDislikedIngredients: boolean;
   /** Budget ceiling in minor units. */

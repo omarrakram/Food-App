@@ -25,6 +25,7 @@ const base: MealRequest = {
   requiredIngredients: [],
   excludedIngredients: [],
   pantryMode: 'off',
+  maxMissingIngredients: null,
   allowDislikedIngredients: false,
 };
 

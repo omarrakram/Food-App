@@ -6,7 +6,7 @@ import type {
   RecipeIngredient,
 } from '@/types/domain';
 
-import { INGREDIENT_CATALOGUE, type CatalogueIngredient } from './catalogue';
+import { INGREDIENT_CATALOGUE, isAssumedOnHand, type CatalogueIngredient } from './catalogue';
 import { freshnessOf } from './freshness';
 import { normaliseIngredientName, similarityScore } from './normalise';
 
@@ -146,14 +146,17 @@ export function buildAvailabilityIndex(
 
   if (assumeCommonStaples) {
     for (const ingredient of INGREDIENT_CATALOGUE) {
-      if (!ingredient.isCommonStaple) continue;
-      // FOOD SAFETY / HONESTY: never assume a perishable is in the kitchen.
-      // Salt and oil keep; eggs, milk and bread do not, and quietly counting
-      // them as present recommends meals the cook cannot actually make. The
-      // importer rejects this combination too — this is the second lock.
-      if (ingredient.isPerishable) continue;
+      // `isAssumedOnHand`, NOT `isCommonStaple`. The difference is the whole
+      // bug: the staple flag is a pantry-UI convenience that marks rice,
+      // pasta, potatoes, onions, lentils and flour as cupboard items, and
+      // assuming those made three recipes cookable from an empty kitchen —
+      // which then matched every search, whatever the user had selected.
+      //
+      // FOOD SAFETY / HONESTY is still the other half: never assume a
+      // perishable. `isAssumedOnHand` refuses those outright.
+      if (!isAssumedOnHand(ingredient)) continue;
       const key = normaliseIngredientName(ingredient.name);
-      // A staple the user has explicitly marked expired stays excluded.
+      // Something the user has explicitly marked expired stays excluded.
       if (available.has(key) || expired.has(key)) continue;
       available.add(key);
       assumedStaples.add(key);

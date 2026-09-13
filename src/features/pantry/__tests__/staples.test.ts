@@ -1,4 +1,8 @@
-import { INGREDIENT_CATALOGUE } from '@/features/ingredients/catalogue';
+import {
+  ASSUMED_ON_HAND_SLUGS,
+  INGREDIENT_CATALOGUE,
+  INGREDIENTS_BY_SLUG,
+} from '@/features/ingredients/catalogue';
 import { buildAvailabilityIndex, resolveIngredient } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 
@@ -31,8 +35,36 @@ describe('staple assumptions', () => {
     const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
 
     // Keyed on the canonical name, which is what the index stores.
-    for (const name of ['salt', 'black pepper', 'vegetable oil']) {
+    for (const name of ['salt', 'black pepper', 'vegetable oil', 'onions', 'garlic']) {
       expect(index.assumedStaples.has(normaliseIngredientName(name))).toBe(true);
+    }
+  });
+
+  it('never assumes the substance of a dish', () => {
+    // REGRESSION, and this was the release-blocking one. The matching engine
+    // read `isCommonStaple`, which the pantry UI uses to mean "cupboard item"
+    // — so rice, pasta, potatoes, lentils, fava beans and tea were all on hand
+    // for everybody. Three recipes became cookable from a completely empty
+    // kitchen, and because they needed nothing they matched every search:
+    // "chicken and rice" and "banana and oats" both answered koshari.
+    const index = buildAvailabilityIndex([], [], { assumeCommonStaples: true });
+
+    for (const name of ['rice', 'pasta', 'potatoes', 'red lentils', 'fava beans', 'tea']) {
+      expect(index.available.has(normaliseIngredientName(name))).toBe(false);
+    }
+  });
+
+  it('names only slugs that exist, so a typo cannot silently do nothing', () => {
+    // `ASSUMED_ON_HAND_SLUGS` is filtered FROM the catalogue, so a misspelled
+    // entry in the source list vanishes without a word — which is how
+    // "vegetable-oil" (really `sunflower-oil`) stopped being assumed while
+    // every test still passed.
+    expect(ASSUMED_ON_HAND_SLUGS.size).toBeGreaterThan(30);
+    for (const slug of ASSUMED_ON_HAND_SLUGS) {
+      expect(INGREDIENTS_BY_SLUG.has(slug)).toBe(true);
+    }
+    for (const slug of ['water', 'olive-oil', 'sunflower-oil', 'onions', 'garlic', 'salt']) {
+      expect(ASSUMED_ON_HAND_SLUGS.has(slug)).toBe(true);
     }
   });
 

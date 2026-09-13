@@ -22,6 +22,8 @@ export const StorageKeys = {
   guestChoice: 'akla.auth.guestChoice',
   /** A guest's display name, bio and country, before there is an account. */
   guestProfile: 'akla.guest.profile',
+  /** The schema version the stored data was written by. See `SCHEMA_VERSION`. */
+  schemaVersion: 'akla.schema.version',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];
@@ -61,5 +63,44 @@ export async function clearAppStorage(): Promise<void> {
     await AsyncStorage.multiRemove(Object.values(StorageKeys));
   } catch {
     // ignore
+  }
+}
+
+/**
+ * Bump this when a stored shape changes incompatibly.
+ *
+ * 2: the matching engine's semantics changed. `recentIngredients` seeds the
+ *    Cook screen, and a preview tester carrying a selection from before the
+ *    fix would submit it, get the new behaviour, and have no way to tell
+ *    whether they were seeing a stale client or a real result. Clearing is
+ *    cheaper than explaining.
+ */
+export const SCHEMA_VERSION = 2;
+
+/**
+ * Drops persisted state written by an older schema.
+ *
+ * Deliberately blunt: everything here is a cache or a convenience — a recent
+ * search, a draft, a colour scheme — and none of it is worth a migration path.
+ * Real user data lives on the server or in the pantry repository, neither of
+ * which this touches.
+ *
+ * Returns true when something was actually cleared, so a preview build can say
+ * so rather than leaving the tester wondering why their selections vanished.
+ */
+export async function resetStorageIfStale(): Promise<boolean> {
+  try {
+    const raw = await AsyncStorage.getItem(StorageKeys.schemaVersion);
+    const stored = raw === null ? 0 : Number.parseInt(raw, 10);
+    if (Number.isFinite(stored) && stored >= SCHEMA_VERSION) return false;
+
+    // A first run has nothing to clear; only say we reset when we did.
+    const hadData = (await AsyncStorage.getItem(StorageKeys.onboardingCompleted)) !== null;
+    await clearAppStorage();
+    await AsyncStorage.setItem(StorageKeys.schemaVersion, String(SCHEMA_VERSION));
+    return hadData;
+  } catch {
+    // Storage being unavailable is not a reason to refuse to start.
+    return false;
   }
 }

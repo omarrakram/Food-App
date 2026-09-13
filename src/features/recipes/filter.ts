@@ -10,6 +10,7 @@ import {
   essentialIngredients,
   ingredientSlug,
   isAbsolute,
+  missingBudgetFor,
   recipeContains,
   type IngredientRestriction,
   type RecipeConstraints,
@@ -44,6 +45,7 @@ export const REJECTION_REASONS = [
   'protein',
   'tag',
   'pantry',
+  'uses_nothing_you_have',
 ] as const;
 export type RejectionReason = (typeof REJECTION_REASONS)[number];
 
@@ -110,21 +112,68 @@ export function findMissingRequirement(recipe: Recipe, required: readonly string
   return null;
 }
 
+/** The normalised key an availability index is looked up by. */
+function availabilityKey(name: string): string {
+  const resolved = resolveIngredient(name);
+  return normaliseIngredientName(resolved?.name ?? name);
+}
+
 /**
- * Can this be cooked right now, from what the user actually has?
+ * Essentials the user does not have.
  *
- * Every essential ingredient — not optional, not a garnish, not a background
- * staple — has to be available. An expired pantry item is not available; the
- * availability index has already removed it, and that is a food-safety rule
- * rather than a matching detail.
+ * An essential is not optional, not a garnish and not a recipe-declared
+ * background staple. An expired pantry item is not available: the index has
+ * already removed it, and that is a food-safety rule rather than a matching
+ * detail.
+ *
+ * Returns the LIST rather than the first one, because "how many are you
+ * missing?" is the question both modes are actually asking — strict wants
+ * zero, and relaxed wants at most N.
  */
+export function missingEssentials(recipe: Recipe, index: AvailabilityIndex): string[] {
+  return essentialIngredients(recipe)
+    .filter((line) => !index.available.has(availabilityKey(line.name)))
+    .map((line) => line.name);
+}
+
+/** Kept for callers that only need to know whether anything is missing. */
 export function findUnavailableEssential(recipe: Recipe, index: AvailabilityIndex): string | null {
-  for (const line of essentialIngredients(recipe)) {
-    const resolved = resolveIngredient(line.name);
-    const key = normaliseIngredientName(resolved?.name ?? line.name);
-    if (!index.available.has(key)) return line.name;
+  return missingEssentials(recipe, index)[0] ?? null;
+}
+
+/**
+ * Does this recipe use anything the user actually named?
+ *
+ * An assumed seasoning does not count. The whole point of the question is
+ * whether the dish has anything to do with what is in front of them: a recipe
+ * satisfied entirely by the spice rack is an answer to nobody's question.
+ */
+export function usesSomethingAvailable(
+  recipe: Recipe,
+  index: AvailabilityIndex,
+  supplied: ReadonlySet<string>,
+): boolean {
+  if (supplied.size === 0) return true;
+  return recipe.ingredients.some((line) => supplied.has(availabilityKey(line.name)));
+}
+
+/**
+ * The things the user actually told us about — typed in, or in their pantry.
+ *
+ * Deliberately NOT `index.available`, which also contains everything assumed
+ * on hand.
+ */
+export function suppliedKeys(
+  constraints: RecipeConstraints,
+  options: FilterOptions = {},
+): Set<string> {
+  const keys = new Set<string>();
+  for (const name of constraints.availableIngredients) keys.add(availabilityKey(name));
+  if (constraints.pantryMode !== 'off') {
+    for (const item of options.pantryItems ?? []) keys.add(availabilityKey(item.ingredientName));
   }
-  return null;
+  keys.delete('');
+  return keys;
 }
 
 // --- The pipeline ----------------------------------------------------------
@@ -161,6 +210,8 @@ export function checkRecipe(
   recipe: Recipe,
   constraints: RecipeConstraints,
   index: AvailabilityIndex,
+  /** Pre-computed so a page of results does not rebuild the supplied set. */
+  options: FilterOptions & { supplied?: ReadonlySet<string> } = {},
 ): Rejection | null {
   if (violatesAllergens(recipe, constraints.allergens)) {
     return { reason: 'allergen', detail: null };
@@ -222,9 +273,22 @@ export function checkRecipe(
     if (!recipe.tags.includes(tag)) return { reason: 'tag', detail: tag };
   }
 
-  if (constraints.pantryMode === 'strict') {
-    const unavailable = findUnavailableEssential(recipe, index);
-    if (unavailable) return { reason: 'pantry', detail: unavailable };
+  const budget = missingBudgetFor(constraints.pantryMode, constraints.maxMissingIngredients);
+  if (budget !== null) {
+    const missingList = missingEssentials(recipe, index);
+    if (missingList.length > budget) {
+      return { reason: 'pantry', detail: missingList[0] ?? null };
+    }
+
+    // Checked after the gap budget so the reason a user sees is the more
+    // specific one: "you are missing four things" beats "this has nothing to
+    // do with your kitchen" when both are true.
+    if (constraints.mustUseSomethingAvailable) {
+      const supplied = options.supplied ?? suppliedKeys(constraints, options);
+      if (!usesSomethingAvailable(recipe, index, supplied)) {
+        return { reason: 'uses_nothing_you_have', detail: null };
+      }
+    }
   }
 
   return null;
@@ -236,9 +300,10 @@ export function filterRecipes(
   options: FilterOptions = {},
 ): FilterVerdict[] {
   const index = buildIndexFor(constraints, options);
+  const supplied = suppliedKeys(constraints, options);
   return recipes.map((recipe) => ({
     recipe,
-    rejection: checkRecipe(recipe, constraints, index),
+    rejection: checkRecipe(recipe, constraints, index, { ...options, supplied }),
   }));
 }
 
@@ -280,7 +345,16 @@ function without(constraints: RecipeConstraints, reason: RejectionReason): Recip
     case 'tag':
       return { ...constraints, tags: [] };
     case 'pantry':
-      return { ...constraints, pantryMode: 'partial' };
+      // One more gap than currently allowed, rather than jumping straight to
+      // "ignore the kitchen": the offer should be a step, not a cliff.
+      return {
+        ...constraints,
+        pantryMode: 'partial',
+        maxMissingIngredients:
+          (missingBudgetFor(constraints.pantryMode, constraints.maxMissingIngredients) ?? 0) + 1,
+      };
+    case 'uses_nothing_you_have':
+      return { ...constraints, mustUseSomethingAvailable: false };
     default:
       // Safety constraints are not relaxable. Returning them unchanged means
       // `wouldReturn` stays 0 and they never surface as a suggestion.

@@ -233,12 +233,55 @@ export function pageLocally(recipes: readonly Recipe[], plan: QueryPlan): Recipe
 }
 
 /**
- * Stable cache key for a plan, cursor excluded.
+ * Stable cache key for the CONSTRAINTS, not merely the plan.
  *
- * The cursor is the page, not the query: including it would give every page
- * its own cache entry and defeat `useInfiniteQuery`, which keys on the query
- * and stores the pages beneath it.
+ * The plan is the coarse SQL half. Two different constraint sets can produce
+ * the same plan — the kitchen contents, the gap budget and the relevance rule
+ * are all evaluated client-side — and keying on the plan alone would let one
+ * of them serve the other's cached answer.
+ *
+ * That is exactly the failure this app shipped: a user changing their
+ * ingredients and getting the same recipes back. The client filter does re-run
+ * on the cached rows, so it was not the cause here — but a key that omits an
+ * input capable of changing the output is a bug waiting for a refactor to
+ * expose it. Everything that can change the result is in here.
+ *
+ * The cursor is deliberately NOT: it is the page, not the query, and including
+ * it would give every page its own entry and defeat `useInfiniteQuery`.
  */
+export function constraintsFingerprint(constraints: RecipeConstraints): string {
+  const sorted = (values: readonly string[]) => [...values].sort().join(',');
+  return [
+    sorted(constraints.availableIngredients),
+    sorted(constraints.requiredIngredients),
+    constraints.excludedIngredients
+      .map((entry) => `${entry.severity}:${entry.slug ?? entry.label}`)
+      .sort()
+      .join(','),
+    sorted(constraints.allergens),
+    constraints.eatingStyle,
+    sorted(constraints.dietFlags),
+    constraints.allowDislikedIngredients ? '1' : '0',
+    constraints.pantryMode,
+    constraints.maxMissingIngredients ?? '',
+    constraints.mustUseSomethingAvailable ? '1' : '0',
+    constraints.mealType ?? '',
+    constraints.cuisine ?? '',
+    constraints.maxMinutes ?? '',
+    constraints.maxCalories ?? '',
+    constraints.minProteinGrams ?? '',
+    sorted(constraints.appliances),
+    sorted(constraints.tags),
+    constraints.servings,
+    constraints.budgetMinor ?? '',
+    constraints.currency,
+    constraints.country,
+    constraints.skillLevel,
+    constraints.query ?? '',
+  ].join('~');
+}
+
+/** The SQL half of the key, for callers that only vary the plan. */
 export function planFingerprint(plan: QueryPlan): string {
   return [
     plan.cuisine ?? '',

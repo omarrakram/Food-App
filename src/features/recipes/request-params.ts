@@ -39,6 +39,12 @@ export function encodeRequest(request: MealRequest): RequestParams {
     .map((entry) => `${entry.severity === 'hard_avoid' ? '!' : ''}${entry.label}`);
   if (avoid.length > 0) params.avoid = avoid.join('|');
   if (request.pantryMode !== 'off') params.pantry = request.pantryMode;
+  // Carried explicitly: "allow 1 missing" and "allow 2 missing" are both
+  // `partial`, and a link that lost the number would silently widen or narrow
+  // the search the user shared.
+  if (request.maxMissingIngredients !== null) {
+    params.missing = String(request.maxMissingIngredients);
+  }
   params.servings = String(request.servings);
 
   return params;
@@ -134,9 +140,25 @@ export function decodeRequest(
     requiredIngredients: splitList(first(params.must)),
     excludedIngredients,
     pantryMode,
+    maxMissingIngredients: clampMissing(parseIntOrNull(first(params.missing))),
     servings: servings && servings > 0 ? Math.min(servings, 20) : defaults.servings,
   };
 }
+
+/** A gap budget from a URL is user input; a negative or huge one is not. */
+function clampMissing(value: number | null): number | null {
+  if (value === null) return null;
+  if (!Number.isFinite(value) || value < 0) return null;
+  return Math.min(Math.trunc(value), MAX_ALLOWED_MISSING);
+}
+
+/**
+ * The most gaps the UI will ever offer.
+ *
+ * Past three, "you could cook this" stops being true in any useful sense —
+ * it is a shopping list with a recipe attached.
+ */
+export const MAX_ALLOWED_MISSING = 3;
 
 /** Stable cache key for a request, used as a React Query key. */
 export function requestFingerprint(request: MealRequest): string {
@@ -160,6 +182,7 @@ export function requestFingerprint(request: MealRequest): string {
       .sort()
       .join(','),
     request.pantryMode,
+    request.maxMissingIngredients ?? '',
     request.allowDislikedIngredients ? '1' : '0',
   ].join('~');
 }
