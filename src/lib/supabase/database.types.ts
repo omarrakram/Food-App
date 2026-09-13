@@ -67,6 +67,7 @@ export type CuisineEnum =
 export type MealTypeEnum = 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'dessert';
 export type DifficultyEnum = 'easy' | 'medium' | 'hard';
 export type RecipeSourceEnum = 'curated' | 'ai_generated' | 'user';
+export type RecipeImageSourceEnum = 'generated' | 'owned' | 'openly_licensed' | 'community';
 export type HistoryKindEnum = 'viewed' | 'cooked' | 'disliked';
 
 export type IngredientCategoryEnum =
@@ -152,6 +153,12 @@ export type RecipeRow = {
   title_ar: string | null;
   description: string;
   description_ar: string | null;
+  image_path: string | null;
+  image_source: RecipeImageSourceEnum | null;
+  image_creator: string | null;
+  image_license: string | null;
+  image_attribution: string | null;
+  image_source_url: string | null;
   image_url: string | null;
   source: RecipeSourceEnum;
   cuisine: CuisineEnum | null;
@@ -174,11 +181,15 @@ export type RecipeIngredientRow = {
   id: string;
   recipe_id: string;
   ingredient_id: string | null;
+  slug: string | null;
   name: string;
   quantity: number | null;
   unit: MeasurementUnitEnum | null;
   preparation: string | null;
   is_optional: boolean;
+  is_garnish: boolean;
+  is_pantry_staple: boolean;
+  notes: string | null;
   sort_order: number;
 };
 

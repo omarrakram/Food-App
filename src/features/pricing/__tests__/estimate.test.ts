@@ -1,21 +1,12 @@
 import { RECIPES_BY_ID } from '@/features/recipes/fixtures';
+import { makeRecipeIngredient } from '@/test-utils/factories';
 import type { Recipe, RecipeIngredient } from '@/types/domain';
 
 import { budgetVerdict, costOfIngredient, estimateRecipeCost, toPricedAmount } from '../estimate';
 import type { PriceBook, PriceQuote } from '../price-book';
 
 function line(overrides: Partial<RecipeIngredient> = {}): RecipeIngredient {
-  return {
-    id: 'line',
-    ingredientId: null,
-    name: 'rice',
-    quantity: 300,
-    unit: 'g',
-    preparation: null,
-    isOptional: false,
-    sortOrder: 0,
-    ...overrides,
-  };
+  return makeRecipeIngredient({ id: 'line', name: 'rice', quantity: 300, unit: 'g', sortOrder: 0, ...overrides });
 }
 
 /** 100 EGP per kilo, so the arithmetic in these assertions is obvious. */

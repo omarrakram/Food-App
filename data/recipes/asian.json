@@ -1,0 +1,2626 @@
+[
+  {
+    "slug": "beef-noodle-stirfry",
+    "title": "Beef and Vegetable Noodles",
+    "titleAr": "نودلز باللحمة والخضار",
+    "description": "Everything cut before the pan gets hot, because after that there is no time.",
+    "descriptionAr": "كل حاجة متقطّعة قبل ما الطاسة تسخن، لأن بعد كده مفيش وقت.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 10,
+    "servings": 3,
+    "nutrition": {
+      "calories": 540,
+      "protein": 32,
+      "carbs": 62,
+      "fat": 18,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "quick",
+      "high-protein",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/beef-noodle-stirfry.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "noodles",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "cooked"
+      },
+      {
+        "slug": "beef-steak",
+        "quantity": 350,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "broccoli",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "cut into florets"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 20,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Cut everything first and put it beside the stove. Stir-frying leaves no time to chop.",
+        "textAr": "قطّع كل حاجة الأول وحطها جنب البوتاجاز. الشوح السريع مابيسيبش وقت للتقطيع.",
+        "minutes": 15,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sear the beef in very hot oil for 2 minutes and lift it out.",
+        "textAr": "شوّح اللحمة في زيت سخن جدًا دقيقتين وارفعها.",
+        "minutes": 3,
+        "uses": [
+          "beef-steak",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir-fry the vegetables 4 minutes, then the garlic and ginger for 30 seconds.",
+        "textAr": "شوّح الخضار ٤ دقايق، وبعدين التوم والزنجبيل ٣٠ ثانية.",
+        "minutes": 5,
+        "uses": [
+          "bell-pepper",
+          "broccoli",
+          "carrots",
+          "garlic",
+          "ginger"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Return the beef with the noodles, soy and sesame oil and toss for 2 minutes.",
+        "textAr": "رجّع اللحمة مع النودلز والصويا وزيت السمسم وقلّب دقيقتين.",
+        "minutes": 3,
+        "uses": [
+          "noodles",
+          "soy-sauce",
+          "sesame-oil",
+          "chili-flakes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "chicken-fried-rice",
+    "title": "Chicken Fried Rice",
+    "titleAr": "أرز مقلي بالفراخ",
+    "description": "Yesterday's rice, a very hot pan, and everything moving the whole time.",
+    "descriptionAr": "رز امبارح وطاسة سخنة جدًا وكل حاجة بتتحرك طول الوقت.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 12,
+    "servings": 3,
+    "nutrition": {
+      "calories": 480,
+      "protein": 28,
+      "carbs": 58,
+      "fat": 15,
+      "fiber": 3
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "quick",
+      "high-protein",
+      "leftovers",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/chicken-fried-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "cooked and cooled"
+      },
+      {
+        "slug": "chicken-breast",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "green-peas",
+        "quantity": 100,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "carrots",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Scramble the eggs quickly in hot oil and lift them out.",
+        "textAr": "اعمل البيض سكرامبل بسرعة في زيت سخن وارفعه.",
+        "minutes": 3,
+        "uses": [
+          "eggs",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sear the chicken hard until browned and cooked through, then set aside.",
+        "textAr": "شوّح الفراخ كويس لحد ما تتحمّر وتستوي، وبعدين ارفعها.",
+        "minutes": 6,
+        "uses": [
+          "chicken-breast"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      },
+      {
+        "text": "Stir-fry the carrot, peas and garlic for 3 minutes, then add the cold rice and fry hard.",
+        "textAr": "شوّح الجزر والبسلة والتوم ٣ دقايق، وبعدين ضيف الرز البارد واقليه على نار عالية.",
+        "minutes": 6,
+        "uses": [
+          "carrots",
+          "green-peas",
+          "garlic",
+          "rice"
+        ],
+        "safety": "Only use rice that was cooled quickly and refrigerated, and reheat it once until piping hot.",
+        "safetyAr": "استخدم بس رز اتبرّد بسرعة واتحط في التلاجة، وسخّنه مرة واحدة بس لحد ما يبقى سخن جدًا."
+      },
+      {
+        "text": "Return everything, add soy and sesame oil, and finish with green onion.",
+        "textAr": "رجّع كل حاجة، ضيف الصويا وزيت السمسم، وزيّن بالبصل الأخضر.",
+        "minutes": 3,
+        "uses": [
+          "soy-sauce",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "coconut-chicken-curry",
+    "title": "Coconut Chicken Curry",
+    "titleAr": "كاري فراخ بجوز الهند",
+    "description": "Mild, creamy and forgiving. The curry that works on a weeknight.",
+    "descriptionAr": "خفيف وكريمي وبيسامح. الكاري اللي بينفع في نص الأسبوع.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 520,
+      "protein": 36,
+      "carbs": 22,
+      "fat": 34,
+      "fiber": 4
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "high-protein",
+      "comfort",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/coconut-chicken-curry.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "coconut-milk",
+        "quantity": 400,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 25,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "curry-powder",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion in oil, then add the garlic, ginger and curry powder for a minute.",
+        "textAr": "شوّح البصل في الزيت، وبعدين ضيف التوم والزنجبيل والكاري دقيقة.",
+        "minutes": 7,
+        "uses": [
+          "onions",
+          "sunflower-oil",
+          "garlic",
+          "ginger",
+          "curry-powder"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Brown the chicken in the spices, then stir in the tomato paste.",
+        "textAr": "حمّر الفراخ في البهارات، وبعدين قلّب صلصة الطماطم.",
+        "minutes": 8,
+        "uses": [
+          "chicken-thigh",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour in the coconut milk and simmer 20 minutes until it thickens. Finish with coriander.",
+        "textAr": "صبّ جوز الهند وسيبها ٢٠ دقيقة لحد ما تتقل. زيّنها بالكزبرة.",
+        "minutes": 20,
+        "uses": [
+          "coconut-milk",
+          "salt",
+          "coriander"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      }
+    ]
+  },
+  {
+    "slug": "congee-chicken",
+    "title": "Chicken Rice Porridge",
+    "titleAr": "عصيدة رز بالفراخ",
+    "description": "Rice cooked far past done until it turns to soup. What you eat when you are ill.",
+    "descriptionAr": "رز متطبوخ أكتر من اللازم بكتير لحد ما يبقى شوربة. اللي بتاكله وانت تعبان.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "breakfast",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 50,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 24,
+      "carbs": 42,
+      "fat": 6,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "comfort",
+      "budget",
+      "beginner",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/congee-chicken.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 180,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "chicken-thigh",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "ginger",
+        "quantity": 30,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "white-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer the rice, chicken, ginger and stock in 2L water for 45 minutes, stirring now and then.",
+        "textAr": "سيب الرز والفراخ والزنجبيل والمرقة في ٢ لتر مية ٤٥ دقيقة مع التقليب من وقت للتاني.",
+        "minutes": 45,
+        "uses": [
+          "rice",
+          "chicken-thigh",
+          "ginger",
+          "stock-cube"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      },
+      {
+        "text": "Lift the chicken, shred it and return it. The rice should have collapsed completely.",
+        "textAr": "ارفع الفراخ، فتّتها ورجّعها. الرز المفروض يكون سايح تمامًا.",
+        "minutes": 5,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Season with soy, salt, pepper and sesame oil and top with green onion.",
+        "textAr": "تبّلها بالصويا والملح والفلفل وزيت السمسم وحط البصل الأخضر فوق.",
+        "minutes": 3,
+        "uses": [
+          "soy-sauce",
+          "salt",
+          "white-pepper",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "edamame-rice-bowl",
+    "title": "Edamame and Egg Rice Bowl",
+    "titleAr": "طبق رز بالإدامامي والبيض",
+    "description": "A bowl assembled rather than cooked, if the rice is already there.",
+    "descriptionAr": "طبق بيتجمّع مش بيتطبخ، لو الرز جاهز.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 8,
+    "servings": 2,
+    "nutrition": {
+      "calories": 480,
+      "protein": 24,
+      "carbs": 62,
+      "fat": 14,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "quick",
+      "high-protein",
+      "beginner",
+      "healthy",
+      "leftovers"
+    ],
+    "image": {
+      "path": "curated/edamame-rice-bowl.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cooked"
+      },
+      {
+        "slug": "edamame",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "carrots",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-seeds",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the edamame for 4 minutes and drain.",
+        "textAr": "اسلق الإدامامي ٤ دقايق وصفّيه.",
+        "minutes": 4,
+        "uses": [
+          "edamame"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the eggs so the whites are set and the edges are crisp.",
+        "textAr": "اقلي البيض لحد ما البياض يستوي والأطراف تقرمش.",
+        "minutes": 4,
+        "uses": [
+          "eggs"
+        ],
+        "safety": "Cook eggs until the whites are completely set.",
+        "safetyAr": "اطبخ البيض لحد ما البياض يستوي تمامًا."
+      },
+      {
+        "text": "Build the bowls with warm rice, edamame, carrot and egg, then season.",
+        "textAr": "جهّز الأطباق برز سخن وإدامامي وجزر وبيض، وبعدين تبّلها.",
+        "minutes": 4,
+        "uses": [
+          "rice",
+          "carrots",
+          "soy-sauce",
+          "sesame-oil",
+          "green-onion",
+          "sesame-seeds"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "egg-drop-soup",
+    "title": "Egg Drop Soup",
+    "titleAr": "شوربة البيض",
+    "description": "Ten minutes from nothing. Ribbons of egg through hot, seasoned broth.",
+    "descriptionAr": "عشر دقايق من ولا حاجة. خيوط بيض في مرق سخن ومتبّل.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 160,
+      "protein": 12,
+      "carbs": 10,
+      "fat": 8,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "quick",
+      "budget",
+      "beginner",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/egg-drop-soup.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "cornflour",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 10,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "white-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Bring 800ml water with the stock, ginger, soy and pepper to a simmer.",
+        "textAr": "سخّن ٨٠٠ مل مية مع المرقة والزنجبيل والصويا والفلفل لحد الغليان الهادي.",
+        "minutes": 6,
+        "uses": [
+          "stock-cube",
+          "ginger",
+          "soy-sauce",
+          "white-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Slurry the cornflour with cold water and stir it in to thicken slightly.",
+        "textAr": "ذوّب النشا في مية باردة وقلّبه عشان يتقل شوية.",
+        "minutes": 2,
+        "uses": [
+          "cornflour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Turn the heat off, pour the egg in a thin stream while stirring one direction.",
+        "textAr": "اطفي النار، وصبّ البيض خيط رفيع وانت بتقلّب في اتجاه واحد.",
+        "minutes": 2,
+        "uses": [
+          "eggs",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": "Cook eggs until set. The broth must be near boiling for the ribbons to cook through.",
+        "safetyAr": "اطبخ البيض لحد ما يستوي. المرق لازم يكون قرب الغليان عشان الخيوط تستوي."
+      }
+    ]
+  },
+  {
+    "slug": "garlic-green-beans",
+    "title": "Garlic Green Beans",
+    "titleAr": "فاصوليا خضرا بالتوم",
+    "description": "Blistered in a hot pan until the skins wrinkle, then hit with garlic.",
+    "descriptionAr": "متحمّرة في طاسة سخنة لحد ما القشرة تتجعّد، وبعدين توم عليها.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 6,
+    "cookMinutes": 10,
+    "servings": 4,
+    "nutrition": {
+      "calories": 120,
+      "protein": 4,
+      "carbs": 12,
+      "fat": 7,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "vegan",
+      "healthy",
+      "quick",
+      "beginner",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/garlic-green-beans.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "green-beans",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "trimmed"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      },
+      {
+        "slug": "sesame-seeds",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the beans in very hot oil, barely moving them, until blistered — about 7 minutes.",
+        "textAr": "اقلي الفاصوليا في زيت سخن جدًا من غير تحريك تقريبًا لحد ما تتحمّر — حوالي ٧ دقايق.",
+        "minutes": 7,
+        "uses": [
+          "green-beans",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the garlic for 40 seconds, then the soy and sesame oil off the heat.",
+        "textAr": "ضيف التوم ٤٠ ثانية، وبعدين الصويا وزيت السمسم بعيد عن النار.",
+        "minutes": 2,
+        "uses": [
+          "garlic",
+          "soy-sauce",
+          "sesame-oil",
+          "chili-flakes",
+          "sesame-seeds"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "ginger-garlic-broccoli-beef",
+    "title": "Ginger Beef and Broccoli",
+    "titleAr": "لحمة بالزنجبيل والبروكلي",
+    "description": "The takeaway dish, made properly: beef seared in batches so it never steams.",
+    "descriptionAr": "أكلة المطاعم بس مظبوطة: لحمة مشوّحة على دفعات عشان ماتسلقش.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 12,
+    "servings": 3,
+    "nutrition": {
+      "calories": 410,
+      "protein": 36,
+      "carbs": 18,
+      "fat": 22,
+      "fiber": 4
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "high-protein",
+      "quick",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/ginger-garlic-broccoli-beef.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "beef-steak",
+        "quantity": 450,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "broccoli",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cut into florets"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 30,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "cornflour",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the beef with 1 tbsp soy and the cornflour and leave it 10 minutes.",
+        "textAr": "قلّب اللحمة مع معلقة صويا والنشا وسيبها ١٠ دقايق.",
+        "minutes": 10,
+        "uses": [
+          "beef-steak",
+          "soy-sauce",
+          "cornflour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blanch the broccoli 2 minutes and drain it well.",
+        "textAr": "اسلق البروكلي دقيقتين وصفّيه كويس.",
+        "minutes": 3,
+        "uses": [
+          "broccoli"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sear the beef in two batches in very hot oil, 90 seconds each, and set aside.",
+        "textAr": "شوّح اللحمة على دفعتين في زيت سخن جدًا، دقيقة ونص لكل دفعة، وارفعها.",
+        "minutes": 4,
+        "uses": [
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the garlic and ginger, return everything with the rest of the soy and the honey.",
+        "textAr": "حمّر التوم والزنجبيل، ورجّع كل حاجة مع باقي الصويا والعسل.",
+        "minutes": 4,
+        "uses": [
+          "garlic",
+          "ginger",
+          "honey",
+          "sesame-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "kimchi-less-cabbage-rice",
+    "title": "Spicy Cabbage and Egg Rice",
+    "titleAr": "رز بالكرنب الحار والبيض",
+    "description": "Cabbage fried until it sweetens, chilli, and a fried egg to hold it together.",
+    "descriptionAr": "كرنب مقلي لحد ما يحلى وشطة وبيضة مقلية بتلمّهم.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 14,
+    "servings": 2,
+    "nutrition": {
+      "calories": 450,
+      "protein": 15,
+      "carbs": 64,
+      "fat": 15,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "budget",
+      "quick",
+      "vegetarian",
+      "one-pan",
+      "leftovers"
+    ],
+    "image": {
+      "path": "curated/kimchi-less-cabbage-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cooked and cooled"
+      },
+      {
+        "slug": "cabbage",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "shredded"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "hot-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the cabbage hard in oil for 6 minutes until the edges brown and it turns sweet.",
+        "textAr": "اقلي الكرنب بقوة في الزيت ٦ دقايق لحد ما أطرافه تتحمّر ويحلى.",
+        "minutes": 6,
+        "uses": [
+          "cabbage",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the garlic, rice, hot sauce and soy and fry 5 minutes.",
+        "textAr": "ضيف التوم والرز والصلصة الحارة والصويا واقليهم ٥ دقايق.",
+        "minutes": 5,
+        "uses": [
+          "garlic",
+          "rice",
+          "hot-sauce",
+          "soy-sauce"
+        ],
+        "safety": "Only use rice that was cooled quickly and refrigerated, and reheat it once until piping hot.",
+        "safetyAr": "استخدم بس رز اتبرّد بسرعة واتحط في التلاجة، وسخّنه مرة واحدة بس لحد ما يبقى سخن جدًا."
+      },
+      {
+        "text": "Fry the eggs separately and slide one onto each bowl.",
+        "textAr": "اقلي البيض لوحده وحط بيضة على كل طبق.",
+        "minutes": 4,
+        "uses": [
+          "eggs",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mango-sticky-rice",
+    "title": "Mango and Coconut Rice",
+    "titleAr": "رز بجوز الهند والمانجا",
+    "description": "Sweet coconut rice under cold mango. Best when the mango is almost too ripe.",
+    "descriptionAr": "رز حلو بجوز الهند تحت مانجا باردة. أحلى لما المانجا تكون مستوية أوي.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "dessert"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 420,
+      "protein": 5,
+      "carbs": 78,
+      "fat": 11,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "sesame"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "dessert",
+      "vegan"
+    ],
+    "image": {
+      "path": "curated/mango-sticky-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "coconut-milk",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "mango",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-seeds",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Cook the rice in 350ml water for 18 minutes until soft.",
+        "textAr": "اطبخ الرز في ٣٥٠ مل مية ١٨ دقيقة لحد ما يطرى.",
+        "minutes": 18,
+        "uses": [
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Warm the coconut milk with the sugar and salt, then stir two thirds into the hot rice.",
+        "textAr": "سخّن لبن جوز الهند مع السكر والملح، وبعدين قلّب تلتينه في الرز السخن.",
+        "minutes": 6,
+        "uses": [
+          "coconut-milk",
+          "sugar",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rest 15 minutes, then serve with mango and the rest of the coconut milk poured over.",
+        "textAr": "سيبه ١٥ دقيقة، وبعدين قدّمه مع المانجا وباقي لبن جوز الهند مصبوب فوق.",
+        "minutes": 15,
+        "uses": [
+          "mango",
+          "sesame-seeds"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "miso-less-tofu-soup",
+    "title": "Tofu and Green Onion Broth",
+    "titleAr": "شوربة توفو بالبصل الأخضر",
+    "description": "Clean, light and quick. The kind of bowl that fixes an evening.",
+    "descriptionAr": "صافية وخفيفة وسريعة. الطبق اللي بيصلّح السهرة.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 12,
+    "servings": 2,
+    "nutrition": {
+      "calories": 190,
+      "protein": 16,
+      "carbs": 10,
+      "fat": 10,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "vegan",
+      "healthy",
+      "quick",
+      "high-protein",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/miso-less-tofu-soup.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tofu",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "diced"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "mushroom",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "sliced"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 15,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer the ginger, garlic and stock in 800ml water for 6 minutes.",
+        "textAr": "سيب الزنجبيل والتوم والمرقة في ٨٠٠ مل مية ٦ دقايق.",
+        "minutes": 6,
+        "uses": [
+          "ginger",
+          "garlic",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the mushrooms and tofu and cook 5 minutes more without boiling hard.",
+        "textAr": "ضيف المشروم والتوفو واطبخهم ٥ دقايق كمان من غير غليان قوي.",
+        "minutes": 5,
+        "uses": [
+          "mushroom",
+          "tofu"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Season with soy and sesame oil off the heat and scatter the green onion.",
+        "textAr": "تبّلها بالصويا وزيت السمسم بعيد عن النار ورشّ البصل الأخضر.",
+        "minutes": 2,
+        "uses": [
+          "soy-sauce",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "quick-vegetable-fried-rice",
+    "title": "Quick Vegetable Fried Rice",
+    "titleAr": "أرز مقلي بالخضار",
+    "description": "The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.",
+    "descriptionAr": "أحسن حاجة تعملها برز امبارح. خمستاشر دقيقة وطاسة واحدة وأي خضار عندك.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 470,
+      "protein": 16,
+      "carbs": 68,
+      "fat": 14,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "budget",
+      "under-100",
+      "asian",
+      "leftovers",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/quick-vegetable-fried-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cooked and cooled"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "green-peas",
+        "quantity": 100,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "minced"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "sliced"
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Scramble the eggs quickly in hot oil and set aside.",
+        "textAr": "اعمل البيض سكرامبل بسرعة في زيت سخن وارفعه.",
+        "minutes": 2,
+        "uses": [
+          "eggs",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir-fry the carrot and peas for 3 minutes, then add the garlic for 30 seconds.",
+        "textAr": "شوّح الجزر والبسلة ٣ دقايق، وبعدين ضيف التوم ٣٠ ثانية.",
+        "minutes": 4,
+        "uses": [
+          "carrots",
+          "green-peas",
+          "garlic"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the cold rice, breaking up clumps, and fry hard for 4 minutes until it starts to catch.",
+        "textAr": "ضيف الرز البارد وفكّك التكتّلات، واقليه على نار عالية ٤ دقايق لحد ما يبدأ يتحمّر.",
+        "minutes": 4,
+        "uses": [
+          "rice"
+        ],
+        "safety": "Only use rice that was cooled quickly and refrigerated, and reheat it once until piping hot.",
+        "safetyAr": "استخدم بس رز اتبرّد بسرعة واتحط في التلاجة، وسخّنه مرة واحدة بس لحد ما يبقى سخن جدًا."
+      },
+      {
+        "text": "Fold the egg back in with the green onions and season.",
+        "textAr": "رجّع البيض مع البصل الأخضر وظبّط الملح.",
+        "minutes": 1,
+        "uses": [
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "sesame-noodles-cold",
+    "title": "Cold Sesame Noodles",
+    "titleAr": "نودلز باردة بالسمسم",
+    "description": "No heat past boiling the noodles. Good the next day out of the fridge.",
+    "descriptionAr": "مفيش نار غير سلق النودلز. وحلوة تاني يوم من التلاجة.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 8,
+    "servings": 3,
+    "nutrition": {
+      "calories": 430,
+      "protein": 13,
+      "carbs": 56,
+      "fat": 17,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "vegan",
+      "quick",
+      "no-cook",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/sesame-noodles-cold.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "noodles",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tahini",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "vinegar-apple",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the noodles, then rinse them under cold water until completely cool.",
+        "textAr": "اسلق النودلز، وبعدين اشطفها بمية باردة لحد ما تبرد تمامًا.",
+        "minutes": 8,
+        "uses": [
+          "noodles"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the tahini, soy, vinegar, sesame oil, honey and garlic with 4 tbsp warm water.",
+        "textAr": "اخفق الطحينة والصويا والخل وزيت السمسم والعسل والتوم مع ٤ معالق مية دافية.",
+        "minutes": 4,
+        "uses": [
+          "tahini",
+          "soy-sauce",
+          "vinegar-apple",
+          "sesame-oil",
+          "honey",
+          "garlic"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss everything together with the cucumber and green onion.",
+        "textAr": "قلّب كل حاجة مع الخيار والبصل الأخضر.",
+        "minutes": 3,
+        "uses": [
+          "cucumber",
+          "green-onion",
+          "chili-flakes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "shrimp-noodle-soup",
+    "title": "Shrimp and Noodle Soup",
+    "titleAr": "شوربة نودلز بالجمبري",
+    "description": "A clear, gingery broth built in fifteen minutes with shrimp dropped in at the end.",
+    "descriptionAr": "مرق صافي بالزنجبيل متعمول في خمستاشر دقيقة والجمبري بينزل في الآخر.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 15,
+    "servings": 2,
+    "nutrition": {
+      "calories": 400,
+      "protein": 30,
+      "carbs": 48,
+      "fat": 9,
+      "fiber": 3
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "shellfish",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "high-protein",
+      "quick",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/shrimp-noodle-soup.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "shrimp",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "peeled"
+      },
+      {
+        "slug": "noodles",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "ginger",
+        "quantity": 25,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "spinach",
+        "quantity": 100,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer the ginger, garlic and stock in 1L water for 8 minutes, then strain out the ginger.",
+        "textAr": "سيب الزنجبيل والتوم والمرقة في ١ لتر مية ٨ دقايق، وبعدين شيل الزنجبيل.",
+        "minutes": 8,
+        "uses": [
+          "ginger",
+          "garlic",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook the noodles in the broth for 4 minutes.",
+        "textAr": "اسلق النودلز في المرق ٤ دقايق.",
+        "minutes": 4,
+        "uses": [
+          "noodles"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the shrimp and spinach and cook 3 minutes until the shrimp is opaque.",
+        "textAr": "ضيف الجمبري والسبانخ واطبخهم ٣ دقايق لحد ما الجمبري لونه يتغيّر.",
+        "minutes": 3,
+        "uses": [
+          "shrimp",
+          "spinach",
+          "soy-sauce",
+          "sesame-oil",
+          "green-onion",
+          "chili-flakes"
+        ],
+        "safety": "Shrimp is cooked when it is opaque and firm throughout.",
+        "safetyAr": "الجمبري بيبقى مستوي لما لونه يبقى مش شفّاف ويشدّ من جواه."
+      }
+    ]
+  },
+  {
+    "slug": "sweet-sour-tofu",
+    "title": "Sweet and Sour Tofu",
+    "titleAr": "توفو حلو وحامض",
+    "description": "Cornflour crust, sharp sauce, and pineapple doing more work than you would expect.",
+    "descriptionAr": "قشرة نشا وصلصة حامضة وأناناس بيعمل شغل أكتر مما تتخيل.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 20,
+    "servings": 3,
+    "nutrition": {
+      "calories": 390,
+      "protein": 18,
+      "carbs": 44,
+      "fat": 16,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "vegan",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/sweet-sour-tofu.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tofu",
+        "quantity": 450,
+        "unit": "g",
+        "prep": "diced"
+      },
+      {
+        "slug": "cornflour",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "pineapple",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "diced"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "wedges to serve"
+      },
+      {
+        "slug": "ketchup",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "vinegar-apple",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Press the tofu dry, toss in cornflour, and fry until every side is crisp.",
+        "textAr": "انشّف التوفو، قلّبه في النشا، واقليه لحد ما كل وش يقرمش.",
+        "minutes": 12,
+        "uses": [
+          "tofu",
+          "cornflour",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir-fry the pepper and onion for 4 minutes, then add the pineapple.",
+        "textAr": "شوّح الفلفل والبصل ٤ دقايق، وبعدين ضيف الأناناس.",
+        "minutes": 5,
+        "uses": [
+          "bell-pepper",
+          "onions",
+          "pineapple"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the ketchup, vinegar, sugar and soy and bubble 3 minutes, then fold the tofu back in.",
+        "textAr": "ضيف الكاتشب والخل والسكر والصويا وسيبهم ٣ دقايق، وبعدين رجّع التوفو.",
+        "minutes": 4,
+        "uses": [
+          "ketchup",
+          "vinegar-apple",
+          "sugar",
+          "soy-sauce"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "teriyaki-less-chicken",
+    "title": "Sticky Soy and Honey Chicken",
+    "titleAr": "فراخ بصلصة الصويا والعسل",
+    "description": "Four pantry things reduce into a glaze that clings. Serve on rice, obviously.",
+    "descriptionAr": "أربع حاجات من الدولاب بتتركّز لصلصة بتلزق. قدّمها على رز طبعًا.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 18,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 38,
+      "carbs": 34,
+      "fat": 14,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "asian",
+      "high-protein",
+      "quick",
+      "beginner",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/teriyaki-less-chicken.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 20,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "vinegar-apple",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-seeds",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "garnish": true,
+        "staple": true
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Brown the chicken hard in oil for 8 minutes until it takes colour.",
+        "textAr": "حمّر الفراخ كويس في الزيت ٨ دقايق لحد ما تاخد لون.",
+        "minutes": 8,
+        "uses": [
+          "chicken-thigh",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the garlic and ginger for 30 seconds, then the soy, honey and vinegar.",
+        "textAr": "ضيف التوم والزنجبيل ٣٠ ثانية، وبعدين الصويا والعسل والخل.",
+        "minutes": 2,
+        "uses": [
+          "garlic",
+          "ginger",
+          "soy-sauce",
+          "honey",
+          "vinegar-apple"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bubble hard for 8 minutes until the sauce coats the back of a spoon.",
+        "textAr": "سيبها تغلي بقوة ٨ دقايق لحد ما الصلصة تغطّي ظهر المعلقة.",
+        "minutes": 8,
+        "uses": [
+          "sesame-seeds",
+          "green-onion"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      }
+    ]
+  },
+  {
+    "slug": "thai-style-peanut-salad",
+    "title": "Crunchy Peanut Salad",
+    "titleAr": "سلطة مقرمشة بالفول السوداني",
+    "description": "Raw, cold, loud with lime and chilli, and it takes twelve minutes.",
+    "descriptionAr": "نية وباردة وقوية بالليمون والشطة، وبتاخد اتناشر دقيقة.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 0,
+    "servings": 3,
+    "nutrition": {
+      "calories": 290,
+      "protein": 10,
+      "carbs": 24,
+      "fat": 19,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "peanuts",
+      "soy"
+    ],
+    "appliances": [],
+    "tags": [
+      "asian",
+      "vegan",
+      "no-cook",
+      "quick",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/thai-style-peanut-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "cabbage",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "shredded"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "peanuts",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "peanut-butter",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk the peanut butter with lemon, soy, honey, chilli and 3 tbsp warm water.",
+        "textAr": "اخفق زبدة الفول السوداني مع الليمون والصويا والعسل والشطة و٣ معالق مية دافية.",
+        "minutes": 5,
+        "uses": [
+          "peanut-butter",
+          "lemon",
+          "soy-sauce",
+          "honey",
+          "chili-flakes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss with the shredded vegetables and top with peanuts and coriander.",
+        "textAr": "قلّبها مع الخضار المبشور وحط الفول السوداني والكزبرة فوق.",
+        "minutes": 7,
+        "uses": [
+          "cabbage",
+          "carrots",
+          "bell-pepper",
+          "peanuts",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "vegetable-spring-rolls",
+    "title": "Baked Vegetable Spring Rolls",
+    "titleAr": "سبرينج رول خضار في الفرن",
+    "description": "Baked, not deep fried, so you can make a whole tray without a litre of oil.",
+    "descriptionAr": "متخبوزة مش مقلية، فتقدر تعمل صينية كاملة من غير لتر زيت.",
+    "cuisine": "asian",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 25,
+    "cookMinutes": 20,
+    "servings": 4,
+    "nutrition": {
+      "calories": 280,
+      "protein": 7,
+      "carbs": 38,
+      "fat": 11,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame",
+      "soy"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "asian",
+      "vegan",
+      "oven",
+      "snack"
+    ],
+    "image": {
+      "path": "curated/vegetable-spring-rolls.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "phyllo",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "cabbage",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "shredded"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "mushroom",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "ginger",
+        "quantity": 15,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "soy-sauce",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sesame-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Stir-fry the vegetables hard for 5 minutes so they stay crisp, then season and cool.",
+        "textAr": "شوّح الخضار بقوة ٥ دقايق عشان تفضل مقرمشة، وبعدين تبّلها وبرّدها.",
+        "minutes": 8,
+        "uses": [
+          "cabbage",
+          "carrots",
+          "mushroom",
+          "garlic",
+          "ginger",
+          "soy-sauce",
+          "sesame-oil",
+          "green-onion"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roll spoonfuls in pastry, folding the sides in, and brush all over with oil.",
+        "textAr": "لف معالق من الحشو في العجين مع طي الجوانب، وادهنها كلها بالزيت.",
+        "minutes": 15,
+        "uses": [
+          "phyllo",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 200°C for 20 minutes, turning once, until crisp and golden.",
+        "textAr": "اخبزها على ٢٠٠ درجة ٢٠ دقيقة مع التقليب مرة، لحد ما تقرمش وتدهب.",
+        "minutes": 20,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]

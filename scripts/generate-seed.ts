@@ -16,7 +16,12 @@ import { writeFileSync } from 'node:fs';
 
 import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
 import { PRICE_DATA, PRICE_DATA_DATE } from '../src/features/pricing/price-data.ts';
-import { RECIPE_FIXTURES } from '../src/features/recipes/fixtures.ts';
+// Read the GENERATED catalogue, not fixtures.ts: this runs under Node's
+// type-stripping loader, and fixtures.ts binds the data to runtime concerns
+// (image URL resolution) that pull in Expo modules Node cannot load. The seed
+// stores image PATHS anyway — resolving them is the app's job, not the
+// database's.
+import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
 
 import { uuidv5 } from './uuid.mjs';
 
@@ -123,15 +128,19 @@ for (const ingredient of INGREDIENT_CATALOGUE) {
 
 lines.push('-- === Recipes ===============================================================', '');
 
-for (const recipe of RECIPE_FIXTURES) {
+for (const recipe of RECIPE_CATALOGUE) {
   lines.push(
     `-- ${recipe.title}`,
     `insert into public.recipes (`,
-    `  id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,`,
+    `  id, slug, title, title_ar, description, description_ar,`,
+    `  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,`,
+    `  image_url, source, cuisine, difficulty,`,
     `  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,`,
     `  created_by, is_public)`,
     `values (${lit(recipe.id)}, ${lit(recipe.slug)}, ${lit(recipe.title)}, ${lit(recipe.titleAr)},`,
     `  ${lit(recipe.description)}, ${lit(recipe.descriptionAr)},`,
+    `  ${lit(recipe.image?.path ?? null)}, ${lit(recipe.image?.source ?? null)}, ${lit(recipe.image?.creator ?? null)},`,
+    `  ${lit(recipe.image?.license ?? null)}, ${lit(recipe.image?.attribution ?? null)}, ${lit(recipe.image?.sourceUrl ?? null)},`,
     `  ${lit(recipe.imageUrl)}, ${lit(recipe.source)}, ${lit(recipe.cuisine)}, ${lit(recipe.difficulty)},`,
     `  ${lit(recipe.prepMinutes)}, ${lit(recipe.cookMinutes)}, ${lit(recipe.baseServings)},`,
     `  ${lit(recipe.nutrition.calories)}, ${lit(recipe.nutrition.proteinGrams)}, ${lit(recipe.nutrition.carbsGrams)},`,
@@ -141,6 +150,12 @@ for (const recipe of RECIPE_FIXTURES) {
     `  title_ar = excluded.title_ar,`,
     `  description = excluded.description,`,
     `  description_ar = excluded.description_ar,`,
+    `  image_path = excluded.image_path,`,
+    `  image_source = excluded.image_source,`,
+    `  image_creator = excluded.image_creator,`,
+    `  image_license = excluded.image_license,`,
+    `  image_attribution = excluded.image_attribution,`,
+    `  image_source_url = excluded.image_source_url,`,
     `  image_url = excluded.image_url,`,
     `  cuisine = excluded.cuisine,`,
     `  difficulty = excluded.difficulty,`,
@@ -176,12 +191,15 @@ for (const recipe of RECIPE_FIXTURES) {
 
   lines.push(`delete from public.recipe_ingredients where recipe_id = ${lit(recipe.id)};`);
   for (const ingredient of recipe.ingredients) {
-    const ingredientId = ingredient.ingredientId
-      ? lit(uuidv5(`ingredient:${ingredient.ingredientId}`))
+    // The importer already resolved every curated ingredient to a catalogue
+    // row, so the slug is the reliable key. The name lookup stays as a
+    // fallback for an AI-proposed ingredient with no slug.
+    const ingredientId = ingredient.slug
+      ? `(select id from public.ingredients where slug = ${lit(ingredient.slug)} limit 1)`
       : `(select id from public.ingredients where name = ${lit(ingredient.name)} limit 1)`;
     lines.push(
-      `insert into public.recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order)`,
-      `values (${lit(ingredient.id)}, ${lit(recipe.id)}, ${ingredientId}, ${lit(ingredient.name)}, ${lit(ingredient.quantity)}, ${lit(ingredient.unit)}, ${lit(ingredient.preparation)}, ${lit(ingredient.isOptional)}, ${lit(ingredient.sortOrder)});`,
+      `insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)`,
+      `values (${lit(ingredient.id)}, ${lit(recipe.id)}, ${ingredientId}, ${lit(ingredient.slug)}, ${lit(ingredient.name)}, ${lit(ingredient.quantity)}, ${lit(ingredient.unit)}, ${lit(ingredient.preparation)}, ${lit(ingredient.isOptional)}, ${lit(ingredient.isGarnish)}, ${lit(ingredient.isPantryStaple)}, ${lit(ingredient.notes)}, ${lit(ingredient.sortOrder)});`,
     );
   }
   lines.push('');
@@ -218,5 +236,5 @@ const output = `${lines.join('\n')}`;
 writeFileSync(new URL('../supabase/seed.sql', import.meta.url), output);
 
 console.log(
-  `seed.sql written: ${INGREDIENT_CATALOGUE.length} ingredients, ${RECIPE_FIXTURES.length} recipes, ${output.split('\n').length} lines`,
+  `seed.sql written: ${INGREDIENT_CATALOGUE.length} ingredients, ${RECIPE_CATALOGUE.length} recipes, ${output.split('\n').length} lines`,
 );

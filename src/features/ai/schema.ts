@@ -217,6 +217,7 @@ export function toDomainRecipe(
     // Generated recipes have no photograph. The card and detail screens both
     // render a themed placeholder for a null image rather than a broken one.
     imageUrl: null,
+    image: null,
     source: 'ai_generated',
     cuisine: generated.cuisine,
     mealTypes: generated.mealTypes,
@@ -234,11 +235,18 @@ export function toDomainRecipe(
     ingredients: generated.ingredients.map((ingredient, index) => ({
       id: makeId(),
       ingredientId: null,
+      // The model proposes a name, not a catalogue entry. Resolution to a slug
+      // happens in the matching engine, which can fall back to fuzzy matching;
+      // guessing one here would put an unverified id on a stored row.
+      slug: null,
       name: ingredient.name,
       quantity: ingredient.quantity,
       unit: ingredient.unit,
       preparation: ingredient.preparation,
       isOptional: ingredient.isOptional,
+      isGarnish: false,
+      isPantryStaple: false,
+      notes: null,
       sortOrder: index,
     })),
     steps: generated.steps.map((step, index) => ({

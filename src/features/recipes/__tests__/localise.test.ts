@@ -116,14 +116,18 @@ describe('falling back', () => {
     expect(preparationLabel('something new', 'ar')).toBe('something new');
   });
 
+  // By slug, not by index: the catalogue is sorted and grows, so index 0 is
+  // whichever recipe happens to sort first.
+  const koshari = RECIPE_FIXTURES.find((recipe) => recipe.slug === 'koshari')!;
+
   it('never reaches for the Arabic field in English', () => {
-    const recipe = RECIPE_FIXTURES[0]!;
+    const recipe = koshari;
     expect(recipeTitle(recipe, 'en')).toBe(recipe.title);
     expect(stepInstruction(recipe.steps[0]!, 'en')).toBe(recipe.steps[0]!.instruction);
   });
 
   it('reads the Arabic field in Arabic', () => {
-    const recipe = RECIPE_FIXTURES[0]!;
+    const recipe = koshari;
     expect(recipeTitle(recipe, 'ar')).toBe('كشري');
     expect(stepInstruction(recipe.steps[0]!, 'ar')).toBe(recipe.steps[0]!.instructionAr);
     expect(preparationLabel('finely chopped', 'ar')).toBe('مفروم ناعم');

@@ -8,6 +8,7 @@ import {
 import { INGREDIENT_CATALOGUE } from '../catalogue';
 import { todayISO } from '../freshness';
 import { normaliseIngredientName } from '../normalise';
+import { makeRecipeIngredient } from '@/test-utils/factories';
 import type { PantryItem, RecipeIngredient } from '@/types/domain';
 
 const NOW = new Date('2026-09-10T12:00:00');
@@ -39,21 +40,8 @@ function pantry(
   };
 }
 
-function recipeIngredient(
-  name: string,
-  isOptional = false,
-  id = name,
-): RecipeIngredient {
-  return {
-    id,
-    ingredientId: null,
-    name,
-    quantity: 1,
-    unit: null,
-    preparation: null,
-    isOptional,
-    sortOrder: 0,
-  };
+function recipeIngredient(name: string, isOptional = false, id = name): RecipeIngredient {
+  return makeRecipeIngredient({ id, name, isOptional, sortOrder: 0 });
 }
 
 describe('resolveIngredient', () => {

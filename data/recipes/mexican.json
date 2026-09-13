@@ -1,0 +1,1293 @@
+[
+  {
+    "slug": "bean-burrito-bowl",
+    "title": "Bean and Rice Burrito Bowl",
+    "titleAr": "طبق برّيتو بالفاصوليا والرز",
+    "description": "Everything a burrito has, without the folding. Cheap, filling, mostly cupboard.",
+    "descriptionAr": "كل اللي في البرّيتو من غير لف. رخيص ومشبع ومعظمه من الدولاب.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 15,
+    "servings": 3,
+    "nutrition": {
+      "calories": 520,
+      "protein": 19,
+      "carbs": 76,
+      "fat": 16,
+      "fiber": 15
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "budget",
+      "high-protein",
+      "meal-prep",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/bean-burrito-bowl.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "cooked"
+      },
+      {
+        "slug": "kidney-beans",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "corn",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "avocado",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the onion with the spices, add the beans and corn and warm through for 8 minutes.",
+        "textAr": "حمّر البصل مع البهارات، ضيف الفاصوليا والذرة وسخّنهم ٨ دقايق.",
+        "minutes": 9,
+        "uses": [
+          "onions",
+          "cumin",
+          "chili-powder",
+          "sunflower-oil",
+          "kidney-beans",
+          "corn",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Build bowls with rice at the bottom and everything else in sections on top.",
+        "textAr": "جهّز الأطباق والرز تحت وكل حاجة تانية أقسام فوقه.",
+        "minutes": 6,
+        "uses": [
+          "rice",
+          "avocado",
+          "tomatoes",
+          "coriander",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "beef-tacos",
+    "title": "Beef Tacos",
+    "titleAr": "تاكو باللحمة",
+    "description": "Spiced mince, warm tortillas, and everything else on the table for people to build their own.",
+    "descriptionAr": "لحمة متبّلة وتورتيلا سخنة وكل حاجة تانية على السفرة عشان كل واحد يركّب اللي هو عايزه.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 20,
+    "servings": 4,
+    "nutrition": {
+      "calories": 510,
+      "protein": 32,
+      "carbs": 42,
+      "fat": 24,
+      "fiber": 6
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "quick",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/beef-tacos.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "ground-beef",
+        "quantity": 600,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tortilla",
+        "quantity": 8,
+        "unit": "piece",
+        "prep": "warmed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "lettuce",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "shredded"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "wedges to serve",
+        "garnish": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Brown the mince hard, then add the onion, garlic and spices.",
+        "textAr": "حمّر اللحمة كويس، وبعدين ضيف البصل والتوم والبهارات.",
+        "minutes": 12,
+        "uses": [
+          "ground-beef",
+          "onions",
+          "garlic",
+          "chili-powder",
+          "cumin"
+        ],
+        "safety": "Ground beef must reach 71°C / 160°F all the way through.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره."
+      },
+      {
+        "text": "Stir in the tomato paste with 150ml water and reduce for 8 minutes.",
+        "textAr": "قلّب صلصة الطماطم مع ١٥٠ مل مية وسيبها تتركّز ٨ دقايق.",
+        "minutes": 8,
+        "uses": [
+          "tomato-paste",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Warm the tortillas and put everything on the table separately.",
+        "textAr": "سخّن التورتيلا وحط كل حاجة على السفرة كل واحدة لوحدها.",
+        "minutes": 5,
+        "uses": [
+          "tortilla",
+          "lettuce",
+          "tomatoes",
+          "cheddar",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "black-bean-quesadilla",
+    "title": "Bean and Cheese Quesadilla",
+    "titleAr": "كاساديا بالفاصوليا والجبنة",
+    "description": "Fifteen minutes, mostly cupboard, and it crisps in a dry pan.",
+    "descriptionAr": "خمستاشر دقيقة معظمها من الدولاب، وبتقرمش في طاسة ناشفة.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 520,
+      "protein": 22,
+      "carbs": 58,
+      "fat": 22,
+      "fiber": 12
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "budget",
+      "vegetarian",
+      "late-night",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/black-bean-quesadilla.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tortilla",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "kidney-beans",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.75,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the onion with the spices, add the beans and crush half of them.",
+        "textAr": "حمّر البصل مع البهارات، ضيف الفاصوليا واهرس نصها.",
+        "minutes": 7,
+        "uses": [
+          "onions",
+          "cumin",
+          "chili-powder",
+          "sunflower-oil",
+          "kidney-beans",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Spread over half of each tortilla with the cheese and fold them over.",
+        "textAr": "افرد الخليط على نص كل تورتيلا مع الجبنة واطويها.",
+        "minutes": 3,
+        "uses": [
+          "tortilla",
+          "cheddar",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook in a dry pan 3 minutes a side until crisp and the cheese has gone.",
+        "textAr": "اطبخها في طاسة ناشفة ٣ دقايق لكل وش لحد ما تقرمش والجبنة تسيح.",
+        "minutes": 7,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "chicken-fajitas",
+    "title": "Chicken Fajitas",
+    "titleAr": "فاهيتا فراخ",
+    "description": "The pan has to be too hot. Char on the peppers is the entire point.",
+    "descriptionAr": "الطاسة لازم تكون سخنة أوي. تحميرة الفلفل هي الهدف كله.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 470,
+      "protein": 40,
+      "carbs": 38,
+      "fat": 18,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "quick",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/chicken-fajitas.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-breast",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "tortilla",
+        "quantity": 8,
+        "unit": "piece",
+        "prep": "warmed"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the chicken with the spices, lemon and salt and leave it 10 minutes.",
+        "textAr": "قلّب الفراخ مع البهارات والليمون والملح وسيبها ١٠ دقايق.",
+        "minutes": 10,
+        "uses": [
+          "chicken-breast",
+          "paprika",
+          "cumin",
+          "chili-powder",
+          "lemon",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sear the chicken in a screaming hot pan for 6 minutes, then lift it out.",
+        "textAr": "شوّح الفراخ في طاسة سخنة جدًا ٦ دقايق، وبعدين ارفعها.",
+        "minutes": 6,
+        "uses": [
+          "sunflower-oil"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      },
+      {
+        "text": "Char the peppers and onions hard for 6 minutes, add the garlic, then return the chicken.",
+        "textAr": "حمّر الفلفل والبصل بقوة ٦ دقايق، ضيف التوم، وبعدين رجّع الفراخ.",
+        "minutes": 8,
+        "uses": [
+          "bell-pepper",
+          "onions",
+          "garlic",
+          "tortilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "corn-avocado-salad",
+    "title": "Corn, Avocado and Lime Salad",
+    "titleAr": "سلطة ذرة وأفوكادو",
+    "description": "Charred corn against cold avocado. Ten minutes and it works beside anything.",
+    "descriptionAr": "ذرة محمّرة مع أفوكادو بارد. عشر دقايق وبتنفع جنب أي حاجة.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 8,
+    "servings": 4,
+    "nutrition": {
+      "calories": 230,
+      "protein": 5,
+      "carbs": 26,
+      "fat": 13,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "quick",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/corn-avocado-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "corn",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "avocado",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Char the corn in a dry hot pan for 7 minutes until spotted black.",
+        "textAr": "حمّر الذرة في طاسة ناشفة سخنة ٧ دقايق لحد ما تتنقّط أسود.",
+        "minutes": 8,
+        "uses": [
+          "corn"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cool it slightly, then fold everything together with the lime and oil.",
+        "textAr": "برّدها شوية، وبعدين قلّب كل حاجة مع الليمون والزيت.",
+        "minutes": 5,
+        "uses": [
+          "avocado",
+          "onions",
+          "coriander",
+          "lemon",
+          "chili-powder",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "guacamole",
+    "title": "Guacamole",
+    "titleAr": "جواكامولي",
+    "description": "Mashed with a fork, never blended. Lime goes in immediately or it browns.",
+    "descriptionAr": "مهروس بشوكة مش مضروب في الخلاط. والليمون بينزل على طول وإلا هيسود.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 190,
+      "protein": 3,
+      "carbs": 12,
+      "fat": 16,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [],
+    "tags": [
+      "no-cook",
+      "quick",
+      "vegan",
+      "healthy",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/guacamole.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "avocado",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.25,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "chili-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped",
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mash the avocado with the lime and salt immediately, leaving it chunky.",
+        "textAr": "اهرس الأفوكادو مع الليمون والملح على طول، وسيبه خشن.",
+        "minutes": 5,
+        "uses": [
+          "avocado",
+          "lemon",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold in everything else and press cling film onto the surface if it is waiting.",
+        "textAr": "قلّب كل حاجة تانية واضغط ورق نايلون على وشه لو هيستنى.",
+        "minutes": 5,
+        "uses": [
+          "onions",
+          "tomatoes",
+          "coriander",
+          "chili-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "huevos-rancheros",
+    "title": "Eggs on Tortilla with Salsa",
+    "titleAr": "بيض على تورتيلا بالصلصة",
+    "description": "Fried tortilla, warm bean sauce, and eggs cooked directly in it.",
+    "descriptionAr": "تورتيلا مقلية وصلصة فاصوليا سخنة وبيض متطبوخ فيها على طول.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "breakfast",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 15,
+    "servings": 2,
+    "nutrition": {
+      "calories": 520,
+      "protein": 24,
+      "carbs": 48,
+      "fat": 26,
+      "fiber": 11
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "high-protein",
+      "one-pan",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/huevos-rancheros.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tortilla",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "eggs",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "kidney-beans",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the tortillas until crisp and set them aside.",
+        "textAr": "اقلي التورتيلا لحد ما تقرمش وارفعها.",
+        "minutes": 4,
+        "uses": [
+          "tortilla",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook the onion, garlic and spices, add the tomatoes and beans and simmer 8 minutes.",
+        "textAr": "اطبخ البصل والتوم والبهارات، ضيف الطماطم والفاصوليا وسيبهم ٨ دقايق.",
+        "minutes": 9,
+        "uses": [
+          "onions",
+          "garlic",
+          "chili-powder",
+          "cumin",
+          "tomatoes",
+          "kidney-beans",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Make wells, crack in the eggs, cover and cook 5 minutes. Serve on the tortillas.",
+        "textAr": "اعمل حفر، كسّر البيض، غطّي واطبخ ٥ دقايق. قدّمها على التورتيلا.",
+        "minutes": 5,
+        "uses": [
+          "eggs",
+          "coriander"
+        ],
+        "safety": "Cook eggs until the whites are completely set.",
+        "safetyAr": "اطبخ البيض لحد ما البياض يستوي تمامًا."
+      }
+    ]
+  },
+  {
+    "slug": "mexican-rice",
+    "title": "Tomato Rice",
+    "titleAr": "رز بالطماطم المكسيكي",
+    "description": "The rice is toasted in oil first, which is why it stays separate rather than clumping.",
+    "descriptionAr": "الرز بيتحمّر في الزيت الأول، عشان كده بيفضل مفرفر مش متكتّل.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 340,
+      "protein": 7,
+      "carbs": 62,
+      "fat": 8,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "budget",
+      "vegan",
+      "beginner",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/mexican-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 350,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "blended"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toast the dry rice in oil for 4 minutes until it smells nutty and turns opaque.",
+        "textAr": "حمّر الرز الناشف في الزيت ٤ دقايق لحد ما ريحته تطلع ولونه يتغيّر.",
+        "minutes": 4,
+        "uses": [
+          "rice",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the onion and garlic for 3 minutes, then the tomatoes, paste, cumin and stock.",
+        "textAr": "ضيف البصل والتوم ٣ دقايق، وبعدين الطماطم والصلصة والكمون والمرقة.",
+        "minutes": 4,
+        "uses": [
+          "onions",
+          "garlic",
+          "tomatoes",
+          "tomato-paste",
+          "cumin",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add 500ml water, cover, and cook 18 minutes. Rest 5 before forking through.",
+        "textAr": "ضيف ٥٠٠ مل مية، غطّي، واطبخ ١٨ دقيقة. سيبه ٥ قبل ما تفكّكه.",
+        "minutes": 20,
+        "uses": [
+          "salt",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "pico-de-gallo",
+    "title": "Fresh Tomato Salsa",
+    "titleAr": "صلصة طماطم طازة",
+    "description": "Raw and chopped, salted first so the tomato gives up its water.",
+    "descriptionAr": "نية ومقطّعة، ومتملّحة الأول عشان الطماطم تسيّب ميتها.",
+    "cuisine": "mexican",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 45,
+      "protein": 1,
+      "carbs": 9,
+      "fat": 1,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [],
+    "tags": [
+      "no-cook",
+      "quick",
+      "vegan",
+      "healthy",
+      "budget",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/pico-de-gallo.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tomatoes",
+        "quantity": 5,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "chili-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Salt the diced tomato and leave it 10 minutes, then drain off the liquid.",
+        "textAr": "ملّح الطماطم المقطّعة وسيبها ١٠ دقايق، وبعدين صفّي السايل.",
+        "minutes": 10,
+        "uses": [
+          "tomatoes",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir in everything else and eat within a few hours.",
+        "textAr": "قلّب كل حاجة تانية وكلها في خلال ساعات قليلة.",
+        "minutes": 3,
+        "uses": [
+          "onions",
+          "coriander",
+          "chili-pepper",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]

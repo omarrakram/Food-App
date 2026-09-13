@@ -292,6 +292,14 @@ export type RecipeIngredient = {
   id: string;
   /** Null when the AI proposed an ingredient we have not canonicalised yet. */
   ingredientId: string | null;
+  /**
+   * Canonical catalogue slug. Present for every curated and community recipe;
+   * null only for an AI-proposed ingredient we could not resolve.
+   *
+   * This — not `name` — is what exclusion, requirement and pantry matching key
+   * off, so "bell pepper", "capsicum" and «فلفل ألوان» are one thing.
+   */
+  slug: string | null;
   name: string;
   quantity: number | null;
   unit: Unit | null;
@@ -302,6 +310,17 @@ export type RecipeIngredient = {
    * added to the shopping list by default.
    */
   isOptional: boolean;
+  /** A finishing touch. Never required to consider the dish cookable. */
+  isGarnish: boolean;
+  /**
+   * Salt, oil, pepper — assumed present unless the user says otherwise.
+   *
+   * Separate from `isOptional` because a staple genuinely IS in the dish; it
+   * just should not stop someone being told they can cook it tonight.
+   */
+  isPantryStaple: boolean;
+  /** Free-text note shown under the line, e.g. a substitution hint. */
+  notes: string | null;
   /** Ordering within the recipe. */
   sortOrder: number;
 };
@@ -339,6 +358,42 @@ export type NutritionPerServing = {
 
 export type RecipeSource = 'curated' | 'ai_generated' | 'user';
 
+/**
+ * Where a recipe's photograph came from, and what using it requires.
+ *
+ * Carried with the recipe rather than kept in a side table because the
+ * obligation travels with the image: anything rendered has to be able to
+ * answer "who took this and what does the licence require?" without a join.
+ */
+export type RecipeImageMeta = {
+  /**
+   * Path inside the recipe-images bucket, e.g. `curated/koshari.jpg`.
+   * Resolved to a URL at render time so the same row works against Supabase
+   * Storage, a CDN, or the bundled preview assets.
+   */
+  path: string;
+  source: RecipeImageSource;
+  /** Photographer or illustrator, when the licence requires naming them. */
+  creator: string | null;
+  /** SPDX identifier where one exists, e.g. `CC0-1.0`, or `proprietary`. */
+  license: string;
+  /** The exact string that must be displayed, when one is required. */
+  attribution: string | null;
+  sourceUrl: string | null;
+};
+
+export const RECIPE_IMAGE_SOURCES = [
+  /** Rendered by us for this catalogue. */
+  'generated',
+  /** Photographed by or for us; we hold the rights. */
+  'owned',
+  /** Public domain or an open licence that permits this use. */
+  'openly_licensed',
+  /** Uploaded by a user with a submission. */
+  'community',
+] as const;
+export type RecipeImageSource = (typeof RECIPE_IMAGE_SOURCES)[number];
+
 export type Recipe = {
   id: string;
   slug: string | null;
@@ -348,7 +403,13 @@ export type Recipe = {
   description: string;
   /** Arabic description. Null for AI recipes. */
   descriptionAr: string | null;
+  /**
+   * Resolved URL for the hero photograph, or null to draw the branded
+   * fallback. Derived from `image` at load time — never authored directly.
+   */
   imageUrl: string | null;
+  /** Provenance and licence for `imageUrl`. Null when there is no photo. */
+  image: RecipeImageMeta | null;
   source: RecipeSource;
   cuisine: Cuisine | null;
   mealTypes: MealType[];

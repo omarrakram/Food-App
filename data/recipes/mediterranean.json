@@ -1,0 +1,2452 @@
+[
+  {
+    "slug": "air-fryer-spiced-chicken",
+    "title": "Air Fryer Spiced Chicken",
+    "titleAr": "فراخ متبّلة في الإير فراير",
+    "description": "Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.",
+    "descriptionAr": "عشرين دقيقة في الإير فراير، ومفيش طاسة زيت تغسلها بعدين. مقرمشة من بره وطرية من جوه.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 18,
+    "servings": 2,
+    "nutrition": {
+      "calories": 410,
+      "protein": 52,
+      "carbs": 6,
+      "fat": 19,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "air_fryer"
+    ],
+    "tags": [
+      "air-fryer",
+      "high-protein",
+      "quick",
+      "healthy",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/air-fryer-spiced-chicken.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 20,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "to serve",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the chicken with oil, lemon juice, garlic, paprika, cumin and salt. Leave 5 minutes if you have it.",
+        "textAr": "قلّب الفراخ مع الزيت وعصير الليمون والتوم والبابريكا والكمون والملح. سيبها ٥ دقايق لو معاك وقت.",
+        "minutes": 8,
+        "uses": [
+          "chicken-thigh",
+          "olive-oil",
+          "lemon",
+          "garlic",
+          "paprika",
+          "cumin"
+        ],
+        "safety": "Marinate in the fridge, never on the counter, and discard any marinade that touched raw chicken.",
+        "safetyAr": "تبّل في التلاجة، مش على الرخامة أبدًا، وارمي أي تتبيلة لمست فراخ نية."
+      },
+      {
+        "text": "Air fry at 200°C for 18 minutes, turning once halfway.",
+        "textAr": "اقليها في الإير فراير على ٢٠٠ درجة ١٨ دقيقة، مع تقليبها مرة في النص.",
+        "minutes": 18,
+        "uses": [],
+        "safety": "Check the thickest piece reaches 74°C / 165°F before serving.",
+        "safetyAr": "اتأكد إن أتخن قطعة وصلت ٧٤°م / ١٦٥°ف قبل ما تقدّم."
+      },
+      {
+        "text": "Rest for 3 minutes, then serve with cold yogurt.",
+        "textAr": "سيبها ترتاح ٣ دقايق، وبعدين قدّمها مع زبادي بارد.",
+        "minutes": 3,
+        "uses": [
+          "yogurt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "baked-salmon-vegetables",
+    "title": "Tray-Baked Salmon and Vegetables",
+    "titleAr": "سلمون بالخضار في الفرن",
+    "description": "One tray, nothing to wash, and it is on the table in half an hour.",
+    "descriptionAr": "صينية واحدة، مفيش حاجة تتغسل، وعلى السفرة في نص ساعة.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 25,
+    "servings": 2,
+    "nutrition": {
+      "calories": 480,
+      "protein": 40,
+      "carbs": 22,
+      "fat": 26,
+      "fiber": 5
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "high-protein",
+      "healthy",
+      "oven",
+      "quick",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/baked-salmon-vegetables.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "salmon",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "in two fillets"
+      },
+      {
+        "slug": "zucchini",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "cherry-tomato",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "oregano",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the vegetables with oil, oregano and salt and roast at 210°C for 12 minutes.",
+        "textAr": "قلّب الخضار مع الزيت والأوريجانو والملح واخبزها على ٢١٠ درجة ١٢ دقيقة.",
+        "minutes": 12,
+        "uses": [
+          "zucchini",
+          "cherry-tomato",
+          "bell-pepper",
+          "garlic",
+          "olive-oil",
+          "oregano",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Nestle the salmon in, top with lemon slices, and roast 13 minutes more.",
+        "textAr": "حط السلمون بينهم، حط شرايح الليمون فوقه، واخبزه ١٣ دقيقة كمان.",
+        "minutes": 13,
+        "uses": [
+          "salmon",
+          "lemon"
+        ],
+        "safety": "Fish is done when it flakes easily and is opaque in the centre.",
+        "safetyAr": "السمك بيبقى مستوي لما يتفتّت بسهولة ولونه في النص يبقى مش شفّاف."
+      }
+    ]
+  },
+  {
+    "slug": "chickpea-spinach-curryless",
+    "title": "Chickpeas with Spinach and Lemon",
+    "titleAr": "حمص بالسبانخ والليمون",
+    "description": "A pan of green and gold that costs almost nothing and eats like a meal.",
+    "descriptionAr": "طاسة أخضر ودهبي بتكلّف ولا حاجة وبتتاكل كأنها وجبة كاملة.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 15,
+    "servings": 3,
+    "nutrition": {
+      "calories": 300,
+      "protein": 14,
+      "carbs": 36,
+      "fat": 12,
+      "fiber": 11
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "budget",
+      "healthy",
+      "quick",
+      "one-pan",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/chickpea-spinach-curryless.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chickpeas",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "spinach",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the garlic, cumin and chilli in oil for 1 minute until fragrant.",
+        "textAr": "حمّر التوم والكمون والشطة في الزيت دقيقة لحد ما ريحتهم تطلع.",
+        "minutes": 2,
+        "uses": [
+          "garlic",
+          "cumin",
+          "chili-flakes",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the chickpeas and crush about a third of them against the pan. Cook 6 minutes.",
+        "textAr": "ضيف الحمص واهرس تلته تقريبًا على الطاسة. اطبخه ٦ دقايق.",
+        "minutes": 6,
+        "uses": [
+          "chickpeas"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Wilt the spinach through in handfuls, then finish with lemon and salt.",
+        "textAr": "ذبّل السبانخ حبة حبة، وبعدين زيّنه بالليمون والملح.",
+        "minutes": 6,
+        "uses": [
+          "spinach",
+          "lemon",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "greek-salad",
+    "title": "Greek Salad with Feta",
+    "titleAr": "سلطة يونانية بالجبنة",
+    "description": "Big chunks, no lettuce, and enough oregano to smell it from the doorway.",
+    "descriptionAr": "قطع كبيرة، من غير خس، وأوريجانو كفاية تشمه من باب الأوضة.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 260,
+      "protein": 9,
+      "carbs": 12,
+      "fat": 20,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [],
+    "tags": [
+      "healthy",
+      "no-cook",
+      "quick",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/greek-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "cut into wedges"
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "olives",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "in slabs"
+      },
+      {
+        "slug": "oregano",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "vinegar",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Cut the tomato and cucumber into big, confident pieces and pile them in a bowl.",
+        "textAr": "قطّع الطماطم والخيار قطع كبيرة وحطهم في طبق.",
+        "minutes": 8,
+        "uses": [
+          "tomatoes",
+          "cucumber",
+          "onions",
+          "olives"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lay the cheese on top whole, then dress with oil, vinegar, oregano and salt.",
+        "textAr": "حط الجبنة فوق قطعة واحدة، وبعدين تبّلها بالزيت والخل والأوريجانو والملح.",
+        "minutes": 4,
+        "uses": [
+          "white-cheese",
+          "olive-oil",
+          "vinegar",
+          "oregano",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "grilled-sea-bream",
+    "title": "Grilled Sea Bream with Lemon",
+    "titleAr": "دنيس مشوي بالليمون",
+    "description": "Whole fish, hot grill, lemon and nothing else getting in the way.",
+    "descriptionAr": "سمكة كاملة وشواية سخنة وليمون ومفيش حاجة تانية تعطّل.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 10,
+    "cookMinutes": 20,
+    "servings": 2,
+    "nutrition": {
+      "calories": 330,
+      "protein": 42,
+      "carbs": 4,
+      "fat": 16,
+      "fiber": 1
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [
+      "grill"
+    ],
+    "tags": [
+      "high-protein",
+      "healthy",
+      "grill",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/grilled-sea-bream.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "sea-bream",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cleaned and scored"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Score the fish three times a side, rub with oil and salt, and push garlic into the cuts.",
+        "textAr": "خرّم السمكة تلات مرات على كل وش، ادهنها بالزيت والملح، وحط التوم في الشقوق.",
+        "minutes": 8,
+        "uses": [
+          "sea-bream",
+          "garlic",
+          "olive-oil",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stuff the cavity with lemon slices and parsley.",
+        "textAr": "احشي جوف السمكة بشرايح الليمون والبقدونس.",
+        "minutes": 3,
+        "uses": [
+          "lemon",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Grill 8–10 minutes a side over high heat until the skin blisters and the flesh flakes.",
+        "textAr": "اشويها ٨–١٠ دقايق لكل وش على نار عالية لحد ما القشرة تتقرمش واللحم يتفتّت.",
+        "minutes": 20,
+        "uses": [],
+        "safety": "Fish is done when it flakes and is opaque all the way to the bone.",
+        "safetyAr": "السمك بيبقى مستوي لما يتفتّت ولونه يبقى مش شفّاف لحد العضم."
+      }
+    ]
+  },
+  {
+    "slug": "herb-omelette-feta",
+    "title": "Feta and Herb Omelette",
+    "titleAr": "أومليت بالجبنة والخضرة",
+    "description": "Four minutes, one pan, and enough protein to actually hold until lunch.",
+    "descriptionAr": "أربع دقايق وطاسة واحدة وبروتين كفاية يقعّدك لحد الغدا.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 6,
+    "servings": 1,
+    "nutrition": {
+      "calories": 340,
+      "protein": 22,
+      "carbs": 4,
+      "fat": 26,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "quick",
+      "beginner",
+      "high-protein",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/herb-omelette-feta.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "crumbled"
+      },
+      {
+        "slug": "dill",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "butter",
+        "quantity": 15,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Beat the eggs with the salt and pepper until completely uniform.",
+        "textAr": "اخفق البيض مع الملح والفلفل لحد ما يبقى متجانس تمامًا.",
+        "minutes": 2,
+        "uses": [
+          "eggs",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook in foaming butter on medium-low, pulling the edges in, for 3 minutes.",
+        "textAr": "اطبخه في زبدة مرغية على نار متوسطة هادية مع سحب الأطراف للنص، ٣ دقايق.",
+        "minutes": 3,
+        "uses": [
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Scatter the cheese and herbs over one half, fold, and slide it out.",
+        "textAr": "رشّ الجبنة والخضرة على نص، اطويه، وزحلقه في الطبق.",
+        "minutes": 3,
+        "uses": [
+          "white-cheese",
+          "dill",
+          "green-onion"
+        ],
+        "safety": "Cook until the eggs are set with no runny liquid.",
+        "safetyAr": "اطبخه لحد ما البيض يستوي ومايفضلش فيه سايل."
+      }
+    ]
+  },
+  {
+    "slug": "lemon-herb-couscous",
+    "title": "Couscous with Herbs and Almonds",
+    "titleAr": "كسكس بالخضرة واللوز",
+    "description": "Ready in the time the kettle takes. Herbs, lemon, toasted almonds, done.",
+    "descriptionAr": "جاهز في وقت غلي الكتلة. خضرة وليمون ولوز محمّص وخلاص.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 5,
+    "servings": 4,
+    "nutrition": {
+      "calories": 340,
+      "protein": 9,
+      "carbs": 50,
+      "fat": 12,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "kettle"
+    ],
+    "tags": [
+      "quick",
+      "vegan",
+      "beginner",
+      "budget",
+      "no-cook"
+    ],
+    "image": {
+      "path": "curated/lemon-herb-couscous.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "couscous",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "almonds",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "toasted"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "mint",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "raisins",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Pour 350ml boiling water over the couscous with the salt, cover and leave 6 minutes.",
+        "textAr": "صبّ ٣٥٠ مل مية مغلية على الكسكس مع الملح، غطّيه وسيبه ٦ دقايق.",
+        "minutes": 6,
+        "uses": [
+          "couscous",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fork it through to separate the grains, then fold in everything else.",
+        "textAr": "فكّكه بشوكة عشان الحبات تنفصل، وبعدين قلّب كل حاجة تانية معاه.",
+        "minutes": 5,
+        "uses": [
+          "almonds",
+          "parsley",
+          "mint",
+          "green-onion",
+          "lemon",
+          "olive-oil",
+          "raisins"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "orange-olive-oil-cake",
+    "title": "Orange and Olive Oil Cake",
+    "titleAr": "كيكة البرتقال بزيت الزيتون",
+    "description": "No butter at all. Damp, fragrant, and better on the second day.",
+    "descriptionAr": "من غير زبدة خالص. رطبة وريحتها حلوة وأحلى تاني يوم.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "dessert",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 45,
+    "servings": 8,
+    "nutrition": {
+      "calories": 330,
+      "protein": 5,
+      "carbs": 42,
+      "fat": 16,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "dessert",
+      "oven",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/orange-olive-oil-cake.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 220,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 180,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "oranges",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "vanilla",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "icing-sugar",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true,
+        "garnish": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk the eggs and sugar until pale and thick, about 4 minutes.",
+        "textAr": "اخفق البيض والسكر لحد ما لونهم يفتح ويتقلوا، حوالي ٤ دقايق.",
+        "minutes": 5,
+        "uses": [
+          "eggs",
+          "sugar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour in the oil and orange juice slowly, still whisking, then fold in the dry ingredients.",
+        "textAr": "صبّ الزيت وعصير البرتقال بالراحة وانت بتخفق، وبعدين قلّب المكوّنات الناشفة.",
+        "minutes": 6,
+        "uses": [
+          "olive-oil",
+          "oranges",
+          "flour",
+          "baking-powder",
+          "vanilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 170°C for 45 minutes. Cool in the tin, then dust with icing sugar.",
+        "textAr": "اخبزها على ١٧٠ درجة ٤٥ دقيقة. بردها في الصينية، وبعدين رشّ السكر البودرة.",
+        "minutes": 45,
+        "uses": [
+          "icing-sugar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "ratatouille-tray",
+    "title": "Roasted Summer Vegetables",
+    "titleAr": "خضار صيفي محمّر",
+    "description": "Aubergine, courgette and pepper roasted hard until the edges blacken and sweeten.",
+    "descriptionAr": "باذنجان وكوسة وفلفل محمّرين لحد ما الأطراف تسود وتحلى.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 40,
+    "servings": 4,
+    "nutrition": {
+      "calories": 210,
+      "protein": 4,
+      "carbs": 22,
+      "fat": 13,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "healthy",
+      "vegan",
+      "oven",
+      "batch-cook",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/ratatouille-tray.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggplant",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "zucchini",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "wedges to serve"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": null
+      },
+      {
+        "slug": "oregano",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss everything with oil, oregano and salt on a large tray in one layer.",
+        "textAr": "قلّب كل حاجة مع الزيت والأوريجانو والملح في صينية كبيرة طبقة واحدة.",
+        "minutes": 12,
+        "uses": [
+          "eggplant",
+          "zucchini",
+          "bell-pepper",
+          "onions",
+          "tomatoes",
+          "garlic",
+          "oregano",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roast at 220°C for 40 minutes, turning once. Crowding the tray steams it, so use two if needed.",
+        "textAr": "اخبزها على ٢٢٠ درجة ٤٠ دقيقة مع التقليب مرة. لو الصينية زحمة هتسلق، فاستخدم اتنين لو لزم.",
+        "minutes": 40,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "roasted-cauliflower-tahini",
+    "title": "Roasted Cauliflower with Tahini",
+    "titleAr": "قرنبيط محمّر بالطحينة",
+    "description": "Roasted until properly brown, not politely pale, then drenched in tahini.",
+    "descriptionAr": "محمّر لحد ما يبقى بنّي فعلًا مش فاتح، وبعدين مغرق في الطحينة.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 280,
+      "protein": 9,
+      "carbs": 20,
+      "fat": 19,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "sesame"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "oven",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/roasted-cauliflower-tahini.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "cauliflower",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into florets"
+      },
+      {
+        "slug": "tahini",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "pomegranate",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null,
+        "optional": true,
+        "garnish": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the florets with oil, cumin and salt and roast at 220°C for 30 minutes until charred at the tips.",
+        "textAr": "قلّب الزهرات مع الزيت والكمون والملح واخبزها على ٢٢٠ درجة ٣٠ دقيقة لحد ما أطرافها تتحمّر.",
+        "minutes": 30,
+        "uses": [
+          "cauliflower",
+          "olive-oil",
+          "cumin",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the tahini with lemon, garlic and water until pourable.",
+        "textAr": "اخفق الطحينة مع الليمون والتوم والمية لحد ما تسيح.",
+        "minutes": 4,
+        "uses": [
+          "tahini",
+          "lemon",
+          "garlic"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Spoon the tahini over and scatter pomegranate and parsley.",
+        "textAr": "صبّ الطحينة فوق ورشّ الرمان والبقدونس.",
+        "minutes": 2,
+        "uses": [
+          "pomegranate",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "shrimp-garlic",
+    "title": "Garlic Shrimp in Olive Oil",
+    "titleAr": "جمبري بالتوم وزيت الزيتون",
+    "description": "Six minutes, one pan, and bread that has to be there to catch the oil.",
+    "descriptionAr": "ست دقايق وطاسة واحدة وعيش لازم يكون موجود يلمّ الزيت.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 6,
+    "servings": 2,
+    "nutrition": {
+      "calories": 300,
+      "protein": 32,
+      "carbs": 6,
+      "fat": 17,
+      "fiber": 1
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "gluten",
+      "shellfish"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "quick",
+      "one-pan",
+      "late-night"
+    ],
+    "image": {
+      "path": "curated/shrimp-garlic.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "shrimp",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "peeled"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 8,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "baguette",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Warm the oil with the garlic and chilli over low heat for 3 minutes — do not brown the garlic.",
+        "textAr": "سخّن الزيت مع التوم والشطة على نار هادية ٣ دقايق — ماتحمّرش التوم.",
+        "minutes": 3,
+        "uses": [
+          "olive-oil",
+          "garlic",
+          "chili-flakes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Turn the heat up, add the shrimp and cook 3 minutes until they curl and turn opaque.",
+        "textAr": "ارفع النار، ضيف الجمبري واطبخه ٣ دقايق لحد ما يتكوّر ولونه يتغيّر.",
+        "minutes": 3,
+        "uses": [
+          "shrimp",
+          "salt"
+        ],
+        "safety": "Shrimp is cooked when it is opaque and firm; a grey translucent centre is not.",
+        "safetyAr": "الجمبري بيبقى مستوي لما لونه يبقى مش شفّاف ويشدّ؛ النص الرمادي الشفّاف مش مستوي."
+      },
+      {
+        "text": "Off the heat, add lemon and parsley and serve with bread.",
+        "textAr": "بعيد عن النار، ضيف الليمون والبقدونس وقدّمه مع العيش.",
+        "minutes": 2,
+        "uses": [
+          "lemon",
+          "parsley",
+          "baguette"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "spanakopita-triangles",
+    "title": "Spinach and Cheese Triangles",
+    "titleAr": "مثلثات سبانخ بالجبنة",
+    "description": "Phyllo, spinach, salty cheese. Bakes into something that shatters when you bite it.",
+    "descriptionAr": "عجين رقايق وسبانخ وجبنة مالحة. بتتخبز لحاجة بتتكسر لما تعضّها.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 25,
+    "cookMinutes": 25,
+    "servings": 6,
+    "nutrition": {
+      "calories": 310,
+      "protein": 11,
+      "carbs": 26,
+      "fat": 18,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "oven",
+      "comfort",
+      "snack"
+    ],
+    "image": {
+      "path": "curated/spanakopita-triangles.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "phyllo",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "spinach",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "crumbled"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "dill",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "butter",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "nutmeg",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Wilt the spinach, squeeze it as dry as you possibly can, then chop it.",
+        "textAr": "ذبّل السبانخ، اعصرها أنشف ما تقدر، وبعدين قطّعها.",
+        "minutes": 10,
+        "uses": [
+          "spinach"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Mix with the cheese, onion, dill, egg, nutmeg and salt.",
+        "textAr": "اخلطها مع الجبنة والبصل والشبت والبيض وجوزة الطيب والملح.",
+        "minutes": 6,
+        "uses": [
+          "white-cheese",
+          "green-onion",
+          "dill",
+          "eggs",
+          "nutmeg",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Brush pastry strips with butter, spoon on filling and fold into triangles.",
+        "textAr": "ادهن شرايح العجين بالزبدة، حط الحشو ولفها مثلثات.",
+        "minutes": 12,
+        "uses": [
+          "phyllo",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 200°C for 25 minutes until deep golden.",
+        "textAr": "اخبزها على ٢٠٠ درجة ٢٥ دقيقة لحد ما تدهب.",
+        "minutes": 25,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "stuffed-peppers-rice",
+    "title": "Peppers Stuffed with Herbed Rice",
+    "titleAr": "فلفل محشي بالرز",
+    "description": "Sweet peppers filled with tomato rice and baked until they collapse a little.",
+    "descriptionAr": "فلفل حلو محشي رز بالطماطم ومخبوز لحد ما يترخّى شوية.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 20,
+    "cookMinutes": 50,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 7,
+      "carbs": 54,
+      "fat": 9,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "vegan",
+      "oven",
+      "budget",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/stuffed-peppers-rice.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bell-pepper",
+        "quantity": 6,
+        "unit": "piece",
+        "prep": "tops cut off"
+      },
+      {
+        "slug": "rice",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "grated"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "mint",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the rice with the grated tomato, onion, herbs, paste, oil, cumin and salt.",
+        "textAr": "اخلط الرز مع الطماطم المبشورة والبصل والخضرة والصلصة والزيت والكمون والملح.",
+        "minutes": 10,
+        "uses": [
+          "rice",
+          "tomatoes",
+          "onions",
+          "parsley",
+          "mint",
+          "tomato-paste",
+          "olive-oil",
+          "cumin",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fill the peppers two-thirds full — the rice needs room — and replace the tops.",
+        "textAr": "املا الفلفل لتلتين — الرز محتاج مساحة — ورجّع الغطا.",
+        "minutes": 8,
+        "uses": [
+          "bell-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stand them in a dish with 200ml water, cover, and bake at 190°C for 50 minutes.",
+        "textAr": "وقّفهم في صينية مع ٢٠٠ مل مية، غطّيهم، واخبزهم على ١٩٠ درجة ٥٠ دقيقة.",
+        "minutes": 50,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "tuna-pasta-salad",
+    "title": "Cold Tuna Pasta Salad",
+    "titleAr": "سلطة مكرونة بالتونة",
+    "description": "Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.",
+    "descriptionAr": "اسلق المكرونة وخلاص، مفيش حاجة تانية عايزة نار. تونة وليمون وخيار، وبروتين يكفّيك لحد العشا.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 480,
+      "protein": 34,
+      "carbs": 58,
+      "fat": 13,
+      "fiber": 5
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "high-protein",
+      "healthy",
+      "under-100",
+      "beginner",
+      "no-oven"
+    ],
+    "image": {
+      "path": "curated/tuna-pasta-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tuna-can",
+        "quantity": 2,
+        "unit": "can",
+        "prep": "drained"
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "sliced",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the pasta, drain and rinse under cold water so it stops cooking.",
+        "textAr": "اسلق المكرونة وصفّيها واشطفها بمية باردة عشان تبطّل استواء.",
+        "minutes": 10,
+        "uses": [
+          "pasta"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the lemon juice with olive oil, salt and pepper.",
+        "textAr": "اخفق عصير الليمون مع زيت الزيتون والملح والفلفل.",
+        "minutes": 2,
+        "uses": [
+          "lemon",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold everything together and chill for 10 minutes if you can wait.",
+        "textAr": "قلّب كل حاجة مع بعض وسيبها في التلاجة ١٠ دقايق لو تقدر تستنى.",
+        "minutes": 4,
+        "uses": [
+          "tuna-can",
+          "cucumber",
+          "tomatoes",
+          "green-onion"
+        ],
+        "safety": "Keep it refrigerated and eat within two days.",
+        "safetyAr": "سيبها في التلاجة وكلها في خلال يومين."
+      }
+    ]
+  },
+  {
+    "slug": "tuna-white-bean-salad",
+    "title": "Tuna and White Bean Salad",
+    "titleAr": "سلطة تونة بالفاصوليا البيضا",
+    "description": "Store cupboard to table in eight minutes, with real protein in it.",
+    "descriptionAr": "من الدولاب للسفرة في تمن دقايق، وفيها بروتين حقيقي.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 0,
+    "servings": 2,
+    "nutrition": {
+      "calories": 390,
+      "protein": 32,
+      "carbs": 32,
+      "fat": 14,
+      "fiber": 10
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [],
+    "tags": [
+      "no-cook",
+      "quick",
+      "high-protein",
+      "budget",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/tuna-white-bean-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tuna-can",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "white-beans",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "capers",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soak the sliced onion in cold water for 5 minutes to take its edge off, then drain.",
+        "textAr": "انقع البصل المقطّع في مية باردة ٥ دقايق عشان حدّته تروح، وبعدين صفّيه.",
+        "minutes": 5,
+        "uses": [
+          "onions"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold everything together gently so the beans stay whole.",
+        "textAr": "قلّب كل حاجة برفق عشان الفاصوليا تفضل صحيحة.",
+        "minutes": 4,
+        "uses": [
+          "tuna-can",
+          "white-beans",
+          "parsley",
+          "lemon",
+          "olive-oil",
+          "capers",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "white-bean-stew",
+    "title": "Tomato and White Bean Stew",
+    "titleAr": "يخنة فاصوليا بيضا",
+    "description": "Cheap protein cooked until creamy, sharpened with lemon at the end.",
+    "descriptionAr": "بروتين رخيص متطبوخ لحد ما يبقى كريمي، ومتحمّض بالليمون في الآخر.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 35,
+    "servings": 4,
+    "nutrition": {
+      "calories": 310,
+      "protein": 15,
+      "carbs": 44,
+      "fat": 8,
+      "fiber": 13
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "budget",
+      "healthy",
+      "batch-cook",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/white-bean-stew.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "white-beans",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "blended"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "bay-leaf",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion and carrot in oil for 8 minutes, then add the garlic and paste.",
+        "textAr": "شوّح البصل والجزر في الزيت ٨ دقايق، وبعدين ضيف التوم والصلصة.",
+        "minutes": 9,
+        "uses": [
+          "onions",
+          "carrots",
+          "olive-oil",
+          "garlic",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the beans, tomatoes, bay and 300ml water and simmer 25 minutes until thick.",
+        "textAr": "ضيف الفاصوليا والطماطم وورق اللورا و٣٠٠ مل مية وسيبها ٢٥ دقيقة لحد ما تتقل.",
+        "minutes": 25,
+        "uses": [
+          "white-beans",
+          "tomatoes",
+          "bay-leaf",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Finish with lemon and a lot more olive oil than feels necessary.",
+        "textAr": "زيّنها بالليمون وزيت زيتون أكتر مما تتخيل.",
+        "minutes": 2,
+        "uses": [
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "yogurt-berry-bowl",
+    "title": "Yogurt Bowl with Fruit and Nuts",
+    "titleAr": "طبق زبادي بالفواكه والمكسرات",
+    "description": "Two minutes, no cooking, and the protein of a real breakfast.",
+    "descriptionAr": "دقيقتين من غير طبخ، وبروتين فطار حقيقي.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "breakfast",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 0,
+    "servings": 1,
+    "nutrition": {
+      "calories": 340,
+      "protein": 18,
+      "carbs": 38,
+      "fat": 14,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "nuts"
+    ],
+    "appliances": [],
+    "tags": [
+      "breakfast",
+      "no-cook",
+      "quick",
+      "beginner",
+      "healthy",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/yogurt-berry-bowl.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "yogurt",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "strawberry",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "halved"
+      },
+      {
+        "slug": "walnuts",
+        "quantity": 20,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "chia",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Spoon the yogurt into a bowl and level the top.",
+        "textAr": "حط الزبادي في طبق وسوّي وشه.",
+        "minutes": 1,
+        "uses": [
+          "yogurt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pile on the fruit and nuts, drizzle honey and dust with cinnamon.",
+        "textAr": "حط الفواكه والمكسرات فوق، رشّ العسل والقرفة.",
+        "minutes": 3,
+        "uses": [
+          "strawberry",
+          "walnuts",
+          "honey",
+          "chia",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "zucchini-egg-skillet",
+    "title": "Zucchini & Egg Skillet",
+    "titleAr": "كوسة بالبيض في الطاسة",
+    "description": "Green, quick and barely any money. What to cook when the fridge is nearly empty.",
+    "descriptionAr": "خضرا وسريعة وبتكلّف ولا حاجة. اللي تعمله لما التلاجة تكون فاضية.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "breakfast",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 12,
+    "servings": 2,
+    "nutrition": {
+      "calories": 300,
+      "protein": 20,
+      "carbs": 12,
+      "fat": 20,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "budget",
+      "under-100",
+      "healthy",
+      "beginner",
+      "low-carb"
+    ],
+    "image": {
+      "path": "curated/zucchini-egg-skillet.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "zucchini",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "sliced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 25,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 50,
+        "unit": "g",
+        "prep": "crumbled",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the onion and zucchini in olive oil over medium-high heat for 8 minutes until browned at the edges.",
+        "textAr": "اقلي البصل والكوسة في زيت الزيتون على نار عالية شوية ٨ دقايق لحد ما يتحمّروا من الأطراف.",
+        "minutes": 8,
+        "uses": [
+          "onions",
+          "zucchini",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the garlic for 30 seconds, then pour in the eggs and stir gently until just set.",
+        "textAr": "ضيف التوم ٣٠ ثانية، وبعدين صبّ البيض وقلّب برفق لحد ما يستوي.",
+        "minutes": 4,
+        "uses": [
+          "garlic",
+          "eggs"
+        ],
+        "safety": "Cook until the eggs are set with no runny liquid.",
+        "safetyAr": "اطبخه لحد ما البيض يستوي ومايفضلش فيه سايل."
+      },
+      {
+        "text": "Crumble the cheese over and serve straight from the pan.",
+        "textAr": "فتّت الجبنة فوق وقدّمه من الطاسة على طول.",
+        "minutes": 1,
+        "uses": [
+          "white-cheese"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]

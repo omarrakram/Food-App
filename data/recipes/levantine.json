@@ -1,0 +1,3147 @@
+[
+  {
+    "slug": "batata-harra",
+    "title": "Spicy Coriander Potatoes",
+    "titleAr": "بطاطا حرة",
+    "description": "Crisp potato cubes tossed hard with garlic, coriander and chilli off the heat.",
+    "descriptionAr": "مكعبات بطاطس مقرمشة متقلّبة بقوة مع توم وكزبرة وشطة بعيد عن النار.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 260,
+      "protein": 5,
+      "carbs": 38,
+      "fat": 11,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "vegan",
+      "budget",
+      "beginner",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/batata-harra.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "potatoes",
+        "quantity": 800,
+        "unit": "g",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the potato cubes with oil and salt and roast at 220°C for 25 minutes until crisp.",
+        "textAr": "قلّب مكعبات البطاطس مع الزيت والملح واخبزها على ٢٢٠ درجة ٢٥ دقيقة لحد ما تقرمش.",
+        "minutes": 25,
+        "uses": [
+          "potatoes",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Off the heat, toss immediately with the garlic, coriander, chilli and lemon.",
+        "textAr": "بعيد عن النار، قلّبها على طول مع التوم والكزبرة والشطة والليمون.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "coriander",
+          "chili-flakes",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "fatteh-hummus",
+    "title": "Chickpea Fatteh with Yogurt",
+    "titleAr": "فتة حمص بالزبادي",
+    "description": "Crisp bread, warm chickpeas, cold garlicky yogurt and browned butter. Textures on purpose.",
+    "descriptionAr": "عيش مقرمش وحمص سخن وزبادي بارد بالتوم وزبدة محمّرة. القوام مقصود.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "breakfast",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 18,
+      "carbs": 44,
+      "fat": 21,
+      "fiber": 9
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "nuts",
+      "sesame"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "comfort",
+      "high-protein",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/fatteh-hummus.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chickpeas",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "pita-bread",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "torn and toasted"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "tahini",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 50,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "pine-nuts",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null,
+        "garnish": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Warm the chickpeas in a little of their liquid until steaming.",
+        "textAr": "سخّن الحمص في شوية من ميته لحد ما يبخّر.",
+        "minutes": 6,
+        "uses": [
+          "chickpeas"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the yogurt with the garlic, tahini and salt until smooth.",
+        "textAr": "اخفق الزبادي مع التوم والطحينة والملح لحد ما يبقى ناعم.",
+        "minutes": 3,
+        "uses": [
+          "yogurt",
+          "garlic",
+          "tahini",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Layer bread, chickpeas and yogurt. Brown the butter with the pine nuts and pour it over.",
+        "textAr": "رصّ العيش والحمص والزبادي. حمّر الزبدة مع الصنوبر وصبّها فوق.",
+        "minutes": 6,
+        "uses": [
+          "pita-bread",
+          "butter",
+          "pine-nuts",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "fattoush",
+    "title": "Fattoush with Sumac and Crisp Bread",
+    "titleAr": "فتوش",
+    "description": "Every crunchy vegetable in the fridge, plus fried bread and a lot of sumac.",
+    "descriptionAr": "كل خضار مقرمش في التلاجة، وعيش مقلي وسماق كتير.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 5,
+    "servings": 4,
+    "nutrition": {
+      "calories": 220,
+      "protein": 5,
+      "carbs": 24,
+      "fat": 12,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "healthy",
+      "vegan",
+      "quick",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/fattoush.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pita-bread",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "torn"
+      },
+      {
+        "slug": "lettuce",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "shredded"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "wedges"
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "radish",
+        "quantity": 5,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "mint",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "sumac",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "pomegranate-molasses",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry or toast the torn bread until it snaps, then drain it on paper.",
+        "textAr": "اقلي أو حمّر العيش المقطّع لحد ما يقرمش، وصفّيه على ورق.",
+        "minutes": 5,
+        "uses": [
+          "pita-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the lemon, oil, molasses, sumac and salt into a dressing.",
+        "textAr": "اخفق الليمون والزيت ودبس الرمان والسماق والملح مع بعض.",
+        "minutes": 3,
+        "uses": [
+          "lemon",
+          "olive-oil",
+          "pomegranate-molasses",
+          "sumac",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss the vegetables with the dressing and add the bread at the very last moment.",
+        "textAr": "قلّب الخضار مع الصلصة وضيف العيش في آخر لحظة.",
+        "minutes": 4,
+        "uses": [
+          "lettuce",
+          "tomatoes",
+          "cucumber",
+          "radish",
+          "green-onion",
+          "mint"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "foul-shami",
+    "title": "Levantine Ful with Tahini",
+    "titleAr": "فول شامي بالطحينة",
+    "description": "Fava beans loosened with tahini instead of oil, sharp with lemon and garlic.",
+    "descriptionAr": "فول مخفّف بالطحينة بدل الزيت، وحامض بالليمون والتوم.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 340,
+      "protein": 16,
+      "carbs": 38,
+      "fat": 14,
+      "fiber": 12
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "sesame"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "vegan",
+      "budget",
+      "high-protein",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/foul-shami.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "fava-beans",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "tahini",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Warm the beans with a splash of water and mash about half.",
+        "textAr": "سخّن الفول مع شوية مية واهرس نصه تقريبًا.",
+        "minutes": 8,
+        "uses": [
+          "fava-beans"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the tahini with lemon, garlic and cold water until pourable, then stir it through.",
+        "textAr": "اخفق الطحينة مع الليمون والتوم ومية باردة لحد ما تسيح، وبعدين قلّبها فيه.",
+        "minutes": 3,
+        "uses": [
+          "tahini",
+          "lemon",
+          "garlic"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Season with cumin and salt, finish with oil and parsley.",
+        "textAr": "تبّله بالكمون والملح، وزيّنه بالزيت والبقدونس.",
+        "minutes": 2,
+        "uses": [
+          "cumin",
+          "salt",
+          "olive-oil",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "hummus-classic",
+    "title": "Hummus with Warm Chickpeas",
+    "titleAr": "حمص بالطحينة",
+    "description": "Blended until it is genuinely smooth, with whole chickpeas and oil pooled on top.",
+    "descriptionAr": "مضروب لحد ما يبقى ناعم فعلًا، وفوقه حمص صحيح وزيت.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 5,
+    "servings": 4,
+    "nutrition": {
+      "calories": 300,
+      "protein": 11,
+      "carbs": 30,
+      "fat": 16,
+      "fiber": 8
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "sesame"
+    ],
+    "appliances": [
+      "blender"
+    ],
+    "tags": [
+      "healthy",
+      "vegan",
+      "no-cook",
+      "beginner",
+      "high-protein",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/hummus-classic.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chickpeas",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "tahini",
+        "quantity": 90,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "paprika",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "garnish": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Reserve a handful of chickpeas. Blend the rest with tahini, lemon, garlic, cumin and salt.",
+        "textAr": "شيل حفنة حمص على جنب. اضرب الباقي مع الطحينة والليمون والتوم والكمون والملح.",
+        "minutes": 6,
+        "uses": [
+          "chickpeas",
+          "tahini",
+          "lemon",
+          "garlic",
+          "cumin",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add ice-cold water a spoon at a time, still blending, until it turns pale and fluffy.",
+        "textAr": "ضيف مية مثلجة معلقة معلقة وانت بتضرب، لحد ما يبقى لونه فاتح وهش.",
+        "minutes": 4,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Spread into a bowl, make a well, and fill it with oil, the whole chickpeas and paprika.",
+        "textAr": "افرده في طبق، اعمل حفرة، واملاها بالزيت والحمص الصحيح والبابريكا.",
+        "minutes": 3,
+        "uses": [
+          "olive-oil",
+          "paprika"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "kafta-bil-sanieh",
+    "title": "Kafta and Potato Tray Bake",
+    "titleAr": "كفتة بالصينية",
+    "description": "Mince patties and potato slices baked under tomato until the edges catch.",
+    "descriptionAr": "أقراص لحمة وشرايح بطاطس متخبوزين تحت الطماطم لحد ما الأطراف تتحمّر.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 45,
+    "servings": 4,
+    "nutrition": {
+      "calories": 490,
+      "protein": 30,
+      "carbs": 32,
+      "fat": 26,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "comfort",
+      "oven",
+      "high-protein",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/kafta-bil-sanieh.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "ground-beef",
+        "quantity": 600,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "one grated, one sliced"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "sliced thick"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Knead the mince with the grated onion, parsley, spice and seasoning, then press into a tray.",
+        "textAr": "اعجن اللحمة مع البصل المبشور والبقدونس والبهارات والتوابل، وبعدين افردها في صينية.",
+        "minutes": 12,
+        "uses": [
+          "ground-beef",
+          "onions",
+          "parsley",
+          "mixed-spice",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lay potato and tomato slices over the top, overlapping.",
+        "textAr": "رصّ شرايح البطاطس والطماطم فوق بعضها.",
+        "minutes": 8,
+        "uses": [
+          "potatoes",
+          "tomatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the tomato paste with 200ml water and the oil and pour it over.",
+        "textAr": "اخفق صلصة الطماطم مع ٢٠٠ مل مية والزيت وصبّها فوق.",
+        "minutes": 3,
+        "uses": [
+          "tomato-paste",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 200°C for 45 minutes until the potatoes are tender.",
+        "textAr": "اخبزها على ٢٠٠ درجة ٤٥ دقيقة لحد ما البطاطس تستوي.",
+        "minutes": 45,
+        "uses": [],
+        "safety": "Ground beef must reach 71°C / 160°F all the way through.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره."
+      }
+    ]
+  },
+  {
+    "slug": "kibbeh-bil-sanieh",
+    "title": "Baked Bulgur and Lamb Pie",
+    "titleAr": "كبة بالصينية",
+    "description": "Two bulgur crusts around a spiced lamb and pine nut middle, cut into diamonds.",
+    "descriptionAr": "طبقتين برغل حوالين حشوة لحمة ضاني وصنوبر، ومتقطّعة معيّنات.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 35,
+    "cookMinutes": 45,
+    "servings": 6,
+    "nutrition": {
+      "calories": 520,
+      "protein": 28,
+      "carbs": 42,
+      "fat": 26,
+      "fiber": 7
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "oven",
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "oven",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/kibbeh-bil-sanieh.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bulgur",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "soaked"
+      },
+      {
+        "slug": "lamb",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "minced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "pine-nuts",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "ghee",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soak the bulgur 30 minutes, squeeze dry, then knead with half the lamb and half the spice until it holds.",
+        "textAr": "انقع البرغل ٣٠ دقيقة، اعصره، وبعدين اعجنه مع نص اللحمة ونص البهارات لحد ما يتماسك.",
+        "minutes": 20,
+        "uses": [
+          "bulgur",
+          "lamb",
+          "mixed-spice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the onions, add the rest of the lamb, the pine nuts and cinnamon, and cook through.",
+        "textAr": "حمّر البصل، ضيف باقي اللحمة والصنوبر والقرفة، واطبخهم لحد ما يستووا.",
+        "minutes": 12,
+        "uses": [
+          "onions",
+          "pine-nuts",
+          "cinnamon",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Press half the bulgur into a greased tray, spread the filling, then top with the rest.",
+        "textAr": "اضغط نص البرغل في صينية مدهونة، افرد الحشو، وبعدين غطّيه بالباقي.",
+        "minutes": 10,
+        "uses": [
+          "ghee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Score into diamonds, pour over the ghee and bake at 200°C for 45 minutes.",
+        "textAr": "خطّطها معيّنات، صبّ السمنة فوقها واخبزها على ٢٠٠ درجة ٤٥ دقيقة.",
+        "minutes": 45,
+        "uses": [],
+        "safety": "Lamb mince must be cooked through to 71°C / 160°F.",
+        "safetyAr": "اللحمة الضاني المفرومة لازم تستوي لحد ٧١°م / ١٦٠°ف."
+      }
+    ]
+  },
+  {
+    "slug": "kunafa-cheese",
+    "title": "Cheese Kunafa",
+    "titleAr": "كنافة بالجبنة",
+    "description": "Shredded pastry over stretchy cheese, drowned in syrup while it is still too hot.",
+    "descriptionAr": "كنافة على جبنة بتمط، ومغرقة في الشربات وهي لسه سخنة أوي.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "dessert"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 30,
+    "servings": 8,
+    "nutrition": {
+      "calories": 520,
+      "protein": 14,
+      "carbs": 62,
+      "fat": 25,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "dessert",
+      "comfort",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/kunafa-cheese.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "phyllo",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "shredded"
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "crumbled"
+      },
+      {
+        "slug": "butter",
+        "quantity": 180,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "sugar",
+        "quantity": 350,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 0.5,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "rose-water",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "pistachios",
+        "quantity": 40,
+        "unit": "g",
+        "prep": "chopped"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rub the melted butter through the shredded pastry until every strand is coated.",
+        "textAr": "افرك الزبدة السايحة في الكنافة لحد ما كل خصلة تتغطّى.",
+        "minutes": 8,
+        "uses": [
+          "phyllo",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Press half into a tray, spread the cheeses, then cover with the rest and press down hard.",
+        "textAr": "اضغط نصها في صينية، افرد الجبنة، وبعدين غطّيها بالباقي واضغط بقوة.",
+        "minutes": 7,
+        "uses": [
+          "mozzarella",
+          "white-cheese"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 200°C for 30 minutes until the base is deep gold.",
+        "textAr": "اخبزها على ٢٠٠ درجة ٣٠ دقيقة لحد ما القاعدة تبقى دهبية غامقة.",
+        "minutes": 30,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Boil the sugar with 250ml water, lemon and rose water for 8 minutes and pour it over hot.",
+        "textAr": "اغلي السكر مع ٢٥٠ مل مية والليمون وماء الورد ٨ دقايق وصبّه فوقها سخن.",
+        "minutes": 8,
+        "uses": [
+          "sugar",
+          "lemon",
+          "rose-water",
+          "pistachios"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "labneh-bowl",
+    "title": "Labneh with Oil and Zaatar",
+    "titleAr": "لبنة بالزيت والزعتر",
+    "description": "Thick strained yogurt, a pool of good oil, and bread. Breakfast in ninety seconds.",
+    "descriptionAr": "لبنة تقيلة وبركة زيت كويس وعيش. فطار في تسعين ثانية.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "breakfast",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 0,
+    "servings": 2,
+    "nutrition": {
+      "calories": 280,
+      "protein": 12,
+      "carbs": 18,
+      "fat": 18,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [],
+    "tags": [
+      "breakfast",
+      "no-cook",
+      "quick",
+      "beginner",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/labneh-bowl.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "labneh",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "thyme-dried",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olives",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced",
+        "optional": true
+      },
+      {
+        "slug": "pita-bread",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Spread the labneh in a shallow bowl and swirl a well through the middle.",
+        "textAr": "افرد اللبنة في طبق واسع واعمل حفرة في النص.",
+        "minutes": 2,
+        "uses": [
+          "labneh"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fill the well with oil, scatter thyme, and serve with bread, olives and cucumber.",
+        "textAr": "املا الحفرة بالزيت، رشّ الزعتر، وقدّمها مع العيش والزيتون والخيار.",
+        "minutes": 3,
+        "uses": [
+          "olive-oil",
+          "thyme-dried",
+          "pita-bread",
+          "olives",
+          "cucumber"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "lamb-freekeh",
+    "title": "Freekeh with Lamb and Almonds",
+    "titleAr": "فريكة باللحمة",
+    "description": "Smoked green wheat cooked in lamb broth. Nuttier and better than rice for this.",
+    "descriptionAr": "قمح أخضر مدخّن متطبوخ في مرق الضاني. طعمه مكسرات وأحلى من الرز هنا.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 75,
+    "servings": 6,
+    "nutrition": {
+      "calories": 560,
+      "protein": 34,
+      "carbs": 58,
+      "fat": 20,
+      "fiber": 9
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "high-protein",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/lamb-freekeh.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "lamb",
+        "quantity": 800,
+        "unit": "g",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "freekeh",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "ghee",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "almonds",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "toasted",
+        "garnish": true
+      },
+      {
+        "slug": "bay-leaf",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Brown the lamb in ghee, add the onion, spices, bay and 1.5L water and simmer 55 minutes.",
+        "textAr": "حمّر الضاني في السمنة، ضيف البصل والبهارات وورق اللورا و١.٥ لتر مية وسيبها ٥٥ دقيقة.",
+        "minutes": 60,
+        "uses": [
+          "lamb",
+          "ghee",
+          "onions",
+          "mixed-spice",
+          "cinnamon",
+          "bay-leaf",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lift out the meat, add the freekeh to the broth and cook 25 minutes until tender.",
+        "textAr": "ارفع اللحمة، ضيف الفريكة للمرق واطبخها ٢٥ دقيقة لحد ما تستوي.",
+        "minutes": 25,
+        "uses": [
+          "freekeh"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Return the lamb, rest 10 minutes, and scatter toasted almonds over.",
+        "textAr": "رجّع الضاني، سيبها ١٠ دقايق، ورشّ اللوز المحمّص فوق.",
+        "minutes": 10,
+        "uses": [
+          "almonds"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "lentil-soup-lemon",
+    "title": "Levantine Lentil Soup",
+    "titleAr": "شوربة عدس بالليمون",
+    "description": "Thinner and sharper than the Egyptian one, finished with a hard squeeze of lemon.",
+    "descriptionAr": "أرق وأحمض من المصرية، ومتزيّنة بعصرة ليمون قوية.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 230,
+      "protein": 12,
+      "carbs": 34,
+      "fat": 5,
+      "fiber": 8
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "budget",
+      "beginner",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/lentil-soup-lemon.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "lentils",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "turmeric",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "coriander",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion and garlic in oil, add the spices and cook 1 minute.",
+        "textAr": "شوّح البصل والتوم في الزيت، ضيف البهارات واطبخهم دقيقة.",
+        "minutes": 6,
+        "uses": [
+          "onions",
+          "garlic",
+          "olive-oil",
+          "cumin",
+          "turmeric"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the lentils and 1.2L water and simmer 25 minutes.",
+        "textAr": "ضيف العدس و١.٢ لتر مية وسيبها ٢٥ دقيقة.",
+        "minutes": 25,
+        "uses": [
+          "lentils",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Squeeze in all the lemon off the heat and scatter coriander.",
+        "textAr": "اعصر كل الليمون بعيد عن النار ورشّ الكزبرة.",
+        "minutes": 2,
+        "uses": [
+          "lemon",
+          "coriander"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "manakish-zaatar",
+    "title": "Zaatar Flatbreads",
+    "titleAr": "مناقيش زعتر",
+    "description": "Dough, oil, thyme. Ten minutes in a hot oven and breakfast is solved.",
+    "descriptionAr": "عجين وزيت وزعتر. عشر دقايق في فرن سخن والفطار خلص.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "breakfast",
+      "snack"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 90,
+    "cookMinutes": 12,
+    "servings": 4,
+    "nutrition": {
+      "calories": 340,
+      "protein": 8,
+      "carbs": 46,
+      "fat": 14,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "sesame"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "breakfast",
+      "vegan",
+      "budget",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/manakish-zaatar.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 120,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "thyme-dried",
+        "quantity": 6,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sesame-seeds",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sumac",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Make a soft dough with the flour, yeast, sugar, salt, 2 tbsp oil and 300ml warm water.",
+        "textAr": "اعجن عجينة طرية من الدقيق والخميرة والسكر والملح ومعلقتين زيت و٣٠٠ مل مية دافية.",
+        "minutes": 15,
+        "uses": [
+          "flour",
+          "yeast",
+          "sugar",
+          "salt",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Leave it to rise for 75 minutes until doubled.",
+        "textAr": "سيبها تخمر ٧٥ دقيقة لحد ما تبقى الضعف.",
+        "minutes": 75,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Mix the thyme, sesame, sumac and remaining oil into a loose paste.",
+        "textAr": "اخلط الزعتر والسمسم والسماق وباقي الزيت لحد ما يبقوا خليط سايح.",
+        "minutes": 3,
+        "uses": [
+          "thyme-dried",
+          "sesame-seeds",
+          "sumac"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roll into rounds, spread the paste to the edges and bake at 240°C for 10 minutes.",
+        "textAr": "افرد العجين دواير، افرد الخليط لحد الأطراف واخبزها على ٢٤٠ درجة ١٠ دقايق.",
+        "minutes": 12,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "maqluba",
+    "title": "Upside-Down Rice with Aubergine",
+    "titleAr": "مقلوبة",
+    "description": "Layered in the pot, flipped onto a plate at the table. The moment is half the dish.",
+    "descriptionAr": "مرصوصة في الحلة ومتقلبة على الطبق على السفرة. اللحظة دي نص الأكلة.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 30,
+    "cookMinutes": 60,
+    "servings": 6,
+    "nutrition": {
+      "calories": 560,
+      "protein": 30,
+      "carbs": 66,
+      "fat": 20,
+      "fiber": 6
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "nuts"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "batch-cook",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/maqluba.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 800,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "eggplant",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced thick"
+      },
+      {
+        "slug": "rice",
+        "quantity": 450,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "turmeric",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 100,
+        "unit": "ml",
+        "prep": "for frying",
+        "staple": true
+      },
+      {
+        "slug": "pine-nuts",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null,
+        "optional": true,
+        "garnish": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer the chicken with the onion and spices in 1.2L water for 30 minutes. Keep the broth.",
+        "textAr": "اسلق الفراخ مع البصل والبهارات في ١.٢ لتر مية ٣٠ دقيقة. احتفظ بالمرق.",
+        "minutes": 30,
+        "uses": [
+          "chicken-thigh",
+          "onions",
+          "mixed-spice",
+          "turmeric",
+          "cinnamon",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the aubergine slices until golden and drain them on paper.",
+        "textAr": "اقلي شرايح الباذنجان لحد ما تتحمّر وصفّيها على ورق.",
+        "minutes": 15,
+        "uses": [
+          "eggplant",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Layer aubergine, then chicken, then rice in the pot. Pour over the strained broth.",
+        "textAr": "رصّ الباذنجان، وبعدين الفراخ، وبعدين الرز في الحلة. صبّ المرق المصفّى فوقهم.",
+        "minutes": 8,
+        "uses": [
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook covered on low for 25 minutes, rest 10, then flip onto a wide plate.",
+        "textAr": "اطبخها مغطّاة على نار هادية ٢٥ دقيقة، سيبها ١٠، وبعدين اقلبها على طبق واسع.",
+        "minutes": 35,
+        "uses": [
+          "pine-nuts"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout. The juices should run clear.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية."
+      }
+    ]
+  },
+  {
+    "slug": "muhammara",
+    "title": "Red Pepper and Walnut Dip",
+    "titleAr": "محمرة",
+    "description": "Roasted peppers and walnuts blitzed with pomegranate molasses. Sweet, sour, nutty.",
+    "descriptionAr": "فلفل مشوي وعين جمل مضروبين مع دبس الرمان. حلو وحامض وطعمه مكسرات.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 20,
+    "servings": 4,
+    "nutrition": {
+      "calories": 280,
+      "protein": 6,
+      "carbs": 16,
+      "fat": 22,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "oven",
+      "blender"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "oven"
+    ],
+    "image": {
+      "path": "curated/muhammara.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bell-pepper",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "walnuts",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "breadcrumbs",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "pomegranate-molasses",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Roast the peppers at 220°C for 20 minutes until blackened at the edges, then peel.",
+        "textAr": "اشوي الفلفل على ٢٢٠ درجة ٢٠ دقيقة لحد ما أطرافه تسود، وبعدين قشّره.",
+        "minutes": 20,
+        "uses": [
+          "bell-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blend with everything else to a coarse paste — it should not be silky.",
+        "textAr": "اضربه مع كل حاجة تانية لحد ما يبقى خشن — مالزمش يبقى ناعم.",
+        "minutes": 6,
+        "uses": [
+          "walnuts",
+          "breadcrumbs",
+          "pomegranate-molasses",
+          "garlic",
+          "cumin",
+          "chili-flakes",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mujadara",
+    "title": "Lentils and Rice with Caramelised Onion",
+    "titleAr": "مجدرة",
+    "description": "Brown lentils and rice under a mountain of onions cooked almost to jam.",
+    "descriptionAr": "عدس بني ورز تحت جبل من البصل المحمّر لحد ما يبقى زي المربى.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 40,
+    "servings": 4,
+    "nutrition": {
+      "calories": 410,
+      "protein": 14,
+      "carbs": 70,
+      "fat": 10,
+      "fiber": 11
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "vegan",
+      "budget",
+      "healthy",
+      "batch-cook",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/mujadara.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "green-lentils",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "rice",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coriander-ground",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Cook the onions in the oil for 25 minutes, patiently, until dark and sweet.",
+        "textAr": "اطبخ البصل في الزيت ٢٥ دقيقة بصبر، لحد ما يبقى غامق وحلو.",
+        "minutes": 25,
+        "uses": [
+          "onions",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Simmer the lentils in 700ml water for 15 minutes until nearly tender.",
+        "textAr": "اسلق العدس في ٧٠٠ مل مية ١٥ دقيقة لحد ما يقرب يستوي.",
+        "minutes": 15,
+        "uses": [
+          "green-lentils"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the rice, spices, salt and half the onions, cover and cook 18 minutes.",
+        "textAr": "ضيف الرز والبهارات والملح ونص البصل، غطّي واطبخ ١٨ دقيقة.",
+        "minutes": 18,
+        "uses": [
+          "rice",
+          "cumin",
+          "coriander-ground",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pile the rest of the onions on top.",
+        "textAr": "حط باقي البصل فوق.",
+        "minutes": 2,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mutabbal",
+    "title": "Smoky Aubergine and Tahini Dip",
+    "titleAr": "متبل باذنجان",
+    "description": "Aubergine burnt over flame until the skin collapses, then whipped with tahini.",
+    "descriptionAr": "باذنجان متحرق على النار لحد ما القشرة تقع، وبعدين مخفوق بالطحينة.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 190,
+      "protein": 5,
+      "carbs": 14,
+      "fat": 14,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "sesame"
+    ],
+    "appliances": [
+      "grill"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "budget",
+      "grill"
+    ],
+    "image": {
+      "path": "curated/mutabbal.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggplant",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "tahini",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Char the aubergines whole over a flame or under a hot grill for 20 minutes, turning.",
+        "textAr": "احرق الباذنجان صحيح على النار أو تحت شواية سخنة ٢٠ دقيقة مع التقليب.",
+        "minutes": 22,
+        "uses": [
+          "eggplant"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Peel off the blackened skin, drain the flesh in a sieve for 10 minutes.",
+        "textAr": "قشّر القشرة المحروقة، وصفّي اللب في مصفاة ١٠ دقايق.",
+        "minutes": 10,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Mash with tahini, lemon, garlic and salt. Finish with oil and parsley.",
+        "textAr": "اهرسه مع الطحينة والليمون والتوم والملح. زيّنه بالزيت والبقدونس.",
+        "minutes": 5,
+        "uses": [
+          "tahini",
+          "lemon",
+          "garlic",
+          "salt",
+          "olive-oil",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "salatet-rocca",
+    "title": "Rocket, Sumac and Onion Salad",
+    "titleAr": "سلطة جرجير بالسماق",
+    "description": "Three ingredients and a sharp dressing. The side that cuts through grilled meat.",
+    "descriptionAr": "تلات مكوّنات وصلصة حامضة. الطبق الجانبي اللي بيكسر دسم المشويات.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 90,
+      "protein": 2,
+      "carbs": 7,
+      "fat": 7,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [],
+    "tags": [
+      "healthy",
+      "vegan",
+      "no-cook",
+      "quick",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/salatet-rocca.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rocket",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "sumac",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rub the sliced onion with the sumac and a pinch of salt and leave it 5 minutes to soften.",
+        "textAr": "افرك البصل المقطّع بالسماق ورشة ملح وسيبه ٥ دقايق يطرى.",
+        "minutes": 5,
+        "uses": [
+          "onions",
+          "sumac",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss with the rocket, lemon and oil right before it goes on the table.",
+        "textAr": "قلّبه مع الجرجير والليمون والزيت قبل ما ينزل على السفرة على طول.",
+        "minutes": 3,
+        "uses": [
+          "rocket",
+          "lemon",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "sfiha-lamb",
+    "title": "Open Lamb Pies",
+    "titleAr": "صفيحة باللحمة",
+    "description": "Small open-topped pies with spiced lamb and a squeeze of lemon at the end.",
+    "descriptionAr": "فطاير صغيرة مفتوحة بلحمة ضاني متبّلة وعصرة ليمون في الآخر.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 90,
+    "cookMinutes": 15,
+    "servings": 6,
+    "nutrition": {
+      "calories": 310,
+      "protein": 16,
+      "carbs": 34,
+      "fat": 12,
+      "fiber": 2
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "oven",
+      "comfort",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/sfiha-lamb.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lamb",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "minced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "pomegranate-molasses",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "wedges to serve",
+        "garnish": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Make a soft dough with flour, yeast, salt, oil and 300ml warm water and let it rise 75 minutes.",
+        "textAr": "اعجن عجينة طرية من الدقيق والخميرة والملح والزيت و٣٠٠ مل مية دافية وسيبها تخمر ٧٥ دقيقة.",
+        "minutes": 80,
+        "uses": [
+          "flour",
+          "yeast",
+          "salt",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Mix the raw lamb with the onion, tomato, molasses and spice.",
+        "textAr": "اخلط اللحمة النية مع البصل والطماطم والدبس والبهارات.",
+        "minutes": 8,
+        "uses": [
+          "lamb",
+          "onions",
+          "tomatoes",
+          "pomegranate-molasses",
+          "mixed-spice"
+        ],
+        "safety": "Wash hands and surfaces after handling raw mince, and keep it away from anything eaten raw.",
+        "safetyAr": "اغسل إيديك والأسطح بعد ما تلمس لحمة مفرومة نية، وابعدها عن أي حاجة هتتاكل نية."
+      },
+      {
+        "text": "Roll small rounds, spread the topping thin, and bake at 240°C for 12 minutes.",
+        "textAr": "افرد دواير صغيرة، افرد الحشو رفيع، واخبزها على ٢٤٠ درجة ١٢ دقيقة.",
+        "minutes": 15,
+        "uses": [
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "shawarma-chicken",
+    "title": "Chicken Shawarma at Home",
+    "titleAr": "شاورما فراخ",
+    "description": "The spice mix and a very hot pan get you most of the way there without a spit.",
+    "descriptionAr": "خلطة البهارات وطاسة سخنة جدًا هيوصّلوك لمعظم الطعم من غير سيخ دوّار.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 40,
+      "carbs": 26,
+      "fat": 18,
+      "fiber": 3
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "quick",
+      "late-night"
+    ],
+    "image": {
+      "path": "curated/shawarma-chicken.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 100,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "mixed-spice",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "turmeric",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "vinegar",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "pita-bread",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "pickles",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null,
+        "optional": true,
+        "garnish": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Marinate the sliced chicken in yogurt, lemon, vinegar, garlic, spices and salt for 2 hours.",
+        "textAr": "تبّل الفراخ المقطّعة في الزبادي والليمون والخل والتوم والبهارات والملح ساعتين.",
+        "minutes": 10,
+        "uses": [
+          "chicken-thigh",
+          "yogurt",
+          "lemon",
+          "vinegar",
+          "garlic",
+          "mixed-spice",
+          "paprika",
+          "turmeric",
+          "salt"
+        ],
+        "safety": "Marinate in the fridge, never on the counter, and discard any marinade that touched raw chicken.",
+        "safetyAr": "تبّل في التلاجة، مش على الرخامة أبدًا، وارمي أي تتبيلة لمست فراخ نية."
+      },
+      {
+        "text": "Sear in a very hot pan in batches so it browns instead of stewing.",
+        "textAr": "شوّحها في طاسة سخنة جدًا على دفعات عشان تتحمّر مش تسلق.",
+        "minutes": 12,
+        "uses": [
+          "sunflower-oil"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout. The juices should run clear.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية."
+      },
+      {
+        "text": "Pile into warm bread with pickles.",
+        "textAr": "حطها في عيش سخن مع المخلل.",
+        "minutes": 3,
+        "uses": [
+          "pita-bread",
+          "pickles"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "shish-tawook",
+    "title": "Yogurt-Marinated Chicken Skewers",
+    "titleAr": "شيش طاووق",
+    "description": "Yogurt and lemon do the tenderising overnight; the grill only has to finish the job.",
+    "descriptionAr": "الزبادي والليمون بيطرّوا الفراخ بالليل؛ الشواية بتكمّل بس.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 340,
+      "protein": 42,
+      "carbs": 8,
+      "fat": 15,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "grill"
+    ],
+    "tags": [
+      "high-protein",
+      "healthy",
+      "grill"
+    ],
+    "image": {
+      "path": "curated/shish-tawook.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-breast",
+        "quantity": 800,
+        "unit": "g",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the yogurt, lemon, garlic, paprika, tomato paste, oil and seasoning into a marinade.",
+        "textAr": "اخلط الزبادي والليمون والتوم والبابريكا وصلصة الطماطم والزيت والتوابل مع بعض.",
+        "minutes": 8,
+        "uses": [
+          "yogurt",
+          "lemon",
+          "garlic",
+          "paprika",
+          "tomato-paste",
+          "olive-oil",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Coat the chicken and refrigerate at least 4 hours, ideally overnight.",
+        "textAr": "غطّي الفراخ بالتتبيلة وحطها في التلاجة ٤ ساعات على الأقل، ويفضل بالليل كله.",
+        "minutes": 10,
+        "uses": [
+          "chicken-breast"
+        ],
+        "safety": "Marinate in the fridge, never on the counter, and discard any marinade that touched raw chicken.",
+        "safetyAr": "تبّل في التلاجة، مش على الرخامة أبدًا، وارمي أي تتبيلة لمست فراخ نية."
+      },
+      {
+        "text": "Thread onto skewers and grill hot for 12–15 minutes, turning, until charred at the edges.",
+        "textAr": "رصّها في أسياخ واشويها على نار عالية ١٢–١٥ دقيقة مع التقليب لحد ما أطرافها تتحمّر.",
+        "minutes": 15,
+        "uses": [],
+        "safety": "Poultry must reach 74°C / 165°F throughout. The juices should run clear.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية."
+      }
+    ]
+  },
+  {
+    "slug": "tabbouleh",
+    "title": "Parsley and Bulgur Salad",
+    "titleAr": "تبولة",
+    "description": "Overwhelmingly parsley, barely bulgur. Sharp with lemon and cut fine.",
+    "descriptionAr": "بقدونس بالأساس وبرغل بالكاد. حامضة بالليمون ومقطّعة ناعم.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 180,
+      "protein": 4,
+      "carbs": 20,
+      "fat": 10,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [],
+    "tags": [
+      "healthy",
+      "vegan",
+      "no-cook",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/tabbouleh.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "parsley",
+        "quantity": 3,
+        "unit": "bunch",
+        "prep": "very finely chopped"
+      },
+      {
+        "slug": "bulgur",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "soaked"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "mint",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soak the bulgur in cold water for 15 minutes, then squeeze it dry.",
+        "textAr": "انقع البرغل في مية باردة ١٥ دقيقة، وبعدين اعصره كويس.",
+        "minutes": 15,
+        "uses": [
+          "bulgur"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Chop the parsley as finely as you can manage — this is the whole dish.",
+        "textAr": "قطّع البقدونس أنعم ما تقدر — دي الأكلة كلها.",
+        "minutes": 10,
+        "uses": [
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss everything with lemon, oil and salt just before serving.",
+        "textAr": "قلّب كل حاجة مع الليمون والزيت والملح قبل التقديم على طول.",
+        "minutes": 3,
+        "uses": [
+          "tomatoes",
+          "mint",
+          "green-onion",
+          "lemon",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "warak-enab",
+    "title": "Vine Leaves with Lemon",
+    "titleAr": "ورق عنب",
+    "description": "Rolled thin, packed tight and cooked under a plate with far more lemon than seems wise.",
+    "descriptionAr": "ملفوف رفيع ومرصوص جنب بعضه ومطبوخ تحت طبق بليمون أكتر مما تتخيل.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 50,
+    "cookMinutes": 50,
+    "servings": 6,
+    "nutrition": {
+      "calories": 260,
+      "protein": 5,
+      "carbs": 42,
+      "fat": 9,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "vegan",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/warak-enab.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "mint",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the rice with the tomato, herbs, onion, half the lemon, oil and seasoning.",
+        "textAr": "اخلط الرز مع الطماطم والخضرة والبصل ونص الليمون والزيت والتوابل.",
+        "minutes": 10,
+        "uses": [
+          "rice",
+          "tomatoes",
+          "parsley",
+          "mint",
+          "onions",
+          "lemon",
+          "olive-oil",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Put a teaspoon of filling on each leaf, fold the sides in and roll tight.",
+        "textAr": "حط معلقة صغيرة حشو على كل ورقة، اطوي الجوانب ولفها مشدودة.",
+        "minutes": 35,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pack into a pot, weigh down with a plate, cover with water and the rest of the lemon.",
+        "textAr": "رصّها في حلة، ثبّتها بطبق، غطّيها بمية وباقي الليمون.",
+        "minutes": 5,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Simmer very gently for 50 minutes, then rest before unpacking.",
+        "textAr": "سيبها على نار هادية جدًا ٥٠ دقيقة، وبعدين سيبها ترتاح قبل ما تفرّغها.",
+        "minutes": 50,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]

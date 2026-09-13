@@ -52,6 +52,23 @@ export const env = {
   defaultCountry: (optional(process.env.EXPO_PUBLIC_DEFAULT_COUNTRY) ?? 'EG') as CountryCode,
   defaultCurrency: (optional(process.env.EXPO_PUBLIC_DEFAULT_CURRENCY) ?? 'EGP') as CurrencyCode,
 
+  /**
+   * Where recipe photography is served from, when it is not Supabase Storage.
+   *
+   * Lets the GitHub Pages preview point at a static asset host without a
+   * Supabase project, and lets production move to a CDN without a migration.
+   */
+  recipeImageBaseUrl: optional(process.env.EXPO_PUBLIC_RECIPE_IMAGE_BASE_URL),
+
+  /**
+   * Renders the social screens against seeded demo data.
+   *
+   * Exists so the preview can SHOW friends, chat and moderation without
+   * pretending a server answered. Every screen it touches is visibly badged,
+   * and `isProduction` forces it off so it cannot ship by accident.
+   */
+  demoMode: boolFlag(process.env.EXPO_PUBLIC_DEMO_MODE, false) && appEnv !== 'production',
+
   enableGroceryOrdering: boolFlag(process.env.EXPO_PUBLIC_ENABLE_GROCERY_ORDERING, false),
   enableSocialAuth: boolFlag(process.env.EXPO_PUBLIC_ENABLE_SOCIAL_AUTH, false),
 

@@ -52,6 +52,12 @@ jobs:
       - name: Verify imported price data matches the survey CSV
         run: npm run prices:import -- --check
 
+      - name: Validate the recipe dataset and its generated catalogue
+        # Also the dataset's own integrity gate: unknown ingredient slugs,
+        # undeclared allergens, contradictory diet tags and near-duplicate
+        # titles all fail here rather than reaching a user.
+        run: npm run recipes:import -- --check
+
       - name: Verify the generated seed is in step with its TypeScript source
         run: |
           npm run seed:generate

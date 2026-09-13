@@ -1,0 +1,2518 @@
+[
+  {
+    "slug": "banana-bread",
+    "title": "Banana Bread",
+    "titleAr": "خبز الموز",
+    "description": "The blacker the bananas, the better the loaf. One bowl, no mixer.",
+    "descriptionAr": "كل ما الموز يسود، كل ما الكيكة تحلى. طبق واحد ومن غير خلاط.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast",
+      "dessert",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 55,
+    "servings": 8,
+    "nutrition": {
+      "calories": 310,
+      "protein": 5,
+      "carbs": 44,
+      "fat": 13,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "dessert",
+      "breakfast",
+      "oven",
+      "beginner",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/banana-bread.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bananas",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "very ripe"
+      },
+      {
+        "slug": "flour",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 110,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "walnuts",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "chopped",
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mash the bananas thoroughly, then beat in the sugar, eggs and melted butter.",
+        "textAr": "اهرس الموز كويس، وبعدين اخفق معاه السكر والبيض والزبدة السايحة.",
+        "minutes": 8,
+        "uses": [
+          "bananas",
+          "sugar",
+          "eggs",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold in the flour, baking powder, cinnamon and salt until only just combined.",
+        "textAr": "قلّب الدقيق والبيكنج بودر والقرفة والملح لحد ما يختلطوا بالكاد.",
+        "minutes": 5,
+        "uses": [
+          "flour",
+          "baking-powder",
+          "cinnamon",
+          "salt",
+          "walnuts"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 170°C for 55 minutes. A skewer should come out with a crumb or two on it.",
+        "textAr": "اخبزها على ١٧٠ درجة ٥٥ دقيقة. السيخ المفروض يطلع وعليه فتافيت بسيطة.",
+        "minutes": 55,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "banana-peanut-oats",
+    "title": "Banana & Peanut Butter Oats",
+    "titleAr": "شوفان بالموز وزبدة الفول السوداني",
+    "description": "Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.",
+    "descriptionAr": "خمس دقايق وطبق واحد، ويقعّدك لحد الغدا. حلو من غير ما تحط سكر.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 2,
+    "cookMinutes": 5,
+    "servings": 1,
+    "nutrition": {
+      "calories": 450,
+      "protein": 17,
+      "carbs": 58,
+      "fat": 17,
+      "fiber": 8
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "peanuts"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "breakfast",
+      "budget",
+      "under-100",
+      "beginner",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/banana-peanut-oats.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "oats",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "milk",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "bananas",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "peanut-butter",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "pinch",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Simmer the oats in milk with a pinch of salt for 4 minutes, stirring, until creamy.",
+        "textAr": "اطبخ الشوفان في اللبن مع رشة ملح ٤ دقايق مع التقليب لحد ما يبقى كريمي.",
+        "minutes": 5,
+        "uses": [
+          "oats",
+          "milk"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir in half the banana so it melts into the oats. Top with the rest, peanut butter, cinnamon and honey.",
+        "textAr": "قلّب نص الموزة جوه لحد ما تدوب في الشوفان. زيّن بالباقي وزبدة الفول السوداني والقرفة والعسل.",
+        "minutes": 2,
+        "uses": [
+          "bananas",
+          "peanut-butter",
+          "cinnamon",
+          "honey"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "beef-burger-homemade",
+    "title": "Proper Homemade Burger",
+    "titleAr": "برجر لحمة في البيت",
+    "description": "Cold mince, barely handled, salted only when it hits the pan. That is the whole thing.",
+    "descriptionAr": "لحمة مفرومة باردة، ماتلمسهاش كتير، وتتملّح لما تنزل الطاسة بس. دي الحكاية كلها.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 10,
+    "servings": 4,
+    "nutrition": {
+      "calories": 620,
+      "protein": 38,
+      "carbs": 42,
+      "fat": 32,
+      "fiber": 3
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "comfort",
+      "quick",
+      "late-night"
+    ],
+    "image": {
+      "path": "curated/beef-burger-homemade.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "ground-beef",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cold"
+      },
+      {
+        "slug": "toast-bread",
+        "quantity": 8,
+        "unit": "piece",
+        "prep": "toasted"
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "lettuce",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "pickles",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mayonnaise",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Shape the cold mince into four loose patties without compressing them.",
+        "textAr": "شكّل اللحمة الباردة أربع أقراص من غير ما تضغطها.",
+        "minutes": 8,
+        "uses": [
+          "ground-beef"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Salt only as they hit a screaming hot pan. Sear 3 minutes a side.",
+        "textAr": "ملّحها لما تنزل طاسة سخنة جدًا بس. شوّحها ٣ دقايق لكل وش.",
+        "minutes": 7,
+        "uses": [
+          "salt",
+          "black-pepper",
+          "sunflower-oil"
+        ],
+        "safety": "Ground beef must reach 71°C / 160°F all the way through.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره."
+      },
+      {
+        "text": "Melt the cheese on top under a lid for 60 seconds, then build with everything else.",
+        "textAr": "دوّب الجبنة فوقها تحت غطا ٦٠ ثانية، وبعدين ركّب الباقي.",
+        "minutes": 3,
+        "uses": [
+          "cheddar",
+          "toast-bread",
+          "onions",
+          "lettuce",
+          "tomatoes",
+          "pickles",
+          "mayonnaise"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "buffalo-less-baked-wings",
+    "title": "Oven Wings with Hot Sauce",
+    "titleAr": "أجنحة فراخ في الفرن بالصلصة الحارة",
+    "description": "Baking powder in the rub is the trick — it dries the skin so it crisps like frying.",
+    "descriptionAr": "البيكنج بودر في التتبيلة هو السر — بينشّف الجلد فيقرمش زي المقلي.",
+    "cuisine": "american",
+    "mealTypes": [
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 45,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 36,
+      "carbs": 6,
+      "fat": 29,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "high-protein",
+      "oven",
+      "late-night",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/buffalo-less-baked-wings.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-wings",
+        "quantity": 1,
+        "unit": "kg",
+        "prep": "patted dry"
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "garlic-powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "hot-sauce",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 40,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the dry wings with baking powder, paprika, garlic powder, salt and pepper.",
+        "textAr": "قلّب الأجنحة الناشفة مع البيكنج بودر والبابريكا وبودرة التوم والملح والفلفل.",
+        "minutes": 8,
+        "uses": [
+          "chicken-wings",
+          "baking-powder",
+          "paprika",
+          "garlic-powder",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": "Wash hands and the board after handling raw poultry.",
+        "safetyAr": "اغسل إيديك واللوح بعد ما تلمس فراخ نية."
+      },
+      {
+        "text": "Bake on a rack at 220°C for 45 minutes, turning once, until the skin snaps.",
+        "textAr": "اخبزها على شبكة على ٢٢٠ درجة ٤٥ دقيقة مع التقليب مرة، لحد ما الجلد يقرمش.",
+        "minutes": 45,
+        "uses": [],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      },
+      {
+        "text": "Toss straight from the oven with the hot sauce whisked into melted butter.",
+        "textAr": "قلّبها وهي طالعة من الفرن مع الصلصة الحارة المخفوقة في الزبدة السايحة.",
+        "minutes": 3,
+        "uses": [
+          "hot-sauce",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "caesar-less-chicken-salad",
+    "title": "Grilled Chicken and Crouton Salad",
+    "titleAr": "سلطة فراخ مشوية بالخبز المحمّر",
+    "description": "A salad that eats like a meal, with the dressing made from yogurt rather than raw egg.",
+    "descriptionAr": "سلطة بتتاكل كوجبة، والصلصة معمولة بزبادي مش بيض ني.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 15,
+    "servings": 2,
+    "nutrition": {
+      "calories": 470,
+      "protein": 44,
+      "carbs": 26,
+      "fat": 22,
+      "fiber": 4
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "healthy",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/caesar-less-chicken-salad.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-breast",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lettuce",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "shredded"
+      },
+      {
+        "slug": "toast-bread",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "cut into cubes"
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 40,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 120,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mayonnaise",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "mustard",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Season and sear the chicken 6 minutes a side, then rest it and slice.",
+        "textAr": "تبّل الفراخ وشوّحها ٦ دقايق لكل وش، وبعدين سيبها ترتاح وقطّعها.",
+        "minutes": 14,
+        "uses": [
+          "chicken-breast",
+          "salt",
+          "olive-oil"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      },
+      {
+        "text": "Toast the bread cubes in the same pan until golden.",
+        "textAr": "حمّر مكعبات العيش في نفس الطاسة لحد ما تدهب.",
+        "minutes": 5,
+        "uses": [
+          "toast-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the yogurt, mayonnaise, lemon, garlic and mustard and toss everything together.",
+        "textAr": "اخفق الزبادي والمايونيز والليمون والتوم والمسطردة وقلّب كل حاجة مع بعض.",
+        "minutes": 5,
+        "uses": [
+          "yogurt",
+          "mayonnaise",
+          "lemon",
+          "garlic",
+          "mustard",
+          "lettuce",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "chili-con-carne-beef",
+    "title": "Beef and Bean Chilli",
+    "titleAr": "تشيلي باللحمة والفاصوليا",
+    "description": "Better after an hour, best the next day. Cocoa in the pot is not a mistake.",
+    "descriptionAr": "أحلى بعد ساعة وأحلى تاني يوم. والكاكاو في الحلة مش غلطة.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 60,
+    "servings": 6,
+    "nutrition": {
+      "calories": 430,
+      "protein": 32,
+      "carbs": 34,
+      "fat": 18,
+      "fiber": 10
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "high-protein",
+      "comfort",
+      "batch-cook",
+      "budget",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/chili-con-carne-beef.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "ground-beef",
+        "quantity": 700,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "kidney-beans",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 6,
+        "unit": "piece",
+        "prep": "blended"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "chili-powder",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "cocoa",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Brown the mince hard in oil, in batches, then set it aside.",
+        "textAr": "حمّر اللحمة كويس في الزيت على دفعات، وبعدين ارفعها.",
+        "minutes": 10,
+        "uses": [
+          "ground-beef",
+          "sunflower-oil"
+        ],
+        "safety": "Ground beef must reach 71°C / 160°F all the way through.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره."
+      },
+      {
+        "text": "Cook the onion and pepper for 8 minutes, then the garlic and spices for 2.",
+        "textAr": "اطبخ البصل والفلفل ٨ دقايق، وبعدين التوم والبهارات دقيقتين.",
+        "minutes": 10,
+        "uses": [
+          "onions",
+          "bell-pepper",
+          "garlic",
+          "chili-powder",
+          "cumin"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Return the meat with the tomatoes, paste, cocoa and salt and simmer 45 minutes.",
+        "textAr": "رجّع اللحمة مع الطماطم والصلصة والكاكاو والملح وسيبها ٤٥ دقيقة.",
+        "minutes": 45,
+        "uses": [
+          "tomatoes",
+          "tomato-paste",
+          "cocoa",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the beans for the last 15 minutes.",
+        "textAr": "ضيف الفاصوليا آخر ١٥ دقيقة.",
+        "minutes": 15,
+        "uses": [
+          "kidney-beans"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "chocolate-chip-cookies",
+    "title": "Chocolate Chip Cookies",
+    "titleAr": "كوكيز بالشوكولاتة",
+    "description": "Chilled dough and a slightly underbaked middle. Both matter more than the recipe.",
+    "descriptionAr": "عجينة مبرّدة ونص مش مستوي تمامًا. الاتنين أهم من الوصفة نفسها.",
+    "cuisine": "american",
+    "mealTypes": [
+      "dessert",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 12,
+    "servings": 8,
+    "nutrition": {
+      "calories": 280,
+      "protein": 4,
+      "carbs": 36,
+      "fat": 14,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten",
+      "soy"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "dessert",
+      "oven",
+      "beginner",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/chocolate-chip-cookies.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 280,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 170,
+        "unit": "g",
+        "prep": "softened"
+      },
+      {
+        "slug": "brown-sugar",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "eggs",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "chocolate",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "vanilla",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Beat the butter and both sugars for 4 minutes until pale, then beat in the egg and vanilla.",
+        "textAr": "اخفق الزبدة والسكرين ٤ دقايق لحد ما يفتح لونهم، وبعدين اخفق البيضة والفانيليا.",
+        "minutes": 6,
+        "uses": [
+          "butter",
+          "brown-sugar",
+          "sugar",
+          "eggs",
+          "vanilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold in the flour, baking powder, salt and chocolate, then chill the dough 1 hour.",
+        "textAr": "قلّب الدقيق والبيكنج بودر والملح والشوكولاتة، وبعدين برّد العجينة ساعة.",
+        "minutes": 14,
+        "uses": [
+          "flour",
+          "baking-powder",
+          "salt",
+          "chocolate"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake balls of dough at 180°C for 11 minutes. They will look underdone; take them out.",
+        "textAr": "اخبز كور العجين على ١٨٠ درجة ١١ دقيقة. هيبانوا مش مستويين؛ طلّعهم.",
+        "minutes": 12,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "cobb-style-bowl",
+    "title": "Chopped Salad Bowl with Egg and Cheese",
+    "titleAr": "طبق سلطة مقطّعة بالبيض والجبنة",
+    "description": "Everything chopped to the same size and laid out in rows. Protein, no cooking beyond eggs.",
+    "descriptionAr": "كل حاجة مقطّعة بنفس الحجم ومرصوصة صفوف. بروتين ومفيش طبخ غير البيض.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 8,
+    "servings": 2,
+    "nutrition": {
+      "calories": 460,
+      "protein": 30,
+      "carbs": 18,
+      "fat": 32,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "no-cook",
+      "healthy",
+      "high-protein",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/cobb-style-bowl.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "lettuce",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "shredded"
+      },
+      {
+        "slug": "cherry-tomato",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "halved"
+      },
+      {
+        "slug": "avocado",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "diced"
+      },
+      {
+        "slug": "cucumber",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.75,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the eggs 8 minutes, cool them under cold water and peel.",
+        "textAr": "اسلق البيض ٨ دقايق، برّده تحت مية باردة وقشّره.",
+        "minutes": 8,
+        "uses": [
+          "eggs"
+        ],
+        "safety": "Boil eggs for at least 7 minutes so the white is fully set.",
+        "safetyAr": "اسلق البيض ٧ دقايق على الأقل عشان البياض يستوي تمامًا."
+      },
+      {
+        "text": "Lay everything out in rows on top of the lettuce.",
+        "textAr": "رصّ كل حاجة صفوف فوق الخس.",
+        "minutes": 8,
+        "uses": [
+          "lettuce",
+          "cherry-tomato",
+          "avocado",
+          "cheddar",
+          "cucumber"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Whisk the yogurt, lemon, oil and salt and spoon it over just before eating.",
+        "textAr": "اخفق الزبادي والليمون والزيت والملح وحطهم فوق قبل الأكل على طول.",
+        "minutes": 3,
+        "uses": [
+          "yogurt",
+          "lemon",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "egyptian-cheese-toastie",
+    "title": "Grilled Cheese & Tomato Toastie",
+    "titleAr": "توست بالجبنة والطماطم",
+    "description": "Four ingredients and five minutes. Dangerously good at midnight.",
+    "descriptionAr": "أربع مكوّنات وخمس دقايق. خطر في نص الليل.",
+    "cuisine": "american",
+    "mealTypes": [
+      "snack",
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 3,
+    "cookMinutes": 6,
+    "servings": 1,
+    "nutrition": {
+      "calories": 430,
+      "protein": 19,
+      "carbs": 38,
+      "fat": 23,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "late-night",
+      "budget",
+      "under-100",
+      "beginner",
+      "snack"
+    ],
+    "image": {
+      "path": "curated/egyptian-cheese-toastie.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "toast-bread",
+        "quantity": 2,
+        "unit": "slice",
+        "prep": null
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "butter",
+        "quantity": 10,
+        "unit": "g",
+        "prep": "softened"
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "pinch",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Butter the outsides of both slices. Pile the cheese and tomato inside and press together.",
+        "textAr": "دهّن وش الشريحتين بالزبدة من بره. حط الجبنة والطماطم في النص واضغط عليهم.",
+        "minutes": 3,
+        "uses": [
+          "toast-bread",
+          "butter",
+          "mozzarella",
+          "tomatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook in a dry pan over medium-low heat, 3 minutes a side, pressing down, until deep gold and molten inside.",
+        "textAr": "اطبخه في طاسة ناشفة على نار متوسطة هادية، ٣ دقايق لكل وش مع الضغط، لحد ما يبقى دهبي غامق والجبنة سايحة جوه.",
+        "minutes": 6,
+        "uses": [
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mac-and-cheese-baked",
+    "title": "Baked Macaroni Cheese",
+    "titleAr": "مكرونة بالجبنة في الفرن",
+    "description": "Three cheeses, a proper sauce, and a crumb top that has to go brown.",
+    "descriptionAr": "تلات أنواع جبنة وصلصة مظبوطة ووش بقسماط لازم يتحمّر.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 35,
+    "servings": 6,
+    "nutrition": {
+      "calories": 590,
+      "protein": 26,
+      "carbs": 58,
+      "fat": 28,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "oven",
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "oven",
+      "batch-cook",
+      "vegetarian"
+    ],
+    "image": {
+      "path": "curated/mac-and-cheese-baked.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 450,
+        "unit": "g",
+        "prep": "cooked"
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "milk",
+        "quantity": 700,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "flour",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "breadcrumbs",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mustard",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Melt the butter, whisk in the flour, then add the milk slowly until it thickens.",
+        "textAr": "دوّب الزبدة، اخفق الدقيق، وبعدين ضيف اللبن بالراحة لحد ما يتقل.",
+        "minutes": 10,
+        "uses": [
+          "butter",
+          "flour",
+          "milk"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Off the heat, beat in the cheddar, mozzarella, mustard, salt and pepper.",
+        "textAr": "بعيد عن النار، اخفق الشيدر والموتزاريلا والمسطردة والملح والفلفل.",
+        "minutes": 4,
+        "uses": [
+          "cheddar",
+          "mozzarella",
+          "mustard",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold in the pasta, tip into a dish, and top with breadcrumbs and parmesan.",
+        "textAr": "قلّب المكرونة، حطها في صينية، ورشّ البقسماط والبارميزان فوق.",
+        "minutes": 5,
+        "uses": [
+          "pasta",
+          "breadcrumbs",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 200°C for 30 minutes until the top is properly brown.",
+        "textAr": "اخبزها على ٢٠٠ درجة ٣٠ دقيقة لحد ما الوش يتحمّر كويس.",
+        "minutes": 30,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "overnight-oats",
+    "title": "Overnight Oats",
+    "titleAr": "شوفان منقوع بالليل",
+    "description": "Assembled the night before, eaten cold from the jar. No cooking at all.",
+    "descriptionAr": "بيتجهّز بالليل ويتاكل بارد من البرطمان. من غير أي طبخ.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 0,
+    "servings": 1,
+    "nutrition": {
+      "calories": 390,
+      "protein": 15,
+      "carbs": 52,
+      "fat": 14,
+      "fiber": 8
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [],
+    "tags": [
+      "breakfast",
+      "no-cook",
+      "quick",
+      "beginner",
+      "healthy",
+      "meal-prep"
+    ],
+    "image": {
+      "path": "curated/overnight-oats.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "oats",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "milk",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "chia",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "bananas",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Stir the oats, milk, yogurt, chia and honey together in a jar.",
+        "textAr": "قلّب الشوفان واللبن والزبادي والشيا والعسل في برطمان.",
+        "minutes": 4,
+        "uses": [
+          "oats",
+          "milk",
+          "yogurt",
+          "chia",
+          "honey",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Refrigerate overnight and top with banana in the morning.",
+        "textAr": "حطه في التلاجة بالليل وحط الموز فوقه الصبح.",
+        "minutes": 2,
+        "uses": [
+          "bananas"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "pancakes-buttermilk",
+    "title": "Fluffy Pancakes",
+    "titleAr": "بان كيك هش",
+    "description": "Lumpy batter is correct. Overmixing is what makes them flat.",
+    "descriptionAr": "الخليط المتكتّل صح. الخفق الزيادة هو اللي بيخلّيهم مسطّحين.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast",
+      "dessert"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 390,
+      "protein": 11,
+      "carbs": 54,
+      "fat": 14,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "comfort",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/pancakes-buttermilk.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 280,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "buttermilk",
+        "quantity": 350,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 50,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "vanilla",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "honey",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true,
+        "garnish": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk the dry ingredients in one bowl and the wet in another.",
+        "textAr": "اخفق المكوّنات الناشفة في طبق والسايلة في طبق تاني.",
+        "minutes": 6,
+        "uses": [
+          "flour",
+          "sugar",
+          "baking-powder",
+          "salt",
+          "buttermilk",
+          "eggs",
+          "butter",
+          "vanilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Combine with about ten strokes. It should still be lumpy — that is right.",
+        "textAr": "اخلطهم بحوالي عشر لفات. المفروض يفضل متكتّل — ده الصح.",
+        "minutes": 2,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook on a medium pan, 2 minutes a side, flipping when bubbles hold their shape.",
+        "textAr": "اطبخهم على طاسة متوسطة، دقيقتين لكل وش، واقلبهم لما الفقاعات تثبت.",
+        "minutes": 15,
+        "uses": [
+          "honey"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "roast-chicken-potatoes",
+    "title": "Roast Chicken and Potatoes",
+    "titleAr": "فراخ وبطاطس في الفرن",
+    "description": "One tray, one hour, and the potatoes cook in the fat that comes off the bird.",
+    "descriptionAr": "صينية واحدة وساعة، والبطاطس بتستوي في دهن الفرخة.",
+    "cuisine": "american",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 70,
+    "servings": 4,
+    "nutrition": {
+      "calories": 620,
+      "protein": 46,
+      "carbs": 42,
+      "fat": 30,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "high-protein",
+      "oven",
+      "comfort",
+      "one-pan",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/roast-chicken-potatoes.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 1,
+        "unit": "kg",
+        "prep": "bone in"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 800,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "wedges to serve"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 8,
+        "unit": "clove",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "rosemary",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Toss the potatoes, onion and garlic with half the oil and salt on a large tray.",
+        "textAr": "قلّب البطاطس والبصل والتوم مع نص الزيت والملح في صينية كبيرة.",
+        "minutes": 8,
+        "uses": [
+          "potatoes",
+          "onions",
+          "garlic",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rub the chicken with the rest of the oil, the paprika, rosemary, pepper and salt.",
+        "textAr": "ادهن الفراخ بباقي الزيت والبابريكا والروزماري والفلفل والملح.",
+        "minutes": 6,
+        "uses": [
+          "chicken-thigh",
+          "paprika",
+          "rosemary",
+          "black-pepper"
+        ],
+        "safety": "Wash hands and the board after handling raw poultry.",
+        "safetyAr": "اغسل إيديك واللوح بعد ما تلمس فراخ نية."
+      },
+      {
+        "text": "Sit the chicken on top of the potatoes and roast at 200°C for 70 minutes.",
+        "textAr": "حط الفراخ فوق البطاطس واخبزها على ٢٠٠ درجة ٧٠ دقيقة.",
+        "minutes": 70,
+        "uses": [
+          "lemon"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout. The juices should run clear.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية."
+      }
+    ]
+  },
+  {
+    "slug": "scrambled-eggs-soft",
+    "title": "Soft Scrambled Eggs",
+    "titleAr": "بيض مخفوق طري",
+    "description": "Low heat and constant stirring. It takes five minutes and it is worth all of them.",
+    "descriptionAr": "نار هادية وتقليب مستمر. بتاخد خمس دقايق وتستاهلهم كلهم.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 3,
+    "cookMinutes": 6,
+    "servings": 2,
+    "nutrition": {
+      "calories": 280,
+      "protein": 18,
+      "carbs": 3,
+      "fat": 22,
+      "fiber": 0
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal",
+      "keto"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "quick",
+      "beginner",
+      "high-protein",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/scrambled-eggs-soft.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "eggs",
+        "quantity": 5,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "butter",
+        "quantity": 25,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "cream",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "green-onion",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Beat the eggs thoroughly with the cream before they go anywhere near heat.",
+        "textAr": "اخفق البيض كويس مع الكريمة قبل ما يقرب من النار.",
+        "minutes": 3,
+        "uses": [
+          "eggs",
+          "cream"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook in butter on the lowest heat, stirring constantly, for 5 minutes.",
+        "textAr": "اطبخه في الزبدة على أهدى نار مع التقليب المستمر ٥ دقايق.",
+        "minutes": 5,
+        "uses": [
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Take it off while it still looks slightly underdone — it keeps cooking.",
+        "textAr": "ارفعه وهو لسه شكله مش مستوي تمامًا — بيفضل يستوي.",
+        "minutes": 1,
+        "uses": [
+          "salt",
+          "black-pepper",
+          "green-onion"
+        ],
+        "safety": "Cook eggs until the whites are completely set. Runny yolks are only safe with pasteurised eggs.",
+        "safetyAr": "اطبخ البيض لحد ما البياض يستوي تمامًا. الصفار السايح مأمون بس مع البيض المبستر."
+      }
+    ]
+  },
+  {
+    "slug": "sheet-pan-sausage-veg",
+    "title": "Sausage and Vegetable Tray Bake",
+    "titleAr": "سجق وخضار في الفرن",
+    "description": "Everything on one tray at the same temperature. Weeknight cooking at its least demanding.",
+    "descriptionAr": "كل حاجة في صينية واحدة على نفس الحرارة. أقل طبخ ممكن في نص الأسبوع.",
+    "cuisine": "american",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 35,
+    "servings": 4,
+    "nutrition": {
+      "calories": 520,
+      "protein": 26,
+      "carbs": 38,
+      "fat": 30,
+      "fiber": 6
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "oven",
+      "one-pan",
+      "quick",
+      "high-protein",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/sheet-pan-sausage-veg.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "sausage",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "bell-pepper",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "wedges to serve"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": null
+      },
+      {
+        "slug": "paprika",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "oregano",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Give the potatoes a 12-minute head start at 210°C with half the oil.",
+        "textAr": "ادّي البطاطس ١٢ دقيقة بدري على ٢١٠ درجة مع نص الزيت.",
+        "minutes": 12,
+        "uses": [
+          "potatoes",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add everything else, toss, and roast 25 minutes more until the edges catch.",
+        "textAr": "ضيف كل حاجة تانية، قلّبها، واخبزها ٢٥ دقيقة كمان لحد ما الأطراف تتحمّر.",
+        "minutes": 25,
+        "uses": [
+          "sausage",
+          "bell-pepper",
+          "onions",
+          "garlic",
+          "paprika",
+          "oregano",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "smoothie-protein-banana",
+    "title": "Banana Peanut Protein Smoothie",
+    "titleAr": "سموذي موز وفول سوداني",
+    "description": "Three minutes, one blender, and it holds until lunch.",
+    "descriptionAr": "تلات دقايق وخلاط واحد وبيقعّدك لحد الغدا.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 4,
+    "cookMinutes": 0,
+    "servings": 1,
+    "nutrition": {
+      "calories": 420,
+      "protein": 20,
+      "carbs": 48,
+      "fat": 18,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten",
+      "peanuts"
+    ],
+    "appliances": [
+      "blender"
+    ],
+    "tags": [
+      "breakfast",
+      "no-cook",
+      "quick",
+      "beginner",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/smoothie-protein-banana.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "bananas",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "frozen"
+      },
+      {
+        "slug": "milk",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "peanut-butter",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "oats",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "honey",
+        "quantity": 1,
+        "unit": "tbsp",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 0.25,
+        "unit": "tsp",
+        "prep": null,
+        "optional": true,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Put everything in the blender with the liquid at the bottom.",
+        "textAr": "حط كل حاجة في الخلاط والسايل تحت.",
+        "minutes": 2,
+        "uses": [
+          "milk",
+          "bananas",
+          "peanut-butter",
+          "oats",
+          "honey",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blend for 60 seconds until completely smooth.",
+        "textAr": "اضربه ٦٠ ثانية لحد ما يبقى ناعم تمامًا.",
+        "minutes": 2,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "sweet-potato-fries-airfryer",
+    "title": "Air Fryer Sweet Potato Fries",
+    "titleAr": "بطاطا حلوة في الإير فراير",
+    "description": "Cornflour is what makes them crisp instead of floppy. Do not crowd the basket.",
+    "descriptionAr": "النشا هو اللي بيخلّيها مقرمشة مش مترخّية. ماتزحمش السلة.",
+    "cuisine": "american",
+    "mealTypes": [
+      "snack",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 20,
+    "servings": 3,
+    "nutrition": {
+      "calories": 230,
+      "protein": 3,
+      "carbs": 38,
+      "fat": 8,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "air_fryer"
+    ],
+    "tags": [
+      "air-fryer",
+      "vegan",
+      "quick",
+      "beginner",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/sweet-potato-fries-airfryer.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "sweet-potato",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "cornflour",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "paprika",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "garlic-powder",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soak the strips in cold water 20 minutes, then dry them completely.",
+        "textAr": "انقع الشرايح في مية باردة ٢٠ دقيقة، وبعدين نشّفها تمامًا.",
+        "minutes": 20,
+        "uses": [
+          "sweet-potato"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss with cornflour, spices, oil and salt until every piece is coated.",
+        "textAr": "قلّبها مع النشا والبهارات والزيت والملح لحد ما كل قطعة تتغطّى.",
+        "minutes": 4,
+        "uses": [
+          "cornflour",
+          "paprika",
+          "garlic-powder",
+          "sunflower-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Air fry at 200°C for 20 minutes, shaking twice. Cook in two batches if the basket is full.",
+        "textAr": "اقليها في الإير فراير على ٢٠٠ درجة ٢٠ دقيقة مع الرج مرتين. اعملها على دفعتين لو السلة زحمة.",
+        "minutes": 20,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "tuna-melt",
+    "title": "Tuna Melt",
+    "titleAr": "توست بالتونة والجبنة",
+    "description": "Store cupboard, ten minutes, and better than it has any right to be.",
+    "descriptionAr": "من الدولاب في عشر دقايق وأحلى مما يستاهل.",
+    "cuisine": "american",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 6,
+    "cookMinutes": 8,
+    "servings": 2,
+    "nutrition": {
+      "calories": 480,
+      "protein": 32,
+      "carbs": 36,
+      "fat": 24,
+      "fiber": 3
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "fish",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "budget",
+      "high-protein",
+      "late-night",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/tuna-melt.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tuna-can",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "toast-bread",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "cheddar",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "mayonnaise",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 0.25,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "pickles",
+        "quantity": 30,
+        "unit": "g",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the tuna with mayonnaise, onion, pickle and pepper.",
+        "textAr": "اخلط التونة مع المايونيز والبصل والمخلل والفلفل.",
+        "minutes": 5,
+        "uses": [
+          "tuna-can",
+          "mayonnaise",
+          "onions",
+          "pickles",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Build the sandwiches with cheese on both sides of the filling so it seals.",
+        "textAr": "ركّب السندوتشات والجبنة على وشين الحشو عشان يقفل.",
+        "minutes": 3,
+        "uses": [
+          "toast-bread",
+          "cheddar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Butter the outsides and cook in a dry pan 4 minutes a side, pressing down.",
+        "textAr": "ادهن الوش الخارجي بالزبدة واطبخه في طاسة ناشفة ٤ دقايق لكل وش مع الضغط.",
+        "minutes": 8,
+        "uses": [
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]

@@ -9,6 +9,7 @@ import type {
   DietaryPreference,
   MealType,
   Recipe,
+  RecipeImageMeta,
   RecipeIngredient,
   RecipeStep,
 } from '@/types/domain';
@@ -23,10 +24,11 @@ import type {
 
 export const RECIPE_SELECT = `
   id, slug, title, title_ar, description, description_ar, image_url, source, cuisine, difficulty,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
   prep_minutes, cook_minutes, base_servings,
   calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public, created_at, updated_at,
-  recipe_ingredients (id, recipe_id, ingredient_id, name, quantity, unit, preparation, is_optional, sort_order),
+  recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order),
   recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs),
   recipe_meal_types (meal_type),
   recipe_diet_tags (diet),
@@ -45,15 +47,38 @@ export type RecipeQueryRow = RecipeRow & {
   recipe_tags: { tag: string }[] | null;
 };
 
+/**
+ * Image provenance, or null when the row carries no photograph.
+ *
+ * `image_path` is the discriminator: the migration's check constraint makes a
+ * path without a source and a licence impossible, so one test covers all six
+ * columns.
+ */
+function toImage(row: RecipeRow): RecipeImageMeta | null {
+  if (!row.image_path) return null;
+  return {
+    path: row.image_path,
+    source: row.image_source ?? 'owned',
+    creator: row.image_creator,
+    license: row.image_license ?? 'proprietary',
+    attribution: row.image_attribution,
+    sourceUrl: row.image_source_url,
+  };
+}
+
 function toIngredient(row: RecipeIngredientRow): RecipeIngredient {
   return {
     id: row.id,
     ingredientId: row.ingredient_id,
+    slug: row.slug,
     name: row.name,
     quantity: row.quantity,
     unit: row.unit,
     preparation: row.preparation,
     isOptional: row.is_optional,
+    isGarnish: row.is_garnish,
+    isPantryStaple: row.is_pantry_staple,
+    notes: row.notes,
     sortOrder: row.sort_order,
   };
 }
@@ -80,6 +105,7 @@ export function rowsToRecipe(row: RecipeQueryRow): Recipe {
     description: row.description,
     descriptionAr: row.description_ar,
     imageUrl: row.image_url,
+    image: toImage(row),
     source: row.source,
     cuisine: row.cuisine,
     mealTypes: (row.recipe_meal_types ?? []).map((entry) => entry.meal_type),

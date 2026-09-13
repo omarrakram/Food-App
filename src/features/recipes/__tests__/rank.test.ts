@@ -9,7 +9,8 @@ import {
   sortMatches,
   violatesAllergens,
 } from '../rank';
-import type { Allergen, MealRequest, Recipe } from '@/types/domain';
+import { makeRecipe, makeRecipeIngredient } from '@/test-utils/factories';
+import type { Allergen, MealRequest } from '@/types/domain';
 
 function baseRequest(overrides: Partial<MealRequest> = {}): MealRequest {
   return {
@@ -35,51 +36,9 @@ function baseRequest(overrides: Partial<MealRequest> = {}): MealRequest {
   };
 }
 
-function makeRecipe(overrides: Partial<Recipe> = {}): Recipe {
-  return {
-    id: 'test-recipe',
-    slug: 'test-recipe',
-    title: 'Test recipe',
-    titleAr: null,
-    description: '',
-    descriptionAr: null,
-    imageUrl: null,
-    source: 'curated',
-    cuisine: 'egyptian',
-    mealTypes: ['dinner'],
-    difficulty: 'easy',
-    prepMinutes: 5,
-    cookMinutes: 10,
-    baseServings: 2,
-    nutrition: {
-      calories: 400,
-      proteinGrams: 20,
-      carbsGrams: 40,
-      fatGrams: 10,
-      fiberGrams: 4,
-    },
-    ingredients: [],
-    steps: [],
-    allergens: [],
-    dietTags: [],
-    requiredAppliances: ['stove'],
-    tags: [],
-    createdAt: '2026-01-01T00:00:00.000Z',
-    ...overrides,
-  };
-}
 
 function ingredient(name: string, isOptional = false) {
-  return {
-    id: name,
-    ingredientId: null,
-    name,
-    quantity: 1,
-    unit: null,
-    preparation: null,
-    isOptional,
-    sortOrder: 0,
-  };
+  return makeRecipeIngredient({ id: name, name, isOptional, sortOrder: 0 });
 }
 
 // ---------------------------------------------------------------------------

@@ -6,10 +6,63 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-11 |
-| **Current phase** | Manual-QA regression pass complete. Remaining work is credential-gated. |
+| **Current phase** | Product build-out. Phase A (recipe catalogue) complete; see "Build-out progress". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
+
+---
+
+## Build-out progress
+
+The product is moving past MVP: a real catalogue, real filtering, accounts,
+profiles, social features and community submissions. Phases run in order
+because each depends on the one before it.
+
+| Phase | What | State |
+|---|---|---|
+| A | 150+ structured recipes with an import/validation pipeline | **done** — 153 recipes |
+| B | Recipe image architecture with provenance and licensing | **done** — manifest + resolver; assets pending |
+| C | `RecipeConstraints` with genuine hard filtering | in progress |
+| D | Database-backed recipe search | not started |
+| E–G | Auth hardening, profiles, storage uploads | not started |
+| H, P | Drawer navigation and information architecture | not started |
+| I–K | Friends, 1-to-1 messaging, recipe sharing | not started |
+| L–N | Community submissions, moderation, admin | not started |
+| O | In-app notifications | not started |
+| Q–U | Privacy, security, performance, preview, tests | not started |
+
+### Phase A — the recipe catalogue
+
+**The recipes are DATA.** `data/recipes/*.json`, one file per cuisine, compiled
+into `src/features/recipes/catalogue.generated.ts` by `npm run recipes:import`
+and into `supabase/seed.sql` by `npm run seed:generate`. Adding a recipe is a
+JSON object; it is never a TypeScript literal in a component.
+
+153 recipes: egyptian 32, levantine 22, american 18, asian 18, mediterranean
+18, italian 16, indian 11, mexican 9, turkish 9. Every one carries an English
+and an Arabic title, description and every cooking step.
+
+**Every ingredient line references the canonical ingredient catalogue by slug.**
+That is what makes exclusion, requirement, pantry matching, pricing and Arabic
+naming work at all — a free-text ingredient is invisible to every engine in the
+product. `recipe_ingredients` additionally distinguishes three things that
+`is_optional` alone was conflating: optional, garnish, and pantry staple.
+
+The importer is a gate, not a formatter. It refuses to emit on: a duplicate or
+near-duplicate title (Dice coefficient ≥ 0.86 on normalised titles), an unknown
+ingredient slug, an allergen the ingredients imply but the recipe does not
+declare, a diet tag the ingredients contradict, servings/times/nutrition
+outside believable bounds, a step referencing an ingredient the recipe does not
+list, an untranslated step, or image metadata without a licence.
+
+It found four real allergen-declaration bugs in the original 14 recipes on its
+first run: butter, bread, yogurt and cheese present but undeclared. Runtime
+allergen filtering reads ingredient-implied allergens too, so users were
+protected — but the declared list is what feeds the indexed database filter, so
+those were real gaps for server-side filtering.
+
+`npm run recipes:import -- --check` runs in CI.
 
 ---
 

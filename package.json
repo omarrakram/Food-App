@@ -31,6 +31,7 @@
     "eas:build:preview": "eas build --profile preview",
     "eas:build:prod": "eas build --profile production",
     "ingredients:import": "node --experimental-strip-types --no-warnings scripts/import-ingredients.ts",
+    "recipes:import": "node --experimental-strip-types --no-warnings scripts/import-recipes.ts",
     "prices:import": "node --experimental-strip-types --no-warnings scripts/import-prices.ts",
     "seed:generate": "node --experimental-strip-types --no-warnings scripts/generate-seed.ts",
     "fn:check": "deno check --min-dep-age 0 --config supabase/functions/deno.json supabase/functions/ai-suggest/index.ts supabase/functions/ai-interpret/index.ts",

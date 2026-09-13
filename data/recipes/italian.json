@@ -1,0 +1,2280 @@
+[
+  {
+    "slug": "bruschetta-tomato",
+    "title": "Tomato Bruschetta",
+    "titleAr": "بروشيتا بالطماطم",
+    "description": "Good bread, rubbed with raw garlic, piled with tomato that has been salted first.",
+    "descriptionAr": "عيش كويس متفروك بتوم ني، وفوقه طماطم اتملّحت الأول.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "snack",
+      "lunch"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 12,
+    "cookMinutes": 5,
+    "servings": 4,
+    "nutrition": {
+      "calories": 230,
+      "protein": 6,
+      "carbs": 32,
+      "fat": 9,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "grill"
+    ],
+    "tags": [
+      "italian",
+      "quick",
+      "vegan",
+      "beginner",
+      "budget"
+    ],
+    "image": {
+      "path": "curated/bruschetta-tomato.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "baguette",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "diced small"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 2,
+        "unit": "clove",
+        "prep": "halved"
+      },
+      {
+        "slug": "basil",
+        "quantity": 10,
+        "unit": "piece",
+        "prep": "torn"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.75,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Salt the diced tomato and leave it 10 minutes, then drain off the water it releases.",
+        "textAr": "ملّح الطماطم المقطّعة وسيبها ١٠ دقايق، وبعدين صفّي المية اللي طلعت منها.",
+        "minutes": 10,
+        "uses": [
+          "tomatoes",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toast the bread until it is crisp on the outside but still soft inside.",
+        "textAr": "حمّر العيش لحد ما يقرمش من بره ويفضل طري من جوه.",
+        "minutes": 5,
+        "uses": [
+          "baguette"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rub each slice with the cut garlic, pile on the tomato, then oil, basil and pepper.",
+        "textAr": "افرك كل شريحة بالتوم المقطوع، حط الطماطم، وبعدين الزيت والريحان والفلفل.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "basil",
+          "olive-oil",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "caprese-stack",
+    "title": "Tomato, Mozzarella and Basil",
+    "titleAr": "كابريزي",
+    "description": "Three ingredients means all three have to be good. Room temperature, always.",
+    "descriptionAr": "تلات مكوّنات يعني تلاتتهم لازم يكونوا كويسين. وعلى حرارة الأوضة دايمًا.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 0,
+    "servings": 2,
+    "nutrition": {
+      "calories": 310,
+      "protein": 18,
+      "carbs": 8,
+      "fat": 24,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [],
+    "tags": [
+      "italian",
+      "no-cook",
+      "quick",
+      "beginner",
+      "healthy"
+    ],
+    "image": {
+      "path": "curated/caprese-stack.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "basil",
+        "quantity": 15,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Take everything out of the fridge 20 minutes before you build it.",
+        "textAr": "طلّع كل حاجة من التلاجة ٢٠ دقيقة قبل ما تجهّزه.",
+        "minutes": 20,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Alternate tomato, cheese and basil on a plate, then dress with oil, salt and pepper.",
+        "textAr": "رصّ طماطم وجبنة وريحان بالتبادل في طبق، وبعدين تبّلهم بالزيت والملح والفلفل.",
+        "minutes": 6,
+        "uses": [
+          "tomatoes",
+          "mozzarella",
+          "basil",
+          "olive-oil",
+          "salt",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "carbonara-beef",
+    "title": "Carbonara with Beef Bacon",
+    "titleAr": "كاربونارا ببيكون اللحمة",
+    "description": "No cream. Egg, cheese and pasta water, off the heat, moving fast.",
+    "descriptionAr": "من غير كريمة. بيض وجبنة ومية مكرونة، بعيد عن النار وبسرعة.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 8,
+    "cookMinutes": 15,
+    "servings": 2,
+    "nutrition": {
+      "calories": 680,
+      "protein": 34,
+      "carbs": 66,
+      "fat": 30,
+      "fiber": 3
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "high-protein",
+      "comfort",
+      "quick"
+    ],
+    "image": {
+      "path": "curated/carbonara-beef.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "bacon-beef",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "egg-yolk",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Crisp the beef bacon in a dry pan and grind in a lot of black pepper.",
+        "textAr": "حمّر البيكون في طاسة ناشفة واطحن فلفل أسود كتير فوقه.",
+        "minutes": 7,
+        "uses": [
+          "bacon-beef",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Beat the eggs and yolk with the cheese into a thick paste.",
+        "textAr": "اخفق البيض والصفار مع الجبنة لحد ما يبقوا عجينة تقيلة.",
+        "minutes": 3,
+        "uses": [
+          "eggs",
+          "egg-yolk",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Drain the pasta, kill the heat, and toss everything with splashes of pasta water until glossy.",
+        "textAr": "صفّي المكرونة، اطفي النار، وقلّب كل حاجة مع شوية مية مكرونة لحد ما تلمع.",
+        "minutes": 5,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": "The pan must be off the heat or the eggs scramble instead of thickening.",
+        "safetyAr": "الطاسة لازم تكون بعيد عن النار وإلا البيض هيتخثّر بدل ما يتقل."
+      }
+    ]
+  },
+  {
+    "slug": "chicken-parm-oven",
+    "title": "Oven Chicken Parmigiana",
+    "titleAr": "دجاج بارميجانا في الفرن",
+    "description": "Breadcrumbed and baked rather than fried, under tomato and a lot of cheese.",
+    "descriptionAr": "مغطّى بقسماط ومخبوز بدل المقلي، تحت طماطم وجبنة كتير.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 20,
+    "cookMinutes": 35,
+    "servings": 4,
+    "nutrition": {
+      "calories": 560,
+      "protein": 48,
+      "carbs": 32,
+      "fat": 26,
+      "fiber": 4
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "italian",
+      "high-protein",
+      "oven",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/chicken-parm-oven.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-breast",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "butterflied"
+      },
+      {
+        "slug": "breadcrumbs",
+        "quantity": 120,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 50,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "tomato-sauce",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "oregano",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the breadcrumbs with the parmesan and oregano. Dip the chicken in egg, then crumbs.",
+        "textAr": "اخلط البقسماط مع البارميزان والأوريجانو. غطّس الفراخ في البيض وبعدين في البقسماط.",
+        "minutes": 12,
+        "uses": [
+          "breadcrumbs",
+          "parmesan",
+          "oregano",
+          "eggs",
+          "chicken-breast",
+          "salt"
+        ],
+        "safety": "Wash hands and the board after handling raw poultry.",
+        "safetyAr": "اغسل إيديك واللوح بعد ما تلمس فراخ نية."
+      },
+      {
+        "text": "Drizzle with oil and bake at 200°C for 20 minutes until the crumb is golden.",
+        "textAr": "رشّ الزيت واخبزها على ٢٠٠ درجة ٢٠ دقيقة لحد ما البقسماط يدهب.",
+        "minutes": 20,
+        "uses": [
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Spoon over the sauce, cover with mozzarella and bake 15 minutes more.",
+        "textAr": "حط الصلصة فوق، غطّيها بالموتزاريلا واخبزها ١٥ دقيقة كمان.",
+        "minutes": 15,
+        "uses": [
+          "tomato-sauce",
+          "mozzarella"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F throughout.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
+      }
+    ]
+  },
+  {
+    "slug": "creamy-chicken-pasta",
+    "title": "Creamy Chicken Pasta",
+    "titleAr": "مكرونة بالفراخ والكريمة",
+    "description": "One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.",
+    "descriptionAr": "طاسة واحدة في نص الأسبوع. فراخ مشوّحة وكريمة بالتوم وجبنة رومي بتفرق.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 20,
+    "servings": 3,
+    "nutrition": {
+      "calories": 650,
+      "protein": 48,
+      "carbs": 62,
+      "fat": 22,
+      "fiber": 4
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "high-protein",
+      "comfort",
+      "italian",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/creamy-chicken-pasta.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chicken-breast",
+        "quantity": 450,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "pasta",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "cream",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "minced"
+      },
+      {
+        "slug": "roumy-cheese",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "butter",
+        "quantity": 20,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped",
+        "optional": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the pasta in well-salted water. Reserve a cup of the water before draining.",
+        "textAr": "اسلق المكرونة في مية مملّحة كويس. شيل كوباية من ميتها قبل ما تصفّيها.",
+        "minutes": 10,
+        "uses": [
+          "pasta"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Season the chicken and sear in butter over high heat until golden on both sides.",
+        "textAr": "تبّل الفراخ وشوّحها في الزبدة على نار عالية لحد ما تتحمّر من الناحيتين.",
+        "minutes": 7,
+        "uses": [
+          "chicken-breast",
+          "butter",
+          "black-pepper"
+        ],
+        "safety": "Cook chicken until it reaches 74°C / 165°F and no pink remains. Wash hands and the board after handling raw poultry.",
+        "safetyAr": "اطبخ الفراخ لحد ما توصل ٧٤°م / ١٦٥°ف ومايفضلش فيها لون وردي. اغسل إيديك واللوح بعد ما تلمس فراخ نية."
+      },
+      {
+        "text": "Lower the heat, add the garlic for 30 seconds, then pour in the cream and let it bubble for 2 minutes.",
+        "textAr": "هدّي النار، ضيف التوم ٣٠ ثانية، وبعدين صبّ الكريمة وسيبها تغلي دقيقتين.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "cream"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss in the pasta with a splash of its water and the grated cheese until glossy. Finish with parsley.",
+        "textAr": "قلّب المكرونة مع شوية من ميتها والجبنة المبشورة لحد ما تلمع. زيّن بالبقدونس.",
+        "minutes": 3,
+        "uses": [
+          "roumy-cheese",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "gnocchi-butter-sage",
+    "title": "Potato Gnocchi in Brown Butter",
+    "titleAr": "نيوكي بالزبدة",
+    "description": "Made from potato and very little flour. The lighter your hand, the lighter they are.",
+    "descriptionAr": "معمولة من بطاطس ودقيق قليل جدًا. كل ما إيدك تكون أخف، كل ما بقت أخف.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 40,
+    "cookMinutes": 20,
+    "servings": 4,
+    "nutrition": {
+      "calories": 480,
+      "protein": 11,
+      "carbs": 68,
+      "fat": 18,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "eggs",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/gnocchi-butter-sage.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "potatoes",
+        "quantity": 1,
+        "unit": "kg",
+        "prep": null
+      },
+      {
+        "slug": "flour",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "egg-yolk",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 100,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the potatoes whole in their skins, peel them hot and rice them.",
+        "textAr": "اسلق البطاطس صحيحة بقشرها، قشّرها وهي سخنة واهرسها ناعم.",
+        "minutes": 30,
+        "uses": [
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Work in the flour, yolk and salt with the lightest hand you can — overworking makes them heavy.",
+        "textAr": "ادخل الدقيق والصفار والملح بأخف إيد ممكنة — العجن الزيادة بيتقّلهم.",
+        "minutes": 10,
+        "uses": [
+          "flour",
+          "egg-yolk",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roll into ropes, cut into pieces, and boil until they float, about 2 minutes.",
+        "textAr": "لفّها حبال، قطّعها قطع، واسلقها لحد ما تطفو، حوالي دقيقتين.",
+        "minutes": 8,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Brown the butter until it smells nutty and toss the gnocchi through it with cheese.",
+        "textAr": "حمّر الزبدة لحد ما ريحتها تبقى زي المكسرات وقلّب النيوكي فيها مع الجبنة.",
+        "minutes": 6,
+        "uses": [
+          "butter",
+          "parmesan",
+          "black-pepper"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "lasagne-beef",
+    "title": "Beef Lasagne",
+    "titleAr": "لازانيا باللحمة",
+    "description": "A long ragù, a proper béchamel, and the patience to let it rest before cutting.",
+    "descriptionAr": "راجو على مهله وبشاميل مظبوط وصبر لحد ما ترتاح قبل ما تقطعها.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 30,
+    "cookMinutes": 90,
+    "servings": 6,
+    "nutrition": {
+      "calories": 650,
+      "protein": 34,
+      "carbs": 52,
+      "fat": 32,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "oven",
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "comfort",
+      "oven",
+      "batch-cook",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/lasagne-beef.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "lasagne-sheets",
+        "quantity": 350,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "ground-beef",
+        "quantity": 600,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 6,
+        "unit": "piece",
+        "prep": "blended"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "celery",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "milk",
+        "quantity": 800,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 70,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "flour",
+        "quantity": 70,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "nutmeg",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion, carrot and celery in oil for 10 minutes, then brown the mince hard.",
+        "textAr": "شوّح البصل والجزر والكرفس في الزيت ١٠ دقايق، وبعدين حمّر اللحمة كويس.",
+        "minutes": 15,
+        "uses": [
+          "onions",
+          "carrots",
+          "celery",
+          "olive-oil",
+          "ground-beef"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the tomatoes, paste and salt and simmer for 45 minutes until dark and thick.",
+        "textAr": "ضيف الطماطم والصلصة والملح وسيبها ٤٥ دقيقة لحد ما تغمق وتتقل.",
+        "minutes": 45,
+        "uses": [
+          "tomatoes",
+          "tomato-paste",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Make the béchamel: butter, flour, then the milk slowly, with nutmeg.",
+        "textAr": "اعمل البشاميل: زبدة ودقيق، وبعدين اللبن بالراحة، مع جوزة الطيب.",
+        "minutes": 10,
+        "uses": [
+          "butter",
+          "flour",
+          "milk",
+          "nutmeg"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Layer ragù, pasta and béchamel three times, finishing with béchamel and cheese.",
+        "textAr": "رصّ راجو ومكرونة وبشاميل تلات مرات، وخلّص ببشاميل وجبنة.",
+        "minutes": 8,
+        "uses": [
+          "lasagne-sheets",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 190°C for 45 minutes, then rest 20 minutes before cutting.",
+        "textAr": "اخبزها على ١٩٠ درجة ٤٥ دقيقة، وبعدين سيبها ٢٠ دقيقة قبل ما تقطعها.",
+        "minutes": 45,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "margherita-flatbread",
+    "title": "Quick Margherita Flatbread",
+    "titleAr": "فطيرة مارجريتا سريعة",
+    "description": "No proving. A hot oven, a hot tray, and it is done before delivery would arrive.",
+    "descriptionAr": "من غير تخمير. فرن سخن وصينية سخنة وبتخلص قبل ما الدليفري يوصل.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 12,
+    "servings": 2,
+    "nutrition": {
+      "calories": 560,
+      "protein": 22,
+      "carbs": 72,
+      "fat": 20,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "italian",
+      "quick",
+      "oven",
+      "beginner",
+      "late-night"
+    ],
+    "image": {
+      "path": "curated/margherita-flatbread.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "baking-powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "yogurt",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tomato-sauce",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mozzarella",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "basil",
+        "quantity": 10,
+        "unit": "piece",
+        "prep": null,
+        "garnish": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Knead the flour, baking powder, yogurt and salt into a soft dough. No rising needed.",
+        "textAr": "اعجن الدقيق والبيكنج بودر والزبادي والملح لعجينة طرية. مش محتاجة تخمير.",
+        "minutes": 10,
+        "uses": [
+          "flour",
+          "baking-powder",
+          "yogurt",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roll thin onto a hot tray, spread the sauce and scatter the cheese.",
+        "textAr": "افردها رفيعة على صينية سخنة، افرد الصلصة ورشّ الجبنة.",
+        "minutes": 5,
+        "uses": [
+          "tomato-sauce",
+          "mozzarella",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 250°C for 12 minutes until blistered. Tear basil over as it comes out.",
+        "textAr": "اخبزها على ٢٥٠ درجة ١٢ دقيقة لحد ما تتنفخ. قطّع الريحان فوقها وهي طالعة.",
+        "minutes": 12,
+        "uses": [
+          "basil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "minestrone",
+    "title": "Vegetable and Bean Minestrone",
+    "titleAr": "شوربة مينستروني بالخضار",
+    "description": "Whatever vegetables you have, plus beans and small pasta. A whole meal in a bowl.",
+    "descriptionAr": "أي خضار عندك، وفاصوليا ومكرونة صغيرة. وجبة كاملة في طبق.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 35,
+    "servings": 6,
+    "nutrition": {
+      "calories": 290,
+      "protein": 12,
+      "carbs": 44,
+      "fat": 8,
+      "fiber": 10
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "vegan",
+      "budget",
+      "healthy",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/minestrone.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "white-beans",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "pasta",
+        "quantity": 120,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "carrots",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "celery",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "zucchini",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "diced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "oregano",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Sweat the onion, carrot and celery in oil for 10 minutes without colouring them.",
+        "textAr": "شوّح البصل والجزر والكرفس في الزيت ١٠ دقايق من غير ما يتحمّروا.",
+        "minutes": 10,
+        "uses": [
+          "onions",
+          "carrots",
+          "celery",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the garlic, tomatoes, stock, oregano and 1.5L water and simmer 20 minutes.",
+        "textAr": "ضيف التوم والطماطم والمرقة والأوريجانو و١.٥ لتر مية وسيبها ٢٠ دقيقة.",
+        "minutes": 20,
+        "uses": [
+          "garlic",
+          "tomatoes",
+          "stock-cube",
+          "oregano",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the beans, courgette and pasta and cook 10 minutes more.",
+        "textAr": "ضيف الفاصوليا والكوسة والمكرونة واطبخهم ١٠ دقايق كمان.",
+        "minutes": 10,
+        "uses": [
+          "white-beans",
+          "zucchini",
+          "pasta"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "pasta-e-ceci",
+    "title": "Pasta and Chickpeas",
+    "titleAr": "مكرونة بالحمص",
+    "description": "Half soup, half pasta, entirely cheap. Rosemary is what makes it taste expensive.",
+    "descriptionAr": "نص شوربة ونص مكرونة ورخيصة تمامًا. الروزماري هو اللي بيخلّي طعمها غالي.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 400,
+      "protein": 17,
+      "carbs": 60,
+      "fat": 11,
+      "fiber": 11
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "vegan",
+      "budget",
+      "high-protein",
+      "comfort",
+      "one-pan"
+    ],
+    "image": {
+      "path": "curated/pasta-e-ceci.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "chickpeas",
+        "quantity": 480,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "pasta",
+        "quantity": 200,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "rosemary",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the garlic, rosemary and chilli in oil, then stir in the tomato paste for a minute.",
+        "textAr": "حمّر التوم والروزماري والشطة في الزيت، وبعدين قلّب صلصة الطماطم دقيقة.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "rosemary",
+          "chili-flakes",
+          "olive-oil",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the chickpeas, crush a third of them, then add the stock and 900ml water.",
+        "textAr": "ضيف الحمص، اهرس تلته، وبعدين ضيف المرقة و٩٠٠ مل مية.",
+        "minutes": 5,
+        "uses": [
+          "chickpeas",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the pasta and cook 12 minutes until it is thick enough to hold a spoon upright.",
+        "textAr": "ضيف المكرونة واطبخها ١٢ دقيقة لحد ما تتقل وتقف فيها المعلقة.",
+        "minutes": 15,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "pasta-pomodoro",
+    "title": "Tomato and Basil Pasta",
+    "titleAr": "مكرونة بالطماطم والريحان",
+    "description": "The sauce is four things. Its quality is entirely about how long you leave it alone.",
+    "descriptionAr": "الصلصة أربع حاجات. وجودتها كلها في إنك تسيبها في حالها قد إيه.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 13,
+      "carbs": 72,
+      "fat": 11,
+      "fiber": 6
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "budget",
+      "vegan",
+      "beginner",
+      "comfort"
+    ],
+    "image": {
+      "path": "curated/pasta-pomodoro.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 8,
+        "unit": "piece",
+        "prep": "blended"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "basil",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sugar",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the garlic in oil for 30 seconds, then add the tomatoes, sugar and salt.",
+        "textAr": "حمّر التوم في الزيت ٣٠ ثانية، وبعدين ضيف الطماطم والسكر والملح.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "olive-oil",
+          "tomatoes",
+          "sugar",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Simmer uncovered for 25 minutes until it darkens and thickens. Do not rush this.",
+        "textAr": "سيبها مكشوفة ٢٥ دقيقة لحد ما لونها يغمق وتتقل. ماتستعجلش على الخطوة دي.",
+        "minutes": 25,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook the pasta, toss it through the sauce, and tear in the basil off the heat.",
+        "textAr": "اسلق المكرونة، قلّبها في الصلصة، وقطّع الريحان فوقها بعيد عن النار.",
+        "minutes": 10,
+        "uses": [
+          "pasta",
+          "basil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "pasta-tuna-lemon",
+    "title": "Tuna, Lemon and Caper Pasta",
+    "titleAr": "مكرونة بالتونة والليمون",
+    "description": "Store cupboard dinner that tastes deliberate. Ready in the time the pasta takes.",
+    "descriptionAr": "عشا من الدولاب طعمه مقصود. جاهز في وقت سلق المكرونة.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 12,
+    "servings": 2,
+    "nutrition": {
+      "calories": 540,
+      "protein": 28,
+      "carbs": 72,
+      "fat": 16,
+      "fiber": 5
+    },
+    "dietTags": [
+      "pescatarian",
+      "halal"
+    ],
+    "allergens": [
+      "fish",
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "quick",
+      "budget",
+      "high-protein",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/pasta-tuna-lemon.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "tuna-can",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "drained"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "capers",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 0.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the pasta and keep a cup of the water.",
+        "textAr": "اسلق المكرونة واحتفظ بكوباية من ميتها.",
+        "minutes": 10,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Warm the garlic, chilli and capers in oil, then flake in the tuna.",
+        "textAr": "سخّن التوم والشطة والكبر في الزيت، وبعدين فتّت التونة فيهم.",
+        "minutes": 4,
+        "uses": [
+          "garlic",
+          "chili-flakes",
+          "capers",
+          "olive-oil",
+          "tuna-can"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss with the pasta, lemon, parsley and enough pasta water to make it slippery.",
+        "textAr": "قلّبهم مع المكرونة والليمون والبقدونس ومية مكرونة كفاية تخلّيها سايحة.",
+        "minutes": 3,
+        "uses": [
+          "lemon",
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "polenta-mushroom",
+    "title": "Soft Cornmeal with Mushrooms",
+    "titleAr": "دقيق ذرة بالمشروم",
+    "description": "Cornmeal cooked soft as porridge under garlicky mushrooms. Cheap and warming.",
+    "descriptionAr": "دقيق ذرة متطبوخ طري تحت مشروم بالتوم. رخيص وبيدفّي.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 360,
+      "protein": 10,
+      "carbs": 52,
+      "fat": 13,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "budget",
+      "comfort",
+      "vegetarian"
+    ],
+    "image": {
+      "path": "curated/polenta-mushroom.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "cornmeal",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mushroom",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "butter",
+        "quantity": 50,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "thyme-dried",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whisk the cornmeal into 1.2L salted boiling water and cook on low for 25 minutes, stirring.",
+        "textAr": "اخفق دقيق الذرة في ١.٢ لتر مية مغلية مملّحة واطبخه على نار هادية ٢٥ دقيقة مع التقليب.",
+        "minutes": 25,
+        "uses": [
+          "cornmeal",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the mushrooms hard in oil until browned, then add garlic and thyme for a minute.",
+        "textAr": "حمّر المشروم كويس في الزيت لحد ما يتحمّر، وبعدين ضيف التوم والزعتر دقيقة.",
+        "minutes": 8,
+        "uses": [
+          "mushroom",
+          "olive-oil",
+          "garlic",
+          "thyme-dried"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Beat the butter and cheese into the cornmeal and spoon the mushrooms over.",
+        "textAr": "اخفق الزبدة والجبنة في دقيق الذرة وحط المشروم فوق.",
+        "minutes": 4,
+        "uses": [
+          "butter",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "risotto-mushroom",
+    "title": "Mushroom Risotto",
+    "titleAr": "ريزوتو بالمشروم",
+    "description": "Stirring is the recipe. Twenty minutes at the stove and it turns creamy without cream.",
+    "descriptionAr": "التقليب هو الوصفة. عشرين دقيقة على البوتاجاز وبيبقى كريمي من غير كريمة.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 10,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 470,
+      "protein": 13,
+      "carbs": 66,
+      "fat": 16,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "comfort",
+      "vegetarian"
+    ],
+    "image": {
+      "path": "curated/risotto-mushroom.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 350,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "mushroom",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "sliced"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 70,
+        "unit": "g",
+        "prep": "grated"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "thyme-dried",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Fry the mushrooms hard in oil until browned, season, and set half aside.",
+        "textAr": "حمّر المشروم كويس في الزيت لحد ما يتحمّر، ملّحه، وشيل نصه على جنب.",
+        "minutes": 8,
+        "uses": [
+          "mushroom",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Soften the onion and garlic in butter, add the rice and toast it for 2 minutes.",
+        "textAr": "شوّح البصل والتوم في الزبدة، ضيف الرز وحمّره دقيقتين.",
+        "minutes": 5,
+        "uses": [
+          "onions",
+          "garlic",
+          "butter",
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add hot stock a ladle at a time, stirring, for 18 minutes until the rice is just tender.",
+        "textAr": "ضيف المرقة السخنة مغرفة مغرفة مع التقليب، ١٨ دقيقة لحد ما الرز يستوي.",
+        "minutes": 18,
+        "uses": [
+          "stock-cube",
+          "thyme-dried"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Beat in the cheese off the heat and top with the reserved mushrooms.",
+        "textAr": "اخفق الجبنة بعيد عن النار وحط المشروم اللي شيلته فوق.",
+        "minutes": 3,
+        "uses": [
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "spaghetti-aglio-olio",
+    "title": "Garlic and Chilli Spaghetti",
+    "titleAr": "سباجيتي بالتوم والشطة",
+    "description": "Five ingredients, twelve minutes, and it lives or dies on the pasta water.",
+    "descriptionAr": "خمس مكوّنات واتناشر دقيقة، وبتنجح أو تفشل على حسب مية المكرونة.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 12,
+    "servings": 2,
+    "nutrition": {
+      "calories": 520,
+      "protein": 15,
+      "carbs": 74,
+      "fat": 18,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "quick",
+      "budget",
+      "vegan",
+      "beginner",
+      "late-night"
+    ],
+    "image": {
+      "path": "curated/spaghetti-aglio-olio.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 250,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 6,
+        "unit": "clove",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "parsley",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": "chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the pasta in well-salted water. Save a full cup of the water before draining.",
+        "textAr": "اسلق المكرونة في مية مملّحة كويس. شيل كوباية كاملة من ميتها قبل ما تصفّيها.",
+        "minutes": 10,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Warm the garlic and chilli in the oil on low until the garlic is pale gold, not brown.",
+        "textAr": "سخّن التوم والشطة في الزيت على نار هادية لحد ما التوم يبقى دهبي فاتح، مش بنّي.",
+        "minutes": 4,
+        "uses": [
+          "garlic",
+          "chili-flakes",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toss the pasta in with a splash of its water and keep tossing until the sauce turns creamy.",
+        "textAr": "قلّب المكرونة معاهم مع شوية من ميتها وفضل تقلّب لحد ما الصلصة تبقى كريمية.",
+        "minutes": 3,
+        "uses": [
+          "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "tiramisu-quick",
+    "title": "Coffee and Mascarpone Cups",
+    "titleAr": "كاسات قهوة وكريمة",
+    "description": "The flavours of tiramisu in a glass, set in the fridge instead of assembled in a tray.",
+    "descriptionAr": "طعم التيراميسو في كاسة، بتمسك في التلاجة بدل ما تترصّ في صينية.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "dessert"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 420,
+      "protein": 8,
+      "carbs": 34,
+      "fat": 28,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy",
+      "gluten"
+    ],
+    "appliances": [],
+    "tags": [
+      "italian",
+      "dessert",
+      "no-cook"
+    ],
+    "image": {
+      "path": "curated/tiramisu-quick.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "cream-cheese",
+        "quantity": 300,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "cream",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "coffee",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": "strong and cooled"
+      },
+      {
+        "slug": "toast-bread",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "cut into fingers"
+      },
+      {
+        "slug": "cocoa",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "vanilla",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Whip the cream to soft peaks, then beat in the cream cheese, sugar and vanilla.",
+        "textAr": "اخفق الكريمة لحد ما تمسك، وبعدين اخفق معاها الجبنة الكريمي والسكر والفانيليا.",
+        "minutes": 8,
+        "uses": [
+          "cream",
+          "cream-cheese",
+          "sugar",
+          "vanilla"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Dip the bread fingers briefly in the coffee — one second each, no more.",
+        "textAr": "غطّس أصابع العيش في القهوة بسرعة — ثانية لكل واحدة، مش أكتر.",
+        "minutes": 5,
+        "uses": [
+          "toast-bread",
+          "coffee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Layer cream and soaked fingers in glasses and chill 3 hours. Dust with cocoa to serve.",
+        "textAr": "رصّ الكريمة والأصابع المنقوعة في كاسات وسيبها ٣ ساعات في التلاجة. رشّ الكاكاو عند التقديم.",
+        "minutes": 7,
+        "uses": [
+          "cocoa"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  }
+]
