@@ -501,6 +501,7 @@ async function main() {
     const seenPhotos = new Set();
     const decodedPhotos = new Set();
     let fallbacksSeen = 0;
+    let barren = 0;
     for (let step = 0; step < 20; step += 1) {
       // `window.scrollTo` does nothing here: React Native Web renders a list
       // as its own overflow container, so the document never scrolls and a
@@ -510,9 +511,16 @@ async function main() {
       await page.mouse.wheel(0, 700);
       await page.waitForTimeout(500);
       const audit = await photoAudit('discover');
+      const before = decodedPhotos.size;
       for (const slug of audit.decodedSlugs) decodedPhotos.add(slug);
       for (const slug of audit.slugs) seenPhotos.add(slug);
       fallbacksSeen = Math.max(fallbacksSeen, audit.fallbacks);
+
+      // Stop once the walk stops finding anything new. Reaching the end of a
+      // virtualised list still costs a full decode wait per step, and four
+      // barren screenfuls in a row means we have seen what there is.
+      barren = decodedPhotos.size > before ? 0 : barren + 1;
+      if (barren >= 4 && decodedPhotos.size > 0) break;
     }
 
     check(
@@ -757,11 +765,21 @@ async function main() {
       await tap('cook-submit');
       await page.waitForTimeout(2600);
 
-      const ids = await page.evaluate(() =>
-        [...document.querySelectorAll('[data-testid^="result-"]')].map((node) =>
-          node.getAttribute('data-testid'),
+      // DISTINCT ids. React Native Web puts the same testID on nested nodes,
+      // so a raw node count is roughly double and drifts with the markup —
+      // the table reported 34 for a search the engine answers with 19.
+      const ids = await page.evaluate(() => [
+        ...new Set(
+          [...document.querySelectorAll('[data-testid^="result-"]')].map((node) =>
+            node.getAttribute('data-testid'),
+          ),
         ),
-      );
+      ]);
+      // And the app's own count, which is the whole answer rather than the
+      // part of it the virtualised list has bothered to render.
+      const reported = (
+        await page.locator('[data-testid="results-count"]').first().innerText().catch(() => '')
+      ).trim();
       const titles = await page.evaluate(() =>
         [...document.querySelectorAll('[data-testid^="recipe-title-"]')]
           .slice(0, 10)
@@ -777,7 +795,7 @@ async function main() {
         }),
       );
       const empty = (await page.locator('[data-testid="results-empty"]').count()) > 0;
-      return { ids, selected, titles, missing, empty };
+      return { ids, selected, titles, missing, empty, reported };
     };
 
     /** One row of the evidence table this hotfix has to produce. */
@@ -785,7 +803,7 @@ async function main() {
     const record = (input, mode, result) => {
       const counts = [...new Set(result.missing)].sort((a, b) => a - b);
       rows.push(
-        `| ${input} | ${mode} | ${result.ids.length} | ` +
+        `| ${input} | ${mode} | ${result.reported || result.ids.length} | ` +
           `${result.titles.join('; ') || '—'} | ` +
           `${counts.length ? counts.join(', ') : '—'} |`,
       );

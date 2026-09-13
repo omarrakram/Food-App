@@ -221,7 +221,10 @@ export function ResultsView({
         }}
       >
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
-          <Text variant="footnote" color="textSecondary">
+          {/* Marked so a test can read the app's OWN answer. Counting rendered
+              cards is not the same number: the list is virtualised, and React
+              Native Web puts the same testID on nested nodes. */}
+          <Text variant="footnote" color="textSecondary" testID="results-count">
             {t('results.count', { count: sorted.length })}
           </Text>
           {isGenerating ? (
