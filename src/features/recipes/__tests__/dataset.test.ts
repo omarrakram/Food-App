@@ -5,6 +5,7 @@ import type { Recipe } from '@/types/domain';
 import { emptyConstraints } from '../constraints';
 import { buildIndexFor, checkRecipe, missingEssentials, suppliedKeys } from '../filter';
 import { RECIPE_FIXTURES } from '../fixtures';
+import { creditedImages } from '../images';
 
 /**
  * Is the catalogue good enough to answer the product's question?
@@ -187,15 +188,26 @@ describe('the image manifest and the app agree', () => {
     }
   });
 
-  it('every credited photograph reaches the credits screen', () => {
-    // The screen is built from this same map, so the assertion is really that
-    // nobody has introduced a second list to forget to update.
-    const needingCredit = Object.values(LOCAL_RECIPE_IMAGES).filter(
-      (image) => image.attribution !== null,
-    );
-    const shown = Object.values(LOCAL_RECIPE_IMAGES).filter(
-      (image) => image.attribution !== null,
-    );
-    expect(shown.length).toBe(needingCredit.length);
+  it('every photograph the licence obliges us to credit is on the credits screen', () => {
+    // The previous version of this test computed both sides the same way and
+    // could therefore never fail. `creditedImages()` is what the screen
+    // actually renders, so comparing the manifest against it is a real claim.
+    const owed = Object.entries(LOCAL_RECIPE_IMAGES)
+      .filter(([, image]) => image.license !== 'CC0-1.0')
+      .map(([slug]) => slug)
+      .sort();
+    const shown = creditedImages().map(([slug]) => slug);
+
+    expect(shown).toEqual(owed);
+  });
+
+  it('and the credit names a person and a licence, not just a slug', () => {
+    for (const [slug, image] of creditedImages()) {
+      expect({ slug, attribution: image.attribution }).toEqual({
+        slug,
+        attribution: expect.stringContaining(image.license),
+      });
+      expect(image.attribution).toContain(image.creator);
+    }
   });
 });

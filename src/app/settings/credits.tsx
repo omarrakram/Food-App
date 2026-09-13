@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { EmptyState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
-import { LOCAL_RECIPE_IMAGES } from '@/features/recipes/image-assets.generated';
+import { creditedImages } from '@/features/recipes/images';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
@@ -22,11 +22,7 @@ export default function CreditsScreen() {
   const theme = useTheme();
   const { t } = useI18n();
 
-  // CC0 asks for nothing. Listing those too would bury the credits that are
-  // actually required among ones that are not.
-  const credited = Object.entries(LOCAL_RECIPE_IMAGES)
-    .filter(([, image]) => image.attribution !== null)
-    .sort(([a], [b]) => a.localeCompare(b));
+  const credited = creditedImages();
 
   return (
     <ScreenScroll bottomInset={theme.spacing.xxl} contentGap={theme.spacing.lg}>

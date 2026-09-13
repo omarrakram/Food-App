@@ -35,6 +35,20 @@ export function localRecipeImage(slug: string | null | undefined): LocalRecipeIm
 }
 
 /**
+ * Every photograph whose licence obliges us to name someone, slug and all.
+ *
+ * The credits screen renders exactly this, so the obligation cannot be missed
+ * by editing a screen: there is no second list. CC0 is excluded because it
+ * asks for nothing, and burying the required credits among unrequired ones
+ * makes the required ones harder to check.
+ */
+export function creditedImages(): [string, LocalRecipeImage][] {
+  return Object.entries(LOCAL_RECIPE_IMAGES)
+    .filter(([, image]) => image.attribution !== null)
+    .sort(([a], [b]) => a.localeCompare(b));
+}
+
+/**
  * Attribution the licence obliges us to display.
  *
  * Returned rather than rendered here so the caller decides placement, but it
