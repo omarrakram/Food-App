@@ -447,16 +447,29 @@ const MAX_BYTES = 6 * 1024 * 1024;
  */
 const MAX_STORED_BYTES = 900 * 1024;
 
-/** What a JPEG and a PNG start with. An HTML error page starts with neither. */
-function looksLikeImage(bytes: Buffer): boolean {
-  if (bytes.byteLength < 8) return false;
-  const jpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
-  const png =
-    bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
-  return jpeg || png;
+/**
+ * What the bytes actually are, read from their own header.
+ *
+ * Not from the URL and not from the mime Commons reported for the ORIGINAL:
+ * the thumbnailer does content negotiation, so a request for a JPEG can come
+ * back as WebP, and writing those bytes into a `.jpg` produces a file that no
+ * bundler will decode. It also catches the other case — an HTML error page
+ * served with a 200, which is an image only by file extension.
+ */
+function imageKind(bytes: Buffer): 'jpg' | 'png' | 'webp' | null {
+  if (bytes.byteLength < 12) return null;
+  if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return 'jpg';
+  if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) {
+    return 'png';
+  }
+  if (bytes.subarray(0, 4).toString('latin1') === 'RIFF' &&
+      bytes.subarray(8, 12).toString('latin1') === 'WEBP') {
+    return 'webp';
+  }
+  return null;
 }
 
-type Fetched = { bytes: Buffer; url: string } | { error: string };
+type Fetched = { bytes: Buffer; url: string; kind: 'jpg' | 'png' | 'webp' } | { error: string };
 
 /**
  * One GET, with the status reported rather than swallowed.
@@ -469,7 +482,7 @@ async function get(url: string, attempt = 1): Promise<Fetched> {
   let response: Response;
   try {
     response = await fetch(url, {
-      headers: { 'user-agent': USER_AGENT, accept: 'image/jpeg,image/png,image/*' },
+      headers: { 'user-agent': USER_AGENT, accept: 'image/jpeg,image/png,image/webp' },
     });
   } catch (error) {
     if (attempt >= 3) return { error: `network: ${String(error)}` };
@@ -482,21 +495,50 @@ async function get(url: string, attempt = 1): Promise<Fetched> {
     await sleep(attempt * 2000);
     return get(url, attempt + 1);
   }
-  if (!response.ok) return { error: `HTTP ${response.status}` };
+  if (!response.ok) {
+    // Wikimedia's thumbnailer says WHY in the body, and the status alone is
+    // not enough to act on — a 400 can be a width it will not render, a name
+    // it cannot parse, or a file it has given up on. Guessing between those
+    // wasted a run.
+    const explanation = (await response.text().catch(() => '')).replace(/<[^>]*>/g, ' ');
+    const detail = explanation.replace(/\s+/g, ' ').trim().slice(0, 120);
+    return { error: `HTTP ${response.status}${detail ? ` — ${detail}` : ''}` };
+  }
 
   const bytes = Buffer.from(await response.arrayBuffer());
   if (bytes.byteLength > MAX_BYTES) {
     return { error: `${(bytes.byteLength / 1024 / 1024).toFixed(1)}MB exceeds the cap` };
   }
-  if (!looksLikeImage(bytes)) return { error: 'response was not image data' };
-  return { bytes, url };
+  const kind = imageKind(bytes);
+  if (!kind) return { error: 'response was not image data' };
+  return { bytes, url, kind };
 }
 
 /**
- * A thumbnail URL from Commons at a given width.
+ * A scaled copy of a Commons file, by the documented route.
  *
- *     .../wikipedia/commons/8/8f/Koshari.jpg
- *     .../wikipedia/commons/thumb/8/8f/Koshari.jpg/1200px-Koshari.jpg
+ * `Special:FilePath` is MediaWiki's own supported way to ask for a file at a
+ * width. It redirects to whatever the thumbnail URL happens to be today, which
+ * means we do not have to know — and knowing is exactly what went wrong. The
+ * hand-built `/commons/thumb/<a>/<ab>/<name>/<N>px-<name>` path returned HTTP
+ * 400 for every single file in a 158-recipe run, so all 45 photographs that
+ * came back were full-size originals that merely happened to fit under the
+ * size cap.
+ */
+function scaledUrl(fileTitle: string, width: number): string {
+  const name = fileTitle.replace(/^File:/, '').replace(/ /g, '_');
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(name)}?width=${Math.round(width)}`;
+}
+
+/**
+ * The CDN thumbnail path, kept only as a second guess.
+ *
+ *     .../wikipedia/commons/c/c8/Aloo_gobi.jpg
+ *     .../wikipedia/commons/thumb/c/c8/Aloo_gobi.jpg/1000px-Aloo_gobi.jpg
+ *
+ * This is the form that returned 400 across the board, so it is no longer
+ * trusted first — but the failure is still not fully explained, and one
+ * unexplained failure is not a reason to have only one way to ask.
  */
 function thumbUrl(original: string, width: number): string {
   const marker = '/commons/';
@@ -516,15 +558,11 @@ const TARGET_WIDTH = 1000;
 /**
  * Gets the bytes for a candidate at a sensible size.
  *
- * THIS IS WHERE THE FIRST RUN FAILED, 118 times out of 118. It asked for a
- * 1200px render of every file including the ones that were 900px wide, and
- * MediaWiki does not upscale — it answers 404. So the width asked for is now
- * never larger than the file actually is, with the untouched original as the
- * last resort.
- *
- * Asking Commons to resize (rather than shrinking the original here) is both
+ * Asking Commons to resize, rather than shrinking the original here, is both
  * kinder to their bandwidth and how this script avoids needing an image
- * library: the file that lands is already the size the app wants.
+ * library: the file that lands is already the size the app wants. The width
+ * asked for is never larger than the file is, because MediaWiki does not
+ * upscale — it refuses.
  */
 async function fetchImage(candidate: Candidate): Promise<Fetched> {
   const widths = [...new Set([Math.min(TARGET_WIDTH, candidate.width), 800, 640])]
@@ -533,9 +571,13 @@ async function fetchImage(candidate: Candidate): Promise<Fetched> {
 
   const errors: string[] = [];
   for (const width of widths) {
-    const result = await get(thumbUrl(candidate.url, width));
+    let result = await get(scaledUrl(candidate.title, width));
     if ('error' in result) {
-      errors.push(`${width}px ${result.error}`);
+      errors.push(`${width}px filepath ${result.error}`);
+      result = await get(thumbUrl(candidate.url, width));
+    }
+    if ('error' in result) {
+      errors.push(`${width}px thumb ${result.error}`);
       continue;
     }
     if (result.bytes.byteLength <= MAX_STORED_BYTES) return result;
@@ -575,8 +617,7 @@ async function main(): Promise<void> {
   for (const recipe of todo) {
     const slug = recipe.slug!;
     let picked: Candidate | null = null;
-    let bytes: Buffer | null = null;
-    let downloadedFrom = '';
+    let got: Extract<Fetched, { bytes: Buffer }> | null = null;
     const notes: string[] = [];
     const note = (message: string) => notes.push(message);
 
@@ -589,8 +630,7 @@ async function main(): Promise<void> {
       const result = await fetchImage(candidate);
       if ('bytes' in result) {
         picked = candidate;
-        bytes = result.bytes;
-        downloadedFrom = result.url;
+        got = result;
         break;
       }
       notes.push(`${candidate.title}: ${result.error}`);
@@ -598,7 +638,7 @@ async function main(): Promise<void> {
       if (tried >= 6) break;
     }
 
-    if (!picked || !bytes) {
+    if (!picked || !got) {
       // The honest outcome. Reported, not papered over with a stock photo of
       // something else.
       const reason = notes.length > 0 ? notes[0]! : 'no relevant openly-licensed image found';
@@ -607,14 +647,16 @@ async function main(): Promise<void> {
       continue;
     }
 
-    const extension = picked.mime === 'image/png' ? 'png' : 'jpg';
-    const relative = `${slug}.${extension}`;
-    writeFileSync(join(ASSET_DIR, relative), bytes);
+    // The extension follows the BYTES, not the mime Commons reported for the
+    // original: the thumbnailer negotiates, so a JPEG original can come back
+    // as WebP, and a WebP written into a `.jpg` is a file nothing can decode.
+    const relative = `${slug}.${got.kind}`;
+    writeFileSync(join(ASSET_DIR, relative), got.bytes);
 
-    // The width we actually got, derived from the URL we actually used, so the
-    // manifest describes the file on disk rather than the file we asked for.
-    const asked = /\/(\d+)px-[^/]+$/.exec(downloadedFrom);
-    const width = asked ? Number(asked[1]) : picked.width;
+    // The width actually served, from the URL actually used, so the manifest
+    // describes the file on disk rather than the one we asked for.
+    const asked = /[?&]width=(\d+)/.exec(got.url) ?? /\/(\d+)px-[^/]+$/.exec(got.url);
+    const width = Math.min(asked ? Number(asked[1]) : picked.width, picked.width);
     const height = Math.round(picked.height * (width / picked.width));
 
     found.push({
@@ -629,8 +671,8 @@ async function main(): Promise<void> {
         : null,
       width,
       height,
-      bytes: bytes.byteLength,
-      sha256: createHash('sha256').update(bytes).digest('hex'),
+      bytes: got.bytes.byteLength,
+      sha256: createHash('sha256').update(got.bytes).digest('hex'),
       acquiredAt: new Date().toISOString(),
     });
     console.log(
