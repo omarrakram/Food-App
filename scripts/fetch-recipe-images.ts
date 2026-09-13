@@ -174,6 +174,8 @@ type Candidate = {
   licence: Licence | null;
   artist: string;
   restrictions: string;
+  /** The file's own Commons categories, which say what it is a picture OF. */
+  categories: string;
 };
 
 /** Strips the HTML Commons returns in its metadata fields. */
@@ -211,6 +213,7 @@ function toCandidate(
     mime: string;
     extmetadata?: Record<string, { value?: string }>;
   },
+  categories = '',
 ): Candidate {
   const meta = info.extmetadata ?? {};
   return {
@@ -232,6 +235,7 @@ function toCandidate(
     ),
     artist: plain(meta.Artist?.value) || 'Unknown',
     restrictions: plain(meta.Restrictions?.value),
+    categories,
   };
 }
 
@@ -243,6 +247,7 @@ type ImageInfoPages = {
         title: string;
         index?: number;
         missing?: string;
+        categories?: { title: string }[];
         imageinfo?: {
           url: string;
           descriptionurl: string;
@@ -266,12 +271,21 @@ function candidatesFrom(data: ImageInfoPages): Candidate[] {
   const candidates: Candidate[] = [];
   for (const page of pages) {
     const info = page.imageinfo?.[0];
-    if (info) candidates.push(toCandidate(page.title, info));
+    if (info) {
+      candidates.push(
+        toCandidate(page.title, info, (page.categories ?? []).map((c) => c.title).join(' ')),
+      );
+    }
   }
   return candidates;
 }
 
-const IMAGE_INFO = { prop: 'imageinfo', iiprop: 'url|size|mime|extmetadata' };
+const IMAGE_INFO = {
+  prop: 'imageinfo|categories',
+  iiprop: 'url|size|mime|extmetadata',
+  cllimit: 'max',
+  clshow: '!hidden',
+};
 
 /**
  * SOURCE 1 — the lead photograph of the dish's own Wikipedia article.
@@ -429,6 +443,17 @@ function usable(candidate: Candidate, recipe: (typeof RECIPE_CATALOGUE)[number])
 
   if (NOT_A_DISH.test(title)) return false;
   if (HARAM.test(title)) return false;
+  if (HARAM.test(candidate.categories)) return false;
+
+  // The file's OWN categories, which say what it is a picture of — as opposed
+  // to the category it was found under, which says what it is filed near.
+  // `Category:Menemen` is a Turkish town as well as a dish, and it produced
+  // first an aerial photograph of the town and then a commuter train at
+  // Ulukent station. Both were correctly filed. Neither is food, and both
+  // said so in their own categories.
+  if (candidate.categories && !FOOD_CATEGORY.test(`${candidate.categories} ${title}`)) {
+    return false;
+  }
 
   // A protein the recipe does not contain means a different dish — "Thai fried
   // rice with seafood" is not the chicken fried rice it was chosen for.

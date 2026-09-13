@@ -224,14 +224,16 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 544/544 across 33 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 598/598 across 34 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 171 assertions across six files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 72 interaction checks, no page errors |
-| The published Pages build | `npm run smoke:web -- --base <url>` | **pass**, all 72 against the `/Food-App` subpath build |
+| Image manifest | `npm run images:check` | **pass**, licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
+| Dataset spread | `npm run recipes:audit` | reports only — 158 recipes, no pair over 0.9 Jaccard |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 89 interaction checks, no page errors |
+| The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
 ### The test suite runs on two platforms

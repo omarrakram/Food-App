@@ -45,6 +45,26 @@
       "title": "File:Fried oysters with soft scrambled eggs don of Nakau.jpg",
       "rejectedFor": "scrambled-eggs-soft",
       "reason": "Breaded fried oysters on rice. The title mentions scrambled eggs; the photograph is a seafood donburi."
+    },
+    {
+      "title": "File:Top view of cheese kunafa at Agasi, Lajpat Nagar, Delhi (2025-10-04).jpg",
+      "rejectedFor": "kunafa-cheese",
+      "reason": "A flat browned disc that reads as a potato rösti. The second candidate from the same category and the second one that is not kunafa; this recipe keeps the fallback."
+    },
+    {
+      "title": "File:E22011 at Ulukent.jpg",
+      "rejectedFor": "menemen",
+      "reason": "A commuter train at Ulukent station. The first attempt was an aerial view of the town — the dish is named after the place, and its Commons category is transport and landscapes."
+    },
+    {
+      "title": "File:Mushroom risotto (3990739885).jpg",
+      "rejectedFor": "risotto-mushroom",
+      "reason": "Correctly a mushroom risotto, and there is a glass of red wine on the table beside it. Same disqualification as the burger."
+    },
+    {
+      "title": "File:Fried oysters with soft scrambled eggs bowl of Matsuya.jpg",
+      "rejectedFor": "scrambled-eggs-soft",
+      "reason": "Fried oysters in egg on rice, again, from a different Japanese restaurant. The phrase 'soft scrambled eggs' appears on donburi menus and keeps winning the search."
     }
   ]
 }

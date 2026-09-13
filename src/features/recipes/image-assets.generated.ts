@@ -230,13 +230,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Dina Said · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
   },
-  "kunafa-cheese": {
-    source: require('../../../assets/recipes/kunafa-cheese.jpg') as number,
-    creator: "Contrapunctus-1",
-    license: "CC-BY-SA-4.0",
-    attribution: "Contrapunctus-1 · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Top_view_of_cheese_kunafa_at_Agasi,_Lajpat_Nagar,_Delhi_(2025-10-04).jpg",
-  },
   "mac-and-cheese-baked": {
     source: require('../../../assets/recipes/mac-and-cheese-baked.jpg') as number,
     creator: "Texasfoodgawker",
@@ -278,13 +271,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
-  },
-  "menemen": {
-    source: require('../../../assets/recipes/menemen.jpg') as number,
-    creator: "B'Tian Denizcan P. Dorsam",
-    license: "CC-BY-SA-3.0",
-    attribution: "B'Tian Denizcan P. Dorsam · CC-BY-SA-3.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:E22011_at_Ulukent.jpg",
   },
   "mexican-rice": {
     source: require('../../../assets/recipes/mexican-rice.jpg') as number,
@@ -370,13 +356,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
   },
-  "risotto-mushroom": {
-    source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
-    creator: "Karen and Brad Emerson",
-    license: "CC-BY-2.0",
-    attribution: "Karen and Brad Emerson · CC-BY-2.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Mushroom_risotto_(3990739885).jpg",
-  },
   "roz-bel-laban": {
     source: require('../../../assets/recipes/roz-bel-laban.jpg') as number,
     creator: "Shivangisj",
@@ -390,13 +369,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
-  },
-  "scrambled-eggs-soft": {
-    source: require('../../../assets/recipes/scrambled-eggs-soft.jpg') as number,
-    creator: "毒島みるく",
-    license: "CC0-1.0",
-    attribution: null,
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Fried_oysters_with_soft_scrambled_eggs_bowl_of_Matsuya.jpg",
   },
   "shakshuka": {
     source: require('../../../assets/recipes/shakshuka.jpg') as number,
