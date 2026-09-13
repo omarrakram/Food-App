@@ -621,3 +621,36 @@ export type ProfileEdit = {
   visibility?: ProfileVisibility;
   showCity?: boolean;
 };
+
+// --- Friends ----------------------------------------------------------------
+
+export const FRIEND_REQUEST_STATUSES = [
+  'pending',
+  'accepted',
+  'declined',
+  'cancelled',
+] as const;
+export type FriendRequestStatus = (typeof FRIEND_REQUEST_STATUSES)[number];
+
+/**
+ * A request, from the point of view of whoever is looking at it.
+ *
+ * `direction` rather than raw sender/recipient ids because every screen that
+ * renders one needs to know which of the two it is — an incoming request
+ * offers Accept and Decline, an outgoing one offers Cancel — and deriving that
+ * at each render site is how one of them ends up offering the wrong buttons.
+ */
+export type FriendRequest = {
+  id: string;
+  direction: 'incoming' | 'outgoing';
+  /** The OTHER person. Never the viewer. */
+  person: PublicProfile;
+  status: FriendRequestStatus;
+  createdAt: string;
+  respondedAt: string | null;
+};
+
+export type Friend = {
+  person: PublicProfile;
+  friendsSince: string;
+};

@@ -3,6 +3,7 @@ import { useEffect, useMemo, type ReactNode } from 'react';
 
 import { useAuth } from '@/features/auth/auth-provider';
 import { SupabasePantryRepository } from '@/features/pantry/supabase-repository';
+import { SupabaseFriendsRepository } from '@/features/friends/supabase-repository';
 import { SupabaseProfileRepository } from '@/features/profile/supabase-repository';
 import {
   registerPreferenceSync,
@@ -48,6 +49,7 @@ export function SupabaseBridge({ children }: { children: ReactNode }) {
     return {
       pantry: new SupabasePantryRepository(supabase, userId),
       profile: new SupabaseProfileRepository(supabase, userId),
+      friends: new SupabaseFriendsRepository(supabase, userId),
       recipes: new SupabaseRecipeRepository(supabase),
       saved: new SupabaseSavedRepository(supabase, userId),
       history: new SupabaseHistoryRepository(supabase, userId),

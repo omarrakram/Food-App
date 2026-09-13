@@ -48,10 +48,13 @@ const PRIMARY_ROWS: DrawerRow[] = [
 ];
 
 /**
- * Social. Empty until Phase I–N, and deliberately so — see the note above
- * about rows that go nowhere.
+ * Social. Messages and Submit a Recipe join this list when Phases J and L
+ * land; until then they are absent rather than disabled, for the reason in the
+ * note above.
  */
-const SOCIAL_ROWS: DrawerRow[] = [];
+const SOCIAL_ROWS: DrawerRow[] = [
+  { key: 'friends', labelKey: 'friends.title', icon: 'people-outline', href: '/friends' },
+];
 
 const ACCOUNT_ROWS: DrawerRow[] = [
   { key: 'profile', labelKey: 'profile.edit', icon: 'person-circle-outline', href: '/settings/profile' },

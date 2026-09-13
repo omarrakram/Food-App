@@ -120,6 +120,8 @@ function RootNavigator() {
         <Stack.Screen name="recipe" />
         <Stack.Screen name="search" options={{ animation: 'fade_from_bottom' }} />
         <Stack.Screen name="shopping-list" />
+        <Stack.Screen name="friends" />
+        <Stack.Screen name="u" />
         <Stack.Screen name="settings" />
         <Stack.Screen name="+not-found" options={{ title: 'Not found' }} />
       </Stack>

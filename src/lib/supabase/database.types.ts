@@ -106,6 +106,30 @@ export type AvailabilityStatusEnum = 'in_stock' | 'low_stock' | 'out_of_stock' |
 
 export type ProfileVisibilityEnum = 'public' | 'friends' | 'private';
 
+export type FriendRequestStatusEnum = 'pending' | 'accepted' | 'declined' | 'cancelled';
+
+export type FriendRequestRow = {
+  id: string;
+  sender_id: string;
+  recipient_id: string;
+  status: FriendRequestStatusEnum;
+  created_at: string;
+  responded_at: string | null;
+};
+
+/** Ids are stored low-high, enforced by `friendships_ordered`. */
+export type FriendshipRow = {
+  user_low_id: string;
+  user_high_id: string;
+  created_at: string;
+};
+
+export type BlockRow = {
+  blocker_id: string;
+  blocked_id: string;
+  created_at: string;
+};
+
 export type ProfileRow = {
   id: string;
   display_name: string | null;
@@ -325,6 +349,15 @@ export type Database = {
       recipe_allergens: Table<{ recipe_id: string; allergen: AllergenEnum }>;
       recipe_appliances: Table<{ recipe_id: string; appliance: ApplianceEnum }>;
       recipe_tags: Table<{ recipe_id: string; tag: string }>;
+      friend_requests: Table<
+        FriendRequestRow,
+        { sender_id: string; recipient_id: string; status?: FriendRequestStatusEnum },
+        Partial<Pick<FriendRequestRow, 'status' | 'responded_at'>>
+      >;
+      // No Insert type worth naming: there is no insert policy, and the only
+      // route to a row is `accept_friend_request`.
+      friendships: Table<FriendshipRow, never, never>;
+      blocks: Table<BlockRow, { blocker_id: string; blocked_id: string }, never>;
       saved_recipes: Table<SavedRecipeRow, { user_id: string; recipe_id: string }>;
       recipe_history: Table<
         RecipeHistoryRow,
@@ -359,6 +392,11 @@ export type Database = {
       delete_own_account: { Args: Record<string, never>; Returns: undefined };
       clear_own_history: { Args: Record<string, never>; Returns: undefined };
       username_available: { Args: { candidate: string }; Returns: boolean };
+      are_friends: { Args: { a: string; b: string }; Returns: boolean };
+      blocked_between: { Args: { a: string; b: string }; Returns: boolean };
+      accept_friend_request: { Args: { request_id: string }; Returns: undefined };
+      block_user: { Args: { target: string }; Returns: undefined };
+      blocked_profiles: { Args: Record<string, never>; Returns: PublicProfileRow[] };
     };
     Enums: {
       dietary_preference: DietaryPreferenceEnum;
@@ -375,6 +413,7 @@ export type Database = {
       measurement_unit: MeasurementUnitEnum;
       availability_status: AvailabilityStatusEnum;
       profile_visibility: ProfileVisibilityEnum;
+      friend_request_status: FriendRequestStatusEnum;
       recipe_image_source: RecipeImageSourceEnum;
     };
     CompositeTypes: Record<string, never>;

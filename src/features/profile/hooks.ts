@@ -121,3 +121,24 @@ export function useHandleAvailability(
 
   return { state, problem };
 }
+
+/**
+ * Handle search, for the friend flow.
+ *
+ * Debounced and floored at two characters. A one-character query matches a
+ * large fraction of every handle in the database, which is a slow query
+ * returning a useless page — and it runs on every keystroke.
+ */
+export function useProfileSearch(query: string) {
+  const { profile, scopeKey } = useRepositories();
+  const trimmed = query.trim();
+
+  return useQuery({
+    queryKey: ['akla', 'profile', 'search', scopeKey, trimmed] as const,
+    enabled: trimmed.length >= 2,
+    // A handle does not change often, and re-querying the same prefix as the
+    // user backspaces through it is pure waste.
+    staleTime: 30_000,
+    queryFn: () => profile.search(trimmed),
+  });
+}
