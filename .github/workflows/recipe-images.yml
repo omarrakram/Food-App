@@ -35,6 +35,10 @@ concurrency:
 jobs:
   acquire:
     runs-on: ubuntu-latest
+    # Roughly five minutes of Wikimedia requests plus the npm install. A run
+    # that has not finished in half an hour is stuck, and a stuck job holding
+    # the `recipe-images` concurrency group blocks the next attempt.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -85,4 +89,17 @@ jobs:
           refuses to pass without them.
 
           Acquired by .github/workflows/recipe-images.yml."
-          git push
+
+          # The acquisition takes minutes, and a person working on the branch
+          # can easily land a commit inside that window — which once threw away
+          # a finished run of 158 photographs at the very last step. Rebasing
+          # the one commit this job makes is always safe: it touches only the
+          # assets, the manifest and the generated index, and nobody else is
+          # editing those by hand.
+          for attempt in 1 2 3; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "push attempt $attempt lost a race; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the acquired photographs after three attempts."
+          exit 1
