@@ -434,18 +434,51 @@ async function main() {
     // saying it decoded actual pixels.
     console.log('\n▸ photographs');
 
+    /**
+     * Counts photographs and how many of them the browser really decoded.
+     *
+     * Only the ones ON SCREEN are judged. A feed loads its images lazily, so a
+     * card forty rows down has legitimately not fetched anything yet, and
+     * counting it as a failure measures scroll position rather than whether
+     * the photography works. It waits for the visible ones to settle rather
+     * than sampling at an arbitrary moment, because the first version of this
+     * check read 2 of 9 and the other seven arrived a second later.
+     */
     const photoAudit = async (label) => {
-      await page.waitForTimeout(900);
-      return page.evaluate(() => {
-        const nodes = [...document.querySelectorAll('[data-testid^="recipe-photo-"]')];
-        const fallbacks = document.querySelectorAll('[data-testid^="recipe-fallback-"]').length;
-        let decoded = 0;
-        for (const node of nodes) {
+      const visiblePhotos = () => `
+        [...document.querySelectorAll('[data-testid^="recipe-photo-"]')].filter((node) => {
+          const box = node.getBoundingClientRect();
+          return box.top < innerHeight && box.bottom > 0 && box.width > 0;
+        })`;
+
+      await page
+        .waitForFunction(
+          `(() => {
+            const shown = ${visiblePhotos()};
+            if (shown.length === 0) return false;
+            return shown.every((node) => {
+              const img = node.tagName === 'IMG' ? node : node.querySelector('img');
+              return img && img.complete && img.naturalWidth > 0;
+            });
+          })()`,
+          { timeout: 10000 },
+        )
+        .catch(() => {});
+
+      const result = await page.evaluate(`(() => {
+        const shown = ${visiblePhotos()};
+        const decoded = shown.filter((node) => {
           const img = node.tagName === 'IMG' ? node : node.querySelector('img');
-          if (img && img.naturalWidth > 0) decoded += 1;
-        }
-        return { photos: nodes.length, decoded, fallbacks };
-      }).then((result) => ({ ...result, label }));
+          return img && img.complete && img.naturalWidth > 0;
+        }).length;
+        return {
+          photos: document.querySelectorAll('[data-testid^="recipe-photo-"]').length,
+          onScreen: shown.length,
+          decoded,
+          fallbacks: document.querySelectorAll('[data-testid^="recipe-fallback-"]').length,
+        };
+      })()`);
+      return { ...result, label };
     };
 
     await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
@@ -460,9 +493,9 @@ async function main() {
       `${discoverPhotos.photos} photos, ${discoverPhotos.fallbacks} fallbacks`,
     );
     check(
-      'and the browser actually decoded them',
-      discoverPhotos.photos === 0 || discoverPhotos.decoded === discoverPhotos.photos,
-      `${discoverPhotos.decoded} of ${discoverPhotos.photos} decoded`,
+      'and the browser actually decoded every one that is on screen',
+      discoverPhotos.onScreen > 0 && discoverPhotos.decoded === discoverPhotos.onScreen,
+      `${discoverPhotos.decoded} of ${discoverPhotos.onScreen} on screen decoded`,
     );
     await shot('05a-discover-photos');
 
@@ -680,9 +713,9 @@ async function main() {
         ),
       );
       const titles = await page.evaluate(() =>
-        [...document.querySelectorAll('[data-testid^="result-"]')]
+        [...document.querySelectorAll('[data-testid^="recipe-title-"]')]
           .slice(0, 10)
-          .map((node) => (node.innerText || '').split('\n')[0]),
+          .map((node) => (node.textContent || '').trim()),
       );
       // The gap count the card itself is showing. Read from the rendered text
       // rather than recomputed here, so the table below reports what a user

@@ -179,6 +179,25 @@ export function buildAvailabilityIndex(
   return { available, expired, assumedStaples, itemIdByName, expiringSoon };
 }
 
+/**
+ * Is this line something the cook actually has to go and get?
+ *
+ * THE ONE DEFINITION OF "NEEDED". It used to exist twice: the filter excluded
+ * optional lines, garnishes and pantry staples, while the match counted only
+ * optional ones — so a recipe admitted into an "allow one missing" search
+ * displayed "2 missing" on its card, because the card was counting a garnish.
+ * Two numbers for one question, and the one the user could see was the wrong
+ * one.
+ *
+ * Garnishes and pantry staples are excluded for the same reason optional lines
+ * are: nobody considers themselves unable to cook because they are out of
+ * parsley to scatter on top, and telling them they are is how a results screen
+ * loses their trust.
+ */
+export function isNeededLine(line: Pick<RecipeIngredient, 'isOptional' | 'isGarnish' | 'isPantryStaple'>): boolean {
+  return !line.isOptional && !line.isGarnish && !line.isPantryStaple;
+}
+
 function matchOne(
   recipeIngredient: RecipeIngredient,
   index: AvailabilityIndex,
@@ -195,7 +214,7 @@ function matchOne(
       isAvailable: false,
       matchedVia: null,
       excludedReason: 'expired',
-      isOptional: recipeIngredient.isOptional,
+      isOptional: !isNeededLine(recipeIngredient),
     };
   }
 
@@ -214,7 +233,10 @@ function matchOne(
     isAvailable,
     matchedVia,
     excludedReason: null,
-    isOptional: recipeIngredient.isOptional,
+    // `isOptional` on a MATCH means "not something they must go and buy",
+    // which is the union of optional, garnish and pantry staple — not the
+    // recipe line's own `isOptional` flag alone.
+    isOptional: !isNeededLine(recipeIngredient),
   };
 }
 

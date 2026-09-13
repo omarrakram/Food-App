@@ -1,4 +1,4 @@
-import { resolveIngredient } from '@/features/ingredients/matching';
+import { isNeededLine, resolveIngredient } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import type {
   Allergen,
@@ -271,7 +271,7 @@ export function recipeContains(
  * dish they have no chicken for.
  */
 export function essentialIngredients(recipe: Pick<Recipe, 'ingredients'>): RecipeIngredient[] {
-  return recipe.ingredients.filter(
-    (line) => !line.isOptional && !line.isGarnish && !line.isPantryStaple,
-  );
+  // Deliberately delegating rather than restating the predicate: this and the
+  // match aggregate MUST agree, and they did not.
+  return recipe.ingredients.filter(isNeededLine);
 }

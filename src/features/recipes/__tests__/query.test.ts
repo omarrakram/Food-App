@@ -1,6 +1,11 @@
-import { emptyConstraints, toRestriction } from '../constraints';
+import { DEFAULT_PREFERENCES } from '@/types/domain';
+
+import { emptyConstraints, missingBudgetFor, toRestriction } from '../constraints';
+import { requestDefaultsFrom } from '@/features/preferences/preferences-provider';
+import { decodeRequest, encodeRequest, relaxRequest } from '../request-params';
+import { toConstraints } from '../to-constraints';
 import { RECIPE_FIXTURES } from '../fixtures';
-import { checkRecipe, buildIndexFor } from '../filter';
+import { checkRecipe, buildIndexFor, relaxedConstraints } from '../filter';
 import {
   applyPlanLocally,
   constraintsFingerprint,
@@ -280,5 +285,61 @@ describe('the cache key cannot serve one search the answer to another', () => {
 
     expect(plan(a)).toBe(plan(b));
     expect(constraintsFingerprint(a)).not.toBe(constraintsFingerprint(b));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Relaxation is implemented twice — on the constraints, to work out what to
+// OFFER, and on the request, to carry the offer through the URL. If the two
+// disagree, the screen promises a number of recipes and then shows a
+// different one.
+// ---------------------------------------------------------------------------
+
+describe('taking a relaxation does what offering it promised', () => {
+  // Built the way a screen builds one — through the URL codec, from the
+  // preference defaults — so the test exercises the path the app uses.
+  const request = decodeRequest(
+    encodeRequest({
+      ...requestDefaultsFrom(DEFAULT_PREFERENCES),
+      mode: 'ingredients',
+      ingredients: ['bananas', 'oats', 'milk'],
+      pantryMode: 'strict',
+      maxMissingIngredients: 0,
+      budgetMinor: null,
+      servings: 2,
+      mealType: null,
+      cuisine: null,
+      maxMinutes: null,
+      minProteinGrams: null,
+      maxCalories: null,
+      query: null,
+    }),
+    DEFAULT_PREFERENCES,
+  );
+
+  it('widens the gap budget by exactly one, as the offer was computed with', () => {
+    // REGRESSION: this used to set only `pantryMode: 'partial'` and leave the
+    // budget at 0 — and `missingBudgetFor('partial', 0)` is 0, because `0 ?? 2`
+    // is 0. The button was inert: the empty state offered a way forward and
+    // then produced the same empty state.
+    const relaxed = relaxRequest(request, 'pantry');
+
+    expect(relaxed.maxMissingIngredients).toBe(1);
+    expect(relaxed.pantryMode).toBe('partial');
+  });
+
+  it('agrees with the constraint-level relaxation the offer is measured by', () => {
+    const viaRequest = toConstraints(relaxRequest(request, 'pantry'));
+    const viaConstraints = relaxedConstraints(toConstraints(request), 'pantry');
+
+    expect(missingBudgetFor(viaRequest.pantryMode, viaRequest.maxMissingIngredients)).toBe(
+      missingBudgetFor(viaConstraints.pantryMode, viaConstraints.maxMissingIngredients),
+    );
+  });
+
+  it('keeps widening rather than stopping after one step', () => {
+    const twice = relaxRequest(relaxRequest(request, 'pantry'), 'pantry');
+
+    expect(twice.maxMissingIngredients).toBe(2);
   });
 });

@@ -214,7 +214,18 @@ export function relaxRequest(request: MealRequest, reason: RejectionReason): Mea
     case 'protein':
       return { ...request, minProteinGrams: null };
     case 'pantry':
-      return { ...request, pantryMode: 'partial' };
+      // MUST match `without()` in filter.ts: one more gap than currently
+      // allowed, not "ignore the kitchen". The offer is computed by that
+      // function and honoured by this one, so if they disagree the button
+      // promises a number of recipes and then delivers a different one.
+      //
+      // It used to set only the mode, and `missingBudgetFor('partial', 0)` is
+      // 0 — because `0 ?? 2` is 0 — so pressing it changed nothing at all.
+      return {
+        ...request,
+        pantryMode: 'partial',
+        maxMissingIngredients: clampMissing((request.maxMissingIngredients ?? 0) + 1),
+      };
     default:
       return request;
   }

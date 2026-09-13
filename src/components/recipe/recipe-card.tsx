@@ -142,7 +142,13 @@ export function RecipeCard({
 
       <View style={{ padding: theme.spacing.lg, gap: theme.spacing.sm }}>
         <View style={{ gap: 3 }}>
-          <Text variant="title3" lines={1}>
+          {/*
+            Marked so a test can read the title without scraping the card's
+            text. Its first rendered line is the save button's icon glyph and
+            its second is the match badge, so "the first words in the card" is
+            not the title and an evidence table built that way says so.
+          */}
+          <Text variant="title3" lines={1} testID={`recipe-title-${recipe.id}`}>
             {recipeText.title(recipe)}
           </Text>
           <Text variant="footnote" color="textSecondary" lines={2}>

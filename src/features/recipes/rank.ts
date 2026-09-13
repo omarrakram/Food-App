@@ -11,7 +11,8 @@ import {
 } from '@/features/pricing/estimate';
 import type { MealRequest, PantryItem, Recipe, RecipeMatch } from '@/types/domain';
 
-import { filterRecipes, type RejectionReason } from './filter';
+import { availabilityKey, filterRecipes, suppliedKeys, type RejectionReason } from './filter';
+import { essentialIngredients } from './constraints';
 import { toConstraints } from './to-constraints';
 
 /**
@@ -145,10 +146,33 @@ export function applyConstraintsLegacy(
  * mode and the weights follow.
  */
 const WEIGHTS = {
-  ingredients: { match: 60, budget: 5, time: 10, expiring: 15, cuisine: 5, difficulty: 5 },
-  budget: { match: 20, budget: 45, time: 10, expiring: 10, cuisine: 10, difficulty: 5 },
-  search: { match: 30, budget: 20, time: 15, expiring: 10, cuisine: 20, difficulty: 5 },
+  ingredients: { match: 35, uses: 30, budget: 5, time: 5, expiring: 15, cuisine: 5, difficulty: 5 },
+  budget: { match: 20, uses: 0, budget: 45, time: 10, expiring: 10, cuisine: 10, difficulty: 5 },
+  search: { match: 25, uses: 10, budget: 15, time: 15, expiring: 10, cuisine: 20, difficulty: 5 },
 } as const;
+
+/**
+ * How much of what the user ACTUALLY NAMED this recipe uses.
+ *
+ * Distinct from `matchPercent`, which asks the opposite question: what
+ * fraction of the recipe the cook can cover. Those come apart badly. Someone
+ * who types "ground beef, pasta, tomato" and allows two gaps was shown eight
+ * recipes with no beef in them, every one of them at 100% coverage, because a
+ * dish of pasta and tomato needs nothing else and a beef ragu needs six more
+ * things. Both numbers were right. Neither was the answer to the question.
+ *
+ * So both are scored. Coverage keeps the results cookable; this keeps them
+ * about the ingredients the user was actually looking at.
+ */
+function suppliedUsage(recipe: Recipe, supplied: ReadonlySet<string>): number {
+  if (supplied.size === 0) return 0.5;
+  const used = new Set<string>();
+  for (const line of essentialIngredients(recipe)) {
+    const key = availabilityKey(line.name);
+    if (supplied.has(key)) used.add(key);
+  }
+  return used.size / supplied.size;
+}
 
 function budgetScore(totalMinor: number, budgetMinor: number | null): number {
   if (!budgetMinor || budgetMinor <= 0) return 0.5;
@@ -203,9 +227,12 @@ export function rankRecipes(
     (outcome) => !outcome.excludedBy,
   );
 
-  const matches = survivors.map(({ recipe }) => describeMatch(recipe, request, index));
+  // Derived once for the whole ranking rather than per recipe: it depends on
+  // the request, not on what is being scored.
+  const supplied = suppliedKeys(toConstraints(request), { pantryItems: options.pantryItems });
+  const matches = survivors.map(({ recipe }) => describeMatch(recipe, request, index, supplied));
 
-  const ordered = matches.sort((a, b) => b.score - a.score);
+  const ordered = matches.sort(byGapThenScore(request));
   return options.limit ? ordered.slice(0, options.limit) : ordered;
 }
 
@@ -223,6 +250,8 @@ export function describeMatch(
   recipe: Recipe,
   request: MealRequest,
   index: AvailabilityIndex,
+  /** The user's own named ingredients; derived when not supplied. */
+  supplied?: ReadonlySet<string>,
 ): RecipeMatch {
   const weights = WEIGHTS[request.mode];
   const match = matchRecipeIngredients(recipe, index);
@@ -242,6 +271,7 @@ export function describeMatch(
 
   const score =
     weights.match * (match.matchPercent / 100) +
+    weights.uses * suppliedUsage(recipe, supplied ?? suppliedKeys(toConstraints(request), {})) +
     weights.budget * budgetScore(spendMinor, request.budgetMinor) +
     weights.time * timeScore(totalMinutes, request.maxMinutes) +
     weights.expiring * expiringBonus +
@@ -265,6 +295,29 @@ export function describeMatch(
 }
 
 export type SortMode = 'best' | 'cheapest' | 'fastest' | 'protein';
+
+/**
+ * Fewest gaps first, then the blended score.
+ *
+ * The gap count is the PRIMARY key rather than one term among six, because it
+ * is the promise the mode makes. "Allow up to two missing" has to mean the
+ * things you can cook right now come first and the ones needing a shop come
+ * after — otherwise a well-weighted 2-gap recipe can outrank a 0-gap one and
+ * the setting stops describing the list.
+ *
+ * Only where a gap budget applies. In budget mode nothing was said about a
+ * kitchen, so ordering by gaps would rank on an answer nobody gave.
+ */
+function byGapThenScore(request: MealRequest) {
+  const budgeted = request.mode === 'ingredients';
+  return (a: RecipeMatch, b: RecipeMatch) => {
+    if (budgeted) {
+      const gap = a.missingIngredients.length - b.missingIngredients.length;
+      if (gap !== 0) return gap;
+    }
+    return b.score - a.score;
+  };
+}
 
 export function sortMatches(matches: readonly RecipeMatch[], mode: SortMode): RecipeMatch[] {
   const copy = [...matches];

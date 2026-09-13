@@ -59,7 +59,14 @@ const RELAXATION_LABEL: Record<RejectionReason, TranslationKey | null> = {
   time: 'results.relaxTime',
   calories: 'results.relaxCalories',
   tag: 'results.relaxCollection',
-  uses_nothing_you_have: 'results.relaxUnrelated',
+  // Never offered, and `null` is how this table says so.
+  //
+  // Dropping it means "show me recipes that use nothing I listed", which in
+  // ingredients mode is abandoning the question the user asked — and it is
+  // precisely the behaviour that made every search return the same twenty
+  // recipes made of assumed store-cupboard items. Widening the gap budget is
+  // the step that actually helps, and that is the one offered.
+  uses_nothing_you_have: null,
   protein: 'results.relaxProtein',
   pantry: 'results.relaxPantry',
 };

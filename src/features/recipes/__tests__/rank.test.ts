@@ -381,3 +381,74 @@ describe('diet flags compose with the eating style', () => {
     expect(outcomes.find((entry) => entry.recipe.id === 'keto-ok')?.excludedBy).toBeNull();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Ordering. Two rules, in this order: how many things you would still have to
+// buy, and then — among recipes that ask the same of you — how much of what
+// you actually named the dish uses.
+// ---------------------------------------------------------------------------
+
+describe('ordering puts what you can cook first', () => {
+  const wanted = ['ground beef', 'pasta', 'tomatoes'];
+  const request = baseRequest({
+    ingredients: wanted,
+    pantryMode: 'partial',
+    maxMissingIngredients: 2,
+  });
+
+  const usesAllThree = makeRecipe({
+    id: 'uses-all-three',
+    title: 'Beef Ragu with Pasta',
+    ingredients: [
+      makeRecipeIngredient({ name: 'ground beef' }),
+      makeRecipeIngredient({ name: 'pasta' }),
+      makeRecipeIngredient({ name: 'tomatoes' }),
+      makeRecipeIngredient({ name: 'carrots' }),
+    ],
+  });
+
+  const usesOne = makeRecipe({
+    id: 'uses-one',
+    title: 'Tomato Bread',
+    ingredients: [makeRecipeIngredient({ name: 'tomatoes' })],
+  });
+
+  it('ranks by how many things you would still have to buy, first', () => {
+    // `usesOne` needs nothing you do not have; `usesAllThree` needs carrots.
+    // The gap count is the promise the mode makes — "allow up to two missing"
+    // has to mean the cookable ones come first — so it beats every other
+    // signal, including how much of your shopping the other one uses.
+    const ranked = rankRecipes([usesAllThree, usesOne], request);
+
+    expect(ranked.map((match) => match.recipe.id)).toEqual(['uses-one', 'uses-all-three']);
+  });
+
+  it('and then by how much of what you named it actually uses', () => {
+    // THE fix. Both of these are cookable right now, so the gap count cannot
+    // separate them and coverage says they are both perfect. Someone who typed
+    // "ground beef" wants the one with beef in it.
+    const twoOfThree = makeRecipe({
+      id: 'two-of-three',
+      title: 'Beef and Tomatoes',
+      ingredients: [
+        makeRecipeIngredient({ name: 'ground beef' }),
+        makeRecipeIngredient({ name: 'tomatoes' }),
+      ],
+    });
+
+    const ranked = rankRecipes([usesOne, twoOfThree], request);
+
+    expect(ranked.map((match) => match.recipe.id)).toEqual(['two-of-three', 'uses-one']);
+  });
+
+  it('does not order by gaps in budget mode, where no kitchen was described', () => {
+    // Ordering on an answer nobody gave. A budget search is about the wallet.
+    const ranked = rankRecipes([usesAllThree, usesOne], baseRequest({
+      mode: 'budget',
+      ingredients: [],
+      budgetMinor: 20_000,
+    }));
+
+    expect(ranked.length).toBe(2);
+  });
+});

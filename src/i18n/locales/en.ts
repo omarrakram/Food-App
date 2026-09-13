@@ -170,8 +170,10 @@ export const en = {
   'results.relaxUnrelated_other': 'Include recipes using none of your ingredients · {count} recipes',
   'results.relaxCollection_one': 'Look outside this collection · 1 recipe',
   'results.relaxCollection_other': 'Look outside this collection · {count} recipes',
-  'results.relaxPantry_one': 'Allow a few missing ingredients · 1 recipe',
-  'results.relaxPantry_other': 'Allow a few missing ingredients · {count} recipes',
+  // Says the step it takes, because that is what it does: one more gap than
+  // currently allowed, not "ignore the kitchen".
+  'results.relaxPantry_one': 'Allow one more missing ingredient · 1 recipe',
+  'results.relaxPantry_other': 'Allow one more missing ingredient · {count} recipes',
   'results.clearFilters': 'Show everything',
   'results.matchFull': 'You have everything',
   'results.match': 'You have {have}/{total} ingredients',

@@ -113,7 +113,8 @@ export function findMissingRequirement(recipe: Recipe, required: readonly string
 }
 
 /** The normalised key an availability index is looked up by. */
-function availabilityKey(name: string): string {
+/** The key an ingredient name resolves to in the availability index. */
+export function availabilityKey(name: string): string {
   const resolved = resolveIngredient(name);
   return normaliseIngredientName(resolved?.name ?? name);
 }
@@ -324,7 +325,17 @@ export type Relaxation = {
 };
 
 /** Removes one constraint, so we can count what it alone is costing. */
-function without(constraints: RecipeConstraints, reason: RejectionReason): RecipeConstraints {
+/**
+ * The constraints with one reason dropped.
+ *
+ * Exported because `relaxRequest` in `request-params.ts` has to do the same
+ * thing to the REQUEST, and the two disagreeing is a screen that offers a way
+ * forward and then does not take it. A test holds them together.
+ */
+export function relaxedConstraints(
+  constraints: RecipeConstraints,
+  reason: RejectionReason,
+): RecipeConstraints {
   switch (reason) {
     case 'disliked_ingredient':
       return { ...constraints, allowDislikedIngredients: true };
@@ -388,7 +399,7 @@ export function suggestRelaxations(
 
   const suggestions: Relaxation[] = [];
   for (const [reason, detail] of blocking) {
-    const relaxed = filterRecipes(recipes, without(constraints, reason), options);
+    const relaxed = filterRecipes(recipes, relaxedConstraints(constraints, reason), options);
     const wouldReturn = relaxed.filter((verdict) => !verdict.rejection).length;
     if (wouldReturn > 0) suggestions.push({ reason, detail, wouldReturn });
   }
