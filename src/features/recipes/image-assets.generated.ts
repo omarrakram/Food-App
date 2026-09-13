@@ -34,13 +34,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Shisma · CC-BY-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
   },
-  "banana-milkshake": {
-    source: require('../../../assets/recipes/banana-milkshake.jpg') as number,
-    creator: "Hazel Nicholson from Coventry, United Kingdom",
-    license: "CC-BY-2.0",
-    attribution: "Hazel Nicholson from Coventry, United Kingdom · CC-BY-2.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Five_Guys_banana_milkshake_(40878734941).jpg",
-  },
   "basbousa": {
     source: require('../../../assets/recipes/basbousa.jpg') as number,
     creator: "stu_spivack",
@@ -285,13 +278,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG",
-  },
-  "menemen": {
-    source: require('../../../assets/recipes/menemen.jpg') as number,
-    creator: "Samizambak",
-    license: "CC-BY-SA-4.0",
-    attribution: "Samizambak · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Menemen_Emiralem_Strawberry.jpg",
   },
   "mexican-rice": {
     source: require('../../../assets/recipes/mexican-rice.jpg') as number,

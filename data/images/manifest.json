@@ -43,20 +43,6 @@
       "acquiredAt": "2026-09-13T15:34:15.932Z"
     },
     {
-      "recipeSlug": "banana-milkshake",
-      "path": "banana-milkshake.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Five_Guys_banana_milkshake_(40878734941).jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Five_Guys_banana_milkshake_%2840878734941%29.jpg",
-      "creator": "Hazel Nicholson from Coventry, United Kingdom",
-      "license": "CC-BY-2.0",
-      "attribution": "Hazel Nicholson from Coventry, United Kingdom · CC-BY-2.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 1333,
-      "bytes": 372858,
-      "sha256": "14efc7eb6174d6f5eb92ccb9785bd4ad7e25dd8f45331c683ab6a3efe99730fd",
-      "acquiredAt": "2026-09-13T23:35:34.098Z"
-    },
-    {
       "recipeSlug": "basbousa",
       "path": "basbousa.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Basboosa.jpg",
@@ -547,20 +533,6 @@
       "acquiredAt": "2026-09-13T15:36:27.961Z"
     },
     {
-      "recipeSlug": "menemen",
-      "path": "menemen.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Menemen_Emiralem_Strawberry.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Menemen_Emiralem_Strawberry.jpg",
-      "creator": "Samizambak",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Samizambak · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 563,
-      "bytes": 282291,
-      "sha256": "ee148dc57760b6040439aae3c0d7405e9247981edc88e5786d4d712990281846",
-      "acquiredAt": "2026-09-13T23:36:06.413Z"
-    },
-    {
       "recipeSlug": "mexican-rice",
       "path": "mexican-rice.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Mexican_rice_144235.jpg",
@@ -977,6 +949,10 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "recipeSlug": "banana-milkshake",
+      "reason": "refused on review"
+    },
+    {
       "recipeSlug": "banana-peanut-oats",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1143,6 +1119,10 @@
     {
       "recipeSlug": "margherita-flatbread",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "menemen",
+      "reason": "refused on review"
     },
     {
       "recipeSlug": "mesaqaa",

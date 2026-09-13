@@ -65,6 +65,16 @@
       "title": "File:Fried oysters with soft scrambled eggs bowl of Matsuya.jpg",
       "rejectedFor": "scrambled-eggs-soft",
       "reason": "Fried oysters in egg on rice, again, from a different Japanese restaurant. The phrase 'soft scrambled eggs' appears on donburi menus and keeps winning the search."
+    },
+    {
+      "title": "File:Five Guys banana milkshake (40878734941).jpg",
+      "rejectedFor": "banana-milkshake",
+      "reason": "A branded fast-food shake cup with the chain's logo across it. Someone else's trademark, and a takeaway cup is not a photograph of something you made."
+    },
+    {
+      "title": "File:Menemen Emiralem Strawberry.jpg",
+      "rejectedFor": "menemen",
+      "reason": "A punnet of strawberries. Third attempt for this recipe and the third non-food result: the dish shares its name with a Turkish district, so its Commons category is landscapes, trains and produce. It keeps the branded fallback."
     }
   ]
 }
