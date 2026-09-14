@@ -61,6 +61,14 @@ jobs:
       - name: Validate the recipe image manifest
         run: npm run images:check
 
+      - name: Refuse offset pagination on anything that grows at the head
+        # A thread grows while somebody scrolls back through it, so `range()`
+        # shifts the window under the reader and a message goes missing with
+        # nothing to draw attention to the gap. Static, because that failure
+        # needs a row to arrive between two fetches — rare in a test, constant
+        # in production.
+        run: npm run audit:pagination
+
       - name: Verify the generated seed is in step with its TypeScript source
         run: |
           npm run seed:generate
