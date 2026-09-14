@@ -85,6 +85,11 @@ jobs:
   smoke:
     name: Drive the built app in a browser
     runs-on: ubuntu-latest
+    # It exports the bundle and then walks ~140 interactions across every
+    # screen, twice over for the narrow-viewport pass. Twenty-odd minutes is
+    # normal; the cap is here so a hung browser fails in half an hour rather
+    # than burning the default six.
+    timeout-minutes: 35
     # The only job that exercises the app as a user meets it: real navigation,
     # real typing, real rendering. Everything above it can pass while a screen
     # is blank — that is exactly what happened when every ingredient selection
@@ -99,8 +104,20 @@ jobs:
 
       - run: npm ci
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright and Chromium
+        # `playwright install` downloads the BROWSER; it does not install the
+        # npm package that drives it. The smoke script deliberately does not
+        # depend on Playwright — it locates one at runtime, so the app's
+        # dependency tree stays free of a browser automation library — which
+        # means CI has to supply it.
+        #
+        # `playwright` rather than `playwright-core`: it pins the browser
+        # revision it was built against, and `playwright install` then
+        # resolves to that local copy. Pinning them separately is how you get
+        # "Executable doesn't exist" from two compatible-looking versions.
+        run: |
+          npm i --no-save playwright
+          npx playwright install --with-deps chromium
 
       - name: Walk the app
         # The script exports the bundle itself, with the same DEMO flags the
