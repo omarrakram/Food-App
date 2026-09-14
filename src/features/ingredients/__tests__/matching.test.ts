@@ -354,3 +354,85 @@ describe('resolving English and Arabic names', () => {
     expect(resolveIngredient('  avocado  ')?.slug).toBe('avocado');
   });
 });
+
+// ---------------------------------------------------------------------------
+// Autocomplete relevance. Reported from the app: typing "to" offered garlic,
+// apples and pickles. Nothing was broken — their Egyptian transliterations are
+// `toum`, `tofah` and `torshi`, so all three really are prefix matches. The
+// ranking simply had no way to say that a match on an ingredient's OWN name
+// beats a match on one of its nicknames.
+// ---------------------------------------------------------------------------
+
+describe('ingredient autocomplete ranks by how good the evidence is', () => {
+  const names = (query: string, limit = 8) =>
+    searchIngredients(query, limit).map((entry) => entry.name);
+
+  it('puts canonical prefix matches above alias prefix matches', () => {
+    const top = names('to', 6);
+
+    for (const wanted of ['tomatoes', 'tofu', 'toast bread']) {
+      expect({ wanted, rank: top.indexOf(wanted) }).toEqual({
+        wanted,
+        rank: expect.any(Number),
+      });
+      expect(top).toContain(wanted);
+    }
+    // The three the report named, all matching only through a transliterated
+    // alias, must not be crowding out the real answers.
+    for (const alias of ['garlic', 'apples', 'pickles']) {
+      expect({ alias, inTopSix: top.includes(alias) }).toEqual({ alias, inTopSix: false });
+    }
+  });
+
+  it('is deterministic — the same query gives the same order every time', () => {
+    expect(names('to')).toEqual(names('to'));
+    expect(names('chick')).toEqual(names('chick'));
+  });
+
+  it('puts an exact match first', () => {
+    expect(names('rice')[0]).toBe('rice');
+    expect(names('lemon')[0]).toBe('lemon');
+    expect(names('eggs')[0]).toBe('eggs');
+  });
+
+  it('finds the obvious thing for a short English prefix', () => {
+    expect(names('chick', 3)).toContain('chickpeas');
+    expect(names('chick', 5)).toContain('chicken breast');
+    expect(names('lem', 3)).toContain('lemon');
+  });
+
+  it('ranks Arabic queries by the same rules', () => {
+    // طماطم — tomatoes. The canonical Arabic name, not an alias.
+    expect(names('طم', 4)).toContain('tomatoes');
+    expect(names('طماطم')[0]).toBe('tomatoes');
+    // فراخ — chicken.
+    expect(names('فراخ', 5)).toContain('chicken breast');
+    // عيش — bread.
+    expect(names('عيش', 5).length).toBeGreaterThan(0);
+  });
+
+  it('still tolerates a typo once the query is long enough to be sure', () => {
+    expect(names('tomatos', 3)).toContain('tomatoes');
+    expect(names('mushrom', 3)).toContain('mushrooms');
+    expect(names('brocoli', 3)).toContain('broccoli');
+  });
+
+  it('does NOT guess from two letters — that is where the noise came from', () => {
+    // A short query has a confident answer, so nothing fuzzy is offered
+    // alongside it. Every result here matches on a real prefix.
+    for (const name of names('to')) {
+      const entry = INGREDIENT_CATALOGUE.find((item) => item.name === name)!;
+      const haystack = [entry.name, entry.nameAr, ...entry.aliases].map((value) =>
+        normaliseIngredientName(value),
+      );
+      expect({ name, hasPrefix: haystack.some((value) => value.includes('to')) }).toEqual({
+        name,
+        hasPrefix: true,
+      });
+    }
+  });
+
+  it('returns nothing for a query that resembles nothing', () => {
+    expect(names('zzqqxx')).toEqual([]);
+  });
+});

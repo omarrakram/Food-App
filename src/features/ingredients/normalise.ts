@@ -162,3 +162,38 @@ export function sanitiseForPrompt(raw: string, maxLength = 60): string {
     .trim()
     .slice(0, maxLength);
 }
+
+/**
+ * Is `a` within `max` single-character edits of `b`?
+ *
+ * Bounded on purpose — it stops as soon as the best possible distance exceeds
+ * the budget, so a long catalogue costs almost nothing. Used only as the last
+ * resort in autocomplete, where the alternative to a typo-tolerant answer is
+ * no answer at all: "mushrom" resembles exactly one ingredient, and refusing
+ * to find it helps nobody.
+ */
+export function withinEditDistance(a: string, b: string, max: number): boolean {
+  if (Math.abs(a.length - b.length) > max) return false;
+  if (a === b) return true;
+
+  // Two rows of the matrix is all the algorithm ever needs.
+  let previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= a.length; i += 1) {
+    const current = [i];
+    let rowBest = i;
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      const value = Math.min(
+        (current[j - 1] ?? 0) + 1,
+        (previous[j] ?? 0) + 1,
+        (previous[j - 1] ?? 0) + cost,
+      );
+      current.push(value);
+      if (value < rowBest) rowBest = value;
+    }
+    // Nothing further down can beat the best value in this row.
+    if (rowBest > max) return false;
+    previous = current;
+  }
+  return (previous[b.length] ?? Infinity) <= max;
+}

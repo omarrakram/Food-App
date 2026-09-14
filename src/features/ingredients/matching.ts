@@ -8,7 +8,7 @@ import type {
 
 import { INGREDIENT_CATALOGUE, isUniversalBasic, type CatalogueIngredient } from './catalogue';
 import { freshnessOf } from './freshness';
-import { normaliseIngredientName, similarityScore } from './normalise';
+import { normaliseIngredientName, similarityScore, withinEditDistance } from './normalise';
 
 /**
  * Deterministic ingredient matching.
@@ -44,22 +44,135 @@ export function resolveIngredient(raw: string): CatalogueIngredient | null {
 }
 
 /** Autocomplete suggestions, best first. */
+/**
+ * How good a match is, as a rank rather than a blended number.
+ *
+ * WHY TIERS AND NOT A SCORE. Every name an ingredient answers to used to be
+ * thrown into one pool and the best fuzzy score won. That is why typing "to"
+ * offered garlic, apples and pickles: their Egyptian transliterations are
+ * `toum`, `tofah` and `torshi`, so all three are genuine prefix matches and
+ * scored the same as `tomatoes`. Nothing was broken — the ranking simply had
+ * no way to say that a match on an ingredient's OWN NAME beats a match on one
+ * of its nicknames.
+ *
+ * Higher wins. The gaps are deliberate: no amount of within-tier advantage can
+ * lift an alias hit above a canonical one.
+ */
+const TIER = {
+  exactCanonical: 100,
+  exactAlias: 90,
+  canonicalPrefix: 80,
+  aliasPrefix: 70,
+  canonicalTokenPrefix: 60,
+  aliasTokenPrefix: 50,
+  canonicalSubstring: 40,
+  aliasSubstring: 30,
+  fuzzy: 10,
+} as const;
+
+/** The tier a single candidate string earns, or 0 for no match at all. */
+function tierFor(query: string, candidate: string, canonical: boolean): number {
+  const q = normaliseIngredientName(query);
+  const c = normaliseIngredientName(candidate);
+  if (!q || !c) return 0;
+
+  if (c === q) return canonical ? TIER.exactCanonical : TIER.exactAlias;
+  if (c.startsWith(q)) return canonical ? TIER.canonicalPrefix : TIER.aliasPrefix;
+  if (c.split(' ').some((token) => token.startsWith(q))) {
+    return canonical ? TIER.canonicalTokenPrefix : TIER.aliasTokenPrefix;
+  }
+  if (c.includes(q)) return canonical ? TIER.canonicalSubstring : TIER.aliasSubstring;
+  return 0;
+}
+
+/**
+ * Below this, a typo-tolerant match is more likely to be noise than help.
+ * "to" fuzzily resembles a great many things; "tomatos" resembles one.
+ */
+const MIN_FUZZY_QUERY = 4;
+
+/**
+ * Typo tolerance, only ever consulted as a last resort.
+ *
+ * The budget scales with the query because a one-character slip in a
+ * four-letter word is most of it, and being generous there turns autocomplete
+ * into a random ingredient generator. Seven characters in, a slip is a slip.
+ */
+function fuzzyScore(query: string, candidate: string): number {
+  const q = normaliseIngredientName(query);
+  const c = normaliseIngredientName(candidate);
+  if (q.length < MIN_FUZZY_QUERY || !c) return 0;
+
+  const budget = q.length >= 7 ? 2 : 1;
+  if (withinEditDistance(q, c, budget)) return 1 - Math.abs(q.length - c.length) / 100;
+
+  // A slip inside one word of a longer name — "chiken breast".
+  for (const token of c.split(' ')) {
+    if (token.length >= MIN_FUZZY_QUERY && withinEditDistance(q, token, budget)) return 0.5;
+  }
+
+  // Falls back to the shared token-overlap band, which catches a reordered or
+  // partially-typed multi-word name.
+  const score = similarityScore(q, c);
+  return score > 0 && score < 0.7 ? score * 0.4 : 0;
+}
+
+/**
+ * Ingredients matching a typed query, best first.
+ *
+ * Deterministic: same query, same order, every time. Within a tier the shorter
+ * name wins — it is the tighter match on the same evidence — and ties break
+ * alphabetically rather than on catalogue order, so adding an ingredient
+ * cannot silently reshuffle an unrelated search.
+ */
 export function searchIngredients(query: string, limit = 8): CatalogueIngredient[] {
   const trimmed = query.trim();
   if (!trimmed) return [];
 
   const scored = INGREDIENT_CATALOGUE.map((ingredient) => {
-    const candidates = [ingredient.name, ingredient.nameAr, ...ingredient.aliases];
-    const best = candidates.reduce((max, candidate) => {
-      const score = similarityScore(trimmed, candidate);
-      return score > max ? score : max;
-    }, 0);
-    return { ingredient, score: best };
-  })
-    .filter((entry) => entry.score > 0.25)
-    .sort((a, b) => b.score - a.score);
+    // The ingredient's own names in both languages are canonical. Everything
+    // else it answers to is an alias.
+    let tier = Math.max(
+      tierFor(trimmed, ingredient.name, true),
+      tierFor(trimmed, ingredient.nameAr, true),
+    );
+    let matched = ingredient.name;
 
-  return scored.slice(0, limit).map((entry) => entry.ingredient);
+    for (const alias of ingredient.aliases) {
+      const aliasTier = tierFor(trimmed, alias, false);
+      if (aliasTier > tier) {
+        tier = aliasTier;
+        matched = alias;
+      }
+    }
+
+    if (tier === 0) {
+      const fuzzy = [ingredient.name, ingredient.nameAr, ...ingredient.aliases].reduce(
+        (best, candidate) => Math.max(best, fuzzyScore(trimmed, candidate)),
+        0,
+      );
+      if (fuzzy > 0) return { ingredient, tier: TIER.fuzzy, fuzzy, matched: ingredient.name };
+    }
+
+    return { ingredient, tier, fuzzy: 0, matched };
+  }).filter((entry) => entry.tier > 0);
+
+  // A confident match anywhere means the guesses are noise. Someone who has
+  // typed something the catalogue recognises does not want to be shown what it
+  // might have meant instead.
+  const best = scored.reduce((max, entry) => Math.max(max, entry.tier), 0);
+  const candidates =
+    best >= TIER.canonicalTokenPrefix ? scored.filter((entry) => entry.tier > TIER.fuzzy) : scored;
+
+  candidates.sort(
+    (a, b) =>
+      b.tier - a.tier ||
+      b.fuzzy - a.fuzzy ||
+      a.matched.length - b.matched.length ||
+      a.ingredient.name.localeCompare(b.ingredient.name),
+  );
+
+  return candidates.slice(0, limit).map((entry) => entry.ingredient);
 }
 
 /** Every allergen implied by a set of ingredient names. */

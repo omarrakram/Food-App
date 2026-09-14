@@ -66,6 +66,21 @@ jobs:
           # The repository name is the subpath a project site is served from.
           EXPO_WEB_BASE_URL: ${{ steps.pages.outputs.base_path }}
 
+      - name: Stamp the build so the deployed commit can be checked without opening it
+        # `https://<pages>/build.txt` answers "is the preview current?" in one
+        # fetch. The About screen carries the same SHA, but reading it means
+        # loading the app — and the app shell is exactly the thing a browser
+        # might be serving from cache when that question comes up.
+        run: |
+          set -euo pipefail
+          {
+            echo "commit=${GITHUB_SHA}"
+            echo "short=${GITHUB_SHA:0:7}"
+            echo "built=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "ref=${GITHUB_REF_NAME}"
+          } > dist/build.txt
+          cat dist/build.txt
+
       - name: Add an SPA fallback
         # Expo's static output already writes one HTML file per route, so deep
         # links resolve directly. This only catches paths with no file of their
