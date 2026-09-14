@@ -74,6 +74,40 @@ jobs:
           # the app must run, without a backend configured.
           EXPO_PUBLIC_APP_ENV: preview
 
+  smoke:
+    name: Drive the built app in a browser
+    runs-on: ubuntu-latest
+    # The only job that exercises the app as a user meets it: real navigation,
+    # real typing, real rendering. Everything above it can pass while a screen
+    # is blank — that is exactly what happened when every ingredient selection
+    # returned the same recipes and the unit tests all agreed it was fine.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Walk the app
+        # The script exports the bundle itself, with the same DEMO flags the
+        # preview deploys under — a smoke test that exercises a different
+        # configuration from the deployed one is testing a build nobody opens.
+        run: npm run smoke:web
+
+      - name: Keep the screenshots when it fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-screenshots
+          path: .smoke/
+          retention-days: 7
+
   database:
     name: Migrations, seed and RLS policies
     runs-on: ubuntu-latest

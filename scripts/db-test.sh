@@ -35,7 +35,10 @@ echo "-> seed"
 psql -d "${DB}" -v ON_ERROR_STOP=1 -q -f supabase/seed.sql
 
 echo "-> tests"
-for suite in supabase/tests/0[1-9]*.sql; do
+# Everything but the shim, in filename order. Deliberately NOT `0[1-9]*`:
+# that glob silently stops matching at the tenth suite, and a test that stops
+# running is worse than one that fails.
+for suite in $(ls supabase/tests/*.sql | grep -v '00_platform_shim.sql'); do
   # Capture first, then filter: piping psql straight into a filter would hide
   # the ERROR line that tells you which assertion failed.
   output="$(psql -d "${DB}" -v ON_ERROR_STOP=1 -f "${suite}" 2>&1)" || {

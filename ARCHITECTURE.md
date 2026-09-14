@@ -221,6 +221,44 @@ not require a schema migration on the client's core type.
   Postgres or fetch error never reaches the UI.
 - **Logging redacts** emails, tokens, free text and query strings.
 
+### Four rules the social features rest on
+
+Each of these is enforced by the database and asserted in
+`supabase/tests/`. They are written out because each one is easy to "fix" by
+adding the policy somebody's client seemed to need.
+
+1. **A role is granted out of band.** `user_roles` has read policies and NO
+   write policy at all, so the only way to make somebody a moderator is a
+   service-role insert. A policy that let admins grant admin would let anyone
+   who reached one admin reach all of them. The client-side `useCanModerate`
+   decides what to RENDER; `moderate_submission` re-checks with the caller's
+   own credentials and is the boundary.
+
+2. **Publication is a function, never a column.** `recipes.is_public` is
+   unwritable by every client — moderators included — and
+   `moderate_submission` is the only route to it. There is no branch in it
+   that publishes on anything but an approval.
+
+3. **A notification is written by a trigger.** `notifications` has no insert
+   policy: every row comes from a definer trigger on the table where the event
+   happened. A notifications table a client can write to is a spam channel
+   with the product's name on it. Each row is a POINTER (kind + subject id) —
+   nothing copies a message body or a recipe title, which is what lets deleted
+   or unpublished content stop being advertised by a notification about it.
+
+4. **A submission photograph is exactly as public as its recipe.** The object
+   never moves between buckets. The storage policy derives readability from
+   `recipes.is_public`, so unpublishing takes the photograph down in the same
+   statement — a copy-on-approval design leaves the copy behind, which is the
+   case moderation exists for.
+
+`supabase/tests/09_privacy_audit_test.sql` asserts the STRUCTURE rather than
+the behaviour: every table has RLS, every read policy on a private table is
+scoped to `auth.uid()`, every security-definer function is revoked from `anon`
+and pins its `search_path`, and `public_profiles` exposes exactly eight
+columns. That is what catches the table somebody adds later and forgets to
+protect.
+
 ---
 
 ## 8. Internationalisation

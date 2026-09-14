@@ -43,9 +43,9 @@ push, and whose screens the interaction smoke test drives. Where a phase is
 partly credential-gated (E–G need a Supabase project) the built half is
 complete and the inert half is named under "Credentials this needs".
 
-The one correction this pass made to the table: the catalogue is 158 recipes,
-not 153. Five seafood dishes were added after the dataset audit found the
-protein spread too narrow.
+The catalogue is 161 recipes. It was 153 until the dataset audit found the
+protein spread too narrow; five seafood dishes and three more went in after
+it.
 
 ---
 
@@ -318,8 +318,8 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 699/699 across 43 suites, 2 projects |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 255 assertions across eight files |
+| Unit + component tests | `npm test` | **pass**, 704/704 across 44 suites, 2 projects |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
@@ -405,12 +405,25 @@ requests are the sandbox's egress policy, not the app.
 ## What is built
 
 ### Screens
-Bottom tabs (Home, Discover, Pantry, Saved, Profile); cook-with-what-I-have and
-eat-within-my-budget flows with a shared sortable results view; recipe detail
-with have/need split, serving scaling and step check-off; distraction-free
-cooking mode; natural-language search; shopping list; **six-step** onboarding;
-seven settings screens; auth screens; edit-profile (`/settings/profile`) and
-another user's public profile (`/u/[username]`).
+
+**Food.** Bottom tabs (Home, Discover, Pantry, Saved, Profile);
+cook-with-what-I-have and eat-within-my-budget flows with a shared sortable
+results view; recipe detail with have/need split, serving scaling and step
+check-off; distraction-free cooking mode; natural-language search; shopping
+list; **six-step** onboarding; eight settings screens; auth screens.
+
+**People.** Edit-profile (`/settings/profile`); another user's public profile
+(`/u/[username]`); friends, requests and blocking (`/friends`); the
+conversation list (`/messages`) and a thread (`/messages/[id]`); the
+notification feed (`/notifications`).
+
+**Community.** Submit a recipe (`/submit`); what happened to the ones you sent
+(`/submit/status`); the review queue (`/moderate`) and one submission under
+review (`/moderate/[id]`).
+
+Everything past the tabs is reached through the drawer, which carries unread
+badges for messages and notifications and shows the review queue only when the
+server says the viewer holds the role.
 
 ### Domain engines — pure, offline, unit-tested
 | Module | Responsibility |
@@ -439,7 +452,7 @@ Everything a person edits is a data file, not code:
 |---|---|---|---|
 | Ingredients (257) | `data/ingredients/catalogue.csv` | `catalogue.generated.ts` | `npm run ingredients:import` |
 | Prices (69) | `data/prices/eg.csv` | `pricing/price-data.ts` | `npm run prices:import` |
-| Recipes (158) | `data/recipes/*.json` | `recipes/catalogue.generated.ts` | `npm run recipes:import` |
+| Recipes (161) | `data/recipes/*.json` | `recipes/catalogue.generated.ts` | `npm run recipes:import` |
 | Database seed | the three above | `supabase/seed.sql` | `npm run seed:generate` |
 
 Each importer validates and refuses bad input, and CI fails on drift. **257
@@ -485,14 +498,36 @@ phone browser that is not signed in to claude.ai gets a 404.
 
 ### What the preview can and cannot show
 
-Everything that runs on device works: the whole 158-recipe catalogue, hard
-constraint filtering, all three gap budgets, budget estimation,
-Discover, the pantry, Saved, the shopping list, the drawer, and both languages.
+Everything that runs on device works for real: the whole 161-recipe catalogue,
+hard constraint filtering, all three gap budgets, budget estimation, Discover,
+the pantry, Saved, the shopping list, the drawer, and both languages.
 
-Everything that needs a server is inert and **says so** rather than pretending:
-sign-in, profiles and handles, avatar upload, friends, messaging, and AI
-generation. `/settings/about` reports which of those are live, reading what
-`env` actually resolved.
+**The social screens run in DEMO MODE, and every one of them says so.** The
+preview has no Supabase project behind it, so Friends, Messages, sharing,
+submissions, moderation and notifications would otherwise be permanently empty
+and nobody could review them. They are fed by seeded on-device repositories
+instead — real behaviour, real persistence, real state machines — and each
+carries a banner in the warning colour reading *"DEMO MODE — nothing here is
+sent anywhere"*.
+
+The rule that banner exists to keep: **a demo action must never be mistakable
+for a successful server action.** The buttons have to do something for the
+screens to be walkable, so what makes it honest is the label, not the
+inertness.
+
+Two things to know about it:
+
+- `EXPO_PUBLIC_DEMO_MODE` is the only way in, and `env.ts` forces it false when
+  `EXPO_PUBLIC_APP_ENV` is `production`. It cannot ship by accident.
+- The moderator screens are reachable in the preview behind a flag, and the
+  queue carries a second notice saying exactly that: in the real app that
+  screen is reached only by an account a database administrator granted the
+  role to, and there is no way to grant it from inside the app.
+
+Everything else that needs a server is inert and **says so** rather than
+pretending: sign-in, profiles and handles, avatar upload, and AI generation.
+`/settings/about` reports which of those are live, reading what `env` actually
+resolved.
 
 ### Verifying the deployed build from this sandbox
 

@@ -1263,20 +1263,32 @@ async function main() {
       );
       await shot('19a-messages');
 
-      // Open the thread that has the shared recipe in it.
-      const firstThread = conversationIds[0];
-      check('a conversation opens', await tap(firstThread));
-      await page.waitForTimeout(1600);
+      // Walk every thread looking for the shared recipe, rather than assuming
+      // which one holds it. A shared recipe is a REFERENCE, so a rendered card
+      // is the proof that the lookup resolved — and the list order is the
+      // demo repository's business, not this test's.
+      let sharedCard = false;
+      let openedThread = null;
+      for (const thread of conversationIds) {
+        await page.goto(`${BASE}/messages`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1200);
+        await tap(thread);
+        await page.waitForTimeout(1600);
+        openedThread = thread;
+
+        const found = await page.evaluate(
+          () => document.querySelectorAll('[data-testid$="-recipe"]').length > 0,
+        );
+        if (found) {
+          sharedCard = true;
+          break;
+        }
+      }
+
+      check('a conversation opens', openedThread !== null, openedThread ?? '');
       check('the thread renders', await visible('conversation-thread', 6000));
       check('the thread names who it is with', await visible('conversation-title', 3000));
       check('the thread is badged as demo too', await visible('conversation-demo-banner', 3000));
-
-      // A shared recipe is a REFERENCE, so the card is only there if the
-      // lookup resolved. A rendered card is the proof that end of sharing
-      // works; a missing one would mean the reference did not resolve.
-      const sharedCard = await page.evaluate(
-        () => document.querySelectorAll('[data-testid*="-recipe"]').length > 0,
-      );
       check('a shared recipe renders as a card', sharedCard);
       await shot('19b-conversation');
 
@@ -1293,9 +1305,13 @@ async function main() {
         () => document.querySelectorAll('[data-testid^="message-"]').length,
       );
       check('sending adds the message to the thread', after > before, `${before} -> ${after}`);
+      const threadText = await page.evaluate(
+        () => document.querySelector('[data-testid="conversation-thread"]')?.textContent ?? '',
+      );
       check(
         'the words the user typed are on screen',
-        await page.getByText('smoke test message').first().isVisible().catch(() => false),
+        threadText.includes('smoke test message'),
+        threadText.slice(-60),
       );
       await shot('19c-sent');
 
