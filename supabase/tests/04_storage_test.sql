@@ -207,6 +207,67 @@ $$;
 reset role;
 reset request.jwt.claim.sub;
 
+-- --------------------------------------------------------------------------
+-- A submission photograph is exactly as public as its recipe
+-- --------------------------------------------------------------------------
+-- The design in `20260914130000_submission_photos.sql`: the file never moves
+-- between buckets, and readability is derived from the recipe's state. The
+-- case this exists for is the one a copy-on-approval design gets wrong — a
+-- recipe taken down for unsafe instructions whose photograph is still served
+-- from a public bucket.
+
+insert into auth.users (id, email)
+values ('11110000-0000-4000-8000-000000000009', 'photo@storage.test');
+
+do $$
+declare
+  dish uuid;
+  path text := '11110000-0000-4000-8000-000000000009/recipe-photo.jpg';
+begin
+  insert into public.recipes (title, description, source, created_by, is_public, image_url)
+  values ('Photographed submission', '', 'user',
+          '11110000-0000-4000-8000-000000000009', false, path)
+  returning id into dish;
+
+  insert into storage.objects (bucket_id, name, owner)
+  values ('recipe-uploads', path, '11110000-0000-4000-8000-000000000009');
+
+  -- Unpublished: only the owner (and a moderator mid-review) may look.
+  set local role authenticated;
+  set local request.jwt.claim.sub = '11110000-0000-4000-8000-000000000002';
+
+  perform pg_temp.assert(
+    (select count(*) from storage.objects where name = path) = 0,
+    'a photograph on an unpublished recipe is not readable by another user');
+
+  reset role;
+  update public.recipes set is_public = true where id = dish;
+
+  set local role authenticated;
+  set local request.jwt.claim.sub = '11110000-0000-4000-8000-000000000002';
+
+  perform pg_temp.assert(
+    (select count(*) from storage.objects where name = path) = 1,
+    'publishing the recipe publishes its photograph');
+
+  reset role;
+  update public.recipes set is_public = false where id = dish;
+
+  set local role authenticated;
+  set local request.jwt.claim.sub = '11110000-0000-4000-8000-000000000002';
+
+  -- THE assertion. A copy into a public bucket would leave this readable.
+  perform pg_temp.assert(
+    (select count(*) from storage.objects where name = path) = 0,
+    'unpublishing takes the photograph down in the same statement');
+
+  reset role;
+end
+$$;
+
+reset role;
+reset request.jwt.claim.sub;
+
 -- Every write policy that exists on storage.objects must be scoped to a
 -- bucket. A policy that forgot its bucket_id clause would apply everywhere.
 do $$

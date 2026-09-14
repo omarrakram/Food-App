@@ -20,6 +20,7 @@ import {
   useSubmittedRecipe,
   useSubmissionsAreLive,
 } from '@/features/submissions/hooks';
+import { useStorageImageUrl } from '@/features/storage/hooks';
 import { useI18n } from '@/i18n';
 import { presentError } from '@/lib/errors';
 import { useTheme } from '@/theme';
@@ -56,6 +57,7 @@ export default function ModerateSubmissionScreen() {
   );
   const recipe = useSubmittedRecipe(entry?.recipeId);
   const history = useModerationHistory(id);
+  const photo = useStorageImageUrl(recipe.data?.imageUrl);
 
   const [feedback, setFeedback] = useState('');
   const [needsFeedback, setNeedsFeedback] = useState(false);
@@ -137,8 +139,14 @@ export default function ModerateSubmissionScreen() {
         </Text>
       </View>
 
+      {/*
+        The photograph lives in a private bucket and is signed for whoever may
+        read it — here, a moderator, because there is a submission against this
+        recipe. Passing the resolved URL rather than the stored path is what
+        lets the ordinary RecipeImage render it, fallback and all.
+      */}
       <RecipeImage
-        recipe={dish}
+        recipe={{ ...dish, imageUrl: photo.data ?? null }}
         aspectRatio={theme.layout.cardImageAspect}
         style={{ borderRadius: theme.radius.md }}
         testID="moderate-photo"

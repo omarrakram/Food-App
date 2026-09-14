@@ -103,15 +103,44 @@ jobs:
       - name: Refuse to publish anything secret
         # This bundle becomes a public URL. A leaked key would be public with
         # it, so the check is a gate rather than a report.
+        #
+        # The literal patterns catch a key pasted into a source file. The
+        # regex ones catch the shapes — a JWT, a PEM block, an AWS key id —
+        # which is what catches the key nobody thought to name. `service_role`
+        # is the Supabase key that bypasses RLS entirely; it belongs in edge
+        # function secrets and nowhere a browser can read.
         run: |
           set -euo pipefail
           bundle=$(find dist -name '*.js' -type f)
+
           for pattern in 'sk-ant-' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
             if grep -rqF "$pattern" $bundle; then
               echo "::error::Refusing to publish: found '$pattern' in the web bundle."
               exit 1
             fi
           done
+
+          # A Supabase service-role JWT decodes to a payload containing
+          # "role":"service_role". The anon key is a JWT too and is SUPPOSED
+          # to be in the bundle, so the shape alone cannot be the test — the
+          # payload is decoded and inspected.
+          for token in $(grep -rhoE 'eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}' $bundle | sort -u); do
+            payload=$(echo "$token" | cut -d. -f2)
+            # base64url, and padding is optional in a JWT.
+            decoded=$(echo "${payload}==" | tr '_-' '/+' | base64 -d 2>/dev/null || true)
+            if echo "$decoded" | grep -q 'service_role'; then
+              echo "::error::Refusing to publish: a service-role JWT is in the web bundle."
+              exit 1
+            fi
+          done
+
+          for shape in 'BEGIN [A-Z ]*PRIVATE KEY' 'AKIA[0-9A-Z]{16}' 'ghp_[A-Za-z0-9]{36}'; do
+            if grep -rqE "$shape" $bundle; then
+              echo "::error::Refusing to publish: found something matching /$shape/ in the bundle."
+              exit 1
+            fi
+          done
+
           echo "No secret-shaped strings in the bundle."
 
       - uses: actions/upload-pages-artifact@v3

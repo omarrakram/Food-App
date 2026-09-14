@@ -14,6 +14,7 @@ import { Stepper } from '@/components/ui/stepper';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { useRepositories } from '@/features/data/repositories';
+import { useImageUpload } from '@/features/storage/hooks';
 import { searchIngredients } from '@/features/ingredients/matching';
 import {
   useMySubmissions,
@@ -96,6 +97,7 @@ export default function SubmitRecipeScreen() {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const mine = useMySubmissions();
   const actions = useSubmissionActions();
+  const upload = useImageUpload('recipe');
 
   const [draft, setDraft] = useState<SubmissionDraft>(emptyDraft());
   const [ingredientQuery, setIngredientQuery] = useState('');
@@ -134,6 +136,27 @@ export default function SubmitRecipeScreen() {
     patch({
       steps: draft.steps.map((step, at) => (at === index ? { ...step, instruction } : step)),
     });
+
+  /**
+   * Attaching a photograph.
+   *
+   * It goes to `recipe-uploads`, which is not a public bucket: a submission
+   * under review must not be reachable by URL, or moderation is advisory. The
+   * object never moves — the storage policy makes it readable exactly while
+   * the recipe that references it is public, so approval publishes it and
+   * unpublishing takes it down in the same statement.
+   *
+   * The PATH is what goes on the recipe, not a URL. A URL would have to be
+   * signed, and a signed URL expires.
+   */
+  const addPhoto = () => {
+    void upload
+      .mutateAsync()
+      .then((result) => {
+        if (result) patch({ imageUrl: result.path });
+      })
+      .catch((error: unknown) => fail(error));
+  };
 
   const fail = (error: unknown) => {
     const presented = presentError(error);
@@ -216,6 +239,45 @@ export default function SubmitRecipeScreen() {
           </Text>
         </View>
       ) : null}
+
+      <Section title={t('submit.photo')} subtitle={t('submit.photoHint')}>
+        <View style={{ gap: theme.spacing.sm }}>
+          {draft.imageUrl ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: theme.spacing.sm,
+                backgroundColor: theme.colors.surfaceAlt,
+                borderRadius: theme.radius.sm,
+                padding: theme.spacing.sm,
+              }}
+              testID="submit-photo-attached"
+            >
+              <Ionicons name="image-outline" size={18} color={theme.colors.textSecondary} />
+              <Text variant="footnote" color="textSecondary" style={{ flex: 1 }} lines={1}>
+                {t('submit.photoAttached')}
+              </Text>
+              <IconButton
+                icon="close"
+                size={30}
+                variant="ghost"
+                onPress={() => patch({ imageUrl: null })}
+                accessibilityLabel={t('common.remove')}
+                testID="submit-photo-remove"
+              />
+            </View>
+          ) : null}
+          <Button
+            label={draft.imageUrl ? t('submit.photoReplace') : t('submit.photoAdd')}
+            icon="camera-outline"
+            variant="secondary"
+            onPress={addPhoto}
+            loading={upload.isPending}
+            testID="submit-photo"
+          />
+        </View>
+      </Section>
 
       <Section title={t('submit.aboutTheDish')}>
         <View style={{ gap: theme.spacing.md }}>

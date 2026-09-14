@@ -744,6 +744,35 @@ async function main() {
     );
     await tap('pantry-editor-close', { optional: true });
 
+    // The social screens are the newest and the least walked, which makes
+    // them the likeliest place for an untranslated string to sit unnoticed.
+    // The demo data is deliberately excluded by name: the seeded people and
+    // their messages are data written in Latin, the same as the user's own
+    // name, and translating a demo fixture would be translating a fixture.
+    const DEMO_LATIN =
+      /^(Nour|Hassan|Layla|Omar|@nour|@hassan|@layla|@omar|Weeknight lentil soup|Smoke test.*|.*lemon roast chicken)$/i;
+    const socialLeaked = async () =>
+      (await latinLines()).filter((line) => !DEMO_LATIN.test(line));
+
+    for (const [path, label] of [
+      ['/messages', 'the Arabic messages list'],
+      ['/friends', 'the Arabic friends screen'],
+      ['/notifications', 'the Arabic notifications feed'],
+      ['/submit', 'the Arabic submission form'],
+      ['/submit/status', 'the Arabic submission status screen'],
+      ['/moderate', 'the Arabic review queue'],
+    ]) {
+      await page.goto(BASE + path, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1500);
+      const leaked = await socialLeaked();
+      check(
+        `${label} has no English left in it`,
+        leaked.length === 0,
+        leaked.slice(0, 4).join(' | '),
+      );
+    }
+    await shot('13c-social-arabic');
+
     await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1400);
     await tap('language-en', { optional: true });
@@ -1453,6 +1482,121 @@ async function main() {
       );
       await shot('22a-notifications');
     }
+
+    // --- Accessibility and layout ------------------------------------------
+    //
+    // Two objective properties, checked on every screen rather than argued
+    // about per component.
+    //
+    // A CONTROL WITH NO NAME is invisible to a screen reader: it announces as
+    // "button" and the user has to activate it to find out what it does. This
+    // counts the ones with neither an accessible name nor text inside them.
+    //
+    // A SCREEN THAT SCROLLS SIDEWAYS is broken on a phone, and it is the
+    // commonest thing a desktop browser hides — the window is wide enough that
+    // a 420px-wide row fits. Checked at 390 and again at 320, which is the
+    // narrowest phone still in use.
+    console.log('\n▸ accessibility and layout');
+
+    const SCREENS = [
+      ['/', 'home'],
+      ['/discover', 'discover'],
+      ['/cook', 'cook'],
+      ['/pantry', 'pantry'],
+      ['/messages', 'messages'],
+      ['/friends', 'friends'],
+      ['/notifications', 'notifications'],
+      ['/submit', 'submit'],
+      ['/submit/status', 'submission status'],
+      ['/moderate', 'review queue'],
+      ['/shopping-list', 'shopping list'],
+      ['/profile', 'profile'],
+    ];
+
+    /**
+     * Interactive nodes with no accessible name.
+     *
+     * React Native Web duplicates some attributes onto nested nodes, so the
+     * count is of OUTERMOST interactive elements — a nested span inheriting
+     * role=button from its parent is not a second nameless control.
+     */
+    const namelessControls = () =>
+      page.evaluate(() => {
+        const selector =
+          'button, [role="button"], [role="link"], a[href], input, textarea, select, [role="switch"], [role="checkbox"]';
+        const all = [...document.querySelectorAll(selector)];
+        const outermost = all.filter(
+          (el) => !all.some((other) => other !== el && other.contains(el)),
+        );
+        return outermost
+          .filter((el) => {
+            const style = window.getComputedStyle(el);
+            if (style.display === 'none' || style.visibility === 'hidden') return false;
+            if (el.closest('[aria-hidden="true"]')) return false;
+            const name =
+              el.getAttribute('aria-label') ??
+              el.getAttribute('title') ??
+              el.getAttribute('placeholder') ??
+              el.textContent ??
+              '';
+            // Ionicons render as private-use glyphs, which are characters but
+            // not a name anybody can read out.
+            const readable = name.replace(/[\uE000-\uF8FF]/g, '').trim();
+            return readable.length === 0;
+          })
+          .map((el) => el.getAttribute('data-testid') ?? el.tagName.toLowerCase())
+          .slice(0, 6);
+      });
+
+    const overflows = () =>
+      page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+
+    let namelessTotal = 0;
+    const overflowing = [];
+    for (const [path, label] of SCREENS) {
+      await page.goto(BASE + path, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1200);
+
+      const nameless = await namelessControls();
+      if (nameless.length > 0) {
+        namelessTotal += nameless.length;
+        check(`every control on ${label} has a name a screen reader can read`, false, nameless.join(', '));
+      }
+
+      const slop = await overflows();
+      if (slop > 1) overflowing.push(`${label} +${slop}px`);
+    }
+
+    check(
+      'every control on every screen has an accessible name',
+      namelessTotal === 0,
+      namelessTotal === 0 ? `${SCREENS.length} screens` : `${namelessTotal} nameless`,
+    );
+    check(
+      'no screen scrolls sideways at 390px',
+      overflowing.length === 0,
+      overflowing.join(', ') || `${SCREENS.length} screens`,
+    );
+
+    // The narrow pass. A layout that survives 390 and breaks at 320 is a
+    // layout with a fixed width in it somewhere.
+    await page.setViewportSize({ width: 320, height: 720 });
+    const narrowOverflow = [];
+    for (const [path, label] of SCREENS) {
+      await page.goto(BASE + path, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1000);
+      const slop = await overflows();
+      if (slop > 1) narrowOverflow.push(`${label} +${slop}px`);
+    }
+    check(
+      'and none of them scrolls sideways at 320px either',
+      narrowOverflow.length === 0,
+      narrowOverflow.join(', ') || `${SCREENS.length} screens`,
+    );
+    await shot('23-narrow');
+    await page.setViewportSize({ width: 390, height: 844 });
 
     // --- The drawer -------------------------------------------------------
     // The drawer is invisible until something opens it, which makes it exactly
