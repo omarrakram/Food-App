@@ -65,24 +65,19 @@ export default function ConversationScreen() {
   const partnerName =
     conversation?.partner.displayName ?? conversation?.partner.username ?? '';
 
-  // Opening the thread is what clears the badge. Once per mount: re-firing it
-  // on every render would write a timestamp per keystroke.
+  // Opening the thread is what clears the badge — in demo mode too, where
+  // there is no server to tell but the count should still go away.
+  //
+  // Once per mount. Re-firing it on every render would write a `last_read_at`
+  // per keystroke, and the unread count is derived from that column.
   useEffect(() => {
-    if (!id || marked.current || !isLive) return;
+    if (!id || marked.current) return;
     marked.current = true;
     markRead.mutate(id);
     // `markRead` is a stable mutation object from React Query; including it
     // would re-run this on every render of the parent.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, isLive]);
-
-  // Demo mode has no server to tell, but the badge should still clear.
-  useEffect(() => {
-    if (!id || isLive || marked.current) return;
-    marked.current = true;
-    markRead.mutate(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, isLive]);
+  }, [id]);
 
   // A share handed in through the route: "Share → pick a friend" lands here
   // with the recipe already attached, so the user can add a note or just send.

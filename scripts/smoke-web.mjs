@@ -744,15 +744,43 @@ async function main() {
     );
     await tap('pantry-editor-close', { optional: true });
 
-    // The social screens are the newest and the least walked, which makes
-    // them the likeliest place for an untranslated string to sit unnoticed.
-    // The demo data is deliberately excluded by name: the seeded people and
-    // their messages are data written in Latin, the same as the user's own
-    // name, and translating a demo fixture would be translating a fixture.
-    const DEMO_LATIN =
-      /^(Nour|Hassan|Layla|Omar|@nour|@hassan|@layla|@omar|Weeknight lentil soup|Smoke test.*|.*lemon roast chicken)$/i;
+    // The social screens are the newest and the least walked, which makes them
+    // the likeliest place for an untranslated string to sit unnoticed.
+    //
+    // THE HARD PART is that these screens are the only ones whose content is
+    // DATA rather than dictionary strings — seeded people, the messages they
+    // sent, the note a reviewer wrote. A fixture written in Latin is not an
+    // untranslated string, and translating one would be translating a fixture.
+    // So three exclusions, each for a different reason:
+    //
+    //   * a line containing ANY Arabic is fine. "Nour شارك معاك وصفة" is a
+    //     translated string with a Latin name interpolated into it, which is
+    //     exactly right — the name is what the person is called.
+    //   * one- and two-character lines are avatar initials, derived from a
+    //     name rather than written anywhere.
+    //   * the seeded fixture text, listed explicitly so that adding a new
+    //     fixture is a deliberate act rather than a silent widening.
+    //
+    // What is left — a Latin-only line of three characters or more that is not
+    // a fixture — is a string somebody forgot to translate.
+    const DEMO_FIXTURES = [
+      /^@?(nour|hassan|layla|omar)$/i,
+      /^Something with the tomatoes before they go\.$/,
+      /^What are you making tonight\?$/,
+      /^Try this one, it is quick\.$/,
+      /^Weeknight lentil soup$/,
+      /^Please add quantities for the spices, and say how long to simmer\.$/,
+      /lemon roast chicken$/i,
+      /^Smoke test/i,
+    ];
+
     const socialLeaked = async () =>
-      (await latinLines()).filter((line) => !DEMO_LATIN.test(line));
+      (await latinLines()).filter(
+        (line) =>
+          !/[\u0600-\u06FF]/.test(line) &&
+          line.length > 2 &&
+          !DEMO_FIXTURES.some((fixture) => fixture.test(line)),
+      );
 
     for (const [path, label] of [
       ['/messages', 'the Arabic messages list'],

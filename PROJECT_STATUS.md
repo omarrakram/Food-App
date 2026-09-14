@@ -326,7 +326,8 @@ branch):
 | Web production bundle | `npx expo export --platform web` | **pass** |
 | Image manifest | `npm run images:check` | **pass**, 67 of 161; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
 | Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 105 interaction checks (non-demo build); the demo-mode walk adds the social screens |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 152 interaction checks across every screen, in DEMO MODE so the social screens have something in them |
+| Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
@@ -555,9 +556,12 @@ curl -s .../deployments/<id>/statuses                          # state: success
 ## Where this session stopped
 
 **Latest commit: see `git log -1` on `claude/expo-rn-setup-mom5gw`.** Phases A
-through I are complete and verified. The correctness hotfix is in progress:
-the matching engine is fixed and proven through the rendered app; the
-photographs are still being acquired.
+through O are complete and verified, along with the correctness hotfix. Q–U
+(the review pass) is most of the way through: the privacy audit, the security
+review, the storage policy review, the pagination review, the accessibility
+and RTL regressions, the secret scan and CI are all done. What remains is the
+final deployed-preview walk, which this sandbox cannot do directly — the
+egress proxy blocks `omarrakram.github.io`, verified by probing it.
 
 ### THE SINGLE NEXT ACTION
 
@@ -849,7 +853,8 @@ npm run fn:test                     # run their tests
 npm run ingredients:import          # data/ingredients/catalogue.csv -> TS
 npm run prices:import               # data/prices/eg.csv -> TS
 npm run seed:generate               # regenerate supabase/seed.sql
-./scripts/db-test.sh                # migrations + seed + 45 RLS assertions
+npm run audit:pagination            # refuse offset paging on growing lists
+./scripts/db-test.sh                # migrations + seed + 290 RLS assertions
 
 npm run db:types:from-url           # regenerate Supabase types (needs Docker)
 python3 scripts/generate-icons.py   # regenerate the placeholder icons
