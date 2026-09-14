@@ -122,6 +122,9 @@ function RootNavigator() {
         <Stack.Screen name="shopping-list" />
         <Stack.Screen name="friends" />
         <Stack.Screen name="messages" />
+        <Stack.Screen name="submit" />
+        <Stack.Screen name="moderate" />
+        <Stack.Screen name="notifications" />
         <Stack.Screen name="u" />
         <Stack.Screen name="settings" />
         <Stack.Screen name="+not-found" options={{ title: 'Not found' }} />

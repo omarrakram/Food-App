@@ -159,8 +159,17 @@ async function main() {
     log('exporting the web bundle…');
     // EXPO_OFFLINE keeps the CLI from reaching api.expo.dev, which is blocked
     // in some sandboxes and only ever consulted for version hints.
+    // The DEMO flags match `.github/workflows/preview.yml` exactly, and that is
+    // the point: a smoke test that exports a different configuration from the
+    // one that gets deployed is testing a build nobody will ever open. The
+    // social screens only have anything in them under these.
     await run('npx', ['expo', 'export', '--platform', 'web', '--clear'], {
-      env: { ...process.env, EXPO_OFFLINE: '1' },
+      env: {
+        ...process.env,
+        EXPO_OFFLINE: '1',
+        EXPO_PUBLIC_APP_ENV: process.env.EXPO_PUBLIC_APP_ENV ?? 'preview',
+        EXPO_PUBLIC_DEMO_MODE: process.env.EXPO_PUBLIC_DEMO_MODE ?? 'true',
+      },
     });
   }
 
@@ -1296,6 +1305,155 @@ async function main() {
       }
     }
 
+    // --- Community submissions ---------------------------------------------
+    // The form, the queue, and the one thing that must never regress: a
+    // moderator screen that is reachable without the role. In this build the
+    // role is a preview flag and the screen says so — in production it is a
+    // server-side check against a table no client can write.
+    console.log('\n▸ submissions');
+    await page.goto(`${BASE}/submit`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const submitForm = await visible('submit-screen', 4000);
+    const submitNeedsAccount = await visible('submit-needs-account', 1500);
+    check(
+      'submit either opens the form or says it needs an account',
+      submitForm || submitNeedsAccount,
+      submitForm ? 'form shown' : 'needs an account',
+    );
+
+    if (submitForm) {
+      check('the form is badged as demo', await visible('submit-demo-banner', 3000));
+      check('it asks for a name', await visible('submit-title', 3000));
+      check('it asks for ingredients', await visible('submit-ingredient-search', 3000));
+      check('it asks for steps', await visible('submit-step-0', 3000));
+
+      // Sending an empty draft must be refused with reasons, not accepted.
+      await tap('submit-send');
+      await page.waitForTimeout(700);
+      const refused = await visible('submit-problems', 3000);
+      check('an empty recipe is refused, with the reasons listed', refused);
+      await shot('20a-submit-empty');
+
+      // Fill enough of it in to see the objections clear.
+      await type('submit-title', 'Smoke test tagine');
+      await type('submit-ingredient-search', 'tomato');
+      await page.waitForTimeout(700);
+      const picked = await page.evaluate(() => {
+        const chip = document.querySelector('[data-testid^="submit-ingredient-suggestion-"]');
+        return chip ? chip.getAttribute('data-testid') : null;
+      });
+      check('the ingredient search suggests catalogue ingredients', picked !== null, picked ?? '');
+      if (picked) {
+        await tap(picked);
+        check('picking one adds a line', await visible('submit-ingredient-0', 3000));
+      }
+      await shot('20b-submit-filled');
+    }
+
+    await page.goto(`${BASE}/submit/status`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+    const statusList = await visible('submissions-list', 4000);
+    const statusEmpty = await visible('submissions-empty', 1500);
+    check(
+      'the status screen shows submissions or an honest empty state',
+      statusList || statusEmpty,
+      statusList ? 'listed' : 'empty',
+    );
+    if (statusList) {
+      check(
+        'each submission states where it got to',
+        await page.locator('[data-testid^="submission-status-"]').first().isVisible().catch(() => false),
+      );
+      check(
+        'feedback from a reviewer reaches the author',
+        await page.locator('[data-testid^="submission-note-"]').first().isVisible().catch(() => false),
+      );
+    }
+    await shot('20c-submissions');
+
+    // --- Moderation --------------------------------------------------------
+    console.log('\n▸ moderation');
+    await page.goto(`${BASE}/moderate`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const queueShown = await visible('moderate-queue', 4000);
+    const queueRefused = await visible('moderate-not-allowed', 1500);
+    check(
+      'the review queue either lists work or refuses access',
+      queueShown || queueRefused,
+      queueShown ? 'queue shown' : 'refused',
+    );
+
+    if (queueShown) {
+      // The preview must never look like a granted role.
+      check(
+        'a preview of the moderator screens says it is a preview',
+        await visible('moderate-preview-note', 3000),
+      );
+
+      const first = await page.evaluate(() => {
+        const row = document.querySelector('[data-testid^="moderate-entry-"]');
+        return row ? row.getAttribute('data-testid') : null;
+      });
+      check('the queue has something in it', first !== null, first ?? '');
+      await shot('21a-moderate-queue');
+
+      if (first) {
+        await tap(first);
+        await page.waitForTimeout(1800);
+        check('a submission opens for review', await visible('moderate-review', 6000));
+        check('the reviewer sees the ingredients', await visible('moderate-ingredients', 3000));
+        check('and the steps', await visible('moderate-steps', 3000));
+
+        // THE assertion: a refusal without a reason is refused.
+        await tap('moderate-reject');
+        await page.waitForTimeout(700);
+        check(
+          'rejecting with no feedback is refused',
+          await visible('moderate-feedback-required', 3000),
+        );
+        await shot('21b-moderate-review');
+      }
+    } else {
+      await shot('21a-moderate-refused');
+    }
+
+    // --- Notifications -----------------------------------------------------
+    console.log('\n▸ notifications');
+    await page.goto(`${BASE}/notifications`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const feed = await visible('notifications-list', 4000);
+    const feedEmpty = await visible('notifications-empty', 1500);
+    const feedNeedsAccount = await visible('notifications-needs-account', 1500);
+    check(
+      'notifications render, or say honestly why they do not',
+      feed || feedEmpty || feedNeedsAccount,
+      feed ? 'feed shown' : feedEmpty ? 'empty' : 'needs an account',
+    );
+
+    if (feed) {
+      check('the feed is badged as demo', await visible('notifications-demo-banner', 3000));
+      const rows = await page.evaluate(
+        () =>
+          new Set(
+            [...document.querySelectorAll('[data-testid^="notification-"]')].map((el) =>
+              el.getAttribute('data-testid'),
+            ),
+          ).size,
+      );
+      check('there is more than one kind of thing in it', rows >= 2, `${rows} rows`);
+      check('there is a way to clear the badge', await visible('notifications-mark-all', 3000));
+      await tap('notifications-mark-all');
+      await page.waitForTimeout(1200);
+      check(
+        'marking all read removes the control',
+        (await visible('notifications-mark-all', 1500)) === false,
+      );
+      await shot('22a-notifications');
+    }
+
     // --- The drawer -------------------------------------------------------
     // The drawer is invisible until something opens it, which makes it exactly
     // the kind of thing that can be wired up wrong and still look fine in a
@@ -1338,6 +1496,18 @@ async function main() {
     );
     check('the drawer shows who is signed in', await visible('drawer-identity', 4000));
     await shot('18b-drawer');
+
+    // Every social destination has a row. Absent rows are how a finished
+    // feature stays unreachable: nothing links to /messages but the drawer.
+    for (const [key, label] of [
+      ['notifications', 'notifications'],
+      ['friends', 'friends'],
+      ['messages', 'messages'],
+      ['submit', 'submit a recipe'],
+      ['submissions', 'your submissions'],
+    ]) {
+      check(`the drawer reaches ${label}`, await visible(`drawer-${key}`, 3000));
+    }
 
     check('the drawer reaches the shopping list', await tap('drawer-shopping'));
     await page.waitForTimeout(1600);

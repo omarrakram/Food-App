@@ -19,10 +19,6 @@ The product is moving past MVP: a real catalogue, real filtering, accounts,
 profiles, social features and community submissions. Phases run in order
 because each depends on the one before it.
 
-**A new milestone sits between I and J and everything after J waits on it.**
-The roadmap is unchanged otherwise; nothing below has been dropped or
-reordered.
-
 | Phase | What | State |
 |---|---|---|
 | A | 150+ structured recipes with an import/validation pipeline | **done** — 161 recipes |
@@ -32,12 +28,12 @@ reordered.
 | E–G | Auth hardening, profiles, storage uploads | **done** — guest choice, expiry, handles, avatars |
 | H, P | Drawer navigation and information architecture | **done** — drawer wraps the tabs |
 | I | Friends, requests, blocking | **done** — schema, RLS, screen |
-| **HOTFIX** | **Core product correctness: matching, and real photographs** | **in progress** — see "The hotfix" |
-| J | 1-to-1 messaging | **schema done, no UI** — paused behind the hotfix |
-| K | Recipe sharing and deep links | not started |
-| L–N | Community submissions, moderation, admin | not started |
-| O | In-app notifications | not started |
-| Q–U | Privacy, security, performance, preview, tests | not started |
+| **HOTFIX** | **Core product correctness: matching, and real photographs** | **done** — see "The hotfix" |
+| J | 1-to-1 messaging | **done** — schema, RLS, repositories, list + thread, keyset paging, failed-send retry |
+| K | Recipe sharing and deep links | **done** — shared as a reference, share sheet, external URL |
+| L–N | Community submissions, moderation, admin | **done** — schema, RLS, submit form, status, review queue |
+| O | In-app notifications | **done** — schema, trigger-written rows, feed, badges |
+| Q–U | Privacy, security, performance, preview, tests | **in progress** |
 
 ### Why A–I are marked done
 
@@ -322,15 +318,15 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 610/610 across 34 suites, 2 projects |
-| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 171 assertions across six files |
+| Unit + component tests | `npm test` | **pass**, 699/699 across 43 suites, 2 projects |
+| Database + RLS suite | `./scripts/db-test.sh` | **pass**, 255 assertions across eight files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
 | Image manifest | `npm run images:check` | **pass**, 67 of 161; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
 | Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 93 interaction checks, no page errors |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 105 interaction checks (non-demo build); the demo-mode walk adds the social screens |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
 
@@ -530,77 +526,70 @@ photographs are still being acquired.
 
 ### THE SINGLE NEXT ACTION
 
-**Phase J: the messaging UI.** The correctness hotfix is finished — the four
-reported cases give four different answers through the rendered app, exact mode
-returns only zero-gap recipes, and 64 recipes carry a reviewed photograph in the
-deployed preview.
+**Phase Q–U: the audits.** Everything J through O is built, tested and wired
+into the drawer. What remains is the review pass the brief asks for — privacy,
+social-feature RLS, chat authorization, storage policy, moderation security,
+pagination, performance/caching, accessibility, Arabic/RTL, responsive, secret
+scan, full CI, full Pages deploy.
 
-What remains on the photographs is not a task, it is a standing practice:
-another acquisition round would add a handful, and every round needs a human to
-look at contact sheets before it ships. See "Where the photographs stand".
+Nothing in J–O is half-finished, so there is no partially-built thing to pick
+up first. The order below is the brief's own.
 
-#### If you are adding photographs
+#### What landed in J–O
 
-**Finish the photograph acquisition, then verify it in the deployed preview.**
+- **J — messaging.** `src/features/messages/` (interface, local, demo,
+  Supabase), `src/app/messages/index.tsx` and `[id].tsx`, keyset paging on
+  `created_at|id`, an optimistic send whose FAILURES STAY ON SCREEN (the outbox
+  is local state, deliberately, so a refetch cannot swallow a failed message).
+- **K — sharing.** `RecipeShareSheet` on the recipe screen; in-app sharing
+  attaches `shared_recipe_id` and the card looks the recipe up, so an
+  unpublished recipe stops rendering. External sharing builds a URL from
+  `EXPO_PUBLIC_WEB_ORIGIN` — `akla://` alone is useless to anyone without the
+  app. One migration came out of building it
+  (`20260914090000_message_share_without_words.sql`): a share with no covering
+  note was impossible to express, and the app would have had to invent a body.
+- **L–N — submissions and moderation.**
+  `20260914100000_community_submissions.sql`. Publication is a function, never
+  a column write; `user_roles` has read policies and NO write policy at all, so
+  a grant is a service-role operation and nothing else. Screens: `/submit`,
+  `/submit/status`, `/moderate`, `/moderate/[id]`.
+- **O — notifications.** `20260914110000_notifications.sql`. Rows are written
+  by triggers on the tables where events happen; the table has no insert policy,
+  so no client can put anything in anybody's feed — including its own. A
+  notification is a POINTER (kind + subject id), never a copy.
 
+#### Where the photographs stand
+
+Not a task, a standing practice: another acquisition round would add a handful,
+and every round needs a human to look at contact sheets before it ships.
 `.github/workflows/recipe-images.yml` (manual dispatch, no inputs = every
 recipe) is the only place it can run — this sandbox's proxy blocks
 `commons.wikimedia.org` and `upload.wikimedia.org`, verified by probing them,
-so the workflow log is the whole diagnostic. Read the "Acquire photographs"
-step with a large `tail_lines`; the per-recipe failure lines now name the HTTP
-status and the server's explanation.
-
-After a run:
-
-1. `git pull` — the workflow commits the assets, the manifest and the
-   generated index itself, and validates before committing so a photograph
-   with no recorded licence cannot reach the branch.
-2. Check the weight: `node -e "…manifest.json…"` should show a mean well under
-   the 900KB cap. Three runs in a row silently kept full-size originals.
-3. Re-export and re-deploy the Pages preview, and confirm photographs actually
-   render there — the brief is explicit that a preview limitation is no longer
-   an acceptable explanation for their absence.
-4. Recipes with no sufficiently relevant openly-licensed image keep the branded
-   fallback and are listed in `manifest.skipped` with the reason. That is the
-   designed outcome, not a failure to chase to 100%: attaching a photograph of
-   a different dish tells the user something false about what they are cooking.
-
-### THEN, and only then: the messaging UI
-
-Everything underneath it exists and is tested —
-`supabase/migrations/20260913120000_messaging.sql` plus 25 adversarial
-assertions in `supabase/tests/06_messaging_test.sql`. What is missing is the
-client half, and it mirrors Phase I exactly:
-
-1. `src/features/messages/repository.ts` — the interface, verb-shaped:
-   `conversations()`, `messages(conversationId, cursor)`, `send(...)`,
-   `markRead(...)`, `startWith(userId)`. A `LocalMessagesRepository` that
-   returns nothing and refuses every write, as `LocalFriendsRepository` does.
-2. `supabase-repository.ts` — the real one. Read profiles through
-   `public_profiles`, never `profiles`. Use `start_conversation()` and
-   `unread_counts()`; do not reimplement either client-side.
-3. **Paginate the thread.** `messages_thread_idx` is
-   `(conversation_id, created_at desc, id desc)`, so reuse the keyset cursor
-   from `features/recipes/query.ts` rather than inventing a second scheme.
-4. Two screens: a conversation list (avatar, name, the preview the trigger
-   maintains, unread badge) and a thread (bubbles, send box, retry on failure,
-   timestamps, empty state).
-5. Supabase Realtime on `messages` filtered by `conversation_id`. The RLS
-   policies already apply to Realtime, so a non-member receives nothing.
-6. Add `Messages` to `SOCIAL_ROWS` in `drawer-content.tsx` — one line, and only
-   once the screens exist.
-
-Then **Phase K** (sharing): `messages.shared_recipe_id` is already there and is
-a reference by design, so the card renders the recipe as it is now. The deep
-link is `akla://recipe/{id}` plus the web URL, and the rule to keep is that a
-private or unapproved recipe must not resolve through a public link.
+so the workflow log is the whole diagnostic. After a run: `git pull` (the
+workflow commits and validates for itself), check the mean asset weight is well
+under the 900KB cap, re-deploy, and confirm photographs render on the deployed
+preview. Recipes with no sufficiently relevant openly-licensed image keep the
+branded fallback and are listed in `manifest.skipped` with a reason — attaching
+a photograph of a different dish tells the user something false about what they
+are cooking.
 
 ### What is NOT done, and is deliberately waiting
 
-- **Roles.** The drawer's `Admin Review` row needs a server-authoritative role
-  (USER / MODERATOR / ADMIN). That is Phase N and the brief is explicit it must
-  not be a client-side boolean. `SOCIAL_ROWS` in `drawer-content.tsx` is empty
-  precisely so no row appears before its destination and its permission do.
+- **Roles are granted out of band, and that is the design.** `user_roles` has
+  read policies and no write policy at all, so the only way to make somebody a
+  moderator is a service-role insert (or a human with database access). A
+  policy that let admins grant admin would let anyone who reached one admin
+  reach all of them. The drawer's `Review queue` row appears only when the
+  SERVER says the viewer holds the role — and that row is a courtesy, not a
+  control: `moderate_submission` re-checks with the caller's own credentials.
+- **Push notifications.** The in-app feed is complete; push needs APNs/FCM
+  credentials and a native build, so it is credential-gated rather than
+  unbuilt. Nothing in the schema has to change to add it — a worker reads
+  `notifications` and sends.
+- **Realtime.** The messaging data layer is shaped for it (repository methods,
+  query keys, invalidation) but no subscription is open: without a Supabase
+  project there is nothing to subscribe to. The RLS policies already apply to
+  Realtime, so a non-member would receive nothing.
 - **Blocking and `friends` visibility are done.** The `public_profiles` view
   resolves `friends` through `are_friends()` now, and excludes anyone either
   party has blocked. `blocked_profiles()` is the narrow exception that keeps

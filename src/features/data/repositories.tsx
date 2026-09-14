@@ -14,6 +14,11 @@ import {
   type MessagesRepository,
 } from '@/features/messages/repository';
 import {
+  DemoNotificationsRepository,
+  LocalNotificationsRepository,
+  type NotificationsRepository,
+} from '@/features/notifications/repository';
+import {
   DemoProfileRepository,
   LocalProfileRepository,
   type ProfileRepository,
@@ -26,6 +31,11 @@ import {
   type SavedRepository,
 } from '@/features/saved/repository';
 import { LocalShoppingRepository, type ShoppingRepository } from '@/features/shopping/repository';
+import {
+  DemoSubmissionsRepository,
+  LocalSubmissionsRepository,
+  type SubmissionsRepository,
+} from '@/features/submissions/repository';
 
 /**
  * Repository wiring.
@@ -45,6 +55,8 @@ export type Repositories = {
   saved: SavedRepository;
   history: HistoryRepository;
   shopping: ShoppingRepository;
+  submissions: SubmissionsRepository;
+  notifications: NotificationsRepository;
   /** 'local' for guests, otherwise the Supabase user id. */
   scopeKey: string;
   isRemote: boolean;
@@ -93,6 +105,12 @@ export function RepositoryProvider({
       saved: new LocalSavedRepository(),
       history: new LocalHistoryRepository(),
       shopping: new LocalShoppingRepository(),
+      submissions: env.demoMode
+        ? new DemoSubmissionsRepository()
+        : new LocalSubmissionsRepository(),
+      notifications: env.demoMode
+        ? new DemoNotificationsRepository()
+        : new LocalNotificationsRepository(),
       scopeKey: 'local',
       isRemote: false,
       isSyncing,

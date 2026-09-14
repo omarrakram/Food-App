@@ -13,6 +13,8 @@ import { Text } from '@/components/ui/text';
 import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useUnreadTotal } from '@/features/messages/hooks';
+import { useUnreadNotifications } from '@/features/notifications/hooks';
+import { useCanModerate } from '@/features/submissions/hooks';
 import { useOwnProfile } from '@/features/profile/hooks';
 import { useI18n, type TranslationKey } from '@/i18n';
 import { confirmAction } from '@/lib/confirm';
@@ -50,14 +52,39 @@ const PRIMARY_ROWS: DrawerRow[] = [
   { key: 'saved', labelKey: 'tabs.saved', icon: 'bookmark-outline', href: '/saved' },
 ];
 
-/**
- * Social. Submit a Recipe joins this list when Phase L lands; until then it is
- * absent rather than disabled, for the reason in the note above.
- */
+/** Social and community. */
 const SOCIAL_ROWS: DrawerRow[] = [
+  {
+    key: 'notifications',
+    labelKey: 'notifications.title',
+    icon: 'notifications-outline',
+    href: '/notifications',
+  },
   { key: 'friends', labelKey: 'friends.title', icon: 'people-outline', href: '/friends' },
   { key: 'messages', labelKey: 'messages.title', icon: 'chatbubbles-outline', href: '/messages' },
+  { key: 'submit', labelKey: 'submit.title', icon: 'restaurant-outline', href: '/submit' },
+  {
+    key: 'submissions',
+    labelKey: 'submissions.title',
+    icon: 'document-text-outline',
+    href: '/submit/status',
+  },
 ];
+
+/**
+ * The review queue, for the people who staff it.
+ *
+ * Rendered only when the SERVER says the viewer holds the role — and only as a
+ * way of reaching a screen the database would refuse them anyway. A hidden row
+ * is a courtesy, not a control: `moderate_submission` checks the role again
+ * with the caller's own credentials.
+ */
+const MODERATOR_ROW: DrawerRow = {
+  key: 'moderate',
+  labelKey: 'moderate.title',
+  icon: 'shield-checkmark-outline',
+  href: '/moderate',
+};
 
 const ACCOUNT_ROWS: DrawerRow[] = [
   { key: 'profile', labelKey: 'profile.edit', icon: 'person-circle-outline', href: '/settings/profile' },
@@ -79,7 +106,9 @@ function Row({
     <PressScale
       accessibilityRole="link"
       accessibilityLabel={
-        row.badge ? `${t(row.labelKey)}, ${t('messages.unread', { count: row.badge })}` : t(row.labelKey)
+        row.badge
+          ? `${t(row.labelKey)}, ${t('messages.unread', { count: row.badge })}`
+          : t(row.labelKey)
       }
       onPress={() => onNavigate(row.href)}
       haptic="selection"
@@ -146,6 +175,8 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
   const { user, isEnabled, signOut, isGuest } = useAuth();
   const profile = useOwnProfile();
   const unread = useUnreadTotal();
+  const unreadNotifications = useUnreadNotifications();
+  const canModerate = useCanModerate();
 
   /**
    * A closed drawer must not be readable by assistive technology.
@@ -242,10 +273,19 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
           {SOCIAL_ROWS.map((row) => (
             <Row
               key={row.key}
-              row={row.key === 'messages' ? { ...row, badge: unread } : row}
+              row={
+                row.key === 'messages'
+                  ? { ...row, badge: unread }
+                  : row.key === 'notifications'
+                    ? { ...row, badge: unreadNotifications }
+                    : row
+              }
               onNavigate={go}
             />
           ))}
+          {canModerate.data === true ? (
+            <Row row={MODERATOR_ROW} onNavigate={go} />
+          ) : null}
         </>
       ) : null}
 

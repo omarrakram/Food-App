@@ -156,6 +156,75 @@ export type MessageRow = {
   edited_at: string | null;
 };
 
+export type SubmissionStatusEnum =
+  | 'draft'
+  | 'pending'
+  | 'changes_requested'
+  | 'approved'
+  | 'rejected';
+
+export type ModerationActionEnum =
+  | 'submit'
+  | 'resubmit'
+  | 'approve'
+  | 'reject'
+  | 'request_changes'
+  | 'withdraw';
+
+export type AppRoleEnum = 'moderator' | 'admin';
+
+export type UserRoleRow = {
+  user_id: string;
+  role: AppRoleEnum;
+  granted_at: string;
+  granted_by: string | null;
+};
+
+export type RecipeSubmissionRow = {
+  id: string;
+  recipe_id: string;
+  author_id: string;
+  status: SubmissionStatusEnum;
+  revision: number;
+  submitted_at: string | null;
+  decided_at: string | null;
+  decided_by: string | null;
+  /** The feedback the AUTHOR sees. Internal history lives elsewhere. */
+  author_note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ModerationEventRow = {
+  id: string;
+  submission_id: string;
+  actor_id: string | null;
+  action: ModerationActionEnum;
+  note: string | null;
+  revision: number;
+  created_at: string;
+};
+
+export type NotificationKindEnum =
+  | 'friend_request'
+  | 'friend_accepted'
+  | 'message'
+  | 'recipe_shared'
+  | 'submission_approved'
+  | 'submission_rejected'
+  | 'submission_changes_requested';
+
+export type NotificationRow = {
+  id: string;
+  user_id: string;
+  kind: NotificationKindEnum;
+  actor_id: string | null;
+  /** A pointer to whatever it is about. The kind says which table. */
+  subject_id: string | null;
+  read_at: string | null;
+  created_at: string;
+};
+
 export type ProfileRow = {
   id: string;
   display_name: string | null;
@@ -402,6 +471,26 @@ export type Database = {
         },
         Pick<MessageRow, 'body' | 'edited_at'>
       >;
+      // Read-only to every client. The absence of an Insert and an Update
+      // type is the schema's own rule restated: `user_roles` has no write
+      // policy at all, so a grant is a service-role operation and nothing
+      // else.
+      user_roles: Table<UserRoleRow, never, never>;
+      recipe_submissions: Table<
+        RecipeSubmissionRow,
+        // An author files a DRAFT. Everything past that is a function call —
+        // `submit_recipe` and `moderate_submission` — because a status a
+        // client can write is a status a client can set to 'approved'.
+        { recipe_id: string; author_id: string; status?: 'draft' },
+        Partial<Pick<RecipeSubmissionRow, 'author_note'>>
+      >;
+      // Append-only, and written by the definer functions. A moderation log a
+      // moderator can edit is not a log.
+      moderation_events: Table<ModerationEventRow, never, never>;
+      // No Insert type: rows are written by triggers, and the table has no
+      // insert policy. A client that could write one could put anything in
+      // anybody's feed.
+      notifications: Table<NotificationRow, never, Pick<NotificationRow, 'read_at'>>;
       saved_recipes: Table<SavedRecipeRow, { user_id: string; recipe_id: string }>;
       recipe_history: Table<
         RecipeHistoryRow,
@@ -448,6 +537,32 @@ export type Database = {
         Args: Record<string, never>;
         Returns: { conversation_id: string; unread: number }[];
       };
+      has_role: { Args: { who: string; wanted: AppRoleEnum }; Returns: boolean };
+      is_moderator: { Args: Record<string, never>; Returns: boolean };
+      is_admin: { Args: Record<string, never>; Returns: boolean };
+      submit_recipe: { Args: { submission: string }; Returns: SubmissionStatusEnum };
+      withdraw_submission: { Args: { submission: string }; Returns: SubmissionStatusEnum };
+      moderate_submission: {
+        Args: { submission: string; decision: ModerationActionEnum; feedback?: string | null };
+        Returns: SubmissionStatusEnum;
+      };
+      unpublish_recipe: { Args: { target: string; reason: string }; Returns: undefined };
+      unread_notification_count: { Args: Record<string, never>; Returns: number };
+      mark_all_notifications_read: { Args: Record<string, never>; Returns: undefined };
+      moderation_queue: {
+        Args: Record<string, never>;
+        Returns: {
+          submission_id: string;
+          recipe_id: string;
+          title: string;
+          author_id: string;
+          author_name: string | null;
+          author_handle: string | null;
+          status: SubmissionStatusEnum;
+          revision: number;
+          submitted_at: string | null;
+        }[];
+      };
     };
     Enums: {
       dietary_preference: DietaryPreferenceEnum;
@@ -466,6 +581,10 @@ export type Database = {
       profile_visibility: ProfileVisibilityEnum;
       friend_request_status: FriendRequestStatusEnum;
       recipe_image_source: RecipeImageSourceEnum;
+      submission_status: SubmissionStatusEnum;
+      moderation_action: ModerationActionEnum;
+      app_role: AppRoleEnum;
+      notification_kind: NotificationKindEnum;
     };
     CompositeTypes: Record<string, never>;
   };

@@ -671,6 +671,100 @@ export type MessagePage = {
   nextCursor: string | null;
 };
 
+// ---------------------------------------------------------------------------
+// Community submissions and moderation
+// ---------------------------------------------------------------------------
+
+export const SUBMISSION_STATUSES = [
+  'draft',
+  'pending',
+  'changes_requested',
+  'approved',
+  'rejected',
+] as const;
+export type SubmissionStatus = (typeof SUBMISSION_STATUSES)[number];
+
+export const MODERATION_DECISIONS = ['approve', 'reject', 'request_changes'] as const;
+export type ModerationDecision = (typeof MODERATION_DECISIONS)[number];
+
+export type AppRole = 'moderator' | 'admin';
+
+/**
+ * An author's view of something they sent for review.
+ *
+ * `authorNote` is the feedback a moderator wrote FOR THEM. The internal
+ * moderation history is a different thing and is never on this object: an
+ * author sees the reason their recipe was refused, not the discussion.
+ */
+export type RecipeSubmission = {
+  id: string;
+  recipeId: string;
+  authorId: string;
+  title: string;
+  status: SubmissionStatus;
+  revision: number;
+  submittedAt: string | null;
+  decidedAt: string | null;
+  authorNote: string | null;
+  createdAt: string;
+};
+
+/** A moderator's view of the queue: the submission plus who wrote it. */
+export type ModerationQueueEntry = {
+  submissionId: string;
+  recipeId: string;
+  title: string;
+  authorId: string;
+  authorName: string | null;
+  authorHandle: string | null;
+  status: SubmissionStatus;
+  revision: number;
+  submittedAt: string | null;
+};
+
+export const NOTIFICATION_KINDS = [
+  'friend_request',
+  'friend_accepted',
+  'message',
+  'recipe_shared',
+  'submission_approved',
+  'submission_rejected',
+  'submission_changes_requested',
+] as const;
+export type NotificationKind = (typeof NOTIFICATION_KINDS)[number];
+
+/**
+ * One thing that happened, for the person it happened to.
+ *
+ * A POINTER, not a copy. `subjectId` names a conversation, a submission or a
+ * request, and the row that renders it looks the subject up — so a message
+ * that was deleted, or a recipe that was unpublished for being unsafe, stops
+ * being advertised by a notification about it.
+ *
+ * `actor` is resolved through `public_profiles` like every other rendering of
+ * a person, so a notification cannot become a route to somebody's private
+ * columns.
+ */
+export type AppNotification = {
+  id: string;
+  kind: NotificationKind;
+  actor: PublicProfile | null;
+  subjectId: string | null;
+  readAt: string | null;
+  createdAt: string;
+};
+
+/** One line of the moderation log. Moderators only — never shown to authors. */
+export type ModerationEvent = {
+  id: string;
+  submissionId: string;
+  actorId: string | null;
+  action: 'submit' | 'resubmit' | 'approve' | 'reject' | 'request_changes' | 'withdraw';
+  note: string | null;
+  revision: number;
+  createdAt: string;
+};
+
 export type PublicProfile = {
   id: string;
   /** Handle as the user typed it. Null until they claim one. */

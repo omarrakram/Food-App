@@ -5,6 +5,7 @@ import { useAuth } from '@/features/auth/auth-provider';
 import { SupabasePantryRepository } from '@/features/pantry/supabase-repository';
 import { SupabaseFriendsRepository } from '@/features/friends/supabase-repository';
 import { SupabaseMessagesRepository } from '@/features/messages/supabase-repository';
+import { SupabaseNotificationsRepository } from '@/features/notifications/supabase-repository';
 import { SupabaseProfileRepository } from '@/features/profile/supabase-repository';
 import {
   registerPreferenceSync,
@@ -20,6 +21,7 @@ import {
   SupabaseSavedRepository,
 } from '@/features/saved/supabase-repository';
 import { SupabaseShoppingRepository } from '@/features/shopping/supabase-repository';
+import { SupabaseSubmissionsRepository } from '@/features/submissions/supabase-repository';
 import { getSupabase } from '@/lib/supabase/client';
 import { logError } from '@/lib/logger';
 
@@ -56,6 +58,8 @@ export function SupabaseBridge({ children }: { children: ReactNode }) {
       saved: new SupabaseSavedRepository(supabase, userId),
       history: new SupabaseHistoryRepository(supabase, userId),
       shopping: new SupabaseShoppingRepository(supabase, userId),
+      submissions: new SupabaseSubmissionsRepository(supabase, userId),
+      notifications: new SupabaseNotificationsRepository(supabase, userId),
     };
   }, [supabase, userId]);
 
