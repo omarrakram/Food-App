@@ -562,7 +562,24 @@ async function main() {
 
     // --- Recipe detail and cooking mode ----------------------------------
     console.log('\n▸ recipe');
-    const firstResult = page.locator('[data-testid^="result-"]').first();
+    // Reached through Discover rather than through whatever the last search
+    // happened to return. A cook search with no results used to skip this
+    // whole section silently, taking the recipe-detail assertions with it —
+    // including the one about ordering being shown as unavailable.
+    await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
+    // The catalogue list is virtualised and mounts after the route settles, so
+    // this waits for a card rather than for a fixed number of milliseconds.
+    await page
+      .locator('[data-testid^="recipe-photo-"], [data-testid^="recipe-fallback-"]')
+      .first()
+      .waitFor({ state: 'visible', timeout: 15000 })
+      .catch(() => {});
+    // The card's image is what navigates — the `discover-*` wrapper is not the
+    // pressable, and clicking it does nothing.
+    const firstResult = page
+      .locator('[data-testid^="recipe-photo-"], [data-testid^="recipe-fallback-"]')
+      .first();
+    check('discover offers a recipe to open', (await firstResult.count()) > 0);
     if (await firstResult.count()) {
       await firstResult.click();
       await page.waitForTimeout(1800);
