@@ -65,6 +65,18 @@ jobs:
         env:
           # The repository name is the subpath a project site is served from.
           EXPO_WEB_BASE_URL: ${{ steps.pages.outputs.base_path }}
+          # DEMO MODE. This preview has no Supabase project behind it, so the
+          # social screens — Friends, Messages, sharing, submissions,
+          # moderation — would otherwise be permanently empty and nobody could
+          # review them. The seeded repositories make them walkable, and every
+          # screen they feed renders a DEMO banner saying nothing leaves the
+          # device. `EXPO_PUBLIC_APP_ENV` is `preview`, and `env.ts` forces the
+          # flag off when it is `production`, so this cannot ship by accident.
+          EXPO_PUBLIC_APP_ENV: preview
+          EXPO_PUBLIC_DEMO_MODE: 'true'
+          # So an external share produces a link a browser can open rather than
+          # an `akla://` URL that means nothing outside the app.
+          EXPO_PUBLIC_WEB_ORIGIN: ${{ steps.pages.outputs.base_url }}
 
       - name: Stamp the build so the deployed commit can be checked without opening it
         # `https://<pages>/build.txt` answers "is the preview current?" in one

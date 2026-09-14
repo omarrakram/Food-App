@@ -24,6 +24,14 @@ export const StorageKeys = {
   guestProfile: 'akla.guest.profile',
   /** The schema version the stored data was written by. See `SCHEMA_VERSION`. */
   schemaVersion: 'akla.schema.version',
+  /** Demo-mode friends, requests and blocks. Only written when `demoMode` is on. */
+  demoFriends: 'akla.demo.friends',
+  /** Demo-mode message store. Only ever written when `demoMode` is on. */
+  demoMessages: 'akla.demo.messages',
+  /** Demo-mode community submissions and their moderation history. */
+  demoSubmissions: 'akla.demo.submissions',
+  /** Demo-mode notification feed. */
+  demoNotifications: 'akla.demo.notifications',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];

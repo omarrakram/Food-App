@@ -1,3 +1,4 @@
+import { DEMO_PEOPLE } from '@/features/demo/people';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
 import type { CountryCode, OwnProfile, ProfileEdit, PublicProfile } from '@/types/domain';
 
@@ -69,13 +70,13 @@ export class LocalProfileRepository implements ProfileRepository {
     return next;
   }
 
-  async byUsername(): Promise<PublicProfile | null> {
+  async byUsername(_username: string): Promise<PublicProfile | null> {
     // There is no directory offline. Returning null rather than throwing keeps
     // a shared profile link degrading into "not found" instead of an error.
     return null;
   }
 
-  async search(): Promise<PublicProfile[]> {
+  async search(_query: string, _limit?: number): Promise<PublicProfile[]> {
     return [];
   }
 
@@ -89,4 +90,33 @@ export class LocalProfileRepository implements ProfileRepository {
 /** Rebuilds an `OwnProfile` from whatever a caller stored. */
 export function toCountry(value: string | undefined): CountryCode {
   return (value ?? 'EG') as CountryCode;
+}
+
+// ---------------------------------------------------------------------------
+// Demo mode
+// ---------------------------------------------------------------------------
+
+/**
+ * A directory of four people, for previewing the friend flow.
+ *
+ * Everything else is the guest behaviour, unchanged — the demo cast exists so
+ * that "search for someone, send a request" can be walked through in the
+ * hosted preview, not so that a guest gets a fake social graph. Reachable only
+ * behind `EXPO_PUBLIC_DEMO_MODE`, which `env` forces off in production.
+ */
+export class DemoProfileRepository extends LocalProfileRepository {
+  override async byUsername(username: string): Promise<PublicProfile | null> {
+    const wanted = username.trim().toLowerCase().replace(/^@/, '');
+    return DEMO_PEOPLE.find((person) => person.username === wanted) ?? null;
+  }
+
+  override async search(query: string, limit = PROFILE_SEARCH_LIMIT): Promise<PublicProfile[]> {
+    const needle = query.trim().toLowerCase().replace(/^@/, '');
+    if (needle.length < 2) return [];
+    return DEMO_PEOPLE.filter(
+      (person) =>
+        person.username?.includes(needle) ||
+        person.displayName?.toLowerCase().includes(needle),
+    ).slice(0, limit);
+  }
 }

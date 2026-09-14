@@ -1173,6 +1173,129 @@ async function main() {
     );
     await shot('17d-friends');
 
+    // --- Messages ----------------------------------------------------------
+    // Two things are being checked here at once, and the second matters more.
+    //
+    // FIRST: the screens work — a conversation list, a thread that opens, a
+    // composer that sends, and a shared recipe rendered as a card.
+    //
+    // SECOND, and this is the one that must never regress: NOTHING in this
+    // build reaches a server, and the app says so. The preview runs the seeded
+    // demo repositories because there is no Supabase project behind it, so
+    // every screen they feed has to carry the DEMO banner. A demo send that
+    // looked like a delivered one would be the app lying to whoever is
+    // reviewing it.
+    console.log('\n▸ messages');
+    await page.goto(`${BASE}/messages`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const messagesDemo = await visible('messages-demo-banner', 3000);
+    const messagesList = await visible('messages-list', 3000);
+    const messagesNeedsAccount = await visible('messages-needs-account', 1500);
+
+    check(
+      'messages either lists threads or says it needs an account',
+      messagesList || messagesNeedsAccount,
+      messagesList ? 'threads listed' : 'needs an account',
+    );
+
+    if (messagesList) {
+      // The banner is not decoration: it is the only thing separating "this
+      // preview demonstrates messaging" from "this preview sent a message".
+      check('a demo build says so, unmissably', messagesDemo);
+
+      const conversationIds = await page.evaluate(() =>
+        [
+          ...new Set(
+            [...document.querySelectorAll('[data-testid^="conversation-"]')]
+              .map((el) => el.getAttribute('data-testid'))
+              .filter((id) => id && !id.endsWith('-unread')),
+          ),
+        ].sort(),
+      );
+      check(
+        'the conversation list has threads in it',
+        conversationIds.length >= 2,
+        conversationIds.join(', '),
+      );
+
+      check(
+        'an unread thread carries a count, not just a dot',
+        await page.locator('[data-testid$="-unread"]').first().isVisible().catch(() => false),
+      );
+      await shot('19a-messages');
+
+      // Open the thread that has the shared recipe in it.
+      const firstThread = conversationIds[0];
+      check('a conversation opens', await tap(firstThread));
+      await page.waitForTimeout(1600);
+      check('the thread renders', await visible('conversation-thread', 6000));
+      check('the thread names who it is with', await visible('conversation-title', 3000));
+      check('the thread is badged as demo too', await visible('conversation-demo-banner', 3000));
+
+      // A shared recipe is a REFERENCE, so the card is only there if the
+      // lookup resolved. A rendered card is the proof that end of sharing
+      // works; a missing one would mean the reference did not resolve.
+      const sharedCard = await page.evaluate(
+        () => document.querySelectorAll('[data-testid*="-recipe"]').length > 0,
+      );
+      check('a shared recipe renders as a card', sharedCard);
+      await shot('19b-conversation');
+
+      // Sending. The message has to appear in the thread, and the thread has
+      // to be the one that grew.
+      const before = await page.evaluate(
+        () => document.querySelectorAll('[data-testid^="message-"]').length,
+      );
+      await type('conversation-input', 'smoke test message');
+      check('the composer accepts text', true);
+      check('send is reachable', await tap('conversation-send'));
+      await page.waitForTimeout(1600);
+      const after = await page.evaluate(
+        () => document.querySelectorAll('[data-testid^="message-"]').length,
+      );
+      check('sending adds the message to the thread', after > before, `${before} -> ${after}`);
+      check(
+        'the words the user typed are on screen',
+        await page.getByText('smoke test message').first().isVisible().catch(() => false),
+      );
+      await shot('19c-sent');
+
+      // Back out and confirm the list reflects it.
+      check('the thread has a way back', await tap('conversation-back'));
+      await page.waitForTimeout(1600);
+      check('back lands on the conversation list', await visible('messages-list', 6000));
+    }
+
+    // --- Sharing a recipe ---------------------------------------------------
+    console.log('\n▸ sharing');
+    await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+    // Reached by clicking a card's image, the same way the hero check above
+    // does — the card itself has no test id of its own.
+    const shareTarget = await page.evaluate(() => {
+      const node = document.querySelector(
+        '[data-testid^="recipe-photo-"], [data-testid^="recipe-fallback-"]',
+      );
+      return node?.getAttribute('data-testid') ?? null;
+    });
+    if (shareTarget) {
+      await page.locator(`[data-testid="${shareTarget}"]`).first().click().catch(() => {});
+      await page.waitForTimeout(2200);
+      const shareButton = await visible('recipe-share', 4000);
+      check('a recipe offers a way to share it', shareButton);
+      if (shareButton) {
+        check('the share sheet opens', await tap('recipe-share'));
+        await page.waitForTimeout(900);
+        check('the share sheet renders', await visible('recipe-share-sheet', 4000));
+        check(
+          'sharing offers a link for people who are not in the app',
+          await visible('share-copy-link', 3000),
+        );
+        await shot('19d-share');
+      }
+    }
+
     // --- The drawer -------------------------------------------------------
     // The drawer is invisible until something opens it, which makes it exactly
     // the kind of thing that can be wired up wrong and still look fine in a

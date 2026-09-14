@@ -624,6 +624,53 @@ export type ProfileVisibility = (typeof PROFILE_VISIBILITIES)[number];
  * another account. The database enforces that with a hand-enumerated view;
  * this type is the client-side half of the same promise.
  */
+/**
+ * One 1-to-1 thread, as a list row needs it.
+ *
+ * `partner` rather than `members`: the schema enforces exactly two people per
+ * conversation, so "the other one" is always well defined and every screen
+ * wants it rather than an array it has to filter itself.
+ */
+export type Conversation = {
+  id: string;
+  partner: PublicProfile;
+  /** Denormalised by a trigger so a list of threads is one query. */
+  lastMessageAt: string | null;
+  lastMessagePreview: string | null;
+  unread: number;
+};
+
+/** How far a message has got. Local-only; the server has no such column. */
+export type MessageDelivery = 'sent' | 'sending' | 'failed';
+
+export type Message = {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  body: string;
+  /**
+   * A shared recipe travels as a REFERENCE, never as copied content — so the
+   * card renders the recipe as it is now, and one later made private stops
+   * rendering instead of leaving a stale copy in someone's chat log.
+   */
+  sharedRecipeId: string | null;
+  createdAt: string;
+  editedAt: string | null;
+  /**
+   * Present only for messages this device is still trying to deliver. A
+   * message that came back from the server never carries anything but 'sent',
+   * which is what keeps an optimistic bubble distinguishable from a real one.
+   */
+  delivery?: MessageDelivery;
+};
+
+/** A page of messages, newest first, with a cursor for older ones. */
+export type MessagePage = {
+  messages: Message[];
+  /** Opaque; null when the thread has no more history. */
+  nextCursor: string | null;
+};
+
 export type PublicProfile = {
   id: string;
   /** Handle as the user typed it. Null until they claim one. */

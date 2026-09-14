@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PriceTag } from '@/components/recipe/price-tag';
 import {} from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
+import { RecipeShareSheet } from '@/components/recipe/share-sheet';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
 import { Divider } from '@/components/ui/section';
@@ -149,6 +150,7 @@ export default function RecipeDetailScreen() {
 
   const [servings, setServings] = useState<number | null>(null);
   const [orderSheetOpen, setOrderSheetOpen] = useState(false);
+  const [sharing, setSharing] = useState(false);
   const orderingAvailable = isOrderingAvailable(preferences.country);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
 
@@ -289,13 +291,22 @@ export default function RecipeDetailScreen() {
               accessibilityLabel={t('common.back')}
               testID="recipe-back"
             />
-            <IconButton
-              icon={isSaved ? 'heart' : 'heart-outline'}
-              variant="onImage"
-              onPress={() => toggleSave.mutate({ recipe, shouldSave: !isSaved })}
-              accessibilityLabel={isSaved ? t('recipe.unsaveRecipe') : t('recipe.saveRecipe')}
-              testID="recipe-save"
-            />
+            <View style={{ flexDirection: 'row', gap: theme.spacing.sm }}>
+              <IconButton
+                icon="share-outline"
+                variant="onImage"
+                onPress={() => setSharing(true)}
+                accessibilityLabel={t('recipe.share')}
+                testID="recipe-share"
+              />
+              <IconButton
+                icon={isSaved ? 'heart' : 'heart-outline'}
+                variant="onImage"
+                onPress={() => toggleSave.mutate({ recipe, shouldSave: !isSaved })}
+                accessibilityLabel={isSaved ? t('recipe.unsaveRecipe') : t('recipe.saveRecipe')}
+                testID="recipe-save"
+              />
+            </View>
           </View>
         </View>
 
@@ -621,6 +632,13 @@ export default function RecipeDetailScreen() {
           />
         </View>
       </Sheet>
+
+      <RecipeShareSheet
+        visible={sharing}
+        onClose={() => setSharing(false)}
+        recipeId={recipe.id}
+        recipeTitle={recipeText.title(recipe)}
+      />
     </>
   );
 }

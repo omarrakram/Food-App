@@ -1,13 +1,18 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { View } from 'react-native';
 
 import { Avatar } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { EmptyState } from '@/components/ui/states';
 import { SkeletonList } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
+import { useToast } from '@/components/ui/toast';
+import { useFriends } from '@/features/friends/hooks';
+import { useMessagingViewerId, useStartConversation } from '@/features/messages/hooks';
 import { usePublicProfile } from '@/features/profile/hooks';
 import { useI18n } from '@/i18n';
+import { presentError } from '@/lib/errors';
 import { useTheme } from '@/theme';
 
 /**
@@ -26,8 +31,13 @@ import { useTheme } from '@/theme';
 export default function PublicProfileScreen() {
   const theme = useTheme();
   const { t, formatDate } = useI18n();
+  const router = useRouter();
+  const toast = useToast();
   const { username } = useLocalSearchParams<{ username: string }>();
   const profile = usePublicProfile(username);
+  const friends = useFriends();
+  const viewerId = useMessagingViewerId();
+  const startConversation = useStartConversation();
 
   if (profile.isLoading) {
     return (
@@ -53,6 +63,26 @@ export default function PublicProfileScreen() {
   }
 
   const person = profile.data;
+
+  /**
+   * Message is offered only to friends.
+   *
+   * Not a security boundary — `start_conversation` refuses blocked pairs and
+   * the policies decide who may send — but a product one: a Message button on
+   * every stranger's profile makes the app a way to be contacted by anyone,
+   * which is not what people who set a public profile agreed to.
+   */
+  const isFriend = (friends.data ?? []).some((entry) => entry.person.id === person.id);
+
+  const message = () => {
+    void startConversation
+      .mutateAsync(person.id)
+      .then((conversationId) => router.push(`/messages/${conversationId}`))
+      .catch((error: unknown) => {
+        const presented = presentError(error);
+        toast.show({ message: t(presented.bodyKey, presented.values), tone: 'danger' });
+      });
+  };
 
   return (
     <ScreenScroll contentGap={theme.spacing.lg} testID="public-profile">
@@ -89,6 +119,16 @@ export default function PublicProfileScreen() {
           {t('profile.joined', { date: formatDate(person.joinedAt, { month: 'long', year: 'numeric' }) })}
         </Text>
       </View>
+
+      {isFriend && viewerId !== null ? (
+        <Button
+          label={t('friends.message')}
+          icon="chatbubble-outline"
+          onPress={message}
+          loading={startConversation.isPending}
+          testID="public-profile-message"
+        />
+      ) : null}
     </ScreenScroll>
   );
 }

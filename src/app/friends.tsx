@@ -1,7 +1,9 @@
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 import { PersonRow } from '@/components/friends/person-row';
+import { DemoBanner } from '@/components/messages/demo-banner';
 import { Input } from '@/components/ui/input';
 import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { SegmentedControl } from '@/components/ui/segmented-control';
@@ -10,12 +12,14 @@ import { EmptyState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { useAuth } from '@/features/auth/auth-provider';
+import { useRepositories } from '@/features/data/repositories';
 import {
   useFriendActions,
   useFriends,
   useIncomingRequests,
   useOutgoingRequests,
 } from '@/features/friends/hooks';
+import { useStartConversation } from '@/features/messages/hooks';
 import { normaliseHandleInput } from '@/features/profile/handle';
 import { useProfileSearch } from '@/features/profile/hooks';
 import { useI18n } from '@/i18n';
@@ -37,8 +41,10 @@ type Tab = 'friends' | 'incoming' | 'sent';
 export default function FriendsScreen() {
   const theme = useTheme();
   const { t, formatDate } = useI18n();
+  const router = useRouter();
   const toast = useToast();
   const { isEnabled, user } = useAuth();
+  const { demoMode } = useRepositories();
 
   const [tab, setTab] = useState<Tab>('friends');
   const [query, setQuery] = useState('');
@@ -48,12 +54,30 @@ export default function FriendsScreen() {
   const outgoing = useOutgoingRequests();
   const search = useProfileSearch(query);
   const actions = useFriendActions();
+  const startConversation = useStartConversation();
 
   const run = (promise: Promise<unknown>, successKey?: 'friends.requestSent') => {
     void promise
       .then(() => {
         if (successKey) toast.show({ message: t(successKey), tone: 'success' });
       })
+      .catch((error: unknown) => {
+        const presented = presentError(error);
+        toast.show({ message: t(presented.bodyKey, presented.values), tone: 'danger' });
+      });
+  };
+
+  /**
+   * Opens the thread with someone, creating it if there is not one yet.
+   *
+   * `startWith` is the server function, so a pair where either has blocked the
+   * other is refused THERE rather than here — a client-side check would be a
+   * second implementation of the rule and the one that goes stale.
+   */
+  const openChat = (userId: string) => {
+    void startConversation
+      .mutateAsync(userId)
+      .then((conversationId) => router.push(`/messages/${conversationId}`))
       .catch((error: unknown) => {
         const presented = presentError(error);
         toast.show({ message: t(presented.bodyKey, presented.values), tone: 'danger' });
@@ -86,7 +110,9 @@ export default function FriendsScreen() {
     })();
   };
 
-  if (!isEnabled || !user) {
+  // Demo mode has a viewer and seeded people, so the preview shows the real
+  // screen (badged) rather than a sign-in wall it cannot get past.
+  if (!demoMode && (!isEnabled || !user)) {
     return (
       <ScreenScroll contentGap={theme.spacing.lg}>
         <ScreenHeader title={t('friends.title')} />
@@ -108,12 +134,14 @@ export default function FriendsScreen() {
     ...(friends.data ?? []).map((entry) => entry.person.id),
     ...(incoming.data ?? []).map((entry) => entry.person.id),
     ...(outgoing.data ?? []).map((entry) => entry.person.id),
-    user.id,
+    ...(user ? [user.id] : []),
   ]);
 
   return (
     <ScreenScroll bottomInset={theme.spacing.xxl} contentGap={theme.spacing.lg}>
       <ScreenHeader title={t('friends.title')} />
+
+      {demoMode ? <DemoBanner testID="friends-demo-banner" /> : null}
 
       <View style={{ gap: theme.spacing.xs }}>
         <Input
@@ -199,6 +227,12 @@ export default function FriendsScreen() {
                   })}
                   testID={`friend-${entry.person.id}`}
                   actions={[
+                    {
+                      labelKey: 'friends.message',
+                      variant: 'primary',
+                      onPress: () => openChat(entry.person.id),
+                      testID: `friends-message-${entry.person.id}`,
+                    },
                     {
                       labelKey: 'friends.unfriend',
                       onPress: () => confirmUnfriend(entry.person.id),

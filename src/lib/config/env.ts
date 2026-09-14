@@ -64,6 +64,15 @@ export const env = {
   recipeImageBaseUrl: optional(process.env.EXPO_PUBLIC_RECIPE_IMAGE_BASE_URL),
 
   /**
+   * Origin of the hosted web build, for links that have to survive leaving the app.
+   *
+   * A native build sharing `akla://recipe/x` has shared nothing with someone
+   * who does not have the app. When this is set, an external share produces a
+   * URL a browser can open; when it is not, the app scheme is the fallback.
+   */
+  webOrigin: optional(process.env.EXPO_PUBLIC_WEB_ORIGIN),
+
+  /**
    * Renders the social screens against seeded demo data.
    *
    * Exists so the preview can SHOW friends, chat and moderation without

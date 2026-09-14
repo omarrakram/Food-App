@@ -162,7 +162,47 @@ begin
       $sql$insert into public.messages (conversation_id, sender_id, body)
            values (%L, 'c0000000-0000-4000-8000-00000000000b', '')$sql$,
       target),
-    'an empty message is rejected');
+    'an empty message with nothing attached is rejected');
+end
+$$;
+
+-- --------------------------------------------------------------------------
+-- Sharing a recipe
+-- --------------------------------------------------------------------------
+-- Two things have to be true at once. Tapping Share and sending the card with
+-- no covering note is the most ordinary sharing gesture there is, so a message
+-- carrying only a `shared_recipe_id` must be accepted — otherwise the app has
+-- to invent a body, and an invented body is words the user did not write
+-- appearing under their name. And a message carrying NEITHER words nor a
+-- recipe is still nothing, and still refused (asserted just above).
+
+do $$
+declare
+  target uuid := (select id from msg_ids where label = 'ab');
+  dish uuid := (select id from public.recipes limit 1);
+  shared uuid;
+begin
+  perform pg_temp.assert(dish is not null, 'the seed has a recipe to share');
+
+  insert into public.messages (conversation_id, sender_id, body, shared_recipe_id)
+  values (target, 'c0000000-0000-4000-8000-00000000000b', '', dish)
+  returning id into shared;
+
+  perform pg_temp.assert(
+    shared is not null,
+    'a shared recipe needs no covering note');
+
+  -- The reference, not a copy. Unpublishing the recipe must actually take
+  -- effect in the chat log, which it cannot do if the content travelled.
+  perform pg_temp.assert(
+    (select shared_recipe_id from public.messages where id = shared) = dish,
+    'the share is stored as a reference to the recipe');
+
+  perform pg_temp.assert(
+    (select last_message_body from public.conversations where id = target) = '',
+    'the preview of a wordless share is empty rather than invented');
+
+  delete from public.messages where id = shared;
 end
 $$;
 

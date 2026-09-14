@@ -12,6 +12,7 @@ import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
+import { useUnreadTotal } from '@/features/messages/hooks';
 import { useOwnProfile } from '@/features/profile/hooks';
 import { useI18n, type TranslationKey } from '@/i18n';
 import { confirmAction } from '@/lib/confirm';
@@ -36,6 +37,8 @@ type DrawerRow = {
   labelKey: TranslationKey;
   icon: keyof typeof Ionicons.glyphMap;
   href: string;
+  /** Unread count, when the destination has one. Zero renders nothing. */
+  badge?: number;
 };
 
 /** The core food experience. Same destinations as the tab bar, by design. */
@@ -48,12 +51,12 @@ const PRIMARY_ROWS: DrawerRow[] = [
 ];
 
 /**
- * Social. Messages and Submit a Recipe join this list when Phases J and L
- * land; until then they are absent rather than disabled, for the reason in the
- * note above.
+ * Social. Submit a Recipe joins this list when Phase L lands; until then it is
+ * absent rather than disabled, for the reason in the note above.
  */
 const SOCIAL_ROWS: DrawerRow[] = [
   { key: 'friends', labelKey: 'friends.title', icon: 'people-outline', href: '/friends' },
+  { key: 'messages', labelKey: 'messages.title', icon: 'chatbubbles-outline', href: '/messages' },
 ];
 
 const ACCOUNT_ROWS: DrawerRow[] = [
@@ -70,12 +73,14 @@ function Row({
   onNavigate: (href: string) => void;
 }) {
   const theme = useTheme();
-  const { t, isRTL } = useI18n();
+  const { t, isRTL, formatNumber } = useI18n();
 
   return (
     <PressScale
       accessibilityRole="link"
-      accessibilityLabel={t(row.labelKey)}
+      accessibilityLabel={
+        row.badge ? `${t(row.labelKey)}, ${t('messages.unread', { count: row.badge })}` : t(row.labelKey)
+      }
       onPress={() => onNavigate(row.href)}
       haptic="selection"
       scaleTo={0.98}
@@ -96,6 +101,24 @@ function Row({
       <Text variant="body" style={{ flex: 1 }}>
         {t(row.labelKey)}
       </Text>
+      {row.badge ? (
+        <View
+          testID={`drawer-${row.key}-badge`}
+          style={{
+            minWidth: 20,
+            paddingHorizontal: 6,
+            height: 20,
+            borderRadius: theme.radius.pill,
+            backgroundColor: theme.colors.primaryStrong,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Text variant="micro" style={{ color: theme.colors.textOnPrimary }}>
+            {formatNumber(row.badge)}
+          </Text>
+        </View>
+      ) : null}
     </PressScale>
   );
 }
@@ -122,6 +145,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
   const { preferences } = usePreferences();
   const { user, isEnabled, signOut, isGuest } = useAuth();
   const profile = useOwnProfile();
+  const unread = useUnreadTotal();
 
   /**
    * A closed drawer must not be readable by assistive technology.
@@ -216,7 +240,11 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
         <>
           <Divider />
           {SOCIAL_ROWS.map((row) => (
-            <Row key={row.key} row={row} onNavigate={go} />
+            <Row
+              key={row.key}
+              row={row.key === 'messages' ? { ...row, badge: unread } : row}
+              onNavigate={go}
+            />
           ))}
         </>
       ) : null}
