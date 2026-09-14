@@ -5,8 +5,8 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-13 |
-| **Current phase** | **CORE PRODUCT CORRECTNESS HOTFIX.** A–I are complete; J–U are paused. Manual testing found the central feature — "what can I cook with what I have" — returning the same answer whatever the user selected. See "The hotfix" below. |
+| **Last updated** | 2026-09-14 |
+| **Current phase** | **CORE PRODUCT CORRECTNESS HOTFIX — done, two rounds.** A–I complete; J–U resume next. Round one: every ingredient selection returned the same answer. Round two: the app overstated what the user had. See "The hotfix". |
 | **App name** | Akla (working name — see "Renaming") |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -25,7 +25,7 @@ reordered.
 
 | Phase | What | State |
 |---|---|---|
-| A | 150+ structured recipes with an import/validation pipeline | **done** — 158 recipes |
+| A | 150+ structured recipes with an import/validation pipeline | **done** — 161 recipes |
 | B | Recipe image architecture with provenance and licensing | **done** — manifest, resolver, validator, credits screen |
 | C | `RecipeConstraints` with genuine hard filtering | **done** — one model, hard filters, honest relaxations |
 | D | Database-backed recipe search | **done** — query plan, keyset paging, indexes |
@@ -117,6 +117,30 @@ the catalogue had almost nothing you can make from them. Three recipes fill the
 hole rather than the threshold being lowered: **muhallabia** — a staple
 Egyptian dessert missing from an Egypt-first catalogue — warm oats with banana,
 and a banana milkshake. **161 recipes.**
+
+#### Reverified through the built app
+
+Driven by `npm run smoke:web`, which prints this table from the rendered
+screens. Counts are the app's own "N ideas", not a node count.
+
+| Inventory | Mode | Result | First results |
+|---|---|---|---|
+| rice, tomatoes — **basics ticked** | ≤2 missing | 17 | Tomato Rice, Okra in Tomato, Bulgur Pilaf, Koshari |
+| rice, tomatoes — **nothing configured** | ≤2 missing | **6, and Tomato Rice is not among them** | Tomato & Mozzarella, Mango Coconut Rice, Lentils and Rice |
+| chicken, rice, tomato | exact / ≤1 / ≤2 | 1 / 4 / 17 | Tomato Rice |
+| eggs, white cheese, tomato | exact / ≤2 | 1 / 15 | Tomato & Feta Shakshuka |
+| banana, oats, milk | exact / ≤2 | 1 / 5 | Warm Oats with Banana |
+
+The first two rows are the fix. Same search, same ingredients; the only
+difference is whether that cook told us they keep oil, onions, garlic, stock
+and tomato paste. **Ticked, Tomato Rice is one coriander short and ranks
+first. Unticked, it does not appear at all.**
+
+Two things that look like discrepancies and are not. Adding chicken to rice
+and tomatoes changes nothing at ≤2 because the one recipe it would add,
+shish tawook, needs a **grill** and the default kitchen is stove-only. The
+banana milkshake is missing from the banana/oats/milk row for the same reason
+— it needs a blender.
 
 ---
 
@@ -237,7 +261,7 @@ server's own explanation:
 4. **72 of 158, correctly sized.** `Special:FilePath?width=` — MediaWiki's own
    documented way to ask for a file at a size — replaced the hand-built CDN
    path, which had been returning HTTP 400 for every request.
-5. **64 of 158, after two rounds of someone looking at them.**
+5. **67 of 161, after three rounds of someone looking at them.**
 
 ### The part no rule could do
 
@@ -253,15 +277,24 @@ had to go, and not one of them was catchable by a rule that reads a filename:
   for overnight oats. **Breaded fried oysters** for soft scrambled eggs. A pan
   of **raw mushrooms with cured meat** for risotto. A pale pancake for kunafa.
 - Two photographs were each doing duty for two recipes.
+- Later rounds added: a **branded fast-food shake cup** for the banana
+  milkshake, and — three separate attempts for **Menemen** — an aerial view of
+  the Turkish town, a commuter train at Ulukent, and a punnet of strawberries.
+  The dish shares its name with a district, so its Commons category is
+  landscapes and produce. That recipe keeps the fallback for good.
 
-`data/images/rejected.json` records **thirteen refusals with the reason each**; the
+Acquisition now runs **most-surfaced-first** — MENA cuisine, short ingredient
+lists, easy — so a run that stops early has spent its requests on the dishes
+that fill Home, Discover and the answer to "what can I cook".
+
+`data/images/rejected.json` records **fifteen refusals with the reason each**; the
 fetcher never chooses them again and `images:check` refuses a manifest
 containing one, including one restored by hand. Duplicates are handled
 separately, because those photographs are fine — no file may illustrate two
 recipes, enforced in the fetcher across runs and in the validator across the
 manifest.
 
-**Coverage settled at 64 of 158, having been 72 before anyone looked, and that is the correct direction.** The brief
+**Coverage settled at 67 of 161 (42%), having been 72 before anyone looked, and that is the correct direction.** The brief
 asks for relevance over coverage, and eleven pictures of the wrong thing are
 worth less than none of them. The 94 recipes still on the branded fallback are
 listed in `manifest.skipped` with a reason each; most are ordinary weeknight
@@ -289,14 +322,14 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 598/598 across 34 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 610/610 across 34 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 171 assertions across six files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Image manifest | `npm run images:check` | **pass**, licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
-| Dataset spread | `npm run recipes:audit` | reports only — 158 recipes, no pair over 0.9 Jaccard |
+| Image manifest | `npm run images:check` | **pass**, 67 of 161; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
+| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags** |
 | Whole-app browser walk | `npm run smoke:web` | **pass**, 93 interaction checks, no page errors |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
