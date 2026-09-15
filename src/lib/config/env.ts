@@ -31,7 +31,28 @@ function boolFlag(value: string | undefined, fallback = false): boolean {
 }
 
 const supabaseUrl = optional(process.env.EXPO_PUBLIC_SUPABASE_URL);
-const supabaseAnonKey = optional(process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY);
+
+/**
+ * The publishable key, under its current name and its old one.
+ *
+ * Supabase's modern key is `sb_publishable_…`; the legacy one was a JWT called
+ * `anon`. They are interchangeable to this app — the client never inspects the
+ * key, it only passes it — so the rename is about the NAME being honest, not
+ * about the value changing.
+ *
+ * The old variable is still read, and deliberately. Dropping it outright would
+ * not produce an error: an environment still setting only
+ * `EXPO_PUBLIC_SUPABASE_ANON_KEY` would read as "no backend configured" and
+ * quietly fall into demo mode with a real project sitting behind it. A silent
+ * downgrade is the worst of the available failures, so the fallback stays
+ * until `describeConfigGaps()` has stopped reporting it anywhere that matters.
+ *
+ * Both are referenced statically, which Expo's bundler requires in order to
+ * inline them.
+ */
+const supabasePublishableKeyNew = optional(process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY);
+const supabaseLegacyAnonKey = optional(process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY);
+const supabasePublishableKey = supabasePublishableKeyNew ?? supabaseLegacyAnonKey;
 
 export type AppEnvironment = 'development' | 'preview' | 'production';
 
@@ -44,13 +65,13 @@ export const env = {
   isProduction: appEnv === 'production',
 
   supabaseUrl,
-  supabaseAnonKey,
+  supabasePublishableKey,
   /**
    * False when Supabase credentials are absent. The app stays fully usable in
    * this state: it runs against local fixture data and disables sign-in. This
    * is what lets development continue before a Supabase project exists.
    */
-  hasSupabase: Boolean(supabaseUrl && supabaseAnonKey),
+  hasSupabase: Boolean(supabaseUrl && supabasePublishableKey),
 
   defaultCountry: (optional(process.env.EXPO_PUBLIC_DEFAULT_COUNTRY) ?? 'EG') as CountryCode,
   defaultCurrency: (optional(process.env.EXPO_PUBLIC_DEFAULT_CURRENCY) ?? 'EGP') as CurrencyCode,
@@ -92,7 +113,7 @@ export const env = {
     // makes "production and demo cannot coexist" true of the app rather than
     // only of the deploy script — a stale `EXPO_PUBLIC_DEMO_MODE=true` in
     // somebody's `.env.local` turns itself off when they add their keys.
-    !Boolean(supabaseUrl && supabaseAnonKey),
+    !Boolean(supabaseUrl && supabasePublishableKey),
 
   enableGroceryOrdering: boolFlag(process.env.EXPO_PUBLIC_ENABLE_GROCERY_ORDERING, false),
   enableSocialAuth: boolFlag(process.env.EXPO_PUBLIC_ENABLE_SOCIAL_AUTH, false),
@@ -122,6 +143,15 @@ export const env = {
 export function describeConfigGaps(): string[] {
   const gaps: string[] = [];
   if (!supabaseUrl) gaps.push('EXPO_PUBLIC_SUPABASE_URL is not set');
-  if (!supabaseAnonKey) gaps.push('EXPO_PUBLIC_SUPABASE_ANON_KEY is not set');
+  if (!supabasePublishableKey) {
+    gaps.push('EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY is not set');
+  } else if (!supabasePublishableKeyNew) {
+    // Working, but on the old name. Said out loud so the fallback above can
+    // eventually be removed on evidence rather than on hope.
+    gaps.push(
+      'EXPO_PUBLIC_SUPABASE_ANON_KEY is deprecated — rename it to ' +
+        'EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY (the value does not change)',
+    );
+  }
   return gaps;
 }

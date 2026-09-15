@@ -46,19 +46,25 @@ Dashboard → **Settings → API**:
 | Value | Where it goes | Secret? |
 |---|---|---|
 | Project URL | `EXPO_PUBLIC_SUPABASE_URL` | No |
-| `anon` / publishable key | `EXPO_PUBLIC_SUPABASE_ANON_KEY` | **No — see below** |
-| `service_role` key | Nowhere in this repository | **YES. Never.** |
+| Publishable key (`sb_publishable_…`) | `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | **No — see below** |
+| Secret key (`sb_secret_…`) | Nowhere in this repository | **YES. Never.** |
 
-The anon key is safe in a shipped bundle *only because row level security is
-enabled on every table*, which this schema does and
+Supabase's modern key pair is `sb_publishable_…` / `sb_secret_…`; older
+projects call the same two things `anon` and `service_role`. Either publishable
+form works here — the client passes the key through without inspecting it — so
+if your project still shows an `anon` JWT, that value goes in the same
+variable.
+
+The publishable key is safe in a shipped bundle *only because row level
+security is enabled on every table*, which this schema does and
 `supabase/tests/09_privacy_audit_test.sql` asserts on every CI run. That is the
-whole basis of the safety, so if you ever disable RLS on a table, the anon key
-stops being safe that same minute.
+whole basis of the safety, so if you ever disable RLS on a table, the
+publishable key stops being safe that same minute.
 
-The `service_role` key bypasses RLS entirely. It belongs in Supabase's own
-secret store (step 7) and nowhere else. The preview deploy actively refuses to
-publish a bundle containing one — it decodes any JWT it finds and fails on a
-`service_role` payload.
+The secret key bypasses RLS entirely. It belongs in Supabase's own secret store
+(step 7) and nowhere else. The preview deploy refuses to publish a bundle
+containing one: it matches `sb_secret_` literally, and decodes any JWT it finds
+and fails on a `service_role` payload.
 
 ---
 
@@ -276,8 +282,12 @@ Fill in exactly two values:
 
 ```
 EXPO_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT-REF.supabase.co
-EXPO_PUBLIC_SUPABASE_ANON_KEY=YOUR_ANON_KEY
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
 ```
+
+`EXPO_PUBLIC_SUPABASE_ANON_KEY` is still read as a fallback, so an older
+`.env.local` keeps working — but the app lists it as deprecated in its startup
+diagnostics until it is renamed. The value is unchanged; only the name is.
 
 **Do not set `EXPO_PUBLIC_DEMO_MODE`.** It is off by default, and
 `src/lib/config/env.ts` forces it off anyway once Supabase credentials are
@@ -324,15 +334,16 @@ mode. To deploy a real one, set repository secrets and reference them in
 
 ```yaml
 EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
-EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
 ```
 
 and remove the two `EXPO_PUBLIC_DEMO_MODE` / `EXPO_PUBLIC_APP_ENV: preview`
 lines. The demo flag would turn itself off regardless, but leaving it in the
 workflow is a misleading thing for the next reader to find.
 
-The workflow's secret gate stays on either way: it decodes every JWT in the
-bundle and refuses to publish one carrying a `service_role` payload.
+The workflow's secret gate stays on either way: it refuses a bundle containing
+`sb_secret_`, and decodes every JWT in it to refuse one carrying a
+`service_role` payload.
 
 ---
 

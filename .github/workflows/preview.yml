@@ -106,14 +106,22 @@ jobs:
         #
         # The literal patterns catch a key pasted into a source file. The
         # regex ones catch the shapes — a JWT, a PEM block, an AWS key id —
-        # which is what catches the key nobody thought to name. `service_role`
-        # is the Supabase key that bypasses RLS entirely; it belongs in edge
-        # function secrets and nowhere a browser can read.
+        # which is what catches the key nobody thought to name. The Supabase
+        # key that bypasses RLS entirely is `sb_secret_…` on the modern key
+        # system and a `service_role` JWT on the older one; both are matched,
+        # and both belong in edge function secrets, nowhere a browser can
+        # read.
         run: |
           set -euo pipefail
           bundle=$(find dist -name '*.js' -type f)
 
-          for pattern in 'sk-ant-' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
+          # `sb_secret_` is the modern Supabase secret key, and it is the one
+          # this gate could not previously see: it is an opaque string rather
+          # than a JWT, so the payload decode below never applies to it, and it
+          # contains none of the legacy literals. A project on the new key
+          # system has exactly one credential that bypasses RLS, and until this
+          # line nothing here was looking for it.
+          for pattern in 'sk-ant-' 'sb_secret_' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
             if grep -rqF "$pattern" $bundle; then
               echo "::error::Refusing to publish: found '$pattern' in the web bundle."
               exit 1

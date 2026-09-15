@@ -14,19 +14,21 @@ import { secureSessionStorage } from './secure-storage';
  * is what lets development continue before a Supabase project exists. Every
  * caller must handle null rather than assuming a client.
  *
- * SECURITY: only the anon (publishable) key is ever used here. It is safe in
- * the client solely because RLS is enabled on every table — see
- * supabase/migrations/20260910120700_row_level_security.sql. The service-role
- * key must never appear in this bundle.
+ * SECURITY: only the PUBLISHABLE key is ever used here — `sb_publishable_…`,
+ * or the legacy `anon` JWT it replaced. It is safe in the client solely
+ * because RLS is enabled on every table — see
+ * supabase/migrations/20260910120700_row_level_security.sql. A secret key
+ * (`sb_secret_…`, or the legacy `service_role` JWT) bypasses RLS entirely and
+ * must never appear in this bundle.
  */
 
 let client: SupabaseClient<Database> | null = null;
 let appStateSubscribed = false;
 
 function create(): SupabaseClient<Database> | null {
-  if (!env.hasSupabase || !env.supabaseUrl || !env.supabaseAnonKey) return null;
+  if (!env.hasSupabase || !env.supabaseUrl || !env.supabasePublishableKey) return null;
 
-  const instance = createClient<Database>(env.supabaseUrl, env.supabaseAnonKey, {
+  const instance = createClient<Database>(env.supabaseUrl, env.supabasePublishableKey, {
     auth: {
       storage: secureSessionStorage,
       autoRefreshToken: true,
@@ -68,7 +70,10 @@ export function getSupabase(): SupabaseClient<Database> | null {
 export function requireSupabase(): SupabaseClient<Database> {
   const instance = getSupabase();
   if (!instance) {
-    throw new Error('Supabase is not configured. Set EXPO_PUBLIC_SUPABASE_URL and _ANON_KEY.');
+    throw new Error(
+      'Supabase is not configured. Set EXPO_PUBLIC_SUPABASE_URL and ' +
+        'EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY.',
+    );
   }
   return instance;
 }
