@@ -76,10 +76,23 @@ export const env = {
    * Renders the social screens against seeded demo data.
    *
    * Exists so the preview can SHOW friends, chat and moderation without
-   * pretending a server answered. Every screen it touches is visibly badged,
-   * and `isProduction` forces it off so it cannot ship by accident.
+   * pretending a server answered. Every screen it touches is visibly badged.
+   *
+   * THREE conditions, all required: the flag is set, the environment is not
+   * production, and there is no Supabase project. See the comment below on
+   * the last one — it is what makes demo and real mutually exclusive.
    */
-  demoMode: boolFlag(process.env.EXPO_PUBLIC_DEMO_MODE, false) && appEnv !== 'production',
+  demoMode:
+    boolFlag(process.env.EXPO_PUBLIC_DEMO_MODE, false) &&
+    appEnv !== 'production' &&
+    // AND no backend. Demo mode exists BECAUSE there is nowhere to send
+    // anything; the moment a Supabase project is configured there is, and a
+    // build that seeded a fake friend list beside a real one would be the
+    // exact confusion the banner is there to prevent. This is the rule that
+    // makes "production and demo cannot coexist" true of the app rather than
+    // only of the deploy script — a stale `EXPO_PUBLIC_DEMO_MODE=true` in
+    // somebody's `.env.local` turns itself off when they add their keys.
+    !Boolean(supabaseUrl && supabaseAnonKey),
 
   enableGroceryOrdering: boolFlag(process.env.EXPO_PUBLIC_ENABLE_GROCERY_ORDERING, false),
   enableSocialAuth: boolFlag(process.env.EXPO_PUBLIC_ENABLE_SOCIAL_AUTH, false),

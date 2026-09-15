@@ -22,25 +22,4 @@ export const RECIPE_FIXTURES: Recipe[] = RECIPE_CATALOGUE.map(withResolvedImage)
 
 export const RECIPES_BY_ID = new Map(RECIPE_FIXTURES.map((recipe) => [recipe.id, recipe]));
 
-/** Discover collections. `tag` is matched against `Recipe.tags`. */
-export const COLLECTIONS = [
-  { slug: 'quick', tag: 'quick', labelKey: 'discover.collectionQuick', emoji: '⚡' },
-  { slug: 'under-100', tag: 'under-100', labelKey: 'discover.collectionUnder100', emoji: '💸' },
-  {
-    slug: 'high-protein',
-    tag: 'high-protein',
-    labelKey: 'discover.collectionHighProtein',
-    emoji: '💪',
-  },
-  { slug: 'healthy', tag: 'healthy', labelKey: 'discover.collectionHealthy', emoji: '🥗' },
-  { slug: 'egyptian', tag: 'egyptian', labelKey: 'discover.collectionEgyptian', emoji: '🇪🇬' },
-  { slug: 'italian', tag: 'italian', labelKey: 'discover.collectionItalian', emoji: '🍝' },
-  { slug: 'asian', tag: 'asian', labelKey: 'discover.collectionAsian', emoji: '🍜' },
-  { slug: 'breakfast', tag: 'breakfast', labelKey: 'discover.collectionBreakfast', emoji: '🍳' },
-  { slug: 'late-night', tag: 'late-night', labelKey: 'discover.collectionLateNight', emoji: '🌙' },
-  { slug: 'air-fryer', tag: 'air-fryer', labelKey: 'discover.collectionAirFryer', emoji: '🔥' },
-  { slug: 'beginner', tag: 'beginner', labelKey: 'discover.collectionBeginner', emoji: '🌱' },
-  { slug: 'comfort', tag: 'comfort', labelKey: 'discover.collectionTrending', emoji: '🍲' },
-] as const;
-
-export type CollectionSlug = (typeof COLLECTIONS)[number]['slug'];
+export { COLLECTIONS, type CollectionSlug } from './collections';

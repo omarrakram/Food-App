@@ -40,7 +40,7 @@ type Tab = 'friends' | 'incoming' | 'sent';
  */
 export default function FriendsScreen() {
   const theme = useTheme();
-  const { t, formatDate } = useI18n();
+  const { t } = useI18n();
   const router = useRouter();
   const toast = useToast();
   const { isEnabled, user } = useAuth();
@@ -222,9 +222,6 @@ export default function FriendsScreen() {
                 <PersonRow
                   key={entry.person.id}
                   person={entry.person}
-                  subtitle={t('friends.since', {
-                    date: formatDate(entry.friendsSince, { month: 'long', year: 'numeric' }),
-                  })}
                   testID={`friend-${entry.person.id}`}
                   actions={[
                     {
@@ -233,15 +230,21 @@ export default function FriendsScreen() {
                       onPress: () => openChat(entry.person.id),
                       testID: `friends-message-${entry.person.id}`,
                     },
+                  ]}
+                  overflow={[
                     {
                       labelKey: 'friends.unfriend',
+                      icon: 'person-remove-outline',
+                      destructive: true,
                       onPress: () => confirmUnfriend(entry.person.id),
                       testID: `friends-unfriend-${entry.person.id}`,
                     },
                     {
                       labelKey: 'friends.block',
-                      variant: 'ghost',
+                      icon: 'ban-outline',
+                      destructive: true,
                       onPress: () => confirmBlock(entry.person.id),
+                      testID: `friends-block-${entry.person.id}`,
                     },
                   ]}
                 />

@@ -240,6 +240,24 @@ export default function SubmitRecipeScreen() {
         </View>
       ) : null}
 
+      <Section title={t('submit.aboutTheDish')}>
+        <View style={{ gap: theme.spacing.md }}>
+          <Input
+            value={draft.title}
+            onChangeText={(title) => patch({ title })}
+            placeholder={t('submit.titlePlaceholder')}
+            testID="submit-title"
+          />
+          <Input
+            value={draft.description}
+            onChangeText={(description) => patch({ description })}
+            placeholder={t('submit.descriptionPlaceholder')}
+            multiline
+            testID="submit-description"
+          />
+        </View>
+      </Section>
+
       <Section title={t('submit.photo')} subtitle={t('submit.photoHint')}>
         <View style={{ gap: theme.spacing.sm }}>
           {draft.imageUrl ? (
@@ -276,86 +294,6 @@ export default function SubmitRecipeScreen() {
             loading={upload.isPending}
             testID="submit-photo"
           />
-        </View>
-      </Section>
-
-      <Section title={t('submit.aboutTheDish')}>
-        <View style={{ gap: theme.spacing.md }}>
-          <Input
-            value={draft.title}
-            onChangeText={(title) => patch({ title })}
-            placeholder={t('submit.titlePlaceholder')}
-            testID="submit-title"
-          />
-          <Input
-            value={draft.description}
-            onChangeText={(description) => patch({ description })}
-            placeholder={t('submit.descriptionPlaceholder')}
-            multiline
-            testID="submit-description"
-          />
-        </View>
-      </Section>
-
-      <Section title={t('submit.timeAndServings')}>
-        <View style={{ gap: theme.spacing.md }}>
-          <LabelledStepper
-            label={t('submit.prep')}
-            value={draft.prepMinutes}
-            onChange={(prepMinutes) => patch({ prepMinutes })}
-            step={5}
-            min={0}
-            max={1440}
-            suffix={t('common.min', { count: draft.prepMinutes })}
-            testID="submit-prep"
-          />
-          <LabelledStepper
-            label={t('submit.cook')}
-            value={draft.cookMinutes}
-            onChange={(cookMinutes) => patch({ cookMinutes })}
-            step={5}
-            min={0}
-            max={1440}
-            suffix={t('common.min', { count: draft.cookMinutes })}
-            testID="submit-cook"
-          />
-          <LabelledStepper
-            label={t('submit.servings')}
-            value={draft.baseServings}
-            onChange={(baseServings) => patch({ baseServings })}
-            min={1}
-            max={50}
-            suffix={t('common.peopleUnit', { count: draft.baseServings })}
-            testID="submit-servings"
-          />
-        </View>
-      </Section>
-
-      <Section title={t('submit.cuisine')}>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.xs }}>
-          {CUISINES.map((cuisine) => (
-            <Chip
-              key={cuisine}
-              label={t(`cuisine.${cuisine}` as TranslationKey)}
-              selected={draft.cuisine === cuisine}
-              onPress={() => patch({ cuisine: draft.cuisine === cuisine ? null : cuisine })}
-              testID={`submit-cuisine-${cuisine}`}
-            />
-          ))}
-        </View>
-      </Section>
-
-      <Section title={t('submit.difficulty')}>
-        <View style={{ flexDirection: 'row', gap: theme.spacing.xs }}>
-          {DIFFICULTIES.map((level) => (
-            <Chip
-              key={level}
-              label={t(`difficulty.${level}` as TranslationKey)}
-              selected={draft.difficulty === level}
-              onPress={() => patch({ difficulty: level })}
-              testID={`submit-difficulty-${level}`}
-            />
-          ))}
         </View>
       </Section>
 
@@ -506,6 +444,79 @@ export default function SubmitRecipeScreen() {
             }
             testID="submit-add-step"
           />
+        </View>
+      </Section>
+
+      {/*
+        The authoring sequence, and the reason for it: a person writing a
+        recipe down knows its name, then what it looks like, then what goes in
+        it, then what you do. Time, cuisine and difficulty are things they
+        answer ABOUT a recipe that already exists — asking for them third, as
+        this form used to, is asking somebody to classify a dish they have not
+        written yet.
+
+        Nothing about the submission schema changed for this. It is the order
+        of four JSX blocks.
+      */}
+      <Section title={t('submit.timeAndServings')}>
+        <View style={{ gap: theme.spacing.md }}>
+          <LabelledStepper
+            label={t('submit.prep')}
+            value={draft.prepMinutes}
+            onChange={(prepMinutes) => patch({ prepMinutes })}
+            step={5}
+            min={0}
+            max={1440}
+            suffix={t('common.min', { count: draft.prepMinutes })}
+            testID="submit-prep"
+          />
+          <LabelledStepper
+            label={t('submit.cook')}
+            value={draft.cookMinutes}
+            onChange={(cookMinutes) => patch({ cookMinutes })}
+            step={5}
+            min={0}
+            max={1440}
+            suffix={t('common.min', { count: draft.cookMinutes })}
+            testID="submit-cook"
+          />
+          <LabelledStepper
+            label={t('submit.servings')}
+            value={draft.baseServings}
+            onChange={(baseServings) => patch({ baseServings })}
+            min={1}
+            max={50}
+            suffix={t('common.peopleUnit', { count: draft.baseServings })}
+            testID="submit-servings"
+          />
+        </View>
+      </Section>
+
+      <Section title={t('submit.cuisine')}>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.xs }}>
+          {CUISINES.map((cuisine) => (
+            <Chip
+              key={cuisine}
+              label={t(`cuisine.${cuisine}` as TranslationKey)}
+              selected={draft.cuisine === cuisine}
+              onPress={() => patch({ cuisine: draft.cuisine === cuisine ? null : cuisine })}
+              testID={`submit-cuisine-${cuisine}`}
+            />
+          ))}
+        </View>
+      </Section>
+
+      <Section title={t('submit.difficulty')}>
+        <View style={{ flexDirection: 'row', gap: theme.spacing.xs }}>
+          {DIFFICULTIES.map((level) => (
+            <Chip
+              key={level}
+              label={t(`difficulty.${level}` as TranslationKey)}
+              selected={draft.difficulty === level}
+              onPress={() => patch({ difficulty: level })}
+              testID={`submit-difficulty-${level}`}
+            />
+          ))}
         </View>
       </Section>
 

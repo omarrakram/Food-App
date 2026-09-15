@@ -86,9 +86,19 @@ const MODERATOR_ROW: DrawerRow = {
   href: '/moderate',
 };
 
+/**
+ * Account.
+ *
+ * "Settings" rather than "Profile" on the gear row. `/profile` is a list of
+ * settings — preferences, household, kitchen, appearance, language — and
+ * calling it Profile put two rows named after the same noun two lines apart,
+ * one of which edited an identity and the other of which did not. The bottom
+ * tab keeps its own label; this is about the drawer, where both were visible
+ * at once.
+ */
 const ACCOUNT_ROWS: DrawerRow[] = [
   { key: 'profile', labelKey: 'profile.edit', icon: 'person-circle-outline', href: '/settings/profile' },
-  { key: 'settings', labelKey: 'tabs.profile', icon: 'settings-outline', href: '/profile' },
+  { key: 'settings', labelKey: 'nav.settings', icon: 'settings-outline', href: '/profile' },
   { key: 'about', labelKey: 'profile.about', icon: 'help-circle-outline', href: '/settings/about' },
 ];
 
@@ -192,6 +202,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
 
   const name = profile.data?.displayName ?? preferences.displayName ?? t('profile.guest');
   const handle = profile.data?.username;
+  const bio = profile.data?.bio?.trim() || null;
 
   // Closing first means the drawer is not still sliding shut over the screen
   // it just pushed. Doing it after `push` leaves a visible overlap.
@@ -228,11 +239,26 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
       }}
       showsVerticalScrollIndicator={false}
     >
-      {/* Identity, and a way to change it. */}
+      {/*
+        WHO YOU ARE, and nothing else.
+
+        This used to fall back to "Your username, name and how visible you
+        are" when there was no handle — instructional copy about a settings
+        screen, sitting where a name belongs, and truncating mid-word because
+        it was never meant to be a subtitle. An identity block shows an
+        identity: avatar, name, handle, and a bio if there is one. When there
+        is no handle it shows a name and stops, which is the honest amount of
+        information rather than a sentence explaining what is missing.
+
+        Tapping opens the PUBLIC profile — what everyone else sees — because
+        that is what a person looking at their own identity block wants to
+        check. Editing it is one row below. A user with no handle has no public
+        page to open, so they go to the editor that lets them claim one.
+      */}
       <PressScale
         accessibilityRole="button"
-        accessibilityLabel={t('profile.edit')}
-        onPress={() => go('/settings/profile')}
+        accessibilityLabel={handle ? `${name}, @${handle}` : name}
+        onPress={() => go(handle ? `/u/${handle}` : '/settings/profile')}
         haptic="selection"
         scaleTo={0.985}
         style={{
@@ -250,14 +276,15 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
             {name}
           </Text>
           {handle ? (
-            <Text variant="footnote" color="textSecondary" lines={1}>
+            <Text variant="footnote" color="textSecondary" lines={1} testID="drawer-identity-handle">
               @{handle}
             </Text>
-          ) : (
-            <Text variant="footnote" color="textTertiary" lines={1}>
-              {isEnabled && !user ? t('profile.signInPrompt') : t('profile.editSub')}
+          ) : null}
+          {bio ? (
+            <Text variant="micro" color="textTertiary" lines={1} testID="drawer-identity-bio">
+              {bio}
             </Text>
-          )}
+          ) : null}
         </View>
       </PressScale>
 

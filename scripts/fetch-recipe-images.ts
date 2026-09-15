@@ -32,6 +32,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
+import { COLLECTIONS } from '../src/features/recipes/collections.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const ASSET_DIR = join(ROOT, 'assets', 'recipes');
@@ -726,8 +727,33 @@ async function fetchImage(candidate: Candidate): Promise<Fetched> {
  *   screen keep returning; and easy, because the catalogue skews that way and
  *   so do the results.
  */
+/**
+ * Which recipes are worth a photograph FIRST.
+ *
+ * Coverage will never be 100% and chasing it is the wrong goal: a recipe with
+ * no sufficiently relevant openly-licensed image keeps the branded fallback,
+ * and attaching a photograph of a different dish tells the user something
+ * false about what they are cooking. So the question is not how many, it is
+ * WHICH — and the answer is the ones people actually see.
+ *
+ * Four proxies, all of them for "appears on a screen somebody is looking at":
+ *
+ *   MENA CUISINE — this is an Egyptian product. These are the dishes on Home
+ *   and the ones people search for by name.
+ *
+ *   FEW ESSENTIAL INGREDIENTS — the strongest predictor of showing up in Cook
+ *   results, because a short list is a list a real pantry can satisfy. A
+ *   fourteen-ingredient braise is a recipe almost nobody is ever offered.
+ *
+ *   IN A DISCOVER COLLECTION — surfaced by name on a browsing screen, where a
+ *   grid of gradient fallbacks is most obvious.
+ *
+ *   EASY — correlates with both of the above and breaks ties sensibly.
+ */
 function surfacingScore(recipe: (typeof RECIPE_CATALOGUE)[number]): number {
   const MENA: readonly string[] = ['egyptian', 'levantine', 'turkish'];
+  const COLLECTION_TAGS: readonly string[] = COLLECTIONS.map((entry) => entry.tag);
+
   const essentials = recipe.ingredients.filter(
     (line) => !line.isOptional && !line.isGarnish && !line.isPantryStaple,
   ).length;
@@ -736,6 +762,7 @@ function surfacingScore(recipe: (typeof RECIPE_CATALOGUE)[number]): number {
   if (MENA.includes(recipe.cuisine ?? '')) score += 3;
   if (essentials <= 4) score += 3;
   else if (essentials <= 6) score += 2;
+  if (recipe.tags.some((tag) => COLLECTION_TAGS.includes(tag))) score += 2;
   if (recipe.difficulty === 'easy') score += 1;
   return score;
 }

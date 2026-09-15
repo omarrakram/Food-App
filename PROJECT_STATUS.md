@@ -33,7 +33,9 @@ because each depends on the one before it.
 | K | Recipe sharing and deep links | **done** — shared as a reference, share sheet, external URL |
 | L–N | Community submissions, moderation, admin | **done** — schema, RLS, submit form, status, review queue |
 | O | In-app notifications | **done** — schema, trigger-written rows, feed, badges |
-| Q–U | Privacy, security, performance, preview, tests | **in progress** |
+| Q–U | Privacy, security, performance, preview, tests | **done** |
+| **UX cleanup** | Drawer, friends, messaging, submission order, demo banner | **done** — see below |
+| **Backend activation** | Documented and audited, not yet performed | **ready** — `BACKEND_SETUP.md` |
 
 ### Why A–I are marked done
 
@@ -318,7 +320,7 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 704/704 across 44 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 732/732 across 48 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
@@ -565,16 +567,62 @@ egress proxy blocks `omarrakram.github.io`, verified by probing it.
 
 ### THE SINGLE NEXT ACTION
 
-**Phase Q–U: the audits.** Everything J through O is built, tested and wired
-into the drawer. What remains is the review pass the brief asks for — privacy,
-social-feature RLS, chat authorization, storage policy, moderation security,
-pagination, performance/caching, accessibility, Arabic/RTL, responsive, secret
-scan, full CI, full Pages deploy.
+**Create a Supabase project and follow `BACKEND_SETUP.md`.** Everything else is
+built, tested and deployed. That document is the whole activation sequence,
+verified against this repository rather than written from memory: the 21
+migrations apply to an empty database in filename order, a clean migrate-then-
+seed produces exactly 161 recipes / 257 ingredients / 69 price estimates, and
+the redirect paths in it are the constants the app's own deep-link parser reads
+back.
 
-Nothing in J–O is half-finished, so there is no partially-built thing to pick
-up first. The order below is the brief's own.
+Two things the audit found while writing it, both fixed:
 
-#### What landed in J–O
+- **Nothing exchanged the auth code on native.** The app built
+  `emailRedirectTo` deep links and no listener existed, so on web Supabase
+  parsed the callback itself and on native a tapped confirmation link opened
+  the app and produced no session. It could not be noticed without a backend —
+  with no project configured, no email is ever sent — and would have been the
+  first thing to fail after activation. `src/features/auth/deep-link.ts` plus
+  11 assertions.
+- **Demo mode and a real backend could coexist.** `env.demoMode` was gated on
+  the flag and the environment, but not on the absence of credentials — so a
+  stale `EXPO_PUBLIC_DEMO_MODE=true` in a `.env.local` would have seeded a fake
+  friend list beside a real one. It now turns itself off the moment Supabase is
+  configured, asserted over every combination of the three inputs.
+
+### The UX cleanup pass
+
+- **Drawer.** The identity block showed "Your username, name and how visible
+  you are" when there was no handle — instructional copy about a settings
+  screen, truncating mid-word where a name belongs. It is avatar / name /
+  handle / bio now, and tapping it opens the PUBLIC profile rather than the
+  editor. The gear row is **Settings**; "Edit profile" stays distinct.
+- **Moderator visibility.** Unchanged in behaviour and now pinned by a rendered
+  navigation test: an ordinary user does not see the review queue, somebody the
+  server says holds the role does. Verified to fail when the gate is removed.
+- **Friends.** Message is the one inline action. Unfriend and Block moved
+  behind •••, where a mis-tap costs a sheet rather than a friendship. "Friends
+  since" left the row — at 320px it truncated to "Friends since A..." — and
+  moved to the public profile, where the line has room.
+- **Messaging.** Shared recipe cards were already tappable; the gone state is
+  deliberate now ("Recipe unavailable", dashed border, not pressable) and
+  tested both ways. Still a reference, never a copy.
+- **Submission form.** Reordered to the authoring sequence — title,
+  description, photograph, ingredients, steps, then the details you can only
+  answer about a recipe that already exists. Four JSX blocks moved; the schema
+  did not change.
+- **Demo banner.** One line instead of a four-line card repeated on eight
+  screens, expandable to the full text. Eight identical paragraphs is how a
+  warning becomes wallpaper. The compact form still names DEMO MODE and states
+  the consequence without being opened, and a screen reader hears the whole
+  warning either way. The stronger moderator-role preview notice on the review
+  queue is untouched.
+- **Photography.** Unchanged standards, better ordering: the acquisition run
+  now also prioritises recipes that appear in a Discover collection, alongside
+  MENA cuisine and short ingredient lists. 67 of 161; the next ten it would try
+  are Egyptian and Levantine staples.
+
+#### What landed in J–O#### What landed in J–O
 
 - **J — messaging.** `src/features/messages/` (interface, local, demo,
   Supabase), `src/app/messages/index.tsx` and `[id].tsx`, keyset paging on

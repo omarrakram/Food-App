@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { View } from 'react-native';
 
@@ -55,19 +56,45 @@ export function SharedRecipeCard({
     );
   }
 
+  /**
+   * The recipe is gone, and saying so is the point.
+   *
+   * This is the case the whole reference-not-a-copy design exists for: a
+   * recipe unpublished for unsafe instructions must stop being served from
+   * every chat log that ever carried it. So the card does not fail quietly
+   * into an empty box — it says, deliberately, that there is nothing here
+   * any more. Not pressable, because there is nowhere to go.
+   *
+   * Loading is handled above, so reaching here means the lookup finished and
+   * came back with nothing: deleted, unpublished, or never visible to this
+   * reader in the first place. All three are the same fact to them.
+   */
   if (!recipe.data) {
     return (
       <View
-        testID={testID ? `${testID}-missing` : undefined}
+        testID={testID ? `${testID}-missing` : 'shared-recipe-missing'}
+        accessible
+        accessibilityLabel={t('messages.recipeGone')}
         style={{
           ...frame,
-          padding: theme.spacing.md,
+          borderStyle: 'dashed',
+          borderColor: theme.colors.borderStrong,
           backgroundColor: theme.colors.surfaceAlt,
+          padding: theme.spacing.md,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: theme.spacing.sm,
         }}
       >
-        <Text variant="footnote" color="textSecondary">
-          {t('messages.recipeGone')}
-        </Text>
+        <Ionicons name="eye-off-outline" size={18} color={theme.colors.textTertiary} />
+        <View style={{ flex: 1, gap: 1 }}>
+          <Text variant="subhead" color="textSecondary">
+            {t('messages.recipeGone')}
+          </Text>
+          <Text variant="micro" color="textTertiary">
+            {t('messages.recipeGoneBody')}
+          </Text>
+        </View>
       </View>
     );
   }

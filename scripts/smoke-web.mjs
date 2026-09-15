@@ -1237,6 +1237,37 @@ async function main() {
       friendsSignedOut || friendsSearch,
       friendsSignedOut ? 'needs an account' : 'search available',
     );
+
+    if (friendsSearch) {
+      // ONE primary action on a friend row, and the destructive pair behind
+      // •••. Three buttons inline meant the row had no primary action, and
+      // Block sat a thumb's width from the one people actually want.
+      const firstFriend = await page.evaluate(() => {
+        const row = document.querySelector('[data-testid^="friend-"]');
+        return row ? row.getAttribute('data-testid') : null;
+      });
+      check('the friends list has a friend in it', firstFriend !== null, firstFriend ?? '');
+
+      if (firstFriend) {
+        check(
+          'Message is the visible action',
+          await visible(`friends-message-${firstFriend.replace('friend-', '')}`, 3000),
+        );
+        check(
+          'the destructive pair is NOT inline',
+          (await visible(`friends-unfriend-${firstFriend.replace('friend-', '')}`, 1200)) === false,
+        );
+        check('the row offers an overflow menu', await visible(`${firstFriend}-more`, 3000));
+
+        await tap(`${firstFriend}-more`);
+        await page.waitForTimeout(900);
+        const menu = await page.evaluate(
+          () => document.body.innerText.includes('Block') && document.body.innerText.includes('Unfriend'),
+        );
+        check('••• reveals Unfriend and Block', menu);
+        await shot('17d2-friends-overflow');
+      }
+    }
     await shot('17d-friends');
 
     // --- Messages ----------------------------------------------------------
@@ -1269,6 +1300,21 @@ async function main() {
       // The banner is not decoration: it is the only thing separating "this
       // preview demonstrates messaging" from "this preview sent a message".
       check('a demo build says so, unmissably', messagesDemo);
+      check(
+        'and the compact banner still names DEMO MODE without being opened',
+        await page.evaluate(() => {
+          const el = document.querySelector('[data-testid="messages-demo-banner"]');
+          return (el?.textContent ?? '').includes('DEMO MODE');
+        }),
+      );
+      await tap('messages-demo-banner');
+      await page.waitForTimeout(600);
+      check(
+        'tapping it reveals the full explanation',
+        await page.evaluate(() =>
+          document.body.innerText.includes('Nothing you do here reaches another person'),
+        ),
+      );
 
       const conversationIds = await page.evaluate(() =>
         [
@@ -1400,6 +1446,21 @@ async function main() {
       check('it asks for a name', await visible('submit-title', 3000));
       check('it asks for ingredients', await visible('submit-ingredient-search', 3000));
       check('it asks for steps', await visible('submit-step-0', 3000));
+
+      // The authoring sequence: name, photo, ingredients, steps, then the
+      // details you can only answer about a recipe that already exists.
+      const order = await page.evaluate(() => {
+        const ids = ['submit-title', 'submit-photo', 'submit-ingredient-search', 'submit-step-0'];
+        return ids.map((id) => {
+          const el = document.querySelector(`[data-testid="${id}"]`);
+          return el ? el.getBoundingClientRect().top + window.scrollY : -1;
+        });
+      });
+      check(
+        'the form follows the authoring sequence',
+        order.every((top, index) => top > 0 && (index === 0 || top > order[index - 1])),
+        order.map(Math.round).join(' < '),
+      );
 
       // Sending an empty draft must be refused with reasons, not accepted.
       await tap('submit-send');
@@ -1683,6 +1744,20 @@ async function main() {
       opened ? `x=${Math.round(opened.x)} w=${Math.round(opened.width)}` : 'missing',
     );
     check('the drawer shows who is signed in', await visible('drawer-identity', 4000));
+    check(
+      'the identity block carries no instructional copy',
+      (await page.evaluate(() => {
+        const el = document.querySelector('[data-testid="drawer-identity"]');
+        return el ? el.textContent ?? '' : '';
+      })).includes('Your username, name and how') === false,
+    );
+    check(
+      'the gear row is named Settings, not Profile',
+      await page.evaluate(() => {
+        const el = document.querySelector('[data-testid="drawer-settings"]');
+        return (el?.textContent ?? '').includes('Settings');
+      }),
+    );
     await shot('18b-drawer');
 
     // Every social destination has a row. Absent rows are how a finished

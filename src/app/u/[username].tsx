@@ -72,7 +72,8 @@ export default function PublicProfileScreen() {
    * every stranger's profile makes the app a way to be contacted by anyone,
    * which is not what people who set a public profile agreed to.
    */
-  const isFriend = (friends.data ?? []).some((entry) => entry.person.id === person.id);
+  const friendship = (friends.data ?? []).find((entry) => entry.person.id === person.id);
+  const isFriend = Boolean(friendship);
 
   const message = () => {
     void startConversation
@@ -118,6 +119,19 @@ export default function PublicProfileScreen() {
         <Text variant="micro" color="textTertiary">
           {t('profile.joined', { date: formatDate(person.joinedAt, { month: 'long', year: 'numeric' }) })}
         </Text>
+        {/*
+          "Friends since" belongs here rather than on the friends list row.
+          On a 320px row beside an avatar, a name and a Message button it
+          truncated to "Friends since A..." — which is not a date, and told
+          the reader less than nothing. Here the line has the width to say it.
+        */}
+        {friendship ? (
+          <Text variant="micro" color="textTertiary" testID="public-profile-friends-since">
+            {t('friends.since', {
+              date: formatDate(friendship.friendsSince, { month: 'long', year: 'numeric' }),
+            })}
+          </Text>
+        ) : null}
       </View>
 
       {isFriend && viewerId !== null ? (

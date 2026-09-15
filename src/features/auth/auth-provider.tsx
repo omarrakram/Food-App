@@ -1,6 +1,7 @@
 import type { Session, User } from '@supabase/supabase-js';
 import { useQueryClient } from '@tanstack/react-query';
 import * as Linking from 'expo-linking';
+import { useRouter } from 'expo-router';
 import {
   createContext,
   use,
@@ -17,6 +18,12 @@ import { env } from '@/lib/config/env';
 import { logError, logInfo } from '@/lib/logger';
 import { clearAppStorage } from '@/lib/storage';
 
+import {
+  AUTH_REDIRECT_PATHS,
+  destinationFor,
+  needsManualExchange,
+  parseAuthLink,
+} from './deep-link';
 import { AuthFailure } from './errors';
 import { chooseGuest, clearGuestChoice, readGuestChoice } from './guest-mode';
 
@@ -70,7 +77,13 @@ export type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-/** Deep link the confirmation and reset emails return to. */
+/**
+ * Deep link the confirmation and reset emails return to.
+ *
+ * The paths live in `deep-link.ts` beside the parser that reads them back, so
+ * the two cannot drift — a redirect nobody listens for is how email
+ * confirmation fails silently on native.
+ */
 function redirectTo(path: string): string {
   return Linking.createURL(path);
 }
@@ -82,6 +95,7 @@ function unavailable(): never {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const supabase = getSupabase();
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [session, setSession] = useState<Session | null>(null);
   const [status, setStatus] = useState<AuthStatus>(supabase ? 'loading' : 'signed_out');
   const [signedOutReason, setSignedOutReason] = useState<SignedOutReason>('never');
@@ -107,6 +121,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       cancelled = true;
     };
   }, []);
+
+  /**
+   * Email links coming back into the app.
+   *
+   * On web the Supabase client parses the URL itself (`detectSessionInUrl`).
+   * On native there is no URL bar, so this is the only thing that turns a
+   * tapped confirmation link into a session — without it, activation's first
+   * visible failure is a reset screen that cannot reset anything.
+   *
+   * Two entry points because there are two ways a link arrives: cold, opening
+   * the app (`getInitialURL`), and warm, while it is already running (the
+   * `url` event). Handling only one of them works perfectly in whichever case
+   * you happened to test.
+   */
+  useEffect(() => {
+    if (!supabase || !needsManualExchange()) return;
+
+    let cancelled = false;
+
+    const handle = (url: string | null) => {
+      if (cancelled || !url) return;
+      const link = parseAuthLink(url);
+      if (!link) return;
+
+      if (link.error) {
+        logError('auth_deep_link_rejected', new Error(link.error));
+        return;
+      }
+      if (!link.code) return;
+
+      void supabase.auth
+        .exchangeCodeForSession(link.code)
+        .then(({ error }) => {
+          if (error) throw error;
+          // `onAuthStateChange` below picks up the new session; this only
+          // decides where the user lands.
+          router.replace(destinationFor(link.kind) as never);
+        })
+        .catch((error: unknown) => logError('auth_code_exchange_failed', error));
+    };
+
+    void Linking.getInitialURL().then(handle);
+    const subscription = Linking.addEventListener('url', (event) => handle(event.url));
+
+    return () => {
+      cancelled = true;
+      subscription.remove();
+    };
+  }, [supabase, router]);
 
   useEffect(() => {
     if (!supabase) return;
@@ -164,7 +227,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         password,
         options: {
           data: { display_name: displayName.trim().slice(0, 80) },
-          emailRedirectTo: redirectTo('/auth/callback'),
+          emailRedirectTo: redirectTo(AUTH_REDIRECT_PATHS.confirm),
         },
       });
       if (error) throw new AuthFailure(error);
@@ -203,7 +266,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     async (email: string) => {
       if (!supabase) unavailable();
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
-        redirectTo: redirectTo('/auth/reset'),
+        redirectTo: redirectTo(AUTH_REDIRECT_PATHS.recover),
       });
       // Deliberately swallowed unless it is a rate limit: reporting "no such
       // account" would turn this into an email-enumeration oracle. The UI says
@@ -229,7 +292,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { error } = await supabase.auth.resend({
         type: 'signup',
         email: email.trim().toLowerCase(),
-        options: { emailRedirectTo: redirectTo('/auth/callback') },
+        options: { emailRedirectTo: redirectTo(AUTH_REDIRECT_PATHS.confirm) },
       });
       if (error && error.status === 429) throw new AuthFailure(error);
       if (error) logError('auth_resend_failed', error);

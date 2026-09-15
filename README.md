@@ -81,6 +81,12 @@ npm run format
 
 ## Database
 
+> **Turning the backend on for the first time?** Follow
+> **[`BACKEND_SETUP.md`](BACKEND_SETUP.md)** instead — it is the whole sequence
+> in order, from creating the project to granting yourself the moderator role,
+> with a check after every step. The commands below are the day-to-day
+> shorthand for a project that already exists.
+
 ### Against a hosted Supabase project
 
 ```bash
