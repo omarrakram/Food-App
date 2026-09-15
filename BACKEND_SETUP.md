@@ -97,13 +97,28 @@ supabase db diff          # prints nothing when the remote matches the migration
 
 ## 4. Seed the reference data
 
+`supabase db push` applies migrations and nothing else, so the reference data
+is a separate step.
+
+The connection string is in the dashboard: **Project Settings → Database →
+Connection string → URI**. It embeds your database password, so keep it out of
+shell history and out of Git — read it into a variable for the one command and
+unset it after:
+
 ```bash
-psql "$(supabase status --output json | jq -r '.DB_URL')" -f supabase/seed.sql
+read -rs SUPABASE_DB_URL      # paste the URI; it is not echoed
+psql "$SUPABASE_DB_URL" -f supabase/seed.sql
+unset SUPABASE_DB_URL
 ```
 
-Or paste `supabase/seed.sql` into the dashboard SQL editor. It is 18,000 lines
-of ingredients, recipes and price estimates — reference data, not user data, and
-safe to re-run.
+**Not `supabase status`.** That reports the LOCAL development stack started by
+`supabase start`. Seeding through its `DB_URL` fills a Docker database on your
+own machine and leaves the project you just created empty — and if the local
+stack is not running it simply fails.
+
+Pasting `supabase/seed.sql` into the dashboard SQL editor works too, but it is
+18,000 lines and the editor struggles with that. Either way it is reference
+data, not user data, and safe to re-run.
 
 **Check:** dashboard → Table editor → `recipes` shows 161 rows, `ingredients`
 257, `ingredient_price_estimates` 69. Those are the exact figures a clean
@@ -187,9 +202,27 @@ akla://auth/callback
 akla://auth/reset
 exp://127.0.0.1:8081/--/auth/callback      # Expo Go, development only
 exp://127.0.0.1:8081/--/auth/reset
-https://YOUR-WEB-DOMAIN/auth/callback      # if you deploy the web build
-https://YOUR-WEB-DOMAIN/auth/reset
+http://localhost:8081/auth/callback        # `npx expo start --web`
+http://localhost:8081/auth/reset
 ```
+
+**A web build served from a sub-path needs a code change before these work.**
+On web, `Linking.createURL('auth/callback')` resolves the path against
+`window.location.origin` — see `expo-linking/build/createURL.web.js`, which is
+`new URL(path, window.location.origin)` — and an origin is scheme plus host
+with no path at all. A GitHub Pages *project* site is served from
+`https://<user>.github.io/<repo>/`, so the link the app generates is
+`https://<user>.github.io/auth/callback`: GitHub's 404 page, not the app.
+Adding that URL to the whitelist does not help, because the URL itself is
+wrong.
+
+Nothing is broken by this today. The Pages preview ships no Supabase
+credentials and therefore never sends an email. It becomes real only when a web
+build is deployed against this backend (step 12) on a sub-path. Two ways out:
+serve that build from a domain root — a custom domain, or a `<user>.github.io`
+user site — or make `redirectTo` in `src/features/auth/auth-provider.tsx`
+prepend the deployed base path. Native builds and local `expo start` are
+unaffected: the app is at the root there.
 
 `akla` is the scheme from `app.json`. The two paths are
 `AUTH_REDIRECT_PATHS` in `src/features/auth/deep-link.ts`, which is also where
