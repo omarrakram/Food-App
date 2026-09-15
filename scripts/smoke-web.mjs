@@ -1261,10 +1261,18 @@ async function main() {
 
         await tap(`${firstFriend}-more`);
         await page.waitForTimeout(900);
-        const menu = await page.evaluate(
-          () => document.body.innerText.includes('Block') && document.body.innerText.includes('Unfriend'),
+        // The same two testIDs that had to be absent inline a moment ago.
+        // Asserting on them rather than on label text is the point: the
+        // English for `friends.unfriend` is "Remove friend", so a check
+        // written against the word "Unfriend" tests a string that has never
+        // been on the screen, and fails while the menu works perfectly.
+        const id = firstFriend.replace('friend-', '');
+        check('the ••• menu opens', await visible(`${firstFriend}-menu`, 3000));
+        check(
+          '••• reveals Remove friend and Block',
+          (await visible(`friends-unfriend-${id}`, 3000)) &&
+            (await visible(`friends-block-${id}`, 3000)),
         );
-        check('••• reveals Unfriend and Block', menu);
         await shot('17d2-friends-overflow');
       }
     }
