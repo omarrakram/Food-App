@@ -106,7 +106,17 @@ create policy "recipe-images: anyone may read"
   on storage.objects for select
   using (bucket_id = 'recipe-images');
 
-comment on table storage.objects is
-  'Ownership is by path: user-writable objects live under <uid>/… and the '
-  'policies compare the first segment to auth.uid(). recipe-images has read '
-  'policies only — writing there would bypass moderation.';
+-- Ownership is by path: user-writable objects live under <uid>/… and the
+-- policies compare the first segment to auth.uid(). recipe-images has read
+-- policies only — writing there would bypass moderation.
+--
+-- This was a `comment on table storage.objects`, which cannot work on a hosted
+-- project: COMMENT requires ownership of the object, and `storage.objects`
+-- belongs to `supabase_storage_admin` there, not to the role running
+-- migrations. It failed with `must be owner of table objects (SQLSTATE 42501)`
+-- and rolled the whole migration back. CREATE POLICY on the same table is
+-- fine — Supabase grants that — which is why every statement above this one
+-- applied before the push stopped here.
+--
+-- Nothing was lost by demoting it: the text was for whoever reads the schema,
+-- and it says the same thing to them here.

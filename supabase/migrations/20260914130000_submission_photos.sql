@@ -58,7 +58,13 @@ create policy "recipe-uploads: moderators read submitted"
     )
   );
 
-comment on policy "recipe-uploads: read when the recipe is published"
-  on storage.objects is
-  'The photograph is public exactly while its recipe is. Unpublishing takes '
-  'both down in one statement — there is no copy in another bucket to forget.';
+-- On the policy "recipe-uploads: read when the recipe is published":
+-- the photograph is public exactly while its recipe is. Unpublishing takes
+-- both down in one statement — there is no copy in another bucket to forget.
+--
+-- Also a plain comment rather than `comment on policy … on storage.objects`,
+-- for the same reason as in `20260913100000_storage_buckets.sql`: commenting
+-- on a policy requires ownership of the table it is attached to, and nobody
+-- but `supabase_storage_admin` owns `storage.objects` on a hosted project.
+-- This one had not been reached yet — it would have failed the push the
+-- moment the first was fixed.
