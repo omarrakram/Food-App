@@ -349,6 +349,7 @@ async function main() {
 
     const firstItem = page.locator('[data-testid^="pantry-item-"]').first();
     check('the saved item is listed', (await firstItem.count()) > 0);
+
     if (await firstItem.count()) {
       await firstItem.click();
       await page.waitForTimeout(700);
@@ -372,6 +373,43 @@ async function main() {
       (await page.locator('[data-testid^="pantry-item-"]').count()) === 0 ||
         (await visible('pantry-empty', 2000)),
     );
+
+    // --- What a row says about how much there is -------------------------
+    //
+    // THE BUG THIS GUARDS: a row rendered "rice / g / 2 days left".
+    // `formatQuantity(null, 'g')` returned the bare unit label, so an item
+    // with a unit and no amount printed the suffix on its own.
+    await page.evaluate(() => {
+      const stamp = '2026-09-01T00:00:00.000Z';
+      const row = (id, name, category, quantity, unit, isStaple) => ({
+        id, ingredientName: name, category, quantity, unit, expiresOn: null,
+        isStaple, note: null, createdAt: stamp, updatedAt: stamp,
+      });
+      window.localStorage.setItem('akla.local.pantry', JSON.stringify([
+        row('q1', 'rice', 'carbs', null, 'g', false),
+        row('q2', 'milk', 'dairy', 500, 'ml', false),
+        row('q3', 'salt', 'spices', null, 'g', true),
+      ]));
+    });
+    await page.goto(`${BASE}/pantry`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+    const amounts = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-testid="pantry-row-quantity"]')].map((node) =>
+        node.innerText.replace(/\s+/g, ' ').trim(),
+      ),
+    );
+    check(
+      'no row renders a naked unit',
+      !amounts.some((text) => /^(g|ml|kg|l|pieces?)$/i.test(text)),
+      JSON.stringify(amounts),
+    );
+    check('an amount with a unit shows both', amounts.includes('500 ml'));
+    check('an item with no amount says so deliberately', amounts.includes('Quantity not set'));
+    check(
+      'a staple stays quiet, having no amount on purpose',
+      amounts.filter((text) => text === 'Quantity not set').length === 1,
+    );
+    await shot('04b-pantry-quantities');
 
     // --- Cook: typing, autocomplete, selection, removal -------------------
     console.log('\n▸ cook with what I have');
@@ -1379,6 +1417,57 @@ async function main() {
       const before = await page.evaluate(
         () => document.querySelectorAll('[data-testid^="message-"]').length,
       );
+      // --- The composer's shape ------------------------------------------
+      //
+      // THE BUG THIS GUARDS: it opened about twice as tall as one line needs.
+      // `multiline` makes a `<textarea>` on web, react-native-web takes its
+      // `rows` from `numberOfLines`, nothing passed one, and the browser
+      // applied its own default of two.
+      const composerHeight = () =>
+        page.evaluate(() => {
+          const el = document.querySelector('[data-testid="conversation-input"]');
+          return el ? Math.round(el.getBoundingClientRect().height) : -1;
+        });
+
+      const emptyHeight = await composerHeight();
+      check('the composer starts at one line', emptyHeight > 0 && emptyHeight <= 56, `${emptyHeight}px`);
+      check(
+        'its textarea asks for one row, not the browser default',
+        (await page.evaluate(() =>
+          document.querySelector('[data-testid="conversation-input"]')?.getAttribute('rows'),
+        )) === '1',
+      );
+
+      const composer = page.locator('[data-testid="conversation-input"]').first();
+      await composer.fill(
+        'A message long enough to wrap over several lines in a narrow phone composer, so that the field has something to grow into.',
+      );
+      await page.waitForTimeout(700);
+      const grownHeight = await composerHeight();
+      check('it grows as the text wraps', grownHeight > emptyHeight, `${emptyHeight}px -> ${grownHeight}px`);
+
+      // `fill` rather than typing: Enter now sends, so a typed string with
+      // newlines in it would fire off forty messages.
+      await composer.fill(Array.from({ length: 40 }, (_, i) => `line ${i}`).join('\n'));
+      await page.waitForTimeout(900);
+      const cappedHeight = await composerHeight();
+      check('it stops growing at a ceiling', cappedHeight <= 140, `${cappedHeight}px`);
+      check(
+        'and scrolls inside itself past that',
+        await page.evaluate(() => {
+          const el = document.querySelector('[data-testid="conversation-input"]');
+          return el ? el.scrollHeight > el.clientHeight + 4 : false;
+        }),
+      );
+      const sendBox = await page.locator('[data-testid="conversation-send"]').first().boundingBox();
+      check(
+        'Send is still on screen with the composer at full height',
+        sendBox !== null && sendBox.y + sendBox.height <= 844,
+        sendBox ? `bottom ${Math.round(sendBox.y + sendBox.height)} of 844` : 'no box',
+      );
+      await composer.fill('');
+      await shot('18c-composer');
+
       await type('conversation-input', 'smoke test message');
       check('the composer accepts text', true);
       check('send is reachable', await tap('conversation-send'));
@@ -1469,6 +1558,81 @@ async function main() {
         order.every((top, index) => top > 0 && (index === 0 || top > order[index - 1])),
         order.map(Math.round).join(' < '),
       );
+
+      // --- Add a photo ---------------------------------------------------
+      //
+      // THE BUG THIS GUARDS: pressing Add a photo on a build with no Supabase
+      // project — which every preview build is — reported "Something went
+      // wrong". `useImageUpload` threw before the picker opened, because it
+      // demanded an account to CHOOSE a file rather than to upload one.
+      //
+      // Driving a real file needs one shim. expo-image-picker opens the dialog
+      // with a SYNTHETIC click, and headless Chromium answers an untrusted
+      // click on a file input by firing `cancel`; the library turns `cancel`
+      // into `change`, so the picker resolves "cancelled" and removes the input
+      // before anything can be chosen. Dropping that one listener leaves the
+      // input in the DOM. No app code is patched, and cancellation is still
+      // exercised below by dispatching `change` with no files — exactly what
+      // the listener did.
+      await page.evaluate(() => {
+        const add = EventTarget.prototype.addEventListener;
+        EventTarget.prototype.addEventListener = function (type, listener, options) {
+          if (
+            type === 'cancel' &&
+            this instanceof HTMLInputElement &&
+            this.getAttribute('data-testid') === 'file-input'
+          ) {
+            return undefined;
+          }
+          return add.call(this, type, listener, options);
+        };
+      });
+
+      const saysError = async () =>
+        /logged it|Something went wrong|hit a snag/i.test(
+          (await page.evaluate(() => document.body.innerText)).replace(/\s+/g, ' '),
+        );
+
+      await tap('submit-photo');
+      await page.waitForTimeout(600);
+      check(
+        'Add a photo opens a picker rather than failing',
+        (await page.locator('input[data-testid="file-input"]').count()) > 0,
+      );
+      check('and reports no error', (await saysError()) === false);
+
+      await page.locator('input[data-testid="file-input"]').last().dispatchEvent('change');
+      await page.waitForTimeout(700);
+      check('cancelling the picker is silent', (await saysError()) === false);
+      check('and attaches nothing', (await visible('submit-photo-attached', 900)) === false);
+
+      await tap('submit-photo');
+      await page.waitForTimeout(600);
+      await page
+        .locator('input[data-testid="file-input"]')
+        .last()
+        .setInputFiles(join(ROOT, 'assets/recipes/koshari.jpg'));
+      await page.waitForTimeout(1600);
+      check('a chosen photo attaches', await visible('submit-photo-attached', 4000));
+      check('and is previewed, not merely described', await visible('submit-photo-preview', 4000));
+      check(
+        'the preview renders the file that was chosen',
+        await page.evaluate(() => {
+          const el = document.querySelector('[data-testid="submit-photo-preview"]');
+          const img = el?.tagName === 'IMG' ? el : el?.querySelector('img');
+          const src = img?.currentSrc || img?.src || '';
+          return src.startsWith('blob:') && (img?.naturalWidth ?? 0) > 0;
+        }),
+      );
+      check(
+        'and it says the photo never left the device',
+        (await page.evaluate(() => document.body.innerText)).includes('On this device only'),
+      );
+
+      await tap('submit-photo-remove');
+      await page.waitForTimeout(600);
+      check('removing the photo clears it', (await visible('submit-photo-attached', 900)) === false);
+      await shot('19b-submit-photo');
 
       // Sending an empty draft must be refused with reasons, not accepted.
       await tap('submit-send');

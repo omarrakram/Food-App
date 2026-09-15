@@ -63,12 +63,19 @@ export function PantryRow({
 
   const quantityLabel = formatQuantity(item.quantity, item.unit, { t, formatNumber });
   const name = displayName(item.ingredientName);
+  /*
+    A staple has no quantity ON PURPOSE — it counts as available without one —
+    so labelling it "not set" would report a deliberate choice as an omission.
+    Anything else with no quantity genuinely has one missing, and saying so is
+    more use than a blank space the reader has to interpret.
+  */
+  const quantityText = quantityLabel || (item.isStaple ? '' : t('pantry.quantityUnset'));
 
   return (
     <PressScale
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={`${name}${quantityLabel ? `, ${quantityLabel}` : ''}`}
+      accessibilityLabel={`${name}${quantityText ? `, ${quantityText}` : ''}`}
       onPress={onPress}
       haptic="selection"
       scaleTo={0.99}
@@ -115,9 +122,9 @@ export function PantryRow({
         </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
-          {quantityLabel ? (
-            <Text variant="footnote" color="textSecondary">
-              {quantityLabel}
+          {quantityText ? (
+            <Text variant="footnote" color="textSecondary" testID="pantry-row-quantity">
+              {quantityText}
             </Text>
           ) : null}
           {item.expiresOn ? (

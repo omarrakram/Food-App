@@ -37,6 +37,16 @@ export type InputProps = Omit<TextInputProps, 'style'> & {
   /** Renders text to the right of the field, e.g. a currency code. */
   suffix?: string;
   containerStyle?: ViewStyle;
+  /**
+   * Grow with the text, between these bounds, then scroll inside.
+   *
+   * For a chat composer. A `multiline` TextInput on web is a `<textarea>`, and
+   * react-native-web sets its `rows` from `numberOfLines` — which is undefined
+   * here, so the browser applies its own default of 2 and the field opens
+   * roughly twice as tall as the one line most messages need. Setting this
+   * pins it to one row and measures the content instead.
+   */
+  autoGrow?: { min: number; max: number };
 };
 
 /**
@@ -55,8 +65,10 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
     onTrailingIconPress,
     suffix,
     containerStyle,
+    autoGrow,
     onFocus,
     onBlur,
+    onContentSizeChange,
     ...rest
   },
   ref,
@@ -64,6 +76,15 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
   const theme = useTheme();
   const { isRTL } = useI18n();
   const [isFocused, setIsFocused] = useState(false);
+  const [grownHeight, setGrownHeight] = useState<number | null>(null);
+
+  // Clamped on the way in, so the field can never be shorter than one line or
+  // taller than the ceiling — past which it scrolls rather than pushing the
+  // Send button off the screen.
+  const measuredHeight =
+    autoGrow && grownHeight !== null
+      ? Math.min(Math.max(grownHeight, autoGrow.min), autoGrow.max)
+      : null;
 
   const borderColor = error
     ? theme.colors.danger
@@ -84,7 +105,7 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
           flexDirection: 'row',
           alignItems: 'center',
           gap: theme.spacing.sm,
-          minHeight: 52,
+          minHeight: autoGrow ? autoGrow.min : 52,
           paddingHorizontal: theme.spacing.lg,
           borderRadius: theme.radius.md,
           borderWidth: 1.5,
@@ -100,6 +121,11 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
           ref={ref}
           placeholderTextColor={theme.colors.textTertiary}
           accessibilityLabel={label}
+          {...(autoGrow ? { rows: 1, scrollEnabled: measuredHeight === autoGrow.max } : null)}
+          onContentSizeChange={(event) => {
+            if (autoGrow) setGrownHeight(event.nativeEvent.contentSize.height);
+            onContentSizeChange?.(event);
+          }}
           onFocus={(event) => {
             setIsFocused(true);
             onFocus?.(event);
@@ -112,6 +138,7 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
             {
               flex: 1,
               paddingVertical: theme.spacing.md,
+              ...(measuredHeight !== null ? { height: measuredHeight } : null),
               fontSize: theme.typography.body.fontSize,
               lineHeight: theme.typography.body.lineHeight,
               color: theme.colors.text,

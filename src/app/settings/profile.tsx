@@ -96,10 +96,21 @@ export default function EditProfileScreen() {
   const chooseAvatar = () => {
     void (async () => {
       try {
-        const uploaded = await avatarUpload.mutateAsync();
+        const chosen = await avatarUpload.mutateAsync();
         // Cancelling the picker is the common path and is not an error.
-        if (!uploaded) return;
-        const url = publicImageUrl(UPLOAD_RULES.avatar.bucket, uploaded.path);
+        if (!chosen) return;
+
+        // No backend, so the photo went nowhere. Show it — it is a real
+        // choice the user made and the preview should reflect it — but say
+        // plainly that it did not leave the device, and do not write it to a
+        // profile that has no server to hold it.
+        if (!chosen.stored) {
+          setAvatarUrl(chosen.uri);
+          toast.show({ message: t('profile.avatarLocalOnly'), tone: 'neutral' });
+          return;
+        }
+
+        const url = publicImageUrl(UPLOAD_RULES.avatar.bucket, chosen.path);
         setAvatarUrl(url);
         // Saved immediately rather than on the form's Save. A photo the user
         // has already watched upload is a change they consider made, and

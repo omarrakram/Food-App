@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 
 import { DemoBanner } from '@/components/messages/demo-banner';
 import { Button, IconButton } from '@/components/ui/button';
@@ -15,6 +15,7 @@ import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { useRepositories } from '@/features/data/repositories';
 import { useImageUpload } from '@/features/storage/hooks';
+import { ImageRejected } from '@/features/storage/upload';
 import { searchIngredients } from '@/features/ingredients/matching';
 import {
   useMySubmissions,
@@ -100,11 +101,34 @@ export default function SubmitRecipeScreen() {
   const upload = useImageUpload('recipe');
 
   const [draft, setDraft] = useState<SubmissionDraft>(emptyDraft());
+  /**
+   * A photo the user chose when there was nowhere to upload it.
+   *
+   * Deliberately NOT in `draft`. `draft.imageUrl` is a path inside
+   * `recipe-uploads` and is submitted to the server; a `blob:` URI is neither
+   * of those things, and writing one there would put a URL that means nothing
+   * off this device into a record that outlives the session. It also would not
+   * survive a reload — object URLs are revoked with the document — so the
+   * preview says so rather than pretending otherwise.
+   */
+  const [localPhoto, setLocalPhoto] = useState<{ uri: string; width: number; height: number } | null>(
+    null,
+  );
   const [ingredientQuery, setIngredientQuery] = useState('');
   const [savedId, setSavedId] = useState<string | null>(id ?? null);
   const [showProblems, setShowProblems] = useState(false);
 
   const problems = useMemo(() => validateDraft(draft), [draft]);
+  /** Either a real upload or a local-only pick counts as "there is a photo". */
+  const hasPhoto = Boolean(draft.imageUrl) || localPhoto !== null;
+  /*
+    Only a LOCAL pick is previewed. An uploaded one lives in a private bucket,
+    so showing it back means signing a URL — which cannot be exercised here,
+    there being no project to sign against. An unverified path on the screen
+    that just broke is not a trade worth making, so with a backend the row
+    names the photo exactly as it did before.
+  */
+  const previewUri = localPhoto?.uri ?? null;
   const existing = (mine.data ?? []).find((entry) => entry.id === savedId);
 
   const patch = (next: Partial<SubmissionDraft>) => setDraft((current) => ({ ...current, ...next }));
@@ -152,10 +176,41 @@ export default function SubmitRecipeScreen() {
   const addPhoto = () => {
     void upload
       .mutateAsync()
-      .then((result) => {
-        if (result) patch({ imageUrl: result.path });
+      .then((chosen) => {
+        // Cancelling is the common path and is not an error. Nothing changes,
+        // nothing is said, and the error boundary never hears about it.
+        if (!chosen) return;
+        if (chosen.stored) {
+          setLocalPhoto(null);
+          patch({ imageUrl: chosen.path });
+          return;
+        }
+        // Nowhere to upload to. Keep the photo where it is and show it.
+        setLocalPhoto({ uri: chosen.uri, width: chosen.width, height: chosen.height });
+        patch({ imageUrl: null });
       })
-      .catch((error: unknown) => fail(error));
+      .catch((error: unknown) => failPhoto(error));
+  };
+
+  const removePhoto = () => {
+    setLocalPhoto(null);
+    patch({ imageUrl: null });
+  };
+
+  /**
+   * A photo that could not be used says WHY.
+   *
+   * `ImageRejected` carries which rule the file broke, and each has its own
+   * sentence — "That file type is not supported" is actionable in a way that
+   * "something went wrong" never is. Anything else falls back to the generic
+   * presenter, which no longer claims the failure was recorded anywhere.
+   */
+  const failPhoto = (error: unknown) => {
+    const message =
+      error instanceof ImageRejected
+        ? t(`submit.photo.${error.problem}` as const)
+        : t('submit.photoFailed');
+    toast.show({ message, tone: 'danger' });
   };
 
   const fail = (error: unknown) => {
@@ -260,11 +315,9 @@ export default function SubmitRecipeScreen() {
 
       <Section title={t('submit.photo')} subtitle={t('submit.photoHint')}>
         <View style={{ gap: theme.spacing.sm }}>
-          {draft.imageUrl ? (
+          {hasPhoto ? (
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
                 gap: theme.spacing.sm,
                 backgroundColor: theme.colors.surfaceAlt,
                 borderRadius: theme.radius.sm,
@@ -272,22 +325,46 @@ export default function SubmitRecipeScreen() {
               }}
               testID="submit-photo-attached"
             >
-              <Ionicons name="image-outline" size={18} color={theme.colors.textSecondary} />
-              <Text variant="footnote" color="textSecondary" style={{ flex: 1 }} lines={1}>
-                {t('submit.photoAttached')}
-              </Text>
-              <IconButton
-                icon="close"
-                size={30}
-                variant="ghost"
-                onPress={() => patch({ imageUrl: null })}
-                accessibilityLabel={t('common.remove')}
-                testID="submit-photo-remove"
-              />
+              {/*
+                The photo the user chose, actually shown. Previously this was
+                an icon and the words "Photo attached", which asks someone to
+                take on trust that the right file was picked.
+              */}
+              {previewUri ? (
+                <Image
+                  source={{ uri: previewUri }}
+                  accessibilityLabel={t('submit.photoPreview')}
+                  style={{
+                    width: '100%',
+                    aspectRatio: 4 / 3,
+                    borderRadius: theme.radius.sm,
+                    backgroundColor: theme.colors.surface,
+                  }}
+                  resizeMode="cover"
+                  testID="submit-photo-preview"
+                />
+              ) : null}
+
+              <View
+                style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
+              >
+                <Ionicons name="image-outline" size={18} color={theme.colors.textSecondary} />
+                <Text variant="footnote" color="textSecondary" style={{ flex: 1 }} lines={2}>
+                  {localPhoto ? t('submit.photoLocalOnly') : t('submit.photoAttached')}
+                </Text>
+                <IconButton
+                  icon="close"
+                  size={30}
+                  variant="ghost"
+                  onPress={removePhoto}
+                  accessibilityLabel={t('common.remove')}
+                  testID="submit-photo-remove"
+                />
+              </View>
             </View>
           ) : null}
           <Button
-            label={draft.imageUrl ? t('submit.photoReplace') : t('submit.photoAdd')}
+            label={hasPhoto ? t('submit.photoReplace') : t('submit.photoAdd')}
             icon="camera-outline"
             variant="secondary"
             onPress={addPhoto}

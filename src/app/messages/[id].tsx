@@ -1,6 +1,13 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+  type NativeSyntheticEvent,
+  type TextInputKeyPressEventData,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { DemoBanner } from '@/components/messages/demo-banner';
@@ -92,6 +99,26 @@ export default function ConversationScreen() {
     setDraft('');
     setAttached(null);
     requestAnimationFrame(() => scroller.current?.scrollToEnd({ animated: true }));
+  };
+
+  /**
+   * Enter sends on web; Shift+Enter starts a new line.
+   *
+   * Calling `preventDefault` here is what makes it work: react-native-web's
+   * own Enter handling is skipped for an event that has already been
+   * defaulted, so the keypress neither inserts a newline nor blurs the field —
+   * and a composer that lost focus after every message would be its own bug.
+   *
+   * Untouched on native, where Enter belongs to the keyboard: it inserts a
+   * line break and Send is the button beside the field.
+   */
+  const onComposerKeyPress = (event: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+    if (Platform.OS !== 'web') return;
+    const key = event.nativeEvent.key;
+    const web = event as unknown as { shiftKey?: boolean; preventDefault?: () => void };
+    if (key !== 'Enter' || web.shiftKey) return;
+    web.preventDefault?.();
+    submit();
   };
 
   return (
@@ -261,6 +288,12 @@ export default function ConversationScreen() {
                 onChangeText={setDraft}
                 placeholder={t('messages.placeholder')}
                 multiline
+                // One line to start, growing to about five before it scrolls
+                // inside itself. The ceiling is what keeps Send on screen: an
+                // unbounded composer walks the send button off the bottom on a
+                // small phone, which is the one control the screen exists for.
+                autoGrow={{ min: 44, max: 132 }}
+                onKeyPress={onComposerKeyPress}
                 onSubmitEditing={submit}
                 testID="conversation-input"
               />

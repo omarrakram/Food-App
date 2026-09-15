@@ -143,9 +143,20 @@ describe('formatQuantity', () => {
     expect(formatQuantity(1, 'to_taste', english)).toBe('to taste');
   });
 
-  it('handles an unknown quantity', () => {
-    expect(formatQuantity(null, 'g', english)).toBe('g');
+  it('never renders a naked unit when there is no quantity', () => {
+    // This asserted `'g'` until a pantry row rendered exactly that: "rice / g /
+    // 2 days left". A unit is a suffix to a number, so with no number there is
+    // nothing to print, and every caller already treats '' as "print nothing".
+    expect(formatQuantity(null, 'g', english)).toBe('');
+    expect(formatQuantity(null, 'ml', english)).toBe('');
+    expect(formatQuantity(null, 'piece', english)).toBe('');
     expect(formatQuantity(null, null, english)).toBe('');
+  });
+
+  it('still names an amount left to the cook', () => {
+    // `to_taste` is the one case that carries meaning without a number, and it
+    // is resolved before the quantity is looked at.
+    expect(formatQuantity(null, 'to_taste', english)).toBe(english.t('unit.toTaste'));
   });
 });
 

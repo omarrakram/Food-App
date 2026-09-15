@@ -4,30 +4,70 @@ import { useAuth } from '@/features/auth/auth-provider';
 import { env } from '@/lib/config/env';
 import { getSupabase } from '@/lib/supabase/client';
 
-import { UPLOAD_RULES, type UploadKind } from './images';
-import { pickImage, uploadImage, type UploadResult } from './upload';
+import { UPLOAD_RULES, validateImage, type UploadKind } from './images';
+import { ImageRejected, pickImage, uploadImage, type UploadResult } from './upload';
 
 /**
- * Pick a photo and upload it.
+ * What the user ended up with after choosing a photo.
  *
- * Resolves to `null` when the user cancels the picker, which is the common
- * path and is not an error. Everything else throws, so the caller's error
- * branch only ever sees genuine failures.
+ * `stored` is the whole point of the type. An uploaded photo has a path in a
+ * bucket and outlives the session; a local one is a URI this device can render
+ * and nothing more. Collapsing the two into a single "imageUrl" is how a
+ * preview build ends up implying a file reached a server.
+ */
+export type PhotoSelection =
+  | ({ stored: true } & UploadResult)
+  | { stored: false; uri: string; width: number; height: number };
+
+/**
+ * Pick a photo, and upload it if there is anywhere to upload it to.
+ *
+ * PICKING AND UPLOADING ARE DIFFERENT THINGS, and conflating them is what
+ * broke this. The previous version opened with
+ *
+ *     if (!supabase || !user) throw new Error('uploads need an account');
+ *
+ * so in a build with no Supabase project — the hosted preview, every time —
+ * pressing "Add a photo" threw before the picker opened, and the submit screen
+ * turned that into "Something went wrong". Nothing had gone wrong. There was
+ * simply nowhere to PUT the file, which says nothing about whether the user
+ * may CHOOSE one.
+ *
+ * So: pick first, validate against the same rules the buckets enforce, then
+ * branch on whether a backend exists. With one, the photo goes to
+ * `recipe-uploads` exactly as designed. Without one, the local URI comes back
+ * marked `stored: false` and the caller is responsible for saying so.
+ *
+ * Resolves to `null` when the user cancels, which is the common path and is
+ * not an error. A rejected photo throws `ImageRejected` carrying which rule it
+ * broke, so the caller can say "that image is too large" rather than
+ * "something went wrong".
  */
 export function useImageUpload(kind: UploadKind) {
   const { user } = useAuth();
   const supabase = getSupabase();
 
-  return useMutation<UploadResult | null>({
+  return useMutation<PhotoSelection | null>({
     mutationFn: async () => {
-      // Without a project there is nowhere to put the file. Failing here beats
-      // letting someone crop a photo and then telling them.
-      if (!supabase || !user) throw new Error('uploads need an account');
-
       const picked = await pickImage(kind);
       if (!picked) return null;
 
-      return uploadImage(supabase, user.id, kind, picked);
+      // Checked here rather than only inside `uploadImage`, so the local path
+      // rejects a 40MB file for the same reason the uploading one does. A
+      // preview that accepts what production refuses is not a preview.
+      const problem = validateImage(picked, kind);
+      if (problem) throw new ImageRejected(problem);
+
+      if (!supabase || !user) {
+        return {
+          stored: false,
+          uri: picked.uri,
+          width: picked.width,
+          height: picked.height,
+        };
+      }
+
+      return { stored: true, ...(await uploadImage(supabase, user.id, kind, picked)) };
     },
   });
 }

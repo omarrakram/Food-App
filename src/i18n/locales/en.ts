@@ -250,6 +250,7 @@ export const en = {
   // choice, and sat confusingly beside "3 days left" on the same row. This
   // says what it does, and the hints below say what still overrides it.
   'pantry.staple': 'Keep assuming I have this',
+  'pantry.quantityUnset': 'Quantity not set',
   // Only ever shown for water and salt. Anything else that is ticked names
   // where it came from instead, because "assumed" was doing work it had not
   // earned.
@@ -305,6 +306,13 @@ export const en = {
   'submit.photoAdd': 'Add a photo',
   'submit.photoReplace': 'Replace the photo',
   'submit.photoAttached': 'Photo attached',
+  'submit.photoPreview': 'The photo you chose',
+  'submit.photoLocalOnly': 'On this device only — it has not been uploaded anywhere.',
+  'submit.photoFailed': 'We could not add that photo. Please try again.',
+  'submit.photo.unsupported_type': 'That file type is not supported. Use a JPEG, PNG or WebP.',
+  'submit.photo.too_large': 'That photo is too large. The limit is 8MB.',
+  'submit.photo.too_small': 'That photo is too small. Use one at least 320 pixels on its shortest side.',
+  'submit.photo.unreadable': 'That file could not be read as an image.',
   'submit.titlePlaceholder': 'What is it called?',
   'submit.descriptionPlaceholder': 'A sentence about it. Where it comes from, when you make it.',
   'submit.timeAndServings': 'Time and servings',
@@ -635,6 +643,7 @@ export const en = {
   'profile.avatarUpdated': 'Photo updated',
   'profile.avatar.unsupported_type': 'That file type is not supported. Use a JPEG, PNG or WebP.',
   'profile.avatar.too_large': 'That image is too large.',
+  'profile.avatarLocalOnly': 'Shown on this device only — there is no account to save it to.',
   'profile.avatar.too_small': 'That image is too small to use.',
   'profile.avatar.unreadable': 'That image could not be read.',
   'profile.edit': 'Edit profile',
@@ -854,7 +863,7 @@ export const en = {
   'error.notFoundTitle': 'We could not find that',
   'error.notFoundBody': 'It may have been removed.',
   'error.genericTitle': 'Something went wrong',
-  'error.genericBody': 'We have logged it. Please try again.',
+  'error.genericBody': 'Something went wrong. Please try again.',
   'error.crashTitle': 'The app hit a snag',
   'error.crashBody': 'Restarting this screen usually fixes it.',
   'error.reload': 'Reload',

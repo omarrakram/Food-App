@@ -310,6 +310,42 @@ npm run images:fetch   # in CI only; the sandbox proxy blocks Wikimedia
 
 ---
 
+## The preview-review round: a photo that would not attach
+
+Three things came back from a manual pass over the deployed preview. One was a
+real regression, two were correctness.
+
+**"Add a photo" reported a failure before it opened anything.** `useImageUpload`
+began with `if (!supabase || !user) throw new Error('uploads need an account')`,
+so on any build with no Supabase project — which every preview build is — the
+mutation threw before the picker was reached, and the screen presented that as
+"Something went wrong". Nothing had gone wrong. There was nowhere to PUT a
+file, which says nothing about whether somebody may CHOOSE one. Picking and
+uploading are now separate steps: pick, validate against the same rules the
+buckets enforce, then upload if there is a backend and otherwise hand back the
+local URI marked `stored: false`. The submit screen shows the photo either way
+and, without a backend, says it is on this device only. The production path
+through `recipe-uploads` is untouched.
+
+**A pantry row rendered "rice / g / 2 days left".** `formatQuantity(null, 'g')`
+returned the bare unit label, so an item with a unit and no amount printed the
+suffix on its own. It returns nothing now, and the row says "Quantity not set"
+for a tracked item — but stays quiet for a staple, whose whole point is having
+no amount.
+
+**The chat composer opened at two lines.** A `multiline` TextInput is a
+`<textarea>` on web, react-native-web takes its `rows` from `numberOfLines`,
+nothing passed one, and the browser applied its default of 2. It now measures
+its content between 44 and 132 points and scrolls inside itself past that, so
+Send stays on screen: 70px → 47px empty.
+
+**And one piece of copy that was not true.** The generic error body said "We
+have logged it." The logger's production sink is a documented no-op pending a
+crash reporter, so in production nothing was logged, and in development it
+reached a console. It says "Something went wrong. Please try again." now, and
+a photo that cannot be used gets a specific reason instead — the file type,
+the 8MB limit, the 320px floor.
+
 ## Last known passing state
 
 Verified on `claude/expo-rn-setup-mom5gw` (also the repository's default
@@ -320,7 +356,7 @@ branch):
 | App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
 | Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 732/732 across 48 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 758/758 across 51 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |

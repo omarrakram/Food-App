@@ -184,7 +184,19 @@ export function formatQuantity(
   { t, formatNumber }: QuantityFormatters,
 ): string {
   if (unit === 'to_taste') return t('unit.toTaste');
-  if (quantity === null) return unit ? unitLabel(unit, 1, t) : '';
+  /*
+    NO QUANTITY MEANS NO PHRASE. This used to return the bare unit label, so a
+    pantry item with a unit and no amount rendered as "g" — a row reading
+    "rice / g / 2 days left", which is not a quantity, not a sentence, and not
+    something anyone can act on. A unit is a suffix to a number; without the
+    number there is nothing to suffix.
+
+    Only the pantry and the shopping list can reach this: every one of the
+    1,374 ingredient rows in the recipe dataset carries a quantity, and an
+    ingredient with no amount uses `to_taste`, handled above. Callers already
+    treat an empty string as "print nothing".
+  */
+  if (quantity === null) return '';
 
   const rounded = roundForKitchen(quantity);
   const numeric = formatKitchenNumber(rounded, formatNumber);
