@@ -101,3 +101,40 @@ describe('Arabic locale parity', () => {
     expect(untranslated).toEqual([]);
   });
 });
+
+/**
+ * A "unit" key names the unit and nothing else.
+ *
+ * THE BUG THIS EXISTS FOR: the submission form's time steppers read
+ * "10 10 min". `Stepper` prints its own value and appends `suffix`, so a
+ * suffix is a bare unit — but the caller passed `common.min`, which is
+ * "{count} min" and already contains the number. Two numbers, one control.
+ *
+ * `common.min` is still right for prose ("Ready in 25 min"); it is just not a
+ * suffix. Keeping the two shapes apart is what stops the next caller from
+ * reaching for the wrong one.
+ */
+describe('unit keys', () => {
+  const UNIT_KEYS = ['common.minUnit', 'common.peopleUnit'];
+
+  it('name a unit without interpolating the number', () => {
+    for (const base of UNIT_KEYS) {
+      for (const key of [`${base}_one`, `${base}_other`]) {
+        const english = (en as Record<string, string>)[key];
+        const arabic = (ar as Record<string, string>)[key];
+        expect(english).toBeDefined();
+        expect(arabic).toBeDefined();
+        expect(english).not.toContain('{count}');
+        expect(arabic).not.toContain('{count}');
+      }
+    }
+  });
+
+  it('are distinct from the prose forms, which DO carry the number', () => {
+    // If these ever became the same string the distinction would be silently
+    // lost, and the next person would pick either one at random.
+    expect(en['common.min']).toContain('{count}');
+    expect(en['common.min']).not.toBe(en['common.minUnit_other']);
+  });
+});
+

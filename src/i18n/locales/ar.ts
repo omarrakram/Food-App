@@ -49,6 +49,8 @@ export const ar: Record<RawTranslationKey, string> = {
   'common.or': 'أو',
   'common.and': 'و',
   'common.min': '{count} دقيقة',
+  'common.minUnit_one': 'دقيقة',
+  'common.minUnit_other': 'دقائق',
   'common.kcal': '{count} سعرة',
   'common.grams': '{count} جم',
   'common.servings_one': 'طبق واحد',

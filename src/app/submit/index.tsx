@@ -544,7 +544,7 @@ export default function SubmitRecipeScreen() {
             step={5}
             min={0}
             max={1440}
-            suffix={t('common.min', { count: draft.prepMinutes })}
+            suffix={t('common.minUnit', { count: draft.prepMinutes })}
             testID="submit-prep"
           />
           <LabelledStepper
@@ -554,7 +554,7 @@ export default function SubmitRecipeScreen() {
             step={5}
             min={0}
             max={1440}
-            suffix={t('common.min', { count: draft.cookMinutes })}
+            suffix={t('common.minUnit', { count: draft.cookMinutes })}
             testID="submit-cook"
           />
           <LabelledStepper

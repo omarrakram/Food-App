@@ -1553,6 +1553,28 @@ async function main() {
           return el ? el.getBoundingClientRect().top + window.scrollY : -1;
         });
       });
+      // THE BUG THIS GUARDS: these read "10 10 min" and "20 20 min". `Stepper`
+      // renders its own value and appends `suffix`, so a suffix is a bare
+      // unit — but the caller passed `common.min`, which is "{count} min" and
+      // already carries the number.
+      const stepperText = async (id) =>
+        (await page.evaluate((testid) => {
+          const el = document.querySelector(`[data-testid="${testid}"]`);
+          return el ? el.innerText.replace(/\s+/g, ' ').trim() : '';
+        }, id)) ?? '';
+
+      for (const [id, label] of [
+        ['submit-prep', 'preparation'],
+        ['submit-cook', 'cooking'],
+      ]) {
+        const text = await stepperText(id);
+        check(
+          `the ${label} time prints its number once`,
+          /^\d+ \S+$/.test(text) && !/^(\d+)\s+\1\b/.test(text),
+          text,
+        );
+      }
+
       check(
         'the form follows the authoring sequence',
         order.every((top, index) => top > 0 && (index === 0 || top > order[index - 1])),
@@ -1789,6 +1811,39 @@ async function main() {
       ['/shopping-list', 'shopping list'],
       ['/profile', 'profile'],
     ];
+
+    /*
+      NO CONTROL INSIDE ANOTHER CONTROL.
+
+      THE BUG THIS GUARDS: the recipe card was a `PressScale` with
+      `accessibilityRole="button"` — which react-native-web renders as a real
+      `<button>` — wrapping the save button and the price tag, which are
+      buttons too. `<button>` inside `<button>` is invalid HTML, and worse than
+      invalid for anyone on a screen reader or a keyboard, for whom a control
+      nested inside a control is ambiguous at best and unreachable at worst.
+
+      Checked across every screen below rather than on the card alone, because
+      the mistake is a shape — a pressable surface with pressable things on it —
+      and it can be made again anywhere.
+    */
+    const nestedControls = [];
+    for (const [path] of SCREENS) {
+      await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1100);
+      const found = await page.evaluate(() =>
+        [...document.querySelectorAll('button button, a button, button a')].map((el) => {
+          const name = (node) =>
+            node?.getAttribute('data-testid') ?? node?.getAttribute('aria-label') ?? '?';
+          return `${name(el.parentElement?.closest('button, a'))} > ${name(el)}`;
+        }),
+      );
+      for (const entry of found) nestedControls.push(`${path} ${entry}`);
+    }
+    check(
+      'no control is nested inside another control',
+      nestedControls.length === 0,
+      nestedControls.length ? nestedControls.slice(0, 3).join(' | ') : `${SCREENS.length} screens`,
+    );
 
     /**
      * Interactive nodes with no accessible name.

@@ -43,6 +43,10 @@ export const en = {
   'common.or': 'or',
   'common.and': 'and',
   'common.min': '{count} min',
+  // The bare unit, for controls that render the number themselves — a Stepper
+  // prints its own value, so handing it `common.min` produced "10 10 min".
+  'common.minUnit_one': 'min',
+  'common.minUnit_other': 'min',
   'common.kcal': '{count} kcal',
   'common.grams': '{count}g',
   'common.servings_one': '{count} serving',

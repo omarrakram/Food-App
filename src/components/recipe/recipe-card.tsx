@@ -1,6 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, type ViewStyle } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { Badge } from '@/components/ui/badge';
 import { IconButton } from '@/components/ui/button';
@@ -15,13 +22,7 @@ import type { Recipe, RecipeMatch } from '@/types/domain';
 
 import { PriceTag } from './price-tag';
 
-function MetaPill({
-  icon,
-  label,
-}: {
-  icon: keyof typeof Ionicons.glyphMap;
-  label: string;
-}) {
+function MetaPill({ icon, label }: { icon: keyof typeof Ionicons.glyphMap; label: string }) {
   const theme = useTheme();
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
@@ -32,7 +33,6 @@ function MetaPill({
     </View>
   );
 }
-
 
 export type RecipeCardProps = {
   match: RecipeMatch;
@@ -74,14 +74,37 @@ export function RecipeCard({
     match.estimatedCost !== null &&
     match.estimatedSpend.money.amountMinor !== match.estimatedCost.money.amountMinor;
 
+  /*
+    THE CARD IS NOT A BUTTON, and that is the whole point of this structure.
+
+    It used to be: a `PressScale` wrapping everything, with the save button and
+    the price tag — both independently pressable — inside it. On web
+    react-native-web renders `accessibilityRole="button"` as a real `<button>`,
+    so that produced `<button>` inside `<button>`: invalid HTML, which React
+    says out loud, and worse than a warning for anyone using a screen reader or
+    a keyboard, for whom a control nested inside another control is ambiguous
+    at best and unreachable at worst.
+
+    So the card is a plain container. The press target wraps only the parts
+    that do nothing on their own — image, title, description, meta — and the
+    two real controls are its SIBLINGS: the save button absolutely positioned
+    over the image exactly where it was, and the price row in normal flow
+    below. Three siblings, three separate controls, no nesting.
+
+    The press feedback moves to the container so the whole card still shrinks
+    as one, price row included: `PressScale` forwards `onPressIn`/`onPressOut`,
+    and this drives the same timing and spring it would have used itself.
+  */
+  const pressProgress = useSharedValue(0);
+  const reduceMotion = useReducedMotion();
+  const CARD_SCALE = 0.985;
+
+  const pressStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 - pressProgress.get() * (reduceMotion ? 0 : 1 - CARD_SCALE) }],
+  }));
+
   return (
-    <PressScale
-      testID={testID}
-      accessibilityRole="button"
-      accessibilityLabel={`${recipeText.title(recipe)}. ${recipeText.description(recipe)}`}
-      onPress={onPress}
-      haptic="light"
-      scaleTo={0.985}
+    <Animated.View
       style={[
         {
           backgroundColor: theme.colors.surface,
@@ -90,132 +113,178 @@ export function RecipeCard({
           ...theme.elevation(1),
         },
         style as ViewStyle,
+        pressStyle,
       ]}
     >
-      <View style={{ position: 'relative' }}>
-        <RecipeImage recipe={recipe} aspectRatio={theme.layout.cardImageAspect} />
+      <PressScale
+        testID={testID}
+        accessibilityRole="button"
+        accessibilityLabel={`${recipeText.title(recipe)}. ${recipeText.description(recipe)}`}
+        onPress={onPress}
+        onPressIn={() => {
+          pressProgress.set(withTiming(1, { duration: theme.duration.instant }));
+        }}
+        onPressOut={() => {
+          pressProgress.set(
+            reduceMotion
+              ? withTiming(0, { duration: theme.duration.instant })
+              : withSpring(0, { damping: 18, stiffness: 260 }),
+          );
+        }}
+        haptic="light"
+        // The container carries the scale, so the press target must not also
+        // shrink — two scales would compound into a visibly deeper press.
+        scaleTo={1}
+      >
+        <View style={{ position: 'relative' }}>
+          <RecipeImage recipe={recipe} aspectRatio={theme.layout.cardImageAspect} />
 
-        <LinearGradient
-          colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.45)']}
-          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 72 }}
-          pointerEvents="none"
-        />
-
-        {onToggleSave ? (
-          <IconButton
-            icon={isSaved ? 'heart' : 'heart-outline'}
-            variant="onImage"
-            active={false}
-            onPress={onToggleSave}
-            accessibilityLabel={isSaved ? t('recipe.unsaveRecipe') : t('recipe.saveRecipe')}
-            style={{ position: 'absolute', top: theme.spacing.md, right: theme.spacing.md }}
-            testID={`${testID ?? recipe.id}-save`}
+          <LinearGradient
+            colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.45)']}
+            style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 72 }}
+            pointerEvents="none"
           />
-        ) : null}
 
-        {showMatch && match.requiredCount > 0 ? (
-          <View
-            style={{ position: 'absolute', left: theme.spacing.md, bottom: theme.spacing.md }}
-          >
-            <Badge
-              label={
-                hasEverything
-                  ? t('results.matchFull')
-                  : t('results.match', {
-                      have: formatNumber(match.haveCount),
-                      total: formatNumber(match.requiredCount),
-                    })
-              }
-              tone={hasEverything ? 'success' : match.matchPercent >= 60 ? 'primary' : 'neutral'}
-              icon={hasEverything ? 'checkmark-circle' : 'basket-outline'}
-              size="md"
-            />
-          </View>
-        ) : null}
+          {showMatch && match.requiredCount > 0 ? (
+            <View
+              style={{ position: 'absolute', left: theme.spacing.md, bottom: theme.spacing.md }}
+            >
+              <Badge
+                label={
+                  hasEverything
+                    ? t('results.matchFull')
+                    : t('results.match', {
+                        have: formatNumber(match.haveCount),
+                        total: formatNumber(match.requiredCount),
+                      })
+                }
+                tone={hasEverything ? 'success' : match.matchPercent >= 60 ? 'primary' : 'neutral'}
+                icon={hasEverything ? 'checkmark-circle' : 'basket-outline'}
+                size="md"
+              />
+            </View>
+          ) : null}
 
-        {match.usesExpiringItems.length > 0 ? (
-          <View style={{ position: 'absolute', top: theme.spacing.md, left: theme.spacing.md }}>
-            <Badge label={t('pantry.expiringSoon')} tone="warning" icon="time-outline" size="md" />
-          </View>
-        ) : null}
-      </View>
+          {match.usesExpiringItems.length > 0 ? (
+            <View style={{ position: 'absolute', top: theme.spacing.md, left: theme.spacing.md }}>
+              <Badge
+                label={t('pantry.expiringSoon')}
+                tone="warning"
+                icon="time-outline"
+                size="md"
+              />
+            </View>
+          ) : null}
+        </View>
 
-      <View style={{ padding: theme.spacing.lg, gap: theme.spacing.sm }}>
-        <View style={{ gap: 3 }}>
-          {/*
+        <View
+          style={{
+            paddingHorizontal: theme.spacing.lg,
+            paddingTop: theme.spacing.lg,
+            gap: theme.spacing.sm,
+          }}
+        >
+          <View style={{ gap: 3 }}>
+            {/*
             Marked so a test can read the title without scraping the card's
             text. Its first rendered line is the save button's icon glyph and
             its second is the match badge, so "the first words in the card" is
             not the title and an evidence table built that way says so.
           */}
-          <Text variant="title3" lines={1} testID={`recipe-title-${recipe.id}`}>
-            {recipeText.title(recipe)}
-          </Text>
-          <Text variant="footnote" color="textSecondary" lines={2}>
-            {recipeText.description(recipe)}
-          </Text>
-        </View>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: theme.spacing.md,
-          }}
-        >
-          <MetaPill icon="time-outline" label={t('common.min', { count: totalMinutes })} />
-          <MetaPill
-            icon="speedometer-outline"
-            label={t(`difficulty.${recipe.difficulty}` as const)}
-          />
-          {recipe.nutrition.calories !== null ? (
-            <MetaPill
-              icon="flame-outline"
-              label={t('common.kcal', { count: recipe.nutrition.calories })}
-            />
-          ) : null}
-          {recipe.nutrition.proteinGrams !== null ? (
-            <MetaPill
-              icon="barbell-outline"
-              label={t('common.grams', { count: recipe.nutrition.proteinGrams })}
-            />
-          ) : null}
-        </View>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: theme.spacing.sm,
-            marginTop: 2,
-          }}
-        >
-          {/*
-            When the cook already owns part of the recipe, the number that
-            answers "can I afford this" is what they still have to buy — and it
-            is labelled, so the two figures can never be mistaken for one
-            another.
-          */}
-          {ownsSomething ? (
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-              <PriceTag priced={match.estimatedSpend} size="md" />
-              <Text variant="micro" color="textTertiary">
-                {t('price.toBuy')}
-              </Text>
-            </View>
-          ) : (
-            <PriceTag priced={match.estimatedCost} size="md" />
-          )}
-          {showMatch && match.missingIngredients.length > 0 ? (
-            <Text variant="caption" color="textTertiary">
-              {t('results.missing', { count: match.missingIngredients.length })}
+            <Text variant="title3" lines={1} testID={`recipe-title-${recipe.id}`}>
+              {recipeText.title(recipe)}
             </Text>
-          ) : null}
+            <Text variant="footnote" color="textSecondary" lines={2}>
+              {recipeText.description(recipe)}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: theme.spacing.md,
+            }}
+          >
+            <MetaPill icon="time-outline" label={t('common.min', { count: totalMinutes })} />
+            <MetaPill
+              icon="speedometer-outline"
+              label={t(`difficulty.${recipe.difficulty}` as const)}
+            />
+            {recipe.nutrition.calories !== null ? (
+              <MetaPill
+                icon="flame-outline"
+                label={t('common.kcal', { count: recipe.nutrition.calories })}
+              />
+            ) : null}
+            {recipe.nutrition.proteinGrams !== null ? (
+              <MetaPill
+                icon="barbell-outline"
+                label={t('common.grams', { count: recipe.nutrition.proteinGrams })}
+              />
+            ) : null}
+          </View>
         </View>
+      </PressScale>
+
+      {/*
+        Outside the press target because `PriceTag` is itself a button — it
+        opens the explainer for how an estimate is reached. The padding
+        reproduces what it had as the last child of the block above: the
+        container's `gap` of `sm` plus its own `marginTop: 2`.
+      */}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: theme.spacing.sm,
+          paddingHorizontal: theme.spacing.lg,
+          paddingTop: theme.spacing.sm + 2,
+          paddingBottom: theme.spacing.lg,
+        }}
+      >
+        {/*
+          When the cook already owns part of the recipe, the number that
+          answers "can I afford this" is what they still have to buy — and it
+          is labelled, so the two figures can never be mistaken for one
+          another.
+        */}
+        {ownsSomething ? (
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <PriceTag priced={match.estimatedSpend} size="md" />
+            <Text variant="micro" color="textTertiary">
+              {t('price.toBuy')}
+            </Text>
+          </View>
+        ) : (
+          <PriceTag priced={match.estimatedCost} size="md" />
+        )}
+        {showMatch && match.missingIngredients.length > 0 ? (
+          <Text variant="caption" color="textTertiary">
+            {t('results.missing', { count: match.missingIngredients.length })}
+          </Text>
+        ) : null}
       </View>
-    </PressScale>
+
+      {/*
+        Also a sibling, and positioned against the card rather than the image —
+        the image is flush with the card's top edge, so the offsets land on the
+        same pixels they did before.
+      */}
+      {onToggleSave ? (
+        <IconButton
+          icon={isSaved ? 'heart' : 'heart-outline'}
+          variant="onImage"
+          active={false}
+          onPress={onToggleSave}
+          accessibilityLabel={isSaved ? t('recipe.unsaveRecipe') : t('recipe.saveRecipe')}
+          style={{ position: 'absolute', top: theme.spacing.md, right: theme.spacing.md }}
+          testID={`${testID ?? recipe.id}-save`}
+        />
+      ) : null}
+    </Animated.View>
   );
 }
 
