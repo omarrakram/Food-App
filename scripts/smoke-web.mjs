@@ -1557,10 +1557,14 @@ async function main() {
       // renders its own value and appends `suffix`, so a suffix is a bare
       // unit — but the caller passed `common.min`, which is "{count} min" and
       // already carries the number.
+      // The minus and plus controls are Ionicons, which render as private-use
+      // glyphs and land in innerText — strip them or the value never matches.
       const stepperText = async (id) =>
         (await page.evaluate((testid) => {
           const el = document.querySelector(`[data-testid="${testid}"]`);
-          return el ? el.innerText.replace(/\s+/g, ' ').trim() : '';
+          return el
+            ? el.innerText.replace(/[\uE000-\uF8FF]/g, '').replace(/\s+/g, ' ').trim()
+            : '';
         }, id)) ?? '';
 
       for (const [id, label] of [

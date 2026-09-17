@@ -1,8 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { Badge } from '@/components/ui/badge';
-import { PressScale } from '@/components/ui/press-scale';
+import { PressScale, usePressFeedback } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { daysUntil, freshnessOf } from '@/features/ingredients/freshness';
 import { useIngredientName } from '@/features/ingredients/display';
@@ -70,73 +71,100 @@ export function PantryRow({
     more use than a blank space the reader has to interpret.
   */
   const quantityText = quantityLabel || (item.isStaple ? '' : t('pantry.quantityUnset'));
+  const press = usePressFeedback(0.99);
 
   return (
-    <PressScale
-      testID={testID}
-      accessibilityRole="button"
-      accessibilityLabel={`${name}${quantityText ? `, ${quantityText}` : ''}`}
-      onPress={onPress}
-      haptic="selection"
-      scaleTo={0.99}
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: theme.spacing.md,
-        paddingVertical: theme.spacing.md,
-      }}
-    >
-      <View
-        style={{
-          width: 42,
-          height: 42,
-          borderRadius: theme.radius.md,
-          backgroundColor: isExpired
-            ? theme.colors.dangerSoft
-            : isUrgent
-              ? theme.colors.warningSoft
-              : theme.colors.surfaceAlt,
+    /*
+      THE ROW IS NOT A BUTTON. It used to be a `PressScale` with
+      `accessibilityRole="button"` containing the remove control, which is a
+      button too — `<button>` inside `<button>` on web, invalid and ambiguous
+      to a screen reader. Opening the item and deleting it are two different
+      actions and must be two sibling controls.
+
+      The press target takes the row's whole width bar the remove control, so
+      tapping anywhere on the item still opens it, and the container carries
+      the press scale so the row still responds as one piece.
+    */
+    <Animated.View
+      style={[
+        {
+          flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'center',
+          gap: theme.spacing.md,
+          paddingVertical: theme.spacing.md,
+        },
+        press.style,
+      ]}
+    >
+      <PressScale
+        testID={testID}
+        accessibilityRole="button"
+        accessibilityLabel={`${name}${quantityText ? `, ${quantityText}` : ''}`}
+        onPress={onPress}
+        onPressIn={press.onPressIn}
+        onPressOut={press.onPressOut}
+        haptic="selection"
+        // The container scales; a second scale here would compound.
+        scaleTo={1}
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: theme.spacing.md,
         }}
       >
-        <Ionicons
-          name={CATEGORY_ICON[item.category] ?? 'ellipse-outline'}
-          size={20}
-          color={
-            isExpired
-              ? theme.colors.danger
+        <View
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: theme.radius.md,
+            backgroundColor: isExpired
+              ? theme.colors.dangerSoft
               : isUrgent
-                ? theme.colors.warningSoftText
-                : theme.colors.textSecondary
-          }
-        />
-      </View>
-
-      <View style={{ flex: 1, gap: 3 }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.xs }}>
-          <Text variant="bodyMedium" lines={1} style={{ flexShrink: 1 }}>
-            {name}
-          </Text>
-          {item.isStaple ? <Badge label={t('pantry.staple')} tone="neutral" /> : null}
+                ? theme.colors.warningSoft
+                : theme.colors.surfaceAlt,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Ionicons
+            name={CATEGORY_ICON[item.category] ?? 'ellipse-outline'}
+            size={20}
+            color={
+              isExpired
+                ? theme.colors.danger
+                : isUrgent
+                  ? theme.colors.warningSoftText
+                  : theme.colors.textSecondary
+            }
+          />
         </View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
-          {quantityText ? (
-            <Text variant="footnote" color="textSecondary" testID="pantry-row-quantity">
-              {quantityText}
+        <View style={{ flex: 1, gap: 3 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.xs }}>
+            <Text variant="bodyMedium" lines={1} style={{ flexShrink: 1 }}>
+              {name}
             </Text>
-          ) : null}
-          {item.expiresOn ? (
-            <Text
-              variant="footnote"
-              color={isExpired ? 'danger' : isUrgent ? 'warningSoftText' : 'textTertiary'}
-            >
-              {isExpired ? t('pantry.expired') : expiryLabel(item.expiresOn)}
-            </Text>
-          ) : null}
+            {item.isStaple ? <Badge label={t('pantry.staple')} tone="neutral" /> : null}
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
+            {quantityText ? (
+              <Text variant="footnote" color="textSecondary" testID="pantry-row-quantity">
+                {quantityText}
+              </Text>
+            ) : null}
+            {item.expiresOn ? (
+              <Text
+                variant="footnote"
+                color={isExpired ? 'danger' : isUrgent ? 'warningSoftText' : 'textTertiary'}
+              >
+                {isExpired ? t('pantry.expired') : expiryLabel(item.expiresOn)}
+              </Text>
+            ) : null}
+          </View>
         </View>
-      </View>
+      </PressScale>
 
       <PressScale
         accessibilityRole="button"
@@ -149,6 +177,6 @@ export function PantryRow({
       >
         <Ionicons name="close-circle" size={22} color={theme.colors.textTertiary} />
       </PressScale>
-    </PressScale>
+    </Animated.View>
   );
 }

@@ -1,17 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, type ViewStyle } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useReducedMotion,
-  useSharedValue,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { Badge } from '@/components/ui/badge';
 import { IconButton } from '@/components/ui/button';
-import { PressScale } from '@/components/ui/press-scale';
+import { PressScale, usePressFeedback } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useRecipeText } from '@/features/recipes/localise';
 import { useI18n } from '@/i18n';
@@ -95,13 +89,7 @@ export function RecipeCard({
     as one, price row included: `PressScale` forwards `onPressIn`/`onPressOut`,
     and this drives the same timing and spring it would have used itself.
   */
-  const pressProgress = useSharedValue(0);
-  const reduceMotion = useReducedMotion();
-  const CARD_SCALE = 0.985;
-
-  const pressStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: 1 - pressProgress.get() * (reduceMotion ? 0 : 1 - CARD_SCALE) }],
-  }));
+  const press = usePressFeedback(0.985);
 
   return (
     <Animated.View
@@ -113,7 +101,7 @@ export function RecipeCard({
           ...theme.elevation(1),
         },
         style as ViewStyle,
-        pressStyle,
+        press.style,
       ]}
     >
       <PressScale
@@ -121,16 +109,8 @@ export function RecipeCard({
         accessibilityRole="button"
         accessibilityLabel={`${recipeText.title(recipe)}. ${recipeText.description(recipe)}`}
         onPress={onPress}
-        onPressIn={() => {
-          pressProgress.set(withTiming(1, { duration: theme.duration.instant }));
-        }}
-        onPressOut={() => {
-          pressProgress.set(
-            reduceMotion
-              ? withTiming(0, { duration: theme.duration.instant })
-              : withSpring(0, { damping: 18, stiffness: 260 }),
-          );
-        }}
+        onPressIn={press.onPressIn}
+        onPressOut={press.onPressOut}
         haptic="light"
         // The container carries the scale, so the press target must not also
         // shrink — two scales would compound into a visibly deeper press.

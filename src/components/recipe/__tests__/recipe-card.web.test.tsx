@@ -4,11 +4,12 @@ import { flushSync } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { PantryRow } from '@/components/pantry/pantry-row';
 import { RecipeCard } from '@/components/recipe/recipe-card';
 import { RECIPE_CATALOGUE } from '@/features/recipes/catalogue.generated';
 import { I18nProvider } from '@/i18n';
 import { ThemeProvider } from '@/theme';
-import type { RecipeMatch } from '@/types/domain';
+import type { PantryItem, RecipeMatch } from '@/types/domain';
 
 /**
  * A CONTROL MUST NOT CONTAIN ANOTHER CONTROL.
@@ -112,3 +113,40 @@ describe('a recipe card in the DOM', () => {
     expect(container.querySelectorAll('button button')).toHaveLength(0);
   });
 });
+
+/**
+ * The same fault, found in a second place — and only because the browser smoke
+ * SEEDS a pantry before it looks. A sweep of the app with an empty pantry
+ * renders no rows at all, so the nesting was invisible: the bug needed data to
+ * exist. Worth keeping here, where it costs milliseconds instead of a build.
+ */
+describe('a pantry row in the DOM', () => {
+  const item = {
+    id: 'p1',
+    ingredientName: 'rice',
+    category: 'carbs',
+    quantity: 500,
+    unit: 'g',
+    expiresOn: null,
+    isStaple: false,
+    addedAt: '2026-09-01T00:00:00.000Z',
+  } as unknown as PantryItem;
+
+  it('renders no button inside another button', () => {
+    const container = render(
+      <PantryRow item={item} onPress={() => {}} onRemove={() => {}} testID="row" />,
+    );
+    expect(container.querySelectorAll('button button')).toHaveLength(0);
+  });
+
+  it('keeps opening the item and removing it as two separate controls', () => {
+    const container = render(
+      <PantryRow item={item} onPress={() => {}} onRemove={() => {}} testID="row" />,
+    );
+    const labels = buttonsIn(container).map((b) => b.getAttribute('aria-label') ?? '');
+    expect(buttonsIn(container)).toHaveLength(2);
+    expect(labels.some((l) => l.includes('rice'))).toBe(true);
+    expect(labels.some((l) => /remove/i.test(l))).toBe(true);
+  });
+});
+

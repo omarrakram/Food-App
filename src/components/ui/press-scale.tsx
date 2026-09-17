@@ -119,3 +119,46 @@ export function PressScale({
     </AnimatedPressable>
   );
 }
+
+/**
+ * Press feedback for a surface that CANNOT be the pressable itself.
+ *
+ * A card or a row that is tappable, but which also carries its own buttons,
+ * must not wrap them: `accessibilityRole="button"` renders as a real
+ * `<button>` on web, and a control inside a control is invalid HTML and
+ * ambiguous to assistive technology. The fix is to make the press target a
+ * sibling of those buttons rather than their ancestor — at which point the
+ * press target no longer spans the thing that should visibly respond.
+ *
+ * This puts the feedback back where it belongs. Spread `onPressIn`/`onPressOut`
+ * onto the `PressScale` (with `scaleTo={1}`, so it does not also shrink and
+ * compound) and `style` onto the container.
+ *
+ * The timing and the spring are the same ones `PressScale` uses on itself, and
+ * reduced motion is honoured the same way — a press still registers, it just
+ * stops moving.
+ */
+export function usePressFeedback(scaleTo = 0.985) {
+  const theme = useTheme();
+  const pressProgress = useSharedValue(0);
+  const reduceMotion = useReducedMotion();
+
+  const style = useAnimatedStyle(() => ({
+    transform: [{ scale: 1 - pressProgress.get() * (reduceMotion ? 0 : 1 - scaleTo) }],
+  }));
+
+  return {
+    style,
+    onPressIn: () => {
+      pressProgress.set(withTiming(1, { duration: theme.duration.instant }));
+    },
+    onPressOut: () => {
+      pressProgress.set(
+        reduceMotion
+          ? withTiming(0, { duration: theme.duration.instant })
+          : withSpring(0, { damping: 18, stiffness: 260 }),
+      );
+    },
+  };
+}
+
