@@ -14,12 +14,17 @@ import { secureSessionStorage } from './secure-storage';
  * is what lets development continue before a Supabase project exists. Every
  * caller must handle null rather than assuming a client.
  *
- * SECURITY: only the PUBLISHABLE key is ever used here — `sb_publishable_…`,
- * or the legacy `anon` JWT it replaced. It is safe in the client solely
+ * SECURITY: only the PUBLISHABLE key is ever used here — the `sb-publishable`
+ * form, or the legacy anon JWT it replaced. It is safe in the client solely
  * because RLS is enabled on every table — see
- * supabase/migrations/20260910120700_row_level_security.sql. A secret key
- * (`sb_secret_…`, or the legacy `service_role` JWT) bypasses RLS entirely and
- * must never appear in this bundle.
+ * supabase/migrations/20260910120700_row_level_security.sql. The SECRET key,
+ * in either generation, bypasses RLS entirely and must never appear in this
+ * bundle; `.github/workflows/preview.yml` refuses to publish a build
+ * containing one.
+ *
+ * The exact key prefixes are deliberately not spelled out here. Comments
+ * survive into the web bundle, and that gate greps it — so naming the thing
+ * it hunts for, in order to warn about it, failed a deploy over a sentence.
  */
 
 let client: SupabaseClient<Database> | null = null;

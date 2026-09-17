@@ -115,13 +115,7 @@ jobs:
           set -euo pipefail
           bundle=$(find dist -name '*.js' -type f)
 
-          # `sb_secret_` is the modern Supabase secret key, and it is the one
-          # this gate could not previously see: it is an opaque string rather
-          # than a JWT, so the payload decode below never applies to it, and it
-          # contains none of the legacy literals. A project on the new key
-          # system has exactly one credential that bypasses RLS, and until this
-          # line nothing here was looking for it.
-          for pattern in 'sk-ant-' 'sb_secret_' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
+          for pattern in 'sk-ant-' 'service_role' 'SUPABASE_SERVICE' 'ANTHROPIC_API_KEY'; do
             if grep -rqF "$pattern" $bundle; then
               echo "::error::Refusing to publish: found '$pattern' in the web bundle."
               exit 1
@@ -142,7 +136,17 @@ jobs:
             fi
           done
 
-          for shape in 'BEGIN [A-Z ]*PRIVATE KEY' 'AKIA[0-9A-Z]{16}' 'ghp_[A-Za-z0-9]{36}'; do
+          # `sb_secret_…` is the modern Supabase secret key, and it is the one
+          # this gate could not previously see: an opaque string rather than a
+          # JWT, so the payload decode above never applies to it, and it carries
+          # none of the legacy literals.
+          #
+          # Matched as a SHAPE and not as a bare prefix. A literal `sb_secret_`
+          # also matches documentation that names the prefix in order to warn
+          # about it — which is exactly what happened, and it failed the deploy
+          # over a comment. A real key carries a long random tail; prose does
+          # not.
+          for shape in 'sb_secret_[A-Za-z0-9_-]{12,}' 'BEGIN [A-Z ]*PRIVATE KEY' 'AKIA[0-9A-Z]{16}' 'ghp_[A-Za-z0-9]{36}'; do
             if grep -rqE "$shape" $bundle; then
               echo "::error::Refusing to publish: found something matching /$shape/ in the bundle."
               exit 1
