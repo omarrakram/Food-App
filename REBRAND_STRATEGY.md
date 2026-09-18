@@ -1,10 +1,12 @@
 # Rebrand Strategy
 
 **Status:** proposal. Nothing in this document has been implemented.
-**Naming status:** Round 1 (§4–§7) is **REJECTED** — all three finalists died in external
-market checks. The live naming work is **§10, Naming Round 2**. Sections 1–3, 7.0, 8 and 9
-(the audits, the shared colour/type/shape foundations, the sequence and the guardrails)
-remain **approved and current**.
+**Naming status:** Rounds 1 (§4–§7) and 2 (§10–§12) are both **REJECTED**. The live naming
+work is **§13, Naming Round 3**. Permanently eliminated and never to be revisited: Lamma,
+Nemma, Sila, Wansa, Nabza, Nefer, Hanwa, Bosla, Rahba. Held, not advancing: Razwa, Zadra.
+Sections 1–3, 7.0, 8 and 9 (the audits, the shared colour/type/shape foundations, the
+sequence and the guardrails) remain **approved and current** and are not affected by any
+naming round.
 **Scope of this commit:** this file only. No application code, no design tokens, no
 database objects, no copy, no configuration has been changed.
 **Decision required from the founder:** the name. This document narrows to three
@@ -792,7 +794,12 @@ Recorded here so implementation can be checked against them:
 
 ---
 
-## 10. Naming Round 2 — ownability-first
+## 10. Naming Round 2 — ownability-first — REJECTED
+
+> **Superseded by §13.** Kept as the record. Six of the eight submitted names died in
+> external clearance and are permanently eliminated; two are held but not advancing.
+> **Do not draw names from §10–§12.**
+
 
 ### 10.0 Why Round 1 failed, precisely
 
@@ -865,7 +872,10 @@ dropped rather than listed. Recorded so the screen is auditable:
 
 ---
 
-## 11. The thirty candidates
+## 11. The thirty candidates — ROUND 2, REJECTED
+
+> **Superseded by §14.** Record only.
+
 
 ### Group A — Highly coined (10)
 
@@ -1234,7 +1244,11 @@ thirty independently-chosen names would.
 
 ---
 
-## 12. The eight for external clearance
+## 12. The eight for external clearance — ROUND 2, OUTCOME RECORDED
+
+> **Outcome:** Wansa, Nabza, Nefer, Hanwa, Bosla and Rahba are **permanently eliminated**.
+> Razwa and Zadra are **held, not advancing**. Superseded by §15.
+
 
 Selected for ownability first, as instructed, then for the "download ____" test and for
 whether the name still makes sense when the company sells groceries. **Four of the eight
@@ -1284,3 +1298,345 @@ near-black, Alexandria-style bilingual typography, flat editorial surfaces, no g
 no glassmorphism, no purple, invisible AI. §7.0 remains the live specification, and every
 replacement in §3 can proceed on its own schedule — the design work is not blocked on the
 name, and should not wait for it.
+
+---
+
+## 13. Naming Round 3 — brand-shape first, meaning second
+
+### 13.0 What changed in the method
+
+Rounds 1 and 2 both started from meaning and worked outward to sound. Round 1 started
+from emotional Arabic nouns and collided with every other founder who did the same.
+Round 2 started from Arabic *roots* and, as the rejection correctly identified, still
+produced things that read as Arabic vocabulary — because a root-derived word is, to a
+native speaker, a word.
+
+Round 3 inverts it completely. **The sound comes first and is designed as a consumer
+brand; meaning is allowed to attach afterwards, or not at all.** A name here has to pass
+four spoken tests before anything else is considered:
+
+> "I found it on ____." · "Download ____." · "____ knows what I can cook." · "Order it through ____."
+
+If a candidate is awkward in any of those four, it is out, regardless of how good its
+story is. Round 2's finalists all had better stories than anything below. That was the
+problem.
+
+### 13.1 The search space, generated and measured
+
+Rather than free-associating, the candidate space was constructed mechanically:
+Egyptian-legal onsets (no `p`, no `v` — Egyptian Arabic has neither, and a brand carrying
+one is mispronounced by its own home market on day one), no initial consonant clusters
+(Egyptian speakers insert an epenthetic vowel, so "Klarna" becomes "Kilarna"), a
+whitelist of medial clusters an Egyptian says without one, and four terminal vowels.
+
+**15,300 shapes generated; 10,674 survive the mechanical filter** (length, banned
+substrings, the `-wa`/`-za` endings that made Round 2 monotonous, and bigram similarity
+against every burned name plus the named competitors).
+
+**But the generator cannot pick a brand, and it is worth recording exactly how it failed.**
+Ranked by phonetic quality alone, its top output collapsed onto a single vowel family —
+`betro, tezmo, derti, kermi, nelko` — every name a variant of the same shape, which is the
+identical monotony problem the rejection called out. Worse, it happily produced **`gezmo`**:
+جزمة *gazma* is a shoe, and calling someone one is an insult. A phonotactic model has no
+way to know that.
+
+So the generator is used here as a **prover and a verifier**, not a namer: it establishes
+that the space is large, and it enforces the rules. The naming itself is done by hand
+across five deliberately different construction systems, and the result is then run back
+through the checker.
+
+### 13.2 Five construction systems
+
+Used so the forty do not share one phonetic family — the specific failure of Round 2.
+
+| | System | Principle | Terminal |
+|---|---|---|---|
+| **S1** | **Plosive–liquid frames** | A stop consonant attacks, a liquid carries. Produces names that survive being shouted and turn into verbs easily. | `-o` |
+| **S2** | **Particle-derived** | Built from Egyptian *function* words — "like this", "also", "maybe" — which are grammar, not emotional nouns, and so sit outside the crowded semantic field. | mixed |
+| **S3** | **Loan-texture** | Coined in the shape of the Italian and Turkish loanwords already naturalised in Egyptian (*bosta*, *trella*, *kobri*, *karo*). Egyptians say them with zero effort; Latin readers find them familiar. | `-o`, `-a` |
+| **S4** | **Commerce re-cut** | Take a concrete, unglamorous commerce object — scales, a shelf, a bundle, raw metal — and change its vowels until it stops being the word. Follows the Bosta/Cartona/Fatura precedent: Egyptian consumer tech names come from mundane objects, not from feelings. | `-a`, `-o` |
+| **S5** | **Bright minimal pairs** | Four letters, two open syllables, maximum repeat-after-one-hearing. The hardest space to own and the easiest to say. | `-o` |
+
+### 13.3 An honest limitation of the output
+
+**Nine of the final twelve end in `-o`, and that is a finding rather than laziness.**
+Arabic morphology occupies almost every other short ending: `-a` lands on real feminine
+nouns (and on female given names), `-i` is the *nisba* adjective ending and therefore reads
+as a surname, and consonant-final CaCiC shapes are active participles, which is where
+Arabic gets most of its male given names. **`-o` is the one terminal Arabic does not use
+productively** — which is precisely why it is unoccupied, and precisely why Egyptian
+nicknames and naturalised loanwords colonised it. The brief's ban on name-like candidates
+pushes hard toward the one available slot.
+
+The three `-a` survivors are included specifically to keep the shortlist from being one
+sound repeated twelve times.
+
+---
+
+## 14. The forty candidates
+
+Arabic given for each. Eliminated names carry the reason inline.
+
+### S1 · Plosive–liquid frames
+
+| Name | Arabic | Verdict |
+|---|---|---|
+| **Keldo** | كيلدو | **survives** |
+| **Rindo** | ريندو | **survives** |
+| **Belko** | بيلكو | **survives** |
+| Tanbo | تانبو | cut — shadows *Bosta* at 0.50 on the similarity check, and collides with O.R. Tambo |
+| Kirlo | كيرلو | cut — two plausible readings (KEER-lo / KUR-lo) |
+| Darbo | داربو | cut — Darbo is an established European preserves brand |
+| Denko | دنكو | cut — Showa Denko, a major chemical company |
+| Kinto | كينتو | cut — KINTO is both a housewares brand and a Toyota mobility service, the latter adjacent to this category |
+
+### S2 · Particle-derived
+
+| Name | Arabic | Verdict |
+|---|---|---|
+| **Keda** | كده | **survives** |
+| Bardo | برضو | cut — Bardo Museum, Bardo Thodol; too many prior associations |
+| Balki | بلكي | cut — more Levantine/Iraqi than Egyptian; also a well-known sitcom character |
+| Yadob | يادوب | cut — reads as two words; English speakers land on "YAY-dob" |
+| Kaman | كمان | cut — also means *violin*; Kaman Corporation; scores 0.50 against *Lamma* |
+| Fein | فين | cut — reads as German *fein*; English speakers say "fayn" |
+| Maashi | ماشي | cut — English speakers hear "mashy", a food word, which is the worst possible misreading here |
+| Ezzay | إزاي | cut — vowel-initial and at least two plausible stress patterns |
+
+### S3 · Loan-texture
+
+| Name | Arabic | Verdict |
+|---|---|---|
+| **Tarso** | تارسو | **survives** |
+| **Wardo** | واردو | **survives** |
+| Kardo | كاردو | cut — Cardo is an established motorcycle-comms brand |
+| Rento | رينتو | cut — reads as "rent"; widely used by rental startups |
+| Salto | سالتو | cut — Salto is a large access-control company |
+| Monta | مونتا | cut — Monta is an EV-charging company; scores 0.50 against *Monzo* |
+| Konta | كونتا | cut — Kunta Kinte; also a well-known athlete's surname |
+| Nardi | ناردي | cut — Nardi is an established Italian furniture and automotive brand |
+
+### S4 · Commerce re-cut
+
+| Name | Arabic | Verdict |
+|---|---|---|
+| **Mizna** | ميزنة | **survives** — from ميزان, the scales |
+| **Tibra** | تبرة | **survives** — from تبر, raw unminted gold |
+| **Rafo** | رافو | **survives** — from رف, a shelf |
+| Rozma | رزمة | cut — still plainly the real word for a bundle |
+| Kiso | كيسو | cut — from كيس, a bag, but the vowel invites a crude mishearing |
+| Suko | سوكو | cut — English speakers hear the first syllable of "sucker" |
+| Gardo | جاردو | cut — **and the reason generalises**: ج is a hard *g* in Egypt and a *j* almost everywhere else, so Cairo says "Gardo" and Amman says "Jardo". Any name containing ج fractures the moment the company leaves Egypt |
+| Dulbo | دلبو | cut — "dull"; weak sound |
+
+### S5 · Bright minimal pairs
+
+| Name | Arabic | Verdict |
+|---|---|---|
+| **Diko** | ديكو | **survives** |
+| **Nito** | نيتو | **survives** |
+| **Rilo** | ريلو | **survives** |
+| Tilo | تيلو | cut — a German given name and the Spanish word for the linden tree |
+| Bino | بينو | cut — reads as clipped "binoculars"; also a given name |
+| Lito | ليتو | cut — a common Spanish and Filipino nickname |
+| Bilo | بيلو | cut — **BI-LO is a US supermarket chain**; a direct collision in the category this brand expands into |
+| Nabla | نبلة | cut — scores 0.50 against the permanently eliminated *Nabza*; also a mathematical operator |
+
+### Two landmines worth recording
+
+Both were caught by a vulgarity and mis-hearing screen that no trademark database would
+ever surface, and both would have been catastrophic:
+
+- **`gezmo`**, produced by the generator — جزمة, a shoe, and a common Egyptian insult.
+- **`Kasma`**, considered and dropped during S4 — written كسمة, it sits one breath from the
+  most common obscenity in Egyptian Arabic. An outsider would have shortlisted it.
+
+This is the argument for the native-speaker read-aloud panel, and it is why that step is
+non-negotiable before any name is adopted.
+
+---
+
+## 15. The twelve survivors
+
+Ordered by my assessment of strength. Every one has been checked for length, banned
+substrings, `v`/`p`, vulgar roots, Round-2 fatigue endings, and similarity to all burned
+names and named competitors — and the twelve are mutually distinct.
+
+---
+
+### 1 · Mizna — ميزنة
+- **Pronunciation:** MEEZ-na
+- **Why it works:** re-cut from ميزان, the balance-scales — the object in every Egyptian
+  market, and the one that means both *weighing* and *budgeting*. It is not the word, so
+  it is ownable, but the echo is there for anyone who wants it. It also brushes مزنة, a
+  rain-cloud, which is purely positive and entirely non-food. The strongest sound here:
+  two syllables, a bright first vowel, an unusual Z–N pair that is graphically excellent
+  next to a cobalt icon.
+- **Likely mispronunciation:** "MIZZ-na" from English speakers; occasionally "ma-ZEE-na".
+- **Stretch:** **recipes** — weighing what you have against what you could make;
+  **pantry** — quantities are literally what it measures; **community** — weakest of the
+  four, it needs the product to supply the warmth; **grocery** — excellent, scales are the
+  universal symbol of buying food honestly.
+
+### 2 · Keldo — كيلدو
+- **Pronunciation:** KEL-do
+- **Why it works:** pure construction. No meaning in Arabic or English, no collision I am
+  aware of, one possible pronunciation, and a hard K attack that makes it verb-ready —
+  "just Keldo it" works on the first hearing. The cleanest of the coinages.
+- **Likely mispronunciation:** essentially none; a few English speakers may try "KEEL-do",
+  which the wordmark's own vowel fixes.
+- **Stretch:** total — it means nothing, so nothing constrains it. That is also its cost:
+  it will carry whatever the marketing budget puts into it, and nothing before that.
+
+### 3 · Rindo — ريندو
+- **Pronunciation:** RIN-do
+- **Why it works:** the liquid R and the nasal N make it unusually easy to repeat after
+  one hearing, which is the single best predictor of word-of-mouth. Two syllables, five
+  letters, no meaning to trip over in either language. Reads confident rather than cute.
+- **Likely mispronunciation:** "REEN-do" — a minor vowel drift that costs nothing.
+- **Stretch:** total, for the same reason as Keldo. Slightly warmer in the mouth, which
+  helps the community side.
+
+### 4 · Tibra — تبرة
+- **Pronunciation:** TIB-ra
+- **Why it works:** re-cut from تبر, raw unminted gold — a concrete commerce object, never
+  a food word, and rare enough that almost no Egyptian will recognise it as vocabulary.
+  The "raw material that has value before anyone works it" reading is a quiet fit for a
+  product about what is already in your kitchen, without ever saying so.
+- **Likely mispronunciation:** "TEE-bra" or "TYE-bra" from English speakers; the second is
+  the one to design against.
+- **Stretch:** **recipes** and **pantry** excellent — raw material is the literal premise;
+  **community** neutral; **grocery** strong, it reads as value.
+
+### 5 · Belko — بيلكو
+- **Pronunciation:** BEL-ko
+- **Why it works:** plosive open, plosive close — the most percussive name on the list and
+  the easiest to turn into a verb or a chant. The B and K bracket it so firmly that it
+  survives being said across a noisy room, which is the real-world test for a name people
+  recommend out loud.
+- **Likely mispronunciation:** "BEEL-ko"; a 2017 film shares the name, which is the one
+  thing clearance must weigh.
+- **Stretch:** total. Reads slightly industrial, which helps grocery and logistics more
+  than it helps community.
+
+### 6 · Keda — كده
+- **Pronunciation:** KEH-da
+- **Why it works:** the one particle-derived survivor, and the only name here with genuine
+  Egyptian soul. كده means "like this" — the most-said word in Cairo, and the reply when
+  something turns out to be simple. "Dinner, keda." It is four letters, instantly familiar
+  to every Egyptian, and entirely free of emotional-noun crowding because it is grammar
+  rather than vocabulary.
+- **Likely mispronunciation:** "KAY-da" or "KEE-da" from English speakers — the real risk
+  on this one, since two readings are both plausible and only one is Egyptian.
+- **Stretch:** **recipes** and **pantry** excellent — "keda" is exactly what you say when
+  the answer turns out to be easy; **community** good, it is conversational by nature;
+  **grocery** moderate — "Order it through Keda" is the weakest of the four spoken tests.
+
+### 7 · Diko — ديكو
+- **Pronunciation:** DEE-ko
+- **Why it works:** four letters, two open syllables, a hard D attack. Close to the
+  theoretical optimum for repeat-after-one-hearing, and short enough to work as a
+  lowercase wordmark beside a cobalt icon without any lockup gymnastics.
+- **Likely mispronunciation:** "DYE-ko"; some readers will see "deco" and carry an
+  art-deco association.
+- **Stretch:** total, though its shortness means it will read as a utility rather than a
+  place — better for the tool than for the community.
+
+### 8 · Nito — نيتو
+- **Pronunciation:** NEE-to
+- **Why it works:** the softest name on the shortlist and the most effortless to say in
+  either language. Where Belko is percussive, Nito is friendly, which matters for a
+  product people use tired and hungry at 8pm.
+- **Likely mispronunciation:** "NYE-to"; also a Spanish surname, which clearance must check.
+- **Stretch:** **community** strongest here of any name on the list; **grocery** weakest —
+  it is a little light to carry a logistics business.
+
+### 9 · Rafo — رافو
+- **Pronunciation:** RA-fo
+- **Why it works:** re-cut from رف, a shelf — the most mundane possible object, which is
+  exactly the Bosta/Cartona precedent. Four letters, no emphatic consonants, identical in
+  both mouths.
+- **Likely mispronunciation:** "RAY-fo"; it is also a Spanish diminutive of Rafael, which
+  is the main thing to clear.
+- **Stretch:** **pantry** and **grocery** excellent — a shelf is the object both features
+  are about; **recipes** neutral; **community** weak.
+
+### 10 · Tarso — تارسو
+- **Pronunciation:** TAR-so
+- **Why it works:** loan-texture, in the family Egyptian ears already accept without
+  effort. Opens hard, closes open, and looks unusually strong set in capitals.
+- **Likely mispronunciation:** reliable in both languages; the risk is association rather
+  than sound — *tarsus* is an anatomical term and Tarso is an Italian given name.
+- **Stretch:** total, with a slightly formal register that suits commerce better than
+  community.
+
+### 11 · Wardo — واردو
+- **Pronunciation:** WAR-do
+- **Why it works:** the only W onset on the shortlist, which makes it the most
+  distinctive-looking of the twelve in a list of app icons. Re-cut from وارد — *incoming*,
+  what has arrived into stock — which is warehouse vocabulary, not food vocabulary, and
+  therefore points straight at the grocery future.
+- **Likely mispronunciation:** English speakers may hear "war" in the first syllable,
+  which is the one real objection to it; also a Spanish diminutive of Eduardo.
+- **Stretch:** **grocery** the strongest of any name here; **pantry** excellent;
+  **recipes** neutral; **community** weak.
+
+### 12 · Rilo — ريلو
+- **Pronunciation:** REE-lo
+- **Why it works:** two liquids and two open vowels make it the smoothest name on the
+  list — the one most likely to be repeated correctly by someone who heard it once, in
+  either language. No Arabic meaning at all.
+- **Likely mispronunciation:** "RYE-lo"; an indie band carries the name, which is a low
+  but non-zero clearance risk.
+- **Stretch:** total, and the softest of the coinages — it would need the design system to
+  supply the confidence.
+
+---
+
+### What I would submit, and in what order
+
+Not a decision, but the sequencing I would use if clearance is being paid for in batches:
+
+1. **First batch — Mizna, Keldo, Keda, Wardo.** The four with the most distinct
+   personalities: a meaning-carrying coinage, a pure coinage, the Egyptian one, and the
+   grocery-forward one. Whichever survives tells you which direction is actually available.
+2. **Second batch — Rindo, Tibra, Belko, Diko.**
+3. **Hold — Nito, Rafo, Tarso, Rilo.**
+
+Run the same checks as §12, and do not skip the read-aloud panel: `gezmo` and `Kasma`
+above are the proof that the worst failures are inaudible to a database and obvious to a
+person.
+
+### If Round 3 also fails — read this before commissioning Round 4
+
+Three rounds have now been run and two have failed at clearance. That is evidence about
+the constraint set, not about the names, and it deserves to be said plainly: **the 4–6
+letter, 2–3 syllable, pronounceable-in-two-languages space is the most heavily trademarked
+real estate in global branding.** Tens of thousands of companies have searched exactly
+that space, with exactly these criteria, for thirty years. A fourth pass under identical
+constraints should be expected to fail the same way.
+
+If that happens, the productive move is to **loosen exactly one constraint**, and the
+choice is strategic rather than aesthetic:
+
+- **Loosen length to 7–9 letters.** By far the best odds. *Breadfast*, *Instashop* and
+  *Talabat* are all longer than six, and none of them suffers for it. This costs the least
+  and opens the most.
+- **Accept a compound or portmanteau.** Two short morphemes joined — the *Breadfast*
+  construction — is nearly unlimited space and clears easily.
+- **Accept a semi-coined name and defend it aggressively.** Take something with a mild
+  existing use in an unrelated class and win it on trademark classes 9/35/43 rather than
+  on novelty. This is what most MENA consumer brands actually did.
+
+What should **not** be loosened: the Egyptian-pronounceability rules, the `v`/`p` ban, the
+no-initial-cluster rule, or the read-aloud panel. Those are what keep a name usable in its
+home market, and none of them is what caused the last two failures.
+
+### Unchanged, again
+
+No application code, design token, database object, copy string or configuration has been
+touched by any naming round. The approved brand direction stands and is not waiting on the
+name: cobalt `#3155FF` at its measured 5.42:1, warm cream, near-black, Alexandria-style
+bilingual type, flat editorial surfaces, no gradients, no glassmorphism, no purple,
+invisible AI. **§3's UI replacements and §7.0's foundations can and should proceed now** —
+they are blocked on nothing in this section.
