@@ -1,11 +1,20 @@
+// Shared config for the Deno test run (`npm run fn:test`), which passes it
+// explicitly. The DEPLOY does not read this file, and neither does
+// `npm run fn:check` any more — both resolve a function's imports from the
+// per-function `deno.json` beside its entry point. The pins here are kept
+// byte-identical to those, and `npm run fn:imports` enforces it, so the
+// tests exercise the same dependency graph the deploy builds.
 {
   "imports": {
-    "@anthropic-ai/sdk": "npm:@anthropic-ai/sdk@^0.125.0",
-    "@supabase/supabase-js": "npm:@supabase/supabase-js@^2.116.0",
-    "zod": "npm:zod@^4.6.1"
+    "@anthropic-ai/sdk": "npm:@anthropic-ai/sdk@0.125.0",
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.116.0",
+    "zod": "npm:zod@4.6.2"
   },
   "compilerOptions": {
-    "lib": ["deno.window", "esnext"],
+    "lib": [
+      "deno.window",
+      "esnext"
+    ],
     "strict": true
   }
 }

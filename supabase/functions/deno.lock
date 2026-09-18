@@ -3,9 +3,9 @@
   "specifiers": {
     "jsr:@std/assert@1": "1.0.19",
     "jsr:@std/internal@^1.0.12": "1.0.14",
-    "npm:@anthropic-ai/sdk@0.125": "0.125.0_zod@4.6.2",
-    "npm:@supabase/supabase-js@^2.116.0": "2.116.0",
-    "npm:zod@^4.6.1": "4.6.2"
+    "npm:@anthropic-ai/sdk@0.125.0": "0.125.0_zod@4.6.2",
+    "npm:@supabase/supabase-js@2.116.0": "2.116.0",
+    "npm:zod@4.6.2": "4.6.2"
   },
   "jsr": {
     "@std/assert@1.0.19": {
@@ -114,9 +114,9 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@anthropic-ai/sdk@0.125",
-      "npm:@supabase/supabase-js@^2.116.0",
-      "npm:zod@^4.6.1"
+      "npm:@anthropic-ai/sdk@0.125.0",
+      "npm:@supabase/supabase-js@2.116.0",
+      "npm:zod@4.6.2"
     ]
   }
 }

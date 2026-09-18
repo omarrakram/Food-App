@@ -39,6 +39,13 @@ jobs:
           npm run fn:check
           npm run fn:test
 
+      - name: Every edge-function import resolves the way the deploy resolves it
+        # A hosted deploy failed on `Relative import path "zod" not prefixed
+        # with / or ./ or ../` while this repository was green: the mapping
+        # lived in the shared `supabase/functions/deno.json`, which the local
+        # deno CLI finds by walking up and the hosted bundler never reads.
+        run: npm run fn:imports
+
       - name: Check database.types.ts against the migrations
         # Hand-maintained types are the one place the app can be wrong in a way
         # TypeScript cannot see: a renamed column type-checks and fails at

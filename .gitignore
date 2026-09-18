@@ -54,6 +54,12 @@ example
 supabase/.temp/
 supabase/.branches/
 supabase/functions/.env
+# Per-function lockfiles: deno writes one next to any deno.json it is
+# pointed at. The functions share supabase/functions/deno.lock (the npm
+# scripts pass it with --lock), and shipping a second, possibly newer
+# lock format inside a function directory is exactly what the hosted
+# bundler would read on deploy.
+supabase/functions/*/deno.lock
 
 # testing
 coverage/
