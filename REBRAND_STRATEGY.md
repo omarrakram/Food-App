@@ -1,6 +1,10 @@
 # Rebrand Strategy
 
 **Status:** proposal. Nothing in this document has been implemented.
+**Naming status:** Round 1 (§4–§7) is **REJECTED** — all three finalists died in external
+market checks. The live naming work is **§10, Naming Round 2**. Sections 1–3, 7.0, 8 and 9
+(the audits, the shared colour/type/shape foundations, the sequence and the guardrails)
+remain **approved and current**.
 **Scope of this commit:** this file only. No application code, no design tokens, no
 database objects, no copy, no configuration has been changed.
 **Decision required from the founder:** the name. This document narrows to three
@@ -319,7 +323,12 @@ technique the repo already uses for contrast and for edge-function imports.
 
 ---
 
-## 4. Twelve naming candidates
+## 4. Twelve naming candidates — ROUND 1, REJECTED
+
+> **Superseded.** Kept as the record of what was tried and why it failed. All three
+> finalists collided in external checks; see §10.0 for the post-mortem and §10 for the
+> replacement round. **Do not draw names from this section.**
+
 
 > **Verification caveat, stated up front.** This environment has no outbound access to
 > trademark registries, app stores or domain registrars. Every availability judgement
@@ -497,7 +506,10 @@ technique the repo already uses for contrast and for edge-function imports.
 
 ---
 
-## 5. Quick comparison
+## 5. Quick comparison — ROUND 1, REJECTED
+
+> **Superseded by §11.** Retained as the record only.
+
 
 | # | Name | Territory | Letters | Story | Stretch | Ownability | Risk |
 |---|---|---|---|---|---|---|---|
@@ -516,7 +528,11 @@ technique the repo already uses for contrast and for edge-function imports.
 
 ---
 
-## 6. The three finalists
+## 6. The three finalists — ROUND 1, REJECTED
+
+> **All three are dead.** Lamma, Nemma and Sila each hit existing commercial use in or
+> adjacent to this category. Retained only so the reasoning is auditable. §10 replaces it.
+
 
 **Lamma**, **Nemma**, and **Sila** — one from each territory, deliberately. They are not
 three flavours of the same idea; they are three different strategic bets, and the choice
@@ -537,7 +553,12 @@ Each finalist is the right answer to exactly one of those.
 
 ---
 
-## 7. Brand systems for the three finalists
+## 7. Brand systems for the three finalists — NAMES REJECTED, §7.0 STILL LIVE
+
+> **Read §7.0 — it is approved and unaffected.** The colour, contrast, neutral ramp,
+> support hues, shape and motion foundations are independent of the name and remain the
+> brand direction. Only the three *named* systems (§7.1–§7.3) are void.
+
 
 ### 7.0 Shared foundations
 
@@ -768,3 +789,498 @@ Recorded here so implementation can be checked against them:
 - Chips, badges and cards are rationed, not decorative.
 - Flat and editorial: borders and background steps instead of shadows.
 - One primary color, one hex, everywhere.
+
+---
+
+## 10. Naming Round 2 — ownability-first
+
+### 10.0 Why Round 1 failed, precisely
+
+All three finalists were high-frequency emotional Arabic words. That is exactly why they
+collided: **every founder in this category reaches into the same small vocabulary.** لمة,
+نعمة and صلة are among the warmest, most obvious nouns available for a food-and-people
+brand in Arabic, so the probability that each was already taken approached one. The names
+were good; the search space was exhausted before the search began.
+
+Two structural lessons carry into this round.
+
+**Lesson one: meaning and ownability trade against each other in Arabic, harder than in
+English.** Arabic builds words from triliteral roots, so a native speaker can *derive* the
+meaning of almost any well-formed word. The effect is that Arabic has very few
+pronounceable-but-empty slots — nearly every shape like CaCCa already means something,
+and the ones that mean something warm are already trademarked. English brand-builders can
+coin freely (Google, Kodak, Uber) because English tolerates meaningless strings. Arabic
+punishes them: a meaningless Arabic-shaped word sounds like a *mistake* rather than an
+invention, unless it is built carefully.
+
+**Lesson two: the fix is phonotactic, not semantic.** Searching for a *better meaning*
+produces more collisions, because meaning is the crowded axis. This round searches for
+**sound-shapes that are legal in Arabic but not occupied by it** — words an Egyptian can
+say instantly and confidently, that carry a faint root echo, and that are not entries in
+any dictionary. That is the axis with room left on it.
+
+### 10.1 The four coinage techniques used here
+
+Rather than listing whatever sounded nice, Group A is built with four named methods, so
+the founder can see the craft and generate more if clearance kills these too.
+
+1. **Root-echo suffixing.** Take a live root (رزق, زاد, رمز, حنو) and attach a real Arabic
+   noun ending (-wa, -za, -da, -ra) that the root does not actually take. The result is
+   *derivable but not derived* — Egyptians feel the meaning without recognising the word.
+2. **Dialect respelling.** Take a word whose Egyptian pronunciation already differs from
+   its written form and spell the *Egyptian* one in Latin. The Latin brand is then
+   distinct from the dictionary entry it came from.
+3. **Rare-register revival.** Use a classical word so uncommercialised it behaves as a
+   coinage in practice, and accept that it must be taught.
+4. **Pure construction.** No root at all; built only for mouth-feel in both languages and
+   for strength in Latin capitals. Legally the cleanest, semantically the most expensive.
+
+### 10.2 Screening applied before a name reached this list
+
+Every one of the 30 was checked against the constraints, and candidates that failed were
+dropped rather than listed. Recorded so the screen is auditable:
+
+- **No banned substring** — food, cook, chef, meal, pantry, fridge, recipe, plate, bite,
+  kitchen. This eliminated an otherwise excellent candidate, **Wasfa** (وصفة), which means
+  *a recipe* — the ban in its purest form.
+- **No cookware or ingredient words.** Killed *Rakwa* (the coffee pot), *Tawa* (the pan),
+  *Sawka* (the fork), *Zabda* (butter), *Roka* (arugula), *Nakha* (flavour), *Sorba*.
+- **No negative or unfortunate second reading.** Killed *Zafra* (زفر also means a greasy
+  or fishy smell — fatal for food), *Nazwa* (a caprice), *Nazla* (a head cold), *Hawla*
+  (a squint), *Dahna* (grease), *Balwa* (a calamity), and **Nakba**, which needs no
+  explanation.
+- **No collision with the rejected three, or close phonetic variants.** This removed
+  *Hemma*, *Tamma* and *Gemma* for rhyming with Nemma, and *Zala* and *Sella* for
+  shadowing Sila.
+- **No adjacency to the named competitors.** Removed *Tolba* and *Talda* (Talabat),
+  *Nuro* (Noon), and anything ending *-menu*.
+- **No Arabizi, no numerals.** Removed *Sar7a*, the natural chat spelling of one candidate.
+- **No `v` and no `p`.** Egyptian Arabic has neither; speakers substitute ف and ب, so any
+  brand containing them is mispronounced by its own home market on day one.
+- **Politically or religiously loaded.** Removed *Kifaya* (the 2004 protest movement),
+  *Nahda*, *Sahwa*, *Safwa*, *Omra*, *Zahd*.
+- **Already a large regional company.** Removed *Wamda* (MENA startup media — a
+  particularly dangerous near-miss, since it is in the startup press business), *Zain*
+  (telecom), *Arma* (Egyptian food industry), *Barwa*, *Sarwa*, *Wasla*, *Rotana*.
+
+---
+
+## 11. The thirty candidates
+
+### Group A — Highly coined (10)
+
+Built by techniques 1, 2 and 4. None is a dictionary entry in any register of Arabic.
+
+#### A1 · Razwa — رزوة
+- **Say it:** RAZ-wa
+- **Origin:** technique 1. From رِزق *rizq*, the provision that arrives to you, plus the
+  live noun ending *-wa* (as in نشوة، حظوة) that this root does not take.
+- **Feels like:** quiet abundance; something arriving without being chased.
+- **Likely misspellings:** Razwah, Rezwa, Raswa, Razwaa
+- **Same in both mouths?** Yes — no emphatic consonant, no ayn, no qaf. An Egyptian and a
+  Londoner produce nearly the same sound.
+- **Weakness:** the Z–W sequence is rare in Latin-script brands and needs one beat of
+  learning; carries no meaning whatsoever for a non-Arabic speaker.
+
+#### A2 · Zadra — زادرة
+- **Say it:** ZAD-ra
+- **Origin:** technique 1. From زاد *zād*, the provisions you pack for a journey, plus *-ra*.
+- **Feels like:** stocked and ready; about to go somewhere.
+- **Likely misspellings:** Zaadra, Zadrah, Sadra, Zahdra
+- **Same in both mouths?** Yes.
+- **Weakness:** one letter from *Sadra* (Mulla Sadra, a major Persian philosopher); the
+  D–R cluster is slightly stiff; reads a little clinical next to the warmer options.
+
+#### A3 · Rimza — رمزة
+- **Say it:** RIM-za
+- **Origin:** technique 1. From رمز *ramz*, a symbol or sign. رمزة is not a standard noun.
+- **Feels like:** a small sign that stands for something larger.
+- **Likely misspellings:** Rimsa, Remza, Ramza, Rimzah
+- **Same in both mouths?** Yes.
+- **Weakness:** serious — رمز is the standard in-app Arabic word for a *verification code*
+  ("رمز التحقق"). Arabic speakers may hear something technical and transactional rather
+  than warm, which is the opposite of the brief.
+
+#### A4 · Hanwa — حنوة
+- **Say it:** HAN-wa
+- **Origin:** technique 1. From حنو / حنان *ḥanān*, tenderness — the specific affection
+  associated with a mother.
+- **Feels like:** being cared for; warmth directed at a person.
+- **Likely misspellings:** Hanwah, Hanua, Henwa, Hannwa
+- **Same in both mouths?** Nearly. Arabic ح is a throat H; English gives a plain /h/. Same
+  word, different texture — the most common and most survivable compromise in MENA branding.
+- **Weakness:** that ح drift; and it sits near the Gulf given name Hanouf.
+
+#### A5 · Rozna — روزنة
+- **Say it:** ROZ-na
+- **Origin:** technique 4, with a faint echo of روزنامة *roznāma* (the almanac) and of
+  روزنة, a small window in Levantine usage.
+- **Feels like:** a small opening onto something; a daily rhythm.
+- **Likely misspellings:** Rosna, Roznah, Rozana, Ruzna
+- **Same in both mouths?** Yes — one of the cleanest here.
+- **Weakness:** *Rozana* is an established Syrian radio station and a common given name,
+  one letter away; reads faintly Eastern European in Latin script.
+
+#### A6 · Rakza — ركزة
+- **Say it:** RAK-za
+- **Origin:** technique 1. From ركز *rakaza*, to plant firmly, to fix in place, to focus.
+- **Feels like:** steady and grounded; deliberate rather than frantic.
+- **Likely misspellings:** Raksa, Rakzah, Rekza, Raqza
+- **Same in both mouths?** Yes.
+- **Weakness:** close to رقصة *raqṣa*, "a dance", in written Arabic — though Egyptian
+  pronunciation ("ra'sa") separates them in speech. The K–Z cluster is the least fluid
+  in this group.
+
+#### A7 · Nabza — نبضة
+- **Say it:** NAB-za
+- **Origin:** technique 2. نبضة *nabḍa* is a single pulse or heartbeat — a real word,
+  almost entirely uncommercialised. Spelling it with *z* rather than the emphatic *ḍ*
+  makes the Latin brand a deliberate respelling, not the dictionary entry.
+- **Feels like:** alive and quick; a signal with a rhythm.
+- **Likely misspellings:** Nabda, Nabsa, Nabzah, Nabtha
+- **Same in both mouths?** Close, not identical. Egyptians will say NAB-ḍa; English
+  speakers NAB-za. The brand must choose one and hold it in both scripts.
+- **Weakness:** that consonant drift is a permanent small tax; and "pulse" is worn out as
+  a metaphor in health and fitness branding.
+
+#### A8 · Sabwa — صبوة
+- **Say it:** SAB-wa
+- **Origin:** technique 3. صبوة *ṣabwa*, a rare classical word for youthful yearning.
+- **Feels like:** young and eager; faintly romantic.
+- **Likely misspellings:** Sabwah, Sabua, Sobwa, Sabwaa
+- **Same in both mouths?** Near-identical; ص is emphatic but barely audible in this position.
+- **Weakness:** so rare that most Egyptians will not recognise it — which forfeits the
+  benefit of an Arabic root and leaves it behaving exactly like a pure coinage, with the
+  same marketing cost.
+
+#### A9 · Rafda — رفدة
+- **Say it:** RAF-da
+- **Origin:** technique 1. From رفد *rafd*, to supply or support someone.
+- **Feels like:** backing; supply; having someone behind you.
+- **Likely misspellings:** Rafdah, Raphda, Rafta, Refda
+- **Same in both mouths?** Yes, very clean.
+- **Weakness:** probably disqualifying — رفض *rafḍ*, "refusal", is one emphatic consonant
+  away and vastly more common. A meaningful share of Arabic speakers will hear "rejection"
+  on first contact. Listed so the near-miss is on the record.
+
+#### A10 · Tanza — تنزة
+- **Say it:** TAN-za
+- **Origin:** technique 4. No root in either language; built purely for bilingual mouth-feel
+  and for strength in Latin capitals.
+- **Feels like:** nothing yet — deliberately empty, to be filled by the product.
+- **Likely misspellings:** Tansa, Tanzah, Tenza, Tanzaa
+- **Same in both mouths?** Yes, identical.
+- **Weakness:** English speakers hear the first syllables of "Tanzania"; and being
+  genuinely meaningless, it demands the largest marketing spend of any name here to come
+  to mean anything at all. Legally the easiest to clear, commercially the most expensive.
+
+---
+
+### Group B — Subtle Egyptian / Arabic root (10)
+
+Real words, chosen for being *uncrowded* rather than for being evocative — the Round 1
+mistake inverted.
+
+#### B1 · Wansa — ونسة
+- **Say it:** WAN-sa
+- **Origin:** Egyptian colloquial ونسة, from أنس *uns* — the pleasure of company.
+  "ونسة حلوة" describes an evening with someone whose company you enjoyed. It names the
+  companionship, never the food.
+- **Feels like:** not eating alone; what a shared table is actually for.
+- **Likely misspellings:** Wanssa, Wansah, Onsa, Wanza
+- **Same in both mouths?** Yes — W, N and S are identical in both.
+- **Weakness:** a known colloquial word, so ownability is moderate rather than high;
+  the initial W is unusual for a consumer brand (distinctive, but it fights autocorrect);
+  and the word is somewhat more Gulf-inflected than "Egyptian-first" implies.
+
+#### B2 · Rahba — رحبة
+- **Say it:** RAH-ba
+- **Origin:** رحبة, the wide open square or courtyard of an old town, from the root رحب —
+  the same root that produces مرحبا and أهلاً وسهلاً, the entire Arabic vocabulary of welcome.
+- **Feels like:** an open space with room for everybody; hospitality at scale.
+- **Likely misspellings:** Rahbah, Raheba, Rehba, Rahaba
+- **Same in both mouths?** Partly — ح again, throat H versus plain H.
+- **Weakness:** the ح drift; rare enough that most Egyptians will not know it; and Rahba
+  is a place name in both Syria and Lebanon.
+
+#### B3 · Wafra — وفرة
+- **Say it:** WAF-ra
+- **Origin:** وفرة *wafra*, abundance — from وفّر, which in daily Egyptian means *to save
+  money*. One word holding both "plenty" and "thrift", which is this product's exact promise.
+- **Feels like:** having enough; more, for less.
+- **Likely misspellings:** Wafrah, Wafira, Waffra, Wofra
+- **Same in both mouths?** Yes, clean.
+- **Weakness:** legally weak. It is a plain dictionary word, it is arguably *descriptive*
+  of the benefit — which is a recognised ground for refusal — and Wafra is a well-known
+  agricultural region in Kuwait. Best meaning in Group B, worst trademark prospects.
+
+#### B4 · Sarha — سرحة
+- **Say it:** SAR-ha
+- **Origin:** Egyptian colloquial سرحة, a wander with no fixed destination — "خرجنا سرحة".
+- **Feels like:** unhurried; out in the city with time to spare.
+- **Likely misspellings:** Sarhah, Sar-ha, Sarhaa (and inevitably the Arabizi *Sar7a*,
+  which the brief rules out but users will type anyway)
+- **Same in both mouths?** Partly — ح again.
+- **Weakness:** سرح also means *to zone out*, and "aimless wandering" is the wrong promise
+  for a product whose whole value is *knowing* what to make.
+
+#### B5 · Zahwa — زهوة
+- **Say it:** ZAH-wa
+- **Origin:** زهوة, from زهو — radiance, bloom, quiet pride in something.
+- **Feels like:** understated confidence; something in bloom.
+- **Likely misspellings:** Zahwah, Zahoa, Zohwa, Zahaw
+- **Same in both mouths?** Yes — no emphatic or throat consonants at all.
+- **Weakness:** an established female given name across the Gulf and North Africa, which
+  complicates both trademark and social handles; and it is one letter from زهرة *zahra*,
+  "flower", one of the most commercially used words in Arabic.
+
+#### B6 · Sanad — سند
+- **Say it:** SA-nad
+- **Origin:** سند, the support you lean on — a prop, a backing, the person who has your back.
+- **Feels like:** solidity; something reliable behind you.
+- **Likely misspellings:** Sannad, Sened, Sanand, Sanadd
+- **Same in both mouths?** Yes — effortless and identical, the best phonetics in Group B.
+- **Weakness:** almost certainly uncleanable. سند is the standard Arabic word for a
+  financial *bond*, the technical term for a hadith's chain of transmission, and the name
+  of multiple MENA financial and charitable programmes.
+
+#### B7 · Hedwa — هدوة
+- **Say it:** HED-wa
+- **Origin:** Egyptian colloquial هدوة, from هدوء *hudū'* — calm.
+- **Feels like:** the opposite of the 7pm panic in front of an open fridge. The most
+  literal description of the product's emotional job on this list.
+- **Likely misspellings:** Hedwah, Hidwa, Hadwa, Hudwa
+- **Same in both mouths?** Yes — هـ is a plain H in both, unlike the ح names above.
+- **Weakness:** visually close to Hedwig and to the Hebrew name Hedva in Latin script; and
+  "calm" is a soft promise that may not stretch to carrying a commerce business.
+
+#### B8 · Wasma — وسمة
+- **Say it:** WAS-ma
+- **Origin:** وسم *wasm*, a mark burned into something to show ownership — and, since
+  roughly 2012, the standard Arabic word for a *hashtag*. Literally "the mark".
+- **Feels like:** identity; being marked as yours.
+- **Likely misspellings:** Wasmah, Wasema, Wassma, Wasmaa
+- **Same in both mouths?** Yes.
+- **Weakness:** `.wasm` is the file extension for WebAssembly, so every technical search
+  collides; وسمة also names a plant used as a dark hair dye in Gulf tradition; and naming
+  a brand "the brand" is a shade too clever about itself.
+
+#### B9 · Dafa — دفا
+- **Say it:** DA-fa
+- **Origin:** Egyptian colloquial دفا — warmth. The physical warmth of a room, a blanket,
+  a body. Four letters.
+- **Feels like:** the brief's most-repeated adjective, turned into a noun.
+- **Likely misspellings:** Daffa, Dafaa, Dafah, Difa
+- **Same in both mouths?** Yes, effortless in both.
+- **Weakness:** very short and phonetically plain, so the mark would have to do nearly all
+  the work; دفاع *difā'* ("defence") is close in writing; and "Dafa" is a Wolof word and a
+  West African surname, so international collisions are near-certain.
+
+#### B10 · Baseta — بسيطة
+- **Say it:** ba-SEE-ta
+- **Origin:** بسيطة — the Egyptian reassurance meaning "it's nothing, don't worry about it".
+  Said constantly, and always kindly.
+- **Feels like:** tension leaving a problem; a friend telling you this is handled.
+- **Likely misspellings:** Basita, Baseeta, Basetta, Bseta
+- **Same in both mouths?** Yes, though English speakers will tend to stress the first
+  syllable rather than the second.
+- **Weakness:** six letters and three syllables, the longest here; "it's simple" is one
+  step from "it's cheap", which fights a premium cobalt system; and the phrase is so
+  common that legal distinctiveness is close to zero.
+
+---
+
+### Group C — Abstract consumer-tech (10)
+
+Latin-first legibility, minimal semantic load, still comfortable in an Egyptian mouth.
+
+#### C1 · Nefer — نفر
+- **Say it:** NEH-fer
+- **Origin:** two roots at once. In Ancient Egyptian *nfr* meant good, complete, beautiful
+  — the first syllable of Nefertiti. In modern Egyptian Arabic نفر means *one person*
+  ("كام نفر؟" — how many people?). Goodness in the country's oldest language, and a human
+  head-count in its most everyday one.
+- **Feels like:** good, in the deepest sense this country has; and a person, in the most
+  ordinary.
+- **Likely misspellings:** Neffer, Nafar, Nepher, Nefr
+- **Same in both mouths?** Not quite. Arabic نفر is "NA-far"; the Latin "Nefer" invites
+  "NEH-fer". The brand must fix one pronunciation and teach it in both scripts.
+- **Weakness:** that vowel drift; pharaonic reference risks reading touristic, which the
+  brief rules out; and نفر can be slightly coarse in Egyptian when counting labourers.
+
+#### C2 · Bosla — بوصلة
+- **Say it:** BOS-la
+- **Origin:** بوصلة, compass — borrowed into Arabic from the Italian *bussola* centuries
+  ago, which is exactly why it sits easily in both scripts.
+- **Feels like:** direction. Knowing which way to go without being told what to do — a
+  precise description of a recommendation product that refuses to be bossy.
+- **Likely misspellings:** Bousla, Bosila, Busla, Boslah
+- **Same in both mouths?** Yes — the shared Italian ancestry does the work for you.
+- **Weakness:** "compass" is a well-worn startup metaphor and Bosla/Boussole names already
+  exist in MENA media and education; ص is emphatic, so the Arabic is a touch heavier than
+  the Latin suggests.
+
+#### C3 · Kado — كادو
+- **Say it:** KA-do
+- **Origin:** كادو, the Egyptian borrowing of the French *cadeau* — a gift. Universally
+  understood in Cairo.
+- **Feels like:** something given rather than sold.
+- **Likely misspellings:** Cado, Kadoo, Kadu, Caddo
+- **Same in both mouths?** Yes, identical.
+- **Weakness:** a loanword, so it carries no Egyptian ownership at all; a very common
+  four-letter string, so handles and marks will be gone; and "gift" mis-sets expectations
+  for a product that will eventually charge money.
+
+#### C4 · Dima — ديما
+- **Say it:** DEE-ma
+- **Origin:** Egyptian colloquial ديما — "always".
+- **Feels like:** permanence; the app you keep rather than the one you try.
+- **Likely misspellings:** Deema, Deama, Dimah, Dema
+- **Same in both mouths?** Yes.
+- **Weakness:** Dima is a very common Levantine female given name, and a short common
+  string with heavy existing commercial use. Ownability is the lowest in Group C.
+
+#### C5 · Zenta — زنتا
+- **Say it:** ZEN-ta
+- **Origin:** technique 4, pure construction. Z and T are the two most graphically
+  distinctive consonants available in Latin, and the shape is a clean two-syllable trochee.
+- **Feels like:** nothing inherently — deliberately empty.
+- **Likely misspellings:** Zenda, Zanta, Xenta, Zentah
+- **Same in both mouths?** Yes, identical.
+- **Weakness:** the "Zen" first syllable imports a wellness/mindfulness association that
+  actively fights Egyptian warmth; and Zenta is a historical Central European place name
+  (the Battle of Zenta, 1697).
+
+#### C6 · Korba — كوربة
+- **Say it:** KOR-ba
+- **Origin:** كوربة — Cairo's own word, from the English "curve", and the name of the
+  Heliopolis district built around one. Egyptian in the most specific, least folkloric way
+  available.
+- **Feels like:** a real place with arcades and old shopfronts; urban and unpretentious.
+- **Likely misspellings:** Corba, Kurba, Korbah, Qorba
+- **Same in both mouths?** Yes.
+- **Weakness:** two problems, either fatal. Naming a national brand after one affluent
+  Cairo neighbourhood is limiting and can read as exclusionary. And *çorba / corba* means
+  **soup** in Turkish and across the Balkans — a food-word collision the brief explicitly
+  rules out, invisible from Cairo and unmissable anywhere north of it.
+
+#### C7 · Marsa — مرسى
+- **Say it:** MAR-sa
+- **Origin:** مرسى, a mooring or harbour — where a boat ties up. Familiar to every Egyptian
+  through Marsa Alam and Marsa Matrouh.
+- **Feels like:** arrival; somewhere to put things down.
+- **Likely misspellings:** Marssa, Mersa, Marsah, Marza
+- **Same in both mouths?** Yes.
+- **Weakness:** in Egypt it is strongly bound to Red Sea tourism, which drags the brand
+  toward travel; and Marsa is commercially used in Malta, Tunisia and Libya.
+
+#### C8 · Kobri — كوبري
+- **Say it:** KOB-ri
+- **Origin:** كوبري, the Egyptian word for a bridge, borrowed from the Turkish *köprü*.
+  Ordinary Cairene street vocabulary — the opposite of folkloric.
+- **Feels like:** getting from one side to the other. What you have on one bank, dinner on
+  the other.
+- **Likely misspellings:** Kobry, Kubri, Kobree, Copri
+- **Same in both mouths?** Close. Egyptians say KOB-ri; English speakers drift to
+  "KOH-bree". Minor, and correctable by the wordmark's own stress.
+- **Weakness:** visually near *cobra* in Latin script, which is a poor association for a
+  warm brand; كوبري appears in many Cairo place names (Kobri El Qobba), diluting it
+  locally; and the *-i* ending is uncommon for a consumer brand.
+
+*(Replaces an earlier candidate, Sanza, which was cut on measurement rather than taste:
+a bigram-similarity check across all thirty flagged it at 0.75 against Tanza in Group A.
+Two near-identical pure coinages would have wasted a slot, and the second one was also
+one letter from Sansa.)*
+
+#### C9 · Karo — كارو
+- **Say it:** KA-ro
+- **Origin:** كارو, the Egyptian word for a hand- or animal-drawn cart, from the Italian
+  *carro*. The cart is, quite literally, the grocery metaphor.
+- **Feels like:** everyday street commerce; the thing that carries your shopping home.
+- **Likely misspellings:** Carro, Karro, Caro, Kharo
+- **Same in both mouths?** Yes.
+- **Weakness:** likely disqualifying in-market, and completely invisible from outside it —
+  عربية كارو carries a distinctly downmarket class connotation in Egypt that a premium
+  cobalt brand cannot outrun. Included because the lesson generalises: only local review
+  catches this class of failure.
+
+#### C10 · Tiba — طيبة
+- **Say it:** TEE-ba
+- **Origin:** طيبة — simultaneously the ancient Arabic name for Thebes (Luxor) and the
+  ordinary noun for goodness of character. Egypt's oldest city and its most-praised human
+  quality, in four letters.
+- **Feels like:** decency — the quality Egyptians reach for first when they describe
+  someone they like.
+- **Likely misspellings:** Teeba, Tayba, Theba, Tiban
+- **Same in both mouths?** Mostly — ط is emphatic, so the Arabic "Ṭeeba" lands heavier
+  than the English "Teeba".
+- **Weakness:** Tiba/Teiba is a common Egyptian given name and appears across local
+  business names — schools, clinics, compounds. Beautiful story, low distinctiveness.
+
+### 11.1 Mechanical screen — run, not assumed
+
+All thirty were checked by script rather than by eye, against: length 4–7; no digits; none
+of the ten banned substrings; no `v` or `p`; bigram similarity below 0.5 against *lamma*,
+*nemma*, *sila*, *talabat*, *breadfast*, *elmenus*, *rabbit*, *instashop* and *noon*; and
+below 0.6 against each other. **All thirty pass.** The check earned its keep once — it
+flagged an internal near-duplicate at 0.75 that reading the list had not caught, and that
+slot was re-filled.
+
+One honest artefact of the method: the endings cluster. Five of the thirty end in *-wa*
+and four in *-za*, because those are among the few Arabic noun endings that attach cleanly
+to a root without producing a real dictionary word. That is the cost of technique 1, and it
+is worth knowing that a shortlist drawn only from Group A will sound more alike than
+thirty independently-chosen names would.
+
+---
+
+## 12. The eight for external clearance
+
+Selected for ownability first, as instructed, then for the "download ____" test and for
+whether the name still makes sense when the company sells groceries. **Four of the eight
+are Group A coinages**, which is the deliberate consequence of prioritising ownability:
+invented words are the only ones with real room left in the register.
+
+Ordered by my assessment of combined strength and clearance odds.
+
+| # | Name | Arabic | Group | Why it earned a slot | What clearance must resolve |
+|---|---|---|---|---|---|
+| 1 | **Razwa** | رزوة | A · coined | Cleanest coinage found: no dictionary entry, no negative second reading, no emphatic-consonant drift, root echo of "provision" that scales straight into groceries. | Nothing known. The highest-confidence candidate on the list. |
+| 2 | **Wansa** | ونسة | B · rooted | The warmest name here and the only one whose meaning is *companionship* rather than food — it scales to friends, community and shared ordering without stretching. | Gulf usage; whether any MENA social or delivery app holds it. |
+| 3 | **Nabza** | نبضة | A · respelled | Graphically the strongest in Latin (N-B-Z), energetic, short, and near-uncommercialised in Arabic. | Whether the ض→z respelling is defensible as distinct; "pulse" crowding in health tech. |
+| 4 | **Nefer** | نفر | C · abstract | The most *ownable* story of all thirty — two authentic Egyptian layers, four thousand years apart, in one five-letter word. | Pharaonic naming is popular in Egyptian tourism; check hospitality and travel classes especially. |
+| 5 | **Hanwa** | حنوة | A · coined | Delivers the brief's core adjective — warm, human — through a real root, with no dictionary entry to collide with. | Proximity to the given name Hanouf; confirm the ح/h split is acceptable to the founder. |
+| 6 | **Zadra** | زادرة | A · coined | Commanding as a logotype, strong provisions root, the best pure-grocery fit among the coinages. | *Sadra* proximity; check Persian/Gulf commercial use. |
+| 7 | **Bosla** | بوصلة | C · abstract | The most scalable of all thirty — "the compass" stays true through recipes, pantry, community and ordering alike, and needs no translation. | Compass-metaphor crowding; existing Bosla/Boussole media and education brands in MENA. |
+| 8 | **Rahba** | رحبة | B · rooted | Hospitality encoded at the root level — the same root as *marhaba* — and a genuinely uncrowded word. | Syrian and Lebanese place-name use; whether the ح drift is tolerable. |
+
+**Deliberately not submitted, and why** — so the omissions are decisions rather than
+oversights: **Rafda** (hears as "refusal"), **Rimza** (hears as "verification code"),
+**Korba** (means *soup* north of Egypt), **Karo** (downmarket class signal in Cairo),
+**Sanad** and **Baseta** and **Wafra** (too common to clear; Wafra additionally risks a
+descriptiveness refusal), **Kobri** (reads as *cobra*), **Zenta** (Zen), **Dima** and **Kado**
+(short, common, already everywhere), **Tanza** (clearable but semantically empty — hold as
+the fallback if all eight fail).
+
+### What to run, per name
+
+1. Egyptian Trademark Office and WIPO Global Brand Database, **classes 9, 35, 42 and 43**.
+2. App Store and Google Play name search in the **EG storefront**, plus SA and AE.
+3. Domains: `.com`, `.app`, `.eg`, `.com.eg`.
+4. Handles: Instagram, TikTok, X.
+5. **A native-speaker read-aloud panel** — six to eight Egyptians, shown the Latin spelling
+   only, asked to say it and then to say what it makes them think of. Karo and Korba are
+   the proof that this step catches what no database will: a class connotation and a
+   Turkish food word are both invisible to search and obvious to a person.
+
+Expect attrition. Four surviving from eight would be a good outcome; two is workable;
+if fewer, §10.1's four techniques generate more without starting over.
+
+### Unchanged by this round
+
+The approved brand direction carries forward untouched and is **not** contingent on the
+name: electric cobalt `#3155FF` with its measured 5.42:1 white-on-primary, warm cream,
+near-black, Alexandria-style bilingual typography, flat editorial surfaces, no gradients,
+no glassmorphism, no purple, invisible AI. §7.0 remains the live specification, and every
+replacement in §3 can proceed on its own schedule — the design work is not blocked on the
+name, and should not wait for it.
