@@ -165,6 +165,20 @@ export default function CookScreen() {
             }
             testID="cook-pantry-mode"
           />
+          {/*
+            One line, for the mode that is actually selected.
+
+            The labels had to shrink — "Only what I have" truncated to "Only
+            what I h..." inside a three-up segmented control, and a clipped
+            label is worse than a terse one. "Exact" is terse enough to need
+            saying once what it means, so this says it once rather than
+            printing a paragraph per option.
+          */}
+          <Text variant="footnote" color="textSecondary" testID="cook-mode-hint">
+            {maxMissing === 0
+              ? t('cook.modeStrictHint')
+              : t('cook.modeMissingHint', { count: maxMissing })}
+          </Text>
 
           <Button
             label={

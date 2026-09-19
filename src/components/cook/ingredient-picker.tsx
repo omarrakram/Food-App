@@ -177,7 +177,18 @@ function QuickGroup({
               label={displayName(name)}
               size="sm"
               selected={isSelected}
-              emphasis={isSelected ? 'solid' : 'soft'}
+              /*
+                SOFT here, solid in the Selected rail — deliberately not the
+                same weight.
+
+                An ingredient can appear three times at once: in the rail, in
+                Common, and in an open category. When every occurrence was a
+                solid cobalt fill, choosing four things turned the screen into
+                a field of blue and the rail stopped reading as the summary.
+                The tick plus a tint is unambiguous at a glance and leaves the
+                rail as the one place that answers "what have I picked".
+              */
+              emphasis="soft"
               icon={isSelected ? 'checkmark' : undefined}
               onPress={() => onToggle(name)}
               testID={`${idPrefix}-${normaliseIngredientName(name)}`}
@@ -275,7 +286,15 @@ export function IngredientPicker({
    * with anise, baking powder, bay leaf and caraway. See
    * `features/ingredients/common.ts`.
    */
-  const commons = useMemo(() => COMMON_INGREDIENT_NAMES.slice(0, 18), []);
+  /*
+    Ten, not eighteen. The ranking is unchanged — this is purely how much of it
+    is shown before the user has expressed any interest. Eighteen chips wrapped
+    to four rows and pushed browsing off screen, which made the quick-add list
+    compete with the thing it is supposed to be a shortcut past. The rest of
+    the ranking is still reachable through search and through the categories
+    directly beneath.
+  */
+  const commons = useMemo(() => COMMON_INGREDIENT_NAMES.slice(0, 10), []);
 
   const categoryItems = useMemo(() => {
     if (!openCategory) return [];
@@ -430,6 +449,17 @@ export function IngredientPicker({
                   testID={`category-${category}`}
                 />
               ))}
+              {/*
+                A trailing spacer, because the last chip was rendering as
+                "Pan…" — a clipped label reads as a rendering fault, not as a
+                hint that the row scrolls.
+
+                `paddingHorizontal` on a horizontal contentContainer is applied
+                inconsistently at the far edge across RN and RN-web, so the end
+                padding cannot be relied on to give the final item room. An
+                actual element always can.
+              */}
+              <View style={{ width: theme.spacing.xl }} />
             </ScrollView>
 
             {openCategory ? (
