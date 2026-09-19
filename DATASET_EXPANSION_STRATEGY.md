@@ -19,35 +19,50 @@ and the Franco-Arab transliteration people use on a phone keyboard — were run
 through `resolveIngredient` and `searchIngredients`, the same two functions
 the picker and the pantry use:
 
-| Outcome                                     | Count |   Share |
-| ------------------------------------------- | ----: | ------: |
-| Resolves to the right canonical ingredient  |   167 | **66%** |
-| Nothing resolves; search offers _something_ |    45 |     18% |
-| Nothing at all — a dead end                 |    42 | **17%** |
+| Outcome                               |   Count |    Share |
+| ------------------------------------- | ------: | -------: |
+| Resolves to the **right** ingredient  |     165 |      65% |
+| Search finds the **right** ingredient |      25 |      10% |
+| **Correct overall**                   | **190** |  **75%** |
+| Dead end — nothing at all             |      42 |      17% |
+| Wrong, same food group                |       8 |       3% |
+| **Wrong, DIFFERENT food group**       |  **14** | **5.5%** |
 
-The middle row is where the real damage is. Of those 45, **19 resolve to an
-ingredient from a different food group**, silently and confidently:
+> **These numbers replaced an earlier, wronger set.** The first pass counted
+> whether `resolveIngredient` returned _anything_ and reported 66% / 18% / 17%.
+> That measured the wrong quantity in both directions: it ignored the 25 terms
+> where search finds the right answer, and it counted two confident **alias**
+> errors as successes — `whole chicken` → `chicken-breast`, and `pita` →
+> `baladi-bread`. 167 resolutions minus those two is the 165 above. The
+> difference between "returned" and "returned the right thing" is the
+> difference between a benchmark and a counter.
 
-| A user types  | The app offers | They meant    |
-| ------------- | -------------- | ------------- |
-| `farawla`     | caraway        | strawberry    |
-| `shammam`     | pigeon         | cantaloupe    |
-| `arnab`       | cauliflower    | rabbit        |
-| `termis`      | buttermilk     | lupini beans  |
-| `broad beans` | tofu           | fava beans    |
-| `vine leaves` | tea            | vine leaves   |
-| `قشطة`        | tomatoes       | clotted cream |
-| `ماجي`        | watercress     | stock cube    |
-| `مش`          | apricots       | mish cheese   |
-| `قريش`        | lamb chops     | areesh cheese |
-| `corn flakes` | corn oil       | corn flakes   |
+**Wrong answers are two very different events.** Eight are misses inside a
+food group — `gebna rumi` offering white cheese, `pita` offering baladi bread,
+`cottage cheese` offering mozzarella. Fourteen cross food groups, and arrive
+with exactly the confidence of a correct answer:
 
-**A dead end is honest; a wrong answer is not.** "Add anyway" recovers the
-first. Nothing recovers the second: the user taps a plausible-looking
+| A user types            | The app offers | They meant       |
+| ----------------------- | -------------- | ---------------- |
+| `farawla`               | caraway        | strawberry       |
+| `shammam`               | pigeon         | cantaloupe       |
+| `arnab`                 | cauliflower    | rabbit           |
+| `termis`                | buttermilk     | lupini beans     |
+| `فول أخضر`              | green onion    | green fava beans |
+| `wara enab` / `ورق عنب` | grapes         | vine leaves      |
+| `vine leaves`           | tea            | vine leaves      |
+| `قشطة`                  | tomatoes       | clotted cream    |
+| `ماجي`                  | watercress     | stock cube       |
+| `مش`                    | apricot        | mish cheese      |
+| `قريش`                  | lamb chops     | areesh cheese    |
+| `corn flakes`           | corn oil       | corn flakes      |
+
+**A dead end is honest; a cross-group answer is not.** "Add anyway" recovers
+the first. Nothing recovers the second: the user taps a plausible-looking
 suggestion, and the matching engine then reasons about caraway.
 
-So roughly **one term in four either fails or lies**. That is the number the
-expansion has to move, and headcount is not the lever that moves it.
+So **25% of terms fail, and 5.5% actively mislead**. The second number is the
+one with a hard target of zero.
 
 ### The engine is not at fault
 
@@ -181,6 +196,212 @@ Egyptian kitchens are organised around **cuts, forms and preparations** —
 `farkha` vs `sedr` vs `werk`, `gebna talaga` vs `areesh` vs `mish`, fresh vs
 frozen molokhia. Species-level coverage is good; form-level coverage is where
 the dead ends are.
+
+---
+
+## 3b. How the benchmark measures, and why an earlier version could not
+
+`src/features/ingredients/__tests__/vocabulary-coverage.test.ts` with its
+truth table in `fixtures/vocabulary-benchmark.ts`.
+
+### The assertion that had to be replaced
+
+The first version ended with a check that read like a safety net and was not
+one:
+
+```ts
+const stillWrong = MUST_NOT_SUGGEST.filter(/* … */);
+expect(stillWrong.length).toBeLessThanOrEqual(MUST_NOT_SUGGEST.length);
+```
+
+`stillWrong` is filtered **from `MUST_NOT_SUGGEST` itself**, so its length can
+never exceed the array's. The condition is true by construction. It could not
+fail, it could not notice a newly introduced wrong match, and it licensed
+every known wrong pair to keep passing forever. The same defect class as a
+green test asserting nothing — and worth naming, because the shape is
+seductive: a real list, a real filter, a real `expect`, and no possible
+failure.
+
+### The truth table
+
+Every term now carries an expected outcome, of one of three kinds:
+
+| Kind        | Meaning                                                                                    | Example                                                |
+| ----------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| `canonical` | the catalogue has this exact concept; anything else is wrong                               | `farawla` → `strawberry`                               |
+| `oneOf`     | genuinely ambiguous in Egyptian usage, with a written `because`                            | `shatta` → chili pepper **or** flakes **or** hot sauce |
+| `absent`    | the catalogue genuinely lacks it; only a dead end or a same-group suggestion is acceptable | `termis` → _(lupini beans, legume)_                    |
+
+`oneOf` carries a mandatory justification string. An `oneOf` written to make a
+failing term pass is how a benchmark stops being a benchmark, and the
+requirement to write the reason is the only thing standing between those two
+states.
+
+### Five outcomes, counted separately
+
+| Outcome             | Meaning                                                |
+| ------------------- | ------------------------------------------------------ |
+| `RESOLVED_CORRECT`  | `resolveIngredient` returns an acceptable slug         |
+| `SEARCH_CORRECT`    | nothing resolves, but the top search hit is acceptable |
+| `DEAD_END`          | nothing at all — the honest failure                    |
+| `WRONG_SAME_GROUP`  | wrong, but from the same food group. A miss            |
+| `WRONG_OTHER_GROUP` | wrong, from a different food group. **A lie**          |
+
+Food group comes from `fixtures/food-groups.ts`, which is deliberately **not**
+the catalogue's `category`. `category` is an aisle taxonomy — `protein` holds
+beef, tilapia, lentils and tofu — and is useless for asking "could a cook
+mistake this for the real thing?". The fixture maps 25 kitchen-meaningful
+groups, with every slug whose category misleads listed explicitly.
+
+### The safety invariant
+
+> An unknown term may return **no** canonical result. It must never
+> confidently return an **unrelated** ingredient.
+
+Expressed as `WRONG_OTHER_GROUP === 0`, currently pinned at its measured 14 so
+the list can be worked down term by term. Every stage lowers the number, and a
+fifteenth fails the build the moment it appears — because it is counted from
+live results, not filtered from the list that defines it.
+
+### Bounds, all set at the measured state
+
+| Assertion                    | Bound          | Measured |
+| ---------------------------- | -------------- | -------- |
+| correct share                | ≥ 0.748        | 0.748    |
+| wrong answers, any kind      | ≤ 22           | 22       |
+| cross-group answers          | ≤ 14           | 14       |
+| cross-group alias collisions | allowlist of 1 | 1        |
+
+No slack. A floor with room in it is a floor that never catches anything.
+
+### Benchmark hygiene checks
+
+The benchmark is also checked for being well-formed, because a typo in a truth
+table reports a regression that does not exist:
+
+- every slug it names exists in the catalogue;
+- every food-group override names a real slug;
+- every expectation has a resolvable group;
+- no term appears under two different concepts.
+
+### Alias collision checks
+
+Two, on the catalogue itself:
+
+- **Cross-group collisions fail the build.** One alias claimed by ingredients
+  in different food groups is a silent wrong answer waiting for whoever adds
+  the next row, since which one wins is decided by insertion order into the
+  alias index.
+- **Same-group collisions are reported, not failed.** Two ingredients
+  answering to one word can be a deliberate modelling choice; it is printed so
+  it stays a decision rather than an accident.
+
+**The check found exactly one cross-group collision, and it explains a live
+inconsistency.** `حمص` is claimed by both `chickpeas` (legume) and
+`hummus-dip` (prepared). Insertion order is alphabetical by accident, so the
+Arabic `حمص` resolves to the pulse while the transliteration `homos` has no
+alias at all and falls through to search, which offers the dip. Two spellings
+of one word, two different answers. It is allowlisted with its reason rather
+than silently tolerated; **Stage 1 fixes it as a data change** by deciding
+which concept owns the bare word and giving the other a qualified alias.
+
+### This set does NOT gate launch
+
+The 254 terms were used to _find_ the catalogue's gaps. Once Stage 1 writes
+aliases against them, a high score here measures whether those aliases were
+written — which is already known. The benchmark stays as the **development**
+instrument: it catches regressions, it proves a stage moved the number, and it
+is fast enough to run on every commit.
+
+### The independent holdout, required before launch
+
+Launch validation needs a **separate set of raw ingredient terms that were not
+used to author the catalogue**. Requirements:
+
+1. **Collected from real Egyptian users**, not written by whoever wrote the
+   aliases. Sources, in order of preference: the unmatched-term tally from
+   §5C once the app has traffic; a written exercise with 20–30 Egyptian
+   households listing what is in their kitchen in their own words; typed
+   pantry and cook-search terms from a closed beta.
+2. **Sealed before the aliases are written.** Collected, labelled with the
+   same truth-table scheme, and then _not looked at_ during authoring. A
+   holdout inspected during training is training data.
+3. **At least 300 terms**, skewed toward Franco-Arab transliteration and
+   colloquial forms, because those are where the failures concentrate.
+4. **Labelled by a native Egyptian speaker**, including the `absent` cases —
+   deciding that the catalogue genuinely lacks a concept is a judgement about
+   Egyptian food, not about the catalogue.
+5. **Run once per stage, not iterated against.** If the holdout number is
+   used to decide which aliases to write next, it has become a second
+   development set and a third holdout is needed.
+
+**Launch gate: ≥90% correct and 0 cross-group answers on the holdout.** The
+development benchmark's ≥95% is a necessary condition for reaching that, not
+a substitute for measuring it.
+
+---
+
+## 3c. Ontology audit of the proposed P0/P1 list
+
+The gap list in §3 was written before this audit and **contained real
+ontology errors**. Corrected here before any of it becomes data.
+
+### Errors found in the proposal
+
+| Proposed                                                       | Verdict                                | Why                                                                                                                                                                                                   |
+| -------------------------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bechamel, mahshi filling, besara, koshari sauce, ful mix       | **Reject — these are dishes**          | Each is a recipe with its own ingredients and steps. A dish in the ingredient table cannot be priced, cannot carry allergens honestly, and cannot be matched against. They belong in `data/recipes/`. |
+| domiati cheese                                                 | **Reject — duplicate**                 | Domiati _is_ Egyptian white cheese. The catalogue already has `white-cheese` with `gebna beida`/`جبنة بيضاء`. This is an alias, not a row.                                                            |
+| barameely cheese                                               | **Reject — a form, not a concept**     | White cheese aged in barrels. Same ingredient, different maturation. Alias.                                                                                                                           |
+| istanbouly cheese                                              | **Reject — a variety**                 | A variety of roumy. Alias on `roumy-cheese`.                                                                                                                                                          |
+| "indomie / instant noodles" as two entries                     | **Merge**                              | One row `instant-noodles`; `indomie`/`اندومي` is its highest-traffic alias. A genericised brand is still a brand.                                                                                     |
+| "vegetable oil generic"                                        | **Reject**                             | Already reachable through `sunflower-oil` aliases. A second generic row splits matching for no gain.                                                                                                  |
+| frozen molokhia, frozen okra, frozen spinach, frozen artichoke | **Reject as rows — make them aliases** | See below.                                                                                                                                                                                            |
+
+### Where the proposal was right
+
+| Proposed                                    | Verdict               | Why                                                                                                                                  |
+| ------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| whole chicken (`farkha`)                    | **Accept as a row**   | A whole bird is bought, priced and cooked differently from any cut. It is _currently_ aliased to `chicken-breast`, which is the bug. |
+| `werk`, `sedr`                              | **Correctly aliases** | Cuts that already exist as rows. No new concepts.                                                                                    |
+| gebna talaga, areesh, mish                  | **Accept as rows**    | Three genuinely different cheeses — fresh soft, curd, and fermented. Not spellings of one thing.                                     |
+| sole (`samak moosa`)                        | **Accept**            | A distinct species, currently offering salmon and tilapia.                                                                           |
+| lupini (`termis`)                           | **Accept**            | A distinct legume with no catalogue equivalent.                                                                                      |
+| red lentils vs `lentils`                    | **Accept**            | A cooking-behaviour distinction: red lentils dissolve, green hold shape. `green-lentils` already exists, so this is consistent.      |
+| shawarma spice, baharat blend, zaatar blend | **Accept as rows**    | Bought as blends, not assembled. Distinct from their components.                                                                     |
+| corn flakes, halawa                         | **Accept**            | Packaged products used as ingredients.                                                                                               |
+
+### The fresh-versus-frozen rule
+
+**A frozen form is an alias of the fresh ingredient unless a recipe genuinely
+distinguishes them.**
+
+In Egypt, frozen molokhia _is_ the normal form — most households never see the
+fresh leaf. Creating `frozen-molokhia` as a separate row would mean a pantry
+holding it fails to match a recipe calling for `molokhia`, which is the
+opposite of what the user wants and a regression in matching semantics.
+
+Only two frozen rows earn their place, and both already exist: `frozen-fries`
+and `frozen-mixed-veg` — because neither has a single fresh equivalent. The
+proposed frozen molokhia, okra, spinach and artichoke become aliases on their
+fresh rows.
+
+### The rules this audit establishes
+
+Applied to every candidate before it becomes a row:
+
+1. **Is it a dish?** If it has a recipe, it is a recipe.
+2. **Is it a different name for something we have?** Then it is an alias.
+   Egyptian Arabic having several words for one food is a reason to write
+   several aliases, never several rows.
+3. **Is it a cut or a form?** A cut earns a row only when it is bought,
+   priced and cooked differently (`whole chicken` yes, `sedr` no — that one
+   already has a row). A form — frozen, dried, canned — earns a row only when
+   a recipe genuinely requires that form.
+4. **Is it a brand?** Then it is an alias, under the generic concept.
+5. **Would two rows break matching?** If a pantry entry under one would fail
+   to satisfy a recipe under the other, and a cook would consider them
+   interchangeable, they are one row.
 
 ---
 
@@ -423,6 +644,47 @@ Existing dataset gates still apply: no pair above 0.9 Jaccard similarity,
 allergens declared, diet tags consistent, Arabic for every title, description,
 step and safety note.
 
+### Photography expands with the recipes, or coverage collapses
+
+**67 of 161 recipes have a photograph — 42%.** Adding 139 recipes with no
+photographs leaves 67 of 300, which is **22%**. The catalogue would grow by 86%
+and the share of recipes a user sees photographed would nearly halve. That is a
+visible downgrade delivered by an expansion, and it would land on Home and
+Discover first, where the geometric fallback already does the most work.
+
+So the rule:
+
+> **Every recipe batch produces or updates its photography backlog, and photo
+> coverage is reported with the batch. A batch that lowers the coverage
+> percentage is not finished.**
+
+Concretely, per batch:
+
+1. Run `npm run audit:photos` **after** the batch lands. It ranks
+   unphotographed recipes by how often they actually reach a screen — pantry
+   reach, speed, ingredient count, launch market, Discover membership — so the
+   backlog re-sorts itself around the new recipes rather than appending them.
+2. Record photo coverage before and after in the batch's commit message, the
+   same way test counts already are.
+3. **Shoot or license to hold the line at ≥42%**, prioritising the batch's own
+   recipes where they rank high. 139 new recipes need roughly **58 new
+   photographs** to keep coverage flat, and about **113** to reach 60%.
+4. Batches whose recipes rank highest for exposure — the five-ingredient meals
+   and the Egyptian core, which land on Home and in Discover's collections —
+   carry the largest share of that photography, because the backlog's own
+   ranking puts them at the top anyway.
+
+| After             | Recipes | Photographed |       Coverage |
+| ----------------- | ------: | -----------: | -------------: |
+| Today             |     161 |           67 |            42% |
+| Batches 1–2 (+75) |     236 |          ~99 | **42%** — held |
+| Batches 3–6 (+64) |     300 |         ~126 | **42%** — held |
+| Launch goal       |     300 |         ~180 |        **60%** |
+
+Holding 42% is the floor, not the ambition. The point is that photography
+stops being a separate project running behind the dataset and becomes part of
+the definition of a finished batch.
+
 ---
 
 ## 9. Price expansion priorities
@@ -454,16 +716,17 @@ not to catalogue batches.
 Each stage ends with the probe re-run and its number recorded. No stage begins
 before the previous one's number has moved.
 
-| Stage                              | Work                                                                                                                                                      | Measured exit condition                                                           |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **0. Instrument** ✅               | Vocabulary probe committed as a test with floors                                                                                                          | 66% / 17% / 19 recorded                                                           |
-| **1. Aliases only**                | No new rows. Add the ~20 known alias fixes, then sweep all 257 for Franco-Arab and colloquial forms toward 8–12 each                                      | Resolution **≥85%**, wrong-group suggestions **≤5**, still 257 ingredients        |
-| **2. P0 ingredients**              | ~120 rows: Egyptian meat cuts, poultry cuts, Egyptian cheeses, frozen forms, breakfast/packaged, dairy — each with full alias set at the Stage-1 standard | Resolution **≥92%**, dead ends **≤10**, 0 wrong-group                             |
-| **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                            | A typed unknown is visibly distinct, still never matches a recipe, and is counted |
-| **4. P1 ingredients**              | ~180 rows: legumes, breads, seafood, canned, baking, condiments, international, prepared                                                                  | Resolution **≥95%**, catalogue ~550                                               |
-| **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs                                                                                          | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%                     |
-| **6. Prices**                      | P0 then P1 from §9, tied to the recipe batches                                                                                                            | Slot coverage **≥95%**                                                            |
-| **7. Long tail**                   | ~100 P2 rows only if the probe still shows gaps                                                                                                           | Resolution ≥95% sustained; stop when it plateaus                                  |
+| Stage                              | Work                                                                                                                                                                                                                                                           | Measured exit condition                                                                              |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                  |
+| **1. Aliases only**                | No new rows. The ~20 known alias fixes, the `حمص` collision, the `whole chicken`→`chicken-breast` and `pita`→`baladi-bread` alias errors, then a sweep of all 257 toward 8–12 aliases each                                                                     | Correct **≥85%**, cross-group **≤5**, still 257 ingredients                                          |
+| **2. P0 ingredients**              | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                             |
+| **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                    |
+| **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                        |
+| **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**    |
+| **6. Prices**                      | P0 then P1 from §9, tied to the recipe batches                                                                                                                                                                                                                 | Slot coverage **≥95%**                                                                               |
+| **7. Long tail**                   | ~100 P2 rows only if the benchmark still shows gaps                                                                                                                                                                                                            | Development benchmark ≥95% sustained; stop when it plateaus                                          |
+| **8. Holdout validation**          | Collect and seal the independent holdout per §3b, label it with a native speaker, run it **once**                                                                                                                                                              | **≥90% correct and 0 cross-group on the holdout.** This, not the development benchmark, gates launch |
 
 **Review gates.** Stages 1–2 and 4 add data that a native Egyptian speaker
 should review before it ships — transliteration quality is the whole point and
