@@ -67,6 +67,16 @@ const oneOf = (slugs: readonly string[], because: string): Expectation => ({
   slugs,
   because,
 });
+/*
+  UNUSED TODAY, AND KEPT ON PURPOSE. Stage 2A.1 closed the last gap this
+  described — the drumstick — so no entry is currently labelled `absent`. The
+  helper stays because the benchmark's ability to say "we do not have this
+  concept" is the thing that makes it a truth table rather than a scoreboard:
+  without it, a newly discovered gap has nowhere to go except an `oneOf` that
+  accepts whatever the search happens to return, which is how a benchmark stops
+  measuring. Deleting it to satisfy a linter would cost more than it saves.
+*/
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const absent = (concept: string, group: FoodGroup): Expectation => ({
   kind: 'absent',
   concept,
@@ -165,9 +175,9 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
   },
   { terms: ['werk', 'ورك', 'thigh'], expect: canonical('chicken-thigh') },
   {
-    terms: ['drumsticks', 'drumstick'],
-    expect: absent('drumsticks', 'poultry'),
-    note: 'STAGE 2B CONFLICT, recorded rather than resolved. `chicken-thigh` claims `drumsticks` as an alias. Defensible — أوراك is sold as the leg quarter, thigh and drumstick attached — but a drumstick is not a thigh, and the alias must be settled BEFORE any drumstick row exists or the two will fight over the word. Left failing on purpose so it cannot be forgotten.',
+    terms: ['drumsticks', 'drumstick', 'دبابيس', 'دبابيس فراخ'],
+    expect: canonical('chicken-drumstick'),
+    note: 'SETTLED in Stage 2A.1. It was an alias of `chicken-thigh`, recorded here as a conflict and left failing. أوراك stays the thigh row\u2019s — it IS the leg quarter — but the drumstick is bought and cooked on its own, so it is its own row.',
   },
   { terms: ['sedr', 'صدر', 'breast'], expect: canonical('chicken-breast') },
   { terms: ['kawanes', 'كوانس', 'gizzards'], expect: canonical('chicken-gizzards') },

@@ -67,6 +67,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   'chicken-gizzards': 'offal', trotters: 'offal', 'sausage-casing': 'offal',
   'chicken-breast': 'poultry', 'chicken-thigh': 'poultry', 'chicken-wings': 'poultry',
   duck: 'poultry', pigeon: 'poultry', turkey: 'poultry', 'whole-chicken': 'poultry',
+  'chicken-drumstick': 'poultry',
   anchovy: 'fish', herring: 'fish', mackerel: 'fish', mullet: 'fish',
   salmon: 'fish', 'salted-fish': 'fish', sardines: 'fish', 'sea-bass': 'fish',
   'sea-bream': 'fish', tilapia: 'fish', 'tuna-can': 'fish', 'sole-fish': 'fish',

@@ -7,6 +7,7 @@ import type {
 } from '@/types/domain';
 
 import { INGREDIENT_CATALOGUE, isUniversalBasic, type CatalogueIngredient } from './catalogue';
+import { familyFor } from './families';
 import { freshnessOf } from './freshness';
 import { normaliseIngredientName, similarityScore, withinEditDistance } from './normalise';
 
@@ -48,53 +49,26 @@ export function resolveIngredient(raw: string): CatalogueIngredient | null {
 }
 
 /**
- * Words that name SEVERAL catalogue ingredients rather than one.
+ * The ingredients a family word covers, or an empty list for anything else.
  *
- * `chicken` is the case that forced this to exist. It is not a cut, so no row
- * may own it — see the alias index above — but it is not meaningless either:
- * "something without chicken" has an obvious meaning, and so does "a meal with
- * chicken". Resolution cannot express that, because resolution returns one
- * ingredient and the honest answer here is six.
+ * A family word names a SET — `chicken` is seven rows, not one — and the
+ * reasoning, the curated vocabulary and the inferred rule all live in
+ * `./families`. This function owns only the part that needs the alias index:
+ * the precedence.
  *
- * The rule is read off the catalogue's own naming rather than from a list
- * maintained by hand: a word is a family word when it appears as a WHOLE TOKEN
- * inside the canonical name of more than one ingredient. `chicken` is a token
- * of `chicken breast`, `chicken thighs`, `chicken wings`, `chicken livers`,
- * `chicken gizzards` and `whole chicken`; `فراخ` of their Arabic names. Adding
- * a seventh chicken row extends the family with nothing to update.
+ * RESOLUTION WINS. A term that names one ingredient exactly is not a family
+ * word, whatever else it might look like, so `milk` stays milk rather than
+ * becoming every milk in the shop.
  *
  * Deliberately NOT consulted by pantry matching. Owning "chicken" is a claim
  * about one specific thing in a fridge, and a claim that vague is the bug this
  * whole milestone removed. A family narrows a search; it never fills a pantry.
  */
-const FAMILY_INDEX: Map<string, CatalogueIngredient[]> = (() => {
-  const index = new Map<string, CatalogueIngredient[]>();
-  for (const ingredient of INGREDIENT_CATALOGUE) {
-    const tokens = new Set(
-      [ingredient.name, ingredient.nameAr]
-        .flatMap((value) => normaliseIngredientName(value).split(' '))
-        .filter((token) => token.length >= 3),
-    );
-    for (const token of tokens) {
-      const bucket = index.get(token);
-      if (bucket) bucket.push(ingredient);
-      else index.set(token, [ingredient]);
-    }
-  }
-  return index;
-})();
-
-/**
- * The ingredients a family word covers, or an empty list for anything else.
- *
- * Empty for a term that resolves on its own: one exact answer always beats a
- * family, so `milk` stays milk rather than becoming every milk in the shop.
- */
 export function ingredientFamily(raw: string): readonly CatalogueIngredient[] {
   const normalised = normaliseIngredientName(raw);
-  if (!normalised || normalised.includes(' ')) return [];
+  if (!normalised) return [];
   if (ALIAS_INDEX.has(normalised)) return [];
-  return FAMILY_INDEX.get(normalised) ?? [];
+  return familyFor(normalised);
 }
 
 /** Autocomplete suggestions, best first. */

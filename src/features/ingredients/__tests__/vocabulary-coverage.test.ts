@@ -262,6 +262,7 @@ describe('vocabulary coverage', () => {
   it('resolves or finds the right ingredient for most terms', () => {
     const correct = countOf('RESOLVED_CORRECT') + countOf('SEARCH_CORRECT');
     // STAGE 1: 190 -> 218 (aliases). STAGE 2A: 218 -> 235 -> 254 of 256.
+    // STAGE 2A.1: 258 of 258, once the drumstick had a row of its own.
     //
     // NOT pinned at 1.0, deliberately, and this is the one bound here that is
     // loose on purpose. Recording a newly discovered missing concept means
@@ -280,21 +281,21 @@ describe('vocabulary coverage', () => {
     const wrong = countOf('WRONG_SAME_GROUP') + countOf('WRONG_OTHER_GROUP');
     /*
       Counted from LIVE RESULTS, not filtered from the list that defines it.
-      STAGE 1: 22 -> 15. STAGE 2A: 15 -> 4 (batch A) -> 2 (batch B).
+      STAGE 1: 22 -> 15. STAGE 2A: 15 -> 4 -> 2. STAGE 2A.1: 2 -> 0.
 
-      The two are `drumsticks` and `drumstick`, both landing on
-      `chicken-thigh`. They are ONE open ontology question, recorded in the
-      benchmark rather than settled, and deliberately left failing — see the
-      note on that entry.
-
-      This bound is therefore not zero, and the arithmetic to get it to zero
-      was available: drop the entry, or relabel it to accept the answer it
-      already gives. Both would have been the exact move this benchmark was
-      rebuilt to make impossible. A measurement you can round down by deleting
-      the inconvenient row measures nothing.
+      The last two were `drumsticks` and `drumstick` landing on
+      `chicken-thigh` — one open ontology question, recorded in the benchmark
+      rather than settled, and left failing on purpose. It was settled by
+      giving the drumstick its own row, which is why this is now an exact zero
+      and why the terms are still here. The arithmetic shortcut was always
+      available: drop the entry, or relabel it to accept the answer it already
+      gave. Both are the exact move this benchmark was rebuilt to make
+      impossible, and a measurement you can round down by deleting the
+      inconvenient row measures nothing.
     */
     expect(rows('WRONG_OTHER_GROUP')).toEqual([]);
-    expect(wrong).toBeLessThanOrEqual(2);
+    expect(rows('WRONG_SAME_GROUP')).toEqual([]);
+    expect(wrong).toBe(0);
   });
 
   it('gets every term right whose concept the catalogue actually has', () => {

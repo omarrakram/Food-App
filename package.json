@@ -44,6 +44,7 @@
     "images:check": "node --experimental-strip-types --no-warnings scripts/validate-image-manifest.ts",
     "images:index": "node --experimental-strip-types --no-warnings scripts/generate-image-index.ts",
     "audit:pagination": "node --experimental-strip-types --no-warnings scripts/audit-pagination.ts",
+    "audit:families": "node --experimental-strip-types --no-warnings scripts/audit-families.ts",
     "audit:photos": "node --experimental-strip-types --no-warnings scripts/audit-photography.ts",
     "audit:testids": "node --experimental-strip-types --no-warnings scripts/audit-testids.ts"
   },

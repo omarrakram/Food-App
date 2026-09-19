@@ -960,7 +960,7 @@ and neither was acceptable. No ranking or scoring rule was touched.
   the benchmark on the batch it was introduced in. `koosa` and `kousa` were
   added to `zucchini` so that word resolves by alias instead of by guess.
 
-### Stage 2B conflict, recorded not resolved
+### Stage 2B conflict, recorded not resolved — SETTLED IN STAGE 2A.1, see §9d
 
 **`chicken-thigh` carries `drumsticks` as an alias.** Defensible — أوراك is
 sold as the leg quarter, thigh and drumstick attached — but a drumstick is not
@@ -996,6 +996,148 @@ begun.
 
 ---
 
+## 9d. Stage 2A.1: hardening the family semantics
+
+Stage 2A introduced family words — a word naming a SET of ingredients rather
+than one — because removing `chicken` as an alias of `chicken-breast` broke
+exclusion and requirement. 2A.1 hardens that mechanism, settles the drumstick,
+and surveys what the heuristic had quietly started to believe.
+
+### The family invariant now matches its own documentation
+
+`ingredientFamily` documented that a family names more than one ingredient and
+then returned one-item buckets. Harmless in effect — a singleton behaved like
+an alias — and wrong in kind, because it meant a family word and an alias did
+the same job through two mechanisms with two review paths. A family is now at
+least **two distinct canonical ingredients**; a word heading exactly one is not
+a family, and belongs in the alias column where a human reads it.
+
+### Chicken is now declared, and bilingual
+
+Inference reads canonical NAMES, and the two languages do not name a family the
+same way. `فراخ` appears in `صدور فراخ` and `أوراك فراخ` but not in `فرخة` (a
+whole bird) or `كوانس` (gizzards), so the Arabic word reached five rows where
+the English word reached seven, and `دجاج` reached none at all. A user typing
+فراخ and a user typing chicken are asking the same question.
+
+So the chicken family is **declared** rather than inferred:
+
+| | |
+|---|---|
+| Terms | `chicken` `فراخ` `firakh` `farakh` `دجاج` `dagag` `dajaj` |
+| Members | `chicken-breast`, `chicken-thigh`, `chicken-drumstick`, `chicken-wings`, `chicken-liver`, `chicken-gizzards`, `whole-chicken` |
+
+Three invariants are asserted, not assumed. **None of those terms may resolve
+to a single ingredient** — a resolution beats a family, so one that slipped
+through would silently reinstate the Stage 2A bug with a different row on the
+end of it. **The member list must be complete**: any catalogue row whose name
+carries a chicken token and is not listed fails the suite, so an eighth chicken
+row cannot be added without someone deciding whether it belongs. And **a family
+word still never fills a pantry** — `chicken` in the fridge claims no cut.
+
+### The drumstick is settled
+
+`drumsticks` was an alias of `chicken-thigh`, recorded in the benchmark as an
+open conflict and left failing. It now has its own row:
+
+    chicken-drumstick    chicken drumsticks / دبابيس فراخ    90 g per piece
+
+`أوراك` stays with the thigh row — it genuinely IS the leg quarter, thigh and
+drumstick attached — but the drumstick is bought, priced and cooked on its own.
+The benchmark entry moved from `absent` to `canonical`, and its two terms
+became four rather than being deleted.
+
+### What the token heuristic had started to believe
+
+`npm run audit:families` prints every family, and the first run found a live
+bug rather than a theoretical one.
+
+The inferred rule took any token shared by two canonical names, which made
+every **adjective** a family. `green` meant beans, fava beans, lentils, onion
+and peas. `white` meant a cheese, a bean, a pepper and an egg white. `hot` meant
+a hot dog or hot sauce; `mixed`, `brown`, `black` and `ground` the same. These
+reached real queries, because search extracts required ingredients from query
+tokens and a requirement is a hard filter, not a boost:
+
+| Query | Became |
+|---|---|
+| `green salad for 4` | must contain one of five unrelated green things |
+| `white fish dinner` | must contain tilapia AND an egg white — satisfiable by nothing |
+| `brown bread breakfast` | must contain baladi bread AND brown rice or brown sugar |
+| `hot dinner in 20 minutes` | must contain a hot dog or hot sauce |
+
+**The fix is one rule: an inferred family is a HEAD NOUN, not any token.** A
+modifier tells you which one; only the head tells you what kind, and a family
+is a kind. The head is the **last** token in English and the **first** in
+Arabic, because the two languages build a noun phrase from opposite ends —
+`white cheese` against `جبنة بيضاء`, `chicken breast` against `صدور فراخ`.
+Reading either from the wrong end puts the adjectives straight back.
+
+Inferred families fell from **116 to 65**, and those spanning food groups from
+**77 to 37**. Every query above now behaves. It costs the English `chicken`
+family, whose head is `breast` — which is exactly what the declared layer is
+for, and it had to be declared for Arabic regardless.
+
+### What survives, and is intended
+
+`cheese` / `جبنه`, `bread` / `عيش`, `bean`, `oil` / `زيت`, `sauce` / `صوص`,
+`seed`, `powder`, `milk` / `لبن`, `pepper` / `فلفل`. These are real parent
+concepts: "without cheese" means all of them.
+
+Many never fire at all, because **resolution beats a family**: `rice`, `corn`,
+`water`, `bread`, `beef`, `seed`, `حمص`, `فول`, `دقيق` and `رومي` all resolve to
+one ingredient, so their buckets are never consulted. That is the intended
+precedence and it removes most of the remaining risk surface.
+
+Two inferred families are mild accidents, both low-harm and left alone:
+`cube` (beef cubes, stock cube) and `flake` (chili flakes, corn flakes). They
+are genuine head nouns; the words are just doing double duty. Neither is a word
+a cook types on its own.
+
+### The model this is standing in for — for later approval, not now
+
+A head noun read off a name is a heuristic standing in for a real **parent /
+child relationship**, and the places it strains are visible in the audit:
+
+- **`فول`** heads fava beans, peanuts (`فول سوداني`) and soybeans (`فول
+  الصويا`). Three unrelated foods sharing a head. Only bare `فول` resolving to
+  fava beans keeps this from mattering.
+- **`رومي`** heads both `جبنة رومي` and `ديك رومي` — a cheese and a turkey.
+  Same accident, same accidental rescue.
+- **`cream`** covers clotted cream, cream and ice cream; **`pea`** covers black
+  eyed peas, green peas and split peas. Defensible as families, but nothing
+  distinguishes "a kind of" from "made with".
+
+The eventual fix is an explicit `parentSlug` (or a family table) so the
+catalogue states these relationships instead of having them inferred from
+spelling. **That is a schema change and is not proposed here** — it belongs with
+the alias table and the unknown-term table in §5, for separate approval. The
+declared layer is the interim: anything the heuristic gets wrong can be stated
+explicitly without new schema.
+
+### Terms wanting native-speaker review
+
+- **`دبابيس` / `دبابيس فراخ`** for drumsticks — the term I am most confident
+  about, and still the one a native speaker should confirm first, since the
+  whole row rests on it. The Franco `dababees` is my spelling of it and wants
+  checking more than the Arabic does.
+- **`dagag` / `dajaj`** as Franco for `دجاج` — Modern Standard rather than
+  Egyptian. Included so an MSA speaker is not stranded; a native reviewer may
+  prefer to drop them.
+- **`farakh`** beside `firakh` — both turn up in typed Franco; neither is
+  standardised.
+- **`رومي` alone** currently resolves to `turkey`, not to `roumy-cheese`. At a
+  deli counter the word almost certainly means the cheese. This predates Stage
+  2A and is not changed here, but it looks wrong and wants a decision.
+
+### What Stage 2A.1 did not do
+
+No schema change. No change to the hosted Supabase database. No recipes, no
+pricing, no P0 expansion. One canonical row added — the drumstick — and no
+change to ranking, scoring or the fuzzy tier.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins
@@ -1006,6 +1148,7 @@ before the previous one's number has moved.
 | **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                            |
 | **1. Aliases only**                | ✅ **Done** — three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided                                                                                                                            | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten are missing concepts, not vocabulary) |
 | **2A. Benchmark-gap closure**      | ✅ **Done** — the 14 concepts the Stage 1 measurement proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix                                                                             | **99% correct**, dead ends **0**, **cross-group 0**; 2 wrong answers left, both the one recorded drumstick conflict                    |
+| **2A.1. Family semantics**         | ✅ **Done** — family invariant fixed, chicken declared bilingually, drumstick row added and the alias conflict settled, inferred families restricted to head nouns                                                                              | **100% correct**, dead ends 0, wrong answers of any kind **0**; inferred families 116 → 65                                            |
 | **2B. P0 ingredients**             | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
 | **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
 | **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |

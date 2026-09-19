@@ -1066,6 +1066,29 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'chicken-drumstick', 'chicken drumsticks', 'دبابيس فراخ', 'protein', 'g', 90, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'drumstick') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'دبابيس') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'دبابيس فراخ') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'dababees') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'chicken drumstick') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'دبوس فراخ') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('dc354d8c-9d0d-5283-836f-da2637961601', 'chicken-gizzards', 'chicken gizzards', 'كوانس', 'protein', 'g', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -1122,8 +1145,6 @@ on conflict (slug) do update set
 
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('9e434947-7e6a-538a-a1a8-51b5b0c6355d', 'chicken thigh') on conflict do nothing;
-insert into public.ingredient_aliases (ingredient_id, alias)
-values ('9e434947-7e6a-538a-a1a8-51b5b0c6355d', 'drumsticks') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('9e434947-7e6a-538a-a1a8-51b5b0c6355d', 'أوراك') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
