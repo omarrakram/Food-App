@@ -14,7 +14,7 @@ import { Screen, ScreenFooter, ScreenHeader, ScreenScroll } from '@/components/u
 import { SegmentedControl } from '@/components/ui/segmented-control';
 import { Sheet } from '@/components/ui/sheet';
 import { Text } from '@/components/ui/text';
-import { isSafeToUse } from '@/features/ingredients/freshness';
+import { expiringSoonItems, isSafeToUse } from '@/features/ingredients/freshness';
 import { usePantryItems } from '@/features/pantry/hooks';
 import { requestDefaultsFrom, usePreferences } from '@/features/preferences/preferences-provider';
 import { encodeRequest } from '@/features/recipes/request-params';
@@ -27,7 +27,7 @@ export default function CookScreen() {
   const { t } = useI18n();
   const router = useRouter();
   const { preferences } = usePreferences();
-  const params = useLocalSearchParams<{ fromPantry?: string }>();
+  const params = useLocalSearchParams<{ fromPantry?: string; expiring?: string }>();
 
   const pantry = usePantryItems();
 
@@ -78,13 +78,32 @@ export default function CookScreen() {
     do not.
   */
   const fromPantry = params.fromPantry === '1';
-  const seedSource = fromPantry
-    ? // FOOD SAFETY: only what is still in date. Seeding an expired item would
-      // put it in the picker as though the user had typed it, and a typed
-      // ingredient is trusted absolutely — so the expiry rule the engine
-      // enforces would be quietly defeated on the way in.
-      pantry.data?.filter((item) => isSafeToUse(item)).map((item) => item.ingredientName)
-    : [];
+  // Narrower still when arriving from the "expiring soon" block: the question
+  // there is "what can I make from the things about to go off", not "from
+  // everything I own", and seeding the whole pantry would bury the answer.
+  const onlyExpiring = params.expiring === '1';
+
+  /*
+    `undefined` HERE MEANS "the pantry has not loaded yet", and that is
+    load-bearing rather than incidental: the guard below seeds exactly once,
+    the first time this is not undefined. Collapsing it to `?? []` — which an
+    earlier version of this edit did — makes the guard fire on the very first
+    render, against an empty pantry, and then never fire again. The picker then
+    opens blank no matter what the user owns, and the food-safety assertion
+    about expired items passes VACUOUSLY because nothing was seeded at all.
+  */
+  const pantryRows = pantry.data;
+  const seedSource = !fromPantry
+    ? []
+    : pantryRows === undefined
+      ? undefined
+      : // FOOD SAFETY: only what is still in date. Seeding an expired item
+        // would put it in the picker as though the user had typed it, and a
+        // typed ingredient is trusted absolutely — so the expiry rule the
+        // engine enforces would be quietly defeated on the way in.
+        (onlyExpiring ? expiringSoonItems(pantryRows) : pantryRows)
+          .filter((item) => isSafeToUse(item))
+          .map((item) => item.ingredientName);
 
   if (!hasSeeded && seedSource !== undefined) {
     setHasSeeded(true);
