@@ -1374,10 +1374,43 @@ The Language screen still offers a restart, now only where one is genuinely
 pending: on native, for the parts JS cannot mirror — the drawer's side, gesture
 directions (expo-updates on native, a plain reload on web).
 
-**Still split-brain, and next:** 77 plain `flexDirection: 'row'` sites mirror
-automatically on native Arabic and not at all on web, because web has no
-platform mechanism to do it. Closing that means giving web one — a document
-direction — rather than converting 77 call sites. Tracked below.
+### Still split-brain, and what was tried
+
+77 plain `flexDirection: 'row'` sites mirror automatically on native Arabic and
+not at all on web, because web has no platform mechanism to do it. The smoke
+counts 20 mirrored rows in Arabic — the ones that go through `useRowDirection`
+— out of roughly 97. Two user-visible consequences on the web build, both
+confirmed from Arabic screenshots:
+
+- **Horizontal rails do not mirror.** Home's "quick ideas" rail and Discover's
+  collection chips run left-to-right and open at the wrong end. This cannot be
+  fixed by reversing one row: a rail's SCROLL ORIGIN has to move too, and
+  that is a browser behaviour, not a style.
+- **The drawer opens from the left.** React Navigation picks its side from
+  `I18nManager.isRTL`, which on web is permanently false.
+
+**The obvious fix was attempted and reverted.** Setting `dir="rtl"` on
+`document.documentElement` gives the web the mechanism it lacks: CSS lays
+`flex-direction: row` along the inline axis, so every row reverses and every
+horizontal scroller starts at the correct edge. It worked — the smoke's
+geometry checks passed (`dir=rtl`, the first tab to the right of the last,
+identical before and after a reload, rails opening at `scrollLeft: -300`) —
+but it **broke a core interaction**: a Discover card in Arabic became
+unclickable, with Playwright resolving the button and then timing out for
+30 seconds waiting for it to receive events. The drawer, which React
+Navigation still positions from `I18nManager.isRTL`, appears to end up over
+the content once the document reads right-to-left.
+
+It is reverted rather than shipped. A card that cannot be tapped in Arabic is
+worse than a rail that opens at the wrong end. Whoever picks this up should
+start from the interaction, not the layout: reproduce the unclickable card
+with the drawer closed, and establish whether the blocker is the drawer's
+overlay, a stacking context, or `elementFromPoint` disagreeing with the
+painted position. The change itself was three lines — a `documentDirection`
+module flag, `platformMirrorsRows()` reading it alongside the native flag, and
+a `platformSwapsSides()` split for the sides CSS does NOT swap — plus a
+`drawerPosition` that must key off the NATIVE flag, not the document, because
+React Navigation only reads the former.
 
 ---
 
