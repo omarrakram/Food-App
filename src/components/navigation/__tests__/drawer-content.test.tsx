@@ -92,24 +92,24 @@ describe('the drawer', () => {
     // empty tree, which is the failure mode a negative test invites.
     await renderDrawer(false);
     expect(screen.getByTestId('app-drawer')).toBeTruthy();
-    expect(screen.getByTestId('drawer-friends')).toBeTruthy();
-    expect(screen.getByTestId('drawer-messages')).toBeTruthy();
+    expect(screen.getByTestId('drawer-row-friends')).toBeTruthy();
+    expect(screen.getByTestId('drawer-row-messages')).toBeTruthy();
   });
 
   it('does NOT show the review queue to an ordinary user', async () => {
     await renderDrawer(false);
-    expect(screen.queryByTestId('drawer-moderate')).toBeNull();
+    expect(screen.queryByTestId('drawer-row-moderate')).toBeNull();
   });
 
   it('shows it to somebody the server says holds the role', async () => {
     await renderDrawer(true);
-    expect(await screen.findByTestId('drawer-moderate')).toBeTruthy();
+    expect(await screen.findByTestId('drawer-row-moderate')).toBeTruthy();
   });
 
   it('offers Submit a recipe to everybody — that is not a staff screen', async () => {
     await renderDrawer(false);
-    expect(screen.getByTestId('drawer-submit')).toBeTruthy();
-    expect(screen.getByTestId('drawer-submissions')).toBeTruthy();
+    expect(screen.getByTestId('drawer-row-submit')).toBeTruthy();
+    expect(screen.getByTestId('drawer-row-submissions')).toBeTruthy();
   });
 
   it('names the gear row Settings, not Profile', async () => {

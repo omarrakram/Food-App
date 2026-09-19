@@ -40,13 +40,14 @@ const STATUS_LABEL: Record<SubmissionStatus, TranslationKey> = {
   rejected: 'submissions.statusRejected',
 };
 
-const STATUS_TONE: Record<SubmissionStatus, 'neutral' | 'info' | 'warning' | 'success' | 'danger'> = {
-  draft: 'neutral',
-  pending: 'info',
-  changes_requested: 'warning',
-  approved: 'success',
-  rejected: 'danger',
-};
+const STATUS_TONE: Record<SubmissionStatus, 'neutral' | 'info' | 'warning' | 'success' | 'danger'> =
+  {
+    draft: 'neutral',
+    pending: 'info',
+    changes_requested: 'warning',
+    approved: 'success',
+    rejected: 'danger',
+  };
 
 export default function SubmissionStatusScreen() {
   const theme = useTheme();
@@ -84,7 +85,11 @@ export default function SubmissionStatusScreen() {
           {(mine.data ?? []).map((entry) => (
             <View
               key={entry.id}
-              testID={`submission-${entry.id}`}
+              // `submission-card-`, not `submission-`: the status, note,
+              // edit, withdraw and view controls all live under
+              // `submission-*`, and a prefix selector for the shorter name
+              // would reach every one of them before the card.
+              testID={`submission-card-${entry.id}`}
               style={{
                 borderWidth: 1,
                 borderColor: theme.colors.border,
@@ -121,7 +126,9 @@ export default function SubmissionStatusScreen() {
                       }),
                     })
                   : t('submissions.notSentYet')}
-                {entry.revision > 1 ? ` · ${t('submissions.revision', { count: entry.revision })}` : ''}
+                {entry.revision > 1
+                  ? ` · ${t('submissions.revision', { count: entry.revision })}`
+                  : ''}
               </Text>
 
               {entry.authorNote ? (
@@ -155,9 +162,7 @@ export default function SubmissionStatusScreen() {
                     label={t('submissions.withdraw')}
                     size="sm"
                     variant="secondary"
-                    onPress={() =>
-                      void actions.withdraw.mutateAsync(entry.id).catch(fail)
-                    }
+                    onPress={() => void actions.withdraw.mutateAsync(entry.id).catch(fail)}
                     testID={`submission-withdraw-${entry.id}`}
                   />
                 ) : null}

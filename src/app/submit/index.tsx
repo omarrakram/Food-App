@@ -111,9 +111,11 @@ export default function SubmitRecipeScreen() {
    * survive a reload — object URLs are revoked with the document — so the
    * preview says so rather than pretending otherwise.
    */
-  const [localPhoto, setLocalPhoto] = useState<{ uri: string; width: number; height: number } | null>(
-    null,
-  );
+  const [localPhoto, setLocalPhoto] = useState<{
+    uri: string;
+    width: number;
+    height: number;
+  } | null>(null);
   const [ingredientQuery, setIngredientQuery] = useState('');
   const [savedId, setSavedId] = useState<string | null>(id ?? null);
   const [showProblems, setShowProblems] = useState(false);
@@ -131,7 +133,8 @@ export default function SubmitRecipeScreen() {
   const previewUri = localPhoto?.uri ?? null;
   const existing = (mine.data ?? []).find((entry) => entry.id === savedId);
 
-  const patch = (next: Partial<SubmissionDraft>) => setDraft((current) => ({ ...current, ...next }));
+  const patch = (next: Partial<SubmissionDraft>) =>
+    setDraft((current) => ({ ...current, ...next }));
 
   const suggestions = useMemo(() => {
     if (ingredientQuery.trim().length < 2) return [];
@@ -269,7 +272,11 @@ export default function SubmitRecipeScreen() {
   }
 
   return (
-    <ScreenScroll bottomInset={theme.spacing.xxl} contentGap={theme.spacing.xl} testID="submit-screen">
+    <ScreenScroll
+      bottomInset={theme.spacing.xxl}
+      contentGap={theme.spacing.xl}
+      testID="submit-screen"
+    >
       <ScreenHeader title={t('submit.title')} subtitle={t('submit.subtitle')} />
 
       {isLive ? null : <DemoBanner testID="submit-demo-banner" />}
@@ -345,9 +352,7 @@ export default function SubmitRecipeScreen() {
                 />
               ) : null}
 
-              <View
-                style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
-              >
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
                 <Ionicons name="image-outline" size={18} color={theme.colors.textSecondary} />
                 <Text variant="footnote" color="textSecondary" style={{ flex: 1 }} lines={2}>
                   {localPhoto ? t('submit.photoLocalOnly') : t('submit.photoAttached')}
@@ -380,7 +385,10 @@ export default function SubmitRecipeScreen() {
             <View
               key={`${line.name}-${index}`}
               style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
-              testID={`submit-ingredient-${index}`}
+              // Named for what it is rather than for the row it sits in:
+              // `submit-ingredient-${index}` was a prefix of this row's own
+              // quantity and remove controls.
+              testID={`submit-ingredient-name-${index}`}
             >
               <View style={{ flex: 1 }}>
                 <Text variant="callout">{line.name}</Text>
@@ -493,7 +501,7 @@ export default function SubmitRecipeScreen() {
                   onChangeText={(value) => editStep(index, value)}
                   placeholder={t('submit.stepPlaceholder')}
                   multiline
-                  testID={`submit-step-${index}`}
+                  testID={`submit-step-text-${index}`}
                 />
               </View>
               {draft.steps.length > 1 ? (
@@ -501,9 +509,7 @@ export default function SubmitRecipeScreen() {
                   icon="close"
                   size={32}
                   variant="ghost"
-                  onPress={() =>
-                    patch({ steps: draft.steps.filter((_, at) => at !== index) })
-                  }
+                  onPress={() => patch({ steps: draft.steps.filter((_, at) => at !== index) })}
                   accessibilityLabel={t('common.remove')}
                   testID={`submit-step-remove-${index}`}
                 />

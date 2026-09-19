@@ -73,7 +73,10 @@ export default function LanguageSettingsScreen() {
                 />
               ) : undefined
             }
-            testID={`language-${option.value}`}
+            // `language-choice-`, not `language-`: `language-restart` sits
+            // on the same screen, and a prefix selector for the shorter name
+            // would reach the restart button as if it were a language.
+            testID={`language-choice-${option.value}`}
           />
         ))}
       </ListGroup>

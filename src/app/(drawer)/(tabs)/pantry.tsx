@@ -121,7 +121,10 @@ export default function PantryScreen() {
     }
     add.mutate(input, {
       onSuccess: (created) =>
-        toast.show({ message: t('pantry.itemAdded', { name: created.ingredientName }), tone: 'success' }),
+        toast.show({
+          message: t('pantry.itemAdded', { name: created.ingredientName }),
+          tone: 'success',
+        }),
       onError: (mutationError) =>
         toast.show({ message: t(presentError(mutationError).titleKey), tone: 'danger' }),
     });
@@ -187,7 +190,10 @@ export default function PantryScreen() {
             {addable.map((candidate) => (
               <PressScale
                 key={candidate.slug}
-                testID={`pantry-add-${candidate.slug}`}
+                // `pantry-quick-add-`: `pantry-add` is the sheet trigger and
+                // `pantry-add-suggestions` is the group around these, so a
+                // `pantry-add-` prefix reaches both before any candidate.
+                testID={`pantry-quick-add-${candidate.slug}`}
                 accessibilityRole="button"
                 accessibilityLabel={t('pantry.addNamed', {
                   name: displayName(candidate.name),
@@ -284,15 +290,8 @@ export default function PantryScreen() {
                 testID="pantry-expiring-block"
               >
                 <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.sm }}>
-                  <Ionicons
-                    name="time-outline"
-                    size={18}
-                    color={theme.colors.warningSoftText}
-                  />
-                  <Text
-                    variant="subhead"
-                    style={{ color: theme.colors.warningSoftText, flex: 1 }}
-                  >
+                  <Ionicons name="time-outline" size={18} color={theme.colors.warningSoftText} />
+                  <Text variant="subhead" style={{ color: theme.colors.warningSoftText, flex: 1 }}>
                     {t('pantry.expiringSoon')}
                   </Text>
                   <Text variant="caption" style={{ color: theme.colors.warningSoftText }}>

@@ -432,7 +432,10 @@ async function main() {
     // ONE FIELD, TWO JOBS. Typing offers catalogue matches you do not hold.
     await type('pantry-search', 'tomato');
     check('typing offers something to add', await visible('pantry-add-suggestions', 4000));
-    const addRow = page.locator('[data-testid^="pantry-add-"]').first();
+    // `pantry-quick-add-`, not `pantry-add-`: the latter matched the group
+    // View wrapping the candidates, and the surrounding sheet trigger, before
+    // any candidate row — so this tapped a container and proved nothing.
+    const addRow = page.locator('[data-testid^="pantry-quick-add-"]').first();
     if (await addRow.count()) await addRow.click();
     await page.waitForTimeout(1200);
 
@@ -579,9 +582,9 @@ async function main() {
     );
 
     // Browsing by category, which did not exist before.
-    check('categories are offered for browsing', await tap('category-protein'));
+    check('categories are offered for browsing', await tap('category-chip-protein'));
     check('opening a category lists its ingredients', await visible('category-list-protein', 4000));
-    check('and it collapses again', await tap('category-protein'));
+    check('and it collapses again', await tap('category-chip-protein'));
 
     const firstChip = page.locator('[data-testid^="selected-"]').first();
     await firstChip.click();
@@ -830,20 +833,44 @@ async function main() {
     await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1800);
 
-    const discoverCards = () => page.locator('[data-testid^="discover-"]').count();
+    // `discover-recipe-`, not `discover-`. The latter also matches the
+    // header's drawer button, the empty state and load-more, so it counted one
+    // extra card on every screen and could never reach zero — which quietly
+    // made the zero-result branch below unreachable.
+    const discoverCards = () => page.locator('[data-testid^="discover-recipe-"]').count();
     await tap('collection-all', { optional: true });
     await page.waitForTimeout(700);
     const unfiltered = await discoverCards();
     check('discover shows the catalogue', unfiltered > 0, `${unfiltered} cards`);
 
-    const collection = page.locator('[data-testid^="collection-"]').nth(2);
-    if (await collection.count()) {
-      await collection.click();
+    // Which collection narrows is a property of the DATA, not of the UI, and
+    // the first page is capped — so a collection larger than that cap looks
+    // identical to no filter at all. Asking "does any collection narrow this"
+    // tests the behaviour without depending on chip order or catalogue size,
+    // and reports which one it used.
+    const chips = page.locator('[data-testid^="collection-tag-"]');
+    const chipCount = await chips.count();
+    let narrowed = null;
+    for (let index = 0; index < chipCount && narrowed === null; index += 1) {
+      const chip = chips.nth(index);
+      const id = await chip.getAttribute('data-testid');
+      await chip.click();
       await page.waitForTimeout(900);
       const filtered = await discoverCards();
-      check('a collection narrows the catalogue', filtered < unfiltered, `${filtered} cards`);
+      if (filtered < unfiltered) narrowed = { id, filtered };
+      else await tap('collection-all', { optional: true });
+      await page.waitForTimeout(400);
+    }
+    check(
+      'a collection narrows the catalogue',
+      narrowed !== null,
+      narrowed
+        ? `${narrowed.id} -> ${narrowed.filtered} cards`
+        : `${chipCount} chips, none narrowed`,
+    );
 
-      if (filtered === 0) {
+    if (narrowed) {
+      if (narrowed.filtered === 0) {
         check(
           'the zero-result state offers a way out',
           await visible('discover-empty-action', 3000),
@@ -951,7 +978,7 @@ async function main() {
     const ltrReversed = await reversedRowCount();
     check('English lays nothing out right-to-left', ltrReversed === 0, `${ltrReversed} reversed`);
 
-    check('the language screen offers Arabic', await tap('language-ar', { optional: true }));
+    check('the language screen offers Arabic', await tap('language-choice-ar', { optional: true }));
     check('switching language does not hit the error boundary', errorCount() === beforeSwitch);
 
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
@@ -1014,16 +1041,33 @@ async function main() {
       ].filter((line) => /[A-Za-z]/.test(line) && line !== OWN_NAME && line !== OWN_NAME[0]);
     };
 
-    const firstDiscoverCard = page.locator('[data-testid^="discover-"]').first();
+    // THE SAME TRAP AS ABOVE, and here it was doing real damage. `discover-`
+    // matched `discover-open-drawer` first, so this step opened the DRAWER and
+    // then audited the drawer's contents while reporting on "the Arabic recipe
+    // page". It passed for that reason, not because a recipe page was clean —
+    // and every Arabic screenshot in the archive shows the drawer hanging
+    // open, which is what that looked like from outside.
+    //
+    // Two corrections. The image is what navigates, exactly as in the English
+    // pass — the card wrapper is not the pressable. And arriving is asserted
+    // before anything is read, so a step that silently goes nowhere fails here
+    // instead of quietly auditing whatever screen it is still standing on.
+    const firstDiscoverCard = page
+      .locator('[data-testid^="recipe-photo-"], [data-testid^="recipe-fallback-"]')
+      .first();
     if (await firstDiscoverCard.count()) {
       await firstDiscoverCard.click();
       await page.waitForTimeout(2000);
-      const leaked = await latinLines();
-      check(
-        'the Arabic recipe page has no English left in it',
-        leaked.length === 0,
-        leaked.slice(0, 4).join(' | '),
-      );
+      const onRecipe = await visible('recipe-start-cooking', 6000);
+      check('an Arabic discover card opens its recipe', onRecipe, page.url());
+      if (onRecipe) {
+        const leaked = await latinLines();
+        check(
+          'the Arabic recipe page has no English left in it',
+          leaked.length === 0,
+          leaked.slice(0, 4).join(' | '),
+        );
+      }
       await shot('13b-recipe-arabic');
     }
 
@@ -1107,7 +1151,7 @@ async function main() {
 
     await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1400);
-    await tap('language-en', { optional: true });
+    await tap('language-choice-en', { optional: true });
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
@@ -1863,12 +1907,17 @@ async function main() {
       check('the form is badged as demo', await visible('submit-demo-banner', 3000));
       check('it asks for a name', await visible('submit-title', 3000));
       check('it asks for ingredients', await visible('submit-ingredient-search', 3000));
-      check('it asks for steps', await visible('submit-step-0', 3000));
+      check('it asks for steps', await visible('submit-step-text-0', 3000));
 
       // The authoring sequence: name, photo, ingredients, steps, then the
       // details you can only answer about a recipe that already exists.
       const order = await page.evaluate(() => {
-        const ids = ['submit-title', 'submit-photo', 'submit-ingredient-search', 'submit-step-0'];
+        const ids = [
+          'submit-title',
+          'submit-photo',
+          'submit-ingredient-search',
+          'submit-step-text-0',
+        ];
         return ids.map((id) => {
           const el = document.querySelector(`[data-testid="${id}"]`);
           return el ? el.getBoundingClientRect().top + window.scrollY : -1;
@@ -2005,7 +2054,7 @@ async function main() {
       check('the ingredient search suggests catalogue ingredients', picked !== null, picked ?? '');
       if (picked) {
         await tap(picked);
-        check('picking one adds a line', await visible('submit-ingredient-0', 3000));
+        check('picking one adds a line', await visible('submit-ingredient-name-0', 3000));
       }
       await shot('20b-submit-filled');
     }
@@ -2326,7 +2375,7 @@ async function main() {
     check(
       'the gear row is named Settings, not Profile',
       await page.evaluate(() => {
-        const el = document.querySelector('[data-testid="drawer-settings"]');
+        const el = document.querySelector('[data-testid="drawer-row-settings"]');
         return (el?.textContent ?? '').includes('Settings');
       }),
     );
@@ -2341,10 +2390,10 @@ async function main() {
       ['submit', 'submit a recipe'],
       ['submissions', 'your submissions'],
     ]) {
-      check(`the drawer reaches ${label}`, await visible(`drawer-${key}`, 3000));
+      check(`the drawer reaches ${label}`, await visible(`drawer-row-${key}`, 3000));
     }
 
-    check('the drawer reaches the shopping list', await tap('drawer-shopping'));
+    check('the drawer reaches the shopping list', await tap('drawer-row-shopping'));
     await page.waitForTimeout(1600);
     check(
       'the drawer row actually navigated',
@@ -2402,7 +2451,9 @@ async function main() {
     // "Recently viewed" has content, because the recipe above was opened.
     await tap('saved-tabs-viewed', { optional: true });
     await page.waitForTimeout(900);
-    const viewed = await page.locator('[data-testid^="saved-"]').count();
+    // `saved-recipe-`, not `saved-`: the latter also counted the tab bar and
+    // each of its three tabs as saved recipes.
+    const viewed = await page.locator('[data-testid^="saved-recipe-"]').count();
     check('recently viewed remembers the recipe that was opened', viewed > 0, `${viewed} entries`);
     await shot('20-saved');
 

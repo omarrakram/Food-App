@@ -114,7 +114,10 @@ export default function SavedScreen() {
               onToggleSave={() =>
                 toggleSave.mutate({ recipe, shouldSave: !savedIds.has(recipe.id) })
               }
-              testID={`saved-${recipe.id}`}
+              // `saved-recipe-`, not `saved-`: `saved-tabs` and
+              // `saved-empty` share the screen, and a prefix selector for the
+              // shorter name reaches them first.
+              testID={`saved-recipe-${recipe.id}`}
             />
           ))}
         </View>

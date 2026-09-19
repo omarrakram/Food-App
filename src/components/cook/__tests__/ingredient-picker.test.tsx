@@ -157,11 +157,11 @@ describe('IngredientPicker', () => {
     // Nothing expanded until a category is chosen.
     expect(view.queryByTestId('category-list-protein')).toBeNull();
 
-    fireEvent.press(view.getByTestId('category-protein'));
+    fireEvent.press(view.getByTestId('category-chip-protein'));
     expect(await view.findByTestId('category-list-protein')).toBeTruthy();
 
     // And it collapses again, so browsing cannot strand the user in a list.
-    fireEvent.press(view.getByTestId('category-protein'));
+    fireEvent.press(view.getByTestId('category-chip-protein'));
     await waitFor(() => expect(view.queryByTestId('category-list-protein')).toBeNull());
   });
 

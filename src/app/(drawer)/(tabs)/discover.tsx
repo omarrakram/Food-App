@@ -31,7 +31,11 @@ function SaveableCard({ match }: { match: RecipeMatch }) {
       showMatch={false}
       onPress={() => router.push(`/recipe/${match.recipe.id}`)}
       onToggleSave={() => toggleSave.mutate({ recipe: match.recipe, shouldSave: !isSaved })}
-      testID={`discover-${match.recipe.id}`}
+      // `discover-recipe-` rather than `discover-`: the header's drawer
+      // button, the empty state and the load-more control all live under
+      // `discover-*` too, and a prefix match on the shorter name picks the
+      // drawer button first — it comes earlier in the DOM than any card.
+      testID={`discover-recipe-${match.recipe.id}`}
     />
   );
 }
@@ -71,7 +75,13 @@ export default function DiscoverScreen() {
       // there by the time the user reaches the bottom of this one.
       onEndReached={fetchNextPage}
     >
-      <View style={{ paddingHorizontal: theme.layout.screenPadding, gap: theme.spacing.lg, paddingTop: theme.spacing.md }}>
+      <View
+        style={{
+          paddingHorizontal: theme.layout.screenPadding,
+          gap: theme.spacing.lg,
+          paddingTop: theme.spacing.md,
+        }}
+      >
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: theme.spacing.md }}>
           <DrawerButton testID="discover-open-drawer" />
           <View style={{ gap: 2, flex: 1 }}>
@@ -127,7 +137,11 @@ export default function DiscoverScreen() {
             label={`${entry.emoji}  ${t(entry.labelKey)}`}
             selected={entry.slug === activeCollection}
             onPress={() => setActiveCollection(entry.slug)}
-            testID={`collection-${entry.slug}`}
+            // `collection-tag-`, for the same reason as `discover-recipe-`:
+            // `collection-` would also match `collection-all`, and a prefix
+            // selector would then count the "everything" chip as a
+            // collection and shift every index after it.
+            testID={`collection-tag-${entry.slug}`}
           />
         ))}
       </ScrollView>

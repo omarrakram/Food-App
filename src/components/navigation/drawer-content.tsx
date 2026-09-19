@@ -49,7 +49,12 @@ const PRIMARY_ROWS: DrawerRow[] = [
   { key: 'home', labelKey: 'tabs.home', icon: 'home-outline', href: '/' },
   { key: 'discover', labelKey: 'tabs.discover', icon: 'compass-outline', href: '/discover' },
   { key: 'pantry', labelKey: 'tabs.pantry', icon: 'file-tray-full-outline', href: '/pantry' },
-  { key: 'shopping', labelKey: 'profile.shoppingList', icon: 'cart-outline', href: '/shopping-list' },
+  {
+    key: 'shopping',
+    labelKey: 'profile.shoppingList',
+    icon: 'cart-outline',
+    href: '/shopping-list',
+  },
   { key: 'saved', labelKey: 'tabs.saved', icon: 'bookmark-outline', href: '/saved' },
 ];
 
@@ -98,18 +103,17 @@ const MODERATOR_ROW: DrawerRow = {
  * at once.
  */
 const ACCOUNT_ROWS: DrawerRow[] = [
-  { key: 'profile', labelKey: 'profile.edit', icon: 'person-circle-outline', href: '/settings/profile' },
+  {
+    key: 'profile',
+    labelKey: 'profile.edit',
+    icon: 'person-circle-outline',
+    href: '/settings/profile',
+  },
   { key: 'settings', labelKey: 'nav.settings', icon: 'settings-outline', href: '/profile' },
   { key: 'about', labelKey: 'profile.about', icon: 'help-circle-outline', href: '/settings/about' },
 ];
 
-function Row({
-  row,
-  onNavigate,
-}: {
-  row: DrawerRow;
-  onNavigate: (href: string) => void;
-}) {
+function Row({ row, onNavigate }: { row: DrawerRow; onNavigate: (href: string) => void }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
   // Named `direction` because this component already takes a `row` prop —
@@ -138,7 +142,10 @@ function Row({
         minHeight: 48,
         borderRadius: theme.radius.md,
       }}
-      testID={`drawer-${row.key}`}
+      // `drawer-row-`, not `drawer-`: the identity block and the sign-out
+      // button live under `drawer-*` too, and a prefix selector for the
+      // shorter name would reach them as if they were navigation rows.
+      testID={`drawer-row-${row.key}`}
     >
       <Ionicons name={row.icon} size={22} color={theme.colors.textSecondary} />
       <Text variant="body" style={{ flex: 1 }}>
@@ -146,7 +153,7 @@ function Row({
       </Text>
       {row.badge ? (
         <View
-          testID={`drawer-${row.key}-badge`}
+          testID={`drawer-row-${row.key}-badge`}
           style={{
             minWidth: 20,
             paddingHorizontal: 6,
@@ -281,7 +288,12 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
             {name}
           </Text>
           {handle ? (
-            <Text variant="footnote" color="textSecondary" lines={1} testID="drawer-identity-handle">
+            <Text
+              variant="footnote"
+              color="textSecondary"
+              lines={1}
+              testID="drawer-identity-handle"
+            >
               @{handle}
             </Text>
           ) : null}
@@ -315,9 +327,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
               onNavigate={go}
             />
           ))}
-          {canModerate.data === true ? (
-            <Row row={MODERATOR_ROW} onNavigate={go} />
-          ) : null}
+          {canModerate.data === true ? <Row row={MODERATOR_ROW} onNavigate={go} /> : null}
         </>
       ) : null}
 

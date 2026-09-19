@@ -216,10 +216,7 @@ export function IngredientPicker({
   const [query, setQuery] = useState('');
   const [openCategory, setOpenCategory] = useState<IngredientCategory | null>(null);
 
-  const selectedKeys = useMemo(
-    () => new Set(selected.map(normaliseIngredientName)),
-    [selected],
-  );
+  const selectedKeys = useMemo(() => new Set(selected.map(normaliseIngredientName)), [selected]);
 
   /**
    * Adds or removes in one gesture.
@@ -269,10 +266,7 @@ export function IngredientPicker({
     [trimmedQuery],
   );
 
-  const pantryNames = useMemo(
-    () => pantryItems.map((item) => item.ingredientName),
-    [pantryItems],
-  );
+  const pantryNames = useMemo(() => pantryItems.map((item) => item.ingredientName), [pantryItems]);
   const unselectedPantry = useMemo(
     () => pantryNames.filter((name) => !selectedKeys.has(normaliseIngredientName(name))),
     [pantryNames, selectedKeys],
@@ -394,9 +388,7 @@ export function IngredientPicker({
             names={pantryNames}
             selectedKeys={selectedKeys}
             onToggle={toggle}
-            onAddAll={
-              unselectedPantry.length > 0 ? () => addMany(unselectedPantry) : undefined
-            }
+            onAddAll={unselectedPantry.length > 0 ? () => addMany(unselectedPantry) : undefined}
             addAllLabel={unselectedPantry.length > 0 ? t('cook.addAll') : undefined}
             idPrefix="pantry-suggest"
           />
@@ -446,7 +438,10 @@ export function IngredientPicker({
                   onPress={() =>
                     setOpenCategory((current) => (current === category ? null : category))
                   }
-                  testID={`category-${category}`}
+                  // `category-chip-`, not `category-`: the opened list and
+                  // its rows are `category-list-*` and `category-item-*`, and
+                  // a prefix selector for the shorter name reaches those too.
+                  testID={`category-chip-${category}`}
                 />
               ))}
               {/*
