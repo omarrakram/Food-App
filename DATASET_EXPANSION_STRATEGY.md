@@ -711,22 +711,103 @@ not to catalogue batches.
 
 ---
 
+## 9b. Stage 1 result: what vocabulary alone was worth
+
+Three batches, aliases only. No canonical rows, no recipes, no schema, no
+change to search or matching.
+
+|                              |        Before |             After |                  |
+| ---------------------------- | ------------: | ----------------: | ---------------- |
+| Correct                      | 190/254 (75%) | **218/254 (86%)** | target ≥85% ✅   |
+| — resolved directly          |           165 |           **205** |                  |
+| — found via search           |            25 |                13 |                  |
+| Dead ends                    |            42 |            **21** |                  |
+| Wrong, same group            |             8 |             **5** |                  |
+| Wrong, cross group           |            14 |            **10** | target ≤5 ❌     |
+| Cross-group alias collisions |             1 |             **0** | ✅               |
+| Canonical ingredients        |           257 |           **257** | unchanged ✅     |
+| Aliases                      |           717 |           **997** | mean 2.79 → 3.88 |
+
+### The ceiling, and how it is known to be a ceiling
+
+**Every benchmark term whose concept the catalogue actually has now resolves
+correctly — all 218 of them.** That is asserted, not claimed: the benchmark
+splits its results on whether the expectation is `absent`, and the
+non-absent failure list is empty.
+
+So all 36 remaining failures are concepts the catalogue does not contain. No
+alias can close any of them without aliasing a term to an ingredient it is
+not, which is the one thing this stage was told not to do.
+
+**This is why cross-group cannot reach ≤5 in Stage 1.** Ten of the fourteen
+cross-group answers were missing concepts from the start; only four were
+vocabulary gaps, and all four are fixed. The target is reachable — it just
+needs Stage 2's rows, not more words.
+
+### The three alias errors removed
+
+Each of these was actively telling users one thing is another:
+
+| Alias                      | Was on          | Why it was wrong                                                                                     |
+| -------------------------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| `pita`                     | `baladi-bread`  | Baladi and shami are different breads, obviously so in this market, and `pita-bread` already existed |
+| `حمص`                      | `hummus-dip`    | The bare Arabic word is the pulse; the dip claiming it too made resolution depend on insertion order |
+| `baking soda`, `بيكربونات` | `baking-powder` | Different leaveners. Powder is soda plus an acid plus a starch; substituting either way fails a bake |
+
+### The mistake the per-batch gate caught
+
+I invented `bataates` as a transliteration for potato in batch 2. Egyptian
+بطاطس is `batatis` (potato) and بطاطا is `bataata` (**sweet** potato) — one
+letter apart. The bad spelling pulled `bataa` off sweet potato and onto potato,
+and the benchmark reported it as a new same-group wrong answer before the batch
+could be committed. This is the argument for measuring every batch rather than
+every stage.
+
+### Terms wanting native-speaker review
+
+Written with reasonable confidence, but each is a judgement an Egyptian
+speaker should confirm:
+
+| Term               | Written as                        | The doubt                                                                                                                                                                    |
+| ------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `zaatar` / `زعتر`  | resolves to `thyme-dried`         | The herb and the sesame-and-sumac blend share the word. The blend is a genuine missing row                                                                                   |
+| `زعتر بري`         | alias of `oregano` (pre-existing) | Wild thyme and oregano are close but arguably distinct                                                                                                                       |
+| `shatta`           | `chili-flakes`                    | In Egypt shatta is the fresh pepper, the dried flakes AND the bottled sauce depending on the household. Modelled as `oneOf` in the benchmark, resolved to flakes in the data |
+| `dibs`             | `molasses`                        | Generic syrup word; `dibs el-balah` is specifically date syrup, which is a separate row                                                                                      |
+| `3weda`            | alias of `cloves`                 | Regional; common in some Egyptian households, unfamiliar in others                                                                                                           |
+| `iklil el gabal`   | alias of `rosemary`               | More Levantine than Egyptian                                                                                                                                                 |
+| `lift`             | alias of `turnip`                 | Correct, but collides with the English word for an elevator in a mixed-script field                                                                                          |
+| `hummus` (English) | the dip, not the pulse            | Deliberate: the two languages disagree about this word                                                                                                                       |
+
+### What Stage 1 did not and could not measure
+
+Batches 2 and 3 added 205 aliases across 96 ingredients and moved the headline
+number by zero, because batch 1 had already closed every term the benchmark
+probes. Those two batches raised mean alias density from 3.08 to 3.88 and made
+ten more terms resolve directly rather than through ranked search — real
+improvements the 254-term set is structurally unable to score.
+
+**This is the circularity the holdout exists for, arriving exactly on
+schedule.** Nothing about Stage 1's number should be read as a launch signal.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins
 before the previous one's number has moved.
 
-| Stage                              | Work                                                                                                                                                                                                                                                           | Measured exit condition                                                                              |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                  |
-| **1. Aliases only**                | No new rows. The ~20 known alias fixes, the `حمص` collision, the `whole chicken`→`chicken-breast` and `pita`→`baladi-bread` alias errors, then a sweep of all 257 toward 8–12 aliases each                                                                     | Correct **≥85%**, cross-group **≤5**, still 257 ingredients                                          |
-| **2. P0 ingredients**              | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                             |
-| **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                    |
-| **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                        |
-| **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**    |
-| **6. Prices**                      | P0 then P1 from §9, tied to the recipe batches                                                                                                                                                                                                                 | Slot coverage **≥95%**                                                                               |
-| **7. Long tail**                   | ~100 P2 rows only if the benchmark still shows gaps                                                                                                                                                                                                            | Development benchmark ≥95% sustained; stop when it plateaus                                          |
-| **8. Holdout validation**          | Collect and seal the independent holdout per §3b, label it with a native speaker, run it **once**                                                                                                                                                              | **≥90% correct and 0 cross-group on the holdout.** This, not the development benchmark, gates launch |
+| Stage                              | Work                                                                                                                                                                                                                                                           | Measured exit condition                                                                                        |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                            |
+| **1. Aliases only**                | ✅ **Done** — three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided                                                                                                                            | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten are missing concepts, not vocabulary) |
+| **2. P0 ingredients**              | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
+| **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
+| **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |
+| **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**              |
+| **6. Prices**                      | P0 then P1 from §9, tied to the recipe batches                                                                                                                                                                                                                 | Slot coverage **≥95%**                                                                                         |
+| **7. Long tail**                   | ~100 P2 rows only if the benchmark still shows gaps                                                                                                                                                                                                            | Development benchmark ≥95% sustained; stop when it plateaus                                                    |
+| **8. Holdout validation**          | Collect and seal the independent holdout per §3b, label it with a native speaker, run it **once**                                                                                                                                                              | **≥90% correct and 0 cross-group on the holdout.** This, not the development benchmark, gates launch           |
 
 **Review gates.** Stages 1–2 and 4 add data that a native Egyptian speaker
 should review before it ships — transliteration quality is the whole point and
