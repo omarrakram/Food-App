@@ -747,6 +747,10 @@ export const en = {
   'auth.error.sessionExpired': 'Your session expired. Please sign in again.',
 
   // --- Onboarding ---------------------------------------------------------
+  'onboarding.languageTitle': 'Which language do you want?',
+  'onboarding.languageBody': 'You can change this any time in Settings.',
+  'onboarding.startTitle': 'That is everything we need.',
+  'onboarding.startBody': 'Pick where to start. You can do the other one next.',
   'onboarding.progress': 'Step {current} of {total}',
 
   'onboarding.nameTitle': 'First, what should we call you?',

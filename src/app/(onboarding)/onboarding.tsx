@@ -3,70 +3,75 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
-import {
-  INGREDIENTS_BY_SLUG,
-  SUGGESTED_KITCHEN_BASICS,
-} from '@/features/ingredients/catalogue';
+import { SUGGESTED_KITCHEN_BASICS } from '@/features/ingredients/catalogue';
 import { Button } from '@/components/ui/button';
 import { Chip } from '@/components/ui/chip';
-import { Input } from '@/components/ui/input';
 import { Screen, ScreenFooter } from '@/components/ui/screen';
-import { Stepper } from '@/components/ui/stepper';
-import { TagInput } from '@/components/ui/tag-input';
 import { Text } from '@/components/ui/text';
-import { useAuth } from '@/features/auth/auth-provider';
 import { usePreferences } from '@/features/preferences/preferences-provider';
-import { isCountrySupported } from '@/features/pricing/price-book';
-import { useI18n } from '@/i18n';
+import { SUPPORTED_LANGUAGES, useI18n } from '@/i18n';
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
 import { useTheme } from '@/theme';
 import {
   ALLERGENS,
-  APPLIANCES,
-  COUNTRY_CODES,
-  CUISINES,
-  DIET_FLAGS,
   EATING_STYLES,
-  GOALS,
-  SKILL_LEVELS,
   type Allergen,
-  type Appliance,
-  type CountryCode,
-  type Cuisine,
-  type DietFlag,
   type UserPreferences,
 } from '@/types/domain';
 
 /**
- * First-run onboarding, in six screens.
+ * First-run onboarding, in three screens.
  *
- * It used to be eleven — one question each — which is a lot of taps before
- * anyone has seen a recipe. Questions that a person answers in the same breath
+ * It has been eleven, then seven, and is now three. The pattern each time was
+ * the same: questions a person answers in the same breath
  * now share a screen ("where do you cook, and for how many"), while the two
  * that carry real weight keep their own: diet, because the model behind it is
  * subtle, and allergies, because they are a safety constraint rather than a
  * preference.
  *
- * Every underlying preference field survives the regrouping; nothing was
- * dropped to make the count.
+ * No preference FIELD was deleted — every one still exists, still has its
+ * default, and is still editable in Settings. What changed is which of them a
+ * first-time user is compelled to answer before the app will show them food.
  */
 
 type Draft = Partial<UserPreferences>;
 
-type StepId = 'name' | 'household' | 'diet' | 'avoid' | 'taste' | 'basics' | 'kitchen';
+type StepId = 'language' | 'avoid' | 'start';
 
-const STEPS: readonly StepId[] = ['name', 'household', 'diet', 'avoid', 'taste', 'basics', 'kitchen'];
+/**
+ * THREE STEPS, and the cut is the point.
+ *
+ * This was seven: name, household, diet, avoid, taste, basics, kitchen — and
+ * the ONLY required one was `name`, which is the single most optional fact in
+ * the product. A first-time user had to type their name before the app would
+ * show them a recipe. That is asking for profile information before
+ * demonstrating any value, in the first ten seconds.
+ *
+ * What survives has to earn its place by being unanswerable by default:
+ *
+ *   language   changes every string on every subsequent screen, so asking
+ *              after would mean asking in a language they may not read.
+ *   avoid      allergies are a SAFETY rule, not a preference. The app must not
+ *              show someone food that could hurt them, and it cannot infer
+ *              that. Eating style rides along because it changes every result
+ *              and costs one tap on a step already open.
+ *   start      not a question — the first useful thing, chosen by the user.
+ *
+ * Everything cut has a defensible default AND an existing Settings screen:
+ * name -> settings/profile, household and country -> settings/household,
+ * dislikes -> settings/preferences, basics -> settings/basics, appliances ->
+ * settings/kitchen. Nothing became unreachable; it stopped being compulsory.
+ */
+const STEPS: readonly StepId[] = ['language', 'avoid', 'start'];
 
 /**
  * Steps that must be answered before moving on.
  *
- * Everything else has a defensible default, so it gets a Skip. A step with no
- * Skip is not "important" — it is unanswerable by default.
+ * Empty on purpose. `language` and `start` both commit a real choice by being
+ * pressed, and `avoid` is skippable because "no allergies" is a legitimate
+ * answer that must not be harder to give than a wrong one.
  */
-const REQUIRED_STEPS: ReadonlySet<StepId> = new Set<StepId>(['name']);
-
-/** Common enough to be worth one tap, short enough not to become a survey. */
-const DISLIKE_SUGGESTIONS = ['mushrooms', 'olives', 'coriander', 'liver', 'aubergine'];
+const REQUIRED_STEPS: ReadonlySet<StepId> = new Set<StepId>();
 
 function toggle<T>(list: readonly T[] | undefined, value: T): T[] {
   const current = list ?? [];
@@ -77,10 +82,9 @@ function toggle<T>(list: readonly T[] | undefined, value: T): T[] {
 
 export default function OnboardingScreen() {
   const theme = useTheme();
-  const { t } = useI18n();
+  const { t, language, setLanguage } = useI18n();
   const router = useRouter();
   const { preferences, completeOnboarding } = usePreferences();
-  const { isEnabled: authEnabled, status: authStatus } = useAuth();
 
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState<Draft>({});
@@ -115,15 +119,11 @@ export default function OnboardingScreen() {
     [index],
   );
 
-  const step = STEPS[index] ?? 'name';
+  const step = STEPS[index] ?? 'language';
   const isLast = index === STEPS.length - 1;
   const isFirst = index === 0;
 
-  const canAdvance = useMemo(() => {
-    if (!REQUIRED_STEPS.has(step)) return true;
-    if (step === 'name') return Boolean((draft.displayName ?? '').trim());
-    return true;
-  }, [step, draft.displayName]);
+  const canAdvance = useMemo(() => !REQUIRED_STEPS.has(step), [step]);
 
   const goNext = () => {
     if (index < STEPS.length - 1) {
@@ -137,144 +137,59 @@ export default function OnboardingScreen() {
     if (index > 0) setIndex(index - 1);
   };
 
-  const finish = async () => {
-    // The basics step shows the suggestions ticked, so pressing straight
-    // through IS a choice — the user saw the list and accepted it. Committing
-    // the default explicitly is what makes that true in the data as well as on
-    // screen; leaving it undefined would silently mean "I have nothing".
+  /**
+   * Completes onboarding and lands the user on the thing they chose.
+   *
+   * The kitchen basics default is still committed explicitly rather than left
+   * undefined, which would silently mean "I have nothing" and quietly break
+   * every match. It is no longer a step the user walks through, so it is now
+   * surfaced in Settings -> Kitchen basics instead, pre-ticked and editable.
+   *
+   * It also no longer detours through `(auth)/welcome`. The route gate already
+   * shows that screen BEFORE onboarding for anyone who has never answered it,
+   * so sending a guest there again on the way out asked the same question
+   * twice and put an account wall between a user and the first useful screen.
+   */
+  const finish = async (destination: '/cook' | '/budget') => {
     await completeOnboarding({
       ...draft,
       alwaysAvailableIngredients:
         draft.alwaysAvailableIngredients ?? [...SUGGESTED_KITCHEN_BASICS],
     });
-    // A guest who has just told us their diet, allergies and goals is the best
-    // moment to offer an account — their answers are the thing worth keeping.
-    // It stays an offer: `welcome` has a "look around first" route out.
-    if (authEnabled && authStatus === 'signed_out') {
-      router.replace('/(auth)/welcome');
-      return;
-    }
-    router.replace('/');
+    router.replace(destination);
   };
 
   if (!restored) return <Screen />;
 
   const progress = (index + 1) / STEPS.length;
-  const country = draft.country ?? preferences.country;
   const eatingStyle = draft.dietaryPreference ?? preferences.dietaryPreference;
-  const dietFlags = draft.dietFlags ?? preferences.dietFlags;
   const allergens = draft.allergens ?? preferences.allergens;
 
   const content = () => {
     switch (step) {
-      case 'name':
+      case 'language':
         return (
-          <StepShell title={t('onboarding.nameTitle')} body={t('onboarding.nameBody')}>
-            <Input
-              value={draft.displayName ?? ''}
-              onChangeText={(displayName) => patch({ displayName })}
-              placeholder={t('auth.namePlaceholder')}
-              autoFocus
-              autoCapitalize="words"
-              returnKeyType="next"
-              onSubmitEditing={() => canAdvance && goNext()}
-              testID="onboarding-name"
-            />
-          </StepShell>
-        );
-
-      case 'household':
-        return (
-          <StepShell title={t('onboarding.householdTitle')} body={t('onboarding.householdBody')}>
-            <View style={{ gap: theme.spacing.xl }}>
-              <Field label={t('onboarding.country')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {COUNTRY_CODES.map((code: CountryCode) => {
-                    const supported = isCountrySupported(code);
-                    return (
-                      <Chip
-                        key={code}
-                        label={
-                          supported
-                            ? t(`country.${code}` as const)
-                            : `${t(`country.${code}` as const)} · ${t('common.comingSoon')}`
-                        }
-                        selected={country === code}
-                        // Budgets are only honest where a real price survey
-                        // exists. Rather than hide the ambition, the country is
-                        // visible and plainly not ready.
-                        disabled={!supported}
-                        onPress={() => patch({ country: code })}
-                        testID={`onboarding-country-${code}`}
-                      />
-                    );
-                  })}
-                </View>
-              </Field>
-
-              <Input
-                label={t('onboarding.city')}
-                value={draft.city ?? ''}
-                onChangeText={(city) => patch({ city })}
-                placeholder={t('onboarding.cityPlaceholder')}
-                testID="onboarding-city"
-              />
-
-              <Field label={t('onboarding.householdLabel')}>
-                <Stepper
-                  value={draft.householdSize ?? preferences.householdSize}
-                  onChange={(householdSize) => patch({ householdSize })}
-                  min={1}
-                  max={12}
-                  suffix={t('common.peopleUnit', { count: draft.householdSize ?? preferences.householdSize })}
-                  accessibilityLabel={t('onboarding.householdLabel')}
-                  testID="onboarding-household"
+          <StepShell title={t('onboarding.languageTitle')} body={t('onboarding.languageBody')}>
+            <View style={{ gap: theme.spacing.md }}>
+              {SUPPORTED_LANGUAGES.map((code) => (
+                <Button
+                  key={code}
+                  label={t(code === 'ar' ? 'language.arabic' : 'language.english')}
+                  variant={language === code ? 'primary' : 'secondary'}
+                  size="lg"
+                  onPress={() => setLanguage(code)}
+                  testID={`onboarding-language-${code}`}
                 />
-              </Field>
-            </View>
-          </StepShell>
-        );
-
-      case 'diet':
-        return (
-          <StepShell title={t('onboarding.dietTitle')} body={t('onboarding.dietBody')}>
-            <View style={{ gap: theme.spacing.xl }}>
-              <Field label={t('onboarding.eatingStyleLabel')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {EATING_STYLES.map((style) => (
-                    <Chip
-                      key={style}
-                      label={t(`diet.${style}` as const)}
-                      selected={eatingStyle === style}
-                      onPress={() => patch({ dietaryPreference: style })}
-                      testID={`onboarding-diet-${style}`}
-                    />
-                  ))}
-                </View>
-              </Field>
-
-              <Field label={t('onboarding.dietFlagsLabel')} hint={t('onboarding.dietFlagsHint')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {DIET_FLAGS.map((flag: DietFlag) => (
-                    <Chip
-                      key={flag}
-                      label={t(`diet.${flag}` as const)}
-                      selected={dietFlags.includes(flag)}
-                      onPress={() => patch({ dietFlags: toggle(dietFlags, flag) })}
-                      testID={`onboarding-dietflag-${flag}`}
-                    />
-                  ))}
-                </View>
-              </Field>
+              ))}
             </View>
           </StepShell>
         );
 
       case 'avoid':
         return (
-          <StepShell title={t('onboarding.avoidTitle')} body={t('onboarding.avoidBody')}>
+          <StepShell title={t('onboarding.avoidTitle')} body={t('onboarding.allergyBody')}>
             <View style={{ gap: theme.spacing.xl }}>
-              <Field label={t('onboarding.allergyLabel')} hint={t('onboarding.allergyBody')}>
+              <Field label={t('onboarding.allergyLabel')}>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
                   <Chip
                     label={t('onboarding.allergyNone')}
@@ -295,48 +210,22 @@ export default function OnboardingScreen() {
                 </View>
               </Field>
 
-              <Field label={t('onboarding.dislikeLabel')} hint={t('onboarding.dislikeBody')}>
-                <TagInput
-                  values={draft.dislikedIngredients ?? preferences.dislikedIngredients}
-                  onChange={(dislikedIngredients) => patch({ dislikedIngredients })}
-                  placeholder={t('onboarding.dislikePlaceholder')}
-                  suggestions={DISLIKE_SUGGESTIONS}
-                  testID="onboarding-dislike-input"
-                />
-              </Field>
-            </View>
-          </StepShell>
-        );
-
-      case 'taste':
-        return (
-          <StepShell title={t('onboarding.tasteTitle')} body={t('onboarding.tasteBody')}>
-            <View style={{ gap: theme.spacing.xl }}>
-              <Field label={t('onboarding.goalLabel')}>
+              {/*
+                Eating style rides along here rather than owning a step. It
+                changes every result the app will ever show, which is worth one
+                tap; it does not justify a screen of its own when the step is
+                already open and the user is already answering "what should we
+                not cook for you".
+              */}
+              <Field label={t('onboarding.eatingStyleLabel')}>
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {GOALS.map((goal) => (
+                  {EATING_STYLES.map((style) => (
                     <Chip
-                      key={goal}
-                      label={t(`goal.${goal}` as const)}
-                      selected={draft.primaryGoal === goal}
-                      onPress={() => patch({ primaryGoal: goal })}
-                      testID={`onboarding-goal-${goal}`}
-                    />
-                  ))}
-                </View>
-              </Field>
-
-              <Field label={t('onboarding.cuisineLabel')} hint={t('onboarding.cuisineBody')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {CUISINES.map((cuisine: Cuisine) => (
-                    <Chip
-                      key={cuisine}
-                      label={t(`cuisine.${cuisine}` as const)}
-                      selected={(draft.preferredCuisines ?? []).includes(cuisine)}
-                      onPress={() =>
-                        patch({ preferredCuisines: toggle(draft.preferredCuisines, cuisine) })
-                      }
-                      testID={`onboarding-cuisine-${cuisine}`}
+                      key={style}
+                      label={t(`diet.${style}` as const)}
+                      selected={eatingStyle === style}
+                      onPress={() => patch({ dietaryPreference: style })}
+                      testID={`onboarding-diet-${style}`}
                     />
                   ))}
                 </View>
@@ -345,75 +234,37 @@ export default function OnboardingScreen() {
           </StepShell>
         );
 
-      case 'basics':
-        // The screen that stops the app guessing.
-        //
-        // It assumes water and salt for everybody and nothing else. Everything
-        // here is offered, ticked by default because these really are in most
-        // Egyptian kitchens — but visibly, on a step the user walks through and
-        // can change, so "you have onions" is something they said rather than
-        // something we decided. Getting this wrong told a cook with rice and
-        // tomatoes that they were one ingredient short of dinner.
+      case 'start':
         return (
-          <StepShell title={t('onboarding.basicsTitle')} body={t('onboarding.basicsBody')}>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-              {SUGGESTED_KITCHEN_BASICS.map((slug) => {
-                const ingredient = INGREDIENTS_BY_SLUG.get(slug);
-                if (!ingredient) return null;
-                const current = draft.alwaysAvailableIngredients ?? [...SUGGESTED_KITCHEN_BASICS];
-                return (
-                  <Chip
-                    key={slug}
-                    label={ingredient.name}
-                    selected={current.includes(slug)}
-                    onPress={() => patch({ alwaysAvailableIngredients: toggle(current, slug) })}
-                    testID={`onboarding-basic-${slug}`}
-                  />
-                );
-              })}
+          <StepShell title={t('onboarding.startTitle')} body={t('onboarding.startBody')}>
+            {/*
+              Not a question, and not a summary of what was answered. The last
+              step of onboarding is the first useful screen, chosen by the
+              user — which is what "explain the product by doing" means in
+              practice. Both routes land on real functionality immediately.
+            */}
+            <View style={{ gap: theme.spacing.md }}>
+              <Button
+                label={t('home.cookWithWhatIHave')}
+                icon="basket-outline"
+                size="lg"
+                onPress={() => void finish('/cook')}
+                testID="onboarding-start-cook"
+              />
+              <Button
+                label={t('home.eatWithinBudget')}
+                icon="wallet-outline"
+                variant="secondary"
+                size="lg"
+                onPress={() => void finish('/budget')}
+                testID="onboarding-start-budget"
+              />
             </View>
           </StepShell>
         );
 
-      case 'kitchen':
       default:
-        return (
-          <StepShell title={t('onboarding.kitchenTitle')} body={t('onboarding.kitchenBody')}>
-            <View style={{ gap: theme.spacing.xl }}>
-              <Field label={t('onboarding.skillLabel')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {SKILL_LEVELS.map((level) => (
-                    <Chip
-                      key={level}
-                      label={t(`skill.${level}` as const)}
-                      selected={draft.skillLevel === level}
-                      onPress={() => patch({ skillLevel: level })}
-                      testID={`onboarding-skill-${level}`}
-                    />
-                  ))}
-                </View>
-              </Field>
-
-              <Field label={t('onboarding.appliancesLabel')} hint={t('onboarding.appliancesBody')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
-                  {APPLIANCES.map((appliance: Appliance) => (
-                    <Chip
-                      key={appliance}
-                      label={t(`appliance.${appliance}` as const)}
-                      selected={(draft.appliances ?? preferences.appliances).includes(appliance)}
-                      onPress={() =>
-                        patch({
-                          appliances: toggle(draft.appliances ?? preferences.appliances, appliance),
-                        })
-                      }
-                      testID={`onboarding-appliance-${appliance}`}
-                    />
-                  ))}
-                </View>
-              </Field>
-            </View>
-          </StepShell>
-        );
+        return null;
     }
   };
 
@@ -473,13 +324,20 @@ export default function OnboardingScreen() {
       </Animated.View>
 
       <ScreenFooter>
-        <Button
-          label={isLast ? t('onboarding.doneCta') : t('common.continue')}
-          onPress={() => (isLast ? void finish() : goNext())}
-          disabled={!canAdvance}
-          size="lg"
-          testID="onboarding-next"
-        />
+        {/*
+          No Continue on the last step. Its two buttons ARE the action, and a
+          third primary control underneath them would be a second way to do the
+          same thing with no way to say which.
+        */}
+        {!isLast ? (
+          <Button
+            label={t('common.continue')}
+            onPress={goNext}
+            disabled={!canAdvance}
+            size="lg"
+            testID="onboarding-next"
+          />
+        ) : null}
         {/*
           Back is absent on the first step rather than present and dimmed: a
           disabled control invites a tap and then refuses it. Skip appears only
@@ -501,12 +359,12 @@ export default function OnboardingScreen() {
                 testID="onboarding-back"
               />
             ) : null}
-            {!REQUIRED_STEPS.has(step) ? (
+            {!isLast ? (
               <Button
-                label={isLast ? t('common.skipForNow') : t('common.skip')}
+                label={t('common.skip')}
                 variant="ghost"
                 size="sm"
-                onPress={() => (isLast ? void finish() : goNext())}
+                onPress={goNext}
                 testID="onboarding-skip"
               />
             ) : null}

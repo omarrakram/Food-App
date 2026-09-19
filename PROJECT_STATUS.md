@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-19 |
-| **Current phase** | **UI/UX UPGRADE — Phase 3.5 refinement done.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **CORE JOURNEY UX — numerals + onboarding landed; ingredient/pantry/budget/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -189,6 +189,68 @@ app icon are the brand's most-reproduced assets and are worth owning first;
 everything else can wait and is not worth a bespoke set.
 
 The four `sparkles` icons are gone from the primary flows as previously agreed.
+
+### Phase 4 — core journey UX (in progress)
+
+Landed in stable milestones, each committed on its own.
+
+#### Numerals — one system, Western 0–9, both languages
+
+The product spoke **two numeral systems at once**. `t()` does plain string
+substitution, so interpolated counts arrived as Latin digits; anything through
+`formatNumber` / `formatMoney` / `formatDate` went through `Intl` under `ar-EG`
+and arrived Arabic-Indic; and **49 Arabic-Indic digits across 17 lines** had
+been typed into `ar.ts` by hand. It was visible on the Arabic home screen —
+placeholder `١٥٠`, pantry count `3`.
+
+Fixed with the `-u-nu-latn` Unicode extension rather than dropping to `en-US`:
+it pins the numbering system and leaves grouping, currency placement, date
+order and month names Egyptian, and preserves `formatMoney`'s `startsWith('ar')`
+check — which is what selects ج.م over EGP. A naive switch to `en-US` would
+have silently anglicised the currency symbol too, and `numerals.test.ts`
+asserts exactly that so the shortcut fails loudly later.
+
+#### Onboarding — seven steps to three
+
+The old flow was `name → household → diet → avoid → taste → basics → kitchen`,
+and the **only required step was `name`** — the single most optional fact in the
+product, gating the first recipe. What survives had to be unanswerable by
+default:
+
+| step | why it earns a screen |
+|---|---|
+| **language** | changes every subsequent string; asking later means asking in a language they may not read |
+| **avoid** | allergies are a **safety rule**, not a preference, and cannot be inferred. Eating style rides along — it changes every result and costs one tap on an open step |
+| **start** | not a question. The first useful screen, chosen by the user |
+
+Everything cut kept its default **and** already had a Settings screen: name →
+`settings/profile`, household/country → `settings/household`, dislikes →
+`settings/preferences`, basics → `settings/basics`, appliances →
+`settings/kitchen`. No preference field was deleted; it stopped being compulsory.
+
+Finishing now lands on `/cook` or `/budget` directly. It used to detour through
+`(auth)/welcome` — which the route gate **already shows before onboarding** —
+so a guest was asked to make an account twice, with the second ask standing
+between them and the first useful screen.
+
+Smoke covers both requested cases: a **fresh install** (asserts it opens on
+language and never asks for a name) and a **persisted user** (asserts a reload
+re-asks nothing).
+
+#### Photography backlog — `PHOTOGRAPHY_BACKLOG.md`
+
+`npm run audit:photos` ranks the 94 unphotographed recipes by how often they
+actually reach a screen, using the app's **own** staple sets
+(`SUGGESTED_KITCHEN_BASICS`, `COMMON_STAPLE_SLUGS`, `UNIVERSAL_BASICS`) rather
+than a list typed into the script — so the ranking reflects what the matching
+engine really does. Signals: pantry reach, Home's 30-minute rail, ingredient
+count, launch market, Discover collection membership. It reads photographed
+slugs off `assets/recipes/` because the manifest is Metro `require` calls that
+Node cannot import — and the directory is what the manifest is generated from,
+so it cannot drift.
+
+Top of the list is exactly what you would want it to be: koshari lentil rice
+(100% staple reach), shorbet adas, foul with eggs, taameya.
 
 ### Not done yet (deliberately, in the stated order)
 

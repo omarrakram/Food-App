@@ -280,18 +280,37 @@ async function main() {
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1500);
 
-    check('onboarding starts on a name field', await visible('onboarding-name', 12000));
-    await type('onboarding-name', 'Omar');
+    // FRESH INSTALL. The first screen must be a question the app genuinely
+    // cannot answer for you — not a name field. Onboarding used to open on
+    // one, and it was the only REQUIRED step in the flow.
+    check('a fresh install opens on language, not a profile form',
+      await visible('onboarding-language-en', 12000));
+    check('and never asks for a name before showing anything',
+      !(await visible('onboarding-name', 1200)));
     await shot('01-onboarding');
 
-    // Step one needs a name; the rest are skippable. Walk to the end.
-    let steps = 0;
-    for (; steps < 14; steps += 1) {
-      if (!(await tap('onboarding-next', { optional: true }))) break;
-    }
-    await page.waitForTimeout(1500);
-    check('onboarding completes and lands in the app', await visible('home-cook-with', 10000),
-      `${steps} steps`);
+    await tap('onboarding-language-en');
+    check('choosing a language advances', await tap('onboarding-next', { optional: true }));
+
+    check('the second step is the safety question',
+      await visible('onboarding-allergy-none', 6000));
+    check('"no allergies" is offered as a first-class answer',
+      await tap('onboarding-allergy-none', { optional: true }));
+    await tap('onboarding-next', { optional: true });
+
+    // The last step is the first useful screen, chosen by the user.
+    check('the last step offers a way in, not a summary',
+      await visible('onboarding-start-cook', 6000));
+    await tap('onboarding-start-cook');
+    await page.waitForTimeout(1800);
+    check('finishing lands straight in the ingredient picker, not a marketing page',
+      await visible('cook-ingredient-picker', 10000));
+
+    // PERSISTED USER. A reload must not re-ask anything.
+    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+    check('a returning user is not asked again', !(await visible('onboarding-language-en', 1500)));
+    check('and lands on the app', await visible('home-cook-with', 10000));
     await shot('02-home');
 
     // --- Pantry: the add flow, from BOTH entry points ---------------------

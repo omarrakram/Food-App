@@ -43,7 +43,8 @@
     "images:fetch": "node --experimental-strip-types --no-warnings scripts/fetch-recipe-images.ts",
     "images:check": "node --experimental-strip-types --no-warnings scripts/validate-image-manifest.ts",
     "images:index": "node --experimental-strip-types --no-warnings scripts/generate-image-index.ts",
-    "audit:pagination": "node --experimental-strip-types --no-warnings scripts/audit-pagination.ts"
+    "audit:pagination": "node --experimental-strip-types --no-warnings scripts/audit-pagination.ts",
+    "audit:photos": "node --experimental-strip-types --no-warnings scripts/audit-photography.ts"
   },
   "jest": {
     "projects": [
