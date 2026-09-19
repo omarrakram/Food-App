@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useGlyph, useRowDirection } from '@/components/ui/direction';
 import { DemoBanner } from '@/components/messages/demo-banner';
 import { MessageBubble } from '@/components/messages/message-bubble';
 import { Avatar } from '@/components/ui/avatar';
@@ -45,7 +46,9 @@ import { useTheme } from '@/theme';
  */
 export default function ConversationScreen() {
   const theme = useTheme();
-  const { t, isRTL } = useI18n();
+  const { t } = useI18n();
+  const row = useRowDirection();
+  const backGlyph = useGlyph('chevron-back', 'chevron-forward');
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -137,7 +140,7 @@ export default function ConversationScreen() {
         {/* Header: who this is, and a way back. */}
         <View
           style={{
-            flexDirection: isRTL ? 'row-reverse' : 'row',
+            flexDirection: row,
             alignItems: 'center',
             gap: theme.spacing.md,
             paddingTop: insets.top + theme.spacing.sm,
@@ -148,7 +151,7 @@ export default function ConversationScreen() {
           }}
         >
           <IconButton
-            icon={isRTL ? 'chevron-forward' : 'chevron-back'}
+            icon={backGlyph}
             onPress={() => (router.canGoBack() ? router.back() : router.replace('/messages'))}
             accessibilityLabel={t('common.back')}
             variant="secondary"
@@ -251,7 +254,7 @@ export default function ConversationScreen() {
           {attached ? (
             <View
               style={{
-                flexDirection: isRTL ? 'row-reverse' : 'row',
+                flexDirection: row,
                 alignItems: 'center',
                 gap: theme.spacing.sm,
                 backgroundColor: theme.colors.surfaceAlt,
@@ -277,7 +280,7 @@ export default function ConversationScreen() {
 
           <View
             style={{
-              flexDirection: isRTL ? 'row-reverse' : 'row',
+              flexDirection: row,
               alignItems: 'flex-end',
               gap: theme.spacing.sm,
             }}

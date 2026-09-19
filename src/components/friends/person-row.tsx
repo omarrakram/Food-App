@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 
+import { useRowDirection } from '@/components/ui/direction';
 import { Avatar } from '@/components/ui/avatar';
 import { Button, IconButton } from '@/components/ui/button';
 import { ListRow } from '@/components/ui/list-row';
@@ -56,7 +57,8 @@ export function PersonRow({
   testID?: string;
 }) {
   const theme = useTheme();
-  const { t, isRTL } = useI18n();
+  const { t } = useI18n();
+  const row = useRowDirection();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const name = person.displayName ?? person.username ?? '';
@@ -65,7 +67,7 @@ export function PersonRow({
     <View
       testID={testID}
       style={{
-        flexDirection: isRTL ? 'row-reverse' : 'row',
+        flexDirection: row,
         alignItems: 'center',
         gap: theme.spacing.md,
         paddingVertical: theme.spacing.sm,
@@ -91,7 +93,7 @@ export function PersonRow({
 
       <View
         style={{
-          flexDirection: isRTL ? 'row-reverse' : 'row',
+          flexDirection: row,
           alignItems: 'center',
           gap: theme.spacing.xs,
         }}

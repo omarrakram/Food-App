@@ -1,42 +1,49 @@
-import { I18nManager } from 'react-native';
-import type { FlexStyle } from 'react-native';
+import type { FlexStyle, TextStyle } from 'react-native';
 
 import { useI18n } from '@/i18n';
+import { resolveGlyph, resolveRowDirection, resolveSide, type Edge } from '@/i18n/direction';
 
 /**
- * The row direction to use, correct whichever RTL state the app is in.
+ * React bindings for `@/i18n/direction`, which is where the reasoning lives.
  *
- * THE BUG THIS EXISTS FOR. This app decides layout direction two different
- * ways at once, and they can cancel out:
- *
- *   1. `I18nManager.forceRTL()` — which makes React Native itself flip every
- *      `flexDirection: 'row'`, automatically and invisibly.
- *   2. Hand-written `isRTL ? 'row-reverse' : 'row'` at roughly ten call sites.
- *
- * When only (2) is active, rows flip once and are correct. When (1) is also
- * active, they flip twice and land back in left-to-right — in Arabic.
- *
- * And which of those you get depends on HOW YOU ARRIVED. `I18nProvider`'s
- * hydration path restores a stored language with `setLanguageState`, which
- * never touches `I18nManager`; only the interactive `setLanguage` calls
- * `forceRTL`. So launching the app already set to Arabic and switching to
- * Arabic inside the app produce two different layouts from the same state.
- *
- * This asks the question that actually matters — "is something already
- * flipping rows for me?" — and only flips when nothing else will. Call sites
- * using it are correct before and after any fix to the provider, which is what
- * lets the provider be fixed separately without a flag day.
+ * Nothing in the app should write `isRTL ? 'row-reverse' : 'row'` or
+ * `isRTL ? 'right' : 'left'` by hand again. Both are wrong on a platform that
+ * is already mirroring — see the header of `@/i18n/direction` — and getting
+ * them right at each call site means getting them right roughly twenty times
+ * and then again for every screen added afterwards.
  */
+
+/** The `flexDirection` a horizontal row should use. */
 export function useRowDirection(): FlexStyle['flexDirection'] {
-  const { isRTL } = useI18n();
-  return isRTL && !I18nManager.isRTL ? 'row-reverse' : 'row';
+  return resolveRowDirection(useI18n().isRTL);
+}
+
+/** The physical side a logical edge lands on. */
+export function useSide(edge: Edge): 'left' | 'right' {
+  return resolveSide(useI18n().isRTL, edge);
 }
 
 /**
- * `textAlign` for a value that should hug the reading edge — quantities in a
- * table, a trailing timestamp. Never used for prose, which aligns itself.
+ * `textAlign` for text that should hug one edge.
+ *
+ * `leading` is the edge a reader starts from — use it for a label or a field
+ * whose content must start where the eye does. `trailing` is for a value that
+ * belongs at the far end of a row: a quantity, a timestamp. Prose needs
+ * neither; it aligns itself.
  */
-export function useTrailingAlign(): 'left' | 'right' {
-  const { isRTL } = useI18n();
-  return isRTL ? 'left' : 'right';
+export function useTextAlign(edge: Edge): TextStyle['textAlign'] {
+  return resolveSide(useI18n().isRTL, edge);
 }
+
+/**
+ * Picks the glyph of a directional icon pair — `ltr` for a reader going left
+ * to right, `rtl` for one going right to left.
+ *
+ * Follows the language only. See `resolveGlyph` for why that is correct, and
+ * why it is the one thing on this page that does not consult the platform.
+ */
+export function useGlyph<T>(ltr: T, rtl: T): T {
+  return resolveGlyph(useI18n().isRTL, ltr, rtl);
+}
+
+export type { Edge };

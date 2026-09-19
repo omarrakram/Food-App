@@ -1324,9 +1324,60 @@ singular («طبق واحد»). `interpretQuery` normalises Arabic-Indic digits 
 parsing, so "أقل من ١٥٠ جنيه" is understood — before that every number pattern
 was `\d`, which is ASCII-only, and an Arabic keyboard produced nothing.
 
-RTL applies at native startup, so the Language screen detects a pending
-direction change and offers the restart directly (expo-updates on native, a
-plain reload on web).
+### Direction: one mechanism, decided in one place
+
+`src/i18n/direction.ts` owns every direction decision in the app, and its
+header is the reference. The short version, because the two platforms behave
+completely differently and each of them lies about it:
+
+**Native.** RN mirrors the interface itself when the native flag is set: every
+`flexDirection: 'row'` is reversed, and every `left`/`right` in a style is
+swapped (`doLeftAndRightSwapInRTL`). `forceRTL()` writes that flag **for the
+next launch**, and `I18nManager.isRTL` is a snapshot taken when the JS loaded —
+so it never changes mid-session.
+
+**Web.** `react-native-web`'s `I18nManager` is a **stub**: `forceRTL` is a
+no-op, `getConstants().isRTL` is hard-coded `false`, and the object has no
+`isRTL` property at all, so `I18nManager.isRTL` reads `undefined`. The web
+build mirrors nothing on its own, ever.
+
+So "is the platform mirroring for me?" is a real runtime question with three
+answers, and the resolvers mirror in JS **exactly when the platform will not**.
+That is correct in all four states — persisted Arabic, persisted English, a
+switch to Arabic, a switch back — with no reload needed for anything the app
+controls.
+
+The two bugs this replaced:
+
+- **The double-flip.** Twelve sites wrote `isRTL ? 'row-reverse' : 'row'` by
+  hand while `forceRTL` was also in play. On native Arabic after a restart both
+  applied, rows flipped twice and landed back in English layout — while reading
+  Arabic. Alignment and border sides had the same fault for the same reason.
+- **The permanent restart notice on web.** `directionPending` was
+  `isRTL !== I18nManager.isRTL`, which on web compares a boolean against
+  `undefined` and is therefore true in **both** languages. The shipped web
+  build was telling every user to restart, in English included.
+
+Three rules, all enforced by `src/i18n/__tests__/direction.test.tsx`:
+
+1. **Never write `row-reverse` or a bare `left`/`right` in a style.** Use
+   `useRowDirection`, `useSide` or `useTextAlign`.
+2. **Icons are the exception and are named as one.** `useGlyph(ltr, rtl)`
+   follows the language and ignores the platform, because no platform mirrors a
+   glyph. Passing the same value twice is how a caller says "this one does not
+   mirror" — a play triangle, a flask, a flame.
+3. **Both paths that set a language call `applyPlatformDirection`** — the
+   interactive switch and the hydration that restores a stored one. Those two
+   diverging is what made layout depend on how you arrived.
+
+The Language screen still offers a restart, now only where one is genuinely
+pending: on native, for the parts JS cannot mirror — the drawer's side, gesture
+directions (expo-updates on native, a plain reload on web).
+
+**Still split-brain, and next:** 77 plain `flexDirection: 'row'` sites mirror
+automatically on native Arabic and not at all on web, because web has no
+platform mechanism to do it. Closing that means giving web one — a document
+direction — rather than converting 77 call sites. Tracked below.
 
 ---
 

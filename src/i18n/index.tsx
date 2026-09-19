@@ -8,21 +8,17 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { I18nManager } from 'react-native';
 
 import { getItem, setItem, StorageKeys } from '@/lib/storage';
 
+import { applyPlatformDirection } from './direction';
+import { isRTLLanguage, SUPPORTED_LANGUAGES, type Language } from './language';
 import { ar } from './locales/ar';
 import { en, type RawTranslationKey, type TranslationKey } from './locales/en';
 
-export type Language = 'en' | 'ar';
-
-export const SUPPORTED_LANGUAGES: readonly Language[] = ['en', 'ar'] as const;
+export { isRTLLanguage, SUPPORTED_LANGUAGES, type Language };
 
 const DICTIONARIES: Record<Language, Partial<Record<RawTranslationKey, string>>> = { en, ar };
-
-/** Languages that render right-to-left. */
-const RTL_LANGUAGES: readonly Language[] = ['ar'] as const;
 
 export type TranslateValues = Record<string, string | number>;
 
@@ -90,10 +86,6 @@ function detectDeviceLanguage(): Language {
   return 'en';
 }
 
-export function isRTLLanguage(language: Language): boolean {
-  return RTL_LANGUAGES.includes(language);
-}
-
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
   const [isHydrated, setIsHydrated] = useState(false);
@@ -107,6 +99,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         stored && (SUPPORTED_LANGUAGES as readonly string[]).includes(stored)
           ? stored
           : detectDeviceLanguage();
+      // The SAME direction handling as the interactive switch below. These
+      // two paths diverging is the original bug: a session that reached
+      // Arabic by being launched into it behaved differently from one that
+      // reached it by tapping العربية.
+      applyPlatformDirection(next);
       setLanguageState(next);
       setIsHydrated(true);
     })();
@@ -118,13 +115,11 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLanguage = useCallback((next: Language) => {
     setLanguageState(next);
     void setItem(StorageKeys.languagePreference, next);
-    // `forceRTL` only takes effect after a full reload of the native app, so we
-    // set it here and surface `language.restartNotice` at the call site.
-    const shouldBeRTL = isRTLLanguage(next);
-    if (I18nManager.isRTL !== shouldBeRTL) {
-      I18nManager.allowRTL(shouldBeRTL);
-      I18nManager.forceRTL(shouldBeRTL);
-    }
+    // Writes the native flag for the next launch. It cannot change the current
+    // one, which is why `language.restartNotice` exists — but screen layout is
+    // already correct without it, because the direction resolvers mirror in JS
+    // whenever the platform is not doing it.
+    applyPlatformDirection(next);
   }, []);
 
   const value = useMemo<I18nContextValue>(() => {

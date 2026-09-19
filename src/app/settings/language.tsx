@@ -1,12 +1,13 @@
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
-import { I18nManager, Platform, View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import { Button } from '@/components/ui/button';
 import { ListGroup, ListRow } from '@/components/ui/list-row';
 import { ScreenHeader, ScreenScroll } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
 import { useI18n, type Language } from '@/i18n';
+import { isDirectionRestartPending } from '@/i18n/direction';
 import { useTheme } from '@/theme';
 
 const OPTIONS: { value: Language; labelKey: 'language.english' | 'language.arabic' }[] = [
@@ -16,14 +17,20 @@ const OPTIONS: { value: Language; labelKey: 'language.english' | 'language.arabi
 
 export default function LanguageSettingsScreen() {
   const theme = useTheme();
-  const { t, language, setLanguage, isRTL } = useI18n();
+  const { t, language, setLanguage } = useI18n();
   const [isRestarting, setIsRestarting] = useState(false);
 
-  // Writing direction is applied by the native layer at startup, so a switch
-  // between Arabic and English only half-lands until the app reloads: the
-  // strings change, the layout does not. Rather than leave the user wondering
-  // why, offer the restart directly.
-  const directionPending = isRTL !== I18nManager.isRTL;
+  // The native writing-direction flag is read once at startup, so on native a
+  // switch between Arabic and English leaves the parts this code cannot
+  // mirror itself — the drawer's side, gesture directions — pointing the old
+  // way until the app reloads. Rather than leave the user wondering, offer the
+  // restart directly.
+  //
+  // It is deliberately NOT offered on web, where there is no native flag and
+  // nothing is pending. The old test compared `isRTL` against
+  // `I18nManager.isRTL`, which on web is `undefined`, so this notice was
+  // showing permanently on the web build — in English as well as Arabic.
+  const directionPending = isDirectionRestartPending(language);
 
   const restart = async () => {
     setIsRestarting(true);

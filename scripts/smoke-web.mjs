@@ -283,10 +283,14 @@ async function main() {
     // FRESH INSTALL. The first screen must be a question the app genuinely
     // cannot answer for you — not a name field. Onboarding used to open on
     // one, and it was the only REQUIRED step in the flow.
-    check('a fresh install opens on language, not a profile form',
-      await visible('onboarding-language-en', 12000));
-    check('and never asks for a name before showing anything',
-      !(await visible('onboarding-name', 1200)));
+    check(
+      'a fresh install opens on language, not a profile form',
+      await visible('onboarding-language-en', 12000),
+    );
+    check(
+      'and never asks for a name before showing anything',
+      !(await visible('onboarding-name', 1200)),
+    );
     await shot('01-onboarding');
 
     // Language is the one step with no Skip: skipping it does not mean "no
@@ -297,9 +301,7 @@ async function main() {
     // Choosing Arabic must take effect on THIS screen, not after a restart.
     await tap('onboarding-language-ar');
     await page.waitForTimeout(700);
-    const arabicNow = await page.evaluate(() =>
-      /[\u0600-\u06FF]/.test(document.body.innerText),
-    );
+    const arabicNow = await page.evaluate(() => /[\u0600-\u06FF]/.test(document.body.innerText));
     check('choosing Arabic renders this screen in Arabic immediately', arabicNow);
     await shot('01b-onboarding-arabic');
 
@@ -307,19 +309,24 @@ async function main() {
     await page.waitForTimeout(500);
     check('choosing a language advances', await tap('onboarding-next', { optional: true }));
 
-    check('the second step is the safety question',
-      await visible('onboarding-allergy-none', 6000));
-    check('"no allergies" is offered as a first-class answer',
-      await tap('onboarding-allergy-none', { optional: true }));
+    check('the second step is the safety question', await visible('onboarding-allergy-none', 6000));
+    check(
+      '"no allergies" is offered as a first-class answer',
+      await tap('onboarding-allergy-none', { optional: true }),
+    );
     await tap('onboarding-next', { optional: true });
 
     // The last step is the first useful screen, chosen by the user.
-    check('the last step offers a way in, not a summary',
-      await visible('onboarding-start-cook', 6000));
+    check(
+      'the last step offers a way in, not a summary',
+      await visible('onboarding-start-cook', 6000),
+    );
     await tap('onboarding-start-cook');
     await page.waitForTimeout(1800);
-    check('finishing lands straight in the ingredient picker, not a marketing page',
-      await visible('cook-ingredient-picker', 10000));
+    check(
+      'finishing lands straight in the ingredient picker, not a marketing page',
+      await visible('cook-ingredient-picker', 10000),
+    );
 
     // PERSISTED USER. A reload must not re-ask anything.
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
@@ -351,7 +358,9 @@ async function main() {
     await shot('03-pantry-editor');
 
     await type('pantry-editor-name', 'milk');
-    const summary = await locate('pantry-editor-details').innerText().catch(() => '');
+    const summary = await locate('pantry-editor-details')
+      .innerText()
+      .catch(() => '');
     check('category and unit are inferred from the catalogue', /\w/.test(summary), summary.trim());
 
     await type('pantry-editor-quantity', '500');
@@ -359,7 +368,10 @@ async function main() {
 
     // A perishable is never an "always assume I have this" staple, and the row
     // says so rather than silently disappearing.
-    const stapleRow = async () => locate('pantry-editor-staple').innerText().catch(() => '');
+    const stapleRow = async () =>
+      locate('pantry-editor-staple')
+        .innerText()
+        .catch(() => '');
     check(
       'a perishable cannot be marked a staple',
       /goes off|تاريخ|بتبوظ/i.test(await stapleRow()),
@@ -369,7 +381,9 @@ async function main() {
     await type('pantry-editor-name', 'salt', { clear: true });
     check(
       'a cupboard staple can be',
-      /keep assuming|available without a quantity|اعتبرها موجودة|من غير كمية/i.test(await stapleRow()),
+      /keep assuming|available without a quantity|اعتبرها موجودة|من غير كمية/i.test(
+        await stapleRow(),
+      ),
       (await stapleRow()).replace(/\n/g, ' ').trim(),
     );
     await type('pantry-editor-name', 'milk', { clear: true });
@@ -394,7 +408,9 @@ async function main() {
       check('editing an existing item saves', true);
     }
 
-    const removeButton = page.locator('[data-testid^="pantry-item-"][data-testid$="-remove"]').first();
+    const removeButton = page
+      .locator('[data-testid^="pantry-item-"][data-testid$="-remove"]')
+      .first();
     const rowRemove = page.getByRole('button', { name: /remove|شيل|احذف/i }).first();
     if ((await removeButton.count()) > 0) {
       await removeButton.click();
@@ -421,8 +437,11 @@ async function main() {
     await page.waitForTimeout(1200);
 
     const pantryRows = async () => page.locator('[data-testid^="pantry-item-"]').count();
-    check('one tap adds it, with no quantity or date demanded', (await pantryRows()) > 0,
-      `${await pantryRows()} rows`);
+    check(
+      'one tap adds it, with no quantity or date demanded',
+      (await pantryRows()) > 0,
+      `${await pantryRows()} rows`,
+    );
 
     // The primary action is reachable without scrolling past the inventory.
     check('"cook from pantry" is present', await visible('pantry-cook', 4000));
@@ -434,8 +453,11 @@ async function main() {
     await page.waitForTimeout(2000);
     check('cook-with-these opens the picker', await visible('cook-ingredient-picker', 8000));
     const seededFromPantry = await page.locator('[data-testid^="selected-"]').count();
-    check('and arrives pre-selected from the pantry', seededFromPantry > 0,
-      `${seededFromPantry} selected`);
+    check(
+      'and arrives pre-selected from the pantry',
+      seededFromPantry > 0,
+      `${seededFromPantry} selected`,
+    );
 
     // Change the temporary selection, then go back and check the pantry.
     const firstSelected = page.locator('[data-testid^="selected-"]').first();
@@ -443,11 +465,12 @@ async function main() {
     await page.waitForTimeout(600);
     await page.goto(`${BASE}/pantry`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1500);
-    check('removing an ingredient from the SEARCH leaves the pantry alone',
+    check(
+      'removing an ingredient from the SEARCH leaves the pantry alone',
       (await pantryRows()) === pantryCountBefore,
-      `${pantryCountBefore} -> ${await pantryRows()}`);
+      `${pantryCountBefore} -> ${await pantryRows()}`,
+    );
     await shot('03b-pantry-quick-add');
-
 
     // --- What a row says about how much there is -------------------------
     //
@@ -457,14 +480,25 @@ async function main() {
     await page.evaluate(() => {
       const stamp = '2026-09-01T00:00:00.000Z';
       const row = (id, name, category, quantity, unit, isStaple) => ({
-        id, ingredientName: name, category, quantity, unit, expiresOn: null,
-        isStaple, note: null, createdAt: stamp, updatedAt: stamp,
+        id,
+        ingredientName: name,
+        category,
+        quantity,
+        unit,
+        expiresOn: null,
+        isStaple,
+        note: null,
+        createdAt: stamp,
+        updatedAt: stamp,
       });
-      window.localStorage.setItem('akla.local.pantry', JSON.stringify([
-        row('q1', 'rice', 'carbs', null, 'g', false),
-        row('q2', 'milk', 'dairy', 500, 'ml', false),
-        row('q3', 'salt', 'spices', null, 'g', true),
-      ]));
+      window.localStorage.setItem(
+        'akla.local.pantry',
+        JSON.stringify([
+          row('q1', 'rice', 'carbs', null, 'g', false),
+          row('q2', 'milk', 'dairy', 500, 'ml', false),
+          row('q3', 'salt', 'spices', null, 'g', true),
+        ]),
+      );
     });
     await page.goto(`${BASE}/pantry`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1800);
@@ -503,8 +537,10 @@ async function main() {
     // THE REGRESSION THIS FLOW EXISTS FOR: the chosen row used to be filtered
     // out of its own list, so the thing under the thumb vanished and the next
     // row jumped up into it.
-    check('the chosen row stays in the results list',
-      (await page.locator('[data-testid^="autocomplete-"]').count()) > 0);
+    check(
+      'the chosen row stays in the results list',
+      (await page.locator('[data-testid^="autocomplete-"]').count()) > 0,
+    );
 
     // And tapping it again removes it, where the user is already looking.
     const beforeToggle = await selectedCount();
@@ -525,21 +561,26 @@ async function main() {
     await shot('05-cook-selected');
 
     const starters = page.locator('[data-testid^="starter-"]');
-    check('common ingredients are offered without typing', (await starters.count()) > 0,
-      `${await starters.count()} shown`);
+    check(
+      'common ingredients are offered without typing',
+      (await starters.count()) > 0,
+      `${await starters.count()} shown`,
+    );
     const beforeStarters = await selectedCount();
     await starters.first().click();
     await page.waitForTimeout(400);
     await starters.nth(1).click();
     await page.waitForTimeout(400);
     const afterStarters = await selectedCount();
-    check('common suggestions add to the selection', afterStarters >= beforeStarters + 2,
-      `${beforeStarters} -> ${afterStarters}`);
+    check(
+      'common suggestions add to the selection',
+      afterStarters >= beforeStarters + 2,
+      `${beforeStarters} -> ${afterStarters}`,
+    );
 
     // Browsing by category, which did not exist before.
     check('categories are offered for browsing', await tap('category-protein'));
-    check('opening a category lists its ingredients',
-      await visible('category-list-protein', 4000));
+    check('opening a category lists its ingredients', await visible('category-list-protein', 4000));
     check('and it collapses again', await tap('category-protein'));
 
     const firstChip = page.locator('[data-testid^="selected-"]').first();
@@ -558,13 +599,22 @@ async function main() {
       // "Clear" only exists once something is filtered — that is the point of
       // it, and asserting on it before applying a filter is how the previous
       // version of this check managed to be wrong.
-      check('nothing to clear before a filter is applied', !(await visible('cook-filters-clear', 1200)));
+      check(
+        'nothing to clear before a filter is applied',
+        !(await visible('cook-filters-clear', 1200)),
+      );
       check('a protein target can be set', await tap('filter-protein-40'));
       check('a time limit can be set', await tap('filter-time-15'));
-      check('the clear control appears once filters are active', await visible('cook-filters-clear', 3000));
+      check(
+        'the clear control appears once filters are active',
+        await visible('cook-filters-clear', 3000),
+      );
       await tap('cook-filters-clear');
       await page.waitForTimeout(500);
-      check('clearing removes the reset control again', !(await visible('cook-filters-clear', 1200)));
+      check(
+        'clearing removes the reset control again',
+        !(await visible('cook-filters-clear', 1200)),
+      );
       await tap('cook-filters-done');
     }
 
@@ -794,7 +844,10 @@ async function main() {
       check('a collection narrows the catalogue', filtered < unfiltered, `${filtered} cards`);
 
       if (filtered === 0) {
-        check('the zero-result state offers a way out', await visible('discover-empty-action', 3000));
+        check(
+          'the zero-result state offers a way out',
+          await visible('discover-empty-action', 3000),
+        );
         await tap('discover-empty-action');
       } else {
         await tap('collection-all');
@@ -850,8 +903,10 @@ async function main() {
 
     // The setup screen carries no price disclaimer; results do.
     const setupText = await page.evaluate(() => document.body.innerText);
-    check('the setup screen is not a disclaimer page',
-      !/not live store prices|ليست أسعار/i.test(setupText));
+    check(
+      'the setup screen is not a disclaimer page',
+      !/not live store prices|ليست أسعار/i.test(setupText),
+    );
 
     await shot('10-budget');
     if (await tap('budget-submit', { optional: true })) {
@@ -859,8 +914,10 @@ async function main() {
       const budgetResults = await page.locator('[data-testid^="result-"]').count();
       check('budget returns results', budgetResults > 0, `${budgetResults} results`);
       const resultsText = await page.evaluate(() => document.body.innerText);
-      check('and results DO carry the price caveat',
-        /not live store prices|ليست أسعار|Estimated/i.test(resultsText));
+      check(
+        'and results DO carry the price caveat',
+        /not live store prices|ليست أسعار|Estimated/i.test(resultsText),
+      );
       // The four sort modes survive the redesign.
       for (const mode of ['best', 'cheapest', 'fastest', 'protein']) {
         check(`sort "${mode}" is offered`, await visible(`sort-${mode}`, 2500));
@@ -868,11 +925,32 @@ async function main() {
       await shot('11-budget-results');
     }
 
+    /** How many elements the browser is actually laying out right-to-left. */
+    const reversedRowCount = () =>
+      page.evaluate(
+        () =>
+          [...document.querySelectorAll('*')].filter(
+            (el) => getComputedStyle(el).flexDirection === 'row-reverse',
+          ).length,
+      );
+
     // --- Language: English -> Arabic -> English ---------------------------
     console.log('\n▸ language');
     await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1400);
     const beforeSwitch = errorCount();
+    // The restart notice is a NATIVE concern: `forceRTL` only lands on the
+    // next launch there. On web there is no native direction flag at all, so
+    // nothing is ever pending — and this used to compare a boolean against
+    // `undefined`, which left the web build permanently telling people to
+    // restart, in English as well as Arabic.
+    check(
+      'the web build is not told to restart for a direction already applied',
+      !(await visible('language-restart', 1200)),
+    );
+    const ltrReversed = await reversedRowCount();
+    check('English lays nothing out right-to-left', ltrReversed === 0, `${ltrReversed} reversed`);
+
     check('the language screen offers Arabic', await tap('language-ar', { optional: true }));
     check('switching language does not hit the error boundary', errorCount() === beforeSwitch);
 
@@ -883,6 +961,25 @@ async function main() {
     check(
       'no English recipe titles leak into the Arabic home',
       !/Koshari|Shakshuka|Molokhia|Zucchini|Creamy Chicken/i.test(arabicHome),
+    );
+    const arabicReversed = await reversedRowCount();
+    check(
+      'Arabic mirrors rows, with no restart and no reload',
+      arabicReversed > 0,
+      `${arabicReversed} reversed`,
+    );
+
+    // THE RELOAD-DEPENDENCE TEST. Layout used to depend on how you arrived:
+    // the provider restored a stored language without applying direction,
+    // while an interactive switch did. Arriving by reload and arriving by tap
+    // must now produce the same number of mirrored rows, exactly.
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.waitForTimeout(1600);
+    const afterReload = await reversedRowCount();
+    check(
+      'and lays out identically when Arabic is restored on launch instead',
+      afterReload === arabicReversed,
+      `${arabicReversed} before reload, ${afterReload} after`,
     );
     await shot('12-home-arabic');
 
@@ -907,9 +1004,14 @@ async function main() {
     const OWN_NAME = 'Omar';
     const latinLines = async () => {
       const text = await bodyText();
-      return [...new Set(text.split('\n').map((line) => line.trim()).filter(Boolean))].filter(
-        (line) => /[A-Za-z]/.test(line) && line !== OWN_NAME && line !== OWN_NAME[0],
-      );
+      return [
+        ...new Set(
+          text
+            .split('\n')
+            .map((line) => line.trim())
+            .filter(Boolean),
+        ),
+      ].filter((line) => /[A-Za-z]/.test(line) && line !== OWN_NAME && line !== OWN_NAME[0]);
     };
 
     const firstDiscoverCard = page.locator('[data-testid^="discover-"]').first();
@@ -1009,6 +1111,8 @@ async function main() {
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
+    const backToLtr = await reversedRowCount();
+    check('and nothing stays mirrored behind it', backToLtr === 0, `${backToLtr} reversed`);
 
     // --- Matching, driven through the real UI ------------------------------
     //
@@ -1063,7 +1167,11 @@ async function main() {
       // And the app's own count, which is the whole answer rather than the
       // part of it the virtualised list has bothered to render.
       const reported = (
-        await page.locator('[data-testid="results-count"]').first().innerText().catch(() => '')
+        await page
+          .locator('[data-testid="results-count"]')
+          .first()
+          .innerText()
+          .catch(() => '')
       ).trim();
       const titles = await page.evaluate(() =>
         [...document.querySelectorAll('[data-testid^="recipe-title-"]')]
@@ -1118,7 +1226,11 @@ async function main() {
     await page.waitForTimeout(1800);
     const basicChips = page.locator('[data-testid^="basic-"]');
     const basicCount = await basicChips.count();
-    check('the basics screen lists what can be configured', basicCount >= 10, `${basicCount} chips`);
+    check(
+      'the basics screen lists what can be configured',
+      basicCount >= 10,
+      `${basicCount} chips`,
+    );
     for (let index = 0; index < basicCount; index += 1) {
       await basicChips.nth(index).click();
       await page.waitForTimeout(90);
@@ -1160,19 +1272,29 @@ async function main() {
     const CASE_A = ['chicken breast', 'rice', 'tomatoes'];
     const CASE_C = ['banana', 'oats', 'milk'];
 
-    const relaxedA = record('chicken, rice, tomato', '≤2 missing', await cookWith(CASE_A, 'missing2'));
+    const relaxedA = record(
+      'chicken, rice, tomato',
+      '≤2 missing',
+      await cookWith(CASE_A, 'missing2'),
+    );
     check(
       'the picker accepted the first ingredient set',
       relaxedA.selected === CASE_A.length,
       `${relaxedA.selected} of ${CASE_A.length} chips`,
     );
-    check('chicken, rice, tomato returns something', relaxedA.ids.length > 0,
-      `${relaxedA.ids.length} results`);
+    check(
+      'chicken, rice, tomato returns something',
+      relaxedA.ids.length > 0,
+      `${relaxedA.ids.length} results`,
+    );
     await shot('17e-cook-case-a');
 
     const relaxedC = record('banana, oats, milk', '≤2 missing', await cookWith(CASE_C, 'missing2'));
-    check('banana, oats, milk returns something', relaxedC.ids.length > 0,
-      `${relaxedC.ids.length} results`);
+    check(
+      'banana, oats, milk returns something',
+      relaxedC.ids.length > 0,
+      `${relaxedC.ids.length} results`,
+    );
     await shot('17f-cook-case-c');
 
     // THE assertion. Two kitchens with nothing in common produced identical
@@ -1210,8 +1332,16 @@ async function main() {
     // the rendered app rather than two of them standing in for the set.
     const CASE_B = ['eggs', 'white cheese', 'tomatoes'];
     const CASE_D = ['ground beef', 'pasta', 'tomatoes'];
-    const relaxedB = record('eggs, white cheese, tomato', '≤2 missing', await cookWith(CASE_B, 'missing2'));
-    const relaxedD = record('ground beef, pasta, tomato', '≤2 missing', await cookWith(CASE_D, 'missing2'));
+    const relaxedB = record(
+      'eggs, white cheese, tomato',
+      '≤2 missing',
+      await cookWith(CASE_B, 'missing2'),
+    );
+    const relaxedD = record(
+      'ground beef, pasta, tomato',
+      '≤2 missing',
+      await cookWith(CASE_D, 'missing2'),
+    );
 
     const answers = [relaxedA, relaxedB, relaxedC, relaxedD].map((result) => result.ids.join('|'));
     check(
@@ -1223,7 +1353,11 @@ async function main() {
     // ALIASES. The user does not know our vocabulary. "Minced meat" and
     // "macaroni" are what a person says; `ground-beef` and `pasta` are what the
     // catalogue calls them, and the answer must not depend on which was typed.
-    const aliased = record('minced meat, macaroni, tomato (aliases)', '≤2 missing', await cookWith(['minced meat', 'macaroni', 'tomato'], 'missing2'));
+    const aliased = record(
+      'minced meat, macaroni, tomato (aliases)',
+      '≤2 missing',
+      await cookWith(['minced meat', 'macaroni', 'tomato'], 'missing2'),
+    );
     check(
       'colloquial names resolve to the same recipes as catalogue names',
       aliased.ids.join('|') === relaxedD.ids.join('|'),
@@ -1274,7 +1408,11 @@ async function main() {
     // And the middle setting is a budget of ONE, not "some". This is the mode
     // that used to be "partial" and applied no constraint whatsoever.
     const oneA = record('chicken, rice, tomato', '≤1 missing', await cookWith(CASE_A, 'missing1'));
-    const oneD = record('ground beef, pasta, tomato', '≤1 missing', await cookWith(CASE_D, 'missing1'));
+    const oneD = record(
+      'ground beef, pasta, tomato',
+      '≤1 missing',
+      await cookWith(CASE_D, 'missing1'),
+    );
     const oneGaps = [...oneA.missing, ...oneD.missing];
     check(
       'allowing one missing returns only recipes missing one or none',
@@ -1305,10 +1443,7 @@ async function main() {
       await page.waitForTimeout(2500);
 
       const excludedText = await bodyText();
-      check(
-        'an exclusion is understood and shown back',
-        /bell pepper|without/i.test(excludedText),
-      );
+      check('an exclusion is understood and shown back', /bell pepper|without/i.test(excludedText));
 
       // Asserted, not skipped. An earlier version only opened a result `if`
       // one existed, so a search that returned nothing passed the whole block
@@ -1410,7 +1545,13 @@ async function main() {
     await page.waitForTimeout(1800);
 
     const readOut = async (testId) =>
-      (await page.locator(`[data-testid="${testId}"]`).first().innerText().catch(() => '')).trim();
+      (
+        await page
+          .locator(`[data-testid="${testId}"]`)
+          .first()
+          .innerText()
+          .catch(() => '')
+      ).trim();
 
     const commit = await readOut('about-commit');
     check('the build names the commit it was built from', /[0-9a-f]{7}/i.test(commit), commit);
@@ -1422,10 +1563,7 @@ async function main() {
       /\d{2,}/.test(recipeLine),
       recipeLine.replace(/\n/g, ' '),
     );
-    check(
-      'and how many ingredients',
-      /\d{2,}/.test(await readOut('about-ingredient-count')),
-    );
+    check('and how many ingredients', /\d{2,}/.test(await readOut('about-ingredient-count')));
     await shot('17j-about-build');
 
     // --- Friends -----------------------------------------------------------
@@ -1546,7 +1684,11 @@ async function main() {
 
       check(
         'an unread thread carries a count, not just a dot',
-        await page.locator('[data-testid$="-unread"]').first().isVisible().catch(() => false),
+        await page
+          .locator('[data-testid$="-unread"]')
+          .first()
+          .isVisible()
+          .catch(() => false),
       );
       await shot('19a-messages');
 
@@ -1597,7 +1739,11 @@ async function main() {
         });
 
       const emptyHeight = await composerHeight();
-      check('the composer starts at one line', emptyHeight > 0 && emptyHeight <= 56, `${emptyHeight}px`);
+      check(
+        'the composer starts at one line',
+        emptyHeight > 0 && emptyHeight <= 56,
+        `${emptyHeight}px`,
+      );
       check(
         'its textarea asks for one row, not the browser default',
         (await page.evaluate(() =>
@@ -1611,7 +1757,11 @@ async function main() {
       );
       await page.waitForTimeout(700);
       const grownHeight = await composerHeight();
-      check('it grows as the text wraps', grownHeight > emptyHeight, `${emptyHeight}px -> ${grownHeight}px`);
+      check(
+        'it grows as the text wraps',
+        grownHeight > emptyHeight,
+        `${emptyHeight}px -> ${grownHeight}px`,
+      );
 
       // `fill` rather than typing: Enter now sends, so a typed string with
       // newlines in it would fire off forty messages.
@@ -1672,7 +1822,11 @@ async function main() {
       return node?.getAttribute('data-testid') ?? null;
     });
     if (shareTarget) {
-      await page.locator(`[data-testid="${shareTarget}"]`).first().click().catch(() => {});
+      await page
+        .locator(`[data-testid="${shareTarget}"]`)
+        .first()
+        .click()
+        .catch(() => {});
       await page.waitForTimeout(2200);
       const shareButton = await visible('recipe-share', 4000);
       check('a recipe offers a way to share it', shareButton);
@@ -1730,7 +1884,10 @@ async function main() {
         (await page.evaluate((testid) => {
           const el = document.querySelector(`[data-testid="${testid}"]`);
           return el
-            ? el.innerText.replace(/[\uE000-\uF8FF]/g, '').replace(/\s+/g, ' ').trim()
+            ? el.innerText
+                .replace(/[\uE000-\uF8FF]/g, '')
+                .replace(/\s+/g, ' ')
+                .trim()
             : '';
         }, id)) ?? '';
 
@@ -1824,7 +1981,10 @@ async function main() {
 
       await tap('submit-photo-remove');
       await page.waitForTimeout(600);
-      check('removing the photo clears it', (await visible('submit-photo-attached', 900)) === false);
+      check(
+        'removing the photo clears it',
+        (await visible('submit-photo-attached', 900)) === false,
+      );
       await shot('19b-submit-photo');
 
       // Sending an empty draft must be refused with reasons, not accepted.
@@ -1862,11 +2022,19 @@ async function main() {
     if (statusList) {
       check(
         'each submission states where it got to',
-        await page.locator('[data-testid^="submission-status-"]').first().isVisible().catch(() => false),
+        await page
+          .locator('[data-testid^="submission-status-"]')
+          .first()
+          .isVisible()
+          .catch(() => false),
       );
       check(
         'feedback from a reviewer reaches the author',
-        await page.locator('[data-testid^="submission-note-"]').first().isVisible().catch(() => false),
+        await page
+          .locator('[data-testid^="submission-note-"]')
+          .first()
+          .isVisible()
+          .catch(() => false),
       );
     }
     await shot('20c-submissions');
@@ -2065,7 +2233,11 @@ async function main() {
       const nameless = await namelessControls();
       if (nameless.length > 0) {
         namelessTotal += nameless.length;
-        check(`every control on ${label} has a name a screen reader can read`, false, nameless.join(', '));
+        check(
+          `every control on ${label} has a name a screen reader can read`,
+          false,
+          nameless.join(', '),
+        );
       }
 
       const slop = await overflows();
@@ -2144,10 +2316,12 @@ async function main() {
     check('the drawer shows who is signed in', await visible('drawer-identity', 4000));
     check(
       'the identity block carries no instructional copy',
-      (await page.evaluate(() => {
-        const el = document.querySelector('[data-testid="drawer-identity"]');
-        return el ? el.textContent ?? '' : '';
-      })).includes('Your username, name and how') === false,
+      (
+        await page.evaluate(() => {
+          const el = document.querySelector('[data-testid="drawer-identity"]');
+          return el ? (el.textContent ?? '') : '';
+        })
+      ).includes('Your username, name and how') === false,
     );
     check(
       'the gear row is named Settings, not Profile',
@@ -2219,7 +2393,10 @@ async function main() {
     await page.goto(`${BASE}/saved`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1500);
     for (const tabName of ['saved', 'viewed', 'cooked']) {
-      check(`the "${tabName}" tab switches`, await tap(`saved-tabs-${tabName}`, { optional: true }));
+      check(
+        `the "${tabName}" tab switches`,
+        await tap(`saved-tabs-${tabName}`, { optional: true }),
+      );
       await page.waitForTimeout(500);
     }
     // "Recently viewed" has content, because the recipe above was opened.
@@ -2234,7 +2411,10 @@ async function main() {
     await page.goto(`${BASE}/shopping-list`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1400);
     check('an empty list explains itself', await visible('shopping-empty', 5000));
-    check('the empty state offers the add action', await tap('shopping-empty-action', { optional: true }));
+    check(
+      'the empty state offers the add action',
+      await tap('shopping-empty-action', { optional: true }),
+    );
     if (await visible('shopping-add-input', 4000)) {
       await type('shopping-add-input', 'parsley');
       await tap('shopping-add-submit');

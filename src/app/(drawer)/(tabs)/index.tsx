@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { DrawerButton } from '@/components/navigation/drawer-button';
-import { useRowDirection } from '@/components/ui/direction';
+import { useGlyph, useRowDirection } from '@/components/ui/direction';
 import { RecipeCardCompact } from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
 import { PressScale } from '@/components/ui/press-scale';
@@ -55,8 +55,8 @@ function HeroAction({
   testID: string;
 }) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
   const row = useRowDirection();
+  const glyph = useGlyph('arrow-forward', 'arrow-back');
 
   return (
     <PressScale
@@ -105,7 +105,7 @@ function HeroAction({
           {cta}
         </Text>
         <Ionicons
-          name={isRTL ? 'arrow-back' : 'arrow-forward'}
+          name={glyph}
           size={16}
           color={theme.colors.primary}
         />
@@ -129,8 +129,8 @@ function SecondaryAction({
   testID: string;
 }) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
   const row = useRowDirection();
+  const glyph = useGlyph('chevron-forward', 'chevron-back');
 
   return (
     <PressScale
@@ -162,7 +162,7 @@ function SecondaryAction({
         </Text>
       </View>
       <Ionicons
-        name={isRTL ? 'chevron-back' : 'chevron-forward'}
+        name={glyph}
         size={17}
         color={theme.colors.textTertiary}
       />

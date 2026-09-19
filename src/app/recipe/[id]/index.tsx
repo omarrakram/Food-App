@@ -8,7 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PriceTag } from '@/components/recipe/price-tag';
 import {} from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
-import { useRowDirection, useTrailingAlign } from '@/components/ui/direction';
+import { useRowDirection, useSide, useTextAlign } from '@/components/ui/direction';
 import { RecipeShareSheet } from '@/components/recipe/share-sheet';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
@@ -57,10 +57,12 @@ function NutritionCell({
   first?: boolean;
 }) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
-  // The divider belongs between cells, so in Arabic it moves to the other
-  // side — `borderLeft` is physical and would leave a rule hanging off the
-  // strip's outer edge once the row reverses.
+  // The divider belongs between cells, so it has to follow the reading
+  // direction: a physical `borderLeft` would leave a rule hanging off the
+  // strip's outer edge once the row reverses. `useSide` names the physical
+  // side the leading edge lands on, which is the left-to-right answer on a
+  // platform that swaps sides for us and the mirrored one where nothing does.
+  const leading = useSide('leading');
   const divider = first ? 0 : 1;
   return (
     <View
@@ -69,8 +71,8 @@ function NutritionCell({
         alignItems: 'center',
         gap: 3,
         paddingVertical: theme.spacing.md,
-        borderLeftWidth: isRTL ? 0 : divider,
-        borderRightWidth: isRTL ? divider : 0,
+        borderLeftWidth: leading === 'left' ? divider : 0,
+        borderRightWidth: leading === 'left' ? 0 : divider,
         borderLeftColor: theme.colors.border,
         borderRightColor: theme.colors.border,
       }}
@@ -97,7 +99,7 @@ function IngredientLine({
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
   const row = useRowDirection();
-  const trailing = useTrailingAlign();
+  const trailing = useTextAlign('trailing');
   const displayName = useIngredientName();
   const recipeText = useRecipeText();
 

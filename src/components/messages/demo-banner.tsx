@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { View } from 'react-native';
 
+import { useRowDirection } from '@/components/ui/direction';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useI18n } from '@/i18n';
@@ -29,7 +30,8 @@ import { useTheme } from '@/theme';
  */
 export function DemoBanner({ testID }: { testID?: string }) {
   const theme = useTheme();
-  const { t, isRTL } = useI18n();
+  const { t } = useI18n();
+  const row = useRowDirection();
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -56,7 +58,7 @@ export function DemoBanner({ testID }: { testID?: string }) {
     >
       <View
         style={{
-          flexDirection: isRTL ? 'row-reverse' : 'row',
+          flexDirection: row,
           alignItems: 'center',
           gap: theme.spacing.xs,
         }}

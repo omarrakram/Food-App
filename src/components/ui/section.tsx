@@ -2,9 +2,9 @@ import { Ionicons } from '@expo/vector-icons';
 import type { ReactNode } from 'react';
 import { View, type ViewStyle } from 'react-native';
 
-import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 
+import { useGlyph } from './direction';
 import { PressScale } from './press-scale';
 import { Text } from './text';
 
@@ -17,7 +17,7 @@ export type SectionHeaderProps = {
 
 export function SectionHeader({ title, subtitle, action, style }: SectionHeaderProps) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
+  const glyph = useGlyph('chevron-forward', 'chevron-back');
 
   return (
     <View
@@ -53,7 +53,7 @@ export function SectionHeader({ title, subtitle, action, style }: SectionHeaderP
             {action.label}
           </Text>
           <Ionicons
-            name={isRTL ? 'chevron-back' : 'chevron-forward'}
+            name={glyph}
             size={15}
             color={theme.colors.primary}
           />

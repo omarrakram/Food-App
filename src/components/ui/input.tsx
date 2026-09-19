@@ -10,9 +10,10 @@ import {
   type TextInput as RNTextInput,
 } from 'react-native';
 
-import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
 import { ROLE_FAMILY } from '@/theme/typography';
+
+import { useTextAlign } from './direction';
 
 import { PressScale } from './press-scale';
 import { Text } from './text';
@@ -61,8 +62,9 @@ export type InputProps = Omit<TextInputProps, 'style'> & {
 /**
  * Text field with label, error and icon affordances.
  *
- * Handles RTL automatically by flipping `textAlign` — RN does not do this for
- * `TextInput` reliably across platforms.
+ * Alignment comes from `useTextAlign`, not from the platform: RN does not
+ * align a `TextInput` by reading direction reliably across platforms, and on a
+ * mirroring platform writing `right` by hand would flip it twice.
  */
 export const Input = forwardRef<RNTextInput, InputProps>(function Input(
   {
@@ -84,7 +86,7 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
   ref,
 ) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
+  const textAlign = useTextAlign('leading');
   const [isFocused, setIsFocused] = useState(false);
   const [grownHeight, setGrownHeight] = useState<number | null>(null);
 
@@ -161,7 +163,7 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
                 emphasis === 'display' ? 'display' : 'body'
               ],
               color: theme.colors.text,
-              textAlign: isRTL ? 'right' : 'left',
+              textAlign,
             },
             WEB_FOCUS_RING_RESET,
           ]}

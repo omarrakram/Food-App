@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useI18n } from '@/i18n';
+import { useGlyph } from './direction';
 import { useTheme } from '@/theme';
 
 import { IconButton } from './button';
@@ -180,7 +181,8 @@ export function ScreenHeader({
   const theme = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { isRTL, t } = useI18n();
+  const { t } = useI18n();
+  const backGlyph = useGlyph('chevron-back', 'chevron-forward');
 
   const handleBack = () => {
     if (onBack) {
@@ -213,7 +215,7 @@ export function ScreenHeader({
       >
         {showBack ? (
           <IconButton
-            icon={isRTL ? 'chevron-forward' : 'chevron-back'}
+            icon={backGlyph}
             onPress={handleBack}
             accessibilityLabel={t('common.back')}
             variant="secondary"
@@ -267,10 +269,10 @@ export function ScreenFooter({ children }: { children: ReactNode }) {
 /** Small helper for the chevron used in list rows, RTL-aware. */
 export function RowChevron() {
   const theme = useTheme();
-  const { isRTL } = useI18n();
+  const glyph = useGlyph('chevron-forward', 'chevron-back');
   return (
     <Ionicons
-      name={isRTL ? 'chevron-back' : 'chevron-forward'}
+      name={glyph}
       size={18}
       color={theme.colors.textTertiary}
     />

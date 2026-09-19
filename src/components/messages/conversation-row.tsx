@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
 
+import { useRowDirection } from '@/components/ui/direction';
 import { Avatar } from '@/components/ui/avatar';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
@@ -30,7 +31,8 @@ export function ConversationRow({
   testID?: string;
 }) {
   const theme = useTheme();
-  const { t, formatDate, formatNumber, isRTL } = useI18n();
+  const { t, formatDate, formatNumber } = useI18n();
+  const row = useRowDirection();
 
   const name = conversation.partner.displayName ?? conversation.partner.username ?? '';
   const unread = conversation.unread > 0;
@@ -53,7 +55,7 @@ export function ConversationRow({
       haptic="selection"
       scaleTo={0.98}
       style={{
-        flexDirection: isRTL ? 'row-reverse' : 'row',
+        flexDirection: row,
         alignItems: 'center',
         gap: theme.spacing.md,
         paddingVertical: theme.spacing.sm,
@@ -66,7 +68,7 @@ export function ConversationRow({
       <View style={{ flex: 1, gap: 2 }}>
         <View
           style={{
-            flexDirection: isRTL ? 'row-reverse' : 'row',
+            flexDirection: row,
             alignItems: 'center',
             gap: theme.spacing.sm,
           }}
@@ -83,7 +85,7 @@ export function ConversationRow({
 
         <View
           style={{
-            flexDirection: isRTL ? 'row-reverse' : 'row',
+            flexDirection: row,
             alignItems: 'center',
             gap: theme.spacing.xs,
           }}

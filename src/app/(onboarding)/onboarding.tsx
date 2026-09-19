@@ -5,7 +5,7 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { SUGGESTED_KITCHEN_BASICS } from '@/features/ingredients/catalogue';
 import { Button } from '@/components/ui/button';
-import { useRowDirection } from '@/components/ui/direction';
+import { useRowDirection, useTextAlign } from '@/components/ui/direction';
 import { Chip } from '@/components/ui/chip';
 import { Screen, ScreenFooter } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
@@ -83,8 +83,9 @@ function toggle<T>(list: readonly T[] | undefined, value: T): T[] {
 
 export default function OnboardingScreen() {
   const theme = useTheme();
-  const { t, language, setLanguage, isRTL } = useI18n();
+  const { t, language, setLanguage } = useI18n();
   const row = useRowDirection();
+  const align = useTextAlign('leading');
   const router = useRouter();
   const { preferences, completeOnboarding } = usePreferences();
 
@@ -297,7 +298,7 @@ export default function OnboardingScreen() {
             }}
           />
         </View>
-        <Text variant="micro" color="textTertiary" align={isRTL ? 'right' : 'left'}>
+        <Text variant="micro" color="textTertiary" align={align}>
           {t('onboarding.progress', { current: index + 1, total: STEPS.length })}
         </Text>
       </View>
@@ -395,19 +396,18 @@ function StepShell({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
   /*
     Alignment is stated rather than inherited, so that choosing Arabic on step
     one re-renders THIS screen right-aligned on the very next frame.
 
-    It cannot be left to the platform: `setLanguage` calls
-    `I18nManager.forceRTL`, which on native needs a full reload before it
-    affects layout — the app already surfaces a restart notice for exactly that
-    reason. A user who picks العربية and sees the screen stay left-aligned has
-    been told the setting did not work. Driving alignment from the language
-    value instead makes the effect immediate on every platform.
+    It cannot be left to the platform: on native, `forceRTL` needs a full
+    reload before it affects layout — the app surfaces a restart notice for
+    exactly that reason. A user who picks العربية and sees the screen stay
+    left-aligned has been told the setting did not work. `useTextAlign` states
+    it from the language, and mirrors in JS only where the platform is not
+    already doing it, so the effect is immediate without flipping twice.
   */
-  const align = isRTL ? 'right' : 'left';
+  const align = useTextAlign('leading');
   return (
     <View style={{ gap: theme.spacing.xl }}>
       <View style={{ gap: theme.spacing.xs }}>
@@ -434,8 +434,7 @@ function Field({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-  const { isRTL } = useI18n();
-  const align = isRTL ? 'right' : 'left';
+  const align = useTextAlign('leading');
   return (
     <View style={{ gap: theme.spacing.sm }}>
       <View style={{ gap: 2 }}>

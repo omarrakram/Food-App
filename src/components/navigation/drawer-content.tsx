@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useRowDirection } from '@/components/ui/direction';
 import { Avatar } from '@/components/ui/avatar';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
@@ -110,7 +111,10 @@ function Row({
   onNavigate: (href: string) => void;
 }) {
   const theme = useTheme();
-  const { t, isRTL, formatNumber } = useI18n();
+  const { t, formatNumber } = useI18n();
+  // Named `direction` because this component already takes a `row` prop —
+  // the drawer entry it renders.
+  const direction = useRowDirection();
 
   return (
     <PressScale
@@ -124,7 +128,7 @@ function Row({
       haptic="selection"
       scaleTo={0.98}
       style={{
-        flexDirection: isRTL ? 'row-reverse' : 'row',
+        flexDirection: direction,
         alignItems: 'center',
         gap: theme.spacing.md,
         paddingVertical: theme.spacing.md,
@@ -178,7 +182,8 @@ function Divider() {
 
 export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
   const theme = useTheme();
-  const { t, isRTL } = useI18n();
+  const { t } = useI18n();
+  const row = useRowDirection();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { preferences } = usePreferences();
@@ -262,7 +267,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
         haptic="selection"
         scaleTo={0.985}
         style={{
-          flexDirection: isRTL ? 'row-reverse' : 'row',
+          flexDirection: row,
           alignItems: 'center',
           gap: theme.spacing.md,
           paddingHorizontal: theme.spacing.lg,
@@ -336,7 +341,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
             haptic="selection"
             scaleTo={0.98}
             style={{
-              flexDirection: isRTL ? 'row-reverse' : 'row',
+              flexDirection: row,
               alignItems: 'center',
               gap: theme.spacing.md,
               paddingVertical: theme.spacing.md,
