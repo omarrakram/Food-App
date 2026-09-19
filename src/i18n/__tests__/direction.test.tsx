@@ -7,7 +7,10 @@ import {
   applyPlatformDirection,
   isDirectionRestartPending,
   platformHasDirectionFlag,
-  platformMirrorsLayout,
+  navigationMirrorsItself,
+  platformMirrorsRows,
+  platformSwapsSides,
+  resetDocumentDirection,
   resolveGlyph,
   resolveRowDirection,
   resolveSide,
@@ -55,6 +58,7 @@ beforeAll(() => {
 
 afterEach(() => {
   setPlatformFlag(originalFlag);
+  resetDocumentDirection();
   jest.restoreAllMocks();
 });
 
@@ -62,17 +66,45 @@ describe('the platform predicate', () => {
   it('knows the web platform has no direction flag at all', () => {
     setPlatformFlag(WEB);
     expect(platformHasDirectionFlag()).toBe(false);
-    expect(platformMirrorsLayout()).toBe(false);
+    expect(platformMirrorsRows()).toBe(false);
+    expect(platformSwapsSides()).toBe(false);
   });
 
   it('knows a native platform has one, set or not', () => {
     setPlatformFlag(NATIVE_LTR);
     expect(platformHasDirectionFlag()).toBe(true);
-    expect(platformMirrorsLayout()).toBe(false);
+    expect(platformMirrorsRows()).toBe(false);
 
     setPlatformFlag(NATIVE_RTL);
     expect(platformHasDirectionFlag()).toBe(true);
-    expect(platformMirrorsLayout()).toBe(true);
+    expect(platformMirrorsRows()).toBe(true);
+    expect(platformSwapsSides()).toBe(true);
+  });
+
+  it('separates the three capabilities, because the web only has one', () => {
+    setPlatformFlag(WEB);
+    applyPlatformDirection('ar');
+    // CSS lays a flex row along the inline axis, so `dir="rtl"` reverses
+    // every row — including the ones nobody remembered to ask about, and the
+    // scroll origin of every horizontal rail.
+    expect(platformMirrorsRows()).toBe(true);
+    // But `text-align: left` and `border-left-width` are physical in CSS and
+    // ignore `dir` completely, so sides stay ours to mirror.
+    expect(platformSwapsSides()).toBe(false);
+    // And React Navigation reads `I18nManager.isRTL`, never the document, so
+    // its chrome stays ours to position. Conflating this with the row
+    // question is what left the drawer opening from the wrong side.
+    expect(navigationMirrorsItself()).toBe(false);
+
+    expect(resolveRowDirection(true)).toBe('row');
+    expect(resolveSide(true, 'leading')).toBe('right');
+  });
+
+  it('gives all three back to the platform on native', () => {
+    setPlatformFlag(NATIVE_RTL);
+    expect(platformMirrorsRows()).toBe(true);
+    expect(platformSwapsSides()).toBe(true);
+    expect(navigationMirrorsItself()).toBe(true);
   });
 });
 
@@ -194,14 +226,25 @@ describe('a real row, in the four states', () => {
     expect(firstRowDirection(view.toJSON())).toBe('row');
   });
 
-  it('renders a persisted Arabic launch right to left, with no reload', async () => {
+  it('renders a persisted Arabic launch mirrored by the platform, with no reload', async () => {
     setPlatformFlag(WEB);
     await setItem(StorageKeys.languagePreference, 'ar');
     const view = await render(<DemoBanner />);
     await screen.findByTestId('demo-banner');
     // The state that used to depend on how you arrived: launched straight
-    // into Arabic, nothing had called `forceRTL`, so nothing mirrored.
-    expect(firstRowDirection(view.toJSON())).toBe('row-reverse');
+    // into Arabic, nothing had applied direction at all, so nothing mirrored.
+    // Hydration applies it now, the platform takes over, and the style stays
+    // `row` precisely BECAUSE something else is reversing it.
+    expect(platformMirrorsRows()).toBe(true);
+    expect(firstRowDirection(view.toJSON())).toBe('row');
+  });
+
+  it('mirrors in JS only while no platform will', () => {
+    setPlatformFlag(WEB);
+    resetDocumentDirection();
+    // The very first frame of a cold start, before anything has applied
+    // direction: the resolver is the only thing that can mirror, and does.
+    expect(resolveRowDirection(true)).toBe('row-reverse');
   });
 
   it('renders a persisted Arabic launch UNreversed where the platform mirrors', async () => {
@@ -226,13 +269,20 @@ describe('switching language inside a session', () => {
 
     const view = await render(<Capture />);
     await screen.findByTestId('demo-banner');
+    expect(platformMirrorsRows()).toBe(false);
     expect(firstRowDirection(view.toJSON())).toBe('row');
 
     await act(async () => setLanguage?.('ar'));
-    expect(firstRowDirection(view.toJSON())).toBe('row-reverse');
+    // Direction lands on the same tick as the language, so the screen mirrors
+    // on the next frame rather than after a restart — and the style stays
+    // `row`, because asking for `row-reverse` on top of a mirroring platform
+    // is the double-flip all of this exists to prevent.
+    expect(platformMirrorsRows()).toBe(true);
+    expect(firstRowDirection(view.toJSON())).toBe('row');
     expect(await getItem(StorageKeys.languagePreference)).toBe('ar');
 
     await act(async () => setLanguage?.('en'));
+    expect(platformMirrorsRows()).toBe(false);
     expect(firstRowDirection(view.toJSON())).toBe('row');
     expect(await getItem(StorageKeys.languagePreference)).toBe('en');
   });

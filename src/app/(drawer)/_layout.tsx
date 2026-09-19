@@ -1,6 +1,8 @@
 import { Drawer } from 'expo-router/drawer';
 
 import { AppDrawerContent } from '@/components/navigation/drawer-content';
+import { useI18n } from '@/i18n';
+import { navigationMirrorsItself } from '@/i18n/direction';
 import { useTheme } from '@/theme';
 
 /**
@@ -19,18 +21,32 @@ import { useTheme } from '@/theme';
  */
 export default function DrawerLayout() {
   const theme = useTheme();
+  const { isRTL } = useI18n();
+
+  /*
+    The same question every direction decision asks, pointed at the one
+    consumer that answers it differently: is something already flipping this
+    for me?
+
+    React Navigation reads `I18nManager.isRTL` and nothing else. On native it
+    therefore flips the drawer itself, and naming a side here would flip it
+    twice — which is what broke this before, displacing the whole content pane
+    off the viewport. On web that flag is permanently false whatever the
+    document's direction says, so left to itself the drawer opened from the
+    LEFT in Arabic while every row inside it read right-to-left.
+
+    `navigationMirrorsItself()` rather than `platformMirrorsRows()`: on web the
+    document direction reverses rows and rails, but it does not reach a library
+    that never asks the document.
+  */
+  const drawerPosition = navigationMirrorsItself() ? undefined : isRTL ? 'right' : 'left';
 
   return (
     <Drawer
       drawerContent={(props) => <AppDrawerContent {...props} />}
       screenOptions={{
         headerShown: false,
-        // `drawerPosition` is deliberately NOT set. React Navigation already
-        // flips the drawer to the right when `I18nManager.isRTL`, so passing
-        // `isRTL ? 'right' : 'left'` double-flips it — and on web that did not
-        // merely mirror the drawer, it displaced the entire content pane off
-        // the viewport (a 390pt-wide screen rendering its close button at
-        // x=653). Left to itself the library gets it right.
+        drawerPosition,
         drawerType: 'front',
         drawerStyle: {
           backgroundColor: theme.colors.background,

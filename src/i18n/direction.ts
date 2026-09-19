@@ -60,8 +60,52 @@ export function platformHasDirectionFlag(): boolean {
   return typeof I18nManager.isRTL === 'boolean';
 }
 
-/** Whether the platform is currently mirroring layout for us. */
-export function platformMirrorsLayout(): boolean {
+/**
+ * The document direction this code has applied, where the platform has one.
+ *
+ * Module state rather than a DOM read, because a resolver runs during render
+ * and Expo Router renders its first pass with no DOM at all. Both paths that
+ * set a language call `applyPlatformDirection` BEFORE the state update that
+ * re-renders, so by the time a resolver asks, this is current.
+ */
+let documentDirection: 'ltr' | 'rtl' = 'ltr';
+
+/**
+ * Whether the platform reverses a horizontal row for us.
+ *
+ * Native does it from its own flag. The web does it from the document's
+ * direction: CSS lays `flex-direction: row` along the INLINE axis, so an
+ * element inside `dir="rtl"` reverses without being asked — and, unlike
+ * anything reachable from a per-component JS flip, a horizontal scroller
+ * inside it also starts at the correct edge and scrolls the correct way.
+ */
+export function platformMirrorsRows(): boolean {
+  return I18nManager.isRTL === true || documentDirection === 'rtl';
+}
+
+/**
+ * Whether the platform swaps `left` and `right` inside a style for us.
+ *
+ * Native does (`doLeftAndRightSwapInRTL`). The web does NOT: `text-align:
+ * left` and `border-left-width` are physical in CSS and ignore `dir`
+ * entirely. This is the one place the platforms differ in CAPABILITY rather
+ * than in wiring, which is why it is a separate question from
+ * `platformMirrorsRows` — and why `resolveSide` consults this one.
+ */
+export function platformSwapsSides(): boolean {
+  return I18nManager.isRTL === true;
+}
+
+/**
+ * Whether React Navigation will position its own chrome for us.
+ *
+ * It reads `I18nManager.isRTL` and nothing else, so on web it never will,
+ * whatever the document says. A screen that needs to tell the library which
+ * side a drawer belongs on asks THIS, not `platformMirrorsRows` — getting
+ * that wrong is how the drawer ended up opening from the left in Arabic while
+ * every row on it read right-to-left.
+ */
+export function navigationMirrorsItself(): boolean {
   return I18nManager.isRTL === true;
 }
 
@@ -72,7 +116,7 @@ export function platformMirrorsLayout(): boolean {
  * platform in English. `row-reverse` only where nothing else will flip it.
  */
 export function resolveRowDirection(isRTL: boolean): 'row' | 'row-reverse' {
-  return isRTL && !platformMirrorsLayout() ? 'row-reverse' : 'row';
+  return isRTL && !platformMirrorsRows() ? 'row-reverse' : 'row';
 }
 
 /**
@@ -84,7 +128,7 @@ export function resolveRowDirection(isRTL: boolean): 'row' | 'row-reverse' {
  * swapping twice.
  */
 export function resolveSide(isRTL: boolean, edge: Edge): 'left' | 'right' {
-  const mirrored = isRTL && !platformMirrorsLayout();
+  const mirrored = isRTL && !platformSwapsSides();
   if (edge === 'leading') return mirrored ? 'right' : 'left';
   return mirrored ? 'left' : 'right';
 }
@@ -103,11 +147,29 @@ export function resolveSide(isRTL: boolean, edge: Edge): 'left' | 'right' {
  * does nothing, deliberately: the resolvers above mirror in JS instead.
  */
 export function applyPlatformDirection(language: Language): void {
-  if (!platformHasDirectionFlag()) return;
   const shouldBeRTL = isRTLLanguage(language);
+
+  if (!platformHasDirectionFlag()) {
+    // Web. Hand the browser the job the native flag does, through the only
+    // mechanism the web has. `documentElement` rather than a wrapper: a
+    // drawer, a modal and a toast render outside the app's own tree, and
+    // direction has to reach them too.
+    documentDirection = shouldBeRTL ? 'rtl' : 'ltr';
+    if (typeof document !== 'undefined') {
+      document.documentElement.dir = documentDirection;
+      document.documentElement.lang = language;
+    }
+    return;
+  }
+
   if (I18nManager.isRTL === shouldBeRTL) return;
   I18nManager.allowRTL(shouldBeRTL);
   I18nManager.forceRTL(shouldBeRTL);
+}
+
+/** Resets the applied document direction. For tests only. */
+export function resetDocumentDirection(): void {
+  documentDirection = 'ltr';
 }
 
 /**

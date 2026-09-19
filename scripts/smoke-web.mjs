@@ -952,14 +952,28 @@ async function main() {
       await shot('11-budget-results');
     }
 
-    /** How many elements the browser is actually laying out right-to-left. */
-    const reversedRowCount = () =>
-      page.evaluate(
-        () =>
-          [...document.querySelectorAll('*')].filter(
-            (el) => getComputedStyle(el).flexDirection === 'row-reverse',
-          ).length,
-      );
+    /**
+     * Whether the browser is really laying the page out right-to-left.
+     *
+     * Measured as GEOMETRY, not as a style string. Direction is applied to the
+     * document now, so `flex-direction` stays `row` and reads the same in both
+     * languages — what changes is where the children land. This takes the tab
+     * bar, which has five children, and asks whether the first sits to the
+     * right of the last. That is what a reader would notice.
+     */
+    const readingDirection = () =>
+      page.evaluate(() => {
+        const tabs = [...document.querySelectorAll('[role="tab"]')].filter(
+          (el) => el.getBoundingClientRect().width > 0,
+        );
+        const first = tabs[0]?.getBoundingClientRect();
+        const last = tabs[tabs.length - 1]?.getBoundingClientRect();
+        return {
+          dir: document.documentElement.dir || 'ltr',
+          tabCount: tabs.length,
+          firstTabIsRightOfLast: first && last ? first.left > last.left : null,
+        };
+      });
 
     // --- Language: English -> Arabic -> English ---------------------------
     console.log('\n▸ language');
@@ -975,8 +989,12 @@ async function main() {
       'the web build is not told to restart for a direction already applied',
       !(await visible('language-restart', 1200)),
     );
-    const ltrReversed = await reversedRowCount();
-    check('English lays nothing out right-to-left', ltrReversed === 0, `${ltrReversed} reversed`);
+    const ltr = await readingDirection();
+    check(
+      'English lays the document out left-to-right',
+      ltr.dir === 'ltr' && ltr.firstTabIsRightOfLast !== true,
+      `dir=${ltr.dir}, ${ltr.tabCount} tabs, firstRightOfLast=${ltr.firstTabIsRightOfLast}`,
+    );
 
     check('the language screen offers Arabic', await tap('language-choice-ar', { optional: true }));
     check('switching language does not hit the error boundary', errorCount() === beforeSwitch);
@@ -989,25 +1007,67 @@ async function main() {
       'no English recipe titles leak into the Arabic home',
       !/Koshari|Shakshuka|Molokhia|Zucchini|Creamy Chicken/i.test(arabicHome),
     );
-    const arabicReversed = await reversedRowCount();
+    const arabic = await readingDirection();
     check(
-      'Arabic mirrors rows, with no restart and no reload',
-      arabicReversed > 0,
-      `${arabicReversed} reversed`,
+      'Arabic mirrors the whole document, with no restart and no reload',
+      arabic.dir === 'rtl' && arabic.firstTabIsRightOfLast === true,
+      `dir=${arabic.dir}, ${arabic.tabCount} tabs, firstRightOfLast=${arabic.firstTabIsRightOfLast}`,
     );
 
     // THE RELOAD-DEPENDENCE TEST. Layout used to depend on how you arrived:
     // the provider restored a stored language without applying direction,
     // while an interactive switch did. Arriving by reload and arriving by tap
-    // must now produce the same number of mirrored rows, exactly.
+    // must now produce exactly the same layout.
     await page.reload({ waitUntil: 'networkidle' });
     await page.waitForTimeout(1600);
-    const afterReload = await reversedRowCount();
+    const afterReload = await readingDirection();
     check(
       'and lays out identically when Arabic is restored on launch instead',
-      afterReload === arabicReversed,
-      `${arabicReversed} before reload, ${afterReload} after`,
+      afterReload.dir === arabic.dir &&
+        afterReload.firstTabIsRightOfLast === arabic.firstTabIsRightOfLast,
+      `${JSON.stringify(arabic)} then ${JSON.stringify(afterReload)}`,
     );
+
+    // A horizontal rail cannot be mirrored by reversing one row: its SCROLL
+    // ORIGIN has to move too, or Arabic opens showing the end of the list.
+    // Only the browser does that, and only for a document it knows reads
+    // right-to-left.
+    const railStarts = await page.evaluate(() =>
+      [...document.querySelectorAll('*')]
+        .filter((el) => el.scrollWidth > el.clientWidth + 40 && el.clientWidth > 200)
+        .map((el) => el.scrollLeft),
+    );
+    check(
+      'a horizontal rail in Arabic opens at its own beginning',
+      railStarts.every((left) => left <= 0),
+      `scrollLeft: ${railStarts.join(', ') || 'no rails found'}`,
+    );
+
+    // THE DRAWER, which React Navigation positions from `I18nManager.isRTL`
+    // and therefore never mirrors on web by itself. It opened from the left
+    // in Arabic while every row inside it read right-to-left.
+    await tap('discover-open-drawer', { optional: true });
+    await page.waitForTimeout(900);
+    const drawerSide = await page.evaluate(() => {
+      const identity = document.querySelector('[data-testid="drawer-identity"]');
+      if (!identity) return null;
+      let panel = identity;
+      while (panel.parentElement && panel.getBoundingClientRect().width < innerWidth * 0.5) {
+        panel = panel.parentElement;
+      }
+      const r = panel.getBoundingClientRect();
+      return { left: Math.round(r.left), right: Math.round(r.right), viewport: innerWidth };
+    });
+    check(
+      // Measures the SIDE, not the animation: a right-hand drawer parks just
+      // past the right edge when closed and slides in from there, so either
+      // state proves which side React Navigation put it on.
+      'and the drawer belongs to the reading edge',
+      drawerSide !== null && drawerSide.right >= drawerSide.viewport - 8,
+      drawerSide ? JSON.stringify(drawerSide) : 'drawer did not open',
+    );
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(600);
     await shot('12-home-arabic');
 
     await page.goto(`${BASE}/discover`, { waitUntil: 'networkidle' });
@@ -1155,8 +1215,12 @@ async function main() {
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1600);
     check('switching back to English sticks', /What are you eating|Good /i.test(await bodyText()));
-    const backToLtr = await reversedRowCount();
-    check('and nothing stays mirrored behind it', backToLtr === 0, `${backToLtr} reversed`);
+    const backToLtr = await readingDirection();
+    check(
+      'and nothing stays mirrored behind it',
+      backToLtr.dir === 'ltr' && backToLtr.firstTabIsRightOfLast !== true,
+      `dir=${backToLtr.dir}, firstRightOfLast=${backToLtr.firstTabIsRightOfLast}`,
+    );
 
     // --- Matching, driven through the real UI ------------------------------
     //
