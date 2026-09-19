@@ -40,7 +40,8 @@ export function DateField({
   const { t, language } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
-  const locale = language === 'ar' ? 'ar-EG' : 'en-GB';
+  // Same numeral policy as the rest of the app — see i18n/index.tsx.
+  const locale = language === 'ar' ? 'ar-EG-u-nu-latn' : 'en-GB';
   const selected = value ? parseISODate(value) : null;
 
   return (

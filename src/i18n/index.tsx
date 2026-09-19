@@ -128,7 +128,25 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<I18nContextValue>(() => {
-    const locale = language === 'ar' ? 'ar-EG' : 'en-US';
+    /*
+      WESTERN NUMERALS IN BOTH LANGUAGES, decided app-wide.
+
+      `ar-EG` alone makes every Intl formatter emit Arabic-Indic digits
+      (٠١٢٣…), which left the product speaking two numeral systems at once:
+      interpolated counts came out Latin because `t()` does plain string
+      substitution, while anything through `formatNumber`, `formatMoney` or
+      `formatDate` came out Arabic-Indic — and a handful of Arabic strings had
+      Arabic-Indic digits typed into them by hand. A price could disagree with
+      the count beside it on the same row.
+
+      The `-u-nu-latn` Unicode extension pins the numbering system to Latin
+      while leaving everything else about the locale alone: grouping,
+      currency placement, date order and month names stay Egyptian, and text
+      direction is unaffected because that comes from `isRTL`, not from here.
+      `formatMoney` keys its Arabic currency symbol off `startsWith('ar')`,
+      which the extension preserves.
+    */
+    const locale = language === 'ar' ? 'ar-EG-u-nu-latn' : 'en-US';
     return {
       language,
       locale,
