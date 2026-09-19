@@ -759,10 +759,9 @@ branch):
 
 | Check | Command | Result |
 |---|---|---|
-| App typecheck | `npx tsc --noEmit` | **pass**, 0 errors |
-| Script typecheck | `npx tsc --noEmit -p scripts/tsconfig.json` | **pass**, 0 errors |
+| Typecheck, app AND build scripts | `npm run typecheck` | **pass**, 0 errors. Do not substitute `npx tsc --noEmit`; it silently skips `scripts/` — see **CI** below |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 758/758 across 51 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 812/812 across 57 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
@@ -770,7 +769,7 @@ branch):
 | Web production bundle | `npx expo export --platform web` | **pass** |
 | Image manifest | `npm run images:check` | **pass**, 67 of 161; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
 | Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags** |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 152 interaction checks across every screen, in DEMO MODE so the social screens have something in them |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 228 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
@@ -1144,12 +1143,25 @@ Nothing built so far is blocked, but three things are inert without config:
 
 ### CI
 
-Green as of the last push. Two earlier commits (`c9a3063`, `d7b0fed`) failed on
-a single error — `scripts/import-recipes.ts(466,48): Property 'id' does not
-exist on type 'CatalogueIngredient'` — fixed in `a22d001`. The typecheck step
-runs `tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json` and every later
-step is skipped when it fails, so **run `npm run typecheck`, not `npx tsc
---noEmit`**: the latter does not cover `scripts/`.
+Green as of the last push (`855230f`, run 68: all three jobs).
+
+**This trap has now caught the same mistake twice.** The typecheck step runs
+`tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json`, and every later step
+in the job is *skipped* when it fails — so a red `app` job can hide the state
+of eleven other gates. Two earlier commits (`c9a3063`, `d7b0fed`) failed on
+`scripts/import-recipes.ts(466,48)`, fixed in `a22d001`. Then `3b26923` added
+`scripts/audit-photography.ts` with four `string | null` errors and CI stayed
+red for four consecutive commits (runs 64–67), because verification was done
+with a bare `npx tsc --noEmit` — which checks the app project only, since the
+root config *excludes* `scripts/`. Fixed in `855230f`.
+
+**Run `npm run typecheck`, never `npx tsc --noEmit`.** The second is not a
+faster version of the first; it is a different, smaller check.
+
+Worth knowing when reading a red run: `smoke` and `database` are separate jobs
+and do not depend on `app`. Through all four red runs they passed, so the
+failure was only ever the type of a report-generating script — but you cannot
+tell that from the run's red tick, only from the job list.
 
 ### Things left undone on purpose
 
