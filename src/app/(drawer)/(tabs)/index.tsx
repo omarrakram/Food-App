@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMemo } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { DrawerButton } from '@/components/navigation/drawer-button';
+import { useRowDirection } from '@/components/ui/direction';
 import { RecipeCardCompact } from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
 import { PressScale } from '@/components/ui/press-scale';
@@ -25,46 +26,37 @@ function greetingKey(hour: number) {
 }
 
 /**
- * A primary entry point into one of the two core journeys.
+ * THE product proposition, given the weight it earns.
  *
- * WHAT THIS REPLACED, because the reason matters more than the markup: two
- * side-by-side diagonal-gradient cards, each with a stock icon inside a
- * translucent white circle and white text over the gradient. That exact
- * component — gradient card, circular icon chip, white title, white subtitle,
- * 26pt radius, drop shadow — is the single most reproduced pattern in
- * generated UI, and it was the first thing anyone saw on opening the app.
- *
- * This version is flat, bordered, and left-aligned to the same grid as
- * everything else on the page. The colour appears once, in a small square
- * icon plate, instead of flooding the whole surface; the type carries the
- * hierarchy; and the row can now hold a real piece of state (`hint`) rather
- * than a second line of marketing copy.
+ * Both journeys used to be the same component at the same size, which made the
+ * screen read as a settings list: two identical rows, equal emphasis, no view
+ * about what this app is for. "Cook with what I have" is the reason the product
+ * exists; "Eat within my budget" is a second way in. They are now different
+ * components, and the difference is structural rather than decorative — a
+ * tinted field, a bigger plate, a heading rather than a row label, and a stated
+ * action — so the hierarchy survives without a gradient or a shadow.
  */
-function PrimaryAction({
+function HeroAction({
   title,
   subtitle,
   hint,
+  cta,
   icon,
-  accent,
   onPress,
   testID,
 }: {
   title: string;
   subtitle: string;
-  /** Live state for this journey, e.g. "12 items in your pantry". */
+  /** Live state for this journey, e.g. "12 ingredients in your kitchen". */
   hint?: string;
+  cta: string;
   icon: keyof typeof Ionicons.glyphMap;
-  accent: 'primary' | 'success';
   onPress: () => void;
   testID: string;
 }) {
   const theme = useTheme();
   const { isRTL } = useI18n();
-
-  const plate =
-    accent === 'primary'
-      ? { bg: theme.colors.primarySoft, fg: theme.colors.primarySoftText }
-      : { bg: theme.colors.successSoft, fg: theme.colors.successSoftText };
+  const row = useRowDirection();
 
   return (
     <PressScale
@@ -75,41 +67,103 @@ function PrimaryAction({
       haptic="medium"
       scaleTo={0.99}
       style={{
-        flexDirection: 'row',
-        alignItems: 'center',
+        padding: theme.spacing.xl,
         gap: theme.spacing.lg,
-        padding: theme.spacing.lg,
+        borderRadius: theme.radius.lg,
+        backgroundColor: theme.colors.primarySoft,
+        borderWidth: 1,
+        borderColor: theme.colors.primary,
+      }}
+    >
+      <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.lg }}>
+        <View
+          style={{
+            width: 52,
+            height: 52,
+            borderRadius: theme.radius.md,
+            backgroundColor: theme.colors.primary,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Ionicons name={icon} size={26} color={theme.colors.textOnPrimary} />
+        </View>
+        <View style={{ flex: 1, gap: 4 }}>
+          <Text variant="title2" style={{ color: theme.colors.primarySoftText }}>
+            {title}
+          </Text>
+          <Text variant="footnote" style={{ color: theme.colors.primarySoftText }} lines={2}>
+            {hint ?? subtitle}
+          </Text>
+        </View>
+      </View>
+
+      {/* Named, not implied. A card that states its action converts better than
+          a card that merely looks tappable. */}
+      <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.xs }}>
+        <Text variant="subhead" style={{ color: theme.colors.primary }}>
+          {cta}
+        </Text>
+        <Ionicons
+          name={isRTL ? 'arrow-back' : 'arrow-forward'}
+          size={16}
+          color={theme.colors.primary}
+        />
+      </View>
+    </PressScale>
+  );
+}
+
+/** The second way in. Clearly reachable, clearly not the headline. */
+function SecondaryAction({
+  title,
+  subtitle,
+  icon,
+  onPress,
+  testID,
+}: {
+  title: string;
+  subtitle: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  onPress: () => void;
+  testID: string;
+}) {
+  const theme = useTheme();
+  const { isRTL } = useI18n();
+  const row = useRowDirection();
+
+  return (
+    <PressScale
+      testID={testID}
+      accessibilityRole="button"
+      accessibilityLabel={`${title}. ${subtitle}`}
+      onPress={onPress}
+      haptic="light"
+      scaleTo={0.99}
+      style={{
+        flexDirection: row,
+        alignItems: 'center',
+        gap: theme.spacing.md,
+        paddingVertical: theme.spacing.lg,
+        paddingHorizontal: theme.spacing.lg,
         borderRadius: theme.radius.md,
         backgroundColor: theme.colors.surface,
         borderWidth: 1,
         borderColor: theme.colors.border,
       }}
     >
-      <View
-        style={{
-          width: 44,
-          height: 44,
-          // Squared, not a circle. A circular icon chip is the other half of
-          // the pattern this component exists to get away from.
-          borderRadius: theme.radius.sm,
-          backgroundColor: plate.bg,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Ionicons name={icon} size={21} color={plate.fg} />
-      </View>
-
-      <View style={{ flex: 1, gap: 3 }}>
+      <Ionicons name={icon} size={20} color={theme.colors.textSecondary} />
+      <View style={{ flex: 1, gap: 2 }}>
         <Text variant="headline">{title}</Text>
+        {/* Two lines, not one. At one line this truncated mid-word — "…we will
+            find m…" — which reads as a layout accident rather than a summary. */}
         <Text variant="footnote" color="textSecondary" lines={2}>
-          {hint ?? subtitle}
+          {subtitle}
         </Text>
       </View>
-
       <Ionicons
         name={isRTL ? 'chevron-back' : 'chevron-forward'}
-        size={18}
+        size={17}
         color={theme.colors.textTertiary}
       />
     </PressScale>
@@ -124,6 +178,7 @@ export default function HomeScreen() {
 
   const pantry = usePantryItems();
   const pantryCount = pantry.data?.length ?? 0;
+  const row = useRowDirection();
   const expiring = useExpiringSoon();
   const quickRequest = useMealRequest(
     useMemo(() => ({ mode: 'ingredients' as const, maxMinutes: 30 }), []),
@@ -137,7 +192,7 @@ export default function HomeScreen() {
   return (
     <ScreenScroll bottomInset={theme.layout.tabBarHeight} contentGap={theme.spacing.xxl}>
       <View style={{ gap: theme.spacing.lg, paddingTop: theme.spacing.md }}>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: theme.spacing.md }}>
+        <View style={{ flexDirection: row, alignItems: 'flex-start', gap: theme.spacing.md }}>
           <DrawerButton testID="home-open-drawer" />
           <View style={{ gap: 2, flex: 1 }}>
             <Text variant="micro" color="textTertiary" style={{ textTransform: 'uppercase' }}>
@@ -154,7 +209,7 @@ export default function HomeScreen() {
           haptic="selection"
           scaleTo={0.985}
           style={{
-            flexDirection: 'row',
+            flexDirection: row,
             alignItems: 'center',
             gap: theme.spacing.sm,
             minHeight: 48,
@@ -175,25 +230,22 @@ export default function HomeScreen() {
       </View>
 
       <View style={{ gap: theme.spacing.md }}>
-        <PrimaryAction
+        <HeroAction
           testID="home-cook-with"
           title={t('home.cookWithWhatIHave')}
           subtitle={t('home.cookWithWhatIHaveSub')}
+          cta={t('home.cookWithCta')}
           icon="basket-outline"
-          accent="primary"
           hint={
-            pantryCount > 0
-              ? t('home.cookWithPantryCount', { count: pantryCount })
-              : undefined
+            pantryCount > 0 ? t('home.cookWithPantryCount', { count: pantryCount }) : undefined
           }
           onPress={() => router.push('/cook')}
         />
-        <PrimaryAction
+        <SecondaryAction
           testID="home-budget"
           title={t('home.eatWithinBudget')}
           subtitle={t('home.eatWithinBudgetSub')}
           icon="wallet-outline"
-          accent="success"
           onPress={() => router.push('/budget')}
         />
       </View>
@@ -207,7 +259,7 @@ export default function HomeScreen() {
           haptic="light"
           scaleTo={0.985}
           style={{
-            flexDirection: 'row',
+            flexDirection: row,
             alignItems: 'center',
             gap: theme.spacing.md,
             padding: theme.spacing.lg,
@@ -234,25 +286,30 @@ export default function HomeScreen() {
         title={t('home.quickIdeas')}
         action={{ label: t('common.seeAll'), onPress: () => router.push('/discover') }}
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: theme.spacing.md,
-          }}
+        {/*
+          A rail, not a wrapping grid. The grid stacked into three rows of two
+          on a phone, so the last thing on Home was a long column of small
+          cards and the screen never ended. A rail keeps the section to one
+          screen-height, and a partly visible next card is what tells a reader
+          there is more — which is the job "See all" was doing alone.
+        */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: theme.spacing.md, paddingRight: theme.spacing.xl }}
         >
           {quickIdeas.isLoading
             ? Array.from({ length: 4 }, (_, index) => (
-                <View key={index} style={{ width: 160, gap: theme.spacing.sm }}>
-                  <Skeleton height={160} radius={theme.radius.md} />
+                <View key={index} style={{ width: 150, gap: theme.spacing.sm }}>
+                  <Skeleton height={150} radius={theme.radius.md} />
                   <Skeleton width="80%" height={14} />
                 </View>
               ))
-            : quickIdeas.matches.slice(0, 6).map((match) => (
+            : quickIdeas.matches.slice(0, 8).map((match) => (
                 <RecipeCardCompact
                   key={match.recipe.id}
                   recipe={match.recipe}
-                  width={160}
+                  width={150}
                   badge={
                     match.missingIngredients.length === 0 && match.requiredCount > 0
                       ? t('results.matchFull')
@@ -262,7 +319,7 @@ export default function HomeScreen() {
                   testID={`home-quick-${match.recipe.id}`}
                 />
               ))}
-        </View>
+        </ScrollView>
       </Section>
     </ScreenScroll>
   );

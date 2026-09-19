@@ -1,4 +1,3 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useMemo } from 'react';
 import { View } from 'react-native';
@@ -57,27 +56,32 @@ export default function BudgetResultsScreen() {
     return { within, unknown };
   }, [matches, request.budgetMinor]);
 
+  /*
+    THE BUDGET, AS A LINE OF TEXT, not as a green slab.
+
+    It was a full-width filled card with a wallet icon, occupying the top of
+    the results page above the count row and the sort row — three stacked
+    chrome surfaces before the first recipe. The information is worth keeping
+    and the furniture is not: the constraint the user typed is now a single
+    line with a rule under it, which states the same two facts and gives the
+    vertical space back to the food.
+  */
   const header = budgetLabel ? (
     <View
       style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: theme.spacing.md,
-        padding: theme.spacing.lg,
-        borderRadius: theme.radius.lg,
-        backgroundColor: theme.colors.successSoft,
+        gap: 2,
+        paddingBottom: theme.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: theme.colors.border,
       }}
     >
-      <Ionicons name="wallet" size={22} color={theme.colors.successSoftText} />
-      <View style={{ flex: 1, gap: 2 }}>
-        <Text variant="bodyMedium" style={{ color: theme.colors.successSoftText }}>
-          {budgetLabel} · {t('common.servings', { count: request.servings })}
-        </Text>
-        <Text variant="footnote" style={{ color: theme.colors.successSoftText }}>
-          {t('budget.withinBudget')}: {tally.within}
-          {tally.unknown > 0 ? ` · ${t('budget.needsChecking', { count: tally.unknown })}` : ''}
-        </Text>
-      </View>
+      <Text variant="title3">
+        {budgetLabel} · {t('common.servings', { count: request.servings })}
+      </Text>
+      <Text variant="footnote" color="textSecondary">
+        {t('budget.withinBudget')}: {tally.within}
+        {tally.unknown > 0 ? ` · ${t('budget.needsChecking', { count: tally.unknown })}` : ''}
+      </Text>
     </View>
   ) : null;
 

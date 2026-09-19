@@ -4,6 +4,7 @@ import Animated from 'react-native-reanimated';
 
 import { Badge } from '@/components/ui/badge';
 import { IconButton } from '@/components/ui/button';
+import { useRowDirection } from '@/components/ui/direction';
 import { PressScale, usePressFeedback } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useRecipeText } from '@/features/recipes/localise';
@@ -44,6 +45,7 @@ function MetaPill({ icon, label }: { icon: keyof typeof Ionicons.glyphMap; label
 function MatchRow({ match }: { match: RecipeMatch }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const row = useRowDirection();
 
   const hasEverything = match.missingIngredients.length === 0 && match.requiredCount > 0;
   const fraction =
@@ -52,7 +54,7 @@ function MatchRow({ match }: { match: RecipeMatch }) {
 
   return (
     <View style={{ gap: theme.spacing.sm }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
+      <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.sm }}>
         <Ionicons
           name={hasEverything ? 'checkmark-circle' : 'basket-outline'}
           size={16}
@@ -81,6 +83,9 @@ function MatchRow({ match }: { match: RecipeMatch }) {
           borderRadius: theme.radius.xs,
           backgroundColor: theme.colors.surfaceAlt,
           overflow: 'hidden',
+          // Progress grows from the edge the reader starts at, which in Arabic
+          // is the right. A bar that fills leftward reads as depletion.
+          flexDirection: row,
         }}
       >
         <View
@@ -183,7 +188,11 @@ export function RecipeCard({
         scaleTo={1}
       >
         <View style={{ position: 'relative' }}>
-          <RecipeImage recipe={recipe} aspectRatio={theme.layout.cardImageAspect} />
+          <RecipeImage
+            recipe={recipe}
+            aspectRatio={theme.layout.cardImageAspect}
+            fallbackAspectRatio={theme.layout.cardFallbackAspect}
+          />
 
           {/*
             No scrim gradient any more. It existed only to make the match badge
@@ -218,7 +227,7 @@ export function RecipeCard({
             its second is the match badge, so "the first words in the card" is
             not the title and an evidence table built that way says so.
           */}
-            <Text variant="title3" lines={1} testID={`recipe-title-${recipe.id}`}>
+            <Text variant="title2" lines={2} testID={`recipe-title-${recipe.id}`}>
               {recipeText.title(recipe)}
             </Text>
             <Text variant="footnote" color="textSecondary" lines={2}>
@@ -347,7 +356,7 @@ export function RecipeCardCompact({
       style={{ width, gap: theme.spacing.sm }}
     >
       <View style={{ position: 'relative', borderRadius: theme.radius.md, overflow: 'hidden' }}>
-        <RecipeImage recipe={recipe} aspectRatio={1} glyphSize={26} />
+        <RecipeImage recipe={recipe} aspectRatio={1} />
         {badge ? (
           <View style={{ position: 'absolute', left: 6, bottom: 6 }}>
             <Badge label={badge} tone="primary" />

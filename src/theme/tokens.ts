@@ -54,25 +54,28 @@ export type RadiusKey = keyof typeof radius;
  * that these values already allow for.
  */
 export const typography = {
-  /* Display and titles are tracked in slightly, which is what makes large type
-     read as set rather than as merely big — the single cheapest typographic
-     upgrade available before a brand typeface is licensed. Body sizes keep
-     neutral tracking, where tightening costs legibility (and costs more in
-     Arabic than in Latin). */
-  display: { fontSize: 34, lineHeight: 40, fontWeight: '800', letterSpacing: -0.7 },
-  title1: { fontSize: 27, lineHeight: 33, fontWeight: '800', letterSpacing: -0.5 },
-  title2: { fontSize: 22, lineHeight: 28, fontWeight: '700', letterSpacing: -0.3 },
-  title3: { fontSize: 18, lineHeight: 24, fontWeight: '700', letterSpacing: -0.2 },
-  headline: { fontSize: 16, lineHeight: 22, fontWeight: '700', letterSpacing: -0.1 },
-  body: { fontSize: 16, lineHeight: 23, fontWeight: '400' },
-  bodyMedium: { fontSize: 16, lineHeight: 23, fontWeight: '600' },
-  callout: { fontSize: 15, lineHeight: 21, fontWeight: '400' },
-  subhead: { fontSize: 14, lineHeight: 20, fontWeight: '600' },
-  footnote: { fontSize: 13, lineHeight: 19, fontWeight: '400' },
-  caption: { fontSize: 12, lineHeight: 16, fontWeight: '600' },
+  /* `role` names the real font weight each variant resolves to — see
+     `typography.ts`. React Native cannot pick a weight out of a family the way
+     CSS can, so the role is what the Text primitive turns into a concrete
+     `fontFamily`; `fontWeight` is kept only as the fallback for the frames
+     before the font finishes loading.
+
+     Tracking is Latin-only and is dropped in Arabic, whose letters join:
+     negative tracking pulls joined forms into one another. */
+  display: { fontSize: 34, lineHeight: 40, fontWeight: '800', letterSpacing: -0.7, role: 'display' },
+  title1: { fontSize: 27, lineHeight: 33, fontWeight: '800', letterSpacing: -0.5, role: 'display' },
+  title2: { fontSize: 22, lineHeight: 28, fontWeight: '700', letterSpacing: -0.3, role: 'heading' },
+  title3: { fontSize: 18, lineHeight: 24, fontWeight: '700', letterSpacing: -0.2, role: 'heading' },
+  headline: { fontSize: 16, lineHeight: 22, fontWeight: '700', letterSpacing: -0.1, role: 'heading' },
+  body: { fontSize: 16, lineHeight: 24, fontWeight: '400', role: 'body' },
+  bodyMedium: { fontSize: 16, lineHeight: 24, fontWeight: '600', role: 'subheading' },
+  callout: { fontSize: 15, lineHeight: 22, fontWeight: '400', role: 'body' },
+  subhead: { fontSize: 14, lineHeight: 20, fontWeight: '600', role: 'subheading' },
+  footnote: { fontSize: 13, lineHeight: 19, fontWeight: '400', role: 'caption' },
+  caption: { fontSize: 12, lineHeight: 16, fontWeight: '600', role: 'label' },
   /* Section eyebrows and metadata labels. Uppercase at call sites, where the
      wide tracking stops it reading as a shout. */
-  micro: { fontSize: 11, lineHeight: 14, fontWeight: '700', letterSpacing: 0.6 },
+  micro: { fontSize: 11, lineHeight: 14, fontWeight: '700', letterSpacing: 0.6, role: 'label' },
 } as const;
 
 export type TypographyVariant = keyof typeof typography;
@@ -117,4 +120,13 @@ export const layout = {
   tabBarHeight: 60,
   heroImageAspect: 4 / 3,
   cardImageAspect: 16 / 10,
+  /**
+   * The shape a large card's plate takes when the recipe has no photograph.
+   *
+   * A photo earns 16:10 by being appetising; an equal height of pattern does
+   * not, and it pushed the recipe's own name toward the fold on more than half
+   * the catalogue. A band still carries the cuisine label and the brand motif
+   * while letting the title, match and price sit higher.
+   */
+  cardFallbackAspect: 24 / 7,
 } as const;

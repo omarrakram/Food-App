@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-19 |
-| **Current phase** | **UI/UX UPGRADE — Phase 1–3 (first milestone) done.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **UI/UX UPGRADE — Phase 3.5 refinement done.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -68,6 +68,127 @@ real Egyptian consumer app. Backend behaviour deliberately untouched.
   have/need groups now carry their own counts; the remaining hero gradient is
   documented as a functional scrim protecting the back/share controls over
   arbitrary photography.
+
+### Phase 3.5 — refinement (done)
+
+#### Typography: Alexandria, verified rather than assumed
+
+`@expo-google-fonts/alexandria` 0.4.2, **MIT AND OFL-1.1** — embeddable in a
+commercial app with no runtime fetch and no in-app attribution. Everything below
+was read out of the shipped `400Regular` TTF, not taken from the metadata:
+
+| | |
+|---|---|
+| Arabic | 101 codepoints in U+0600–06FF, **all ten** Arabic-Indic digits, 73 Presentation-Forms-A, 89 Presentation-Forms-B |
+| Shaping | GSUB **and** GPOS present, so contextual joining and mark positioning are real |
+| Latin | full A–Z a–z |
+| Weights | nine static instances 100–900 — **every weight the app uses is a real file** |
+
+**Four weights are bundled, not nine** (400/600/700/800, ~700KB). Each unused
+weight is ~275KB for nothing.
+
+**Why each weight is its own `fontFamily`.** React Native does not select a
+weight out of a family the way CSS does: with statically loaded fonts
+`fontWeight` is ignored on Android and unreliable on iOS, so asking for weight
+800 has to mean asking for the ExtraBold *file*. The six semantic roles map:
+
+| role | weight | file |
+|---|---|---|
+| display | 800 | `Alexandria_800ExtraBold` |
+| heading | 700 | `Alexandria_700Bold` |
+| subheading | 600 | `Alexandria_600SemiBold` |
+| body | 400 | `Alexandria_400Regular` |
+| label | 600 | `Alexandria_600SemiBold` |
+| caption | 400 | `Alexandria_400Regular` |
+
+**Arabic vertical metrics, audited separately as asked.** Alexandria at 1000
+units/em reports `typoAscender 968 / typoDescender −251` — a **1.219 em**
+typographic box — but `winAscent 1166 / winDescent 566`, a **1.732 em** ink-safe
+box. That gap *is* the Arabic problem: the typo box describes Latin, the win
+pair describes how far ink actually travels once Arabic descenders and stacked
+marks are involved. This is not theoretical here — the app's own `ar.ts` carries
+**89 shadda, 28 fathatan, 4 damma, 1 kasratan** and 2759 descender-bearing
+letters. Latin-tuned leading does not clip one line; it makes wrapped Arabic
+lines collide, mark into descender.
+
+Arabic therefore has its own ratio table. Body and below clear **1.70 em**, at
+or near the ink-safe box, so wrapped Arabic body copy cannot overlap. Display
+and headings use 1.45–1.50: a 34pt headline at 1.732 em would carry 59pt of
+leading and stop reading as a headline. **That trade is the one place the table
+is not absolutely guaranteed**, and it is deliberate. Latin tracking is dropped
+entirely in Arabic, whose letters join — negative tracking degrades the joins.
+
+A font that fails to decode is **not** fatal: the system face still renders every
+string, and the scale keeps `fontWeight` set for exactly that case.
+
+#### The missing-photo treatment, third attempt
+
+Two previous versions were both wrong, in opposite directions, and both are
+recorded in `recipe-fallback.tsx`: a colour gradient with a stock glyph (read as
+"no content"), then a flat beige tile with the same glyph (a *tasteful* large
+empty rectangle is still a large empty rectangle). The fix was to stop rendering
+a better absence:
+
+- **Field** — a cobalt- or accent-tinted palette surface. Never beige, because
+  beige is what "no image" looks like.
+- **Motif** — an eight-point star lattice drawn in SVG: the geometry running
+  through Cairo tilework, mashrabiya and Mamluk doors. Drawn as a repeating
+  pattern, not an icon dropped in the middle, so it has texture at any size and
+  no centre of gravity competing with the card title.
+- **Variation** — by cuisine, through tint: nine cuisines onto four palette
+  families, which varies a feed without turning it into a swatch test.
+- **Height** — a plate may be *shorter* than a photo. A photo earns 16:10 by
+  being appetising; an equal height of pattern does not, and it pushed the
+  recipe's own name toward the fold on 58% of the catalogue. Large cards pass
+  `fallbackAspectRatio` and get a 24:7 band.
+
+It is also unmistakably not a photograph, which was a stated requirement.
+
+#### RTL: the real finding
+
+**The app decides layout direction two ways at once, and they cancel out.**
+`I18nManager.forceRTL()` makes React Native flip every `flexDirection: 'row'`
+automatically; roughly ten call sites *also* hand-write
+`isRTL ? 'row-reverse' : 'row'`. When only the second is active rows flip once
+and are correct; when both are, they flip twice and land back in left-to-right —
+in Arabic.
+
+Which one you get **depends on how you arrived.** `I18nProvider`'s hydration
+restores a stored language with `setLanguageState`, which never touches
+`I18nManager`; only the interactive `setLanguage` calls `forceRTL`. So launching
+already set to Arabic and switching to Arabic in-app produce different layouts
+from identical state. The Arabic screenshot showed it plainly: the drawer button
+and both action cards did not mirror, while the section header did.
+
+`src/components/ui/direction.ts` asks the question that actually matters — *is
+something already flipping rows for me?* — and flips only when nothing else
+will. Call sites using it are correct **before and after** any fix to the
+provider, which is what lets the provider be fixed separately without a flag
+day. The three screens in scope now use it throughout, including the match
+proportion bar (which must grow from the reading edge — a bar filling leftward
+reads as depletion) and the fact-strip dividers (physical `borderLeft` would
+hang off the strip's outer edge once the row reverses).
+
+**Not mechanically mirrored, on purpose:** the back chevron glyph flips (it
+means "backwards", which is direction-relative) while the play glyph on *Start
+cooking* does not (it means "play", which is not).
+
+**Still open, outside these three screens:** the hydration path should call
+`forceRTL`, and the ~10 hand-written flip sites should move to the helper. Doing
+that app-wide is a separate change and was explicitly out of scope here.
+
+#### Owned icon language — proposal, nothing drawn yet
+
+Measured usage, most-seen first: the **five tab bar glyphs** (home, compass,
+file-tray, heart, person-circle) are on screen on every single screen, then
+`restaurant-outline` (the recipe mark), `cart-outline`, `add`, `close`,
+`time-outline`. Recommendation: commission **those ten only**, on a 24pt grid
+with a 1.75pt stroke, square terminals, no rounded caps, one optical size, and
+keep Ionicons for the long tail of settings and utility glyphs. The tab bar and
+app icon are the brand's most-reproduced assets and are worth owning first;
+everything else can wait and is not worth a bespoke set.
+
+The four `sparkles` icons are gone from the primary flows as previously agreed.
 
 ### Not done yet (deliberately, in the stated order)
 

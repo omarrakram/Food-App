@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PriceTag } from '@/components/recipe/price-tag';
 import {} from '@/components/recipe/recipe-card';
 import { Badge } from '@/components/ui/badge';
+import { useRowDirection, useTrailingAlign } from '@/components/ui/direction';
 import { RecipeShareSheet } from '@/components/recipe/share-sheet';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
@@ -35,12 +36,47 @@ import { RecipeImage } from '@/components/recipe/recipe-image';
 import { useTheme } from '@/theme';
 import type { IngredientMatch, Recipe } from '@/types/domain';
 
-function NutritionCell({ label, value }: { label: string; value: string }) {
+/**
+ * One fact in the strip under the title.
+ *
+ * These used to sit in two separate bordered, rounded boxes — seven numbers
+ * inside two cards on a screen that already had a card for cost and another
+ * for servings. Cardifying a number does not make it easier to read; it makes
+ * the page look like a dashboard. They are now a plain strip ruled top and
+ * bottom, with hairline dividers between cells, which is how a recipe's facts
+ * are set in print.
+ */
+function NutritionCell({
+  label,
+  value,
+  first = false,
+}: {
+  label: string;
+  value: string;
+  /** Suppresses the leading divider on the first cell of a row. */
+  first?: boolean;
+}) {
   const theme = useTheme();
+  const { isRTL } = useI18n();
+  // The divider belongs between cells, so in Arabic it moves to the other
+  // side — `borderLeft` is physical and would leave a rule hanging off the
+  // strip's outer edge once the row reverses.
+  const divider = first ? 0 : 1;
   return (
-    <View style={{ flex: 1, alignItems: 'center', gap: 2, paddingVertical: theme.spacing.sm }}>
-      <Text variant="bodyMedium">{value}</Text>
-      <Text variant="micro" color="textTertiary">
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        gap: 3,
+        paddingVertical: theme.spacing.md,
+        borderLeftWidth: isRTL ? 0 : divider,
+        borderRightWidth: isRTL ? divider : 0,
+        borderLeftColor: theme.colors.border,
+        borderRightColor: theme.colors.border,
+      }}
+    >
+      <Text variant="headline">{value}</Text>
+      <Text variant="micro" color="textTertiary" lines={1}>
         {label}
       </Text>
     </View>
@@ -60,6 +96,8 @@ function IngredientLine({
 }) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const row = useRowDirection();
+  const trailing = useTrailingAlign();
   const displayName = useIngredientName();
   const recipeText = useRecipeText();
 
@@ -70,19 +108,31 @@ function IngredientLine({
   const quantityLabel = formatQuantity(scaled, ingredient.unit, { t, formatNumber });
 
   return (
+    /*
+      An ingredient list is a table, so it is set like one: a hairline between
+      rows, the name ranged left, the quantity ranged right in its own column
+      so the numbers line up down the page. The availability mark is a small
+      dot rather than a filled tick — at one per row, twenty ticks became the
+      loudest thing in the section, and the grouping headers above already say
+      which list you are reading.
+    */
     <View
       style={{
-        flexDirection: 'row',
+        flexDirection: row,
         alignItems: 'center',
         gap: theme.spacing.md,
-        paddingVertical: theme.spacing.sm,
-        opacity: muted ? 0.85 : 1,
+        paddingVertical: theme.spacing.md,
+        borderBottomWidth: 1,
+        borderBottomColor: theme.colors.border,
       }}
     >
-      <Ionicons
-        name={match.isAvailable ? 'checkmark-circle' : 'ellipse-outline'}
-        size={20}
-        color={match.isAvailable ? theme.colors.success : theme.colors.borderStrong}
+      <View
+        style={{
+          width: 7,
+          height: 7,
+          borderRadius: theme.radius.pill,
+          backgroundColor: match.isAvailable ? theme.colors.success : theme.colors.borderStrong,
+        }}
       />
       <View style={{ flex: 1, gap: 1 }}>
         <Text variant="body">
@@ -123,7 +173,12 @@ function IngredientLine({
           </Text>
         ) : null}
       </View>
-      <Text variant="subhead" color="textSecondary">
+      <Text
+        variant="subhead"
+        color={muted ? 'textTertiary' : 'textSecondary'}
+        align={trailing}
+        style={{ minWidth: 64 }}
+      >
         {quantityLabel}
       </Text>
       {ingredient.isOptional ? <Badge label={t('common.optional')} tone="neutral" /> : null}
@@ -148,6 +203,7 @@ export default function RecipeDetailScreen() {
   const recordHistory = useRecordHistory();
   const shopping = useShoppingMutations();
 
+  const row = useRowDirection();
   const [servings, setServings] = useState<number | null>(null);
   const [orderSheetOpen, setOrderSheetOpen] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -264,11 +320,7 @@ export default function RecipeDetailScreen() {
     <>
       <ScreenScroll padded={false} edges={{ top: false }} bottomInset={theme.spacing.huge}>
         <View style={{ position: 'relative' }}>
-          <RecipeImage
-            recipe={recipe}
-            aspectRatio={theme.layout.heroImageAspect}
-            glyphSize={52}
-          />
+          <RecipeImage recipe={recipe} aspectRatio={theme.layout.heroImageAspect} />
           {/*
             The one gradient left on this screen, and it is functional rather
             than decorative: back, share and save sit over arbitrary
@@ -356,14 +408,14 @@ export default function RecipeDetailScreen() {
 
           <View
             style={{
-              flexDirection: 'row',
-              backgroundColor: theme.colors.surface,
-              borderRadius: theme.radius.md,
-              borderWidth: 1,
+              flexDirection: row,
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
               borderColor: theme.colors.border,
             }}
           >
             <NutritionCell
+              first
               label={t('recipe.prepTime')}
               value={t('common.min', { count: recipe.prepMinutes })}
             />
@@ -379,14 +431,14 @@ export default function RecipeDetailScreen() {
 
           <View
             style={{
-              flexDirection: 'row',
-              backgroundColor: theme.colors.surface,
-              borderRadius: theme.radius.md,
-              borderWidth: 1,
+              flexDirection: row,
+              borderTopWidth: 1,
+              borderBottomWidth: 1,
               borderColor: theme.colors.border,
             }}
           >
             <NutritionCell
+              first
               label={t('recipe.calories')}
               value={recipe.nutrition.calories !== null ? formatNumber(recipe.nutrition.calories) : '—'}
             />
@@ -418,14 +470,22 @@ export default function RecipeDetailScreen() {
 
           <View
             style={{
-              flexDirection: 'row',
+              flexDirection: row,
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: theme.spacing.md,
             }}
           >
-            <View style={{ gap: 2 }}>
-              <Text variant="caption" color="textTertiary">
+            {/*
+              Cost leads, servings answer to it. The two used to be a matched
+              pair of equal-weight labelled blocks, which made the reader work
+              out which was the number and which was the control. The label is
+              now a quiet eyebrow, the money is the biggest thing in the row,
+              and the per-serving figure hangs beneath it — where it reads as a
+              consequence of the stepper rather than a competing fact.
+            */}
+            <View style={{ gap: 2, flex: 1 }}>
+              <Text variant="micro" color="textTertiary" style={{ textTransform: 'uppercase' }}>
                 {t('recipe.estimatedCost')}
               </Text>
               <PriceTag priced={priced} size="lg" />
@@ -436,7 +496,7 @@ export default function RecipeDetailScreen() {
               </Text>
             </View>
             <View style={{ gap: theme.spacing.xs, alignItems: 'flex-end' }}>
-              <Text variant="caption" color="textTertiary">
+              <Text variant="micro" color="textTertiary" style={{ textTransform: 'uppercase' }}>
                 {t('recipe.servingsAdjust')}
               </Text>
               <Stepper
@@ -459,7 +519,7 @@ export default function RecipeDetailScreen() {
               reader to total the ticks themselves.
             */}
             {match.availableIngredients.length > 0 ? (
-              <View style={{ gap: theme.spacing.xs }}>
+              <View style={{ gap: theme.spacing.xs, marginTop: theme.spacing.xs }}>
                 <View
                   style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
                 >
@@ -486,7 +546,7 @@ export default function RecipeDetailScreen() {
             ) : null}
 
             {missing.length > 0 ? (
-              <View style={{ gap: theme.spacing.xs }}>
+              <View style={{ gap: theme.spacing.xs, marginTop: theme.spacing.lg }}>
                 <View
                   style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
                 >

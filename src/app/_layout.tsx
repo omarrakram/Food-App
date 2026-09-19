@@ -1,3 +1,10 @@
+import {
+  Alexandria_400Regular,
+  Alexandria_600SemiBold,
+  Alexandria_700Bold,
+  Alexandria_800ExtraBold,
+} from '@expo-google-fonts/alexandria';
+import { useFonts } from 'expo-font';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -93,7 +100,28 @@ function RootNavigator() {
   const { isHydrated: i18nReady } = useI18n();
   const { status } = useAuth();
 
-  const isReady = prefsReady && i18nReady && status !== 'loading';
+  /*
+    THE BRAND TYPEFACE, loaded before the first frame.
+
+    Four real weights, not nine: the type scale uses 400/600/700/800 and
+    nothing else, and each unused weight is ~275KB of bundle for nothing.
+    Alexandria carries both scripts in one family, so Arabic and Latin share
+    metrics instead of falling back to a different face per platform.
+
+    `fontError` is deliberately not fatal. A font that fails to decode is a
+    cosmetic problem — the system face still renders every string, and the type
+    scale keeps `fontWeight` set for exactly this case. Blocking the app behind
+    it would turn a cosmetic failure into an outage.
+  */
+  const [fontsLoaded, fontError] = useFonts({
+    Alexandria_400Regular,
+    Alexandria_600SemiBold,
+    Alexandria_700Bold,
+    Alexandria_800ExtraBold,
+  });
+
+  const isReady =
+    prefsReady && i18nReady && status !== 'loading' && (fontsLoaded || fontError !== null);
   useRouteGate(isReady);
 
   useEffect(() => {

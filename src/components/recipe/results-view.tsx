@@ -2,9 +2,9 @@ import { useRouter } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Chip } from '@/components/ui/chip';
+import { useRowDirection } from '@/components/ui/direction';
+import { PressScale } from '@/components/ui/press-scale';
 import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState, ErrorState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
@@ -121,6 +121,7 @@ export function ResultsView({
 }: ResultsViewProps) {
   const theme = useTheme();
   const { t, formatNumber } = useI18n();
+  const row = useRowDirection();
   const [sort, setSort] = useState<SortMode>('best');
 
   const sorted = useMemo(() => sortMatches(matches, sort), [matches, sort]);
@@ -212,25 +213,34 @@ export function ResultsView({
     <View style={{ gap: theme.spacing.lg }}>
       {header}
 
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: theme.spacing.sm,
-        }}
-      >
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
+      {/*
+        ONE quiet toolbar, not three stacked surfaces.
+
+        This was a row of counts and an "Estimated prices" badge, then a full
+        row of four outlined chips, then the list — roughly a fifth of the
+        screen spent on chrome before the first recipe. Results pages are
+        judged on the food, so the controls give up their outlines: sorting is
+        now plain text, the selected mode carries the brand colour and weight,
+        and the unselected ones recede. The estimate notice moves next to the
+        count, where it qualifies a number rather than floating as a badge.
+      */}
+      <View style={{ gap: theme.spacing.sm }}>
+        <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.sm }}>
           {/* Marked so a test can read the app's OWN answer. Counting rendered
               cards is not the same number: the list is virtualised, and React
               Native Web puts the same testID on nested nodes. */}
           <Text variant="footnote" color="textSecondary" testID="results-count">
             {t('results.count', { count: sorted.length })}
           </Text>
+          {request.budgetMinor !== null ? (
+            <Text variant="footnote" color="textTertiary" lines={1} style={{ flex: 1 }}>
+              {`· ${t('budget.estimateNoticeShort')}`}
+            </Text>
+          ) : null}
           {isGenerating ? (
             // Generation runs behind results that are already useful, so this
             // is an ambient hint rather than a spinner over the whole screen.
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+            <View style={{ flexDirection: row, alignItems: 'center', gap: 4 }}>
               <ActivityIndicator size="small" color={theme.colors.textTertiary} />
               <Text variant="micro" color="textTertiary">
                 {t('results.generatingMore')}
@@ -238,41 +248,49 @@ export function ResultsView({
             </View>
           ) : null}
         </View>
-        {request.budgetMinor !== null ? (
-          <Badge label={t('budget.estimateNoticeShort')} tone="neutral" icon="information-circle" />
-        ) : null}
-      </View>
 
-      {/*
-        Bleeds past the screen padding on purpose. Constrained to it, the last
-        option ("Most protein") was clipped at the padding boundary with no
-        hint that anything lay beyond. Running to the edge is what makes a
-        horizontal list read as scrollable, and the trailing padding leaves the
-        final chip somewhere to land.
-      */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{
-          marginHorizontal: -theme.layout.screenPadding,
-          flexGrow: 0,
-        }}
-        contentContainerStyle={{
-          gap: theme.spacing.sm,
-          paddingHorizontal: theme.layout.screenPadding,
-        }}
-      >
-        {sortOptions.map((option) => (
-          <Chip
-            key={option.value}
-            label={option.label}
-            size="sm"
-            selected={sort === option.value}
-            onPress={() => setSort(option.value)}
-            testID={`sort-${option.value}`}
-          />
-        ))}
-      </ScrollView>
+        {/*
+          Bleeds past the screen padding on purpose. Constrained to it, the
+          last option was clipped at the padding boundary with no hint that
+          anything lay beyond. Running to the edge is what makes a horizontal
+          list read as scrollable.
+        */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ marginHorizontal: -theme.layout.screenPadding, flexGrow: 0 }}
+          contentContainerStyle={{
+            gap: theme.spacing.lg,
+            paddingHorizontal: theme.layout.screenPadding,
+            alignItems: 'center',
+          }}
+        >
+          {sortOptions.map((option) => {
+            const isActive = sort === option.value;
+            return (
+              <PressScale
+                key={option.value}
+                testID={`sort-${option.value}`}
+                accessibilityRole="button"
+                accessibilityState={{ selected: isActive }}
+                accessibilityLabel={option.label}
+                onPress={() => setSort(option.value)}
+                haptic="selection"
+                hitSlop={10}
+                scaleTo={0.96}
+                style={{ paddingVertical: theme.spacing.xs }}
+              >
+                <Text
+                  variant={isActive ? 'subhead' : 'callout'}
+                  style={{ color: isActive ? theme.colors.primary : theme.colors.textTertiary }}
+                >
+                  {option.label}
+                </Text>
+              </PressScale>
+            );
+          })}
+        </ScrollView>
+      </View>
 
       {generationError ? (
         <View
