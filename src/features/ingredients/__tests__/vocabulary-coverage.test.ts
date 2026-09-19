@@ -258,18 +258,15 @@ describe('vocabulary coverage', () => {
 
   it('resolves or finds the right ingredient for most terms', () => {
     const correct = countOf('RESOLVED_CORRECT') + countOf('SEARCH_CORRECT');
-    // STAGE 1: 190/254 -> 218/254. Raised to the new measured state, which is
-    // also the ceiling for alias-only work: every one of the 36 remaining
-    // failures is a concept the catalogue does not have. Stage 2 adds rows and
-    // raises this again.
-    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.858);
+    // STAGE 1: 190 -> 218 (aliases). STAGE 2A batch A: 218 -> 235 (7 rows).
+    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.925);
   });
 
   it('keeps wrong answers of any kind bounded', () => {
     const wrong = countOf('WRONG_SAME_GROUP') + countOf('WRONG_OTHER_GROUP');
     // Counted from LIVE RESULTS, not filtered from the list that defines it.
-    // STAGE 1: 22 -> 15. Tightened to the measured state, so a 16th fails.
-    expect(wrong).toBeLessThanOrEqual(15);
+    // STAGE 1: 22 -> 15. STAGE 2A batch A: 15 -> 4.
+    expect(wrong).toBeLessThanOrEqual(4);
   });
 
   it('gets every term right whose concept the catalogue actually has', () => {
@@ -298,8 +295,8 @@ describe('vocabulary coverage', () => {
       (r) => `${r.term} -> ${r.got} [want ${r.expected}]`,
     );
     // The invariant that matters, and the one that must reach ZERO.
-    // STAGE 1: 14 -> 10. All ten survivors are concepts the catalogue does not
-    // have, so no alias can move them; they are Stage 2's to close.
-    expect(violations.length).toBeLessThanOrEqual(10);
+    // STAGE 1: 14 -> 10. STAGE 2A batch A: 10 -> 1. The survivor is `corn
+    // flakes` offering corn oil, and batch B adds the row that closes it.
+    expect(violations.length).toBeLessThanOrEqual(1);
   });
 });

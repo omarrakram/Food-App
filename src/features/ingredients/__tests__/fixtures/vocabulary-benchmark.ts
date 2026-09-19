@@ -16,6 +16,15 @@ import type { FoodGroup } from './food-groups';
  *
  * Both were counted as wins. A benchmark that cannot tell "returned" from
  * "returned the right thing" measures the wrong quantity.
+ *
+ * WHEN A LABEL MAY CHANGE, because it is otherwise the one thing here that
+ * must not move. `absent` is a statement about the CATALOGUE, not about the
+ * search: it says "we do not have this concept". When an approved stage adds
+ * the row, that statement stops being true and the label follows the data —
+ * always from `absent` to `canonical`, which is strictly HARDER to satisfy,
+ * because `absent` accepts any dead end while `canonical` demands one exact
+ * slug. A label may never move the other way, and may never be relaxed to let
+ * an implementation pass.
  */
 
 export type Expectation =
@@ -118,7 +127,7 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
     note: 'Ontology: the BLEND deserves its own row. Tracked as a P1 gap.',
   },
   { terms: ['dukkah', 'دقة'], expect: canonical('dukkah') },
-  { terms: ['wara enab', 'ورق عنب', 'vine leaves'], expect: absent('vine leaves', 'vegetable') },
+  { terms: ['wara enab', 'ورق عنب', 'vine leaves'], expect: canonical('vine-leaves') },
 
   // --- meat, cuts and offal -----------------------------------------------
   { terms: ['kandooz', 'كندوز', 'veal'], expect: canonical('veal') },
@@ -160,11 +169,11 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
   // --- dairy and cheese ---------------------------------------------------
   { terms: ['gebna beida', 'جبنة بيضاء', 'white cheese'], expect: canonical('white-cheese') },
   { terms: ['gebna rumi', 'جبنة رومي', 'roumy'], expect: canonical('roumy-cheese') },
-  { terms: ['talaga', 'طلاجة'], expect: absent('gebna talaga', 'cheese') },
-  { terms: ['mesh', 'مش'], expect: absent('mish cheese', 'cheese') },
-  { terms: ['areesh', 'قريش', 'cottage cheese'], expect: absent('areesh cheese', 'cheese') },
+  { terms: ['talaga', 'طلاجة'], expect: canonical('talaga-cheese') },
+  { terms: ['mesh', 'مش'], expect: canonical('mish-cheese') },
+  { terms: ['areesh', 'قريش', 'cottage cheese'], expect: canonical('areesh-cheese') },
   { terms: ['labna', 'لبنة', 'labneh'], expect: canonical('labneh') },
-  { terms: ['eshta', 'قشطة'], expect: absent('clotted cream', 'dairy') },
+  { terms: ['eshta', 'قشطة'], expect: canonical('clotted-cream') },
   { terms: ['cream'], expect: canonical('cream') },
   { terms: ['zabadi', 'زبادي', 'yogurt'], expect: canonical('yogurt') },
 
@@ -185,9 +194,9 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
   { terms: ['shaareya', 'شعرية', 'vermicelli'], expect: canonical('vermicelli') },
 
   // --- legumes ------------------------------------------------------------
-  { terms: ['fool akhdar', 'فول أخضر'], expect: absent('green fava beans', 'legume') },
+  { terms: ['fool akhdar', 'فول أخضر'], expect: canonical('green-fava-beans') },
   { terms: ['fool medames', 'فول مدمس', 'broad beans'], expect: canonical('fava-beans') },
-  { terms: ['termis', 'ترمس', 'lupini'], expect: absent('lupini beans', 'legume') },
+  { terms: ['termis', 'ترمس', 'lupini'], expect: canonical('lupini-beans') },
   { terms: ['adas', 'عدس', 'lentils'], expect: canonical('lentils') },
   {
     terms: ['homos', 'حمص', 'chickpeas'],
