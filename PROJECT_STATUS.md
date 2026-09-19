@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-19 |
-| **Current phase** | **CORE JOURNEY UX — numerals, onboarding, ingredient picker and budget landed; pantry/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -353,6 +353,62 @@ everywhere, but refusing ٠١٢٣ as *input* would be refusing the launch market
 own keyboard. Currency position (`150 ج.م`, suffixed in both languages) is
 pinned too, because a tidy-up to a prefix would silently change every price in
 the product.
+
+#### Pantry — Milestone 5
+
+**Adding was a form.** The "+" in the header opened a sheet asking for a
+quantity, a unit and a date — for the sentence "I bought tomatoes". Quantity,
+unit and expiry are all *optional* to every consumer of a pantry item, so
+demanding them at the door was turning the fastest thought in the product into
+data entry.
+
+**One field now does both jobs.** Typing filters what you have *and* offers
+catalogue matches you do not, as one-tap adds with nothing else required. The
+editor sheet survives for the details, reached by tapping a row. The field is
+also always present now — it was hidden on an empty pantry, so the one screen
+that most needed a way in did not have one.
+
+**Expiring soon was a caption** in the same weight as a category heading, so
+"three things are about to go off" looked exactly like "dairy". It is now a
+tinted bordered block with its own count and its own `Cook with these`, which
+carries `expiring=1` so the cook flow starts from those items rather than the
+whole pantry.
+
+**`Cook from pantry` moved up from the bottom.** With thirty ingredients, the
+action the pantry exists to enable was below all of them.
+
+**Basics got a quiet route** to the existing Settings screen — they change every
+match in the app so they need one, but they are not what someone opens the
+pantry to do, and editing is not duplicated.
+
+Semantics preserved and now pinned by test: five expiry states (expired,
+expires-today, expiring-soon, fresh, **unknown** — an undated item is never
+guessed to be fresh); an expired item is unusable but **not deleted**; and
+`Cook with these` hands over a *copy of the names*, so editing the temporary
+search cannot reach back into storage. The smoke proves the last one end to end
+— it removes an ingredient from the search and asserts the pantry is unchanged.
+
+#### Shopping list — Milestone 6
+
+**Checked items used to stay in place** inside their category group, so a
+half-done shop was a list where the next thing to find was somewhere among the
+things already found. Unchecked items now come first, still ordered by category
+because that *is* aisle order, and the done pile sinks to the bottom at reduced
+opacity — receded, not hidden, so a mistaken tick can still be undone.
+
+The estimated-total surface was still floating on a shadow; this screen was not
+in the Phase 3.5 flattening pass. It is border-first now.
+
+**`Ordering — coming soon` is untouched and still disabled**, and the estimated
+total keeps its "some items have no estimate" note. Nothing implies a live or
+guaranteed basket price.
+
+**Saved was audited and deliberately left alone.** It already uses `RecipeCard`
+with `showMatch={false}` — so it does not repeat the dense matching information
+from Results — and it already has saved/viewed/cooked tabs, quick unsave, and
+empty states with a "Discover recipes" CTA. The brief asked for no invented
+folders or classifications; the honest audit result is that this screen needed
+nothing.
 
 ### Not done yet (deliberately, in the stated order)
 

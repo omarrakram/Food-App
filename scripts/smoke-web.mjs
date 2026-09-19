@@ -408,6 +408,47 @@ async function main() {
         (await visible('pantry-empty', 2000)),
     );
 
+    // --- Pantry: quick add, expiry prominence, and the cook handoff -------
+    console.log('\n▸ pantry quick add and cook handoff');
+    await page.goto(`${BASE}/pantry`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1500);
+
+    // ONE FIELD, TWO JOBS. Typing offers catalogue matches you do not hold.
+    await type('pantry-search', 'tomato');
+    check('typing offers something to add', await visible('pantry-add-suggestions', 4000));
+    const addRow = page.locator('[data-testid^="pantry-add-"]').first();
+    if (await addRow.count()) await addRow.click();
+    await page.waitForTimeout(1200);
+
+    const pantryRows = async () => page.locator('[data-testid^="pantry-item-"]').count();
+    check('one tap adds it, with no quantity or date demanded', (await pantryRows()) > 0,
+      `${await pantryRows()} rows`);
+
+    // The primary action is reachable without scrolling past the inventory.
+    check('"cook from pantry" is present', await visible('pantry-cook', 4000));
+    check('basics have a route, quietly', await visible('pantry-basics', 3000));
+
+    // COOKING MUST NOT MUTATE THE PANTRY.
+    const pantryCountBefore = await pantryRows();
+    await tap('pantry-cook');
+    await page.waitForTimeout(2000);
+    check('cook-with-these opens the picker', await visible('cook-ingredient-picker', 8000));
+    const seededFromPantry = await page.locator('[data-testid^="selected-"]').count();
+    check('and arrives pre-selected from the pantry', seededFromPantry > 0,
+      `${seededFromPantry} selected`);
+
+    // Change the temporary selection, then go back and check the pantry.
+    const firstSelected = page.locator('[data-testid^="selected-"]').first();
+    if (await firstSelected.count()) await firstSelected.click();
+    await page.waitForTimeout(600);
+    await page.goto(`${BASE}/pantry`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1500);
+    check('removing an ingredient from the SEARCH leaves the pantry alone',
+      (await pantryRows()) === pantryCountBefore,
+      `${pantryCountBefore} -> ${await pantryRows()}`);
+    await shot('03b-pantry-quick-add');
+
+
     // --- What a row says about how much there is -------------------------
     //
     // THE BUG THIS GUARDS: a row rendered "rice / g / 2 days left".
@@ -1350,8 +1391,11 @@ async function main() {
     );
     check('opening Cook from the pantry pre-selects the pantry', /tomato/.test(seeded), seeded);
     check(
+      // Requires that something WAS seeded. Without that clause this passed
+      // while the picker seeded nothing at all — which is exactly how a real
+      // seeding regression hid behind a green food-safety assertion.
       'FOOD SAFETY: and never pre-selects something already expired',
-      !/chicken/.test(seeded),
+      /tomato/.test(seeded) && !/chicken/.test(seeded),
       seeded,
     );
     await shot('17i-cook-from-pantry');

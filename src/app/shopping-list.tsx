@@ -172,10 +172,14 @@ export default function ShoppingListScreen() {
                 style={{
                   gap: theme.spacing.xs,
                   padding: theme.spacing.lg,
-                  borderRadius: theme.radius.lg,
+                  borderRadius: theme.radius.md,
                   backgroundColor: theme.colors.surface,
-                  ...theme.elevation(1),
+                  // Border-first, like every other surface since Phase 3.5.
+                  // This screen was not in that pass and kept its shadow.
+                  borderWidth: 1,
+                  borderColor: theme.colors.border,
                 }}
+                testID="shopping-total"
               >
                 <Text variant="caption" color="textTertiary">
                   {t('shopping.estimatedTotal')}
@@ -187,23 +191,71 @@ export default function ShoppingListScreen() {
               </View>
             ) : null}
 
-            {grouped.map((group) => (
-              <View key={group.category} style={{ gap: theme.spacing.xs }}>
-                <Text variant="caption" color="textTertiary">
-                  {t(`category.${group.category}` as const)}
+            {/*
+              STILL TO BUY COMES FIRST, and what is already in the trolley
+              sinks to the bottom.
+
+              Checked items used to stay in place inside their category group,
+              so a half-done shop was a list where the next thing to find was
+              somewhere among the things already found. In a supermarket, with
+              one hand, that is the whole job of this screen. The categories
+              still order the unchecked items — that IS the aisle order — and
+              the done pile does not need them.
+            */}
+            {grouped.map((group) => {
+              const pending = group.items.filter((item) => !item.isChecked);
+              if (pending.length === 0) return null;
+              return (
+                <View key={group.category} style={{ gap: theme.spacing.xs }}>
+                  <Text
+                    variant="micro"
+                    color="textTertiary"
+                    style={{ textTransform: 'uppercase' }}
+                  >
+                    {t(`category.${group.category}` as const)}
+                  </Text>
+                  {pending.map((item, index) => (
+                    <View key={item.id}>
+                      <Row
+                        item={item}
+                        onToggle={() => toggle.mutate({ id: item.id, isChecked: !item.isChecked })}
+                        onRemove={() => remove.mutate(item.id)}
+                      />
+                      {index < pending.length - 1 ? <Divider /> : null}
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
+
+            {checkedCount > 0 ? (
+              <View style={{ gap: theme.spacing.xs }} testID="shopping-checked-group">
+                <Text
+                  variant="micro"
+                  color="textTertiary"
+                  style={{ textTransform: 'uppercase' }}
+                >
+                  {t('shopping.inTrolley', { count: checkedCount })}
                 </Text>
-                {group.items.map((item, index) => (
-                  <View key={item.id}>
-                    <Row
-                      item={item}
-                      onToggle={() => toggle.mutate({ id: item.id, isChecked: !item.isChecked })}
-                      onRemove={() => remove.mutate(item.id)}
-                    />
-                    {index < group.items.length - 1 ? <Divider /> : null}
-                  </View>
-                ))}
+                {/* Receded, not hidden: still reachable to untick a mistake. */}
+                <View style={{ opacity: 0.55 }}>
+                  {(items ?? [])
+                    .filter((item) => item.isChecked)
+                    .map((item, index, all) => (
+                      <View key={item.id}>
+                        <Row
+                          item={item}
+                          onToggle={() =>
+                            toggle.mutate({ id: item.id, isChecked: !item.isChecked })
+                          }
+                          onRemove={() => remove.mutate(item.id)}
+                        />
+                        {index < all.length - 1 ? <Divider /> : null}
+                      </View>
+                    ))}
+                </View>
               </View>
-            ))}
+            ) : null}
 
             <View style={{ gap: theme.spacing.sm, marginTop: theme.spacing.md }}>
               {checkedCount > 0 ? (
