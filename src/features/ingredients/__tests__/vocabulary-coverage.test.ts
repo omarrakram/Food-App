@@ -107,6 +107,13 @@ function countOf(outcome: Outcome): number {
   return RESULTS.filter((r) => r.outcome === outcome).length;
 }
 
+/** The terms behind a count, so a failure names them instead of an integer. */
+function rows(outcome: Outcome): string[] {
+  return RESULTS.filter((r) => r.outcome === outcome).map(
+    (r) => `${r.term} -> ${r.got ?? '(nothing)'} [want ${r.expected}]`,
+  );
+}
+
 const TOTAL = RESULTS.length;
 
 // --- the benchmark must be well-formed before it can measure anything ------
@@ -221,10 +228,6 @@ describe('alias integrity', () => {
 
 describe('vocabulary coverage', () => {
   it('reports the full breakdown', () => {
-    const rows = (outcome: Outcome) =>
-      RESULTS.filter((r) => r.outcome === outcome).map(
-        (r) => `${r.term} -> ${r.got ?? '(nothing)'} [want ${r.expected}]`,
-      );
     console.warn(
       JSON.stringify(
         {
@@ -258,15 +261,40 @@ describe('vocabulary coverage', () => {
 
   it('resolves or finds the right ingredient for most terms', () => {
     const correct = countOf('RESOLVED_CORRECT') + countOf('SEARCH_CORRECT');
-    // STAGE 1: 190 -> 218 (aliases). STAGE 2A batch A: 218 -> 235 (7 rows).
-    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.925);
+    // STAGE 1: 190 -> 218 (aliases). STAGE 2A: 218 -> 235 -> 254 of 256.
+    //
+    // NOT pinned at 1.0, deliberately, and this is the one bound here that is
+    // loose on purpose. Recording a newly discovered missing concept means
+    // adding terms labelled `absent`, which dead-end and therefore count as
+    // incorrect until the row exists. Pinning this at 1.0 would make the
+    // honest act — writing down a gap the moment it is found — turn the suite
+    // red, and the cheapest way out of that is to not write it down.
+    //
+    // Nothing real hides in the slack: a regression on a concept the
+    // catalogue HAS fails the invariant below, and a wrong answer of any kind
+    // fails the bound above it. Both are exact zeros.
+    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.98);
   });
 
   it('keeps wrong answers of any kind bounded', () => {
     const wrong = countOf('WRONG_SAME_GROUP') + countOf('WRONG_OTHER_GROUP');
-    // Counted from LIVE RESULTS, not filtered from the list that defines it.
-    // STAGE 1: 22 -> 15. STAGE 2A batch A: 15 -> 4.
-    expect(wrong).toBeLessThanOrEqual(4);
+    /*
+      Counted from LIVE RESULTS, not filtered from the list that defines it.
+      STAGE 1: 22 -> 15. STAGE 2A: 15 -> 4 (batch A) -> 2 (batch B).
+
+      The two are `drumsticks` and `drumstick`, both landing on
+      `chicken-thigh`. They are ONE open ontology question, recorded in the
+      benchmark rather than settled, and deliberately left failing — see the
+      note on that entry.
+
+      This bound is therefore not zero, and the arithmetic to get it to zero
+      was available: drop the entry, or relabel it to accept the answer it
+      already gives. Both would have been the exact move this benchmark was
+      rebuilt to make impossible. A measurement you can round down by deleting
+      the inconvenient row measures nothing.
+    */
+    expect(rows('WRONG_OTHER_GROUP')).toEqual([]);
+    expect(wrong).toBeLessThanOrEqual(2);
   });
 
   it('gets every term right whose concept the catalogue actually has', () => {
@@ -294,9 +322,12 @@ describe('vocabulary coverage', () => {
     const violations = RESULTS.filter((r) => r.outcome === 'WRONG_OTHER_GROUP').map(
       (r) => `${r.term} -> ${r.got} [want ${r.expected}]`,
     );
-    // The invariant that matters, and the one that must reach ZERO.
-    // STAGE 1: 14 -> 10. STAGE 2A batch A: 10 -> 1. The survivor is `corn
-    // flakes` offering corn oil, and batch B adds the row that closes it.
-    expect(violations.length).toBeLessThanOrEqual(1);
+    // The invariant that matters, and the one that has now reached ZERO.
+    // STAGE 1: 14 -> 10. STAGE 2A: 10 -> 1 (batch A) -> 0 (batch B). The last
+    // survivor was `corn flakes` offering corn oil.
+    //
+    // `toEqual([])` rather than a count, so a failure prints the pair that
+    // broke it instead of two integers.
+    expect(violations).toEqual([]);
   });
 });

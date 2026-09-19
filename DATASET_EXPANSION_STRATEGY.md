@@ -816,6 +816,186 @@ schedule.** Nothing about Stage 1's number should be read as a launch signal.
 
 ---
 
+## 9c. Stage 2A result: closing the benchmark's own gaps
+
+Stage 2A was scoped to the 14 concepts the Stage 1 measurement proved were
+missing outright, plus two ontology corrections, in two reviewable batches.
+
+### The numbers
+
+| | Stage 1 exit | Batch A `065d85f` | Batch B |
+|---|---|---|---|
+| Benchmark terms | 254 | 254 | **256** |
+| Correct | 218 (86%) | 235 (93%) | **254 (99%)** |
+| Dead ends | 21 | 15 | **0** |
+| Wrong, same group | 5 | 3 | **2** |
+| Wrong, **different group** (safety) | 10 | 1 | **0** |
+| Failures on concepts we have | 0 | 0 | **0** |
+| Canonical ingredients | 257 | 264 | **271** |
+| Aliases | 997 | 1050 | **1095** |
+
+**Read the 99% correctly: it is a ceiling effect, not a grade.** This benchmark
+was written FROM the catalogue's gaps — every term in it was chosen because it
+probed something suspected of being missing or wrong. Closing those gaps
+exhausts the set. The score now carries no information about anything except
+the gaps already known, which is precisely the circularity §3b's independent
+holdout exists to break. What the set is still worth is REGRESSION: it now
+fails on any wrong answer at all.
+
+The two remaining wrong answers are `drumsticks` and `drumstick`, one open
+question counted twice — see below. They are recorded in the benchmark and
+left failing on purpose.
+
+### The 14 concepts added
+
+**Batch A** — `vine-leaves` (the ingredient; mahshi wara enab stays a recipe),
+`areesh-cheese`, `mish-cheese`, `talaga-cheese`, `clotted-cream` (eshta),
+`lupini-beans` (termis), `green-fava-beans` (fresh in the pod, a different
+purchase from dried `fava-beans`).
+
+**Batch B** — `whole-chicken`, `chicken-gizzards` (kawanes), `trotters`
+(kawareh), `sausage-casing`, `sole-fish` (samak moosa), `halva` (halawa
+tehiniya), `corn-flakes`.
+
+Each was put through the §3c rules before it was written: not a dish, not an
+alias of something we already have, not a brand, distinct enough in buying and
+cooking to earn a row, and no interchangeability regression.
+
+`sausage-casing` is the §3c rule applied literally, as instructed: the
+INGREDIENT is the edible casing, with `mombar` as the household alias. Stuffed
+mombar is a dish and belongs in the recipe catalogue, not here.
+
+`corn-flakes` declares `gluten` deliberately. Mainstream corn flakes carry
+barley malt, and an allergen declaration is the one field where the safe
+reading wins over the pedantic one.
+
+### The two ontology corrections
+
+**Istamboli and Baramili are not roumy.** They are the Egyptian soft, white,
+brined Domiati family. Earlier text in this document said otherwise and was
+wrong. Applying the interchangeability rule, neither earned a row: both became
+aliases of `white-cheese`, the row that already carries `domiati` and `feta`.
+Talaga was assessed on its own terms rather than collapsed for also being white
+and soft — it is essentially unsalted, which is exactly what makes swapping it
+for a brined cheese wrong in both directions — and it earned a row.
+
+**No `red-lentils` row.** The catalogue's `lentils` row is already named *red
+lentils*. The earlier proposal was stale and is withdrawn.
+
+### Whole chicken: the one that needed more than a row
+
+`whole chicken` resolved to `chicken-breast`, with full confidence and no fuzzy
+tier involved, because `chicken-breast` claimed `chicken` as an alias and
+`whole` was stripped as a preparation word. **No CSV row could have fixed it**:
+any alias written for a whole bird normalises to `chicken` too, and lands on
+the breast again.
+
+Three changes, each needed:
+
+1. **`whole` is protected when it leads a phrase** (`normalise.ts`). Checked
+   against every other `whole …` phrase before the change rather than after:
+   `whole wheat` unchanged; `whole spices` used to resolve to `mixed spice`,
+   which was WRONG — whole spices are unground, not a blend — and now suggests
+   it instead; `whole tomatoes` likewise; `whole milk` stops resolving and
+   suggests `milk`. Giving `milk` a `whole milk` alias was tried and removed:
+   it shares its leading token with every other `whole …` phrase, so the fuzzy
+   band put milk at the TOP of the results for `whole wheat` and `whole grain
+   rice`. One phrase resolving is not worth four phrases answering "milk".
+2. **The generic words left `chicken-breast`** — `chicken`, `فراخ`, `دجاج`,
+   `firakh`. A word that names six ingredients belongs to none of them. It
+   resolved to breast for no better reason than that `chicken-breast` sorts
+   before `chicken-thigh`.
+3. **A family-word concept** (`ingredientFamily`), because removing the alias
+   broke search in a way that mattered more than the bug it fixed — see below.
+
+`دجاجة` was proposed as an alias and rejected: ta-marbuta folding turns it into
+`دجاج`, the generic word, which would have made bare "chicken" mean a whole
+bird — the same lie with a different row on the end of it.
+
+### Scope note: the family-word change was not in the plan
+
+Removing `chicken` as an alias broke eight tests, and they were right to break.
+`something without chicken` silently dropped the exclusion, and
+`requiredIngredients: ['chicken']` returned nothing. Someone who says "without
+chicken" and is served chicken thighs has been failed by the app.
+
+Resolution returns ONE ingredient; the honest answer for a generic word is a
+set. So `ingredientFamily(term)` returns the rows whose canonical name contains
+the term as a whole token — read off the catalogue's own naming, not a
+hand-kept list, so a seventh chicken row extends the family with nothing to
+update. It is consulted in exactly three places:
+
+- `recipeContains` — a family word matches any member, which is what both
+  callers mean: "without chicken" rules out every cut, "with chicken" is
+  satisfied by any one.
+- `extractIngredients` — yields the WORD, not the family, because
+  `requiredIngredients` is an AND and expanding `chicken` to six cuts would
+  build a query no recipe satisfies.
+- `planQuery` — nothing. SQL's `requireSlugs` is an AND and cannot express "any
+  of these six", so a family word contributes nothing to the narrowing and the
+  client filter enforces it, the same division of labour dislikes already use.
+
+**It is deliberately NOT consulted by pantry matching.** Owning "chicken" is a
+claim about one specific thing in a fridge, and a claim that vague is the bug
+this milestone removed.
+
+This is more than "add 14 rows", and it is recorded here rather than buried:
+the alternative was to leave either the lie or the broken exclusion in place,
+and neither was acceptable. No ranking or scoring rule was touched.
+
+### Rejected, and why
+
+- **`red-lentils`** — the row exists under the name `lentils`.
+- **`istamboli`, `baramili`** — aliases of `white-cheese`, not rows.
+- **`fresh white cheese`** as a talaga alias — the import guard rejected it and
+  was right: `fresh` is a noise word, so it normalised to `white cheese` and
+  collided with that row's own name. Talaga is precisely NOT brined white
+  cheese, and the alias would have undone the distinction the row exists to
+  make.
+- **stuffed mombar** as an ingredient — it is a dish.
+- **`دجاجة` / `dagaga`** — folds to the generic `دجاج`.
+- **`whole milk`** as a milk alias — measured harm to four other phrases.
+- **bare `moosa`** as a sole alias — a given name, not an ingredient word, and
+  one edit from `kosa`, so it stole zucchini through the fuzzy tier. Caught by
+  the benchmark on the batch it was introduced in. `koosa` and `kousa` were
+  added to `zucchini` so that word resolves by alias instead of by guess.
+
+### Stage 2B conflict, recorded not resolved
+
+**`chicken-thigh` carries `drumsticks` as an alias.** Defensible — أوراك is
+sold as the leg quarter, thigh and drumstick attached — but a drumstick is not
+a thigh. **This must be settled BEFORE any drumstick row is added**, or the two
+will fight over the word and the first-writer-wins tiebreak will decide it
+arbitrarily, exactly as it decided `chicken`.
+
+It is now IN the benchmark, labelled `absent('drumsticks', 'poultry')` and
+failing, so the wrong-answer bound is 2 rather than 0. Getting it to zero was
+one deletion away and that deletion is the move this benchmark was rebuilt to
+make impossible.
+
+### Terms wanting native-speaker review
+
+- **`دجاج` (MSA) now reaches nothing at all.** Egyptian households say فراخ,
+  which does surface the cuts, but the MSA word returning an empty list is a
+  genuine gap. It cannot be fixed with an alias — no single row may own it, and
+  the import guard enforces global alias uniqueness — so it needs the family
+  concept extended to Arabic generic words, or a disambiguation affordance.
+  **Stage 2B.**
+- **`كوارع` vs `أكارع`** for trotters — both are used; both are aliases.
+- **`ممبار` as the casing vs the stuffed dish** — the household word almost
+  always means the finished dish. Modelling the casing is right for an
+  ingredient ontology but a shopper typing ممبار may expect the recipe.
+- **`حلاوة`** alone can mean sweetness generally; `حلاوة طحينية` is the
+  product. The bare word is an alias of `halva` here.
+
+### What Stage 2A did not do
+
+No schema change. No change to the hosted Supabase database. No recipes. No
+pricing. No ranking or scoring change. The broad ~100-row P0 expansion has not
+begun.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins
@@ -825,7 +1005,8 @@ before the previous one's number has moved.
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                            |
 | **1. Aliases only**                | ✅ **Done** — three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided                                                                                                                            | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten are missing concepts, not vocabulary) |
-| **2. P0 ingredients**              | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
+| **2A. Benchmark-gap closure**      | ✅ **Done** — the 14 concepts the Stage 1 measurement proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix                                                                             | **99% correct**, dead ends **0**, **cross-group 0**; 2 wrong answers left, both the one recorded drumstick conflict                    |
+| **2B. P0 ingredients**             | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
 | **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
 | **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |
 | **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**              |

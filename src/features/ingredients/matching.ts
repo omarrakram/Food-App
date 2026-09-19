@@ -25,8 +25,12 @@ const ALIAS_INDEX: Map<string, CatalogueIngredient> = (() => {
     const keys = [ingredient.name, ingredient.slug.replace(/-/g, ' '), ...ingredient.aliases];
     for (const key of keys) {
       const normalised = normaliseIngredientName(key);
-      // First writer wins: catalogue order defines precedence for shared
-      // aliases (e.g. "chicken" resolves to chicken breast, not thighs).
+      // First writer wins, so catalogue order breaks any tie. That tiebreak
+      // is alphabetical and arbitrary, and it must never be what decides a
+      // question of meaning: `chicken` used to resolve to chicken breast for
+      // no better reason than that `chicken-breast` sorts before
+      // `chicken-thigh`. A word that names more than one ingredient belongs
+      // to none of them — see the chicken-cut tests in `matching.test.ts`.
       if (normalised && !index.has(normalised)) index.set(normalised, ingredient);
     }
     // Arabic name is indexed separately since normalisation differs.
@@ -41,6 +45,56 @@ export function resolveIngredient(raw: string): CatalogueIngredient | null {
   const normalised = normaliseIngredientName(raw);
   if (!normalised) return null;
   return ALIAS_INDEX.get(normalised) ?? null;
+}
+
+/**
+ * Words that name SEVERAL catalogue ingredients rather than one.
+ *
+ * `chicken` is the case that forced this to exist. It is not a cut, so no row
+ * may own it — see the alias index above — but it is not meaningless either:
+ * "something without chicken" has an obvious meaning, and so does "a meal with
+ * chicken". Resolution cannot express that, because resolution returns one
+ * ingredient and the honest answer here is six.
+ *
+ * The rule is read off the catalogue's own naming rather than from a list
+ * maintained by hand: a word is a family word when it appears as a WHOLE TOKEN
+ * inside the canonical name of more than one ingredient. `chicken` is a token
+ * of `chicken breast`, `chicken thighs`, `chicken wings`, `chicken livers`,
+ * `chicken gizzards` and `whole chicken`; `فراخ` of their Arabic names. Adding
+ * a seventh chicken row extends the family with nothing to update.
+ *
+ * Deliberately NOT consulted by pantry matching. Owning "chicken" is a claim
+ * about one specific thing in a fridge, and a claim that vague is the bug this
+ * whole milestone removed. A family narrows a search; it never fills a pantry.
+ */
+const FAMILY_INDEX: Map<string, CatalogueIngredient[]> = (() => {
+  const index = new Map<string, CatalogueIngredient[]>();
+  for (const ingredient of INGREDIENT_CATALOGUE) {
+    const tokens = new Set(
+      [ingredient.name, ingredient.nameAr]
+        .flatMap((value) => normaliseIngredientName(value).split(' '))
+        .filter((token) => token.length >= 3),
+    );
+    for (const token of tokens) {
+      const bucket = index.get(token);
+      if (bucket) bucket.push(ingredient);
+      else index.set(token, [ingredient]);
+    }
+  }
+  return index;
+})();
+
+/**
+ * The ingredients a family word covers, or an empty list for anything else.
+ *
+ * Empty for a term that resolves on its own: one exact answer always beats a
+ * family, so `milk` stays milk rather than becoming every milk in the shop.
+ */
+export function ingredientFamily(raw: string): readonly CatalogueIngredient[] {
+  const normalised = normaliseIngredientName(raw);
+  if (!normalised || normalised.includes(' ')) return [];
+  if (ALIAS_INDEX.has(normalised)) return [];
+  return FAMILY_INDEX.get(normalised) ?? [];
 }
 
 /** Autocomplete suggestions, best first. */

@@ -17,6 +17,17 @@ import type { FoodGroup } from './food-groups';
  * Both were counted as wins. A benchmark that cannot tell "returned" from
  * "returned the right thing" measures the wrong quantity.
  *
+ * WHAT 254/254 MEANS, since Stage 2A reached it and the number invites the
+ * wrong conclusion. This set was written FROM the catalogue's gaps: every term
+ * in it was chosen because it probed something suspected of being missing or
+ * wrong. Closing those gaps therefore exhausts the set, and the score stops
+ * carrying information about anything except the gaps already known. It is a
+ * ceiling effect, not a grade, and treating it as a launch signal would be the
+ * same mistake as the count it replaced. Launch validation needs terms nobody
+ * built the catalogue against — the independent holdout in §3b of
+ * DATASET_EXPANSION_STRATEGY.md. What this set is still good for is
+ * REGRESSION: it now fails on any wrong answer at all.
+ *
  * WHEN A LABEL MAY CHANGE, because it is otherwise the one thing here that
  * must not move. `absent` is a statement about the CATALOGUE, not about the
  * search: it says "we do not have this concept". When an approved stage adds
@@ -132,8 +143,12 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
   // --- meat, cuts and offal -----------------------------------------------
   { terms: ['kandooz', 'كندوز', 'veal'], expect: canonical('veal') },
   { terms: ['kebda', 'كبدة', 'liver'], expect: canonical('liver') },
-  { terms: ['kawareh', 'كوارع', 'trotters'], expect: absent('trotters', 'offal') },
-  { terms: ['mombar', 'ممبار'], expect: absent('stuffed intestine', 'offal') },
+  { terms: ['kawareh', 'كوارع', 'trotters'], expect: canonical('trotters') },
+  {
+    terms: ['mombar', 'ممبار'],
+    expect: canonical('sausage-casing'),
+    note: 'The INGREDIENT is the casing. Stuffed mombar is a dish and belongs in the recipe catalogue.',
+  },
   { terms: ['lahma mafrooma', 'لحمة مفرومة', 'mince'], expect: canonical('ground-beef') },
   { terms: ['sogoq', 'سجق', 'sausage'], expect: canonical('sausage') },
   { terms: ['basterma', 'بسطرمة', 'pastrami'], expect: canonical('pastrami') },
@@ -145,12 +160,17 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
   { terms: ['deek roumi', 'ديك رومي', 'turkey'], expect: canonical('turkey') },
   {
     terms: ['farkha', 'فرخة', 'whole chicken'],
-    expect: absent('whole chicken', 'poultry'),
-    note: 'CURRENTLY WRONG: `whole chicken` resolves to chicken-breast by alias. A bird is not a cut of itself.',
+    expect: canonical('whole-chicken'),
+    note: 'Was resolving to chicken-breast by alias. Fixed in Stage 2A by the row AND by protecting a leading `whole` in the normaliser — an alias alone could not have done it.',
   },
   { terms: ['werk', 'ورك', 'thigh'], expect: canonical('chicken-thigh') },
+  {
+    terms: ['drumsticks', 'drumstick'],
+    expect: absent('drumsticks', 'poultry'),
+    note: 'STAGE 2B CONFLICT, recorded rather than resolved. `chicken-thigh` claims `drumsticks` as an alias. Defensible — أوراك is sold as the leg quarter, thigh and drumstick attached — but a drumstick is not a thigh, and the alias must be settled BEFORE any drumstick row exists or the two will fight over the word. Left failing on purpose so it cannot be forgotten.',
+  },
   { terms: ['sedr', 'صدر', 'breast'], expect: canonical('chicken-breast') },
-  { terms: ['kawanes', 'كوانس', 'gizzards'], expect: absent('gizzards', 'offal') },
+  { terms: ['kawanes', 'كوانس', 'gizzards'], expect: canonical('chicken-gizzards') },
 
   // --- fish and seafood ---------------------------------------------------
   { terms: ['feseekh', 'فسيخ'], expect: canonical('salted-fish') },
@@ -164,7 +184,7 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
     terms: ['tona', 'تونة', 'tuna'],
     expect: oneOf(['tuna-can'], 'The catalogue only stocks the canned form, which is what Egyptian kitchens mean.'),
   },
-  { terms: ['samak moosa', 'سمك موسى', 'sole'], expect: absent('sole', 'fish') },
+  { terms: ['samak moosa', 'سمك موسى', 'sole'], expect: canonical('sole-fish') },
 
   // --- dairy and cheese ---------------------------------------------------
   { terms: ['gebna beida', 'جبنة بيضاء', 'white cheese'], expect: canonical('white-cheese') },
@@ -228,8 +248,8 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
     expect: canonical('noodles'),
     note: 'Genericised brand. Indomie means instant noodles in Egypt; the brand is an alias, never a row.',
   },
-  { terms: ['corn flakes', 'كورن فليكس'], expect: absent('corn flakes', 'packaged') },
-  { terms: ['halawa', 'حلاوة', 'halva'], expect: absent('halva', 'packaged') },
+  { terms: ['corn flakes', 'كورن فليكس'], expect: canonical('corn-flakes') },
+  { terms: ['halawa', 'حلاوة', 'halva'], expect: canonical('halva') },
   { terms: ['gelatin', 'جيلاتين'], expect: canonical('gelatin') },
   { terms: ['yeast', 'خميرة', 'khamira'], expect: canonical('yeast') },
 ];

@@ -1,5 +1,8 @@
 import { createTranslator } from '@/i18n';
 
+import { recipeContains } from '@/features/recipes/constraints';
+import { makeRecipeIngredient } from '@/test-utils/factories';
+
 import { applyInterpretation, interpretQuery, LOW_CONFIDENCE } from '../interpret';
 import type { MealRequest } from '@/types/domain';
 
@@ -96,8 +99,21 @@ describe('nutrition extraction', () => {
 
 describe('ingredient extraction', () => {
   it('finds catalogue ingredients mentioned in the query', () => {
-    expect(parse('high protein meal using chicken').ingredients).toContain('chicken breast');
     expect(parse('something sweet with bananas').ingredients).toContain('bananas');
+    expect(parse('grilled chicken breast salad').ingredients).toContain('chicken breast');
+  });
+
+  it('keeps a word that names several ingredients as a word', () => {
+    // This used to read `toContain('chicken breast')`, and it passed because
+    // `chicken-breast` had claimed `chicken` as an alias. The query does not
+    // ask for breast. It asks for chicken, which is six rows, and the AND in
+    // `requiredIngredients` cannot carry six — see `extractIngredients`.
+    expect(parse('high protein meal using chicken').ingredients).toEqual(['chicken']);
+    expect(parse('عايز أكلة فيها فراخ').ingredients).toEqual(['فراخ']);
+  });
+
+  it('does not add the family word when the query named a cut', () => {
+    expect(parse('grilled chicken breast salad').ingredients).not.toContain('chicken');
   });
 
   it('does not match a substring of another word', () => {
@@ -258,9 +274,28 @@ describe('the phrases people type', () => {
   it('EXCLUDES what a query rules out instead of searching for it', () => {
     const result = parse('something without chicken');
 
-    expect(result.excludedIngredients).toContain('chicken breast');
+    expect(result.excludedIngredients).toContain('chicken');
     // The critical half: "without chicken" must not become "with chicken".
-    expect(result.ingredients).not.toContain('chicken breast');
+    expect(result.ingredients).toEqual([]);
+  });
+
+  it('rules out EVERY cut when the exclusion is the family word', () => {
+    // The assertion that matters is not the string, it is the effect. Someone
+    // who says "without chicken" and is served chicken thighs has been failed
+    // by the app, and the string in the middle is no comfort.
+    const result = parse('something without chicken');
+    const recipe = (slug: string) => ({
+      ingredients: [makeRecipeIngredient({ id: slug, name: slug, slug, sortOrder: 0 })],
+    });
+
+    for (const cut of ['chicken-breast', 'chicken-thigh', 'chicken-wings', 'whole-chicken']) {
+      expect({ cut, excluded: result.excludedIngredients.some((term) => recipeContains(recipe(cut), term)) }).toEqual({
+        cut,
+        excluded: true,
+      });
+    }
+
+    expect(result.excludedIngredients.some((term) => recipeContains(recipe('tilapia'), term))).toBe(false);
   });
 
   it('handles the other ways people phrase an exclusion', () => {
@@ -286,7 +321,7 @@ describe('the phrases people type', () => {
   });
 
   it('resolves Arabic ingredient names', () => {
-    expect(parse('عايز أكلة فيها فراخ').ingredients).toContain('chicken breast');
+    expect(parse('عايزة أكلة فيها بلطي').ingredients).toContain('tilapia');
   });
 
   it('reads calories and cooking time together', () => {
@@ -307,7 +342,7 @@ describe('exclusions survive into the request', () => {
     const interpretation = interpretQuery('something without chicken', 'EGP');
     const applied = applyInterpretation(base, interpretation, 'something without chicken');
 
-    expect(applied.dislikedIngredients).toContain('chicken breast');
+    expect(applied.dislikedIngredients).toContain('chicken');
   });
 
   it('does not drop the user’s standing dislikes', () => {

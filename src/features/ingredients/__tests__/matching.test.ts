@@ -50,8 +50,8 @@ describe('resolveIngredient', () => {
   });
 
   it('resolves through aliases, transliterations and Arabic', () => {
-    expect(resolveIngredient('firakh')?.slug).toBe('chicken-breast');
-    expect(resolveIngredient('فراخ')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('sedr firakh')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('صدر فراخ')?.slug).toBe('chicken-breast');
     expect(resolveIngredient('foul')?.slug).toBe('fava-beans');
     expect(resolveIngredient('aish baladi')?.slug).toBe('baladi-bread');
     expect(resolveIngredient('feta')?.slug).toBe('white-cheese');
@@ -344,8 +344,16 @@ describe('resolving English and Arabic names', () => {
     expect(resolveIngredient('pepper')?.slug).toBe('black-pepper');
     expect(resolveIngredient('bread')?.slug).toBe('baladi-bread');
     expect(resolveIngredient('coriander')?.slug).toBe('coriander');
-    expect(resolveIngredient('chicken')?.slug).toBe('chicken-breast');
     expect(resolveIngredient('pasta')?.slug).toBe('pasta');
+  });
+
+  it('does not own the bare word `chicken`, which names no single cut', () => {
+    // This assertion used to read `toBe('chicken-breast')` and sat in the
+    // block above as though it were a meaning worth protecting. It was not:
+    // breast, thigh, wings and a whole bird are different purchases, and the
+    // catalogue answered with whichever row happened to carry the alias. See
+    // the chicken-cut block at the end of this file.
+    expect(resolveIngredient('chicken')).toBeNull();
   });
 
   it('tolerates the spelling variants people actually type', () => {
@@ -434,5 +442,85 @@ describe('ingredient autocomplete ranks by how good the evidence is', () => {
 
   it('returns nothing for a query that resembles nothing', () => {
     expect(names('zzqqxx')).toEqual([]);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Chicken cuts. A bird is not a cut of itself.
+//
+// `whole chicken` used to return `chicken-breast`, with full confidence and no
+// fuzzy tier involved, because `chicken-breast` carried `chicken` as an alias
+// and `whole` was stripped as a preparation word. Someone who had a whole bird
+// in the freezer was told they had breast fillets, and someone who had breast
+// fillets was told they could cook a recipe calling for a whole bird.
+//
+// Two changes fixed it and both are load-bearing, which is why these tests
+// assert the behaviour rather than either mechanism: a `whole-chicken` row,
+// and a leading `whole` protected in the normaliser — without the second, every
+// alias written for the new row would have normalised back to `chicken` and
+// landed on the breast again.
+// ---------------------------------------------------------------------------
+describe('chicken cuts are not interchangeable', () => {
+  it('resolves a whole bird to the whole bird, not to breast', () => {
+    expect(resolveIngredient('whole chicken')?.slug).toBe('whole-chicken');
+    expect(resolveIngredient('farkha')?.slug).toBe('whole-chicken');
+    expect(resolveIngredient('فرخة')?.slug).toBe('whole-chicken');
+    expect(resolveIngredient('whole chicken')?.slug).not.toBe('chicken-breast');
+  });
+
+  it('keeps chicken breast meaning chicken breast', () => {
+    expect(resolveIngredient('chicken breast')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('chicken breasts')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('sedr')?.slug).toBe('chicken-breast');
+    expect(resolveIngredient('صدر فراخ')?.slug).toBe('chicken-breast');
+  });
+
+  it('keeps chicken thigh meaning chicken thigh', () => {
+    expect(resolveIngredient('chicken thigh')?.slug).toBe('chicken-thigh');
+    expect(resolveIngredient('werk')?.slug).toBe('chicken-thigh');
+    expect(resolveIngredient('أوراك فراخ')?.slug).toBe('chicken-thigh');
+  });
+
+  it('offers the cuts for a generic query instead of picking one', () => {
+    // The generic word is not a lie the catalogue is allowed to tell, and it
+    // is not a dead end either: it is a question, and the answer is a list.
+    expect(resolveIngredient('chicken')).toBeNull();
+    expect(resolveIngredient('فراخ')).toBeNull();
+
+    const suggested = searchIngredients('chicken', 8).map((item) => item.slug);
+    expect(suggested).toEqual(expect.arrayContaining(['chicken-breast', 'chicken-thigh']));
+    expect(suggested.length).toBeGreaterThan(1);
+  });
+
+  it('does not let a generic pantry entry claim a specific cut', () => {
+    // The failure this guards against is silent and expensive: the recipe
+    // reads 100% matched, the shopping list drops the line, and the cook finds
+    // out at the pan.
+    const index = buildAvailabilityIndex([pantry('chicken')], [], { now: NOW });
+    const recipe = {
+      ingredients: [recipeIngredient('chicken breast'), recipeIngredient('rice')],
+    };
+
+    const result = matchRecipeIngredients(recipe, index);
+    const breast = result.matches.find((match) => match.name === 'chicken breast')!;
+
+    expect(breast.isAvailable).toBe(false);
+    expect(result.missingIngredients.map((match) => match.name)).toContain('chicken breast');
+  });
+
+  it('does not let a whole bird in the pantry stand in for a cut, or the reverse', () => {
+    const wholeBird = buildAvailabilityIndex([pantry('whole chicken')], [], { now: NOW });
+    const breastOnly = buildAvailabilityIndex([pantry('chicken breast')], [], { now: NOW });
+
+    const needsBreast = { ingredients: [recipeIngredient('chicken breast')] };
+    const needsWholeBird = { ingredients: [recipeIngredient('whole chicken')] };
+
+    expect(matchRecipeIngredients(needsBreast, wholeBird).haveCount).toBe(0);
+    expect(matchRecipeIngredients(needsWholeBird, breastOnly).haveCount).toBe(0);
+
+    // ...and each still matches itself, so the guard above is not just a pair
+    // of names that never match anything.
+    expect(matchRecipeIngredients(needsBreast, breastOnly).haveCount).toBe(1);
+    expect(matchRecipeIngredients(needsWholeBird, wholeBird).haveCount).toBe(1);
   });
 });

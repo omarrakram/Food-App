@@ -65,8 +65,43 @@ const NOISE_WORDS = new Set([
 /**
  * `ground beef` and `ground coriander` are distinct ingredients, so a few
  * "noise" words are protected when they lead a multi-word name.
+ *
+ * `whole` joined them in Stage 2A, and it is the interesting case. As noise it
+ * made `whole chicken` normalise to `chicken` — which `chicken-breast` claimed
+ * as an alias — so asking for a whole bird returned a breast, confidently, by
+ * alias rather than by guess. No CSV row could fix that: any alias written for
+ * `whole chicken` normalises to `chicken` too.
+ *
+ * Protection applies only at index 0 of a multi-word phrase, so `chicken
+ * whole` is unaffected, and the effect on the other phrases people actually
+ * type was checked before the change rather than after:
+ *
+ *   `whole milk`    stops resolving outright; `milk` is now the top search
+ *                   suggestion instead. Giving `milk` a `whole milk` alias was
+ *                   tried first and REMOVED: it shares its leading token with
+ *                   every other `whole ...` phrase, so the fuzzy
+ *                   token-overlap band put milk at the top of the results for
+ *                   `whole wheat`, `whole spices` and `whole grain rice`.
+ *                   One phrase resolving beat four phrases answering "milk".
+ *   `whole wheat`   suggests bulgur, as before.
+ *   `whole spices`  used to resolve to `mixed spice`, which was wrong — whole
+ *                   spices are unground, not a blend. Now a suggestion.
+ *   `whole tomatoes` used to resolve to `tomatoes`; now suggests it instead.
+ *                   A can label rather than a kitchen word.
+ *
+ * So the cost is real and it is bounded: four phrases that used to resolve
+ * confidently now offer the same answer as a suggestion, and two of those were
+ * resolving to the WRONG thing. Measured before the change, not after.
  */
-const PROTECTED_PREFIXES = new Set(['ground', 'green', 'red', 'white', 'black', 'sweet']);
+const PROTECTED_PREFIXES = new Set([
+  'ground',
+  'green',
+  'red',
+  'white',
+  'black',
+  'sweet',
+  'whole',
+]);
 
 function stripArabic(input: string): string {
   return input

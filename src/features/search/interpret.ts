@@ -1,4 +1,5 @@
 import { INGREDIENT_CATALOGUE } from '@/features/ingredients/catalogue';
+import { ingredientFamily } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import { fromMajor } from '@/lib/format/money';
 import type {
@@ -175,6 +176,26 @@ function extractServings(text: string): number | null {
   return word ?? null;
 }
 
+/**
+ * The ingredients a query mentions.
+ *
+ * Two passes, because two different things count as "mentioning" one.
+ *
+ * The first matches a name the catalogue owns — canonical, Arabic or alias —
+ * and yields that ingredient's name.
+ *
+ * The second handles a FAMILY WORD: one that names several rows and therefore
+ * none of them, like `chicken` or `فراخ`. It yields the WORD, not the family,
+ * and that distinction is the whole point. These names travel on to
+ * `requiredIngredients`, which is an AND — expanding `chicken` to all six cuts
+ * would build the query "contains breast AND thigh AND wings AND liver AND
+ * gizzards AND a whole bird", which no recipe satisfies. Left as a word, it
+ * reaches `recipeContains`, which knows a family word matches any member.
+ *
+ * A family word is skipped when the first pass already named one of its
+ * members, so "chicken breast" asks for chicken breast rather than for chicken
+ * breast and, redundantly, chicken.
+ */
 function extractIngredients(text: string): string[] {
   const normalisedText = ` ${normaliseIngredientName(text)} `;
   const found: string[] = [];
@@ -187,6 +208,14 @@ function extractIngredients(text: string): string[] {
       return key.length >= 3 && normalisedText.includes(` ${key} `);
     });
     if (hit) found.push(ingredient.name);
+  }
+
+  const named = new Set(found);
+  for (const token of new Set(normalisedText.trim().split(' '))) {
+    const family = ingredientFamily(token);
+    if (family.length < 2) continue;
+    if (family.some((ingredient) => named.has(ingredient.name))) continue;
+    found.push(token);
   }
 
   return [...new Set(found)];
@@ -261,7 +290,12 @@ function residualKeywords(
   // ("capsicum") is removed as surely as the canonical name.
   for (const name of matched.ingredients) {
     const entry = INGREDIENT_CATALOGUE.find((candidate) => candidate.name === name);
-    if (!entry) continue;
+    // A family word is not a catalogue entry and has only one spelling, but it
+    // was still understood, so it must not survive into the title search.
+    if (!entry) {
+      rest = rest.replaceAll(name.toLowerCase(), ' ');
+      continue;
+    }
     for (const spelling of [entry.name, entry.nameAr, ...entry.aliases]) {
       if (spelling.length < 3) continue;
       rest = rest.replaceAll(spelling.toLowerCase(), ' ');

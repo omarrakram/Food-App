@@ -47,6 +47,15 @@ export type FoodGroup =
  * taxonomy disagree. Kept explicit rather than inferred, because a wrong
  * grouping would quietly weaken the safety invariant this file exists to
  * support.
+ *
+ * The test for an entry is whether it is TRUE, not whether it is strict. Most
+ * of these tighten the benchmark — without them the `protein` category alone
+ * would call a sole fillet and a whole chicken "red meat", so confusing either
+ * with beef would be scored as a near miss. A few loosen it, and cheese is the
+ * example: mistaking areesh for another fresh white cheese is a near miss and
+ * should be reported as one. Leaving that mislabelled would have made the
+ * safety invariant fire on a confusion it was never meant to catch, and a
+ * signal that cries wolf is the one people eventually edit away.
  */
 const OVERRIDES: Record<string, FoodGroup> = {
   // `protein` is really six groups wearing one label.
@@ -55,15 +64,17 @@ const OVERRIDES: Record<string, FoodGroup> = {
   veal: 'red-meat', kofta: 'red-meat', pastrami: 'red-meat', sausage: 'red-meat',
   'hot-dog': 'red-meat', 'luncheon-meat': 'red-meat', rabbit: 'red-meat',
   'chicken-liver': 'offal', liver: 'offal',
+  'chicken-gizzards': 'offal', trotters: 'offal', 'sausage-casing': 'offal',
   'chicken-breast': 'poultry', 'chicken-thigh': 'poultry', 'chicken-wings': 'poultry',
-  duck: 'poultry', pigeon: 'poultry', turkey: 'poultry',
+  duck: 'poultry', pigeon: 'poultry', turkey: 'poultry', 'whole-chicken': 'poultry',
   anchovy: 'fish', herring: 'fish', mackerel: 'fish', mullet: 'fish',
   salmon: 'fish', 'salted-fish': 'fish', sardines: 'fish', 'sea-bass': 'fish',
-  'sea-bream': 'fish', tilapia: 'fish', 'tuna-can': 'fish',
+  'sea-bream': 'fish', tilapia: 'fish', 'tuna-can': 'fish', 'sole-fish': 'fish',
   calamari: 'seafood', crab: 'seafood', mussels: 'seafood', shrimp: 'seafood',
   eggs: 'egg',
   edamame: 'legume', 'green-lentils': 'legume', 'kidney-beans': 'legume',
   soybeans: 'legume', 'split-peas': 'legume', tofu: 'legume',
+  'green-fava-beans': 'legume',
   'falafel-mix': 'prepared',
 
   // `pantry` is the other catch-all.
@@ -72,7 +83,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   pistachios: 'nut-seed', 'pumpkin-seeds': 'nut-seed', 'sunflower-seeds': 'nut-seed',
   walnuts: 'nut-seed', 'coconut-flakes': 'nut-seed', 'peanut-butter': 'nut-seed',
   'black-eyed-peas': 'legume', chickpeas: 'legume', 'fava-beans': 'legume',
-  lentils: 'legume', 'white-beans': 'legume',
+  lentils: 'legume', 'white-beans': 'legume', 'lupini-beans': 'legume',
   'baking-chocolate': 'baking', 'baking-powder': 'baking', flour: 'baking',
   gelatin: 'baking', yeast: 'baking', cocoa: 'baking', 'icing-sugar': 'baking',
   'brown-sugar': 'sweetener', 'corn-syrup': 'sweetener', honey: 'sweetener',
@@ -104,6 +115,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   cheddar: 'cheese', 'cream-cheese': 'cheese', halloumi: 'cheese',
   kashkaval: 'cheese', mozzarella: 'cheese', parmesan: 'cheese',
   'roumy-cheese': 'cheese', 'white-cheese': 'cheese', labneh: 'cheese',
+  'areesh-cheese': 'cheese', 'mish-cheese': 'cheese', 'talaga-cheese': 'cheese',
   'egg-white': 'egg', 'egg-yolk': 'egg',
   'lasagne-sheets': 'pasta', noodles: 'pasta', pasta: 'pasta',
   vermicelli: 'pasta', couscous: 'pasta',

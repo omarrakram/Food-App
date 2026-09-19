@@ -45,13 +45,32 @@ describe('planning a query from constraints', () => {
   it('resolves required and excluded ingredients to canonical slugs', () => {
     const plan = planQuery({
       constraints: emptyConstraints({
-        requiredIngredients: ['فراخ'],
+        requiredIngredients: ['صدر فراخ'],
         excludedIngredients: [toRestriction('capsicum', 'hard_avoid')!],
       }),
     });
 
     expect(plan.requireSlugs).toEqual(['chicken-breast']);
     expect(plan.excludeSlugs).toEqual(['bell-pepper']);
+  });
+
+  it('leaves a word naming several ingredients out of the SQL narrowing', () => {
+    /*
+      `فراخ` used to appear here as `['chicken-breast']`, which was wrong twice
+      over: it narrowed the query to ONE cut, and it did so because that row
+      happened to own the alias.
+
+      SQL cannot express "any of these six" through `requireSlugs`, which is an
+      AND. So a family word contributes nothing to the query and the client
+      filter enforces it instead — the same division of labour dislikes have
+      always used, and safe for the same reason: every page the database
+      returns is filtered again before it is shown.
+    */
+    const plan = planQuery({
+      constraints: emptyConstraints({ requiredIngredients: ['فراخ'] }),
+    });
+
+    expect(plan.requireSlugs).toEqual([]);
   });
 
   it('caps the page size whatever the caller asks for', () => {

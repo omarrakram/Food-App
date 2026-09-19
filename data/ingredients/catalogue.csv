@@ -45,7 +45,8 @@ celery,celery,كرفس,vegetables,g,50,,كرفس|karafs|krafs|karafs baladi,0,1
 cheddar,cheddar cheese,جبنة شيدر,dairy,g,,dairy,cheddar|شيدر|جبنة شيدر|gebna cheddar|gibna shedar,0,1
 cherry-tomato,cherry tomatoes,طماطم شيري,vegetables,piece,15,,شيري|طماطم شيري|cherry tomatos,0,1
 chia,chia seeds,بذور الشيا,pantry,g,,,شيا|chia,0,0
-chicken-breast,chicken breast,صدور فراخ,protein,g,180,,chicken|chicken breasts|firakh|فراخ|صدر فراخ|دجاج|sedr|sedr firakh|صدر,0,1
+chicken-breast,chicken breast,صدور فراخ,protein,g,180,,chicken breasts|صدر فراخ|sedr|sedr firakh|صدر,0,1
+chicken-gizzards,chicken gizzards,كوانس,protein,g,,,كوانس|kawanes|kawanis|gizzards|قوانص|gizzard|kawanes firakh,0,1
 chicken-liver,chicken livers,كبدة فراخ,protein,g,,,kebda farakh|كبدة فراخ|kebda firakh|kabda farakh,0,1
 chicken-thigh,chicken thighs,أوراك فراخ,protein,g,130,,chicken thigh|drumsticks|أوراك|وراك فراخ|werk|ورك|wrak|awrak firakh,0,1
 chicken-wings,chicken wings,أجنحة فراخ,protein,g,40,,wings|اجنحة|جوانح,0,1
@@ -66,6 +67,7 @@ condensed-milk,condensed milk,لبن مكثف,dairy,g,,dairy,لبن مكثف|swe
 coriander,coriander,كزبرة,vegetables,bunch,50,,cilantro|kozbara|كزبره خضراء|kosbara|kuzbara|kozbara khadra,0,1
 coriander-ground,coriander seeds,كزبرة ناشفة,spices,tsp,2,,ground coriander|كزبره ناشفه|kozbara nashfa|kuzbara nashfa,1,0
 corn,sweetcorn,ذرة,vegetables,g,,,corn|maize|ذرة|درة,0,1
+corn-flakes,corn flakes,كورن فليكس,pantry,g,,gluten,كورن فليكس|cornflakes|corn flake|رقائق الذرة|kornfleks|kornflex,0,0
 corn-oil,corn oil,زيت ذرة,pantry,ml,,,زيت ذرة|زيت الذرة,1,0
 corn-syrup,corn syrup,شراب الذرة,pantry,ml,,,شراب ذرة|glucose syrup,0,0
 cornflour,cornflour,نشا,carbs,g,,,cornstarch|نشا|نشاء|nesha|nisha,0,0
@@ -114,6 +116,7 @@ green-peas,green peas,بسلة,frozen,g,,,peas|besella|بسله,0,0
 ground-beef,ground beef,لحمة مفرومة,protein,g,,,minced beef|mince|minced meat|kofta meat|لحمة مفرومه|مفروم|lahma mafrooma|lahma mafroma|lahm mafroom,0,1
 guava,guava,جوافة,fruit,piece,120,,جوافة|gawafa|guavas|goafa|gwafa|guafa,0,1
 halloumi,halloumi,حلومي,dairy,g,,dairy,حلومي|halloum|haloumi|gebna halloumi,0,1
+halva,halva,حلاوة طحينية,pantry,g,,sesame,حلاوة|halawa|halaweh|halawa tehiniya|tahini halva|حلاوه طحينيه|halvah,0,0
 hazelnuts,hazelnuts,بندق,pantry,g,,nuts,بندق|bondok|hazelnut,0,0
 herring,herring,رنجة,protein,g,,fish,renga|رنجة|ringa,0,1
 hibiscus,hibiscus,كركديه,spices,g,,,كركديه|karkade|karkadeh|karkadeeh,0,0
@@ -210,12 +213,14 @@ salt,salt,ملح,spices,tsp,6,,malh|table salt|ملح طعام|melh|malh nakhy,1
 salted-fish,fesikh,فسيخ,protein,g,,fish,fesikh|فسيخ|salted mullet,0,1
 sardines,sardines,سردين,protein,g,,fish,sardine|سردين|سردينة,0,1
 sausage,beef sausage,سجق,protein,g,40,,sogo2|sogok|سجق بلدي,0,1
+sausage-casing,sausage casing,ممبار,protein,g,,,ممبار|mombar|mumbar|momber|مصران|beef casing|intestine casing,0,1
 sea-bass,sea bass,قاروص,protein,piece,400,fish,qaros|قاروص|وقار|branzino,0,1
 sea-bream,sea bream,دنيس,protein,piece,350,fish,denis|دنيس|gilthead,0,1
 semolina,semolina,سميد,carbs,g,,gluten,سميد|smeed|farina,0,0
 sesame-oil,sesame oil,زيت سمسم,pantry,ml,,sesame,زيت السمسم|zeit simsim|sesame seed oil,0,0
 sesame-seeds,sesame seeds,سمسم,spices,g,,sesame,سمسم|simsim|semsem|simsim abyad,1,0
 shrimp,shrimp,جمبري,protein,g,12,shellfish,prawns|gambari|جمبرى,0,1
+sole-fish,sole,سمك موسى,protein,g,,fish,سمك موسى|samak moosa|samak musa|سمك موسي|dover sole|sole fillet,0,1
 soy-sauce,soy sauce,صوص الصويا,sauces,ml,,soy|gluten,صويا صوص|soya sauce|صوص صويا,0,0
 soybeans,soybeans,فول الصويا,protein,g,,soy,soya|فول صويا|soy beans,0,0
 spinach,spinach,سبانخ,vegetables,g,,,sabanekh|سبانخ مفرومة|sbanekh|sabanek,0,1
@@ -242,6 +247,7 @@ tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,salsa|tomato puree
 tomato-sauce,tomato sauce,صلصة طماطم,sauces,g,,,passata|صوص طماطم مطبوخ,0,0
 tomatoes,tomatoes,طماطم,vegetables,piece,120,,tomato|oota|طماطم حمراء|قوطة|outa|tamatem|auta,0,1
 tortilla,tortilla,تورتيلا,bakery,piece,60,gluten,تورتيلا|wrap|خبز تورتيلا,0,1
+trotters,trotters,كوارع,protein,g,,,كوارع|kawareh|kaware|kawari3|أكارع|cow feet|calf trotters,0,1
 tuna-can,canned tuna,تونة,protein,can,140,fish,tuna|tuna can|تونه,0,0
 turkey,turkey,ديك رومي,protein,g,,,turkey breast|رومي|ديك رومي|deek roumi|dik roumi|deek rumi,0,1
 turmeric,turmeric,كركم,spices,g,,,كركم|kurkum|korkom|kurkom,1,0
@@ -259,7 +265,8 @@ watermelon,watermelon,بطيخ,fruit,g,,,بطيخ|batikh|batteekh|battikh|bateek
 white-beans,white beans,فاصوليا بيضاء,pantry,g,,,fasolia|cannellini|فاصوليا,0,0
 white-cheese,white cheese,جبنة بيضاء,dairy,g,,dairy,feta|gebna beida|domiati|جبنه بيضاء|جبنة فيتا|gebna bayda|gebna beda|gibna beida|istanbouly|إسطنبولي|istambouli|baramili|برميلي|gebna baramili,0,1
 white-pepper,white pepper,فلفل أبيض,spices,g,,,فلفل ابيض|felfel abyad|filfil abyad,1,0
+whole-chicken,whole chicken,فرخة,protein,piece,1200,,farkha|فرخه|farkha kamla|فرخة كاملة|whole bird|farkha baladi|فرخة بلدي,0,1
 worcestershire,worcestershire sauce,صوص ورشستر,sauces,ml,,fish,ورشستر|worcester,0,0
 yeast,yeast,خميرة,pantry,g,,,خميرة|khamira|instant yeast,1,0
 yogurt,yogurt,زبادي,dairy,g,105,dairy,zabady|plain yoghurt|زبادى|zabadi|zabadi baladi,0,1
-zucchini,zucchini,كوسة,vegetables,piece,160,,courgette|kosa|كوسه,0,1
+zucchini,zucchini,كوسة,vegetables,piece,160,,courgette|kosa|koosa|kousa|كوسه,0,1

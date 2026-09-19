@@ -1,4 +1,4 @@
-import { isNeededLine, resolveIngredient } from '@/features/ingredients/matching';
+import { ingredientFamily, isNeededLine, resolveIngredient } from '@/features/ingredients/matching';
 import { normaliseIngredientName } from '@/features/ingredients/normalise';
 import type {
   Allergen,
@@ -241,9 +241,18 @@ export function recipeSlugs(recipe: Pick<Recipe, 'ingredients'>): Set<string> {
 /**
  * Does this recipe contain the named ingredient?
  *
- * Falls back to normalised-name comparison when neither side resolves to the
- * catalogue, so a user excluding something we have never heard of still gets
- * an exact-name exclusion rather than nothing at all.
+ * Three answers in descending order of confidence. An exact resolution wins.
+ * Failing that, a FAMILY WORD — one that names several catalogue rows, like
+ * `chicken` — matches any member, which is what both callers mean: "without
+ * chicken" rules out every cut, and "with chicken" is satisfied by any one of
+ * them. Failing that, normalised-name comparison, so a user excluding
+ * something we have never heard of still gets an exact-name exclusion rather
+ * than nothing at all.
+ *
+ * The family case is why removing `chicken` as an alias of `chicken-breast`
+ * did not simply break search. Resolution returns one ingredient; the honest
+ * answer for a generic word is a set, and a set is what exclusion and
+ * requirement have always needed.
  */
 export function recipeContains(
   recipe: Pick<Recipe, 'ingredients'>,
@@ -258,6 +267,17 @@ export function recipeContains(
   const resolved = resolveIngredient(wanted);
   const wantedSlug = resolved?.slug ?? null;
   const wantedKey = normaliseIngredientName(resolved?.name ?? wanted);
+
+  if (!resolved) {
+    const family = ingredientFamily(wanted);
+    if (family.length > 0) {
+      const slugs = new Set(family.map((ingredient) => ingredient.slug));
+      return lines.some((line) => {
+        const slug = ingredientSlug(line);
+        return slug !== null && slugs.has(slug);
+      });
+    }
+  }
 
   return lines.some((line) => {
     if (wantedSlug) {
