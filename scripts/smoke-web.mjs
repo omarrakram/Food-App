@@ -767,12 +767,63 @@ async function main() {
     console.log('\n▸ budget');
     await page.goto(`${BASE}/budget`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(1500);
-    await tap('budget-preset-150', { optional: true });
+    // EMPTY is not submittable. The screen asks for one number; offering to
+    // proceed without it would produce an empty results page that looks like a
+    // broken app rather than a missing input.
+    await type('budget-amount', '', { clear: true });
+    await page.waitForTimeout(400);
+    const emptyDisabled = await page.evaluate(() => {
+      const el = document.querySelector('[data-testid="budget-submit"]');
+      return el?.getAttribute('aria-disabled') === 'true' || el?.disabled === true;
+    });
+    check('an empty budget cannot be submitted', emptyDisabled);
+
+    // ZERO and a below-the-floor amount are refused with a reason, not silently.
+    await type('budget-amount', '0', { clear: true });
+    await page.waitForTimeout(500);
+    const zeroText = await page.evaluate(() => document.body.innerText);
+    check('zero is refused with an explanation', /budget above|أقل من|فوق/i.test(zeroText));
+
+    // A quick amount fills the field rather than being a separate mode.
+    check('a quick amount is one tap', await tap('budget-preset-150', { optional: true }));
+    await page.waitForTimeout(500);
+    const filled = await page.inputValue('[data-testid="budget-amount"]').catch(() => '');
+    check('and it lands in the field', filled.includes('150'), filled);
+
+    // Servings is on the screen, not behind Filters — a budget without a head
+    // count is not a constraint the engine can use.
+    check('servings is set on the main screen', await visible('filter-servings', 3000));
+
+    // Filters exist, are optional, and are behind one action.
+    check('filters are secondary, behind one action', await visible('budget-filters', 3000));
+    if (await tap('budget-filters', { optional: true })) {
+      check('the budget filter sheet opens', await visible('budget-filters-done', 4000));
+      await tap('budget-filters-done', { optional: true });
+      await page.waitForTimeout(400);
+    }
+
+    // The CTA names the amount and no magic.
+    const budgetCta = await page.locator('[data-testid="budget-submit"]').innerText();
+    check('the CTA states the amount', /150/.test(budgetCta), budgetCta.replace(/\n/g, ' '));
+    check('and uses no sparkle language', !/sparkle|magic|✨/i.test(budgetCta));
+
+    // The setup screen carries no price disclaimer; results do.
+    const setupText = await page.evaluate(() => document.body.innerText);
+    check('the setup screen is not a disclaimer page',
+      !/not live store prices|ليست أسعار/i.test(setupText));
+
     await shot('10-budget');
     if (await tap('budget-submit', { optional: true })) {
-      await page.waitForTimeout(2400);
+      await page.waitForTimeout(2500);
       const budgetResults = await page.locator('[data-testid^="result-"]').count();
       check('budget returns results', budgetResults > 0, `${budgetResults} results`);
+      const resultsText = await page.evaluate(() => document.body.innerText);
+      check('and results DO carry the price caveat',
+        /not live store prices|ليست أسعار|Estimated/i.test(resultsText));
+      // The four sort modes survive the redesign.
+      for (const mode of ['best', 'cheapest', 'fastest', 'protein']) {
+        check(`sort "${mode}" is offered`, await visible(`sort-${mode}`, 2500));
+      }
       await shot('11-budget-results');
     }
 

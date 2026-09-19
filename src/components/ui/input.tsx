@@ -12,6 +12,7 @@ import {
 
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/theme';
+import { ROLE_FAMILY } from '@/theme/typography';
 
 import { PressScale } from './press-scale';
 import { Text } from './text';
@@ -47,6 +48,14 @@ export type InputProps = Omit<TextInputProps, 'style'> & {
    * pins it to one row and measures the content instead.
    */
   autoGrow?: { min: number; max: number };
+  /**
+   * Renders the value at display size.
+   *
+   * For a field that IS the screen's question — the budget amount — where the
+   * number the user typed should be the largest thing on the page rather than
+   * body text in a box like any other.
+   */
+  emphasis?: 'default' | 'display';
 };
 
 /**
@@ -66,6 +75,7 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
     suffix,
     containerStyle,
     autoGrow,
+    emphasis = 'default',
     onFocus,
     onBlur,
     onContentSizeChange,
@@ -139,8 +149,17 @@ export const Input = forwardRef<RNTextInput, InputProps>(function Input(
               flex: 1,
               paddingVertical: theme.spacing.md,
               ...(measuredHeight !== null ? { height: measuredHeight } : null),
-              fontSize: theme.typography.body.fontSize,
-              lineHeight: theme.typography.body.lineHeight,
+              fontSize:
+                emphasis === 'display'
+                  ? theme.typography.title1.fontSize
+                  : theme.typography.body.fontSize,
+              lineHeight:
+                emphasis === 'display'
+                  ? theme.typography.title1.lineHeight
+                  : theme.typography.body.lineHeight,
+              fontFamily: ROLE_FAMILY[
+                emphasis === 'display' ? 'display' : 'body'
+              ],
               color: theme.colors.text,
               textAlign: isRTL ? 'right' : 'left',
             },

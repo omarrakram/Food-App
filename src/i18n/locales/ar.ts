@@ -122,6 +122,7 @@ export const ar: Record<RawTranslationKey, string> = {
   'budget.subtitle': 'سنقترح وجبات قريبة من ميزانيتك',
   'budget.amountLabel': 'الميزانية',
   'budget.presets': 'اختيارات سريعة',
+  'budget.ctaWithAmount': 'شوف أكلات بأقل من {amount}',
   'budget.findMeals': 'ابحث عن وجبات',
   'budget.estimateNoticeShort': 'أسعار تقديرية وليست أسعار متاجر حية',
   'budget.withinBudget': 'ضمن الميزانية',

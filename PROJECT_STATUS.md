@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-19 |
-| **Current phase** | **CORE JOURNEY UX — numerals, onboarding and the ingredient picker landed; budget/pantry/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **CORE JOURNEY UX — numerals, onboarding, ingredient picker and budget landed; pantry/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -304,6 +304,55 @@ relative to `Date.now()` — so two reads a millisecond apart disagreed, the
 feed's times shifted under the reader, and `markAllRead` re-seeded before
 saving and re-stamped rows that were already read. Seeding now persists on
 first read. Eight consecutive clean runs since.
+
+#### Ingredient picker cleanup
+
+Four small fixes before Budget. `Only what I have` truncated to `Only what I
+h...` inside a three-up segmented control, so the modes are now **Exact /
+Missing 1 / Missing 2** with one short hint for whichever is selected — a
+clipped label is worse than a terse one, and semantics are unchanged. The
+category rail clipped its last chip to `Pan…`; `paddingHorizontal` on a
+horizontal contentContainer is applied inconsistently at the far edge across RN
+and RN-web, so a trailing spacer **element** does the job the padding could not.
+Commons show **10 instead of 18** — ranking untouched, this is purely how much
+is shown before the user asks. And selected chips in the groups dropped from
+solid to **soft**: an ingredient can appear in the rail, in Common and in an
+open category at once, and three solid cobalt fills made the rail stop reading
+as the summary.
+
+#### Budget flow — Milestone 4
+
+The whole of `RequestFilters` sat **open on the screen** under a "Narrow it
+down" heading: six groups of chips between a person and a list of meals they
+can afford, on a screen whose only job is to take a number. It is now behind
+one action, matching Cook.
+
+**Servings moved the other way — onto the screen.** That is deliberately the
+opposite of what happened in Cook, and the reason is that a budget without a
+head count is not a constraint the engine can use: 150 EGP means something
+completely different for one person and for five, and every downstream price is
+derived from it. In Cook servings is a filter with a good default; in Budget it
+is the second half of the question.
+
+The amount renders at **display size** (new `Input emphasis="display"`), quick
+amounts dropped from **five to three**, the CTA reads **"See meals under 150
+EGP"** and lost its `sparkles` icon.
+
+**The price disclaimer left the setup screen.** It was a filled info panel
+giving a caveat the same visual weight as the input it qualified. The honesty
+is not dropped — it moved to where it is actionable: results already label
+every figure "Estimated prices, not live store prices", mark each row with `~`,
+and count the items they could not price. A caveat next to the price it
+qualifies is read; a caveat two screens earlier is not. The smoke asserts both
+halves — setup is *not* a disclaimer page, results *do* carry the caveat.
+
+Validation is pinned by test: empty, zero, negative, below-floor and text are
+all refused; decimals, grouping separators and **Arabic-Indic digits typed on
+an Arabic keyboard** are all accepted. The app renders Western numerals
+everywhere, but refusing ٠١٢٣ as *input* would be refusing the launch market's
+own keyboard. Currency position (`150 ج.م`, suffixed in both languages) is
+pinned too, because a tidy-up to a prefix would silently change every price in
+the product.
 
 ### Not done yet (deliberately, in the stated order)
 
