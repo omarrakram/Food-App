@@ -19,13 +19,19 @@ export type CardProps = {
 };
 
 /**
- * The app's primary content surface. Rounded, softly elevated, and pressable
- * when `onPress` is supplied.
+ * The app's primary content surface.
+ *
+ * Border-first, not shadow-first. A hairline and a background step separate a
+ * card from the page more honestly than a drop shadow does, and a screen of
+ * bordered cards reads as a product while a screen of floating ones reads as a
+ * concept render. `elevation` is therefore 0 by default and should stay there
+ * for anything that sits IN the page; raise it only for things that genuinely
+ * sit above it.
  */
 export function Card({
   children,
   onPress,
-  elevation = 1,
+  elevation = 0,
   padded = true,
   clip = false,
   style,
@@ -36,9 +42,11 @@ export function Card({
 
   const baseStyle: ViewStyle = {
     backgroundColor: theme.colors.surface,
-    borderRadius: theme.radius.lg,
+    borderRadius: theme.radius.md,
     padding: padded ? theme.spacing.lg : 0,
-    borderWidth: elevation === 0 ? 1 : 0,
+    // The border stays at every elevation. It is what gives the card an edge
+    // in dark mode, where a shadow on a dark surface is invisible.
+    borderWidth: 1,
     borderColor: theme.colors.border,
     overflow: clip ? 'hidden' : 'visible',
     ...theme.elevation(elevation),

@@ -51,10 +51,10 @@ export function Chip({
   testID,
 }: ChipProps) {
   const theme = useTheme();
-  const height = size === 'sm' ? 32 : 40;
+  const height = size === 'sm' ? 30 : 38;
   // The pill stays small; the thumb target does not. See touch-target.ts.
   const hitSlop = hitSlopFor(height);
-  const paddingH = size === 'sm' ? theme.spacing.md : theme.spacing.lg;
+  const paddingH = size === 'sm' ? theme.spacing.sm : theme.spacing.md;
 
   const toneColors = {
     neutral: { bg: theme.colors.primarySoft, fg: theme.colors.primarySoftText },
@@ -64,11 +64,9 @@ export function Chip({
     danger: { bg: theme.colors.dangerSoft, fg: theme.colors.dangerSoftText },
   }[tone];
 
-  // `primaryStrong` rather than `primary`: the brand colour is too light to
-  // put a label on and clear 4.5:1. See palette.ts.
   const isSolid = selected && emphasis === 'solid';
   const background = isSolid
-    ? theme.colors.primaryStrong
+    ? theme.colors.primary
     : selected
       ? toneColors.bg
       : theme.colors.surface;
@@ -77,7 +75,11 @@ export function Chip({
     : selected
       ? toneColors.fg
       : theme.colors.textSecondary;
-  const borderColor = selected ? 'transparent' : theme.colors.border;
+  const borderColor = isSolid
+    ? theme.colors.primary
+    : selected
+      ? toneColors.fg
+      : theme.colors.border;
 
   const content = (
     <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.xs }}>
@@ -111,9 +113,14 @@ export function Chip({
         {
           height,
           paddingHorizontal: paddingH,
-          borderRadius: theme.radius.pill,
+          // A rectangle with an 8pt corner, not a capsule. Chips are the single
+          // most repeated element in the app (50+ instances), so their shape IS
+          // the app's shape language.
+          borderRadius: theme.radius.sm,
           backgroundColor: background,
-          borderWidth: selected ? 0 : 1,
+          // A selected soft chip keeps its border too, so selection reads as a
+          // fill change rather than as the outline disappearing.
+          borderWidth: 1,
           borderColor,
           alignItems: 'center',
           justifyContent: 'center',

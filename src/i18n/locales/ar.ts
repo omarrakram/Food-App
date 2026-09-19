@@ -75,6 +75,8 @@ export const ar: Record<RawTranslationKey, string> = {
   'home.question': 'هتاكل إيه النهاردة؟',
   'home.cookWithWhatIHave': 'اطبخ بالمتاح عندي',
   'home.cookWithWhatIHaveSub': 'حوّل مكوّنات مطبخك إلى وجبة',
+  'home.cookWithPantryCount_one': 'مكوّن واحد في مطبخك',
+  'home.cookWithPantryCount_other': '{count} مكوّنات في مطبخك',
   'home.eatWithinBudget': 'كُل في حدود ميزانيتي',
   'home.eatWithinBudgetSub': 'قل لنا ميزانيتك ونحن نجد الوجبات',
   'home.quickIdeas': 'أفكار سريعة',

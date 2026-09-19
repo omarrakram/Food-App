@@ -77,7 +77,13 @@ function TabItem({
       <Animated.View style={iconStyle}>
         <Ionicons name={isFocused ? icons.active : icons.inactive} size={23} color={color} />
       </Animated.View>
-      <Text variant="micro" style={{ color, fontWeight: isFocused ? '700' : '600' }} lines={1}>
+      {/* `micro` carries wide tracking for uppercase eyebrows; a sentence-case
+          tab label wants none of it. */}
+      <Text
+        variant="micro"
+        style={{ color, fontWeight: isFocused ? '700' : '600', letterSpacing: 0 }}
+        lines={1}
+      >
         {label}
       </Text>
     </PressScale>

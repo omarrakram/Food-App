@@ -29,7 +29,7 @@ export type ButtonProps = {
 const SIZES: Record<ButtonSize, { height: number; paddingH: number; gap: number; icon: number }> = {
   sm: { height: 36, paddingH: 14, gap: 6, icon: 16 },
   md: { height: 48, paddingH: 20, gap: 8, icon: 18 },
-  lg: { height: 56, paddingH: 24, gap: 10, icon: 20 },
+  lg: { height: 54, paddingH: 24, gap: 10, icon: 20 },
 };
 
 export function Button({
@@ -52,7 +52,7 @@ export function Button({
   const stretch = fullWidth ?? size === 'lg';
 
   const surface: Record<ButtonVariant, { bg: string; border: string; fg: TextColor }> = {
-    primary: { bg: theme.colors.primaryStrong, border: 'transparent', fg: 'textOnPrimary' },
+    primary: { bg: theme.colors.primary, border: 'transparent', fg: 'textOnPrimary' },
     secondary: { bg: theme.colors.surfaceAlt, border: theme.colors.border, fg: 'text' },
     ghost: { bg: 'transparent', border: 'transparent', fg: 'primary' },
     danger: { bg: theme.colors.dangerStrong, border: 'transparent', fg: 'textOnPrimary' },
@@ -82,14 +82,16 @@ export function Button({
         {
           minHeight: dims.height,
           paddingHorizontal: dims.paddingH,
-          borderRadius: theme.radius.pill,
+          // Rectangular, not a capsule, and flat. A filled button with a drop
+          // shadow floats; a filled button with a crisp corner reads as part of
+          // the page, which is what a production consumer app looks like.
+          borderRadius: theme.radius.md,
           backgroundColor: bg,
           borderWidth: variant === 'secondary' ? 1 : 0,
           borderColor: border,
           alignItems: 'center',
           justifyContent: 'center',
           alignSelf: stretch ? 'stretch' : 'flex-start',
-          ...(variant === 'primary' || variant === 'danger' ? theme.elevation(1) : {}),
         },
         style as ViewStyle,
       ]}
@@ -149,17 +151,21 @@ export function IconButton({
   const backgrounds: Record<typeof variant, string> = {
     secondary: theme.colors.surfaceAlt,
     ghost: 'transparent',
-    // Lighter than it was: a 42%-black disc over a recipe card read as a
-    // heavy dark blob competing with the food. This is enough scrim for a
-    // white glyph to stay legible without becoming the loudest thing on the
-    // card.
-    onImage: 'rgba(0,0,0,0.28)',
+    /*
+      A near-opaque plate in the CURRENT SCHEME'S surface colour, carrying a
+      normal dark-on-light (or light-on-dark) glyph.
+
+      It used to be a translucent black disc with a white glyph, which worked
+      only because every image behind it was either a photograph or a dark
+      gradient. Now that a recipe without a photograph falls back to a light
+      cream tile, a white glyph on a 28%-black disc over cream is close to
+      unreadable — and more than half the catalogue has no photograph. A solid
+      plate is legible over anything, which is the only property that matters
+      when you do not control what is behind it.
+    */
+    onImage: theme.scheme === 'dark' ? 'rgba(23, 26, 33, 0.9)' : 'rgba(255, 255, 255, 0.94)',
   };
-  const foreground = active
-    ? theme.colors.primary
-    : variant === 'onImage'
-      ? '#FFFFFF'
-      : theme.colors.text;
+  const foreground = active ? theme.colors.primary : theme.colors.text;
 
   return (
     <PressScale

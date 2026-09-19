@@ -5,11 +5,76 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-14 |
-| **Current phase** | **CORE PRODUCT CORRECTNESS HOTFIX — done, two rounds.** A–I complete; J–U resume next. Round one: every ingredient selection returned the same answer. Round two: the app overstated what the user had. See "The hotfix". |
-| **App name** | Akla (working name — see "Renaming") |
+| **Last updated** | 2026-09-19 |
+| **Current phase** | **UI/UX UPGRADE — Phase 1–3 (first milestone) done.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
+
+---
+
+## UI/UX upgrade
+
+**Goal:** stop the product reading as an AI-generated demo and make it read as a
+real Egyptian consumer app. Backend behaviour deliberately untouched.
+
+### Phase 1 — what was actually wrong (measured, not asserted)
+
+| # | Finding | Evidence |
+|---|---|---|
+| 1 | **Two different primary colours.** White on the old `paprika500` was **3.48:1** — below the 4.5:1 body minimum — so the palette carried a second, darker `primaryStrong` for anything with a label. The brand colour was never the colour of the most important control on screen. | `palette.ts`, `contrast.test.ts` |
+| 2 | **Capsule shape language.** `radius.pill` (999) was the *most-used* radius in the app — 21 sites — across buttons, chips, badges, search fields and icon plates, alongside 51 `<Chip>` and 10 `<Badge>`. | grep |
+| 3 | **Two decorative gradients.** The home hero pair (gradient card + translucent white icon circle + white text + 26pt radius + shadow — the single most reproduced generated-UI pattern) and the missing-photo placeholder. | `(tabs)/index.tsx`, `recipe-image.tsx` |
+| 4 | **58% of the catalogue had no photograph.** 67 images for 161 recipes; the other 94 rendered as a colour gradient with a stock glyph floating in it. | `image-assets.generated.ts` |
+| 5 | **Everything floated.** `elevation()` applied to 13 surfaces including buttons, list rows, skeletons and segmented controls. | grep |
+| 6 | **The key number was unreadable.** "How much of this do I already have?" — the question the product exists to answer — was a `3/5` badge sitting on the photograph behind a black scrim put there to make it legible. | `recipe-card.tsx` |
+| 7 | **No brand typeface at all.** No `expo-font`, no `useFonts`, no font file. The app renders in whatever the OS picks, Arabic included. | grep |
+| 8 | Four `sparkles` icons; Ionicons across 30 files; `Card` exported and used **zero** times. | grep |
+
+### Phase 2 — design system (done)
+
+- **`palette.ts`** rewritten to cobalt `#3155FF` / warm cream `#FBF7F0` / near-black
+  `#12100E`. White on cobalt is **5.42:1**, so there is one primary again and
+  `primaryStrong` is now an alias kept only for call-site compatibility. Dark mode
+  flips `textOnPrimary` to ink, because white on the lighter dark-mode cobalt
+  measures 3.77:1 and fails. **Both schemes were verified against the existing
+  contrast contract before the file was edited**, and `contrast.test.ts` passes.
+- **`tokens.ts`** — radii collapsed to `0/4/8/12/16/20`; `pill` survives only for
+  avatars and circular icon buttons. Type scale tightened with negative tracking
+  on display/titles and positive tracking on `micro` for uppercase eyebrows.
+- **`elevation()`** flattened hard: level 1 is now a whisper, and separation comes
+  from a hairline border plus a background step.
+- **Components** de-pilled and flattened: `button` (rectangular, no shadow, true
+  brand colour), `chip` (8pt rectangle, keeps its border when selected),
+  `badge` (4pt squared status tag), `card` (border-first, elevation 0 default),
+  `segmented-control`, `states`, `skeleton`, `stepper`.
+- **`recipe-image.tsx`** — the gradient-plus-glyph placeholder is now a **flat
+  typographic tile**: three muted sand tones instead of a rotating hue, with the
+  cuisine set in small caps. This is what 58% of the app looks like, so it
+  mattered more than any single screen.
+
+### Phase 3 — first screen milestone (done)
+
+- **Home** — the two gradient hero cards are now flat, bordered, left-aligned
+  action rows with a squared icon plate, and they carry **live state** ("12
+  ingredients in your kitchen") instead of a second line of marketing copy. The
+  search field is a rectangle, not a capsule. The greeting became a `micro`
+  uppercase eyebrow over a `title1`, so the hierarchy is type rather than size.
+- **Recipe results** — the card is flat and bordered; the photo scrim gradient is
+  gone; and the match moved off the photograph into a **labelled row with a
+  proportion bar** — the one encoding of "nearly there" vs "barely" that reads at
+  scrolling speed, which a fraction cannot.
+- **Recipe detail** — both fact strips bordered rather than floating; the
+  have/need groups now carry their own counts; the remaining hero gradient is
+  documented as a functional scrim protecting the back/share controls over
+  arbitrary photography.
+
+### Not done yet (deliberately, in the stated order)
+
+Phase 3 screens 1, 3, 6–9 (onboarding, ingredient picker, budget, pantry, saved,
+profile); Phase 4 imagery beyond the fallback; Phase 5 UX polish. **The brand
+typeface (finding 7) is the largest remaining visual gap** and is blocked on
+licensing Alexandria's static weights, not on code.
 
 ---
 

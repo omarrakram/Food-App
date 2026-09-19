@@ -65,7 +65,7 @@ export function StateView({
         style={{
           width: 76,
           height: 76,
-          borderRadius: theme.radius.pill,
+          borderRadius: theme.radius.md,
           backgroundColor: tones.bg,
           alignItems: 'center',
           justifyContent: 'center',

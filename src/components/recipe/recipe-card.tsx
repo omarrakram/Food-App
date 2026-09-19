@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { View, type ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
@@ -24,6 +23,74 @@ function MetaPill({ icon, label }: { icon: keyof typeof Ionicons.glyphMap; label
       <Text variant="caption" color="textSecondary">
         {label}
       </Text>
+    </View>
+  );
+}
+
+/**
+ * "How much of this do I already have?" — the single fact this product exists
+ * to answer, finally rendered where it can be read.
+ *
+ * It used to be a small badge reading "3/5" sitting ON the photograph, behind
+ * a black gradient scrim put there to make it legible. That is three problems
+ * at once: the most important number on the card competed with the food, it
+ * was compressed to a fraction with no label, and it forced a decorative
+ * gradient onto every card in the app.
+ *
+ * Here it is a titled row under the content with a proportion bar. The bar is
+ * not decoration — it is the one glanceable encoding of "nearly there" versus
+ * "barely", which a fraction cannot give you at scrolling speed.
+ */
+function MatchRow({ match }: { match: RecipeMatch }) {
+  const theme = useTheme();
+  const { t, formatNumber } = useI18n();
+
+  const hasEverything = match.missingIngredients.length === 0 && match.requiredCount > 0;
+  const fraction =
+    match.requiredCount > 0 ? Math.min(1, match.haveCount / match.requiredCount) : 0;
+  const accent = hasEverything ? theme.colors.success : theme.colors.primary;
+
+  return (
+    <View style={{ gap: theme.spacing.sm }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}>
+        <Ionicons
+          name={hasEverything ? 'checkmark-circle' : 'basket-outline'}
+          size={16}
+          color={accent}
+        />
+        <Text variant="subhead" style={{ color: accent, flex: 1 }} lines={1}>
+          {hasEverything
+            ? t('results.matchFull')
+            : t('results.match', {
+                have: formatNumber(match.haveCount),
+                total: formatNumber(match.requiredCount),
+              })}
+        </Text>
+        {match.missingIngredients.length > 0 ? (
+          <Text variant="caption" color="textTertiary">
+            {t('results.missing', { count: match.missingIngredients.length })}
+          </Text>
+        ) : null}
+      </View>
+
+      <View
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+        style={{
+          height: 3,
+          borderRadius: theme.radius.xs,
+          backgroundColor: theme.colors.surfaceAlt,
+          overflow: 'hidden',
+        }}
+      >
+        <View
+          style={{
+            width: `${Math.round(fraction * 100)}%`,
+            height: '100%',
+            backgroundColor: accent,
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -54,13 +121,11 @@ export function RecipeCard({
   testID,
 }: RecipeCardProps) {
   const theme = useTheme();
-  const { t, formatNumber } = useI18n();
+  const { t } = useI18n();
   const recipeText = useRecipeText();
   const { recipe } = match;
 
   const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
-  const hasEverything = match.missingIngredients.length === 0 && match.requiredCount > 0;
-
   // Only meaningful once a pantry is known; without one the two figures are
   // identical and the extra label would be noise.
   const ownsSomething =
@@ -96,9 +161,10 @@ export function RecipeCard({
       style={[
         {
           backgroundColor: theme.colors.surface,
-          borderRadius: theme.radius.lg,
+          borderRadius: theme.radius.md,
+          borderWidth: 1,
+          borderColor: theme.colors.border,
           overflow: 'hidden',
-          ...theme.elevation(1),
         },
         style as ViewStyle,
         press.style,
@@ -119,34 +185,15 @@ export function RecipeCard({
         <View style={{ position: 'relative' }}>
           <RecipeImage recipe={recipe} aspectRatio={theme.layout.cardImageAspect} />
 
-          <LinearGradient
-            colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.45)']}
-            style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 72 }}
-            pointerEvents="none"
-          />
-
-          {showMatch && match.requiredCount > 0 ? (
-            <View
-              style={{ position: 'absolute', left: theme.spacing.md, bottom: theme.spacing.md }}
-            >
-              <Badge
-                label={
-                  hasEverything
-                    ? t('results.matchFull')
-                    : t('results.match', {
-                        have: formatNumber(match.haveCount),
-                        total: formatNumber(match.requiredCount),
-                      })
-                }
-                tone={hasEverything ? 'success' : match.matchPercent >= 60 ? 'primary' : 'neutral'}
-                icon={hasEverything ? 'checkmark-circle' : 'basket-outline'}
-                size="md"
-              />
-            </View>
-          ) : null}
-
+          {/*
+            No scrim gradient any more. It existed only to make the match badge
+            readable over the photograph; the badge now lives under the content
+            in `MatchRow`, so the photograph is allowed to just be a photograph.
+            The one thing still overlaid is a genuine time-sensitive alert, and
+            it carries its own solid background.
+          */}
           {match.usesExpiringItems.length > 0 ? (
-            <View style={{ position: 'absolute', top: theme.spacing.md, left: theme.spacing.md }}>
+            <View style={{ position: 'absolute', top: theme.spacing.sm, left: theme.spacing.sm }}>
               <Badge
                 label={t('pantry.expiringSoon')}
                 tone="warning"
@@ -205,6 +252,8 @@ export function RecipeCard({
               />
             ) : null}
           </View>
+
+          {showMatch && match.requiredCount > 0 ? <MatchRow match={match} /> : null}
         </View>
       </PressScale>
 
@@ -241,11 +290,8 @@ export function RecipeCard({
         ) : (
           <PriceTag priced={match.estimatedCost} size="md" />
         )}
-        {showMatch && match.missingIngredients.length > 0 ? (
-          <Text variant="caption" color="textTertiary">
-            {t('results.missing', { count: match.missingIngredients.length })}
-          </Text>
-        ) : null}
+        {/* The missing count now lives in `MatchRow`, next to the number it
+            qualifies, rather than orphaned on the opposite side of the card. */}
       </View>
 
       {/*
@@ -301,7 +347,7 @@ export function RecipeCardCompact({
       style={{ width, gap: theme.spacing.sm }}
     >
       <View style={{ position: 'relative', borderRadius: theme.radius.md, overflow: 'hidden' }}>
-        <RecipeImage recipe={recipe} aspectRatio={1} glyphSize={28} />
+        <RecipeImage recipe={recipe} aspectRatio={1} glyphSize={26} />
         {badge ? (
           <View style={{ position: 'absolute', left: 6, bottom: 6 }}>
             <Badge label={badge} tone="primary" />

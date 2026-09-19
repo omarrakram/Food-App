@@ -24,15 +24,25 @@ export const spacing = {
 
 export type SpacingKey = keyof typeof spacing;
 
-/** Generous, rounded radii — the app should feel soft and food-forward. */
+/**
+ * Corner radii.
+ *
+ * Collapsed from the old scale, which topped out at 32 and whose most-used
+ * value was `pill` (999) — across buttons, chips, badges, search fields and
+ * icon circles alike. A capsule shape language is the default look of a
+ * generated UI; this one is rectangular and editorial, and `pill` now survives
+ * for the two places a capsule is genuinely correct: avatars and circular icon
+ * buttons.
+ */
 export const radius = {
   none: 0,
-  xs: 6,
-  sm: 10,
-  md: 14,
-  lg: 20,
-  xl: 26,
-  xxl: 32,
+  xs: 4,
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 20,
+  /** Kept so call sites compile; prefer `xl`. Nothing rectangular should use it. */
+  xxl: 24,
   pill: 999,
 } as const;
 
@@ -44,18 +54,25 @@ export type RadiusKey = keyof typeof radius;
  * that these values already allow for.
  */
 export const typography = {
-  display: { fontSize: 34, lineHeight: 41, fontWeight: '800' },
-  title1: { fontSize: 28, lineHeight: 34, fontWeight: '800' },
-  title2: { fontSize: 22, lineHeight: 28, fontWeight: '700' },
-  title3: { fontSize: 19, lineHeight: 25, fontWeight: '700' },
-  headline: { fontSize: 17, lineHeight: 23, fontWeight: '700' },
+  /* Display and titles are tracked in slightly, which is what makes large type
+     read as set rather than as merely big — the single cheapest typographic
+     upgrade available before a brand typeface is licensed. Body sizes keep
+     neutral tracking, where tightening costs legibility (and costs more in
+     Arabic than in Latin). */
+  display: { fontSize: 34, lineHeight: 40, fontWeight: '800', letterSpacing: -0.7 },
+  title1: { fontSize: 27, lineHeight: 33, fontWeight: '800', letterSpacing: -0.5 },
+  title2: { fontSize: 22, lineHeight: 28, fontWeight: '700', letterSpacing: -0.3 },
+  title3: { fontSize: 18, lineHeight: 24, fontWeight: '700', letterSpacing: -0.2 },
+  headline: { fontSize: 16, lineHeight: 22, fontWeight: '700', letterSpacing: -0.1 },
   body: { fontSize: 16, lineHeight: 23, fontWeight: '400' },
   bodyMedium: { fontSize: 16, lineHeight: 23, fontWeight: '600' },
   callout: { fontSize: 15, lineHeight: 21, fontWeight: '400' },
   subhead: { fontSize: 14, lineHeight: 20, fontWeight: '600' },
-  footnote: { fontSize: 13, lineHeight: 18, fontWeight: '400' },
+  footnote: { fontSize: 13, lineHeight: 19, fontWeight: '400' },
   caption: { fontSize: 12, lineHeight: 16, fontWeight: '600' },
-  micro: { fontSize: 11, lineHeight: 14, fontWeight: '700' },
+  /* Section eyebrows and metadata labels. Uppercase at call sites, where the
+     wide tracking stops it reading as a shout. */
+  micro: { fontSize: 11, lineHeight: 14, fontWeight: '700', letterSpacing: 0.6 },
 } as const;
 
 export type TypographyVariant = keyof typeof typography;

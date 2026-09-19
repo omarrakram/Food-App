@@ -6,30 +6,42 @@
  * confined to this file.
  */
 
-/** Raw brand ramp — only `palette.ts` should ever touch these. */
+/**
+ * Raw brand ramp — only `palette.ts` should ever touch these.
+ *
+ * Cobalt, not the old paprika. The reason is measurable rather than a
+ * preference: white on the old `paprika500` was 3.48:1, below the 4.5:1 body
+ * minimum, so the palette needed a SECOND, darker primary for anything
+ * carrying a label. The brand colour was therefore never the colour of the
+ * most important control on screen, which is the one thing a brand colour
+ * exists to do. White on `cobalt500` is 5.42:1, so there is one primary again
+ * and `primaryStrong` is now an alias kept only for call-site compatibility.
+ */
 const brand = {
-  paprika50: '#FFF1EB',
-  paprika100: '#FFDCCB',
-  paprika200: '#FFB894',
-  paprika300: '#FF9464',
-  paprika400: '#F5773E',
-  paprika500: '#E85D2A',
-  paprika600: '#C74A1E',
-  paprika700: '#9C3915',
+  cobalt50: '#F2F5FF',
+  cobalt100: '#E9EDFF',
+  cobalt200: '#C7D1FF',
+  cobalt300: '#A3B5FF',
+  cobalt400: '#7D95FF',
+  cobalt500: '#3155FF',
+  cobalt600: '#2442D6',
+  cobalt700: '#1E36B0',
 
-  basil400: '#3FBE85',
-  basil500: '#2E9E6B',
-  basil600: '#217A52',
+  /* Support hues. Each fill is dark enough to carry white at 4.5:1, which the
+     old green and red were not — that is why filled buttons had to reach for
+     separate `*Strong` shades. */
+  leaf500: '#1F7A4D',
+  leaf400: '#4ECB92',
+  leaf700: '#155C39',
 
-  saffron400: '#F2B33D',
-  saffron500: '#E09A1C',
+  amber600: '#9A6207',
+  amber400: '#E3B15C',
+  amber700: '#7A4D05',
 
-  chili400: '#F1584F',
-  chili500: '#DC3B31',
-  chili600: '#B32A22',
-
-  sky400: '#4C9BE8',
-  sky500: '#2F7FD1',
+  clay500: '#C0341F',
+  clay400: '#F07E6C',
+  clay600: '#9E2917',
+  clay700: '#992718',
 } as const;
 
 export type ColorScheme = 'light' | 'dark';
@@ -106,118 +118,129 @@ export type Palette = {
 
 export const palettes: Record<ColorScheme, Palette> = {
   light: {
-    background: '#FFFBF7',
-    backgroundAlt: '#FBF4EC',
+    background: '#FBF7F0',
+    backgroundAlt: '#F4EEE4',
     surface: '#FFFFFF',
-    surfaceAlt: '#F7F1EA',
-    surfacePressed: '#F0E8DF',
-    border: '#EDE3D8',
-    borderStrong: '#D9C9B8',
+    surfaceAlt: '#F6F1E9',
+    surfacePressed: '#ECE5DA',
+    border: '#E7E0D4',
+    borderStrong: '#D2C9B9',
 
-    text: '#1A1614',
-    textSecondary: '#6B5F56',
-    textTertiary: '#9C8E83',
+    text: '#12100E',
+    textSecondary: '#6B6560',
+    textTertiary: '#87807A',
     textOnPrimary: '#FFFFFF',
 
-    primary: brand.paprika500,
-    primaryStrong: brand.paprika600,
-    successStrong: brand.basil600,
-    dangerStrong: brand.chili600,
-    primaryPressed: brand.paprika600,
-    primarySoft: brand.paprika50,
-    primarySoftText: brand.paprika700,
+    primary: brand.cobalt500,
+    primaryStrong: brand.cobalt500,
+    successStrong: brand.leaf500,
+    dangerStrong: brand.clay500,
+    primaryPressed: brand.cobalt600,
+    primarySoft: brand.cobalt100,
+    primarySoftText: brand.cobalt700,
 
-    success: brand.basil500,
-    successSoft: '#E4F6ED',
-    successSoftText: brand.basil600,
+    success: brand.leaf500,
+    successSoft: '#E3F3EA',
+    successSoftText: brand.leaf700,
 
-    warning: brand.saffron500,
-    warningSoft: '#FDF3DF',
-    warningSoftText: '#8A5D06',
+    warning: brand.amber600,
+    warningSoft: '#FAEFDA',
+    warningSoftText: brand.amber700,
 
-    danger: brand.chili500,
-    dangerPressed: brand.chili600,
-    dangerSoft: '#FDECEB',
-    dangerSoftText: brand.chili600,
+    danger: brand.clay500,
+    dangerPressed: brand.clay600,
+    dangerSoft: '#FBEAE6',
+    dangerSoftText: brand.clay700,
 
-    info: brand.sky500,
-    infoSoft: '#E8F1FC',
-    infoSoftText: '#1E5C9E',
+    info: brand.cobalt600,
+    infoSoft: '#E9EDFD',
+    infoSoftText: brand.cobalt700,
 
-    skeleton: '#EFE7DE',
-    skeletonHighlight: '#F9F4EE',
+    skeleton: '#EDE7DC',
+    skeletonHighlight: '#F8F4EC',
 
-    scrim: 'rgba(26, 22, 20, 0.55)',
-    shadow: '#8A6B52',
+    scrim: 'rgba(18, 16, 14, 0.55)',
+    shadow: '#2A231B',
 
-    tabBarBackground: 'rgba(255, 251, 247, 0.94)',
-    tabBarBorder: '#EDE3D8',
-    tabBarActive: brand.paprika500,
-    tabBarInactive: '#9C8E83',
+    tabBarBackground: 'rgba(251, 247, 240, 0.96)',
+    tabBarBorder: '#E7E0D4',
+    tabBarActive: brand.cobalt500,
+    tabBarInactive: '#6B6560',
   },
   dark: {
-    background: '#141210',
-    backgroundAlt: '#1B1815',
-    surface: '#211D1A',
-    surfaceAlt: '#2A2521',
-    surfacePressed: '#332D28',
-    border: '#332D28',
-    borderStrong: '#4A423B',
+    background: '#0E0F13',
+    backgroundAlt: '#14161C',
+    surface: '#171A21',
+    surfaceAlt: '#1F232C',
+    surfacePressed: '#272C37',
+    border: '#252A33',
+    borderStrong: '#3A4150',
 
-    text: '#F7F2EC',
-    textSecondary: '#B3A79C',
-    textTertiary: '#8A7E74',
-    textOnPrimary: '#1A1614',
+    text: '#F3F1ED',
+    textSecondary: '#A6A39E',
+    textTertiary: '#7D7A75',
+    /* Near-black, not white: cobalt is light enough in dark mode that a white
+       label on it measures 3.77:1 and fails. Ink on it is 5.04:1. */
+    textOnPrimary: '#0E0F13',
 
-    primary: brand.paprika400,
-    primaryStrong: brand.paprika400,
-    successStrong: brand.basil400,
-    dangerStrong: brand.chili400,
-    primaryPressed: brand.paprika300,
-    primarySoft: '#3A2318',
-    primarySoftText: brand.paprika200,
+    primary: brand.cobalt400,
+    primaryStrong: brand.cobalt400,
+    successStrong: brand.leaf400,
+    dangerStrong: brand.clay400,
+    primaryPressed: brand.cobalt300,
+    primarySoft: '#1C2440',
+    primarySoftText: '#AFC0FF',
 
-    success: brand.basil400,
-    successSoft: '#16301F',
-    successSoftText: '#7FD9AE',
+    success: brand.leaf400,
+    successSoft: '#12301F',
+    successSoftText: '#7FDDB0',
 
-    warning: brand.saffron400,
-    warningSoft: '#332715',
-    warningSoftText: '#F5CE7E',
+    warning: brand.amber400,
+    warningSoft: '#33270F',
+    warningSoftText: '#F0CD8F',
 
-    danger: brand.chili400,
-    dangerPressed: brand.chili500,
-    dangerSoft: '#3A1E1C',
-    dangerSoftText: '#F79E98',
+    danger: brand.clay400,
+    dangerPressed: '#F59C8D',
+    dangerSoft: '#361B17',
+    dangerSoftText: '#F5A99B',
 
-    info: brand.sky400,
-    infoSoft: '#17273A',
-    infoSoftText: '#9AC5F0',
+    info: brand.cobalt400,
+    infoSoft: '#18203A',
+    infoSoftText: '#AFC0FF',
 
-    skeleton: '#2A2521',
-    skeletonHighlight: '#363029',
+    skeleton: '#1F232C',
+    skeletonHighlight: '#2A2F3A',
 
     scrim: 'rgba(0, 0, 0, 0.66)',
     shadow: '#000000',
 
-    tabBarBackground: 'rgba(20, 18, 16, 0.94)',
-    tabBarBorder: '#332D28',
-    tabBarActive: brand.paprika300,
-    tabBarInactive: '#8A7E74',
+    tabBarBackground: 'rgba(14, 15, 19, 0.96)',
+    tabBarBorder: '#252A33',
+    tabBarActive: brand.cobalt400,
+    tabBarInactive: '#A6A39E',
   },
 };
 
 /**
- * Elevation presets. Android only understands `elevation`; iOS needs the
- * shadow* family. Returning both keeps call sites free of platform branches.
+ * Elevation presets.
+ *
+ * Deliberately much flatter than they were. Soft drop shadows on cards, list
+ * rows, buttons, skeletons and segmented controls is a dashboard convention;
+ * this product is meant to read as editorial, where separation comes from a
+ * hairline border and a background step. Level 1 is now a whisper — it exists
+ * so things that genuinely sit above the page (a sheet, a toast) still say so
+ * — and level 3 is reserved for modals.
+ *
+ * Android only understands `elevation`; iOS needs the shadow* family.
+ * Returning both keeps call sites free of platform branches.
  */
 export function elevation(scheme: ColorScheme, level: 0 | 1 | 2 | 3) {
   if (level === 0) return {};
   const shadowColor = palettes[scheme].shadow;
   const config = {
-    1: { opacity: scheme === 'dark' ? 0.34 : 0.08, radius: 8, offsetY: 2, elevation: 2 },
-    2: { opacity: scheme === 'dark' ? 0.42 : 0.11, radius: 16, offsetY: 6, elevation: 5 },
-    3: { opacity: scheme === 'dark' ? 0.5 : 0.15, radius: 28, offsetY: 12, elevation: 10 },
+    1: { opacity: scheme === 'dark' ? 0.24 : 0.04, radius: 4, offsetY: 1, elevation: 1 },
+    2: { opacity: scheme === 'dark' ? 0.34 : 0.07, radius: 10, offsetY: 3, elevation: 3 },
+    3: { opacity: scheme === 'dark' ? 0.46 : 0.12, radius: 22, offsetY: 8, elevation: 8 },
   }[level];
 
   return {

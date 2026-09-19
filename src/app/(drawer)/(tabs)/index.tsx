@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useMemo } from 'react';
 import { View } from 'react-native';
@@ -12,7 +11,7 @@ import { ScreenScroll } from '@/components/ui/screen';
 import { Section } from '@/components/ui/section';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Text } from '@/components/ui/text';
-import { useExpiringSoon } from '@/features/pantry/hooks';
+import { useExpiringSoon, usePantryItems } from '@/features/pantry/hooks';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useLocalSuggestions, useMealRequest } from '@/features/recipes/hooks';
 import { useI18n } from '@/i18n';
@@ -25,22 +24,47 @@ function greetingKey(hour: number) {
   return 'home.greetingEvening' as const;
 }
 
+/**
+ * A primary entry point into one of the two core journeys.
+ *
+ * WHAT THIS REPLACED, because the reason matters more than the markup: two
+ * side-by-side diagonal-gradient cards, each with a stock icon inside a
+ * translucent white circle and white text over the gradient. That exact
+ * component — gradient card, circular icon chip, white title, white subtitle,
+ * 26pt radius, drop shadow — is the single most reproduced pattern in
+ * generated UI, and it was the first thing anyone saw on opening the app.
+ *
+ * This version is flat, bordered, and left-aligned to the same grid as
+ * everything else on the page. The colour appears once, in a small square
+ * icon plate, instead of flooding the whole surface; the type carries the
+ * hierarchy; and the row can now hold a real piece of state (`hint`) rather
+ * than a second line of marketing copy.
+ */
 function PrimaryAction({
   title,
   subtitle,
+  hint,
   icon,
-  colors,
+  accent,
   onPress,
   testID,
 }: {
   title: string;
   subtitle: string;
+  /** Live state for this journey, e.g. "12 items in your pantry". */
+  hint?: string;
   icon: keyof typeof Ionicons.glyphMap;
-  colors: readonly [string, string];
+  accent: 'primary' | 'success';
   onPress: () => void;
   testID: string;
 }) {
   const theme = useTheme();
+  const { isRTL } = useI18n();
+
+  const plate =
+    accent === 'primary'
+      ? { bg: theme.colors.primarySoft, fg: theme.colors.primarySoftText }
+      : { bg: theme.colors.successSoft, fg: theme.colors.successSoftText };
 
   return (
     <PressScale
@@ -49,43 +73,45 @@ function PrimaryAction({
       accessibilityLabel={`${title}. ${subtitle}`}
       onPress={onPress}
       haptic="medium"
-      scaleTo={0.975}
-      style={{ borderRadius: theme.radius.xl, ...theme.elevation(2) }}
+      scaleTo={0.99}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: theme.spacing.lg,
+        padding: theme.spacing.lg,
+        borderRadius: theme.radius.md,
+        backgroundColor: theme.colors.surface,
+        borderWidth: 1,
+        borderColor: theme.colors.border,
+      }}
     >
-      <LinearGradient
-        colors={colors}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+      <View
         style={{
-          borderRadius: theme.radius.xl,
-          padding: theme.spacing.xl,
-          gap: theme.spacing.sm,
-          minHeight: 132,
-          justifyContent: 'space-between',
+          width: 44,
+          height: 44,
+          // Squared, not a circle. A circular icon chip is the other half of
+          // the pattern this component exists to get away from.
+          borderRadius: theme.radius.sm,
+          backgroundColor: plate.bg,
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <View
-          style={{
-            width: 42,
-            height: 42,
-            borderRadius: theme.radius.pill,
-            backgroundColor: 'rgba(255,255,255,0.22)',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Ionicons name={icon} size={22} color="#FFFFFF" />
-        </View>
+        <Ionicons name={icon} size={21} color={plate.fg} />
+      </View>
 
-        <View style={{ gap: 2 }}>
-          <Text variant="title3" style={{ color: '#FFFFFF' }}>
-            {title}
-          </Text>
-          <Text variant="footnote" style={{ color: 'rgba(255,255,255,0.88)' }} lines={2}>
-            {subtitle}
-          </Text>
-        </View>
-      </LinearGradient>
+      <View style={{ flex: 1, gap: 3 }}>
+        <Text variant="headline">{title}</Text>
+        <Text variant="footnote" color="textSecondary" lines={2}>
+          {hint ?? subtitle}
+        </Text>
+      </View>
+
+      <Ionicons
+        name={isRTL ? 'chevron-back' : 'chevron-forward'}
+        size={18}
+        color={theme.colors.textTertiary}
+      />
     </PressScale>
   );
 }
@@ -96,6 +122,8 @@ export default function HomeScreen() {
   const router = useRouter();
   const { preferences } = usePreferences();
 
+  const pantry = usePantryItems();
+  const pantryCount = pantry.data?.length ?? 0;
   const expiring = useExpiringSoon();
   const quickRequest = useMealRequest(
     useMemo(() => ({ mode: 'ingredients' as const, maxMinutes: 30 }), []),
@@ -112,10 +140,10 @@ export default function HomeScreen() {
         <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: theme.spacing.md }}>
           <DrawerButton testID="home-open-drawer" />
           <View style={{ gap: 2, flex: 1 }}>
-            <Text variant="callout" color="textSecondary">
+            <Text variant="micro" color="textTertiary" style={{ textTransform: 'uppercase' }}>
               {name ? `${greeting}, ${name}` : greeting}
             </Text>
-            <Text variant="display">{t('home.question')}</Text>
+            <Text variant="title1">{t('home.question')}</Text>
           </View>
         </View>
 
@@ -129,9 +157,11 @@ export default function HomeScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             gap: theme.spacing.sm,
-            minHeight: 50,
-            paddingHorizontal: theme.spacing.lg,
-            borderRadius: theme.radius.pill,
+            minHeight: 48,
+            paddingHorizontal: theme.spacing.md,
+            // A search field is an input, and inputs in this system are
+            // rectangles. The capsule version read as a button.
+            borderRadius: theme.radius.md,
             backgroundColor: theme.colors.surface,
             borderWidth: 1,
             borderColor: theme.colors.border,
@@ -149,16 +179,21 @@ export default function HomeScreen() {
           testID="home-cook-with"
           title={t('home.cookWithWhatIHave')}
           subtitle={t('home.cookWithWhatIHaveSub')}
-          icon="restaurant"
-          colors={['#F5773E', '#E85D2A'] as const}
+          icon="basket-outline"
+          accent="primary"
+          hint={
+            pantryCount > 0
+              ? t('home.cookWithPantryCount', { count: pantryCount })
+              : undefined
+          }
           onPress={() => router.push('/cook')}
         />
         <PrimaryAction
           testID="home-budget"
           title={t('home.eatWithinBudget')}
           subtitle={t('home.eatWithinBudgetSub')}
-          icon="wallet"
-          colors={['#3FBE85', '#217A52'] as const}
+          icon="wallet-outline"
+          accent="success"
           onPress={() => router.push('/budget')}
         />
       </View>
@@ -176,22 +211,13 @@ export default function HomeScreen() {
             alignItems: 'center',
             gap: theme.spacing.md,
             padding: theme.spacing.lg,
-            borderRadius: theme.radius.lg,
+            borderRadius: theme.radius.md,
             backgroundColor: theme.colors.warningSoft,
+            borderWidth: 1,
+            borderColor: theme.colors.warning,
           }}
         >
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: theme.radius.pill,
-              backgroundColor: 'rgba(255,255,255,0.55)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Ionicons name="time" size={20} color={theme.colors.warningSoftText} />
-          </View>
+          <Ionicons name="time-outline" size={20} color={theme.colors.warningSoftText} />
           <View style={{ flex: 1, gap: 2 }}>
             <Text variant="bodyMedium" style={{ color: theme.colors.warningSoftText }}>
               {t('home.expiringSoon')}

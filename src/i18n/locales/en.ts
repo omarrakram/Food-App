@@ -76,6 +76,8 @@ export const en = {
   'home.question': 'What are you eating today?',
   'home.cookWithWhatIHave': 'Cook with what I have',
   'home.cookWithWhatIHaveSub': 'Turn what is in your kitchen into a meal',
+  'home.cookWithPantryCount_one': '{count} ingredient in your kitchen',
+  'home.cookWithPantryCount_other': '{count} ingredients in your kitchen',
   'home.eatWithinBudget': 'Eat within my budget',
   'home.eatWithinBudgetSub': 'Tell us your budget and we will find meals that fit',
   'home.quickIdeas': 'Ready when you are',

@@ -41,9 +41,9 @@ export function SegmentedControl<T extends string>({
       style={[
         {
           flexDirection: 'row',
-          padding: 4,
-          gap: 4,
-          borderRadius: theme.radius.pill,
+          padding: 3,
+          gap: 3,
+          borderRadius: theme.radius.md,
           backgroundColor: theme.colors.surfaceAlt,
         },
         style,
@@ -72,9 +72,10 @@ export function SegmentedControl<T extends string>({
               minHeight: 38,
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: theme.radius.pill,
+              borderRadius: theme.radius.sm,
               backgroundColor: isSelected ? theme.colors.surface : 'transparent',
-              ...(isSelected ? theme.elevation(1) : {}),
+              borderWidth: 1,
+              borderColor: isSelected ? theme.colors.border : 'transparent',
             }}
           >
             <Text

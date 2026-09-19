@@ -45,9 +45,11 @@ export function Badge({ label, tone = 'neutral', icon, size = 'sm', style, testI
           gap: 4,
           alignSelf: 'flex-start',
           backgroundColor: bg,
-          paddingHorizontal: size === 'sm' ? theme.spacing.sm : theme.spacing.md,
-          paddingVertical: size === 'sm' ? 3 : 6,
-          borderRadius: theme.radius.pill,
+          paddingHorizontal: size === 'sm' ? 6 : theme.spacing.sm,
+          paddingVertical: size === 'sm' ? 3 : 5,
+          // Squared, not a capsule. A status tag is a label, not a button, and
+          // the rectangle is what stops it being mistaken for one.
+          borderRadius: theme.radius.xs,
         },
         style,
       ]}

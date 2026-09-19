@@ -56,7 +56,7 @@ export function Stepper({
       style={{
         width: 36,
         height: 36,
-        borderRadius: theme.radius.pill,
+        borderRadius: theme.radius.sm,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: theme.colors.surface,
@@ -77,7 +77,7 @@ export function Stepper({
           alignItems: 'center',
           gap: theme.spacing.sm,
           padding: 4,
-          borderRadius: theme.radius.pill,
+          borderRadius: theme.radius.sm,
           backgroundColor: theme.colors.surfaceAlt,
           alignSelf: 'flex-start',
         },

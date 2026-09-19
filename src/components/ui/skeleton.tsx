@@ -75,9 +75,9 @@ export function RecipeCardSkeleton() {
         <Skeleton width="72%" height={20} />
         <Skeleton width="90%" height={14} />
         <View style={{ flexDirection: 'row', gap: theme.spacing.sm, marginTop: theme.spacing.xs }}>
-          <Skeleton width={64} height={22} radius={theme.radius.pill} />
-          <Skeleton width={78} height={22} radius={theme.radius.pill} />
-          <Skeleton width={58} height={22} radius={theme.radius.pill} />
+          <Skeleton width={64} height={22} radius={theme.radius.sm} />
+          <Skeleton width={78} height={22} radius={theme.radius.sm} />
+          <Skeleton width={58} height={22} radius={theme.radius.sm} />
         </View>
       </View>
     </View>

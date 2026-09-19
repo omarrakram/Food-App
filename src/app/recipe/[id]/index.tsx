@@ -269,9 +269,17 @@ export default function RecipeDetailScreen() {
             aspectRatio={theme.layout.heroImageAspect}
             glyphSize={52}
           />
+          {/*
+            The one gradient left on this screen, and it is functional rather
+            than decorative: back, share and save sit over arbitrary
+            photography, and without a scrim their legibility depends on
+            whatever happens to be in the top of the picture. The two
+            decorative gradients this app used to have — the home hero pair and
+            the missing-photo placeholder — are gone.
+          */}
           <LinearGradient
-            colors={['rgba(0,0,0,0.35)', 'rgba(0,0,0,0)']}
-            style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 120 }}
+            colors={['rgba(0,0,0,0.28)', 'rgba(0,0,0,0)']}
+            style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 108 }}
             pointerEvents="none"
           />
           <View
@@ -350,8 +358,9 @@ export default function RecipeDetailScreen() {
             style={{
               flexDirection: 'row',
               backgroundColor: theme.colors.surface,
-              borderRadius: theme.radius.lg,
-              ...theme.elevation(1),
+              borderRadius: theme.radius.md,
+              borderWidth: 1,
+              borderColor: theme.colors.border,
             }}
           >
             <NutritionCell
@@ -372,8 +381,9 @@ export default function RecipeDetailScreen() {
             style={{
               flexDirection: 'row',
               backgroundColor: theme.colors.surface,
-              borderRadius: theme.radius.lg,
-              ...theme.elevation(1),
+              borderRadius: theme.radius.md,
+              borderWidth: 1,
+              borderColor: theme.colors.border,
             }}
           >
             <NutritionCell
@@ -443,11 +453,26 @@ export default function RecipeDetailScreen() {
           <View style={{ gap: theme.spacing.md }}>
             <Text variant="title3">{t('recipe.ingredients')}</Text>
 
+            {/*
+              The have/need split is the reason this screen exists, so each
+              group is labelled with its own count rather than relying on the
+              reader to total the ticks themselves.
+            */}
             {match.availableIngredients.length > 0 ? (
               <View style={{ gap: theme.spacing.xs }}>
-                <Text variant="caption" color="successSoftText">
-                  {t('recipe.youHave')}
-                </Text>
+                <View
+                  style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
+                >
+                  <Text
+                    variant="micro"
+                    style={{ color: theme.colors.success, textTransform: 'uppercase' }}
+                  >
+                    {t('recipe.youHave')}
+                  </Text>
+                  <Text variant="micro" color="textTertiary">
+                    {formatNumber(match.availableIngredients.length)}
+                  </Text>
+                </View>
                 {match.availableIngredients.map((entry) => (
                   <IngredientLine
                     key={entry.recipeIngredientId}
@@ -462,9 +487,19 @@ export default function RecipeDetailScreen() {
 
             {missing.length > 0 ? (
               <View style={{ gap: theme.spacing.xs }}>
-                <Text variant="caption" color="primary">
-                  {t('recipe.youNeed')}
-                </Text>
+                <View
+                  style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
+                >
+                  <Text
+                    variant="micro"
+                    style={{ color: theme.colors.primary, textTransform: 'uppercase' }}
+                  >
+                    {t('recipe.youNeed')}
+                  </Text>
+                  <Text variant="micro" color="textTertiary">
+                    {formatNumber(missing.length)}
+                  </Text>
+                </View>
                 {missing.map((entry) => (
                   <IngredientLine
                     key={entry.recipeIngredientId}

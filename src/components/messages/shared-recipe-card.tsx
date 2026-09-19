@@ -111,7 +111,7 @@ export function SharedRecipeCard({
       style={frame}
       testID={testID}
     >
-      <RecipeImage recipe={dish} aspectRatio={2} glyphSize={26} />
+      <RecipeImage recipe={dish} aspectRatio={2} glyphSize={24} compact />
       <View style={{ padding: theme.spacing.sm, gap: 2 }}>
         <Text variant="subhead" lines={2}>
           {dish.title}
