@@ -82,11 +82,19 @@ type Scored = {
 const scored: Scored[] = [];
 
 for (const recipe of RECIPE_CATALOGUE) {
-  if (PHOTOGRAPHED.has(recipe.slug)) continue; // already photographed
+  // `slug` is nullable on `Recipe` because an AI-generated recipe has no
+  // catalogue entry. Such a recipe cannot appear in this backlog at all: there
+  // is no `assets/recipes/<slug>` for a photograph to be filed at. The curated
+  // catalogue has no null slugs today, so this skips nothing in practice.
+  const slug = recipe.slug;
+  if (slug === null) continue;
+  if (PHOTOGRAPHED.has(slug)) continue; // already photographed
   if (recipe.imageUrl) continue; // has a remote image
 
   const required = recipe.ingredients.filter((i) => !i.isOptional && !i.isGarnish);
-  const staples = required.filter((i) => COMMON_STAPLES.has(i.slug)).length;
+  // An ingredient with no slug is one the AI proposed and we never
+  // canonicalised, so it is by definition not a staple we stock.
+  const staples = required.filter((i) => i.slug !== null && COMMON_STAPLES.has(i.slug)).length;
   const reach = required.length > 0 ? staples / required.length : 0;
   const minutes = recipe.prepMinutes + recipe.cookMinutes;
 
@@ -123,7 +131,7 @@ for (const recipe of RECIPE_CATALOGUE) {
   }
 
   scored.push({
-    slug: recipe.slug,
+    slug,
     title: recipe.title,
     cuisine: recipe.cuisine,
     minutes,
@@ -138,7 +146,9 @@ scored.sort((a, b) => b.score - a.score);
 const top = scored.slice(0, 30);
 
 const total = RECIPE_CATALOGUE.length;
-const photographed = RECIPE_CATALOGUE.filter((r) => PHOTOGRAPHED.has(r.slug)).length;
+const photographed = RECIPE_CATALOGUE.filter(
+  (r) => r.slug !== null && PHOTOGRAPHED.has(r.slug),
+).length;
 
 const lines: string[] = [
   '# Photography backlog',
