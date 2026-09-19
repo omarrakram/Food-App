@@ -40,7 +40,14 @@ type Outcome =
   | 'WRONG_SAME_GROUP'
   | 'WRONG_OTHER_GROUP';
 
-type Scored = { term: string; outcome: Outcome; got: string | null; expected: string };
+type Scored = {
+  term: string;
+  outcome: Outcome;
+  got: string | null;
+  expected: string;
+  /** True when the catalogue genuinely lacks the concept, so no alias can help. */
+  absentConcept: boolean;
+};
 
 /** What the expectation permits, as slugs. Empty for a concept we do not have. */
 function acceptableSlugs(entry: BenchmarkEntry): readonly string[] {
@@ -74,6 +81,7 @@ function describeExpectation(entry: BenchmarkEntry): string {
 
 function score(term: string, entry: BenchmarkEntry): Scored {
   const expected = describeExpectation(entry);
+  const absentConcept = entry.expect.kind === 'absent';
   const acceptable = acceptableSlugs(entry);
   const wantedGroup = expectedGroup(entry);
 
@@ -84,11 +92,13 @@ function score(term: string, entry: BenchmarkEntry): Scored {
   };
 
   const resolved = resolveIngredient(term);
-  if (resolved) return { term, outcome: classify(resolved.slug, true), got: resolved.slug, expected };
+  if (resolved) {
+    return { term, outcome: classify(resolved.slug, true), got: resolved.slug, expected, absentConcept };
+  }
 
   const top = searchIngredients(term, 1)[0];
-  if (!top) return { term, outcome: 'DEAD_END', got: null, expected };
-  return { term, outcome: classify(top.slug, false), got: top.slug, expected };
+  if (!top) return { term, outcome: 'DEAD_END', got: null, expected, absentConcept };
+  return { term, outcome: classify(top.slug, false), got: top.slug, expected, absentConcept };
 }
 
 const RESULTS: readonly Scored[] = BENCHMARK_TERMS.map(({ term, entry }) => score(term, entry));
@@ -161,25 +171,22 @@ describe('alias integrity', () => {
       .map(([alias, list]) => `"${alias}" -> ${list.map((o) => `${o.slug}(${o.group})`).join(' + ')}`);
 
     /*
-      ONE KNOWN EXCEPTION, named rather than tolerated.
+      THE ALLOWLIST IS GONE, and this is what it used to hold.
 
-      `حمص` is claimed by both `chickpeas` and `hummus-dip`, and which one wins
-      is decided by insertion order into the alias index — alphabetical by
-      accident. That is exactly why the app is inconsistent about it today:
-      the Arabic `حمص` resolves to the pulse, while the transliteration
-      `homos` finds no alias at all and falls through to search, which offers
-      the dip. Two spellings of one word, two different answers.
+      `حمص` was claimed by both `chickpeas` and `hummus-dip`, in different food
+      groups, and which one won was decided by insertion order into the alias
+      index — alphabetical by accident. That is why the app was inconsistent:
+      the Arabic resolved to the pulse while the transliteration `homos` had
+      no alias at all and fell through to search, which offered the dip.
 
-      Fixing it is a DATA change — decide which concept owns the bare word and
-      give the other a qualified alias — and data changes belong to Stage 1.
-      Listed here so the check stays live for everything else, and so removing
-      it later passes rather than fails.
+      Stage 1 decided it deliberately. The bare Arabic word and its
+      transliterations belong to the PULSE, which is what `حمص` means in
+      Egyptian Arabic. English `hummus` belongs to the DIP, because that is
+      what an English speaker asking for hummus means. The two languages
+      genuinely disagree about this word, and modelling that disagreement is
+      more honest than forcing one answer on both.
     */
-    const KNOWN = new Set(['"حمص" -> chickpeas(legume) + hummus-dip(prepared)']);
-
-    expect(crossGroup.filter((collision) => !KNOWN.has(collision))).toEqual([]);
-    // The allowlist itself must not grow. A second entry is a second bug.
-    expect(KNOWN.size).toBe(1);
+    expect(crossGroup).toEqual([]);
   });
 
   it('reports same-group alias collisions without failing on them', () => {
@@ -231,6 +238,13 @@ describe('vocabulary coverage', () => {
           correctPct: Math.round(
             (100 * (countOf('RESOLVED_CORRECT') + countOf('SEARCH_CORRECT'))) / TOTAL,
           ),
+          absentConceptTerms: RESULTS.filter((r) => r.absentConcept).length,
+          failuresOnConceptsWeHave: RESULTS.filter(
+            (r) =>
+              !r.absentConcept &&
+              r.outcome !== 'RESOLVED_CORRECT' &&
+              r.outcome !== 'SEARCH_CORRECT',
+          ).length,
           wrongOtherGroupDetail: rows('WRONG_OTHER_GROUP'),
           wrongSameGroupDetail: rows('WRONG_SAME_GROUP'),
           deadEndDetail: rows('DEAD_END'),
@@ -244,27 +258,48 @@ describe('vocabulary coverage', () => {
 
   it('resolves or finds the right ingredient for most terms', () => {
     const correct = countOf('RESOLVED_CORRECT') + countOf('SEARCH_CORRECT');
-    // Set at the measured state (190/254 = 74.8%), not below it. A floor with
-    // slack in it is a floor that never catches anything. Stage 1 raises this
-    // to 0.85; each stage raises it deliberately.
-    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.748);
+    // STAGE 1: 190/254 -> 218/254. Raised to the new measured state, which is
+    // also the ceiling for alias-only work: every one of the 36 remaining
+    // failures is a concept the catalogue does not have. Stage 2 adds rows and
+    // raises this again.
+    expect(correct / TOTAL).toBeGreaterThanOrEqual(0.858);
   });
 
   it('keeps wrong answers of any kind bounded', () => {
     const wrong = countOf('WRONG_SAME_GROUP') + countOf('WRONG_OTHER_GROUP');
     // Counted from LIVE RESULTS, not filtered from the list that defines it.
-    // That is the whole difference from the assertion this replaced: 22 is
-    // the measured state, so a 23rd wrong answer fails the build.
-    expect(wrong).toBeLessThanOrEqual(22);
+    // STAGE 1: 22 -> 15. Tightened to the measured state, so a 16th fails.
+    expect(wrong).toBeLessThanOrEqual(15);
+  });
+
+  it('gets every term right whose concept the catalogue actually has', () => {
+    /*
+      THE INVARIANT STAGE 1 ESTABLISHED, and the one Stage 2 must not break.
+
+      Split the benchmark in two. For a concept the catalogue HAS, a failure
+      is a vocabulary gap and aliases can always close it. For a concept it
+      LACKS, no alias can help and pretending otherwise means aliasing a term
+      to the wrong ingredient to make a number move.
+
+      After Stage 1 the first set is empty: all 218 terms whose concept exists
+      resolve correctly. Every remaining failure is the second kind. That is
+      what "aliases have reached their ceiling" means, stated as an assertion
+      rather than a claim.
+    */
+    const failures = RESULTS.filter(
+      (r) =>
+        !r.absentConcept && r.outcome !== 'RESOLVED_CORRECT' && r.outcome !== 'SEARCH_CORRECT',
+    ).map((r) => `${r.term} -> ${r.got ?? '(nothing)'} [want ${r.expected}]`);
+    expect(failures).toEqual([]);
   });
 
   it('SAFETY: an unknown term never confidently returns an unrelated ingredient', () => {
     const violations = RESULTS.filter((r) => r.outcome === 'WRONG_OTHER_GROUP').map(
       (r) => `${r.term} -> ${r.got} [want ${r.expected}]`,
     );
-    // The invariant that matters, and the one that must reach ZERO. Pinned at
-    // the measured 14 only so the list can be worked down term by term —
-    // every stage lowers it, and a 15th fails the build the moment it appears.
-    expect(violations.length).toBeLessThanOrEqual(14);
+    // The invariant that matters, and the one that must reach ZERO.
+    // STAGE 1: 14 -> 10. All ten survivors are concepts the catalogue does not
+    // have, so no alias can move them; they are Stage 2's to close.
+    expect(violations.length).toBeLessThanOrEqual(10);
   });
 });
