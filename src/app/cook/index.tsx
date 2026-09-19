@@ -7,7 +7,6 @@ import { IngredientPicker } from '@/components/cook/ingredient-picker';
 import {
   activeFilterCount,
   RequestFilters,
-  ServingsField,
   type RequestFiltersValue,
 } from '@/components/cook/request-filters';
 import { Button } from '@/components/ui/button';
@@ -66,10 +65,18 @@ export default function CookScreen() {
     maxCalories: null,
   });
 
-  // Arriving from the pantry pre-selects everything the user has (the whole
-  // point of that entry point); otherwise we seed from what they last cooked
-  // with. Seeding happens once, during render, so the first paint already has
-  // the chips in place instead of flashing an empty picker.
+  /*
+    ARRIVING FROM THE PANTRY pre-selects what the user has — that is the whole
+    point of that entry point, and they asked for it by tapping "cook with
+    these".
+
+    ARRIVING NORMALLY NO LONGER DOES. Opening Cook used to silently pre-fill
+    the previous search, so the screen you saw depended on something you did
+    days ago, with nothing on screen saying so, and the first job was working
+    out what was already ticked and why. Last time's list is now offered as a
+    labelled group you can tap — same speed if you want it, no surprise if you
+    do not.
+  */
   const fromPantry = params.fromPantry === '1';
   const seedSource = fromPantry
     ? // FOOD SAFETY: only what is still in date. Seeding an expired item would
@@ -77,7 +84,7 @@ export default function CookScreen() {
       // ingredient is trusted absolutely — so the expiry rule the engine
       // enforces would be quietly defeated on the way in.
       pantry.data?.filter((item) => isSafeToUse(item)).map((item) => item.ingredientName)
-    : recentIngredients.data;
+    : [];
 
   if (!hasSeeded && seedSource !== undefined) {
     setHasSeeded(true);
@@ -125,12 +132,25 @@ export default function CookScreen() {
           selected={ingredients}
           onChange={setIngredients}
           pantryItems={pantry.data ?? []}
+          recent={recentIngredients.data ?? []}
           testID="cook-ingredient-picker"
         />
 
         {/*
-          Servings stays; everything else is one tap away. A hungry person
-          should not have to walk past six groups of chips to ask for food.
+          WHAT SURVIVES BELOW THE PICKER, and why only this.
+
+          The gap budget stays on the main screen because it is not a filter —
+          it decides what "cook with what I have" MEANS, and its default (0,
+          strictly what you own) is the promise the screen makes. Hiding it
+          would leave the promise unstated and unchangeable.
+
+          Servings moved into Filters. It is a genuine optional constraint with
+          a good default from the household size, and it was the last thing
+          standing between choosing ingredients and getting food.
+
+          The explanatory paragraph under the control is gone. Three labelled
+          options that say "only what I have", "missing 1" and "missing 2" do
+          not need a sentence each explaining that they mean what they say.
         */}
         <View style={{ gap: theme.spacing.lg }}>
           <SegmentedControl<'strict' | 'missing1' | 'missing2'>
@@ -144,16 +164,6 @@ export default function CookScreen() {
               setMaxMissing(mode === 'strict' ? 0 : mode === 'missing1' ? 1 : 2)
             }
             testID="cook-pantry-mode"
-          />
-          <Text variant="footnote" color="textSecondary">
-            {maxMissing === 0
-              ? t('cook.modeStrictHint')
-              : t('cook.modeMissingHint', { count: maxMissing })}
-          </Text>
-
-          <ServingsField
-            value={filters.servings}
-            onChange={(servings) => setFilters((current) => ({ ...current, servings }))}
           />
 
           <Button
@@ -217,9 +227,18 @@ export default function CookScreen() {
             {footerHint}
           </Text>
         ) : null}
+        {/*
+          States what it will do and how much it has to work with. The icon was
+          `sparkles`, which dressed a deterministic catalogue search up as
+          something magical — the opposite of the confidence this screen is
+          supposed to build.
+        */}
         <Button
-          label={t('cook.findMeals')}
-          icon="sparkles"
+          label={
+            canSubmit
+              ? t('cook.ctaWithCount', { count: ingredients.length })
+              : t('cook.findMeals')
+          }
           onPress={handleSubmit}
           disabled={!canSubmit}
           size="lg"

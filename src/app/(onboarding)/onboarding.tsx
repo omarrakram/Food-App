@@ -5,6 +5,7 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { SUGGESTED_KITCHEN_BASICS } from '@/features/ingredients/catalogue';
 import { Button } from '@/components/ui/button';
+import { useRowDirection } from '@/components/ui/direction';
 import { Chip } from '@/components/ui/chip';
 import { Screen, ScreenFooter } from '@/components/ui/screen';
 import { Text } from '@/components/ui/text';
@@ -82,7 +83,8 @@ function toggle<T>(list: readonly T[] | undefined, value: T): T[] {
 
 export default function OnboardingScreen() {
   const theme = useTheme();
-  const { t, language, setLanguage } = useI18n();
+  const { t, language, setLanguage, isRTL } = useI18n();
+  const row = useRowDirection();
   const router = useRouter();
   const { preferences, completeOnboarding } = usePreferences();
 
@@ -190,7 +192,7 @@ export default function OnboardingScreen() {
           <StepShell title={t('onboarding.avoidTitle')} body={t('onboarding.allergyBody')}>
             <View style={{ gap: theme.spacing.xl }}>
               <Field label={t('onboarding.allergyLabel')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+                <View style={{ flexDirection: row, flexWrap: 'wrap', gap: theme.spacing.sm }}>
                   <Chip
                     label={t('onboarding.allergyNone')}
                     selected={allergens.length === 0}
@@ -218,7 +220,7 @@ export default function OnboardingScreen() {
                 not cook for you".
               */}
               <Field label={t('onboarding.eatingStyleLabel')}>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm }}>
+                <View style={{ flexDirection: row, flexWrap: 'wrap', gap: theme.spacing.sm }}>
                   {EATING_STYLES.map((style) => (
                     <Chip
                       key={style}
@@ -277,6 +279,8 @@ export default function OnboardingScreen() {
             borderRadius: 2,
             backgroundColor: theme.colors.surfaceAlt,
             overflow: 'hidden',
+            // Progress advances from the edge the reader starts at.
+            flexDirection: row,
           }}
           accessibilityRole="progressbar"
           accessibilityLabel={t('onboarding.progress', {
@@ -293,7 +297,7 @@ export default function OnboardingScreen() {
             }}
           />
         </View>
-        <Text variant="micro" color="textTertiary">
+        <Text variant="micro" color="textTertiary" align={isRTL ? 'right' : 'left'}>
           {t('onboarding.progress', { current: index + 1, total: STEPS.length })}
         </Text>
       </View>
@@ -359,7 +363,13 @@ export default function OnboardingScreen() {
                 testID="onboarding-back"
               />
             ) : null}
-            {!isLast ? (
+            {/*
+              No Skip on language. Skipping it does not mean "no preference",
+              it means "decide for me" — and the app would then decide in a
+              language the reader may not be able to undo the decision in.
+              Every other step has a real default; this one has a real choice.
+            */}
+            {!isLast && step !== 'language' ? (
               <Button
                 label={t('common.skip')}
                 variant="ghost"
@@ -385,11 +395,26 @@ function StepShell({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
+  const { isRTL } = useI18n();
+  /*
+    Alignment is stated rather than inherited, so that choosing Arabic on step
+    one re-renders THIS screen right-aligned on the very next frame.
+
+    It cannot be left to the platform: `setLanguage` calls
+    `I18nManager.forceRTL`, which on native needs a full reload before it
+    affects layout — the app already surfaces a restart notice for exactly that
+    reason. A user who picks العربية and sees the screen stay left-aligned has
+    been told the setting did not work. Driving alignment from the language
+    value instead makes the effect immediate on every platform.
+  */
+  const align = isRTL ? 'right' : 'left';
   return (
     <View style={{ gap: theme.spacing.xl }}>
       <View style={{ gap: theme.spacing.xs }}>
-        <Text variant="title1">{title}</Text>
-        <Text variant="body" color="textSecondary">
+        <Text variant="title1" align={align}>
+          {title}
+        </Text>
+        <Text variant="body" color="textSecondary" align={align}>
           {body}
         </Text>
       </View>
@@ -409,12 +434,16 @@ function Field({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
+  const { isRTL } = useI18n();
+  const align = isRTL ? 'right' : 'left';
   return (
     <View style={{ gap: theme.spacing.sm }}>
       <View style={{ gap: 2 }}>
-        <Text variant="subhead">{label}</Text>
+        <Text variant="subhead" align={align}>
+          {label}
+        </Text>
         {hint ? (
-          <Text variant="micro" color="textTertiary">
+          <Text variant="micro" color="textTertiary" align={align}>
             {hint}
           </Text>
         ) : null}

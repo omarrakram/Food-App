@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-19 |
-| **Current phase** | **CORE JOURNEY UX — numerals + onboarding landed; ingredient/pantry/budget/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **CORE JOURNEY UX — numerals, onboarding and the ingredient picker landed; budget/pantry/saved next.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -251,6 +251,59 @@ so it cannot drift.
 
 Top of the list is exactly what you would want it to be: koshari lentil rice
 (100% staple reach), shorbet adas, foul with eggs, taameya.
+
+#### Ingredient picker + Cook flow — Milestone 3
+
+**Audit first.** What was already good and kept untouched: `searchIngredients`
+is a nine-tier scorer (exact canonical → exact alias → prefix → token prefix →
+substring → fuzzy) that reads `name`, `nameAr` **and** `aliases`, so **Arabic
+search already worked**; fuzzy results are suppressed whenever a confident
+match exists; and the picker never asked for a quantity. Matching semantics are
+unchanged.
+
+What was costing time, each fixed:
+
+| Problem | Why it mattered |
+|---|---|
+| A selected ingredient was **removed from its own results list** | The row under your thumb vanished and the next one jumped into it. You could not see what you had done, or undo it where you did it. |
+| Suggestions were **12 hardcoded English strings** in the component | Monolingual, and drifted from a 257-ingredient catalogue. |
+| The **11-category taxonomy was unused** | Browsing 257 ingredients meant guessing a word to type. |
+| **No zero-results state at all** | Typing something unknown rendered nothing — even though the engine has always accepted free text. |
+| Everything was chips, including results | A long list became a reflowing wall of small targets. |
+| Opening Cook **silently pre-filled the last search** | The screen depended on something you did days ago, with nothing saying so. |
+| CTA was "Find meals" with a **`sparkles` icon** | Dressed a deterministic catalogue search up as magic. |
+
+**Changes.** Results are rows with visible selected state and one-tap toggle;
+the selected list is a single scrolling rail rather than a growing wall;
+categories browse on demand (nothing expanded until one is opened); zero
+results explains itself and offers "add anyway"; last time's ingredients are a
+labelled group you tap rather than a silent pre-fill; servings moved into
+Filters; the gap-budget control stays visible because it defines what "cook
+with what I have" *means*; the CTA reads **"See meals with N ingredients"**.
+
+**A data-model limitation worth recording.** The catalogue flags 47 ingredients
+`isCommonStaple`, and the first version of the quick-add list took the first
+eighteen. That flag **carries no ordering** and the catalogue is authored
+alphabetically, so the list opened with *anise, baking powder, bay leaf,
+caraway, cardamom, clove*. All genuinely common staples; none is what somebody
+at a fridge taps first. `features/ingredients/common.ts` now ranks by **how
+many catalogue recipes actually call for each ingredient**, which is a better
+proxy for both "likely in the kitchen" and "will actually unlock results", and
+excludes universal basics because the engine already assumes those.
+
+**Basics semantics preserved:** `UNIVERSAL_BASICS` is still only the two the
+product defines, user-configured basics stay user-controlled, and nothing
+silently assumes a normal ingredient exists.
+
+#### A real bug found while testing
+
+The suite had been failing about **one run in six** since Phase 3.5, and it was
+not flakiness. `DemoNotificationsRepository.state()` returned a **fresh seed on
+every call** until something was written, and the seed's timestamps are
+relative to `Date.now()` — so two reads a millisecond apart disagreed, the
+feed's times shifted under the reader, and `markAllRead` re-seeded before
+saving and re-stamped rows that were already read. Seeding now persists on
+first read. Eight consecutive clean runs since.
 
 ### Not done yet (deliberately, in the stated order)
 

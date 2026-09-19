@@ -54,11 +54,15 @@ export function activeFilterCount(value: RequestFiltersValue): number {
 }
 
 /**
- * Servings, which stays on the screen.
+ * Servings.
  *
- * It is the one constraint nearly everyone sets and the one that changes every
- * quantity and price downstream, so it earns its place next to the primary
- * action. Everything else is behind `RequestFilters`.
+ * It used to sit on the cook screen next to the primary action, on the
+ * argument that nearly everyone sets it. Watching the flow, almost nobody
+ * does: it is seeded from household size, which is right most of the time, and
+ * being right most of the time is exactly what makes a control a filter rather
+ * than a step. It now lives inside `RequestFilters` with the other optional
+ * constraints, and is still exported separately for any screen that genuinely
+ * needs it inline.
  */
 export function ServingsField({
   value,
@@ -102,6 +106,8 @@ export function RequestFilters({ value, onChange, showNutrition = true }: Reques
 
   return (
     <View style={{ gap: theme.spacing.lg }}>
+      <ServingsField value={value.servings} onChange={(servings) => onChange({ servings })} />
+
       <FilterGroup label={t('cook.maxTime')}>
         <Chip
           label={t('cook.anyTime')}

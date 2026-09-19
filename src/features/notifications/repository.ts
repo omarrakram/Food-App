@@ -80,9 +80,28 @@ function seedNotifications(): AppNotification[] {
 export class DemoNotificationsRepository implements NotificationsRepository {
   readonly isLive = false;
 
+  /**
+   * The rows, seeded exactly once.
+   *
+   * THE BUG THIS FIXES: the seed's timestamps are relative to `Date.now()`,
+   * and this used to return a FRESH seed on every call until something was
+   * written. Two reads a millisecond apart therefore disagreed — the same
+   * notification carried a different `createdAt` and `readAt` each time it was
+   * looked at, so the feed's times shifted under the reader, and
+   * `markAllRead` re-seeded before saving and stamped rows that were already
+   * read with a new time.
+   *
+   * It surfaced as a test that failed roughly one run in six, which is the
+   * tell: a time-dependent seed is not a flaky test, it is non-deterministic
+   * data. Persisting on first read makes the first read the only one that
+   * invents anything.
+   */
   private async state(): Promise<AppNotification[]> {
     const stored = await getItem<AppNotification[]>(StorageKeys.demoNotifications);
-    return stored ?? seedNotifications();
+    if (stored) return stored;
+    const seeded = seedNotifications();
+    await this.save(seeded);
+    return seeded;
   }
 
   private async save(next: AppNotification[]): Promise<void> {

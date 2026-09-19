@@ -289,7 +289,22 @@ async function main() {
       !(await visible('onboarding-name', 1200)));
     await shot('01-onboarding');
 
+    // Language is the one step with no Skip: skipping it does not mean "no
+    // preference", it means "decide for me", in a language the reader may not
+    // be able to undo the decision in.
+    check('language cannot be skipped', !(await visible('onboarding-skip', 1200)));
+
+    // Choosing Arabic must take effect on THIS screen, not after a restart.
+    await tap('onboarding-language-ar');
+    await page.waitForTimeout(700);
+    const arabicNow = await page.evaluate(() =>
+      /[\u0600-\u06FF]/.test(document.body.innerText),
+    );
+    check('choosing Arabic renders this screen in Arabic immediately', arabicNow);
+    await shot('01b-onboarding-arabic');
+
     await tap('onboarding-language-en');
+    await page.waitForTimeout(500);
     check('choosing a language advances', await tap('onboarding-next', { optional: true }));
 
     check('the second step is the safety question',
@@ -443,20 +458,58 @@ async function main() {
 
     const selectedCount = async () => page.locator('[data-testid^="selected-"]').count();
     check('the picked ingredient becomes a selected chip', (await selectedCount()) > 0);
+
+    // THE REGRESSION THIS FLOW EXISTS FOR: the chosen row used to be filtered
+    // out of its own list, so the thing under the thumb vanished and the next
+    // row jumped up into it.
+    check('the chosen row stays in the results list',
+      (await page.locator('[data-testid^="autocomplete-"]').count()) > 0);
+
+    // And tapping it again removes it, where the user is already looking.
+    const beforeToggle = await selectedCount();
+    await page.locator('[data-testid^="autocomplete-"]').first().click();
+    await page.waitForTimeout(500);
+    check('tapping the same row again removes it', (await selectedCount()) === beforeToggle - 1);
+    await page.locator('[data-testid^="autocomplete-"]').first().click();
+    await page.waitForTimeout(500);
+
+    // Zero results used to render nothing at all and look broken.
+    await type('ingredient-input', 'zzzqqq', { clear: true });
+    check('an unknown ingredient explains itself', await visible('ingredient-no-results', 4000));
+    check('and still offers a way forward', await visible('ingredient-add-anyway', 2000));
+
+    // Clearing the field brings the browse surfaces back.
+    await type('ingredient-input', '', { clear: true });
+    await page.waitForTimeout(600);
     await shot('05-cook-selected');
 
-    // NOTE: the testID is the NORMALISED name — "eggs" normalises to "egg".
-    // The previous version of this script tapped `starter-eggs`, matched
-    // nothing, and passed anyway because the tap was optional.
-    check('a common suggestion is tappable', await tap('starter-egg'));
-    check('a second common suggestion is tappable', await tap('starter-rice'));
+    const starters = page.locator('[data-testid^="starter-"]');
+    check('common ingredients are offered without typing', (await starters.count()) > 0,
+      `${await starters.count()} shown`);
+    const beforeStarters = await selectedCount();
+    await starters.first().click();
+    await page.waitForTimeout(400);
+    await starters.nth(1).click();
+    await page.waitForTimeout(400);
     const afterStarters = await selectedCount();
-    check('common suggestions add to the selection', afterStarters >= 2, `${afterStarters} chips`);
+    check('common suggestions add to the selection', afterStarters >= beforeStarters + 2,
+      `${beforeStarters} -> ${afterStarters}`);
+
+    // Browsing by category, which did not exist before.
+    check('categories are offered for browsing', await tap('category-protein'));
+    check('opening a category lists its ingredients',
+      await visible('category-list-protein', 4000));
+    check('and it collapses again', await tap('category-protein'));
 
     const firstChip = page.locator('[data-testid^="selected-"]').first();
     await firstChip.click();
     await page.waitForTimeout(600);
     check('tapping a selected chip removes it', (await selectedCount()) === afterStarters - 1);
+
+    // The CTA counts what it has, and names no magic.
+    const cta = await page.locator('[data-testid="cook-submit"]').innerText();
+    check('the CTA states what it will do, with a count', /\d/.test(cta), cta.replace(/\n/g, ' '));
+    check('and uses no sparkle language', !/sparkle|magic|✨/i.test(cta));
 
     // Filters: open, apply, confirm the reset appears, clear.
     if (await tap('cook-filters', { optional: true })) {
