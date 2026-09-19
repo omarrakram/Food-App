@@ -1374,43 +1374,65 @@ The Language screen still offers a restart, now only where one is genuinely
 pending: on native, for the parts JS cannot mirror — the drawer's side, gesture
 directions (expo-updates on native, a plain reload on web).
 
-### Still split-brain, and what was tried
+### Web direction: done, and why the first attempt was reverted wrongly
 
-77 plain `flexDirection: 'row'` sites mirror automatically on native Arabic and
-not at all on web, because web has no platform mechanism to do it. The smoke
-counts 20 mirrored rows in Arabic — the ones that go through `useRowDirection`
-— out of roughly 97. Two user-visible consequences on the web build, both
-confirmed from Arabic screenshots:
+The web build now applies `dir="rtl"` to `document.documentElement`, which is
+the browser's own version of the native flag. CSS lays `flex-direction: row`
+along the inline axis, so every row reverses — including the seventy-seven
+plain ones nobody routed through a hook — and a horizontal scroller inside it
+starts at the correct edge and scrolls the correct way. Neither is reachable
+from a per-component JS flip.
 
-- **Horizontal rails do not mirror.** Home's "quick ideas" rail and Discover's
-  collection chips run left-to-right and open at the wrong end. This cannot be
-  fixed by reversing one row: a rail's SCROLL ORIGIN has to move too, and
-  that is a browser behaviour, not a style.
-- **The drawer opens from the left.** React Navigation picks its side from
-  `I18nManager.isRTL`, which on web is permanently false.
+**The previous revert was a misdiagnosis.** The symptom was an Arabic Discover
+card that would not click, blamed on hit-testing under a document direction.
+Reproducing it properly — Arabic, document RTL, drawer CLOSED,
+`elementFromPoint` at the card's centre — shows the hit test agreeing with the
+painted position in both directions, nothing covering it, and the click
+landing. The real cause was a **testID prefix collision**: cards were
+`discover-${id}`, so `[data-testid^="discover-"]` matched
+`discover-open-drawer` first and the step had been opening the drawer for
+months. `npm run audit:testids` now fails the build on that class of bug and
+found six more instances.
 
-**The obvious fix was attempted and reverted.** Setting `dir="rtl"` on
-`document.documentElement` gives the web the mechanism it lacks: CSS lays
-`flex-direction: row` along the inline axis, so every row reverses and every
-horizontal scroller starts at the correct edge. It worked — the smoke's
-geometry checks passed (`dir=rtl`, the first tab to the right of the last,
-identical before and after a reload, rails opening at `scrollLeft: -300`) —
-but it **broke a core interaction**: a Discover card in Arabic became
-unclickable, with Playwright resolving the button and then timing out for
-30 seconds waiting for it to receive events. The drawer, which React
-Navigation still positions from `I18nManager.isRTL`, appears to end up over
-the content once the document reads right-to-left.
+**Three capabilities, not one**, because the platforms differ in what they CAN
+do rather than only in how they are wired:
 
-It is reverted rather than shipped. A card that cannot be tapped in Arabic is
-worse than a rail that opens at the wrong end. Whoever picks this up should
-start from the interaction, not the layout: reproduce the unclickable card
-with the drawer closed, and establish whether the blocker is the drawer's
-overlay, a stacking context, or `elementFromPoint` disagreeing with the
-painted position. The change itself was three lines — a `documentDirection`
-module flag, `platformMirrorsRows()` reading it alongside the native flag, and
-a `platformSwapsSides()` split for the sides CSS does NOT swap — plus a
-`drawerPosition` that must key off the NATIVE flag, not the document, because
-React Navigation only reads the former.
+| | native | web |
+|---|---|---|
+| `platformMirrorsRows()` | flag | document direction |
+| `platformSwapsSides()` | flag | **no** — CSS `text-align: left` and `border-left-width` are physical and ignore `dir` |
+| `navigationMirrorsItself()` | flag | **no** — React Navigation reads `I18nManager.isRTL`, never the document |
+
+Conflating the third with the first is how the drawer ended up opening from the
+left in Arabic; passing a side on NATIVE is what displaced the content pane off
+the viewport the time before that. `_layout.tsx` names a `drawerPosition` only
+when the library will not work it out itself.
+
+The browser walk pins all of it as GEOMETRY rather than as style strings —
+`flex-direction` now reads `row` in both languages, so a string assertion would
+silently invert. It asserts the document direction, the first tab sitting right
+of the last, the rails' scroll origin, the drawer's side, that arriving by
+reload and arriving by tap produce identical layout, and that an Arabic
+Discover card reaches a recipe URL.
+
+### Core-journey QA
+
+Walked as five journeys — first-time user, budget, pantry, saved, shopping
+list — in English and Arabic at 390 and 320, measuring every interactive rect
+rather than reading screenshots: horizontal overflow past the viewport, text
+clipped by its own box, and touch targets under the 44px floor.
+
+**One genuine finding across all four sweeps.** Twelve controls render below
+44px; eleven already carry `hitSlop` lifting the real target to the minimum,
+which a DOM rect cannot show — the starter chips at 30px through `Chip`, the
+drawer button at 32px, the header back button at 40px through `IconButton`.
+The twelfth, "See all" beside a section title, had a literal `hitSlop={8}` and
+so 36px of target; it now goes through `hitSlopFor` like everything else.
+
+The overflow readings are dominated by the CLOSED drawer parked off-screen,
+which is correct behaviour — and incidentally confirms the direction fix from
+the other side: parked at `left: -300` in English and at `left: 390` on a
+390-wide viewport in Arabic.
 
 ---
 
