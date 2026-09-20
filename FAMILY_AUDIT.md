@@ -9,7 +9,7 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 62 |
+| Inferred families | 63 |
 | …whose members span food groups | 34 |
 
 ## Declared
@@ -19,7 +19,7 @@ inferred rule.
 
 | Concept | Terms | Members |
 |---|---|---|
-| chicken | `chicken` `فراخ` `firakh` `farakh` `دجاج` `dagag` `dajaj` | `chicken-breast`, `chicken-thigh`, `chicken-drumstick`, `chicken-wings`, `chicken-liver`, `chicken-gizzards`, `whole-chicken` |
+| chicken | `chicken` `فراخ` `firakh` `farakh` `دجاج` `dagag` `dajaj` | `chicken-breast`, `chicken-thigh`, `chicken-drumstick`, `chicken-wings`, `chicken-liver`, `chicken-gizzards`, `chicken-bones`, `whole-chicken` |
 
 ## Inferred, spanning more than one food group
 
@@ -32,12 +32,12 @@ rather than a real parent concept.
 | `seed` | pantry, seasoning | `chia`, `coriander-ground`, `fennel-seed`, `mustard-seed`, `nigella`, `pumpkin-seeds`, `sesame-seeds`, `sunflower-seeds` |
 | `bean` | pantry, produce, protein | `fava-beans`, `green-beans`, `green-fava-beans`, `kidney-beans`, `lupini-beans`, `white-beans` |
 | `لبن` | dairy, seasoning | `buttermilk`, `coconut-milk`, `condensed-milk`, `milk`, `powdered-milk` |
+| `cream` | dairy, frozen | `clotted-cream`, `cream`, `ice-cream`, `sour-cream` |
 | `milk` | dairy, seasoning | `coconut-milk`, `condensed-milk`, `milk`, `powdered-milk` |
 | `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `pepper` | produce, seasoning | `bell-pepper`, `black-pepper`, `chili-pepper`, `white-pepper` |
 | `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `فول` | pantry, produce, protein | `fava-beans`, `green-fava-beans`, `peanuts`, `soybeans` |
-| `cream` | dairy, frozen | `clotted-cream`, `cream`, `ice-cream` |
 | `pea` | frozen, pantry, protein | `black-eyed-peas`, `green-peas`, `split-peas` |
 | `water` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `بصل` | produce, seasoning | `green-onion`, `onion-powder`, `onions` |
@@ -68,8 +68,8 @@ rather than a real parent concept.
 
 | Token | Group | Members |
 |---|---|---|
-| `جبنه` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `kashkaval`, `parmesan`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
-| `cheese` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `mish-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
+| `جبنه` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `kashkaval`, `parmesan`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
+| `cheese` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `mish-cheese`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
 | `sauce` | seasoning | `bbq-sauce`, `hot-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
 | `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `soy-sauce`, `worcestershire` |
 | `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `toast-bread` |
@@ -95,4 +95,5 @@ rather than a real parent concept.
 | `شوكولاته` | pantry | `baking-chocolate`, `chocolate` |
 | `عجينه` | staple | `phyllo`, `puff-pastry` |
 | `كبده` | protein | `chicken-liver`, `liver` |
+| `كريمه` | dairy | `cream`, `sour-cream` |
 | `لحمه` | protein | `beef-cubes`, `ground-beef` |

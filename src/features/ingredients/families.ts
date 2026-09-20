@@ -88,6 +88,7 @@ export const DECLARED_FAMILIES: readonly DeclaredFamily[] = [
       'chicken-wings',
       'chicken-liver',
       'chicken-gizzards',
+      'chicken-bones',
       'whole-chicken',
     ],
     memberTokens: ['chicken', 'فراخ', 'فرخه', 'كوانس'],

@@ -1167,6 +1167,84 @@ change to ranking, scoring or the fuzzy tier.
 
 ---
 
+## 9e. Stage 2B batch 1: P0, after the stale proposals were removed
+
+The §3 gap list was written when the catalogue held 257 rows. Probing it
+against the live catalogue rather than trusting it found that **a third of the
+remaining P0 proposals were already satisfied**, and one was a live wrong
+answer nobody had listed.
+
+### Already present, rejected as duplicates
+
+| Proposed | Already | 
+|---|---|
+| rusk (`بقسماط`) | the `breadcrumbs` row IS بقسماط, with `rusk` as an alias |
+| mutton / lahma dani | `lamb` already carries `mutton`, `ضاني`, `لحم غنم`, `خروف` |
+| laban rayeb (`لبن رايب`) | the `buttermilk` row IS لبن رايب, with `rayeb` as an alias |
+| kariesh | the same cheese as areesh, added in 2A |
+| frozen molokhia / okra / spinach / artichoke | all four already resolve to the fresh row, because `مجمدة` is a noise word. The fresh-vs-frozen rule was already working. |
+
+### Rejected on the ontology rules
+
+| Proposed | Rule | Why |
+|---|---|---|
+| kebda eskandarani | 1, a dish | The ingredient is `liver`, which exists. `كبدة اسكندراني` already resolves to it. |
+| fiteer, basbousa, koshari | 1, dishes | They have recipes. |
+| artichoke hearts | 3, a form | `artichoke` exists and the form does not change a recipe. |
+| pastry sheets | 2 | `phyllo` and `puff-pastry` cover it. |
+| fish fillet | too generic | Species-unspecified. Egyptians buy فيليه بلطي, not "fillet". A row would match nothing honestly. |
+| mince grades | 2 | A quality attribute, not a concept. |
+| full / skim milk | 5 | Added as ALIASES of `milk`. Two rows would mean a pantry holding skimmed milk fails a recipe calling for milk. |
+| ras (رأس), rekab | flagged | رأس is ambiguous (رأس ثوم is a head of garlic) and I could not confirm what the list meant by *rekab*. Not guessed at. |
+
+### The nine that earned rows
+
+`quail` (سمان) · `lamb-shank` (موزة ضاني) · `brain` (مخ) · `bottarga` (بطارخ) ·
+`chicken-bones` (عضم فراخ) · `processed-cheese` (جبنة مثلثات) · `sour-cream`
+(كريمة حامضة) · `jam` (مربى) · `burger-patty` (برجر)
+
+Each was put through the §3c rules first: not a dish, not another name for
+something we have, not a brand, and a form or cut only where buying, cooking
+and pricing genuinely differ.
+
+**`chicken-bones` went through the family guard, which is what the guard is
+for.** A new chicken row failed the declared-family completeness test until
+someone decided whether a carcass is chicken. It is: "without chicken" must
+rule out a stock made from one. Added to the family explicitly.
+
+**`موزة` was left with the bananas.** The shank cut really is called موزة, but
+bare موزة is far more often one banana, and `bananas` already owns it. Rather
+than take the word — which would be the same lie in the other direction — the
+row is named `موزة ضاني` and reached through its qualified forms, exactly as
+`حمص` was settled in Stage 1: the bare word keeps its everyday sense, the
+specialised sense is qualified. Flagged for native review.
+
+**`processed-cheese` carries `البقرة الضاحكة` / `laughing cow` as aliases.** A
+genericised brand is still a brand and belongs under the generic concept
+(rule 4), not in a row of its own.
+
+**`burger-patty` declares `gluten` deliberately**, on the same reasoning as
+corn flakes: Egyptian commercial patties commonly contain rusk, and the safe
+reading of an allergen beats the pedantic one. Flagged.
+
+### Measured
+
+| | After 2A.2 | After batch 1 |
+|---|---|---|
+| Canonical ingredients | 272 | **281** |
+| Aliases | 1100 | **1160** |
+| Benchmark correct | 258/258 | **258/258** |
+| Dead ends · wrong same-group · wrong cross-group | 0 · 0 · 0 | **0 · 0 · 0** |
+| Inferred families | 62 | **63** |
+
+The one new inferred family is `كريمه` = {`cream`, `sour-cream`}, which is
+correct rather than accidental. `cheese`, `جبنه` and `cream` absorbed the new
+rows as they should, and the benchmark did not move — nine rows added no
+regression, and none of them was a concept the benchmark probes, so no truth
+label changed.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins

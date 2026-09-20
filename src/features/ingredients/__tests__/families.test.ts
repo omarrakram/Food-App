@@ -139,9 +139,14 @@ describe('the declared chicken family', () => {
     }
   });
 
-  it('covers every cut, the offal and the whole bird', () => {
+  it('covers every cut, the offal, the bones and the whole bird', () => {
+    // Spelled out rather than derived, so adding a chicken row is a decision
+    // someone makes here. Stage 2B added `chicken-bones` and this list is
+    // where that was decided: a carcass is chicken, so "without chicken" must
+    // rule out a stock made from one.
     expect([...CHICKEN_SLUGS].sort()).toEqual(
       [
+        'chicken-bones',
         'chicken-breast',
         'chicken-drumstick',
         'chicken-gizzards',
