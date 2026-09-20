@@ -118,13 +118,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Rainer Zenz · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Cacik-1.jpg",
   },
-  "cacio-e-pepe": {
-    source: require('../../../assets/recipes/cacio-e-pepe.jpg') as number,
-    creator: "Camelia.boban",
-    license: "CC-BY-SA-4.0",
-    attribution: "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
-  },
   "chana-masala": {
     source: require('../../../assets/recipes/chana-masala.jpg') as number,
     creator: "Simon Law (sfllaw) from Montréal , QC , Canada",
@@ -446,6 +439,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-4.0",
     attribution: "روتانا · CC-BY-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Fluffy_Pancakes.jpg",
+  },
+  "parmesan-pepper-pasta": {
+    source: require('../../../assets/recipes/parmesan-pepper-pasta.jpg') as number,
+    creator: "Camelia.boban",
+    license: "CC-BY-SA-4.0",
+    attribution: "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
   },
   "pasta-e-ceci": {
     source: require('../../../assets/recipes/pasta-e-ceci.jpg') as number,

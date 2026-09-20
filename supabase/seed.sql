@@ -10021,7 +10021,7 @@ values ('95ced6a3-470e-5eda-af41-71c903724eb2', '7e324ea6-e957-5b84-9eb3-77faeb1
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('ae1bc422-14e4-5e8e-8a1a-830d09357d16', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 2, 'Crack the eggs straight on top of the basterma. Do not stir them — this is fried, not scrambled, and the yolks stay whole.', 'اكسر البيض على البسطرمة على طول. متقلبهوش — ده بيض مقلي مش مخفوق، والصفار يفضل كامل.', 1, null, null, '{"eggs","basterma"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('a1b2d93e-0294-5c94-95b8-ed11a973b530', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 3, 'Cover and cook 4 to 5 minutes, until the whites are set and the yolks still move. Salt lightly at the end — the basterma has already brought most of it.', 'غطي واطبخ من ٤ لـ ٥ دقايق، لحد ما البياض يمسك والصفار لسه بيتحرك. ملّح خفيف في الآخر — البسطرمة أصلاً جابت أغلب الملح.', 5, null, null, '{"eggs","salt"}');
+values ('a1b2d93e-0294-5c94-95b8-ed11a973b530', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 3, 'Cover and cook 4 to 5 minutes, until the whites are set and the yolks still move. Salt lightly at the end — the basterma has already brought most of it.', 'غطي واطبخ من ٤ لـ ٥ دقايق، لحد ما البياض يمسك والصفار لسه بيتحرك. ملّح خفيف في الآخر — البسطرمة أصلاً جابت أغلب الملح.', 5, 'Cook the eggs until the whites are completely set. Runny yolks are not for anyone pregnant, very young, elderly or unwell — cook them through instead.', 'استوي البيض لحد ما البياض يمسك تماماً. الصفار السايح مش مناسب للحامل ولا للأطفال الصغيرين ولا لكبار السن ولا للمريض — استويه كويس بدل كده.', '{"eggs","salt"}');
 
 -- Fava Bean Purée with Herbs
 insert into public.recipes (
@@ -10520,82 +10520,6 @@ values ('7ba3ac45-a893-5ed2-8213-2e0068d21192', '14f939dd-7511-5252-8df6-ee21e99
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('cb4d7602-2072-55b7-a7e0-118df5fe2180', '14f939dd-7511-5252-8df6-ee21e9986fc2', 2, 'Whisk the yogurt with 150ml cold water until pourable, then stir everything in.', 'اخفق الزبادي مع ١٥٠ مل مية باردة لحد ما يسيح، وبعدين قلّب كل حاجة فيه.', 5, null, null, '{"yogurt","garlic","mint","dill","olive oil","ice"}');
 
--- Pasta with Cheese and Pepper
-insert into public.recipes (
-  id, slug, title, title_ar, description, description_ar,
-  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
-  image_url, source, cuisine, difficulty,
-  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
-  created_by, is_public)
-values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'cacio-e-pepe', 'Pasta with Cheese and Pepper', 'مكرونة بالجبنة والفلفل',
-  'Four things and a technique. The sauce is cheese loosened with the water the pasta cooked in — no cream — and it splits the moment the pan is too hot.', 'أربع حاجات وطريقة. الصلصة دي جبنة بتترخي بمية سلق المكرونة — من غير كريمة — وبتتقطّع أول ما الطاسة تسخن زيادة.',
-  'curated/cacio-e-pepe.jpg', 'openly_licensed', 'Camelia.boban',
-  'CC-BY-SA-4.0', 'Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg',
-  null, 'curated', 'italian', 'medium',
-  5, 15, 4,
-  480, 19, 68,
-  15, 3, null, true)
-on conflict (id) do update set
-  title = excluded.title,
-  title_ar = excluded.title_ar,
-  description = excluded.description,
-  description_ar = excluded.description_ar,
-  image_path = excluded.image_path,
-  image_source = excluded.image_source,
-  image_creator = excluded.image_creator,
-  image_license = excluded.image_license,
-  image_attribution = excluded.image_attribution,
-  image_source_url = excluded.image_source_url,
-  image_url = excluded.image_url,
-  cuisine = excluded.cuisine,
-  difficulty = excluded.difficulty,
-  prep_minutes = excluded.prep_minutes,
-  cook_minutes = excluded.cook_minutes,
-  base_servings = excluded.base_servings,
-  calories = excluded.calories,
-  protein_g = excluded.protein_g,
-  carbs_g = excluded.carbs_g,
-  fat_g = excluded.fat_g,
-  fiber_g = excluded.fiber_g,
-  is_public = excluded.is_public;
-
-delete from public.recipe_meal_types where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'lunch');
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'dinner');
-delete from public.recipe_diet_tags where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_diet_tags (recipe_id, diet) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'vegetarian');
-insert into public.recipe_diet_tags (recipe_id, diet) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'halal');
-delete from public.recipe_allergens where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_allergens (recipe_id, allergen) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'gluten');
-insert into public.recipe_allergens (recipe_id, allergen) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'dairy');
-delete from public.recipe_appliances where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_appliances (recipe_id, appliance) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'stove');
-delete from public.recipe_tags where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'italian');
-insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'quick');
-insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'comfort');
-insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'beginner');
-
-delete from public.recipe_ingredients where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('fc2c94c1-1d28-5825-84ff-8f4d3eac8f28', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'pasta' limit 1), 'pasta', 'pasta', 400, 'g', null, false, false, false, null, 1);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('95603edc-eb8d-58cd-8049-368b2f747565', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'parmesan' limit 1), 'parmesan', 'parmesan', 150, 'g', 'finely grated', false, false, false, null, 2);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9418e2f2-2b62-5045-a787-32c9d3976d1f', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'black-pepper' limit 1), 'black-pepper', 'black pepper', 2, 'tsp', 'coarsely cracked', false, false, false, null, 3);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('18f165b3-30dc-5be6-b86f-a8b2b7636685', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 40, 'g', null, false, false, false, null, 4);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9a36f94c-1832-5ddd-bac8-fa5c8e2ac229', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
-
-delete from public.recipe_steps where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('165c68eb-d0e8-5a7c-b520-cc229eb25508', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 1, 'Boil the pasta in salted water, but use less water than usual — you want it starchy, because that starch is the sauce.', 'اسلق المكرونة في مية مملحة، بس مية أقل من المعتاد — عايزها تقيلة بالنشا، لأن النشا ده هو الصلصة.', 12, null, null, '{"pasta","salt"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('7ba6faaf-5a86-5b71-96bf-5690c23add37', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 2, 'Toast the cracked pepper in the butter in a wide pan for a minute, until it smells sharp. Then TAKE THE PAN OFF THE HEAT.', 'حمّص الفلفل المجروش في الزبدة في طاسة واسعة دقيقة، لحد ما ريحته تطلع نفّاذة. وبعدين شيل الطاسة من على النار.', 2, null, null, '{"black pepper","butter"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('e2bd89da-4be4-5eaa-8460-6e8a053fe9a7', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 3, 'Lift the pasta straight into the pan with a ladleful of its water. Add the parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.', 'شيل المكرونة على طول في الطاسة ومعاها مغرفة من مياتها. حط البارميزان والطاسة بعيد عن النار وقلّب بقوة لحد ما تبقى صلصة بتغلّف. الحرارة هي اللي بتعمل خيوط؛ سيب الطاسة بعيد عنها.', 3, null, null, '{"pasta","parmesan"}');
-
 -- Grilled Chicken and Crouton Salad
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -10780,7 +10704,7 @@ values ('f5d0d564-9619-52cf-b5ee-5f58768d81ff', 'caprese-stack', 'Tomato, Mozzar
   'curated/caprese-stack.jpg', 'generated', 'Akla kitchen',
   'CC0-1.0', null, null,
   null, 'curated', 'italian', 'easy',
-  8, 0, 2,
+  25, 0, 2,
   310, 18, 8,
   24, 2, null, true)
 on conflict (id) do update set
@@ -14732,13 +14656,13 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'kebda-eskandarani', 'Alexandrian Liver', 'كبدة اسكندراني',
-  'Liver cut into strips and thrown into a pan hot enough to sear it in seconds, with a lot of garlic and enough chilli to make your eyes water. Overcook it by a minute and it turns to rubber.', 'كبدة مقطعة شرايح وبتترمي في طاسة سخنة لدرجة إنها تستوي في ثواني، مع توم كتير وشطة تخلي عينك تدمع. لو زوّدت دقيقة واحدة هتبقى أستيك.',
+  'Liver marinated in vinegar and cumin, then seared hard with garlic and green chilli. The vinegar is not optional seasoning — it is what takes the metallic edge off and what makes this Alexandrian rather than just fried liver. Eight lines, because stripping it to five stripped out the dish.', 'كبدة متتبلة بالخل والكمون، وبعدين تتحمّر على نار عالية مع توم وشطة خضرا. الخل مش مجرد تتبيلة — هو اللي بيشيل الطعم المعدني وهو اللي بيخليها اسكندراني مش مجرد كبدة مقلية. تمن سطور، لأن تقليلها لخمسة شال الأكلة نفسها.',
   'curated/kebda-eskandarani.jpg', 'openly_licensed', 'Turnopoems',
   'CC-BY-SA-4.0', 'Turnopoems · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Kebda_eskandarani.jpg',
   null, 'curated', 'egyptian', 'medium',
-  10, 8, 4,
-  290, 27, 6,
-  17, 1, null, true)
+  30, 12, 4,
+  310, 28, 7,
+  18, 1, null, true)
 on conflict (id) do update set
   title = excluded.title,
   title_ar = excluded.title_ar,
@@ -14774,30 +14698,38 @@ insert into public.recipe_appliances (recipe_id, appliance) values ('239ecaaf-d4
 delete from public.recipe_tags where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
 insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'egyptian');
 insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'high-protein');
-insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'comfort');
 
 delete from public.recipe_ingredients where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('7844f83f-7a27-5c1d-906a-86bde7bcf03d', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'liver' limit 1), 'liver', 'beef liver', 600, 'g', 'cut into strips', false, false, false, null, 1);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('7761af9b-8e1b-506c-84ba-134df6fff128', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 8, 'clove', 'crushed', false, false, false, null, 2);
+values ('e612a6e3-8bca-5733-9074-7b782793c003', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'vinegar' limit 1), 'vinegar', 'vinegar', 60, 'ml', null, false, false, false, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('08e6c03b-7b31-5944-85be-a92a72a968ad', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 2, 'tsp', null, false, false, false, null, 3);
+values ('7761af9b-8e1b-506c-84ba-134df6fff128', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 8, 'clove', 'crushed', false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('d416ea65-8032-5c21-9ad6-97d08d67914f', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 45, 'ml', null, false, false, false, null, 4);
+values ('95544976-3c6f-53d9-b919-f742b93a5308', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('99b3e89a-ec31-549b-8037-708878c436ec', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 5);
+values ('94bf6bcf-3228-5ce6-b925-0a7e6b9f2212', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'chili-pepper' limit 1), 'chili-pepper', 'chili pepper', 3, 'piece', 'sliced', false, false, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d416ea65-8032-5c21-9ad6-97d08d67914f', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 45, 'ml', null, false, false, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('8de81109-4217-5f55-9027-b6d3b5d1aa1d', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'cut into wedges', false, false, false, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('99b3e89a-ec31-549b-8037-708878c436ec', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 8);
 
 delete from public.recipe_steps where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('f1ae549e-2d65-52a5-a2ad-5da60bad4168', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 1, 'Cut the liver into finger-width strips and pat it very dry. Wet liver steams in the pan and goes grey instead of browning.', 'قطّع الكبدة شرايح عرض صباع ونشّفها كويس أوي. الكبدة المبلولة بتتبخّر في الطاسة وبتبقى رمادية بدل ما تتحمّر.', 8, null, null, '{"beef liver"}');
+values ('f1ae549e-2d65-52a5-a2ad-5da60bad4168', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 1, 'Cut the liver into finger-width strips, pull off any tough membrane, and toss it with the vinegar, the cumin and half the garlic.', 'قطّع الكبدة شرايح عرض صباع، شيل أي غشاوة قاسية، وقلّبها مع الخل والكمون ونص التوم.', 10, null, null, '{"beef liver","vinegar","cumin","garlic"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('9270f3c0-a173-553d-aaed-4134716804f8', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 2, 'Get the oil properly hot in a wide pan — it should shimmer. Put the liver in one layer and leave it alone for 90 seconds before you touch it.', 'سخّن الزيت كويس في طاسة واسعة — لازم يلمع. حط الكبدة طبقة واحدة وسيبها ٩٠ ثانية قبل ما تلمسها.', 3, 'Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.', 'الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة.', '{"vegetable oil","beef liver"}');
+values ('9270f3c0-a173-553d-aaed-4134716804f8', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 2, 'Leave it 20 minutes. This is the step people skip and the one that matters: the vinegar takes the metallic edge off the liver and starts to tenderise it.', 'سيبها ٢٠ دقيقة. دي الخطوة اللي الناس بتتخطاها وهي الأهم: الخل بيشيل الطعم المعدني وبيبدأ يطرّي الكبدة.', 20, null, null, '{"beef liver","vinegar"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('bf20623f-abb0-539e-8882-4d0de34f0e99', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 3, 'Turn it once, add the garlic and the chilli, and give it 90 seconds more. It is done the moment the pink has gone from the outside; the middle should still be soft.', 'لفها مرة واحدة، ضيف التوم والشطة، وادّيها ٩٠ ثانية كمان. تبقى استوت أول ما الوردي يختفي من بره؛ النص لازم يفضل طري.', 3, null, null, '{"garlic","chili flakes"}');
+values ('bf20623f-abb0-539e-8882-4d0de34f0e99', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 3, 'Lift the liver out and pat every piece dry. Get the oil properly hot in a wide pan, then sear the liver in ONE LAYER, in two batches if you have to — a crowded pan steams it grey.', 'شيل الكبدة ونشّف كل قطعة. سخّن الزيت كويس في طاسة واسعة، وحمّر الكبدة طبقة واحدة، على دفعتين لو لازم — الطاسة المزنوقة بتبخّرها وبتخليها رمادية.', 3, 'Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.', 'الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة.', '{"beef liver","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('ff81278b-5250-5d54-9a7c-232049887f5e', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 4, 'Salt it off the heat, not before — salting liver early draws the water out and toughens it.', 'ملّحها بعد ما تنزلها من على النار مش قبل — الملح بدري بيطلع مياتها ويقسّيها.', 1, null, null, '{"salt"}');
+values ('ff81278b-5250-5d54-9a7c-232049887f5e', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 4, 'Add the rest of the garlic and the green chilli and keep it moving until the liver is COOKED THROUGH — firm, with no pink left anywhere when you cut the thickest piece open, and any juice running clear. Allow about 6 minutes in total.', 'ضيف باقي التوم والشطة الخضرا وفضل تقلّب لحد ما الكبدة تستوي تماماً — تبقى متماسكة، ومفيهاش أي لون وردي خالص لما تفتح أكبر قطعة، والعصارة تطلع صافية. حوالي ٦ دقايق إجمالاً.', 6, 'Liver is offal and must be cooked all the way through — 71°C / 160°F at the centre if you have a thermometer. Do not judge it by the outside: a seared exterior tells you nothing about the middle. Cut the thickest piece open and look.', 'الكبدة أحشاء ولازم تستوي من جوه خالص — ٧١°م / ١٦٠°ف في النص لو عندك ترمومتر. متحكمش عليها من بره: اللون من بره مش بيقول أي حاجة عن النص. افتح أكبر قطعة وبصّ جواها.', '{"garlic","chili pepper","beef liver"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('d6486827-7cec-5c3a-ab91-aed348cfb9dc', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 5, 'Salt it off the heat — salting liver early draws the water out and toughens it — and serve with the lemon wedges to squeeze over.', 'ملّحها بعد ما تنزلها من على النار — الملح بدري بيطلع مياتها ويقسّيها — وقدّمها ومعاها فصوص الليمون تعصر عليها.', 1, null, null, '{"salt","lemon"}');
 
 -- Baked Bulgur and Lamb Pie
 insert into public.recipes (
@@ -18113,6 +18045,81 @@ values ('c1b779de-8fea-5efe-b773-67527912e582', '9aa67479-e5d0-5cb8-90df-0d4721c
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('24e871f1-51b5-5c5f-9a31-c65eb9a57fac', '9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', 3, 'Cook on a medium pan, 2 minutes a side, flipping when bubbles hold their shape.', 'اطبخهم على طاسة متوسطة، دقيقتين لكل وش، واقلبهم لما الفقاعات تثبت.', 15, null, null, '{"honey"}');
 
+-- Parmesan and Black Pepper Pasta
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'parmesan-pepper-pasta', 'Parmesan and Black Pepper Pasta', 'مكرونة بالبارميزان والفلفل الأسود',
+  'Cheese, pepper, pasta water and butter, emulsified into a sauce with no cream in it. Inspired by cacio e pepe and NOT that dish: the Roman original is Pecorino Romano and no butter, and pecorino is not something an Egyptian supermarket reliably stocks. Parmesan and a little butter get you a very good pasta; calling it cacio e pepe would be claiming something it is not.', 'جبنة وفلفل ومية سلق المكرونة وزبدة، بيتخلطوا لصلصة من غير أي كريمة. مستوحاة من الكاتشو إي بيبي ومش هي: الأصل الروماني بيتعمل بجبنة بيكورينو رومانو من غير زبدة، والبيكورينو مش موجود بانتظام في سوبر ماركت مصري. البارميزان وشوية زبدة بيدوك مكرونة ممتازة؛ بس نسمّيها كاتشو إي بيبي يبقى ادعاء مش صح.',
+  'curated/parmesan-pepper-pasta.jpg', 'openly_licensed', 'Camelia.boban',
+  'CC-BY-SA-4.0', 'Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg',
+  null, 'curated', 'italian', 'medium',
+  5, 15, 4,
+  480, 19, 68,
+  15, 3, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'halal');
+delete from public.recipe_allergens where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_allergens (recipe_id, allergen) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'gluten');
+insert into public.recipe_allergens (recipe_id, allergen) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'dairy');
+delete from public.recipe_appliances where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_appliances (recipe_id, appliance) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'stove');
+delete from public.recipe_tags where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_tags (recipe_id, tag) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'italian');
+insert into public.recipe_tags (recipe_id, tag) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('60480242-0c98-520b-ab0a-75085bc1a15e', 'comfort');
+
+delete from public.recipe_ingredients where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5d4ae617-5ce0-504f-98d6-3068fd9a4be8', '60480242-0c98-520b-ab0a-75085bc1a15e', (select id from public.ingredients where slug = 'pasta' limit 1), 'pasta', 'pasta', 400, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('26243548-ccc2-5844-b703-39d121c4eefa', '60480242-0c98-520b-ab0a-75085bc1a15e', (select id from public.ingredients where slug = 'parmesan' limit 1), 'parmesan', 'parmesan', 150, 'g', 'finely grated', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('aa43e1a0-3042-5adf-9db6-f9b1e776dd72', '60480242-0c98-520b-ab0a-75085bc1a15e', (select id from public.ingredients where slug = 'black-pepper' limit 1), 'black-pepper', 'black pepper', 2, 'tsp', 'coarsely cracked', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('765a026b-bb10-5aaf-a96a-5643a2b718bb', '60480242-0c98-520b-ab0a-75085bc1a15e', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 40, 'g', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('95b13741-8f3e-5da0-a99a-b7245c79c1fd', '60480242-0c98-520b-ab0a-75085bc1a15e', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = '60480242-0c98-520b-ab0a-75085bc1a15e';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('3682bbc0-6a7c-5a79-8303-9139a95a42f3', '60480242-0c98-520b-ab0a-75085bc1a15e', 1, 'Boil the pasta in salted water, but use less water than usual — you want it starchy, because that starch is the sauce.', 'اسلق المكرونة في مية مملحة، بس مية أقل من المعتاد — عايزها تقيلة بالنشا، لأن النشا ده هو الصلصة.', 12, null, null, '{"pasta","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('a72c6228-f08f-5ef5-adc0-f73a54a3377f', '60480242-0c98-520b-ab0a-75085bc1a15e', 2, 'Toast the cracked pepper in the butter in a wide pan for a minute, until it smells sharp. Then TAKE THE PAN OFF THE HEAT.', 'حمّص الفلفل المجروش في الزبدة في طاسة واسعة دقيقة، لحد ما ريحته تطلع نفّاذة. وبعدين شيل الطاسة من على النار.', 2, null, null, '{"black pepper","butter"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('f58574ef-93dd-5073-87ff-f590d86e09d5', '60480242-0c98-520b-ab0a-75085bc1a15e', 3, 'Lift the pasta straight into the pan with a ladleful of its water. Add the Parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.', 'شيل المكرونة على طول في الطاسة ومعاها مغرفة من مياتها. حط البارميزان والطاسة بعيد عن النار وقلّب بقوة لحد ما تبقى صلصة بتغلّف. الحرارة هي اللي بتعمل خيوط؛ سيب الطاسة بعيد عنها.', 3, null, null, '{"pasta","parmesan"}');
+
 -- Pasta and Chickpeas
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -18455,7 +18462,7 @@ values ('90603428-b668-5f95-9419-1104c925cc84', 'pita-bread', 'Pocket Flatbread'
   'curated/pita-bread.jpg', 'openly_licensed', 'Azure Dragon of the East',
   'CC-BY-SA-3.0', 'Azure Dragon of the East · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Pita_Bread.jpg',
   null, 'curated', 'levantine', 'medium',
-  95, 15, 8,
+  105, 15, 8,
   210, 6, 40,
   3, 2, null, true)
 on conflict (id) do update set
@@ -18615,7 +18622,7 @@ values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'potato-salad', 'Creamy Potato S
   'curated/potato-salad.jpg', 'openly_licensed', 'SajjadF',
   'CC-BY-SA-3.0', 'SajjadF · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Potato_salad_(1).jpg',
   null, 'curated', 'mediterranean', 'easy',
-  10, 20, 6,
+  40, 20, 6,
   260, 7, 28,
   14, 3, null, true)
 on conflict (id) do update set
@@ -18678,7 +18685,7 @@ values ('a1eb4fd8-04b4-5852-88d8-e094579cdecb', 'c1b00c9c-a4e7-5f28-a36f-963143d
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('18381433-5e98-5152-8da7-0acebbe796df', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 3, 'Peel and cut the potatoes into chunks WHILE THEY ARE STILL HOT and fold the mayonnaise through straight away. Warm potato absorbs dressing; cold potato just wears it.', 'قشّر وقطّع البطاطس مكعبات وهي لسه سخنة وقلّب المايونيز معاها على طول. البطاطس الدافية بتشرب التتبيلة؛ الساقعة بتلبسها بس.', 5, null, null, '{"potatoes","mayonnaise"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('06edf1e0-d5ad-5c0c-9428-eff3808f3f14', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 4, 'Chop the eggs in, add the parsley, taste for salt, and let it sit for half an hour before serving.', 'قطّع البيض وضيفه، حط البقدونس، دوقها للملح، وسيبها نص ساعة قبل ما تقدمها.', 5, null, null, '{"eggs","parsley","salt"}');
+values ('06edf1e0-d5ad-5c0c-9428-eff3808f3f14', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 4, 'Chop the eggs in, add the parsley, taste for salt, and let it sit for half an hour before serving.', 'قطّع البيض وضيفه، حط البقدونس، دوقها للملح، وسيبها نص ساعة قبل ما تقدمها.', 35, null, null, '{"eggs","parsley","salt"}');
 
 -- Quick Vegetable Fried Rice
 insert into public.recipes (
@@ -20532,7 +20539,6 @@ insert into public.recipe_appliances (recipe_id, appliance) values ('9dbe04ed-09
 delete from public.recipe_tags where recipe_id = '9dbe04ed-090c-52c7-836e-5baded5ed012';
 insert into public.recipe_tags (recipe_id, tag) values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'oven');
 insert into public.recipe_tags (recipe_id, tag) values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'one-pan');
-insert into public.recipe_tags (recipe_id, tag) values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'high-protein');
 insert into public.recipe_tags (recipe_id, tag) values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'batch-cook');
 
@@ -21643,7 +21649,7 @@ values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'sweet-potato-fries-airfryer', '
   'curated/sweet-potato-fries-airfryer.jpg', 'generated', 'Akla kitchen',
   'CC0-1.0', null, null,
   null, 'curated', 'american', 'easy',
-  10, 20, 3,
+  30, 20, 3,
   230, 3, 38,
   8, 5, null, true)
 on conflict (id) do update set
@@ -21683,7 +21689,6 @@ insert into public.recipe_appliances (recipe_id, appliance) values ('4c9a3716-ea
 delete from public.recipe_tags where recipe_id = '4c9a3716-ea23-5451-9541-344a0c214ee9';
 insert into public.recipe_tags (recipe_id, tag) values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'air-fryer');
 insert into public.recipe_tags (recipe_id, tag) values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'vegan');
-insert into public.recipe_tags (recipe_id, tag) values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'beginner');
 insert into public.recipe_tags (recipe_id, tag) values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'healthy');
 
@@ -21895,7 +21900,7 @@ values ('05e4329c-c043-5890-85ea-945bda4b696d', 'tabbouleh', 'Parsley and Bulgur
   'curated/tabbouleh.jpg', 'openly_licensed', 'Miansari66',
   'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Tabouleh_1.JPG',
   null, 'curated', 'levantine', 'easy',
-  20, 0, 4,
+  25, 0, 4,
   180, 4, 20,
   10, 5, null, true)
 on conflict (id) do update set
@@ -22429,9 +22434,7 @@ insert into public.recipe_allergens (recipe_id, allergen) values ('9a2f5b32-63bd
 delete from public.recipe_appliances where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
 insert into public.recipe_appliances (recipe_id, appliance) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'stove');
 delete from public.recipe_tags where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
-insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'budget');
-insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'beginner');
 insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'comfort');
 insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'high-protein');
 

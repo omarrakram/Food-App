@@ -143,7 +143,7 @@
       "snack"
     ],
     "difficulty": "easy",
-    "prepMinutes": 8,
+    "prepMinutes": 25,
     "cookMinutes": 0,
     "servings": 2,
     "nutrition": {
@@ -2481,11 +2481,11 @@
     ]
   },
   {
-    "slug": "cacio-e-pepe",
-    "title": "Pasta with Cheese and Pepper",
-    "titleAr": "مكرونة بالجبنة والفلفل",
-    "description": "Four things and a technique. The sauce is cheese loosened with the water the pasta cooked in — no cream — and it splits the moment the pan is too hot.",
-    "descriptionAr": "أربع حاجات وطريقة. الصلصة دي جبنة بتترخي بمية سلق المكرونة — من غير كريمة — وبتتقطّع أول ما الطاسة تسخن زيادة.",
+    "slug": "parmesan-pepper-pasta",
+    "title": "Parmesan and Black Pepper Pasta",
+    "titleAr": "مكرونة بالبارميزان والفلفل الأسود",
+    "description": "Cheese, pepper, pasta water and butter, emulsified into a sauce with no cream in it. Inspired by cacio e pepe and NOT that dish: the Roman original is Pecorino Romano and no butter, and pecorino is not something an Egyptian supermarket reliably stocks. Parmesan and a little butter get you a very good pasta; calling it cacio e pepe would be claiming something it is not.",
+    "descriptionAr": "جبنة وفلفل ومية سلق المكرونة وزبدة، بيتخلطوا لصلصة من غير أي كريمة. مستوحاة من الكاتشو إي بيبي ومش هي: الأصل الروماني بيتعمل بجبنة بيكورينو رومانو من غير زبدة، والبيكورينو مش موجود بانتظام في سوبر ماركت مصري. البارميزان وشوية زبدة بيدوك مكرونة ممتازة؛ بس نسمّيها كاتشو إي بيبي يبقى ادعاء مش صح.",
     "cuisine": "italian",
     "mealTypes": [
       "lunch",
@@ -2516,8 +2516,7 @@
     "tags": [
       "italian",
       "quick",
-      "comfort",
-      "beginner"
+      "comfort"
     ],
     "image": null,
     "ingredients": [
@@ -2577,7 +2576,7 @@
         "safetyAr": null
       },
       {
-        "text": "Lift the pasta straight into the pan with a ladleful of its water. Add the parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.",
+        "text": "Lift the pasta straight into the pan with a ladleful of its water. Add the Parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.",
         "textAr": "شيل المكرونة على طول في الطاسة ومعاها مغرفة من مياتها. حط البارميزان والطاسة بعيد عن النار وقلّب بقوة لحد ما تبقى صلصة بتغلّف. الحرارة هي اللي بتعمل خيوط؛ سيب الطاسة بعيد عنها.",
         "minutes": 3,
         "uses": [

@@ -2781,9 +2781,7 @@
       "stove"
     ],
     "tags": [
-      "quick",
       "budget",
-      "beginner",
       "comfort",
       "high-protein"
     ],
@@ -3005,7 +3003,7 @@
       "snack"
     ],
     "difficulty": "easy",
-    "prepMinutes": 10,
+    "prepMinutes": 40,
     "cookMinutes": 20,
     "servings": 6,
     "nutrition": {
@@ -3101,7 +3099,7 @@
       {
         "text": "Chop the eggs in, add the parsley, taste for salt, and let it sit for half an hour before serving.",
         "textAr": "قطّع البيض وضيفه، حط البقدونس، دوقها للملح، وسيبها نص ساعة قبل ما تقدمها.",
-        "minutes": 5,
+        "minutes": 35,
         "uses": [
           "eggs",
           "parsley",

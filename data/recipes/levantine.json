@@ -2832,7 +2832,7 @@
       "snack"
     ],
     "difficulty": "easy",
-    "prepMinutes": 20,
+    "prepMinutes": 25,
     "cookMinutes": 0,
     "servings": 4,
     "nutrition": {
@@ -3210,7 +3210,7 @@
       "breakfast"
     ],
     "difficulty": "medium",
-    "prepMinutes": 95,
+    "prepMinutes": 105,
     "cookMinutes": 15,
     "servings": 8,
     "nutrition": {

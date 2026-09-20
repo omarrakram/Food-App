@@ -22,6 +22,7 @@ import {
   UNIVERSAL_BASICS,
 } from '../src/features/ingredients/catalogue.ts';
 import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
+import { similarity } from './lib/recipe-similarity.ts';
 
 type Recipe = (typeof RECIPE_CATALOGUE)[number];
 
@@ -56,21 +57,10 @@ function essentialSlugs(recipe: Recipe): string[] {
     .filter((slug): slug is string => slug !== null);
 }
 
-/**
- * How alike are two recipes, by what goes in them?
- *
- * Jaccard over essential ingredients. Two dishes sharing most of their
- * ingredients are either the same dish twice or a variant pretending to be a
- * second recipe — and either way the catalogue is smaller than it claims.
- */
-function similarity(a: Recipe, b: Recipe): number {
-  const left = new Set(essentialSlugs(a));
-  const right = new Set(essentialSlugs(b));
-  if (left.size === 0 || right.size === 0) return 0;
-  let shared = 0;
-  for (const slug of left) if (right.has(slug)) shared += 1;
-  return shared / (left.size + right.size - shared);
-}
+// Similarity lives in `lib/recipe-similarity.ts` so it can be tested without
+// running this report. It compares DISTINGUISHING ingredients — everything
+// except salt and water, which every kitchen is assumed to have and which
+// therefore cannot make two dishes different from each other.
 
 function main(): void {
   const recipes = RECIPE_CATALOGUE;
@@ -201,7 +191,7 @@ function main(): void {
   console.log(`  ${[...UNIVERSAL_BASICS].sort().join(', ')}`);
   console.log(`  offered but never assumed: ${SUGGESTED_KITCHEN_BASICS.join(', ')}`);
 
-  section('Near-duplicate check (Jaccard over essential ingredients)');
+  section('Near-duplicate check (Jaccard over distinguishing ingredients)');
   const SIMILAR = 0.7;
   const pairs: { a: string; b: string; score: number }[] = [];
   for (let i = 0; i < recipes.length; i += 1) {

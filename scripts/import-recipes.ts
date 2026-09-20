@@ -216,6 +216,94 @@ function loadDataset(): { file: string; recipe: RawRecipe }[] {
   return loaded;
 }
 
+// --- What the clock promises -----------------------------------------------
+
+/**
+ * WHAT THE TIME FIELDS MEAN. Documented here because until Stage 3P.2 nothing
+ * said, and the corpus showed it: only 27 of 182 recipes had step minutes that
+ * summed to their stated total, 46 claimed LESS time than their own steps, and
+ * 109 claimed more.
+ *
+ *   prepMinutes   Everything that is not active cooking, INCLUDING the waiting
+ *                 the cook has to plan around — soaking, marinating, proofing,
+ *                 resting, chilling, cooling. A 20-minute fridge wait is 20
+ *                 minutes of the evening whether or not anyone is stirring.
+ *
+ *   cookMinutes   Time the food spends cooking: on the heat, in the oven, in
+ *                 the air fryer.
+ *
+ *   the total     prep + cook, and it promises ELAPSED time from starting to
+ *                 eating for a cook who overlaps what can sensibly be
+ *                 overlapped.
+ *
+ * STEP MINUTES MAY LEGITIMATELY SUM TO MORE THAN THE TOTAL, which is why there
+ * is no `sum === total` rule. Steps overlap: you boil the eggs in the pan
+ * already boiling the potatoes, you heat the oven while the dough proves. A
+ * gate demanding they match would be wrong about a third of the catalogue and
+ * would push authors to falsify step durations to satisfy it.
+ *
+ * So only the one-sided failure is caught — the recipe that takes materially
+ * LONGER than it claims:
+ *
+ *   NO SINGLE STEP may exceed the whole stated total. Unarguable, and it found
+ *   `caprese-stack`, which claimed 8 minutes and opened with a 20-minute wait.
+ *
+ *   THE SUM may exceed the total by at most 25% plus 5 minutes. Generous on
+ *   purpose, because overlap is real. Measured over the corpus before it was
+ *   adopted: at this tolerance it flagged 2 recipes and both were genuinely
+ *   wrong; at 10% it also flagged `tabbouleh`, where the bulgur soaks while the
+ *   parsley is chopped, which is exactly the overlap this must tolerate.
+ */
+function timingProblems(recipe: RawRecipe): string[] {
+  const total = recipe.prepMinutes + recipe.cookMinutes;
+  const minutes = recipe.steps.map((step) => step.minutes ?? 0);
+  const problems: string[] = [];
+  if (total <= 0) return problems;
+
+  const longest = Math.max(0, ...minutes);
+  if (longest > total) {
+    problems.push(
+      `a single step takes ${longest} minutes but the recipe claims ${total} in total. ` +
+        'Waiting — soaking, proofing, resting, cooling — belongs in prepMinutes.',
+    );
+  }
+
+  const sum = minutes.reduce((carry, value) => carry + value, 0);
+  const allowed = total * 1.25 + 5;
+  if (sum > allowed) {
+    problems.push(
+      `the steps add up to ${sum} minutes against a stated ${total}. Overlap is ` +
+        `expected and tolerated up to ${Math.round(allowed)}; beyond that the total is ` +
+        'understating what the cook is in for.',
+    );
+  }
+  return problems;
+}
+
+/**
+ * Tags that are a claim about the recipe rather than a theme.
+ *
+ * Read off the corpus rather than invented. `beginner` was already
+ * `difficulty: easy` in 80 of the 82 recipes carrying it, and `quick` had a
+ * median total of 18 minutes with a 90th percentile of 30 — two recipes sat
+ * above 40 and both were mine. So these encode what the catalogue already
+ * meant, and the two deviations were corrected rather than the definition
+ * being widened to admit them.
+ */
+const QUICK_MINUTES = 40;
+
+function tagProblems(recipe: RawRecipe): string[] {
+  const problems: string[] = [];
+  const total = recipe.prepMinutes + recipe.cookMinutes;
+  if (recipe.tags.includes('quick') && total > QUICK_MINUTES) {
+    problems.push(`tagged quick but takes ${total} minutes; quick means ${QUICK_MINUTES} or under`);
+  }
+  if (recipe.tags.includes('beginner') && recipe.difficulty !== 'easy') {
+    problems.push(`tagged beginner but difficulty is "${recipe.difficulty}"`);
+  }
+  return problems;
+}
+
 // --- Ingredients hidden in prose -------------------------------------------
 
 /**
@@ -616,6 +704,10 @@ function validate(entries: { file: string; recipe: RawRecipe }[]): void {
 
       // Nothing required may live only in the instructions.
       ingredientsHiddenInProse(recipe).forEach(fail);
+
+      // The clock, and the tags that make a claim about it.
+      timingProblems(recipe).forEach(fail);
+      tagProblems(recipe).forEach(fail);
 
       // Image metadata
       if (recipe.image) {

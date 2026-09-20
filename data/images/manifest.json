@@ -211,20 +211,6 @@
       "acquiredAt": "2026-09-13T15:34:37.555Z"
     },
     {
-      "recipeSlug": "cacio-e-pepe",
-      "path": "cacio-e-pepe.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Tonnarelli_cacio_e_pepe.jpg",
-      "creator": "Camelia.boban",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 750,
-      "bytes": 164219,
-      "sha256": "1ac5e366ec3399dd946510461db6aa9cfa3f99697f25f732453444dbc4d413c8",
-      "acquiredAt": "2026-09-20T09:47:53.810Z"
-    },
-    {
       "recipeSlug": "chana-masala",
       "path": "chana-masala.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Chana_masala.jpg",
@@ -867,6 +853,20 @@
       "bytes": 366182,
       "sha256": "c5b0e2bcc0836090a17e0165e8008b507c903f8293e60d1af896795d631a5062",
       "acquiredAt": "2026-09-13T15:36:48.930Z"
+    },
+    {
+      "recipeSlug": "parmesan-pepper-pasta",
+      "path": "parmesan-pepper-pasta.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Tonnarelli_cacio_e_pepe.jpg",
+      "creator": "Camelia.boban",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 164219,
+      "sha256": "1ac5e366ec3399dd946510461db6aa9cfa3f99697f25f732453444dbc4d413c8",
+      "acquiredAt": "2026-09-20T09:47:53.810Z"
     },
     {
       "recipeSlug": "pasta-e-ceci",

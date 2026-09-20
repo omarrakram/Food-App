@@ -6211,8 +6211,8 @@
           "eggs",
           "salt"
         ],
-        "safety": null,
-        "safetyAr": null
+        "safety": "Cook the eggs until the whites are completely set. Runny yolks are not for anyone pregnant, very young, elderly or unwell — cook them through instead.",
+        "safetyAr": "استوي البيض لحد ما البياض يمسك تماماً. الصفار السايح مش مناسب للحامل ولا للأطفال الصغيرين ولا لكبار السن ولا للمريض — استويه كويس بدل كده."
       }
     ]
   },
@@ -6341,22 +6341,22 @@
     "slug": "kebda-eskandarani",
     "title": "Alexandrian Liver",
     "titleAr": "كبدة اسكندراني",
-    "description": "Liver cut into strips and thrown into a pan hot enough to sear it in seconds, with a lot of garlic and enough chilli to make your eyes water. Overcook it by a minute and it turns to rubber.",
-    "descriptionAr": "كبدة مقطعة شرايح وبتترمي في طاسة سخنة لدرجة إنها تستوي في ثواني، مع توم كتير وشطة تخلي عينك تدمع. لو زوّدت دقيقة واحدة هتبقى أستيك.",
+    "description": "Liver marinated in vinegar and cumin, then seared hard with garlic and green chilli. The vinegar is not optional seasoning — it is what takes the metallic edge off and what makes this Alexandrian rather than just fried liver. Eight lines, because stripping it to five stripped out the dish.",
+    "descriptionAr": "كبدة متتبلة بالخل والكمون، وبعدين تتحمّر على نار عالية مع توم وشطة خضرا. الخل مش مجرد تتبيلة — هو اللي بيشيل الطعم المعدني وهو اللي بيخليها اسكندراني مش مجرد كبدة مقلية. تمن سطور، لأن تقليلها لخمسة شال الأكلة نفسها.",
     "cuisine": "egyptian",
     "mealTypes": [
       "lunch",
       "dinner"
     ],
     "difficulty": "medium",
-    "prepMinutes": 10,
-    "cookMinutes": 8,
+    "prepMinutes": 30,
+    "cookMinutes": 12,
     "servings": 4,
     "nutrition": {
-      "calories": 290,
-      "protein": 27,
-      "carbs": 6,
-      "fat": 17,
+      "calories": 310,
+      "protein": 28,
+      "carbs": 7,
+      "fat": 18,
       "fiber": 1
     },
     "dietTags": [
@@ -6369,8 +6369,8 @@
     "tags": [
       "egyptian",
       "high-protein",
-      "quick",
-      "budget"
+      "budget",
+      "comfort"
     ],
     "image": null,
     "ingredients": [
@@ -6381,22 +6381,40 @@
         "prep": "cut into strips"
       },
       {
+        "slug": "vinegar",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
         "slug": "garlic",
         "quantity": 8,
         "unit": "clove",
         "prep": "crushed"
       },
       {
-        "slug": "chili-flakes",
+        "slug": "cumin",
         "quantity": 2,
         "unit": "tsp",
         "prep": null
+      },
+      {
+        "slug": "chili-pepper",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "sliced"
       },
       {
         "slug": "sunflower-oil",
         "quantity": 45,
         "unit": "ml",
         "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into wedges"
       },
       {
         "slug": "salt",
@@ -6408,43 +6426,59 @@
     ],
     "steps": [
       {
-        "text": "Cut the liver into finger-width strips and pat it very dry. Wet liver steams in the pan and goes grey instead of browning.",
-        "textAr": "قطّع الكبدة شرايح عرض صباع ونشّفها كويس أوي. الكبدة المبلولة بتتبخّر في الطاسة وبتبقى رمادية بدل ما تتحمّر.",
-        "minutes": 8,
+        "text": "Cut the liver into finger-width strips, pull off any tough membrane, and toss it with the vinegar, the cumin and half the garlic.",
+        "textAr": "قطّع الكبدة شرايح عرض صباع، شيل أي غشاوة قاسية، وقلّبها مع الخل والكمون ونص التوم.",
+        "minutes": 10,
         "uses": [
-          "liver"
+          "liver",
+          "vinegar",
+          "cumin",
+          "garlic"
         ],
         "safety": null,
         "safetyAr": null
       },
       {
-        "text": "Get the oil properly hot in a wide pan — it should shimmer. Put the liver in one layer and leave it alone for 90 seconds before you touch it.",
-        "textAr": "سخّن الزيت كويس في طاسة واسعة — لازم يلمع. حط الكبدة طبقة واحدة وسيبها ٩٠ ثانية قبل ما تلمسها.",
+        "text": "Leave it 20 minutes. This is the step people skip and the one that matters: the vinegar takes the metallic edge off the liver and starts to tenderise it.",
+        "textAr": "سيبها ٢٠ دقيقة. دي الخطوة اللي الناس بتتخطاها وهي الأهم: الخل بيشيل الطعم المعدني وبيبدأ يطرّي الكبدة.",
+        "minutes": 20,
+        "uses": [
+          "liver",
+          "vinegar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lift the liver out and pat every piece dry. Get the oil properly hot in a wide pan, then sear the liver in ONE LAYER, in two batches if you have to — a crowded pan steams it grey.",
+        "textAr": "شيل الكبدة ونشّف كل قطعة. سخّن الزيت كويس في طاسة واسعة، وحمّر الكبدة طبقة واحدة، على دفعتين لو لازم — الطاسة المزنوقة بتبخّرها وبتخليها رمادية.",
         "minutes": 3,
         "uses": [
-          "sunflower-oil",
-          "liver"
+          "liver",
+          "sunflower-oil"
         ],
         "safety": "Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.",
         "safetyAr": "الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة."
       },
       {
-        "text": "Turn it once, add the garlic and the chilli, and give it 90 seconds more. It is done the moment the pink has gone from the outside; the middle should still be soft.",
-        "textAr": "لفها مرة واحدة، ضيف التوم والشطة، وادّيها ٩٠ ثانية كمان. تبقى استوت أول ما الوردي يختفي من بره؛ النص لازم يفضل طري.",
-        "minutes": 3,
+        "text": "Add the rest of the garlic and the green chilli and keep it moving until the liver is COOKED THROUGH — firm, with no pink left anywhere when you cut the thickest piece open, and any juice running clear. Allow about 6 minutes in total.",
+        "textAr": "ضيف باقي التوم والشطة الخضرا وفضل تقلّب لحد ما الكبدة تستوي تماماً — تبقى متماسكة، ومفيهاش أي لون وردي خالص لما تفتح أكبر قطعة، والعصارة تطلع صافية. حوالي ٦ دقايق إجمالاً.",
+        "minutes": 6,
         "uses": [
           "garlic",
-          "chili-flakes"
+          "chili-pepper",
+          "liver"
         ],
-        "safety": null,
-        "safetyAr": null
+        "safety": "Liver is offal and must be cooked all the way through — 71°C / 160°F at the centre if you have a thermometer. Do not judge it by the outside: a seared exterior tells you nothing about the middle. Cut the thickest piece open and look.",
+        "safetyAr": "الكبدة أحشاء ولازم تستوي من جوه خالص — ٧١°م / ١٦٠°ف في النص لو عندك ترمومتر. متحكمش عليها من بره: اللون من بره مش بيقول أي حاجة عن النص. افتح أكبر قطعة وبصّ جواها."
       },
       {
-        "text": "Salt it off the heat, not before — salting liver early draws the water out and toughens it.",
-        "textAr": "ملّحها بعد ما تنزلها من على النار مش قبل — الملح بدري بيطلع مياتها ويقسّيها.",
+        "text": "Salt it off the heat — salting liver early draws the water out and toughens it — and serve with the lemon wedges to squeeze over.",
+        "textAr": "ملّحها بعد ما تنزلها من على النار — الملح بدري بيطلع مياتها ويقسّيها — وقدّمها ومعاها فصوص الليمون تعصر عليها.",
         "minutes": 1,
         "uses": [
-          "salt"
+          "salt",
+          "lemon"
         ],
         "safety": null,
         "safetyAr": null

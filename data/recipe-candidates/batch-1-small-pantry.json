@@ -256,9 +256,9 @@
       "note": "Four ingredients and eight minutes. The halloumi row is used by nothing."
     },
     {
-      "slug": "cacio-e-pepe",
-      "name": "Pasta with Cheese and Pepper",
-      "nameAr": "مكرونة بالجبنة والفلفل",
+      "slug": "parmesan-pepper-pasta",
+      "name": "Parmesan and Black Pepper Pasta",
+      "nameAr": "مكرونة بالبارميزان والفلفل الأسود",
       "cuisine": "italian",
       "coreIngredients": [
         "pasta",
@@ -270,7 +270,7 @@
       "searchNames": [
         "Cacio e pepe"
       ],
-      "note": "The one pasta in this batch, chosen because it is the shortest honest pasta there is."
+      "note": "Renamed in Stage 3P.2. The photograph found under \"cacio e pepe\" is kept because a pecorino sauce and a Parmesan one are visually identical on pasta, but the recipe no longer claims to be the Roman dish: there is no pecorino row and one dish does not justify opening the ingredient ontology."
     },
     {
       "slug": "focaccia",

@@ -1988,7 +1988,6 @@
     "tags": [
       "oven",
       "one-pan",
-      "quick",
       "high-protein",
       "batch-cook"
     ],
@@ -2218,7 +2217,7 @@
       "dinner"
     ],
     "difficulty": "easy",
-    "prepMinutes": 10,
+    "prepMinutes": 30,
     "cookMinutes": 20,
     "servings": 3,
     "nutrition": {
@@ -2240,7 +2239,6 @@
     "tags": [
       "air-fryer",
       "vegan",
-      "quick",
       "beginner",
       "healthy"
     ],
