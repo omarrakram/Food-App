@@ -9,8 +9,8 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 64 |
-| …whose members span food groups | 35 |
+| Inferred families | 66 |
+| …whose members span food groups | 36 |
 
 ## Declared
 
@@ -39,6 +39,7 @@ rather than a real parent concept.
 | `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `فول` | pantry, produce, protein | `fava-beans`, `green-fava-beans`, `peanuts`, `soybeans` |
 | `pea` | frozen, pantry, protein | `black-eyed-peas`, `green-peas`, `split-peas` |
+| `vinegar` | pantry, seasoning | `rice-vinegar`, `vinegar`, `vinegar-apple` |
 | `water` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `بصل` | produce, seasoning | `green-onion`, `onion-powder`, `onions` |
 | `ثوم` | produce, seasoning | `garlic`, `garlic-powder`, `spring-garlic` |
@@ -52,9 +53,9 @@ rather than a real parent concept.
 | `ginger` | produce, seasoning | `ginger`, `ginger-ground` |
 | `lentil` | pantry, protein | `green-lentils`, `lentils` |
 | `syrup` | pantry, seasoning | `corn-syrup`, `date-syrup` |
-| `vinegar` | pantry, seasoning | `vinegar`, `vinegar-apple` |
 | `بسله` | frozen, protein | `green-peas`, `split-peas` |
 | `بطاطس` | frozen, produce | `frozen-fries`, `potatoes` |
+| `تمر` | pantry, produce | `dates`, `tamarind` |
 | `جوز` | pantry, produce | `coconut`, `coconut-flakes` |
 | `حمص` | pantry, seasoning | `chickpeas`, `hummus-dip` |
 | `زبده` | dairy, pantry | `butter`, `peanut-butter` |
@@ -71,8 +72,8 @@ rather than a real parent concept.
 |---|---|---|
 | `جبنه` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `kashkaval`, `parmesan`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
 | `cheese` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `mish-cheese`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
-| `sauce` | seasoning | `bbq-sauce`, `hot-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
-| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `soy-sauce`, `worcestershire` |
+| `sauce` | seasoning | `bbq-sauce`, `garlic-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
+| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `worcestershire` |
 | `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `toast-bread` |
 | `bread` | staple | `baladi-bread`, `pita-bread`, `toast-bread` |
 | `rice` | staple | `basmati-rice`, `brown-rice`, `rice` |
@@ -93,6 +94,7 @@ rather than a real parent concept.
 | `برقوق` | produce | `plum`, `prunes` |
 | `بقدونس` | produce | `parsley`, `watercress` |
 | `دبس` | seasoning | `date-syrup`, `pomegranate-molasses` |
+| `زعتر` | seasoning | `thyme-dried`, `zaatar-blend` |
 | `شوكولاته` | pantry | `baking-chocolate`, `chocolate` |
 | `عجينه` | staple | `phyllo`, `puff-pastry` |
 | `كبده` | protein | `chicken-liver`, `liver` |

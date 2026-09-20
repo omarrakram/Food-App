@@ -96,7 +96,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   'corn-oil': 'oil', 'sesame-oil': 'oil',
   'lemon-juice': 'condiment', 'orange-blossom': 'condiment', 'rose-water': 'condiment',
   'vinegar-apple': 'condiment', 'stock-cube': 'condiment', 'citric-acid': 'condiment',
-  coffee: 'beverage', tea: 'beverage',
+  coffee: 'beverage', tea: 'beverage', licorice: 'beverage',
 
   // `sauces` holds the oils.
   'olive-oil': 'oil', 'sunflower-oil': 'oil',

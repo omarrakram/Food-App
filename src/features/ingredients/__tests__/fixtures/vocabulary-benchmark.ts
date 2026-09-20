@@ -143,9 +143,9 @@ export const BENCHMARK: readonly BenchmarkEntry[] = [
     terms: ['zaatar', 'زعتر'],
     expect: oneOf(
       ['thyme-dried'],
-      'The herb and the sesame-and-sumac blend share the word. The blend is a genuine catalogue gap; the herb is the defensible answer until it exists.',
+      'The herb and the sesame-and-sumac blend share the word, and the herb is what the bare word means.',
     ),
-    note: 'Ontology: the BLEND deserves its own row. Tracked as a P1 gap.',
+    note: 'The blend got its row in Stage 2C (`zaatar-blend`), reached through qualified forms only — `زعتر بالسمسم`, `zaatar blend`. The LABEL here did not move with it, because what this entry measures is the BARE word, and that still means the herb. A row existing is not a reason to relabel.',
   },
   { terms: ['dukkah', 'دقة'], expect: canonical('dukkah') },
   { terms: ['wara enab', 'ورق عنب', 'vine leaves'], expect: canonical('vine-leaves') },
