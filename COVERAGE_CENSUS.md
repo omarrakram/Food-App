@@ -17,15 +17,15 @@ not replace real-user testing.
 | | | |
 |---|---:|---:|
 | **Concepts** | **525** | |
-| Represented by their own row | 353 | 67.2% |
+| Represented by their own row | 362 | 69% |
 | Reachable through an alias | 25 | 4.8% |
-| Missing | 42 | 8% |
+| Missing | 33 | 6.3% |
 | Ambiguous | 11 | 2.1% |
 | Correctly not a row — dish | 26 | 5% |
 | Correctly not a row — form | 66 | 12.6% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 378 of the 431 actionable concepts (87.7%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 387 of the 431 actionable concepts (89.8%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -37,45 +37,45 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 376 | 75.4% |
+| Concepts whose every term lands correctly | 385 | 77.2% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 1029 | 84.5% |
+| Terms landing correctly | 1050 | 86.2% |
 | **Declared forms/brands whose aliasing is BROKEN** | **2** | |
 
-Catalogue: **369 canonical ingredients**, **1658 aliases**.
+Catalogue: **378 canonical ingredients**, **1695 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baking | 33 | 23 | 2 | 5 | 0 | 83.3% | 68.8% |
+| baking | 33 | 24 | 2 | 4 | 0 | 86.7% | 71.9% |
 | bread and bakery | 24 | 13 | 2 | 3 | 0 | 83.3% | 76.2% |
-| breakfast | 15 | 8 | 2 | 1 | 0 | 90.9% | 72.7% |
+| breakfast | 15 | 9 | 2 | 0 | 0 | 100% | 81.8% |
 | canned and jarred | 18 | 7 | 1 | 0 | 0 | 100% | 94.4% |
 | cheese | 23 | 15 | 3 | 0 | 0 | 100% | 95.7% |
-| dairy and eggs | 21 | 17 | 0 | 3 | 0 | 85% | 81% |
+| dairy and eggs | 21 | 18 | 0 | 2 | 0 | 90% | 85.7% |
 | drinks that are ingredients | 3 | 1 | 0 | 1 | 0 | 50% | 66.7% |
 | fish and seafood | 27 | 20 | 0 | 2 | 2 | 83.3% | 74.1% |
 | frozen | 15 | 5 | 0 | 1 | 2 | 62.5% | 73.3% |
-| fruit | 29 | 24 | 1 | 2 | 0 | 92.6% | 75.9% |
+| fruit | 29 | 25 | 1 | 1 | 0 | 96.3% | 79.3% |
 | grains and rice | 18 | 14 | 0 | 2 | 0 | 87.5% | 76.5% |
 | herbs | 11 | 9 | 0 | 1 | 1 | 81.8% | 72.7% |
 | international in egypt | 10 | 1 | 1 | 6 | 0 | 25% | 30% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
 | nuts seeds dried fruit | 22 | 19 | 1 | 1 | 0 | 95.2% | 45.5% |
-| offal | 17 | 11 | 0 | 2 | 1 | 78.6% | 68.8% |
-| oils and fats | 6 | 4 | 1 | 1 | 0 | 83.3% | 83.3% |
-| packaged pantry | 16 | 10 | 0 | 1 | 0 | 90.9% | 87.5% |
+| offal | 17 | 12 | 0 | 1 | 1 | 85.7% | 75% |
+| oils and fats | 6 | 5 | 1 | 0 | 0 | 100% | 100% |
+| packaged pantry | 16 | 11 | 0 | 0 | 0 | 100% | 93.8% |
 | pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
 | poultry | 15 | 14 | 0 | 1 | 0 | 93.3% | 93.3% |
 | prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
-| red meat cuts | 25 | 16 | 3 | 1 | 1 | 90.5% | 56.5% |
+| red meat cuts | 25 | 17 | 3 | 0 | 1 | 95.2% | 60.9% |
 | sauces and condiments | 27 | 21 | 3 | 0 | 1 | 96% | 85.2% |
 | snacks used as ingredients | 13 | 4 | 1 | 2 | 0 | 71.4% | 50% |
 | spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
 | spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
-| vegetables | 56 | 45 | 1 | 2 | 2 | 92% | 76.8% |
+| vegetables | 56 | 46 | 1 | 1 | 2 | 94% | 78.6% |
 
 ## 4. BROKEN aliasing — a declared form or brand that does not reach its base
 
@@ -93,21 +93,17 @@ Catalogue: **369 canonical ingredients**, **1658 aliases**.
 | mixed dried fruit / yameesh | ramadan and eid | ياميش · yameesh |
 | sharbat | ramadan and eid | شربات · sugar syrup · sharbat |
 
-### P2 — 9
+### P2 — 5
 
 | Concept | Category | Terms probed |
 |---|---|---|
 | cake mix | baking | ميكس كيك · cake mix |
-| sweetener tablets | baking | سكر دايت · sweetener |
 | samoon | bread and bakery | صامولي · samoon |
-| ayran / yoghurt drink | dairy and eggs | عيران · ayran · laban ayran |
 | tuna steak | fish and seafood | شرائح تونة · tuna steak |
 | jareesh | grains and rice | جريش · jareesh · crushed wheat |
 | dried cranberries | nuts seeds dried fruit | توت بري مجفف · dried cranberries |
-| tomato juice | packaged pantry | عصير طماطم · tomato juice |
-| beef neck | red meat cuts | رقبة · رقبه · beef neck |
 
-### long-tail — 31
+### long-tail — 26
 
 | Concept | Category | Terms probed |
 |---|---|---|
@@ -116,13 +112,11 @@ Catalogue: **369 canonical ingredients**, **1658 aliases**.
 | cocoa butter | baking | زبدة كاكاو · cocoa butter |
 | bataw bread | bread and bakery | بتاو · bataw |
 | bread sticks | bread and bakery | بقسماط طويل · breadsticks |
-| honey comb | breakfast | شمع عسل · honeycomb |
 | cheese whey | dairy and eggs | مصل اللبن · whey |
 | duck eggs | dairy and eggs | بيض بط · duck eggs |
 | malt drink | drinks that are ingredients | بيرة شعير · malt drink |
 | eel | fish and seafood | ثعبان البحر · eel |
 | frozen pastry cups | frozen | تارت مجمد · pastry cups |
-| sour orange | fruit | نارنج · sour orange · naring |
 | tangerine peel | fruit | قشر يوسفي · tangerine peel |
 | sorghum | grains and rice | ذرة رفيعة · sorghum |
 | tarragon | herbs | طرخون · tarragon |
@@ -132,15 +126,12 @@ Catalogue: **369 canonical ingredients**, **1658 aliases**.
 | taco shells | international in egypt | تاكو · taco shells |
 | teriyaki sauce | international in egypt | ترياكي · teriyaki |
 | wasabi | international in egypt | واسابي · wasabi |
-| duck liver | offal | كبدة بط · duck liver |
 | lamb testicles | offal | بيض غنم · lamb fries |
-| palm oil | oils and fats | زيت نخيل · palm oil |
 | rice noodles | pasta and noodles | نودلز أرز · rice noodles |
 | chicken skin | poultry | جلد فراخ · chicken skin |
 | marshmallow | snacks used as ingredients | مارشميلو · marshmallow |
 | wafers | snacks used as ingredients | ويفر · wafers |
 | dried rose buds | spices | ورد مجفف · dried rose |
-| jerusalem artichoke | vegetables | طرطوفة · jerusalem artichoke |
 | jute mallow seeds | vegetables | بذور ملوخية · molokhia seeds |
 
 ## 6. Ambiguous — a word that names more than one food

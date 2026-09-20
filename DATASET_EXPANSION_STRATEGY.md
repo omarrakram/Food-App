@@ -1617,6 +1617,80 @@ exists yet, so nothing is broken today. Recorded before one of them is added.
 
 ---
 
+## 9k. Stage 2D-D: the ingredient phase, and where it honestly stops
+
+### Measured, batch by batch
+
+| | Start of 2D | D1 | D2 | D3 | D4 | D5 |
+|---|---:|---:|---:|---:|---:|---:|
+| Canonical rows | 301 | 332 | 347 | 360 | 369 | **378** |
+| Aliases | 1351 | 1501 | 1562 | 1614 | 1658 | **1695** |
+| Ontology coverage | 70.9% | 78.6% | 82.0% | 85.0% | 87.7% | **89.8%** |
+| Input, concepts | 60.9% | 67.5% | 70.5% | 73.1% | 75.4% | **77.2%** |
+| Input, terms | 71.1% | 77.9% | 80.4% | 82.5% | 84.5% | **86.2%** |
+
+Benchmark held at 258/258 with zero dead ends and zero wrong answers of either
+kind through every batch. Cross-group alias collisions: zero throughout.
+
+### 89.8%, and why it stops there
+
+**The target was ~90% and this is 0.2 short. Three of the remaining concepts
+would have crossed it and none of them earned a row**, so the number stands
+where the ontology left it. `cake mix`, `cake sprinkles` and `sweetener
+tablets`-adjacent packaging minutiae are the kind of row §7 warns about: every
+extra row is another candidate in the fuzzy tier, and a catalogue that is
+mostly furniture makes search worse rather than better.
+
+The 44 concepts still missing, grouped by why:
+
+| Why | Count | Examples |
+|---|---:|---|
+| International long-tail in Egypt | 7 | wasabi, mirin, teriyaki, panko, taco shells, curry paste, rice noodles |
+| Baking and packaging minutiae | 6 | agar agar, cake sprinkles, cocoa butter, cake mix, bread sticks, frozen pastry cups |
+| Genuinely obscure Egyptian | 8 | bataw bread, jareesh, sorghum, jute mallow seeds, tangerine peel, lamb testicles, cheese whey, honey comb |
+| Regional, not Egyptian | 4 | samoon (Iraqi), tarragon, dried cranberries, malt drink |
+| **Deliberate non-rows** | 2 | `ياميش` and `شربات` — see below |
+| Species/form we do not stock | 5 | tuna steak (fresh), eel, duck eggs, frozen berries, chicken skin |
+| Remainder | 12 | long-tail fruit, spices and snacks |
+
+**None of these is a gap a Cairo cook hits in an ordinary week.** That is the
+honest ceiling for a 525-concept census, and the way past it is not more rows —
+it is the sealed launch holdout in §3b telling us which of these 44 real users
+actually type.
+
+### Two concepts that are deliberately not rows
+
+**`ياميش`** names the Ramadan dried-fruit-and-nut assortment. It is a SET of
+concepts the catalogue already has, not a concept of its own, and it is
+recorded as a Ramadan shopping/discovery collection candidate rather than an
+`ingredientFamily`. A family drives hard recipe inclusion and exclusion, and
+yameesh membership is too fluid for that promise — what is in it changes by
+household and by shop.
+
+**`شربات`** is sugar, water and lemon, made at home. A prepared component, and
+deferred until recipe data proves it needs ingredient identity.
+
+### A second way the family heuristic fails
+
+Stage 2A.1 found that a MODIFIER makes a bad family. 369 rows was enough to
+find the other shape: a **partial family**, where the head noun genuinely names
+a kind but the catalogue mostly does not head its rows with it.
+
+`nut` heads `mixed nuts` and `pine nuts` and nothing else, because almonds,
+walnuts, pistachios, hazelnuts, cashews and peanuts are each headed by their
+own name. Two of twelve. **That is worse than no family at all**: "without
+nuts" would return results, hide two ingredients and look like it worked,
+whereas an absent family sends the user to the allergen filter, which covers
+nuts properly. `لحم` is the same, two of roughly fifteen.
+
+Both are denied, in a group kept separate from the form words because the
+reason differs: these ARE kinds, and the rule would be right if the catalogue
+named its rows differently. **If the parent/child model in §9d ever lands, this
+group is the first thing it should replace.** `mix`, `كريم`, `juice` and
+`عصير` joined the form-word group on the older reasoning.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins

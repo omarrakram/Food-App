@@ -10,6 +10,7 @@ areesh-cheese,areesh cheese,جبنة قريش,dairy,g,,dairy,,قريش|areesh|ar
 artichoke,artichoke,خرشوف,vegetables,piece,130,,,kharshouf|خرشوف|ardi shawki,0,1
 asparagus,asparagus,هليون,vegetables,g,,,,هليون|اسبراجوس,0,1
 avocado,avocado,أفوكادو,vegetables,piece,200,,,افوكادو|أفوكادو|avocados,0,1
+ayran,ayran,عيران,dairy,ml,,dairy,,عيران|ayran|laban ayran|لبن عيران,0,1
 baba-ganoush,baba ganoush,بابا غنوج,sauces,g,,sesame,,بابا غنوج|متبل|baba ghanoug|metabbal,0,1
 bacon-beef,beef bacon,بيكون بقري,protein,g,20,,,beef bacon|بيكون,0,1
 baguette,baguette,عيش فينو,bakery,piece,120,gluten,,fino|عيش فينو|فينو|feeno|feno,0,1
@@ -26,6 +27,7 @@ bay-leaf,bay leaf,ورق لورا,spices,piece,1,,,laurel|ورق لوري|wara2 
 bbq-sauce,barbecue sauce,صوص باربكيو,sauces,ml,,,,باربكيو|bbq,0,0
 beef-cubes,beef cubes,لحمة مكعبات,protein,g,,,,stewing beef|beef chunks|لحمة|لحم بقري,0,1
 beef-fat,beef fat,شحم,protein,g,,,,شحم|shahm|شحم بقري|beef suet|دهن لحمة,0,1
+beef-neck,beef neck,رقبة,protein,g,,,,رقبة|رقبه|beef neck|ragaba|رقبة بقري,0,1
 beef-ribs,beef ribs,ضلوع,protein,g,,,,ضلوع|ribs|dolou3|ضلوع بقري|short ribs|ريش لحمة,0,1
 beef-steak,beef steak,استيك بقري,protein,g,250,,,steak|beef steaks|entrecote|انتريكوت|استيك,0,1
 beetroot,beetroot,بنجر,vegetables,g,150,,,beets|beet|بنجر|شمندر,0,1
@@ -113,6 +115,7 @@ dill,dill,شبت,vegetables,g,,,,shabat|شبت|شبنت,0,1
 doum,doum,دوم,fruit,g,,,,دوم|doum|doum palm|ثمر الدوم,0,0
 dried-apricot,qamar el din,قمر الدين,fruit,g,,,,قمر الدين|مشمش مجفف|amar el din,0,0
 duck,duck,بط,protein,g,,,,بطة|لحم بط|batt|bat,0,1
+duck-liver,duck liver,كبدة بط,protein,g,,,,كبدة بط|duck liver|kebda batt,0,1
 dukkah,dukkah,دقة,spices,tbsp,10,nuts|sesame,,duqqa|دقه|da2a|dokka,0,0
 edam,edam cheese,جبنة إيدام,dairy,g,,dairy,,إيدام|edam|جبنة ايدام|gebna edam,0,1
 edamame,edamame,إدامامي,protein,g,,soy,,ادامامي|edamame beans,0,1
@@ -157,6 +160,7 @@ hazelnuts,hazelnuts,بندق,pantry,g,,nuts,,بندق|bondok|hazelnut,0,0
 herring,herring,رنجة,protein,g,,fish,,renga|رنجة|ringa,0,1
 hibiscus,hibiscus,كركديه,spices,g,,,,كركديه|karkade|karkadeh|karkadeeh,0,0
 honey,honey,عسل,pantry,tbsp,21,,,asal|عسل نحل|assal|asal nahl|asal abyad,0,0
+honeycomb,honeycomb,شمع عسل,pantry,g,,,,شمع عسل|honeycomb|عسل بالشمع|shama3 asal,0,0
 hot-dog,hot dog sausage,هوت دوج,protein,piece,50,,,hotdog|frankfurter|هوت دوج,0,1
 hot-sauce,hot sauce,صوص حار,sauces,ml,,,,شطة سائلة|tabasco|صوص حار|معجون شطة|chili paste,0,0
 hummus-dip,hummus,حمص بالطحينة,sauces,g,,sesame,,hummus dip,0,1
@@ -165,6 +169,7 @@ ice-cream,ice cream,آيس كريم,frozen,g,,dairy,,ايس كريم|آيس كر
 icing-sugar,icing sugar,سكر بودرة,pantry,g,,,,سكر بودرة|powdered sugar,0,0
 instant-soup,instant soup powder,شوربة سريعة,pantry,g,,,gluten|dairy,شوربة سريعة|instant soup|شوربة بودرة|soup powder,0,0
 jam,jam,مربى,pantry,g,,,,مربى|meraba|mrabba|marmalade|مربي|meraba faraola,0,0
+jerusalem-artichoke,jerusalem artichoke,طرطوفة,vegetables,g,,,,طرطوفة|tartoufa|jerusalem artichoke|طرطوفه|sunchoke,0,1
 kashkaval,kashkaval,جبنة قشقوان,dairy,g,,dairy,,قشقوان|kashkawan|kashkawal|gebna kashkawan,0,1
 ketchup,ketchup,كاتشب,sauces,ml,,,,كاتشب|catsup|كتشب|هاينز|heinz ketchup|هاينز كاتشب,0,0
 kidney,kidney,كلاوي,protein,g,,,,كلاوي|kalawi|kidneys|كلاوى|lamb kidney,0,1
@@ -233,6 +238,7 @@ orzo,orzo,لسان عصفور,carbs,g,,gluten,,لسان عصفور|orzo|lesan as
 oxtail,oxtail,ذيل البقر,protein,g,,,,ذيل البقر|oxtail|ديل بقري|زنود البقر,0,1
 oyster-sauce,oyster sauce,صوص المحار,sauces,ml,,shellfish,,صوص المحار|صوص محار|oyster sauce|سوس المحار,0,0
 oysters,oysters,محار,protein,g,,shellfish,,محار|oysters|oyster,0,1
+palm-oil,palm oil,زيت نخيل,pantry,ml,,,,زيت نخيل|palm oil|زيت النخيل,0,0
 paprika,paprika,بابريكا,spices,tsp,2,,,sweet paprika|فلفل أحمر مطحون|felfel ahmar matehoun|bapreka,0,0
 parmesan,parmesan,جبنة بارميزان,dairy,g,,dairy,,parmigiano|بارميزان|بارمزان|gebna parmesan|barmezan,0,1
 parsley,parsley,بقدونس,vegetables,bunch,60,,,ba2dounes|بقدونس أخضر|baadounes|ba2dunes|ba2dones,0,1
@@ -303,6 +309,7 @@ shrimp,shrimp,جمبري,protein,g,12,shellfish,,prawns|gambari|جمبرى,0,1
 sobia,sobia,سوبيا,pantry,ml,,,dairy,سوبيا|sobia|soubia|سوبيا مصرية,0,1
 sole-fish,sole,سمك موسى,protein,g,,fish,,سمك موسى|samak moosa|samak musa|سمك موسي|dover sole|sole fillet,0,1
 sour-cream,sour cream,كريمة حامضة,dairy,g,,dairy,,كريمة حامضة|krema hamda|soured cream|كريمه حامضه,0,1
+sour-orange,sour orange,نارنج,fruit,piece,140,,,نارنج|naring|sour orange|bitter orange|برتقال مر,0,1
 soy-sauce,soy sauce,صوص الصويا,sauces,ml,,soy|gluten,,صويا صوص|soya sauce|صوص صويا,0,0
 soybeans,soybeans,فول الصويا,protein,g,,soy,,soya|فول صويا|soy beans,0,0
 spinach,spinach,سبانخ,vegetables,g,,,,sabanekh|سبانخ مفرومة|sbanekh|sabanek,0,1
@@ -321,6 +328,7 @@ sunflower-oil,vegetable oil,زيت,sauces,ml,,,,oil|sunflower oil|cooking oil|ز
 sunflower-seeds,sunflower seeds,لب,pantry,g,,,,لب|seeds|لب سوري,0,0
 sweet-chili-sauce,sweet chili sauce,صوص حار حلو,sauces,ml,,,,صوص حار حلو|sweet chili|sweet chilli sauce|صوص شيلي حلو,0,0
 sweet-potato,sweet potato,بطاطا,vegetables,g,180,,,batata|بطاطا|yam|bataa|bataata|batata helwa,0,1
+sweetener-tablets,sweetener,سكر دايت,pantry,g,,,,سكر دايت|sweetener|محلي صناعي|سكرين|diet sugar,0,0
 tahini,tahini,طحينة,sauces,tbsp,15,sesame,,tehina|sesame paste|طحينه|ta7ina|ta7eena,0,0
 tahini-salad,tahina salad,صلصة طحينة,sauces,g,,sesame,,,0,1
 talaga-cheese,talaga cheese,جبنة طلاجة,dairy,g,,dairy,,طلاجة|talaga|talagah|gebna talaga|جبنه طلاجه|gebna talagah,0,1
@@ -334,6 +342,7 @@ thyme-dried,thyme,زعتر,spices,g,,,,زعتر|zaatar|zatar,1,0
 tilapia,tilapia,بلطي,protein,g,300,fish,,fish|bolti|بلطى|سمك,0,1
 toast-bread,toast bread,عيش توست,bakery,slice,30,gluten,,toast|white bread|sandwich bread|توست,0,1
 tofu,tofu,توفو,protein,g,,soy,,توفو|bean curd,0,1
+tomato-juice,tomato juice,عصير طماطم,pantry,ml,,,,عصير طماطم|tomato juice|عصير الطماطم,0,0
 tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,,salsa|tomato puree|صلصه|salsa tamatem|salsa tomatem|معجون طماطم|tomato concentrate,1,0
 tomato-sauce,tomato sauce,صوص طماطم مطبوخ,sauces,g,,,,passata|بيوريه طماطم|tomato passata|صلصة مطبوخة|صوص مكرونة|jarred pasta sauce,0,0
 tomatoes,tomatoes,طماطم,vegetables,piece,120,,,tomato|oota|طماطم حمراء|قوطة|outa|tamatem|auta,0,1

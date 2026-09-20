@@ -180,7 +180,7 @@ const MINIMUM_FAMILY_SIZE = 2;
  * ambiguity and it is handled by owning nothing — the word resolves to
  * nothing and search offers all three — not by denying a family it never had.
  */
-const FORM_WORDS = new Set(['powder', 'cube', 'flake', 'mix', 'كريم']);
+const FORM_WORDS = new Set(['powder', 'cube', 'flake', 'mix', 'كريم', 'juice', 'عصير']);
 
 /**
  * Head nouns that name a kind the catalogue mostly does NOT head.

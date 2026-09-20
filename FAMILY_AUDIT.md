@@ -9,7 +9,7 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 83 |
+| Inferred families | 85 |
 | …whose members span food groups | 40 |
 
 ## Declared
@@ -34,12 +34,12 @@ rather than a real parent concept.
 | `لبن` | dairy, seasoning | `buttermilk`, `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
 | `cream` | dairy, frozen | `clotted-cream`, `cream`, `ice-cream`, `sour-cream`, `whipping-cream` |
 | `milk` | dairy, seasoning | `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
+| `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `palm-oil`, `sesame-oil`, `sunflower-oil` |
 | `دقيق` | pantry, protein, staple | `almond-flour`, `cornmeal`, `falafel-mix`, `flour`, `rice-flour` |
-| `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
+| `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `palm-oil`, `sesame-oil`, `sunflower-oil` |
 | `pepper` | produce, seasoning | `bell-pepper`, `black-pepper`, `chili-pepper`, `white-pepper` |
 | `vinegar` | pantry, seasoning | `balsamic-vinegar`, `rice-vinegar`, `vinegar`, `vinegar-apple` |
 | `بصل` | produce, seasoning | `fried-onions`, `green-onion`, `onion-powder`, `onions` |
-| `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `فول` | pantry, produce, protein | `fava-beans`, `green-fava-beans`, `peanuts`, `soybeans` |
 | `flour` | pantry, staple | `almond-flour`, `flour`, `rice-flour` |
 | `pea` | frozen, pantry, protein | `black-eyed-peas`, `green-peas`, `split-peas` |
@@ -80,8 +80,10 @@ rather than a real parent concept.
 | `sauce` | seasoning | `bbq-sauce`, `garlic-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `sweet-chili-sauce`, `tartar-sauce`, `tomato-sauce`, `worcestershire` |
 | `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `shamsi-bread`, `toast-bread` |
 | `bread` | staple | `baladi-bread`, `pita-bread`, `shamsi-bread`, `toast-bread` |
+| `سكر` | pantry | `brown-sugar`, `icing-sugar`, `sugar`, `sweetener-tablets` |
 | `شوكولاته` | pantry | `baking-chocolate`, `chocolate`, `chocolate-chips`, `chocolate-spread` |
 | `عجينه` | staple | `kunafa-dough`, `phyllo`, `pizza-dough`, `puff-pastry` |
+| `liver` | protein | `chicken-liver`, `duck-liver`, `liver` |
 | `onion` | produce | `fried-onions`, `green-onion`, `onions` |
 | `rice` | staple | `basmati-rice`, `brown-rice`, `rice` |
 | `spice` | seasoning | `kofta-spice`, `mixed-spice`, `shawarma-spice` |
@@ -89,19 +91,20 @@ rather than a real parent concept.
 | `tomato` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
 | `ارز` | staple | `basmati-rice`, `brown-rice`, `rice` |
 | `بهارات` | seasoning | `kofta-spice`, `mixed-spice`, `shawarma-spice` |
-| `سكر` | pantry | `brown-sugar`, `icing-sugar`, `sugar` |
 | `طماطم` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
+| `كبده` | protein | `chicken-liver`, `duck-liver`, `liver` |
 | `كريمه` | dairy | `cream`, `sour-cream`, `whipping-cream` |
 | `anise` | seasoning | `anise`, `star-anise` |
+| `artichoke` | produce | `artichoke`, `jerusalem-artichoke` |
 | `bone` | protein | `chicken-bones`, `marrow-bones` |
 | `chocolate` | pantry | `baking-chocolate`, `chocolate` |
 | `dough` | staple | `kunafa-dough`, `pizza-dough` |
 | `dressing` | seasoning | `ranch-dressing`, `thousand-island` |
 | `garlic` | produce | `garlic`, `spring-garlic` |
 | `lemon` | produce | `lemon`, `pickled-lemon` |
-| `liver` | protein | `chicken-liver`, `liver` |
 | `meat` | protein | `camel-meat`, `luncheon-meat` |
 | `molass` | seasoning | `molasses`, `pomegranate-molasses` |
+| `orange` | produce | `oranges`, `sour-orange` |
 | `pastry` | staple | `phyllo`, `puff-pastry` |
 | `pear` | produce | `pear`, `prickly-pear` |
 | `potato` | produce | `potatoes`, `sweet-potato` |
@@ -113,7 +116,6 @@ rather than a real parent concept.
 | `زعتر` | seasoning | `thyme-dried`, `zaatar-blend` |
 | `صلصه` | seasoning | `tahini-salad`, `tomato-paste` |
 | `عضم` | protein | `chicken-bones`, `marrow-bones` |
-| `كبده` | protein | `chicken-liver`, `liver` |
 | `لحمه` | protein | `beef-cubes`, `ground-beef` |
 | `ليمون` | produce | `lemon`, `pickled-lemon` |
 | `ينسون` | seasoning | `anise`, `star-anise` |
