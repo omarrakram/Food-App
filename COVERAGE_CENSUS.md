@@ -17,15 +17,15 @@ not replace real-user testing.
 | | | |
 |---|---:|---:|
 | **Concepts** | **525** | |
-| Represented by their own row | 320 | 61% |
-| Reachable through an alias | 21 | 4% |
-| Missing | 83 | 15.8% |
+| Represented by their own row | 333 | 63.4% |
+| Reachable through an alias | 23 | 4.4% |
+| Missing | 68 | 13% |
 | Ambiguous | 10 | 1.9% |
 | Correctly not a row — dish | 26 | 5% |
 | Correctly not a row — form | 63 | 12% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 341 of the 434 actionable concepts (78.6%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 356 of the 434 actionable concepts (82%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -37,18 +37,18 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 337 | 67.5% |
+| Concepts whose every term lands correctly | 352 | 70.5% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 949 | 77.9% |
+| Terms landing correctly | 979 | 80.4% |
 | **Declared forms/brands whose aliasing is BROKEN** | **1** | |
 
-Catalogue: **332 canonical ingredients**, **1501 aliases**.
+Catalogue: **347 canonical ingredients**, **1562 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baking | 33 | 20 | 2 | 8 | 0 | 73.3% | 59.4% |
+| baking | 33 | 23 | 2 | 5 | 0 | 83.3% | 68.8% |
 | bread and bakery | 24 | 10 | 2 | 6 | 0 | 66.7% | 61.9% |
 | breakfast | 15 | 8 | 2 | 1 | 0 | 90.9% | 72.7% |
 | canned and jarred | 18 | 6 | 1 | 1 | 0 | 87.5% | 88.9% |
@@ -60,21 +60,21 @@ Catalogue: **332 canonical ingredients**, **1501 aliases**.
 | fruit | 29 | 21 | 1 | 5 | 0 | 81.5% | 65.5% |
 | grains and rice | 18 | 14 | 0 | 2 | 0 | 87.5% | 76.5% |
 | herbs | 11 | 9 | 0 | 1 | 1 | 81.8% | 72.7% |
-| international in egypt | 10 | 0 | 1 | 8 | 0 | 11.1% | 10% |
+| international in egypt | 10 | 1 | 1 | 7 | 0 | 22.2% | 20% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
 | nuts seeds dried fruit | 22 | 17 | 1 | 3 | 0 | 85.7% | 36.4% |
 | offal | 17 | 10 | 0 | 3 | 1 | 71.4% | 62.5% |
-| oils and fats | 6 | 3 | 1 | 2 | 0 | 66.7% | 66.7% |
+| oils and fats | 6 | 4 | 1 | 1 | 0 | 83.3% | 83.3% |
 | packaged pantry | 16 | 8 | 0 | 3 | 0 | 72.7% | 75% |
 | pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
 | poultry | 15 | 14 | 0 | 1 | 0 | 93.3% | 93.3% |
 | prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
 | red meat cuts | 25 | 13 | 3 | 5 | 0 | 76.2% | 43.5% |
-| sauces and condiments | 27 | 18 | 1 | 6 | 1 | 73.1% | 63% |
+| sauces and condiments | 27 | 21 | 3 | 1 | 1 | 92.3% | 81.5% |
 | snacks used as ingredients | 13 | 3 | 1 | 4 | 0 | 50% | 40% |
-| spice blends | 8 | 5 | 0 | 2 | 0 | 71.4% | 75% |
-| spices | 35 | 26 | 1 | 4 | 0 | 87.1% | 77.1% |
+| spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
+| spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
 | vegetables | 56 | 45 | 1 | 2 | 2 | 92% | 76.8% |
 
 ## 4. BROKEN aliasing — a declared form or brand that does not reach its base
@@ -92,14 +92,11 @@ Catalogue: **332 canonical ingredients**, **1501 aliases**.
 | mixed dried fruit / yameesh | ramadan and eid | ياميش · yameesh |
 | sharbat | ramadan and eid | شربات · sugar syrup · sharbat |
 
-### P2 — 43
+### P2 — 28
 
 | Concept | Category | Terms probed |
 |---|---|---|
-| almond flour | baking | دقيق لوز · almond flour |
 | cake mix | baking | ميكس كيك · cake mix |
-| chocolate chips | baking | شوكولاتة شيبس · chocolate chips |
-| cream caramel mix | baking | كريم كراميل · cream caramel |
 | sweetener tablets | baking | سكر دايت · sweetener |
 | burger buns | bread and bakery | خبز برجر · burger buns |
 | pizza dough | bread and bakery | عجينة بيتزا · pizza dough |
@@ -115,30 +112,18 @@ Catalogue: **332 canonical ingredients**, **1501 aliases**.
 | frozen berries | frozen | توت مجمد · frozen berries |
 | jareesh | grains and rice | جريش · jareesh · crushed wheat |
 | jarred pasta sauce | international in egypt | صوص مكرونة · pasta sauce |
-| sweet chili sauce | international in egypt | صوص حار حلو · sweet chili |
 | dried cranberries | nuts seeds dried fruit | توت بري مجفف · dried cranberries |
 | melon seeds | nuts seeds dried fruit | لب مصري · melon seeds |
 | watermelon seeds | nuts seeds dried fruit | لب بطيخ · watermelon seeds |
-| vegetable shortening | oils and fats | سمن نباتي · shortening |
 | instant soup powder | packaged pantry | شوربة سريعة · instant soup |
 | sobia | packaged pantry | سوبيا · sobia |
 | tomato juice | packaged pantry | عصير طماطم · tomato juice |
 | beef neck | red meat cuts | رقبة · رقبه · beef neck |
 | escalope | red meat cuts | اسكالوب · escalope |
 | tenderloin | red meat cuts | فيليه لحمة · tenderloin · filet |
-| balsamic vinegar | sauces and condiments | خل بلسمي · balsamic |
 | hot chili paste | sauces and condiments | معجون شطة · chili paste |
-| mushroom soup / cream of mushroom | sauces and condiments | شوربة مشروم · cream of mushroom |
-| ranch dressing | sauces and condiments | رانش · ranch |
-| tartar sauce | sauces and condiments | تارتار · tartar sauce |
-| thousand island dressing | sauces and condiments | ثاوزند · thousand island |
 | digestive biscuits | snacks used as ingredients | بسكويت دايجستف · digestive |
 | nuts mix | snacks used as ingredients | مكسرات مشكلة · mixed nuts |
-| fish spice mix | spice blends | تتبيلة سمك · fish spice |
-| kofta spice | spice blends | بهارات كفتة · kofta spice |
-| allspice | spices | بهار حلو · allspice |
-| cream of tartar | spices | كريم أوف تارتار · cream of tartar |
-| star anise | spices | ينسون نجمي · star anise |
 
 ### long-tail — 38
 
