@@ -9,8 +9,8 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 65 |
-| …whose members span food groups | 37 |
+| Inferred families | 62 |
+| …whose members span food groups | 34 |
 
 ## Declared
 
@@ -31,7 +31,6 @@ rather than a real parent concept.
 |---|---|---|
 | `seed` | pantry, seasoning | `chia`, `coriander-ground`, `fennel-seed`, `mustard-seed`, `nigella`, `pumpkin-seeds`, `sesame-seeds`, `sunflower-seeds` |
 | `bean` | pantry, produce, protein | `fava-beans`, `green-beans`, `green-fava-beans`, `kidney-beans`, `lupini-beans`, `white-beans` |
-| `powder` | pantry, seasoning | `baking-powder`, `chili-powder`, `cocoa`, `curry-powder`, `garlic-powder`, `onion-powder` |
 | `لبن` | dairy, seasoning | `buttermilk`, `coconut-milk`, `condensed-milk`, `milk`, `powdered-milk` |
 | `milk` | dairy, seasoning | `coconut-milk`, `condensed-milk`, `milk`, `powdered-milk` |
 | `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
@@ -50,8 +49,6 @@ rather than a real parent concept.
 | `ماء` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `butter` | dairy, pantry | `butter`, `peanut-butter` |
 | `coconut` | pantry, produce | `coconut`, `coconut-flakes` |
-| `cube` | pantry, protein | `beef-cubes`, `stock-cube` |
-| `flake` | pantry, seasoning | `chili-flakes`, `corn-flakes` |
 | `ginger` | produce, seasoning | `ginger`, `ginger-ground` |
 | `lentil` | pantry, protein | `green-lentils`, `lentils` |
 | `syrup` | pantry, seasoning | `corn-syrup`, `date-syrup` |

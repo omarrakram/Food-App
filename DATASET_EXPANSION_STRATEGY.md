@@ -1115,20 +1115,49 @@ the alias table and the unknown-term table in §5, for separate approval. The
 declared layer is the interim: anything the heuristic gets wrong can be stated
 explicitly without new schema.
 
+### Stage 2A.2: the two the audit left behind
+
+**`رومي` now belongs to no one.** The turkey row held the bare word, which in
+an Egypt-first catalogue is the least likely of its three readings: at a deli
+counter رومي is the cheese, فلفل رومي is a bell pepper, and turkey is normally
+said as ديك رومي. It now resolves to nothing and search offers all three
+senses. Deliberately NOT modelled as a family — a family is a claim that its
+members answer the same question, and a cheese, a bird and a pepper do not.
+They share a word and nothing else. That is lexical ambiguity, and the honest
+model for it is to own nothing. The qualified forms still resolve exactly.
+
+**`powder`, `cube` and `flake` are forms, not kinds.** The head-noun rule
+removed the adjectives and could not remove these: `chili powder`, `stock cube`
+and `corn flakes` really are headed by them. But nothing about being a powder
+makes baking powder, cocoa and garlic powder interchangeable, and left as
+families they answered the wrong question:
+
+| Query | Became |
+|---|---|
+| `protein powder` | must contain one of six unrelated powders |
+| `ice cubes` | must contain beef cubes or a stock cube |
+| `oat flakes` | must contain chili flakes or corn flakes |
+
+A short deny list, not a rule, because "form or kind?" is a judgement about
+food and not something a string can be asked. The tests assert every entry
+still heads something real, so the list cannot rot into decoration, and the
+qualified products keep their own names. Inferred families 65 → 62.
+
 ### Terms wanting native-speaker review
 
 - **`دبابيس` / `دبابيس فراخ`** for drumsticks — the term I am most confident
   about, and still the one a native speaker should confirm first, since the
   whole row rests on it. The Franco `dababees` is my spelling of it and wants
   checking more than the Arabic does.
-- **`dagag` / `dajaj`** as Franco for `دجاج` — Modern Standard rather than
-  Egyptian. Included so an MSA speaker is not stranded; a native reviewer may
-  prefer to drop them.
+- **`dagag` / `dajaj`** are SECONDARY MSA transliterations, not primary
+  Egyptian-Franco forms. `فراخ` is the primary Egyptian generic and
+  `firakh`/`farakh` are its two realistic Franco spellings; `دجاج` is supported
+  so an MSA speaker is not stranded. Recorded as such in the declared family
+  rather than presented as equals.
 - **`farakh`** beside `firakh` — both turn up in typed Franco; neither is
   standardised.
-- **`رومي` alone** currently resolves to `turkey`, not to `roumy-cheese`. At a
-  deli counter the word almost certainly means the cheese. This predates Stage
-  2A and is not changed here, but it looks wrong and wants a decision.
+- **`رومي` alone** — RESOLVED in 2A.2, above. It now resolves to nothing and
+  offers all three senses.
 
 ### What Stage 2A.1 did not do
 
@@ -1149,6 +1178,7 @@ before the previous one's number has moved.
 | **1. Aliases only**                | ✅ **Done** — three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided                                                                                                                            | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten are missing concepts, not vocabulary) |
 | **2A. Benchmark-gap closure**      | ✅ **Done** — the 14 concepts the Stage 1 measurement proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix                                                                             | **99% correct**, dead ends **0**, **cross-group 0**; 2 wrong answers left, both the one recorded drumstick conflict                    |
 | **2A.1. Family semantics**         | ✅ **Done** — family invariant fixed, chicken declared bilingually, drumstick row added and the alias conflict settled, inferred families restricted to head nouns                                                                              | **100% correct**, dead ends 0, wrong answers of any kind **0**; inferred families 116 → 65                                            |
+| **2A.2. Native/semantic cleanup**  | ✅ **Done** — bare `رومي` freed from the turkey row, form words (`powder`, `cube`, `flake`) denied as families, MSA transliterations documented as secondary                                                                     | Regression state held: dead ends 0, wrong 0 of either kind, collisions 0; inferred families 65 → 62                                   |
 | **2B. P0 ingredients**             | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
 | **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
 | **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |

@@ -3029,7 +3029,7 @@ export const GENERATED_INGREDIENTS: readonly CatalogueIngredient[] = [
     defaultUnit: 'g',
     gramsPerPiece: null,
     allergens: [],
-    aliases: ['turkey breast', 'رومي', 'ديك رومي', 'deek roumi', 'dik roumi', 'deek rumi'],
+    aliases: ['turkey breast', 'ديك رومي', 'deek roumi', 'dik roumi', 'deek rumi', 'ديك رومى'],
     isCommonStaple: false,
     isPerishable: true,
   },

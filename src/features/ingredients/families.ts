@@ -75,9 +75,11 @@ export type DeclaredFamily = {
 export const DECLARED_FAMILIES: readonly DeclaredFamily[] = [
   {
     concept: 'chicken',
-    // `دجاج` is Modern Standard and `فراخ` is what Egyptian households say;
-    // both reach the same set here. The Franco spellings are the ones that
-    // turn up in typed queries — see the native-review list in §9d.
+    // `فراخ` is the PRIMARY Egyptian generic, and `firakh`/`farakh` are its two
+    // realistic Franco spellings. `دجاج` is Modern Standard, supported because
+    // an MSA speaker should not be stranded, and `dagag`/`dajaj` are SECONDARY
+    // MSA transliterations rather than anything an Egyptian would type first.
+    // Order here reflects that. See the native-review list in §9d.
     terms: ['chicken', 'فراخ', 'firakh', 'farakh', 'دجاج', 'dagag', 'dajaj'],
     slugs: [
       'chicken-breast',
@@ -149,10 +151,43 @@ const INFERRED_INDEX = buildInferredIndex();
  */
 const MINIMUM_FAMILY_SIZE = 2;
 
+/**
+ * Head nouns that name a FORM, not a kind of food.
+ *
+ * The head-noun rule removed the adjectives, and these are what it could not:
+ * `powder`, `cube` and `flake` are perfectly good head nouns, so `chili
+ * powder`, `stock cube` and `corn flakes` really are headed by them. They are
+ * just not a KIND of food. Nothing about being a powder makes baking powder,
+ * cocoa and garlic powder interchangeable, and a family is a claim that its
+ * members answer the same question.
+ *
+ * Left as families they answered the wrong one. `protein powder` required one
+ * of six unrelated powders, `ice cubes` required beef or stock cubes, and `oat
+ * flakes` required chili or corn flakes — none of which the catalogue has, all
+ * of which it then insisted on.
+ *
+ * A deny list rather than a rule, because "is this word a form or a kind?" is
+ * a judgement about food and not something a string can be asked. It is
+ * deliberately short: a word earns a place here by being a head noun that
+ * would otherwise mislead, and the tests assert every entry still names
+ * something real so the list cannot rot into decoration.
+ *
+ * Not the same thing as an ambiguous WORD. `رومي` means roumy cheese, a
+ * turkey and a bell pepper depending on who is speaking; that is lexical
+ * ambiguity and it is handled by owning nothing — the word resolves to
+ * nothing and search offers all three — not by denying a family it never had.
+ */
+const FORM_WORDS = new Set(['powder', 'cube', 'flake']);
+
+/** Exposed so the tests can assert the list still names real head nouns. */
+export function formWords(): readonly string[] {
+  return [...FORM_WORDS];
+}
+
 /** Every inferred family, for the audit and the tests. Sorted, largest first. */
 export function inferredFamilies(): { token: string; members: CatalogueIngredient[] }[] {
   return [...INFERRED_INDEX.entries()]
-    .filter(([, members]) => members.length >= MINIMUM_FAMILY_SIZE)
+    .filter(([token, members]) => members.length >= MINIMUM_FAMILY_SIZE && !FORM_WORDS.has(token))
     .map(([token, members]) => ({ token, members }))
     .sort((a, b) => b.members.length - a.members.length || a.token.localeCompare(b.token));
 }
@@ -188,6 +223,8 @@ export function familyFor(normalisedTerm: string): CatalogueIngredient[] {
 
   // A phrase is never an inferred family: the rule is about single words.
   if (normalisedTerm.includes(' ')) return [];
+
+  if (FORM_WORDS.has(normalisedTerm)) return [];
 
   const inferred = INFERRED_INDEX.get(normalisedTerm) ?? [];
   return inferred.length >= MINIMUM_FAMILY_SIZE ? [...inferred] : [];

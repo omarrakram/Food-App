@@ -5661,8 +5661,6 @@ on conflict (slug) do update set
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'turkey breast') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
-values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'رومي') on conflict do nothing;
-insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'ديك رومي') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'deek roumi') on conflict do nothing;
@@ -5670,6 +5668,8 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'dik roumi') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'deek rumi') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d1a35ade-dcac-54c0-a8de-33d9b99ae748', 'ديك رومى') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('68401d47-3758-5402-9e21-6867ffa93d2e', 'turmeric', 'turmeric', 'كركم', 'spices', 'g', null, true, false)
 on conflict (slug) do update set

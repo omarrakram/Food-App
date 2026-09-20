@@ -2,13 +2,16 @@ import { recipeContains } from '@/features/recipes/constraints';
 import { makeRecipeIngredient } from '@/test-utils/factories';
 import type { PantryItem } from '@/types/domain';
 
+import { interpretQuery } from '@/features/search/interpret';
+
 import { INGREDIENT_CATALOGUE } from '../catalogue';
-import { DECLARED_FAMILIES, headNoun, inferredFamilies } from '../families';
+import { DECLARED_FAMILIES, formWords, headNoun, inferredFamilies } from '../families';
 import {
   buildAvailabilityIndex,
   ingredientFamily,
   matchRecipeIngredients,
   resolveIngredient,
+  searchIngredients,
 } from '../matching';
 import { normaliseIngredientName } from '../normalise';
 
@@ -280,5 +283,98 @@ describe('the cuts stay distinct from each other', () => {
     // the thigh row's, but a drumstick is its own purchase.
     expect(resolveIngredient('drumsticks')?.slug).not.toBe('chicken-thigh');
     expect(resolveIngredient('أوراك')?.slug).toBe('chicken-thigh');
+  });
+});
+
+// --- a form is not a kind ---------------------------------------------------
+
+describe('a word naming a FORM is not a family', () => {
+  it('keeps every denied word pointing at something real', () => {
+    // A deny list that names nothing is decoration. Each entry must still be a
+    // head noun in the catalogue, so one that stops mattering gets noticed and
+    // removed rather than accumulating.
+    for (const word of formWords()) {
+      const headed = INGREDIENT_CATALOGUE.filter(
+        (ingredient) =>
+          headNoun(ingredient.name) === word || headNoun(ingredient.nameAr) === word,
+      ).length;
+      expect({ word, headed: headed > 0 }).toEqual({ word, headed: true });
+    }
+  });
+
+  it('offers no family for a form word', () => {
+    for (const word of formWords()) {
+      expect({ word, family: ingredientFamily(word) }).toEqual({ word, family: [] });
+    }
+  });
+
+  it('leaves form words out of the audit as well as the lookup', () => {
+    // Otherwise the report would keep advertising families the app refuses to
+    // serve, and the next reader would trust the report.
+    const audited = inferredFamilies().map((family) => family.token);
+    for (const word of formWords()) expect(audited).not.toContain(word);
+  });
+
+  it('does not turn a form word in a query into a requirement', () => {
+    // Each of these asked for something the catalogue does not stock, and each
+    // came back demanding unrelated things that merely share a form.
+    const cases: readonly [string, readonly string[]][] = [
+      ['protein powder', []],
+      ['ice cubes', ['ice']],
+      ['oat flakes', ['oats']],
+    ];
+
+    for (const [query, expected] of cases) {
+      expect({ query, required: interpretQuery(query, 'EGP').ingredients }).toEqual({
+        query,
+        required: [...expected],
+      });
+    }
+  });
+
+  it('still finds the real ingredient when the form word is qualified', () => {
+    // The deny list must not cost the specific products their own names.
+    expect(resolveIngredient('chili powder')?.slug).toBe('chili-powder');
+    expect(resolveIngredient('baking powder')?.slug).toBe('baking-powder');
+    expect(resolveIngredient('stock cube')?.slug).toBe('stock-cube');
+    expect(resolveIngredient('corn flakes')?.slug).toBe('corn-flakes');
+    expect(resolveIngredient('chili flakes')?.slug).toBe('chili-flakes');
+  });
+});
+
+// --- lexical ambiguity, which is a different thing --------------------------
+
+describe('رومي belongs to no one', () => {
+  it('resolves to nothing at all', () => {
+    // It meant `turkey`, because the turkey row held the bare word. In an
+    // Egypt-first catalogue that is the least likely reading of the three: at
+    // a deli counter رومي is the cheese, and فلفل رومي is a bell pepper.
+    // Turkey is normally said as ديك رومي.
+    expect(resolveIngredient('رومي')).toBeNull();
+  });
+
+  it('offers every sense rather than choosing one', () => {
+    const suggested = searchIngredients('رومي', 8).map((item) => item.slug);
+    expect(suggested).toEqual(expect.arrayContaining(['roumy-cheese', 'turkey']));
+  });
+
+  it('is NOT modelled as a family, because it is not one', () => {
+    // A family is a claim that its members answer the same question. A cheese,
+    // a bird and a pepper do not; they share a word and nothing else. The
+    // honest model is to own nothing and let the reader pick.
+    expect(ingredientFamily('رومي')).toEqual([]);
+  });
+
+  it('still resolves the qualified forms exactly', () => {
+    expect(resolveIngredient('ديك رومي')?.slug).toBe('turkey');
+    expect(resolveIngredient('deek roumi')?.slug).toBe('turkey');
+    expect(resolveIngredient('dik roumi')?.slug).toBe('turkey');
+    expect(resolveIngredient('جبنة رومي')?.slug).toBe('roumy-cheese');
+    expect(resolveIngredient('gebna roumi')?.slug).toBe('roumy-cheese');
+  });
+
+  it('does not let a bare رومي query require either one', () => {
+    expect(interpretQuery('رومي', 'EGP').ingredients).toEqual([]);
+    expect(interpretQuery('ديك رومي', 'EGP').ingredients).toEqual(['turkey']);
   });
 });
