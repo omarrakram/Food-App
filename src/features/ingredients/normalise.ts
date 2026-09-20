@@ -55,11 +55,55 @@ const NOISE_WORDS = new Set([
   'organic',
   'boneless',
   'skinless',
+  // Found by the same census pass that found the Arabic gap: these are the
+  // English modifiers people actually type that the original list missed.
+  'jarred',
+  'bottled',
+  'smoked',
+  'plain',
+  'unsweetened',
+  'boiled',
+  'grilled',
+  'roasted',
+  'toasted',
+  'deseeded',
   'a',
   'an',
   'the',
   'of',
   'some',
+  // ARABIC. The list above was entirely English, in an app whose primary
+  // audience types Arabic — so `frozen okra` reached okra and `بامية مجمدة`
+  // reached nothing. The coverage census measured the cost: input coverage
+  // 48.8% against 71.3% ontology coverage.
+  //
+  // Only words that NEVER carry identity are here, because Arabic modifiers
+  // TRAIL the noun and `PROTECTED_PREFIXES` only guards position zero. There
+  // is no symmetric guard, so anything identity-bearing is left alone rather
+  // than protected:
+  //
+  //   مفروم   `لحمة مفرومة` is ground beef, a row of its own.
+  //   مطحون   `شطة مطحونة` is chili POWDER, not chili flakes.
+  //   ناشف    `كزبرة ناشفة` is the dried seed, a different row from the herb.
+  //   بلدي    `عيش بلدي` is the bread's own name.
+  //   مطبوخ   `صوص طماطم مطبوخ` is the cooked sauce; stripping it would hand
+  //           that row the bare `صوص طماطم`, which Stage 2D-A deliberately
+  //           left unowned because the phrase is ambiguous.
+  //
+  // Written in the ta-marbuta-folded form the normaliser produces, with the
+  // unfolded spelling beside it so the list reads the way a human writes it.
+  'مجمد', 'مجمده', 'مجمدة', 'مثلج', 'مثلجه',
+  'معلب', 'معلبه', 'معلبة',
+  'طازج', 'طازجه', 'طازجة', 'طازه',
+  'مقشر', 'مقشره', 'مقشرة',
+  'مدخن', 'مدخنه', 'مدخنة',
+  'ساده', 'سادة',
+  'كامل', 'كامله', 'كاملة',
+  'مشوي', 'مشويه', 'مشوية',
+  'مسلوق', 'مسلوقه', 'مسلوقة',
+  'مبشور', 'مبشوره', 'مبشورة',
+  'محمص', 'محمصه', 'محمصة',
+  'مقطع', 'مقطعه', 'مقطعة',
 ]);
 
 /**

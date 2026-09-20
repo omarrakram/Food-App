@@ -73,7 +73,7 @@ rather than a real parent concept.
 | `جبنه` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `kashkaval`, `parmesan`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
 | `cheese` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `mish-cheese`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
 | `sauce` | seasoning | `bbq-sauce`, `garlic-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
-| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `worcestershire` |
+| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
 | `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `toast-bread` |
 | `bread` | staple | `baladi-bread`, `pita-bread`, `toast-bread` |
 | `rice` | staple | `basmati-rice`, `brown-rice`, `rice` |
@@ -81,7 +81,6 @@ rather than a real parent concept.
 | `tomato` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
 | `ارز` | staple | `basmati-rice`, `brown-rice`, `rice` |
 | `سكر` | pantry | `brown-sugar`, `icing-sugar`, `sugar` |
-| `صلصه` | seasoning | `tahini-salad`, `tomato-paste`, `tomato-sauce` |
 | `طماطم` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
 | `chocolate` | pantry | `baking-chocolate`, `chocolate` |
 | `garlic` | produce | `garlic`, `spring-garlic` |
@@ -96,6 +95,7 @@ rather than a real parent concept.
 | `دبس` | seasoning | `date-syrup`, `pomegranate-molasses` |
 | `زعتر` | seasoning | `thyme-dried`, `zaatar-blend` |
 | `شوكولاته` | pantry | `baking-chocolate`, `chocolate` |
+| `صلصه` | seasoning | `tahini-salad`, `tomato-paste` |
 | `عجينه` | staple | `phyllo`, `puff-pastry` |
 | `كبده` | protein | `chicken-liver`, `liver` |
 | `كريمه` | dairy | `cream`, `sour-cream` |

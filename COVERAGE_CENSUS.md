@@ -16,16 +16,16 @@ not replace real-user testing.
 
 | | | |
 |---|---:|---:|
-| **Concepts** | **526** | |
-| Represented by their own row | 289 | 54.9% |
-| Reachable through an alias | 21 | 4% |
-| Missing | 118 | 22.4% |
-| Ambiguous | 7 | 1.3% |
-| Correctly not a row — dish | 26 | 4.9% |
-| Correctly not a row — form | 63 | 12% |
+| **Concepts** | **525** | |
+| Represented by their own row | 290 | 55.2% |
+| Reachable through an alias | 20 | 3.8% |
+| Missing | 117 | 22.3% |
+| Ambiguous | 10 | 1.9% |
+| Correctly not a row — dish | 26 | 5% |
+| Correctly not a row — form | 60 | 11.4% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 310 of the 435 actionable concepts (71.3%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 310 of the 437 actionable concepts (70.9%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -36,113 +36,46 @@ fails this audit.
 
 | | | |
 |---|---:|---:|
-| Concepts in scope (all but dishes) | 500 | |
-| Concepts whose every term lands correctly | 244 | 48.8% |
-| Terms probed | 1220 | |
-| Terms landing correctly | 776 | 63.6% |
-| **Declared forms/brands whose aliasing is BROKEN** | **62** | |
+| Concepts in scope (all but dishes) | 499 | |
+| Concepts whose every term lands correctly | 304 | 60.9% |
+| Terms probed | 1218 | |
+| Terms landing correctly | 866 | 71.1% |
+| **Declared forms/brands whose aliasing is BROKEN** | **0** | |
 
-Catalogue: **301 canonical ingredients**, **1283 aliases**.
+Catalogue: **301 canonical ingredients**, **1351 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baking | 33 | 18 | 3 | 9 | 0 | 70% | 46.9% |
-| bread and bakery | 24 | 10 | 1 | 7 | 0 | 61.1% | 42.9% |
+| baking | 33 | 19 | 2 | 9 | 0 | 70% | 56.3% |
+| bread and bakery | 24 | 10 | 1 | 7 | 0 | 61.1% | 57.1% |
 | breakfast | 15 | 7 | 2 | 2 | 0 | 81.8% | 63.6% |
-| canned and jarred | 18 | 6 | 1 | 1 | 0 | 87.5% | 27.8% |
-| cheese | 23 | 12 | 1 | 5 | 0 | 72.2% | 60.9% |
+| canned and jarred | 18 | 6 | 1 | 1 | 0 | 87.5% | 88.9% |
+| cheese | 23 | 12 | 1 | 5 | 0 | 72.2% | 73.9% |
 | dairy and eggs | 21 | 14 | 0 | 6 | 0 | 70% | 66.7% |
 | drinks that are ingredients | 3 | 1 | 0 | 2 | 0 | 33.3% | 33.3% |
-| fish and seafood | 27 | 16 | 0 | 6 | 2 | 66.7% | 48.1% |
-| frozen | 15 | 4 | 0 | 2 | 1 | 57.1% | 20% |
-| fruit | 29 | 20 | 1 | 6 | 0 | 77.8% | 55.2% |
-| grains and rice | 19 | 12 | 0 | 4 | 0 | 75% | 55.6% |
+| fish and seafood | 27 | 16 | 0 | 6 | 2 | 66.7% | 59.3% |
+| frozen | 15 | 4 | 0 | 2 | 2 | 50% | 66.7% |
+| fruit | 29 | 20 | 1 | 6 | 0 | 77.8% | 62.1% |
+| grains and rice | 18 | 12 | 0 | 4 | 0 | 75% | 64.7% |
 | herbs | 11 | 9 | 0 | 1 | 1 | 81.8% | 72.7% |
-| international in egypt | 10 | 0 | 1 | 8 | 0 | 11.1% | 0% |
-| legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 68.8% |
-| nuts seeds dried fruit | 22 | 17 | 1 | 3 | 0 | 85.7% | 31.8% |
-| offal | 17 | 4 | 0 | 10 | 1 | 26.7% | 18.8% |
+| international in egypt | 10 | 0 | 1 | 8 | 0 | 11.1% | 10% |
+| legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
+| nuts seeds dried fruit | 22 | 17 | 1 | 3 | 0 | 85.7% | 36.4% |
+| offal | 17 | 4 | 0 | 10 | 1 | 26.7% | 25% |
 | oils and fats | 6 | 3 | 1 | 2 | 0 | 66.7% | 66.7% |
-| packaged pantry | 16 | 7 | 0 | 4 | 0 | 63.6% | 37.5% |
-| pasta and noodles | 7 | 2 | 2 | 2 | 0 | 66.7% | 28.6% |
+| packaged pantry | 16 | 7 | 0 | 4 | 0 | 63.6% | 68.8% |
+| pasta and noodles | 7 | 2 | 2 | 2 | 0 | 66.7% | 42.9% |
 | poultry | 15 | 13 | 0 | 2 | 0 | 86.7% | 86.7% |
-| prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 0% |
-| ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 0% |
-| red meat cuts | 25 | 11 | 3 | 7 | 0 | 66.7% | 26.1% |
-| sauces and condiments | 27 | 18 | 1 | 6 | 1 | 73.1% | 59.3% |
-| snacks used as ingredients | 13 | 1 | 1 | 6 | 0 | 25% | 10% |
-| spice blends | 8 | 4 | 0 | 3 | 0 | 57.1% | 50% |
-| spices | 35 | 25 | 1 | 5 | 0 | 83.9% | 62.9% |
-| vegetables | 56 | 42 | 1 | 7 | 0 | 86% | 60.7% |
-
-## 4. BROKEN aliasing — a declared form or brand that does not reach its base
-
-| Concept | Expects | What actually happened |
-|---|---|---|
-| cake flour | flour | دقيق كيك -> (nothing; search: flour); cake flour -> (nothing; search: flour) |
-| glucose syrup | corn-syrup | جلوكوز -> (nothing; search: —) |
-| bran / brown baladi bread | baladi-bread | عيش سن -> (nothing; search: semit); bran bread -> (nothing; search: semit) |
-| rusk fingers | breadcrumbs | بقسماط أصابع -> (nothing; search: breadcrumbs); rusk fingers -> (nothing; search: okra) |
-| shawarma bread | pita-bread | عيش شاورما -> (nothing; search: semit); shawarma bread -> (nothing; search: semit) |
-| canned chickpeas | chickpeas | حمص معلب -> (nothing; search: hummus-dip) |
-| canned cream | cream | كريمة معلبة -> (nothing; search: sour-cream) |
-| canned fava beans | fava-beans | فول معلب -> (nothing; search: peanuts) |
-| canned mushroom | mushroom | مشروم معلب -> (nothing; search: mushroom) |
-| canned peas | green-peas | بسلة معلبة -> (nothing; search: green-peas) |
-| canned sardines | sardines | سردين معلب -> (nothing; search: sardines) |
-| canned sweetcorn | corn | ذرة معلبة -> (nothing; search: corn-oil) |
-| green olives stuffed | olives | زيتون محشي -> (nothing; search: olives); stuffed olives -> (nothing; search: olives) |
-| jarred tahini | tahini | طحينة معلبة -> (nothing; search: tahini); jarred tahini -> (nothing; search: halva) |
-| pickled turnip | pickles | لفت مخلل -> (nothing; search: turnip); pickled turnip -> (nothing; search: turnip) |
-| cheese slices | processed-cheese | جبنة شرائح -> (nothing; search: parmesan); cheese slices -> (nothing; search: mozzarella) |
-| domiati cheese | white-cheese | دمياطي -> (nothing; search: —) |
-| feta | white-cheese | فيتا -> (nothing; search: white-cheese) |
-| shrimp, peeled frozen | shrimp | جمبري مقشر -> (nothing; search: shrimp) |
-| smoked herring | herring | رنجة مدخنة -> (nothing; search: herring); smoked herring -> (nothing; search: herring) |
-| tuna in oil | tuna-can | تونة بالزيت -> (nothing; search: tuna-can); tuna in oil -> (nothing; search: corn-oil) |
-| frozen artichoke | artichoke | خرشوف مجمد -> (nothing; search: artichoke) |
-| frozen green peas | green-peas | بسلة مجمدة -> (nothing; search: green-peas) |
-| frozen molokhia | molokhia | ملوخية مجمدة -> (nothing; search: molokhia) |
-| frozen okra | okra | بامية مجمدة -> (nothing; search: okra) |
-| frozen pastry sheets | puff-pastry, phyllo | عجينة مجمدة -> (nothing; search: phyllo); frozen pastry -> (nothing; search: phyllo) |
-| frozen spinach | spinach | سبانخ مجمدة -> (nothing; search: spinach) |
-| frozen sweetcorn | corn | ذرة مجمدة -> (nothing; search: corn-oil) |
-| ice cubes | ice | مكعبات تلج -> (nothing; search: beef-cubes) |
-| frozen strawberry | strawberry | فراولة مجمدة -> (nothing; search: frozen-fries) |
-| mango pulp, frozen | mango | عصير مانجو مجمد -> (nothing; search: mango); mango pulp -> (nothing; search: mango) |
-| corn kernels, dried | corn | ذرة ناشفة -> (nothing; search: corn-oil) |
-| egyptian short grain rice | rice | أرز مصري -> (nothing; search: rice) |
-| sushi rice | rice | أرز سوشي -> (nothing; search: rice); sushi rice -> (nothing; search: nori) |
-| foul hamam | fava-beans | فول حمام -> (nothing; search: pigeon); foul hamam -> (nothing; search: pigeon) |
-| white lupini brine | lupini-beans | ترمس محلى -> (nothing; search: lupini-beans); brined termis -> (nothing; search: lupini-beans) |
-| dried coconut chips | coconut-flakes | رقائق جوز الهند -> (nothing; search: coconut); coconut chips -> (nothing; search: coconut) |
-| lamb liver | liver | كبدة ضاني -> (nothing; search: lamb); lamb liver -> (nothing; search: lamb) |
-| bouillon powder | stock-cube | بودرة مرقة -> (nothing; search: stock-cube); bouillon powder -> (nothing; search: mahlab) |
-| dried yeast sachet | yeast | خميرة فورية -> (nothing; search: yeast) |
-| nescafe instant coffee | coffee | نسكافيه -> (nothing; search: —); nescafe -> (nothing; search: —) |
-| vermicelli for rice | vermicelli | شعرية للأرز -> (nothing; search: vermicelli); rice vermicelli -> (nothing; search: rice) |
-| vinegar sachets | vinegar | أكياس خل -> (nothing; search: vinegar); vinegar sachet -> (nothing; search: vinegar) |
-| penne | pasta | بيني -> (nothing; search: —) |
-| grape leaves, jarred | vine-leaves | ورق عنب معلب -> (nothing; search: vine-leaves); jarred vine leaves -> (nothing; search: vine-leaves) |
-| lamb for eid | lamb | خروف العيد -> (nothing; search: lamb); eid lamb -> (nothing; search: lamb) |
-| minced lamb | lamb | لحم ضاني مفروم -> (nothing; search: lamb) |
-| sogo2 eskandarani | sausage | سجق اسكندراني -> (nothing; search: liver); sogo2 eskandarani -> (nothing; search: sausage) |
-| heinz ketchup | ketchup | هاينز كاتشب -> (nothing; search: ketchup) |
-| cornflakes, unsweetened | corn-flakes | كورن فليكس سادة -> (nothing; search: corn-flakes); plain cornflakes -> (nothing; search: flour) |
-| tahini halawa with nuts | halva | حلاوة بالمكسرات -> (nothing; search: halva); halawa with nuts -> (nothing; search: halva) |
-| seven spices | mixed-spice | سبع بهارات -> (nothing; search: mixed-spice) |
-| chili whole dried | chili-pepper | شطة كاملة -> (nothing; search: hot-sauce); whole dried chili -> (nothing; search: chili-flakes) |
-| ginger, fresh | ginger | زنجبيل طازج -> (nothing; search: ginger) |
-| whole black pepper | black-pepper | فلفل حب -> (nothing; search: bell-pepper); peppercorns -> (nothing; search: —) |
-| whole cumin seeds | cumin | كمون حب -> (nothing; search: cumin); whole cumin -> (nothing; search: cumin) |
-| corn on the cob | corn | ذرة مشوية -> (nothing; search: corn-oil); corn cob -> (nothing; search: corn-oil) |
-| dried mint | mint | نعناع ناشف -> (nothing; search: mint) |
-| green pepper | bell-pepper | فلفل أخضر -> (nothing; search: chili-pepper) |
-| jew's mallow stems | molokhia | عيدان الملوخية -> (nothing; search: —); molokhia stems -> (nothing; search: molokhia) |
-| spring onion greens | green-onion | ورق بصل -> (nothing; search: nori); onion greens -> (nothing; search: green-onion) |
-| string beans | green-beans | لوبيا خضراء -> (nothing; search: coriander); string beans -> (nothing; search: tofu) |
+| prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
+| ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
+| red meat cuts | 25 | 11 | 3 | 7 | 0 | 66.7% | 34.8% |
+| sauces and condiments | 27 | 18 | 1 | 6 | 1 | 73.1% | 63% |
+| snacks used as ingredients | 13 | 2 | 1 | 5 | 0 | 37.5% | 30% |
+| spice blends | 8 | 4 | 0 | 3 | 0 | 57.1% | 62.5% |
+| spices | 35 | 25 | 1 | 5 | 0 | 83.9% | 74.3% |
+| vegetables | 56 | 41 | 1 | 7 | 2 | 82.4% | 67.9% |
 
 ## 5. Missing, by priority
 
@@ -164,7 +97,7 @@ Catalogue: **301 canonical ingredients**, **1283 aliases**.
 | shawarma spice | spice blends | بهارات شاورما · shawarma spice |
 | fried onions, ready | vegetables | بصل مقلي · crispy onions |
 
-### P2 — 67
+### P2 — 66
 
 | Concept | Category | Terms probed |
 |---|---|---|
@@ -224,7 +157,6 @@ Catalogue: **301 canonical ingredients**, **1283 aliases**.
 | thousand island dressing | sauces and condiments | ثاوزند · thousand island |
 | digestive biscuits | snacks used as ingredients | بسكويت دايجستف · digestive |
 | nuts mix | snacks used as ingredients | مكسرات مشكلة · mixed nuts |
-| roasted chickpeas / hommos el sham | snacks used as ingredients | حمص الشام · roasted chickpeas |
 | fish spice mix | spice blends | تتبيلة سمك · fish spice |
 | kofta spice | spice blends | بهارات كفتة · kofta spice |
 | allspice | spices | بهار حلو · allspice |
@@ -286,10 +218,13 @@ Catalogue: **301 canonical ingredients**, **1283 aliases**.
 | cuttlefish | fish and seafood | calamari | — |
 | fish fillet, unspecified | fish and seafood | — (nothing) | — |
 | frozen fish fillet | frozen | — (nothing) | — |
+| frozen pastry sheets | frozen | — (nothing) | puff-pastry, phyllo |
 | thyme | herbs | thyme-dried | — |
 | sprouted fava / fool nabet | legumes | — (nothing) | — |
 | sheep head meat | offal | — (nothing) | — |
 | صوص طماطم (bare phrase) | sauces and condiments | — (nothing) | ketchup, tomato-sauce |
+| green pepper | vegetables | bell-pepper | bell-pepper, chili-pepper |
+| potatoes | vegetables | frozen-fries, potatoes | — |
 
 ## 7. Dish terms that resolve to an ingredient anyway
 
@@ -299,4 +234,6 @@ right (بليلة really is cooked wheat) and some would be a lie.
 
 | Dish | Lands on |
 |---|---|
+| eggs, boiled | بيض مسلوق → eggs; boiled eggs → eggs |
+| roast chicken, ready | فرخة مشوية → whole-chicken |
 | kebda eskandarani | كبدة اسكندراني → liver |

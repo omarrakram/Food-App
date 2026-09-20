@@ -1574,6 +1574,41 @@ alias of `ketchup`.
   فيليه بلطي, not "fillet"); `tuna steak`, `watermelon seeds` and `white
   radish` are **missing**; `sesame snaps` is a **dish**.
 
+### 2D-A2: the fix, measured
+
+| | Before | After |
+|---|---:|---:|
+| Input coverage, concepts | 48.8% | **60.9%** |
+| Input coverage, terms | 63.6% | **71.1%** |
+| Declared forms whose aliasing is broken | 62 | **0** |
+| Aliases | 1283 | **1351** |
+| Ontology coverage | 71.3% | 70.9% |
+| Benchmark | 258/258 | 258/258, zero of everything |
+
+Three levers, in order of how much they moved:
+
+1. **Arabic noise words.** `مجمد`, `معلب`, `طازج`, `مقشر`, `مدخن`, `سادة`,
+   `كامل`, `مشوي`, `مسلوق`, `مبشور`, `محمص`, `مقطع`. Only words that NEVER
+   carry identity, because Arabic modifiers TRAIL the noun while
+   `PROTECTED_PREFIXES` guards position zero only — there is no symmetric
+   guard, so `مفروم`, `مطحون`, `ناشف`, `بلدي` and `مطبوخ` are left out rather
+   than protected back in. Each would collapse a row onto its neighbour:
+   `لحمة مفرومة` is ground beef, `كزبرة ناشفة` is the seed not the herb,
+   `صوص طماطم مطبوخ` is the cooked sauce and stripping `مطبوخ` would hand it
+   the ambiguous bare phrase 2D-A deliberately left unowned.
+2. **English noise words the original list missed**: `jarred`, `bottled`,
+   `smoked`, `plain`, `unsweetened`, `boiled`, `grilled`, `roasted`,
+   `toasted`, `deseeded`.
+3. **68 aliases**, most of them closing a bilingual asymmetry the census made
+   visible: `domiati` and `feta` were aliases of `white-cheese` in LATIN
+   script only, so `دمياطي` and `فيتا` reached nothing. Same for `nescafe`,
+   `penne`, `bouillon`, `egyptian rice` and two dozen others.
+
+Ontology moved 0.4% the wrong way, which is correct rather than a regression:
+two entries whose `form` label was hiding a real ambiguity (`فلفل أخضر` is bell
+or hot depending on the shop; `عجينة مجمدة` names either pastry sheet) became
+`ambiguous` and joined the actionable denominator instead of leaving it.
+
 ### A finding to carry forward
 
 Noise-word stripping means `dried X` ≡ `X`. Right for `dried mint` and `dried
