@@ -1245,6 +1245,73 @@ label changed.
 
 ---
 
+## 9f. P0 is closed. The proposed P1 plan — for approval, not started
+
+**P0 is complete at 281 rows.** All six P0 categories in §3 are covered: the
+2A stages closed eleven of them, batch 1 closed nine more, and everything else
+in the list was either already satisfied, a dish, a form, or too generic to
+state honestly. Two items remain unresolved and are flagged rather than
+guessed: `ras` (رأس — ambiguous with رأس ثوم, a head of garlic) and `rekab`,
+which I could not confidently identify.
+
+This plan is built from a probe of ~65 Egyptian household terms against the
+live catalogue, so each entry below is a MEASURED dead end rather than a
+proposal from a list. Items that probed as already satisfied were dropped —
+notably every canned form (`فول معلب`, `حمص معلب`, `ذرة معلبة`, `مشروم معلب`
+all resolve to their base rows), `indomie` (→ `noodles`), `termis`,
+`samna baladi` (→ `ghee`) and `شطة` (→ `chili-flakes`).
+
+### P1-A — baking and aromatics (6)
+
+| Concept | Egyptian | Why |
+|---|---|---|
+| `baking-soda` | بيكنج صودا / بيكربونات | **Highest value in this plan.** It currently suggests `baking-powder`, and the two are NOT interchangeable — swapping them ruins the dish. A wrong suggestion in a leavening agent is worse than a dead end. |
+| `custard-powder` | كسترد | Om Ali and most Egyptian milk desserts. |
+| `mastic` | مستكة | Egyptian baking and ice cream. Nothing substitutes. |
+| `mahlab` | محلب | Kahk and festival breads. |
+| `citric-acid` | ملح ليمون | A real pantry item, not a substitute for lemon. |
+| `food-colouring` | ألوان طعام | Kahk, cakes. |
+
+### P1-B — breads and grains (3)
+
+`semit` (سميت) · `roqaq` (رقاق, the pastry sheets for feteer) · `wheat-berries`
+(قمح, for belila — currently a total dead end, and belila is a staple dessert).
+
+Brown baladi is an alias of `baladi-bread`, not a row. `fiteer` is a dish.
+
+### P1-C — condiments, drinks, international (8)
+
+`garlic-sauce` (طومية) · `tamarind` (تمر هندي) · `licorice` (عرقسوس) ·
+`sriracha` · `oyster-sauce` · `rice-vinegar` · `nori` · `pesto`.
+
+The last five are the §3 "international in Egypt" group; they are genuinely
+stocked in Cairo supermarkets and genuinely absent here.
+
+### P1-D — herbs, fish and one open ontology question (4)
+
+`marjoram` (بردقوش) · `sage` (مريمية) · `zaatar-blend`, which the benchmark
+already carries as a deliberate `oneOf` gap.
+
+**`cuttlefish` (سبيط) needs a decision before it becomes a row.** It is
+currently an alias of `calamari`. Squid and cuttlefish are different animals
+with different texture and cooking time, but Egyptian fishmongers and cooks
+often use the words loosely. This is a Stage-2B-style ontology question and
+should be settled the way the drumstick was — recorded, decided, then built —
+not resolved by whoever adds the row.
+
+### What this plan deliberately excludes
+
+- **Anything that already resolves.** Row count is a means; §7's acceptance
+  criteria are the ends, and a row that duplicates a working alias moves the
+  criteria backwards by adding a fuzzy-tier candidate.
+- **`fool nabet` (فول نابت)** — sprouted fava. Arguably a form of `fava-beans`
+  rather than a concept. Flagged for native review before it is decided.
+- **`sobia`, brewer's yeast, snacks** — P2.
+- **Dishes**: besara, bechamel, mahshi filling, koshari sauce, ful mix, fiteer,
+  basbousa. Unchanged from §3c.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins
@@ -1257,7 +1324,8 @@ before the previous one's number has moved.
 | **2A. Benchmark-gap closure**      | ✅ **Done** — the 14 concepts the Stage 1 measurement proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix                                                                             | **99% correct**, dead ends **0**, **cross-group 0**; 2 wrong answers left, both the one recorded drumstick conflict                    |
 | **2A.1. Family semantics**         | ✅ **Done** — family invariant fixed, chicken declared bilingually, drumstick row added and the alias conflict settled, inferred families restricted to head nouns                                                                              | **100% correct**, dead ends 0, wrong answers of any kind **0**; inferred families 116 → 65                                            |
 | **2A.2. Native/semantic cleanup**  | ✅ **Done** — bare `رومي` freed from the turkey row, form words (`powder`, `cube`, `flake`) denied as families, MSA transliterations documented as secondary                                                                     | Regression state held: dead ends 0, wrong 0 of either kind, collisions 0; inferred families 65 → 62                                   |
-| **2B. P0 ingredients**             | ~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
+| **2B. P0 ingredients**             | ✅ **Done** — batch 1 added the nine P0 concepts that survived the §3c rules; the rest of the list was already satisfied, a dish, a form, or too generic. 272 → **281** rows, 1100 → **1160** aliases                                    | Benchmark held at 258/258; dead ends 0, wrong 0 of either kind, collisions 0; no new accidental families                              |
+| ~~2B (original estimate)~~         | ~~~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
 | **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
 | **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |
 | **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**              |
