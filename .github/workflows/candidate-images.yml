@@ -1,0 +1,119 @@
+name: Acquire candidate photography
+
+# Looks for openly-licensed photography for dishes that are NOT YET RECIPES,
+# and stages what it finds for a human to look at.
+#
+# WHY THIS IS SEPARATE FROM `recipe-images.yml`. The honest order of work is:
+# pick the dishes, find out whether legitimate photography exists for them,
+# then write the recipes for the ones it does. The production path cannot do
+# that — `images:fetch` reads RECIPE_CATALOGUE and `images:check` refuses a
+# manifest naming a recipe the catalogue does not have. Both rules are correct,
+# and neither was weakened to make this possible.
+#
+# NOTHING THIS JOB COMMITS IS PUBLISHED. The files land in
+# `assets/recipe-candidates/`, which the app does not bundle and does not
+# index. A staged photograph reaches a recipe card only through
+# `npm run images:promote`, by name, once its recipe exists and a person has
+# looked at the picture in PHOTO_CANDIDATE_REVIEW.md.
+#
+# WHY A WORKFLOW AND NOT A LOCAL SCRIPT RUN. Development happens in a sandbox
+# whose egress proxy blocks every image host — commons.wikimedia.org included —
+# so the acquisition physically cannot run there.
+#
+# Manual by default, on the same reasoning as production: photography is not
+# something that should change under a release without anyone deciding to.
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: 'Which candidate batch (blank = all of them)'
+        required: false
+        default: ''
+      force:
+        description: 'Re-acquire even where a candidate already has one'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: candidate-images
+  cancel-in-progress: false
+
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    # Same budget as production: a few minutes of Wikimedia requests plus the
+    # npm install. A job that has not finished in half an hour is stuck, and a
+    # stuck job holding the concurrency group blocks the next attempt.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Look for candidate photographs
+        run: |
+          set -euo pipefail
+          args=""
+          if [ -n "${{ inputs.batch }}" ]; then args="$args --batch ${{ inputs.batch }}"; fi
+          if [ "${{ inputs.force }}" = "true" ]; then args="$args --force"; fi
+          npm run images:fetch-candidates -- $args
+
+      - name: Validate before committing anything
+        # A photograph with no recorded licence must never reach the repository,
+        # candidate or not: the obligations attach on acquisition, not on
+        # promotion. Failing here leaves the working tree uncommitted.
+        run: npm run images:check-candidates
+
+      - name: Build the review page
+        run: npm run images:review-candidates
+
+      - name: Commit the result
+        run: |
+          set -euo pipefail
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          if git diff --quiet -- assets/recipe-candidates data/images/candidate-manifest.json PHOTO_CANDIDATE_REVIEW.md; then
+            echo 'No new candidate photographs.'
+            exit 0
+          fi
+
+          staged=$(node -e "const m=require('./data/images/candidate-manifest.json');console.log(m.images.length)")
+          none=$(node -e "const m=require('./data/images/candidate-manifest.json');console.log(m.skipped.length)")
+
+          git add assets/recipe-candidates data/images/candidate-manifest.json PHOTO_CANDIDATE_REVIEW.md
+          git commit -m "Stage candidate photography for review
+
+          ${staged} proposed dish(es) now have a photograph to look at; ${none}
+          have no sufficiently relevant openly-licensed image and will not get a
+          recipe in this batch unless one is found.
+
+          NOTHING HERE IS PUBLISHED. These files are not bundled and not indexed;
+          the app cannot see them. Promotion into assets/recipes is a separate,
+          manual step that names each dish, and it refuses any dish that has no
+          recipe. Read PHOTO_CANDIDATE_REVIEW.md — the automatic checks cannot
+          see the picture.
+
+          Acquired by .github/workflows/candidate-images.yml."
+
+          # The acquisition takes minutes, and a person working on the branch can
+          # easily land a commit inside that window. Rebasing the one commit this
+          # job makes is always safe: it touches only the staging directory, the
+          # candidate manifest and the generated review page.
+          for attempt in 1 2 3; do
+            git pull --rebase origin "$GITHUB_REF_NAME" && git push && exit 0
+            echo "push attempt $attempt lost a race; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push the staged photographs after three attempts."
+          exit 1

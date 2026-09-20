@@ -1,0 +1,222 @@
+{
+  "batch": "batch-1-small-pantry",
+  "intent": "24 dishes that are genuinely five ingredient lines or fewer — counting every line, including salt and oil. The catalogue has FOUR of those against a target of about 44, and a short list is the strongest predictor of a recipe a real Egyptian kitchen can actually reach: the dataset audit finds 0 or 1 exact matches for a three-item pantry today. No recipe is written yet. These are dish identities, sent to the photography preflight first, so that the recipes get written for the dishes that can honestly be illustrated rather than the other way round.",
+  "candidates": [
+    {
+      "slug": "karkade",
+      "name": "Hibiscus Tea",
+      "nameAr": "كركديه",
+      "cuisine": "egyptian",
+      "coreIngredients": ["hibiscus", "water", "sugar"],
+      "searchNames": ["Hibiscus tea", "Karkade", "Roselle drink"],
+      "note": "Three ingredients, drunk hot in winter and iced all summer, and in almost every Egyptian house during Ramadan. Nothing in the catalogue covers it."
+    },
+    {
+      "slug": "sahlab",
+      "name": "Warm Sahlab with Pistachios",
+      "nameAr": "سحلب",
+      "cuisine": "egyptian",
+      "coreIngredients": ["milk", "sahlab", "sugar", "pistachios"],
+      "searchNames": ["Salep", "Sahlep", "Sahlab"],
+      "note": "The winter drink. The sahlab row was added in Stage 2D and no recipe uses it."
+    },
+    {
+      "slug": "qamar-el-din",
+      "name": "Apricot Nectar",
+      "nameAr": "قمر الدين",
+      "cuisine": "egyptian",
+      "coreIngredients": ["dried-apricot", "water", "sugar"],
+      "searchNames": ["Qamar al-Din", "Qamareddine", "Apricot leather drink"],
+      "note": "The Ramadan drink, from the apricot sheet sold by the kilo. The ingredient row is literally named qamar el din and nothing cooks with it."
+    },
+    {
+      "slug": "belila",
+      "name": "Wheat Berries in Sweet Milk",
+      "nameAr": "بليلة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["wheat-berries", "milk", "sugar", "cinnamon"],
+      "searchNames": ["Belila", "Balila", "Wheat berry pudding"],
+      "note": "Breakfast and a Mawlid sweet. Four lines, one pot, and the cheapest hot breakfast in the catalogue if it lands."
+    },
+    {
+      "slug": "dura-mashwiya",
+      "name": "Grilled Corn on the Cob",
+      "nameAr": "ذرة مشوية",
+      "cuisine": "egyptian",
+      "coreIngredients": ["corn", "butter", "salt", "lemon"],
+      "searchNames": ["Grilled corn", "Corn on the cob", "Roasted corn"],
+      "note": "Street food on every corniche in the country, and four ingredients."
+    },
+    {
+      "slug": "batata-mashwiya",
+      "name": "Roasted Sweet Potato",
+      "nameAr": "بطاطا مشوية",
+      "cuisine": "egyptian",
+      "coreIngredients": ["sweet-potato", "butter", "honey", "cinnamon"],
+      "searchNames": ["Baked sweet potato", "Roasted sweet potato"],
+      "note": "The winter counterpart to the corn cart. Cheap, filling, and nothing in the catalogue uses sweet potato except air-fryer fries."
+    },
+    {
+      "slug": "salatet-tahina",
+      "name": "Tahini Sauce with Lemon",
+      "nameAr": "سلطة طحينة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["tahini", "lemon", "garlic", "water", "salt"],
+      "searchNames": ["Tahini sauce", "Tahina", "Tarator sauce"],
+      "note": "Poured over taameya, fish, koshari and half the rest of the catalogue. It exists as an assumed accompaniment everywhere and as a recipe nowhere."
+    },
+    {
+      "slug": "lokmet-el-qadi",
+      "name": "Honey-Soaked Dough Balls",
+      "nameAr": "لقمة القاضي",
+      "cuisine": "egyptian",
+      "coreIngredients": ["flour", "yeast", "sugar", "sunflower-oil", "honey"],
+      "searchNames": ["Luqaimat", "Lokma", "Awameh"],
+      "note": "Ramadan dessert made from flour and nothing else expensive. Five lines exactly."
+    },
+    {
+      "slug": "dukkah-baladi",
+      "name": "Peanut and Sesame Dukkah",
+      "nameAr": "دقة بلدي",
+      "cuisine": "egyptian",
+      "coreIngredients": ["peanuts", "sesame-seeds", "coriander-ground", "cumin", "salt"],
+      "searchNames": ["Dukkah", "Duqqa"],
+      "note": "Bread dipped in oil then in this. The dukkah row exists as a bought blend; making it is five pantry items and a pan."
+    },
+    {
+      "slug": "aseer-limon",
+      "name": "Fresh Lemonade with Mint",
+      "nameAr": "عصير ليمون بالنعناع",
+      "cuisine": "egyptian",
+      "coreIngredients": ["lemon", "sugar", "water", "mint"],
+      "searchNames": ["Lemonade", "Mint lemonade", "Limonana"],
+      "note": "Four ingredients, and the thing an Egyptian kitchen makes when it has lemons and nothing else."
+    },
+    {
+      "slug": "shorbet-tamatem",
+      "name": "Tomato Soup",
+      "nameAr": "شوربة طماطم",
+      "cuisine": "egyptian",
+      "coreIngredients": ["tomatoes", "onions", "butter", "salt", "black-pepper"],
+      "searchNames": ["Tomato soup"],
+      "note": "The soup made from whatever tomatoes are going soft. Five lines, no stock, no cream."
+    },
+    {
+      "slug": "beid-bel-basterma",
+      "name": "Eggs with Basterma",
+      "nameAr": "بيض بالبسطرمة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggs", "pastrami", "ghee", "salt"],
+      "searchNames": ["Basturma and eggs", "Pastirma with eggs", "Basterma"],
+      "note": "The Egyptian breakfast that is worth getting up for, and the only savoury protein dish in this batch. Four lines."
+    },
+    {
+      "slug": "torshi-lift",
+      "name": "Pink Pickled Turnips",
+      "nameAr": "طرشي لفت",
+      "cuisine": "egyptian",
+      "coreIngredients": ["turnip", "beetroot", "salt", "vinegar", "water"],
+      "searchNames": ["Torshi", "Pickled turnip", "Turnip pickle"],
+      "note": "On the table beside foul and koshari everywhere. Five ingredients and a jar; the beetroot is only there for the colour."
+    },
+    {
+      "slug": "grilled-halloumi",
+      "name": "Grilled Halloumi with Lemon",
+      "nameAr": "حلومي مشوي",
+      "cuisine": "levantine",
+      "coreIngredients": ["halloumi", "olive-oil", "lemon", "mint"],
+      "searchNames": ["Grilled halloumi", "Halloumi"],
+      "note": "Four ingredients and eight minutes. The halloumi row is used by nothing."
+    },
+    {
+      "slug": "cacio-e-pepe",
+      "name": "Pasta with Cheese and Pepper",
+      "nameAr": "مكرونة بالجبنة والفلفل",
+      "cuisine": "italian",
+      "coreIngredients": ["pasta", "parmesan", "black-pepper", "butter", "salt"],
+      "searchNames": ["Cacio e pepe"],
+      "note": "The one pasta in this batch, chosen because it is the shortest honest pasta there is."
+    },
+    {
+      "slug": "focaccia",
+      "name": "Olive Oil Flatbread",
+      "nameAr": "فوكاتشيا",
+      "cuisine": "italian",
+      "coreIngredients": ["flour", "water", "olive-oil", "salt", "yeast"],
+      "searchNames": ["Focaccia"],
+      "note": "Five ingredients, none of them perishable, and a proof that the catalogue's bread section is not only Egyptian."
+    },
+    {
+      "slug": "garlic-bread",
+      "name": "Garlic Butter Bread",
+      "nameAr": "عيش بالتوم والزبدة",
+      "cuisine": "italian",
+      "coreIngredients": ["baladi-bread", "butter", "garlic", "parsley", "salt"],
+      "searchNames": ["Garlic bread"],
+      "note": "Made here on baladi bread rather than a baguette, which is what an Egyptian kitchen actually has."
+    },
+    {
+      "slug": "french-toast",
+      "name": "French Toast",
+      "nameAr": "عيش بالبيض",
+      "cuisine": "american",
+      "coreIngredients": ["toast-bread", "eggs", "milk", "cinnamon", "butter"],
+      "searchNames": ["French toast", "Eggy bread"],
+      "note": "Stale toast bread, five lines, and a breakfast a child can make. Breakfast is the thinnest meal type in the catalogue at 29 of 161."
+    },
+    {
+      "slug": "hash-browns",
+      "name": "Crisp Potato Hash Browns",
+      "nameAr": "بطاطس مقرمشة",
+      "cuisine": "american",
+      "coreIngredients": ["potatoes", "onions", "sunflower-oil", "salt", "black-pepper"],
+      "searchNames": ["Hash browns", "Hash brown"],
+      "note": "Potatoes and onions, which is what is in the kitchen when nothing else is."
+    },
+    {
+      "slug": "mashed-potatoes",
+      "name": "Buttery Mashed Potatoes",
+      "nameAr": "بطاطس مهروسة",
+      "cuisine": "american",
+      "coreIngredients": ["potatoes", "butter", "milk", "salt", "black-pepper"],
+      "searchNames": ["Mashed potato", "Mashed potatoes"],
+      "note": "The side dish the catalogue has never had, at five lines."
+    },
+    {
+      "slug": "mango-lassi",
+      "name": "Mango Yogurt Drink",
+      "nameAr": "لاسي المانجو",
+      "cuisine": "indian",
+      "coreIngredients": ["mango", "yogurt", "milk", "sugar", "cardamom"],
+      "searchNames": ["Mango lassi", "Lassi"],
+      "note": "Egypt grows more mangoes than it knows what to do with between June and September."
+    },
+    {
+      "slug": "masala-chai",
+      "name": "Spiced Milk Tea",
+      "nameAr": "شاي بالحليب والبهارات",
+      "cuisine": "indian",
+      "coreIngredients": ["tea", "milk", "sugar", "cardamom", "cinnamon"],
+      "searchNames": ["Masala chai", "Chai"],
+      "note": "Five pantry items. The tea row is used by nothing at all."
+    },
+    {
+      "slug": "turkish-coffee",
+      "name": "Turkish Coffee",
+      "nameAr": "قهوة تركي",
+      "cuisine": "turkish",
+      "coreIngredients": ["coffee", "water", "sugar"],
+      "searchNames": ["Turkish coffee", "Kahve"],
+      "note": "Three ingredients and a kanaka. Drunk in Egypt at least as much as in Turkey; tagged Turkish because that is what the dish is called."
+    },
+    {
+      "slug": "refried-beans",
+      "name": "Mashed Spiced Beans",
+      "nameAr": "فاصوليا مهروسة",
+      "cuisine": "mexican",
+      "coreIngredients": ["kidney-beans", "onions", "garlic", "cumin", "sunflower-oil"],
+      "searchNames": ["Refried beans", "Frijoles refritos"],
+      "note": "A tin of beans, an onion and a pan. Legumes are the catalogue's joint-largest protein group and this is the cheapest five-line member of it."
+    }
+  ]
+}

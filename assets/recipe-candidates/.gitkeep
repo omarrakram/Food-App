@@ -1,0 +1,8 @@
+Photography STAGED for dishes that are not yet recipes.
+
+Nothing in this directory is bundled, indexed or visible to the app. Files land
+here from `.github/workflows/candidate-images.yml` so a person can look at them
+in PHOTO_CANDIDATE_REVIEW.md before any of them reaches a recipe card.
+
+A staged photograph moves to `assets/recipes/` only through
+`npm run images:promote`, by name, once its recipe exists.
