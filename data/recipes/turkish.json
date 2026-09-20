@@ -1239,5 +1239,129 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "borek",
+    "title": "Cheese Börek",
+    "titleAr": "بوريك بالجبنة",
+    "description": "Bought phyllo, white cheese and an egg to bind it: rolled into logs, brushed with butter and baked until the layers separate and crackle. Four lines, and the only thing that can go wrong is letting the pastry dry out while you work.",
+    "descriptionAr": "عجين فيلو جاهز وجبنة بيضا وبيضة تربطهم: بتتلف رولات، بتتدهن زبدة، وتتخبز لحد ما الطبقات تنفصل وتقرمش. أربع سطور، والحاجة الوحيدة اللي ممكن تبوظ هي إنك تسيب العجين ينشف وانت بتشتغل.",
+    "cuisine": "turkish",
+    "mealTypes": [
+      "breakfast",
+      "snack",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 25,
+    "cookMinutes": 35,
+    "servings": 6,
+    "nutrition": {
+      "calories": 340,
+      "protein": 12,
+      "carbs": 28,
+      "fat": 20,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "comfort",
+      "breakfast",
+      "oven"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "phyllo",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "white-cheese",
+        "quantity": 350,
+        "unit": "g",
+        "prep": "crumbled"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "butter",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "melted"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat the oven to 190°C. Crumble the cheese into a bowl, add one of the beaten eggs and mash them together into a rough paste — the egg is what stops the filling falling out in dry lumps.",
+        "textAr": "سخّن الفرن على ١٩٠ درجة. فتّت الجبنة في سلطانية، ضيف واحدة من البيضتين المخفوقتين واهرسهم مع بعض لحد ما يبقوا عجينة خشنة — البيضة هي اللي بتمنع الحشو إنه يقع حتت ناشفة.",
+        "minutes": 8,
+        "uses": [
+          "white-cheese",
+          "eggs"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Unroll the phyllo and keep the sheets you are not using under a damp cloth. Phyllo goes from flexible to shattering in about two minutes in dry air.",
+        "textAr": "افرد عجين الفيلو وسيب الورقات اللي مش بتستعملها تحت فوطة مبلولة. الفيلو بيتحول من طري لمكسّر في حوالي دقيقتين في الهوا الناشف.",
+        "minutes": 3,
+        "uses": [
+          "phyllo"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Take two sheets at a time, brush the top one with melted butter, lay a line of filling along the long edge and roll it into a log. Repeat until the filling is gone.",
+        "textAr": "خد ورقتين في المرة، ادهن اللي فوق بالزبدة السايحة، حط خط من الحشو على الطرف الطويل ولفّها رول. كرّر لحد ما الحشو يخلص.",
+        "minutes": 12,
+        "uses": [
+          "phyllo",
+          "butter",
+          "white-cheese"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sit the logs in a buttered tray with a finger of space between them and brush the tops with the rest of the butter and the second beaten egg.",
+        "textAr": "رصّ الرولات في صينية مدهونة زبدة وسيب مسافة صباع بينهم، وادهن وشّهم بباقي الزبدة والبيضة التانية المخفوقة.",
+        "minutes": 5,
+        "uses": [
+          "butter",
+          "eggs"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake 30 to 35 minutes, until they are deep gold and sound hollow and papery when you tap one. Eat them warm; the layers soften again once they cool completely.",
+        "textAr": "اخبزهم من ٣٠ لـ ٣٥ دقيقة، لحد ما يبقوا دهبي غامق ويطلّعوا صوت مجوّف ورقي لما تخبط عليهم. كلهم دافيين؛ الطبقات بترجع تطرى لما يبردوا خالص.",
+        "minutes": 35,
+        "uses": [
+          "phyllo"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

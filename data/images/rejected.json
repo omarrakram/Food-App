@@ -225,6 +225,86 @@
       "title": "File:Kolkata Wayside Tea Stall.jpg",
       "rejectedFor": "masala-chai",
       "reason": "A street vendor's hands pouring chai from a pan beside a grimy burner. It is chai, and it is a process photograph of a stall rather than a cup of tea."
+    },
+    {
+      "title": "File:Chickens_in_market.jpg",
+      "rejectedFor": "kebda-firakh",
+      "reason": "Whole plucked chickens hanging in a butcher's window beside the scale. Raw poultry for sale, not chicken livers, not a cooked dish."
+    },
+    {
+      "title": "File:Aho_ji_nashta_kijie.jpg",
+      "rejectedFor": "aloo-paratha",
+      "reason": "A breakfast tray where a white-bread sev sandwich is as prominent as the parathas. The competing food is unrelated to the dish rather than something served with it."
+    },
+    {
+      "title": "File:020170717_Polish_-_english_breakfast_in_London.jpg",
+      "rejectedFor": "baked-beans",
+      "reason": "A full English breakfast: bacon, pork sausages, hash browns and an omelette, with the beans pushed to one edge. Pork in frame and the dish is not the subject."
+    },
+    {
+      "title": "File:Eggs_with_cheese,_mushrooms,_and_basil.jpg",
+      "rejectedFor": "beid-bel-gibna",
+      "reason": "A dark, blurred home snapshot on a paper towel: American scrambled eggs under shredded cheese and sriracha, with mushrooms and spinach. Not eggs with Egyptian white cheese, and unusable quality besides."
+    },
+    {
+      "title": "File:Tomato_and_egg_soup.jpg",
+      "rejectedFor": "beid-bel-tamatem",
+      "reason": "Chinese tomato-and-egg SOUP in a broth bowl. Beid bel tamatem is eggs fried into tomatoes in a pan; a thin soup is a different dish. Second refusal for this slug."
+    },
+    {
+      "title": "File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg",
+      "rejectedFor": "chicken-katsu",
+      "reason": "A takeaway styrofoam bento sitting on a computer keyboard, and the cutlet is tonkatsu - pork. Second refusal for this slug."
+    },
+    {
+      "title": "File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG",
+      "rejectedFor": "coleslaw",
+      "reason": "A murky kitchen snapshot: the used mixing bowl and a smeared spoon fill the top of the frame and an unidentifiable dark bottle sits at the edge. Second refusal for this slug."
+    },
+    {
+      "title": "File:Egg_curry_pic.jpg",
+      "rejectedFor": "egg-curry",
+      "reason": "An over-processed extreme close-up of a pan. The saturation is pushed so hard the egg is barely findable; nobody would read this as a dish."
+    },
+    {
+      "title": "File:Rew13c05-745a_Bread_Pudding.JPG",
+      "rejectedFor": "eish-el-saraya",
+      "reason": "Western raisin bread pudding on a plate. Eish el saraya is rusk soaked in sugar syrup under a layer of ashta and pistachio, with no raisins and no baked sponge."
+    },
+    {
+      "title": "File:BUTTER_NON_with_GOBI_PANEER_%2B_VEG_MIX.jpg",
+      "rejectedFor": "naan",
+      "reason": "A 'Retrica' app watermark burned into the bottom-right corner, over a dim purple-cast thali of two curries. Second refusal for this slug."
+    },
+    {
+      "title": "File:Black_rice_onigiri_by_Adonis_Chen_in_Hsinchu.jpg",
+      "rejectedFor": "onigiri",
+      "reason": "The rice ball is still inside its convenience-store plastic wrapper and out of focus. Packaging, and the shape that makes an onigiri recognisable is hidden."
+    },
+    {
+      "title": "File:Proper_Panzanella_Salad,_Jamies_Italian,_Leeds.jpg",
+      "rejectedFor": "panzanella",
+      "reason": "A tall glass of amber liquid at the top edge of the frame, from a restaurant chain's table, that cannot be confirmed as anything but beer. The same rule that refused the burger photograph applies when the drink is unidentifiable."
+    },
+    {
+      "title": "File:Noura_-_Lebanese_sweets.jpg",
+      "rejectedFor": "qatayef",
+      "reason": "A Lebanese sweet-shop table where the front plate is halawet el jibn - cream-filled semolina rolls. Qatayef are folded stuffed pancakes; this is a different sweet entirely."
+    },
+    {
+      "title": "File:Oreochromis-niloticus-Nairobi.JPG",
+      "rejectedFor": "samak-bel-forn",
+      "reason": "A live Nile tilapia swimming in an aquarium. The species is right and the food is absent."
+    },
+    {
+      "title": "File:Beverages_in_Coke_bottles.JPG",
+      "rejectedFor": "tamr-hindi",
+      "reason": "A street vendor's shelf of refilled PET bottles with commercial labels and a phone number printed across them. Commercial packaging, and not something anybody made at home."
+    },
+    {
+      "title": "File:Roasted_chicken_leg_piece-MB20.jpg",
+      "rejectedFor": "firakh-bel-forn",
+      "reason": "Two chicken leg quarters with parallel grill bars charred across them, on a bright green plastic plate. This recipe is a WHOLE bird roasted breast-down in an oven; the photograph is jointed tandoori-style grilled chicken, and the difference is the first thing anyone would see. Promoted in error on a first pass and reversed on a second look at full size — the thumbnail hid the grill marks."
     }
   ]
 }

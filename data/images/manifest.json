@@ -29,6 +29,20 @@
       "acquiredAt": "2026-09-20T07:36:40.705Z"
     },
     {
+      "recipeSlug": "avgolemono",
+      "path": "avgolemono.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Avgolemono_soup.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Avgolemono_soup.jpg",
+      "creator": "robin.norwood",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "robin.norwood · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 678,
+      "bytes": 198995,
+      "sha256": "9d8368401b9ec655ecff11f03cf648f6f9cb6a85ac6b46cdb074f538ce6ea8b7",
+      "acquiredAt": "2026-09-20T13:36:14.138Z"
+    },
+    {
       "recipeSlug": "bamia-vegetarian",
       "path": "bamia-vegetarian.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
@@ -169,6 +183,20 @@
       "acquiredAt": "2026-09-13T15:34:29.844Z"
     },
     {
+      "recipeSlug": "betingan-mely",
+      "path": "betingan-mely.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Fried_Eggplant_Slices.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Liat_Portal_for_Foodie_Disorder_-_Fried_Eggplant_Slices.jpg",
+      "creator": "HaJunkiyada",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 509724,
+      "sha256": "6ff20f8e3c7560a59b4a3e99476bcf560b8d5046028fbdb8d314c4b548ebaac1",
+      "acquiredAt": "2026-09-20T13:37:08.561Z"
+    },
+    {
       "recipeSlug": "black-bean-quesadilla",
       "path": "black-bean-quesadilla.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Vegetarian_Black_Bean_Quesadilla.jpg",
@@ -181,6 +209,20 @@
       "bytes": 189606,
       "sha256": "4a7acd949c4b08f6111d62998b4a4cc3360325cf81e77c5479e8090ac4624da0",
       "acquiredAt": "2026-09-13T15:34:31.635Z"
+    },
+    {
+      "recipeSlug": "borek",
+      "path": "borek.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:B%C3%B6rek_mit_K%C3%A4se.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d7/B%C3%B6rek_mit_K%C3%A4se.jpg",
+      "creator": "Alice Wiegand",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Alice Wiegand · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 669,
+      "bytes": 134077,
+      "sha256": "182e01c39d1912660a1b9361a740a9ed2463fce8ea33a229aff20f661dda5278",
+      "acquiredAt": "2026-09-20T13:36:13.219Z"
     },
     {
       "recipeSlug": "butter-chicken-light",
@@ -407,6 +449,20 @@
       "acquiredAt": "2026-09-20T07:36:50.062Z"
     },
     {
+      "recipeSlug": "french-onion-soup",
+      "path": "french-onion-soup.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Soupe_%C3%A0_l%27oignon.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Soupe_%C3%A0_l%27oignon.jpg",
+      "creator": "Ludovic Péron",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Ludovic Péron · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 136639,
+      "sha256": "75b93bcebd81eb2a8b904b559032b32a197de582fdb525744da7ee5755fa580e",
+      "acquiredAt": "2026-09-20T13:36:24.015Z"
+    },
+    {
       "recipeSlug": "french-toast",
       "path": "french-toast.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:FrenchToast.JPG",
@@ -463,6 +519,20 @@
       "acquiredAt": "2026-09-13T15:35:36.125Z"
     },
     {
+      "recipeSlug": "gazpacho",
+      "path": "gazpacho.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gazpacho_Malague%C3%B1o_con_su_%E2%80%9Cpica%C3%ADto%E2%80%9D_-_Moreno,_Playa_Burriana_(cropped).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Gazpacho_Malague%C3%B1o_con_su_%E2%80%9Cpica%C3%ADto%E2%80%9D_-_Moreno%2C_Playa_Burriana_%28cropped%29.jpg",
+      "creator": "Haydn Blackey",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Haydn Blackey · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 749,
+      "bytes": 108017,
+      "sha256": "c944be416ab30714192d8f95b822d25379b0f9499a1d06ae65536fc41b317251",
+      "acquiredAt": "2026-09-20T13:36:13.589Z"
+    },
+    {
       "recipeSlug": "greek-salad",
       "path": "greek-salad.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Greece_Food_Horiatiki.JPG",
@@ -503,6 +573,20 @@
       "bytes": 191601,
       "sha256": "4b6fca968467920c845fc99d6d31578025086093169727869366c3b8d83b1255",
       "acquiredAt": "2026-09-13T15:35:43.831Z"
+    },
+    {
+      "recipeSlug": "harira",
+      "path": "harira.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Harira_fyldig_marrokansk_suppe.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Harira_fyldig_marrokansk_suppe.jpg",
+      "creator": "Interstates",
+      "license": "CC-BY-3.0",
+      "attribution": "Interstates · CC-BY-3.0 · Wikimedia Commons",
+      "width": 960,
+      "height": 960,
+      "bytes": 112013,
+      "sha256": "a49bf248e4c32cfe572b845b789e03ccb29d143c047d23ca5b641cfd4a07032c",
+      "acquiredAt": "2026-09-20T13:36:15.730Z"
     },
     {
       "recipeSlug": "hawawshi",
@@ -573,6 +657,20 @@
       "bytes": 404208,
       "sha256": "6bdd5d0622a3b3dbfa23bd22c73d79a1f3a0d7c378c3b6b62a78a4acda0dde39",
       "acquiredAt": "2026-09-20T09:48:27.360Z"
+    },
+    {
+      "recipeSlug": "khoshaf",
+      "path": "khoshaf.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Persian_Dried_Fruit_Compote.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Persian_Dried_Fruit_Compote.jpg",
+      "creator": "CallMeBarcode",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "CallMeBarcode · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1225,
+      "bytes": 566484,
+      "sha256": "9fc663518c23471333c9e7b0a0279e790bb57abe091532bbfb5e4011586c8441",
+      "acquiredAt": "2026-09-20T13:36:03.276Z"
     },
     {
       "recipeSlug": "kibbeh-bil-sanieh",
@@ -671,6 +769,20 @@
       "bytes": 210336,
       "sha256": "38ee35e560f17098feb6e7c3d11a5ab2a604e4e4ecceee866157adacdca6ebae",
       "acquiredAt": "2026-09-13T15:36:21.930Z"
+    },
+    {
+      "recipeSlug": "makarona-bel-salsa",
+      "path": "makarona-bel-salsa.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pasta_al_pomodoro_2.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Pasta_al_pomodoro_2.jpg",
+      "creator": "10Rosso",
+      "license": "CC-BY-2.0",
+      "attribution": "10Rosso · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 291827,
+      "sha256": "c817cea63b021d63243480a393bdd2173ee8e323e91cf2a849bc44f69c3eb601",
+      "acquiredAt": "2026-09-20T13:36:43.978Z"
     },
     {
       "recipeSlug": "mango-sticky-rice",
@@ -1163,6 +1275,20 @@
       "acquiredAt": "2026-09-13T15:38:13.003Z"
     },
     {
+      "recipeSlug": "torly",
+      "path": "torly.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%C3%84gyptisches_Mittagessen.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/%C3%84gyptisches_Mittagessen.JPG",
+      "creator": "Orientalist",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 444491,
+      "sha256": "6fed828685397f63e5d62cb0d4a2b318507e897445bc2597eb8c502b4ffa07ae",
+      "acquiredAt": "2026-09-20T13:35:36.934Z"
+    },
+    {
       "recipeSlug": "tortilla-espanola",
       "path": "tortilla-espanola.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Tortilla_de_patata_-_San_Sebasti%C3%A1n.jpg",
@@ -1343,6 +1469,10 @@
     {
       "recipeSlug": "feteer-cheese",
       "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "recipeSlug": "firakh-bel-forn",
+      "reason": "Two chicken leg quarters with parallel grill bars charred across them, on a bright green plastic plate. This recipe is a WHOLE bird roasted breast-down in an oven; the photograph is jointed tandoori-style grilled chicken, and the difference is the first thing anyone would see. Promoted in error on a first pass and reversed on a second look at full size — the thumbnail hid the grill marks."
     },
     {
       "recipeSlug": "fish-tacos-cabbage",

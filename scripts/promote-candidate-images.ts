@@ -48,6 +48,13 @@ type CandidateManifest = {
   comment: string;
   images: CandidateRecord[];
   skipped: { candidateSlug: string; batch: string; reason: string }[];
+  /**
+   * Reviewed, photograph is fine, dish cannot be written yet.
+   *
+   * `--batch` promotes everything staged, so a hold has to be enforced here
+   * or the next batch promotion quietly undoes the decision that made it.
+   */
+  held?: { candidateSlug: string; batch: string; reason: string }[];
 };
 type Manifest = {
   images: (Photo & { recipeSlug: string })[];
@@ -96,6 +103,7 @@ function main(): void {
   );
   const byCandidate = new Map(staged.images.map((entry) => [entry.candidateSlug, entry]));
   const alreadyLive = new Set(live.images.map((entry) => entry.recipeSlug));
+  const held = new Map((staged.held ?? []).map((entry) => [entry.candidateSlug, entry.reason]));
 
   const promoted: string[] = [];
   const problems: string[] = [];
@@ -106,6 +114,11 @@ function main(): void {
       // Not an error: a batch promotes what survived review, and the ones with
       // no acceptable image are exactly what this preflight is for.
       console.log(`  – ${slug}: nothing staged, skipping`);
+      continue;
+    }
+    const hold = held.get(slug);
+    if (hold) {
+      console.log(`  – ${slug}: held, skipping — ${hold}`);
       continue;
     }
     if (!recipeSlugs.has(slug)) {

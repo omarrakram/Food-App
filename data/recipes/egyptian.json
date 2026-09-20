@@ -6484,5 +6484,675 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "torly",
+    "title": "Baked Vegetables in Tomato",
+    "titleAr": "طورلي",
+    "description": "One deep tray of aubergine, courgette and potato roasted until the edges catch, then finished in a tomato sauce that thickens around them. It is what an Egyptian kitchen cooks when the vegetable drawer needs emptying, and it feeds six for less than a chicken.",
+    "descriptionAr": "صينية واحدة عميقة فيها باذنجان وكوسة وبطاطس تتحمّر لحد ما أطرافها تشيّط، وبعدين تكمّل في صلصة طماطم تتكتّف حواليها. ده اللي المطبخ المصري بيعمله لما درج الخضار يحتاج يتفضّي، وبيشبع ستة بأقل من تمن فرخة.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 60,
+    "servings": 6,
+    "nutrition": {
+      "calories": 240,
+      "protein": 5,
+      "carbs": 34,
+      "fat": 10,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "egyptian",
+      "budget",
+      "vegan",
+      "oven",
+      "comfort",
+      "batch-cook"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "eggplant",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "zucchini",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "thickly sliced"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat the oven to 200°C. Cut the potatoes, aubergine and courgette into chunks about three fingers wide — matching sizes matter far more than neat ones, because the whole tray has to finish at the same moment. Slice the onions thickly.",
+        "textAr": "سخّن الفرن على ٢٠٠ درجة. قطّع البطاطس والباذنجان والكوسة قطع عرض تلات صوابع — إن الحتت تكون متساوية أهم بكتير من إنها تكون مظبوطة الشكل، لأن الصينية كلها لازم تستوي في نفس اللحظة. قطّع البصل شرايح تخينة.",
+        "minutes": 15,
+        "uses": [
+          "potatoes",
+          "eggplant",
+          "zucchini",
+          "onions"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Tip everything into a deep roasting tray, pour over the oil and half the salt, and turn it with your hands until every piece has a film of oil on it. Spread it out in one layer.",
+        "textAr": "كبّ كل حاجة في صينية فرن عميقة، صبّ عليها الزيت ونص الملح، وقلّبها بإيدك لحد ما كل قطعة يبقى عليها طبقة زيت. افردها طبقة واحدة.",
+        "minutes": 5,
+        "uses": [
+          "sunflower-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Roast for 30 minutes without stirring. The pieces on top should be taking real colour and the potato should just be starting to soften.",
+        "textAr": "اخبزها ٣٠ دقيقة من غير تقليب. القطع اللي فوق لازم تاخد لون حقيقي والبطاطس تبدأ تطرى.",
+        "minutes": 30,
+        "uses": [
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir the tomato paste into the water until no lumps are left, season it with the rest of the salt, pour it over the tray and turn the vegetables once so everything is coated.",
+        "textAr": "دوّب صلصة الطماطم في الماية لحد ما ميبقاش فيها أي تكتلات، ملّحها بباقي الملح، صبّها على الصينية وقلّب الخضار مرة واحدة عشان كل حاجة تتغطي.",
+        "minutes": 5,
+        "uses": [
+          "tomato-paste",
+          "water",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Back into the oven for 25 to 30 minutes, until the sauce has thickened around the vegetables and a knife goes into the potato with no resistance at all. It is better warm than hot.",
+        "textAr": "رجّعها الفرن من ٢٥ لـ ٣٠ دقيقة، لحد ما الصلصة تتكتّف حوالين الخضار والسكينة تدخل في البطاطس من غير أي مقاومة. هي أحلى دافية من إنها تكون سخنة.",
+        "minutes": 30,
+        "uses": [
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "makarona-bel-salsa",
+    "title": "Macaroni in Red Sauce",
+    "titleAr": "مكرونة بالصلصة",
+    "description": "The tomato paste is fried, not stirred in — two full minutes in hot oil until it goes from tinny orange to brick red and starts to smell sweet. That one step is the difference between the sauce Egyptian households actually make and hot pasta with tomato on it.",
+    "descriptionAr": "الصلصة بتتحمّر مش بتتقلّب وخلاص — دقيقتين كاملين في زيت سخن لحد ما لونها يتحول من برتقالي معدني لأحمر قرميدي وتبدأ ريحتها تحلى. الخطوة دي لوحدها هي الفرق بين الصلصة اللي البيوت المصرية بتعملها فعلاً وبين مكرونة سخنة عليها طماطم.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 20,
+    "servings": 4,
+    "nutrition": {
+      "calories": 430,
+      "protein": 13,
+      "carbs": 74,
+      "fat": 11,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "budget",
+      "quick",
+      "beginner",
+      "vegan",
+      "comfort"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "small elbows"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null,
+        "staple": true,
+        "notes": "For the sauce. The pot you boil the pasta in is on top of this.",
+        "notesAr": "للصلصة. الحلة اللي هتسلق فيها المكرونة زيادة على دي."
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Put a large pot of water on to boil and salt it well — the pasta takes most of the salt in this recipe, and water that tastes of nothing cooks pasta that tastes of nothing.",
+        "textAr": "حط حلة كبيرة مياه على النار تغلي وملّحها كويس — المكرونة بتاخد أغلب الملح في الوصفة دي، والمياه اللي طعمها ولا حاجة بتطلّع مكرونة طعمها ولا حاجة.",
+        "minutes": 8,
+        "uses": [
+          "water",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "While it heats, crush the garlic and warm the oil in a small pan over a low flame. Give the garlic under a minute — it should smell sweet and stay pale. Browned garlic turns the whole sauce bitter.",
+        "textAr": "وهي بتسخن، اهرس التوم وسخّن الزيت في طاسة صغيرة على نار هادية. ادّي التوم أقل من دقيقة — لازم ريحته تحلى ويفضل لونه فاتح. التوم اللي بيتحمّر بيمرّر الصلصة كلها.",
+        "minutes": 2,
+        "uses": [
+          "garlic",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the tomato paste and keep it moving for two full minutes. This is the whole dish: raw paste tastes tinny, fried paste turns brick red and sweet.",
+        "textAr": "ضيف صلصة الطماطم وفضل تقلّب دقيقتين كاملين. دي الأكلة كلها: الصلصة النية طعمها معدني، والصلصة المتحمّرة بتبقى حمرا قرميدي وحلوة.",
+        "minutes": 3,
+        "uses": [
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour in the water, bring it to a simmer and leave it to thicken, uncovered, while the pasta cooks. It should coat a spoon by the end.",
+        "textAr": "صبّ الماية، سيبها تغلي على نار هادية وتتكتّف مكشوفة وانت بتسلق المكرونة. لازم تبقى تغلّف المعلقة في الآخر.",
+        "minutes": 10,
+        "uses": [
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Boil the pasta until it still has some bite, drain it, and turn it straight through the sauce in the pan so every piece goes red. Serve it immediately; it stiffens as it cools.",
+        "textAr": "اسلق المكرونة لحد ما تفضل فيها شوية قرمشة، صفّيها، وقلّبها على طول في الصلصة في الطاسة عشان كل قطعة تحمرّ. قدّمها على طول؛ بتنشف وهي بتبرد.",
+        "minutes": 10,
+        "uses": [
+          "pasta"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "betingan-mely",
+    "title": "Fried Aubergine with Garlic and Vinegar",
+    "titleAr": "باذنجان مقلي بالتوم والخل",
+    "description": "Salting the slices first is the whole technique: it pulls the water out, so the aubergine fries instead of stewing and drinks a fraction of the oil. The garlic and vinegar go over while the slices are still hot enough to take them in.",
+    "descriptionAr": "تمليح الشرايح الأول هي الحكاية كلها: بيطلّع المياه، فالباذنجان بيتقلي بدل ما يسلق وبيشرب جزء بسيط من الزيت. التوم والخل بينزلوا والشرايح لسه سخنة كفاية عشان تشربهم.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 40,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 200,
+      "protein": 3,
+      "carbs": 13,
+      "fat": 16,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "budget",
+      "vegan",
+      "comfort"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "eggplant",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "sliced thick"
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 150,
+        "unit": "ml",
+        "prep": "for frying"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "vinegar",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Slice the aubergines a little under a finger thick, salt both sides generously and lay them in a colander.",
+        "textAr": "قطّع الباذنجان شرايح أرفع شوية من صباع، ملّحه على الوشين بسخاء، ورصّه في مصفاة.",
+        "minutes": 10,
+        "uses": [
+          "eggplant",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Leave them 30 minutes. Beads of water will come to the surface and go brown — that water is what would otherwise turn the frying into steaming.",
+        "textAr": "سيبهم ٣٠ دقيقة. هتلاقي نقط مياه بتطلع على الوش ولونها بيغمق — المياه دي هي اللي كانت هتخلي القلي يبقى سلق.",
+        "minutes": 30,
+        "uses": [
+          "eggplant"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Wipe each slice and press it dry. Do not skip this: wet aubergine in hot oil spits.",
+        "textAr": "امسح كل شريحة واضغط عليها تنشف. متتخطّاش دي: الباذنجان المبلول في الزيت السخن بيفرقع.",
+        "minutes": 3,
+        "uses": [
+          "eggplant"
+        ],
+        "safety": "Water in hot oil spits violently. Pat every slice properly dry and lower them into the pan away from you.",
+        "safetyAr": "المياه في الزيت السخن بتفرقع بعنف. نشّف كل شريحة كويس ونزّلهم في الطاسة بعيد عنك."
+      },
+      {
+        "text": "Fry in hot oil in a single layer, a couple of minutes a side, until both faces are properly brown and the middle has gone soft. Lift them onto paper. Work in batches — a crowded pan drops the oil temperature and the slices drink it.",
+        "textAr": "اقليهم في زيت سخن طبقة واحدة، دقيقتين على كل وش، لحد ما الوشين يدهبوا والنص يطرى. شيلهم على ورق. اشتغل على دفعات — الطاسة المزنوقة بتوطّي حرارة الزيت والشرايح بتشربه.",
+        "minutes": 12,
+        "uses": [
+          "sunflower-oil",
+          "eggplant"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Crush the garlic with a pinch of salt, stir it into the vinegar, and spoon it over the slices while they are still hot. Leave them ten minutes before eating; they are better warm than straight out of the pan.",
+        "textAr": "اهرس التوم مع رشة ملح، قلّبه في الخل، وحطه بالمعلقة على الشرايح وهي لسه سخنة. سيبهم عشر دقايق قبل الأكل؛ هما أحلى دافيين من وهما طالعين من الطاسة على طول.",
+        "minutes": 5,
+        "uses": [
+          "garlic",
+          "vinegar",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "firakh-bel-forn",
+    "title": "Whole Chicken in the Oven with Cumin",
+    "titleAr": "فراخ في الفرن بالكمون",
+    "description": "Cumin, lemon and oil worked under the skin as well as over it, then roasted breast-down first so the juices run into the part that dries out. Five lines, one tray, and a thermometer is the only thing that actually tells you it is done.",
+    "descriptionAr": "كمون وليمون وزيت بيتدهنوا تحت الجلدة قبل ما يتدهنوا فوقها، وبعدين تتشوي الفرخة على صدرها الأول عشان العصارة تنزل في الجزء اللي بينشف. خمس سطور، صينية واحدة، والترمومتر هو الحاجة الوحيدة اللي بتقولك فعلاً إنها استوت.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 80,
+    "servings": 4,
+    "nutrition": {
+      "calories": 520,
+      "protein": 46,
+      "carbs": 3,
+      "fat": 36,
+      "fiber": 0
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "egyptian",
+      "oven",
+      "high-protein",
+      "comfort",
+      "sunday-lunch"
+    ],
+    "image": {
+      "path": "curated/firakh-bel-forn.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "whole-chicken",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "patted dry"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat the oven to 200°C. Take the chicken out of the fridge, dry it inside and out with paper, and leave it on the counter while the oven comes up.",
+        "textAr": "سخّن الفرن على ٢٠٠ درجة. طلّع الفرخة من التلاجة، نشّفها من جوه وبره بالورق، وسيبها على الرخامة لحد ما الفرن يسخن.",
+        "minutes": 10,
+        "uses": [
+          "whole-chicken"
+        ],
+        "safety": "Raw chicken: wash your hands, the board and anything the packaging touched before you touch anything else, and never rinse the bird under the tap — that sprays bacteria around the sink.",
+        "safetyAr": "فراخ نية: اغسل إيدك واللوح وأي حاجة لمست الكيس قبل ما تلمس أي حاجة تانية، وعمرك ما تغسل الفرخة تحت الحنفية — ده بيرشّ البكتيريا في الحوض كله."
+      },
+      {
+        "text": "Mix the cumin, the salt, the oil and the juice of one lemon into a loose paste. Push your fingers between the skin and the breast to lift it and work half the paste in there; rub the rest over the outside. Put the squeezed halves inside the bird.",
+        "textAr": "اخلط الكمون والملح والزيت وعصير ليمونة واحدة لحد ما يبقوا عجينة سايحة. دخّل صوابعك بين الجلدة والصدر عشان ترفعها وادهن نص الخلطة جوه؛ ادهن الباقي من بره. حط نصين الليمونة المعصورة جوه الفرخة.",
+        "minutes": 8,
+        "uses": [
+          "cumin",
+          "salt",
+          "sunflower-oil",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Sit it BREAST-DOWN in a roasting tray and give it 40 minutes. Roasting it upside down first is the only reliable way to stop the breast drying out before the thighs are done.",
+        "textAr": "حطها في الصينية والصدر لتحت وادّيها ٤٠ دقيقة. شويها مقلوبة الأول هي الطريقة الوحيدة المضمونة عشان الصدر ما ينشفش قبل ما الورك يستوي.",
+        "minutes": 40,
+        "uses": [
+          "whole-chicken"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Turn it breast-up and give it another 30 to 35 minutes, basting once with what has collected in the tray, until the skin is brown all over.",
+        "textAr": "اقلبها والصدر لفوق وادّيها كمان ٣٠ لـ ٣٥ دقيقة، وادهنها مرة باللي اتجمع في الصينية، لحد ما الجلدة تدهب كلها.",
+        "minutes": 35,
+        "uses": [
+          "whole-chicken"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Check the thickest part of the thigh, keeping the probe off the bone, then rest the bird for 10 minutes before you cut it. Squeeze the second lemon over as you serve.",
+        "textAr": "اقيس أتخن جزء في الورك والترمومتر بعيد عن العضم، وبعدين سيب الفرخة ترتاح ١٠ دقايق قبل ما تقطعها. اعصر الليمونة التانية عليها وانت بتقدّمها.",
+        "minutes": 12,
+        "uses": [
+          "whole-chicken",
+          "lemon"
+        ],
+        "safety": "Chicken must reach 74°C / 165°F at the thickest part of the thigh, away from the bone. Colour is not a test — a browned bird can still be raw at the joint, and juices can run clear below a safe temperature. With no thermometer, cut into the thigh joint and check there is no pink meat and no red at the bone.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن جزء في الورك، بعيد عن العضم. اللون مش دليل — الفرخة الدهبانة ممكن تكون لسه نية عند المفصل، والعصارة ممكن تطلع صافية وهي لسه أقل من درجة الأمان. لو مش معاك ترمومتر، افتح مفصل الورك وتأكد إن مفيش لحمة وردية ولا احمرار عند العضم."
+      }
+    ]
+  },
+  {
+    "slug": "khoshaf",
+    "title": "Dried Fruit in Sweet Water",
+    "titleAr": "خشاف",
+    "description": "Dried apricots, prunes and raisins left in sweetened water until they swell back into fruit and the water turns into a light syrup. No heat and no equipment: you set it up before bed or on your way out, and it is waiting when you get to it.",
+    "descriptionAr": "مشمش وقراصيا وزبيب بينقعوا في مياه محلّاة لحد ما ينفشوا ويرجعوا فاكهة والمياه تبقى شربات خفيف. من غير نار ولا أي أدوات: بتجهّزه قبل ما تنام أو وانت خارج، وتلاقيه مستنيك.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "dessert",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 240,
+    "cookMinutes": 0,
+    "servings": 6,
+    "nutrition": {
+      "calories": 210,
+      "protein": 2,
+      "carbs": 52,
+      "fat": 0,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [],
+    "tags": [
+      "egyptian",
+      "no-cook",
+      "dessert",
+      "budget",
+      "vegan",
+      "healthy"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "dried-apricot",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "prunes",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "raisins",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sugar",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 900,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rinse the dried fruit under the tap and tip it into a bowl or jar big enough for everything to double in size — it will.",
+        "textAr": "اغسل الفاكهة المجففة تحت الحنفية وكبّها في سلطانية أو برطمان كبير كفاية إن كل حاجة تبقى ضعف حجمها — وهي هتبقى فعلاً.",
+        "minutes": 5,
+        "uses": [
+          "dried-apricot",
+          "prunes",
+          "raisins"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir the sugar into the water until you cannot feel any grains on the bottom of the jug. Taste it: it should be noticeably sweeter than you want the finished dish, because the fruit takes a lot of it up.",
+        "textAr": "قلّب السكر في الماية لحد ما متحسش بأي حبيبات في قاع الإبريق. دوقها: لازم تبقى أحلى بشكل واضح من اللي انت عايزه في الآخر، لأن الفاكهة هتشرب منها كتير.",
+        "minutes": 3,
+        "uses": [
+          "sugar",
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour it over the fruit so everything is covered, put a lid on and leave it at least four hours. Overnight is better, and overnight in the fridge is better still.",
+        "textAr": "صبّها على الفاكهة لحد ما كل حاجة تتغطي، غطّيها وسيبها على الأقل أربع ساعات. بالليل كله أحسن، وبالليل في التلاجة أحسن وأحسن.",
+        "minutes": 240,
+        "uses": [
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir once before serving and give everyone some of the liquid — that is half the point of it.",
+        "textAr": "قلّبه مرة قبل التقديم وادّي كل واحد شوية من الشربات — ده نص الحكاية.",
+        "minutes": 2,
+        "uses": [
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

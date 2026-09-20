@@ -27,6 +27,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "HarshLight · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Lemonade_-_27682817724.jpg",
   },
+  "avgolemono": {
+    source: require('../../../assets/recipes/avgolemono.jpg') as number,
+    creator: "robin.norwood",
+    license: "CC-BY-SA-2.0",
+    attribution: "robin.norwood · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Avgolemono_soup.jpg",
+  },
   "bamia-vegetarian": {
     source: require('../../../assets/recipes/bamia-vegetarian.jpg') as number,
     creator: "Tamorlan",
@@ -97,12 +104,26 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Ruby Josephine Smith · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Bissara_Moroccan_split_pea_and_fava_bean_soup.jpg",
   },
+  "betingan-mely": {
+    source: require('../../../assets/recipes/betingan-mely.jpg') as number,
+    creator: "HaJunkiyada",
+    license: "CC-BY-SA-4.0",
+    attribution: "HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Fried_Eggplant_Slices.jpg",
+  },
   "black-bean-quesadilla": {
     source: require('../../../assets/recipes/black-bean-quesadilla.jpg') as number,
     creator: "BOSTON66",
     license: "CC-BY-SA-4.0",
     attribution: "BOSTON66 · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Vegetarian_Black_Bean_Quesadilla.jpg",
+  },
+  "borek": {
+    source: require('../../../assets/recipes/borek.jpg') as number,
+    creator: "Alice Wiegand",
+    license: "CC-BY-SA-3.0",
+    attribution: "Alice Wiegand · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:B%C3%B6rek_mit_K%C3%A4se.jpg",
   },
   "butter-chicken-light": {
     source: require('../../../assets/recipes/butter-chicken-light.jpg') as number,
@@ -216,6 +237,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Fred Benenson · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Focaccia_with_Crumb.jpg",
   },
+  "french-onion-soup": {
+    source: require('../../../assets/recipes/french-onion-soup.jpg') as number,
+    creator: "Ludovic Péron",
+    license: "CC-BY-SA-3.0",
+    attribution: "Ludovic Péron · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Soupe_%C3%A0_l%27oignon.jpg",
+  },
   "french-toast": {
     source: require('../../../assets/recipes/french-toast.jpg') as number,
     creator: "Jonathunder",
@@ -244,6 +272,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "F ASTILY · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Sauteed_Garlic_Green_Beans_1_2017-02-22.jpg",
   },
+  "gazpacho": {
+    source: require('../../../assets/recipes/gazpacho.jpg') as number,
+    creator: "Haydn Blackey",
+    license: "CC-BY-SA-2.0",
+    attribution: "Haydn Blackey · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Gazpacho_Malague%C3%B1o_con_su_%E2%80%9Cpica%C3%ADto%E2%80%9D_-_Moreno,_Playa_Burriana_(cropped).jpg",
+  },
   "greek-salad": {
     source: require('../../../assets/recipes/greek-salad.jpg') as number,
     creator: "User:Jpatokal",
@@ -264,6 +299,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-3.0",
     attribution: "Nikodem Nijaki · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Guacamole_IMGP1271.jpg",
+  },
+  "harira": {
+    source: require('../../../assets/recipes/harira.jpg') as number,
+    creator: "Interstates",
+    license: "CC-BY-3.0",
+    attribution: "Interstates · CC-BY-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Harira_fyldig_marrokansk_suppe.jpg",
   },
   "hawawshi": {
     source: require('../../../assets/recipes/hawawshi.jpg') as number,
@@ -299,6 +341,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "Turnopoems · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Kebda_eskandarani.jpg",
+  },
+  "khoshaf": {
+    source: require('../../../assets/recipes/khoshaf.jpg') as number,
+    creator: "CallMeBarcode",
+    license: "CC-BY-SA-4.0",
+    attribution: "CallMeBarcode · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Persian_Dried_Fruit_Compote.jpg",
   },
   "kibbeh-bil-sanieh": {
     source: require('../../../assets/recipes/kibbeh-bil-sanieh.jpg') as number,
@@ -348,6 +397,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-2.0",
     attribution: "Shixart1985 · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Delicious_stuffed_cabbage_rolls_prepared_in_a_pot.jpg",
+  },
+  "makarona-bel-salsa": {
+    source: require('../../../assets/recipes/makarona-bel-salsa.jpg') as number,
+    creator: "10Rosso",
+    license: "CC-BY-2.0",
+    attribution: "10Rosso · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Pasta_al_pomodoro_2.jpg",
   },
   "mango-sticky-rice": {
     source: require('../../../assets/recipes/mango-sticky-rice.jpg') as number,
@@ -593,6 +649,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-2.0",
     attribution: "Raffaele Diomede from Pordenone, ITALIA · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg",
+  },
+  "torly": {
+    source: require('../../../assets/recipes/torly.jpg') as number,
+    creator: "Orientalist",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:%C3%84gyptisches_Mittagessen.JPG",
   },
   "tortilla-espanola": {
     source: require('../../../assets/recipes/tortilla-espanola.jpg') as number,

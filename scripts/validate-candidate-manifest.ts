@@ -114,6 +114,7 @@ function main(): void {
   const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8')) as {
     images: CandidateImageRecord[];
     skipped: { candidateSlug: string; reason: string }[];
+    held?: { candidateSlug: string; batch: string; reason: string }[];
   };
 
   const declared = declaredCandidates();
@@ -192,6 +193,29 @@ function main(): void {
     }
   }
 
+  // HELD candidates: a third outcome, and the manifest has to be able to say
+  // it. Batch 3 found a good photograph of black bean soup for a dish the
+  // ingredient catalogue cannot express — there is no black-bean row — so the
+  // recipe would have been a kidney-bean soup wearing it. That is neither a
+  // refusal of the file nor a dish waiting to be looked at, and with only two
+  // states to choose from the review page reported it as unreviewed.
+  //
+  // A hold is only meaningful while the photograph is still staged and still
+  // unpublished, so both are checked: a hold on a promoted dish is a
+  // contradiction, and a hold on nothing is a note about a file that is gone.
+  for (const hold of manifest.held ?? []) {
+    const where = hold.candidateSlug || '(no slug)';
+    if (!declared.has(hold.candidateSlug)) {
+      problems.push(`${where}: held, but no candidate by that slug in data/recipe-candidates/`);
+    }
+    if (!seen.has(hold.candidateSlug)) {
+      problems.push(`${where}: held, but nothing is staged for it`);
+    }
+    if (!hold.reason?.trim()) {
+      problems.push(`${where}: held with no reason recorded`);
+    }
+  }
+
   // A photograph refused on review must never come back — including by hand,
   // and including through the candidate door.
   if (existsSync(REJECTED)) {
@@ -254,10 +278,11 @@ function main(): void {
     return;
   }
 
+  const held = manifest.held?.length ?? 0;
   console.log(
     `Candidate image manifest is valid: ${manifest.images.length} staged of ` +
-      `${declared.size} declared candidate(s), ${manifest.skipped.length} with no acceptable image. ` +
-      'None of them is published.',
+      `${declared.size} declared candidate(s), ${manifest.skipped.length} with no acceptable image` +
+      `${held > 0 ? `, ${held} held` : ''}. None of them is published.`,
   );
 }
 

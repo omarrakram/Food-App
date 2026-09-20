@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| Recipes in the catalogue | 182 |
-| With a photograph | 89 (49%) |
-| Without | 93 (51%) |
+| Recipes in the catalogue | 192 |
+| With a photograph | 99 (52%) |
+| Without | 93 (48%) |
 
 Shooting all of them is a large spend and most of it would be wasted — a
 recipe nobody is served does not need a picture. These 30 are the ones that
@@ -26,28 +26,28 @@ collections. See `scripts/audit-photography.ts` for the weighting.
 | 6 | Yogurt and Cucumber Salad | `salatet-zabadi` | egyptian | 10 min | 5 | 40% | 10 min — inside Home's 30-minute rail; only 5 required ingredients; Egyptian — launch market; in Discover: healthy, quick |
 | 7 | Zucchini & Egg Skillet | `zucchini-egg-skillet` | mediterranean | 17 min | 5 | 60% | 60% staple ingredients; 17 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, budget, healthy |
 | 8 | Alexandria Fried Calamari | `calamari-alexandria` | egyptian | 25 min | 8 | 63% | 63% staple ingredients; 25 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: high-protein, quick |
-| 9 | Air Fryer Sweet Potato Fries | `sweet-potato-fries-airfryer` | american | 30 min | 6 | 67% | 67% staple ingredients; 30 min — inside Home's 30-minute rail; only 6 required ingredients; in Discover: quick, healthy |
-| 10 | Labneh with Oil and Zaatar | `labneh-bowl` | levantine | 5 min | 4 | 50% | 5 min — inside Home's 30-minute rail; only 4 required ingredients; Levantine; in Discover: quick, high-protein |
-| 11 | Orzo Soup with Chicken Broth | `shorbet-lisan-asfour` | egyptian | 25 min | 7 | 57% | 25 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: quick, budget |
-| 12 | Chickpeas with Spinach and Lemon | `chickpea-spinach-curryless` | mediterranean | 23 min | 8 | 63% | 63% staple ingredients; 23 min — inside Home's 30-minute rail; in Discover: budget, healthy, quick, high-protein |
-| 13 | Levantine Lentil Soup | `lentil-soup-lemon` | levantine | 35 min | 10 | 80% | 80% staple ingredients; Levantine; in Discover: healthy, budget, high-protein |
-| 14 | Egyptian Lentil Soup | `egyptian-lentil-soup` | egyptian | 38 min | 8 | 75% | 75% staple ingredients; Egyptian — launch market; in Discover: budget, healthy |
-| 15 | Herb and Onion Omelette | `eggah-baladi` | egyptian | 22 min | 8 | 50% | 22 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: quick, high-protein |
-| 16 | Levantine Ful with Tahini | `foul-shami` | levantine | 15 min | 8 | 63% | 63% staple ingredients; 15 min — inside Home's 30-minute rail; Levantine; in Discover: budget, high-protein |
-| 17 | Baked Sardines with Lemon and Oregano | `sardines-baked-lemon` | mediterranean | 20 min | 7 | 57% | 20 min — inside Home's 30-minute rail; in Discover: healthy, high-protein, quick, budget |
-| 18 | Shakshuka with Sausage | `shakshuka-suez` | egyptian | 25 min | 9 | 56% | 25 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: high-protein |
-| 19 | Tomato, Mozzarella and Basil | `caprese-stack` | italian | 8 min | 6 | 50% | 8 min — inside Home's 30-minute rail; only 6 required ingredients; in Discover: quick, healthy |
-| 20 | Cumin Rice with Peas | `spiced-rice-peas` | indian | 25 min | 8 | 63% | 63% staple ingredients; 25 min — inside Home's 30-minute rail; in Discover: budget, quick, vegetarian |
-| 21 | Fish and Caramelised Onion Rice | `sayadeya` | egyptian | 60 min | 9 | 89% | 89% staple ingredients; Egyptian — launch market; in Discover: high-protein |
-| 22 | Grilled Sea Bream with Lemon | `grilled-sea-bream` | mediterranean | 30 min | 7 | 57% | 30 min — inside Home's 30-minute rail; in Discover: high-protein, healthy, quick |
-| 23 | Bulgur Pilaf with Tomato | `turkish-bulgur-pilaf` | turkish | 28 min | 9 | 67% | 67% staple ingredients; 28 min — inside Home's 30-minute rail; in Discover: budget, quick |
-| 24 | Zaatar Flatbreads | `manakish-zaatar` | levantine | 102 min | 8 | 100% | 100% staple ingredients; Levantine; in Discover: budget |
-| 25 | Egyptian Falafel | `taameya` | egyptian | 35 min | 10 | 60% | 60% staple ingredients; Egyptian — launch market; in Discover: budget, high-protein |
-| 26 | Tuna, Lemon and Caper Pasta | `pasta-tuna-lemon` | italian | 17 min | 9 | 56% | 17 min — inside Home's 30-minute rail; in Discover: quick, budget, high-protein |
-| 27 | White Bean Salad with Egg | `turkish-white-bean-salad` | turkish | 20 min | 9 | 44% | 20 min — inside Home's 30-minute rail; in Discover: healthy, high-protein, budget, quick |
-| 28 | Warm Oats with Banana | `oatmeal-banana` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, budget |
-| 29 | Soft Scrambled Eggs | `scrambled-eggs-soft` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, high-protein |
-| 30 | Grilled Mullet with Cumin | `samak-mashwi-mullet` | egyptian | 37 min | 7 | 57% | Egyptian — launch market; in Discover: high-protein, healthy |
+| 9 | Labneh with Oil and Zaatar | `labneh-bowl` | levantine | 5 min | 4 | 50% | 5 min — inside Home's 30-minute rail; only 4 required ingredients; Levantine; in Discover: quick, high-protein |
+| 10 | Orzo Soup with Chicken Broth | `shorbet-lisan-asfour` | egyptian | 25 min | 7 | 57% | 25 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: quick, budget |
+| 11 | Chickpeas with Spinach and Lemon | `chickpea-spinach-curryless` | mediterranean | 23 min | 8 | 63% | 63% staple ingredients; 23 min — inside Home's 30-minute rail; in Discover: budget, healthy, quick, high-protein |
+| 12 | Levantine Lentil Soup | `lentil-soup-lemon` | levantine | 35 min | 10 | 80% | 80% staple ingredients; Levantine; in Discover: healthy, budget, high-protein |
+| 13 | Egyptian Lentil Soup | `egyptian-lentil-soup` | egyptian | 38 min | 8 | 75% | 75% staple ingredients; Egyptian — launch market; in Discover: budget, healthy |
+| 14 | Herb and Onion Omelette | `eggah-baladi` | egyptian | 22 min | 8 | 50% | 22 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: quick, high-protein |
+| 15 | Levantine Ful with Tahini | `foul-shami` | levantine | 15 min | 8 | 63% | 63% staple ingredients; 15 min — inside Home's 30-minute rail; Levantine; in Discover: budget, high-protein |
+| 16 | Baked Sardines with Lemon and Oregano | `sardines-baked-lemon` | mediterranean | 20 min | 7 | 57% | 20 min — inside Home's 30-minute rail; in Discover: healthy, high-protein, quick, budget |
+| 17 | Shakshuka with Sausage | `shakshuka-suez` | egyptian | 25 min | 9 | 56% | 25 min — inside Home's 30-minute rail; Egyptian — launch market; in Discover: high-protein |
+| 18 | Tomato, Mozzarella and Basil | `caprese-stack` | italian | 25 min | 6 | 50% | 25 min — inside Home's 30-minute rail; only 6 required ingredients; in Discover: quick, healthy |
+| 19 | Cumin Rice with Peas | `spiced-rice-peas` | indian | 25 min | 8 | 63% | 63% staple ingredients; 25 min — inside Home's 30-minute rail; in Discover: budget, quick, vegetarian |
+| 20 | Fish and Caramelised Onion Rice | `sayadeya` | egyptian | 60 min | 9 | 89% | 89% staple ingredients; Egyptian — launch market; in Discover: high-protein |
+| 21 | Grilled Sea Bream with Lemon | `grilled-sea-bream` | mediterranean | 30 min | 7 | 57% | 30 min — inside Home's 30-minute rail; in Discover: high-protein, healthy, quick |
+| 22 | Bulgur Pilaf with Tomato | `turkish-bulgur-pilaf` | turkish | 28 min | 9 | 67% | 67% staple ingredients; 28 min — inside Home's 30-minute rail; in Discover: budget, quick |
+| 23 | Zaatar Flatbreads | `manakish-zaatar` | levantine | 102 min | 8 | 100% | 100% staple ingredients; Levantine; in Discover: budget |
+| 24 | Egyptian Falafel | `taameya` | egyptian | 35 min | 10 | 60% | 60% staple ingredients; Egyptian — launch market; in Discover: budget, high-protein |
+| 25 | Tuna, Lemon and Caper Pasta | `pasta-tuna-lemon` | italian | 17 min | 9 | 56% | 17 min — inside Home's 30-minute rail; in Discover: quick, budget, high-protein |
+| 26 | White Bean Salad with Egg | `turkish-white-bean-salad` | turkish | 20 min | 9 | 44% | 20 min — inside Home's 30-minute rail; in Discover: healthy, high-protein, budget, quick |
+| 27 | Warm Oats with Banana | `oatmeal-banana` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, budget |
+| 28 | Soft Scrambled Eggs | `scrambled-eggs-soft` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, high-protein |
+| 29 | Grilled Mullet with Cumin | `samak-mashwi-mullet` | egyptian | 37 min | 7 | 57% | Egyptian — launch market; in Discover: high-protein, healthy |
+| 30 | Tuna and White Bean Salad | `tuna-white-bean-salad` | mediterranean | 8 min | 7 | 43% | 8 min — inside Home's 30-minute rail; in Discover: quick, high-protein, budget, healthy |
 
 ## How to use this
 

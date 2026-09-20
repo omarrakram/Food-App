@@ -823,30 +823,65 @@ implementation with two drivers, and the candidate driver stages into
 `npm run images:promote` is the only door into production, takes dish names,
 and refuses any dish that has no recipe.
 
-| | Before | After batch 1 |
-|---|---:|---:|
-| Recipes | 161 | **172** |
-| Photographs | 67 (41.6%) | **79 (45.9%)** |
-| ≤5 TOTAL ingredient lines | 4 | **15** |
-| Egyptian | 36 (22.4%) | **43 (25.0%)** |
+| | Before | Batch 1 | Batch 2 | Batch 3 |
+|---|---:|---:|---:|---:|
+| Recipes | 161 | 172 | 182 | **192** |
+| Photographs | 67 (41.6%) | 79 (45.9%) | 89 (48.9%) | **98 (51.0%)** |
+| ≤5 TOTAL ingredient lines | 4 | 15 | 22 | **26** |
+| Egyptian | 36 (22.4%) | 43 (25.0%) | 48 (26.4%) | **53 (27.6%)** |
 
 "≤5" counts every line, including salt and oil. Nothing is laundered through
 staple, optional or garnish flags.
 
 ### Why the human review step is not optional
 
-Batch 1 proposed 24 dishes. The mechanical checks — licence, size, format,
-category, no-duplicate, pork-and-alcohol — passed **23** of them. A person then
-looked at all 23 and **12 were wrong**: a Colombian meat barbecue offered as
-grilled corn, gherkins for pickled turnips, a block of cured meat for a dish of
-eggs, four cheeseburgers around the hash browns, a carafe of wine beside the
-pasta, a branded syrup bottle, a blurred snapshot full of strangers.
+Across three batches, 63 distinct dishes were proposed and **76 photographs
+passed every mechanical check** — licence, size, format, category,
+no-duplicate, pork-and-alcohol. A person then looked at all 76 and refused
+**45**:
+
+- a live Nile tilapia swimming in an aquarium, for baked tilapia;
+- whole plucked chickens hanging in a butcher's window, for chicken livers;
+- a painted restaurant sign reading BROILER-BAR, for roast chicken;
+- a full English breakfast — bacon and pork sausages — for baked beans;
+- a takeaway bento of *tonkatsu*, which is pork, on a computer keyboard;
+- a street vendor's shelf of refilled bottles with his phone number on them;
+- a Retrica app watermark burned into the corner of a thali;
+- a Colombian meat barbecue for grilled corn, a carafe of wine beside pasta,
+  hotel buffet trays, gherkins for pickled turnips.
+
+One of the 45 was refused **after** it had been promoted. `firakh-bel-forn` is
+a whole bird roasted breast-down; at thumbnail size its photograph read as
+roast chicken, and at full size it is two jointed leg quarters with grill bars
+charred across them. The promotion was reversed, the file added to
+`rejected.json`, and the recipe went back onto the branded fallback rather
+than keeping a picture of a different preparation. Photo coverage is 51.0%
+rather than 51.6% because of it, which is the trade this project has already
+decided: the floor is 41.6% and a wrong photograph is not a way to stay above
+it.
 
 Every refusal is in `data/images/rejected.json` with its reason. The refusal is
 permanent, applies to production as well as candidates, and both validators
 reject a manifest containing one. `PHOTO_CANDIDATE_REVIEW.md` is the page the
 reviewing happens on; its image references are relative repository paths so
 GitHub renders them inline.
+
+The refusal list also pays for itself. Batch 2 re-ran the twelve dishes batch 1
+had refused; because the fetcher could no longer choose the file it had chosen
+before, it reached further down the results and **four came back correct**.
+
+### Three outcomes, not two
+
+A candidate can also be **held**: the photograph is fine and the dish cannot be
+written. Batch 3 found a good photograph of black bean soup for a recipe the
+ingredient catalogue cannot express — there is no black-bean row, so the recipe
+would have been a kidney-bean soup wearing it. That is not a refusal (the file
+is good, and `rejected.json` is permanent and global) and it is not "waiting to
+be looked at". The manifest carries a `held` list, the validator checks it, the
+promoter skips it, and `scripts/__tests__/candidate-accounting.test.ts` holds
+the invariant that every proposed dish sits in exactly one of the four states —
+promoted, staged, held, refused, or never found. That test exists because the
+review page has twice reported decided dishes as untried.
 
 ### The batch found a shipped safety defect
 
@@ -870,19 +905,19 @@ branch):
 |---|---|---|
 | Typecheck, app AND build scripts | `npm run typecheck` | **pass**, 0 errors. Do not substitute `npx tsc --noEmit`; it silently skips `scripts/` — see **CI** below |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 934/934 across 66 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 964/964 across 72 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Image manifest | `npm run images:check` | **pass**, **79 of 172 (45.9%)** — was 67 of 161 (41.6%) before the Stage 3P preflight; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
-| Candidate image manifest | `npm run images:check-candidates` | **pass** — 0 staged, 13 candidates with no acceptable image. Staged photography is committed photography, so it is held to the same licence standard |
-| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 172 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags**. The nine pairs above 0.7 were reviewed one by one and all nine are distinct dishes |
+| Image manifest | `npm run images:check` | **pass**, **98 of 192 (51.0%)** — was 67 of 161 (41.6%) before the Stage 3P preflight; licence, attribution, header bytes, SHA-256, no reuse, none refused on review, and recipe/seed credits agree with the manifest in both directions |
+| Candidate image manifest | `npm run images:check-candidates` | **pass** — 1 staged and held, 63 declared candidates, 16 with no acceptable image. Staged photography is committed photography, so it is held to the same licence standard |
+| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 192 recipes, **6** pairs at or above 0.7 Jaccard over distinguishing ingredients (salt and water excluded since Stage 3P.2), **zero ORDINARY staple flags**. All six were reviewed one by one and all six are distinct dishes |
 | Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.6%, **zero declared forms whose aliasing is broken** |
 | Ingredient families | `npm run audit:families` | reports only — 1 declared, 85 inferred |
-| Price backlog | `npm run audit:prices` | reports only — **76.2%** of required slots priced, 104 gaps ranked |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 228 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
+| Price backlog | `npm run audit:prices` | reports only — **76.9%** of required slots priced, 108 gaps ranked |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 232 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |

@@ -29,6 +29,7 @@ const ROOT = join(import.meta.dirname, '..');
 const CANDIDATE_DIR = join(ROOT, 'data', 'recipe-candidates');
 const MANIFEST = join(ROOT, 'data', 'images', 'candidate-manifest.json');
 const PRODUCTION = join(ROOT, 'data', 'images', 'manifest.json');
+const REJECTED = join(ROOT, 'data', 'images', 'rejected.json');
 const OUTPUT = join(ROOT, 'PHOTO_CANDIDATE_REVIEW.md');
 
 type Candidate = {
@@ -55,6 +56,7 @@ type Record_ = {
 type Manifest = {
   images: Record_[];
   skipped: { candidateSlug: string; batch: string; reason: string }[];
+  held?: { candidateSlug: string; batch: string; reason: string }[];
 };
 
 function batches(): Batch[] {
@@ -68,6 +70,30 @@ function batches(): Batch[] {
 function manifest(): Manifest {
   if (!existsSync(MANIFEST)) return { images: [], skipped: [] };
   return JSON.parse(readFileSync(MANIFEST, 'utf8')) as Manifest;
+}
+
+/**
+ * What a HUMAN refused, per dish.
+ *
+ * `skipped` only records what the ACQUISITION could not find. A dish whose
+ * photograph a person looked at and rejected leaves no trace there — the file
+ * and its manifest entry are deleted — so batch 3 reported fifteen dishes a
+ * reviewer had just turned down as "not attempted yet". That is the same
+ * class of lie as the promoted-but-unlisted bug: the page has to show the
+ * review that happened, or nobody can tell an untried dish from a refused one.
+ */
+function refusedByHand(): Map<string, string> {
+  if (!existsSync(REJECTED)) return new Map();
+  const file = JSON.parse(readFileSync(REJECTED, 'utf8')) as {
+    files: { title: string; rejectedFor: string; reason: string }[];
+  };
+  const bySlug = new Map<string, string>();
+  // Last one wins: a dish refused twice shows the most recent refusal, which
+  // is the one that says what is still wrong.
+  for (const entry of file.files) {
+    bySlug.set(entry.rejectedFor, `${entry.title}: refused on review — ${entry.reason}`);
+  }
+  return bySlug;
 }
 
 /**
@@ -97,6 +123,8 @@ function main(): void {
   const live = promoted();
   const byslug = new Map(staged.images.map((entry) => [entry.candidateSlug, entry]));
   const skippedBySlug = new Map(staged.skipped.map((entry) => [entry.candidateSlug, entry.reason]));
+  const refused = refusedByHand();
+  const heldBySlug = new Map((staged.held ?? []).map((entry) => [entry.candidateSlug, entry.reason]));
 
   const lines: string[] = [
     '# Candidate photography — review before any of this ships',
@@ -125,7 +153,12 @@ function main(): void {
   ];
 
   for (const batch of all) {
-    const withImage = batch.candidates.filter((entry) => byslug.has(entry.slug));
+    const withImage = batch.candidates.filter(
+      (entry) => byslug.has(entry.slug) && !heldBySlug.has(entry.slug),
+    );
+    const held = batch.candidates.filter(
+      (entry) => byslug.has(entry.slug) && heldBySlug.has(entry.slug),
+    );
     const done = batch.candidates.filter(
       (entry) => !byslug.has(entry.slug) && live.has(entry.slug),
     );
@@ -139,7 +172,9 @@ function main(): void {
       batch.intent,
       '',
       `**${batch.candidates.length} candidates: ${done.length} reviewed and shipped, ` +
-        `${withImage.length} waiting to be looked at, ${without.length} with nothing acceptable.**`,
+        `${withImage.length} waiting to be looked at, ` +
+        `${held.length > 0 ? `${held.length} held, ` : ''}` +
+        `${without.length} with nothing acceptable.**`,
       '',
     );
 
@@ -186,6 +221,26 @@ function main(): void {
       );
     }
 
+    if (held.length > 0) {
+      lines.push(
+        `### Held (${held.length})`,
+        '',
+        'Looked at, and nothing is wrong with the photograph — the dish is the',
+        'problem. These stay staged and unpublished until whatever is blocking them',
+        'is resolved, which is why they are not in `rejected.json`: that list is',
+        'permanent and global, and refusing a good file there would keep it out of',
+        'every future batch as well.',
+        '',
+        '| Dish | Why it is held |',
+        '|---|---|',
+      );
+      for (const candidate of held) {
+        const reason = heldBySlug.get(candidate.slug)!;
+        lines.push(`| ${candidate.name} (\`${candidate.slug}\`) | ${reason.replace(/\|/g, '\\|')} |`);
+      }
+      lines.push('');
+    }
+
     if (without.length > 0) {
       lines.push(
         `### No acceptable image (${without.length})`,
@@ -197,7 +252,8 @@ function main(): void {
         '|---|---|',
       );
       for (const candidate of without) {
-        const reason = skippedBySlug.get(candidate.slug) ?? '_not attempted yet_';
+        const reason =
+          skippedBySlug.get(candidate.slug) ?? refused.get(candidate.slug) ?? '_not attempted yet_';
         lines.push(`| ${candidate.name} (\`${candidate.slug}\`) | ${reason.replace(/\|/g, '\\|')} |`);
       }
       lines.push('');
@@ -210,9 +266,10 @@ function main(): void {
   const shipped = all
     .flatMap((batch) => batch.candidates)
     .filter((entry) => !byslug.has(entry.slug) && live.has(entry.slug)).length;
+  const waiting = staged.images.filter((entry) => !heldBySlug.has(entry.candidateSlug)).length;
   console.log(
     `PHOTO_CANDIDATE_REVIEW.md written: of ${total} candidate(s), ${shipped} promoted, ` +
-      `${staged.images.length} waiting to be looked at.`,
+      `${waiting} waiting to be looked at, ${heldBySlug.size} held.`,
   );
 }
 

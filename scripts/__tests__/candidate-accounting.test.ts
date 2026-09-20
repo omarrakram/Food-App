@@ -1,0 +1,87 @@
+/**
+ * Every candidate dish must be accounted for.
+ *
+ * The review page is the only place anybody sees what happened to a proposed
+ * dish, and twice now it has been wrong in the same direction: it reported
+ * dishes as untried that had in fact been decided. First eleven promoted
+ * dishes showed as "not attempted yet" because promotion moves a candidate
+ * OUT of the staging manifest; then fifteen human-rejected ones showed the
+ * same way, because a refusal deletes the staged file and its entry and
+ * leaves its only trace in `rejected.json`.
+ *
+ * Both were fixed by teaching the generator to read the other files. This
+ * test is the thing that makes the fix stick, and it is deliberately a rule
+ * about the DATA rather than about the markdown: a candidate is in exactly
+ * one of four states, and if it is in none of them the page cannot describe
+ * it honestly no matter how the generator is written.
+ */
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+
+const ROOT = join(__dirname, '..', '..');
+const read = (...parts: string[]) => JSON.parse(readFileSync(join(ROOT, ...parts), 'utf8'));
+
+type Batch = { batch: string; candidates: { slug: string; name: string }[] };
+
+const batches: Batch[] = readdirSync(join(ROOT, 'data', 'recipe-candidates'))
+  .filter((name) => name.endsWith('.json'))
+  .map((name) => read('data', 'recipe-candidates', name) as Batch);
+
+const candidates = new Map(
+  batches.flatMap((batch) => batch.candidates.map((entry) => [entry.slug, batch.batch] as const)),
+);
+
+const staging = read('data', 'images', 'candidate-manifest.json') as {
+  images: { candidateSlug: string }[];
+  skipped: { candidateSlug: string }[];
+  held?: { candidateSlug: string; reason: string }[];
+};
+const production = read('data', 'images', 'manifest.json') as {
+  images: { recipeSlug: string }[];
+};
+const rejected = read('data', 'images', 'rejected.json') as {
+  files: { title: string; rejectedFor: string; reason: string }[];
+};
+
+const staged = new Set(staging.images.map((entry) => entry.candidateSlug));
+const skipped = new Set(staging.skipped.map((entry) => entry.candidateSlug));
+const held = new Set((staging.held ?? []).map((entry) => entry.candidateSlug));
+const published = new Set(production.images.map((entry) => entry.recipeSlug));
+const refused = new Set(rejected.files.map((entry) => entry.rejectedFor));
+
+describe('candidate accounting', () => {
+  it('has candidates to account for', () => {
+    expect(candidates.size).toBeGreaterThan(50);
+  });
+
+  it('leaves no candidate in no state at all', () => {
+    // Promoted, staged, mechanically unfindable, or refused by a person.
+    const unaccounted = [...candidates.keys()].filter(
+      (slug) =>
+        !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+    );
+
+    expect(unaccounted).toEqual([]);
+  });
+
+  it('never holds a dish whose photograph is already published', () => {
+    // A hold says "this is not going out yet". If it is already out, the hold
+    // is stale and the page is describing a decision that no longer applies.
+    expect([...held].filter((slug) => published.has(slug))).toEqual([]);
+  });
+
+  it('gives every hold a staged photograph and a reason', () => {
+    for (const hold of staging.held ?? []) {
+      expect(staged.has(hold.candidateSlug)).toBe(true);
+      expect(hold.reason.trim().length).toBeGreaterThan(40);
+    }
+  });
+
+  it('records a reason with every human refusal', () => {
+    const thin = rejected.files
+      .filter((entry) => entry.reason.trim().length < 40 || !entry.rejectedFor.trim())
+      .map((entry) => entry.title);
+
+    expect(thin).toEqual([]);
+  });
+});

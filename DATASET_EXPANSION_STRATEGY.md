@@ -2001,6 +2001,9 @@ estimates being wrong is itself part of the record.
 | **2D-B. Allergen semantics** | `possibleAllergens` added: intrinsic vs brand-dependent, distinct in effect. Corn-flakes and burger-patty gluten moved (§9h) | 12 rows carry possible allergens; 6 safety tests; migration written, **not applied to hosted** |
 | **2D-C / 2D-D. Ingredients to the plateau** | Eleven P1 concepts, then five P2 batches sized by the weakest census categories | 301 → **378** rows, 1351 → **1698** aliases; ontology **89.8%**, input **77.6%** concepts / **86.4%** terms |
 | **3P. Photography preflight** | The acquisition extracted into one shared implementation with two drivers; a candidate path that stages photography for dishes that are not yet recipes; `images:promote` as the only door into production | `images:check` **unweakened**; `images:check-candidates` added to CI; candidate batch 1 declared |
+| **3P.1. Provenance and prose** | The image manifest made authoritative over recipe/seed image blocks, with a gate in both directions; the appliance list corrected where `other` meant none; a gate against ingredients that exist only in step prose | 79 recipes were crediting Wikimedia photographs as our own CC0 work — all corrected at the pipeline; the prose gate found **33** recipes hiding water |
+| **3P.2. Truthfulness hardening** | The near-duplicate metric stopped counting salt and water as distinguishing; `kebda-eskandarani` rebuilt around a 71°C endpoint and its real identity; `cacio-e-pepe` renamed to what it is; time and tag semantics defined, audited and gated; an animal-protein safety sweep | Corrected duplicate count **9 → 6** (the old 8 was an artifact); timing gate at `max(step) > total` and `sum > total×1.25 + 5`; `quick` ⇒ ≤40 min, `beginner` ⇒ easy |
+| **3. Batches 1–3** | Three rounds of the full loop: 71 candidate declarations covering **63 distinct dishes** (8 re-proposed after a refusal), 76 photographs downloaded and looked at, **30** approved and promoted, 1 held, 31 recipes written | 161 → **192** recipes; photo coverage 41.6% → **51.0%**; ≤5-line recipes 14 → **26**; Egyptian 46 → **53** (27.6%) |
 
 **Where the ingredient phase stopped, and why it is not 90%.** 89.8% is 0.2
 short of the target deliberately. Three rows would have crossed it — cake mix,
@@ -2014,8 +2017,8 @@ real users type, not more rows.
 
 | Stage | Work | Measured exit condition |
 | --- | --- | --- |
-| **3. Recipes, batch by batch** | Each batch is: declare the dish identities → run the candidate acquisition → a human reviews `PHOTO_CANDIDATE_REVIEW.md` → write recipes for the dishes that survived → promote their photographs in the same batch. Batch 1 is 24 genuinely ≤5-line recipes (§9m, resized) | Per batch: photo coverage **never below 41.6%**, and rising toward 60%. Overall: ≤5-ingredient recipes ≥44; Egyptian ≥30%; recipes ~300 |
-| **4. Prices** | The ranked backlog in `PRICE_BACKLOG.md`, re-ranked after each recipe batch because new recipes change which gaps block an estimate | Slot coverage **≥95%** (76.2% now; the top ~60 of 102 reach it) |
+| **3. Recipes, batch by batch** (in progress, 3 of ~6 batches done) | Each batch is: declare the dish identities → run the candidate acquisition → a human reviews `PHOTO_CANDIDATE_REVIEW.md` → write recipes for the dishes that survived → promote their photographs in the same batch. A dish may also be **held**: photograph fine, dish not writable yet | Per batch: photo coverage **never below 41.6%**, and rising toward 60% (**51.0%** after batch 3). Overall: ≤5-ingredient recipes ≥44 (**26**); Egyptian ≥30% (**27.6%**); recipes ~300 (**192**) |
+| **4. Prices** | The ranked backlog in `PRICE_BACKLOG.md`, re-ranked after each recipe batch because new recipes change which gaps block an estimate | Slot coverage **≥95%** (**76.9%** after batch 3; the top 50 of 108 reach 93.3%) |
 | **5. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms | A typed unknown is visibly distinct, still never matches a recipe, and is counted |
 | **6. Long tail, only if asked for** | P2 rows only where the holdout shows real users typing them | Do not start before Stage 8. The census is a discovery set and may not justify its own expansion |
 | **7. Native-speaker review** | The carried-forward questions in §9i, and the Arabic recipe text from every Stage 3 batch | Each item answered or explicitly deferred with a reason. `rekab` stays unguessed until somebody knows |
@@ -2050,7 +2053,16 @@ size: batches of 12–24, not 500.
   partner or delivery concept.
 - It does not attach a photograph to a recipe to protect a percentage. A dish
   with no honest photograph either waits for one or is replaced in the batch by
-  another dish that goes through the same preflight.
+  another dish that goes through the same preflight. Across batches 1–3, 76
+  photographs passed every mechanical check and reached a person; that person
+  refused **45 of them** — a live tilapia in an aquarium, a full English
+  breakfast, a painted restaurant sign reading BROILER-BAR, hotel buffet trays,
+  branded bottles with the vendor's phone number on them, an app watermark,
+  pork twice. The gap between 76 and 30 is the argument for the preflight, and
+  one of the 45 was refused on a SECOND look after it had already been
+  promoted: `firakh-bel-forn`, where a thumbnail hid the grill bars charred
+  across two jointed leg quarters that were standing in for a whole roast bird.
+  The recipe stayed and went back onto the branded fallback.
 - It does not apply the `possibleAllergens` migration to hosted Supabase. The
   hosted database is behind the repository catalogue and stays there until
   somebody decides otherwise.

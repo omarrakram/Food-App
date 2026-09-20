@@ -71,149 +71,25 @@ substitute — it tells the user something false about what they are cooking.
 
 17 new dishes to go with the 13 batch-1 candidates being re-attempted, making 30. Batch 1 converted 11 of 24, and it leaned heavily on drinks, sides and sweets; this one is weighted toward things a household actually eats for lunch and dinner, and toward Egyptian, because the catalogue is 25.0% Egyptian against a ≥30% goal. Nine of the seventeen are Egyptian and none is an invented Egyptian variant of a foreign dish. Protein spread is deliberate: liver, sausage, whole chicken, eggs, white cheese and chicken breast rather than another round of the same three. Every list is five lines or fewer counting water, salt and oil.
 
-**17 candidates: 6 reviewed and shipped, 7 waiting to be looked at, 4 with nothing acceptable.**
+**17 candidates: 8 reviewed and shipped, 0 waiting to be looked at, 9 with nothing acceptable.**
 
-### Already promoted (6)
+### Already promoted (8)
 
 Reviewed, written as recipes, and now on a card. Their photographs live in
 `assets/recipes/` and are validated by `npm run images:check`.
 
 | Dish | Creator | Licence |
 |---|---|---|
+| Macaroni in Red Sauce (`makarona-bel-salsa`) | 10Rosso | CC-BY-2.0 |
 | Rice with Vermicelli (`roz-bel-shareya`) | El Mono Español | CC-BY-SA-4.0 |
 | Alexandrian Liver (`kebda-eskandarani`) | Turnopoems | CC-BY-SA-4.0 |
+| Fried Aubergine with Garlic and Vinegar (`betingan-mely`) | HaJunkiyada | CC-BY-SA-4.0 |
 | Spanish Potato Omelette (`tortilla-espanola`) | Kent Wang | CC-BY-SA-2.0 |
 | Greek Spinach Rice (`spanakorizo`) | KaterinaStrak | CC-BY-SA-4.0 |
 | Potato and Egg Salad (`potato-salad`) | SajjadF | CC-BY-SA-3.0 |
 | Pocket Flatbread (`pita-bread`) | Azure Dragon of the East | CC-BY-SA-3.0 |
 
-### Macaroni in Red Sauce · مكرونة بالصلصة
-
-`makarona-bel-salsa` · egyptian · `pasta`, `tomato-paste`, `garlic`, `sunflower-oil`, `salt`
-
-Probably the most-cooked weeknight dinner in Egypt and the catalogue does not have it. Distinct from pasta-pomodoro: this is tomato PASTE fried with garlic, not fresh tomatoes and basil.
-
-![Macaroni in Red Sauce](assets/recipe-candidates/makarona-bel-salsa.jpg)
-
-| | |
-|---|---|
-| Creator | 10Rosso |
-| Licence | CC-BY-2.0 |
-| Attribution | 10Rosso · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Pasta_al_pomodoro_2.jpg |
-| Size | 1000×750, 285 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Whole Chicken in the Oven with Cumin · فراخ في الفرن بالكمون
-
-`firakh-bel-forn` · egyptian · `whole-chicken`, `cumin`, `lemon`, `sunflower-oil`, `salt`
-
-Friday lunch. The whole-chicken row was added in Stage 2A specifically because a whole bird is not chicken breast, and no recipe has ever used it.
-
-![Whole Chicken in the Oven with Cumin](assets/recipe-candidates/firakh-bel-forn.jpg)
-
-| | |
-|---|---|
-| Creator | Rajeeb Dutta |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Rajeeb Dutta · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Roasted_chicken_leg_piece-MB20.jpg |
-| Size | 1000×750, 311 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Eggs Scrambled with Tomato · بيض بالطماطم
-
-`beid-bel-tamatem` · egyptian · `eggs`, `tomatoes`, `sunflower-oil`, `salt`
-
-Four lines and it is dinner when there is nothing in the house. Distinct from shakshuka, which keeps the yolks whole and adds peppers and cheese.
-
-![Eggs Scrambled with Tomato](assets/recipe-candidates/beid-bel-tamatem.jpg)
-
-| | |
-|---|---|
-| Creator | NNU-10-HanRongrong |
-| Licence | CC-BY-3.0 |
-| Attribution | NNU-10-HanRongrong · CC-BY-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Tomato_and_egg_soup.jpg |
-| Size | 1000×750, 238 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Fried Aubergine with Garlic and Vinegar · باذنجان مقلي بالتوم والخل
-
-`betingan-mely` · egyptian · `eggplant`, `sunflower-oil`, `garlic`, `vinegar`, `salt`
-
-A mezze plate in every Egyptian home, and cheap. The vinegar-and-garlic dressing is what makes it Egyptian rather than generic fried aubergine.
-
-![Fried Aubergine with Garlic and Vinegar](assets/recipe-candidates/betingan-mely.jpg)
-
-| | |
-|---|---|
-| Creator | HaJunkiyada |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Fried_Eggplant_Slices.jpg |
-| Size | 1000×1333, 498 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Yogurt Flatbread · خبز النان
-
-`naan` · indian · `flour`, `yogurt`, `yeast`, `salt`, `ghee`
-
-Five pantry lines and a hot pan. No oven needed, which matters in a kitchen that may not have one.
-
-![Yogurt Flatbread](assets/recipe-candidates/naan.jpg)
-
-| | |
-|---|---|
-| Creator | Mmroy |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Mmroy · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:BUTTER_NON_with_GOBI_PANEER_%2B_VEG_MIX.jpg |
-| Size | 1000×750, 164 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Crumbed Chicken Cutlet · فراخ بانيه
-
-`chicken-katsu` · asian · `chicken-breast`, `breadcrumbs`, `eggs`, `flour`, `sunflower-oil`
-
-This is بانيه — one of the most ordered things in Egypt — and the catalogue has no crumbed cutlet at all. Tagged asian because the dish is katsu; the Egyptian name is in the title.
-
-![Crumbed Chicken Cutlet](assets/recipe-candidates/chicken-katsu.jpg)
-
-| | |
-|---|---|
-| Creator | richardmasoner |
-| Licence | CC-BY-SA-2.0 |
-| Attribution | richardmasoner · CC-BY-SA-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg |
-| Size | 1000×750, 246 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Cabbage and Carrot Slaw · سلطة كول سلو
-
-`coleslaw` · american · `cabbage`, `carrots`, `mayonnaise`, `vinegar`, `salt`
-
-Sold beside every roast chicken in Egypt. Five lines, no cooking, keeps for days.
-
-![Cabbage and Carrot Slaw](assets/recipe-candidates/coleslaw.jpg)
-
-| | |
-|---|---|
-| Creator | David Louw |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | David Louw · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG |
-| Size | 1000×1339, 597 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### No acceptable image (4)
+### No acceptable image (9)
 
 These keep nothing. A generic photograph of something else is not a
 substitute — it tells the user something false about what they are cooking.
@@ -221,493 +97,75 @@ substitute — it tells the user something false about what they are cooking.
 | Dish | Why |
 |---|---|
 | Egyptian Sausage in Tomato (`sogo2-bel-salsa`) | no relevant openly-licensed image found |
+| Whole Chicken in the Oven with Cumin (`firakh-bel-forn`) | File:Roasted_chicken_leg_piece-MB20.jpg: refused on review — Two chicken leg quarters with parallel grill bars charred across them, on a bright green plastic plate. This recipe is a WHOLE bird roasted breast-down in an oven; the photograph is jointed tandoori-style grilled chicken, and the difference is the first thing anyone would see. Promoted in error on a first pass and reversed on a second look at full size — the thumbnail hid the grill marks. |
+| Eggs Scrambled with Tomato (`beid-bel-tamatem`) | File:Tomato_and_egg_soup.jpg: refused on review — Chinese tomato-and-egg SOUP in a broth bowl. Beid bel tamatem is eggs fried into tomatoes in a pan; a thin soup is a different dish. Second refusal for this slug. |
 | White Cheese with Tomato and Mint (`gibna-bel-tamatem`) | no relevant openly-licensed image found |
 | Cheese Sambousek (`sambousek`) | File:Samosas, snack food at Wikipedia's 16th Birthday celebration in Chittagong (01).jpg: refused on review — Fried samosas with a green potato-and-pea filling, photographed at an event. The shape is right and the filling visibly is not: this recipe is cheese sambousek. |
 | Lemon and Oregano Chicken Skewers (`chicken-souvlaki`) | refused on human review — see data/images/rejected.json |
+| Yogurt Flatbread (`naan`) | File:BUTTER_NON_with_GOBI_PANEER_%2B_VEG_MIX.jpg: refused on review — A 'Retrica' app watermark burned into the bottom-right corner, over a dim purple-cast thali of two curries. Second refusal for this slug. |
+| Crumbed Chicken Cutlet (`chicken-katsu`) | File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg: refused on review — A takeaway styrofoam bento sitting on a computer keyboard, and the cutlet is tonkatsu - pork. Second refusal for this slug. |
+| Cabbage and Carrot Slaw (`coleslaw`) | File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG: refused on review — A murky kitchen snapshot: the used mixing bowl and a smeared spoon fill the top of the frame and an unidentifiable dark bottle sits at the edge. Second refusal for this slug. |
 
 ## batch-3-egyptian-weeknight
 
 30 candidates: 20 new and 10 second attempts at batch-2 dishes that were refused once. Fifteen of the thirty are Egyptian — half the pool — because the catalogue is 26.4% Egyptian against a ≥30% goal, and none of them is a foreign dish wearing an Egyptian name to move the number. The weighting is to real meals: a baked tilapia, white beans with beef, a tray of torly, chicken livers, two breakfasts built on cheese and eggs. The nine dishes refused twice in batches 1 and 2 are NOT here — they are retired from automated attempts and kept in the backlog for a human with a known-good source. Belila, gibna-bel-tamatem and sogo2-bel-salsa found nothing twice and are deferred.
 
-**30 candidates: 0 reviewed and shipped, 26 waiting to be looked at, 4 with nothing acceptable.**
+**30 candidates: 9 reviewed and shipped, 0 waiting to be looked at, 1 held, 20 with nothing acceptable.**
 
-### Baked Tilapia with Cumin · سمك بلطي في الفرن
+### Already promoted (9)
 
-`samak-bel-forn` · egyptian · `tilapia`, `lemon`, `cumin`, `sunflower-oil`, `salt`
+Reviewed, written as recipes, and now on a card. Their photographs live in
+`assets/recipes/` and are validated by `npm run images:check`.
 
-Bolti is the fish Egypt actually eats and the catalogue has no baked whole fish. Five lines and an oven.
+| Dish | Creator | Licence |
+|---|---|---|
+| Baked Mixed Vegetables in Tomato (`torly`) | Orientalist | CC0-1.0 |
+| Dried Fruit Compote (`khoshaf`) | CallMeBarcode | CC-BY-SA-4.0 |
+| Cheese Börek (`borek`) | Alice Wiegand | CC-BY-SA-3.0 |
+| Chilled Tomato Soup (`gazpacho`) | Haydn Blackey | CC-BY-SA-2.0 |
+| Greek Egg and Lemon Soup (`avgolemono`) | robin.norwood | CC-BY-SA-2.0 |
+| Lentil and Chickpea Soup (`harira`) | Interstates | CC-BY-3.0 |
+| Onion Soup with Cheese Toast (`french-onion-soup`) | Ludovic Péron | CC-BY-SA-3.0 |
+| Macaroni in Red Sauce (`makarona-bel-salsa`) | 10Rosso | CC-BY-2.0 |
+| Fried Aubergine with Garlic and Vinegar (`betingan-mely`) | HaJunkiyada | CC-BY-SA-4.0 |
 
-![Baked Tilapia with Cumin](assets/recipe-candidates/samak-bel-forn.jpg)
+### Held (1)
 
-| | |
+Looked at, and nothing is wrong with the photograph — the dish is the
+problem. These stay staged and unpublished until whatever is blocking them
+is resolved, which is why they are not in `rejected.json`: that list is
+permanent and global, and refusing a good file there would keep it out of
+every future batch as well.
+
+| Dish | Why it is held |
 |---|---|
-| Creator | Bjørn Christian Tørrissen |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Bjørn Christian Tørrissen · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Oreochromis-niloticus-Nairobi.JPG |
-| Size | 1000×550, 197 KB |
+| Spiced Bean Soup (`black-bean-soup`) | The photograph is fine — a thick, dark bean purée dusted with paprika — but it is a photograph of BLACK beans and the ingredient catalogue has no black-bean row. The recipe this candidate would become is a kidney-bean soup, and putting this picture on it would illustrate a different legume. Held rather than refused: nothing is wrong with the file, and it becomes promotable the day a black-bean row exists. Not written into rejected.json for the same reason — that list is permanent and global. |
 
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Baked Mixed Vegetables in Tomato · طورلي
-
-`torly` · egyptian · `eggplant`, `zucchini`, `potatoes`, `tomato-paste`, `onions`, `sunflower-oil`, `salt`
-
-One tray, whatever vegetables are in the house, tomato over the top. The cheapest way to feed a family in this catalogue if it lands.
-
-![Baked Mixed Vegetables in Tomato](assets/recipe-candidates/torly.jpg)
-
-| | |
-|---|---|
-| Creator | Orientalist |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:%C3%84gyptisches_Mittagessen.JPG |
-| Size | 1000×750, 434 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Chicken Livers with Onion · كبدة فراخ بالبصل
-
-`kebda-firakh` · egyptian · `chicken-liver`, `onions`, `garlic`, `cumin`, `sunflower-oil`, `salt`
-
-Cheaper and softer than the Alexandrian beef liver, and a different dish. The chicken-liver row is used by nothing.
-
-![Chicken Livers with Onion](assets/recipe-candidates/kebda-firakh.jpg)
-
-| | |
-|---|---|
-| Creator | Tomás Castelazo |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Tomás Castelazo · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Chickens_in_market.jpg |
-| Size | 1000×817, 314 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Eggs with White Cheese · بيض بالجبنة البيضا
-
-`beid-bel-gibna` · egyptian · `eggs`, `white-cheese`, `butter`, `salt`
-
-Four lines. Breakfast is still the thinnest meal type in the catalogue.
-
-![Eggs with White Cheese](assets/recipe-candidates/beid-bel-gibna.jpg)
-
-| | |
-|---|---|
-| Creator | JacquesDemien |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:Eggs_with_cheese,_mushrooms,_and_basil.jpg |
-| Size | 1000×1333, 376 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Dried Fruit Compote · خشاف
-
-`khoshaf` · egyptian · `dried-apricot`, `prunes`, `raisins`, `water`, `sugar`
-
-Soaked overnight, eaten at iftar. Five lines, no cooking, and it uses three dried-fruit rows that no recipe touches.
-
-![Dried Fruit Compote](assets/recipe-candidates/khoshaf.jpg)
-
-| | |
-|---|---|
-| Creator | CallMeBarcode |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | CallMeBarcode · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Persian_Dried_Fruit_Compote.jpg |
-| Size | 1000×1225, 553 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Stuffed Ramadan Pancakes · قطايف
-
-`qatayef` · egyptian · `flour`, `semolina`, `sugar`, `yeast`, `water`, `nuts-mix`
-
-The Ramadan sweet. Six lines; the batter is flour, semolina and yeast and the filling is nuts.
-
-![Stuffed Ramadan Pancakes](assets/recipe-candidates/qatayef.jpg)
-
-| | |
-|---|---|
-| Creator | Serge Melki |
-| Licence | CC-BY-2.0 |
-| Attribution | Serge Melki · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Noura_-_Lebanese_sweets.jpg |
-| Size | 1000×529, 114 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Tamarind Drink · تمر هندي
-
-`tamr-hindi` · egyptian · `tamarind`, `water`, `sugar`
-
-Three lines, and the tamarind row exists for exactly this and is used by nothing.
-
-![Tamarind Drink](assets/recipe-candidates/tamr-hindi.jpg)
-
-| | |
-|---|---|
-| Creator | ProtoplasmaKid |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | ProtoplasmaKid · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Beverages_in_Coke_bottles.JPG |
-| Size | 1000×669, 269 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Bread Pudding in Syrup · عيش السرايا
-
-`eish-el-saraya` · egyptian · `toast-bread`, `sugar`, `water`, `cream`, `nuts-mix`
-
-Stale bread, syrup and cream. A real Egyptian dessert built out of what is going hard in the bread bin.
-
-![Bread Pudding in Syrup](assets/recipe-candidates/eish-el-saraya.jpg)
-
-| | |
-|---|---|
-| Creator | Roly Williams |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Roly Williams · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Rew13c05-745a_Bread_Pudding.JPG |
-| Size | 1000×715, 255 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Cheese Börek · بوريك بالجبنة
-
-`borek` · turkish · `phyllo`, `white-cheese`, `eggs`, `butter`
-
-Four lines from bought phyllo. Turkey's version of the same idea as sambousek and a different shape on the plate.
-
-![Cheese Börek](assets/recipe-candidates/borek.jpg)
-
-| | |
-|---|---|
-| Creator | Alice Wiegand |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Alice Wiegand · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:B%C3%B6rek_mit_K%C3%A4se.jpg |
-| Size | 1000×669, 131 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Chilled Tomato Soup · شوربة طماطم باردة
-
-`gazpacho` · mediterranean · `tomatoes`, `cucumber`, `bell-pepper`, `olive-oil`, `vinegar`, `salt`
-
-No cooking at all, served cold, which matters somewhere that is 38°C in August.
-
-![Chilled Tomato Soup](assets/recipe-candidates/gazpacho.jpg)
-
-| | |
-|---|---|
-| Creator | Haydn Blackey |
-| Licence | CC-BY-SA-2.0 |
-| Attribution | Haydn Blackey · CC-BY-SA-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Gazpacho_Malague%C3%B1o_con_su_%E2%80%9Cpica%C3%ADto%E2%80%9D_-_Moreno,_Playa_Burriana_(cropped).jpg |
-| Size | 1000×749, 105 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Greek Egg and Lemon Soup · شوربة البيض والليمون
-
-`avgolemono` · mediterranean · `rice`, `eggs`, `lemon`, `stock-cube`, `water`, `salt`
-
-Rice, egg and lemon whisked into a broth. Cheap, restorative, and nothing like it in the catalogue.
-
-![Greek Egg and Lemon Soup](assets/recipe-candidates/avgolemono.jpg)
-
-| | |
-|---|---|
-| Creator | robin.norwood |
-| Licence | CC-BY-SA-2.0 |
-| Attribution | robin.norwood · CC-BY-SA-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Avgolemono_soup.jpg |
-| Size | 1000×678, 194 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Lentil and Chickpea Soup · حريرة
-
-`harira` · mediterranean · `lentils`, `chickpeas`, `tomatoes`, `onions`, `coriander`, `water`
-
-The Moroccan Ramadan soup. Legumes are the catalogue's joint-largest protein group and this is a substantial one.
-
-![Lentil and Chickpea Soup](assets/recipe-candidates/harira.jpg)
-
-| | |
-|---|---|
-| Creator | Interstates |
-| Licence | CC-BY-3.0 |
-| Attribution | Interstates · CC-BY-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Harira_fyldig_marrokansk_suppe.jpg |
-| Size | 960×960, 109 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Onion Soup with Cheese Toast · شوربة بصل بالجبنة
-
-`french-onion-soup` · mediterranean · `onions`, `butter`, `stock-cube`, `baladi-bread`, `roumy-cheese`, `water`
-
-A kilo of onions and almost nothing else. Made here with roumy on baladi bread, which is what an Egyptian kitchen has.
-
-![Onion Soup with Cheese Toast](assets/recipe-candidates/french-onion-soup.jpg)
-
-| | |
-|---|---|
-| Creator | Ludovic Péron |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Ludovic Péron · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Soupe_%C3%A0_l%27oignon.jpg |
-| Size | 1000×667, 133 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Tomato and Bread Salad · سلطة الطماطم والعيش
-
-`panzanella` · italian · `toast-bread`, `tomatoes`, `cucumber`, `olive-oil`, `vinegar`, `basil`
-
-The other stale-bread dish, and the summer counterpart to fattoush.
-
-![Tomato and Bread Salad](assets/recipe-candidates/panzanella.jpg)
-
-| | |
-|---|---|
-| Creator | thefoodplace.co.uk |
-| Licence | CC-BY-2.0 |
-| Attribution | thefoodplace.co.uk · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Proper_Panzanella_Salad,_Jamies_Italian,_Leeds.jpg |
-| Size | 1000×747, 880 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Potato-Stuffed Flatbread · خبز محشي بالبطاطس
-
-`aloo-paratha` · indian · `flour`, `potatoes`, `cumin`, `chili-pepper`, `ghee`, `salt`
-
-Six pantry lines and a dry pan. Filling, cheap, and no oven needed.
-
-![Potato-Stuffed Flatbread](assets/recipe-candidates/aloo-paratha.jpg)
-
-| | |
-|---|---|
-| Creator | Manna16 |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Manna16 · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Aho_ji_nashta_kijie.jpg |
-| Size | 1000×563, 247 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Eggs in Spiced Tomato · بيض بالكاري
-
-`egg-curry` · indian · `eggs`, `tomatoes`, `onions`, `turmeric`, `sunflower-oil`, `salt`
-
-Boiled eggs simmered in tomato. A main built on the cheapest protein there is.
-
-![Eggs in Spiced Tomato](assets/recipe-candidates/egg-curry.jpg)
-
-| | |
-|---|---|
-| Creator | Ekabhishek |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Ekabhishek · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Egg_curry_pic.jpg |
-| Size | 1000×730, 313 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Beans in Tomato Molasses · فاصوليا بالطماطم والعسل الأسود
-
-`baked-beans` · american · `white-beans`, `tomato-paste`, `onions`, `molasses`, `salt`
-
-Five lines and it keeps for days. The molasses row is Egyptian black honey and is used by almost nothing.
-
-![Beans in Tomato Molasses](assets/recipe-candidates/baked-beans.jpg)
-
-| | |
-|---|---|
-| Creator | Silar |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Silar · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:020170717_Polish_-_english_breakfast_in_London.jpg |
-| Size | 1000×723, 124 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Salted Rice Parcels · كور رز بالنوري
-
-`onigiri` · asian · `rice`, `nori`, `salt`
-
-Three lines. Cold lunch, travels well, and it uses the nori row that nothing else does.
-
-![Salted Rice Parcels](assets/recipe-candidates/onigiri.jpg)
-
-| | |
-|---|---|
-| Creator | Adonis Chen from Hengshan, Hsinchu County, Taiwan |
-| Licence | CC-BY-2.0 |
-| Attribution | Adonis Chen from Hengshan, Hsinchu County, Taiwan · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Black_rice_onigiri_by_Adonis_Chen_in_Hsinchu.jpg |
-| Size | 1000×750, 177 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Spiced Bean Soup · شوربة فاصوليا بالكمون
-
-`black-bean-soup` · mexican · `kidney-beans`, `onions`, `garlic`, `cumin`, `water`, `salt`
-
-A tin of beans into a blender. Six lines, one pot, under half an hour.
-
-![Spiced Bean Soup](assets/recipe-candidates/black-bean-soup.jpg)
-
-| | |
-|---|---|
-| Creator | J Doll |
-| Licence | CC-BY-3.0 |
-| Attribution | J Doll · CC-BY-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Black_Bean_Soup_(140491813).jpeg |
-| Size | 1000×667, 177 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Macaroni in Red Sauce · مكرونة بالصلصة
-
-`makarona-bel-salsa` · egyptian · `pasta`, `tomato-paste`, `garlic`, `sunflower-oil`, `salt`
-
-SECOND ATTEMPT. The first candidate was a pasta alla norma with aubergine and cheese in it. Probably the most-cooked weeknight dinner in Egypt, so it is worth one more try.
-
-![Macaroni in Red Sauce](assets/recipe-candidates/makarona-bel-salsa.jpg)
-
-| | |
-|---|---|
-| Creator | 10Rosso |
-| Licence | CC-BY-2.0 |
-| Attribution | 10Rosso · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Pasta_al_pomodoro_2.jpg |
-| Size | 1000×750, 285 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Eggs Scrambled with Tomato · بيض بالطماطم
-
-`beid-bel-tamatem` · egyptian · `eggs`, `tomatoes`, `sunflower-oil`, `salt`
-
-SECOND ATTEMPT. The first candidate was a hotel buffet chafing dish with its label showing.
-
-![Eggs Scrambled with Tomato](assets/recipe-candidates/beid-bel-tamatem.jpg)
-
-| | |
-|---|---|
-| Creator | NNU-10-HanRongrong |
-| Licence | CC-BY-3.0 |
-| Attribution | NNU-10-HanRongrong · CC-BY-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Tomato_and_egg_soup.jpg |
-| Size | 1000×750, 238 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Fried Aubergine with Garlic and Vinegar · باذنجان مقلي بالتوم والخل
-
-`betingan-mely` · egyptian · `eggplant`, `sunflower-oil`, `garlic`, `vinegar`, `salt`
-
-SECOND ATTEMPT. The first candidate was Spanish berenjenas con miel — battered and drizzled with honey.
-
-![Fried Aubergine with Garlic and Vinegar](assets/recipe-candidates/betingan-mely.jpg)
-
-| | |
-|---|---|
-| Creator | HaJunkiyada |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Fried_Eggplant_Slices.jpg |
-| Size | 1000×1333, 498 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Whole Chicken in the Oven with Cumin · فراخ في الفرن بالكمون
-
-`firakh-bel-forn` · egyptian · `whole-chicken`, `cumin`, `lemon`, `sunflower-oil`, `salt`
-
-SECOND ATTEMPT. The first candidate was a painted restaurant sign reading BROILER-BAR. The whole-chicken row still has no recipe.
-
-![Whole Chicken in the Oven with Cumin](assets/recipe-candidates/firakh-bel-forn.jpg)
-
-| | |
-|---|---|
-| Creator | Rajeeb Dutta |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Rajeeb Dutta · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Roasted_chicken_leg_piece-MB20.jpg |
-| Size | 1000×750, 311 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Yogurt Flatbread · خبز النان
-
-`naan` · indian · `flour`, `yogurt`, `yeast`, `salt`, `ghee`
-
-SECOND ATTEMPT. The first candidate was a restaurant buffet line with a basket of naan in the corner.
-
-![Yogurt Flatbread](assets/recipe-candidates/naan.jpg)
-
-| | |
-|---|---|
-| Creator | Mmroy |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Mmroy · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:BUTTER_NON_with_GOBI_PANEER_%2B_VEG_MIX.jpg |
-| Size | 1000×750, 164 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Cabbage and Carrot Slaw · سلطة كول سلو
-
-`coleslaw` · american · `cabbage`, `carrots`, `mayonnaise`, `vinegar`, `salt`
-
-SECOND ATTEMPT. The first candidate was a diner plate of corn dogs with a ramekin of slaw at the edge.
-
-![Cabbage and Carrot Slaw](assets/recipe-candidates/coleslaw.jpg)
-
-| | |
-|---|---|
-| Creator | David Louw |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | David Louw · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG |
-| Size | 1000×1339, 597 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Crumbed Chicken Cutlet · فراخ بانيه
-
-`chicken-katsu` · asian · `chicken-breast`, `breadcrumbs`, `eggs`, `flour`, `sunflower-oil`
-
-SECOND ATTEMPT. The first candidate was katsu CURRY — the sauce was most of the plate. This is بانيه, one of the most ordered things in Egypt, and the catalogue has no crumbed cutlet.
-
-![Crumbed Chicken Cutlet](assets/recipe-candidates/chicken-katsu.jpg)
-
-| | |
-|---|---|
-| Creator | richardmasoner |
-| Licence | CC-BY-SA-2.0 |
-| Attribution | richardmasoner · CC-BY-SA-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg |
-| Size | 1000×750, 246 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### No acceptable image (4)
+### No acceptable image (20)
 
 These keep nothing. A generic photograph of something else is not a
 substitute — it tells the user something false about what they are cooking.
 
 | Dish | Why |
 |---|---|
+| Baked Tilapia with Cumin (`samak-bel-forn`) | File:Oreochromis-niloticus-Nairobi.JPG: refused on review — A live Nile tilapia swimming in an aquarium. The species is right and the food is absent. |
 | White Beans with Beef (`fasolia-bel-lahma`) | no relevant openly-licensed image found |
+| Chicken Livers with Onion (`kebda-firakh`) | File:Chickens_in_market.jpg: refused on review — Whole plucked chickens hanging in a butcher's window beside the scale. Raw poultry for sale, not chicken livers, not a cooked dish. |
+| Eggs with White Cheese (`beid-bel-gibna`) | File:Eggs_with_cheese,_mushrooms,_and_basil.jpg: refused on review — A dark, blurred home snapshot on a paper towel: American scrambled eggs under shredded cheese and sriracha, with mushrooms and spinach. Not eggs with Egyptian white cheese, and unusable quality besides. |
 | Areesh Cheese with Oil and Tomato (`gibna-areesh`) | no relevant openly-licensed image found |
+| Stuffed Ramadan Pancakes (`qatayef`) | File:Noura_-_Lebanese_sweets.jpg: refused on review — A Lebanese sweet-shop table where the front plate is halawet el jibn - cream-filled semolina rolls. Qatayef are folded stuffed pancakes; this is a different sweet entirely. |
+| Tamarind Drink (`tamr-hindi`) | File:Beverages_in_Coke_bottles.JPG: refused on review — A street vendor's shelf of refilled PET bottles with commercial labels and a phone number printed across them. Commercial packaging, and not something anybody made at home. |
+| Bread Pudding in Syrup (`eish-el-saraya`) | File:Rew13c05-745a_Bread_Pudding.JPG: refused on review — Western raisin bread pudding on a plate. Eish el saraya is rusk soaked in sugar syrup under a layer of ashta and pistachio, with no raisins and no baked sponge. |
 | Lemon and Oregano Roast Potatoes (`greek-lemon-potatoes`) | no relevant openly-licensed image found |
+| Tomato and Bread Salad (`panzanella`) | File:Proper_Panzanella_Salad,_Jamies_Italian,_Leeds.jpg: refused on review — A tall glass of amber liquid at the top edge of the frame, from a restaurant chain's table, that cannot be confirmed as anything but beer. The same rule that refused the burger photograph applies when the drink is unidentifiable. |
+| Potato-Stuffed Flatbread (`aloo-paratha`) | File:Aho_ji_nashta_kijie.jpg: refused on review — A breakfast tray where a white-bread sev sandwich is as prominent as the parathas. The competing food is unrelated to the dish rather than something served with it. |
+| Eggs in Spiced Tomato (`egg-curry`) | File:Egg_curry_pic.jpg: refused on review — An over-processed extreme close-up of a pan. The saturation is pushed so hard the egg is barely findable; nobody would read this as a dish. |
+| Beans in Tomato Molasses (`baked-beans`) | File:020170717_Polish_-_english_breakfast_in_London.jpg: refused on review — A full English breakfast: bacon, pork sausages, hash browns and an omelette, with the beans pushed to one edge. Pork in frame and the dish is not the subject. |
+| Salted Rice Parcels (`onigiri`) | File:Black_rice_onigiri_by_Adonis_Chen_in_Hsinchu.jpg: refused on review — The rice ball is still inside its convenience-store plastic wrapper and out of focus. Packaging, and the shape that makes an onigiri recognisable is hidden. |
+| Eggs Scrambled with Tomato (`beid-bel-tamatem`) | File:Tomato_and_egg_soup.jpg: refused on review — Chinese tomato-and-egg SOUP in a broth bowl. Beid bel tamatem is eggs fried into tomatoes in a pan; a thin soup is a different dish. Second refusal for this slug. |
 | Cheese Sambousek (`sambousek`) | File:Samosas, snack food at Wikipedia's 16th Birthday celebration in Chittagong (01).jpg: refused on review — Fried samosas with a green potato-and-pea filling, photographed at an event. The shape is right and the filling visibly is not: this recipe is cheese sambousek. |
+| Whole Chicken in the Oven with Cumin (`firakh-bel-forn`) | File:Roasted_chicken_leg_piece-MB20.jpg: refused on review — Two chicken leg quarters with parallel grill bars charred across them, on a bright green plastic plate. This recipe is a WHOLE bird roasted breast-down in an oven; the photograph is jointed tandoori-style grilled chicken, and the difference is the first thing anyone would see. Promoted in error on a first pass and reversed on a second look at full size — the thumbnail hid the grill marks. |
+| Yogurt Flatbread (`naan`) | File:BUTTER_NON_with_GOBI_PANEER_%2B_VEG_MIX.jpg: refused on review — A 'Retrica' app watermark burned into the bottom-right corner, over a dim purple-cast thali of two curries. Second refusal for this slug. |
+| Cabbage and Carrot Slaw (`coleslaw`) | File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG: refused on review — A murky kitchen snapshot: the used mixing bowl and a smeared spoon fill the top of the frame and an unidentifiable dark bottle sits at the edge. Second refusal for this slug. |
+| Crumbed Chicken Cutlet (`chicken-katsu`) | File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg: refused on review — A takeaway styrofoam bento sitting on a computer keyboard, and the cutlet is tonkatsu - pork. Second refusal for this slug. |
 
