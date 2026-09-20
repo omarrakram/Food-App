@@ -83,6 +83,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Horacio Cambeiro · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Argentine-style_hand-chopped_roasted_beef_tacos,_with_mozzarella,_caramelized_onions,_and_salsas.jpg",
   },
+  "beid-bel-basterma": {
+    source: require('../../../assets/recipes/beid-bel-basterma.jpg') as number,
+    creator: "E4024",
+    license: "CC-BY-SA-4.0",
+    attribution: "E4024 · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Past%C4%B1rmal%C4%B1_yumurta.jpg",
+  },
   "bessara": {
     source: require('../../../assets/recipes/bessara.jpg') as number,
     creator: "Ruby Josephine Smith",
@@ -110,6 +117,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-3.0",
     attribution: "Rainer Zenz · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Cacik-1.jpg",
+  },
+  "cacio-e-pepe": {
+    source: require('../../../assets/recipes/cacio-e-pepe.jpg') as number,
+    creator: "Camelia.boban",
+    license: "CC-BY-SA-4.0",
+    attribution: "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
   },
   "chana-masala": {
     source: require('../../../assets/recipes/chana-masala.jpg') as number,
@@ -180,6 +194,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC0-1.0",
     attribution: null,
     sourcePage: "https://commons.wikimedia.org/wiki/File:Dukka_Masala.JPG",
+  },
+  "dura-mashwiya": {
+    source: require('../../../assets/recipes/dura-mashwiya.jpg') as number,
+    creator: "100yen",
+    license: "CC-BY-SA-3.0",
+    attribution: "100yen · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:8line_corn.jpg",
   },
   "egg-drop-soup": {
     source: require('../../../assets/recipes/egg-drop-soup.jpg') as number,
@@ -271,6 +292,20 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-3.0",
     attribution: "Beyrouthhh at English Wikipedia · CC-BY-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Lebanese_style_hummus.jpg",
+  },
+  "karkade": {
+    source: require('../../../assets/recipes/karkade.jpg') as number,
+    creator: "stu_spivack",
+    license: "CC-BY-SA-2.0",
+    attribution: "stu_spivack · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Homemade_sorrel_drink.jpg",
+  },
+  "kebda-eskandarani": {
+    source: require('../../../assets/recipes/kebda-eskandarani.jpg') as number,
+    creator: "Turnopoems",
+    license: "CC-BY-SA-4.0",
+    attribution: "Turnopoems · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Kebda_eskandarani.jpg",
   },
   "kibbeh-bil-sanieh": {
     source: require('../../../assets/recipes/kibbeh-bil-sanieh.jpg') as number,
@@ -433,6 +468,20 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "jeffreyw · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg",
   },
+  "pita-bread": {
+    source: require('../../../assets/recipes/pita-bread.jpg') as number,
+    creator: "Azure Dragon of the East",
+    license: "CC-BY-SA-3.0",
+    attribution: "Azure Dragon of the East · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Pita_Bread.jpg",
+  },
+  "potato-salad": {
+    source: require('../../../assets/recipes/potato-salad.jpg') as number,
+    creator: "SajjadF",
+    license: "CC-BY-SA-3.0",
+    attribution: "SajjadF · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Potato_salad_(1).jpg",
+  },
   "risotto-mushroom": {
     source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
     creator: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
@@ -446,6 +495,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
+  },
+  "roz-bel-shareya": {
+    source: require('../../../assets/recipes/roz-bel-shareya.jpg') as number,
+    creator: "El Mono Español",
+    license: "CC-BY-SA-4.0",
+    attribution: "El Mono Español · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Arabic_rice.jpg",
   },
   "sahlab": {
     source: require('../../../assets/recipes/sahlab.jpg') as number,
@@ -503,6 +559,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
   },
+  "spanakorizo": {
+    source: require('../../../assets/recipes/spanakorizo.jpg') as number,
+    creator: "KaterinaStrak",
+    license: "CC-BY-SA-4.0",
+    attribution: "KaterinaStrak · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Spanakorizo.jpg",
+  },
   "sutlac-baked": {
     source: require('../../../assets/recipes/sutlac-baked.jpg') as number,
     creator: "Wiki leylek",
@@ -530,6 +593,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-2.0",
     attribution: "Raffaele Diomede from Pordenone, ITALIA · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg",
+  },
+  "tortilla-espanola": {
+    source: require('../../../assets/recipes/tortilla-espanola.jpg') as number,
+    creator: "Kent Wang",
+    license: "CC-BY-SA-2.0",
+    attribution: "Kent Wang · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tortilla_de_patata_-_San_Sebasti%C3%A1n.jpg",
   },
   "tuna-melt": {
     source: require('../../../assets/recipes/tuna-melt.jpg') as number,

@@ -141,6 +141,20 @@
       "acquiredAt": "2026-09-13T15:34:28.921Z"
     },
     {
+      "recipeSlug": "beid-bel-basterma",
+      "path": "beid-bel-basterma.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Past%C4%B1rmal%C4%B1_yumurta.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/88/Past%C4%B1rmal%C4%B1_yumurta.jpg",
+      "creator": "E4024",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "E4024 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 340789,
+      "sha256": "17c5360684cc4e5c63a5fdba9ae796c1ffabe8611fe4f5a472918c56d6a9f51c",
+      "acquiredAt": "2026-09-20T09:47:48.393Z"
+    },
+    {
       "recipeSlug": "bessara",
       "path": "bessara.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Bissara_Moroccan_split_pea_and_fava_bean_soup.jpg",
@@ -195,6 +209,20 @@
       "bytes": 237191,
       "sha256": "85b6d1f06af4dffbf7ba657c81368acd24d0fd011f048cf2b7497bbd0bfd4e00",
       "acquiredAt": "2026-09-13T15:34:37.555Z"
+    },
+    {
+      "recipeSlug": "cacio-e-pepe",
+      "path": "cacio-e-pepe.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Tonnarelli_cacio_e_pepe.jpg",
+      "creator": "Camelia.boban",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 164219,
+      "sha256": "1ac5e366ec3399dd946510461db6aa9cfa3f99697f25f732453444dbc4d413c8",
+      "acquiredAt": "2026-09-20T09:47:53.810Z"
     },
     {
       "recipeSlug": "chana-masala",
@@ -335,6 +363,20 @@
       "bytes": 247522,
       "sha256": "ab2f967acd588534c9b92f6368dc9c411b283413f22c92a01c73b3ffd0c25d4e",
       "acquiredAt": "2026-09-20T07:36:39.305Z"
+    },
+    {
+      "recipeSlug": "dura-mashwiya",
+      "path": "dura-mashwiya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:8line_corn.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dc/8line_corn.jpg",
+      "creator": "100yen",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "100yen · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1500,
+      "bytes": 793646,
+      "sha256": "6b012d02afd62b229ffcdb19bcecb4825af2d481e3d72c26275147c78db84942",
+      "acquiredAt": "2026-09-20T09:47:44.395Z"
     },
     {
       "recipeSlug": "egg-drop-soup",
@@ -517,6 +559,34 @@
       "bytes": 183608,
       "sha256": "4de8afa11297d9393f6ede4378b478c21da9c8c22740f2f6320a345c7a73de44",
       "acquiredAt": "2026-09-13T15:35:47.545Z"
+    },
+    {
+      "recipeSlug": "karkade",
+      "path": "karkade.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Homemade_sorrel_drink.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/61/Homemade_sorrel_drink.jpg",
+      "creator": "stu_spivack",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "stu_spivack · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1507,
+      "bytes": 215712,
+      "sha256": "e1f106665a5908df7dd8ef058d25037a139fb5e94a42c82d06ba89c8b1e76f2f",
+      "acquiredAt": "2026-09-20T09:47:22.886Z"
+    },
+    {
+      "recipeSlug": "kebda-eskandarani",
+      "path": "kebda-eskandarani.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kebda_eskandarani.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Kebda_eskandarani.jpg",
+      "creator": "Turnopoems",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Turnopoems · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1502,
+      "bytes": 404208,
+      "sha256": "6bdd5d0622a3b3dbfa23bd22c73d79a1f3a0d7c378c3b6b62a78a4acda0dde39",
+      "acquiredAt": "2026-09-20T09:48:27.360Z"
     },
     {
       "recipeSlug": "kibbeh-bil-sanieh",
@@ -841,6 +911,34 @@
       "acquiredAt": "2026-09-13T15:36:52.815Z"
     },
     {
+      "recipeSlug": "pita-bread",
+      "path": "pita-bread.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pita_Bread.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/32/Pita_Bread.jpg",
+      "creator": "Azure Dragon of the East",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Azure Dragon of the East · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 347132,
+      "sha256": "3bfd597504b5abcface187efafd52e708fc243de89a90cd08a4976d6f767ea63",
+      "acquiredAt": "2026-09-20T09:49:04.659Z"
+    },
+    {
+      "recipeSlug": "potato-salad",
+      "path": "potato-salad.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Potato_salad_(1).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Potato_salad_%281%29.jpg",
+      "creator": "SajjadF",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "SajjadF · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 245462,
+      "sha256": "b672bf138ffe2d25747e143ebad09e43017a2eb4af530d9444db0f966870f1c6",
+      "acquiredAt": "2026-09-20T09:49:04.111Z"
+    },
+    {
       "recipeSlug": "risotto-mushroom",
       "path": "risotto-mushroom.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG",
@@ -867,6 +965,20 @@
       "bytes": 144885,
       "sha256": "e92757982c7103312c71700b8a51dd90ba8cdcac2d0d087309c57c0aa8fff970",
       "acquiredAt": "2026-09-13T15:37:07.940Z"
+    },
+    {
+      "recipeSlug": "roz-bel-shareya",
+      "path": "roz-bel-shareya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Arabic_rice.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Arabic_rice.jpg",
+      "creator": "El Mono Español",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "El Mono Español · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 139526,
+      "sha256": "b078606f65f2d8fabe321af2bd8df20a9af5effa5608ef036eb0cc9eb8af3818",
+      "acquiredAt": "2026-09-20T09:48:20.864Z"
     },
     {
       "recipeSlug": "sahlab",
@@ -981,6 +1093,20 @@
       "acquiredAt": "2026-09-13T15:37:49.456Z"
     },
     {
+      "recipeSlug": "spanakorizo",
+      "path": "spanakorizo.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Spanakorizo.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Spanakorizo.jpg",
+      "creator": "KaterinaStrak",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "KaterinaStrak · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 366108,
+      "sha256": "6e603eb9249db937d42fdbec56d0ab698d904784c1d806707cbe7a52a5b5d768",
+      "acquiredAt": "2026-09-20T09:48:53.462Z"
+    },
+    {
       "recipeSlug": "sutlac-baked",
       "path": "sutlac-baked.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Baked_Rice_Pudding_11.06.2025.jpg",
@@ -1035,6 +1161,20 @@
       "bytes": 220492,
       "sha256": "2a241d971a71a96b19bd51094975a9b534db2a7a3361c1351cec40262e46109c",
       "acquiredAt": "2026-09-13T15:38:13.003Z"
+    },
+    {
+      "recipeSlug": "tortilla-espanola",
+      "path": "tortilla-espanola.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tortilla_de_patata_-_San_Sebasti%C3%A1n.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/49/Tortilla_de_patata_-_San_Sebasti%C3%A1n.jpg",
+      "creator": "Kent Wang",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Kent Wang · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 217576,
+      "sha256": "1cc350df7db1814b9b7c1ab3bf5751af07f47de6b350a92cecb1491bf6387397",
+      "acquiredAt": "2026-09-20T09:48:50.779Z"
     },
     {
       "recipeSlug": "tuna-melt",

@@ -2479,5 +2479,114 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "cacio-e-pepe",
+    "title": "Pasta with Cheese and Pepper",
+    "titleAr": "مكرونة بالجبنة والفلفل",
+    "description": "Four things and a technique. The sauce is cheese loosened with the water the pasta cooked in — no cream — and it splits the moment the pan is too hot.",
+    "descriptionAr": "أربع حاجات وطريقة. الصلصة دي جبنة بتترخي بمية سلق المكرونة — من غير كريمة — وبتتقطّع أول ما الطاسة تسخن زيادة.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 5,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 480,
+      "protein": 19,
+      "carbs": 68,
+      "fat": 15,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "italian",
+      "quick",
+      "comfort",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parmesan",
+        "quantity": 150,
+        "unit": "g",
+        "prep": "finely grated"
+      },
+      {
+        "slug": "black-pepper",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": "coarsely cracked"
+      },
+      {
+        "slug": "butter",
+        "quantity": 40,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the pasta in salted water, but use less water than usual — you want it starchy, because that starch is the sauce.",
+        "textAr": "اسلق المكرونة في مية مملحة، بس مية أقل من المعتاد — عايزها تقيلة بالنشا، لأن النشا ده هو الصلصة.",
+        "minutes": 12,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toast the cracked pepper in the butter in a wide pan for a minute, until it smells sharp. Then TAKE THE PAN OFF THE HEAT.",
+        "textAr": "حمّص الفلفل المجروش في الزبدة في طاسة واسعة دقيقة، لحد ما ريحته تطلع نفّاذة. وبعدين شيل الطاسة من على النار.",
+        "minutes": 2,
+        "uses": [
+          "black-pepper",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lift the pasta straight into the pan with a ladleful of its water. Add the parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.",
+        "textAr": "شيل المكرونة على طول في الطاسة ومعاها مغرفة من مياتها. حط البارميزان والطاسة بعيد عن النار وقلّب بقوة لحد ما تبقى صلصة بتغلّف. الحرارة هي اللي بتعمل خيوط؛ سيب الطاسة بعيد عنها.",
+        "minutes": 3,
+        "uses": [
+          "pasta",
+          "parmesan"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

@@ -135,6 +135,96 @@
       "title": "File:Cafe Turque.jpg",
       "rejectedFor": "turkish-coffee",
       "reason": "A plain white mug of black coffee on a garden table with two ring biscuits, heavily filtered. Turkish coffee is served in a small fincan with foam on top, usually beside its cezve; nothing here says which coffee this is."
+    },
+    {
+      "title": "File:Pasta with tomato sauce (6178622998).jpg",
+      "rejectedFor": "makarona-bel-salsa",
+      "reason": "Penne with AUBERGINE, basil and grated cheese, with grilled bread. A good pasta alla norma and not the Egyptian tomato-paste-and-garlic macaroni, which has none of those things."
+    },
+    {
+      "title": "File:Broiler-Bar.jpg",
+      "rejectedFor": "firakh-bel-forn",
+      "reason": "A painted RESTAURANT SIGN reading BROILER-BAR, with a cartoon of two men over a grill. Not food at all. The strongest argument yet that a human has to look: it passed the licence, size, format, category and no-duplicate checks without difficulty."
+    },
+    {
+      "title": "File:Berenjenas con Miel.jpg",
+      "rejectedFor": "betingan-mely",
+      "reason": "Spanish berenjenas con miel — battered aubergine drizzled with honey. A real dish and a different one; the Egyptian version is fried plain and dressed with garlic and vinegar."
+    },
+    {
+      "title": "File:Samosas, snack food at Wikipedia's 16th Birthday celebration in Chittagong (01).jpg",
+      "rejectedFor": "sambousek",
+      "reason": "Fried samosas with a green potato-and-pea filling, photographed at an event. The shape is right and the filling visibly is not: this recipe is cheese sambousek."
+    },
+    {
+      "title": "File:GD 廣東 Guangdong 河源市 HeYuan 越王大道 YueWang Avenue Double Tree by Hilton Hotel Open Cafe n Restaurant 早餐 breakfast food buffet scrambled egg with tomato April 2026 N13P.jpg",
+      "rejectedFor": "beid-bel-tamatem",
+      "reason": "Two hotel buffet chafing pots on a service counter with their labels showing, one of them scrambled egg with tomato. A buffet line is not a plate of food."
+    },
+    {
+      "title": "File:Ελληνικό Σουβλάκι - panoramio.jpg",
+      "rejectedFor": "chicken-souvlaki",
+      "reason": "Skewers on a charcoal grill whose meat is pale, marbled and pink — Greek souvlaki is traditionally PORK, and nothing in the frame rules it out. A catalogue built for Egypt does not gamble on that."
+    },
+    {
+      "title": "File:Bartley's.jpg",
+      "rejectedFor": "coleslaw",
+      "reason": "A diner plate of corn dogs and sweet potato fries with a small ramekin of slaw at the edge, plus a cola. The slaw is a garnish in its own photograph."
+    },
+    {
+      "title": "File:AUD9 Buffet - Green Pepper (2110184894).jpg",
+      "rejectedFor": "naan",
+      "reason": "A restaurant buffet line of chafing dishes with a basket of naan in the foreground. Blurred, cluttered, and a photograph of a buffet rather than of bread."
+    },
+    {
+      "title": "File:Chicken katsu curry rice - Korpan.jpg",
+      "rejectedFor": "chicken-katsu",
+      "reason": "A katsu cutlet sliced over rice and flooded with Japanese curry sauce. The recipe is the crumbed cutlet alone; the curry is most of the plate and most of the promise."
+    },
+    {
+      "title": "File:Syrian apricot paste 01.jpg",
+      "rejectedFor": "qamar-el-din",
+      "reason": "Shrink-wrapped branded slabs of apricot paste on a market shelf with price tags. Packaging again, from a different angle — the second qamar el din candidate and the second that photographs the product rather than the drink."
+    },
+    {
+      "title": "File:Pickled food.JPG",
+      "rejectedFor": "torshi-lift",
+      "reason": "A dish of pickled cucumbers, green chillies, radish and a pickled lemon. Levantine mixed pickles; the dish is pink pickled TURNIP and there is no turnip in the frame."
+    },
+    {
+      "title": "File:Arabaga.jpg",
+      "rejectedFor": "turkish-coffee",
+      "reason": "A branded tin of Arabağa Türk kahvesi standing on a counter. Somebody else's trademark, and a photograph of coffee grounds in a can rather than of coffee."
+    },
+    {
+      "title": "File:Refried Black Beans (4646266085).jpg",
+      "rejectedFor": "refried-beans",
+      "reason": "A well-photographed mound of BLACK beans. The recipe is built on kidney beans and the colour is the one thing a user checks against the picture."
+    },
+    {
+      "title": "File:Roat - A Punjabi dish served with daliya(cracked wheat porridge).jpg",
+      "rejectedFor": "belila",
+      "reason": "A polystyrene bowl of Punjabi daliya with a piece of cake, photographed on an office desk beside a keyboard and a pair of glasses. The wheat porridge is close, the dish and the setting are not."
+    },
+    {
+      "title": "File:American Breakfast (28188218105).jpg",
+      "rejectedFor": "hash-browns",
+      "reason": "A café breakfast table: a basket of croissants, a cappuccino, eggs on muffins and an omelette, with two hash brown triangles as a side on each plate."
+    },
+    {
+      "title": "File:Akha cuisine Mochue tong-uh.JPG",
+      "rejectedFor": "mashed-potatoes",
+      "reason": "An Akha herb potato mash, dim and heavily green. Recognisably mashed potato and recognisably a different dish from buttery mash."
+    },
+    {
+      "title": "File:Banarasi Lassi.jpg",
+      "rejectedFor": "mango-lassi",
+      "reason": "A clay cup of thick white Banarasi lassi topped with pistachio and saffron. A beautiful photograph of a lassi with no mango in it."
+    },
+    {
+      "title": "File:Kolkata Wayside Tea Stall.jpg",
+      "rejectedFor": "masala-chai",
+      "reason": "A street vendor's hands pouring chai from a pan beside a grimy burner. It is chai, and it is a process photograph of a stall rather than a cup of tea."
     }
   ]
 }

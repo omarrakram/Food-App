@@ -105,6 +105,12 @@ const PREPARATION_AR: Record<string, string> = {
   'roughly chopped': 'مقطّع خشن',
   'scrubbed, skin on': 'مغسول بقشره',
   skinless: 'من غير قشر',
+  'coarsely cracked': 'مجروش خشن',
+  'finely grated': 'مبشور ناعم',
+  husked: 'منزوع القشر',
+  'peeled and sliced thin': 'مقشّر ومقطّع شرايح رفيعة',
+  'rinsed until the water runs clear': 'مغسول لحد ما المية تصفّى',
+  'washed and roughly chopped': 'مغسول ومقطّع خشن',
   wedges: 'فصوص',
 };
 

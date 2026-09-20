@@ -5918,5 +5918,537 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "karkade",
+    "title": "Hibiscus Tea",
+    "titleAr": "كركديه",
+    "description": "Dried hibiscus steeped and sweetened. Three things, drunk scalding in winter and over ice all summer, and on every Ramadan table in the country.",
+    "descriptionAr": "كركديه ناشف يتنقع ويتحلّى. تلات حاجات، يتشرب سخن في الشتا ومتلج طول الصيف، وعلى كل سفرة رمضان في مصر.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 2,
+    "cookMinutes": 10,
+    "servings": 6,
+    "nutrition": {
+      "calories": 70,
+      "protein": 0,
+      "carbs": 18,
+      "fat": 0,
+      "fiber": 0
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "quick",
+      "budget",
+      "beginner",
+      "vegan"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "hibiscus",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 1500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sugar",
+        "quantity": 120,
+        "unit": "g",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rinse the hibiscus once in cold water to wash off the dust it is dried in.",
+        "textAr": "اغسل الكركديه مرة واحدة بمية ساقعة عشان تشيل التراب اللي اتنشف فيه.",
+        "minutes": 2,
+        "uses": [
+          "hibiscus"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bring the water to the boil, take it off the heat, drop the hibiscus in and leave it covered for 10 minutes. Boiling it hard turns it bitter and dulls the colour.",
+        "textAr": "غلي المية، شيلها من على النار، نزّل الكركديه وغطيه ١٠ دقايق. لو غليته بقوة هيبقى مر ولونه هيبوظ.",
+        "minutes": 10,
+        "uses": [
+          "water",
+          "hibiscus"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Strain, stir the sugar in while it is hot, and then decide: hot in a glass, or cooled and poured over ice.",
+        "textAr": "صفّيه، قلّب السكر وهو سخن، وبعدين انت تختار: سخن في كباية، أو يبرد ويتصب على تلج.",
+        "minutes": 3,
+        "uses": [
+          "sugar"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "dura-mashwiya",
+    "title": "Grilled Corn on the Cob",
+    "titleAr": "ذرة مشوية",
+    "description": "Corn straight onto the coals until the kernels blister and blacken in patches, then salt and a hard squeeze of lemon. The cart on every corniche in Egypt, four ingredients.",
+    "descriptionAr": "ذرة على الفحم على طول لحد ما الحبات تنفّط ويسوّد منها مناطق، وبعدين ملح وعصرة ليمون قوية. عربية الكورنيش، أربع حاجات.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 15,
+    "servings": 4,
+    "nutrition": {
+      "calories": 160,
+      "protein": 4,
+      "carbs": 28,
+      "fat": 5,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "grill"
+    ],
+    "tags": [
+      "egyptian",
+      "quick",
+      "budget",
+      "grill",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "corn",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "husked"
+      },
+      {
+        "slug": "butter",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null,
+        "optional": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into wedges"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Strip the husks and silk off the cobs. Get the coals to the stage where they are grey outside and glowing underneath — flames scorch the outside before the inside is hot.",
+        "textAr": "قشّر القوالح وشيل الشعر. خلي الفحم يوصل لمرحلة إنه رمادي من بره وأحمر من تحت — اللهب بيحرق بره قبل ما جوه يسخن.",
+        "minutes": 5,
+        "uses": [
+          "corn"
+        ],
+        "safety": "Live coals. Keep children back from the grill and turn the cobs with tongs rather than by hand.",
+        "safetyAr": "فحم مولّع. خلي الأطفال بعيد عن الشواية ولف القوالح بالماشة مش بإيدك."
+      },
+      {
+        "text": "Grill for 12 to 15 minutes, turning every couple of minutes, until the kernels are blistered and patched with black. That char is the flavour, not a mistake.",
+        "textAr": "اشويها من ١٢ لـ ١٥ دقيقة ولفها كل دقيقتين، لحد ما الحبات تنفّط ويبقى فيها مناطق سودا. السواد ده هو الطعم مش غلطة.",
+        "minutes": 15,
+        "uses": [
+          "corn"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Salt them hot, squeeze the lemon hard over the top, and rub the butter on if you want it. The cart does not, and it is still right.",
+        "textAr": "ملّحها وهي سخنة، اعصر عليها الليمون بقوة، وادهنها زبدة لو حابب. العربية مش بتعمل كده وبرضه بتبقى مظبوطة.",
+        "minutes": 2,
+        "uses": [
+          "salt",
+          "lemon",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "beid-bel-basterma",
+    "title": "Eggs Fried with Basterma",
+    "titleAr": "بيض بالبسطرمة",
+    "description": "Basterma crisped in its own fat until the edges curl, then eggs cracked straight on top and left until the whites set. Four things and the reason to get up.",
+    "descriptionAr": "بسطرمة تتحمّر في دهنها لحد ما أطرافها تتلوي، وبعدين البيض يتكسر عليها على طول ويتساب لحد ما البياض يمسك. أربع حاجات والسبب إنك تصحى.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 3,
+    "cookMinutes": 8,
+    "servings": 2,
+    "nutrition": {
+      "calories": 390,
+      "protein": 26,
+      "carbs": 2,
+      "fat": 31,
+      "fiber": 0
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "eggs",
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "breakfast",
+      "quick",
+      "high-protein",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "eggs",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "pastrami",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "ghee",
+        "quantity": 15,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Melt the ghee in a small pan over a medium heat and lay the basterma slices flat in it. Let them go for 2 minutes until the edges curl and the spice crust smells of fenugreek.",
+        "textAr": "دوّب السمنة في طاسة صغيرة على نار متوسطة وافرد شرايح البسطرمة فيها. سيبها دقيقتين لحد ما الأطراف تتلوي وريحة الحلبة تطلع من التتبيلة.",
+        "minutes": 3,
+        "uses": [
+          "ghee",
+          "pastrami"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Crack the eggs straight on top of the basterma. Do not stir them — this is fried, not scrambled, and the yolks stay whole.",
+        "textAr": "اكسر البيض على البسطرمة على طول. متقلبهوش — ده بيض مقلي مش مخفوق، والصفار يفضل كامل.",
+        "minutes": 1,
+        "uses": [
+          "eggs",
+          "pastrami"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover and cook 4 to 5 minutes, until the whites are set and the yolks still move. Salt lightly at the end — the basterma has already brought most of it.",
+        "textAr": "غطي واطبخ من ٤ لـ ٥ دقايق، لحد ما البياض يمسك والصفار لسه بيتحرك. ملّح خفيف في الآخر — البسطرمة أصلاً جابت أغلب الملح.",
+        "minutes": 5,
+        "uses": [
+          "eggs",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "roz-bel-shareya",
+    "title": "Rice with Vermicelli",
+    "titleAr": "رز بالشعرية",
+    "description": "The rice that sits under half the dinners in this app, and a recipe of its own for once. The whole thing turns on browning the vermicelli properly before the rice goes near it.",
+    "descriptionAr": "الرز اللي بيتحط تحت نص العشا في التطبيق ده، وبقى ليه وصفة لوحده. كل الموضوع في إنك تحمّر الشعرية صح قبل ما الرز يقرب منها.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 25,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 6,
+      "carbs": 58,
+      "fat": 7,
+      "fiber": 1
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "budget",
+      "beginner",
+      "vegan",
+      "one-pan"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "rice",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "rinsed until the water runs clear"
+      },
+      {
+        "slug": "vermicelli",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 600,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rinse the rice in several changes of cold water until the water stops going milky, then leave it to drain properly.",
+        "textAr": "اغسل الرز في أكتر من مية لحد ما المية تبطل تطلع بيضا، وبعدين سيبه يصفّى كويس.",
+        "minutes": 5,
+        "uses": [
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the vermicelli in the oil over a medium heat, stirring the whole time, until it is the colour of strong tea. This is the only step that matters and it takes about 3 minutes; pale vermicelli tastes of nothing and black vermicelli is bitter.",
+        "textAr": "حمّر الشعرية في الزيت على نار متوسطة وانت بتقلب على طول، لحد ما تبقى لون الشاي التقيل. دي الخطوة الوحيدة اللي بتفرق وبتاخد تلات دقايق؛ الشعرية الفاتحة مالهاش طعم والسودا بتبقى مرة.",
+        "minutes": 3,
+        "uses": [
+          "vermicelli",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the drained rice and turn it in the oil for a minute so every grain is coated, then pour in the water and the salt and bring it to the boil.",
+        "textAr": "ضيف الرز المصفّى ولفه في الزيت دقيقة عشان كل حبة تتغطي، وبعدين صب المية والملح وسيبه يغلي.",
+        "minutes": 3,
+        "uses": [
+          "rice",
+          "water",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover, drop the heat to its lowest, and leave it 15 minutes WITHOUT lifting the lid. Then take it off the heat and let it sit, still covered, for 5 more.",
+        "textAr": "غطي، نزّل النار لأقل حاجة، وسيبه ١٥ دقيقة من غير ما ترفع الغطا. وبعدين شيله من على النار وسيبه مغطي ٥ دقايق كمان.",
+        "minutes": 20,
+        "uses": [
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "kebda-eskandarani",
+    "title": "Alexandrian Liver",
+    "titleAr": "كبدة اسكندراني",
+    "description": "Liver cut into strips and thrown into a pan hot enough to sear it in seconds, with a lot of garlic and enough chilli to make your eyes water. Overcook it by a minute and it turns to rubber.",
+    "descriptionAr": "كبدة مقطعة شرايح وبتترمي في طاسة سخنة لدرجة إنها تستوي في ثواني، مع توم كتير وشطة تخلي عينك تدمع. لو زوّدت دقيقة واحدة هتبقى أستيك.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 10,
+    "cookMinutes": 8,
+    "servings": 4,
+    "nutrition": {
+      "calories": 290,
+      "protein": 27,
+      "carbs": 6,
+      "fat": 17,
+      "fiber": 1
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "high-protein",
+      "quick",
+      "budget"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "liver",
+        "quantity": 600,
+        "unit": "g",
+        "prep": "cut into strips"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 8,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "chili-flakes",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Cut the liver into finger-width strips and pat it very dry. Wet liver steams in the pan and goes grey instead of browning.",
+        "textAr": "قطّع الكبدة شرايح عرض صباع ونشّفها كويس أوي. الكبدة المبلولة بتتبخّر في الطاسة وبتبقى رمادية بدل ما تتحمّر.",
+        "minutes": 8,
+        "uses": [
+          "liver"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Get the oil properly hot in a wide pan — it should shimmer. Put the liver in one layer and leave it alone for 90 seconds before you touch it.",
+        "textAr": "سخّن الزيت كويس في طاسة واسعة — لازم يلمع. حط الكبدة طبقة واحدة وسيبها ٩٠ ثانية قبل ما تلمسها.",
+        "minutes": 3,
+        "uses": [
+          "sunflower-oil",
+          "liver"
+        ],
+        "safety": "Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.",
+        "safetyAr": "الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة."
+      },
+      {
+        "text": "Turn it once, add the garlic and the chilli, and give it 90 seconds more. It is done the moment the pink has gone from the outside; the middle should still be soft.",
+        "textAr": "لفها مرة واحدة، ضيف التوم والشطة، وادّيها ٩٠ ثانية كمان. تبقى استوت أول ما الوردي يختفي من بره؛ النص لازم يفضل طري.",
+        "minutes": 3,
+        "uses": [
+          "garlic",
+          "chili-flakes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Salt it off the heat, not before — salting liver early draws the water out and toughens it.",
+        "textAr": "ملّحها بعد ما تنزلها من على النار مش قبل — الملح بدري بيطلع مياتها ويقسّيها.",
+        "minutes": 1,
+        "uses": [
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

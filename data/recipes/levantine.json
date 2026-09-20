@@ -3196,5 +3196,123 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "pita-bread",
+    "title": "Pocket Flatbread",
+    "titleAr": "عيش شامي",
+    "description": "Five pantry things and a very hot oven. The pocket is not a trick — it is steam, and it only happens if the oven is hotter than feels sensible.",
+    "descriptionAr": "خمس حاجات من الدولاب وفرن سخن جداً. الجيب مش حيلة — ده بخار، ومش بيحصل غير لو الفرن أسخن من اللي انت شايفه معقول.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "breakfast"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 95,
+    "cookMinutes": 15,
+    "servings": 8,
+    "nutrition": {
+      "calories": 210,
+      "protein": 6,
+      "carbs": 40,
+      "fat": 3,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "budget",
+      "vegan",
+      "batch-cook",
+      "oven"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 320,
+        "unit": "ml",
+        "prep": "lukewarm",
+        "staple": true
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 10,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the flour, yeast and salt, add the water and the oil, and knead for 8 minutes until the dough is smooth and springs back when you press it.",
+        "textAr": "اخلط الدقيق والخميرة والملح، ضيف المية والزيت، واعجن ٨ دقايق لحد ما العجينة تبقى ناعمة وترجع لما تكبس عليها.",
+        "minutes": 12,
+        "uses": [
+          "flour",
+          "yeast",
+          "salt",
+          "water",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover and leave 75 minutes until doubled. Divide into eight, roll each into a ball, and rest them 15 minutes — dough that has not rested fights the rolling pin.",
+        "textAr": "غطيها وسيبها ٧٥ دقيقة لحد ما تبقى الضعف. قسّمها تمانية، كوّر كل واحدة، وسيبهم يرتاحوا ١٥ دقيقة — العجينة اللي مرتحتش بتقاوم النشابة.",
+        "minutes": 85,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Heat the oven as high as it goes with a tray inside it, at least 250°C. The tray must be searing before any bread touches it.",
+        "textAr": "سخّن الفرن على آخره وفيه صينية جوه، على الأقل ٢٥٠ درجة. الصينية لازم تبقى نار قبل ما أي عيش يلمسها.",
+        "minutes": 20,
+        "uses": [],
+        "safety": "A tray at 250°C stays dangerous long after the oven is off. Use dry cloths — a damp one carries the heat straight through to your hand.",
+        "safetyAr": "الصينية على ٢٥٠°م بتفضل خطر حتى بعد ما تطفي الفرن. استعمل فوط ناشفة — المبلولة بتوصّل الحرارة لإيدك على طول."
+      },
+      {
+        "text": "Roll each ball to about 5mm and slide two at a time onto the hot tray. They balloon in 3 to 4 minutes. Take them out the moment they puff, before they colour, and stack them under a cloth so they stay soft.",
+        "textAr": "افرد كل كورة لحوالي ٥ مم وزحلق اتنين في المرة على الصينية السخنة. هينفخوا في ٣ لـ ٤ دقايق. طلعهم أول ما ينفخوا قبل ما ياخدوا لون، وركّبهم فوق بعض تحت فوطة عشان يفضلوا طريين.",
+        "minutes": 15,
+        "uses": [
+          "flour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

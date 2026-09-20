@@ -9950,6 +9950,79 @@ values ('619c4785-65cc-5487-b0a4-011f50a311d8', 'b78991fe-00f2-5d27-8586-5f503d9
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('2bbb05ed-e6ea-52cb-b055-957ea588c5fd', 'b78991fe-00f2-5d27-8586-5f503d94635e', 3, 'Warm the tortillas and put everything on the table separately.', 'سخّن التورتيلا وحط كل حاجة على السفرة كل واحدة لوحدها.', 5, null, null, '{"tortilla","lettuce","tomatoes","cheddar cheese","lemon"}');
 
+-- Eggs Fried with Basterma
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'beid-bel-basterma', 'Eggs Fried with Basterma', 'بيض بالبسطرمة',
+  'Basterma crisped in its own fat until the edges curl, then eggs cracked straight on top and left until the whites set. Four things and the reason to get up.', 'بسطرمة تتحمّر في دهنها لحد ما أطرافها تتلوي، وبعدين البيض يتكسر عليها على طول ويتساب لحد ما البياض يمسك. أربع حاجات والسبب إنك تصحى.',
+  'curated/beid-bel-basterma.jpg', 'openly_licensed', 'E4024',
+  'CC-BY-SA-4.0', 'E4024 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Past%C4%B1rmal%C4%B1_yumurta.jpg',
+  null, 'curated', 'egyptian', 'easy',
+  3, 8, 2,
+  390, 26, 2,
+  31, 0, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'breakfast');
+delete from public.recipe_diet_tags where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'halal');
+delete from public.recipe_allergens where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_allergens (recipe_id, allergen) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'eggs');
+insert into public.recipe_allergens (recipe_id, allergen) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'dairy');
+delete from public.recipe_appliances where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_appliances (recipe_id, appliance) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'stove');
+delete from public.recipe_tags where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_tags (recipe_id, tag) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'breakfast');
+insert into public.recipe_tags (recipe_id, tag) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'high-protein');
+insert into public.recipe_tags (recipe_id, tag) values ('7e324ea6-e957-5b84-9eb3-77faeb18bafd', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('a12d9770-a037-51fd-b6f4-373602a83114', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', (select id from public.ingredients where slug = 'eggs' limit 1), 'eggs', 'eggs', 4, 'piece', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7539d848-6223-5572-a616-525b9bff61ba', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', (select id from public.ingredients where slug = 'pastrami' limit 1), 'pastrami', 'basterma', 80, 'g', 'sliced thin', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('06863ded-e177-5fbf-8f8d-bfdc1523ec26', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', (select id from public.ingredients where slug = 'ghee' limit 1), 'ghee', 'ghee', 15, 'g', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ddbf0433-1b5f-5854-b085-fae8ad97562a', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 4);
+
+delete from public.recipe_steps where recipe_id = '7e324ea6-e957-5b84-9eb3-77faeb18bafd';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('95ced6a3-470e-5eda-af41-71c903724eb2', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 1, 'Melt the ghee in a small pan over a medium heat and lay the basterma slices flat in it. Let them go for 2 minutes until the edges curl and the spice crust smells of fenugreek.', 'دوّب السمنة في طاسة صغيرة على نار متوسطة وافرد شرايح البسطرمة فيها. سيبها دقيقتين لحد ما الأطراف تتلوي وريحة الحلبة تطلع من التتبيلة.', 3, null, null, '{"ghee","basterma"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('ae1bc422-14e4-5e8e-8a1a-830d09357d16', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 2, 'Crack the eggs straight on top of the basterma. Do not stir them — this is fried, not scrambled, and the yolks stay whole.', 'اكسر البيض على البسطرمة على طول. متقلبهوش — ده بيض مقلي مش مخفوق، والصفار يفضل كامل.', 1, null, null, '{"eggs","basterma"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('a1b2d93e-0294-5c94-95b8-ed11a973b530', '7e324ea6-e957-5b84-9eb3-77faeb18bafd', 3, 'Cover and cook 4 to 5 minutes, until the whites are set and the yolks still move. Salt lightly at the end — the basterma has already brought most of it.', 'غطي واطبخ من ٤ لـ ٥ دقايق، لحد ما البياض يمسك والصفار لسه بيتحرك. ملّح خفيف في الآخر — البسطرمة أصلاً جابت أغلب الملح.', 5, null, null, '{"eggs","salt"}');
+
 -- Fava Bean Purée with Herbs
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -10446,6 +10519,82 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('7ba3ac45-a893-5ed2-8213-2e0068d21192', '14f939dd-7511-5252-8df6-ee21e9986fc2', 1, 'Salt the grated cucumber, wait 5 minutes and squeeze out the water.', 'ملّح الخيار المبشور، استنى ٥ دقايق واعصر المية.', 5, null, null, '{"cucumber","salt"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('cb4d7602-2072-55b7-a7e0-118df5fe2180', '14f939dd-7511-5252-8df6-ee21e9986fc2', 2, 'Whisk the yogurt with 150ml cold water until pourable, then stir everything in.', 'اخفق الزبادي مع ١٥٠ مل مية باردة لحد ما يسيح، وبعدين قلّب كل حاجة فيه.', 5, null, null, '{"yogurt","garlic","mint","dill","olive oil","ice"}');
+
+-- Pasta with Cheese and Pepper
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'cacio-e-pepe', 'Pasta with Cheese and Pepper', 'مكرونة بالجبنة والفلفل',
+  'Four things and a technique. The sauce is cheese loosened with the water the pasta cooked in — no cream — and it splits the moment the pan is too hot.', 'أربع حاجات وطريقة. الصلصة دي جبنة بتترخي بمية سلق المكرونة — من غير كريمة — وبتتقطّع أول ما الطاسة تسخن زيادة.',
+  'curated/cacio-e-pepe.jpg', 'openly_licensed', 'Camelia.boban',
+  'CC-BY-SA-4.0', 'Camelia.boban · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tonnarelli_cacio_e_pepe.jpg',
+  null, 'curated', 'italian', 'medium',
+  5, 15, 4,
+  480, 19, 68,
+  15, 3, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'halal');
+delete from public.recipe_allergens where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_allergens (recipe_id, allergen) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'gluten');
+insert into public.recipe_allergens (recipe_id, allergen) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'dairy');
+delete from public.recipe_appliances where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_appliances (recipe_id, appliance) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'stove');
+delete from public.recipe_tags where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'italian');
+insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('fc2c94c1-1d28-5825-84ff-8f4d3eac8f28', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'pasta' limit 1), 'pasta', 'pasta', 400, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('95603edc-eb8d-58cd-8049-368b2f747565', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'parmesan' limit 1), 'parmesan', 'parmesan', 150, 'g', 'finely grated', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9418e2f2-2b62-5045-a787-32c9d3976d1f', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'black-pepper' limit 1), 'black-pepper', 'black pepper', 2, 'tsp', 'coarsely cracked', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('18f165b3-30dc-5be6-b86f-a8b2b7636685', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 40, 'g', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9a36f94c-1832-5ddd-bac8-fa5c8e2ac229', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('165c68eb-d0e8-5a7c-b520-cc229eb25508', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 1, 'Boil the pasta in salted water, but use less water than usual — you want it starchy, because that starch is the sauce.', 'اسلق المكرونة في مية مملحة، بس مية أقل من المعتاد — عايزها تقيلة بالنشا، لأن النشا ده هو الصلصة.', 12, null, null, '{"pasta","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('7ba6faaf-5a86-5b71-96bf-5690c23add37', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 2, 'Toast the cracked pepper in the butter in a wide pan for a minute, until it smells sharp. Then TAKE THE PAN OFF THE HEAT.', 'حمّص الفلفل المجروش في الزبدة في طاسة واسعة دقيقة، لحد ما ريحته تطلع نفّاذة. وبعدين شيل الطاسة من على النار.', 2, null, null, '{"black pepper","butter"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e2bd89da-4be4-5eaa-8460-6e8a053fe9a7', 'ee0508fc-e960-5073-ac98-cf7d3c0b69cc', 3, 'Lift the pasta straight into the pan with a ladleful of its water. Add the parmesan off the heat and toss hard until it turns into a sauce that coats. Heat is what makes it stringy; keep the pan off it.', 'شيل المكرونة على طول في الطاسة ومعاها مغرفة من مياتها. حط البارميزان والطاسة بعيد عن النار وقلّب بقوة لحد ما تبقى صلصة بتغلّف. الحرارة هي اللي بتعمل خيوط؛ سيب الطاسة بعيد عنها.', 3, null, null, '{"pasta","parmesan"}');
 
 -- Grilled Chicken and Crouton Salad
 insert into public.recipes (
@@ -12039,6 +12188,79 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('8facd175-0de7-541c-b6c9-a9879464acdc', '90183001-6018-5487-b035-dcd2817b9fa9', 3, 'Warm the coriander and cumin for 30 seconds, no longer. Ground spices burn in a dry pan much faster than whole ones.', 'دفّي الكزبرة والكمون ٣٠ ثانية، مش أكتر. البهارات المطحونة بتتحرق في الطاسة الناشفة أسرع بكتير من الحب.', 1, null, null, '{"coriander seeds","cumin"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('229ca10d-1792-5890-ad15-fe571009a6b7', '90183001-6018-5487-b035-dcd2817b9fa9', 4, 'Let everything cool, then pulse with the salt to a coarse, sandy rubble. Stop while you can still see whole sesame seeds in it.', 'سيب كل حاجة تبرد، وبعدين اضربها مع الملح ضربات قصيرة لحد ما تبقى خشنة زي الرمل. بطّل وانت لسه شايف حبات سمسم كاملة فيها.', 3, null, null, '{"salt"}');
+
+-- Grilled Corn on the Cob
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'dura-mashwiya', 'Grilled Corn on the Cob', 'ذرة مشوية',
+  'Corn straight onto the coals until the kernels blister and blacken in patches, then salt and a hard squeeze of lemon. The cart on every corniche in Egypt, four ingredients.', 'ذرة على الفحم على طول لحد ما الحبات تنفّط ويسوّد منها مناطق، وبعدين ملح وعصرة ليمون قوية. عربية الكورنيش، أربع حاجات.',
+  'curated/dura-mashwiya.jpg', 'openly_licensed', '100yen',
+  'CC-BY-SA-3.0', '100yen · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:8line_corn.jpg',
+  null, 'curated', 'egyptian', 'easy',
+  5, 15, 4,
+  160, 4, 28,
+  5, 3, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'snack');
+delete from public.recipe_diet_tags where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'halal');
+delete from public.recipe_allergens where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_allergens (recipe_id, allergen) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'dairy');
+delete from public.recipe_appliances where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_appliances (recipe_id, appliance) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'grill');
+delete from public.recipe_tags where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_tags (recipe_id, tag) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'grill');
+insert into public.recipe_tags (recipe_id, tag) values ('1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9a4ecb1b-44d5-5e01-8652-47db60ea84f3', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', (select id from public.ingredients where slug = 'corn' limit 1), 'corn', 'sweetcorn', 4, 'piece', 'husked', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5635f9e1-4f0e-5665-97aa-a27a3b73f0e6', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 30, 'g', null, true, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ee16b54c-16b9-5e26-b145-0d3c1a0206a6', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('94e68c4e-b28f-571a-a387-88340dad1591', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'cut into wedges', false, false, false, null, 4);
+
+delete from public.recipe_steps where recipe_id = '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('530017f1-8181-54af-a1b2-d1d8f579a394', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 1, 'Strip the husks and silk off the cobs. Get the coals to the stage where they are grey outside and glowing underneath — flames scorch the outside before the inside is hot.', 'قشّر القوالح وشيل الشعر. خلي الفحم يوصل لمرحلة إنه رمادي من بره وأحمر من تحت — اللهب بيحرق بره قبل ما جوه يسخن.', 5, 'Live coals. Keep children back from the grill and turn the cobs with tongs rather than by hand.', 'فحم مولّع. خلي الأطفال بعيد عن الشواية ولف القوالح بالماشة مش بإيدك.', '{"sweetcorn"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('70078ae6-0d66-5dae-9cda-1fb3f8450de3', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 2, 'Grill for 12 to 15 minutes, turning every couple of minutes, until the kernels are blistered and patched with black. That char is the flavour, not a mistake.', 'اشويها من ١٢ لـ ١٥ دقيقة ولفها كل دقيقتين، لحد ما الحبات تنفّط ويبقى فيها مناطق سودا. السواد ده هو الطعم مش غلطة.', 15, null, null, '{"sweetcorn"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('633ed30d-2e4e-54f8-89f7-efa8852ed2d0', '1e4a6fbe-f6c1-5b67-873d-aa19c2ff0ff1', 3, 'Salt them hot, squeeze the lemon hard over the top, and rub the butter on if you want it. The cart does not, and it is still right.', 'ملّحها وهي سخنة، اعصر عليها الليمون بقوة، وادهنها زبدة لو حابب. العربية مش بتعمل كده وبرضه بتبقى مظبوطة.', 2, null, null, '{"salt","lemon","butter"}');
 
 -- Edamame and Egg Rice Bowl
 insert into public.recipes (
@@ -14430,6 +14652,152 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('99d39f12-ba6c-5fca-ac95-b644db2fb6c2', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 3, 'Whisk the tomato paste with 200ml water and the oil and pour it over.', 'اخفق صلصة الطماطم مع ٢٠٠ مل مية والزيت وصبّها فوق.', 3, null, null, '{"tomato paste","olive oil","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('1b7298ad-5072-59f7-a6ee-89d8c0a74393', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 4, 'Bake at 200°C for 45 minutes until the potatoes are tender.', 'اخبزها على ٢٠٠ درجة ٤٥ دقيقة لحد ما البطاطس تستوي.', 45, 'Ground beef must reach 71°C / 160°F all the way through.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره.', '{}');
+
+-- Hibiscus Tea
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'karkade', 'Hibiscus Tea', 'كركديه',
+  'Dried hibiscus steeped and sweetened. Three things, drunk scalding in winter and over ice all summer, and on every Ramadan table in the country.', 'كركديه ناشف يتنقع ويتحلّى. تلات حاجات، يتشرب سخن في الشتا ومتلج طول الصيف، وعلى كل سفرة رمضان في مصر.',
+  'curated/karkade.jpg', 'openly_licensed', 'stu_spivack',
+  'CC-BY-SA-2.0', 'stu_spivack · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Homemade_sorrel_drink.jpg',
+  null, 'curated', 'egyptian', 'easy',
+  2, 10, 6,
+  70, 0, 18,
+  0, 0, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'snack');
+delete from public.recipe_diet_tags where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'halal');
+delete from public.recipe_allergens where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+delete from public.recipe_appliances where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_appliances (recipe_id, appliance) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'stove');
+delete from public.recipe_tags where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_tags (recipe_id, tag) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'beginner');
+insert into public.recipe_tags (recipe_id, tag) values ('5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 'vegan');
+
+delete from public.recipe_ingredients where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ff26acf8-bc48-5cdb-8c4b-5392df39ec9e', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', (select id from public.ingredients where slug = 'hibiscus' limit 1), 'hibiscus', 'hibiscus', 60, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7a17faad-cb5d-57e8-b179-5e3ba23a76cc', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1500, 'ml', null, false, false, true, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('6d8694f1-1af1-5983-b07d-b9a39ba943cf', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 120, 'g', null, false, false, false, null, 3);
+
+delete from public.recipe_steps where recipe_id = '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('08b75bb3-2996-543d-9f93-633aed17b9d8', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 1, 'Rinse the hibiscus once in cold water to wash off the dust it is dried in.', 'اغسل الكركديه مرة واحدة بمية ساقعة عشان تشيل التراب اللي اتنشف فيه.', 2, null, null, '{"hibiscus"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('0cf3ef90-98af-5f64-8d45-9fa19d5238a0', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 2, 'Bring the water to the boil, take it off the heat, drop the hibiscus in and leave it covered for 10 minutes. Boiling it hard turns it bitter and dulls the colour.', 'غلي المية، شيلها من على النار، نزّل الكركديه وغطيه ١٠ دقايق. لو غليته بقوة هيبقى مر ولونه هيبوظ.', 10, null, null, '{"water","hibiscus"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('601c7bda-78bc-58ec-af5b-0e7dd7185f97', '5f986a0f-60f2-5dae-b8e0-adcb4d15fdb5', 3, 'Strain, stir the sugar in while it is hot, and then decide: hot in a glass, or cooled and poured over ice.', 'صفّيه، قلّب السكر وهو سخن، وبعدين انت تختار: سخن في كباية، أو يبرد ويتصب على تلج.', 3, null, null, '{"sugar"}');
+
+-- Alexandrian Liver
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'kebda-eskandarani', 'Alexandrian Liver', 'كبدة اسكندراني',
+  'Liver cut into strips and thrown into a pan hot enough to sear it in seconds, with a lot of garlic and enough chilli to make your eyes water. Overcook it by a minute and it turns to rubber.', 'كبدة مقطعة شرايح وبتترمي في طاسة سخنة لدرجة إنها تستوي في ثواني، مع توم كتير وشطة تخلي عينك تدمع. لو زوّدت دقيقة واحدة هتبقى أستيك.',
+  'curated/kebda-eskandarani.jpg', 'openly_licensed', 'Turnopoems',
+  'CC-BY-SA-4.0', 'Turnopoems · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Kebda_eskandarani.jpg',
+  null, 'curated', 'egyptian', 'medium',
+  10, 8, 4,
+  290, 27, 6,
+  17, 1, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'halal');
+delete from public.recipe_allergens where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+delete from public.recipe_appliances where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_appliances (recipe_id, appliance) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'stove');
+delete from public.recipe_tags where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'high-protein');
+insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 'budget');
+
+delete from public.recipe_ingredients where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7844f83f-7a27-5c1d-906a-86bde7bcf03d', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'liver' limit 1), 'liver', 'beef liver', 600, 'g', 'cut into strips', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7761af9b-8e1b-506c-84ba-134df6fff128', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 8, 'clove', 'crushed', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('08e6c03b-7b31-5944-85be-a92a72a968ad', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 2, 'tsp', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d416ea65-8032-5c21-9ad6-97d08d67914f', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 45, 'ml', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('99b3e89a-ec31-549b-8037-708878c436ec', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('f1ae549e-2d65-52a5-a2ad-5da60bad4168', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 1, 'Cut the liver into finger-width strips and pat it very dry. Wet liver steams in the pan and goes grey instead of browning.', 'قطّع الكبدة شرايح عرض صباع ونشّفها كويس أوي. الكبدة المبلولة بتتبخّر في الطاسة وبتبقى رمادية بدل ما تتحمّر.', 8, null, null, '{"beef liver"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9270f3c0-a173-553d-aaed-4134716804f8', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 2, 'Get the oil properly hot in a wide pan — it should shimmer. Put the liver in one layer and leave it alone for 90 seconds before you touch it.', 'سخّن الزيت كويس في طاسة واسعة — لازم يلمع. حط الكبدة طبقة واحدة وسيبها ٩٠ ثانية قبل ما تلمسها.', 3, 'Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.', 'الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة.', '{"vegetable oil","beef liver"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('bf20623f-abb0-539e-8882-4d0de34f0e99', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 3, 'Turn it once, add the garlic and the chilli, and give it 90 seconds more. It is done the moment the pink has gone from the outside; the middle should still be soft.', 'لفها مرة واحدة، ضيف التوم والشطة، وادّيها ٩٠ ثانية كمان. تبقى استوت أول ما الوردي يختفي من بره؛ النص لازم يفضل طري.', 3, null, null, '{"garlic","chili flakes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('ff81278b-5250-5d54-9a7c-232049887f5e', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 4, 'Salt it off the heat, not before — salting liver early draws the water out and toughens it.', 'ملّحها بعد ما تنزلها من على النار مش قبل — الملح بدري بيطلع مياتها ويقسّيها.', 1, null, null, '{"salt"}');
 
 -- Baked Bulgur and Lamb Pie
 insert into public.recipes (
@@ -18075,6 +18443,85 @@ values ('3506b683-53fe-5759-989e-4bea95450568', '216368ae-b675-5fe4-ad99-f320d81
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('50dbc01d-9637-5c5f-9e9b-d0ad51e24de8', '216368ae-b675-5fe4-ad99-f320d8194c78', 2, 'Stir in everything else and eat within a few hours.', 'قلّب كل حاجة تانية وكلها في خلال ساعات قليلة.', 3, null, null, '{"onions","coriander","chili pepper","lemon"}');
 
+-- Pocket Flatbread
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('90603428-b668-5f95-9419-1104c925cc84', 'pita-bread', 'Pocket Flatbread', 'عيش شامي',
+  'Five pantry things and a very hot oven. The pocket is not a trick — it is steam, and it only happens if the oven is hotter than feels sensible.', 'خمس حاجات من الدولاب وفرن سخن جداً. الجيب مش حيلة — ده بخار، ومش بيحصل غير لو الفرن أسخن من اللي انت شايفه معقول.',
+  'curated/pita-bread.jpg', 'openly_licensed', 'Azure Dragon of the East',
+  'CC-BY-SA-3.0', 'Azure Dragon of the East · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Pita_Bread.jpg',
+  null, 'curated', 'levantine', 'medium',
+  95, 15, 8,
+  210, 6, 40,
+  3, 2, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('90603428-b668-5f95-9419-1104c925cc84', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('90603428-b668-5f95-9419-1104c925cc84', 'dinner');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('90603428-b668-5f95-9419-1104c925cc84', 'breakfast');
+delete from public.recipe_diet_tags where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('90603428-b668-5f95-9419-1104c925cc84', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('90603428-b668-5f95-9419-1104c925cc84', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('90603428-b668-5f95-9419-1104c925cc84', 'halal');
+delete from public.recipe_allergens where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_allergens (recipe_id, allergen) values ('90603428-b668-5f95-9419-1104c925cc84', 'gluten');
+delete from public.recipe_appliances where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_appliances (recipe_id, appliance) values ('90603428-b668-5f95-9419-1104c925cc84', 'oven');
+delete from public.recipe_tags where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_tags (recipe_id, tag) values ('90603428-b668-5f95-9419-1104c925cc84', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('90603428-b668-5f95-9419-1104c925cc84', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('90603428-b668-5f95-9419-1104c925cc84', 'batch-cook');
+insert into public.recipe_tags (recipe_id, tag) values ('90603428-b668-5f95-9419-1104c925cc84', 'oven');
+
+delete from public.recipe_ingredients where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5cb8a9f1-c8fb-5b8c-a449-2dbead6a14de', '90603428-b668-5f95-9419-1104c925cc84', (select id from public.ingredients where slug = 'flour' limit 1), 'flour', 'flour', 500, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('a409ed31-aa0b-5d62-b45f-f2cf8a18dff8', '90603428-b668-5f95-9419-1104c925cc84', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 320, 'ml', 'lukewarm', false, false, true, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('f76dd665-591c-5742-9c61-79ac5816df5c', '90603428-b668-5f95-9419-1104c925cc84', (select id from public.ingredients where slug = 'yeast' limit 1), 'yeast', 'yeast', 7, 'g', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('1f95debf-e860-581c-8ab2-cf96deddc3b4', '90603428-b668-5f95-9419-1104c925cc84', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 10, 'g', null, false, false, true, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('8e62960b-f272-5cad-a654-34bad616d58e', '90603428-b668-5f95-9419-1104c925cc84', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 30, 'ml', null, false, false, false, null, 5);
+
+delete from public.recipe_steps where recipe_id = '90603428-b668-5f95-9419-1104c925cc84';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('97349689-679c-5fdc-87a6-bc4612be9c71', '90603428-b668-5f95-9419-1104c925cc84', 1, 'Mix the flour, yeast and salt, add the water and the oil, and knead for 8 minutes until the dough is smooth and springs back when you press it.', 'اخلط الدقيق والخميرة والملح، ضيف المية والزيت، واعجن ٨ دقايق لحد ما العجينة تبقى ناعمة وترجع لما تكبس عليها.', 12, null, null, '{"flour","yeast","salt","water","vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('1e187067-292f-5ff6-b197-a6936b2c239e', '90603428-b668-5f95-9419-1104c925cc84', 2, 'Cover and leave 75 minutes until doubled. Divide into eight, roll each into a ball, and rest them 15 minutes — dough that has not rested fights the rolling pin.', 'غطيها وسيبها ٧٥ دقيقة لحد ما تبقى الضعف. قسّمها تمانية، كوّر كل واحدة، وسيبهم يرتاحوا ١٥ دقيقة — العجينة اللي مرتحتش بتقاوم النشابة.', 85, null, null, '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('08950f63-9521-55ed-bca2-aadac1a3639f', '90603428-b668-5f95-9419-1104c925cc84', 3, 'Heat the oven as high as it goes with a tray inside it, at least 250°C. The tray must be searing before any bread touches it.', 'سخّن الفرن على آخره وفيه صينية جوه، على الأقل ٢٥٠ درجة. الصينية لازم تبقى نار قبل ما أي عيش يلمسها.', 20, 'A tray at 250°C stays dangerous long after the oven is off. Use dry cloths — a damp one carries the heat straight through to your hand.', 'الصينية على ٢٥٠°م بتفضل خطر حتى بعد ما تطفي الفرن. استعمل فوط ناشفة — المبلولة بتوصّل الحرارة لإيدك على طول.', '{}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('1d1dbc6c-fd6f-5325-a708-0d92973664cb', '90603428-b668-5f95-9419-1104c925cc84', 4, 'Roll each ball to about 5mm and slide two at a time onto the hot tray. They balloon in 3 to 4 minutes. Take them out the moment they puff, before they colour, and stack them under a cloth so they stay soft.', 'افرد كل كورة لحوالي ٥ مم وزحلق اتنين في المرة على الصينية السخنة. هينفخوا في ٣ لـ ٤ دقايق. طلعهم أول ما ينفخوا قبل ما ياخدوا لون، وركّبهم فوق بعض تحت فوطة عشان يفضلوا طريين.', 15, null, null, '{"flour"}');
+
 -- Soft Cornmeal with Mushrooms
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -18155,6 +18602,83 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('6ec55fd2-5002-5999-9b3a-8a5fcb446472', '45434653-044d-565f-8e73-6d0c8f39120b', 2, 'Fry the mushrooms hard in oil until browned, then add garlic and thyme for a minute.', 'حمّر المشروم كويس في الزيت لحد ما يتحمّر، وبعدين ضيف التوم والزعتر دقيقة.', 8, null, null, '{"mushrooms","olive oil","garlic","thyme"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('d9cd4b42-ad64-513e-9c3d-05e4260b2de7', '45434653-044d-565f-8e73-6d0c8f39120b', 3, 'Beat the butter and cheese into the cornmeal and spoon the mushrooms over.', 'اخفق الزبدة والجبنة في دقيق الذرة وحط المشروم فوق.', 4, null, null, '{"butter","parmesan"}');
+
+-- Creamy Potato Salad with Herbs
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'potato-salad', 'Creamy Potato Salad with Herbs', 'سلطة بطاطس بالمايونيز',
+  'Warm potatoes dressed while they are still steaming so they drink the dressing instead of sitting in it, with egg through them and a lot of parsley.', 'بطاطس دافية بتتتبّل وهي لسه بتطلع بخار عشان تشرب التتبيلة بدل ما تعوم فيها، وبيض مخلوط فيها وبقدونس كتير.',
+  'curated/potato-salad.jpg', 'openly_licensed', 'SajjadF',
+  'CC-BY-SA-3.0', 'SajjadF · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Potato_salad_(1).jpg',
+  null, 'curated', 'mediterranean', 'easy',
+  10, 20, 6,
+  260, 7, 28,
+  14, 3, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'snack');
+delete from public.recipe_diet_tags where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'halal');
+delete from public.recipe_allergens where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_allergens (recipe_id, allergen) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'eggs');
+delete from public.recipe_appliances where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_appliances (recipe_id, appliance) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'stove');
+delete from public.recipe_tags where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_tags (recipe_id, tag) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'beginner');
+insert into public.recipe_tags (recipe_id, tag) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'batch-cook');
+insert into public.recipe_tags (recipe_id, tag) values ('c1b00c9c-a4e7-5f28-a36f-963143d86757', 'comfort');
+
+delete from public.recipe_ingredients where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('693d9b8c-cff9-56b2-8586-0744bd2fa948', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', (select id from public.ingredients where slug = 'potatoes' limit 1), 'potatoes', 'potatoes', 900, 'g', 'scrubbed, skin on', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('3b88faa6-56fa-5b5f-bed5-ea60ed59e3a6', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', (select id from public.ingredients where slug = 'eggs' limit 1), 'eggs', 'eggs', 3, 'piece', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('61275376-4b66-5696-b95f-000715cf684a', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', (select id from public.ingredients where slug = 'mayonnaise' limit 1), 'mayonnaise', 'mayonnaise', 150, 'g', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('8cd72261-3ee7-5fb1-9917-4dc6bd43268c', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', (select id from public.ingredients where slug = 'parsley' limit 1), 'parsley', 'parsley', 1, 'bunch', 'finely chopped', false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('84bdb7d6-2f04-5005-8ee6-439f58c8a612', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = 'c1b00c9c-a4e7-5f28-a36f-963143d86757';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('cbfe7ac4-1ab8-5f66-a9a7-7ef0d44eb37e', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 1, 'Boil the potatoes whole in well-salted water until a knife slides in, about 20 minutes. Boiling them whole in their skins keeps them from turning to mash.', 'اسلق البطاطس كاملة في مية مملحة كويس لحد ما السكينة تدخل فيها، حوالي ٢٠ دقيقة. سلقها كاملة بقشرها بيمنعها إنها تتهرس.', 20, null, null, '{"potatoes","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('a1eb4fd8-04b4-5852-88d8-e094579cdecb', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 2, 'Boil the eggs for 9 minutes in the same pan, then cool them under the tap and peel.', 'اسلق البيض ٩ دقايق في نفس الحلة، وبعدين بردّه تحت الحنفية وقشّره.', 10, null, null, '{"eggs"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('18381433-5e98-5152-8da7-0acebbe796df', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 3, 'Peel and cut the potatoes into chunks WHILE THEY ARE STILL HOT and fold the mayonnaise through straight away. Warm potato absorbs dressing; cold potato just wears it.', 'قشّر وقطّع البطاطس مكعبات وهي لسه سخنة وقلّب المايونيز معاها على طول. البطاطس الدافية بتشرب التتبيلة؛ الساقعة بتلبسها بس.', 5, null, null, '{"potatoes","mayonnaise"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('06edf1e0-d5ad-5c0c-9428-eff3808f3f14', 'c1b00c9c-a4e7-5f28-a36f-963143d86757', 4, 'Chop the eggs in, add the parsley, taste for salt, and let it sit for half an hour before serving.', 'قطّع البيض وضيفه، حط البقدونس، دوقها للملح، وسيبها نص ساعة قبل ما تقدمها.', 5, null, null, '{"eggs","parsley","salt"}');
 
 -- Quick Vegetable Fried Rice
 insert into public.recipes (
@@ -18654,6 +19178,85 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('ec8f546b-7220-55a1-8fa8-68b25a79fced', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 3, 'Stir in the vanilla, pour into bowls and chill for at least 2 hours.', 'قلّب الفانيليا، صبّه في أطباق وسيبه في التلاجة ساعتين على الأقل.', 3, null, null, '{"vanilla"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('a62bb060-fe8d-5545-a160-966d3a8a9303', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 4, 'Serve cold, dusted with cinnamon and pistachios.', 'قدّمه بارد مرشوش عليه قرفة وفستق.', null, null, null, '{"cinnamon","pistachios"}');
+
+-- Rice with Vermicelli
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'roz-bel-shareya', 'Rice with Vermicelli', 'رز بالشعرية',
+  'The rice that sits under half the dinners in this app, and a recipe of its own for once. The whole thing turns on browning the vermicelli properly before the rice goes near it.', 'الرز اللي بيتحط تحت نص العشا في التطبيق ده، وبقى ليه وصفة لوحده. كل الموضوع في إنك تحمّر الشعرية صح قبل ما الرز يقرب منها.',
+  'curated/roz-bel-shareya.jpg', 'openly_licensed', 'El Mono Español',
+  'CC-BY-SA-4.0', 'El Mono Español · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Arabic_rice.jpg',
+  null, 'curated', 'egyptian', 'easy',
+  5, 25, 4,
+  320, 6, 58,
+  7, 1, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'halal');
+delete from public.recipe_allergens where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_allergens (recipe_id, allergen) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'gluten');
+delete from public.recipe_appliances where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_appliances (recipe_id, appliance) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'stove');
+delete from public.recipe_tags where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_tags (recipe_id, tag) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'beginner');
+insert into public.recipe_tags (recipe_id, tag) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('0e6498b4-50d9-54ca-b111-3a1d0eefa416', 'one-pan');
+
+delete from public.recipe_ingredients where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('4255bec4-1191-5165-83de-3357567d1617', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', (select id from public.ingredients where slug = 'rice' limit 1), 'rice', 'rice', 400, 'g', 'rinsed until the water runs clear', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('36a77edc-10d8-55f2-8922-74282a4b5a29', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', (select id from public.ingredients where slug = 'vermicelli' limit 1), 'vermicelli', 'vermicelli', 60, 'g', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('29ff5a08-18dd-5b17-b3a9-d8ee1b213998', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 45, 'ml', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('897c28f7-b7e7-537e-88d9-8882377121b9', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 600, 'ml', null, false, false, true, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('b36328b8-26d3-5fa5-be2d-f81b95fe71bf', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = '0e6498b4-50d9-54ca-b111-3a1d0eefa416';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('14472a18-9ffb-5f41-a91c-b93e854d312a', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', 1, 'Rinse the rice in several changes of cold water until the water stops going milky, then leave it to drain properly.', 'اغسل الرز في أكتر من مية لحد ما المية تبطل تطلع بيضا، وبعدين سيبه يصفّى كويس.', 5, null, null, '{"rice"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9b02211d-26e6-5aee-8485-25f215a4dbca', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', 2, 'Fry the vermicelli in the oil over a medium heat, stirring the whole time, until it is the colour of strong tea. This is the only step that matters and it takes about 3 minutes; pale vermicelli tastes of nothing and black vermicelli is bitter.', 'حمّر الشعرية في الزيت على نار متوسطة وانت بتقلب على طول، لحد ما تبقى لون الشاي التقيل. دي الخطوة الوحيدة اللي بتفرق وبتاخد تلات دقايق؛ الشعرية الفاتحة مالهاش طعم والسودا بتبقى مرة.', 3, null, null, '{"vermicelli","vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('5b8e7e4a-0493-5fba-9c91-bdee8ee241d7', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', 3, 'Add the drained rice and turn it in the oil for a minute so every grain is coated, then pour in the water and the salt and bring it to the boil.', 'ضيف الرز المصفّى ولفه في الزيت دقيقة عشان كل حبة تتغطي، وبعدين صب المية والملح وسيبه يغلي.', 3, null, null, '{"rice","water","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('96f25079-e373-5fd4-90d3-0c9ae1305909', '0e6498b4-50d9-54ca-b111-3a1d0eefa416', 4, 'Cover, drop the heat to its lowest, and leave it 15 minutes WITHOUT lifting the lid. Then take it off the heat and let it sit, still covered, for 5 more.', 'غطي، نزّل النار لأقل حاجة، وسيبه ١٥ دقيقة من غير ما ترفع الغطا. وبعدين شيله من على النار وسيبه مغطي ٥ دقايق كمان.', 20, null, null, '{"rice"}');
 
 -- Baked Cream Rice
 insert into public.recipes (
@@ -20702,6 +21305,86 @@ values ('ce6bf43d-82ba-5325-9b84-60fec3ba75b2', '6c8289bd-36e9-5ae6-b86e-951d380
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('1398757a-5878-5a23-977e-9a452981e495', '6c8289bd-36e9-5ae6-b86e-951d380f9358', 4, 'Bake at 200°C for 25 minutes until deep golden.', 'اخبزها على ٢٠٠ درجة ٢٥ دقيقة لحد ما تدهب.', 25, null, null, '{}');
 
+-- Greek Spinach Rice
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'spanakorizo', 'Greek Spinach Rice', 'رز بالسبانخ على الطريقة اليونانية',
+  'A whole kilo of spinach cooked down into rice until the pot is more green than white, finished with lemon. Six lines rather than five, because rice needs measured water and hiding it would be a lie about what you need.', 'كيلو سبانخ بيستوي مع الرز لحد ما الحلة تبقى خضرا أكتر منها بيضا، وفي الآخر ليمون. ستة سطور مش خمسة، لأن الرز محتاج مية مقاسة وإخفاءها كذب على اللي هيطبخ.',
+  'curated/spanakorizo.jpg', 'openly_licensed', 'KaterinaStrak',
+  'CC-BY-SA-4.0', 'KaterinaStrak · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Spanakorizo.jpg',
+  null, 'curated', 'mediterranean', 'easy',
+  10, 30, 4,
+  340, 9, 52,
+  12, 5, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'halal');
+delete from public.recipe_allergens where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+delete from public.recipe_appliances where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_appliances (recipe_id, appliance) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'stove');
+delete from public.recipe_tags where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_tags (recipe_id, tag) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'healthy');
+insert into public.recipe_tags (recipe_id, tag) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'one-pan');
+insert into public.recipe_tags (recipe_id, tag) values ('9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 'beginner');
+
+delete from public.recipe_ingredients where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('0f969776-5d7e-5276-aeeb-70813408282a', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'spinach' limit 1), 'spinach', 'spinach', 1, 'kg', 'washed and roughly chopped', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d56cc3af-05cb-5a92-be37-2060aa827f52', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'rice' limit 1), 'rice', 'rice', 250, 'g', 'rinsed', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7f7048f5-c9f7-5531-9fd6-2c6111d16938', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'chopped', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('39976472-6c10-58e9-a266-c6bf70dda035', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 60, 'ml', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('79824045-a299-5909-9fee-a73c0e84b167', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 500, 'ml', null, false, false, true, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('1481c1f3-75cf-50ac-b651-6bee0e62ce78', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 6);
+
+delete from public.recipe_steps where recipe_id = '9cf3f617-ecb2-5df9-b77e-041794bd6cd3';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('36d44758-5a9d-5d33-8935-e6f8ae2ea917', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 1, 'Soften the onion in the olive oil for 8 minutes over a medium heat until it is translucent and sweet.', 'شوّح البصل في زيت الزيتون ٨ دقايق على نار متوسطة لحد ما يبقى شفاف وحلو.', 8, null, null, '{"onions","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('34ad59ed-50f8-5bb4-9356-0e659956fd10', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 2, 'Add the spinach in handfuls, letting each lot collapse before the next goes in. A kilo looks impossible and cooks down to almost nothing.', 'ضيف السبانخ حفنة حفنة، وخلي كل شوية تسيح قبل ما تحط اللي بعدها. الكيلو شكله مستحيل وبيروح لحد ما ميبقاش حاجة.', 5, null, null, '{"spinach"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('1c9902cc-0874-5b77-b7c7-f5ef85de5a4f', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 3, 'Stir the rice through, pour in the water, and bring it to the boil. Season now, while there is liquid to carry it.', 'قلّب الرز معاهم، صب المية، وسيبها تغلي. ملّح دلوقتي وهي لسه فيها سايل يوزّع الملح.', 3, null, null, '{"rice","water"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('97f7634d-feb2-5d65-a399-f60e16b46688', '9cf3f617-ecb2-5df9-b77e-041794bd6cd3', 4, 'Cover and cook on the lowest heat for 18 minutes, then off the heat for 5 more, still covered. Stir the lemon juice through at the very end — added earlier it goes flat.', 'غطي واطبخ على أهدى نار ١٨ دقيقة، وبعدين شيلها من على النار ٥ دقايق كمان وهي مغطية. قلّب عصير الليمون في آخر لحظة — لو ضفته بدري طعمه بيروح.', 25, null, null, '{"rice","lemon"}');
+
 -- Cumin Rice with Peas
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -21694,6 +22377,85 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('c22ad66f-5172-5316-bdc2-440e509f1b2c', 'ea878e73-a2fe-52f1-ae55-04e57af0e76d', 2, 'Dip the bread fingers briefly in the coffee — one second each, no more.', 'غطّس أصابع العيش في القهوة بسرعة — ثانية لكل واحدة، مش أكتر.', 5, null, null, '{"toast bread","coffee"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('258254b8-321c-5c12-a6da-0b47736feed7', 'ea878e73-a2fe-52f1-ae55-04e57af0e76d', 3, 'Layer cream and soaked fingers in glasses and chill 3 hours. Dust with cocoa to serve.', 'رصّ الكريمة والأصابع المنقوعة في كاسات وسيبها ٣ ساعات في التلاجة. رشّ الكاكاو عند التقديم.', 7, null, null, '{"cocoa powder"}');
+
+-- Spanish Potato Omelette
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'tortilla-espanola', 'Spanish Potato Omelette', 'عجة البطاطس الإسبانية',
+  'Potatoes cooked slowly and gently in olive oil until they give up, then set in egg into a thick cake. Five things, eaten hot, warm or cold, and better on the second day.', 'بطاطس بتستوي على مهل في زيت زيتون لحد ما تستسلم، وبعدين تمسك في البيض وتبقى كيكة تخينة. خمس حاجات، تتاكل سخنة أو دافية أو ساقعة، وأحسن في تاني يوم.',
+  'curated/tortilla-espanola.jpg', 'openly_licensed', 'Kent Wang',
+  'CC-BY-SA-2.0', 'Kent Wang · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tortilla_de_patata_-_San_Sebasti%C3%A1n.jpg',
+  null, 'curated', 'mediterranean', 'medium',
+  15, 35, 6,
+  320, 11, 24,
+  20, 2, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'dinner');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'snack');
+delete from public.recipe_diet_tags where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'halal');
+delete from public.recipe_allergens where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_allergens (recipe_id, allergen) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'eggs');
+delete from public.recipe_appliances where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_appliances (recipe_id, appliance) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'stove');
+delete from public.recipe_tags where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'quick');
+insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'beginner');
+insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 'high-protein');
+
+delete from public.recipe_ingredients where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7078a231-7047-54a3-880c-84de2f4f71e4', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', (select id from public.ingredients where slug = 'potatoes' limit 1), 'potatoes', 'potatoes', 700, 'g', 'peeled and sliced thin', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('16a2435b-3a73-51fa-90d2-705d631b8d51', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', (select id from public.ingredients where slug = 'eggs' limit 1), 'eggs', 'eggs', 6, 'piece', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('bb09a299-51ee-55be-8ee0-59c5cae31f72', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'sliced thin', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5d1e1b77-4126-5cf4-babe-b160d4ef98b8', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 200, 'ml', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ca8f04c8-97be-5788-9abe-160fba57568a', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('778f91a9-8be0-5291-b02b-657d1794481c', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 1, 'Slice the potatoes about 3mm thick and the onion the same. Warm the oil in a pan and put them in — it should barely bubble, not fry.', 'قطّع البطاطس حوالي ٣ مم والبصل زيها. دفّي الزيت في طاسة وحطهم فيه — المفروض يهمهم بالعافية مش يقلي.', 15, null, null, '{"potatoes","onions","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('f9e598ca-8590-5a74-9288-37d409b59e27', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 2, 'Cook gently for 20 minutes, turning now and then, until a slice crushes against the side of the pan with no resistance. They must be soft, never crisp.', 'اطبخهم على نار هادية ٢٠ دقيقة وقلّب من وقت للتاني، لحد ما الشريحة تتهرس على جنب الطاسة من غير مقاومة. لازم يبقوا طريين مش مقرمشين.', 20, null, null, '{"potatoes"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('9703a65a-df5f-5bf6-aaae-565122c56e5a', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 3, 'Drain them, keeping two tablespoons of the oil. Beat the eggs with the salt, tip the hot potatoes in and leave the lot to sit for 10 minutes — this is what makes it one thing rather than potatoes in egg.', 'صفّيهم واحتفظ بمعلقتين من الزيت. اخفق البيض مع الملح، اقلب البطاطس السخنة فيه وسيبهم ١٠ دقايق — ده اللي بيخليها حاجة واحدة مش بطاطس في بيض.', 10, null, null, '{"eggs","salt","potatoes","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('15fb4a5e-7c18-5c40-8444-92971131031c', '9a2f5b32-63bd-54c2-b5c0-bb2e5919d042', 4, 'Set the reserved oil over a medium heat, pour the mixture in and cook 5 minutes until the edges look dry. Slide it onto a plate, invert the pan over it, flip, and give it 4 minutes on the other side.', 'سخّن الزيت المحفوظ على نار متوسطة، صب الخليط واطبخه ٥ دقايق لحد ما الأطراف تبان ناشفة. زحلقها في طبق، اقلب الطاسة عليها، اعكسها، وادّيها ٤ دقايق على الوش التاني.', 10, null, null, '{"olive oil"}');
 
 -- Tuna Melt
 insert into public.recipes (

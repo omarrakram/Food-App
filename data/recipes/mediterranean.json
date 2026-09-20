@@ -2746,5 +2746,370 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "tortilla-espanola",
+    "title": "Spanish Potato Omelette",
+    "titleAr": "عجة البطاطس الإسبانية",
+    "description": "Potatoes cooked slowly and gently in olive oil until they give up, then set in egg into a thick cake. Five things, eaten hot, warm or cold, and better on the second day.",
+    "descriptionAr": "بطاطس بتستوي على مهل في زيت زيتون لحد ما تستسلم، وبعدين تمسك في البيض وتبقى كيكة تخينة. خمس حاجات، تتاكل سخنة أو دافية أو ساقعة، وأحسن في تاني يوم.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 35,
+    "servings": 6,
+    "nutrition": {
+      "calories": 320,
+      "protein": 11,
+      "carbs": 24,
+      "fat": 20,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "budget",
+      "beginner",
+      "comfort",
+      "high-protein"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "potatoes",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "peeled and sliced thin"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 6,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Slice the potatoes about 3mm thick and the onion the same. Warm the oil in a pan and put them in — it should barely bubble, not fry.",
+        "textAr": "قطّع البطاطس حوالي ٣ مم والبصل زيها. دفّي الزيت في طاسة وحطهم فيه — المفروض يهمهم بالعافية مش يقلي.",
+        "minutes": 15,
+        "uses": [
+          "potatoes",
+          "onions",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cook gently for 20 minutes, turning now and then, until a slice crushes against the side of the pan with no resistance. They must be soft, never crisp.",
+        "textAr": "اطبخهم على نار هادية ٢٠ دقيقة وقلّب من وقت للتاني، لحد ما الشريحة تتهرس على جنب الطاسة من غير مقاومة. لازم يبقوا طريين مش مقرمشين.",
+        "minutes": 20,
+        "uses": [
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Drain them, keeping two tablespoons of the oil. Beat the eggs with the salt, tip the hot potatoes in and leave the lot to sit for 10 minutes — this is what makes it one thing rather than potatoes in egg.",
+        "textAr": "صفّيهم واحتفظ بمعلقتين من الزيت. اخفق البيض مع الملح، اقلب البطاطس السخنة فيه وسيبهم ١٠ دقايق — ده اللي بيخليها حاجة واحدة مش بطاطس في بيض.",
+        "minutes": 10,
+        "uses": [
+          "eggs",
+          "salt",
+          "potatoes",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Set the reserved oil over a medium heat, pour the mixture in and cook 5 minutes until the edges look dry. Slide it onto a plate, invert the pan over it, flip, and give it 4 minutes on the other side.",
+        "textAr": "سخّن الزيت المحفوظ على نار متوسطة، صب الخليط واطبخه ٥ دقايق لحد ما الأطراف تبان ناشفة. زحلقها في طبق، اقلب الطاسة عليها، اعكسها، وادّيها ٤ دقايق على الوش التاني.",
+        "minutes": 10,
+        "uses": [
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "spanakorizo",
+    "title": "Greek Spinach Rice",
+    "titleAr": "رز بالسبانخ على الطريقة اليونانية",
+    "description": "A whole kilo of spinach cooked down into rice until the pot is more green than white, finished with lemon. Six lines rather than five, because rice needs measured water and hiding it would be a lie about what you need.",
+    "descriptionAr": "كيلو سبانخ بيستوي مع الرز لحد ما الحلة تبقى خضرا أكتر منها بيضا، وفي الآخر ليمون. ستة سطور مش خمسة، لأن الرز محتاج مية مقاسة وإخفاءها كذب على اللي هيطبخ.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 340,
+      "protein": 9,
+      "carbs": 52,
+      "fat": 12,
+      "fiber": 5
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "healthy",
+      "budget",
+      "vegan",
+      "one-pan",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "spinach",
+        "quantity": 1,
+        "unit": "kg",
+        "prep": "washed and roughly chopped"
+      },
+      {
+        "slug": "rice",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion in the olive oil for 8 minutes over a medium heat until it is translucent and sweet.",
+        "textAr": "شوّح البصل في زيت الزيتون ٨ دقايق على نار متوسطة لحد ما يبقى شفاف وحلو.",
+        "minutes": 8,
+        "uses": [
+          "onions",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the spinach in handfuls, letting each lot collapse before the next goes in. A kilo looks impossible and cooks down to almost nothing.",
+        "textAr": "ضيف السبانخ حفنة حفنة، وخلي كل شوية تسيح قبل ما تحط اللي بعدها. الكيلو شكله مستحيل وبيروح لحد ما ميبقاش حاجة.",
+        "minutes": 5,
+        "uses": [
+          "spinach"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir the rice through, pour in the water, and bring it to the boil. Season now, while there is liquid to carry it.",
+        "textAr": "قلّب الرز معاهم، صب المية، وسيبها تغلي. ملّح دلوقتي وهي لسه فيها سايل يوزّع الملح.",
+        "minutes": 3,
+        "uses": [
+          "rice",
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover and cook on the lowest heat for 18 minutes, then off the heat for 5 more, still covered. Stir the lemon juice through at the very end — added earlier it goes flat.",
+        "textAr": "غطي واطبخ على أهدى نار ١٨ دقيقة، وبعدين شيلها من على النار ٥ دقايق كمان وهي مغطية. قلّب عصير الليمون في آخر لحظة — لو ضفته بدري طعمه بيروح.",
+        "minutes": 25,
+        "uses": [
+          "rice",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "potato-salad",
+    "title": "Creamy Potato Salad with Herbs",
+    "titleAr": "سلطة بطاطس بالمايونيز",
+    "description": "Warm potatoes dressed while they are still steaming so they drink the dressing instead of sitting in it, with egg through them and a lot of parsley.",
+    "descriptionAr": "بطاطس دافية بتتتبّل وهي لسه بتطلع بخار عشان تشرب التتبيلة بدل ما تعوم فيها، وبيض مخلوط فيها وبقدونس كتير.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 20,
+    "servings": 6,
+    "nutrition": {
+      "calories": 260,
+      "protein": 7,
+      "carbs": 28,
+      "fat": 14,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "budget",
+      "beginner",
+      "batch-cook",
+      "comfort"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "potatoes",
+        "quantity": 900,
+        "unit": "g",
+        "prep": "scrubbed, skin on"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "mayonnaise",
+        "quantity": 150,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Boil the potatoes whole in well-salted water until a knife slides in, about 20 minutes. Boiling them whole in their skins keeps them from turning to mash.",
+        "textAr": "اسلق البطاطس كاملة في مية مملحة كويس لحد ما السكينة تدخل فيها، حوالي ٢٠ دقيقة. سلقها كاملة بقشرها بيمنعها إنها تتهرس.",
+        "minutes": 20,
+        "uses": [
+          "potatoes",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Boil the eggs for 9 minutes in the same pan, then cool them under the tap and peel.",
+        "textAr": "اسلق البيض ٩ دقايق في نفس الحلة، وبعدين بردّه تحت الحنفية وقشّره.",
+        "minutes": 10,
+        "uses": [
+          "eggs"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Peel and cut the potatoes into chunks WHILE THEY ARE STILL HOT and fold the mayonnaise through straight away. Warm potato absorbs dressing; cold potato just wears it.",
+        "textAr": "قشّر وقطّع البطاطس مكعبات وهي لسه سخنة وقلّب المايونيز معاها على طول. البطاطس الدافية بتشرب التتبيلة؛ الساقعة بتلبسها بس.",
+        "minutes": 5,
+        "uses": [
+          "potatoes",
+          "mayonnaise"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Chop the eggs in, add the parsley, taste for salt, and let it sit for half an hour before serving.",
+        "textAr": "قطّع البيض وضيفه، حط البقدونس، دوقها للملح، وسيبها نص ساعة قبل ما تقدمها.",
+        "minutes": 5,
+        "uses": [
+          "eggs",
+          "parsley",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]
