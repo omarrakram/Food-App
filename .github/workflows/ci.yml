@@ -85,6 +85,18 @@ jobs:
         # in production.
         run: npm run audit:pagination
 
+      - name: Refuse a form or brand whose aliasing does not actually work
+        # The coverage census labels `بامية مجمدة` a FORM of okra. That label
+        # used to be its own pass mark: calling something a form removed it
+        # from the denominator whether or not anyone typing it ever reached
+        # okra. Every form and brand now names the base slug its terms must
+        # reach, and this fails when one of them does not — which is how the
+        # entirely-English noise list was found in the first place.
+        #
+        # Also enforces census integrity: stable ids, no concept claimed twice,
+        # no expectation naming a slug that does not exist.
+        run: npm run audit:coverage
+
       - name: Verify the generated seed is in step with its TypeScript source
         run: |
           npm run seed:generate
