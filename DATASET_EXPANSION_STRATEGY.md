@@ -1834,41 +1834,223 @@ worked from tonight's ordering.
 
 ---
 
+## 9n. Stage 3P: the photography preflight, and what looking at 23 pictures cost
+
+### The order of work was impossible, not merely wrong
+
+§9m proposed "pick the dishes, acquire the pictures, then write the recipes".
+That cannot be executed against the image pipeline as it stood:
+`fetch-recipe-images.ts` iterates `RECIPE_CATALOGUE`, and `images:check`
+refuses a manifest entry naming a recipe the catalogue does not have. A dish
+could not be photographed until it was already written.
+
+Both rules are correct and neither was relaxed. A production manifest that may
+name a recipe that does not exist is a production manifest that may name
+anything. The acquisition was instead extracted into
+`scripts/lib/commons-photography.ts` and given a **second driver** that stages
+into a place the app cannot see.
+
+| | |
+|---|---|
+| `data/recipe-candidates/<batch>.json` | proposed dish identities — slug, both names, cuisine, core ingredient slugs, search names |
+| `assets/recipe-candidates/` | staged photographs; not bundled, not indexed |
+| `data/images/candidate-manifest.json` | the same provenance fields as production |
+| `PHOTO_CANDIDATE_REVIEW.md` | generated; what a person actually looks at |
+| `npm run images:promote` | the only door into production, by name, refusing any dish with no recipe |
+
+Extracted rather than copied, because a second licence-and-relevance
+implementation is a second place to get a licence wrong and the weaker of the
+two decides what lands in the repository. The no-duplicate-photograph rule now
+spans both manifests in both directions, in the gate as well as the
+acquisition.
+
+### The re-run of the existing acquisition bought one photograph
+
+Dispatched on the branch with `force=false`: 67 → **68 of 161 (41.6% →
+42.2%)**, one new photograph (`banana-milkshake`), 93 recipes still on the
+branded fallback. Worth doing and worth not having assumed: 93 of the 94
+misses were misses again.
+
+Reading the log is more useful than the number. Every failure was a recipe
+with a DESCRIPTIVE ENGLISH SLUG rather than a dish name —
+`quick-vegetable-fried-rice`, `sheet-pan-sausage-veg`, `cobb-style-bowl`.
+Wikipedia has no article for those, Commons has no category, and the phrase
+search matches nothing. A named dish is findable; a recipe title is not. That
+is now the first rule for choosing candidates, and it is not a trick: a dish
+with a name is also a dish a user asks for by name.
+
+### 23 of 24 candidates found a photograph. 11 survived a person looking at them
+
+This is the entire justification for the preflight, so the arithmetic is worth
+stating plainly: **the mechanical checks passed 23, and 12 of those 23 were
+wrong.** A pipeline that promoted on metadata alone would have shipped a
+Colombian meat barbecue as grilled corn.
+
+| Outcome | Count |
+|---|---:|
+| Acceptable, promoted | 11 |
+| Refused on human review | 12 |
+| No sufficiently relevant licensed image at all | 1 (`belila`) |
+
+What the twelve actually were, because the categories repeat:
+
+- **A different dish entirely** (4) — a Colombian *asado* for grilled corn,
+  gherkins and pickled onions for pink pickled turnips, salted lassi with
+  chapati for mango lassi, a block of uncut cured basterma for eggs with
+  basterma.
+- **The dish is in the frame but is not the subject** (3) — four cheeseburgers
+  around the hash browns, a Thanksgiving spread with mash as a bit part, a
+  plate of fried bhaji with the chai in the corner.
+- **Alcohol or an unidentifiable bottle in frame** (2) — a carafe of white
+  wine beside an otherwise perfect *cacio e pepe*, and a dark long-necked
+  bottle beside the hibiscus that could not be ruled out. The same call was
+  made before on a burger and a mushroom risotto; a catalogue built for Egypt
+  does not get to be inconsistent about this.
+- **Somebody else's trademark** (1) — a branded bottle of apricot syrup filling
+  the frame, which is also a bought concentrate rather than the drink.
+- **Unusable quality** (2) — a blurred snapshot with several people's hands and
+  bodies in it, and a plain mug of filter coffee that says nothing about being
+  Turkish coffee.
+
+All twelve are in `data/images/rejected.json` with the reason. The refusal is
+permanent, applies to production as well as to candidates, and both validators
+refuse a manifest containing one.
+
+### Coverage went UP, which was the condition
+
+| | before | after |
+|---|---:|---:|
+| Recipes | 161 | **172** |
+| Photographs | 67 → 68 | **79** |
+| Photo coverage | 41.6% → 42.2% | **45.9%** |
+| ≤5 total ingredient lines | 4 | **15** |
+| Egyptian | 36 (22.4%) | **43 (25.0%)** |
+| Distinct catalogue ingredients used | 172 | 174 |
+
+Eleven of the fifteen short recipes now carry a photograph. The near-duplicate
+check is unchanged at the same nine pairs, so nothing in the batch is a variant
+of something already there, and small-kitchen reachability improved on every
+probe the audit runs.
+
+### The batch found a shipped safety defect
+
+`satisfiesDiet` infers vegan and vegetarian from three signals: meat, seafood,
+and the dairy and eggs allergens. **Honey is none of those.** So a recipe of
+flour, yeast, sugar, oil and honey answered YES to vegan — and the gate written
+to stop that immediately found **two recipes already in the catalogue**, cold
+sesame noodles and the crunchy peanut salad, both tagged `vegan` and both
+containing honey.
+
+Nothing had ever exposed it because no recipe existed that was honey-sweetened
+and otherwise plant-based. Writing one did.
+
+Fixed in three places, because a declared tag short-circuits the inference:
+`NON_VEGAN_SLUGS` in `safety.ts` (honey, honeycomb, gelatin; gelatin also fails
+vegetarian), the same rule in the importer so a recipe cannot CLAIM vegan
+falsely, and a regression suite asserting both halves plus a
+non-vacuousness check. The two existing recipes had their LABEL corrected —
+the honey stays, because removing an ingredient to make a tag true is changing
+the food to fit the claim.
+
+`stock-cube` is deliberately NOT on the list. Vegetable and chicken stock cubes
+sit on the same Egyptian shelf and the catalogue has one generic row; guessing
+either way is worse than the honest gap.
+
+### A dead field, found the same way
+
+`prepAr` was accepted by the recipe importer's type and never emitted — silently
+dropped. It was discovered by writing Arabic into it and watching the
+localisation test fail anyway. The field is gone rather than left as a trap;
+preparation phrases belong in the shared `PREPARATION_AR` dictionary, which is
+where the other 74 live and where the test looks.
+
+### The thirteen dishes with no photograph are not abandoned
+
+They keep their candidate entries. Twelve now have a refusal recorded against
+the file that was offered, which means the next acquisition run will not offer
+it again and will reach for the next candidate down. That is the mechanism
+working as intended, and it is why the rejections were written down rather than
+just acted on.
+
 ## 10. Staged implementation plan
 
-Each stage ends with the probe re-run and its number recorded. No stage begins
+Each stage ends with its number re-measured and recorded. No stage begins
 before the previous one's number has moved.
 
-| Stage                              | Work                                                                                                                                                                                                                                                           | Measured exit condition                                                                                        |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **0. Instrument**                  | ✅ Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, benchmark hygiene checks                                                                                                                                    | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named                            |
-| **1. Aliases only**                | ✅ **Done** — three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided                                                                                                                            | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten are missing concepts, not vocabulary) |
-| **2A. Benchmark-gap closure**      | ✅ **Done** — the 14 concepts the Stage 1 measurement proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix                                                                             | **99% correct**, dead ends **0**, **cross-group 0**; 2 wrong answers left, both the one recorded drumstick conflict                    |
-| **2A.1. Family semantics**         | ✅ **Done** — family invariant fixed, chicken declared bilingually, drumstick row added and the alias conflict settled, inferred families restricted to head nouns                                                                              | **100% correct**, dead ends 0, wrong answers of any kind **0**; inferred families 116 → 65                                            |
-| **2A.2. Native/semantic cleanup**  | ✅ **Done** — bare `رومي` freed from the turkey row, form words (`powder`, `cube`, `flake`) denied as families, MSA transliterations documented as secondary                                                                     | Regression state held: dead ends 0, wrong 0 of either kind, collisions 0; inferred families 65 → 62                                   |
-| **2B. P0 ingredients**             | ✅ **Done** — batch 1 added the nine P0 concepts that survived the §3c rules; the rest of the list was already satisfied, a dish, a form, or too generic. 272 → **281** rows, 1100 → **1160** aliases                                    | Benchmark held at 258/258; dead ends 0, wrong 0 of either kind, collisions 0; no new accidental families                              |
-| ~~2B (original estimate)~~         | ~~~100 rows — revised down by §3c, which removed dishes, duplicate cheeses and frozen forms: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy. Each at the Stage-1 alias standard and passing the §3c ontology rules | Correct **≥92%**, dead ends **≤10**, **cross-group = 0**                                                       |
-| **3. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms                                                                                                                                 | A typed unknown is visibly distinct, still never matches a recipe, and is counted                              |
-| **4. P1 ingredients**              | ~170 rows: legumes, breads, seafood, canned, baking, condiments, international                                                                                                                                                                                 | Correct **≥95%** on the development benchmark, catalogue ~530                                                  |
-| **5. Recipes to 300**              | The six batches in §8, each paired with any ingredients it needs **and its photography**                                                                                                                                                                       | Every §8 target met; ≤5-ingredient recipes ≥44; Egyptian ≥30%; **photo coverage never below 42%**              |
-| **6. Prices**                      | P0 then P1 from §9, tied to the recipe batches                                                                                                                                                                                                                 | Slot coverage **≥95%**                                                                                         |
-| **7. Long tail**                   | ~100 P2 rows only if the benchmark still shows gaps                                                                                                                                                                                                            | Development benchmark ≥95% sustained; stop when it plateaus                                                    |
-| **8. Holdout validation**          | Collect and seal the independent holdout per §3b, label it with a native speaker, run it **once**                                                                                                                                                              | **≥90% correct and 0 cross-group on the holdout.** This, not the development benchmark, gates launch           |
+**Rewritten after Stage 2D.** The version below it described a P1 phase of
+~170 rows reaching a ~530-row catalogue, and a single "recipes to 300" stage.
+Neither survived contact with the work: the census showed most of that P1 list
+was already satisfied, a dish, a form or too generic, and the ingredient phase
+stopped honestly at 378 rows rather than padding to a target (§9k). The
+superseded rows are kept struck through rather than deleted, because the
+estimates being wrong is itself part of the record.
 
-**Review gates.** Stages 1–2 and 4 add data that a native Egyptian speaker
-should review before it ships — transliteration quality is the whole point and
-is not something to take on trust from a generator. Stage 5 needs the same for
-recipe text. Build the review into the batch size: batches of 40–60, not 500.
+### Done
+
+| Stage | Work | Measured exit condition |
+| --- | --- | --- |
+| **0. Instrument** | Truth-labelled benchmark: five measured outcomes, the safety invariant, alias-collision checks, hygiene checks | 75% correct / 17% dead / **14 cross-group** recorded; 1 known alias collision named |
+| **1. Aliases only** | Three batches, 257 ingredients unchanged, 717 → 997 aliases, three wrong aliases removed, the `حمص` collision decided | **86% correct** (target ≥85% ✅), cross-group 10 (target ≤5 ❌ — all ten missing concepts, not vocabulary) |
+| **2A. Benchmark-gap closure** | The 14 concepts Stage 1 proved missing, in two batches, plus the cheese and red-lentil ontology corrections and the `whole chicken` normaliser fix | **99% correct**, dead ends **0**, **cross-group 0** |
+| **2A.1. Family semantics** | Family invariant fixed, chicken declared bilingually, drumstick settled, inferred families restricted to head nouns | **100% correct**, wrong answers of any kind **0**; inferred families 116 → 65 |
+| **2A.2. Native/semantic cleanup** | Bare `رومي` freed from the turkey row, form words denied as families, MSA transliterations documented as secondary | Regression state held; inferred families 65 → 62 |
+| **2B. P0 ingredients** | The nine P0 concepts that survived the §3c rules; the rest were already satisfied, a dish, a form, or too generic. 272 → **281** rows | Benchmark 258/258; dead ends 0, wrong 0, collisions 0 |
+| **2C. Coverage census + P1** | A 525-concept census written without reference to the catalogue (§9g), then the P1 concepts it justified | Census exists and is CI-gated; the benchmark demoted to a regression suite |
+| **2D-A. Split the metric** | Ontology coverage separated from input coverage; every declared form/brand must now reach a named base slug, verified not asserted (§9j) | Honest ontology coverage fell 71% → **49%** on measurement alone. This is the most useful number in the document |
+| **2D-A2. Arabic normaliser** | The noise list was entirely English in an Arabic-first app | Input coverage 49% → **61%** |
+| **2D-B. Allergen semantics** | `possibleAllergens` added: intrinsic vs brand-dependent, distinct in effect. Corn-flakes and burger-patty gluten moved (§9h) | 12 rows carry possible allergens; 6 safety tests; migration written, **not applied to hosted** |
+| **2D-C / 2D-D. Ingredients to the plateau** | Eleven P1 concepts, then five P2 batches sized by the weakest census categories | 301 → **378** rows, 1351 → **1698** aliases; ontology **89.8%**, input **77.6%** concepts / **86.4%** terms |
+| **3P. Photography preflight** | The acquisition extracted into one shared implementation with two drivers; a candidate path that stages photography for dishes that are not yet recipes; `images:promote` as the only door into production | `images:check` **unweakened**; `images:check-candidates` added to CI; candidate batch 1 declared |
+
+**Where the ingredient phase stopped, and why it is not 90%.** 89.8% is 0.2
+short of the target deliberately. Three rows would have crossed it — cake mix,
+cake sprinkles, cocoa butter — and none earned one; §7 is explicit that every
+extra row is another candidate in the fuzzy tier, so a catalogue padded to hit
+a number makes search worse. The remaining 44 gaps are itemised by reason in
+§9k. The way past that ceiling is the sealed holdout telling us which of the 44
+real users type, not more rows.
+
+### Current roadmap
+
+| Stage | Work | Measured exit condition |
+| --- | --- | --- |
+| **3. Recipes, batch by batch** | Each batch is: declare the dish identities → run the candidate acquisition → a human reviews `PHOTO_CANDIDATE_REVIEW.md` → write recipes for the dishes that survived → promote their photographs in the same batch. Batch 1 is 24 genuinely ≤5-line recipes (§9m, resized) | Per batch: photo coverage **never below 41.6%**, and rising toward 60%. Overall: ≤5-ingredient recipes ≥44; Egyptian ≥30%; recipes ~300 |
+| **4. Prices** | The ranked backlog in `PRICE_BACKLOG.md`, re-ranked after each recipe batch because new recipes change which gaps block an estimate | Slot coverage **≥95%** (76.2% now; the top ~60 of 102 reach it) |
+| **5. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms | A typed unknown is visibly distinct, still never matches a recipe, and is counted |
+| **6. Long tail, only if asked for** | P2 rows only where the holdout shows real users typing them | Do not start before Stage 8. The census is a discovery set and may not justify its own expansion |
+| **7. Native-speaker review** | The carried-forward questions in §9i, and the Arabic recipe text from every Stage 3 batch | Each item answered or explicitly deferred with a reason. `rekab` stays unguessed until somebody knows |
+| **8. Holdout validation** | Collect and seal the independent holdout per §3b from real Egyptian beta users, label it with a native speaker, run it **once** | **≥90% correct and 0 cross-group on the holdout.** This, not the development benchmark, gates launch |
+
+**The holdout does not exist yet, and must not be manufactured.** A holdout
+written by the same process that built the catalogue measures nothing. Its
+collection protocol may be prepared; its contents may not be invented.
+
+### Superseded
+
+| ~~Stage~~ | ~~Plan~~ | ~~Why it was replaced~~ |
+| --- | --- | --- |
+| ~~2B (original estimate)~~ | ~~~100 rows: Egyptian meat cuts, poultry cuts, the three real Egyptian cheeses, breakfast/packaged, dairy~~ | ~~§3c removed the dishes, duplicate cheeses and frozen forms; nine survived~~ |
+| ~~4. P1 ingredients~~ | ~~~170 rows reaching a ~530-row catalogue~~ | ~~The census showed most were already satisfied, a dish, a form, or too generic. The real phase added 77 rows to 378 and stopped where the ontology stopped~~ |
+| ~~5. Recipes to 300~~ | ~~The six §8 batches, each paired with its photography~~ | ~~Right in substance, wrong in order: it assumed photography could follow the recipes, and the image pipeline cannot photograph a dish that is not already a recipe. Replaced by the preflight in Stage 3~~ |
+| ~~photo coverage never below 42%~~ | ~~A rounded floor~~ | ~~The measured pre-Stage-3 baseline is 67/161 = **41.6%**, raised to 68/161 = **42.2%** by the Stage 3P re-run. A floor quoted at a rounded number is a floor that can be met by rounding~~ |
+
+**Review gates.** Every stage that adds Arabic text needs a native Egyptian
+speaker before it ships — transliteration quality is the whole point and is not
+something to take on trust from a generator. Build the review into the batch
+size: batches of 12–24, not 500.
 
 ### What this plan deliberately does not do
 
-- It does not generate ingredients or recipes in bulk before Stage 1 proves the
-  alias lever works.
-- It does not change the search algorithm while aliases are sparse, because
-  today the fuzzy tier is carrying real load and removing it would convert
-  wrong answers into dead ends without adding a single right one.
-- It does not create brand rows, a SKU catalogue, or any live-price,
-  stock, partner or delivery concept.
-- It does not change the schema. The two changes that eventually earn their
-  place — an alias table and an unknown-term table — are listed in §5 for
-  separate approval.
+- It does not add ingredient rows to move a coverage percentage. The 44
+  remaining gaps are listed by reason; none is a gap a Cairo cook hits in an
+  ordinary week.
+- It does not change the search algorithm. The fuzzy tier is carrying real
+  load, and every row added to the catalogue is another candidate in it.
+- It does not create brand rows, a SKU catalogue, or any live-price, stock,
+  partner or delivery concept.
+- It does not attach a photograph to a recipe to protect a percentage. A dish
+  with no honest photograph either waits for one or is replaced in the batch by
+  another dish that goes through the same preflight.
+- It does not apply the `possibleAllergens` migration to hosted Supabase. The
+  hosted database is behind the repository catalogue and stays there until
+  somebody decides otherwise.

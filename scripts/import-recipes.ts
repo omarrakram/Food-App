@@ -51,8 +51,15 @@ type RawIngredient = {
   slug: string;
   quantity?: number | null;
   unit?: string | null;
+  /**
+   * English only, and deliberately. The Arabic lives in
+   * `PREPARATION_AR` in `features/recipes/localise.ts`, because it is
+   * SHARED vocabulary: a hundred-odd ingredient lines use a few dozen
+   * phrases, and writing the Arabic out per line guarantees they drift.
+   * A `prepAr` field was accepted here for a while and never emitted —
+   * silently dropped — so it is gone rather than left as a trap.
+   */
   prep?: string | null;
-  prepAr?: string | null;
   optional?: boolean;
   garnish?: boolean;
   staple?: boolean;
@@ -254,6 +261,22 @@ function dietContradictions(recipe: RawRecipe): string[] {
     for (const animal of ['dairy', 'eggs'] as const) {
       if (allergens.has(animal)) problems.push(`tagged vegan but contains ${animal}`);
     }
+    // Honey has no allergen and is not meat, so nothing above catches it. A
+    // recipe that declares itself vegan is TRUSTED by `satisfiesDiet` — the
+    // declaration short-circuits the inference — so this is the only place a
+    // false vegan claim can be stopped.
+    for (const line of recipe.ingredients) {
+      if (NON_VEGAN_SLUGS.has(line.slug)) {
+        problems.push(`tagged vegan but contains ${line.slug}`);
+      }
+    }
+  }
+  if (recipe.dietTags.includes('vegetarian')) {
+    for (const line of recipe.ingredients) {
+      if (NON_VEGETARIAN_SLUGS.has(line.slug)) {
+        problems.push(`tagged vegetarian but contains ${line.slug}`);
+      }
+    }
   }
   if (recipe.dietTags.includes('pescatarian')) {
     const hasLandMeat = recipe.ingredients.some((line) => {
@@ -267,6 +290,18 @@ function dietContradictions(recipe: RawRecipe): string[] {
   }
   return problems;
 }
+
+/**
+ * Animal products with no allergen and no meat category.
+ *
+ * Must stay in step with `NON_VEGAN_SLUGS` in `features/recipes/safety.ts`,
+ * which is where the runtime inference lives. Two copies because they answer
+ * different questions — that one decides what to SHOW a vegan, this one
+ * decides what a recipe may CLAIM — and a gate that imports its rule from the
+ * thing it is checking can only ever agree with it.
+ */
+const NON_VEGAN_SLUGS = new Set(['honey', 'honeycomb', 'gelatin']);
+const NON_VEGETARIAN_SLUGS = new Set(['gelatin']);
 
 /** Catalogue proteins that are not animal flesh. */
 const VEGETARIAN_PROTEINS = new Set([

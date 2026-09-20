@@ -5,7 +5,7 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-19 |
+| **Last updated** | 2026-09-20 |
 | **Current phase** | **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
@@ -755,17 +755,17 @@ the 8MB limit, the 320px floor.
 ## The ingredient data phase (Stages 1 – 2D)
 
 The catalogue went from 257 rows to **378**, and the aliases from 717 to
-**1695**. But row count was never the point, and two measurements say what
+**1698**. But row count was never the point, and two measurements say what
 actually changed.
 
 | | Start | Now |
 |---|---:|---:|
 | Canonical ingredients | 257 | **378** |
-| Aliases | 717 | **1695** |
+| Aliases | 717 | **1698** |
 | Development benchmark (258 terms) | 190/254 (75%) | **258/258**, zero dead ends, zero wrong of either kind |
 | Coverage census — ontology | — | **89.8%** of 431 actionable concepts |
-| Coverage census — input, concepts | — | **77.2%** |
-| Coverage census — input, terms | — | **86.2%** |
+| Coverage census — input, concepts | — | **77.6%** |
+| Coverage census — input, terms | — | **86.4%** |
 | Inferred ingredient families | — | 85, audited |
 
 ### Three measurements, and only one of them is validation
@@ -809,6 +809,58 @@ with coeliac disease to read a label we already knew was risky. Diet semantics
 A migration creates `ingredient_possible_allergens`. **It has not been applied
 to hosted Supabase.**
 
+## The recipe phase (Stage 3P onwards)
+
+**Photography is decided BEFORE the recipe is written, not after.** The old
+order could not be executed: the acquisition reads `RECIPE_CATALOGUE` and the
+validator refuses a manifest naming a recipe that does not exist, so a dish
+could not be photographed until it had already been written. That is how 94
+recipes ended up on a branded fallback.
+
+Neither rule was relaxed. The acquisition was extracted into one shared
+implementation with two drivers, and the candidate driver stages into
+`assets/recipe-candidates/` — not bundled, not indexed, invisible to the app.
+`npm run images:promote` is the only door into production, takes dish names,
+and refuses any dish that has no recipe.
+
+| | Before | After batch 1 |
+|---|---:|---:|
+| Recipes | 161 | **172** |
+| Photographs | 67 (41.6%) | **79 (45.9%)** |
+| ≤5 TOTAL ingredient lines | 4 | **15** |
+| Egyptian | 36 (22.4%) | **43 (25.0%)** |
+
+"≤5" counts every line, including salt and oil. Nothing is laundered through
+staple, optional or garnish flags.
+
+### Why the human review step is not optional
+
+Batch 1 proposed 24 dishes. The mechanical checks — licence, size, format,
+category, no-duplicate, pork-and-alcohol — passed **23** of them. A person then
+looked at all 23 and **12 were wrong**: a Colombian meat barbecue offered as
+grilled corn, gherkins for pickled turnips, a block of cured meat for a dish of
+eggs, four cheeseburgers around the hash browns, a carafe of wine beside the
+pasta, a branded syrup bottle, a blurred snapshot full of strangers.
+
+Every refusal is in `data/images/rejected.json` with its reason. The refusal is
+permanent, applies to production as well as candidates, and both validators
+reject a manifest containing one. `PHOTO_CANDIDATE_REVIEW.md` is the page the
+reviewing happens on; its image references are relative repository paths so
+GitHub renders them inline.
+
+### The batch found a shipped safety defect
+
+`satisfiesDiet` inferred vegan from three signals — meat, seafood, and the
+dairy and eggs allergens. **Honey is none of those**, so a honey-sweetened
+plant recipe answered yes to vegan. The gate written to stop that immediately
+found two recipes already shipping with a `vegan` tag and honey in them.
+
+Fixed in the engine, in the importer (a declared tag short-circuits the
+inference, so the claim has to be refused too) and pinned by a regression
+suite. The two existing recipes had their LABEL corrected; the honey stays,
+because removing an ingredient to make a tag true is changing the food to fit
+the claim.
+
 ## Last known passing state
 
 Verified on `claude/expo-rn-setup-mom5gw` (also the repository's default
@@ -818,17 +870,18 @@ branch):
 |---|---|---|
 | Typecheck, app AND build scripts | `npm run typecheck` | **pass**, 0 errors. Do not substitute `npx tsc --noEmit`; it silently skips `scripts/` — see **CI** below |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 916/916 across 64 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 934/934 across 66 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Image manifest | `npm run images:check` | **pass**, 67 of 161 (**41.6%** — the ceiling that stopped the recipe expansion, see below); licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
-| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags**. The nine pairs above 0.7 were reviewed one by one and all nine are distinct dishes |
-| Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.2%, **zero declared forms whose aliasing is broken** |
+| Image manifest | `npm run images:check` | **pass**, **79 of 172 (45.9%)** — was 67 of 161 (41.6%) before the Stage 3P preflight; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
+| Candidate image manifest | `npm run images:check-candidates` | **pass** — 0 staged, 13 candidates with no acceptable image. Staged photography is committed photography, so it is held to the same licence standard |
+| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 172 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags**. The nine pairs above 0.7 were reviewed one by one and all nine are distinct dishes |
+| Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.6%, **zero declared forms whose aliasing is broken** |
 | Ingredient families | `npm run audit:families` | reports only — 1 declared, 85 inferred |
-| Price backlog | `npm run audit:prices` | reports only — **76.2%** of required slots priced, 102 gaps ranked |
+| Price backlog | `npm run audit:prices` | reports only — **76.2%** of required slots priced, 104 gaps ranked |
 | Whole-app browser walk | `npm run smoke:web` | **pass**, 228 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |

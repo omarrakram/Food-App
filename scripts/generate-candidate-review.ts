@@ -28,6 +28,7 @@ import { join } from 'node:path';
 const ROOT = join(import.meta.dirname, '..');
 const CANDIDATE_DIR = join(ROOT, 'data', 'recipe-candidates');
 const MANIFEST = join(ROOT, 'data', 'images', 'candidate-manifest.json');
+const PRODUCTION = join(ROOT, 'data', 'images', 'manifest.json');
 const OUTPUT = join(ROOT, 'PHOTO_CANDIDATE_REVIEW.md');
 
 type Candidate = {
@@ -69,9 +70,31 @@ function manifest(): Manifest {
   return JSON.parse(readFileSync(MANIFEST, 'utf8')) as Manifest;
 }
 
+/**
+ * Candidates whose photograph has already been promoted.
+ *
+ * Read because a promoted candidate LEAVES the candidate manifest, and without
+ * this the page reported eleven dishes that are on recipe cards right now as
+ * "not attempted yet". A review surface that misstates the state is worse than
+ * no review surface, because somebody acts on it.
+ */
+function promoted(): Map<string, { creator: string; license: string }> {
+  if (!existsSync(PRODUCTION)) return new Map();
+  const live = JSON.parse(readFileSync(PRODUCTION, 'utf8')) as {
+    images: { recipeSlug: string; creator: string; license: string }[];
+  };
+  return new Map(
+    live.images.map((entry) => [
+      entry.recipeSlug,
+      { creator: entry.creator, license: entry.license },
+    ]),
+  );
+}
+
 function main(): void {
   const all = batches();
   const staged = manifest();
+  const live = promoted();
   const byslug = new Map(staged.images.map((entry) => [entry.candidateSlug, entry]));
   const skippedBySlug = new Map(staged.skipped.map((entry) => [entry.candidateSlug, entry.reason]));
 
@@ -103,16 +126,41 @@ function main(): void {
 
   for (const batch of all) {
     const withImage = batch.candidates.filter((entry) => byslug.has(entry.slug));
-    const without = batch.candidates.filter((entry) => !byslug.has(entry.slug));
+    const done = batch.candidates.filter(
+      (entry) => !byslug.has(entry.slug) && live.has(entry.slug),
+    );
+    const without = batch.candidates.filter(
+      (entry) => !byslug.has(entry.slug) && !live.has(entry.slug),
+    );
 
     lines.push(
       `## ${batch.batch}`,
       '',
       batch.intent,
       '',
-      `**${withImage.length} of ${batch.candidates.length} have a candidate photograph.**`,
+      `**${batch.candidates.length} candidates: ${done.length} reviewed and shipped, ` +
+        `${withImage.length} waiting to be looked at, ${without.length} with nothing acceptable.**`,
       '',
     );
+
+    if (done.length > 0) {
+      lines.push(
+        `### Already promoted (${done.length})`,
+        '',
+        'Reviewed, written as recipes, and now on a card. Their photographs live in',
+        '`assets/recipes/` and are validated by `npm run images:check`.',
+        '',
+        '| Dish | Creator | Licence |',
+        '|---|---|---|',
+      );
+      for (const candidate of done) {
+        const image = live.get(candidate.slug)!;
+        lines.push(
+          `| ${candidate.name} (\`${candidate.slug}\`) | ${image.creator} | ${image.license} |`,
+        );
+      }
+      lines.push('');
+    }
 
     for (const candidate of withImage) {
       const image = byslug.get(candidate.slug)!;
@@ -159,9 +207,12 @@ function main(): void {
   writeFileSync(OUTPUT, `${lines.join('\n')}\n`);
 
   const total = all.reduce((sum, batch) => sum + batch.candidates.length, 0);
+  const shipped = all
+    .flatMap((batch) => batch.candidates)
+    .filter((entry) => !byslug.has(entry.slug) && live.has(entry.slug)).length;
   console.log(
-    `PHOTO_CANDIDATE_REVIEW.md written: ${staged.images.length} of ${total} candidate(s) ` +
-      'have a photograph to look at.',
+    `PHOTO_CANDIDATE_REVIEW.md written: of ${total} candidate(s), ${shipped} promoted, ` +
+      `${staged.images.length} waiting to be looked at.`,
   );
 }
 

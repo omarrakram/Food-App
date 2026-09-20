@@ -20,6 +20,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Sapanabehl · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Aloo_Ghobi.jpg",
   },
+  "aseer-limon": {
+    source: require('../../../assets/recipes/aseer-limon.jpg') as number,
+    creator: "HarshLight",
+    license: "CC-BY-2.0",
+    attribution: "HarshLight · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Lemonade_-_27682817724.jpg",
+  },
   "bamia-vegetarian": {
     source: require('../../../assets/recipes/bamia-vegetarian.jpg') as number,
     creator: "Tamorlan",
@@ -54,6 +61,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "secretlondon123 from London, England · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Batata_harra.jpg",
+  },
+  "batata-mashwiya": {
+    source: require('../../../assets/recipes/batata-mashwiya.jpg') as number,
+    creator: "국립국어원",
+    license: "CC-BY-SA-2.0",
+    attribution: "국립국어원 · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Gungoguma_(roasted_sweet_potatoes)_2.jpg",
   },
   "beef-burger-homemade": {
     source: require('../../../assets/recipes/beef-burger-homemade.jpg') as number,
@@ -160,6 +174,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "aimee rivers · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Daal_after_Tadka_Pulse_Soup_India.jpg",
   },
+  "dukkah-baladi": {
+    source: require('../../../assets/recipes/dukkah-baladi.jpg') as number,
+    creator: "Miansari66",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Dukka_Masala.JPG",
+  },
   "egg-drop-soup": {
     source: require('../../../assets/recipes/egg-drop-soup.jpg') as number,
     creator: "Sharon Chen from Austin, United States",
@@ -174,12 +195,33 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: null,
     sourcePage: "https://commons.wikimedia.org/wiki/File:Fattoush.JPG",
   },
+  "focaccia": {
+    source: require('../../../assets/recipes/focaccia.jpg') as number,
+    creator: "Fred Benenson",
+    license: "CC-BY-SA-4.0",
+    attribution: "Fred Benenson · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Focaccia_with_Crumb.jpg",
+  },
+  "french-toast": {
+    source: require('../../../assets/recipes/french-toast.jpg') as number,
+    creator: "Jonathunder",
+    license: "CC-BY-SA-3.0",
+    attribution: "Jonathunder · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:FrenchToast.JPG",
+  },
   "ful-medames-classic": {
     source: require('../../../assets/recipes/ful-medames-classic.jpg') as number,
     creator: "Zachbe at en.wikipedia",
     license: "CC-BY-SA-3.0",
     attribution: "Zachbe at en.wikipedia · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Ful_medames.jpg",
+  },
+  "garlic-bread": {
+    source: require('../../../assets/recipes/garlic-bread.jpg') as number,
+    creator: "Popo le Chien",
+    license: "CC-BY-SA-3.0",
+    attribution: "Popo le Chien · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Garlicbread.jpg",
   },
   "garlic-green-beans": {
     source: require('../../../assets/recipes/garlic-green-beans.jpg') as number,
@@ -194,6 +236,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "User:Jpatokal · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Greece_Food_Horiatiki.JPG",
+  },
+  "grilled-halloumi": {
+    source: require('../../../assets/recipes/grilled-halloumi.jpg') as number,
+    creator: "Unknown",
+    license: "CC-BY-SA-3.0",
+    attribution: "Unknown · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Grilled_haloumi_cheese.jpg",
   },
   "guacamole": {
     source: require('../../../assets/recipes/guacamole.jpg') as number,
@@ -243,6 +292,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "Ayshamarjana · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Cream_cheese_kunafa.jpg",
+  },
+  "lokmet-el-qadi": {
+    source: require('../../../assets/recipes/lokmet-el-qadi.jpg') as number,
+    creator: "Aldousari",
+    license: "CC-BY-SA-3.0",
+    attribution: "Aldousari · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Lgemat.JPG",
   },
   "mac-and-cheese-baked": {
     source: require('../../../assets/recipes/mac-and-cheese-baked.jpg') as number,
@@ -391,12 +447,26 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG",
   },
+  "sahlab": {
+    source: require('../../../assets/recipes/sahlab.jpg') as number,
+    creator: "DesignbyNur",
+    license: "CC-BY-SA-3.0",
+    attribution: "DesignbyNur · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Salep_drink.jpg",
+  },
   "salata-baladi": {
     source: require('../../../assets/recipes/salata-baladi.jpg') as number,
     creator: "أحمد ناجي",
     license: "CC-BY-SA-4.0",
     attribution: "أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
+  },
+  "salatet-tahina": {
+    source: require('../../../assets/recipes/salatet-tahina.jpg') as number,
+    creator: "Gilabrand",
+    license: "CC-BY-SA-3.0",
+    attribution: "Gilabrand · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tahina.JPG",
   },
   "shakshuka": {
     source: require('../../../assets/recipes/shakshuka.jpg') as number,
@@ -418,6 +488,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "Garrett Ziegler · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tavuk_%C5%9Ei%C5%9F.jpg",
+  },
+  "shorbet-tamatem": {
+    source: require('../../../assets/recipes/shorbet-tamatem.jpg') as number,
+    creator: "Ella Olsson from Stockholm, Sweden",
+    license: "CC-BY-2.0",
+    attribution: "Ella Olsson from Stockholm, Sweden · CC-BY-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tomato_soup,_plant-based_(44040252791).jpg",
   },
   "spaghetti-aglio-olio": {
     source: require('../../../assets/recipes/spaghetti-aglio-olio.jpg') as number,

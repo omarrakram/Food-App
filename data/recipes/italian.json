@@ -2271,5 +2271,260 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "focaccia",
+    "title": "Olive Oil Flatbread",
+    "titleAr": "خبز الزيت الإيطالي",
+    "description": "Flour, water, salt, yeast and a great deal of olive oil. No kneading at all — the long rise does the work, and the dimples are what hold the oil.",
+    "descriptionAr": "دقيق ومية وملح وخميرة وزيت زيتون كتير. من غير عجن خالص — التخمير الطويل هو اللي بيشتغل، والغمّازات دي اللي بتمسك الزيت.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 130,
+    "cookMinutes": 25,
+    "servings": 8,
+    "nutrition": {
+      "calories": 290,
+      "protein": 7,
+      "carbs": 47,
+      "fat": 8,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "italian",
+      "oven",
+      "budget",
+      "vegan",
+      "batch-cook"
+    ],
+    "image": {
+      "path": "curated/focaccia.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 375,
+        "unit": "ml",
+        "prep": "lukewarm"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 80,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 10,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Stir the flour, yeast and salt together, then add the water and two tablespoons of the oil. Mix to a wet, shaggy dough and stop. There is no kneading in this.",
+        "textAr": "قلّب الدقيق والخميرة والملح مع بعض، وبعدين ضيف المية ومعلقتين من الزيت. اخلطهم لحد ما تبقى عجينة رطبة ومش متماسكة وبطّل. مفيش عجن هنا.",
+        "minutes": 10,
+        "uses": [
+          "flour",
+          "yeast",
+          "salt",
+          "water",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover and leave for 90 minutes to 2 hours, until it has doubled and the surface is full of bubbles. Warm kitchen, less time.",
+        "textAr": "غطيها وسيبها من ساعة ونص لساعتين، لحد ما تبقى الضعف ووشها يمتلي فقاقيع. المطبخ الدافي بيقلل الوقت.",
+        "minutes": 100,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour half the remaining oil into a shallow tray, tip the dough in and coax it towards the corners with your fingers. Rest 20 minutes — it will stretch the rest of the way on its own.",
+        "textAr": "صب نص الزيت الباقي في صينية واطية، اقلب العجينة فيها ومدّها ناحية الأركان بصوابعك. سيبها ترتاح ٢٠ دقيقة — هتتمد لوحدها لآخر الصينية.",
+        "minutes": 22,
+        "uses": [
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Press your oiled fingers straight down all over it to make deep dimples, then pour the rest of the oil over the top and scatter a little coarse salt.",
+        "textAr": "اكبس بصوابعك المدهونة بالزيت لتحت في كل حتة فيها عشان تعمل غمّازات عميقة، وبعدين صب باقي الزيت فوقها ورش شوية ملح خشن.",
+        "minutes": 3,
+        "uses": [
+          "olive-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake at 220°C for 22 to 25 minutes until deep gold and crisp underneath. Eat it warm, the same day.",
+        "textAr": "اخبزها على ٢٢٠ درجة من ٢٢ لـ ٢٥ دقيقة لحد ما تبقى دهبية غامقة ومقرمشة من تحت. كلها دافية في نفس اليوم.",
+        "minutes": 25,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "garlic-bread",
+    "title": "Garlic Butter Bread",
+    "titleAr": "عيش بالتوم والزبدة",
+    "description": "Made on baladi bread rather than a baguette, because that is what is in the kitchen. The butter has to go right to the edges or the edges just burn.",
+    "descriptionAr": "معمول بعيش بلدي مش بالباجيت، لأن ده اللي موجود في البيت. الزبدة لازم توصل للحرف خالص وإلا الحرف هيتحرق وبس.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "snack",
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 8,
+    "cookMinutes": 10,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 6,
+      "carbs": 33,
+      "fat": 18,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "italian",
+      "oven",
+      "quick",
+      "budget",
+      "beginner"
+    ],
+    "image": {
+      "path": "curated/garlic-bread.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "baladi-bread",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 80,
+        "unit": "g",
+        "prep": "softened"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 5,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Heat the oven to 200°C. Mash the soft butter with the garlic, the parsley and the salt until it is one green paste.",
+        "textAr": "سخّن الفرن على ٢٠٠ درجة. اهرس الزبدة الطرية مع التوم والبقدونس والملح لحد ما يبقوا عجينة خضرا واحدة.",
+        "minutes": 5,
+        "uses": [
+          "butter",
+          "garlic",
+          "parsley",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Split each loaf open through the middle and spread the butter thickly over the cut sides, all the way to the crust.",
+        "textAr": "افتح كل رغيف من النص وادهن الزبدة بسمك على الوشين المفتوحين، لحد الحرف خالص.",
+        "minutes": 3,
+        "uses": [
+          "baladi-bread",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake for 8 to 10 minutes, until the butter has soaked in and the edges have gone crisp. Cut into fingers and serve hot.",
+        "textAr": "اخبزه من ٨ لـ ١٠ دقايق، لحد ما الزبدة تتشرب والحروف تقرمش. قطّعه أصابع وقدمه سخن.",
+        "minutes": 10,
+        "uses": [
+          "baladi-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

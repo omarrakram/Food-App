@@ -2631,5 +2631,121 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "french-toast",
+    "title": "French Toast",
+    "titleAr": "عيش بالبيض",
+    "description": "Stale toast bread soaked in egg and milk and fried in butter. Five things, ten minutes, and the best thing that can happen to bread that has gone hard.",
+    "descriptionAr": "عيش توست بايت منقوع في بيض ولبن ومقلي في زبدة. خمس حاجات، عشر دقايق، وأحسن حاجة ممكن تحصل لعيش نشف.",
+    "cuisine": "american",
+    "mealTypes": [
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 10,
+    "servings": 2,
+    "nutrition": {
+      "calories": 480,
+      "protein": 18,
+      "carbs": 46,
+      "fat": 25,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "eggs",
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "breakfast",
+      "quick",
+      "beginner",
+      "comfort",
+      "high-protein"
+    ],
+    "image": {
+      "path": "curated/french-toast.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "toast-bread",
+        "quantity": 6,
+        "unit": "slice",
+        "prep": "a day or two old"
+      },
+      {
+        "slug": "eggs",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "milk",
+        "quantity": 120,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "butter",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Beat the eggs, milk and cinnamon together in a dish wide enough to lay a slice flat.",
+        "textAr": "اخفق البيض واللبن والقرفة مع بعض في طبق واسع يكفي إن الشريحة تتحط فيه مفرودة.",
+        "minutes": 3,
+        "uses": [
+          "eggs",
+          "milk",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Soak each slice for about 20 seconds a side. Fresh bread needs less and falls apart; bread that has gone hard can take a minute.",
+        "textAr": "انقع كل شريحة حوالي ٢٠ ثانية على كل وش. العيش الطازة محتاج أقل وبيتفتت؛ العيش الناشف ممكن ياخد دقيقة.",
+        "minutes": 3,
+        "uses": [
+          "toast-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Melt the butter over a medium heat and fry the slices for 2 to 3 minutes a side, until set through and golden. Do not crowd the pan.",
+        "textAr": "دوّب الزبدة على نار متوسطة واقلي الشرايح من دقيقتين لـ ٣ على كل وش، لحد ما تستوي من جوه وتبقى دهبية. متزنقش الطاسة.",
+        "minutes": 8,
+        "uses": [
+          "butter",
+          "toast-bread"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

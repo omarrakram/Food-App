@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| Recipes in the catalogue | 161 |
-| With a photograph | 67 (42%) |
-| Without | 94 (58%) |
+| Recipes in the catalogue | 172 |
+| With a photograph | 79 (46%) |
+| Without | 93 (54%) |
 
 Shooting all of them is a large spend and most of it would be wasted — a
 recipe nobody is served does not need a picture. These 30 are the ones that
@@ -58,4 +58,4 @@ collections. See `scripts/audit-photography.ts` for the weighting.
 3. Re-run `npm run audit:photos`. Photographed recipes drop out and the next
    30 surface.
 
-_64 further unphotographed recipes fall below this cut._
+_63 further unphotographed recipes fall below this cut._

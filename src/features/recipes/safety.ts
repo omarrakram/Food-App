@@ -81,6 +81,29 @@ const MEAT_SLUGS: ReadonlySet<string> = new Set(
   ).map((entry) => entry.slug),
 );
 
+/**
+ * Animal products that no other column can see.
+ *
+ * Vegan and vegetarian are inferred from three signals — meat, seafood, and
+ * the dairy and eggs allergens — and honey answers "no" to all three. So a
+ * recipe of flour, yeast, sugar, oil and honey passed as vegan, which is how
+ * lokmet el qadi was very nearly offered to a vegan user. The catalogue had no
+ * such recipe until one was written, so nothing had ever exposed it.
+ *
+ * Gelatin is the same shape and worse: it fails vegetarian too.
+ *
+ * Deliberately a short, explicit list rather than a category rule. Every entry
+ * is an ingredient whose animal origin is not recoverable from any other
+ * column, and a rule broad enough to catch them by category would also catch
+ * things that are fine. `stock-cube` is NOT here: it is genuinely ambiguous in
+ * an Egyptian kitchen — vegetable and chicken sit on the same shelf — and
+ * guessing either way would be worse than the honest gap.
+ */
+const NON_VEGAN_SLUGS: ReadonlySet<string> = new Set(['honey', 'honeycomb', 'gelatin']);
+
+/** The subset that a vegetarian must also avoid. */
+const NON_VEGETARIAN_SLUGS: ReadonlySet<string> = new Set(['gelatin']);
+
 function recipeIngredientSlugs(recipe: Recipe): Set<string> {
   const slugs = new Set<string>();
   for (const ingredient of recipe.ingredients) {
@@ -163,7 +186,9 @@ export function satisfiesDiet(recipe: Recipe, diet: DietaryPreference): boolean 
     case 'vegetarian': {
       const hasMeat = [...slugs].some((slug) => MEAT_SLUGS.has(slug));
       const hasSeafood = [...slugs].some((slug) => SEAFOOD_SLUGS.has(slug));
-      return !hasMeat && !hasSeafood && !hasForbiddenAllergen;
+      const hidden = diet === 'vegan' ? NON_VEGAN_SLUGS : NON_VEGETARIAN_SLUGS;
+      const hasHiddenAnimalProduct = [...slugs].some((slug) => hidden.has(slug));
+      return !hasMeat && !hasSeafood && !hasForbiddenAllergen && !hasHiddenAnimalProduct;
     }
     case 'pescatarian':
       return ![...slugs].some((slug) => MEAT_SLUGS.has(slug));

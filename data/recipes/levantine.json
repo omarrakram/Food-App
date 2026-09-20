@@ -3131,5 +3131,113 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "grilled-halloumi",
+    "title": "Grilled Halloumi with Lemon",
+    "titleAr": "حلومي مشوي",
+    "description": "Halloumi is the cheese that does not melt, which is the whole point of it. Dry it properly, do not move it in the pan, and eat it the moment it comes off.",
+    "descriptionAr": "الحلومي هي الجبنة اللي ما بتسيحش، وده كل الموضوع. نشّفها كويس، متحركهاش في الطاسة، وكلها أول ما تنزل من على النار.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 6,
+    "servings": 4,
+    "nutrition": {
+      "calories": 350,
+      "protein": 21,
+      "carbs": 3,
+      "fat": 28,
+      "fiber": 0
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "high-protein",
+      "beginner",
+      "low-carb"
+    ],
+    "image": {
+      "path": "curated/grilled-halloumi.jpg",
+      "source": "generated",
+      "creator": "Akla kitchen",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "sourceUrl": null
+    },
+    "ingredients": [
+      {
+        "slug": "halloumi",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "sliced thick"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 20,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into wedges"
+      },
+      {
+        "slug": "mint",
+        "quantity": 10,
+        "unit": "g",
+        "prep": "torn"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Slice the halloumi a centimetre thick and pat every piece properly dry. Wet halloumi steams in the pan instead of colouring, and that is the whole difference.",
+        "textAr": "قطّع الحلومي سمك سنتي ونشّف كل قطعة كويس. الحلومي المبلول بيتبخّر في الطاسة بدل ما ياخد لون، وده كل الفرق.",
+        "minutes": 4,
+        "uses": [
+          "halloumi"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Brush with the oil and lay the slices in a hot dry pan. Leave them alone for 2 to 3 minutes a side — moving them early tears the crust off.",
+        "textAr": "ادهنها بالزيت وحط الشرايح في طاسة ناشفة سخنة. سيبها من دقيقتين لـ ٣ على كل وش — لو حركتها بدري القشرة هتتقشر.",
+        "minutes": 6,
+        "uses": [
+          "olive-oil",
+          "halloumi"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Squeeze the lemon over while it is still hot and scatter the mint. Eat it straight away; halloumi turns rubbery as it cools.",
+        "textAr": "اعصر الليمون عليها وهي لسه سخنة ورش النعناع. كلها على طول؛ الحلومي بيبقى زي الأستيك لما يبرد.",
+        "minutes": 1,
+        "uses": [
+          "lemon",
+          "mint"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

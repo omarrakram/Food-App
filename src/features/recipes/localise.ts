@@ -97,6 +97,14 @@ const PREPARATION_AR: Record<string, string> = {
   'very finely chopped': 'مفروم ناعم جدًا',
   'very ripe': 'مستوي أوي',
   warmed: 'مسخّن',
+  'a day or two old': 'بايت يوم أو اتنين',
+  'crushed to a paste': 'مدقوق لحد ما يبقى عجينة',
+  'for deep frying': 'للتحمير',
+  'for dusting': 'للرش',
+  lukewarm: 'دافي',
+  'roughly chopped': 'مقطّع خشن',
+  'scrubbed, skin on': 'مغسول بقشره',
+  skinless: 'من غير قشر',
   wedges: 'فصوص',
 };
 

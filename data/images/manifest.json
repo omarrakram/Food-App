@@ -15,6 +15,20 @@
       "acquiredAt": "2026-09-13T15:34:12.215Z"
     },
     {
+      "recipeSlug": "aseer-limon",
+      "path": "aseer-limon.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lemonade_-_27682817724.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Lemonade_-_27682817724.jpg",
+      "creator": "HarshLight",
+      "license": "CC-BY-2.0",
+      "attribution": "HarshLight · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1500,
+      "bytes": 251066,
+      "sha256": "5b86035be7ff355e45ec4fb542b76a299dcaf5a8c5f5e224891d13c901576a4b",
+      "acquiredAt": "2026-09-20T07:36:40.705Z"
+    },
+    {
       "recipeSlug": "bamia-vegetarian",
       "path": "bamia-vegetarian.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG",
@@ -83,6 +97,20 @@
       "bytes": 230599,
       "sha256": "af16af850e1a72b76a95ce1f39bdb85e908666b6b4043bb2d34e38ed32cc0c17",
       "acquiredAt": "2026-09-13T15:34:18.879Z"
+    },
+    {
+      "recipeSlug": "batata-mashwiya",
+      "path": "batata-mashwiya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gungoguma_(roasted_sweet_potatoes)_2.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Gungoguma_%28roasted_sweet_potatoes%29_2.jpg",
+      "creator": "국립국어원",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "국립국어원 · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 804,
+      "bytes": 149946,
+      "sha256": "d033f8b5021463b0b3d1188419ba769f16818b0753cbe4f7db3d974e0f451e54",
+      "acquiredAt": "2026-09-20T07:36:31.556Z"
     },
     {
       "recipeSlug": "beef-burger-homemade",
@@ -295,6 +323,20 @@
       "acquiredAt": "2026-09-13T15:35:08.269Z"
     },
     {
+      "recipeSlug": "dukkah-baladi",
+      "path": "dukkah-baladi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dukka_Masala.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Dukka_Masala.JPG",
+      "creator": "Miansari66",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 247522,
+      "sha256": "ab2f967acd588534c9b92f6368dc9c411b283413f22c92a01c73b3ffd0c25d4e",
+      "acquiredAt": "2026-09-20T07:36:39.305Z"
+    },
+    {
       "recipeSlug": "egg-drop-soup",
       "path": "egg-drop-soup.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:5-Minute_Egg_Drop_Soup-5_(32079790121).jpg",
@@ -323,6 +365,34 @@
       "acquiredAt": "2026-09-13T15:35:22.970Z"
     },
     {
+      "recipeSlug": "focaccia",
+      "path": "focaccia.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Focaccia_with_Crumb.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Focaccia_with_Crumb.jpg",
+      "creator": "Fred Benenson",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Fred Benenson · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 788940,
+      "sha256": "f8ee902b20a41f8895f1eec2b8a2b64ee3ce8514fda675c27e61a549d54e969b",
+      "acquiredAt": "2026-09-20T07:36:50.062Z"
+    },
+    {
+      "recipeSlug": "french-toast",
+      "path": "french-toast.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:FrenchToast.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/42/FrenchToast.JPG",
+      "creator": "Jonathunder",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Jonathunder · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 714,
+      "bytes": 310236,
+      "sha256": "26ea4ad5940a2256190f2baea451ea4878a5dbc19bfb9dd6f02aaf03b61ca78f",
+      "acquiredAt": "2026-09-20T07:36:52.790Z"
+    },
+    {
       "recipeSlug": "ful-medames-classic",
       "path": "ful-medames-classic.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Ful_medames.jpg",
@@ -335,6 +405,20 @@
       "bytes": 230987,
       "sha256": "6e4b8fadfea3e9bd1402cd99bb8264fc6a83e8c1dbddb436fb9df29bb90da779",
       "acquiredAt": "2026-09-13T15:35:34.104Z"
+    },
+    {
+      "recipeSlug": "garlic-bread",
+      "path": "garlic-bread.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Garlicbread.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/59/Garlicbread.jpg",
+      "creator": "Popo le Chien",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Popo le Chien · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 262737,
+      "sha256": "090abc24969e82e055791e8adc44adf23bec28ebe6e4e83f22b004ec566e5d32",
+      "acquiredAt": "2026-09-20T07:36:52.339Z"
     },
     {
       "recipeSlug": "garlic-green-beans",
@@ -363,6 +447,20 @@
       "bytes": 292889,
       "sha256": "d9cc5483eb67551ca31ce456ae437952089de33321b8114b5afaf484c8d81fba",
       "acquiredAt": "2026-09-13T15:35:41.164Z"
+    },
+    {
+      "recipeSlug": "grilled-halloumi",
+      "path": "grilled-halloumi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Grilled_haloumi_cheese.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Grilled_haloumi_cheese.jpg",
+      "creator": "Unknown",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Unknown · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1333,
+      "bytes": 488238,
+      "sha256": "44cf360077466aca3a04aaa577748e7a073f3029065eaf045a0cf22f120828b5",
+      "acquiredAt": "2026-09-20T07:36:47.777Z"
     },
     {
       "recipeSlug": "guacamole",
@@ -461,6 +559,20 @@
       "bytes": 750115,
       "sha256": "b5e8bd362b1dd4e8d29279db7dbf2b29d8f7c6af506ef4635af54a02e0b6a959",
       "acquiredAt": "2026-09-13T23:37:50.914Z"
+    },
+    {
+      "recipeSlug": "lokmet-el-qadi",
+      "path": "lokmet-el-qadi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lgemat.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/02/Lgemat.JPG",
+      "creator": "Aldousari",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Aldousari · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 747,
+      "bytes": 368163,
+      "sha256": "12c2925a16fa38879cc71b6c1b75da758dab4c23e1cdcb7abf391b5cf44bceb1",
+      "acquiredAt": "2026-09-20T07:36:35.478Z"
     },
     {
       "recipeSlug": "mac-and-cheese-baked",
@@ -757,6 +869,20 @@
       "acquiredAt": "2026-09-13T15:37:07.940Z"
     },
     {
+      "recipeSlug": "sahlab",
+      "path": "sahlab.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Salep_drink.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Salep_drink.jpg",
+      "creator": "DesignbyNur",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "DesignbyNur · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 800,
+      "height": 799,
+      "bytes": 136761,
+      "sha256": "16f553c2ea190beea1cc4006e25d5a0410f195cb017f5fb70806f0fd5bada6a8",
+      "acquiredAt": "2026-09-20T07:36:19.244Z"
+    },
+    {
       "recipeSlug": "salata-baladi",
       "path": "salata-baladi.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg",
@@ -769,6 +895,20 @@
       "bytes": 447006,
       "sha256": "08fb579c5ce32394145d63d849d7c246e9849747e4c899730f1cfc255f4c3a61",
       "acquiredAt": "2026-09-13T15:37:10.787Z"
+    },
+    {
+      "recipeSlug": "salatet-tahina",
+      "path": "salatet-tahina.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tahina.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/39/Tahina.JPG",
+      "creator": "Gilabrand",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Gilabrand · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 751,
+      "bytes": 245683,
+      "sha256": "e3223c9b419380f3fa11ae32610c18625956757f2d28f2204700193f953b8ebe",
+      "acquiredAt": "2026-09-20T07:36:32.856Z"
     },
     {
       "recipeSlug": "shakshuka",
@@ -811,6 +951,20 @@
       "bytes": 222203,
       "sha256": "104902aa9b53ca3b94468713379962f62220184ca7dbd1895c6e1796735181ec",
       "acquiredAt": "2026-09-13T15:37:36.064Z"
+    },
+    {
+      "recipeSlug": "shorbet-tamatem",
+      "path": "shorbet-tamatem.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tomato_soup,_plant-based_(44040252791).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Tomato_soup%2C_plant-based_%2844040252791%29.jpg",
+      "creator": "Ella Olsson from Stockholm, Sweden",
+      "license": "CC-BY-2.0",
+      "attribution": "Ella Olsson from Stockholm, Sweden · CC-BY-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 678,
+      "bytes": 125444,
+      "sha256": "933171b5f96b8a3f181564bfe818e78d8fed2ba644384e632a0f20ce5f93fbb8",
+      "acquiredAt": "2026-09-20T07:36:42.819Z"
     },
     {
       "recipeSlug": "spaghetti-aglio-olio",
