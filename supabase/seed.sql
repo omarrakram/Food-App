@@ -841,7 +841,7 @@ on conflict (slug) do update set
   is_common_staple = excluded.is_common_staple,
   is_perishable = excluded.is_perishable;
 
-insert into public.ingredient_allergens (ingredient_id, allergen)
+insert into public.ingredient_possible_allergens (ingredient_id, allergen)
 values ('f847e580-7613-5f3d-a976-98a7750d94e4', 'gluten') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('f847e580-7613-5f3d-a976-98a7750d94e4', 'برجر') on conflict do nothing;
@@ -1768,7 +1768,7 @@ on conflict (slug) do update set
   is_common_staple = excluded.is_common_staple,
   is_perishable = excluded.is_perishable;
 
-insert into public.ingredient_allergens (ingredient_id, allergen)
+insert into public.ingredient_possible_allergens (ingredient_id, allergen)
 values ('e288c3f7-1065-5a44-be59-2486b2e2999f', 'gluten') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e288c3f7-1065-5a44-be59-2486b2e2999f', 'كورن فليكس') on conflict do nothing;

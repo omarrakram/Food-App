@@ -93,9 +93,19 @@ function recipeIngredientSlugs(recipe: Recipe): Set<string> {
 /**
  * ALLERGY SAFETY: a declared allergen is an absolute exclusion.
  *
- * We check both the recipe's declared allergen list and the allergens implied
- * by its ingredients, so a mis-tagged recipe still gets caught. We never reason
- * about "only a trace" or "they could substitute".
+ * We check the recipe's declared allergen list, the allergens implied by its
+ * ingredients, AND the allergens a commercial version of an ingredient may
+ * contain. We never reason about "only a trace" or "they could substitute".
+ *
+ * WHY `possibleAllergens` EXCLUDES AS HARD AS `allergens`. Generic corn flakes
+ * are made of corn, but mainstream Egyptian brands add barley malt. The two
+ * fields disagree about what the food IS; they do not disagree about what to
+ * do for someone with coeliac disease. Asking that person to read the label of
+ * an ingredient we already knew was risky is not a safety model, it is a
+ * disclaimer — so the exclusion is identical and only the MEANING differs.
+ *
+ * That difference is why `satisfiesDiet` below must not read this: a product
+ * that sometimes contains dairy is not intrinsically non-vegan.
  */
 export function violatesAllergens(recipe: Recipe, allergens: readonly Allergen[]): boolean {
   if (allergens.length === 0) return false;
@@ -103,10 +113,40 @@ export function violatesAllergens(recipe: Recipe, allergens: readonly Allergen[]
   for (const ingredient of recipe.ingredients) {
     const resolved = resolveIngredient(ingredient.name);
     resolved?.allergens.forEach((allergen) => declared.add(allergen));
+    resolved?.possibleAllergens.forEach((allergen) => declared.add(allergen));
   }
   return allergens.some((allergen) => declared.has(allergen));
 }
 
+/**
+ * Allergens this recipe may carry depending on which brand was bought.
+ *
+ * Separate from `violatesAllergens` on purpose: that answers "hide this", and
+ * this answers "say this". A recipe using generic corn flakes should be able
+ * to tell a reader that the gluten depends on the box, without the recipe
+ * declaring that it CONTAINS gluten — which would be a claim about the food
+ * rather than about the shelf.
+ */
+export function possibleAllergensOf(recipe: Recipe): Allergen[] {
+  const intrinsic = new Set<Allergen>(recipe.allergens);
+  const possible = new Set<Allergen>();
+  for (const ingredient of recipe.ingredients) {
+    const resolved = resolveIngredient(ingredient.name);
+    resolved?.allergens.forEach((allergen) => intrinsic.add(allergen));
+    resolved?.possibleAllergens.forEach((allergen) => possible.add(allergen));
+  }
+  // Anything the recipe certainly contains is not a "maybe".
+  return [...possible].filter((allergen) => !intrinsic.has(allergen)).sort();
+}
+
+/**
+ * Diet semantics read INTRINSIC allergens only.
+ *
+ * `possibleAllergens` is deliberately absent from everything below. A burger
+ * patty that may contain rusk is not thereby non-vegetarian, and corn flakes
+ * that may contain barley malt are still vegan. Letting "may" drive a diet
+ * flag would mean the label on one brand decides what a food fundamentally is.
+ */
 export function satisfiesDiet(recipe: Recipe, diet: DietaryPreference): boolean {
   if (diet === 'none' || diet === 'other') return true;
   if (recipe.dietTags.includes(diet)) return true;

@@ -34,6 +34,7 @@ const COLUMNS = [
   'default_unit',
   'grams_per_piece',
   'allergens',
+  'possible_allergens',
   'aliases',
   'staple',
   'perishable',
@@ -47,6 +48,7 @@ type Entry = {
   defaultUnit: string;
   gramsPerPiece: number | null;
   allergens: string[];
+  possibleAllergens: string[];
   aliases: string[];
   isCommonStaple: boolean;
   isPerishable: boolean;
@@ -127,10 +129,13 @@ function parse(text: string): Entry[] {
       defaultUnit,
       gramsText,
       allergenText,
+      possibleAllergenText,
       aliasText,
       stapleText,
       perishableText,
-    ] = cells as [string, string, string, string, string, string, string, string, string, string];
+    ] = cells as [
+      string, string, string, string, string, string, string, string, string, string, string,
+    ];
 
     if (!/^[a-z0-9-]+$/.test(slug)) fail(`slug "${slug}" must be lowercase letters, digits and dashes`);
     if (slugs.has(slug)) fail(`duplicate slug "${slug}"`);
@@ -151,10 +156,25 @@ function parse(text: string): Entry[] {
       gramsPerPiece = value;
     }
 
-    const allergens = allergenText ? allergenText.split('|').map((a) => a.trim()).filter(Boolean) : [];
-    for (const allergen of allergens) {
-      if (!(ALLERGENS as readonly string[]).includes(allergen)) {
-        fail(`"${allergen}" is not a known allergen`);
+    const parseAllergens = (text: string, column: string): string[] => {
+      const parsed = text ? text.split('|').map((a) => a.trim()).filter(Boolean) : [];
+      for (const allergen of parsed) {
+        if (!(ALLERGENS as readonly string[]).includes(allergen)) {
+          fail(`"${allergen}" in ${column} is not a known allergen`);
+        }
+      }
+      return parsed;
+    };
+
+    const allergens = parseAllergens(allergenText, 'allergens');
+    const possibleAllergens = parseAllergens(possibleAllergenText, 'possible_allergens');
+
+    // An allergen cannot be both certain and uncertain. Listing it twice would
+    // let the two fields disagree about what the food IS, and `satisfiesDiet`
+    // reads only one of them.
+    for (const allergen of possibleAllergens) {
+      if (allergens.includes(allergen)) {
+        fail(`"${allergen}" is listed as both intrinsic and possible`);
       }
     }
 
@@ -198,6 +218,7 @@ function parse(text: string): Entry[] {
       defaultUnit,
       gramsPerPiece,
       allergens,
+      possibleAllergens,
       aliases,
       isCommonStaple: stapleText === '1',
       isPerishable: perishableText === '1',
@@ -222,6 +243,7 @@ function render(entries: readonly Entry[]): string {
         `    defaultUnit: '${entry.defaultUnit}',\n` +
         `    gramsPerPiece: ${entry.gramsPerPiece ?? 'null'},\n` +
         `    allergens: ${list(entry.allergens)},\n` +
+        `    possibleAllergens: ${list(entry.possibleAllergens)},\n` +
         `    aliases: ${list(entry.aliases)},\n` +
         `    isCommonStaple: ${entry.isCommonStaple},\n` +
         `    isPerishable: ${entry.isPerishable},\n` +

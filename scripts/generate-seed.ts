@@ -96,6 +96,15 @@ for (const ingredient of INGREDIENT_CATALOGUE) {
     );
   }
 
+  // Brand-dependent risk, kept in its own table so nothing reading the
+  // intrinsic one can widen its meaning by accident.
+  for (const allergen of ingredient.possibleAllergens) {
+    lines.push(
+      `insert into public.ingredient_possible_allergens (ingredient_id, allergen)`,
+      `values (${lit(id)}, ${lit(allergen)}) on conflict do nothing;`,
+    );
+  }
+
   for (const alias of ingredient.aliases) {
     lines.push(
       `insert into public.ingredient_aliases (ingredient_id, alias)`,

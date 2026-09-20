@@ -25,7 +25,30 @@ export type CatalogueIngredient = {
   defaultUnit: Unit;
   /** Grams in one `piece`. Null for ingredients that are not countable. */
   gramsPerPiece: number | null;
+  /**
+   * Allergens the food INTRINSICALLY contains. Milk is dairy; it cannot not be.
+   *
+   * Two consumers depend on that meaning. `violatesAllergens` uses it as an
+   * absolute exclusion, and `satisfiesDiet` decides vegetarian and vegan from
+   * it — which is why "may contain" must never be written here. A product that
+   * only sometimes contains dairy would otherwise make every recipe using it
+   * non-vegan.
+   */
   allergens: Allergen[];
+  /**
+   * Allergens a commercial version MAY contain, depending on brand and recipe.
+   *
+   * Generic corn flakes are made of corn, and mainstream Egyptian brands add
+   * barley malt. A beef patty is beef, and commercial ones usually contain
+   * rusk. Neither is intrinsic, and before this field existed both were
+   * written into `allergens` because the alternative — saying nothing — was
+   * dangerous.
+   *
+   * Treated as a HARD EXCLUSION for a user who declared that allergy: we do
+   * not ask someone with coeliac disease to read the label. Deliberately NOT
+   * part of diet semantics, and never the recipe's own "contains" declaration.
+   */
+  possibleAllergens: Allergen[];
   /** Match aliases: transliterations, Arabic spellings, regional names, plurals. */
   aliases: string[];
   /** Assumed present in most kitchens unless the user says otherwise. */

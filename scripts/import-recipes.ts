@@ -221,6 +221,11 @@ function impliedAllergens(recipe: RawRecipe): Set<string> {
   const found = new Set<string>();
   for (const line of recipe.ingredients) {
     const entry = CATALOGUE_BY_SLUG.get(line.slug);
+    // INTRINSIC ONLY, deliberately. `possibleAllergens` is brand-dependent
+    // risk, and forcing a recipe to DECLARE it would turn "the box might have
+    // barley malt in it" into "this dish contains gluten" — a claim about the
+    // food rather than about the shelf. Allergy filtering still excludes on
+    // it (see `violatesAllergens`); the declaration is a different question.
     entry?.allergens.forEach((allergen) => found.add(allergen));
   }
   return found;
