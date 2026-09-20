@@ -752,6 +752,63 @@ reached a console. It says "Something went wrong. Please try again." now, and
 a photo that cannot be used gets a specific reason instead — the file type,
 the 8MB limit, the 320px floor.
 
+## The ingredient data phase (Stages 1 – 2D)
+
+The catalogue went from 257 rows to **378**, and the aliases from 717 to
+**1695**. But row count was never the point, and two measurements say what
+actually changed.
+
+| | Start | Now |
+|---|---:|---:|
+| Canonical ingredients | 257 | **378** |
+| Aliases | 717 | **1695** |
+| Development benchmark (258 terms) | 190/254 (75%) | **258/258**, zero dead ends, zero wrong of either kind |
+| Coverage census — ontology | — | **89.8%** of 431 actionable concepts |
+| Coverage census — input, concepts | — | **77.2%** |
+| Coverage census — input, terms | — | **86.2%** |
+| Inferred ingredient families | — | 85, audited |
+
+### Three measurements, and only one of them is validation
+
+They are easy to confuse and they answer different questions:
+
+- **The 258-term development benchmark** is a REGRESSION SUITE. It was written
+  from the catalogue's known gaps, so closing them saturated it. 100% there
+  means "the failures we already knew about are still fixed". It is not
+  evidence of coverage.
+- **The 525-concept coverage census** is a DISCOVERY set — Egyptian kitchen
+  vocabulary written without reference to the catalogue. It may be read and
+  optimised against while building, which is exactly what disqualifies it as
+  validation.
+- **The sealed launch holdout** (§3b of DATASET_EXPANSION_STRATEGY.md) does not
+  exist yet. It is the only one of the three that will be validation, and
+  nothing so far substitutes for real-user testing.
+
+### The census separates two questions that were being conflated
+
+**Ontology coverage** asks whether a concept is honestly represented; a frozen
+okra correctly has no row of its own. **Input coverage** asks the question a
+user actually poses: type `بامية مجمدة` and do you get okra?
+
+Splitting them exposed that a `form` label had become its own pass mark —
+71% ontology against **49%** input — and the cause was a single fact:
+`NOISE_WORDS` was entirely English in an app whose audience types Arabic.
+`frozen okra` reached okra and `بامية مجمدة` reached nothing.
+
+### Allergens now distinguish "contains" from "might contain"
+
+`allergens` means INTRINSIC — milk is dairy and cannot not be — and it drives
+both allergy exclusion and vegetarian/vegan filtering.
+`possibleAllergens` means a commercial version may contain it: generic corn
+flakes are corn, but Egyptian brands add barley malt.
+
+The asymmetry is the design. Exclusion is **identical** — we do not ask someone
+with coeliac disease to read a label we already knew was risky. Diet semantics
+**ignore** it. And it is never a recipe's own "contains" declaration.
+
+A migration creates `ingredient_possible_allergens`. **It has not been applied
+to hosted Supabase.**
+
 ## Last known passing state
 
 Verified on `claude/expo-rn-setup-mom5gw` (also the repository's default
@@ -761,14 +818,17 @@ branch):
 |---|---|---|
 | Typecheck, app AND build scripts | `npm run typecheck` | **pass**, 0 errors. Do not substitute `npx tsc --noEmit`; it silently skips `scripts/` — see **CI** below |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 812/812 across 57 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 916/916 across 64 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Image manifest | `npm run images:check` | **pass**, 67 of 161; licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
-| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags** |
+| Image manifest | `npm run images:check` | **pass**, 67 of 161 (**41.6%** — the ceiling that stopped the recipe expansion, see below); licence, attribution, header bytes, SHA-256, no reuse, none refused on review |
+| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 161 recipes, no pair over 0.9 Jaccard, **zero ORDINARY staple flags**. The nine pairs above 0.7 were reviewed one by one and all nine are distinct dishes |
+| Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.2%, **zero declared forms whose aliasing is broken** |
+| Ingredient families | `npm run audit:families` | reports only — 1 declared, 85 inferred |
+| Price backlog | `npm run audit:prices` | reports only — **76.2%** of required slots priced, 102 gaps ranked |
 | Whole-app browser walk | `npm run smoke:web` | **pass**, 228 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |

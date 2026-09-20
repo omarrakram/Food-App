@@ -1773,6 +1773,67 @@ same move as deleting a hard benchmark case.
 
 ---
 
+## 9m. The recipe expansion plan, ready to run once photography is decided
+
+Written now so that the moment the photography question is answered, the work
+is a matter of execution rather than design. Every count below comes from the
+re-audit in §9l, not from the original §8 estimates.
+
+### The gate, stated once
+
+**Nothing here starts until one of these is true:**
+
+1. Photography is acquired for the new recipes first — run
+   `.github/workflows/recipe-images.yml` (it is `workflow_dispatch` and needs a
+   human to choose), review what it proposes, and only then add the recipes it
+   can illustrate; or
+2. the coverage rule is explicitly relaxed by the product owner, with the new
+   floor written down.
+
+Option 1 is the honest one and it reorders the work: **pick the dishes, acquire
+the pictures, then write the recipes for the dishes that have them.** That is
+backwards from how the first 161 were built, and it is the right way round now
+that coverage is the binding constraint.
+
+### Six batches, 139 recipes, sized by what the audit says is thin
+
+| # | Batch | Count | Why, from the audit |
+|---|---|---:|---|
+| 1 | **≤5-ingredient Egyptian weeknight** | 24 | The worst gap by far: **4 recipes** in the whole catalogue have 5 or fewer required ingredients, against a target of ~44. This batch alone is most of that. |
+| 2 | **Egyptian core** | 28 | Egyptian share is **22.4%** against a ≥30% target. 28 takes it to 21.3% of 300 on its own, so batches 3 and 6 must also lean Egyptian to clear 30%. |
+| 3 | **Breakfast** | 20 | 29 breakfast recipes today. Egyptian breakfast is a whole cuisine — ful, ta'ameya, eggs, mish, halawa, feteer — and the catalogue treats it as a meal slot. |
+| 4 | **Protein spread** | 25 | Lamb 4, seafood 4, fish 10 against eggs 25 and legumes 25. The new catalogue rows make this possible for the first time: quail, sole, catfish, nile perch, octopus, bottarga, tripe, kidney, tongue, lamb shank. |
+| 5 | **Appliance-oriented** | 18 | Air fryer and grill are under-served; oven and stovetop dominate. |
+| 6 | **Dessert, occasion, Ramadan/Eid** | 24 | 12 desserts today, and Ramadan/Eid was the **weakest census category at 0%** before this stage. The new rows — sahlab, kunafa dough, carob, qamar-el-din-adjacent, sobia, halva — exist precisely to support these. |
+
+### Rules that carry over, restated because they are easy to erode at volume
+
+- **No fake staple shortcuts.** A required ingredient marked `staple` or
+  `garnish` to get under five is cheating the one metric this expansion exists
+  to fix. The importer's own audit reports excused ingredients; that number
+  must not move.
+- **No trivial renames.** The near-duplicate check runs every batch, and a new
+  pair above 0.7 must be argued for the way the existing nine were in §9l, not
+  waved through.
+- **Every ingredient from the catalogue.** 206 of 378 rows are unused; a recipe
+  needing something genuinely absent gets the ontology rules applied first, and
+  one recipe's convenience does not reopen broad ingredient expansion.
+- **Allergens: intrinsic in `allergens`, brand-dependent in `possibleAllergens`.**
+  The importer refuses a recipe that does not declare what its ingredients
+  intrinsically carry, and deliberately does not force declaration of what they
+  might.
+- **Nutrition estimated conservatively**, internally consistent, and never
+  precise beyond what can be justified.
+
+### What this unblocks downstream
+
+Price coverage is **76.2%** of required slots and the target is 95%. The
+expansion changes which ingredients matter — §9l's backlog is ranked against
+the CURRENT 161 recipes, so it must be regenerated after each batch rather than
+worked from tonight's ordering.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins
