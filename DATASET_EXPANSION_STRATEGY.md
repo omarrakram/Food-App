@@ -1691,6 +1691,88 @@ group is the first thing it should replace.** `mix`, `كريم`, `juice` and
 
 ---
 
+## 9l. Stage 3 is blocked by photography, and that is the rule working
+
+### The constraint, verified rather than assumed
+
+The standing rule is that a recipe batch which lowers photo coverage is not
+finished, and that if valid photography cannot be obtained, we **stop adding
+recipes rather than quietly lower the standard**.
+
+It cannot be obtained from a development session, and this was checked rather
+than taken on trust:
+
+```
+commons.wikimedia.org  -> CONNECT tunnel failed, 403
+upload.wikimedia.org   -> CONNECT tunnel failed, 403
+```
+
+`scripts/fetch-recipe-images.ts` says the same in its own header, and
+`.github/workflows/recipe-images.yml` is `workflow_dispatch` only, deliberately:
+*"Photography is not something that should change under a release without
+anyone deciding to."*
+
+### Why that blocks the expansion rather than delaying one step of it
+
+Coverage is **67 of 161 (41.6%)**. Adding even a single batch of 12 takes it to
+67/173 = 38.7%, below the baseline, before any picture could be acquired. And
+the acquisition is not a formality: 94 recipes already have no sufficiently
+relevant openly-licensed photograph, which is what the pipeline found after
+running against the current set. New recipes — more obscure Egyptian dishes,
+by design — will do worse, not better.
+
+There is also a human step that cannot be automated overnight. The pipeline's
+own record shows two photographs rejected by a person after passing every
+mechanical check: *a burger photographed beside a glass of beer, an aerial view
+of the Turkish town of Menemen for the dish named after it.* No rule reading a
+filename catches those.
+
+**So the honest sequence is: decide on photography first, then expand.** Adding
+139 recipes tonight and hoping pictures appear later is exactly the silent
+lowering the rule forbids.
+
+### The live dataset, re-audited rather than taken from old counts
+
+| | Now | Target |
+|---|---:|---:|
+| Recipes | 161 | ~300 |
+| Egyptian | 36 (22.4%) | ≥30% |
+| ≤5 ingredients | 4 | ~44 |
+| Breakfast | 29 | materially more |
+| Dessert | 12 | materially more |
+| Photographed | 67 (41.6%) | never below baseline |
+| Catalogue ingredients used | 172 of 378 | — |
+| Near-duplicate pairs | 9 | reviewed below |
+
+Protein spread: eggs 25, legumes 25, chicken 17, beef 12, fish 10, dairy-led 8,
+lamb 4, seafood 4, and 79 with no protein line.
+
+**The ingredient work has outrun the recipes.** 206 of 378 rows appear in no
+recipe at all — which is not waste, it is the pantry vocabulary doing its job,
+but it does mean the recipe catalogue is the constraint on showing it off.
+
+### The nine near-duplicate pairs, reviewed
+
+All nine are defensible distinct dishes. The Jaccard metric compares essential
+INGREDIENTS and cannot see method, which is where most of these differ:
+
+| Pair | Verdict |
+|---|---|
+| guacamole ~ pico de gallo | Different dishes; one is avocado. Metric artefact. |
+| chocolate chip cookies ~ pancakes | Both are flour, sugar, egg, butter. Artefact. |
+| foul shami ~ roasted cauliflower tahini | Fava versus cauliflower. Artefact. |
+| roz bel laban ~ sutlaç | Both rice pudding; one is stovetop, one baked with a caramelised top. Culturally distinct. |
+| muhallabia ~ sutlaç | Muhallabia has no rice at all. |
+| cacik ~ salatet zabadi | Turkish cold soup versus Egyptian salad. |
+| salata baladi ~ çoban salatası | The thinnest pair: they differ by a bell pepper. Both are real dishes with real identity. |
+| chicken ~ vegetable fried rice | A protein variant, which is intended. |
+| feta omelette ~ soft scrambled eggs | Different egg dishes. |
+
+**Nothing was deleted.** Removing a real dish to make an audit quieter is the
+same move as deleting a hard benchmark case.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins

@@ -1,0 +1,198 @@
+/**
+ * Which missing prices actually cost us a budget answer.
+ *
+ * The budget engine can only price a recipe it has prices for. 76% of required
+ * ingredient slots are covered, and the remaining 24% are not evenly spread:
+ * one missing spice barely moves an estimate, while one missing protein makes
+ * the whole dish unpriceable and the "what can I cook for 100 EGP" promise
+ * quietly stop working for every recipe that uses it.
+ *
+ * So this ranks the unpriced ingredients by what they COST US, not by how many
+ * are left:
+ *
+ *   SLOT FREQUENCY   how many required recipe lines need it. The dominant
+ *                    term: an ingredient in 16 recipes blocks 16 estimates.
+ *   BUDGET WEIGHT    proteins and dairy dominate an Egyptian shopping bill;
+ *                    spices are rounding errors. A missing kilo of lamb
+ *                    matters more than a missing teaspoon of oregano even at
+ *                    the same slot count.
+ *   BLOCKING         recipes where this is the ONLY unpriced ingredient. Price
+ *                    it and that recipe becomes fully estimable — the cheapest
+ *                    coverage wins in the whole list.
+ *
+ * IT FABRICATES NOTHING. Establishing a real Egyptian price means surveying
+ * real shops, and a plausible-looking invented number is worse than a gap: a
+ * gap is visible and an invention is not. This produces the shopping list for
+ * whoever does that survey.
+ *
+ *     npm run audit:prices
+ */
+import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+
+import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
+
+const ROOT = resolve(import.meta.dirname, '..');
+
+/** Slugs with a surveyed Egyptian price. */
+const priced = new Set<string>(
+  readFileSync(join(ROOT, 'data', 'prices', 'eg.csv'), 'utf8')
+    .split('\n')
+    .slice(1)
+    .map((line) => line.split(',')[0]?.trim() ?? '')
+    .filter((slug) => slug.length > 0),
+);
+
+type RawLine = { slug: string; optional?: boolean; garnish?: boolean; staple?: boolean };
+type RawRecipe = { slug: string; title: string; cuisine: string; ingredients: RawLine[] };
+
+const recipes: RawRecipe[] = readdirSync(join(ROOT, 'data', 'recipes'))
+  .filter((file) => file.endsWith('.json'))
+  .flatMap(
+    (file) =>
+      JSON.parse(readFileSync(join(ROOT, 'data', 'recipes', file), 'utf8')) as RawRecipe[],
+  );
+
+/** A line the cook has to buy: not optional, not a garnish. */
+const required = (line: RawLine) => !line.optional && !line.garnish;
+
+const CATEGORY_BY_SLUG = new Map(INGREDIENT_CATALOGUE.map((i) => [i.slug, i.category]));
+
+/**
+ * How much a category moves an Egyptian shopping bill.
+ *
+ * Crude on purpose. The point is only to separate "this decides the total"
+ * from "this rounds to zero", and a finer model would imply a precision the
+ * inputs do not have.
+ */
+const BUDGET_WEIGHT: Record<string, number> = {
+  protein: 5,
+  dairy: 3,
+  frozen: 3,
+  carbs: 2,
+  bakery: 2,
+  vegetables: 2,
+  fruit: 2,
+  pantry: 1.5,
+  sauces: 1,
+  spices: 0.5,
+  other: 1,
+};
+
+const slotCount = new Map<string, number>();
+for (const recipe of recipes) {
+  for (const line of recipe.ingredients.filter(required)) {
+    slotCount.set(line.slug, (slotCount.get(line.slug) ?? 0) + 1);
+  }
+}
+
+const totalSlots = [...slotCount.values()].reduce((sum, n) => sum + n, 0);
+const coveredSlots = [...slotCount.entries()]
+  .filter(([slug]) => priced.has(slug))
+  .reduce((sum, [, n]) => sum + n, 0);
+
+/** Recipes blocked by exactly one unpriced ingredient. */
+const blocking = new Map<string, string[]>();
+for (const recipe of recipes) {
+  const gaps = [
+    ...new Set(recipe.ingredients.filter(required).map((l) => l.slug).filter((s) => !priced.has(s))),
+  ];
+  if (gaps.length === 1 && gaps[0]) {
+    blocking.set(gaps[0], [...(blocking.get(gaps[0]) ?? []), recipe.slug]);
+  }
+}
+
+type Row = {
+  slug: string;
+  slots: number;
+  category: string;
+  weight: number;
+  unblocks: number;
+  score: number;
+};
+
+const rows: Row[] = [...slotCount.entries()]
+  .filter(([slug]) => !priced.has(slug))
+  .map(([slug, slots]) => {
+    const category = CATEGORY_BY_SLUG.get(slug) ?? 'other';
+    const weight = BUDGET_WEIGHT[category] ?? 1;
+    const unblocks = (blocking.get(slug) ?? []).length;
+    return { slug, slots, category, weight, unblocks, score: slots * weight + unblocks * 4 };
+  })
+  .sort((a, b) => b.score - a.score || b.slots - a.slots || a.slug.localeCompare(b.slug));
+
+/** Slot coverage if the top N of this list were surveyed. */
+function coverageAfter(count: number): number {
+  const gained = rows.slice(0, count).reduce((sum, row) => sum + row.slots, 0);
+  return ((coveredSlots + gained) / totalSlots) * 100;
+}
+
+const pct = (value: number) => `${Math.round(value * 10) / 10}%`;
+
+const lines: string[] = [
+  '# Price coverage backlog',
+  '',
+  '**Generated by `npm run audit:prices`. Do not edit by hand.**',
+  '',
+  'The budget engine can only price a recipe it has prices for. This ranks the',
+  'missing prices by what they cost us — not by how many are left.',
+  '',
+  '**It fabricates nothing.** A real Egyptian price comes from surveying real',
+  'shops, and a plausible-looking invented number is worse than a gap: the gap',
+  'is visible and the invention is not. This is the shopping list for whoever',
+  'does that survey.',
+  '',
+  '| | |',
+  '|---|---:|',
+  `| Ingredients with a surveyed price | ${priced.size} |`,
+  `| Distinct ingredients in required slots | ${slotCount.size} |`,
+  `| Required ingredient slots | ${totalSlots} |`,
+  `| Slots with a price | ${coveredSlots} (**${pct((coveredSlots / totalSlots) * 100)}**) |`,
+  `| Unpriced ingredients in required slots | ${rows.length} |`,
+  '',
+  '## What each tranche buys',
+  '',
+  '| Survey the top… | Slot coverage becomes |',
+  '|---|---:|',
+  `| 10 | ${pct(coverageAfter(10))} |`,
+  `| 20 | ${pct(coverageAfter(20))} |`,
+  `| 30 | ${pct(coverageAfter(30))} |`,
+  `| 50 | ${pct(coverageAfter(50))} |`,
+  `| all ${rows.length} | ${pct(coverageAfter(rows.length))} |`,
+  '',
+  '**The target is ≥95%.** Reaching it does not need all of them.',
+  '',
+  '## The ranked backlog',
+  '',
+  '| # | Ingredient | Category | Required slots | Recipes it alone unblocks | Score |',
+  '|---|---|---|---:|---:|---:|',
+];
+
+rows.forEach((row, index) => {
+  lines.push(
+    `| ${index + 1} | \`${row.slug}\` | ${row.category} | ${row.slots} | ${row.unblocks} | ` +
+      `${Math.round(row.score * 10) / 10} |`,
+  );
+});
+
+lines.push(
+  '',
+  '## Method',
+  '',
+  '`score = required slots × budget weight + recipes it alone unblocks × 4`.',
+  '',
+  'Budget weight is deliberately crude — protein 5, dairy and frozen 3, produce',
+  'and staples 2, pantry 1.5, sauces 1, spices 0.5. It only has to separate',
+  '"this decides the total" from "this rounds to zero"; a finer model would',
+  'imply a precision the inputs do not have.',
+  '',
+  'The unblock term is weighted because it is the cheapest coverage available:',
+  'one survey turns a whole recipe from unpriceable into priceable.',
+  '',
+);
+
+writeFileSync(join(ROOT, 'PRICE_BACKLOG.md'), lines.join('\n'));
+console.log(
+  `${pct((coveredSlots / totalSlots) * 100)} slot coverage; ${rows.length} unpriced ingredients. ` +
+    `Top 20 would reach ${pct(coverageAfter(20))}, top 50 ${pct(coverageAfter(50))}.`,
+);

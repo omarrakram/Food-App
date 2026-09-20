@@ -45,6 +45,7 @@
     "images:index": "node --experimental-strip-types --no-warnings scripts/generate-image-index.ts",
     "audit:pagination": "node --experimental-strip-types --no-warnings scripts/audit-pagination.ts",
     "audit:coverage": "node --experimental-strip-types --no-warnings scripts/audit-coverage.ts",
+    "audit:prices": "node --experimental-strip-types --no-warnings scripts/audit-prices.ts",
     "audit:families": "node --experimental-strip-types --no-warnings scripts/audit-families.ts",
     "audit:photos": "node --experimental-strip-types --no-warnings scripts/audit-photography.ts",
     "audit:testids": "node --experimental-strip-types --no-warnings scripts/audit-testids.ts"
