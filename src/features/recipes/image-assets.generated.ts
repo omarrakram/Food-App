@@ -34,6 +34,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Shisma · CC-BY-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
   },
+  "banana-milkshake": {
+    source: require('../../../assets/recipes/banana-milkshake.jpg') as number,
+    creator: "m01229 from USA",
+    license: "CC-BY-SA-2.0",
+    attribution: "m01229 from USA · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Banana_Milkshakes_at_the_International_Banana_Museum_on_a_really_hot_day_(40031652145).jpg",
+  },
   "basbousa": {
     source: require('../../../assets/recipes/basbousa.jpg') as number,
     creator: "stu_spivack",

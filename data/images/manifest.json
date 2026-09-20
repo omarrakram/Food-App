@@ -43,6 +43,20 @@
       "acquiredAt": "2026-09-13T15:34:15.932Z"
     },
     {
+      "recipeSlug": "banana-milkshake",
+      "path": "banana-milkshake.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Banana_Milkshakes_at_the_International_Banana_Museum_on_a_really_hot_day_(40031652145).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Banana_Milkshakes_at_the_International_Banana_Museum_on_a_really_hot_day_%2840031652145%29.jpg",
+      "creator": "m01229 from USA",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "m01229 from USA · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 996,
+      "bytes": 182836,
+      "sha256": "8dbab177895b3e5bd8656f8f03b9efad0cb6ebeec02ccc98c19108db8aab7246",
+      "acquiredAt": "2026-09-20T07:18:28.243Z"
+    },
+    {
       "recipeSlug": "basbousa",
       "path": "basbousa.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Basboosa.jpg",
@@ -949,10 +963,6 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
-      "recipeSlug": "banana-milkshake",
-      "reason": "refused on review"
-    },
-    {
       "recipeSlug": "banana-peanut-oats",
       "reason": "no relevant openly-licensed image found"
     },
@@ -1122,7 +1132,7 @@
     },
     {
       "recipeSlug": "menemen",
-      "reason": "refused on review"
+      "reason": "File:Menemen Emiralem Strawberry.jpg: refused on review — A punnet of strawberries. Third attempt for this recipe and the third non-food result: the dish shares its name with a Turkish district, so its Commons category is landscapes, trains and produce. It keeps the branded fallback."
     },
     {
       "recipeSlug": "mesaqaa",
