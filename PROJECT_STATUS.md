@@ -917,7 +917,7 @@ branch):
 | Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.6%, **zero declared forms whose aliasing is broken** |
 | Ingredient families | `npm run audit:families` | reports only — 1 declared, 85 inferred |
 | Price backlog | `npm run audit:prices` | reports only — **76.9%** of required slots priced, 108 gaps ranked |
-| Whole-app browser walk | `npm run smoke:web` | **pass**, 232 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
+| Whole-app browser walk | `npm run smoke:web` | **pass**, 236 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |
 | Native production build | `eas build` | **not run** — needs an EAS project id |
