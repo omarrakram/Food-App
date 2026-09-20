@@ -156,14 +156,7 @@
       "high-protein",
       "beginner"
     ],
-    "image": {
-      "path": "curated/menemen.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -419,14 +412,7 @@
       "quick",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/turkish-bulgur-pilaf.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bulgur",
@@ -562,14 +548,7 @@
       "high-protein",
       "quick"
     ],
-    "image": {
-      "path": "curated/turkish-eggs-yogurt.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "yogurt",
@@ -843,14 +822,7 @@
       "beginner",
       "budget"
     ],
-    "image": {
-      "path": "curated/turkish-shepherd-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",
@@ -975,14 +947,7 @@
       "comfort",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/turkish-stuffed-flatbread.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -1127,14 +1092,7 @@
       "quick",
       "no-cook"
     ],
-    "image": {
-      "path": "curated/turkish-white-bean-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "white-beans",

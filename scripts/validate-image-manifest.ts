@@ -252,13 +252,49 @@ function main(): void {
     }
   }
 
-  // And the other direction: a recipe with no photograph must not claim one.
+  // AND THE OTHER DIRECTION: A RECIPE WITH NO PHOTOGRAPH MUST NOT CLAIM ONE.
+  //
+  // This used to read `recipe.image?.source === 'openly_licensed'`, which made
+  // the SOURCE FIELD the pass mark — and `generated` was the value that walked
+  // straight past it. Ninety-four recipes shipped `curated/<slug>.jpg`,
+  // "generated", "Akla kitchen", CC0, naming an asset that has never been in
+  // this repository. An invented Wikimedia credit failed; an invented Akla one
+  // did not, and the second is the easier lie to tell because nobody has to be
+  // named in it.
+  //
+  // The claim is what matters, not who it credits. A non-null `image` says
+  // "there is a picture at this path", `resolveRecipeImageUrl` turns that into
+  // a Storage URL the moment a Supabase project is configured, and
+  // `RecipeImage` prefers a URL over the branded fallback. So the gate is now:
+  // a curated image block must correspond to a manifest entry AND to bytes on
+  // disk, whatever it says about itself.
   for (const recipe of RECIPE_CATALOGUE) {
-    if (recipe.slug !== null && photographed.has(recipe.slug)) continue;
-    if (recipe.image?.source === 'openly_licensed') {
-      problems.push(
-        `${recipe.slug}: claims an openly-licensed photograph, but none is in the manifest`,
-      );
+    const image = recipe.image;
+    if (!image) continue;
+    // Community uploads live in the database, not in this repository; the
+    // bundled catalogue is curated end to end.
+    if (!image.path.startsWith('curated/')) continue;
+
+    const photo = recipe.slug === null ? undefined : photographed.get(recipe.slug);
+    if (photo) continue; // the block-by-block comparison above already ran
+
+    problems.push(
+      `${recipe.slug}: claims "${image.path}" (source "${image.source}", ` +
+        `credited to ${image.creator ?? 'nobody'}) but no photograph is in the manifest. ` +
+        'A recipe on the branded fallback has image: null.',
+    );
+  }
+
+  // Belt and braces: every curated path a recipe claims must be a real file.
+  // The manifest check above proves the manifest's own entries exist; this
+  // proves the RECIPE's claim does, which is the statement that reaches the
+  // seed and, through it, a database.
+  for (const recipe of RECIPE_CATALOGUE) {
+    const image = recipe.image;
+    if (!image?.path.startsWith('curated/')) continue;
+    const file = join(ASSET_DIR, image.path.slice('curated/'.length));
+    if (!existsSync(file)) {
+      problems.push(`${recipe.slug}: claims "${image.path}", which is not a file in assets/recipes`);
     }
   }
 

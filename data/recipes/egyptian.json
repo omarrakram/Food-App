@@ -320,14 +320,7 @@
       "oven",
       "budget"
     ],
-    "image": {
-      "path": "curated/batates-mahshia.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "potatoes",
@@ -622,14 +615,7 @@
       "high-protein",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/eggah-baladi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -760,14 +746,7 @@
       "beginner",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/egyptian-lentil-soup.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -904,14 +883,7 @@
       "high-protein",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/fattah-lahma.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "beef-cubes",
@@ -1058,14 +1030,7 @@
       "comfort",
       "oven"
     ],
-    "image": {
-      "path": "curated/feteer-cheese.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "phyllo",
@@ -1174,14 +1139,7 @@
       "high-protein",
       "beginner"
     ],
-    "image": {
-      "path": "curated/foul-with-eggs.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "fava-beans",
@@ -1577,14 +1535,7 @@
       "comfort",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/kabab-halla.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "beef-cubes",
@@ -1711,14 +1662,7 @@
       "high-protein",
       "oven"
     ],
-    "image": {
-      "path": "curated/kofta-tagine.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "ground-beef",
@@ -2050,14 +1994,7 @@
       "beginner",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/koshari-lentil-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -2498,14 +2435,7 @@
       "oven",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/mesaqaa.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggplant",
@@ -2656,14 +2586,7 @@
       "high-protein",
       "sunday-lunch"
     ],
-    "image": {
-      "path": "curated/molokhia-with-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -2823,14 +2746,7 @@
       "high-protein",
       "slow"
     ],
-    "image": {
-      "path": "curated/okra-stew.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "beef-cubes",
@@ -3247,14 +3163,7 @@
       "oven",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/ruz-moammar.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -3480,14 +3389,7 @@
       "quick",
       "beginner"
     ],
-    "image": {
-      "path": "curated/salatet-zabadi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "yogurt",
@@ -3594,14 +3496,7 @@
       "high-protein",
       "comfort"
     ],
-    "image": {
-      "path": "curated/sayadeya.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sea-bass",
@@ -3917,14 +3812,7 @@
       "one-pan",
       "late-night"
     ],
-    "image": {
-      "path": "curated/shakshuka-suez.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sausage",
@@ -4064,14 +3952,7 @@
       "batch-cook",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/shorbet-adas-red.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -4219,14 +4100,7 @@
       "quick",
       "budget"
     ],
-    "image": {
-      "path": "curated/shorbet-lisan-asfour.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "vermicelli",
@@ -4350,14 +4224,7 @@
       "vegan",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/taameya.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "falafel-mix",
@@ -4624,14 +4491,7 @@
       "healthy",
       "oven"
     ],
-    "image": {
-      "path": "curated/samak-mashwi-mullet.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "mullet",
@@ -4775,14 +4635,7 @@
       "high-protein",
       "quick"
     ],
-    "image": {
-      "path": "curated/calamari-alexandria.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "calamari",
@@ -6461,16 +6314,16 @@
         "safetyAr": "الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة."
       },
       {
-        "text": "Add the rest of the garlic and the green chilli and keep it moving until the liver is COOKED THROUGH — firm, with no pink left anywhere when you cut the thickest piece open, and any juice running clear. Allow about 6 minutes in total.",
-        "textAr": "ضيف باقي التوم والشطة الخضرا وفضل تقلّب لحد ما الكبدة تستوي تماماً — تبقى متماسكة، ومفيهاش أي لون وردي خالص لما تفتح أكبر قطعة، والعصارة تطلع صافية. حوالي ٦ دقايق إجمالاً.",
+        "text": "Add the rest of the garlic and the green chilli and keep it moving for about six minutes, until the pieces have gone firm against the back of a spoon instead of yielding. Then measure the thickest one.",
+        "textAr": "ضيف باقي التوم والشطة الخضرا وفضل تقلّب حوالي ست دقايق، لحد ما القطع تبقى متماسكة تحت ضهر المعلقة بدل ما تكون طرية. وبعدين قيس أتخن قطعة.",
         "minutes": 6,
         "uses": [
           "garlic",
           "chili-pepper",
           "liver"
         ],
-        "safety": "Liver is offal and must be cooked all the way through — 71°C / 160°F at the centre if you have a thermometer. Do not judge it by the outside: a seared exterior tells you nothing about the middle. Cut the thickest piece open and look.",
-        "safetyAr": "الكبدة أحشاء ولازم تستوي من جوه خالص — ٧١°م / ١٦٠°ف في النص لو عندك ترمومتر. متحكمش عليها من بره: اللون من بره مش بيقول أي حاجة عن النص. افتح أكبر قطعة وبصّ جواها."
+        "safety": "Liver is offal and must reach 71°C / 160°F at the centre of the thickest piece, measured with a food thermometer. Nothing you can see proves that: not the seared outside, not the colour of the cut face, not juices running clear — all of those appear below a safe temperature. If it reads low, back in the pan and measure again.",
+        "safetyAr": "الكبدة أحشاء ولازم توصل ٧١°م / ١٦٠°ف في نص أتخن قطعة، بترمومتر أكل. مفيش حاجة تشوفها بعينك تثبت ده: لا الوش المتحمّر، ولا لون القطعة من جوه، ولا العصارة الصافية — كل دول بيظهروا والحرارة لسه أقل من درجة الأمان. لو الحرارة أقل، رجّعها الطاسة وقيس تاني."
       },
       {
         "text": "Salt it off the heat — salting liver early draws the water out and toughens it — and serve with the lemon wedges to squeeze over.",
@@ -6940,14 +6793,7 @@
       "comfort",
       "sunday-lunch"
     ],
-    "image": {
-      "path": "curated/firakh-bel-forn.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "whole-chicken",
@@ -7026,15 +6872,15 @@
         "safetyAr": null
       },
       {
-        "text": "Check the thickest part of the thigh, keeping the probe off the bone, then rest the bird for 10 minutes before you cut it. Squeeze the second lemon over as you serve.",
-        "textAr": "اقيس أتخن جزء في الورك والترمومتر بعيد عن العضم، وبعدين سيب الفرخة ترتاح ١٠ دقايق قبل ما تقطعها. اعصر الليمونة التانية عليها وانت بتقدّمها.",
+        "text": "Measure the thickest part of each thigh and the thickest part of the breast, keeping the probe clear of the bone. Once it reads, rest the bird for 10 minutes before you cut it and squeeze the second lemon over as you serve.",
+        "textAr": "قيس أتخن جزء في كل ورك وأتخن جزء في الصدر، والترمومتر بعيد عن العضم. أول ما توصل، سيب الفرخة ترتاح ١٠ دقايق قبل ما تقطعها واعصر الليمونة التانية عليها وانت بتقدّمها.",
         "minutes": 12,
         "uses": [
           "whole-chicken",
           "lemon"
         ],
-        "safety": "Chicken must reach 74°C / 165°F at the thickest part of the thigh, away from the bone. Colour is not a test — a browned bird can still be raw at the joint, and juices can run clear below a safe temperature. With no thermometer, cut into the thigh joint and check there is no pink meat and no red at the bone.",
-        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن جزء في الورك، بعيد عن العضم. اللون مش دليل — الفرخة الدهبانة ممكن تكون لسه نية عند المفصل، والعصارة ممكن تطلع صافية وهي لسه أقل من درجة الأمان. لو مش معاك ترمومتر، افتح مفصل الورك وتأكد إن مفيش لحمة وردية ولا احمرار عند العضم."
+        "safety": "Chicken must reach 74°C / 165°F at the thickest part of each thigh and at the thickest part of the breast, with the probe clear of the bone. A food thermometer is the only way to establish that. Colour is not a test — a browned bird can still be raw at the joint, and juices can run clear well below a safe temperature — so if it reads low, put it back and measure again rather than judging by eye.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن جزء في كل ورك وفي أتخن جزء في الصدر، والترمومتر بعيد عن العضم. ترمومتر الأكل هو الطريقة الوحيدة اللي تتأكد بيها. اللون مش دليل — الفرخة الدهبانة ممكن تكون لسه نية عند المفصل، والعصارة ممكن تطلع صافية وهي لسه أقل بكتير من درجة الأمان — فلو الحرارة أقل، رجّعها وقيس تاني بدل ما تحكم بعينك."
       }
     ]
   },

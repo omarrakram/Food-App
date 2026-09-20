@@ -8636,8 +8636,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b95a6306-1705-5c84-85f2-01f16cf143e4', 'air-fryer-spiced-chicken', 'Air Fryer Spiced Chicken', 'فراخ متبّلة في الإير فراير',
   'Twenty minutes in the air fryer, and no oily pan to scrub afterwards. Crisp outside, still juicy in the middle.', 'عشرين دقيقة في الإير فراير، ومفيش طاسة زيت تغسلها بعدين. مقرمشة من بره وطرية من جوه.',
-  'curated/air-fryer-spiced-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   8, 18, 2,
   410, 52, 6,
@@ -8917,7 +8917,6 @@ delete from public.recipe_appliances where recipe_id = 'adbf42dd-dd81-5778-bf1b-
 insert into public.recipe_appliances (recipe_id, appliance) values ('adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 'stove');
 delete from public.recipe_tags where recipe_id = 'adbf42dd-dd81-5778-bf1b-dc75cd182e0f';
 insert into public.recipe_tags (recipe_id, tag) values ('adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 'comfort');
-insert into public.recipe_tags (recipe_id, tag) values ('adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 'budget');
 insert into public.recipe_tags (recipe_id, tag) values ('adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 'healthy');
 
@@ -8943,7 +8942,7 @@ values ('b6c6551a-2f22-5236-9b75-bf818a336b1a', 'adbf42dd-dd81-5778-bf1b-dc75cd1
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('07de9033-7dfc-5b35-803c-4a1bcc5996d9', 'adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 3, 'Now the step that matters: ladle the hot broth into the egg mixture one ladle at a time, whisking hard the whole time, until you have added four or five. The bowl should feel warm to the back of your hand.', 'دلوقتي الخطوة المهمة: صبّ الشوربة السخنة على خليط البيض مغرفة مغرفة، وانت بتخفق بقوة طول الوقت، لحد ما تكون ضيفت أربعة أو خمسة. السلطانية لازم تبقى دافية على ضهر إيدك.', 4, null, null, '{"eggs"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('993f51a3-69df-5fa6-984d-71e69428f9be', 'adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 4, 'Pour the warmed egg back into the pan, stirring as it goes, and hold it over the lowest heat for two or three minutes until it thickens enough to coat a spoon. It must not boil.', 'صبّ البيض الدافي في الحلة تاني وانت بتقلّب، وسيبها على أهدى نار دقيقتين أو تلاتة لحد ما تتقل وتغلّف المعلقة. لازم ماتغليش.', 4, 'The soup carries raw egg until this step finishes. Hold it just below a simmer until it thickens and coats the back of a spoon — but never let it boil, or the egg curdles. If you are cooking for someone pregnant, elderly or immunocompromised, keep it at that gentle heat for three full minutes.', 'الشوربة فيها بيض ني لحد ما الخطوة دي تخلص. سيبها تحت درجة الغليان بشوية لحد ما تتقل وتغلّف ضهر المعلقة — بس عمرك ما تسيبها تغلي، وإلا البيض هيتكتّل. لو بتطبخ لحامل أو كبير في السن أو مناعته ضعيفة، سيبها على النار الهادية دي تلت دقايق كاملة.', '{"eggs"}');
+values ('993f51a3-69df-5fa6-984d-71e69428f9be', 'adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 4, 'Pour the warmed egg back into the pan, stirring as it goes, and hold it over the lowest heat until it thickens enough to coat a spoon — two or three minutes. It must not boil.', 'صبّ البيض الدافي في الحلة تاني وانت بتقلّب، وسيبها على أهدى نار لحد ما تتقل وتغلّف المعلقة — دقيقتين أو تلاتة. لازم ماتغليش.', 4, 'The soup carries raw egg until this step finishes. Take it to 71°C / 160°F, which is also where it thickens and coats a spoon — below that it stays thin, and above about 80°C / 175°F the egg curdles, which is the real reason it must not boil. Without a thermometer, use pasteurised egg.', 'الشوربة فيها بيض ني لحد ما الخطوة دي تخلص. وصّلها ٧١°م / ١٦٠°ف، ودي نفس الدرجة اللي بتتقل عندها وتغلّف المعلقة — تحتها بتفضل خفيفة، وفوق حوالي ٨٠°م / ١٧٥°ف البيض بيتكتّل، وده السبب الحقيقي إنها لازم ماتغليش. لو مش معاك ترمومتر، استعمل بيض مبستر.', '{"eggs"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('ee904032-09af-52fc-a8db-1dfa1299c8f3', 'adbf42dd-dd81-5778-bf1b-dc75cd182e0f', 5, 'Season with the salt at the very end — the stock cubes have already done most of it — and serve it straight away.', 'ملّحها في آخر خطوة خالص — مكعبات المرقة عملت أغلب الشغل — وقدّمها على طول.', 2, null, null, '{"salt"}');
 
@@ -8956,8 +8955,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'baked-salmon-vegetables', 'Tray-Baked Salmon and Vegetables', 'سلمون بالخضار في الفرن',
   'One tray, nothing to wash, and it is on the table in half an hour.', 'صينية واحدة، مفيش حاجة تتغسل، وعلى السفرة في نص ساعة.',
-  'curated/baked-salmon-vegetables.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   10, 25, 2,
   480, 40, 22,
@@ -8999,7 +8998,6 @@ delete from public.recipe_tags where recipe_id = 'f13f1aae-eb32-5906-a3de-ea7eaa
 insert into public.recipe_tags (recipe_id, tag) values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'high-protein');
 insert into public.recipe_tags (recipe_id, tag) values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'healthy');
 insert into public.recipe_tags (recipe_id, tag) values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'oven');
-insert into public.recipe_tags (recipe_id, tag) values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('f13f1aae-eb32-5906-a3de-ea7eaa3ca38f', 'one-pan');
 
 delete from public.recipe_ingredients where recipe_id = 'f13f1aae-eb32-5906-a3de-ea7eaa3ca38f';
@@ -9285,8 +9283,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('866794f5-af4e-5cf4-9549-f4e498feedfb', 'banana-peanut-oats', 'Banana & Peanut Butter Oats', 'شوفان بالموز وزبدة الفول السوداني',
   'Five minutes, one bowl, holds you until lunch. Sweet without adding sugar.', 'خمس دقايق وطبق واحد، ويقعّدك لحد الغدا. حلو من غير ما تحط سكر.',
-  'curated/banana-peanut-oats.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   2, 5, 1,
   450, 17, 58,
@@ -9599,8 +9597,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('cdfd6850-f006-57fb-8657-4e46345be2d1', 'batates-mahshia', 'Stuffed Potatoes in Tomato Sauce', 'بطاطس محشية',
   'Hollowed potatoes filled with mince and baked in sauce until they take a spoon easily.', 'بطاطس مفرّغة ومحشية لحمة ومخبوزة في الصلصة لحد ما المعلقة تدخل فيها بسهولة.',
-  'curated/batates-mahshia.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   25, 45, 4,
   430, 24, 42,
@@ -9683,8 +9681,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('157d2636-2689-5116-a22f-81a704678a7e', 'bean-burrito-bowl', 'Bean and Rice Burrito Bowl', 'طبق برّيتو بالفاصوليا والرز',
   'Everything a burrito has, without the folding. Cheap, filling, mostly cupboard.', 'كل اللي في البرّيتو من غير لف. رخيص ومشبع ومعظمه من الدولاب.',
-  'curated/bean-burrito-bowl.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mexican', 'easy',
   12, 15, 3,
   520, 19, 76,
@@ -9859,8 +9857,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('36bbdcf3-4d33-53a3-9770-386c2a07cf82', 'beef-noodle-stirfry', 'Beef and Vegetable Noodles', 'نودلز باللحمة والخضار',
   'Everything cut before the pan gets hot, because after that there is no time.', 'كل حاجة متقطّعة قبل ما الطاسة تسخن، لأن بعد كده مفيش وقت.',
-  'curated/beef-noodle-stirfry.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   15, 10, 3,
   540, 32, 62,
@@ -9991,7 +9989,6 @@ delete from public.recipe_appliances where recipe_id = 'b78991fe-00f2-5d27-8586-
 insert into public.recipe_appliances (recipe_id, appliance) values ('b78991fe-00f2-5d27-8586-5f503d94635e', 'stove');
 delete from public.recipe_tags where recipe_id = 'b78991fe-00f2-5d27-8586-5f503d94635e';
 insert into public.recipe_tags (recipe_id, tag) values ('b78991fe-00f2-5d27-8586-5f503d94635e', 'high-protein');
-insert into public.recipe_tags (recipe_id, tag) values ('b78991fe-00f2-5d27-8586-5f503d94635e', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('b78991fe-00f2-5d27-8586-5f503d94635e', 'comfort');
 
 delete from public.recipe_ingredients where recipe_id = 'b78991fe-00f2-5d27-8586-5f503d94635e';
@@ -10443,8 +10440,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('6213dd1a-930b-51ca-bcef-41e0200cec5d', 'bruschetta-tomato', 'Tomato Bruschetta', 'بروشيتا بالطماطم',
   'Good bread, rubbed with raw garlic, piled with tomato that has been salted first.', 'عيش كويس متفروك بتوم ني، وفوقه طماطم اتملّحت الأول.',
-  'curated/bruschetta-tomato.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   12, 5, 4,
   230, 6, 32,
@@ -10524,8 +10521,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('86a10262-a7c8-544c-a9b3-2a0de42d9d64', 'buffalo-less-baked-wings', 'Oven Wings with Hot Sauce', 'أجنحة فراخ في الفرن بالصلصة الحارة',
   'Baking powder in the rub is the trick — it dries the skin so it crisps like frying.', 'البيكنج بودر في التتبيلة هو السر — بينشّف الجلد فيقرمش زي المقلي.',
-  'curated/buffalo-less-baked-wings.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   10, 45, 4,
   430, 36, 6,
@@ -10768,8 +10765,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('94958692-9d7b-5de2-8d93-38ff1c18a9a4', 'caesar-less-chicken-salad', 'Grilled Chicken and Crouton Salad', 'سلطة فراخ مشوية بالخبز المحمّر',
   'A salad that eats like a meal, with the dressing made from yogurt rather than raw egg.', 'سلطة بتتاكل كوجبة، والصلصة معمولة بزبادي مش بيض ني.',
-  'curated/caesar-less-chicken-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   15, 15, 2,
   470, 44, 26,
@@ -10855,8 +10852,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('7a55ecf2-7154-5300-b30a-5c6ab3abf776', 'calamari-alexandria', 'Alexandria Fried Calamari', 'كاليماري إسكندراني',
   'Rings in seasoned flour, fried hot and fast, eaten with tahini and a hard squeeze of lemon.', 'حلقات في دقيق متبّل، مقلية على نار عالية وبسرعة، وبتتاكل بالطحينة وليمون كتير.',
-  'curated/calamari-alexandria.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 10, 4,
   380, 26, 28,
@@ -10940,8 +10937,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f5d0d564-9619-52cf-b5ee-5f58768d81ff', 'caprese-stack', 'Tomato, Mozzarella and Basil', 'كابريزي',
   'Three ingredients means all three have to be good. Room temperature, always.', 'تلات مكوّنات يعني تلاتتهم لازم يكونوا كويسين. وعلى حرارة الأوضة دايمًا.',
-  'curated/caprese-stack.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   25, 0, 2,
   310, 18, 8,
@@ -11015,8 +11012,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('49806b77-eeed-5d42-b74c-669475b5cabe', 'carbonara-beef', 'Carbonara with Beef Bacon', 'كاربونارا ببيكون اللحمة',
   'No cream. Egg, cheese and pasta water, off the heat, moving fast.', 'من غير كريمة. بيض وجبنة ومية مكرونة، بعيد عن النار وبسرعة.',
-  'curated/carbonara-beef.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'medium',
   8, 15, 2,
   680, 34, 66,
@@ -11444,8 +11441,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a0463ab7-a7fa-536a-be86-892bf2d486f6', 'chickpea-spinach-curryless', 'Chickpeas with Spinach and Lemon', 'حمص بالسبانخ والليمون',
   'A pan of green and gold that costs almost nothing and eats like a meal.', 'طاسة أخضر ودهبي بتكلّف ولا حاجة وبتتاكل كأنها وجبة كاملة.',
-  'curated/chickpea-spinach-curryless.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   8, 15, 3,
   300, 14, 36,
@@ -11527,8 +11524,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8ea67265-0903-529c-aa9c-4188b8cb4725', 'chili-con-carne-beef', 'Beef and Bean Chilli', 'تشيلي باللحمة والفاصوليا',
   'Better after an hour, best the next day. Cocoa in the pot is not a mistake.', 'أحلى بعد ساعة وأحلى تاني يوم. والكاكاو في الحلة مش غلطة.',
-  'curated/chili-con-carne-beef.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   15, 60, 6,
   430, 32, 34,
@@ -11703,8 +11700,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('587e68c1-8a80-50cb-a5ec-6be7f96587ab', 'cobb-style-bowl', 'Chopped Salad Bowl with Egg and Cheese', 'طبق سلطة مقطّعة بالبيض والجبنة',
   'Everything chopped to the same size and laid out in rows. Protein, no cooking beyond eggs.', 'كل حاجة مقطّعة بنفس الحجم ومرصوصة صفوف. بروتين ومفيش طبخ غير البيض.',
-  'curated/cobb-style-bowl.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   15, 8, 2,
   460, 30, 18,
@@ -11958,8 +11955,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('873d7372-07c6-5d0e-86d5-0b25f90e5cd0', 'corn-avocado-salad', 'Corn, Avocado and Lime Salad', 'سلطة ذرة وأفوكادو',
   'Charred corn against cold avocado. Ten minutes and it works beside anything.', 'ذرة محمّرة مع أفوكادو بارد. عشر دقايق وبتنفع جنب أي حاجة.',
-  'curated/corn-avocado-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mexican', 'easy',
   10, 8, 4,
   230, 5, 26,
@@ -12037,8 +12034,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('60a4214d-9a37-56b6-a477-deed35c6d87d', 'creamy-chicken-pasta', 'Creamy Chicken Pasta', 'مكرونة بالفراخ والكريمة',
   'One pan, one weeknight. Seared chicken, garlic cream, and enough hard cheese to matter.', 'طاسة واحدة في نص الأسبوع. فراخ مشوّحة وكريمة بالتوم وجبنة رومي بتفرق.',
-  'curated/creamy-chicken-pasta.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   10, 20, 3,
   650, 48, 62,
@@ -12434,8 +12431,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('cdcaafb5-40a2-59ba-9a01-0e1f0e76135c', 'edamame-rice-bowl', 'Edamame and Egg Rice Bowl', 'طبق رز بالإدامامي والبيض',
   'A bowl assembled rather than cooked, if the rice is already there.', 'طبق بيتجمّع مش بيتطبخ، لو الرز جاهز.',
-  'curated/edamame-rice-bowl.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   8, 8, 2,
   480, 24, 62,
@@ -12607,8 +12604,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('5048a346-794b-54d7-906f-cfb282adb8fb', 'eggah-baladi', 'Herb and Onion Omelette', 'عجة بلدي',
   'More herb than egg. Cut into wedges and eaten hot or cold, in bread.', 'خضرة أكتر من البيض. تتقطّع مثلثات وتتاكل سخنة أو باردة في عيش.',
-  'curated/eggah-baladi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   10, 12, 3,
   230, 14, 8,
@@ -12693,8 +12690,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('aa5497f9-33e2-5956-a041-fecd53abc183', 'egyptian-cheese-toastie', 'Grilled Cheese & Tomato Toastie', 'توست بالجبنة والطماطم',
   'Four ingredients and five minutes. Dangerously good at midnight.', 'أربع مكوّنات وخمس دقايق. خطر في نص الليل.',
-  'curated/egyptian-cheese-toastie.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   3, 6, 1,
   430, 19, 38,
@@ -12769,8 +12766,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8549e1f7-6878-5200-8e88-879718a4195a', 'egyptian-lentil-soup', 'Egyptian Lentil Soup', 'شوربة عدس مصرية',
   'Blended red lentils with cumin and a squeeze of lemon. Cheap, filling, and better than it has any right to be.', 'عدس أصفر مضروب بالكمون وعصرة ليمون. رخيصة وشبعانة وأحلى مما تتخيّل.',
-  'curated/egyptian-lentil-soup.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   8, 30, 4,
   290, 16, 44,
@@ -12855,8 +12852,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('78975f66-a89d-5c3a-8f3b-e414a893a9df', 'fattah-lahma', 'Fattah with Beef', 'فتة باللحمة',
   'Crisp bread under rice under garlicky vinegar tomato, with slow-cooked beef on top.', 'عيش محمّر تحت رز تحت صلصة طماطم بالتوم والخل، وفوقهم لحمة مطبوخة على مهلها.',
-  'curated/fattah-lahma.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 90, 6,
   640, 38, 64,
@@ -12939,8 +12936,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('c068dffd-7251-5c9c-a5f6-dcd79f41caaf', 'fatteh-hummus', 'Chickpea Fatteh with Yogurt', 'فتة حمص بالزبادي',
   'Crisp bread, warm chickpeas, cold garlicky yogurt and browned butter. Textures on purpose.', 'عيش مقرمش وحمص سخن وزبادي بارد بالتوم وزبدة محمّرة. القوام مقصود.',
-  'curated/fatteh-hummus.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   10, 15, 4,
   430, 18, 44,
@@ -13115,8 +13112,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('73cb2f1a-7b6c-55ea-bf97-e05f6c8d0a95', 'feteer-cheese', 'Layered Pastry with Cheese', 'فطير مشلتت بالجبنة',
   'Paper-thin layers, a lot of ghee, and white cheese melting between them.', 'طبقات رفيعة زي الورق وسمنة كتير وجبنة بيضا سايحة بينهم.',
-  'curated/feteer-cheese.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   20, 25, 4,
   520, 18, 44,
@@ -13191,8 +13188,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('fc6fc6d3-e8d6-51cb-bb26-dfd760effe1e', 'firakh-bel-forn', 'Whole Chicken in the Oven with Cumin', 'فراخ في الفرن بالكمون',
   'Cumin, lemon and oil worked under the skin as well as over it, then roasted breast-down first so the juices run into the part that dries out. Five lines, one tray, and a thermometer is the only thing that actually tells you it is done.', 'كمون وليمون وزيت بيتدهنوا تحت الجلدة قبل ما يتدهنوا فوقها، وبعدين تتشوي الفرخة على صدرها الأول عشان العصارة تنزل في الجزء اللي بينشف. خمس سطور، صينية واحدة، والترمومتر هو الحاجة الوحيدة اللي بتقولك فعلاً إنها استوت.',
-  'curated/firakh-bel-forn.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 80, 4,
   520, 46, 3,
@@ -13258,7 +13255,7 @@ values ('5060bb6d-1b07-5b1b-b7a2-f5e654a934ad', 'fc6fc6d3-e8d6-51cb-bb26-dfd760e
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('6b712089-d133-5ecc-b5a3-1e84d7ced992', 'fc6fc6d3-e8d6-51cb-bb26-dfd760effe1e', 4, 'Turn it breast-up and give it another 30 to 35 minutes, basting once with what has collected in the tray, until the skin is brown all over.', 'اقلبها والصدر لفوق وادّيها كمان ٣٠ لـ ٣٥ دقيقة، وادهنها مرة باللي اتجمع في الصينية، لحد ما الجلدة تدهب كلها.', 35, null, null, '{"whole chicken"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('baebf0b2-ce62-53fc-8d6d-e483784b2511', 'fc6fc6d3-e8d6-51cb-bb26-dfd760effe1e', 5, 'Check the thickest part of the thigh, keeping the probe off the bone, then rest the bird for 10 minutes before you cut it. Squeeze the second lemon over as you serve.', 'اقيس أتخن جزء في الورك والترمومتر بعيد عن العضم، وبعدين سيب الفرخة ترتاح ١٠ دقايق قبل ما تقطعها. اعصر الليمونة التانية عليها وانت بتقدّمها.', 12, 'Chicken must reach 74°C / 165°F at the thickest part of the thigh, away from the bone. Colour is not a test — a browned bird can still be raw at the joint, and juices can run clear below a safe temperature. With no thermometer, cut into the thigh joint and check there is no pink meat and no red at the bone.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن جزء في الورك، بعيد عن العضم. اللون مش دليل — الفرخة الدهبانة ممكن تكون لسه نية عند المفصل، والعصارة ممكن تطلع صافية وهي لسه أقل من درجة الأمان. لو مش معاك ترمومتر، افتح مفصل الورك وتأكد إن مفيش لحمة وردية ولا احمرار عند العضم.', '{"whole chicken","lemon"}');
+values ('baebf0b2-ce62-53fc-8d6d-e483784b2511', 'fc6fc6d3-e8d6-51cb-bb26-dfd760effe1e', 5, 'Measure the thickest part of each thigh and the thickest part of the breast, keeping the probe clear of the bone. Once it reads, rest the bird for 10 minutes before you cut it and squeeze the second lemon over as you serve.', 'قيس أتخن جزء في كل ورك وأتخن جزء في الصدر، والترمومتر بعيد عن العضم. أول ما توصل، سيب الفرخة ترتاح ١٠ دقايق قبل ما تقطعها واعصر الليمونة التانية عليها وانت بتقدّمها.', 12, 'Chicken must reach 74°C / 165°F at the thickest part of each thigh and at the thickest part of the breast, with the probe clear of the bone. A food thermometer is the only way to establish that. Colour is not a test — a browned bird can still be raw at the joint, and juices can run clear well below a safe temperature — so if it reads low, put it back and measure again rather than judging by eye.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن جزء في كل ورك وفي أتخن جزء في الصدر، والترمومتر بعيد عن العضم. ترمومتر الأكل هو الطريقة الوحيدة اللي تتأكد بيها. اللون مش دليل — الفرخة الدهبانة ممكن تكون لسه نية عند المفصل، والعصارة ممكن تطلع صافية وهي لسه أقل بكتير من درجة الأمان — فلو الحرارة أقل، رجّعها وقيس تاني بدل ما تحكم بعينك.', '{"whole chicken","lemon"}');
 
 -- Fish Tacos with Cabbage Slaw
 insert into public.recipes (
@@ -13269,8 +13266,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('54c85df7-7560-5c08-92ba-7f9b27849127', 'fish-tacos-cabbage', 'Fish Tacos with Cabbage Slaw', 'تاكو سمك بسلطة الكرنب',
   'Spiced tilapia, sharp cabbage, yogurt instead of crema. Ten minutes at the pan.', 'بلطي متبّل وكرنب حامضي وزبادي بدل الكريمة. عشر دقايق على الطاسة.',
-  'curated/fish-tacos-cabbage.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mexican', 'easy',
   15, 10, 4,
   420, 34, 38,
@@ -13439,8 +13436,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('20efcb35-95d5-5d5c-9673-d5326ce7b82a', 'foul-shami', 'Levantine Ful with Tahini', 'فول شامي بالطحينة',
   'Fava beans loosened with tahini instead of oil, sharp with lemon and garlic.', 'فول مخفّف بالطحينة بدل الزيت، وحامض بالليمون والتوم.',
-  'curated/foul-shami.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   5, 10, 2,
   340, 16, 38,
@@ -13521,8 +13518,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('675e79fc-ff56-59bf-ac47-9845fde452a7', 'foul-with-eggs', 'Foul with Eggs & Olive Oil', 'فول بالبيض وزيت الزيتون',
   'The breakfast that runs the country. Warm fava beans, cumin, lemon and a soft-boiled egg on top.', 'فطار البلد كلها. فول سخن وكمون وليمون وبيضة نص استواء فوقه.',
-  'curated/foul-with-eggs.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   5, 10, 2,
   420, 24, 44,
@@ -14086,8 +14083,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('901dad0f-7559-5cb9-8c9b-f9c888f90892', 'ginger-garlic-broccoli-beef', 'Ginger Beef and Broccoli', 'لحمة بالزنجبيل والبروكلي',
   'The takeaway dish, made properly: beef seared in batches so it never steams.', 'أكلة المطاعم بس مظبوطة: لحمة مشوّحة على دفعات عشان ماتسلقش.',
-  'curated/ginger-garlic-broccoli-beef.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'medium',
   15, 12, 3,
   410, 36, 18,
@@ -14171,8 +14168,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('1630107f-aed3-5532-a60e-1af649a84362', 'gnocchi-butter-sage', 'Potato Gnocchi in Brown Butter', 'نيوكي بالزبدة',
   'Made from potato and very little flour. The lighter your hand, the lighter they are.', 'معمولة من بطاطس ودقيق قليل جدًا. كل ما إيدك تكون أخف، كل ما بقت أخف.',
-  'curated/gnocchi-butter-sage.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'hard',
   40, 20, 4,
   480, 11, 68,
@@ -14406,8 +14403,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('5a287c8a-2e3d-5f00-b7fa-dd8a31553cff', 'grilled-sea-bream', 'Grilled Sea Bream with Lemon', 'دنيس مشوي بالليمون',
   'Whole fish, hot grill, lemon and nothing else getting in the way.', 'سمكة كاملة وشواية سخنة وليمون ومفيش حاجة تانية تعطّل.',
-  'curated/grilled-sea-bream.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'medium',
   10, 20, 2,
   330, 42, 4,
@@ -14738,8 +14735,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2eddc1c3-dd89-56a2-a07e-aa80c7a740ea', 'herb-omelette-feta', 'Feta and Herb Omelette', 'أومليت بالجبنة والخضرة',
   'Four minutes, one pan, and enough protein to actually hold until lunch.', 'أربع دقايق وطاسة واحدة وبروتين كفاية يقعّدك لحد الغدا.',
-  'curated/herb-omelette-feta.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   5, 6, 1,
   340, 22, 4,
@@ -14991,8 +14988,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('d4a89ce0-43b2-5212-abac-cc0feca3961a', 'kabab-halla', 'Beef Stewed in Its Own Juices', 'كباب حلة',
   'No water at all. Beef, onions and butter, sealed and left alone until it falls apart.', 'من غير مية خالص. لحمة وبصل وزبدة، مقفولين ومتسايبين لحد ما اللحمة تقع.',
-  'curated/kabab-halla.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   10, 90, 4,
   490, 42, 10,
@@ -15072,8 +15069,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 'kafta-bil-sanieh', 'Kafta and Potato Tray Bake', 'كفتة بالصينية',
   'Mince patties and potato slices baked under tomato until the edges catch.', 'أقراص لحمة وشرايح بطاطس متخبوزين تحت الطماطم لحد ما الأطراف تتحمّر.',
-  'curated/kafta-bil-sanieh.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   20, 45, 4,
   490, 30, 32,
@@ -15300,7 +15297,7 @@ values ('9270f3c0-a173-553d-aaed-4134716804f8', '239ecaaf-d4da-561d-ac4e-4ed2cd6
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('bf20623f-abb0-539e-8882-4d0de34f0e99', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 3, 'Lift the liver out and pat every piece dry. Get the oil properly hot in a wide pan, then sear the liver in ONE LAYER, in two batches if you have to — a crowded pan steams it grey.', 'شيل الكبدة ونشّف كل قطعة. سخّن الزيت كويس في طاسة واسعة، وحمّر الكبدة طبقة واحدة، على دفعتين لو لازم — الطاسة المزنوقة بتبخّرها وبتخليها رمادية.', 3, 'Liver spits hard when it hits hot oil. Stand back as you put it in and keep your arms clear of the pan.', 'الكبدة بتفرقع بقوة أول ما تنزل الزيت السخن. ابعد وانت بتحطها وخلي دراعك بعيد عن الطاسة.', '{"beef liver","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('ff81278b-5250-5d54-9a7c-232049887f5e', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 4, 'Add the rest of the garlic and the green chilli and keep it moving until the liver is COOKED THROUGH — firm, with no pink left anywhere when you cut the thickest piece open, and any juice running clear. Allow about 6 minutes in total.', 'ضيف باقي التوم والشطة الخضرا وفضل تقلّب لحد ما الكبدة تستوي تماماً — تبقى متماسكة، ومفيهاش أي لون وردي خالص لما تفتح أكبر قطعة، والعصارة تطلع صافية. حوالي ٦ دقايق إجمالاً.', 6, 'Liver is offal and must be cooked all the way through — 71°C / 160°F at the centre if you have a thermometer. Do not judge it by the outside: a seared exterior tells you nothing about the middle. Cut the thickest piece open and look.', 'الكبدة أحشاء ولازم تستوي من جوه خالص — ٧١°م / ١٦٠°ف في النص لو عندك ترمومتر. متحكمش عليها من بره: اللون من بره مش بيقول أي حاجة عن النص. افتح أكبر قطعة وبصّ جواها.', '{"garlic","chili pepper","beef liver"}');
+values ('ff81278b-5250-5d54-9a7c-232049887f5e', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 4, 'Add the rest of the garlic and the green chilli and keep it moving for about six minutes, until the pieces have gone firm against the back of a spoon instead of yielding. Then measure the thickest one.', 'ضيف باقي التوم والشطة الخضرا وفضل تقلّب حوالي ست دقايق، لحد ما القطع تبقى متماسكة تحت ضهر المعلقة بدل ما تكون طرية. وبعدين قيس أتخن قطعة.', 6, 'Liver is offal and must reach 71°C / 160°F at the centre of the thickest piece, measured with a food thermometer. Nothing you can see proves that: not the seared outside, not the colour of the cut face, not juices running clear — all of those appear below a safe temperature. If it reads low, back in the pan and measure again.', 'الكبدة أحشاء ولازم توصل ٧١°م / ١٦٠°ف في نص أتخن قطعة، بترمومتر أكل. مفيش حاجة تشوفها بعينك تثبت ده: لا الوش المتحمّر، ولا لون القطعة من جوه، ولا العصارة الصافية — كل دول بيظهروا والحرارة لسه أقل من درجة الأمان. لو الحرارة أقل، رجّعها الطاسة وقيس تاني.', '{"garlic","chili pepper","beef liver"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('d6486827-7cec-5c3a-ab91-aed348cfb9dc', '239ecaaf-d4da-561d-ac4e-4ed2cd6d056a', 5, 'Salt it off the heat — salting liver early draws the water out and toughens it — and serve with the lemon wedges to squeeze over.', 'ملّحها بعد ما تنزلها من على النار — الملح بدري بيطلع مياتها ويقسّيها — وقدّمها ومعاها فصوص الليمون تعصر عليها.', 1, null, null, '{"salt","lemon"}');
 
@@ -15477,8 +15474,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8d8f82f9-ce20-5f97-a634-d7af059a1521', 'kimchi-less-cabbage-rice', 'Spicy Cabbage and Egg Rice', 'رز بالكرنب الحار والبيض',
   'Cabbage fried until it sweetens, chilli, and a fried egg to hold it together.', 'كرنب مقلي لحد ما يحلى وشطة وبيضة مقلية بتلمّهم.',
-  'curated/kimchi-less-cabbage-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   8, 14, 2,
   450, 15, 64,
@@ -15565,8 +15562,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('7afce514-e93f-559b-b243-c5f50563058e', 'kofta-tagine', 'Kofta in Tomato Tagine', 'طاجن كفتة بالطماطم',
   'Beef kofta baked in a thick tomato sauce with potatoes. Sunday food on a Tuesday.', 'كفتة لحمة متحمّرة في صلصة طماطم تقيلة مع بطاطس. أكل الجمعة في يوم تلات.',
-  'curated/kofta-tagine.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   20, 40, 4,
   620, 38, 34,
@@ -15745,8 +15742,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('eb775d97-f63b-5674-8a38-7fd7e0807ac7', 'koshari-lentil-rice', 'Lentils and Rice with Crisp Onions', 'كشري بلدي',
   'The two-ingredient ancestor of koshari. Cheap, filling, and completely satisfying.', 'جد الكشري بمكوّنين بس. رخيص ومشبع ومريح تمامًا.',
-  'curated/koshari-lentil-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   10, 35, 4,
   430, 15, 78,
@@ -15910,8 +15907,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('e0e8ef5f-5681-5de0-875a-ee11cb84e7fa', 'labneh-bowl', 'Labneh with Oil and Zaatar', 'لبنة بالزيت والزعتر',
   'Thick strained yogurt, a pool of good oil, and bread. Breakfast in ninety seconds.', 'لبنة تقيلة وبركة زيت كويس وعيش. فطار في تسعين ثانية.',
-  'curated/labneh-bowl.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   5, 0, 2,
   280, 12, 18,
@@ -15986,8 +15983,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3a97c2ee-5987-59c5-878a-448f8a075c7b', 'lamb-freekeh', 'Freekeh with Lamb and Almonds', 'فريكة باللحمة',
   'Smoked green wheat cooked in lamb broth. Nuttier and better than rice for this.', 'قمح أخضر مدخّن متطبوخ في مرق الضاني. طعمه مكسرات وأحلى من الرز هنا.',
-  'curated/lamb-freekeh.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'medium',
   15, 75, 6,
   560, 34, 58,
@@ -16071,8 +16068,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a8cb1282-643f-5af2-a48b-058ef8d0c101', 'lasagne-beef', 'Beef Lasagne', 'لازانيا باللحمة',
   'A long ragù, a proper béchamel, and the patience to let it rest before cutting.', 'راجو على مهله وبشاميل مظبوط وصبر لحد ما ترتاح قبل ما تقطعها.',
-  'curated/lasagne-beef.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'hard',
   30, 90, 6,
   650, 34, 52,
@@ -16170,8 +16167,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('10fc105d-3feb-5ce9-994b-cbe005d4de63', 'lemon-herb-couscous', 'Couscous with Herbs and Almonds', 'كسكس بالخضرة واللوز',
   'Ready in the time the kettle takes. Herbs, lemon, toasted almonds, done.', 'جاهز في وقت غلي الكتلة. خضرة وليمون ولوز محمّص وخلاص.',
-  'curated/lemon-herb-couscous.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   10, 5, 4,
   340, 9, 50,
@@ -16254,8 +16251,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('97bec492-782a-5614-8d2a-e9beae0a709e', 'lentil-soup-lemon', 'Levantine Lentil Soup', 'شوربة عدس بالليمون',
   'Thinner and sharper than the Egyptian one, finished with a hard squeeze of lemon.', 'أرق وأحمض من المصرية، ومتزيّنة بعصرة ليمون قوية.',
-  'curated/lentil-soup-lemon.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   5, 30, 4,
   230, 12, 34,
@@ -16340,8 +16337,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('e155233f-07b6-5ecc-a575-877578c127bb', 'lentil-spinach-soup-indian', 'Spiced Lentil and Spinach Soup', 'شوربة عدس بالسبانخ والبهارات',
   'Warming without being heavy, and the spinach goes in right at the end.', 'بتدفّي من غير ما تكون تقيلة، والسبانخ بتنزل في الآخر خالص.',
-  'curated/lentil-spinach-soup-indian.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'indian', 'easy',
   8, 28, 4,
   260, 14, 36,
@@ -16865,8 +16862,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('9557f900-3d8c-5cad-ac4a-0562fb03c516', 'manakish-zaatar', 'Zaatar Flatbreads', 'مناقيش زعتر',
   'Dough, oil, thyme. Ten minutes in a hot oven and breakfast is solved.', 'عجين وزيت وزعتر. عشر دقايق في فرن سخن والفطار خلص.',
-  'curated/manakish-zaatar.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'medium',
   90, 12, 4,
   340, 8, 46,
@@ -17115,8 +17112,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f036d987-cd7b-5954-8d3c-55564d4264a7', 'margherita-flatbread', 'Quick Margherita Flatbread', 'فطيرة مارجريتا سريعة',
   'No proving. A hot oven, a hot tray, and it is done before delivery would arrive.', 'من غير تخمير. فرن سخن وصينية سخنة وبتخلص قبل ما الدليفري يوصل.',
-  'curated/margherita-flatbread.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   15, 12, 2,
   560, 22, 72,
@@ -17282,8 +17279,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b242a2ed-b619-5608-a039-3dbd66e3a3ae', 'menemen', 'Turkish Eggs with Peppers', 'منمن',
   'Soft eggs stirred into peppers and tomato. Never let it set solid.', 'بيض طري متقلّب في فلفل وطماطم. ماتسيبهوش يمسك خالص.',
-  'curated/menemen.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'easy',
   8, 15, 2,
   310, 17, 14,
@@ -17363,8 +17360,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('68a203cd-a645-59b8-8893-89e7146fb152', 'mesaqaa', 'Egyptian Eggplant Bake', 'مسقعة',
   'Fried eggplant baked under tomato sauce and mince. Better cold the next day, honestly.', 'باذنجان مقلي متخبوز تحت صلصة طماطم ولحمة. وبصراحة أحلى بارد تاني يوم.',
-  'curated/mesaqaa.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   20, 40, 4,
   410, 18, 26,
@@ -17629,8 +17626,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('46260f10-e496-5f38-bc01-197cd0d0166a', 'miso-less-tofu-soup', 'Tofu and Green Onion Broth', 'شوربة توفو بالبصل الأخضر',
   'Clean, light and quick. The kind of bowl that fixes an evening.', 'صافية وخفيفة وسريعة. الطبق اللي بيصلّح السهرة.',
-  'curated/miso-less-tofu-soup.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   8, 12, 2,
   190, 16, 10,
@@ -17717,8 +17714,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('4b2fa9fa-5de0-5be3-ac0e-278df1c87803', 'molokhia-with-chicken', 'Molokhia with Chicken', 'ملوخية بالفراخ',
   'Silky green molokhia over rice, with poached chicken and a hit of garlic-coriander taqleya.', 'ملوخية خضرا ناعمة على الرز، مع فراخ مسلوقة وتقلية توم وكزبرة.',
-  'curated/molokhia-with-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 45, 4,
   540, 42, 52,
@@ -18051,8 +18048,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('cdf96500-907f-5751-83c2-e530a5854831', 'mussels-tomato-broth', 'Mussels in Tomato Broth', 'بلح البحر في شوربة طماطم',
   'One pan, eight minutes, and a broth worth tearing bread for.', 'طاسة واحدة وتمن دقايق وشوربة تستاهل تغمّس فيها العيش.',
-  'curated/mussels-tomato-broth.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'medium',
   12, 12, 3,
   300, 26, 18,
@@ -18216,8 +18213,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b70af3de-09dd-5c34-ae6f-ceca97543b60', 'oatmeal-banana', 'Warm Oats with Banana', 'شوفان دافي بالموز',
   'Five minutes on the stove and it holds you until lunch. Mash half the banana into the pan so it sweetens the whole thing.', 'خمس دقايق على النار وتسندك لحد الغدا. اهرس نص الموزة في الحلة عشان تحلّي الشوفان كله.',
-  'curated/oatmeal-banana.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   3, 6, 1,
   340, 12, 58,
@@ -18293,8 +18290,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b46b13d3-abf9-5f76-9bd6-aeefffde7382', 'okra-stew', 'Okra Stew with Beef', 'بامية باللحمة',
   'Slow-cooked bamya in garlicky tomato, the way it should be. Serve with rice and bread.', 'بامية على نار هادية في طماطم بالتوم، زي ما المفروض تكون. قدّمها مع رز وعيش.',
-  'curated/okra-stew.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 75, 4,
   520, 36, 30,
@@ -18459,8 +18456,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('42caf151-914f-5bf9-9351-1d0c8c61b127', 'orange-olive-oil-cake', 'Orange and Olive Oil Cake', 'كيكة البرتقال بزيت الزيتون',
   'No butter at all. Damp, fragrant, and better on the second day.', 'من غير زبدة خالص. رطبة وريحتها حلوة وأحلى تاني يوم.',
-  'curated/orange-olive-oil-cake.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   15, 45, 8,
   330, 5, 42,
@@ -19033,8 +19030,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ac6a5b08-709a-500a-8e8d-08e6133725f3', 'pasta-tuna-lemon', 'Tuna, Lemon and Caper Pasta', 'مكرونة بالتونة والليمون',
   'Store cupboard dinner that tastes deliberate. Ready in the time the pasta takes.', 'عشا من الدولاب طعمه مقصود. جاهز في وقت سلق المكرونة.',
-  'curated/pasta-tuna-lemon.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   5, 12, 2,
   540, 28, 72,
@@ -19273,8 +19270,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('45434653-044d-565f-8e73-6d0c8f39120b', 'polenta-mushroom', 'Soft Cornmeal with Mushrooms', 'دقيق ذرة بالمشروم',
   'Cornmeal cooked soft as porridge under garlicky mushrooms. Cheap and warming.', 'دقيق ذرة متطبوخ طري تحت مشروم بالتوم. رخيص وبيدفّي.',
-  'curated/polenta-mushroom.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'italian', 'easy',
   8, 30, 4,
   360, 10, 52,
@@ -19431,8 +19428,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b9e7b782-0d05-58ec-af6b-7b9b594e7125', 'quick-vegetable-fried-rice', 'Quick Vegetable Fried Rice', 'أرز مقلي بالخضار',
   'The best thing to do with yesterday’s rice. Fifteen minutes, one pan, whatever vegetables you have.', 'أحسن حاجة تعملها برز امبارح. خمستاشر دقيقة وطاسة واحدة وأي خضار عندك.',
-  'curated/quick-vegetable-fried-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   8, 10, 2,
   470, 16, 68,
@@ -19514,8 +19511,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('009d6808-ef82-5cff-bf95-bf502beb838c', 'ratatouille-tray', 'Roasted Summer Vegetables', 'خضار صيفي محمّر',
   'Aubergine, courgette and pepper roasted hard until the edges blacken and sweeten.', 'باذنجان وكوسة وفلفل محمّرين لحد ما الأطراف تسود وتحلى.',
-  'curated/ratatouille-tray.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   15, 40, 4,
   210, 4, 22,
@@ -19682,8 +19679,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('c7b00f88-307f-5a08-a1ad-17ad4ef07e58', 'roast-chicken-potatoes', 'Roast Chicken and Potatoes', 'فراخ وبطاطس في الفرن',
   'One tray, one hour, and the potatoes cook in the fat that comes off the bird.', 'صينية واحدة وساعة، والبطاطس بتستوي في دهن الفرخة.',
-  'curated/roast-chicken-potatoes.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   15, 70, 4,
   620, 46, 42,
@@ -19765,8 +19762,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('1ff87df6-d134-50f4-ba2c-377af761be22', 'roasted-cauliflower-tahini', 'Roasted Cauliflower with Tahini', 'قرنبيط محمّر بالطحينة',
   'Roasted until properly brown, not politely pale, then drenched in tahini.', 'محمّر لحد ما يبقى بنّي فعلًا مش فاتح، وبعدين مغرق في الطحينة.',
-  'curated/roasted-cauliflower-tahini.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   10, 30, 4,
   280, 9, 20,
@@ -20009,8 +20006,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f5bc0e39-914e-5312-abcb-2d50036427b7', 'ruz-moammar', 'Baked Cream Rice', 'رز معمر',
   'Rice baked in milk and cream until a golden crust forms on the top and bottom.', 'رز متخبوز في لبن وكريمة لحد ما يعمل قشرة دهبية من فوق ومن تحت.',
-  'curated/ruz-moammar.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   10, 60, 6,
   480, 11, 62,
@@ -20244,8 +20241,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('24020d00-c5c5-5342-a159-d9791df4e2af', 'salatet-rocca', 'Rocket, Sumac and Onion Salad', 'سلطة جرجير بالسماق',
   'Three ingredients and a sharp dressing. The side that cuts through grilled meat.', 'تلات مكوّنات وصلصة حامضة. الطبق الجانبي اللي بيكسر دسم المشويات.',
-  'curated/salatet-rocca.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'easy',
   8, 0, 4,
   90, 2, 7,
@@ -20396,8 +20393,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a3063827-91ff-5d17-808f-4e3ae92be279', 'salatet-zabadi', 'Yogurt and Cucumber Salad', 'سلطة زبادي بالخيار',
   'Cold, garlicky and mint-flecked. The thing that makes a heavy plate work.', 'باردة وبالتوم وعليها نعناع. الحاجة اللي بتخلّي الطبق التقيل يعدي.',
-  'curated/salatet-zabadi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   10, 0, 4,
   90, 6, 9,
@@ -20472,8 +20469,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a3b45244-8dae-5e85-ac26-67d47d8ee926', 'samak-mashwi-mullet', 'Grilled Mullet with Cumin', 'بوري مشوي بالكمون',
   'Whole mullet rubbed with cumin and garlic and grilled until the skin blisters. What the Nile fish stalls do.', 'بوري صحيح متتبّل بكمون وتوم ومشوي لحد ما القشرة تتقرمش. زي ما بيعملوه على عربيات السمك.',
-  'curated/samak-mashwi-mullet.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 22, 4,
   320, 38, 4,
@@ -20555,8 +20552,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('415a69d3-f420-5687-a25f-5dff0fd1fa70', 'sardines-baked-lemon', 'Baked Sardines with Lemon and Oregano', 'سردين بالفرن بالليمون والأوريجانو',
   'Cheap, oily, quick. Twelve minutes in a hot oven and nothing else asked of you.', 'رخيص ودسم وسريع. اتناشر دقيقة في فرن سخن ومش عايز منك حاجة تانية.',
-  'curated/sardines-baked-lemon.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   8, 12, 3,
   340, 30, 3,
@@ -20637,8 +20634,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', 'sayadeya', 'Fish and Caramelised Onion Rice', 'صيادية',
   'Alexandria on a plate: rice cooked in deeply browned onion stock under white fish.', 'إسكندرية في طبق: رز متطبوخ في مرق بصل محمّر غامق تحت سمك أبيض.',
-  'curated/sayadeya.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   15, 45, 4,
   520, 32, 62,
@@ -20725,8 +20722,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('efcd3105-0846-561f-a397-d4234c6b09de', 'scrambled-eggs-soft', 'Soft Scrambled Eggs', 'بيض مخفوق طري',
   'Low heat and constant stirring. It takes five minutes and it is worth all of them.', 'نار هادية وتقليب مستمر. بتاخد خمس دقايق وتستاهلهم كلهم.',
-  'curated/scrambled-eggs-soft.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   3, 6, 2,
   280, 18, 3,
@@ -20804,8 +20801,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('dcc1c52e-be0c-5129-ba74-81c25f08c86a', 'sesame-noodles-cold', 'Cold Sesame Noodles', 'نودلز باردة بالسمسم',
   'No heat past boiling the noodles. Good the next day out of the fridge.', 'مفيش نار غير سلق النودلز. وحلوة تاني يوم من التلاجة.',
-  'curated/sesame-noodles-cold.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   12, 8, 3,
   430, 13, 56,
@@ -20892,8 +20889,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('e69f8c48-4437-5751-90f0-c2a1090d2239', 'sfiha-lamb', 'Open Lamb Pies', 'صفيحة باللحمة',
   'Small open-topped pies with spiced lamb and a squeeze of lemon at the end.', 'فطاير صغيرة مفتوحة بلحمة ضاني متبّلة وعصرة ليمون في الآخر.',
-  'curated/sfiha-lamb.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'medium',
   90, 15, 6,
   310, 16, 34,
@@ -21063,8 +21060,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('726d08e6-196b-5e62-afe3-d0749cb94067', 'shakshuka-suez', 'Shakshuka with Sausage', 'شكشوكة بالسجق',
   'The eggs everyone knows, made heavier and better with spiced sausage.', 'البيض اللي كله يعرفه، بس أتقل وأحلى بالسجق المتبّل.',
-  'curated/shakshuka-suez.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   5, 20, 2,
   480, 28, 16,
@@ -21188,7 +21185,6 @@ delete from public.recipe_appliances where recipe_id = '2fe4d7b8-f8c0-5f58-b9a8-
 insert into public.recipe_appliances (recipe_id, appliance) values ('2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', 'stove');
 delete from public.recipe_tags where recipe_id = '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373';
 insert into public.recipe_tags (recipe_id, tag) values ('2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', 'high-protein');
-insert into public.recipe_tags (recipe_id, tag) values ('2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', 'quick');
 insert into public.recipe_tags (recipe_id, tag) values ('2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', 'late-night');
 
 delete from public.recipe_ingredients where recipe_id = '2fe4d7b8-f8c0-5f58-b9a8-520f7d217373';
@@ -21234,8 +21230,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('9dbe04ed-090c-52c7-836e-5baded5ed012', 'sheet-pan-sausage-veg', 'Sausage and Vegetable Tray Bake', 'سجق وخضار في الفرن',
   'Everything on one tray at the same temperature. Weeknight cooking at its least demanding.', 'كل حاجة في صينية واحدة على نفس الحرارة. أقل طبخ ممكن في نص الأسبوع.',
-  'curated/sheet-pan-sausage-veg.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   12, 35, 4,
   520, 26, 38,
@@ -21394,8 +21390,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b5b5f5f6-e219-541b-bc56-2c454310dae9', 'shorbet-adas-red', 'Everyday Red Lentil Soup', 'شوربة عدس يومية',
   'Twenty-five minutes from cupboard to bowl. Nothing fresh required.', 'خمسة وعشرين دقيقة من الدولاب للطبق. مش محتاجة أي حاجة طازة.',
-  'curated/shorbet-adas-red.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   5, 25, 4,
   240, 13, 38,
@@ -21483,8 +21479,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8bf7aab5-d251-5f6c-aede-a8c5d0eb66bd', 'shorbet-lisan-asfour', 'Orzo Soup with Chicken Broth', 'شوربة لسان عصفور',
   'Toasted orzo swelling in golden chicken broth. The bowl that starts every big meal.', 'لسان عصفور محمّر بيكبر في شوربة فراخ دهبية. الطبق اللي بيفتح أي أكلة كبيرة.',
-  'curated/shorbet-lisan-asfour.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'easy',
   5, 20, 4,
   210, 9, 32,
@@ -21640,8 +21636,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('0e6cbb21-27a5-50da-8ba1-79de84836eae', 'shrimp-garlic', 'Garlic Shrimp in Olive Oil', 'جمبري بالتوم وزيت الزيتون',
   'Six minutes, one pan, and bread that has to be there to catch the oil.', 'ست دقايق وطاسة واحدة وعيش لازم يكون موجود يلمّ الزيت.',
-  'curated/shrimp-garlic.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   8, 6, 2,
   300, 32, 6,
@@ -21724,8 +21720,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', 'shrimp-noodle-soup', 'Shrimp and Noodle Soup', 'شوربة نودلز بالجمبري',
   'A clear, gingery broth built in fifteen minutes with shrimp dropped in at the end.', 'مرق صافي بالزنجبيل متعمول في خمستاشر دقيقة والجمبري بينزل في الآخر.',
-  'curated/shrimp-noodle-soup.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   10, 15, 2,
   400, 30, 48,
@@ -21814,8 +21810,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ad0b45b2-f8a6-51f9-bb44-20a71a3a12bd', 'smoothie-protein-banana', 'Banana Date Yogurt Smoothie', 'سموذي موز وبلح بالزبادي',
   'Frozen banana, dates and thick yogurt. Sweet without sugar, and thick enough to need a spoon.', 'موز مجمّد وبلح وزبادي تقيل. حلو من غير سكر، وتقيل لدرجة إنك محتاج معلقة.',
-  'curated/smoothie-protein-banana.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   8, 0, 1,
   330, 14, 58,
@@ -21969,8 +21965,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('6c8289bd-36e9-5ae6-b86e-951d380f9358', 'spanakopita-triangles', 'Spinach and Cheese Triangles', 'مثلثات سبانخ بالجبنة',
   'Phyllo, spinach, salty cheese. Bakes into something that shatters when you bite it.', 'عجين رقايق وسبانخ وجبنة مالحة. بتتخبز لحاجة بتتكسر لما تعضّها.',
-  'curated/spanakopita-triangles.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'medium',
   25, 25, 6,
   310, 11, 26,
@@ -22135,8 +22131,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('9131b45b-3d9a-59fc-933c-a8350727f3f9', 'spiced-rice-peas', 'Cumin Rice with Peas', 'رز بالكمون والبسلة',
   'The side that makes a plain curry into dinner. Cumin seeds bloomed in ghee first.', 'الطبق اللي بيحوّل الكاري العادي لعشا. كمون متحمّر في السمنة الأول.',
-  'curated/spiced-rice-peas.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'indian', 'easy',
   5, 20, 4,
   320, 8, 58,
@@ -22216,8 +22212,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('c5dd4e90-d5d1-517c-b75d-04be57bc1069', 'stuffed-peppers-rice', 'Peppers Stuffed with Herbed Rice', 'فلفل محشي بالرز',
   'Sweet peppers filled with tomato rice and baked until they collapse a little.', 'فلفل حلو محشي رز بالطماطم ومخبوز لحد ما يترخّى شوية.',
-  'curated/stuffed-peppers-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'medium',
   20, 50, 4,
   320, 7, 54,
@@ -22381,8 +22377,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('4c9a3716-ea23-5451-9541-344a0c214ee9', 'sweet-potato-fries-airfryer', 'Air Fryer Sweet Potato Fries', 'بطاطا حلوة في الإير فراير',
   'Cornflour is what makes them crisp instead of floppy. Do not crowd the basket.', 'النشا هو اللي بيخلّيها مقرمشة مش مترخّية. ماتزحمش السلة.',
-  'curated/sweet-potato-fries-airfryer.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'american', 'easy',
   30, 20, 3,
   230, 3, 38,
@@ -22458,8 +22454,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('673e3bc3-39a9-5196-903b-b158af74ab37', 'sweet-sour-tofu', 'Sweet and Sour Tofu', 'توفو حلو وحامض',
   'Cornflour crust, sharp sauce, and pineapple doing more work than you would expect.', 'قشرة نشا وصلصة حامضة وأناناس بيعمل شغل أكتر مما تتخيل.',
-  'curated/sweet-sour-tofu.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'medium',
   15, 20, 3,
   390, 18, 44,
@@ -22544,8 +22540,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('bf470081-5b5f-5785-bf51-4be091959a52', 'taameya', 'Egyptian Falafel', 'طعمية',
   'Green inside, shatteringly crisp outside. The fava-bean falafel Cairo runs on.', 'خضرا من جوه ومقرمشة من بره. طعمية الفول اللي القاهرة ماشية بيها.',
-  'curated/taameya.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'egyptian', 'medium',
   20, 15, 4,
   380, 16, 34,
@@ -22796,8 +22792,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('aece4c00-570b-52fb-81f7-9642291f422d', 'tandoori-style-chicken', 'Oven Tandoori-Style Chicken', 'فراخ تندوري في الفرن',
   'Yogurt and spice marinade, very hot oven, and the edges have to char.', 'تتبيلة زبادي وبهارات وفرن سخن جدًا، والأطراف لازم تتحمّر.',
-  'curated/tandoori-style-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'indian', 'easy',
   20, 35, 4,
   390, 44, 10,
@@ -22880,8 +22876,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f7a11d74-80b8-5289-bc1b-9dbe32cf8848', 'teriyaki-less-chicken', 'Sticky Soy and Honey Chicken', 'فراخ بصلصة الصويا والعسل',
   'Four pantry things reduce into a glaze that clings. Serve on rice, obviously.', 'أربع حاجات من الدولاب بتتركّز لصلصة بتلزق. قدّمها على رز طبعًا.',
-  'curated/teriyaki-less-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   10, 18, 4,
   430, 38, 34,
@@ -22965,8 +22961,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('96cdc419-4f20-5d24-b14d-01729cf8ff46', 'thai-style-peanut-salad', 'Crunchy Peanut Salad', 'سلطة مقرمشة بالفول السوداني',
   'Raw, cold, loud with lime and chilli, and it takes twelve minutes.', 'نية وباردة وقوية بالليمون والشطة، وبتاخد اتناشر دقيقة.',
-  'curated/thai-style-peanut-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'asian', 'easy',
   12, 0, 3,
   290, 10, 24,
@@ -23458,8 +23454,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3a0a8ba8-2f55-5ac7-8967-b6e1ddcdd876', 'tuna-white-bean-salad', 'Tuna and White Bean Salad', 'سلطة تونة بالفاصوليا البيضا',
   'Store cupboard to table in eight minutes, with real protein in it.', 'من الدولاب للسفرة في تمن دقايق، وفيها بروتين حقيقي.',
-  'curated/tuna-white-bean-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   8, 0, 2,
   390, 32, 32,
@@ -23536,8 +23532,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('57d467ee-d446-571f-9d1f-f5e0409f255d', 'turkish-bulgur-pilaf', 'Bulgur Pilaf with Tomato', 'برغل بالطماطم',
   'Cheaper and faster than rice, and it holds its texture in a way rice does not.', 'أرخص وأسرع من الرز، وبيحافظ على قوامه بشكل الرز مابيعملهوش.',
-  'curated/turkish-bulgur-pilaf.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'easy',
   8, 20, 4,
   310, 9, 54,
@@ -23621,8 +23617,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('6c3fc259-12ff-545f-832a-4881eb4fa7cb', 'turkish-eggs-yogurt', 'Eggs over Garlic Yogurt', 'بيض على زبادي بالتوم',
   'Cold garlicky yogurt under hot poached eggs and chilli butter. The contrast is the dish.', 'زبادي بارد بالتوم تحت بيض مسلوق سخن وزبدة بالشطة. التباين هو الأكلة.',
-  'curated/turkish-eggs-yogurt.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'medium',
   8, 8, 2,
   390, 22, 10,
@@ -23788,8 +23784,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('214abd2f-ea89-545c-8b1a-ca88167a097b', 'turkish-shepherd-salad', 'Shepherd''s Salad', 'سلطة الراعي',
   'Finely diced, no leaves, dressed only with lemon and oil. It goes with everything.', 'مقطّعة ناعم من غير ورق، ومتبّلة بليمون وزيت بس. وبتنفع مع كل حاجة.',
-  'curated/turkish-shepherd-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'easy',
   12, 0, 4,
   120, 2, 11,
@@ -23870,8 +23866,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('65a217f2-8d0d-52d7-9446-b57f69d8168f', 'turkish-stuffed-flatbread', 'Flatbread with Spiced Lamb', 'فطير باللحمة الضاني',
   'Rolled paper thin and cooked in a dry pan, so it blisters rather than bakes.', 'مفرودة رفيعة زي الورق ومطبوخة في طاسة ناشفة، فبتتنفخ مش بتتخبز.',
-  'curated/turkish-stuffed-flatbread.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'medium',
   80, 20, 4,
   470, 24, 52,
@@ -23952,8 +23948,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8fd527b5-3020-5247-b342-6fc903ce2c4e', 'turkish-white-bean-salad', 'White Bean Salad with Egg', 'سلطة فاصوليا بيضا بالبيض',
   'Cold beans, boiled egg, red onion and a lot of lemon. Protein without cooking much.', 'فاصوليا باردة وبيض مسلوق وبصل أحمر وليمون كتير. بروتين من غير طبخ كتير.',
-  'curated/turkish-white-bean-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'turkish', 'easy',
   12, 8, 3,
   320, 17, 38,
@@ -24219,8 +24215,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('6a0e184f-f9db-52ec-b61b-5f65fcd4f642', 'warak-enab', 'Vine Leaves with Lemon', 'ورق عنب',
   'Rolled thin, packed tight and cooked under a plate with far more lemon than seems wise.', 'ملفوف رفيع ومرصوص جنب بعضه ومطبوخ تحت طبق بليمون أكتر مما تتخيل.',
-  'curated/warak-enab.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'levantine', 'hard',
   50, 50, 6,
   260, 5, 42,
@@ -24303,8 +24299,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('737bd8e9-8676-56f9-a955-f7805e9d1d90', 'white-bean-stew', 'Tomato and White Bean Stew', 'يخنة فاصوليا بيضا',
   'Cheap protein cooked until creamy, sharpened with lemon at the end.', 'بروتين رخيص متطبوخ لحد ما يبقى كريمي، ومتحمّض بالليمون في الآخر.',
-  'curated/white-bean-stew.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   10, 35, 4,
   310, 15, 44,
@@ -24391,8 +24387,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('33a55bc0-0c1c-55f5-8386-33dc5a7aefec', 'yogurt-berry-bowl', 'Yogurt Bowl with Fruit and Nuts', 'طبق زبادي بالفواكه والمكسرات',
   'Two minutes, no cooking, and the protein of a real breakfast.', 'دقيقتين من غير طبخ، وبروتين فطار حقيقي.',
-  'curated/yogurt-berry-bowl.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   5, 0, 1,
   340, 18, 38,
@@ -24468,8 +24464,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('fb263053-2fce-5a00-8f75-60270e254280', 'zucchini-egg-skillet', 'Zucchini & Egg Skillet', 'كوسة بالبيض في الطاسة',
   'Green, quick and barely any money. What to cook when the fridge is nearly empty.', 'خضرا وسريعة وبتكلّف ولا حاجة. اللي تعمله لما التلاجة تكون فاضية.',
-  'curated/zucchini-egg-skillet.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  null, null, null,
+  null, null, null,
   null, 'curated', 'mediterranean', 'easy',
   5, 12, 2,
   300, 20, 12,

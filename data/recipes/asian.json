@@ -38,14 +38,7 @@
       "high-protein",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/beef-noodle-stirfry.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "noodles",
@@ -647,14 +640,7 @@
       "healthy",
       "leftovers"
     ],
-    "image": {
-      "path": "curated/edamame-rice-bowl.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1041,14 +1027,7 @@
       "quick",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/ginger-garlic-broccoli-beef.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "beef-steak",
@@ -1197,14 +1176,7 @@
       "one-pan",
       "leftovers"
     ],
-    "image": {
-      "path": "curated/kimchi-less-cabbage-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1467,14 +1439,7 @@
       "high-protein",
       "budget"
     ],
-    "image": {
-      "path": "curated/miso-less-tofu-soup.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tofu",
@@ -1611,14 +1576,7 @@
       "leftovers",
       "beginner"
     ],
-    "image": {
-      "path": "curated/quick-vegetable-fried-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1751,14 +1709,7 @@
       "no-cook",
       "budget"
     ],
-    "image": {
-      "path": "curated/sesame-noodles-cold.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "noodles",
@@ -1904,14 +1855,7 @@
       "quick",
       "healthy"
     ],
-    "image": {
-      "path": "curated/shrimp-noodle-soup.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "shrimp",
@@ -2063,14 +2007,7 @@
       "vegan",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/sweet-sour-tofu.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tofu",
@@ -2215,14 +2152,7 @@
       "beginner",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/teriyaki-less-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -2359,14 +2289,7 @@
       "quick",
       "healthy"
     ],
-    "image": {
-      "path": "curated/thai-style-peanut-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "cabbage",

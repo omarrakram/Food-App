@@ -766,14 +766,7 @@
       "high-protein",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/lentil-spinach-soup-indian.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -1208,14 +1201,7 @@
       "quick",
       "vegetarian"
     ],
-    "image": {
-      "path": "curated/spiced-rice-peas.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "basmati-rice",
@@ -1345,14 +1331,7 @@
       "oven",
       "healthy"
     ],
-    "image": {
-      "path": "curated/tandoori-style-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",

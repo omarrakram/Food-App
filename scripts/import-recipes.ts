@@ -284,13 +284,26 @@ function timingProblems(recipe: RawRecipe): string[] {
  * Tags that are a claim about the recipe rather than a theme.
  *
  * Read off the corpus rather than invented. `beginner` was already
- * `difficulty: easy` in 80 of the 82 recipes carrying it, and `quick` had a
- * median total of 18 minutes with a 90th percentile of 30 — two recipes sat
- * above 40 and both were mine. So these encode what the catalogue already
- * meant, and the two deviations were corrected rather than the definition
- * being widened to admit them.
+ * `difficulty: easy` in 80 of the 82 recipes carrying it.
+ *
+ * `quick` WAS SET AT 40 AND THAT WAS THE WRONG NUMBER. The Stage 3P.2 audit
+ * that chose it measured a median of 18 minutes and a 90th percentile of 30,
+ * then wrote the threshold at 40 — far enough out to admit every existing tag
+ * without argument, which is the definition of a rule fitted to the data
+ * rather than to the promise.
+ *
+ * Thirty is the number the product already uses. `quick` is not an internal
+ * label: it is the ⚡ Quick collection on Discover, and Home's own rail asks
+ * the engine for `maxMinutes: 30`. So the app was offering a 35-minute recipe
+ * under a heading its own fast rail would have excluded.
+ *
+ * Re-measured over all 192 recipes at ≤30: 82 of the 86 quick-tagged recipes
+ * already qualified, min 5, median 18, p90 28. The four that did not —
+ * avgolemono, baked-salmon-vegetables, beef-tacos, shawarma-chicken — all sat
+ * at exactly 35 and lost the tag. Losing 4.7% of a collection is not an
+ * unreasonable removal; promising thirty minutes and taking thirty-five is.
  */
-const QUICK_MINUTES = 40;
+const QUICK_MINUTES = 30;
 
 function tagProblems(recipe: RawRecipe): string[] {
   const problems: string[] = [];
@@ -390,6 +403,23 @@ function ingredientsHiddenInProse(recipe: RawRecipe): string[] {
  * the BYTES it received, so a photograph that came back as WebP is
  * `sahlab.webp`, and a hand-written `curated/sahlab.jpg` would point at
  * nothing.
+ *
+ * AND THE CONVERSE, ADDED IN STAGE 3P.3. A recipe with NO photograph must
+ * carry `image: null`, not a placeholder block. Ninety-four did carry one —
+ * `curated/<slug>.jpg`, "generated", "Akla kitchen", CC0 — naming an asset
+ * that has never existed. The first gate only refused a `generated` claim
+ * where a photograph WAS recorded, so a phantom claim where none was recorded
+ * passed every check.
+ *
+ * That is not only a false statement in the seed. `resolveRecipeImageUrl`
+ * builds a Storage URL from `image.path` the moment a Supabase project is
+ * configured, and `RecipeImage` prefers any URL over the branded fallback —
+ * so ninety-four cards in a production build would have requested an object
+ * that is not in the bucket and rendered a grey box, which is precisely the
+ * state that function's own comment says it exists to prevent.
+ *
+ * The rule is now simple enough to state in one line: the manifest decides
+ * whether a recipe has a photograph, and the JSON never gets a vote.
  */
 type PhotoProvenance = {
   recipeSlug: string;
@@ -414,7 +444,21 @@ function applyPhotographyProvenance(entries: { file: string; recipe: RawRecipe }
 
   for (const { recipe } of entries) {
     const photo = photos.get(recipe.slug);
-    if (!photo) continue;
+
+    if (!photo) {
+      // No photograph, so no image block — whatever `source` it claims. A
+      // "generated"/"Akla kitchen"/CC0 block naming `curated/<slug>.jpg` is a
+      // claim about a file that does not exist, and the app turns it into a
+      // Storage URL as soon as one is configured.
+      if (recipe.image) {
+        overridden.push(
+          `${recipe.slug}: carries an image block (${recipe.image.source}, ` +
+            `"${recipe.image.path}") but no photograph is recorded in the manifest. ` +
+            'A recipe on the branded fallback has image: null.',
+        );
+      }
+      continue;
+    }
 
     // A recipe may not CLAIM a photograph it did not take. The overlay would
     // correct it silently, and a dataset that is wrong-but-corrected is a
@@ -855,8 +899,8 @@ async function main(): Promise<void> {
     const falseClaims = applyPhotographyProvenance(entries);
     if (falseClaims.length > 0) {
       throw new ImportError(
-        `${falseClaims.length} recipe(s) claim authorship of a photograph they did not take:\n` +
-          falseClaims.map((claim) => `  - ${claim}`).join('\n'),
+        `${falseClaims.length} recipe(s) describe a photograph that is not theirs or ` +
+          `is not there:\n${falseClaims.map((claim) => `  - ${claim}`).join('\n')}`,
       );
     }
     validate(entries);

@@ -37,14 +37,7 @@
       "meal-prep",
       "healthy"
     ],
-    "image": {
-      "path": "curated/bean-burrito-bowl.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -189,7 +182,6 @@
     ],
     "tags": [
       "high-protein",
-      "quick",
       "comfort"
     ],
     "image": null,
@@ -644,14 +636,7 @@
       "quick",
       "beginner"
     ],
-    "image": {
-      "path": "curated/corn-avocado-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "corn",
@@ -1290,14 +1275,7 @@
       "high-protein",
       "healthy"
     ],
-    "image": {
-      "path": "curated/fish-tacos-cabbage.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tilapia",

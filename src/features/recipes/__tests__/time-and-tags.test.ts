@@ -56,9 +56,9 @@ describe('a recipe may not take longer than it claims', () => {
 });
 
 describe('tags that make a claim have to be true', () => {
-  it('never calls a recipe quick when it takes over 40 minutes', () => {
+  it('never calls a recipe quick when it takes over 30 minutes', () => {
     const offenders = RECIPE_CATALOGUE.filter(
-      (r) => r.tags.includes('quick') && total(r) > 40,
+      (r) => r.tags.includes('quick') && total(r) > 30,
     ).map((r) => `${r.slug} (${total(r)}m)`);
 
     expect(offenders).toEqual([]);

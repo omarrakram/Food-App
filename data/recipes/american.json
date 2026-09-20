@@ -182,14 +182,7 @@
       "beginner",
       "healthy"
     ],
-    "image": {
-      "path": "curated/banana-peanut-oats.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "oats",
@@ -448,14 +441,7 @@
       "late-night",
       "comfort"
     ],
-    "image": {
-      "path": "curated/buffalo-less-baked-wings.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-wings",
@@ -584,14 +570,7 @@
       "healthy",
       "quick"
     ],
-    "image": {
-      "path": "curated/caesar-less-chicken-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-breast",
@@ -739,14 +718,7 @@
       "budget",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/chili-con-carne-beef.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "ground-beef",
@@ -1051,14 +1023,7 @@
       "high-protein",
       "quick"
     ],
-    "image": {
-      "path": "curated/cobb-style-bowl.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -1204,14 +1169,7 @@
       "beginner",
       "snack"
     ],
-    "image": {
-      "path": "curated/egyptian-cheese-toastie.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "toast-bread",
@@ -1718,14 +1676,7 @@
       "one-pan",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/roast-chicken-potatoes.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -1872,14 +1823,7 @@
       "high-protein",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/scrambled-eggs-soft.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -1991,14 +1935,7 @@
       "high-protein",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/sheet-pan-sausage-veg.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sausage",
@@ -2126,14 +2063,7 @@
       "no-cook",
       "beginner"
     ],
-    "image": {
-      "path": "curated/smoothie-protein-banana.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bananas",
@@ -2242,14 +2172,7 @@
       "beginner",
       "healthy"
     ],
-    "image": {
-      "path": "curated/sweet-potato-fries-airfryer.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sweet-potato",
@@ -2496,14 +2419,7 @@
       "budget",
       "beginner"
     ],
-    "image": {
-      "path": "curated/oatmeal-banana.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "oats",

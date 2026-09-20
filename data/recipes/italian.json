@@ -39,14 +39,7 @@
       "beginner",
       "budget"
     ],
-    "image": {
-      "path": "curated/bruschetta-tomato.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "baguette",
@@ -168,14 +161,7 @@
       "beginner",
       "healthy"
     ],
-    "image": {
-      "path": "curated/caprese-stack.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",
@@ -282,14 +268,7 @@
       "comfort",
       "quick"
     ],
-    "image": {
-      "path": "curated/carbonara-beef.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -548,14 +527,7 @@
       "italian",
       "beginner"
     ],
-    "image": {
-      "path": "curated/creamy-chicken-pasta.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-breast",
@@ -693,14 +665,7 @@
       "italian",
       "comfort"
     ],
-    "image": {
-      "path": "curated/gnocchi-butter-sage.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "potatoes",
@@ -832,14 +797,7 @@
       "batch-cook",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/lasagne-beef.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lasagne-sheets",
@@ -1030,14 +988,7 @@
       "beginner",
       "late-night"
     ],
-    "image": {
-      "path": "curated/margherita-flatbread.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -1609,14 +1560,7 @@
       "high-protein",
       "beginner"
     ],
-    "image": {
-      "path": "curated/pasta-tuna-lemon.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -1753,14 +1697,7 @@
       "comfort",
       "vegetarian"
     ],
-    "image": {
-      "path": "curated/polenta-mushroom.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "cornmeal",

@@ -3,6 +3,7 @@ import { CUISINES, DIFFICULTIES, MEAL_TYPES } from '@/types/domain';
 
 import { RECIPE_CATALOGUE } from '../catalogue.generated';
 import { COLLECTIONS, RECIPE_FIXTURES } from '../fixtures';
+import { LOCAL_RECIPE_IMAGES } from '../image-assets.generated';
 
 /**
  * The catalogue as a product asset, not just as valid data.
@@ -97,13 +98,34 @@ describe('the recipe catalogue is a real catalogue', () => {
     expect(unlicensed).toEqual([]);
   });
 
-  it('has image metadata for every recipe', () => {
-    // The branded fallback is meant to be the exception, not the normal state.
-    const withoutImages = RECIPE_CATALOGUE.filter((recipe) => !recipe.image).map(
-      (recipe) => recipe.slug,
-    );
+  it('never describes a photograph that is not there', () => {
+    // THIS TEST USED TO DEMAND THE OPPOSITE, and that is how the defect got in.
+    // It read "has image metadata for every recipe" and asserted every recipe
+    // had a non-null `image`, on the reasoning that the branded fallback should
+    // be the exception. So the ninety-four recipes WITHOUT a photograph were
+    // given a block to satisfy it: `curated/<slug>.jpg`, "generated", "Akla
+    // kitchen", CC0 — an asset that has never existed in this repository.
+    //
+    // A test that cannot be satisfied truthfully gets satisfied untruthfully.
+    // The honest invariant is the one below: a non-null image block means a
+    // real bundled photograph, and nothing else. `image: null` is the correct,
+    // supported state for a recipe on the fallback, and RecipeImage draws the
+    // branded plate from it.
+    const lying = RECIPE_CATALOGUE.filter(
+      (recipe) => recipe.image && !(recipe.slug && recipe.slug in LOCAL_RECIPE_IMAGES),
+    ).map((recipe) => `${recipe.slug} → ${recipe.image?.path}`);
 
-    expect(withoutImages).toEqual([]);
+    expect(lying).toEqual([]);
+  });
+
+  it('gives every bundled photograph a recipe that points at it', () => {
+    // The converse, so a promotion cannot bundle bytes the catalogue ignores.
+    const unclaimed = Object.keys(LOCAL_RECIPE_IMAGES).filter((slug) => {
+      const recipe = RECIPE_CATALOGUE.find((entry) => entry.slug === slug);
+      return !recipe?.image;
+    });
+
+    expect(unclaimed).toEqual([]);
   });
 });
 

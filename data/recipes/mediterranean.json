@@ -38,14 +38,7 @@
       "healthy",
       "beginner"
     ],
-    "image": {
-      "path": "curated/air-fryer-spiced-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -165,17 +158,9 @@
       "high-protein",
       "healthy",
       "oven",
-      "quick",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/baked-salmon-vegetables.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "salmon",
@@ -304,14 +289,7 @@
       "one-pan",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/chickpea-spinach-curryless.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chickpeas",
@@ -569,14 +547,7 @@
       "grill",
       "quick"
     ],
-    "image": {
-      "path": "curated/grilled-sea-bream.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sea-bream",
@@ -700,14 +671,7 @@
       "high-protein",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/herb-omelette-feta.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -832,14 +796,7 @@
       "budget",
       "no-cook"
     ],
-    "image": {
-      "path": "curated/lemon-herb-couscous.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "couscous",
@@ -967,14 +924,7 @@
       "oven",
       "beginner"
     ],
-    "image": {
-      "path": "curated/orange-olive-oil-cake.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -1105,14 +1055,7 @@
       "batch-cook",
       "budget"
     ],
-    "image": {
-      "path": "curated/ratatouille-tray.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggplant",
@@ -1240,14 +1183,7 @@
       "oven",
       "beginner"
     ],
-    "image": {
-      "path": "curated/roasted-cauliflower-tahini.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "cauliflower",
@@ -1389,14 +1325,7 @@
       "one-pan",
       "late-night"
     ],
-    "image": {
-      "path": "curated/shrimp-garlic.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "shrimp",
@@ -1528,14 +1457,7 @@
       "comfort",
       "snack"
     ],
-    "image": {
-      "path": "curated/spanakopita-triangles.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "phyllo",
@@ -1677,14 +1599,7 @@
       "budget",
       "comfort"
     ],
-    "image": {
-      "path": "curated/stuffed-peppers-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bell-pepper",
@@ -1959,14 +1874,7 @@
       "budget",
       "healthy"
     ],
-    "image": {
-      "path": "curated/tuna-white-bean-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tuna-can",
@@ -2087,14 +1995,7 @@
       "batch-cook",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/white-bean-stew.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "white-beans",
@@ -2247,14 +2148,7 @@
       "healthy",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/yogurt-berry-bowl.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "yogurt",
@@ -2366,14 +2260,7 @@
       "beginner",
       "low-carb"
     ],
-    "image": {
-      "path": "curated/zucchini-egg-skillet.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "zucchini",
@@ -2489,14 +2376,7 @@
       "budget",
       "oven"
     ],
-    "image": {
-      "path": "curated/sardines-baked-lemon.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sardines",
@@ -2629,14 +2509,7 @@
       "quick",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/mussels-tomato-broth.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "mussels",
@@ -3270,7 +3143,6 @@
     ],
     "tags": [
       "comfort",
-      "quick",
       "budget",
       "healthy"
     ],
@@ -3350,14 +3222,14 @@
         "safetyAr": null
       },
       {
-        "text": "Pour the warmed egg back into the pan, stirring as it goes, and hold it over the lowest heat for two or three minutes until it thickens enough to coat a spoon. It must not boil.",
-        "textAr": "صبّ البيض الدافي في الحلة تاني وانت بتقلّب، وسيبها على أهدى نار دقيقتين أو تلاتة لحد ما تتقل وتغلّف المعلقة. لازم ماتغليش.",
+        "text": "Pour the warmed egg back into the pan, stirring as it goes, and hold it over the lowest heat until it thickens enough to coat a spoon — two or three minutes. It must not boil.",
+        "textAr": "صبّ البيض الدافي في الحلة تاني وانت بتقلّب، وسيبها على أهدى نار لحد ما تتقل وتغلّف المعلقة — دقيقتين أو تلاتة. لازم ماتغليش.",
         "minutes": 4,
         "uses": [
           "eggs"
         ],
-        "safety": "The soup carries raw egg until this step finishes. Hold it just below a simmer until it thickens and coats the back of a spoon — but never let it boil, or the egg curdles. If you are cooking for someone pregnant, elderly or immunocompromised, keep it at that gentle heat for three full minutes.",
-        "safetyAr": "الشوربة فيها بيض ني لحد ما الخطوة دي تخلص. سيبها تحت درجة الغليان بشوية لحد ما تتقل وتغلّف ضهر المعلقة — بس عمرك ما تسيبها تغلي، وإلا البيض هيتكتّل. لو بتطبخ لحامل أو كبير في السن أو مناعته ضعيفة، سيبها على النار الهادية دي تلت دقايق كاملة."
+        "safety": "The soup carries raw egg until this step finishes. Take it to 71°C / 160°F, which is also where it thickens and coats a spoon — below that it stays thin, and above about 80°C / 175°F the egg curdles, which is the real reason it must not boil. Without a thermometer, use pasteurised egg.",
+        "safetyAr": "الشوربة فيها بيض ني لحد ما الخطوة دي تخلص. وصّلها ٧١°م / ١٦٠°ف، ودي نفس الدرجة اللي بتتقل عندها وتغلّف المعلقة — تحتها بتفضل خفيفة، وفوق حوالي ٨٠°م / ١٧٥°ف البيض بيتكتّل، وده السبب الحقيقي إنها لازم ماتغليش. لو مش معاك ترمومتر، استعمل بيض مبستر."
       },
       {
         "text": "Season with the salt at the very end — the stock cubes have already done most of it — and serve it straight away.",

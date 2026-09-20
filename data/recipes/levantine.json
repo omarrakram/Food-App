@@ -154,14 +154,7 @@
       "high-protein",
       "budget"
     ],
-    "image": {
-      "path": "curated/fatteh-hummus.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chickpeas",
@@ -456,14 +449,7 @@
       "high-protein",
       "beginner"
     ],
-    "image": {
-      "path": "curated/foul-shami.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "fava-beans",
@@ -724,14 +710,7 @@
       "high-protein",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/kafta-bil-sanieh.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "ground-beef",
@@ -1181,14 +1160,7 @@
       "beginner",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/labneh-bowl.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "labneh",
@@ -1295,14 +1267,7 @@
       "high-protein",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/lamb-freekeh.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lamb",
@@ -1448,14 +1413,7 @@
       "beginner",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/lentil-soup-lemon.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -1603,14 +1561,7 @@
       "budget",
       "oven"
     ],
-    "image": {
-      "path": "curated/manakish-zaatar.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -2300,14 +2251,7 @@
       "quick",
       "beginner"
     ],
-    "image": {
-      "path": "curated/salatet-rocca.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rocket",
@@ -2411,14 +2355,7 @@
       "comfort",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/sfiha-lamb.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -2558,7 +2495,6 @@
     ],
     "tags": [
       "high-protein",
-      "quick",
       "late-night"
     ],
     "image": null,
@@ -2984,14 +2920,7 @@
       "vegan",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/warak-enab.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
