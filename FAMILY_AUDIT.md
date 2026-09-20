@@ -9,8 +9,8 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 63 |
-| …whose members span food groups | 34 |
+| Inferred families | 64 |
+| …whose members span food groups | 35 |
 
 ## Declared
 
@@ -62,6 +62,7 @@ rather than a real parent concept.
 | `عدس` | pantry, protein | `green-lentils`, `lentils` |
 | `عسل` | pantry, seasoning | `honey`, `molasses` |
 | `كزبره` | produce, seasoning | `coriander`, `coriander-ground` |
+| `ملح` | pantry, seasoning | `citric-acid`, `salt` |
 | `ورق` | produce, seasoning | `bay-leaf`, `vine-leaves` |
 
 ## Inferred, within one food group

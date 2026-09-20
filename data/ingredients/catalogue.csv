@@ -13,6 +13,7 @@ bacon-beef,beef bacon,بيكون بقري,protein,g,20,,beef bacon|بيكون,0,
 baguette,baguette,عيش فينو,bakery,piece,120,gluten,fino|عيش فينو|فينو|feeno|feno,0,1
 baking-chocolate,dark chocolate,شوكولاتة داكنة,pantry,g,,soy,شوكولاتة دارك|dark chocolate,0,0
 baking-powder,baking powder,بيكنج بودر,pantry,g,,,بيكنج بودر|baking bowder|بيكنج باودر,1,0
+baking-soda,baking soda,بيكربونات الصوديوم,pantry,g,,,بيكنج صودا|بيكربونات|بيكربونات الصوديوم|bicarbonate of soda|bicarb|sodium bicarbonate|كربونات الصودا|صودا الخبز|bikarbonat,0,0
 baladi-bread,baladi bread,عيش بلدي,bakery,piece,90,gluten,aish|aish baladi|eish|eish baladi|flatbread|bread|عيش|خبز|eish masri|aish masri,0,1
 bananas,bananas,موز,fruit,piece,120,,banana|moz|موزة|mooz|moaz,0,1
 barley,barley,شعير,carbs,g,,gluten,شعير|shaeer|sha3eer|shaer,0,0
@@ -61,6 +62,7 @@ chili-pepper,chili pepper,شطة خضراء,vegetables,piece,15,,chilli|hot pepp
 chili-powder,chili powder,شطة مطحونة,spices,g,,,red pepper powder|shatta mat7ouna|shatta matehouna,1,0
 chocolate,chocolate,شوكولاتة,pantry,g,,dairy|soy,شوكولاتة|شيكولاتة|chocolate bar,0,0
 cinnamon,cinnamon,قرفة,spices,tsp,2,,erfa|قرفه|kerfa|qerfa|erfah,0,0
+citric-acid,citric acid,ملح ليمون,pantry,g,,,ملح ليمون|ملح الليمون|malh limon|malh lamoun|lemon salt|sour salt|حامض الليمون,0,0
 clotted-cream,clotted cream,قشطة,dairy,g,,dairy,قشطة|eshta|2eshta|qeshta|keshta|قشطه|kaymak,0,1
 cloves,cloves,قرنفل,spices,g,,,قرنفل|عويدة|oronfol|orunful|3weda,1,0
 cocoa,cocoa powder,كاكاو,pantry,g,,,كاكاو|cocoa,0,0
@@ -85,6 +87,7 @@ croissant,croissant,كرواسون,bakery,piece,60,gluten|dairy|eggs,كرواس�
 cucumber,cucumber,خيار,vegetables,piece,100,,cucumbers|khiar|خيار بلدي|khyar|khiyar,0,1
 cumin,cumin,كمون,spices,tsp,2,,kamoun|كمون مطحون|kammoun|kamon,1,0
 curry-powder,curry powder,كاري,spices,g,,,كاري|curry,1,0
+custard-powder,custard powder,كسترد,pantry,g,,dairy,كسترد|كاسترد|custard|custard mix|بودرة كسترد|kastard,0,0
 date-syrup,date syrup,دبس التمر,sauces,ml,,,دبس تمر|date molasses,0,0
 dates,dates,تمر,fruit,piece,8,,balah|tamr|بلح,0,0
 dill,dill,شبت,vegetables,g,,,shabat|شبت|شبنت,0,1
@@ -103,6 +106,7 @@ fenugreek,fenugreek,حلبة,spices,g,,,حلبة|helba|hilba|7elba,1,0
 figs,figs,تين,fruit,piece,50,,fig|تين|teen,0,1
 flaxseed,flaxseed,بذر الكتان,pantry,g,,,بذرة الكتان|linseed,0,0
 flour,flour,دقيق,pantry,g,,gluten,all purpose flour|plain flour|دقيق فاخر|da2ee2|dakik|da2ik,1,0
+food-colouring,food colouring,ألوان طعام,pantry,ml,,,ألوان طعام|لون طعام|food coloring|food dye|صبغة طعام|alwan taam|الوان الطعام,0,0
 freekeh,freekeh,فريك,carbs,g,,gluten,فريك|frikeh|farik,0,0
 frozen-fries,frozen fries,بطاطس مجمدة,frozen,g,,,بطاطس محمرة|french fries|شيبسي,0,0
 frozen-mixed-veg,frozen mixed vegetables,خضار مشكل مجمد,frozen,g,,,خضار مجمد|mixed veg,0,0
@@ -152,8 +156,10 @@ liver,beef liver,كبدة,protein,g,,,kebda|كبده|كبدة اسكندراني
 luncheon-meat,luncheon meat,لانشون,protein,g,20,,luncheon|لانشون|لحم بارد,0,1
 lupini-beans,lupini beans,ترمس,pantry,g,,,ترمس|termis|tirmis|termes|lupin|lupini|termos,0,0
 mackerel,mackerel,ماكريل,protein,g,250,fish,ماكريل|scomber|سمك ماكريل,0,1
+mahlab,mahlab,محلب,spices,g,,,محلب|mahaleb|mahlep|محلب مطحون|mahlab powder,1,0
 mandarin,mandarins,يوسفي,fruit,piece,90,,tangerine|يوسفي|مندرين,0,1
 mango,mango,مانجو,fruit,piece,250,,مانجو|manga|mangoes,0,1
+mastic,mastic,مستكة,spices,g,,,مستكة|مستكه|mastika|mistika|gum mastic|mastic gum,1,0
 mayonnaise,mayonnaise,مايونيز,sauces,g,,eggs,مايونيز|mayo|mayonez|mayoneez,0,1
 melon,melon,شمام,fruit,g,,,cantaloupe|شمام|كانتالوب|shammam|shamam|cantaloup,0,1
 milk,milk,لبن,dairy,ml,,dairy,laban|full cream milk|حليب|halib|laban halib|skimmed milk|skim milk|لبن خالي الدسم|لبن نصف دسم,0,1

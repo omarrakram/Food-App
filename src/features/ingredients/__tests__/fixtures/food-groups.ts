@@ -90,11 +90,12 @@ const OVERRIDES: Record<string, FoodGroup> = {
   lentils: 'legume', 'white-beans': 'legume', 'lupini-beans': 'legume',
   'baking-chocolate': 'baking', 'baking-powder': 'baking', flour: 'baking',
   gelatin: 'baking', yeast: 'baking', cocoa: 'baking', 'icing-sugar': 'baking',
+  'baking-soda': 'baking', 'custard-powder': 'baking', 'food-colouring': 'baking',
   'brown-sugar': 'sweetener', 'corn-syrup': 'sweetener', honey: 'sweetener',
   sugar: 'sweetener', chocolate: 'sweetener',
   'corn-oil': 'oil', 'sesame-oil': 'oil',
   'lemon-juice': 'condiment', 'orange-blossom': 'condiment', 'rose-water': 'condiment',
-  'vinegar-apple': 'condiment', 'stock-cube': 'condiment',
+  'vinegar-apple': 'condiment', 'stock-cube': 'condiment', 'citric-acid': 'condiment',
   coffee: 'beverage', tea: 'beverage',
 
   // `sauces` holds the oils.
