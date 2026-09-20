@@ -1,0 +1,276 @@
+{
+  "batch": "batch-3-egyptian-weeknight",
+  "intent": "30 candidates: 20 new and 10 second attempts at batch-2 dishes that were refused once. Fifteen of the thirty are Egyptian — half the pool — because the catalogue is 26.4% Egyptian against a ≥30% goal, and none of them is a foreign dish wearing an Egyptian name to move the number. The weighting is to real meals: a baked tilapia, white beans with beef, a tray of torly, chicken livers, two breakfasts built on cheese and eggs. The nine dishes refused twice in batches 1 and 2 are NOT here — they are retired from automated attempts and kept in the backlog for a human with a known-good source. Belila, gibna-bel-tamatem and sogo2-bel-salsa found nothing twice and are deferred.",
+  "candidates": [
+    {
+      "slug": "samak-bel-forn",
+      "name": "Baked Tilapia with Cumin",
+      "nameAr": "سمك بلطي في الفرن",
+      "cuisine": "egyptian",
+      "coreIngredients": ["tilapia", "lemon", "cumin", "sunflower-oil", "salt"],
+      "searchNames": ["Baked tilapia", "Tilapia", "Baked fish"],
+      "note": "Bolti is the fish Egypt actually eats and the catalogue has no baked whole fish. Five lines and an oven."
+    },
+    {
+      "slug": "torly",
+      "name": "Baked Mixed Vegetables in Tomato",
+      "nameAr": "طورلي",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggplant", "zucchini", "potatoes", "tomato-paste", "onions", "sunflower-oil", "salt"],
+      "searchNames": ["Turlu", "Türlü", "Vegetable casserole"],
+      "note": "One tray, whatever vegetables are in the house, tomato over the top. The cheapest way to feed a family in this catalogue if it lands."
+    },
+    {
+      "slug": "fasolia-bel-lahma",
+      "name": "White Beans with Beef",
+      "nameAr": "فاصوليا بيضا باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["white-beans", "beef-cubes", "tomato-paste", "onions", "water", "salt"],
+      "searchNames": ["White bean stew", "Fasolia"],
+      "note": "The Sunday pot. Distinct from the vegetarian tomato-and-white-bean stew already in the catalogue: this one is built on beef and stock."
+    },
+    {
+      "slug": "kebda-firakh",
+      "name": "Chicken Livers with Onion",
+      "nameAr": "كبدة فراخ بالبصل",
+      "cuisine": "egyptian",
+      "coreIngredients": ["chicken-liver", "onions", "garlic", "cumin", "sunflower-oil", "salt"],
+      "searchNames": ["Chicken liver", "Chicken livers"],
+      "note": "Cheaper and softer than the Alexandrian beef liver, and a different dish. The chicken-liver row is used by nothing."
+    },
+    {
+      "slug": "beid-bel-gibna",
+      "name": "Eggs with White Cheese",
+      "nameAr": "بيض بالجبنة البيضا",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggs", "white-cheese", "butter", "salt"],
+      "searchNames": ["Eggs with cheese", "Cheese omelette"],
+      "note": "Four lines. Breakfast is still the thinnest meal type in the catalogue."
+    },
+    {
+      "slug": "gibna-areesh",
+      "name": "Areesh Cheese with Oil and Tomato",
+      "nameAr": "جبنة قريش بالزيت والطماطم",
+      "cuisine": "egyptian",
+      "coreIngredients": ["areesh-cheese", "olive-oil", "tomatoes", "mint"],
+      "searchNames": ["Areesh cheese", "Karish cheese", "Egyptian cottage cheese"],
+      "note": "The cheapest protein on an Egyptian breakfast table and the areesh row is used by nothing at all."
+    },
+    {
+      "slug": "khoshaf",
+      "name": "Dried Fruit Compote",
+      "nameAr": "خشاف",
+      "cuisine": "egyptian",
+      "coreIngredients": ["dried-apricot", "prunes", "raisins", "water", "sugar"],
+      "searchNames": ["Khoshaf", "Khushaf", "Dried fruit compote"],
+      "note": "Soaked overnight, eaten at iftar. Five lines, no cooking, and it uses three dried-fruit rows that no recipe touches."
+    },
+    {
+      "slug": "qatayef",
+      "name": "Stuffed Ramadan Pancakes",
+      "nameAr": "قطايف",
+      "cuisine": "egyptian",
+      "coreIngredients": ["flour", "semolina", "sugar", "yeast", "water", "nuts-mix"],
+      "searchNames": ["Qatayef", "Katayef", "Atayef"],
+      "note": "The Ramadan sweet. Six lines; the batter is flour, semolina and yeast and the filling is nuts."
+    },
+    {
+      "slug": "tamr-hindi",
+      "name": "Tamarind Drink",
+      "nameAr": "تمر هندي",
+      "cuisine": "egyptian",
+      "coreIngredients": ["tamarind", "water", "sugar"],
+      "searchNames": ["Tamarind juice", "Tamr hindi", "Tamarind drink"],
+      "note": "Three lines, and the tamarind row exists for exactly this and is used by nothing."
+    },
+    {
+      "slug": "eish-el-saraya",
+      "name": "Bread Pudding in Syrup",
+      "nameAr": "عيش السرايا",
+      "cuisine": "egyptian",
+      "coreIngredients": ["toast-bread", "sugar", "water", "cream", "nuts-mix"],
+      "searchNames": ["Aish el saraya", "Eish el saraya", "Bread pudding"],
+      "note": "Stale bread, syrup and cream. A real Egyptian dessert built out of what is going hard in the bread bin."
+    },
+    {
+      "slug": "borek",
+      "name": "Cheese Börek",
+      "nameAr": "بوريك بالجبنة",
+      "cuisine": "turkish",
+      "coreIngredients": ["phyllo", "white-cheese", "eggs", "butter"],
+      "searchNames": ["Börek", "Borek", "Su böreği"],
+      "note": "Four lines from bought phyllo. Turkey's version of the same idea as sambousek and a different shape on the plate."
+    },
+    {
+      "slug": "gazpacho",
+      "name": "Chilled Tomato Soup",
+      "nameAr": "شوربة طماطم باردة",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["tomatoes", "cucumber", "bell-pepper", "olive-oil", "vinegar", "salt"],
+      "searchNames": ["Gazpacho"],
+      "note": "No cooking at all, served cold, which matters somewhere that is 38°C in August."
+    },
+    {
+      "slug": "avgolemono",
+      "name": "Greek Egg and Lemon Soup",
+      "nameAr": "شوربة البيض والليمون",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["rice", "eggs", "lemon", "stock-cube", "water", "salt"],
+      "searchNames": ["Avgolemono", "Egg lemon soup"],
+      "note": "Rice, egg and lemon whisked into a broth. Cheap, restorative, and nothing like it in the catalogue."
+    },
+    {
+      "slug": "harira",
+      "name": "Lentil and Chickpea Soup",
+      "nameAr": "حريرة",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["lentils", "chickpeas", "tomatoes", "onions", "coriander", "water"],
+      "searchNames": ["Harira"],
+      "note": "The Moroccan Ramadan soup. Legumes are the catalogue's joint-largest protein group and this is a substantial one."
+    },
+    {
+      "slug": "greek-lemon-potatoes",
+      "name": "Lemon and Oregano Roast Potatoes",
+      "nameAr": "بطاطس بالليمون والزعتر",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["potatoes", "lemon", "olive-oil", "oregano", "garlic", "salt"],
+      "searchNames": ["Greek lemon potatoes", "Lemon potatoes", "Patates lemonates"],
+      "note": "Roasted in lemon and stock until the edges catch. Six lines, one tray."
+    },
+    {
+      "slug": "french-onion-soup",
+      "name": "Onion Soup with Cheese Toast",
+      "nameAr": "شوربة بصل بالجبنة",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["onions", "butter", "stock-cube", "baladi-bread", "roumy-cheese", "water"],
+      "searchNames": ["French onion soup", "Onion soup"],
+      "note": "A kilo of onions and almost nothing else. Made here with roumy on baladi bread, which is what an Egyptian kitchen has."
+    },
+    {
+      "slug": "panzanella",
+      "name": "Tomato and Bread Salad",
+      "nameAr": "سلطة الطماطم والعيش",
+      "cuisine": "italian",
+      "coreIngredients": ["toast-bread", "tomatoes", "cucumber", "olive-oil", "vinegar", "basil"],
+      "searchNames": ["Panzanella"],
+      "note": "The other stale-bread dish, and the summer counterpart to fattoush."
+    },
+    {
+      "slug": "aloo-paratha",
+      "name": "Potato-Stuffed Flatbread",
+      "nameAr": "خبز محشي بالبطاطس",
+      "cuisine": "indian",
+      "coreIngredients": ["flour", "potatoes", "cumin", "chili-pepper", "ghee", "salt"],
+      "searchNames": ["Aloo paratha", "Paratha"],
+      "note": "Six pantry lines and a dry pan. Filling, cheap, and no oven needed."
+    },
+    {
+      "slug": "egg-curry",
+      "name": "Eggs in Spiced Tomato",
+      "nameAr": "بيض بالكاري",
+      "cuisine": "indian",
+      "coreIngredients": ["eggs", "tomatoes", "onions", "turmeric", "sunflower-oil", "salt"],
+      "searchNames": ["Egg curry", "Anda curry"],
+      "note": "Boiled eggs simmered in tomato. A main built on the cheapest protein there is."
+    },
+    {
+      "slug": "baked-beans",
+      "name": "Beans in Tomato Molasses",
+      "nameAr": "فاصوليا بالطماطم والعسل الأسود",
+      "cuisine": "american",
+      "coreIngredients": ["white-beans", "tomato-paste", "onions", "molasses", "salt"],
+      "searchNames": ["Baked beans"],
+      "note": "Five lines and it keeps for days. The molasses row is Egyptian black honey and is used by almost nothing."
+    },
+    {
+      "slug": "onigiri",
+      "name": "Salted Rice Parcels",
+      "nameAr": "كور رز بالنوري",
+      "cuisine": "asian",
+      "coreIngredients": ["rice", "nori", "salt"],
+      "searchNames": ["Onigiri", "Rice ball"],
+      "note": "Three lines. Cold lunch, travels well, and it uses the nori row that nothing else does."
+    },
+    {
+      "slug": "black-bean-soup",
+      "name": "Spiced Bean Soup",
+      "nameAr": "شوربة فاصوليا بالكمون",
+      "cuisine": "mexican",
+      "coreIngredients": ["kidney-beans", "onions", "garlic", "cumin", "water", "salt"],
+      "searchNames": ["Bean soup", "Black bean soup"],
+      "note": "A tin of beans into a blender. Six lines, one pot, under half an hour."
+    },
+    {
+      "slug": "makarona-bel-salsa",
+      "name": "Macaroni in Red Sauce",
+      "nameAr": "مكرونة بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["pasta", "tomato-paste", "garlic", "sunflower-oil", "salt"],
+      "searchNames": ["Macaroni tomato sauce", "Pasta al pomodoro", "Tomato pasta"],
+      "note": "SECOND ATTEMPT. The first candidate was a pasta alla norma with aubergine and cheese in it. Probably the most-cooked weeknight dinner in Egypt, so it is worth one more try."
+    },
+    {
+      "slug": "beid-bel-tamatem",
+      "name": "Eggs Scrambled with Tomato",
+      "nameAr": "بيض بالطماطم",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggs", "tomatoes", "sunflower-oil", "salt"],
+      "searchNames": ["Scrambled eggs with tomato", "Tomato and egg", "Egg with tomato"],
+      "note": "SECOND ATTEMPT. The first candidate was a hotel buffet chafing dish with its label showing."
+    },
+    {
+      "slug": "sambousek",
+      "name": "Cheese Sambousek",
+      "nameAr": "سمبوسك بالجبنة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["phyllo", "white-cheese", "eggs", "sunflower-oil"],
+      "searchNames": ["Sambousek", "Sambusak", "Cheese sambousek"],
+      "note": "SECOND ATTEMPT. The first candidate was Indian samosas with a green potato filling."
+    },
+    {
+      "slug": "betingan-mely",
+      "name": "Fried Aubergine with Garlic and Vinegar",
+      "nameAr": "باذنجان مقلي بالتوم والخل",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggplant", "sunflower-oil", "garlic", "vinegar", "salt"],
+      "searchNames": ["Fried aubergine slices", "Fried eggplant slices"],
+      "note": "SECOND ATTEMPT. The first candidate was Spanish berenjenas con miel — battered and drizzled with honey."
+    },
+    {
+      "slug": "firakh-bel-forn",
+      "name": "Whole Chicken in the Oven with Cumin",
+      "nameAr": "فراخ في الفرن بالكمون",
+      "cuisine": "egyptian",
+      "coreIngredients": ["whole-chicken", "cumin", "lemon", "sunflower-oil", "salt"],
+      "searchNames": ["Roasted chicken", "Whole roast chicken", "Roast chicken dinner"],
+      "note": "SECOND ATTEMPT. The first candidate was a painted restaurant sign reading BROILER-BAR. The whole-chicken row still has no recipe."
+    },
+    {
+      "slug": "naan",
+      "name": "Yogurt Flatbread",
+      "nameAr": "خبز النان",
+      "cuisine": "indian",
+      "coreIngredients": ["flour", "yogurt", "yeast", "salt", "ghee"],
+      "searchNames": ["Naan bread", "Tandoori naan", "Garlic naan"],
+      "note": "SECOND ATTEMPT. The first candidate was a restaurant buffet line with a basket of naan in the corner."
+    },
+    {
+      "slug": "coleslaw",
+      "name": "Cabbage and Carrot Slaw",
+      "nameAr": "سلطة كول سلو",
+      "cuisine": "american",
+      "coreIngredients": ["cabbage", "carrots", "mayonnaise", "vinegar", "salt"],
+      "searchNames": ["Coleslaw salad", "Cabbage salad", "Creamy coleslaw"],
+      "note": "SECOND ATTEMPT. The first candidate was a diner plate of corn dogs with a ramekin of slaw at the edge."
+    },
+    {
+      "slug": "chicken-katsu",
+      "name": "Crumbed Chicken Cutlet",
+      "nameAr": "فراخ بانيه",
+      "cuisine": "asian",
+      "coreIngredients": ["chicken-breast", "breadcrumbs", "eggs", "flour", "sunflower-oil"],
+      "searchNames": ["Chicken cutlet", "Breaded chicken cutlet", "Tonkatsu"],
+      "note": "SECOND ATTEMPT. The first candidate was katsu CURRY — the sauce was most of the plate. This is بانيه, one of the most ordered things in Egypt, and the catalogue has no crumbed cutlet."
+    }
+  ]
+}
