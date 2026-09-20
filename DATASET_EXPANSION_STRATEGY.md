@@ -1497,6 +1497,21 @@ Still open, and deliberately not guessed:
   Egyptian kitchen, or does one product do both jobs?
 - **`صوص طماطم`** — new. It reaches both ketchup and passata.
 
+**From the Stage 3 recipe batches.** Dish titles, not ingredient rows, and
+none of them blocks anything — but a transliteration nobody checked is exactly
+what this queue exists for.
+
+- **`طورلي`** — the spelling used for the tray of baked vegetables. `طرلي`
+  also appears in Egyptian writing and I do not know which a cook would read
+  first.
+- **`خشاف`** vs **`خوشاف`** — both are written. The recipe uses the shorter.
+- **`باذنجان`** vs **`بتنجان`** — the catalogue's row is `باذنجان`, which is
+  what the recipe title inherits; `بتنجان` is closer to how it is said.
+- **`بوريك`** — börek transliterated. Egyptian menus also write `بورك`.
+- **Step prose in all 31 batch recipes** is Egyptian colloquial rather than
+  MSA, deliberately, and has not been read by a native speaker yet. That is
+  Stage 7's job and it has not happened.
+
 ---
 
 ## 9j. Stage 2D-A: the census was measuring one thing and reporting two
