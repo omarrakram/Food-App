@@ -89,6 +89,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   hazelnuts: 'nut-seed', peanuts: 'nut-seed', 'pine-nuts': 'nut-seed',
   pistachios: 'nut-seed', 'pumpkin-seeds': 'nut-seed', 'sunflower-seeds': 'nut-seed',
   walnuts: 'nut-seed', 'coconut-flakes': 'nut-seed', 'peanut-butter': 'nut-seed',
+  'nuts-mix': 'nut-seed', 'melon-seeds': 'nut-seed', 'watermelon-seeds': 'nut-seed',
   'black-eyed-peas': 'legume', chickpeas: 'legume', 'fava-beans': 'legume',
   lentils: 'legume', 'white-beans': 'legume', 'lupini-beans': 'legume',
   'baking-chocolate': 'baking', 'baking-powder': 'baking', flour: 'baking',
@@ -102,7 +103,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   'lemon-juice': 'condiment', 'orange-blossom': 'condiment', 'rose-water': 'condiment',
   'vinegar-apple': 'condiment', 'stock-cube': 'condiment', 'citric-acid': 'condiment',
   coffee: 'beverage', tea: 'beverage', licorice: 'beverage', carob: 'beverage',
-  sahlab: 'beverage', chamomile: 'beverage', sugarcane: 'beverage',
+  sahlab: 'beverage', chamomile: 'beverage', sugarcane: 'beverage', sobia: 'beverage',
 
   // `sauces` holds the oils.
   'olive-oil': 'oil', 'sunflower-oil': 'oil',
@@ -118,7 +119,7 @@ const OVERRIDES: Record<string, FoodGroup> = {
   basil: 'herb', coriander: 'herb', dill: 'herb', mint: 'herb', parsley: 'herb',
   rocket: 'herb', watercress: 'herb', 'spring-garlic': 'herb',
   ginger: 'spice',
-  capers: 'condiment', olives: 'condiment', pickles: 'condiment',
+  capers: 'condiment', olives: 'condiment', pickles: 'condiment', 'pickled-lemon': 'condiment',
   'sun-dried-tomato': 'condiment',
 
   // Odd ones out inside their own categories.
@@ -127,13 +128,14 @@ const OVERRIDES: Record<string, FoodGroup> = {
   kashkaval: 'cheese', mozzarella: 'cheese', parmesan: 'cheese',
   'roumy-cheese': 'cheese', 'white-cheese': 'cheese', labneh: 'cheese',
   'areesh-cheese': 'cheese', 'mish-cheese': 'cheese', 'talaga-cheese': 'cheese',
-  'processed-cheese': 'cheese',
+  'processed-cheese': 'cheese', gouda: 'cheese', edam: 'cheese', ricotta: 'cheese',
+  mascarpone: 'cheese',
   'egg-white': 'egg', 'egg-yolk': 'egg',
   'lasagne-sheets': 'pasta', noodles: 'pasta', pasta: 'pasta', orzo: 'pasta',
   vermicelli: 'pasta', couscous: 'pasta',
   cornflour: 'baking', 'rice-flour': 'baking',
   breadcrumbs: 'baking', phyllo: 'baking', 'puff-pastry': 'baking',
-  'kunafa-dough': 'baking', 'plain-biscuits': 'baking',
+  'kunafa-dough': 'baking', 'plain-biscuits': 'baking', 'pizza-dough': 'baking',
   'frozen-fries': 'vegetable', 'frozen-mixed-veg': 'vegetable', 'fried-onions': 'vegetable',
   'green-peas': 'vegetable', 'ice-cream': 'dairy', 'popcorn-kernels': 'grain',
   coconut: 'nut-seed',

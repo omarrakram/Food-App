@@ -17,15 +17,15 @@ not replace real-user testing.
 | | | |
 |---|---:|---:|
 | **Concepts** | **525** | |
-| Represented by their own row | 333 | 63.4% |
-| Reachable through an alias | 23 | 4.4% |
-| Missing | 68 | 13% |
+| Represented by their own row | 344 | 65.5% |
+| Reachable through an alias | 25 | 4.8% |
+| Missing | 55 | 10.5% |
 | Ambiguous | 10 | 1.9% |
 | Correctly not a row — dish | 26 | 5% |
 | Correctly not a row — form | 63 | 12% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 356 of the 434 actionable concepts (82%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 369 of the 434 actionable concepts (85%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -37,22 +37,22 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 352 | 70.5% |
+| Concepts whose every term lands correctly | 365 | 73.1% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 979 | 80.4% |
+| Terms landing correctly | 1005 | 82.5% |
 | **Declared forms/brands whose aliasing is BROKEN** | **1** | |
 
-Catalogue: **347 canonical ingredients**, **1562 aliases**.
+Catalogue: **360 canonical ingredients**, **1614 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | baking | 33 | 23 | 2 | 5 | 0 | 83.3% | 68.8% |
-| bread and bakery | 24 | 10 | 2 | 6 | 0 | 66.7% | 61.9% |
+| bread and bakery | 24 | 13 | 2 | 3 | 0 | 83.3% | 76.2% |
 | breakfast | 15 | 8 | 2 | 1 | 0 | 90.9% | 72.7% |
-| canned and jarred | 18 | 6 | 1 | 1 | 0 | 87.5% | 88.9% |
-| cheese | 23 | 12 | 1 | 5 | 0 | 72.2% | 73.9% |
+| canned and jarred | 18 | 7 | 1 | 0 | 0 | 100% | 94.4% |
+| cheese | 23 | 14 | 3 | 1 | 0 | 94.4% | 91.3% |
 | dairy and eggs | 21 | 17 | 0 | 3 | 0 | 85% | 81% |
 | drinks that are ingredients | 3 | 1 | 0 | 1 | 0 | 50% | 66.7% |
 | fish and seafood | 27 | 20 | 0 | 2 | 2 | 83.3% | 74.1% |
@@ -62,17 +62,17 @@ Catalogue: **347 canonical ingredients**, **1562 aliases**.
 | herbs | 11 | 9 | 0 | 1 | 1 | 81.8% | 72.7% |
 | international in egypt | 10 | 1 | 1 | 7 | 0 | 22.2% | 20% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
-| nuts seeds dried fruit | 22 | 17 | 1 | 3 | 0 | 85.7% | 36.4% |
+| nuts seeds dried fruit | 22 | 19 | 1 | 1 | 0 | 95.2% | 45.5% |
 | offal | 17 | 10 | 0 | 3 | 1 | 71.4% | 62.5% |
 | oils and fats | 6 | 4 | 1 | 1 | 0 | 83.3% | 83.3% |
-| packaged pantry | 16 | 8 | 0 | 3 | 0 | 72.7% | 75% |
+| packaged pantry | 16 | 10 | 0 | 1 | 0 | 90.9% | 87.5% |
 | pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
 | poultry | 15 | 14 | 0 | 1 | 0 | 93.3% | 93.3% |
 | prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
 | red meat cuts | 25 | 13 | 3 | 5 | 0 | 76.2% | 43.5% |
 | sauces and condiments | 27 | 21 | 3 | 1 | 1 | 92.3% | 81.5% |
-| snacks used as ingredients | 13 | 3 | 1 | 4 | 0 | 50% | 40% |
+| snacks used as ingredients | 13 | 4 | 1 | 3 | 0 | 62.5% | 50% |
 | spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
 | spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
 | vegetables | 56 | 45 | 1 | 2 | 2 | 92% | 76.8% |
@@ -92,38 +92,25 @@ Catalogue: **347 canonical ingredients**, **1562 aliases**.
 | mixed dried fruit / yameesh | ramadan and eid | ياميش · yameesh |
 | sharbat | ramadan and eid | شربات · sugar syrup · sharbat |
 
-### P2 — 28
+### P2 — 15
 
 | Concept | Category | Terms probed |
 |---|---|---|
 | cake mix | baking | ميكس كيك · cake mix |
 | sweetener tablets | baking | سكر دايت · sweetener |
-| burger buns | bread and bakery | خبز برجر · burger buns |
-| pizza dough | bread and bakery | عجينة بيتزا · pizza dough |
 | samoon | bread and bakery | صامولي · samoon |
-| shamsi bread | bread and bakery | عيش شمسي · shamsi bread |
-| pickled lemon | canned and jarred | ليمون مخلل · pickled lemon |
-| edam | cheese | إيدام · edam |
-| gouda | cheese | جودة · gouda |
-| mascarpone | cheese | ماسكاربوني · mascarpone |
-| ricotta | cheese | ريكوتا · ricotta |
 | ayran / yoghurt drink | dairy and eggs | عيران · ayran · laban ayran |
 | tuna steak | fish and seafood | شرائح تونة · tuna steak |
 | frozen berries | frozen | توت مجمد · frozen berries |
 | jareesh | grains and rice | جريش · jareesh · crushed wheat |
 | jarred pasta sauce | international in egypt | صوص مكرونة · pasta sauce |
 | dried cranberries | nuts seeds dried fruit | توت بري مجفف · dried cranberries |
-| melon seeds | nuts seeds dried fruit | لب مصري · melon seeds |
-| watermelon seeds | nuts seeds dried fruit | لب بطيخ · watermelon seeds |
-| instant soup powder | packaged pantry | شوربة سريعة · instant soup |
-| sobia | packaged pantry | سوبيا · sobia |
 | tomato juice | packaged pantry | عصير طماطم · tomato juice |
 | beef neck | red meat cuts | رقبة · رقبه · beef neck |
 | escalope | red meat cuts | اسكالوب · escalope |
 | tenderloin | red meat cuts | فيليه لحمة · tenderloin · filet |
 | hot chili paste | sauces and condiments | معجون شطة · chili paste |
 | digestive biscuits | snacks used as ingredients | بسكويت دايجستف · digestive |
-| nuts mix | snacks used as ingredients | مكسرات مشكلة · mixed nuts |
 
 ### long-tail — 38
 
