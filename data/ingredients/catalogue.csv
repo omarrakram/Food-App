@@ -68,7 +68,7 @@ chicken-breast,chicken breast,صدور فراخ,protein,g,180,,,chicken breasts|
 chicken-drumstick,chicken drumsticks,دبابيس فراخ,protein,g,90,,,drumstick|دبابيس|دبابيس فراخ|dababees|chicken drumstick|دبوس فراخ,0,1
 chicken-feet,chicken feet,رجل فراخ,protein,g,,,,رجل فراخ|chicken feet|كوارع فراخ|regl firakh,0,1
 chicken-gizzards,chicken gizzards,كوانس,protein,g,,,,كوانس|kawanes|kawanis|gizzards|قوانص|gizzard|kawanes firakh,0,1
-chicken-hearts,chicken hearts,قلوب فراخ,protein,g,,,,قلوب فراخ|قلوب|chicken hearts|hearts|olob firakh,0,1
+chicken-hearts,chicken hearts,قلوب فراخ,protein,g,,,,قلوب فراخ|قلوب|قلب|chicken hearts|hearts|olob firakh,0,1
 chicken-liver,chicken livers,كبدة فراخ,protein,g,,,,kebda farakh|كبدة فراخ|kebda firakh|kabda farakh,0,1
 chicken-thigh,chicken thighs,أوراك فراخ,protein,g,130,,,chicken thigh|أوراك|وراك فراخ|werk|ورك|wrak|awrak firakh,0,1
 chicken-wings,chicken wings,أجنحة فراخ,protein,g,40,,,wings|اجنحة|جوانح,0,1
@@ -259,7 +259,7 @@ pineapple,pineapple,أناناس,fruit,g,,,,اناناس|أناناس|ananas|ana
 pistachios,pistachios,فستق,pantry,g,,nuts,,فستق|fostok|pistachio,0,0
 pita-bread,pita bread,عيش شامي,bakery,piece,80,gluten,,شامي|عيش شامي|pitta|pita|eish shami|aish shami|lebanese bread|عيش شاورما|shawarma bread,0,1
 pizza-dough,pizza dough,عجينة بيتزا,bakery,g,,gluten,,عجينة بيتزا|pizza dough|عجينه بيتزا|pizza base,0,1
-plain-biscuits,plain biscuits,بسكويت,bakery,g,,gluten,dairy|eggs,بسكويت|biscuits|بسكوت|baskaweet|tea biscuits|digestive biscuits|بسكويت دايجستف,0,0
+plain-biscuits,plain biscuits,بسكويت,bakery,g,,gluten,dairy|eggs,بسكويت|biscuits|بسكوت|baskaweet|tea biscuits|digestive biscuits|digestive|بسكويت دايجستف|دايجستف,0,0
 plum,plums,برقوق,fruit,piece,60,,,plum|برقوق|bargo2|barquq,0,1
 pomegranate,pomegranate,رمان,fruit,piece,280,,,رمان|romman|rumman|roman,0,1
 pomegranate-molasses,pomegranate molasses,دبس رمان,sauces,ml,,,,دبس الرمان|debs romman|debs roman|debs el romman,0,0

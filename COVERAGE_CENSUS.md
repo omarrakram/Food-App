@@ -37,12 +37,12 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 385 | 77.2% |
+| Concepts whose every term lands correctly | 387 | 77.6% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 1050 | 86.2% |
-| **Declared forms/brands whose aliasing is BROKEN** | **2** | |
+| Terms landing correctly | 1052 | 86.4% |
+| **Declared forms/brands whose aliasing is BROKEN** | **0** | |
 
-Catalogue: **378 canonical ingredients**, **1695 aliases**.
+Catalogue: **378 canonical ingredients**, **1698 aliases**.
 
 ## 3. By category
 
@@ -63,7 +63,7 @@ Catalogue: **378 canonical ingredients**, **1695 aliases**.
 | international in egypt | 10 | 1 | 1 | 6 | 0 | 25% | 30% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
 | nuts seeds dried fruit | 22 | 19 | 1 | 1 | 0 | 95.2% | 45.5% |
-| offal | 17 | 12 | 0 | 1 | 1 | 85.7% | 75% |
+| offal | 17 | 12 | 0 | 1 | 1 | 85.7% | 81.3% |
 | oils and fats | 6 | 5 | 1 | 0 | 0 | 100% | 100% |
 | packaged pantry | 16 | 11 | 0 | 0 | 0 | 100% | 93.8% |
 | pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
@@ -72,17 +72,10 @@ Catalogue: **378 canonical ingredients**, **1695 aliases**.
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
 | red meat cuts | 25 | 17 | 3 | 0 | 1 | 95.2% | 60.9% |
 | sauces and condiments | 27 | 21 | 3 | 0 | 1 | 96% | 85.2% |
-| snacks used as ingredients | 13 | 4 | 1 | 2 | 0 | 71.4% | 50% |
+| snacks used as ingredients | 13 | 4 | 1 | 2 | 0 | 71.4% | 60% |
 | spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
 | spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
 | vegetables | 56 | 46 | 1 | 1 | 2 | 94% | 78.6% |
-
-## 4. BROKEN aliasing — a declared form or brand that does not reach its base
-
-| Concept | Expects | What actually happened |
-|---|---|---|
-| heart | chicken-hearts | قلب -> (nothing; search: —) |
-| digestive biscuits | plain-biscuits | digestive -> (nothing; search: plain-biscuits) |
 
 ## 5. Missing, by priority
 

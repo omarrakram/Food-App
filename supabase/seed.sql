@@ -1589,6 +1589,8 @@ values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'قلوب فراخ') on conflict
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'قلوب') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'قلب') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
 values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'chicken hearts') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'hearts') on conflict do nothing;
@@ -5943,7 +5945,11 @@ values ('b749ea6e-0b56-5e52-a687-655858157d6a', 'tea biscuits') on conflict do n
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('b749ea6e-0b56-5e52-a687-655858157d6a', 'digestive biscuits') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b749ea6e-0b56-5e52-a687-655858157d6a', 'digestive') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
 values ('b749ea6e-0b56-5e52-a687-655858157d6a', 'بسكويت دايجستف') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b749ea6e-0b56-5e52-a687-655858157d6a', 'دايجستف') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('19d284a1-929c-5054-95e8-e5bc0ddd4eb9', 'plum', 'plums', 'برقوق', 'fruit', 'piece', 60, false, true)
 on conflict (slug) do update set
