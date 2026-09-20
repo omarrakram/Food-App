@@ -1312,6 +1312,192 @@ not resolved by whoever adds the row.
 
 ---
 
+## 9g. Stage 2C: the coverage census, and what it says
+
+### Why a second measurement exists
+
+The 258-term vocabulary benchmark is a REGRESSION SUITE now, and nothing else.
+It was written from the catalogue's known gaps, so closing them saturated it,
+and 100% there means "the failures we already knew about are fixed" — not "a
+cook can type what is in the fridge". It cannot answer the coverage question
+because it was never independent of the thing it measures.
+
+`data/census/egyptian-coverage.csv` + `npm run audit:coverage` is the other
+measurement: **530 distinct concepts** an Egyptian kitchen, supermarket,
+butcher and fishmonger actually deal in, written without reference to the
+catalogue and then run against the live resolver. Every verdict is measured.
+
+**It is a discovery set, not a holdout.** It may be read and optimised against
+while the catalogue is built, which is exactly what disqualifies it as
+validation. The sealed launch holdout in §3b is still required and this does
+not replace real-user testing.
+
+### The headline
+
+| | | |
+|---|---:|---:|
+| Concepts | **530** | |
+| Represented by their own row | 289 | 54.5% |
+| Reachable through an alias | 23 | 4.3% |
+| **Honestly represented** | **312** | **58.9%** |
+| Missing | 115 | 21.7% |
+| Ambiguous | 5 | 0.9% |
+| Rejected — dish / form / brand | 98 | 18.5% |
+
+**Of the 432 concepts the catalogue is actually on the hook for** — the census
+minus the dishes, forms and brands, which are correctly not rows —
+**72.2% are honestly represented**, 26.6% are missing.
+
+That is the number to steer by. 301 rows is not the achievement; 72% is the
+position, and the gap is 115 named concepts rather than a target row count.
+
+### Where it is thin, measured
+
+| Category | Honest of actionable |
+|---|---:|
+| ramadan and eid | **0%** |
+| international in egypt | **11%** |
+| snacks used as ingredients | **25%** |
+| offal | **27%** |
+| drinks that are ingredients | 33% |
+| spice blends | 57% |
+| bread and bakery | 61% |
+| cheese | 68% |
+
+Strong: legumes 93%, nuts/seeds 90%, vegetables 88%, poultry 87%, spices 84%.
+
+The pattern is the same one §3 found and is now measured rather than asserted:
+species-level coverage is good, and the gaps are **forms, cuts, occasions and
+packaged goods** — the parts of a kitchen a supermarket aisle taxonomy does not
+organise.
+
+### The 13 newly discovered P1 gaps, classified
+
+Ten earn rows. Three do not, and saying so is the point of classifying rather
+than implementing.
+
+| Concept | Verdict |
+|---|---|
+| `sahlab` (سحلب) | **Row.** A bought powder, not a preparation. |
+| `kunafa-dough` (كنافة) | **Row**, with a flag: كنافة also names the finished dessert, so the row must be the dough and the dessert stays a recipe — the mombar precedent. |
+| `chocolate-spread` (نوتيلا) | **Row**, with نوتيلا as a BRAND alias under the generic concept. |
+| `whipping-cream` (كريمة خفق) | **Row.** Distinct from `cream`, which is كريمة طهي. Neither substitutes for the other. Flagged for native review. |
+| `kidney` (كلاوي) | **Row.** Offal, bought and cooked on its own. |
+| `tripe` (كرشة) | **Row.** Same. |
+| `carob` (خروب) | **Row.** |
+| `orzo` (لسان عصفور) | **Row.** A shape with its own dish, and `vermicelli` already sets the precedent for shape-level rows. |
+| `plain-biscuits` (بسكويت سادة) | **Row.** Used as an ingredient in dessert bases. |
+| `shawarma-spice` (بهارات شاورما) | **Row.** Bought as a blend; §3c already accepted blends. |
+| `fried-onions` (بصل مقلي) | **Row.** A recipe calling for crispy fried onions is NOT satisfied by raw onions, and it is bought ready. Flagged. |
+| `yameesh` (ياميش) | **NOT a row — a FAMILY candidate.** It names the Ramadan dried-fruit-and-nut assortment, which is a SET of concepts the catalogue already has. That is what the declared-family layer is for. |
+| `sharbat` (شربات) | **NOT a row — a preparation.** Sugar, water and lemon, made at home. Rule 1. |
+
+### Ambiguity the census found on its own
+
+`صوص طماطم` resolves to **both `ketchup` and `tomato-sauce`**. Passata and
+ketchup are not the same product and a recipe calling for one is not satisfied
+by the other. Recorded as an ontology question, not fixed here.
+
+The others were already known: `سبيط` (cuttlefish/calamari), `زعتر` (herb vs
+blend), `فول نابت`, `راس خروف`.
+
+### Proposed next batches, from measured evidence
+
+1. **P1 batch C — the ten rows above.** Offal first, since that category sits
+   at 27% and every gap in it is a real butcher's item.
+2. **P2 batch A — 64 concepts**, led by the weakest categories: Ramadan/Eid,
+   snacks-as-ingredients and the remaining offal and bakery items.
+3. **A declared family for `ياميش`**, and a decision on `صوص طماطم`.
+4. **Long-tail** stays a backlog. It is not worth rows until the holdout says
+   the product needs them.
+
+## 9h. Allergen semantics: the finding
+
+### What the field means today, and how we know
+
+`CatalogueIngredient.allergens` has no doc comment, so the meaning has to be
+read off its consumers, and they disagree in an informative way.
+
+`violatesAllergens` treats it as an **absolute exclusion** — its own comment
+says "we never reason about 'only a trace' or 'they could substitute'". That
+alone is compatible with either reading.
+
+`satisfiesDiet` settles it. Vegetarian and vegan filtering is driven off the
+same field, so `dairy` on a row makes every recipe using it non-vegan. A "may
+contain dairy" product must not do that. **The field therefore means
+"intrinsically always contains this allergen".**
+
+### Which makes two of our own rows a misuse
+
+`corn-flakes` and `burger-patty` both declare `gluten`, and both were added in
+this expansion with the reasoning "the safe reading beats the pedantic one".
+Under intrinsic semantics that is wrong:
+
+- Corn flakes are made of corn. Mainstream Egyptian brands add barley malt;
+  certified gluten-free ones exist.
+- A beef patty is beef. Egyptian commercial patties commonly contain rusk;
+  plain ones do not.
+
+Both encode "common commercial versions may contain it" in a field that means
+"always".
+
+### Why they are NOT being changed
+
+Deleting the allergen would trade an annoying failure for a dangerous one:
+
+| | Over-declare (today) | Under-declare |
+|---|---|---|
+| Effect | A coeliac user never sees recipes they might safely eat | A coeliac user is served a recipe that may make them ill |
+| Cost | Recipes missed | Harm |
+
+There is one field and it cannot express both. Given that, over-exclusion is
+the correct failure direction, so the rows stand. **But it does not scale**:
+every generic packaged product added from here would inherit the same
+treatment, and a coeliac user's catalogue would shrink toward nothing while
+the reason stayed invisible.
+
+### The scalable fix — schema, for separate approval
+
+A second field, `mayContainAllergens: Allergen[]`, consumed by
+`violatesAllergens` exactly as the current field is — so the hard exclusion and
+today's safety behaviour are unchanged — but NOT by `satisfiesDiet`, and
+surfaced in the UI as "depends on the brand, check the label". That separates
+"is this food made of the allergen" from "does the version on the shelf
+contain it" without weakening either.
+
+**This is a schema change and is not proposed for now.** It belongs with the
+alias table, the unknown-term table and the parent/child model in §5.
+
+### The interim rule
+
+Until that field exists: **do not add a commercial-variant allergen to a
+generic row.** Declare only what the food intrinsically is. `corn-flakes` and
+`burger-patty` are grandfathered, named here so they are found again, and are
+the only two.
+
+## 9i. Native-language questions, carried forward
+
+Still open, and deliberately not guessed:
+
+- **`موزة ضاني` vs bare `موزة`** — the shank cut really is called موزة, but the
+  bare word is far more often one banana and `bananas` owns it. Qualified
+  forms reach the cut. Does a butcher's customer type the bare word?
+- **`سبيط`** — currently an alias of `calamari`. Squid and cuttlefish are
+  different animals with different cooking times; Egyptian usage is loose.
+  **Still not built.**
+- **`فول نابت`** — a form of `fava-beans`, or its own concept?
+- **`راس`** — NOT given to any row. رأس is ambiguous (رأس ثوم is a head of
+  garlic), so the census probes the qualified `راس خروف` instead, which
+  currently dead-ends. That is the honest state.
+- **`rekab`** — still unidentified. No meaning has been invented for it.
+- **`دبابيس` / `dababees`** for drumsticks — the whole row rests on it.
+- **`dagag` / `dajaj`** — recorded as secondary MSA, not Egyptian-Franco.
+- **`كريمة خفق` vs `كريمة طهي`** — is whipping cream a separate purchase in an
+  Egyptian kitchen, or does one product do both jobs?
+- **`صوص طماطم`** — new. It reaches both ketchup and passata.
+
+---
+
 ## 10. Staged implementation plan
 
 Each stage ends with the probe re-run and its number recorded. No stage begins

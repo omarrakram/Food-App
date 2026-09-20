@@ -6,10 +6,10 @@ import type {
   RecipeIngredient,
 } from '@/types/domain';
 
-import { INGREDIENT_CATALOGUE, isUniversalBasic, type CatalogueIngredient } from './catalogue';
-import { familyFor } from './families';
-import { freshnessOf } from './freshness';
-import { normaliseIngredientName, similarityScore, withinEditDistance } from './normalise';
+import { INGREDIENT_CATALOGUE, isUniversalBasic, type CatalogueIngredient } from './catalogue.ts';
+import { familyFor } from './families.ts';
+import { freshnessOf } from './freshness.ts';
+import { normaliseIngredientName, similarityScore, withinEditDistance } from './normalise.ts';
 
 /**
  * Deterministic ingredient matching.
