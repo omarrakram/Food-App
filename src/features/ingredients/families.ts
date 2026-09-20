@@ -180,17 +180,43 @@ const MINIMUM_FAMILY_SIZE = 2;
  * ambiguity and it is handled by owning nothing — the word resolves to
  * nothing and search offers all three — not by denying a family it never had.
  */
-const FORM_WORDS = new Set(['powder', 'cube', 'flake']);
+const FORM_WORDS = new Set(['powder', 'cube', 'flake', 'mix', 'كريم']);
+
+/**
+ * Head nouns that name a kind the catalogue mostly does NOT head.
+ *
+ * A second way an inferred family goes wrong, found when Stage 2D-D pushed the
+ * catalogue past 360 rows. `nut` heads `mixed nuts` and `pine nuts` — and
+ * nothing else, because almonds, walnuts, pistachios, hazelnuts, cashews and
+ * peanuts are each headed by their own name. So the family covers two of
+ * twelve.
+ *
+ * That is worse than having no family at all. "without nuts" would return
+ * results, hide two ingredients, and look like it worked. A family that is
+ * merely absent sends the user to the allergen filter, which is the mechanism
+ * that actually covers nuts properly; a family that is 17% complete sends them
+ * away satisfied.
+ *
+ * `لحم` is the same shape: two of roughly fifteen meat rows.
+ *
+ * Kept separate from the form words above because the reason differs — these
+ * ARE kinds, and the rule would be right if the catalogue named its rows
+ * differently. If a real parent/child model ever lands (§9d), this group is
+ * the first thing it should replace.
+ */
+const MISLEADING_PARTIALS = new Set(['nut', 'لحم']);
+
+const DENIED = new Set([...FORM_WORDS, ...MISLEADING_PARTIALS]);
 
 /** Exposed so the tests can assert the list still names real head nouns. */
 export function formWords(): readonly string[] {
-  return [...FORM_WORDS];
+  return [...DENIED];
 }
 
 /** Every inferred family, for the audit and the tests. Sorted, largest first. */
 export function inferredFamilies(): { token: string; members: CatalogueIngredient[] }[] {
   return [...INFERRED_INDEX.entries()]
-    .filter(([token, members]) => members.length >= MINIMUM_FAMILY_SIZE && !FORM_WORDS.has(token))
+    .filter(([token, members]) => members.length >= MINIMUM_FAMILY_SIZE && !DENIED.has(token))
     .map(([token, members]) => ({ token, members }))
     .sort((a, b) => b.members.length - a.members.length || a.token.localeCompare(b.token));
 }
@@ -227,7 +253,7 @@ export function familyFor(normalisedTerm: string): CatalogueIngredient[] {
   // A phrase is never an inferred family: the rule is about single words.
   if (normalisedTerm.includes(' ')) return [];
 
-  if (FORM_WORDS.has(normalisedTerm)) return [];
+  if (DENIED.has(normalisedTerm)) return [];
 
   const inferred = INFERRED_INDEX.get(normalisedTerm) ?? [];
   return inferred.length >= MINIMUM_FAMILY_SIZE ? [...inferred] : [];

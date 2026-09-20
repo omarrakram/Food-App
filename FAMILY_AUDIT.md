@@ -9,8 +9,8 @@ only by search, exclusion and requirement — never by pantry matching. See
 | | |
 |---|---|
 | Declared families | 1 |
-| Inferred families | 73 |
-| …whose members span food groups | 39 |
+| Inferred families | 83 |
+| …whose members span food groups | 40 |
 
 ## Declared
 
@@ -29,19 +29,20 @@ rather than a real parent concept.
 
 | Token | Groups | Members |
 |---|---|---|
-| `seed` | pantry, seasoning | `chia`, `coriander-ground`, `fennel-seed`, `mustard-seed`, `nigella`, `pumpkin-seeds`, `sesame-seeds`, `sunflower-seeds` |
+| `seed` | pantry, seasoning | `chia`, `coriander-ground`, `fennel-seed`, `melon-seeds`, `mustard-seed`, `nigella`, `pumpkin-seeds`, `sesame-seeds`, `sunflower-seeds`, `watermelon-seeds` |
 | `bean` | pantry, produce, protein | `fava-beans`, `green-beans`, `green-fava-beans`, `kidney-beans`, `lupini-beans`, `white-beans` |
 | `لبن` | dairy, seasoning | `buttermilk`, `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
 | `cream` | dairy, frozen | `clotted-cream`, `cream`, `ice-cream`, `sour-cream`, `whipping-cream` |
 | `milk` | dairy, seasoning | `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
+| `دقيق` | pantry, protein, staple | `almond-flour`, `cornmeal`, `falafel-mix`, `flour`, `rice-flour` |
 | `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `pepper` | produce, seasoning | `bell-pepper`, `black-pepper`, `chili-pepper`, `white-pepper` |
+| `vinegar` | pantry, seasoning | `balsamic-vinegar`, `rice-vinegar`, `vinegar`, `vinegar-apple` |
 | `بصل` | produce, seasoning | `fried-onions`, `green-onion`, `onion-powder`, `onions` |
-| `دقيق` | pantry, protein, staple | `cornmeal`, `falafel-mix`, `flour`, `rice-flour` |
 | `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `sesame-oil`, `sunflower-oil` |
 | `فول` | pantry, produce, protein | `fava-beans`, `green-fava-beans`, `peanuts`, `soybeans` |
+| `flour` | pantry, staple | `almond-flour`, `flour`, `rice-flour` |
 | `pea` | frozen, pantry, protein | `black-eyed-peas`, `green-peas`, `split-peas` |
-| `vinegar` | pantry, seasoning | `rice-vinegar`, `vinegar`, `vinegar-apple` |
 | `water` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `ثوم` | produce, seasoning | `garlic`, `garlic-powder`, `spring-garlic` |
 | `شطه` | produce, seasoning | `chili-flakes`, `chili-pepper`, `chili-powder` |
@@ -50,7 +51,6 @@ rather than a real parent concept.
 | `ماء` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `butter` | dairy, pantry | `butter`, `peanut-butter` |
 | `coconut` | pantry, produce | `coconut`, `coconut-flakes` |
-| `flour` | pantry, staple | `flour`, `rice-flour` |
 | `ginger` | produce, seasoning | `ginger`, `ginger-ground` |
 | `lentil` | pantry, protein | `green-lentils`, `lentils` |
 | `syrup` | pantry, seasoning | `corn-syrup`, `date-syrup` |
@@ -62,6 +62,7 @@ rather than a real parent concept.
 | `حمص` | pantry, seasoning | `chickpeas`, `hummus-dip` |
 | `زبده` | dairy, pantry | `butter`, `peanut-butter` |
 | `زنجبيل` | produce, seasoning | `ginger`, `ginger-ground` |
+| `شوربه` | pantry, seasoning | `cream-of-mushroom`, `instant-soup` |
 | `عدس` | pantry, protein | `green-lentils`, `lentils` |
 | `عسل` | pantry, seasoning | `honey`, `molasses` |
 | `كزبره` | produce, seasoning | `coriander`, `coriander-ground` |
@@ -73,37 +74,46 @@ rather than a real parent concept.
 
 | Token | Group | Members |
 |---|---|---|
-| `جبنه` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `kashkaval`, `parmesan`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
-| `cheese` | dairy | `areesh-cheese`, `cheddar`, `cream-cheese`, `mish-cheese`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
-| `sauce` | seasoning | `bbq-sauce`, `garlic-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
-| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `tomato-sauce`, `worcestershire` |
-| `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `toast-bread` |
-| `bread` | staple | `baladi-bread`, `pita-bread`, `toast-bread` |
+| `جبنه` | dairy | `areesh-cheese`, `blue-cheese`, `cheddar`, `cream-cheese`, `edam`, `gouda`, `kashkaval`, `parmesan`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
+| `cheese` | dairy | `areesh-cheese`, `blue-cheese`, `cheddar`, `cream-cheese`, `edam`, `gouda`, `mish-cheese`, `processed-cheese`, `roumy-cheese`, `talaga-cheese`, `white-cheese` |
+| `صوص` | seasoning | `bbq-sauce`, `hot-sauce`, `oyster-sauce`, `ranch-dressing`, `soy-sauce`, `sweet-chili-sauce`, `tartar-sauce`, `thousand-island`, `tomato-sauce`, `worcestershire` |
+| `sauce` | seasoning | `bbq-sauce`, `garlic-sauce`, `hot-sauce`, `oyster-sauce`, `soy-sauce`, `sweet-chili-sauce`, `tartar-sauce`, `tomato-sauce`, `worcestershire` |
+| `عيش` | staple | `baguette`, `baladi-bread`, `pita-bread`, `shamsi-bread`, `toast-bread` |
+| `bread` | staple | `baladi-bread`, `pita-bread`, `shamsi-bread`, `toast-bread` |
+| `شوكولاته` | pantry | `baking-chocolate`, `chocolate`, `chocolate-chips`, `chocolate-spread` |
+| `عجينه` | staple | `kunafa-dough`, `phyllo`, `pizza-dough`, `puff-pastry` |
 | `onion` | produce | `fried-onions`, `green-onion`, `onions` |
 | `rice` | staple | `basmati-rice`, `brown-rice`, `rice` |
+| `spice` | seasoning | `kofta-spice`, `mixed-spice`, `shawarma-spice` |
 | `sugar` | pantry | `brown-sugar`, `icing-sugar`, `sugar` |
 | `tomato` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
 | `ارز` | staple | `basmati-rice`, `brown-rice`, `rice` |
+| `بهارات` | seasoning | `kofta-spice`, `mixed-spice`, `shawarma-spice` |
 | `سكر` | pantry | `brown-sugar`, `icing-sugar`, `sugar` |
-| `شوكولاته` | pantry | `baking-chocolate`, `chocolate`, `chocolate-spread` |
 | `طماطم` | produce | `cherry-tomato`, `sun-dried-tomato`, `tomatoes` |
-| `عجينه` | staple | `kunafa-dough`, `phyllo`, `puff-pastry` |
 | `كريمه` | dairy | `cream`, `sour-cream`, `whipping-cream` |
+| `anise` | seasoning | `anise`, `star-anise` |
 | `bone` | protein | `chicken-bones`, `marrow-bones` |
 | `chocolate` | pantry | `baking-chocolate`, `chocolate` |
+| `dough` | staple | `kunafa-dough`, `pizza-dough` |
+| `dressing` | seasoning | `ranch-dressing`, `thousand-island` |
 | `garlic` | produce | `garlic`, `spring-garlic` |
+| `lemon` | produce | `lemon`, `pickled-lemon` |
 | `liver` | protein | `chicken-liver`, `liver` |
+| `meat` | protein | `camel-meat`, `luncheon-meat` |
 | `molass` | seasoning | `molasses`, `pomegranate-molasses` |
 | `pastry` | staple | `phyllo`, `puff-pastry` |
+| `pear` | produce | `pear`, `prickly-pear` |
 | `potato` | produce | `potatoes`, `sweet-potato` |
 | `sausage` | protein | `hot-dog`, `sausage` |
-| `spice` | seasoning | `mixed-spice`, `shawarma-spice` |
 | `برقوق` | produce | `plum`, `prunes` |
 | `بقدونس` | produce | `parsley`, `watercress` |
-| `بهارات` | seasoning | `mixed-spice`, `shawarma-spice` |
+| `تين` | produce | `figs`, `prickly-pear` |
 | `دبس` | seasoning | `date-syrup`, `pomegranate-molasses` |
 | `زعتر` | seasoning | `thyme-dried`, `zaatar-blend` |
 | `صلصه` | seasoning | `tahini-salad`, `tomato-paste` |
 | `عضم` | protein | `chicken-bones`, `marrow-bones` |
 | `كبده` | protein | `chicken-liver`, `liver` |
 | `لحمه` | protein | `beef-cubes`, `ground-beef` |
+| `ليمون` | produce | `lemon`, `pickled-lemon` |
+| `ينسون` | seasoning | `anise`, `star-anise` |

@@ -323,6 +323,21 @@ describe('a word naming a FORM is not a family', () => {
     for (const word of formWords()) expect(audited).not.toContain(word);
   });
 
+  it('refuses a family that covers only a fraction of its own kind', () => {
+    // `nut` heads `mixed nuts` and `pine nuts` and nothing else — almonds,
+    // walnuts, pistachios, hazelnuts, cashews and peanuts are each headed by
+    // their own name. A family covering two of twelve is worse than none: it
+    // would let "without nuts" return results, hide two ingredients, and look
+    // like it worked. `لحم` is the same, two of about fifteen.
+    expect(ingredientFamily('nut')).toEqual([]);
+    expect(ingredientFamily('nuts')).toEqual([]);
+    expect(ingredientFamily('لحم')).toEqual([]);
+
+    // The kinds the catalogue DOES head consistently still work.
+    expect(ingredientFamily('cheese').length).toBeGreaterThan(5);
+    expect(ingredientFamily('sauce').length).toBeGreaterThan(5);
+  });
+
   it('does not turn a form word in a query into a requirement', () => {
     // Each of these asked for something the catalogue does not stock, and each
     // came back demanding unrelated things that merely share a form.

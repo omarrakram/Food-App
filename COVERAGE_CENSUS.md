@@ -17,15 +17,15 @@ not replace real-user testing.
 | | | |
 |---|---:|---:|
 | **Concepts** | **525** | |
-| Represented by their own row | 344 | 65.5% |
+| Represented by their own row | 353 | 67.2% |
 | Reachable through an alias | 25 | 4.8% |
-| Missing | 55 | 10.5% |
-| Ambiguous | 10 | 1.9% |
+| Missing | 42 | 8% |
+| Ambiguous | 11 | 2.1% |
 | Correctly not a row — dish | 26 | 5% |
-| Correctly not a row — form | 63 | 12% |
+| Correctly not a row — form | 66 | 12.6% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 369 of the 434 actionable concepts (85%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 378 of the 431 actionable concepts (87.7%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -37,12 +37,12 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 365 | 73.1% |
+| Concepts whose every term lands correctly | 376 | 75.4% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 1005 | 82.5% |
-| **Declared forms/brands whose aliasing is BROKEN** | **1** | |
+| Terms landing correctly | 1029 | 84.5% |
+| **Declared forms/brands whose aliasing is BROKEN** | **2** | |
 
-Catalogue: **360 canonical ingredients**, **1614 aliases**.
+Catalogue: **369 canonical ingredients**, **1658 aliases**.
 
 ## 3. By category
 
@@ -52,27 +52,27 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | bread and bakery | 24 | 13 | 2 | 3 | 0 | 83.3% | 76.2% |
 | breakfast | 15 | 8 | 2 | 1 | 0 | 90.9% | 72.7% |
 | canned and jarred | 18 | 7 | 1 | 0 | 0 | 100% | 94.4% |
-| cheese | 23 | 14 | 3 | 1 | 0 | 94.4% | 91.3% |
+| cheese | 23 | 15 | 3 | 0 | 0 | 100% | 95.7% |
 | dairy and eggs | 21 | 17 | 0 | 3 | 0 | 85% | 81% |
 | drinks that are ingredients | 3 | 1 | 0 | 1 | 0 | 50% | 66.7% |
 | fish and seafood | 27 | 20 | 0 | 2 | 2 | 83.3% | 74.1% |
-| frozen | 15 | 4 | 0 | 2 | 2 | 50% | 66.7% |
-| fruit | 29 | 21 | 1 | 5 | 0 | 81.5% | 65.5% |
+| frozen | 15 | 5 | 0 | 1 | 2 | 62.5% | 73.3% |
+| fruit | 29 | 24 | 1 | 2 | 0 | 92.6% | 75.9% |
 | grains and rice | 18 | 14 | 0 | 2 | 0 | 87.5% | 76.5% |
 | herbs | 11 | 9 | 0 | 1 | 1 | 81.8% | 72.7% |
-| international in egypt | 10 | 1 | 1 | 7 | 0 | 22.2% | 20% |
+| international in egypt | 10 | 1 | 1 | 6 | 0 | 25% | 30% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
 | nuts seeds dried fruit | 22 | 19 | 1 | 1 | 0 | 95.2% | 45.5% |
-| offal | 17 | 10 | 0 | 3 | 1 | 71.4% | 62.5% |
+| offal | 17 | 11 | 0 | 2 | 1 | 78.6% | 68.8% |
 | oils and fats | 6 | 4 | 1 | 1 | 0 | 83.3% | 83.3% |
 | packaged pantry | 16 | 10 | 0 | 1 | 0 | 90.9% | 87.5% |
 | pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
 | poultry | 15 | 14 | 0 | 1 | 0 | 93.3% | 93.3% |
 | prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
-| red meat cuts | 25 | 13 | 3 | 5 | 0 | 76.2% | 43.5% |
-| sauces and condiments | 27 | 21 | 3 | 1 | 1 | 92.3% | 81.5% |
-| snacks used as ingredients | 13 | 4 | 1 | 3 | 0 | 62.5% | 50% |
+| red meat cuts | 25 | 16 | 3 | 1 | 1 | 90.5% | 56.5% |
+| sauces and condiments | 27 | 21 | 3 | 0 | 1 | 96% | 85.2% |
+| snacks used as ingredients | 13 | 4 | 1 | 2 | 0 | 71.4% | 50% |
 | spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
 | spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
 | vegetables | 56 | 45 | 1 | 2 | 2 | 92% | 76.8% |
@@ -82,6 +82,7 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | Concept | Expects | What actually happened |
 |---|---|---|
 | heart | chicken-hearts | قلب -> (nothing; search: —) |
+| digestive biscuits | plain-biscuits | digestive -> (nothing; search: plain-biscuits) |
 
 ## 5. Missing, by priority
 
@@ -92,7 +93,7 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | mixed dried fruit / yameesh | ramadan and eid | ياميش · yameesh |
 | sharbat | ramadan and eid | شربات · sugar syrup · sharbat |
 
-### P2 — 15
+### P2 — 9
 
 | Concept | Category | Terms probed |
 |---|---|---|
@@ -101,18 +102,12 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | samoon | bread and bakery | صامولي · samoon |
 | ayran / yoghurt drink | dairy and eggs | عيران · ayran · laban ayran |
 | tuna steak | fish and seafood | شرائح تونة · tuna steak |
-| frozen berries | frozen | توت مجمد · frozen berries |
 | jareesh | grains and rice | جريش · jareesh · crushed wheat |
-| jarred pasta sauce | international in egypt | صوص مكرونة · pasta sauce |
 | dried cranberries | nuts seeds dried fruit | توت بري مجفف · dried cranberries |
 | tomato juice | packaged pantry | عصير طماطم · tomato juice |
 | beef neck | red meat cuts | رقبة · رقبه · beef neck |
-| escalope | red meat cuts | اسكالوب · escalope |
-| tenderloin | red meat cuts | فيليه لحمة · tenderloin · filet |
-| hot chili paste | sauces and condiments | معجون شطة · chili paste |
-| digestive biscuits | snacks used as ingredients | بسكويت دايجستف · digestive |
 
-### long-tail — 38
+### long-tail — 31
 
 | Concept | Category | Terms probed |
 |---|---|---|
@@ -122,15 +117,11 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | bataw bread | bread and bakery | بتاو · bataw |
 | bread sticks | bread and bakery | بقسماط طويل · breadsticks |
 | honey comb | breakfast | شمع عسل · honeycomb |
-| blue cheese | cheese | جبنة زرقاء · blue cheese |
 | cheese whey | dairy and eggs | مصل اللبن · whey |
 | duck eggs | dairy and eggs | بيض بط · duck eggs |
 | malt drink | drinks that are ingredients | بيرة شعير · malt drink |
 | eel | fish and seafood | ثعبان البحر · eel |
 | frozen pastry cups | frozen | تارت مجمد · pastry cups |
-| doum fruit | fruit | دوم · doum |
-| persimmon | fruit | كاكا · persimmon |
-| prickly pear | fruit | تين شوكي · prickly pear |
 | sour orange | fruit | نارنج · sour orange · naring |
 | tangerine peel | fruit | قشر يوسفي · tangerine peel |
 | sorghum | grains and rice | ذرة رفيعة · sorghum |
@@ -143,12 +134,9 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | wasabi | international in egypt | واسابي · wasabi |
 | duck liver | offal | كبدة بط · duck liver |
 | lamb testicles | offal | بيض غنم · lamb fries |
-| spleen | offal | طحال · spleen |
 | palm oil | oils and fats | زيت نخيل · palm oil |
 | rice noodles | pasta and noodles | نودلز أرز · rice noodles |
 | chicken skin | poultry | جلد فراخ · chicken skin |
-| camel meat | red meat cuts | لحم جمل · camel meat |
-| oxtail | red meat cuts | ذيل البقر · oxtail |
 | marshmallow | snacks used as ingredients | مارشميلو · marshmallow |
 | wafers | snacks used as ingredients | ويفر · wafers |
 | dried rose buds | spices | ورد مجفف · dried rose |
@@ -166,6 +154,7 @@ Catalogue: **360 canonical ingredients**, **1614 aliases**.
 | thyme | herbs | thyme-dried | — |
 | sprouted fava / fool nabet | legumes | — (nothing) | — |
 | sheep head meat | offal | — (nothing) | — |
+| escalope | red meat cuts | — (nothing) | veal, chicken-breast |
 | صوص طماطم (bare phrase) | sauces and condiments | — (nothing) | ketchup, tomato-sauce |
 | green pepper | vegetables | bell-pepper | bell-pepper, chili-pepper |
 | potatoes | vegetables | frozen-fries, potatoes | — |
