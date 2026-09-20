@@ -535,6 +535,50 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'beef-fat', 'beef fat', 'شحم', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'شحم') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'shahm') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'شحم بقري') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'beef suet') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('6da335e8-7bed-5011-920b-74e2b183583f', 'دهن لحمة') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'beef-ribs', 'beef ribs', 'ضلوع', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'ضلوع') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'ribs') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'dolou3') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'ضلوع بقري') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'short ribs') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ae4a293e-ea66-5f9a-ad17-ee501db064c2', 'ريش لحمة') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('5f45f2f3-a082-5836-8f14-c6356e2ca4e2', 'beef-steak', 'beef steak', 'استيك بقري', 'protein', 'g', 250, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -1080,6 +1124,29 @@ values ('22f145be-2ec3-5dfa-84d4-d836c2202f99', 'كاجو') on conflict do nothi
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('22f145be-2ec3-5dfa-84d4-d836c2202f99', 'cashew') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'catfish', 'catfish', 'قرموط', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'fish') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'قرموط') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'karmout') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'garmout') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'qarmout') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('4764cfeb-8a66-5ce4-a46e-01a0a7c10037', 'catfish') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('7b1c0cd6-49ae-50b5-9688-b61b0b8be677', 'cauliflower', 'cauliflower', 'قرنبيط', 'vegetables', 'g', 800, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -1115,6 +1182,46 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('f25cd75f-32d4-5223-b318-7f60e5c7dbff', 'krafs') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('f25cd75f-32d4-5223-b318-7f60e5c7dbff', 'karafs baladi') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('3f5ca3b8-44f5-5f46-8625-847dd9fe24af', 'chamomile', 'chamomile', 'بابونج', 'spices', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3f5ca3b8-44f5-5f46-8625-847dd9fe24af', 'بابونج') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3f5ca3b8-44f5-5f46-8625-847dd9fe24af', 'babounag') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3f5ca3b8-44f5-5f46-8625-847dd9fe24af', 'babonag') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3f5ca3b8-44f5-5f46-8625-847dd9fe24af', 'chamomile tea') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'chard', 'chard', 'سلق', 'vegetables', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'سلق') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'selk') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'swiss chard') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'silq') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('43628424-29a2-58ff-b006-8f1079a410da', 'ورق سلق') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('06ed6ebf-3b98-5817-9972-27f4278e91c7', 'cheddar', 'cheddar cheese', 'جبنة شيدر', 'dairy', 'g', null, false, true)
 on conflict (slug) do update set
@@ -1249,6 +1356,25 @@ values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'chicken drumstick') on conflict
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('ca93ed7c-3631-5443-8ec5-e0e8beb79922', 'دبوس فراخ') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('9901c8ee-9ef6-52b1-b31a-51dab4c2078b', 'chicken-feet', 'chicken feet', 'رجل فراخ', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('9901c8ee-9ef6-52b1-b31a-51dab4c2078b', 'رجل فراخ') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('9901c8ee-9ef6-52b1-b31a-51dab4c2078b', 'chicken feet') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('9901c8ee-9ef6-52b1-b31a-51dab4c2078b', 'كوارع فراخ') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('9901c8ee-9ef6-52b1-b31a-51dab4c2078b', 'regl firakh') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('dc354d8c-9d0d-5283-836f-da2637961601', 'chicken-gizzards', 'chicken gizzards', 'كوانس', 'protein', 'g', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -1273,6 +1399,27 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('dc354d8c-9d0d-5283-836f-da2637961601', 'gizzard') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('dc354d8c-9d0d-5283-836f-da2637961601', 'kawanes firakh') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'chicken-hearts', 'chicken hearts', 'قلوب فراخ', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'قلوب فراخ') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'قلوب') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'chicken hearts') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'hearts') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('acc7866d-f340-5d2c-9cb8-5e1e18f74ce2', 'olob firakh') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('d7f123b4-36b9-5361-b174-449fee119108', 'chicken-liver', 'chicken livers', 'كبدة فراخ', 'protein', 'g', null, false, true)
 on conflict (slug) do update set
@@ -2374,6 +2521,25 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('63279d8c-8595-58ec-9b1a-4522accf70c7', 'evaporated-milk', 'evaporated milk', 'لبن مبخر', 'dairy', 'ml', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('63279d8c-8595-58ec-9b1a-4522accf70c7', 'dairy') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('63279d8c-8595-58ec-9b1a-4522accf70c7', 'لبن مبخر') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('63279d8c-8595-58ec-9b1a-4522accf70c7', 'evaporated milk') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('63279d8c-8595-58ec-9b1a-4522accf70c7', 'لبن مركز غير محلى') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('fef923d6-4194-5567-ab7a-615419c7b06a', 'falafel-mix', 'falafel mix', 'دقيق طعمية', 'protein', 'g', null, false, false)
 on conflict (slug) do update set
   name = excluded.name,
@@ -2803,6 +2969,27 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('6358fac4-de23-509c-a2e6-e9ac35ced56a', 'zangabeel matehoun') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('6358fac4-de23-509c-a2e6-e9ac35ced56a', 'ganzabeel matehoun') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'goose', 'goose', 'وزة', 'protein', 'piece', 2500, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'وزة') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'إوزة') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'wezza') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'goose') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7d94f2d5-e710-55e3-95ea-457f61ee3d85', 'وز') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('d87eac67-7979-511e-9f64-ba2b21ea61f1', 'grapes', 'grapes', 'عنب', 'fruit', 'g', null, false, true)
 on conflict (slug) do update set
@@ -3359,6 +3546,29 @@ values ('1bfd2e36-1e4e-584e-8a7b-8af0913707fb', 'فاصوليا حمراء') on 
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('1bfd2e36-1e4e-584e-8a7b-8af0913707fb', 'rajma') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'kishk', 'kishk', 'كشك', 'dairy', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'dairy') on conflict do nothing;
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'gluten') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'كشك') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'kishk') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'كشك مصري') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('3147f201-19f1-5a6d-b6ab-581e63a94cfb', 'keshk') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('74cbb43c-96a9-5790-b467-271d04a14da7', 'kiwi', 'kiwi', 'كيوي', 'fruit', 'piece', 80, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -3810,6 +4020,27 @@ values ('f212fc66-f081-52fb-98a6-402b47e1baa5', 'محلب مطحون') on confli
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('f212fc66-f081-52fb-98a6-402b47e1baa5', 'mahlab powder') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'mallow', 'mallow', 'خبيزة', 'vegetables', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'خبيزة') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'khobeza') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'khobbeza') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'mallow') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('ad5fbf6c-72c0-5806-8dcd-fcbea5ff3dc3', 'خبيزه') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('9ce30a89-e240-5be7-ab71-02a9fd5a2e51', 'mandarin', 'mandarins', 'يوسفي', 'fruit', 'piece', 90, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -3868,6 +4099,27 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('c8ccb60a-d4d7-5c34-baa6-0aa9f13ad8b9', 'مردقوش') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('c8ccb60a-d4d7-5c34-baa6-0aa9f13ad8b9', 'bardaqoosh') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'marrow-bones', 'marrow bones', 'عضم بالمخ', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'عضم بالمخ') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'marrow bones') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'عضم سبح') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'beef bones') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d5b72933-c795-5191-96d9-fd5908ff707d', 'عظم نخاع') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('5ec0806d-d310-5816-abdc-77fb5f9eed6c', 'mastic', 'mastic', 'مستكة', 'spices', 'g', null, true, false)
 on conflict (slug) do update set
@@ -4258,6 +4510,27 @@ values ('98288ac2-4169-590f-bbb2-70ce8cea11cb', 'black seed') on conflict do not
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('98288ac2-4169-590f-bbb2-70ce8cea11cb', 'حبة بركة') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'nile-perch', 'nile perch', 'بياض', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'fish') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'بياض') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'bayad') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'nile perch') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('bc146369-2622-55dd-aa95-d4038912b4bb', 'سمك بياض') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('c9fad558-b367-5f02-87fe-4d654e63abb8', 'noodles', 'noodles', 'نودلز', 'carbs', 'g', null, false, false)
 on conflict (slug) do update set
   name = excluded.name,
@@ -4354,6 +4627,25 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   estimated_high_minor = excluded.estimated_high_minor,
   last_updated = excluded.last_updated;
 
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('d520cfcf-01c8-5054-b4a1-a2621c686843', 'octopus', 'octopus', 'أخطبوط', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('d520cfcf-01c8-5054-b4a1-a2621c686843', 'shellfish') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d520cfcf-01c8-5054-b4a1-a2621c686843', 'أخطبوط') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d520cfcf-01c8-5054-b4a1-a2621c686843', 'octopus') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d520cfcf-01c8-5054-b4a1-a2621c686843', 'اخطبوط') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('7a231039-350a-57aa-b447-18f738e0ecf7', 'okra', 'okra', 'بامية', 'vegetables', 'g', null, false, true)
 on conflict (slug) do update set
@@ -4579,6 +4871,25 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('1b92d95d-efed-5b46-9332-049a5f292ab3', 'oyster sauce') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('1b92d95d-efed-5b46-9332-049a5f292ab3', 'سوس المحار') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('19809558-b93f-5fb9-a2e8-9374708999f0', 'oysters', 'oysters', 'محار', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('19809558-b93f-5fb9-a2e8-9374708999f0', 'shellfish') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('19809558-b93f-5fb9-a2e8-9374708999f0', 'محار') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('19809558-b93f-5fb9-a2e8-9374708999f0', 'oysters') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('19809558-b93f-5fb9-a2e8-9374708999f0', 'oyster') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('170daaf4-de33-55da-b958-5bd619406b74', 'paprika', 'paprika', 'بابريكا', 'spices', 'tsp', 2, false, false)
 on conflict (slug) do update set
@@ -5069,6 +5380,27 @@ values ('a4f1b9f0-eab6-592e-9c1d-3733618701a8', 'debs roman') on conflict do not
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('a4f1b9f0-eab6-592e-9c1d-3733618701a8', 'debs el romman') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'popcorn-kernels', 'popcorn kernels', 'فشار', 'carbs', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'فشار') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'popcorn') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'ذرة فشار') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'popping corn') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('b8b6307d-a39e-54df-a403-eea8883e76f4', 'feshar') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('e8a8e935-9ff9-5797-9bde-48bfbca72a83', 'potatoes', 'potatoes', 'بطاطس', 'vegetables', 'g', 150, true, false)
 on conflict (slug) do update set
   name = excluded.name,
@@ -5217,6 +5549,27 @@ values ('a5a94e71-df39-5903-8b99-1d47856f5ebb', 'لب ابيض') on conflict do 
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('a5a94e71-df39-5903-8b99-1d47856f5ebb', 'pepitas') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'purslane', 'purslane', 'رجلة', 'vegetables', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'رجلة') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'regla') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'purslane') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'رجله') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('cdd7c2af-da93-5ba1-9d76-6032ef527f5a', 'بقلة') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('a3b76f05-8a7e-5d68-8235-8d7689f1569d', 'quail', 'quail', 'سمان', 'protein', 'piece', 200, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -5292,6 +5645,10 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('7cbd0857-78d7-500f-85d8-a7fff0101843', 'fegl') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('7cbd0857-78d7-500f-85d8-a7fff0101843', 'figl baladi') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7cbd0857-78d7-500f-85d8-a7fff0101843', 'فجل أبيض') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7cbd0857-78d7-500f-85d8-a7fff0101843', 'white radish') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('d87c81b9-8e1d-5374-8183-b84ff0f17544', 'raisins', 'raisins', 'زبيب', 'fruit', 'g', null, false, false)
 on conflict (slug) do update set
@@ -5351,6 +5708,25 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   estimated_high_minor = excluded.estimated_high_minor,
   last_updated = excluded.last_updated;
 
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('81bf827f-61f8-5046-a4f7-e9d7ce2433d8', 'rice-flour', 'rice flour', 'دقيق أرز', 'carbs', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('81bf827f-61f8-5046-a4f7-e9d7ce2433d8', 'دقيق أرز') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('81bf827f-61f8-5046-a4f7-e9d7ce2433d8', 'rice flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('81bf827f-61f8-5046-a4f7-e9d7ce2433d8', 'دقيق الأرز') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('81bf827f-61f8-5046-a4f7-e9d7ce2433d8', 'da2ee2 roz') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('f8364e42-26d2-548c-ad3c-de323704e8cd', 'rice-vinegar', 'rice vinegar', 'خل الأرز', 'sauces', 'ml', null, false, false)
 on conflict (slug) do update set
@@ -6130,6 +6506,29 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'sugarcane', 'sugarcane', 'قصب', 'fruit', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'قصب') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'asab') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'sugarcane') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'عصير قصب') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'sugarcane juice') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e5cd9e0d-8bdc-543d-a1f0-2941bdfdf901', 'قصب السكر') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('e14c57c0-53b0-55c2-824b-94910dda15f7', 'sumac', 'sumac', 'سماق', 'spices', 'g', null, true, false)
 on conflict (slug) do update set
   name = excluded.name,
@@ -6561,6 +6960,27 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   estimated_high_minor = excluded.estimated_high_minor,
   last_updated = excluded.last_updated;
 
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'tongue', 'beef tongue', 'لسان عجل', 'protein', 'g', null, false, true)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'لسان عجل') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'beef tongue') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'لسان بقري') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'lesan egl') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('67a88f40-3c2a-5042-8ba2-4b1f6a1a546e', 'ox tongue') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('b70dc41b-b703-561c-b79f-760d9dd98422', 'tortilla', 'tortilla', 'تورتيلا', 'bakery', 'piece', 60, false, true)
 on conflict (slug) do update set

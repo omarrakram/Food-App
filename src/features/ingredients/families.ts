@@ -88,6 +88,8 @@ export const DECLARED_FAMILIES: readonly DeclaredFamily[] = [
       'chicken-wings',
       'chicken-liver',
       'chicken-gizzards',
+      'chicken-hearts',
+      'chicken-feet',
       'chicken-bones',
       'whole-chicken',
     ],

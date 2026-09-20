@@ -22,6 +22,8 @@ basmati-rice,basmati rice,أرز بسمتي,carbs,g,,,,بسمتي|basmati|roz ba
 bay-leaf,bay leaf,ورق لورا,spices,piece,1,,,laurel|ورق لوري|wara2 lora|warak lora|wara lora,1,0
 bbq-sauce,barbecue sauce,صوص باربكيو,sauces,ml,,,,باربكيو|bbq,0,0
 beef-cubes,beef cubes,لحمة مكعبات,protein,g,,,,stewing beef|beef chunks|لحمة|لحم بقري,0,1
+beef-fat,beef fat,شحم,protein,g,,,,شحم|shahm|شحم بقري|beef suet|دهن لحمة,0,1
+beef-ribs,beef ribs,ضلوع,protein,g,,,,ضلوع|ribs|dolou3|ضلوع بقري|short ribs|ريش لحمة,0,1
 beef-steak,beef steak,استيك بقري,protein,g,250,,,steak|beef steaks|entrecote|انتريكوت|استيك,0,1
 beetroot,beetroot,بنجر,vegetables,g,150,,,beets|beet|بنجر|شمندر,0,1
 bell-pepper,bell pepper,فلفل ألوان,vegetables,piece,140,,,capsicum|sweet pepper|red pepper|green pepper|yellow pepper|فلفل رومي|فلفل حلو|felfel alwan|felfel roumi|filfil alwan,0,1
@@ -45,15 +47,20 @@ cardamom,cardamom,حبهان,spices,g,,,,حبهان|hab han|hail|هيل|habahan,
 carob,carob,خروب,pantry,g,,,,خروب|kharoub|carob pods|مسحوق الخروب|kharoob,0,0
 carrots,carrots,جزر,vegetables,piece,70,,,carrot|gazar|جزر بلدي|gazr|gazar baladi,0,1
 cashews,cashews,كاجو,pantry,g,,nuts,,كاجو|cashew,0,0
+catfish,catfish,قرموط,protein,g,,fish,,قرموط|karmout|garmout|qarmout|catfish,0,1
 cauliflower,cauliflower,قرنبيط,vegetables,g,800,,,arnabeet|قرنبيط|زهرة,0,1
 celery,celery,كرفس,vegetables,g,50,,,كرفس|karafs|krafs|karafs baladi,0,1
+chamomile,chamomile,بابونج,spices,g,,,,بابونج|babounag|babonag|chamomile tea,0,0
+chard,chard,سلق,vegetables,g,,,,سلق|selk|swiss chard|silq|ورق سلق,0,1
 cheddar,cheddar cheese,جبنة شيدر,dairy,g,,dairy,,cheddar|شيدر|جبنة شيدر|gebna cheddar|gibna shedar,0,1
 cherry-tomato,cherry tomatoes,طماطم شيري,vegetables,piece,15,,,شيري|طماطم شيري|cherry tomatos,0,1
 chia,chia seeds,بذور الشيا,pantry,g,,,,شيا|chia,0,0
 chicken-bones,chicken bones,عضم فراخ,protein,g,,,,عضم فراخ|chicken carcass|carcass|azm firakh|هيكل فراخ|chicken frame,0,1
 chicken-breast,chicken breast,صدور فراخ,protein,g,180,,,chicken breasts|صدر فراخ|sedr|sedr firakh|صدر,0,1
 chicken-drumstick,chicken drumsticks,دبابيس فراخ,protein,g,90,,,drumstick|دبابيس|دبابيس فراخ|dababees|chicken drumstick|دبوس فراخ,0,1
+chicken-feet,chicken feet,رجل فراخ,protein,g,,,,رجل فراخ|chicken feet|كوارع فراخ|regl firakh,0,1
 chicken-gizzards,chicken gizzards,كوانس,protein,g,,,,كوانس|kawanes|kawanis|gizzards|قوانص|gizzard|kawanes firakh,0,1
+chicken-hearts,chicken hearts,قلوب فراخ,protein,g,,,,قلوب فراخ|قلوب|chicken hearts|hearts|olob firakh,0,1
 chicken-liver,chicken livers,كبدة فراخ,protein,g,,,,kebda farakh|كبدة فراخ|kebda firakh|kabda farakh,0,1
 chicken-thigh,chicken thighs,أوراك فراخ,protein,g,130,,,chicken thigh|أوراك|وراك فراخ|werk|ورك|wrak|awrak firakh,0,1
 chicken-wings,chicken wings,أجنحة فراخ,protein,g,40,,,wings|اجنحة|جوانح,0,1
@@ -101,6 +108,7 @@ egg-white,egg whites,بياض بيض,dairy,piece,33,eggs,,بياض البيض|eg
 egg-yolk,egg yolks,صفار بيض,dairy,piece,17,eggs,,صفار البيض|egg yolk|safar beid|safar el beid,0,1
 eggplant,eggplant,باذنجان,vegetables,piece,220,,,aubergine|betingan|بتنجان,0,1
 eggs,eggs,بيض,protein,piece,55,eggs,,egg|beid|بيضة|بيضه|bed|beed,0,1
+evaporated-milk,evaporated milk,لبن مبخر,dairy,ml,,dairy,,لبن مبخر|evaporated milk|لبن مركز غير محلى,0,0
 falafel-mix,falafel mix,دقيق طعمية,protein,g,,,,taameya mix|طعمية|دقيق الطعمية,0,0
 fava-beans,fava beans,فول,pantry,g,,,,foul|ful|ful medames|foul medames|فول مدمس|broad beans|broad bean|fava|fool|fool medames|فول حمام|foul hamam,1,0
 fennel-seed,fennel seeds,شمر,spices,g,,,,شمر|fennel|shamar|shammar,1,0
@@ -120,6 +128,7 @@ gelatin,gelatin,جيلاتين,pantry,g,,,,جيلاتين|jelly powder,0,0
 ghee,ghee,سمنة,dairy,g,,dairy,,samna|سمنة|clarified butter|سمن|samna baladi|samna balady,0,0
 ginger,ginger,زنجبيل,vegetables,g,,,,زنجبيل|ganzabeel|root ginger|zangabeel|ganzabil,0,1
 ginger-ground,ground ginger,زنجبيل مطحون,spices,g,,,,زنجبيل مطحون|zangabeel matehoun|ganzabeel matehoun,1,0
+goose,goose,وزة,protein,piece,2500,,,وزة|إوزة|wezza|goose|وز,0,1
 grapes,grapes,عنب,fruit,g,,,,عنب|enab|grape,0,1
 green-beans,green beans,فاصوليا خضراء,vegetables,g,,,,فاصوليا خضراء|french beans|fasolia khadra|fasolya khadra|لوبيا خضراء|string beans,0,1
 green-fava-beans,green fava beans,فول أخضر,vegetables,g,,,,فول اخضر|fool akhdar|ful akhdar|foul akhdar|green broad beans|فول بلدي أخضر,0,1
@@ -145,6 +154,7 @@ kashkaval,kashkaval,جبنة قشقوان,dairy,g,,dairy,,قشقوان|kashkawan
 ketchup,ketchup,كاتشب,sauces,ml,,,,كاتشب|catsup|كتشب|هاينز|heinz ketchup|هاينز كاتشب,0,0
 kidney,kidney,كلاوي,protein,g,,,,كلاوي|kalawi|kidneys|كلاوى|lamb kidney,0,1
 kidney-beans,kidney beans,فاصوليا حمراء,protein,g,,,,red beans|فاصوليا حمراء|rajma,0,0
+kishk,kishk,كشك,dairy,g,,dairy|gluten,,كشك|kishk|كشك مصري|keshk,0,0
 kiwi,kiwi,كيوي,fruit,piece,80,,,كيوي|kiwifruit,0,1
 kofta,kofta,كفتة,protein,g,60,,,kufta|كفتة|كفته,0,1
 kunafa-dough,kunafa dough,عجينة كنافة,bakery,g,,gluten,,كنافة|kunafa|konafa|عجينة كنافة|kunafa pastry|كنافه,0,1
@@ -164,9 +174,11 @@ luncheon-meat,luncheon meat,لانشون,protein,g,20,,,luncheon|لانشون|ل
 lupini-beans,lupini beans,ترمس,pantry,g,,,,ترمس|termis|tirmis|termes|lupin|lupini|termos|ترمس محلى|brined termis,0,0
 mackerel,mackerel,ماكريل,protein,g,250,fish,,ماكريل|scomber|سمك ماكريل,0,1
 mahlab,mahlab,محلب,spices,g,,,,محلب|mahaleb|mahlep|محلب مطحون|mahlab powder,1,0
+mallow,mallow,خبيزة,vegetables,g,,,,خبيزة|khobeza|khobbeza|mallow|خبيزه,0,1
 mandarin,mandarins,يوسفي,fruit,piece,90,,,tangerine|يوسفي|مندرين,0,1
 mango,mango,مانجو,fruit,piece,250,,,مانجو|manga|mangoes|مانجو مجمد|mango pulp,0,1
 marjoram,marjoram,بردقوش,spices,g,,,,بردقوش|bardakoosh|bardaqush|مردقوش|bardaqoosh,0,0
+marrow-bones,marrow bones,عضم بالمخ,protein,g,,,,عضم بالمخ|marrow bones|عضم سبح|beef bones|عظم نخاع,0,1
 mastic,mastic,مستكة,spices,g,,,,مستكة|مستكه|mastika|mistika|gum mastic|mastic gum,1,0
 mayonnaise,mayonnaise,مايونيز,sauces,g,,eggs,,مايونيز|mayo|mayonez|mayoneez,0,1
 melon,melon,شمام,fruit,g,,,,cantaloupe|شمام|كانتالوب|shammam|shamam|cantaloup,0,1
@@ -183,10 +195,12 @@ mussels,mussels,بلح البحر,protein,g,,shellfish,,بلح البحر|mussel
 mustard,mustard,مسطردة,sauces,g,,,,مسطردة|خردل|dijon,0,0
 mustard-seed,mustard seeds,حب الخردل,spices,g,,,,خردل حب|mustard seeds|hab khardal|hab el khardal,1,0
 nigella,nigella seeds,حبة البركة,spices,g,,,,حبة البركة|black seed|حبة بركة,1,0
+nile-perch,nile perch,بياض,protein,g,,fish,,بياض|bayad|nile perch|سمك بياض,0,1
 noodles,noodles,نودلز,carbs,g,,gluten,,نودلز|instant noodles|indomie|اندومي|اندومى|noodle,0,0
 nori,nori,نوري,pantry,g,,,,نوري|seaweed|nori sheets|أوراق نوري|sushi seaweed|ورق نوري,0,0
 nutmeg,nutmeg,جوزة الطيب,spices,g,,,,جوزة الطيب|جوز الطيب|gozet el teeb|goz el teeb,1,0
 oats,oats,شوفان,carbs,g,,gluten,,oatmeal|rolled oats|شوفان مجروش,0,0
+octopus,octopus,أخطبوط,protein,g,,shellfish,,أخطبوط|octopus|اخطبوط,0,1
 okra,okra,بامية,vegetables,g,,,,bamya|lady fingers|باميه,0,1
 olive-oil,olive oil,زيت زيتون,sauces,ml,,,,zeit zeitoun|extra virgin olive oil|زيت الزيتون|zeit zaytoun|zait zeitoun,1,0
 olives,olives,زيتون,vegetables,g,5,,,zeitoun|زيتون|green olives|black olives|زيتون محشي|stuffed olives,0,0
@@ -197,6 +211,7 @@ oranges,oranges,برتقال,fruit,piece,180,,,orange|برتقال|برتقال�
 oregano,oregano,أوريجانو,spices,g,,,,اوريجانو|زعتر بري,1,0
 orzo,orzo,لسان عصفور,carbs,g,,gluten,,لسان عصفور|orzo|lesan asfour|lisan asfour|risoni,0,0
 oyster-sauce,oyster sauce,صوص المحار,sauces,ml,,shellfish,,صوص المحار|صوص محار|oyster sauce|سوس المحار,0,0
+oysters,oysters,محار,protein,g,,shellfish,,محار|oysters|oyster,0,1
 paprika,paprika,بابريكا,spices,tsp,2,,,sweet paprika|فلفل أحمر مطحون|felfel ahmar matehoun|bapreka,0,0
 parmesan,parmesan,جبنة بارميزان,dairy,g,,dairy,,parmigiano|بارميزان|بارمزان|gebna parmesan|barmezan,0,1
 parsley,parsley,بقدونس,vegetables,bunch,60,,,ba2dounes|بقدونس أخضر|baadounes|ba2dunes|ba2dones,0,1
@@ -218,6 +233,7 @@ plain-biscuits,plain biscuits,بسكويت,bakery,g,,gluten,dairy|eggs,بسكو�
 plum,plums,برقوق,fruit,piece,60,,,plum|برقوق|bargo2|barquq,0,1
 pomegranate,pomegranate,رمان,fruit,piece,280,,,رمان|romman|rumman|roman,0,1
 pomegranate-molasses,pomegranate molasses,دبس رمان,sauces,ml,,,,دبس الرمان|debs romman|debs roman|debs el romman,0,0
+popcorn-kernels,popcorn kernels,فشار,carbs,g,,,,فشار|popcorn|ذرة فشار|popping corn|feshar,0,0
 potatoes,potatoes,بطاطس,vegetables,g,150,,,potato|batates|batatis,1,0
 powdered-milk,powdered milk,لبن بودرة,dairy,g,,dairy,,milk powder|لبن بودرة|بودرة لبن,0,0
 processed-cheese,processed cheese,جبنة مثلثات,dairy,g,,dairy,,جبنة مثلثات|مثلثات|cheese triangles|جبنة سايحة|cheese spread|gebna mothalathat|البقرة الضاحكة|laughing cow|جبنة شرائح|cheese slices,0,1
@@ -225,12 +241,14 @@ prunes,prunes,برقوق مجفف,fruit,g,,,,برقوق مجفف|bargo2 megaffaf
 puff-pastry,puff pastry,عجينة باف,bakery,g,,gluten|dairy,,باف باستري|عجين مورق,0,1
 pumpkin,pumpkin,قرع عسلي,vegetables,g,,,,قرع|قرع عسلي|squash,0,1
 pumpkin-seeds,pumpkin seeds,لب أبيض,pantry,g,,,,لب ابيض|pepitas,0,0
+purslane,purslane,رجلة,vegetables,g,,,,رجلة|regla|purslane|رجله|بقلة,0,1
 quail,quail,سمان,protein,piece,200,,,semman|سمان|simman|quails|سمانة|semman baladi,0,1
 quinoa,quinoa,كينوا,carbs,g,,,,كينوا|quinua,0,0
 rabbit,rabbit,أرنب,protein,g,,,,أرانب|لحم أرنب|arnab|araneb,0,1
-radish,radish,فجل,vegetables,g,20,,,فجل|figl|fegl|figl baladi,0,1
+radish,radish,فجل,vegetables,g,20,,,فجل|figl|fegl|figl baladi|فجل أبيض|white radish,0,1
 raisins,raisins,زبيب,fruit,g,,,,zabib|زبيب|sultanas,0,0
 rice,rice,أرز,carbs,g,,,,egyptian rice|white rice|roz|رز|rozz|arz|roz masri|أرز مصري|egyptian rice|أرز سوشي|sushi rice,1,0
+rice-flour,rice flour,دقيق أرز,carbs,g,,,,دقيق أرز|rice flour|دقيق الأرز|da2ee2 roz,0,0
 rice-vinegar,rice vinegar,خل الأرز,sauces,ml,,,,خل الأرز|خل ارز|rice wine vinegar|khal roz,0,0
 rocket,rocket,جرجير,vegetables,g,,,,arugula|gargeer|جرجير,0,1
 roqaq,roqaq,رقاق,bakery,g,,gluten,,رقاق|ورق رقاق|roqaq sheets|رقاق فطير|ro2a2|raqaq,0,0
@@ -265,6 +283,7 @@ sriracha,sriracha,سريراتشا,sauces,ml,,,,سريراتشا|siracha|سير�
 stock-cube,stock cube,مكعب مرقة,pantry,piece,10,,,maggi|مكعب مرقة|bouillon|شوربة مكعبات|ماجي|مكعب ماجي|maggie|بودرة مرقة|bouillon powder|bouillon,1,0
 strawberry,strawberries,فراولة,fruit,g,20,,,strawberry|فراولة|فراوله|farawla|frawla|faraola,0,1
 sugar,sugar,سكر,pantry,g,,,,sokkar|white sugar|سكر أبيض|sukkar|sokar,1,0
+sugarcane,sugarcane,قصب,fruit,g,,,,قصب|asab|sugarcane|عصير قصب|sugarcane juice|قصب السكر,0,1
 sumac,sumac,سماق,spices,g,,,,سماق|summaq|sommak|simak,1,0
 sun-dried-tomato,sun-dried tomatoes,طماطم مجففة,vegetables,g,,,,طماطم مجففة|sundried tomato|tamatem megaffafa|outa megaffafa,0,0
 sunflower-oil,vegetable oil,زيت,sauces,ml,,,,oil|sunflower oil|cooking oil|زيت عباد الشمس|zeit|zait|zeit abbad el shams,1,0
@@ -283,6 +302,7 @@ tofu,tofu,توفو,protein,g,,soy,,توفو|bean curd,0,1
 tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,,salsa|tomato puree|صلصه|salsa tamatem|salsa tomatem|معجون طماطم|tomato concentrate,1,0
 tomato-sauce,tomato sauce,صوص طماطم مطبوخ,sauces,g,,,,passata|بيوريه طماطم|tomato passata|صلصة مطبوخة,0,0
 tomatoes,tomatoes,طماطم,vegetables,piece,120,,,tomato|oota|طماطم حمراء|قوطة|outa|tamatem|auta,0,1
+tongue,beef tongue,لسان عجل,protein,g,,,,لسان عجل|beef tongue|لسان بقري|lesan egl|ox tongue,0,1
 tortilla,tortilla,تورتيلا,bakery,piece,60,gluten,,تورتيلا|wrap|خبز تورتيلا,0,1
 tripe,tripe,كرشة,protein,g,,,,كرشة|kersha|كرشه|tripe|beef tripe,0,1
 trotters,trotters,كوارع,protein,g,,,,كوارع|kawareh|kaware|kawari3|أكارع|cow feet|calf trotters,0,1
