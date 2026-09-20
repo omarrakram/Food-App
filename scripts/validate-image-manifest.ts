@@ -205,6 +205,63 @@ function main(): void {
     }
   }
 
+  // THE GENERATED DATA MUST SAY WHAT THE MANIFEST SAYS.
+  //
+  // The app was always right — `imageAttribution()` reads the bundled manifest
+  // first, so the credits screen never showed a wrong name. The generated
+  // catalogue and the SEED were not: every photographed recipe described a
+  // Wikimedia CC-BY-SA photograph as "generated", "Akla kitchen", CC0-1.0, and
+  // a seed is what a database persists. The false claim was one `db push` away
+  // from being the system of record.
+  //
+  // `import-recipes.ts` now derives this block from the manifest. This is the
+  // gate that proves it, and it compares against the manifest rather than
+  // against the importer's own rule — a gate that asks the code what the code
+  // thinks can only ever agree with it.
+  const photographed = new Map(manifest.images.map((image) => [image.recipeSlug, image]));
+  for (const recipe of RECIPE_CATALOGUE) {
+    const photo = recipe.slug === null ? undefined : photographed.get(recipe.slug);
+    if (!photo) continue;
+
+    const where = `${recipe.slug}: generated image metadata`;
+    const image = recipe.image;
+    if (!image) {
+      problems.push(`${where} is null, but a photograph is recorded for it`);
+      continue;
+    }
+    if (image.source !== 'openly_licensed') {
+      problems.push(`${where} claims source "${image.source}" for a Wikimedia photograph`);
+    }
+    if (image.creator !== photo.creator) {
+      problems.push(`${where} credits "${image.creator}", manifest says "${photo.creator}"`);
+    }
+    if (image.license !== photo.license) {
+      problems.push(`${where} says ${image.license}, manifest says ${photo.license}`);
+    }
+    if ((image.attribution ?? null) !== (photo.attribution ?? null)) {
+      problems.push(`${where} carries a different attribution line from the manifest`);
+    }
+    if (image.sourceUrl !== photo.sourcePage) {
+      problems.push(`${where} points at a different source page from the manifest`);
+    }
+    // The path must name the file that actually exists: the fetcher names it
+    // after the BYTES, so a photograph served as WebP is `.webp` and a
+    // hand-written `.jpg` points at nothing.
+    if (image.path !== `curated/${photo.path}`) {
+      problems.push(`${where} path is "${image.path}", the file is "${photo.path}"`);
+    }
+  }
+
+  // And the other direction: a recipe with no photograph must not claim one.
+  for (const recipe of RECIPE_CATALOGUE) {
+    if (recipe.slug !== null && photographed.has(recipe.slug)) continue;
+    if (recipe.image?.source === 'openly_licensed') {
+      problems.push(
+        `${recipe.slug}: claims an openly-licensed photograph, but none is in the manifest`,
+      );
+    }
+  }
+
   const covered = manifest.images.length;
   const total = recipeSlugs.size;
 

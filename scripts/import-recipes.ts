@@ -22,11 +22,12 @@
  * in the bundle and in Postgres. Ingredient and step ids derive from the
  * recipe id, so re-importing never churns them.
  */
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
+import { resolveIngredient } from '../src/features/ingredients/matching.ts';
 import {
   ALLERGENS,
   APPLIANCES,
@@ -42,6 +43,7 @@ import { uuidv5 } from './uuid.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_DIR = join(ROOT, 'data/recipes');
 const OUTPUT = join(ROOT, 'src/features/recipes/catalogue.generated.ts');
+const IMAGE_MANIFEST = join(ROOT, 'data/images/manifest.json');
 
 class ImportError extends Error {}
 
@@ -212,6 +214,144 @@ function loadDataset(): { file: string; recipe: RawRecipe }[] {
     for (const recipe of parsed as RawRecipe[]) loaded.push({ file, recipe });
   }
   return loaded;
+}
+
+// --- Ingredients hidden in prose -------------------------------------------
+
+/**
+ * A quantity in a step must belong to an ingredient on the list.
+ *
+ * `lokmet-el-qadi` shipped claiming to be a five-line recipe and then asked for
+ * "250ml of warm water" in step one. The water was real, measured and required,
+ * and it was nowhere the shopping list, the pantry match or the ≤5 count could
+ * see it. Looking for the same shape across the dataset found THIRTY-TWO MORE,
+ * every one of them water in a soup or a rice pot.
+ *
+ * "The app assumes water" is true for a splash and false for 1.2 litres. If the
+ * recipe measures it, the cook needs it, and the line count is a claim about
+ * what the cook needs.
+ *
+ * TWO THINGS KEEP THIS FROM CRYING WOLF, both measured against the real corpus
+ * rather than guessed:
+ *
+ *   "two tablespoons of THE oil" is a back-reference to a line already on the
+ *   list, so an explicit `the` is skipped.
+ *
+ *   "2 tbsp oil" in a recipe that lists OLIVE oil is shorthand for that line,
+ *   not a second oil. A phrase that appears as a whole word inside a listed
+ *   ingredient's name is treated the same way.
+ *
+ * With both, the false-positive rate over 172 recipes is zero.
+ *
+ * It only sees what it can resolve, so it is a floor and not a proof. An
+ * unmeasured ingredient in prose still gets through, and catching that needs a
+ * person reading the steps.
+ */
+const MEASURED_IN_PROSE =
+  /(\d+(?:[.,]\d+)?)\s*(ml|l|g|kg|tbsp|tsp|cups?|tablespoons?|teaspoons?)\b\s*(?:of\s+)?(the\s+)?([a-z][a-z-]*(?:\s+[a-z][a-z-]*){0,2})/gi;
+
+function ingredientsHiddenInProse(recipe: RawRecipe): string[] {
+  const listed = new Set(recipe.ingredients.map((line) => line.slug));
+  const listedNames = [...listed].map((slug) =>
+    (CATALOGUE_BY_SLUG.get(slug)?.name ?? slug).toLowerCase(),
+  );
+  const problems: string[] = [];
+
+  for (const [index, step] of recipe.steps.entries()) {
+    for (const match of step.text.matchAll(MEASURED_IN_PROSE)) {
+      if (match[3]) continue;
+      const words = (match[4] ?? '').trim().split(/\s+/).filter(Boolean);
+      // Longest phrase first, so "warm water" is preferred over "warm".
+      for (let take = Math.min(3, words.length); take >= 1; take -= 1) {
+        const phrase = words.slice(0, take).join(' ');
+        const resolved = resolveIngredient(phrase);
+        if (!resolved) continue;
+        if (listed.has(resolved.slug)) break;
+        const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        if (listedNames.some((name) => new RegExp(`\\b${escaped}\\b`).test(name))) break;
+        problems.push(
+          `step ${index + 1} measures "${match[0].trim()}" but "${resolved.slug}" is not an ` +
+            'ingredient line. A measured ingredient belongs on the list, not only in prose.',
+        );
+        break;
+      }
+    }
+  }
+  return problems;
+}
+
+// --- Photography provenance ------------------------------------------------
+
+/**
+ * THE IMAGE MANIFEST IS AUTHORITATIVE for any recipe that has a photograph.
+ *
+ * The recipe JSON carries an `image` block describing the BRANDED PLACEHOLDER —
+ * "generated", "Akla kitchen", CC0 — which is true right up until a real
+ * photograph is acquired for that recipe, and false the moment one is. All 79
+ * photographed recipes were describing a Wikimedia CC-BY-SA photograph as our
+ * own CC0 work.
+ *
+ * The app never saw it: `imageAttribution()` reads the bundled manifest first,
+ * so the credits screen was always right. The generated SEED was not, and a
+ * seed is what a database would persist — so the false claim was one apply
+ * away from being the system of record.
+ *
+ * Fixed here rather than in eleven JSON files, because the same thing is true
+ * of the other sixty-eight and of every recipe photographed from now on. The
+ * path is derived too, not just the credit: the fetcher names the file after
+ * the BYTES it received, so a photograph that came back as WebP is
+ * `sahlab.webp`, and a hand-written `curated/sahlab.jpg` would point at
+ * nothing.
+ */
+type PhotoProvenance = {
+  recipeSlug: string;
+  path: string;
+  sourcePage: string;
+  creator: string;
+  license: string;
+  attribution: string | null;
+};
+
+function photographyBySlug(): Map<string, PhotoProvenance> {
+  if (!existsSync(IMAGE_MANIFEST)) return new Map();
+  const manifest = JSON.parse(readFileSync(IMAGE_MANIFEST, 'utf8')) as {
+    images: PhotoProvenance[];
+  };
+  return new Map(manifest.images.map((entry) => [entry.recipeSlug, entry]));
+}
+
+function applyPhotographyProvenance(entries: { file: string; recipe: RawRecipe }[]): string[] {
+  const photos = photographyBySlug();
+  const overridden: string[] = [];
+
+  for (const { recipe } of entries) {
+    const photo = photos.get(recipe.slug);
+    if (!photo) continue;
+
+    // A recipe may not CLAIM a photograph it did not take. The overlay would
+    // correct it silently, and a dataset that is wrong-but-corrected is a
+    // dataset the next author copies the wrong half of.
+    if (recipe.image && (recipe.image.source === 'generated' || recipe.image.source === 'owned')) {
+      overridden.push(
+        `${recipe.slug}: image.source is "${recipe.image.source}" but the photograph is ` +
+          `${photo.creator}, ${photo.license}. Set image to null and let the manifest say so.`,
+      );
+      continue;
+    }
+
+    recipe.image = {
+      // The bucket convention is `curated/<file>`; the file name comes from the
+      // manifest so the extension follows the bytes actually downloaded.
+      path: `curated/${photo.path}`,
+      source: 'openly_licensed',
+      creator: photo.creator,
+      license: photo.license,
+      attribution: photo.attribution,
+      sourceUrl: photo.sourcePage,
+    };
+  }
+
+  return overridden;
 }
 
 // --- Validate --------------------------------------------------------------
@@ -474,6 +614,9 @@ function validate(entries: { file: string; recipe: RawRecipe }[]): void {
       // Diet tags
       dietContradictions(recipe).forEach(fail);
 
+      // Nothing required may live only in the instructions.
+      ingredientsHiddenInProse(recipe).forEach(fail);
+
       // Image metadata
       if (recipe.image) {
         oneOf(recipe.image.source, RECIPE_IMAGE_SOURCES, 'image.source', where);
@@ -615,6 +758,15 @@ async function main(): Promise<void> {
   let entries: { file: string; recipe: RawRecipe }[];
   try {
     entries = loadDataset();
+    // Before validation, so the rules below see the provenance that will
+    // actually be emitted rather than the placeholder it replaced.
+    const falseClaims = applyPhotographyProvenance(entries);
+    if (falseClaims.length > 0) {
+      throw new ImportError(
+        `${falseClaims.length} recipe(s) claim authorship of a photograph they did not take:\n` +
+          falseClaims.map((claim) => `  - ${claim}`).join('\n'),
+      );
+    }
     validate(entries);
   } catch (error) {
     if (error instanceof ImportError) {

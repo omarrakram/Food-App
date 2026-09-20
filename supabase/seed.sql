@@ -8716,8 +8716,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('84d97246-547e-506b-b5fa-aa61139e6781', 'aloo-gobi', 'Potato and Cauliflower Curry', 'بطاطس وقرنبيط بالبهارات',
   'Dry-fried rather than saucy, so the edges catch and crisp.', 'مقلية ناشفة مش بصلصة، عشان الأطراف تتحمّر وتقرمش.',
-  'curated/aloo-gobi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/aloo-gobi.jpg', 'openly_licensed', 'Sapanabehl',
+  'CC-BY-SA-4.0', 'Sapanabehl · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Aloo_Ghobi.jpg',
   null, 'curated', 'indian', 'easy',
   12, 30, 4,
   240, 6, 34,
@@ -8803,8 +8803,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('df488041-5540-5313-9b6f-2a50a4175f2a', 'aseer-limon', 'Fresh Lemonade with Mint', 'عصير ليمون بالنعناع',
   'Lemon juice, sugar and a handful of mint blended and strained. Four things, five minutes, and the drink every Egyptian kitchen falls back on in summer.', 'عصير ليمون وسكر وشوية نعناع في الخلاط وبعدين يتصفّى. أربع حاجات، خمس دقايق، والمشروب اللي كل بيت مصري بيعمله في الصيف.',
-  'curated/aseer-limon.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/aseer-limon.jpg', 'openly_licensed', 'HarshLight',
+  'CC-BY-2.0', 'HarshLight · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Lemonade_-_27682817724.jpg',
   null, 'curated', 'egyptian', 'easy',
   10, 0, 4,
   110, 0, 28,
@@ -8957,8 +8957,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3055b4cb-ea01-56fa-8abb-c33e127a781d', 'bamia-vegetarian', 'Okra in Tomato without Meat', 'بامية صيامي',
   'The lighter bamia: okra stewed in garlicky tomato with nothing heavier than olive oil.', 'البامية الخفيفة: بامية في طماطم بالتوم من غير أي حاجة تقيلة غير زيت الزيتون.',
-  'curated/bamia-vegetarian.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/bamia-vegetarian.jpg', 'openly_licensed', 'Tamorlan',
+  'CC-BY-SA-3.0', 'Tamorlan · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Bamia-Ocras_tomate_(cropped).JPG',
   null, 'curated', 'egyptian', 'easy',
   10, 30, 4,
   190, 6, 24,
@@ -9043,8 +9043,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ea276358-cc05-58c4-b25a-bcca2b2ea85f', 'banana-bread', 'Banana Bread', 'خبز الموز',
   'The blacker the bananas, the better the loaf. One bowl, no mixer.', 'كل ما الموز يسود، كل ما الكيكة تحلى. طبق واحد ومن غير خلاط.',
-  'curated/banana-bread.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/banana-bread.jpg', 'openly_licensed', 'Shisma',
+  'CC-BY-4.0', 'Shisma · CC-BY-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg',
   null, 'curated', 'american', 'easy',
   15, 55, 8,
   310, 5, 44,
@@ -9131,8 +9131,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('57e58ca0-b2fb-5b9f-ae15-0169d4630324', 'banana-milkshake', 'Banana Milkshake', 'عصير موز باللبن',
   'Three ingredients and a blender. Use bananas that have gone spotty — the ones nobody wants to eat are the ones that make this good.', 'تلات حاجات وخلاط. استخدم موز مبقّع — اللي محدش عايز ياكله هو اللي بيطلّع العصير حلو.',
-  'curated/banana-milkshake.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/banana-milkshake.jpg', 'openly_licensed', 'm01229 from USA',
+  'CC-BY-SA-2.0', 'm01229 from USA · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Banana_Milkshakes_at_the_International_Banana_Museum_on_a_really_hot_day_(40031652145).jpg',
   null, 'curated', 'egyptian', 'easy',
   5, 0, 2,
   220, 8, 38,
@@ -9283,8 +9283,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b79c1ee1-545d-5476-b950-15dad4a2637b', 'basbousa', 'Semolina Cake in Syrup', 'بسبوسة',
   'Dense semolina soaked in syrup the moment it leaves the oven. An almond on each square.', 'سميد تقيل منقوع في الشربات وهو طالع من الفرن. ولوزة على كل مربع.',
-  'curated/basbousa.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/basbousa.jpg', 'openly_licensed', 'stu_spivack',
+  'CC-BY-SA-2.0', 'stu_spivack · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Basboosa.jpg',
   null, 'curated', 'egyptian', 'easy',
   15, 35, 8,
   390, 6, 58,
@@ -9347,6 +9347,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('c901ef43-b47f-5a06-a487-873e3a118bcc', 'b79c1ee1-545d-5476-b950-15dad4a2637b', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 0.5, 'piece', 'juiced', false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('416477e9-78b3-5e6b-9c0e-3aee9e8e1dca', 'b79c1ee1-545d-5476-b950-15dad4a2637b', (select id from public.ingredients where slug = 'coconut-flakes' limit 1), 'coconut-flakes', 'desiccated coconut', 40, 'g', null, true, false, false, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('57b9ec3c-72e0-5d6b-b0d3-197ef25432ca', 'b79c1ee1-545d-5476-b950-15dad4a2637b', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 200, 'ml', null, false, false, true, null, 9);
 
 delete from public.recipe_steps where recipe_id = 'b79c1ee1-545d-5476-b950-15dad4a2637b';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -9354,7 +9356,7 @@ values ('8ccf1d85-b613-5bf2-a656-75f0276933cf', 'b79c1ee1-545d-5476-b950-15dad4a
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('48563664-c7a8-5f46-b6fe-307c5351b2f1', 'b79c1ee1-545d-5476-b950-15dad4a2637b', 2, 'Spread in a tray, score into squares and press an almond into each. Bake 35 minutes at 180°C.', 'افرده في صينية، خطّطه مربعات واضغط لوزة في كل واحد. اخبزه ٣٥ دقيقة على ١٨٠ درجة.', 35, null, null, '{"almonds"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('ef82a9a7-4b90-5e2f-8dac-d18183e40e34', 'b79c1ee1-545d-5476-b950-15dad4a2637b', 3, 'Boil the remaining sugar with 200ml water and the lemon for 8 minutes, and pour it hot over the hot cake.', 'اغلي باقي السكر مع ٢٠٠ مل مية والليمون ٨ دقايق، وصبّه سخن على الكيك السخن.', 8, null, null, '{"lemon"}');
+values ('ef82a9a7-4b90-5e2f-8dac-d18183e40e34', 'b79c1ee1-545d-5476-b950-15dad4a2637b', 3, 'Boil the remaining sugar with 200ml water and the lemon for 8 minutes, and pour it hot over the hot cake.', 'اغلي باقي السكر مع ٢٠٠ مل مية والليمون ٨ دقايق، وصبّه سخن على الكيك السخن.', 8, null, null, '{"lemon","water"}');
 
 -- Spicy Coriander Potatoes
 insert into public.recipes (
@@ -9365,8 +9367,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('5d5c3a07-2544-5b5f-b790-fdcfc1827a1d', 'batata-harra', 'Spicy Coriander Potatoes', 'بطاطا حرة',
   'Crisp potato cubes tossed hard with garlic, coriander and chilli off the heat.', 'مكعبات بطاطس مقرمشة متقلّبة بقوة مع توم وكزبرة وشطة بعيد عن النار.',
-  'curated/batata-harra.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/batata-harra.jpg', 'openly_licensed', 'secretlondon123 from London, England',
+  'CC-BY-SA-2.0', 'secretlondon123 from London, England · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Batata_harra.jpg',
   null, 'curated', 'levantine', 'easy',
   10, 25, 4,
   260, 5, 38,
@@ -9442,9 +9444,9 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('8d48fde4-3c56-5c70-9fbf-4f479897f01e', 'batata-mashwiya', 'Roasted Sweet Potato', 'بطاطا مشوية',
-  'Whole sweet potatoes baked until the skin blisters and dark syrup leaks out of the ends, then split open with butter, honey and cinnamon. The winter cart, made at home.', 'بطاطا كاملة في الفرن لحد ما القشرة تنفّط ويطلع منها عسل غامق من الأطراف، وبعدين تتفتح وعليها زبدة وعسل وقرفة. عربية الشتا في البيت.',
-  'curated/batata-mashwiya.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'Whole sweet potatoes baked until the skin blisters and dark syrup leaks out of the ends. That is the whole dish and it is what the winter cart sells — the butter, honey and cinnamon are a home addition and are marked optional, because a sweet potato needs none of them.', 'بطاطا كاملة في الفرن لحد ما القشرة تنفّط ويطلع منها عسل غامق من الأطراف. دي الأكلة كلها وده اللي بتبيعه عربية الشتا — الزبدة والعسل والقرفة إضافة بيتي واختيارية، لأن البطاطا مش محتاجة أي حاجة منهم.',
+  'curated/batata-mashwiya.jpg', 'openly_licensed', '국립국어원',
+  'CC-BY-SA-2.0', '국립국어원 · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Gungoguma_(roasted_sweet_potatoes)_2.jpg',
   null, 'curated', 'egyptian', 'easy',
   5, 55, 4,
   300, 4, 56,
@@ -9494,11 +9496,11 @@ delete from public.recipe_ingredients where recipe_id = '8d48fde4-3c56-5c70-9fbf
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('66565c73-090e-5028-8785-d56540ddeec7', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'sweet-potato' limit 1), 'sweet-potato', 'sweet potato', 1, 'kg', 'scrubbed, skin on', false, false, false, null, 1);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('9b5916b5-5558-51ec-9fdd-d4be289f8b9f', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 30, 'g', null, false, false, false, null, 2);
+values ('9b5916b5-5558-51ec-9fdd-d4be289f8b9f', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 30, 'g', null, true, false, false, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('88ab97d4-3e1b-50eb-a949-c4a26128bd9b', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'honey' limit 1), 'honey', 'honey', 2, 'tbsp', null, false, false, false, null, 3);
+values ('88ab97d4-3e1b-50eb-a949-c4a26128bd9b', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'honey' limit 1), 'honey', 'honey', 2, 'tbsp', null, true, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('f073b5e6-3b3d-5873-9d6c-52c155f5b985', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, false, false, false, null, 4);
+values ('f073b5e6-3b3d-5873-9d6c-52c155f5b985', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, false, false, null, 4);
 
 delete from public.recipe_steps where recipe_id = '8d48fde4-3c56-5c70-9fbf-4f479897f01e';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -9506,7 +9508,7 @@ values ('001a1f0e-0bc0-5a1c-984c-e7c6d35d5db1', '8d48fde4-3c56-5c70-9fbf-4f47989
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('220c0ba1-ce21-530e-8ea9-c9c87978e763', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', 2, 'Bake for 45 to 55 minutes. They are done when a knife goes in with no resistance and the ends are leaking dark syrup — not when the time is up.', 'اخبزها من ٤٥ لـ ٥٥ دقيقة. تبقى استوت لما السكينة تدخل من غير أي مقاومة والأطراف تكون بتنقّط عسل غامق — مش لما الوقت يخلص.', 50, null, null, '{"sweet potato"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('1934503d-0fb1-5ba9-ace1-d82c01290ed3', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', 3, 'Split each one lengthways, press the ends together to open it up, and put in the butter, honey and cinnamon while it is still steaming.', 'افتح كل واحدة بالطول، اكبس الأطراف عشان تفتح، وحط الزبدة والعسل والقرفة وهي لسه بتطلع بخار.', 3, null, null, '{"butter","honey","cinnamon"}');
+values ('1934503d-0fb1-5ba9-ace1-d82c01290ed3', '8d48fde4-3c56-5c70-9fbf-4f479897f01e', 3, 'Split each one lengthways and press the ends together to open it up. Eat it exactly like that, off the skin — or, if you want it dressed, put butter, honey and cinnamon in while it is still steaming.', 'افتح كل واحدة بالطول واكبس الأطراف عشان تفتح. كلها كده على طول من قشرتها — أو لو عايزها متزوّقة، حط الزبدة والعسل والقرفة وهي لسه بتطلع بخار.', 3, null, null, '{"sweet potato","butter","honey","cinnamon"}');
 
 -- Stuffed Potatoes in Tomato Sauce
 insert into public.recipes (
@@ -9689,8 +9691,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('fdc64436-cb4c-5b4a-95f0-1fcce3200097', 'beef-burger-homemade', 'Proper Homemade Burger', 'برجر لحمة في البيت',
   'Cold mince, barely handled, salted only when it hits the pan. That is the whole thing.', 'لحمة مفرومة باردة، ماتلمسهاش كتير، وتتملّح لما تنزل الطاسة بس. دي الحكاية كلها.',
-  'curated/beef-burger-homemade.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/beef-burger-homemade.jpg', 'openly_licensed', 'thienzieyung',
+  'CC-BY-2.0', 'thienzieyung · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Beef_Burger_In_Kota_Kinabalu,_Malaysia.jpg',
   null, 'curated', 'american', 'easy',
   12, 10, 4,
   620, 38, 42,
@@ -9867,8 +9869,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b78991fe-00f2-5d27-8586-5f503d94635e', 'beef-tacos', 'Beef Tacos', 'تاكو باللحمة',
   'Spiced mince, warm tortillas, and everything else on the table for people to build their own.', 'لحمة متبّلة وتورتيلا سخنة وكل حاجة تانية على السفرة عشان كل واحد يركّب اللي هو عايزه.',
-  'curated/beef-tacos.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/beef-tacos.jpg', 'openly_licensed', 'Horacio Cambeiro',
+  'CC-BY-SA-3.0', 'Horacio Cambeiro · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Argentine-style_hand-chopped_roasted_beef_tacos,_with_mozzarella,_caramelized_onions,_and_salsas.jpg',
   null, 'curated', 'mexican', 'easy',
   15, 20, 4,
   510, 32, 42,
@@ -9937,12 +9939,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('9c403bac-9540-5e68-bc32-45fd4bc7d765', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', false, true, false, null, 11);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('84323eae-d145-5944-8bbd-88a144a9ddcc', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 12);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('3e0ba401-8477-590f-abe4-6b2e48f8418a', 'b78991fe-00f2-5d27-8586-5f503d94635e', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 150, 'ml', null, false, false, true, null, 13);
 
 delete from public.recipe_steps where recipe_id = 'b78991fe-00f2-5d27-8586-5f503d94635e';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('45610bd0-f982-5b3e-87cd-49a248b868b3', 'b78991fe-00f2-5d27-8586-5f503d94635e', 1, 'Brown the mince hard, then add the onion, garlic and spices.', 'حمّر اللحمة كويس، وبعدين ضيف البصل والتوم والبهارات.', 12, 'Ground beef must reach 71°C / 160°F all the way through.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره.', '{"ground beef","onions","garlic","chili powder","cumin"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('619c4785-65cc-5487-b0a4-011f50a311d8', 'b78991fe-00f2-5d27-8586-5f503d94635e', 2, 'Stir in the tomato paste with 150ml water and reduce for 8 minutes.', 'قلّب صلصة الطماطم مع ١٥٠ مل مية وسيبها تتركّز ٨ دقايق.', 8, null, null, '{"tomato paste","salt"}');
+values ('619c4785-65cc-5487-b0a4-011f50a311d8', 'b78991fe-00f2-5d27-8586-5f503d94635e', 2, 'Stir in the tomato paste with 150ml water and reduce for 8 minutes.', 'قلّب صلصة الطماطم مع ١٥٠ مل مية وسيبها تتركّز ٨ دقايق.', 8, null, null, '{"tomato paste","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('2bbb05ed-e6ea-52cb-b055-957ea588c5fd', 'b78991fe-00f2-5d27-8586-5f503d94635e', 3, 'Warm the tortillas and put everything on the table separately.', 'سخّن التورتيلا وحط كل حاجة على السفرة كل واحدة لوحدها.', 5, null, null, '{"tortilla","lettuce","tomatoes","cheddar cheese","lemon"}');
 
@@ -9955,8 +9959,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a5989a18-8060-5982-8e85-c5e303c67c45', 'bessara', 'Fava Bean Purée with Herbs', 'بصارة',
   'A green, herb-heavy purée of split fava beans, finished with fried onion.', 'بيوريه أخضر من الفول المدشوش بالخضرة، ومزيّن ببصل محمّر.',
-  'curated/bessara.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/bessara.jpg', 'openly_licensed', 'Ruby Josephine Smith',
+  'CC-BY-SA-4.0', 'Ruby Josephine Smith · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Bissara_Moroccan_split_pea_and_fava_bean_soup.jpg',
   null, 'curated', 'egyptian', 'easy',
   10, 35, 4,
   280, 14, 36,
@@ -10022,10 +10026,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('9f4298ce-6b8a-5172-8520-eb3b45a9cd41', 'a5989a18-8060-5982-8e85-c5e303c67c45', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 60, 'ml', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('15f75a1a-af8a-537b-8b31-47258554da49', 'a5989a18-8060-5982-8e85-c5e303c67c45', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('b97130e3-9019-5e32-ad59-cad758b1476b', 'a5989a18-8060-5982-8e85-c5e303c67c45', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1000, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = 'a5989a18-8060-5982-8e85-c5e303c67c45';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('c50a2d85-42bb-5538-8646-6a50a37ecdc0', 'a5989a18-8060-5982-8e85-c5e303c67c45', 1, 'Simmer the split favas with the garlic in 1L water for 30 minutes until collapsing.', 'اسلق الفول المدشوش مع التوم في ١ لتر مية ٣٠ دقيقة لحد ما يستوي تمامًا.', 30, null, null, '{"split peas","garlic"}');
+values ('c50a2d85-42bb-5538-8646-6a50a37ecdc0', 'a5989a18-8060-5982-8e85-c5e303c67c45', 1, 'Simmer the split favas with the garlic in 1L water for 30 minutes until collapsing.', 'اسلق الفول المدشوش مع التوم في ١ لتر مية ٣٠ دقيقة لحد ما يستوي تمامًا.', 30, null, null, '{"split peas","garlic","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('18126993-a48a-5305-9f30-aa2aa6805181', 'a5989a18-8060-5982-8e85-c5e303c67c45', 2, 'Add all the herbs and the cumin and blend until completely smooth and bright green.', 'ضيف كل الخضرة والكمون واضربه لحد ما يبقى ناعم وأخضر فاتح.', 5, null, null, '{"parsley","dill","coriander","cumin"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -10040,8 +10046,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('7b35519c-74e3-5b4d-a971-8571c82b8d9e', 'black-bean-quesadilla', 'Bean and Cheese Quesadilla', 'كاساديا بالفاصوليا والجبنة',
   'Fifteen minutes, mostly cupboard, and it crisps in a dry pan.', 'خمستاشر دقيقة معظمها من الدولاب، وبتقرمش في طاسة ناشفة.',
-  'curated/black-bean-quesadilla.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/black-bean-quesadilla.jpg', 'openly_licensed', 'BOSTON66',
+  'CC-BY-SA-4.0', 'BOSTON66 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Vegetarian_Black_Bean_Quesadilla.jpg',
   null, 'curated', 'mexican', 'easy',
   10, 10, 2,
   520, 22, 58,
@@ -10287,8 +10293,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('cba21402-c63f-523c-8432-38dbea6b05da', 'butter-chicken-light', 'Tomato and Yogurt Chicken', 'فراخ بالطماطم والزبادي',
   'The comfort of butter chicken with yogurt doing most of the work instead of cream.', 'راحة البتر تشيكن بس الزبادي بيعمل معظم الشغل بدل الكريمة.',
-  'curated/butter-chicken-light.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/butter-chicken-light.jpg', 'openly_licensed', 'Yuvraj Singh 97',
+  'CC-BY-SA-4.0', 'Yuvraj Singh 97 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Butter_Chicken_%26_Butter_Naan_-_Home_-_Chandigarh_-_India_-_0006.jpg',
   null, 'curated', 'indian', 'medium',
   20, 35, 4,
   480, 42, 18,
@@ -10372,8 +10378,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('14f939dd-7511-5252-8df6-ee21e9986fc2', 'cacik', 'Cold Yogurt and Cucumber Soup', 'جاجيك',
   'Somewhere between a dip and a cold soup. Ice cubes in the bowl are correct.', 'ما بين الغموس والشوربة الباردة. وحطّ مكعبات تلج في الطبق هو الصح.',
-  'curated/cacik.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/cacik.jpg', 'openly_licensed', 'Rainer Zenz',
+  'CC-BY-SA-3.0', 'Rainer Zenz · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Cacik-1.jpg',
   null, 'curated', 'turkish', 'easy',
   10, 0, 4,
   110, 7, 10,
@@ -10777,8 +10783,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', 'chana-masala', 'Chickpea Curry', 'كاري الحمص',
   'Cupboard curry with real depth. The onions have to go properly dark first.', 'كاري من الدولاب بطعم عميق. البصل لازم يغمق كويس الأول.',
-  'curated/chana-masala.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/chana-masala.jpg', 'openly_licensed', 'Simon Law (sfllaw) from Montréal , QC , Canada',
+  'CC-BY-SA-2.0', 'Simon Law (sfllaw) from Montréal , QC , Canada · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Chana_masala.jpg',
   null, 'curated', 'indian', 'easy',
   10, 35, 4,
   330, 14, 46,
@@ -10847,6 +10853,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('be244450-08d2-5a54-bca9-d149695c09e5', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'coriander' limit 1), 'coriander', 'coriander', 4, 'tbsp', 'chopped', false, false, false, null, 10);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('a347d672-6659-51bc-a10a-3653cbcf6549', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 11);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d52de74c-8279-5b43-9a70-fde6de0a9185', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 200, 'ml', null, false, false, true, null, 12);
 
 delete from public.recipe_steps where recipe_id = '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -10856,7 +10864,7 @@ values ('ef1449f5-a822-543f-a06a-f58e871869f6', '56cd0c89-5406-5ab7-a9d3-7cc64c7
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('21b8f7bf-7f53-54b7-938b-5b086024462d', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', 3, 'Add the tomatoes and cook 10 minutes until the oil separates out.', 'ضيف الطماطم واطبخها ١٠ دقايق لحد ما الزيت ينفصل.', 10, null, null, '{"tomatoes"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('8def2382-f07a-54ea-9d66-711edd4aaa4e', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', 4, 'Add the chickpeas and 200ml water and simmer 10 minutes. Finish with coriander.', 'ضيف الحمص و٢٠٠ مل مية وسيبها ١٠ دقايق. زيّنها بالكزبرة.', 10, null, null, '{"chickpeas","salt","coriander"}');
+values ('8def2382-f07a-54ea-9d66-711edd4aaa4e', '56cd0c89-5406-5ab7-a9d3-7cc64c77adf3', 4, 'Add the chickpeas and 200ml water and simmer 10 minutes. Finish with coriander.', 'ضيف الحمص و٢٠٠ مل مية وسيبها ١٠ دقايق. زيّنها بالكزبرة.', 10, null, null, '{"chickpeas","salt","coriander","water"}');
 
 -- Chicken Fajitas
 insert into public.recipes (
@@ -10867,8 +10875,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('4507a461-a073-5187-968d-6b2852b1c781', 'chicken-fajitas', 'Chicken Fajitas', 'فاهيتا فراخ',
   'The pan has to be too hot. Char on the peppers is the entire point.', 'الطاسة لازم تكون سخنة أوي. تحميرة الفلفل هي الهدف كله.',
-  'curated/chicken-fajitas.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/chicken-fajitas.jpg', 'openly_licensed', 'Crisco 1492',
+  'CC-BY-SA-4.0', 'Crisco 1492 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Chicken_fajita_platter,_Lone_Star_Texas_Grill,_Windsor,_Ontario,_2025-06-14_03.jpg',
   null, 'curated', 'mexican', 'easy',
   15, 15, 4,
   470, 40, 38,
@@ -10951,8 +10959,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('9d4ee2dd-68bd-5927-b993-b9f224c54a6a', 'chicken-fried-rice', 'Chicken Fried Rice', 'أرز مقلي بالفراخ',
   'Yesterday''s rice, a very hot pan, and everything moving the whole time.', 'رز امبارح وطاسة سخنة جدًا وكل حاجة بتتحرك طول الوقت.',
-  'curated/chicken-fried-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/chicken-fried-rice.jpg', 'openly_licensed', 'abhinaya',
+  'CC-BY-SA-4.0', 'abhinaya · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Chicken_and_egg_fried_rice.jpg',
   null, 'curated', 'asian', 'easy',
   12, 12, 3,
   480, 28, 58,
@@ -11041,8 +11049,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8dbb2df7-6b2a-553b-b407-8ce52b1558ff', 'chicken-parm-oven', 'Oven Chicken Parmigiana', 'دجاج بارميجانا في الفرن',
   'Breadcrumbed and baked rather than fried, under tomato and a lot of cheese.', 'مغطّى بقسماط ومخبوز بدل المقلي، تحت طماطم وجبنة كتير.',
-  'curated/chicken-parm-oven.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/chicken-parm-oven.jpg', 'openly_licensed', 'Oknazevad',
+  'CC-BY-SA-4.0', 'Oknazevad · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Chicken_parm_at_a_diner.jpg',
   null, 'curated', 'italian', 'medium',
   20, 35, 4,
   560, 48, 32,
@@ -11297,8 +11305,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('351fa406-303e-526a-83d5-2f541c8c5dc7', 'chocolate-chip-cookies', 'Chocolate Chip Cookies', 'كوكيز بالشوكولاتة',
   'Chilled dough and a slightly underbaked middle. Both matter more than the recipe.', 'عجينة مبرّدة ونص مش مستوي تمامًا. الاتنين أهم من الوصفة نفسها.',
-  'curated/chocolate-chip-cookies.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/chocolate-chip-cookies.jpg', 'openly_licensed', 'Ted Eytan',
+  'CC-BY-SA-2.0', 'Ted Eytan · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:2018.12.30_Low_Carbohydrate_Cookies,_Rehoboth_Beach_DE,_USA_09394_(39822587633).jpg',
   null, 'curated', 'american', 'easy',
   20, 12, 8,
   280, 4, 36,
@@ -11468,8 +11476,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ec2c939a-bfcd-5614-be1b-ba6ebfe7b560', 'coconut-chicken-curry', 'Coconut Chicken Curry', 'كاري فراخ بجوز الهند',
   'Mild, creamy and forgiving. The curry that works on a weeknight.', 'خفيف وكريمي وبيسامح. الكاري اللي بينفع في نص الأسبوع.',
-  'curated/coconut-chicken-curry.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/coconut-chicken-curry.jpg', 'openly_licensed', 'TheCulinaryGeek',
+  'CC-BY-2.0', 'TheCulinaryGeek · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Coconut_Chicken_Curry.jpg',
   null, 'curated', 'asian', 'easy',
   12, 30, 4,
   520, 36, 22,
@@ -11551,8 +11559,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('944bc170-d1ef-5114-a559-acabef51368b', 'congee-chicken', 'Chicken Rice Porridge', 'عصيدة رز بالفراخ',
   'Rice cooked far past done until it turns to soup. What you eat when you are ill.', 'رز متطبوخ أكتر من اللازم بكتير لحد ما يبقى شوربة. اللي بتاكله وانت تعبان.',
-  'curated/congee-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/congee-chicken.jpg', 'openly_licensed', 'Bitterschoko',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Chok_tomyam_(tomyam_congee),_chicken_ver,_Bangkok,_2018-01-21.jpg',
   null, 'curated', 'asian', 'easy',
   8, 50, 4,
   320, 24, 42,
@@ -11618,10 +11626,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('24a6477a-c035-5485-9c43-647d1af0c957', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('2eb31bb0-0a70-5313-b6ce-8913f2909063', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('5c877091-7045-5a1c-a9e8-86b575b3f6b3', '944bc170-d1ef-5114-a559-acabef51368b', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 2000, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '944bc170-d1ef-5114-a559-acabef51368b';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('0e0fc6a4-37ac-522c-9666-b86171a4b104', '944bc170-d1ef-5114-a559-acabef51368b', 1, 'Simmer the rice, chicken, ginger and stock in 2L water for 45 minutes, stirring now and then.', 'سيب الرز والفراخ والزنجبيل والمرقة في ٢ لتر مية ٤٥ دقيقة مع التقليب من وقت للتاني.', 45, 'Poultry must reach 74°C / 165°F throughout.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها.', '{"rice","chicken thighs","ginger","stock cube"}');
+values ('0e0fc6a4-37ac-522c-9666-b86171a4b104', '944bc170-d1ef-5114-a559-acabef51368b', 1, 'Simmer the rice, chicken, ginger and stock in 2L water for 45 minutes, stirring now and then.', 'سيب الرز والفراخ والزنجبيل والمرقة في ٢ لتر مية ٤٥ دقيقة مع التقليب من وقت للتاني.', 45, 'Poultry must reach 74°C / 165°F throughout.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها.', '{"rice","chicken thighs","ginger","stock cube","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('09c9479f-293d-5918-981f-2185d0371a87', '944bc170-d1ef-5114-a559-acabef51368b', 2, 'Lift the chicken, shred it and return it. The rice should have collapsed completely.', 'ارفع الفراخ، فتّتها ورجّعها. الرز المفروض يكون سايح تمامًا.', 5, null, null, '{}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -11798,8 +11808,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('796ea599-eed2-586b-a95a-82f2fe1b0aa8', 'cucumber-raita', 'Cucumber and Mint Raita', 'رايتا الخيار والنعناع',
   'The cooling thing you serve beside anything spicy. Six minutes, no heat.', 'الحاجة الباردة اللي بتقدّمها جنب أي أكل حار. ست دقايق من غير نار.',
-  'curated/cucumber-raita.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/cucumber-raita.jpg', 'openly_licensed', 'Sonia Goyal',
+  'CC-BY-SA-2.0', 'Sonia Goyal · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Cucumber-raita.jpg',
   null, 'curated', 'indian', 'easy',
   6, 0, 4,
   80, 5, 8,
@@ -11873,8 +11883,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2b6741cb-abc8-5c9c-9cce-4e9976a189f5', 'dal-tadka', 'Lentils with Tempered Spices', 'دال بالبهارات',
   'Soft lentils, then hot spiced ghee poured over at the last second. Do not skip that.', 'عدس طري، وبعدين سمنة سخنة بالبهارات تتصب فوقه في آخر ثانية. ماتفوّتش دي.',
-  'curated/dal-tadka.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/dal-tadka.jpg', 'openly_licensed', 'aimee rivers',
+  'CC-BY-SA-2.0', 'aimee rivers · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Daal_after_Tadka_Pulse_Soup_India.jpg',
   null, 'curated', 'indian', 'easy',
   8, 30, 4,
   290, 14, 38,
@@ -11939,10 +11949,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('eee10c8b-4744-5781-8055-101d5b323e3f', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', (select id from public.ingredients where slug = 'coriander' limit 1), 'coriander', 'coriander', 4, 'tbsp', 'chopped', false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('2b6f72aa-f314-57c6-bdf2-87f2dffe7731', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ac7fa185-3bc7-5435-88b0-edd9288c8ee9', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1000, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '2b6741cb-abc8-5c9c-9cce-4e9976a189f5';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('c44fbe45-6733-522c-b6cb-d6de9b784df0', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', 1, 'Simmer the lentils with turmeric and salt in 1L water for 25 minutes until soft.', 'اسلق العدس مع الكركم والملح في ١ لتر مية ٢٥ دقيقة لحد ما يطرى.', 25, null, null, '{"red lentils","turmeric","salt"}');
+values ('c44fbe45-6733-522c-b6cb-d6de9b784df0', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', 1, 'Simmer the lentils with turmeric and salt in 1L water for 25 minutes until soft.', 'اسلق العدس مع الكركم والملح في ١ لتر مية ٢٥ دقيقة لحد ما يطرى.', 25, null, null, '{"red lentils","turmeric","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('8ff3a01d-cf9c-5ec3-abfc-38f46d9b27bb', '2b6741cb-abc8-5c9c-9cce-4e9976a189f5', 2, 'Add the tomatoes and cook 5 minutes more, mashing lightly.', 'ضيف الطماطم واطبخها ٥ دقايق كمان مع الهرس الخفيف.', 5, null, null, '{"tomatoes"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -11957,8 +11969,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('90183001-6018-5487-b035-dcd2817b9fa9', 'dukkah-baladi', 'Peanut and Sesame Dukkah', 'دقة بلدي',
   'Bread, then oil, then this. Everything toasted separately because they brown at different speeds, and ground coarse — ground fine it turns to paste, and paste is tahini.', 'عيش، وبعدين زيت، وبعدين دي. كل حاجة تتحمص لوحدها عشان بتاخد لون في وقت مختلف، وتتطحن خشن — لو نعمت هتبقى عجينة، والعجينة دي طحينة.',
-  'curated/dukkah-baladi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/dukkah-baladi.jpg', 'openly_licensed', 'Miansari66',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Dukka_Masala.JPG',
   null, 'curated', 'egyptian', 'easy',
   5, 12, 12,
   110, 4, 4,
@@ -12123,8 +12135,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('05e86e6f-97ae-5380-8c01-6e43d9e15c7b', 'egg-drop-soup', 'Egg Drop Soup', 'شوربة البيض',
   'Ten minutes from nothing. Ribbons of egg through hot, seasoned broth.', 'عشر دقايق من ولا حاجة. خيوط بيض في مرق سخن ومتبّل.',
-  'curated/egg-drop-soup.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/egg-drop-soup.jpg', 'openly_licensed', 'Sharon Chen from Austin, United States',
+  'CC-BY-2.0', 'Sharon Chen from Austin, United States · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:5-Minute_Egg_Drop_Soup-5_(32079790121).jpg',
   null, 'curated', 'asian', 'easy',
   5, 10, 2,
   160, 12, 10,
@@ -12190,10 +12202,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('c913bce6-750f-5bea-bb41-46a96092ecf4', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'white-pepper' limit 1), 'white-pepper', 'white pepper', 0.5, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3327da3f-dbd0-5826-8375-d5f946656c60', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2f11813a-99c1-5be8-8a41-e28dc49667a4', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 800, 'ml', null, false, false, true, null, 9);
 
 delete from public.recipe_steps where recipe_id = '05e86e6f-97ae-5380-8c01-6e43d9e15c7b';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('5d65afe8-9528-544f-b962-44cff44ceb48', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', 1, 'Bring 800ml water with the stock, ginger, soy and pepper to a simmer.', 'سخّن ٨٠٠ مل مية مع المرقة والزنجبيل والصويا والفلفل لحد الغليان الهادي.', 6, null, null, '{"stock cube","ginger","soy sauce","white pepper"}');
+values ('5d65afe8-9528-544f-b962-44cff44ceb48', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', 1, 'Bring 800ml water with the stock, ginger, soy and pepper to a simmer.', 'سخّن ٨٠٠ مل مية مع المرقة والزنجبيل والصويا والفلفل لحد الغليان الهادي.', 6, null, null, '{"stock cube","ginger","soy sauce","white pepper","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('f894418e-d1af-570e-a93a-732de9f2bf5c', '05e86e6f-97ae-5380-8c01-6e43d9e15c7b', 2, 'Slurry the cornflour with cold water and stir it in to thicken slightly.', 'ذوّب النشا في مية باردة وقلّبه عشان يتقل شوية.', 2, null, null, '{"cornflour"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -12434,12 +12448,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('5c0116cf-7b3c-5e3a-bad0-a7fd06b5842c', '8549e1f7-6878-5200-8e88-879718a4195a', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e44f61a5-92cf-5944-bf83-2b4f991a4085', '8549e1f7-6878-5200-8e88-879718a4195a', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 20, 'ml', null, false, false, true, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('f8737253-eaeb-5f47-81c8-d2f9c7bf3314', '8549e1f7-6878-5200-8e88-879718a4195a', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1200, 'ml', null, false, false, true, null, 8);
 
 delete from public.recipe_steps where recipe_id = '8549e1f7-6878-5200-8e88-879718a4195a';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('37177ef8-6c93-5a6c-9a85-50b01400e65d', '8549e1f7-6878-5200-8e88-879718a4195a', 1, 'Soften the onion, carrot and potato in oil for 6 minutes.', 'شوّح البصل والجزر والبطاطس في الزيت ٦ دقايق.', 6, null, null, '{"onions","carrots","potatoes","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('f10e3ec9-ea7a-59b0-ae13-ed15a8607353', '8549e1f7-6878-5200-8e88-879718a4195a', 2, 'Add the lentils, cumin and 1.2L water. Simmer 25 minutes until everything collapses.', 'ضيف العدس والكمون و١.٢ لتر مية. سيبها تغلي ٢٥ دقيقة لحد ما كل حاجة تستوي تمامًا.', 25, null, null, '{"red lentils","cumin"}');
+values ('f10e3ec9-ea7a-59b0-ae13-ed15a8607353', '8549e1f7-6878-5200-8e88-879718a4195a', 2, 'Add the lentils, cumin and 1.2L water. Simmer 25 minutes until everything collapses.', 'ضيف العدس والكمون و١.٢ لتر مية. سيبها تغلي ٢٥ دقيقة لحد ما كل حاجة تستوي تمامًا.', 25, null, null, '{"red lentils","cumin","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('beaf639e-6216-5ddf-9529-6c58558f7e9d', '8549e1f7-6878-5200-8e88-879718a4195a', 3, 'Blend until completely smooth, loosening with hot water if needed. Season well.', 'اضربها في الخلاط لحد ما تبقى ناعمة خالص، وخفّفها بمية سخنة لو احتاجت. ظبّط الملح كويس.', 3, 'Blend hot liquid in batches with the lid vented, or it will erupt.', 'اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور.', '{}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -12624,8 +12640,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('0f03c5b2-9953-52c5-a4c9-139eecf17986', 'fattoush', 'Fattoush with Sumac and Crisp Bread', 'فتوش',
   'Every crunchy vegetable in the fridge, plus fried bread and a lot of sumac.', 'كل خضار مقرمش في التلاجة، وعيش مقلي وسماق كتير.',
-  'curated/fattoush.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/fattoush.jpg', 'openly_licensed', 'Unknown',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Fattoush.JPG',
   null, 'curated', 'levantine', 'easy',
   15, 5, 4,
   220, 5, 24,
@@ -12878,8 +12894,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ad0daac5-1909-524a-8068-a9de73e8803c', 'focaccia', 'Olive Oil Flatbread', 'خبز الزيت الإيطالي',
   'Flour, water, salt, yeast and a great deal of olive oil. No kneading at all — the long rise does the work, and the dimples are what hold the oil.', 'دقيق ومية وملح وخميرة وزيت زيتون كتير. من غير عجن خالص — التخمير الطويل هو اللي بيشتغل، والغمّازات دي اللي بتمسك الزيت.',
-  'curated/focaccia.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/focaccia.jpg', 'openly_licensed', 'Fred Benenson',
+  'CC-BY-SA-4.0', 'Fred Benenson · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Focaccia_with_Crumb.jpg',
   null, 'curated', 'italian', 'medium',
   130, 25, 8,
   290, 7, 47,
@@ -13127,8 +13143,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('eb523407-7f1b-5700-b52c-b86783e77426', 'french-toast', 'French Toast', 'عيش بالبيض',
   'Stale toast bread soaked in egg and milk and fried in butter. Five things, ten minutes, and the best thing that can happen to bread that has gone hard.', 'عيش توست بايت منقوع في بيض ولبن ومقلي في زبدة. خمس حاجات، عشر دقايق، وأحسن حاجة ممكن تحصل لعيش نشف.',
-  'curated/french-toast.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/french-toast.jpg', 'openly_licensed', 'Jonathunder',
+  'CC-BY-SA-3.0', 'Jonathunder · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:FrenchToast.JPG',
   null, 'curated', 'american', 'easy',
   5, 10, 2,
   480, 18, 46,
@@ -13204,8 +13220,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ec7b9f9f-4e34-5c5d-bd7d-81491e0cb8c1', 'ful-medames-classic', 'Slow Ful with Cumin and Oil', 'فول مدمس بالكمون',
   'The plain, perfect version. Mashed fava beans, good oil, lemon, and nothing in the way.', 'النسخة السادة المظبوطة. فول مهروس وزيت كويس وليمون ومفيش حاجة واقفة في الطريق.',
-  'curated/ful-medames-classic.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/ful-medames-classic.jpg', 'openly_licensed', 'Zachbe at en.wikipedia',
+  'CC-BY-SA-3.0', 'Zachbe at en.wikipedia · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Ful_medames.jpg',
   null, 'curated', 'egyptian', 'easy',
   5, 10, 2,
   310, 15, 38,
@@ -13283,8 +13299,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('22ac5871-954c-53da-9f80-52d5e817961e', 'garlic-bread', 'Garlic Butter Bread', 'عيش بالتوم والزبدة',
   'Made on baladi bread rather than a baguette, because that is what is in the kitchen. The butter has to go right to the edges or the edges just burn.', 'معمول بعيش بلدي مش بالباجيت، لأن ده اللي موجود في البيت. الزبدة لازم توصل للحرف خالص وإلا الحرف هيتحرق وبس.',
-  'curated/garlic-bread.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/garlic-bread.jpg', 'openly_licensed', 'Popo le Chien',
+  'CC-BY-SA-3.0', 'Popo le Chien · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Garlicbread.jpg',
   null, 'curated', 'italian', 'easy',
   8, 10, 4,
   320, 6, 33,
@@ -13361,8 +13377,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('d1cefcc8-2123-5038-98ca-09b13da731d0', 'garlic-green-beans', 'Garlic Green Beans', 'فاصوليا خضرا بالتوم',
   'Blistered in a hot pan until the skins wrinkle, then hit with garlic.', 'متحمّرة في طاسة سخنة لحد ما القشرة تتجعّد، وبعدين توم عليها.',
-  'curated/garlic-green-beans.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/garlic-green-beans.jpg', 'openly_licensed', 'F ASTILY',
+  'CC-BY-SA-4.0', 'F ASTILY · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Sauteed_Garlic_Green_Beans_1_2017-02-22.jpg',
   null, 'curated', 'asian', 'easy',
   6, 10, 4,
   120, 4, 12,
@@ -13609,8 +13625,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f073975b-eadc-542c-a9da-09f6c3a04401', 'greek-salad', 'Greek Salad with Feta', 'سلطة يونانية بالجبنة',
   'Big chunks, no lettuce, and enough oregano to smell it from the doorway.', 'قطع كبيرة، من غير خس، وأوريجانو كفاية تشمه من باب الأوضة.',
-  'curated/greek-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/greek-salad.jpg', 'openly_licensed', 'User:Jpatokal',
+  'CC-BY-SA-4.0', 'User:Jpatokal · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Greece_Food_Horiatiki.JPG',
   null, 'curated', 'mediterranean', 'easy',
   12, 0, 4,
   260, 9, 12,
@@ -13689,8 +13705,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('03681f07-97b9-590a-a895-12e00e84f79d', 'grilled-halloumi', 'Grilled Halloumi with Lemon', 'حلومي مشوي',
   'Halloumi is the cheese that does not melt, which is the whole point of it. Dry it properly, do not move it in the pan, and eat it the moment it comes off.', 'الحلومي هي الجبنة اللي ما بتسيحش، وده كل الموضوع. نشّفها كويس، متحركهاش في الطاسة، وكلها أول ما تنزل من على النار.',
-  'curated/grilled-halloumi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/grilled-halloumi.jpg', 'openly_licensed', 'Unknown',
+  'CC-BY-SA-3.0', 'Unknown · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Grilled_haloumi_cheese.jpg',
   null, 'curated', 'levantine', 'easy',
   5, 6, 4,
   350, 21, 3,
@@ -13843,8 +13859,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('4e650b90-5b54-5a2d-82f0-6895a4f7037d', 'guacamole', 'Guacamole', 'جواكامولي',
   'Mashed with a fork, never blended. Lime goes in immediately or it browns.', 'مهروس بشوكة مش مضروب في الخلاط. والليمون بينزل على طول وإلا هيسود.',
-  'curated/guacamole.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/guacamole.jpg', 'openly_licensed', 'Nikodem Nijaki',
+  'CC-BY-SA-3.0', 'Nikodem Nijaki · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Guacamole_IMGP1271.jpg',
   null, 'curated', 'mexican', 'easy',
   10, 0, 4,
   190, 3, 12,
@@ -13920,8 +13936,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('e8a2237f-2003-5dcf-b874-46c58bd2653f', 'hawawshi', 'Spiced Meat Baked in Bread', 'حواوشي',
   'Baladi bread packed with spiced mince and baked until the crust crackles.', 'عيش بلدي محشي لحمة مفرومة متبّلة ومخبوز لحد ما القشرة تقرمش.',
-  'curated/hawawshi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/hawawshi.jpg', 'openly_licensed', 'Mkevy',
+  'CC-BY-SA-4.0', 'Mkevy · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Egyptian_meatloaf.jpg',
   null, 'curated', 'egyptian', 'easy',
   15, 25, 4,
   520, 30, 44,
@@ -14084,8 +14100,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('fb200189-f912-5e19-a88c-caef438c9fab', 'huevos-rancheros', 'Eggs on Tortilla with Salsa', 'بيض على تورتيلا بالصلصة',
   'Fried tortilla, warm bean sauce, and eggs cooked directly in it.', 'تورتيلا مقلية وصلصة فاصوليا سخنة وبيض متطبوخ فيها على طول.',
-  'curated/huevos-rancheros.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/huevos-rancheros.jpg', 'openly_licensed', 'jeffreyw',
+  'CC-BY-2.0', 'jeffreyw · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mmm...huevos_rancheros.jpg',
   null, 'curated', 'mexican', 'easy',
   10, 15, 2,
   520, 24, 48,
@@ -14172,8 +14188,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2cb76d01-a764-5a77-9ea3-4f6f5c8e94e4', 'hummus-classic', 'Hummus with Warm Chickpeas', 'حمص بالطحينة',
   'Blended until it is genuinely smooth, with whole chickpeas and oil pooled on top.', 'مضروب لحد ما يبقى ناعم فعلًا، وفوقه حمص صحيح وزيت.',
-  'curated/hummus-classic.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/hummus-classic.jpg', 'openly_licensed', 'Beyrouthhh at English Wikipedia',
+  'CC-BY-3.0', 'Beyrouthhh at English Wikipedia · CC-BY-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Lebanese_style_hummus.jpg',
   null, 'curated', 'levantine', 'easy',
   10, 5, 4,
   300, 11, 30,
@@ -14402,6 +14418,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('08a7b16e-e949-5a30-abb3-9cb1dd1f8a4f', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('53472b0f-aea9-5ed6-b3e5-03a22c430970', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'black-pepper' limit 1), 'black-pepper', 'black pepper', 1, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('e2163473-3857-556f-8f0e-edca66f884a8', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 200, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -14409,7 +14427,7 @@ values ('fd95669b-2083-5a39-921f-847709ccb9d2', 'cea79f2b-126c-52a4-ad51-2e8497c
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('c89620f9-0a2a-519b-8f8e-0dbb5060598e', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 2, 'Lay potato and tomato slices over the top, overlapping.', 'رصّ شرايح البطاطس والطماطم فوق بعضها.', 8, null, null, '{"potatoes","tomatoes"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('99d39f12-ba6c-5fca-ac95-b644db2fb6c2', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 3, 'Whisk the tomato paste with 200ml water and the oil and pour it over.', 'اخفق صلصة الطماطم مع ٢٠٠ مل مية والزيت وصبّها فوق.', 3, null, null, '{"tomato paste","olive oil"}');
+values ('99d39f12-ba6c-5fca-ac95-b644db2fb6c2', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 3, 'Whisk the tomato paste with 200ml water and the oil and pour it over.', 'اخفق صلصة الطماطم مع ٢٠٠ مل مية والزيت وصبّها فوق.', 3, null, null, '{"tomato paste","olive oil","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('1b7298ad-5072-59f7-a6ee-89d8c0a74393', 'cea79f2b-126c-52a4-ad51-2e8497c7b6f9', 4, 'Bake at 200°C for 45 minutes until the potatoes are tender.', 'اخبزها على ٢٠٠ درجة ٤٥ دقيقة لحد ما البطاطس تستوي.', 45, 'Ground beef must reach 71°C / 160°F all the way through.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره.', '{}');
 
@@ -14422,8 +14440,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2b36172e-6022-5dbe-99c1-cb90231c8853', 'kibbeh-bil-sanieh', 'Baked Bulgur and Lamb Pie', 'كبة بالصينية',
   'Two bulgur crusts around a spiced lamb and pine nut middle, cut into diamonds.', 'طبقتين برغل حوالين حشوة لحمة ضاني وصنوبر، ومتقطّعة معيّنات.',
-  'curated/kibbeh-bil-sanieh.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/kibbeh-bil-sanieh.jpg', 'openly_licensed', 'Amaiursancho5',
+  'CC-BY-SA-4.0', 'Amaiursancho5 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Kibbeh_Bil_Sanieh.jpg',
   null, 'curated', 'levantine', 'hard',
   35, 45, 6,
   520, 28, 42,
@@ -14659,6 +14677,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('bdd7e9ae-15b2-587a-90ee-6015add600c5', '7afce514-e93f-559b-b243-c5f50563058e', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c21e2c8c-c77c-5011-8537-31c37db49a96', '7afce514-e93f-559b-b243-c5f50563058e', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 40, 'ml', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('e21e7ac9-b79a-50a0-b22c-700a73f5b0c2', '7afce514-e93f-559b-b243-c5f50563058e', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 200, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '7afce514-e93f-559b-b243-c5f50563058e';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -14666,7 +14686,7 @@ values ('04f73b9d-48c7-5e8c-b14e-14c75dada74d', '7afce514-e93f-559b-b243-c5f5056
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('995eaf47-61a7-5171-a59b-cbc0c49e2a9a', '7afce514-e93f-559b-b243-c5f50563058e', 2, 'Brown the kofta quickly in oil, then set aside. Fry the potato slices in the same pan until golden.', 'حمّر الكفتة بسرعة في الزيت وبعدين ارفعها. اقلي شرايح البطاطس في نفس الطاسة لحد ما تتحمّر.', 12, null, null, '{"vegetable oil","potatoes"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('714dff82-5c18-5855-a48e-ffd867a4a131', '7afce514-e93f-559b-b243-c5f50563058e', 3, 'Fry the sliced onion and garlic, add tomato paste, blended tomatoes and 200ml water. Simmer 8 minutes.', 'حمّر البصل الشرايح والتوم، ضيف صلصة الطماطم والطماطم المضروبة و٢٠٠ مل مية. سيبها تغلي ٨ دقايق.', 10, null, null, '{"garlic","tomato paste","tomatoes"}');
+values ('714dff82-5c18-5855-a48e-ffd867a4a131', '7afce514-e93f-559b-b243-c5f50563058e', 3, 'Fry the sliced onion and garlic, add tomato paste, blended tomatoes and 200ml water. Simmer 8 minutes.', 'حمّر البصل الشرايح والتوم، ضيف صلصة الطماطم والطماطم المضروبة و٢٠٠ مل مية. سيبها تغلي ٨ دقايق.', 10, null, null, '{"garlic","tomato paste","tomatoes","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('3ee17c38-c013-5c61-9b48-ce866f515b4f', '7afce514-e93f-559b-b243-c5f50563058e', 4, 'Layer potatoes and kofta in a baking dish, pour over the sauce and bake at 200°C for 25 minutes.', 'رصّ البطاطس والكفتة في صينية، صبّ الصلصة فوقهم واخبزهم على ٢٠٠ درجة ٢٥ دقيقة.', 25, 'Ground beef must reach 71°C / 160°F all the way through.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف من جواها لبره.', '{}');
 
@@ -14679,8 +14699,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f4006404-ffca-56e7-8916-e180f5615378', 'koshari', 'Koshari', 'كشري',
   'Egypt in a bowl: rice, lentils and pasta under spiced tomato sauce and a mountain of crisp onions.', 'مصر في طبق: رز وعدس ومكرونة تحت صلصة طماطم متبّلة وجبل من البصل المقرمش.',
-  'curated/koshari.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/koshari.jpg', 'openly_licensed', 'Dina Said',
+  'CC-BY-SA-4.0', 'Dina Said · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg',
   null, 'curated', 'egyptian', 'medium',
   15, 40, 4,
   610, 19, 108,
@@ -14750,6 +14770,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('0414bc6a-b659-54dd-ab1d-a9dc2b357996', 'f4006404-ffca-56e7-8916-e180f5615378', (select id from public.ingredients where slug = 'chickpeas' limit 1), 'chickpeas', 'chickpeas', 150, 'g', 'cooked', true, false, false, null, 10);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('a2f955f9-6011-5bcd-8e7e-b8ab20446577', 'f4006404-ffca-56e7-8916-e180f5615378', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 1, 'tsp', null, true, false, true, null, 11);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('1f5615ed-1dbf-5993-8615-3066c68ca6f7', 'f4006404-ffca-56e7-8916-e180f5615378', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 250, 'ml', null, false, false, true, null, 12);
 
 delete from public.recipe_steps where recipe_id = 'f4006404-ffca-56e7-8916-e180f5615378';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -14759,7 +14781,7 @@ values ('ed26ca41-c479-5c4d-bbb8-a5487a48ae5d', 'f4006404-ffca-56e7-8916-e180f56
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('94c82ec7-8b3c-5f74-b81a-b4bf2cf0f694', 'f4006404-ffca-56e7-8916-e180f5615378', 3, 'Cook the rice with a spoon of the onion oil and a good pinch of salt until fluffy. Boil the pasta separately until al dente.', 'اطبخ الرز بمعلقة من زيت البصل ورشة ملح كويسة لحد ما يفرفر. واسلق المكرونة لوحدها لحد ما تستوي وتفضل متماسكة.', 18, null, null, '{"rice","pasta"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('bd2f8431-5045-52e8-ad17-a437c405eeea', 'f4006404-ffca-56e7-8916-e180f5615378', 4, 'For the sauce, fry the garlic for 30 seconds, add tomato paste, cumin and 250ml water. Simmer 10 minutes, then stir in the vinegar.', 'للصلصة، حمّر التوم ٣٠ ثانية، وبعدين ضيف صلصة الطماطم والكمون و٢٥٠ مل مية. سيبها تغلي ١٠ دقايق، وبعدين قلّب الخل فيها.', 12, null, null, '{"garlic","tomato paste","cumin","vinegar"}');
+values ('bd2f8431-5045-52e8-ad17-a437c405eeea', 'f4006404-ffca-56e7-8916-e180f5615378', 4, 'For the sauce, fry the garlic for 30 seconds, add tomato paste, cumin and 250ml water. Simmer 10 minutes, then stir in the vinegar.', 'للصلصة، حمّر التوم ٣٠ ثانية، وبعدين ضيف صلصة الطماطم والكمون و٢٥٠ مل مية. سيبها تغلي ١٠ دقايق، وبعدين قلّب الخل فيها.', 12, null, null, '{"garlic","tomato paste","cumin","vinegar","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('1fed122b-728b-527e-aad6-8d9a4a85e7c1', 'f4006404-ffca-56e7-8916-e180f5615378', 5, 'Layer rice, lentils and pasta in bowls. Ladle over the sauce and finish with the crisp onions and chickpeas.', 'رصّ الرز والعدس والمكرونة في الأطباق. صبّ الصلصة فوقهم وزيّن بالبصل المقرمش والحمص.', 5, null, null, '{"chickpeas"}');
 
@@ -14852,8 +14874,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('277c9b9f-cca7-5ba6-a442-23fbb1aea53a', 'kunafa-cheese', 'Cheese Kunafa', 'كنافة بالجبنة',
   'Shredded pastry over stretchy cheese, drowned in syrup while it is still too hot.', 'كنافة على جبنة بتمط، ومغرقة في الشربات وهي لسه سخنة أوي.',
-  'curated/kunafa-cheese.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/kunafa-cheese.jpg', 'openly_licensed', 'Ayshamarjana',
+  'CC-BY-SA-4.0', 'Ayshamarjana · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Cream_cheese_kunafa.jpg',
   null, 'curated', 'levantine', 'medium',
   15, 30, 8,
   520, 14, 62,
@@ -14915,6 +14937,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('06aa24b9-77de-5cc4-a4cb-fd07dd5d1a87', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', (select id from public.ingredients where slug = 'rose-water' limit 1), 'rose-water', 'rose water', 1, 'tbsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('1c47b1ca-e960-57c7-a4a2-dd6814edab4c', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', (select id from public.ingredients where slug = 'pistachios' limit 1), 'pistachios', 'pistachios', 40, 'g', 'chopped', false, false, false, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7f52abab-ffc3-5b78-b2c0-39fad071c622', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 250, 'ml', null, false, false, true, null, 9);
 
 delete from public.recipe_steps where recipe_id = '277c9b9f-cca7-5ba6-a442-23fbb1aea53a';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -14924,7 +14948,7 @@ values ('73e2cb66-c304-5081-b3ab-8b307d14ddcd', '277c9b9f-cca7-5ba6-a442-23fbb1a
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('a9a29d6a-0665-52f7-aa69-ad37ea0f6582', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', 3, 'Bake at 200°C for 30 minutes until the base is deep gold.', 'اخبزها على ٢٠٠ درجة ٣٠ دقيقة لحد ما القاعدة تبقى دهبية غامقة.', 30, null, null, '{}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('debd0100-1446-558c-88f9-96d305a29a65', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', 4, 'Boil the sugar with 250ml water, lemon and rose water for 8 minutes and pour it over hot.', 'اغلي السكر مع ٢٥٠ مل مية والليمون وماء الورد ٨ دقايق وصبّه فوقها سخن.', 8, null, null, '{"sugar","lemon","rose water","pistachios"}');
+values ('debd0100-1446-558c-88f9-96d305a29a65', '277c9b9f-cca7-5ba6-a442-23fbb1aea53a', 4, 'Boil the sugar with 250ml water, lemon and rose water for 8 minutes and pour it over hot.', 'اغلي السكر مع ٢٥٠ مل مية والليمون وماء الورد ٨ دقايق وصبّه فوقها سخن.', 8, null, null, '{"sugar","lemon","rose water","pistachios","water"}');
 
 -- Labneh with Oil and Zaatar
 insert into public.recipes (
@@ -15076,10 +15100,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('29e662cb-d6ef-5fae-b566-0c0a0e195765', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 2, 'piece', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('70d8d586-2f62-5dbe-9da8-674daf846da6', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('464fe5ba-c113-5e45-baf7-d880e38cd422', '3a97c2ee-5987-59c5-878a-448f8a075c7b', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1500, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '3a97c2ee-5987-59c5-878a-448f8a075c7b';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('e4a3c776-da6d-5435-8c8b-be9632f84e39', '3a97c2ee-5987-59c5-878a-448f8a075c7b', 1, 'Brown the lamb in ghee, add the onion, spices, bay and 1.5L water and simmer 55 minutes.', 'حمّر الضاني في السمنة، ضيف البصل والبهارات وورق اللورا و١.٥ لتر مية وسيبها ٥٥ دقيقة.', 60, null, null, '{"lamb","ghee","onions","mixed spice","cinnamon","bay leaf","salt"}');
+values ('e4a3c776-da6d-5435-8c8b-be9632f84e39', '3a97c2ee-5987-59c5-878a-448f8a075c7b', 1, 'Brown the lamb in ghee, add the onion, spices, bay and 1.5L water and simmer 55 minutes.', 'حمّر الضاني في السمنة، ضيف البصل والبهارات وورق اللورا و١.٥ لتر مية وسيبها ٥٥ دقيقة.', 60, null, null, '{"lamb","ghee","onions","mixed spice","cinnamon","bay leaf","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('fe2e669b-4083-56b7-835e-963c2040bd3a', '3a97c2ee-5987-59c5-878a-448f8a075c7b', 2, 'Lift out the meat, add the freekeh to the broth and cook 25 minutes until tender.', 'ارفع اللحمة، ضيف الفريكة للمرق واطبخها ٢٥ دقيقة لحد ما تستوي.', 25, null, null, '{"freekeh"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -15343,12 +15369,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('9bbb21cd-dbbf-5caa-b854-8b397425de46', '97bec492-782a-5614-8d2a-e9beae0a709e', (select id from public.ingredients where slug = 'coriander' limit 1), 'coriander', 'coriander', 3, 'tbsp', 'chopped', false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('e261bf43-2206-5a04-938a-1f04bec8f08c', '97bec492-782a-5614-8d2a-e9beae0a709e', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('3cb364be-2ed5-504e-adf7-c6d25b945f6a', '97bec492-782a-5614-8d2a-e9beae0a709e', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1200, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '97bec492-782a-5614-8d2a-e9beae0a709e';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('70b8a514-ff3f-53a2-8d45-f1f92d69637f', '97bec492-782a-5614-8d2a-e9beae0a709e', 1, 'Soften the onion and garlic in oil, add the spices and cook 1 minute.', 'شوّح البصل والتوم في الزيت، ضيف البهارات واطبخهم دقيقة.', 6, null, null, '{"onions","garlic","olive oil","cumin","turmeric"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('981b46ac-8f20-5973-96ff-0571f5af6f87', '97bec492-782a-5614-8d2a-e9beae0a709e', 2, 'Add the lentils and 1.2L water and simmer 25 minutes.', 'ضيف العدس و١.٢ لتر مية وسيبها ٢٥ دقيقة.', 25, null, null, '{"red lentils","salt"}');
+values ('981b46ac-8f20-5973-96ff-0571f5af6f87', '97bec492-782a-5614-8d2a-e9beae0a709e', 2, 'Add the lentils and 1.2L water and simmer 25 minutes.', 'ضيف العدس و١.٢ لتر مية وسيبها ٢٥ دقيقة.', 25, null, null, '{"red lentils","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('8d6081bc-1c82-567d-96bd-c09e201cb76f', '97bec492-782a-5614-8d2a-e9beae0a709e', 3, 'Squeeze in all the lemon off the heat and scatter coriander.', 'اعصر كل الليمون بعيد عن النار ورشّ الكزبرة.', 2, null, null, '{"lemon","coriander"}');
 
@@ -15429,30 +15457,32 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('aa48f421-c2e4-5601-beb9-3973bb3bd59c', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('412e1636-ef44-58a4-b409-9ec15ba91614', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('e73e905c-6b9a-55f0-b635-99558407abaf', 'e155233f-07b6-5ecc-a575-877578c127bb', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1000, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = 'e155233f-07b6-5ecc-a575-877578c127bb';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('a784fb90-becb-52de-8350-537107e7f75c', 'e155233f-07b6-5ecc-a575-877578c127bb', 1, 'Soften the onion, garlic and ginger in oil, then toast the curry powder for a minute.', 'شوّح البصل والتوم والزنجبيل في الزيت، وبعدين حمّر الكاري دقيقة.', 7, null, null, '{"onions","garlic","ginger","vegetable oil","curry powder"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('8360fd48-8add-590f-92e4-46e993c60ae7', 'e155233f-07b6-5ecc-a575-877578c127bb', 2, 'Add the lentils and 1L water and simmer 22 minutes.', 'ضيف العدس و١ لتر مية وسيبها ٢٢ دقيقة.', 22, null, null, '{"red lentils","salt"}');
+values ('8360fd48-8add-590f-92e4-46e993c60ae7', 'e155233f-07b6-5ecc-a575-877578c127bb', 2, 'Add the lentils and 1L water and simmer 22 minutes.', 'ضيف العدس و١ لتر مية وسيبها ٢٢ دقيقة.', 22, null, null, '{"red lentils","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('2afc6eea-f46f-51ee-98e8-d99c5d4e6ab3', 'e155233f-07b6-5ecc-a575-877578c127bb', 3, 'Stir in the coconut milk and spinach, cook 3 minutes, then finish with lemon.', 'قلّب لبن جوز الهند والسبانخ، اطبخهم ٣ دقايق، وبعدين زيّنها بالليمون.', 4, null, null, '{"coconut milk","spinach","lemon"}');
 
--- Honey-Soaked Dough Balls
+-- Syrup-Soaked Dough Balls
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
   image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
   image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'lokmet-el-qadi', 'Honey-Soaked Dough Balls', 'لقمة القاضي',
-  'A loose yeast batter dropped into hot oil by the spoonful, fried until it puffs into crisp gold balls, then drowned in warm honey. Ramadan on a plate, from flour and nothing expensive.', 'عجينة خميرة سايحة تتنزل بالمعلقة في زيت سخن، تتقلي لحد ما تنفخ وتبقى كور دهبية مقرمشة، وبعدين تغرق في عسل دافي. رمضان في طبق، من دقيق ومفيش حاجة غالية.',
-  'curated/lokmet-el-qadi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'lokmet-el-qadi', 'Syrup-Soaked Dough Balls', 'لقمة القاضي',
+  'A loose yeast batter dropped into hot oil by the spoonful and dunked, hot, into cold sugar syrup. Six lines rather than five, because the syrup is the dish: sugar, water and lemon boiled to a thread is what لقمة القاضي is soaked in, and a honey shortcut would be a different sweet wearing its name.', 'عجينة خميرة سايحة تتنزل بالمعلقة في زيت سخن، وتتغطس وهي سخنة في شربات ساقع. ستة سطور مش خمسة، لأن الشربات هو الأكلة نفسها: سكر ومية وليمون على النار هو اللي بتتغمس فيه لقمة القاضي، والعسل كان هيبقى حلو تاني لابس اسمها.',
+  'curated/lokmet-el-qadi.jpg', 'openly_licensed', 'Aldousari',
+  'CC-BY-SA-3.0', 'Aldousari · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Lgemat.JPG',
   null, 'curated', 'egyptian', 'medium',
-  55, 20, 6,
-  350, 5, 56,
-  13, 2, null, true)
+  55, 30, 6,
+  390, 5, 68,
+  11, 1, null, true)
 on conflict (id) do update set
   title = excluded.title,
   title_ar = excluded.title_ar,
@@ -15482,6 +15512,7 @@ insert into public.recipe_meal_types (recipe_id, meal_type) values ('c19daa81-be
 insert into public.recipe_meal_types (recipe_id, meal_type) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'snack');
 delete from public.recipe_diet_tags where recipe_id = 'c19daa81-be7d-5235-9a44-9bc15b1b3145';
 insert into public.recipe_diet_tags (recipe_id, diet) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'vegan');
 insert into public.recipe_diet_tags (recipe_id, diet) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'halal');
 delete from public.recipe_allergens where recipe_id = 'c19daa81-be7d-5235-9a44-9bc15b1b3145';
 insert into public.recipe_allergens (recipe_id, allergen) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'gluten');
@@ -15492,6 +15523,7 @@ insert into public.recipe_tags (recipe_id, tag) values ('c19daa81-be7d-5235-9a44
 insert into public.recipe_tags (recipe_id, tag) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'dessert');
 insert into public.recipe_tags (recipe_id, tag) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'comfort');
 insert into public.recipe_tags (recipe_id, tag) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('c19daa81-be7d-5235-9a44-9bc15b1b3145', 'vegan');
 
 delete from public.recipe_ingredients where recipe_id = 'c19daa81-be7d-5235-9a44-9bc15b1b3145';
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
@@ -15499,21 +15531,25 @@ values ('9bfe0996-45ba-501b-be19-f21cdea9fc04', 'c19daa81-be7d-5235-9a44-9bc15b1
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c79589d8-d58c-59eb-9edc-4e124e01c091', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'yeast' limit 1), 'yeast', 'yeast', 7, 'g', null, false, false, false, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c1c3b618-f3d9-588f-a3d6-39676008b1b4', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 1, 'tbsp', null, false, false, false, null, 3);
+values ('c1c3b618-f3d9-588f-a3d6-39676008b1b4', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'sugar' limit 1), 'sugar', 'sugar', 350, 'g', null, false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('02cd9861-d31d-54e6-af40-1c33df035699', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 700, 'ml', 'for deep frying', false, false, false, null, 4);
+values ('a0c8d3ca-9493-52c2-ad96-59badce00248', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 500, 'ml', null, false, false, true, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('78620c6f-4628-5e26-bec3-cde434b35ecc', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'honey' limit 1), 'honey', 'honey', 8, 'tbsp', null, false, false, false, null, 5);
+values ('ca1c786a-857f-58c3-99be-bd650665e009', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('02cd9861-d31d-54e6-af40-1c33df035699', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 700, 'ml', 'for deep frying', false, false, false, null, 6);
 
 delete from public.recipe_steps where recipe_id = 'c19daa81-be7d-5235-9a44-9bc15b1b3145';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('971c299d-89f0-5864-be00-e07584a2d21c', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 1, 'Whisk the flour, yeast and sugar with 250ml of warm water into a batter looser than a cake mix and thicker than cream. Cover and leave 45 minutes, until the surface is covered in bubbles.', 'اخفق الدقيق والخميرة والسكر مع ٢٥٠ مل مية دافية لحد ما تبقى عجينة أرخى من خليط الكيك وأتقل من الكريمة. غطيها وسيبها ٤٥ دقيقة، لحد ما وشها يتملي فقاقيع.', 45, null, null, '{"flour","yeast","sugar"}');
+values ('971c299d-89f0-5864-be00-e07584a2d21c', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 1, 'Whisk the flour, the yeast and a tablespoon of the sugar with 250ml of the water into a batter looser than a cake mix. Cover and leave 45 minutes, until the surface is covered in bubbles.', 'اخفق الدقيق والخميرة ومعلقة كبيرة من السكر مع ٢٥٠ مل من المية لحد ما تبقى عجينة أرخى من خليط الكيك. غطيها وسيبها ٤٥ دقيقة لحد ما وشها يتملي فقاقيع.', 45, null, null, '{"flour","yeast","sugar","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('51826f01-f758-5995-a39f-a0c13af6eb5b', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 2, 'Heat the oil to 170°C in a deep pan — no more than half full. A drop of batter should rise and sizzle within two seconds.', 'سخّن الزيت لـ ١٧٠ درجة في حلة عميقة — متملهاش أكتر من النص. نقطة عجين المفروض تطلع وتزقزق في تانيتين.', 5, 'Hot oil. Never leave the pan, keep children out of the kitchen, and lower the batter in away from yourself. If it ever smokes, take it off the heat.', 'زيت سخن. متسيبش الحلة أبداً، خلي الأطفال بعيد عن المطبخ، ونزّل العجين بعيد عن ناحيتك. لو الزيت دخّن، شيله من على النار.', '{"vegetable oil"}');
+values ('51826f01-f758-5995-a39f-a0c13af6eb5b', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 2, 'Boil the rest of the sugar with the other 250ml of water and the lemon juice for 8 to 10 minutes, until it runs off a spoon in a thread. Then COOL IT COMPLETELY. Hot syrup on hot dough soaks straight through and the balls go limp.', 'اغلي باقي السكر مع الـ ٢٥٠ مل مية التانية وعصير الليمون من ٨ لـ ١٠ دقايق، لحد ما ينزل من المعلقة زي الخيط. وبعدين سيبه يبرد خالص. الشربات السخن على العجين السخن بيتشرب جواه على طول واللقمة بتنشف طراوتها.', 12, null, null, '{"sugar","water","lemon"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('7c304708-976a-5cfc-ad1c-aa4bf09926eb', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 3, 'Drop in teaspoons of batter, a few at a time so the oil stays hot. Fry 4 to 5 minutes, turning, until they are deep gold all over — pale ones are raw in the middle.', 'نزّل معالق صغيرة من العجين، شوية شوية عشان الزيت يفضل سخن. اقليها من ٤ لـ ٥ دقايق وانت بتقلبها، لحد ما تبقى دهبية غامقة من كل ناحية — اللي فاتحة بتبقى نية من جوه.', 15, null, null, '{"vegetable oil"}');
+values ('7c304708-976a-5cfc-ad1c-aa4bf09926eb', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 3, 'Heat the oil to 170°C in a deep pan, no more than half full. A drop of batter should rise and sizzle within two seconds.', 'سخّن الزيت لـ ١٧٠ درجة في حلة عميقة، متملهاش أكتر من النص. نقطة عجين المفروض تطلع وتزقزق في تانيتين.', 5, 'Hot oil. Never leave the pan, keep children out of the kitchen, and lower the batter in away from yourself. If it smokes, take it off the heat.', 'زيت سخن. متسيبش الحلة أبداً، خلي الأطفال بعيد عن المطبخ، ونزّل العجين بعيد عن ناحيتك. لو دخّن، شيله من على النار.', '{"vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('7728b061-214d-5695-8158-edc451c96b76', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 4, 'Lift out onto paper. Warm the honey with two tablespoons of water until it runs, and pour it over while the balls are still hot so they drink it in.', 'شيلها على ورق. دفّي العسل مع معلقتين مية لحد ما يسيح، وصبه عليها وهي لسه سخنة عشان تشربه.', 5, null, null, '{"honey"}');
+values ('7728b061-214d-5695-8158-edc451c96b76', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 4, 'Drop in teaspoons of batter, a few at a time so the oil stays hot. Fry 4 to 5 minutes, turning, until deep gold all over — pale ones are raw in the middle.', 'نزّل معالق صغيرة من العجين، شوية شوية عشان الزيت يفضل سخن. اقليها من ٤ لـ ٥ دقايق وانت بتقلبها لحد ما تبقى دهبية غامقة من كل ناحية — اللي فاتحة بتبقى نية من جوه.', 15, null, null, '{"vegetable oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c804ed08-94c4-5987-a28a-5edfc593b656', 'c19daa81-be7d-5235-9a44-9bc15b1b3145', 5, 'Lift them straight out of the oil into the cold syrup for one minute, then lift them out again onto a plate. Any longer and they stop being crisp.', 'شيلها من الزيت على طول في الشربات الساقع دقيقة واحدة، وبعدين طلعها في طبق. لو سيبتها أكتر هتبطل تقرمش.', 3, null, null, '{"sugar","water"}');
 
 -- Baked Macaroni Cheese
 insert into public.recipes (
@@ -15524,8 +15560,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('8e6c349c-3c2b-5c8e-939b-b9b2bc8194a5', 'mac-and-cheese-baked', 'Baked Macaroni Cheese', 'مكرونة بالجبنة في الفرن',
   'Three cheeses, a proper sauce, and a crumb top that has to go brown.', 'تلات أنواع جبنة وصلصة مظبوطة ووش بقسماط لازم يتحمّر.',
-  'curated/mac-and-cheese-baked.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mac-and-cheese-baked.jpg', 'openly_licensed', 'Texasfoodgawker',
+  'CC-BY-SA-4.0', 'Texasfoodgawker · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg',
   null, 'curated', 'american', 'easy',
   15, 35, 6,
   590, 26, 58,
@@ -15615,8 +15651,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3ae1f24a-eee5-5f6a-958f-7f8e1c72efbd', 'macarona-bechamel', 'Baked Pasta with Béchamel', 'مكرونة بشاميل',
   'Layered pasta and spiced mince under a thick white sauce. Sunday lunch, all week.', 'مكرونة ولحمة مفرومة متبّلة تحت بشاميل تقيل. غدا الجمعة، طول الأسبوع.',
-  'curated/macarona-bechamel.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/macarona-bechamel.jpg', 'openly_licensed', 'Zebi2424',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Macarona_bechamel.jpg',
   null, 'curated', 'egyptian', 'medium',
   25, 45, 6,
   620, 28, 58,
@@ -15703,8 +15739,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('48d0305f-a5d3-55e5-8e28-c3382803a81f', 'mahshi-cabbage', 'Stuffed Cabbage Rolls', 'محشي كرنب',
   'Cabbage leaves rolled around herbed rice and simmered slowly until they almost melt.', 'ورق كرنب ملفوف على رز بالخضرة ومطبوخ على نار هادية لحد ما يدوب في بقك.',
-  'curated/mahshi-cabbage.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mahshi-cabbage.jpg', 'openly_licensed', 'Shixart1985',
+  'CC-BY-2.0', 'Shixart1985 · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Delicious_stuffed_cabbage_rolls_prepared_in_a_pot.jpg',
   null, 'curated', 'egyptian', 'hard',
   45, 60, 6,
   340, 8, 58,
@@ -15879,8 +15915,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('3740572e-cbe1-547f-9623-b9b61e0c6f01', 'mango-sticky-rice', 'Mango and Coconut Rice', 'رز بجوز الهند والمانجا',
   'Sweet coconut rice under cold mango. Best when the mango is almost too ripe.', 'رز حلو بجوز الهند تحت مانجا باردة. أحلى لما المانجا تكون مستوية أوي.',
-  'curated/mango-sticky-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mango-sticky-rice.jpg', 'openly_licensed', 'Dennis Wong from Hong Kong, Hong Kong',
+  'CC-BY-2.0', 'Dennis Wong from Hong Kong, Hong Kong · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mango_sticy_rice_(3859549574).jpg',
   null, 'curated', 'asian', 'easy',
   10, 25, 4,
   420, 5, 78,
@@ -15937,10 +15973,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('8fd37388-b0da-5705-8a12-c2c0e926fde6', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 0.5, 'tsp', null, false, false, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4479ed95-ceca-51a3-b14d-8cd60433521a', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'sesame-seeds' limit 1), 'sesame-seeds', 'sesame seeds', 1, 'tbsp', null, false, true, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2ba241f5-e39f-5893-af28-e0aba0751ac9', '3740572e-cbe1-547f-9623-b9b61e0c6f01', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 350, 'ml', null, false, false, true, null, 7);
 
 delete from public.recipe_steps where recipe_id = '3740572e-cbe1-547f-9623-b9b61e0c6f01';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('a5bf04e0-66d9-51f8-8504-eda1d02bb39e', '3740572e-cbe1-547f-9623-b9b61e0c6f01', 1, 'Cook the rice in 350ml water for 18 minutes until soft.', 'اطبخ الرز في ٣٥٠ مل مية ١٨ دقيقة لحد ما يطرى.', 18, null, null, '{"rice"}');
+values ('a5bf04e0-66d9-51f8-8504-eda1d02bb39e', '3740572e-cbe1-547f-9623-b9b61e0c6f01', 1, 'Cook the rice in 350ml water for 18 minutes until soft.', 'اطبخ الرز في ٣٥٠ مل مية ١٨ دقيقة لحد ما يطرى.', 18, null, null, '{"rice","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('81615471-6f33-577c-b398-d9c2b548a251', '3740572e-cbe1-547f-9623-b9b61e0c6f01', 2, 'Warm the coconut milk with the sugar and salt, then stir two thirds into the hot rice.', 'سخّن لبن جوز الهند مع السكر والملح، وبعدين قلّب تلتينه في الرز السخن.', 6, null, null, '{"coconut milk","sugar","salt"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -15955,8 +15993,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a48f6b88-8257-5fdd-b663-db30dd3c5488', 'maqluba', 'Upside-Down Rice with Aubergine', 'مقلوبة',
   'Layered in the pot, flipped onto a plate at the table. The moment is half the dish.', 'مرصوصة في الحلة ومتقلبة على الطبق على السفرة. اللحظة دي نص الأكلة.',
-  'curated/maqluba.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/maqluba.jpg', 'openly_licensed', 'Arafataslan',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Makluba.JPG',
   null, 'curated', 'levantine', 'hard',
   30, 60, 6,
   560, 30, 66,
@@ -16020,10 +16058,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('c721a659-f803-5f0d-9ac6-3bfb7777b16f', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'pine-nuts' limit 1), 'pine-nuts', 'pine nuts', 40, 'g', null, true, true, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('88897d33-2695-55ea-a7da-0ce172521b51', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('08b389c4-3304-5d2c-b1ca-c6f92ba0a8ce', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1200, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = 'a48f6b88-8257-5fdd-b663-db30dd3c5488';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('3028b0f5-a017-5a45-9a16-d864f0466f53', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', 1, 'Simmer the chicken with the onion and spices in 1.2L water for 30 minutes. Keep the broth.', 'اسلق الفراخ مع البصل والبهارات في ١.٢ لتر مية ٣٠ دقيقة. احتفظ بالمرق.', 30, null, null, '{"chicken thighs","onions","mixed spice","turmeric","cinnamon","salt"}');
+values ('3028b0f5-a017-5a45-9a16-d864f0466f53', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', 1, 'Simmer the chicken with the onion and spices in 1.2L water for 30 minutes. Keep the broth.', 'اسلق الفراخ مع البصل والبهارات في ١.٢ لتر مية ٣٠ دقيقة. احتفظ بالمرق.', 30, null, null, '{"chicken thighs","onions","mixed spice","turmeric","cinnamon","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('de55cd51-d67f-5cdc-b446-6bf0a9b8e536', 'a48f6b88-8257-5fdd-b663-db30dd3c5488', 2, 'Fry the aubergine slices until golden and drain them on paper.', 'اقلي شرايح الباذنجان لحد ما تتحمّر وصفّيها على ورق.', 15, null, null, '{"eggplant","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -16124,8 +16164,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('b7ea1ad2-4544-5624-ba8c-e5c8dd1855f6', 'masala-omelette', 'Masala Omelette', 'أومليت بالبهارات',
   'Chilli, onion and coriander through the egg. Five minutes, and it wakes you up.', 'شطة وبصل وكزبرة في البيض. خمس دقايق وبتصحّيك.',
-  'curated/masala-omelette.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/masala-omelette.jpg', 'openly_licensed', 'SwingingUvula',
+  'CC-BY-SA-4.0', 'SwingingUvula · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Masala_omelette.JPG',
   null, 'curated', 'indian', 'easy',
   6, 6, 2,
   260, 17, 8,
@@ -16374,8 +16414,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('1b5d1c72-ddd8-581c-963f-73618e1a3cf0', 'mexican-rice', 'Tomato Rice', 'رز بالطماطم المكسيكي',
   'The rice is toasted in oil first, which is why it stays separate rather than clumping.', 'الرز بيتحمّر في الزيت الأول، عشان كده بيفضل مفرفر مش متكتّل.',
-  'curated/mexican-rice.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mexican-rice.jpg', 'openly_licensed', 'Ralf Peter Reimann',
+  'CC-BY-SA-2.0', 'Ralf Peter Reimann · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mexican_rice_144235.jpg',
   null, 'curated', 'mexican', 'easy',
   8, 25, 4,
   340, 7, 62,
@@ -16441,6 +16481,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('53baa0d6-b0bc-5afd-a3d0-0c05f39ce4b2', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', (select id from public.ingredients where slug = 'coriander' limit 1), 'coriander', 'coriander', 3, 'tbsp', 'chopped', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('66302f7b-0216-5987-9b05-fc0ada41e908', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('78e13118-97ca-560d-8513-c1b7ea6ff77b', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 500, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = '1b5d1c72-ddd8-581c-963f-73618e1a3cf0';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -16448,7 +16490,7 @@ values ('0b5b1a8e-7014-5ab7-95a7-5f416b238cc5', '1b5d1c72-ddd8-581c-963f-73618e1
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('172a4094-9e86-5d82-a88c-c9b8d162d8e3', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', 2, 'Add the onion and garlic for 3 minutes, then the tomatoes, paste, cumin and stock.', 'ضيف البصل والتوم ٣ دقايق، وبعدين الطماطم والصلصة والكمون والمرقة.', 4, null, null, '{"onions","garlic","tomatoes","tomato paste","cumin","stock cube"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('1a267d4c-6c17-528f-9234-e1c29fa99bc6', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', 3, 'Add 500ml water, cover, and cook 18 minutes. Rest 5 before forking through.', 'ضيف ٥٠٠ مل مية، غطّي، واطبخ ١٨ دقيقة. سيبه ٥ قبل ما تفكّكه.', 20, null, null, '{"salt","coriander"}');
+values ('1a267d4c-6c17-528f-9234-e1c29fa99bc6', '1b5d1c72-ddd8-581c-963f-73618e1a3cf0', 3, 'Add 500ml water, cover, and cook 18 minutes. Rest 5 before forking through.', 'ضيف ٥٠٠ مل مية، غطّي، واطبخ ١٨ دقيقة. سيبه ٥ قبل ما تفكّكه.', 20, null, null, '{"salt","coriander","water"}');
 
 -- Vegetable and Bean Minestrone
 insert into public.recipes (
@@ -16459,8 +16501,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('1033a655-a8db-542c-96ca-7b640170b0b0', 'minestrone', 'Vegetable and Bean Minestrone', 'شوربة مينستروني بالخضار',
   'Whatever vegetables you have, plus beans and small pasta. A whole meal in a bowl.', 'أي خضار عندك، وفاصوليا ومكرونة صغيرة. وجبة كاملة في طبق.',
-  'curated/minestrone.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/minestrone.jpg', 'openly_licensed', 'Daniel Ziegener',
+  'CC-BY-SA-2.0', 'Daniel Ziegener · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Minestrone_soup_(5).jpg',
   null, 'curated', 'italian', 'easy',
   15, 35, 6,
   290, 12, 44,
@@ -16532,12 +16574,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('a0d29f72-fb5f-522c-b657-66106318a311', '1033a655-a8db-542c-96ca-7b640170b0b0', (select id from public.ingredients where slug = 'oregano' limit 1), 'oregano', 'oregano', 1, 'tsp', null, false, false, true, null, 11);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c38a8465-0891-50e2-9f46-ff117a13ac27', '1033a655-a8db-542c-96ca-7b640170b0b0', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 12);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('40d3fbf2-da90-550a-82f2-a73cfb696dd1', '1033a655-a8db-542c-96ca-7b640170b0b0', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1500, 'ml', null, false, false, true, null, 13);
 
 delete from public.recipe_steps where recipe_id = '1033a655-a8db-542c-96ca-7b640170b0b0';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('8887d076-8027-5c70-97bf-e80eaf5af785', '1033a655-a8db-542c-96ca-7b640170b0b0', 1, 'Sweat the onion, carrot and celery in oil for 10 minutes without colouring them.', 'شوّح البصل والجزر والكرفس في الزيت ١٠ دقايق من غير ما يتحمّروا.', 10, null, null, '{"onions","carrots","celery","olive oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('610b2b47-9baa-564b-950d-abbb91515370', '1033a655-a8db-542c-96ca-7b640170b0b0', 2, 'Add the garlic, tomatoes, stock, oregano and 1.5L water and simmer 20 minutes.', 'ضيف التوم والطماطم والمرقة والأوريجانو و١.٥ لتر مية وسيبها ٢٠ دقيقة.', 20, null, null, '{"garlic","tomatoes","stock cube","oregano","salt"}');
+values ('610b2b47-9baa-564b-950d-abbb91515370', '1033a655-a8db-542c-96ca-7b640170b0b0', 2, 'Add the garlic, tomatoes, stock, oregano and 1.5L water and simmer 20 minutes.', 'ضيف التوم والطماطم والمرقة والأوريجانو و١.٥ لتر مية وسيبها ٢٠ دقيقة.', 20, null, null, '{"garlic","tomatoes","stock cube","oregano","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('02226c34-c927-594d-b3be-e2f2633eceae', '1033a655-a8db-542c-96ca-7b640170b0b0', 3, 'Add the beans, courgette and pasta and cook 10 minutes more.', 'ضيف الفاصوليا والكوسة والمكرونة واطبخهم ١٠ دقايق كمان.', 10, null, null, '{"white beans","zucchini","pasta"}');
 
@@ -16618,10 +16662,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('fbef97bd-f7e7-5052-8290-2e1e5e80a0a7', '46260f10-e496-5f38-bc01-197cd0d0166a', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 2, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('93f13258-5d13-5288-bce7-877dd89dd822', '46260f10-e496-5f38-bc01-197cd0d0166a', (select id from public.ingredients where slug = 'stock-cube' limit 1), 'stock-cube', 'stock cube', 1, 'piece', null, false, false, false, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7f39b44a-d992-52d9-bb34-382bef0922a7', '46260f10-e496-5f38-bc01-197cd0d0166a', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 800, 'ml', null, false, false, true, null, 9);
 
 delete from public.recipe_steps where recipe_id = '46260f10-e496-5f38-bc01-197cd0d0166a';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('d7c35890-c8cd-52e1-84d4-acced2408a04', '46260f10-e496-5f38-bc01-197cd0d0166a', 1, 'Simmer the ginger, garlic and stock in 800ml water for 6 minutes.', 'سيب الزنجبيل والتوم والمرقة في ٨٠٠ مل مية ٦ دقايق.', 6, null, null, '{"ginger","garlic","stock cube"}');
+values ('d7c35890-c8cd-52e1-84d4-acced2408a04', '46260f10-e496-5f38-bc01-197cd0d0166a', 1, 'Simmer the ginger, garlic and stock in 800ml water for 6 minutes.', 'سيب الزنجبيل والتوم والمرقة في ٨٠٠ مل مية ٦ دقايق.', 6, null, null, '{"ginger","garlic","stock cube","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('6dd18eb9-fba9-55ad-8a7e-16cb6177c332', '46260f10-e496-5f38-bc01-197cd0d0166a', 2, 'Add the mushrooms and tofu and cook 5 minutes more without boiling hard.', 'ضيف المشروم والتوفو واطبخهم ٥ دقايق كمان من غير غليان قوي.', 5, null, null, '{"mushrooms","tofu"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -16700,10 +16746,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('54b155fa-0668-5620-b76e-f352af19c319', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', (select id from public.ingredients where slug = 'butter' limit 1), 'butter', 'butter', 30, 'g', null, false, false, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('61a6f08b-ebde-5667-9e81-ef40e7ef687a', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', true, false, false, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('476effd0-a3c5-56d9-91ac-fac90430f41e', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1500, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '4b2fa9fa-5de0-5be3-ac0e-278df1c87803';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('33f62591-f6c3-529f-acf6-e8fbb3949e08', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', 1, 'Simmer the chicken with the onion and bay leaves in 1.5L water for 35 minutes. Skim, then lift out the chicken and keep the broth.', 'اسلق الفراخ مع البصل وورق اللورا في ١.٥ لتر مية ٣٥ دقيقة. ارفع الرغوة، وبعدين شيل الفراخ واحتفظ بالشوربة.', 35, 'Poultry must reach 74°C / 165°F throughout. The juices should run clear.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية.', '{"chicken thighs","onions","bay leaf"}');
+values ('33f62591-f6c3-529f-acf6-e8fbb3949e08', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', 1, 'Simmer the chicken with the onion and bay leaves in 1.5L water for 35 minutes. Skim, then lift out the chicken and keep the broth.', 'اسلق الفراخ مع البصل وورق اللورا في ١.٥ لتر مية ٣٥ دقيقة. ارفع الرغوة، وبعدين شيل الفراخ واحتفظ بالشوربة.', 35, 'Poultry must reach 74°C / 165°F throughout. The juices should run clear.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية.', '{"chicken thighs","onions","bay leaf","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('be98b275-cdbc-58b5-8fa5-65cb020efbdd', '4b2fa9fa-5de0-5be3-ac0e-278df1c87803', 2, 'Cook the rice while the chicken simmers.', 'اطبخ الرز والفراخ لسه بتستوي.', 18, null, null, '{"rice"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -16722,8 +16770,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('69082623-2b42-5725-8c1a-75f9f55e9a92', 'muhallabia', 'Milk Pudding with Pistachios', 'مهلبية',
   'Set with cornflour, not eggs, so it stays light. The rosewater is what makes it taste like home rather than like custard.', 'بتتماسك بالنشا مش بالبيض، عشان تفضل خفيفة. وماء الورد هو اللي بيخليها بطعم البيت مش طعم الكاسترد.',
-  'curated/muhallabia.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/muhallabia.jpg', 'openly_licensed', 'Jktab',
+  'CC-BY-SA-4.0', 'Jktab · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mhallabiyyeh_(Arabic_milk_pudding).jpg',
   null, 'curated', 'egyptian', 'easy',
   5, 12, 4,
   210, 6, 32,
@@ -16801,8 +16849,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('62ae96fc-b04b-58ce-9537-5a0c381798a0', 'muhammara', 'Red Pepper and Walnut Dip', 'محمرة',
   'Roasted peppers and walnuts blitzed with pomegranate molasses. Sweet, sour, nutty.', 'فلفل مشوي وعين جمل مضروبين مع دبس الرمان. حلو وحامض وطعمه مكسرات.',
-  'curated/muhammara.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/muhammara.jpg', 'openly_licensed', 'Bazel',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Muhammara.jpg',
   null, 'curated', 'levantine', 'easy',
   10, 20, 4,
   280, 6, 16,
@@ -16884,8 +16932,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('7e8ed538-2336-50c2-9c6b-3beafac77c35', 'mujadara', 'Lentils and Rice with Caramelised Onion', 'مجدرة',
   'Brown lentils and rice under a mountain of onions cooked almost to jam.', 'عدس بني ورز تحت جبل من البصل المحمّر لحد ما يبقى زي المربى.',
-  'curated/mujadara.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mujadara.jpg', 'openly_licensed', 'Bazel',
+  'CC-BY-SA-3.0', 'Bazel · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mujaddara.jpg',
   null, 'curated', 'levantine', 'easy',
   10, 40, 4,
   410, 14, 70,
@@ -16946,12 +16994,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('f6885b18-ecb2-51ac-a582-c650b84a205e', '7e8ed538-2336-50c2-9c6b-3beafac77c35', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 80, 'ml', null, false, false, true, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('77d674bb-a911-53be-929c-24dd3317ad2e', '7e8ed538-2336-50c2-9c6b-3beafac77c35', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('44fab042-d1c0-5400-baab-49878ba50e72', '7e8ed538-2336-50c2-9c6b-3beafac77c35', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 700, 'ml', null, false, false, true, null, 8);
 
 delete from public.recipe_steps where recipe_id = '7e8ed538-2336-50c2-9c6b-3beafac77c35';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('c639cafc-54f7-5e41-a243-95d0c1678480', '7e8ed538-2336-50c2-9c6b-3beafac77c35', 1, 'Cook the onions in the oil for 25 minutes, patiently, until dark and sweet.', 'اطبخ البصل في الزيت ٢٥ دقيقة بصبر، لحد ما يبقى غامق وحلو.', 25, null, null, '{"onions","olive oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('12a674e3-19c7-5534-9243-cafaf25e5b1e', '7e8ed538-2336-50c2-9c6b-3beafac77c35', 2, 'Simmer the lentils in 700ml water for 15 minutes until nearly tender.', 'اسلق العدس في ٧٠٠ مل مية ١٥ دقيقة لحد ما يقرب يستوي.', 15, null, null, '{"green lentils"}');
+values ('12a674e3-19c7-5534-9243-cafaf25e5b1e', '7e8ed538-2336-50c2-9c6b-3beafac77c35', 2, 'Simmer the lentils in 700ml water for 15 minutes until nearly tender.', 'اسلق العدس في ٧٠٠ مل مية ١٥ دقيقة لحد ما يقرب يستوي.', 15, null, null, '{"green lentils","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('8e8a3b7f-73df-5c43-bbe3-96cda50c4874', '7e8ed538-2336-50c2-9c6b-3beafac77c35', 3, 'Add the rice, spices, salt and half the onions, cover and cook 18 minutes.', 'ضيف الرز والبهارات والملح ونص البصل، غطّي واطبخ ١٨ دقيقة.', 18, null, null, '{"rice","cumin","coriander seeds","salt"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -17051,8 +17101,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('714a93b7-7b85-5144-9ccc-35e76c921433', 'mutabbal', 'Smoky Aubergine and Tahini Dip', 'متبل باذنجان',
   'Aubergine burnt over flame until the skin collapses, then whipped with tahini.', 'باذنجان متحرق على النار لحد ما القشرة تقع، وبعدين مخفوق بالطحينة.',
-  'curated/mutabbal.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/mutabbal.jpg', 'openly_licensed', 'avlxyz',
+  'CC-BY-SA-2.0', 'avlxyz · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Baba_ganoush_closeup.jpg',
   null, 'curated', 'levantine', 'easy',
   10, 25, 4,
   190, 5, 14,
@@ -17291,8 +17341,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f98c4c9e-21d9-5442-959a-d1052eb5f04b', 'om-ali', 'Om Ali', 'أم علي',
   'Torn pastry soaked in sweet milk with nuts and coconut, baked until the top blisters.', 'عجين مقطّع منقوع في لبن محلّى بالمكسرات وجوز الهند، ومخبوز لحد ما وشه يتحمّر.',
-  'curated/om-ali.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/om-ali.jpg', 'openly_licensed', 'Miansari66',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Umm_Ali.JPG',
   null, 'curated', 'egyptian', 'easy',
   10, 25, 6,
   470, 10, 52,
@@ -17455,8 +17505,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('4aff8a50-3995-5fa7-8789-a49e5831d4b6', 'overnight-oats', 'Overnight Oats', 'شوفان منقوع بالليل',
   'Assembled the night before, eaten cold from the jar. No cooking at all.', 'بيتجهّز بالليل ويتاكل بارد من البرطمان. من غير أي طبخ.',
-  'curated/overnight-oats.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/overnight-oats.jpg', 'openly_licensed', 'Kolforn ( Kolforn ) I''d appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true',
+  'CC-BY-SA-4.0', 'Kolforn ( Kolforn ) I''d appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:-2019-02-07_Overnight_Oats,_Cromer.JPG',
   null, 'curated', 'american', 'easy',
   5, 0, 1,
   390, 15, 52,
@@ -17533,8 +17583,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('1284bd24-d074-50e6-b517-9c5a048d11ae', 'palak-paneer-style', 'Spinach with Fried Cheese', 'سبانخ بالجبنة المقلية',
   'Halloumi standing in for paneer, seared and dropped into a green, garlicky purée.', 'حلومي بدل البانير، مشوّح ومنزّل في بيوريه أخضر بالتوم.',
-  'curated/palak-paneer-style.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/palak-paneer-style.jpg', 'openly_licensed', 'Lopanayak',
+  'CC-BY-SA-4.0', 'Lopanayak · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Palakpaneer_Rayagada_Odisha_0009.jpg',
   null, 'curated', 'indian', 'medium',
   12, 25, 4,
   390, 24, 14,
@@ -17620,8 +17670,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('9aa67479-e5d0-5cb8-90df-0d4721cf3aa1', 'pancakes-buttermilk', 'Fluffy Pancakes', 'بان كيك هش',
   'Lumpy batter is correct. Overmixing is what makes them flat.', 'الخليط المتكتّل صح. الخفق الزيادة هو اللي بيخلّيهم مسطّحين.',
-  'curated/pancakes-buttermilk.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/pancakes-buttermilk.jpg', 'openly_licensed', 'روتانا',
+  'CC-BY-4.0', 'روتانا · CC-BY-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Fluffy_Pancakes.jpg',
   null, 'curated', 'american', 'easy',
   10, 15, 4,
   390, 11, 54,
@@ -17704,8 +17754,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 'pasta-e-ceci', 'Pasta and Chickpeas', 'مكرونة بالحمص',
   'Half soup, half pasta, entirely cheap. Rosemary is what makes it taste expensive.', 'نص شوربة ونص مكرونة ورخيصة تمامًا. الروزماري هو اللي بيخلّي طعمها غالي.',
-  'curated/pasta-e-ceci.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/pasta-e-ceci.jpg', 'openly_licensed', 'Joey Doll',
+  'CC-BY-2.0', 'Joey Doll · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tortiglioni_con_ceci.jpg',
   null, 'curated', 'italian', 'easy',
   8, 25, 4,
   400, 17, 60,
@@ -17772,12 +17822,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('ace98f3a-eba0-572a-9b59-c12d6d13e9cd', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 0.5, 'tsp', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('a7642871-c024-5fd6-8138-d5881a68622a', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2d4d2983-31e8-5d2b-8585-c529ed7bf11b', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 900, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('abb888c1-4f21-5186-9e6e-64ee0c9ff9b4', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 1, 'Fry the garlic, rosemary and chilli in oil, then stir in the tomato paste for a minute.', 'حمّر التوم والروزماري والشطة في الزيت، وبعدين قلّب صلصة الطماطم دقيقة.', 3, null, null, '{"garlic","rosemary","chili flakes","olive oil","tomato paste"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('f373c8e6-954b-5f76-96ba-c1cb2dc32f0d', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 2, 'Add the chickpeas, crush a third of them, then add the stock and 900ml water.', 'ضيف الحمص، اهرس تلته، وبعدين ضيف المرقة و٩٠٠ مل مية.', 5, null, null, '{"chickpeas","stock cube"}');
+values ('f373c8e6-954b-5f76-96ba-c1cb2dc32f0d', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 2, 'Add the chickpeas, crush a third of them, then add the stock and 900ml water.', 'ضيف الحمص، اهرس تلته، وبعدين ضيف المرقة و٩٠٠ مل مية.', 5, null, null, '{"chickpeas","stock cube","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('51e2be45-5fdc-581c-8a11-e9d728f6b984', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 3, 'Add the pasta and cook 12 minutes until it is thick enough to hold a spoon upright.', 'ضيف المكرونة واطبخها ١٢ دقيقة لحد ما تتقل وتقف فيها المعلقة.', 15, null, null, '{"pasta","salt"}');
 
@@ -17790,8 +17842,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('61a8ff67-973b-513f-8e4f-107ef7419f18', 'pasta-pomodoro', 'Tomato and Basil Pasta', 'مكرونة بالطماطم والريحان',
   'The sauce is four things. Its quality is entirely about how long you leave it alone.', 'الصلصة أربع حاجات. وجودتها كلها في إنك تسيبها في حالها قد إيه.',
-  'curated/pasta-pomodoro.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/pasta-pomodoro.jpg', 'openly_licensed', 'Dr.Conati',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Spaghettata.JPG',
   null, 'curated', 'italian', 'easy',
   5, 30, 4,
   430, 13, 72,
@@ -17956,8 +18008,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('216368ae-b675-5fe4-ad99-f320d8194c78', 'pico-de-gallo', 'Fresh Tomato Salsa', 'صلصة طماطم طازة',
   'Raw and chopped, salted first so the tomato gives up its water.', 'نية ومقطّعة، ومتملّحة الأول عشان الطماطم تسيّب ميتها.',
-  'curated/pico-de-gallo.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/pico-de-gallo.jpg', 'openly_licensed', 'jeffreyw',
+  'CC-BY-2.0', 'jeffreyw · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mmm..._Pico_de_Gallo_(5923456035).jpg',
   null, 'curated', 'mexican', 'easy',
   12, 0, 4,
   45, 1, 9,
@@ -18278,8 +18330,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('fda0ead8-7926-5f23-b5b2-4d99bb2fcd68', 'risotto-mushroom', 'Mushroom Risotto', 'ريزوتو بالمشروم',
   'Stirring is the recipe. Twenty minutes at the stove and it turns creamy without cream.', 'التقليب هو الوصفة. عشرين دقيقة على البوتاجاز وبيبقى كريمي من غير كريمة.',
-  'curated/risotto-mushroom.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/risotto-mushroom.jpg', 'openly_licensed', 'Kolforn ( Kolforn ) I''d appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true',
+  'CC-BY-SA-4.0', 'Kolforn ( Kolforn ) I''d appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG',
   null, 'curated', 'italian', 'medium',
   10, 30, 4,
   470, 13, 66,
@@ -18531,8 +18583,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 'roz-bel-laban', 'Rice Pudding', 'رز باللبن',
   'Cooked down slowly until the rice disappears into the milk. Cold from the fridge is correct.', 'مطبوخ على مهله لحد ما الرز يختفي في اللبن. وبارد من التلاجة هو الصح.',
-  'curated/roz-bel-laban.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/roz-bel-laban.jpg', 'openly_licensed', 'Shivangisj',
+  'CC-BY-SA-4.0', 'Shivangisj · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Kheer_with_condensed_milk..JPG',
   null, 'curated', 'egyptian', 'easy',
   5, 40, 4,
   290, 8, 48,
@@ -18590,10 +18642,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('5362bd61-e564-57da-8cf0-b3a2377de4e3', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, true, true, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ade7a1ce-be25-5008-b59b-348d0995f823', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'pistachios' limit 1), 'pistachios', 'pistachios', 30, 'g', 'chopped', true, true, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('b4244529-cee1-5d5f-a1b2-a1fe93b7bbb0', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 250, 'ml', null, false, false, true, null, 7);
 
 delete from public.recipe_steps where recipe_id = '6655c7d5-6607-558e-9e1f-c5b9a92df1c9';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('216eed60-bf02-5a46-8725-78b2ab5ce26a', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 1, 'Simmer the rice in 250ml water until the water is gone, about 12 minutes.', 'اسلق الرز في ٢٥٠ مل مية لحد ما المية تنشف، حوالي ١٢ دقيقة.', 12, null, null, '{"rice"}');
+values ('216eed60-bf02-5a46-8725-78b2ab5ce26a', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 1, 'Simmer the rice in 250ml water until the water is gone, about 12 minutes.', 'اسلق الرز في ٢٥٠ مل مية لحد ما المية تنشف، حوالي ١٢ دقيقة.', 12, null, null, '{"rice","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('5c709e42-5dad-5d1b-878c-06b0acdb3d6f', '6655c7d5-6607-558e-9e1f-c5b9a92df1c9', 2, 'Add the milk and sugar and cook on low for 25 minutes, stirring often so it does not catch.', 'ضيف اللبن والسكر واطبخ على نار هادية ٢٥ دقيقة مع التقليب المستمر عشان مايتحرقش.', 25, null, null, '{"milk","sugar"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -18687,8 +18741,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f41cc9c5-969e-572e-9387-29cc132940db', 'sahlab', 'Warm Sahlab with Pistachios', 'سحلب بالفستق',
   'Milk thickened on the stove until it coats the back of a spoon, poured hot and finished with cinnamon and chopped pistachios. The cup Egypt drinks all winter.', 'لبن بيتقل على النار لحد ما يمسك في المعلقة، يتصب سخن وفوقه قرفة وفستق مفروم. الكباية اللي مصر بتشربها طول الشتا.',
-  'curated/sahlab.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/sahlab.jpg', 'openly_licensed', 'DesignbyNur',
+  'CC-BY-SA-3.0', 'DesignbyNur · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Salep_drink.jpg',
   null, 'curated', 'egyptian', 'easy',
   2, 12, 4,
   290, 9, 41,
@@ -18766,8 +18820,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('5403354a-d709-5725-ba89-d3eb508f4c3b', 'salata-baladi', 'Chopped Baladi Salad', 'سلطة بلدي',
   'Everything diced small, dressed with lemon and oil. On every table, always.', 'كل حاجة مقطّعة صغير ومتبّلة بليمون وزيت. على كل ترابيزة، دايمًا.',
-  'curated/salata-baladi.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/salata-baladi.jpg', 'openly_licensed', 'أحمد ناجي',
+  'CC-BY-SA-4.0', 'أحمد ناجي · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Salata_baladi.jpg',
   null, 'curated', 'egyptian', 'easy',
   10, 0, 4,
   110, 2, 10,
@@ -18920,8 +18974,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('0c98599f-b14b-59ad-8a92-13660ba760f5', 'salatet-tahina', 'Tahini Sauce with Lemon', 'سلطة طحينة',
   'The sauce that goes on taameya, on fish, on koshari and on half of everything else. It seizes and goes stiff when the lemon hits it — that is supposed to happen, and the water fixes it.', 'الصلصة اللي بتتحط على الطعمية والسمك والكشري ونص أي حاجة تانية. بتجمد وتتقل أول ما الليمون ينزل عليها — ده طبيعي، والمية بتظبطها.',
-  'curated/salatet-tahina.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/salatet-tahina.jpg', 'openly_licensed', 'Gilabrand',
+  'CC-BY-SA-3.0', 'Gilabrand · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tahina.JPG',
   null, 'curated', 'egyptian', 'easy',
   5, 0, 6,
   160, 5, 6,
@@ -18961,7 +19015,6 @@ insert into public.recipe_diet_tags (recipe_id, diet) values ('0c98599f-b14b-59a
 delete from public.recipe_allergens where recipe_id = '0c98599f-b14b-59ad-8a92-13660ba760f5';
 insert into public.recipe_allergens (recipe_id, allergen) values ('0c98599f-b14b-59ad-8a92-13660ba760f5', 'sesame');
 delete from public.recipe_appliances where recipe_id = '0c98599f-b14b-59ad-8a92-13660ba760f5';
-insert into public.recipe_appliances (recipe_id, appliance) values ('0c98599f-b14b-59ad-8a92-13660ba760f5', 'other');
 delete from public.recipe_tags where recipe_id = '0c98599f-b14b-59ad-8a92-13660ba760f5';
 insert into public.recipe_tags (recipe_id, tag) values ('0c98599f-b14b-59ad-8a92-13660ba760f5', 'egyptian');
 insert into public.recipe_tags (recipe_id, tag) values ('0c98599f-b14b-59ad-8a92-13660ba760f5', 'no-cook');
@@ -19303,12 +19356,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('12d01782-1b36-59a1-87c9-8b66bcad3b91', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', false, true, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('0582a021-dcf8-52ac-b7ac-1686d2580f47', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('cc51565c-7355-5f2d-9d1d-fbf9c1fd26de', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 700, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('cb94cbb4-cacd-585e-9c8b-ca8626805c8b', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', 1, 'Fry the onions slowly in oil for 20 minutes until dark brown and sweet. Lift half out.', 'حمّر البصل على نار هادية ٢٠ دقيقة لحد ما يبقى بنّي غامق وحلو. ارفع نصه.', 20, null, null, '{"onions","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('678bbc09-2328-543f-9b35-f3c3186c72b4', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', 2, 'Add 700ml water to the pan with the spices and salt and simmer 5 minutes to make the stock.', 'ضيف ٧٠٠ مل مية على الطاسة مع البهارات والملح وسيبها ٥ دقايق تعمل المرق.', 6, null, null, '{"cumin","coriander seeds","turmeric","salt"}');
+values ('678bbc09-2328-543f-9b35-f3c3186c72b4', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', 2, 'Add 700ml water to the pan with the spices and salt and simmer 5 minutes to make the stock.', 'ضيف ٧٠٠ مل مية على الطاسة مع البهارات والملح وسيبها ٥ دقايق تعمل المرق.', 6, null, null, '{"cumin","coriander seeds","turmeric","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('3e9ffc51-56bc-5d13-9a05-6023d77c99a5', '3fc33f3d-2d2e-5da4-bba9-5b2f5f0ac8ff', 3, 'Cook the rice in that stock, covered, for 18 minutes.', 'اطبخ الرز في المرق ده مغطّى ١٨ دقيقة.', 18, null, null, '{"rice"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -19575,8 +19630,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2791d0d2-cd45-5190-9867-fd7de0379fb9', 'shakshuka', 'Tomato & Feta Shakshuka', 'شكشوكة بالطماطم والجبنة البيضا',
   'Eggs poached in a garlicky tomato sauce with crumbled white cheese. Ready before the bread is toasted.', 'بيض مطبوخ في صلصة طماطم بالتوم مع جبنة بيضا مفتّتة. جاهزة قبل ما العيش يسخن.',
-  'curated/shakshuka.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/shakshuka.jpg', 'openly_licensed', 'Calliopejen1',
+  'CC-BY-SA-3.0', 'Calliopejen1 · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Shakshuka_by_Calliopejen1.jpg',
   null, 'curated', 'egyptian', 'easy',
   5, 15, 2,
   380, 22, 18,
@@ -19746,8 +19801,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('2fe4d7b8-f8c0-5f58-b9a8-520f7d217373', 'shawarma-chicken', 'Chicken Shawarma at Home', 'شاورما فراخ',
   'The spice mix and a very hot pan get you most of the way there without a spit.', 'خلطة البهارات وطاسة سخنة جدًا هيوصّلوك لمعظم الطعم من غير سيخ دوّار.',
-  'curated/shawarma-chicken.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/shawarma-chicken.jpg', 'openly_licensed', 'Sangram Keshari Senapati',
+  'CC-BY-SA-4.0', 'Sangram Keshari Senapati · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Shawarma_Chicken_Roll_at_Indiranagar,_Bangalore,_Karnatak.jpg',
   null, 'curated', 'levantine', 'easy',
   20, 15, 4,
   430, 40, 26,
@@ -19913,8 +19968,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('97c7281d-8efc-50d6-a20d-25a716743ed9', 'shish-tawook', 'Yogurt-Marinated Chicken Skewers', 'شيش طاووق',
   'Yogurt and lemon do the tenderising overnight; the grill only has to finish the job.', 'الزبادي والليمون بيطرّوا الفراخ بالليل؛ الشواية بتكمّل بس.',
-  'curated/shish-tawook.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/shish-tawook.jpg', 'openly_licensed', 'Garrett Ziegler',
+  'CC-BY-SA-4.0', 'Garrett Ziegler · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tavuk_%C5%9Ei%C5%9F.jpg',
   null, 'curated', 'levantine', 'easy',
   20, 15, 4,
   340, 42, 8,
@@ -20064,12 +20119,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('88b45167-257c-58f8-aa4d-49a17a16a5b1', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', false, true, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('23a0bfe8-0a94-5bd3-8283-8ce5a43c156c', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('67f53490-d983-578d-91c0-cbce505f1efe', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1200, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = 'b5b5f5f6-e219-541b-bc56-2c454310dae9';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('2eb62199-d019-5cc1-ad99-af30668fb67f', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', 1, 'Soften the onion and carrot in the oil for 5 minutes.', 'شوّح البصل والجزر في الزيت ٥ دقايق.', 5, null, null, '{"onions","carrots","vegetable oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('5627f67f-07cc-5acd-9c08-b62b2dd60d1a', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', 2, 'Add the lentils, spices, stock and 1.2L water and simmer 20 minutes.', 'ضيف العدس والبهارات والمرقة و١.٢ لتر مية وسيبها ٢٠ دقيقة.', 20, null, null, '{"red lentils","cumin","turmeric","stock cube","salt"}');
+values ('5627f67f-07cc-5acd-9c08-b62b2dd60d1a', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', 2, 'Add the lentils, spices, stock and 1.2L water and simmer 20 minutes.', 'ضيف العدس والبهارات والمرقة و١.٢ لتر مية وسيبها ٢٠ دقيقة.', 20, null, null, '{"red lentils","cumin","turmeric","stock cube","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('dfeab67a-70ac-53df-b120-64a8c3467453', 'b5b5f5f6-e219-541b-bc56-2c454310dae9', 3, 'Blend smooth and serve with lemon.', 'اضربه ناعم وقدّمه مع الليمون.', 3, 'Blend hot liquid in batches with the lid vented, or it will erupt.', 'اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور.', '{"lemon"}');
 
@@ -20162,8 +20219,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ca759adf-4e58-5973-b276-bc35f1e1152e', 'shorbet-tamatem', 'Tomato Soup', 'شوربة طماطم',
   'What to do with the tomatoes that have gone soft. Butter, an onion, twenty minutes covered, then blended — no stock cube and no cream.', 'الحل للطماطم اللي طرّت. زبدة وبصلة وعشرين دقيقة مغطية، وبعدين في الخلاط — من غير مكعب مرقة ومن غير كريمة.',
-  'curated/shorbet-tamatem.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/shorbet-tamatem.jpg', 'openly_licensed', 'Ella Olsson from Stockholm, Sweden',
+  'CC-BY-2.0', 'Ella Olsson from Stockholm, Sweden · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tomato_soup,_plant-based_(44040252791).jpg',
   null, 'curated', 'egyptian', 'easy',
   10, 30, 4,
   140, 3, 15,
@@ -20393,10 +20450,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('bab3306c-9797-5623-9502-5396d4e11482', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', (select id from public.ingredients where slug = 'sesame-oil' limit 1), 'sesame-oil', 'sesame oil', 1, 'tsp', null, false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('3b23b330-cd13-5db1-9bc8-9fda14835d02', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', (select id from public.ingredients where slug = 'chili-flakes' limit 1), 'chili-flakes', 'chili flakes', 0.5, 'tsp', null, true, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('4c479150-1f4a-5f2d-8f70-51f91ebee63c', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1000, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('84e9ec92-0da7-56b0-82c2-55a2ec58ca44', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', 1, 'Simmer the ginger, garlic and stock in 1L water for 8 minutes, then strain out the ginger.', 'سيب الزنجبيل والتوم والمرقة في ١ لتر مية ٨ دقايق، وبعدين شيل الزنجبيل.', 8, null, null, '{"ginger","garlic","stock cube"}');
+values ('84e9ec92-0da7-56b0-82c2-55a2ec58ca44', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', 1, 'Simmer the ginger, garlic and stock in 1L water for 8 minutes, then strain out the ginger.', 'سيب الزنجبيل والتوم والمرقة في ١ لتر مية ٨ دقايق، وبعدين شيل الزنجبيل.', 8, null, null, '{"ginger","garlic","stock cube","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('802ab44b-8f66-56f6-9a53-cbb13ead2c98', '7a3a382e-f76e-52cf-ac0a-d6a08f59c7f5', 2, 'Cook the noodles in the broth for 4 minutes.', 'اسلق النودلز في المرق ٤ دقايق.', 4, null, null, '{"noodles"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -20486,8 +20545,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('598b5a53-9e26-51f0-83a9-f74adb6ce1c1', 'spaghetti-aglio-olio', 'Garlic and Chilli Spaghetti', 'سباجيتي بالتوم والشطة',
   'Five ingredients, twelve minutes, and it lives or dies on the pasta water.', 'خمس مكوّنات واتناشر دقيقة، وبتنجح أو تفشل على حسب مية المكرونة.',
-  'curated/spaghetti-aglio-olio.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/spaghetti-aglio-olio.jpg', 'openly_licensed', 'matsuyuki',
+  'CC-BY-SA-2.0', 'matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg',
   null, 'curated', 'italian', 'easy',
   5, 12, 2,
   520, 15, 74,
@@ -20713,12 +20772,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('8b8977af-60f9-5d04-a14e-43a0f64df3cc', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'ghee' limit 1), 'ghee', 'ghee', 40, 'g', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('8d96a1fb-4631-515e-acb1-d9d8bd5cda00', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('608df1aa-74b4-5c24-8102-f0bc99b3edd8', '9131b45b-3d9a-59fc-933c-a8350727f3f9', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 600, 'ml', null, false, false, true, null, 8);
 
 delete from public.recipe_steps where recipe_id = '9131b45b-3d9a-59fc-933c-a8350727f3f9';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('5ce80d38-2379-5902-8b56-9634e1746ee0', '9131b45b-3d9a-59fc-933c-a8350727f3f9', 1, 'Sizzle the cumin, cardamom and bay in the ghee for 40 seconds.', 'حمّر الكمون والحبهان وورق اللورا في السمنة ٤٠ ثانية.', 1, null, null, '{"cumin","cardamom","bay leaf","ghee"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('1dd0d9c2-8ccf-52e3-870e-cb44b72cf055', '9131b45b-3d9a-59fc-933c-a8350727f3f9', 2, 'Add the rice and stir to coat, then add 600ml water and the salt.', 'ضيف الرز وقلّبه عشان يتغطّى، وبعدين ضيف ٦٠٠ مل مية والملح.', 2, null, null, '{"basmati rice","salt"}');
+values ('1dd0d9c2-8ccf-52e3-870e-cb44b72cf055', '9131b45b-3d9a-59fc-933c-a8350727f3f9', 2, 'Add the rice and stir to coat, then add 600ml water and the salt.', 'ضيف الرز وقلّبه عشان يتغطّى، وبعدين ضيف ٦٠٠ مل مية والملح.', 2, null, null, '{"basmati rice","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('ead3fc9c-2e19-56e8-beab-ff70b83f94da', '9131b45b-3d9a-59fc-933c-a8350727f3f9', 3, 'Cover and cook 15 minutes, adding the peas for the last 5. Rest 5 before forking through.', 'غطّي واطبخ ١٥ دقيقة، وضيف البسلة آخر ٥. سيبه ٥ قبل ما تفكّكه.', 20, null, null, '{"green peas"}');
 
@@ -20798,6 +20859,8 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('f1454e34-9b40-5c3f-80ac-4847eb0ad3ee', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, true, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ed36361e-ad9f-5cd8-9b5e-ff331ec893d1', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('48746a91-1a13-5c39-af8d-67488b0ab733', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 200, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = 'c5dd4e90-d5d1-517c-b75d-04be57bc1069';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -20805,7 +20868,7 @@ values ('f2e57429-f661-54a7-a758-f7de7f7dede0', 'c5dd4e90-d5d1-517c-b75d-04be57b
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('949563da-116e-5a7c-bfdd-6ca86c3cfb63', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', 2, 'Fill the peppers two-thirds full — the rice needs room — and replace the tops.', 'املا الفلفل لتلتين — الرز محتاج مساحة — ورجّع الغطا.', 8, null, null, '{"bell pepper"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('42dbab8a-178d-5fed-adeb-1d686580ecc0', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', 3, 'Stand them in a dish with 200ml water, cover, and bake at 190°C for 50 minutes.', 'وقّفهم في صينية مع ٢٠٠ مل مية، غطّيهم، واخبزهم على ١٩٠ درجة ٥٠ دقيقة.', 50, null, null, '{}');
+values ('42dbab8a-178d-5fed-adeb-1d686580ecc0', 'c5dd4e90-d5d1-517c-b75d-04be57bc1069', 3, 'Stand them in a dish with 200ml water, cover, and bake at 190°C for 50 minutes.', 'وقّفهم في صينية مع ٢٠٠ مل مية، غطّيهم، واخبزهم على ١٩٠ درجة ٥٠ دقيقة.', 50, null, null, '{"water"}');
 
 -- Baked Rice Pudding
 insert into public.recipes (
@@ -20816,8 +20879,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('60985f48-4330-530b-81bc-a9661f8bee3b', 'sutlac-baked', 'Baked Rice Pudding', 'سوتلاش',
   'Rice pudding finished under a hot grill so the top browns and blisters.', 'رز باللبن متحمّر تحت شواية سخنة عشان الوش يدهب ويتنفّط.',
-  'curated/sutlac-baked.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/sutlac-baked.jpg', 'openly_licensed', 'Wiki leylek',
+  'CC-BY-4.0', 'Wiki leylek · CC-BY-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Baked_Rice_Pudding_11.06.2025.jpg',
   null, 'curated', 'turkish', 'easy',
   8, 45, 6,
   280, 8, 46,
@@ -20874,10 +20937,12 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('89b99d42-6569-5d56-8c6b-ee7fca3288dd', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'vanilla' limit 1), 'vanilla', 'vanilla', 1, 'tsp', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('4f397d3c-6e9b-5898-a1fc-ea3a707487f0', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, true, true, true, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d06bbc4d-bb57-54ea-936c-838852600d17', '60985f48-4330-530b-81bc-a9661f8bee3b', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 250, 'ml', null, false, false, true, null, 7);
 
 delete from public.recipe_steps where recipe_id = '60985f48-4330-530b-81bc-a9661f8bee3b';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('8adcd93f-23e5-5f5d-a18b-c96d517b67cb', '60985f48-4330-530b-81bc-a9661f8bee3b', 1, 'Cook the rice in 250ml water until absorbed, about 12 minutes.', 'اطبخ الرز في ٢٥٠ مل مية لحد ما تتشرب، حوالي ١٢ دقيقة.', 12, null, null, '{"rice"}');
+values ('8adcd93f-23e5-5f5d-a18b-c96d517b67cb', '60985f48-4330-530b-81bc-a9661f8bee3b', 1, 'Cook the rice in 250ml water until absorbed, about 12 minutes.', 'اطبخ الرز في ٢٥٠ مل مية لحد ما تتشرب، حوالي ١٢ دقيقة.', 12, null, null, '{"rice","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('31f9fcb1-edb0-5f56-9f51-b7b22b654ad9', '60985f48-4330-530b-81bc-a9661f8bee3b', 2, 'Add the milk and sugar and simmer 20 minutes, then thicken with the cornflour slurry.', 'ضيف اللبن والسكر وسيبهم ٢٠ دقيقة، وبعدين تقّلهم بالنشا المذوّب.', 22, null, null, '{"milk","sugar","cornflour","vanilla"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
@@ -21144,8 +21209,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('05e4329c-c043-5890-85ea-945bda4b696d', 'tabbouleh', 'Parsley and Bulgur Salad', 'تبولة',
   'Overwhelmingly parsley, barely bulgur. Sharp with lemon and cut fine.', 'بقدونس بالأساس وبرغل بالكاد. حامضة بالليمون ومقطّعة ناعم.',
-  'curated/tabbouleh.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/tabbouleh.jpg', 'openly_licensed', 'Miansari66',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Tabouleh_1.JPG',
   null, 'curated', 'levantine', 'easy',
   20, 0, 4,
   180, 4, 20,
@@ -21225,8 +21290,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('50339699-e89d-51a2-afab-79ee0419a4d3', 'tameya-sandwich', 'Falafel Sandwich with Tahini', 'سندوتش طعمية بالطحينة',
   'Street breakfast in one hand: falafel, salad and tahini crushed into warm bread.', 'فطار الشارع في إيد واحدة: طعمية وسلطة وطحينة مضغوطين في عيش سخن.',
-  'curated/tameya-sandwich.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/tameya-sandwich.jpg', 'openly_licensed', 'Losttraveller',
+  'CC-BY-SA-3.0', 'Losttraveller · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tameya_sandwich_Karoleen_Lindberg.jpg',
   null, 'curated', 'egyptian', 'easy',
   10, 0, 2,
   450, 17, 52,
@@ -21562,8 +21627,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ea878e73-a2fe-52f1-ae55-04e57af0e76d', 'tiramisu-quick', 'Coffee and Mascarpone Cups', 'كاسات قهوة وكريمة',
   'The flavours of tiramisu in a glass, set in the fridge instead of assembled in a tray.', 'طعم التيراميسو في كاسة، بتمسك في التلاجة بدل ما تترصّ في صينية.',
-  'curated/tiramisu-quick.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/tiramisu-quick.jpg', 'openly_licensed', 'Raffaele Diomede from Pordenone, ITALIA',
+  'CC-BY-2.0', 'Raffaele Diomede from Pordenone, ITALIA · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tiramisu_-_Raffaele_Diomede.jpg',
   null, 'curated', 'italian', 'easy',
   20, 0, 4,
   420, 8, 34,
@@ -21639,8 +21704,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('92f30f49-9462-5f7c-a103-78482aead8d5', 'tuna-melt', 'Tuna Melt', 'توست بالتونة والجبنة',
   'Store cupboard, ten minutes, and better than it has any right to be.', 'من الدولاب في عشر دقايق وأحلى مما يستاهل.',
-  'curated/tuna-melt.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/tuna-melt.jpg', 'openly_licensed', 'kweez mcG from London, UK',
+  'CC-BY-2.0', 'kweez mcG from London, UK · CC-BY-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tuna_melt_sandwich_with_fries.jpg',
   null, 'curated', 'american', 'easy',
   6, 8, 2,
   480, 32, 36,
@@ -21724,8 +21789,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('732f13a3-bcd0-5c8d-b84c-0a949b1fbd8c', 'tuna-pasta-salad', 'Cold Tuna Pasta Salad', 'سلطة مكرونة بالتونة',
   'Boil the pasta and nothing else needs heat. Tuna, lemon and cucumber, with enough protein to carry you to dinner.', 'اسلق المكرونة وخلاص، مفيش حاجة تانية عايزة نار. تونة وليمون وخيار، وبروتين يكفّيك لحد العشا.',
-  'curated/tuna-pasta-salad.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/tuna-pasta-salad.jpg', 'openly_licensed', 'FotoosVanRobin from Netherlands',
+  'CC-BY-SA-2.0', 'FotoosVanRobin from Netherlands · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tuna_pasta_salad.jpg',
   null, 'curated', 'mediterranean', 'easy',
   10, 10, 2,
   480, 34, 58,
@@ -21949,12 +22014,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('328bc01b-7e01-59b5-91e8-1607bbde9fb2', '57d467ee-d446-571f-9d1f-f5e0409f255d', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 3, 'tbsp', null, false, false, true, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('067bef93-9c02-5217-8ffa-86cf315f39d6', '57d467ee-d446-571f-9d1f-f5e0409f255d', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1, 'tsp', null, false, false, true, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('0586ccd4-6082-5436-badb-146ec7da2db0', '57d467ee-d446-571f-9d1f-f5e0409f255d', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 600, 'ml', null, false, false, true, null, 9);
 
 delete from public.recipe_steps where recipe_id = '57d467ee-d446-571f-9d1f-f5e0409f255d';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('c312307e-4376-5d68-9a22-7a093c924d3b', '57d467ee-d446-571f-9d1f-f5e0409f255d', 1, 'Soften the onion and pepper in oil for 6 minutes, then add the paste for a minute.', 'شوّح البصل والفلفل في الزيت ٦ دقايق، وبعدين ضيف الصلصة دقيقة.', 7, null, null, '{"onions","bell pepper","olive oil","tomato paste"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('96f8bfd0-751c-5f3d-95ae-a9b3ab5d9397', '57d467ee-d446-571f-9d1f-f5e0409f255d', 2, 'Add the bulgur, grated tomato, stock and 600ml water and bring to the boil.', 'ضيف البرغل والطماطم المبشورة والمرقة و٦٠٠ مل مية وسخّنهم لحد الغليان.', 3, null, null, '{"bulgur","tomatoes","stock cube","salt"}');
+values ('96f8bfd0-751c-5f3d-95ae-a9b3ab5d9397', '57d467ee-d446-571f-9d1f-f5e0409f255d', 2, 'Add the bulgur, grated tomato, stock and 600ml water and bring to the boil.', 'ضيف البرغل والطماطم المبشورة والمرقة و٦٠٠ مل مية وسخّنهم لحد الغليان.', 3, null, null, '{"bulgur","tomatoes","stock cube","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('78cb5a8b-a5e3-517e-80a4-397f69274d1c', '57d467ee-d446-571f-9d1f-f5e0409f255d', 3, 'Cover, cook 12 minutes on low, then rest 10 minutes off the heat before forking.', 'غطّي، اطبخ ١٢ دقيقة على نار هادية، وبعدين سيبه ١٠ دقايق بعيد عن النار قبل ما تفكّكه.', 22, null, null, '{}');
 
@@ -22048,8 +22115,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('a599d405-1090-506d-a2bc-066eb120cb56', 'turkish-lentil-soup', 'Red Lentil Soup with Mint Butter', 'شوربة عدس بزبدة النعناع',
   'Smooth lentil soup finished with butter bloomed with dried mint and chilli.', 'شوربة عدس ناعمة ومزيّنة بزبدة متحمّرة بالنعناع الناشف والشطة.',
-  'curated/turkish-lentil-soup.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/turkish-lentil-soup.jpg', 'openly_licensed', 'E4024',
+  'CC-BY-SA-4.0', 'E4024 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mercimek_or_Turkish_lentil_soup.jpg',
   null, 'curated', 'turkish', 'easy',
   8, 30, 4,
   280, 13, 38,
@@ -22114,12 +22181,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('0e909048-d6a4-5567-b39a-fa6326fba54d', 'a599d405-1090-506d-a2bc-066eb120cb56', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'wedges to serve', false, true, false, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('c162434f-6122-5ca2-9b4d-b6ad9c45fdc4', 'a599d405-1090-506d-a2bc-066eb120cb56', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 9);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('02a3caa2-c7b5-5f10-9fce-6cd0c10f7c7e', 'a599d405-1090-506d-a2bc-066eb120cb56', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1200, 'ml', null, false, false, true, null, 10);
 
 delete from public.recipe_steps where recipe_id = 'a599d405-1090-506d-a2bc-066eb120cb56';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('5a88d033-df8b-5d4d-9660-ccf718a6f4ff', 'a599d405-1090-506d-a2bc-066eb120cb56', 1, 'Soften the onion, carrot and potato in a little of the butter for 8 minutes.', 'شوّح البصل والجزر والبطاطس في شوية من الزبدة ٨ دقايق.', 8, null, null, '{"onions","carrots","potatoes","butter"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('f73078d3-cab2-52fc-a01e-4cb23f137978', 'a599d405-1090-506d-a2bc-066eb120cb56', 2, 'Add the lentils and 1.2L water and simmer 22 minutes, then blend smooth.', 'ضيف العدس و١.٢ لتر مية وسيبها ٢٢ دقيقة، وبعدين اضربها ناعمة.', 25, 'Blend hot liquid in batches with the lid vented, or it will erupt.', 'اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور.', '{"red lentils","salt"}');
+values ('f73078d3-cab2-52fc-a01e-4cb23f137978', 'a599d405-1090-506d-a2bc-066eb120cb56', 2, 'Add the lentils and 1.2L water and simmer 22 minutes, then blend smooth.', 'ضيف العدس و١.٢ لتر مية وسيبها ٢٢ دقيقة، وبعدين اضربها ناعمة.', 25, 'Blend hot liquid in batches with the lid vented, or it will erupt.', 'اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور.', '{"red lentils","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('5a17a35d-d4c5-5641-9ec1-560887d04811', 'a599d405-1090-506d-a2bc-066eb120cb56', 3, 'Melt the rest of the butter with the mint and paprika and swirl it in at the table.', 'دوّب باقي الزبدة مع النعناع والبابريكا وحطها على السفرة.', 3, null, null, '{"mint","paprika","lemon"}');
 
@@ -22381,8 +22450,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('f5699a73-e8c8-50f4-8426-ef429c4259c7', 'vegetable-biryani', 'Vegetable Biryani', 'برياني خضار',
   'Layered and steamed so the rice on top stays white and the bottom takes the spice.', 'مرصوص ومتبخّر عشان الرز اللي فوق يفضل أبيض واللي تحت ياخد البهارات.',
-  'curated/vegetable-biryani.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/vegetable-biryani.jpg', 'openly_licensed', 'Phadke09',
+  'CC-BY-SA-4.0', 'Phadke09 · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Vegetable_Biryani_IMG_001.jpg',
   null, 'curated', 'indian', 'hard',
   25, 45, 6,
   430, 11, 68,
@@ -22475,8 +22544,8 @@ insert into public.recipes (
   created_by, is_public)
 values ('ea8a34fe-001a-50f5-a2fd-3b73cb6d5a5a', 'vegetable-spring-rolls', 'Baked Vegetable Spring Rolls', 'سبرينج رول خضار في الفرن',
   'Baked, not deep fried, so you can make a whole tray without a litre of oil.', 'متخبوزة مش مقلية، فتقدر تعمل صينية كاملة من غير لتر زيت.',
-  'curated/vegetable-spring-rolls.jpg', 'generated', 'Akla kitchen',
-  'CC0-1.0', null, null,
+  'curated/vegetable-spring-rolls.jpg', 'openly_licensed', 'Srujanabotcha',
+  'CC-BY-SA-4.0', 'Srujanabotcha · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Golden_Vegetable_Spring_Rolls_Served_with_Dipping_Sauce.jpg',
   null, 'curated', 'asian', 'medium',
   25, 20, 4,
   280, 7, 38,
@@ -22715,12 +22784,14 @@ insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name,
 values ('e53c18d8-0207-537c-8ba9-ba5d675ac609', '737bd8e9-8676-56f9-a955-f7805e9d1d90', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 9);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
 values ('ab1167e8-35fd-5c81-a9b7-9ad29374539d', '737bd8e9-8676-56f9-a955-f7805e9d1d90', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 1.5, 'tsp', null, false, false, true, null, 10);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('c2013b7c-99fc-5f5a-8496-ad34348f2968', '737bd8e9-8676-56f9-a955-f7805e9d1d90', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 300, 'ml', null, false, false, true, null, 11);
 
 delete from public.recipe_steps where recipe_id = '737bd8e9-8676-56f9-a955-f7805e9d1d90';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('b7c27722-de31-5bc5-b218-381b647a40e1', '737bd8e9-8676-56f9-a955-f7805e9d1d90', 1, 'Soften the onion and carrot in oil for 8 minutes, then add the garlic and paste.', 'شوّح البصل والجزر في الزيت ٨ دقايق، وبعدين ضيف التوم والصلصة.', 9, null, null, '{"onions","carrots","olive oil","garlic","tomato paste"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('6adf4880-7316-57eb-a1bc-25f288d26165', '737bd8e9-8676-56f9-a955-f7805e9d1d90', 2, 'Add the beans, tomatoes, bay and 300ml water and simmer 25 minutes until thick.', 'ضيف الفاصوليا والطماطم وورق اللورا و٣٠٠ مل مية وسيبها ٢٥ دقيقة لحد ما تتقل.', 25, null, null, '{"white beans","tomatoes","bay leaf","salt"}');
+values ('6adf4880-7316-57eb-a1bc-25f288d26165', '737bd8e9-8676-56f9-a955-f7805e9d1d90', 2, 'Add the beans, tomatoes, bay and 300ml water and simmer 25 minutes until thick.', 'ضيف الفاصوليا والطماطم وورق اللورا و٣٠٠ مل مية وسيبها ٢٥ دقيقة لحد ما تتقل.', 25, null, null, '{"white beans","tomatoes","bay leaf","salt","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('0ac128cb-7663-54e4-a8be-02f66e2773ce', '737bd8e9-8676-56f9-a955-f7805e9d1d90', 3, 'Finish with lemon and a lot more olive oil than feels necessary.', 'زيّنها بالليمون وزيت زيتون أكتر مما تتخيل.', 2, null, null, '{"lemon"}');
 

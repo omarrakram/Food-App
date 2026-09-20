@@ -35,14 +35,7 @@
       "healthy",
       "beginner"
     ],
-    "image": {
-      "path": "curated/cacik.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "yogurt",
@@ -299,14 +292,7 @@
       "comfort",
       "oven"
     ],
-    "image": {
-      "path": "curated/sutlac-baked.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -347,6 +333,13 @@
         "optional": true,
         "garnish": true,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -355,7 +348,8 @@
         "textAr": "اطبخ الرز في ٢٥٠ مل مية لحد ما تتشرب، حوالي ١٢ دقيقة.",
         "minutes": 12,
         "uses": [
-          "rice"
+          "rice",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -483,6 +477,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 600,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -507,7 +508,8 @@
           "bulgur",
           "tomatoes",
           "stock-cube",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -697,14 +699,7 @@
       "healthy",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/turkish-lentil-soup.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -762,6 +757,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -784,7 +786,8 @@
         "minutes": 25,
         "uses": [
           "lentils",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": "Blend hot liquid in batches with the lid vented, or it will erupt.",
         "safetyAr": "اضرب السوايل السخنة على دفعات والغطا مفتوح شوية، وإلا هتفور."

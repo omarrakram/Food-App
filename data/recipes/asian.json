@@ -207,14 +207,7 @@
       "leftovers",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/chicken-fried-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -362,14 +355,7 @@
       "comfort",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/coconut-chicken-curry.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -514,14 +500,7 @@
       "beginner",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/congee-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -577,6 +556,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 2000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -588,7 +574,8 @@
           "rice",
           "chicken-thigh",
           "ginger",
-          "stock-cube"
+          "stock-cube",
+          "water"
         ],
         "safety": "Poultry must reach 74°C / 165°F throughout.",
         "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها."
@@ -799,14 +786,7 @@
       "beginner",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/egg-drop-soup.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -855,6 +835,13 @@
         "quantity": 1,
         "unit": "tsp",
         "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 800,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -866,7 +853,8 @@
           "stock-cube",
           "ginger",
           "soy-sauce",
-          "white-pepper"
+          "white-pepper",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -938,14 +926,7 @@
       "beginner",
       "budget"
     ],
-    "image": {
-      "path": "curated/garlic-green-beans.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "green-beans",
@@ -1357,14 +1338,7 @@
       "dessert",
       "vegan"
     ],
-    "image": {
-      "path": "curated/mango-sticky-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1404,6 +1378,13 @@
         "unit": "tbsp",
         "prep": null,
         "garnish": true
+      },
+      {
+        "slug": "water",
+        "quantity": 350,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1412,7 +1393,8 @@
         "textAr": "اطبخ الرز في ٣٥٠ مل مية ١٨ دقيقة لحد ما يطرى.",
         "minutes": 18,
         "uses": [
-          "rice"
+          "rice",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1541,6 +1523,13 @@
         "quantity": 1,
         "unit": "piece",
         "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 800,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1551,7 +1540,8 @@
         "uses": [
           "ginger",
           "garlic",
-          "stock-cube"
+          "stock-cube",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1984,6 +1974,13 @@
         "prep": null,
         "optional": true,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1994,7 +1991,8 @@
         "uses": [
           "ginger",
           "garlic",
-          "stock-cube"
+          "stock-cube",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -2504,14 +2502,7 @@
       "oven",
       "snack"
     ],
-    "image": {
-      "path": "curated/vegetable-spring-rolls.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "phyllo",

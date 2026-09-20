@@ -37,14 +37,7 @@
       "vegan",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/bamia-vegetarian.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "okra",
@@ -191,14 +184,7 @@
       "comfort",
       "oven"
     ],
-    "image": {
-      "path": "curated/basbousa.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "semolina",
@@ -250,6 +236,13 @@
         "unit": "g",
         "prep": null,
         "optional": true
+      },
+      {
+        "slug": "water",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -283,7 +276,8 @@
         "textAr": "اغلي باقي السكر مع ٢٠٠ مل مية والليمون ٨ دقايق، وصبّه سخن على الكيك السخن.",
         "minutes": 8,
         "uses": [
-          "lemon"
+          "lemon",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -478,14 +472,7 @@
       "healthy",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/bessara.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "split-peas",
@@ -543,6 +530,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -552,7 +546,8 @@
         "minutes": 30,
         "uses": [
           "split-peas",
-          "garlic"
+          "garlic",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -817,6 +812,13 @@
         "unit": "ml",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -839,7 +841,8 @@
         "minutes": 25,
         "uses": [
           "lentils",
-          "cumin"
+          "cumin",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1321,14 +1324,7 @@
       "beginner",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/ful-medames-classic.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "fava-beans",
@@ -1445,14 +1441,7 @@
       "oven",
       "late-night"
     ],
-    "image": {
-      "path": "curated/hawawshi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "baladi-bread",
@@ -1786,6 +1775,13 @@
         "unit": "ml",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1820,7 +1816,8 @@
         "uses": [
           "garlic",
           "tomato-paste",
-          "tomatoes"
+          "tomatoes",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1875,14 +1872,7 @@
       "comfort",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/koshari.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1954,6 +1944,13 @@
         "prep": null,
         "optional": true,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1997,7 +1994,8 @@
           "garlic",
           "tomato-paste",
           "cumin",
-          "vinegar"
+          "vinegar",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -2184,14 +2182,7 @@
       "batch-cook",
       "oven"
     ],
-    "image": {
-      "path": "curated/macarona-bechamel.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -2341,14 +2332,7 @@
       "batch-cook",
       "budget"
     ],
-    "image": {
-      "path": "curated/mahshi-cabbage.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "cabbage",
@@ -2737,6 +2721,13 @@
         "unit": "piece",
         "prep": "wedges to serve",
         "optional": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -2747,7 +2738,8 @@
         "uses": [
           "chicken-thigh",
           "onions",
-          "bay-leaf"
+          "bay-leaf",
+          "water"
         ],
         "safety": "Poultry must reach 74°C / 165°F throughout. The juices should run clear.",
         "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في كل مكان فيها. والعصارة لازم تطلع صافية."
@@ -2982,14 +2974,7 @@
       "dessert",
       "comfort"
     ],
-    "image": {
-      "path": "curated/om-ali.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "puff-pastry",
@@ -3126,14 +3111,7 @@
       "comfort",
       "beginner"
     ],
-    "image": {
-      "path": "curated/roz-bel-laban.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -3176,6 +3154,13 @@
         "prep": "chopped",
         "optional": true,
         "garnish": true
+      },
+      {
+        "slug": "water",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -3184,7 +3169,8 @@
         "textAr": "اسلق الرز في ٢٥٠ مل مية لحد ما المية تنشف، حوالي ١٢ دقيقة.",
         "minutes": 12,
         "uses": [
-          "rice"
+          "rice",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -3381,14 +3367,7 @@
       "beginner",
       "vegan"
     ],
-    "image": {
-      "path": "curated/salata-baladi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",
@@ -3683,6 +3662,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 700,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -3705,7 +3691,8 @@
           "cumin",
           "coriander-ground",
           "turmeric",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -3783,14 +3770,7 @@
       "under-100",
       "beginner"
     ],
-    "image": {
-      "path": "curated/shakshuka.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -4151,6 +4131,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -4175,7 +4162,8 @@
           "cumin",
           "turmeric",
           "stock-cube",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -4517,14 +4505,7 @@
       "no-cook",
       "quick"
     ],
-    "image": {
-      "path": "curated/tameya-sandwich.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "baladi-bread",
@@ -4943,14 +4924,7 @@
       "comfort",
       "beginner"
     ],
-    "image": {
-      "path": "curated/muhallabia.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "milk",
@@ -5079,14 +5053,7 @@
       "budget",
       "beginner"
     ],
-    "image": {
-      "path": "curated/banana-milkshake.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bananas",
@@ -5192,14 +5159,7 @@
       "beginner",
       "quick"
     ],
-    "image": {
-      "path": "curated/sahlab.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "milk",
@@ -5314,14 +5274,7 @@
       "budget",
       "beginner"
     ],
-    "image": {
-      "path": "curated/aseer-limon.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lemon",
@@ -5389,8 +5342,8 @@
     "slug": "batata-mashwiya",
     "title": "Roasted Sweet Potato",
     "titleAr": "بطاطا مشوية",
-    "description": "Whole sweet potatoes baked until the skin blisters and dark syrup leaks out of the ends, then split open with butter, honey and cinnamon. The winter cart, made at home.",
-    "descriptionAr": "بطاطا كاملة في الفرن لحد ما القشرة تنفّط ويطلع منها عسل غامق من الأطراف، وبعدين تتفتح وعليها زبدة وعسل وقرفة. عربية الشتا في البيت.",
+    "description": "Whole sweet potatoes baked until the skin blisters and dark syrup leaks out of the ends. That is the whole dish and it is what the winter cart sells — the butter, honey and cinnamon are a home addition and are marked optional, because a sweet potato needs none of them.",
+    "descriptionAr": "بطاطا كاملة في الفرن لحد ما القشرة تنفّط ويطلع منها عسل غامق من الأطراف. دي الأكلة كلها وده اللي بتبيعه عربية الشتا — الزبدة والعسل والقرفة إضافة بيتي واختيارية، لأن البطاطا مش محتاجة أي حاجة منهم.",
     "cuisine": "egyptian",
     "mealTypes": [
       "snack",
@@ -5424,14 +5377,7 @@
       "healthy",
       "beginner"
     ],
-    "image": {
-      "path": "curated/batata-mashwiya.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "sweet-potato",
@@ -5443,19 +5389,22 @@
         "slug": "butter",
         "quantity": 30,
         "unit": "g",
-        "prep": null
+        "prep": null,
+        "optional": true
       },
       {
         "slug": "honey",
         "quantity": 2,
         "unit": "tbsp",
-        "prep": null
+        "prep": null,
+        "optional": true
       },
       {
         "slug": "cinnamon",
         "quantity": 1,
         "unit": "tsp",
-        "prep": null
+        "prep": null,
+        "optional": true
       }
     ],
     "steps": [
@@ -5480,10 +5429,11 @@
         "safetyAr": null
       },
       {
-        "text": "Split each one lengthways, press the ends together to open it up, and put in the butter, honey and cinnamon while it is still steaming.",
-        "textAr": "افتح كل واحدة بالطول، اكبس الأطراف عشان تفتح، وحط الزبدة والعسل والقرفة وهي لسه بتطلع بخار.",
+        "text": "Split each one lengthways and press the ends together to open it up. Eat it exactly like that, off the skin — or, if you want it dressed, put butter, honey and cinnamon in while it is still steaming.",
+        "textAr": "افتح كل واحدة بالطول واكبس الأطراف عشان تفتح. كلها كده على طول من قشرتها — أو لو عايزها متزوّقة، حط الزبدة والعسل والقرفة وهي لسه بتطلع بخار.",
         "minutes": 3,
         "uses": [
+          "sweet-potato",
           "butter",
           "honey",
           "cinnamon"
@@ -5524,9 +5474,7 @@
     "allergens": [
       "sesame"
     ],
-    "appliances": [
-      "other"
-    ],
+    "appliances": [],
     "tags": [
       "egyptian",
       "no-cook",
@@ -5534,14 +5482,7 @@
       "vegan",
       "beginner"
     ],
-    "image": {
-      "path": "curated/salatet-tahina.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tahini",
@@ -5652,14 +5593,7 @@
       "healthy",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/shorbet-tamatem.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",
@@ -5729,10 +5663,10 @@
   },
   {
     "slug": "lokmet-el-qadi",
-    "title": "Honey-Soaked Dough Balls",
+    "title": "Syrup-Soaked Dough Balls",
     "titleAr": "لقمة القاضي",
-    "description": "A loose yeast batter dropped into hot oil by the spoonful, fried until it puffs into crisp gold balls, then drowned in warm honey. Ramadan on a plate, from flour and nothing expensive.",
-    "descriptionAr": "عجينة خميرة سايحة تتنزل بالمعلقة في زيت سخن، تتقلي لحد ما تنفخ وتبقى كور دهبية مقرمشة، وبعدين تغرق في عسل دافي. رمضان في طبق، من دقيق ومفيش حاجة غالية.",
+    "description": "A loose yeast batter dropped into hot oil by the spoonful and dunked, hot, into cold sugar syrup. Six lines rather than five, because the syrup is the dish: sugar, water and lemon boiled to a thread is what لقمة القاضي is soaked in, and a honey shortcut would be a different sweet wearing its name.",
+    "descriptionAr": "عجينة خميرة سايحة تتنزل بالمعلقة في زيت سخن، وتتغطس وهي سخنة في شربات ساقع. ستة سطور مش خمسة، لأن الشربات هو الأكلة نفسها: سكر ومية وليمون على النار هو اللي بتتغمس فيه لقمة القاضي، والعسل كان هيبقى حلو تاني لابس اسمها.",
     "cuisine": "egyptian",
     "mealTypes": [
       "dessert",
@@ -5740,17 +5674,18 @@
     ],
     "difficulty": "medium",
     "prepMinutes": 55,
-    "cookMinutes": 20,
+    "cookMinutes": 30,
     "servings": 6,
     "nutrition": {
-      "calories": 350,
+      "calories": 390,
       "protein": 5,
-      "carbs": 56,
-      "fat": 13,
-      "fiber": 2
+      "carbs": 68,
+      "fat": 11,
+      "fiber": 1
     },
     "dietTags": [
       "vegetarian",
+      "vegan",
       "halal"
     ],
     "allergens": [
@@ -5763,16 +5698,10 @@
       "egyptian",
       "dessert",
       "comfort",
-      "budget"
+      "budget",
+      "vegan"
     ],
-    "image": {
-      "path": "curated/lokmet-el-qadi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -5788,49 +5717,69 @@
       },
       {
         "slug": "sugar",
-        "quantity": 1,
-        "unit": "tbsp",
+        "quantity": 350,
+        "unit": "g",
         "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
       },
       {
         "slug": "sunflower-oil",
         "quantity": 700,
         "unit": "ml",
         "prep": "for deep frying"
-      },
-      {
-        "slug": "honey",
-        "quantity": 8,
-        "unit": "tbsp",
-        "prep": null
       }
     ],
     "steps": [
       {
-        "text": "Whisk the flour, yeast and sugar with 250ml of warm water into a batter looser than a cake mix and thicker than cream. Cover and leave 45 minutes, until the surface is covered in bubbles.",
-        "textAr": "اخفق الدقيق والخميرة والسكر مع ٢٥٠ مل مية دافية لحد ما تبقى عجينة أرخى من خليط الكيك وأتقل من الكريمة. غطيها وسيبها ٤٥ دقيقة، لحد ما وشها يتملي فقاقيع.",
+        "text": "Whisk the flour, the yeast and a tablespoon of the sugar with 250ml of the water into a batter looser than a cake mix. Cover and leave 45 minutes, until the surface is covered in bubbles.",
+        "textAr": "اخفق الدقيق والخميرة ومعلقة كبيرة من السكر مع ٢٥٠ مل من المية لحد ما تبقى عجينة أرخى من خليط الكيك. غطيها وسيبها ٤٥ دقيقة لحد ما وشها يتملي فقاقيع.",
         "minutes": 45,
         "uses": [
           "flour",
           "yeast",
-          "sugar"
+          "sugar",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
       },
       {
-        "text": "Heat the oil to 170°C in a deep pan — no more than half full. A drop of batter should rise and sizzle within two seconds.",
-        "textAr": "سخّن الزيت لـ ١٧٠ درجة في حلة عميقة — متملهاش أكتر من النص. نقطة عجين المفروض تطلع وتزقزق في تانيتين.",
+        "text": "Boil the rest of the sugar with the other 250ml of water and the lemon juice for 8 to 10 minutes, until it runs off a spoon in a thread. Then COOL IT COMPLETELY. Hot syrup on hot dough soaks straight through and the balls go limp.",
+        "textAr": "اغلي باقي السكر مع الـ ٢٥٠ مل مية التانية وعصير الليمون من ٨ لـ ١٠ دقايق، لحد ما ينزل من المعلقة زي الخيط. وبعدين سيبه يبرد خالص. الشربات السخن على العجين السخن بيتشرب جواه على طول واللقمة بتنشف طراوتها.",
+        "minutes": 12,
+        "uses": [
+          "sugar",
+          "water",
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Heat the oil to 170°C in a deep pan, no more than half full. A drop of batter should rise and sizzle within two seconds.",
+        "textAr": "سخّن الزيت لـ ١٧٠ درجة في حلة عميقة، متملهاش أكتر من النص. نقطة عجين المفروض تطلع وتزقزق في تانيتين.",
         "minutes": 5,
         "uses": [
           "sunflower-oil"
         ],
-        "safety": "Hot oil. Never leave the pan, keep children out of the kitchen, and lower the batter in away from yourself. If it ever smokes, take it off the heat.",
-        "safetyAr": "زيت سخن. متسيبش الحلة أبداً، خلي الأطفال بعيد عن المطبخ، ونزّل العجين بعيد عن ناحيتك. لو الزيت دخّن، شيله من على النار."
+        "safety": "Hot oil. Never leave the pan, keep children out of the kitchen, and lower the batter in away from yourself. If it smokes, take it off the heat.",
+        "safetyAr": "زيت سخن. متسيبش الحلة أبداً، خلي الأطفال بعيد عن المطبخ، ونزّل العجين بعيد عن ناحيتك. لو دخّن، شيله من على النار."
       },
       {
-        "text": "Drop in teaspoons of batter, a few at a time so the oil stays hot. Fry 4 to 5 minutes, turning, until they are deep gold all over — pale ones are raw in the middle.",
-        "textAr": "نزّل معالق صغيرة من العجين، شوية شوية عشان الزيت يفضل سخن. اقليها من ٤ لـ ٥ دقايق وانت بتقلبها، لحد ما تبقى دهبية غامقة من كل ناحية — اللي فاتحة بتبقى نية من جوه.",
+        "text": "Drop in teaspoons of batter, a few at a time so the oil stays hot. Fry 4 to 5 minutes, turning, until deep gold all over — pale ones are raw in the middle.",
+        "textAr": "نزّل معالق صغيرة من العجين، شوية شوية عشان الزيت يفضل سخن. اقليها من ٤ لـ ٥ دقايق وانت بتقلبها لحد ما تبقى دهبية غامقة من كل ناحية — اللي فاتحة بتبقى نية من جوه.",
         "minutes": 15,
         "uses": [
           "sunflower-oil"
@@ -5839,11 +5788,12 @@
         "safetyAr": null
       },
       {
-        "text": "Lift out onto paper. Warm the honey with two tablespoons of water until it runs, and pour it over while the balls are still hot so they drink it in.",
-        "textAr": "شيلها على ورق. دفّي العسل مع معلقتين مية لحد ما يسيح، وصبه عليها وهي لسه سخنة عشان تشربه.",
-        "minutes": 5,
+        "text": "Lift them straight out of the oil into the cold syrup for one minute, then lift them out again onto a plate. Any longer and they stop being crisp.",
+        "textAr": "شيلها من الزيت على طول في الشربات الساقع دقيقة واحدة، وبعدين طلعها في طبق. لو سيبتها أكتر هتبطل تقرمش.",
+        "minutes": 3,
         "uses": [
-          "honey"
+          "sugar",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -5891,14 +5841,7 @@
       "vegan",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/dukkah-baladi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "peanuts",

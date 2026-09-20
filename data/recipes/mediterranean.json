@@ -440,14 +440,7 @@
       "quick",
       "beginner"
     ],
-    "image": {
-      "path": "curated/greek-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",
@@ -1755,6 +1748,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1790,7 +1790,9 @@
         "text": "Stand them in a dish with 200ml water, cover, and bake at 190°C for 50 minutes.",
         "textAr": "وقّفهم في صينية مع ٢٠٠ مل مية، غطّيهم، واخبزهم على ١٩٠ درجة ٥٠ دقيقة.",
         "minutes": 50,
-        "uses": [],
+        "uses": [
+          "water"
+        ],
         "safety": null,
         "safetyAr": null
       }
@@ -1837,14 +1839,7 @@
       "beginner",
       "no-oven"
     ],
-    "image": {
-      "path": "curated/tuna-pasta-salad.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -2163,6 +2158,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -2188,7 +2190,8 @@
           "white-beans",
           "tomatoes",
           "bay-leaf",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null

@@ -109,12 +109,12 @@ function readManifest(): CandidateManifest {
 }
 
 /** Photographs already illustrating a published recipe. */
-function productionOriginalUrls(): string[] {
+function productionRecords(): { recipeSlug: string; originalUrl: string }[] {
   if (!existsSync(PRODUCTION_MANIFEST)) return [];
   const parsed = JSON.parse(readFileSync(PRODUCTION_MANIFEST, 'utf8')) as {
-    images: { originalUrl: string }[];
+    images: { recipeSlug: string; originalUrl: string }[];
   };
-  return parsed.images.map((entry) => entry.originalUrl);
+  return parsed.images;
 }
 
 const NAME_BY_SLUG = new Map(INGREDIENT_CATALOGUE.map((entry) => [entry.slug, entry.name]));
@@ -173,15 +173,27 @@ async function main(): Promise<void> {
 
   mkdirSync(ASSET_DIR, { recursive: true });
   const manifest = readManifest();
-  const have = new Set(manifest.images.map((entry) => entry.candidateSlug));
   const refused = rejectedTitles(REJECTED);
+
+  // Already answered: staged and waiting for review, OR already promoted.
+  //
+  // The second half matters and is easy to miss. Promotion REMOVES a candidate
+  // from this manifest, so without it a re-run of the batch would go looking
+  // for a second photograph for eleven dishes that already have one on a card.
+  const promoted = new Set(
+    productionRecords().map((entry) => entry.recipeSlug),
+  );
+  const have = new Set([
+    ...manifest.images.map((entry) => entry.candidateSlug),
+    ...promoted,
+  ]);
 
   // The no-duplicate rule spans BOTH manifests. A candidate must not be staged
   // with the photograph already illustrating a published recipe: promote it and
   // two cards in the same feed show the same picture.
   const usedFiles = new Set([
     ...manifest.images.map((entry) => entry.originalUrl),
-    ...productionOriginalUrls(),
+    ...productionRecords().map((entry) => entry.originalUrl),
   ]);
 
   const found: CandidateImageRecord[] = [];

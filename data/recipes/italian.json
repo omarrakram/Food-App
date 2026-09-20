@@ -411,14 +411,7 @@
       "oven",
       "comfort"
     ],
-    "image": {
-      "path": "curated/chicken-parm-oven.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-breast",
@@ -1176,14 +1169,7 @@
       "healthy",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/minestrone.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "white-beans",
@@ -1259,6 +1245,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1284,7 +1277,8 @@
           "tomatoes",
           "stock-cube",
           "oregano",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1344,14 +1338,7 @@
       "comfort",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/pasta-e-ceci.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chickpeas",
@@ -1409,6 +1396,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 900,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1432,7 +1426,8 @@
         "minutes": 5,
         "uses": [
           "chickpeas",
-          "stock-cube"
+          "stock-cube",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1490,14 +1485,7 @@
       "beginner",
       "comfort"
     ],
-    "image": {
-      "path": "curated/pasta-pomodoro.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -1900,14 +1888,7 @@
       "comfort",
       "vegetarian"
     ],
-    "image": {
-      "path": "curated/risotto-mushroom.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -2062,14 +2043,7 @@
       "beginner",
       "late-night"
     ],
-    "image": {
-      "path": "curated/spaghetti-aglio-olio.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -2182,14 +2156,7 @@
       "dessert",
       "no-cook"
     ],
-    "image": {
-      "path": "curated/tiramisu-quick.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "cream-cheese",
@@ -2313,14 +2280,7 @@
       "vegan",
       "batch-cook"
     ],
-    "image": {
-      "path": "curated/focaccia.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -2449,14 +2409,7 @@
       "budget",
       "beginner"
     ],
-    "image": {
-      "path": "curated/garlic-bread.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "baladi-bread",

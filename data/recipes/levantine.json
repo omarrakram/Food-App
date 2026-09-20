@@ -37,14 +37,7 @@
       "beginner",
       "oven"
     ],
-    "image": {
-      "path": "curated/batata-harra.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "potatoes",
@@ -305,14 +298,7 @@
       "quick",
       "beginner"
     ],
-    "image": {
-      "path": "curated/fattoush.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pita-bread",
@@ -610,14 +596,7 @@
       "high-protein",
       "budget"
     ],
-    "image": {
-      "path": "curated/hummus-classic.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chickpeas",
@@ -816,6 +795,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -851,7 +837,8 @@
         "minutes": 3,
         "uses": [
           "tomato-paste",
-          "olive-oil"
+          "olive-oil",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -905,14 +892,7 @@
       "oven",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/kibbeh-bil-sanieh.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bulgur",
@@ -1057,14 +1037,7 @@
       "comfort",
       "oven"
     ],
-    "image": {
-      "path": "curated/kunafa-cheese.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "phyllo",
@@ -1114,6 +1087,13 @@
         "quantity": 40,
         "unit": "g",
         "prep": "chopped"
+      },
+      {
+        "slug": "water",
+        "quantity": 250,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1155,7 +1135,8 @@
           "sugar",
           "lemon",
           "rose-water",
-          "pistachios"
+          "pistachios",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1380,6 +1361,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1394,7 +1382,8 @@
           "mixed-spice",
           "cinnamon",
           "bay-leaf",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1525,6 +1514,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1548,7 +1544,8 @@
         "minutes": 25,
         "uses": [
           "lentils",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1748,14 +1745,7 @@
       "batch-cook",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/maqluba.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -1822,6 +1812,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1835,7 +1832,8 @@
           "mixed-spice",
           "turmeric",
           "cinnamon",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1913,14 +1911,7 @@
       "healthy",
       "oven"
     ],
-    "image": {
-      "path": "curated/muhammara.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bell-pepper",
@@ -2049,14 +2040,7 @@
       "batch-cook",
       "beginner"
     ],
-    "image": {
-      "path": "curated/mujadara.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "green-lentils",
@@ -2103,6 +2087,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 700,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -2122,7 +2113,8 @@
         "textAr": "اسلق العدس في ٧٠٠ مل مية ١٥ دقيقة لحد ما يقرب يستوي.",
         "minutes": 15,
         "uses": [
-          "green-lentils"
+          "green-lentils",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -2189,14 +2181,7 @@
       "budget",
       "grill"
     ],
-    "image": {
-      "path": "curated/mutabbal.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggplant",
@@ -2576,14 +2561,7 @@
       "quick",
       "late-night"
     ],
-    "image": {
-      "path": "curated/shawarma-chicken.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -2743,14 +2721,7 @@
       "healthy",
       "grill"
     ],
-    "image": {
-      "path": "curated/shish-tawook.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-breast",
@@ -2886,14 +2857,7 @@
       "no-cook",
       "quick"
     ],
-    "image": {
-      "path": "curated/tabbouleh.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "parsley",
@@ -3171,14 +3135,7 @@
       "beginner",
       "low-carb"
     ],
-    "image": {
-      "path": "curated/grilled-halloumi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "halloumi",

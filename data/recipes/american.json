@@ -42,14 +42,7 @@
       "beginner",
       "comfort"
     ],
-    "image": {
-      "path": "curated/banana-bread.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "bananas",
@@ -304,14 +297,7 @@
       "quick",
       "late-night"
     ],
-    "image": {
-      "path": "curated/beef-burger-homemade.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "ground-beef",
@@ -930,14 +916,7 @@
       "beginner",
       "comfort"
     ],
-    "image": {
-      "path": "curated/chocolate-chip-cookies.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -1333,14 +1312,7 @@
       "batch-cook",
       "vegetarian"
     ],
-    "image": {
-      "path": "curated/mac-and-cheese-baked.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "pasta",
@@ -1498,14 +1470,7 @@
       "healthy",
       "meal-prep"
     ],
-    "image": {
-      "path": "curated/overnight-oats.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "oats",
@@ -1619,14 +1584,7 @@
       "comfort",
       "beginner"
     ],
-    "image": {
-      "path": "curated/pancakes-buttermilk.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "flour",
@@ -2412,14 +2370,7 @@
       "late-night",
       "beginner"
     ],
-    "image": {
-      "path": "curated/tuna-melt.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tuna-can",
@@ -2672,14 +2623,7 @@
       "comfort",
       "high-protein"
     ],
-    "image": {
-      "path": "curated/french-toast.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "toast-bread",

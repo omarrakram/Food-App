@@ -1,0 +1,159 @@
+{
+  "batch": "batch-2-short-mains",
+  "intent": "17 new dishes to go with the 13 batch-1 candidates being re-attempted, making 30. Batch 1 converted 11 of 24, and it leaned heavily on drinks, sides and sweets; this one is weighted toward things a household actually eats for lunch and dinner, and toward Egyptian, because the catalogue is 25.0% Egyptian against a ≥30% goal. Nine of the seventeen are Egyptian and none is an invented Egyptian variant of a foreign dish. Protein spread is deliberate: liver, sausage, whole chicken, eggs, white cheese and chicken breast rather than another round of the same three. Every list is five lines or fewer counting water, salt and oil.",
+  "candidates": [
+    {
+      "slug": "makarona-bel-salsa",
+      "name": "Macaroni in Red Sauce",
+      "nameAr": "مكرونة بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["pasta", "tomato-paste", "garlic", "sunflower-oil", "salt"],
+      "searchNames": ["Macaroni with tomato sauce", "Pasta with tomato sauce"],
+      "note": "Probably the most-cooked weeknight dinner in Egypt and the catalogue does not have it. Distinct from pasta-pomodoro: this is tomato PASTE fried with garlic, not fresh tomatoes and basil."
+    },
+    {
+      "slug": "roz-bel-shareya",
+      "name": "Rice with Vermicelli",
+      "nameAr": "رز بالشعرية",
+      "cuisine": "egyptian",
+      "coreIngredients": ["rice", "vermicelli", "sunflower-oil", "salt", "water"],
+      "searchNames": ["Rice with vermicelli", "Roz bel shaaria", "Vermicelli rice"],
+      "note": "The base under half the Egyptian dinners in the catalogue, and it has never been a recipe of its own. The vermicelli row is used by almost nothing."
+    },
+    {
+      "slug": "kebda-eskandarani",
+      "name": "Alexandrian Liver",
+      "nameAr": "كبدة اسكندراني",
+      "cuisine": "egyptian",
+      "coreIngredients": ["liver", "garlic", "chili-flakes", "sunflower-oil", "salt"],
+      "searchNames": ["Kebda eskandarani", "Alexandrian liver", "Kabda"],
+      "note": "The Alexandria sandwich. Nothing in the catalogue uses the liver row, and offal is a protein group with no representation at all."
+    },
+    {
+      "slug": "sogo2-bel-salsa",
+      "name": "Egyptian Sausage in Tomato",
+      "nameAr": "سجق بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["sausage", "tomato-paste", "garlic", "sunflower-oil"],
+      "searchNames": ["Sujuk", "Soujouk", "Egyptian sausage"],
+      "note": "Four lines, a pan, and a protein the catalogue otherwise never cooks."
+    },
+    {
+      "slug": "firakh-bel-forn",
+      "name": "Whole Chicken in the Oven with Cumin",
+      "nameAr": "فراخ في الفرن بالكمون",
+      "cuisine": "egyptian",
+      "coreIngredients": ["whole-chicken", "cumin", "lemon", "sunflower-oil", "salt"],
+      "searchNames": ["Roast chicken", "Roasted whole chicken"],
+      "note": "Friday lunch. The whole-chicken row was added in Stage 2A specifically because a whole bird is not chicken breast, and no recipe has ever used it."
+    },
+    {
+      "slug": "beid-bel-tamatem",
+      "name": "Eggs Scrambled with Tomato",
+      "nameAr": "بيض بالطماطم",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggs", "tomatoes", "sunflower-oil", "salt"],
+      "searchNames": ["Egg and tomato", "Scrambled eggs with tomato"],
+      "note": "Four lines and it is dinner when there is nothing in the house. Distinct from shakshuka, which keeps the yolks whole and adds peppers and cheese."
+    },
+    {
+      "slug": "gibna-bel-tamatem",
+      "name": "White Cheese with Tomato and Mint",
+      "nameAr": "جبنة بيضاء بالطماطم",
+      "cuisine": "egyptian",
+      "coreIngredients": ["white-cheese", "tomatoes", "olive-oil", "mint"],
+      "searchNames": ["White cheese salad", "Feta and tomato"],
+      "note": "The plate that sits on an Egyptian breakfast table beside the foul. Breakfast is still the thinnest meal type in the catalogue."
+    },
+    {
+      "slug": "betingan-mely",
+      "name": "Fried Aubergine with Garlic and Vinegar",
+      "nameAr": "باذنجان مقلي بالتوم والخل",
+      "cuisine": "egyptian",
+      "coreIngredients": ["eggplant", "sunflower-oil", "garlic", "vinegar", "salt"],
+      "searchNames": ["Fried eggplant", "Fried aubergine"],
+      "note": "A mezze plate in every Egyptian home, and cheap. The vinegar-and-garlic dressing is what makes it Egyptian rather than generic fried aubergine."
+    },
+    {
+      "slug": "sambousek",
+      "name": "Cheese Sambousek",
+      "nameAr": "سمبوسك بالجبنة",
+      "cuisine": "egyptian",
+      "coreIngredients": ["phyllo", "white-cheese", "eggs", "sunflower-oil"],
+      "searchNames": ["Sambusak", "Sambousek", "Samboosa"],
+      "note": "Ramadan table, four lines. Uses bought phyllo, which is what an Egyptian kitchen actually does."
+    },
+    {
+      "slug": "tortilla-espanola",
+      "name": "Spanish Potato Omelette",
+      "nameAr": "عجة البطاطس الإسبانية",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["potatoes", "eggs", "onions", "olive-oil", "salt"],
+      "searchNames": ["Tortilla de patatas", "Tortilla española", "Spanish omelette"],
+      "note": "Five lines, feeds four, keeps cold. One of the best cheap mains there is and the Commons category is enormous."
+    },
+    {
+      "slug": "chicken-souvlaki",
+      "name": "Lemon and Oregano Chicken Skewers",
+      "nameAr": "أسياخ فراخ بالليمون والزعتر",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["chicken-breast", "olive-oil", "lemon", "oregano", "garlic"],
+      "searchNames": ["Souvlaki", "Chicken souvlaki"],
+      "note": "Five lines, and close enough to shish tawook that an Egyptian cook already owns everything in it."
+    },
+    {
+      "slug": "spanakorizo",
+      "name": "Greek Spinach Rice",
+      "nameAr": "رز بالسبانخ",
+      "cuisine": "mediterranean",
+      "coreIngredients": ["spinach", "rice", "onions", "olive-oil", "lemon"],
+      "searchNames": ["Spanakorizo", "Spinach rice"],
+      "note": "A one-pot vegan main at five lines. The catalogue's vegan mains are mostly legumes."
+    },
+    {
+      "slug": "naan",
+      "name": "Yogurt Flatbread",
+      "nameAr": "خبز النان",
+      "cuisine": "indian",
+      "coreIngredients": ["flour", "yogurt", "yeast", "salt", "ghee"],
+      "searchNames": ["Naan", "Naan bread"],
+      "note": "Five pantry lines and a hot pan. No oven needed, which matters in a kitchen that may not have one."
+    },
+    {
+      "slug": "chicken-katsu",
+      "name": "Crumbed Chicken Cutlet",
+      "nameAr": "فراخ بانيه",
+      "cuisine": "asian",
+      "coreIngredients": ["chicken-breast", "breadcrumbs", "eggs", "flour", "sunflower-oil"],
+      "searchNames": ["Katsu", "Tonkatsu chicken", "Chicken katsu"],
+      "note": "This is بانيه — one of the most ordered things in Egypt — and the catalogue has no crumbed cutlet at all. Tagged asian because the dish is katsu; the Egyptian name is in the title."
+    },
+    {
+      "slug": "coleslaw",
+      "name": "Cabbage and Carrot Slaw",
+      "nameAr": "سلطة كول سلو",
+      "cuisine": "american",
+      "coreIngredients": ["cabbage", "carrots", "mayonnaise", "vinegar", "salt"],
+      "searchNames": ["Coleslaw", "Cole slaw"],
+      "note": "Sold beside every roast chicken in Egypt. Five lines, no cooking, keeps for days."
+    },
+    {
+      "slug": "potato-salad",
+      "name": "Potato and Egg Salad",
+      "nameAr": "سلطة بطاطس بالبيض",
+      "cuisine": "american",
+      "coreIngredients": ["potatoes", "eggs", "mayonnaise", "parsley", "salt"],
+      "searchNames": ["Potato salad"],
+      "note": "Cheap, filling, and the Commons category is very large."
+    },
+    {
+      "slug": "pita-bread",
+      "name": "Pocket Flatbread",
+      "nameAr": "عيش شامي",
+      "cuisine": "levantine",
+      "coreIngredients": ["flour", "water", "yeast", "salt", "sunflower-oil"],
+      "searchNames": ["Pita", "Pita bread", "Pitta"],
+      "note": "Five lines, nothing perishable, and it is the bread half the levantine recipes in the catalogue assume you have."
+    }
+  ]
+}

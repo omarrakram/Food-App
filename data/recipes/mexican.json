@@ -192,14 +192,7 @@
       "quick",
       "comfort"
     ],
-    "image": {
-      "path": "curated/beef-tacos.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "ground-beef",
@@ -275,6 +268,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 150,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -298,7 +298,8 @@
         "minutes": 8,
         "uses": [
           "tomato-paste",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -359,14 +360,7 @@
       "late-night",
       "beginner"
     ],
-    "image": {
-      "path": "curated/black-bean-quesadilla.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tortilla",
@@ -499,14 +493,7 @@
       "quick",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/chicken-fajitas.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-breast",
@@ -782,14 +769,7 @@
       "healthy",
       "beginner"
     ],
-    "image": {
-      "path": "curated/guacamole.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "avocado",
@@ -903,14 +883,7 @@
       "one-pan",
       "quick"
     ],
-    "image": {
-      "path": "curated/huevos-rancheros.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tortilla",
@@ -1060,14 +1033,7 @@
       "beginner",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/mexican-rice.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "rice",
@@ -1131,6 +1097,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1166,7 +1139,8 @@
         "minutes": 20,
         "uses": [
           "salt",
-          "coriander"
+          "coriander",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1210,14 +1184,7 @@
       "budget",
       "beginner"
     ],
-    "image": {
-      "path": "curated/pico-de-gallo.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "tomatoes",

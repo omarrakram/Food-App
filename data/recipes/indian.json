@@ -36,14 +36,7 @@
       "healthy",
       "one-pan"
     ],
-    "image": {
-      "path": "curated/aloo-gobi.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "potatoes",
@@ -192,14 +185,7 @@
       "high-protein",
       "comfort"
     ],
-    "image": {
-      "path": "curated/butter-chicken-light.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chicken-thigh",
@@ -358,14 +344,7 @@
       "comfort",
       "healthy"
     ],
-    "image": {
-      "path": "curated/chana-masala.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "chickpeas",
@@ -436,6 +415,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 200,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -481,7 +467,8 @@
         "uses": [
           "chickpeas",
           "salt",
-          "coriander"
+          "coriander",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -525,14 +512,7 @@
       "beginner",
       "healthy"
     ],
-    "image": {
-      "path": "curated/cucumber-raita.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "yogurt",
@@ -641,14 +621,7 @@
       "vegetarian",
       "beginner"
     ],
-    "image": {
-      "path": "curated/dal-tadka.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "lentils",
@@ -706,6 +679,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -716,7 +696,8 @@
         "uses": [
           "lentils",
           "turmeric",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -855,6 +836,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 1000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -878,7 +866,8 @@
         "minutes": 22,
         "uses": [
           "lentils",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -937,14 +926,7 @@
       "one-pan",
       "budget"
     ],
-    "image": {
-      "path": "curated/masala-omelette.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "eggs",
@@ -1073,14 +1055,7 @@
       "high-protein",
       "healthy"
     ],
-    "image": {
-      "path": "curated/palak-paneer-style.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "spinach",
@@ -1286,6 +1261,13 @@
         "unit": "tsp",
         "prep": null,
         "staple": true
+      },
+      {
+        "slug": "water",
+        "quantity": 600,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
       }
     ],
     "steps": [
@@ -1308,7 +1290,8 @@
         "minutes": 2,
         "uses": [
           "basmati-rice",
-          "salt"
+          "salt",
+          "water"
         ],
         "safety": null,
         "safetyAr": null
@@ -1513,14 +1496,7 @@
       "batch-cook",
       "vegetarian"
     ],
-    "image": {
-      "path": "curated/vegetable-biryani.jpg",
-      "source": "generated",
-      "creator": "Akla kitchen",
-      "license": "CC0-1.0",
-      "attribution": null,
-      "sourceUrl": null
-    },
+    "image": null,
     "ingredients": [
       {
         "slug": "basmati-rice",

@@ -68,7 +68,10 @@ describe('honey is not vegan', () => {
     ).map((recipe) => recipe.slug);
 
     // If this ever drops to zero the two tests above stop proving anything.
+    // `lokmet-el-qadi` used to be named here and is not any more: it was
+    // rewritten to the authentic sugar syrup, which is the correct dish and
+    // happens to make it vegan.
     expect(honeyed.length).toBeGreaterThanOrEqual(3);
-    expect(honeyed).toContain('lokmet-el-qadi');
+    expect(honeyed).toContain('batata-mashwiya');
   });
 });

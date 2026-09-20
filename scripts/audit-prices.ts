@@ -53,8 +53,21 @@ const recipes: RawRecipe[] = readdirSync(join(ROOT, 'data', 'recipes'))
       JSON.parse(readFileSync(join(ROOT, 'data', 'recipes', file), 'utf8')) as RawRecipe[],
   );
 
-/** A line the cook has to buy: not optional, not a garnish. */
-const required = (line: RawLine) => !line.optional && !line.garnish;
+/**
+ * A line the cook has to BUY: not optional, not a garnish, and not tap water.
+ *
+ * Water became an ingredient line on 33 recipes when the rule that nothing
+ * required may hide in step prose was enforced. It is correctly an ingredient
+ * — measured, required, on the page — and it is not a purchase. Left in, it
+ * would have arrived at the top of this backlog with 33 recipes behind it and
+ * sent whoever runs the survey to price the tap.
+ *
+ * The same exclusion lives in `features/pricing/estimate.ts`; both are stating
+ * the same fact about shopping rather than about cost.
+ */
+const NOT_BOUGHT = new Set(['water']);
+const required = (line: RawLine) =>
+  !line.optional && !line.garnish && !NOT_BOUGHT.has(line.slug);
 
 const CATEGORY_BY_SLUG = new Map(INGREDIENT_CATALOGUE.map((i) => [i.slug, i.category]));
 

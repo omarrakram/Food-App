@@ -144,6 +144,24 @@ export type EstimateOptions = {
   ownedIngredientIds?: Iterable<string>;
 };
 
+/**
+ * Things a recipe measures but nobody buys.
+ *
+ * Tap water is an ingredient — it is measured, it is required, and it belongs
+ * on the ingredient list so the line count and the instructions agree. It is
+ * not a PURCHASE. Counting it as an unpriced line dropped koshari's coverage
+ * from 100% to 90% and would have put "water" at the top of the price-survey
+ * backlog with 33 recipes behind it.
+ *
+ * Excluded rather than priced at zero, because a zero in the price book is a
+ * surveyed claim and this is a statement about shopping, not about cost.
+ */
+const NOT_BOUGHT = new Set(['water']);
+
+function isNotBought(ingredientName: string): boolean {
+  return NOT_BOUGHT.has(resolveIngredient(ingredientName)?.slug ?? '');
+}
+
 export function estimateRecipeCost(
   recipe: Pick<Recipe, 'ingredients' | 'baseServings'>,
   options: EstimateOptions = {},
@@ -154,9 +172,9 @@ export function estimateRecipeCost(
   const servings = options.servings ?? recipe.baseServings;
   const includeOptional = options.includeOptional ?? false;
 
-  const considered = recipe.ingredients.filter(
-    (ingredient) => includeOptional || !ingredient.isOptional,
-  );
+  const considered = recipe.ingredients
+    .filter((ingredient) => includeOptional || !ingredient.isOptional)
+    .filter((ingredient) => !isNotBought(ingredient.name));
 
   const lines: IngredientCostLine[] = considered.map((ingredient) => {
     const quote = book.quote(ingredient.name);
