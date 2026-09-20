@@ -17,15 +17,15 @@ not replace real-user testing.
 | | | |
 |---|---:|---:|
 | **Concepts** | **525** | |
-| Represented by their own row | 290 | 55.2% |
-| Reachable through an alias | 20 | 3.8% |
-| Missing | 117 | 22.3% |
+| Represented by their own row | 300 | 57.1% |
+| Reachable through an alias | 21 | 4% |
+| Missing | 106 | 20.2% |
 | Ambiguous | 10 | 1.9% |
 | Correctly not a row — dish | 26 | 5% |
 | Correctly not a row — form | 60 | 11.4% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 310 of the 437 actionable concepts (70.9%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 321 of the 437 actionable concepts (73.5%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -37,23 +37,23 @@ fails this audit.
 | | | |
 |---|---:|---:|
 | Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 304 | 60.9% |
+| Concepts whose every term lands correctly | 315 | 63.1% |
 | Terms probed | 1218 | |
-| Terms landing correctly | 866 | 71.1% |
+| Terms landing correctly | 892 | 73.2% |
 | **Declared forms/brands whose aliasing is BROKEN** | **0** | |
 
-Catalogue: **301 canonical ingredients**, **1351 aliases**.
+Catalogue: **312 canonical ingredients**, **1408 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baking | 33 | 19 | 2 | 9 | 0 | 70% | 56.3% |
-| bread and bakery | 24 | 10 | 1 | 7 | 0 | 61.1% | 57.1% |
-| breakfast | 15 | 7 | 2 | 2 | 0 | 81.8% | 63.6% |
+| baking | 33 | 20 | 2 | 8 | 0 | 73.3% | 59.4% |
+| bread and bakery | 24 | 10 | 2 | 6 | 0 | 66.7% | 61.9% |
+| breakfast | 15 | 8 | 2 | 1 | 0 | 90.9% | 72.7% |
 | canned and jarred | 18 | 6 | 1 | 1 | 0 | 87.5% | 88.9% |
 | cheese | 23 | 12 | 1 | 5 | 0 | 72.2% | 73.9% |
-| dairy and eggs | 21 | 14 | 0 | 6 | 0 | 70% | 66.7% |
+| dairy and eggs | 21 | 15 | 0 | 5 | 0 | 75% | 71.4% |
 | drinks that are ingredients | 3 | 1 | 0 | 2 | 0 | 33.3% | 33.3% |
 | fish and seafood | 27 | 16 | 0 | 6 | 2 | 66.7% | 59.3% |
 | frozen | 15 | 4 | 0 | 2 | 2 | 50% | 66.7% |
@@ -63,39 +63,28 @@ Catalogue: **301 canonical ingredients**, **1351 aliases**.
 | international in egypt | 10 | 0 | 1 | 8 | 0 | 11.1% | 10% |
 | legumes | 17 | 13 | 0 | 0 | 1 | 92.9% | 81.3% |
 | nuts seeds dried fruit | 22 | 17 | 1 | 3 | 0 | 85.7% | 36.4% |
-| offal | 17 | 4 | 0 | 10 | 1 | 26.7% | 25% |
+| offal | 17 | 6 | 0 | 8 | 1 | 40% | 37.5% |
 | oils and fats | 6 | 3 | 1 | 2 | 0 | 66.7% | 66.7% |
-| packaged pantry | 16 | 7 | 0 | 4 | 0 | 63.6% | 68.8% |
-| pasta and noodles | 7 | 2 | 2 | 2 | 0 | 66.7% | 42.9% |
+| packaged pantry | 16 | 8 | 0 | 3 | 0 | 72.7% | 75% |
+| pasta and noodles | 7 | 3 | 2 | 1 | 0 | 83.3% | 57.1% |
 | poultry | 15 | 13 | 0 | 2 | 0 | 86.7% | 86.7% |
 | prepared and deli | 8 | 0 | 0 | 0 | 0 | 0% | 100% |
 | ramadan and eid | 6 | 0 | 0 | 2 | 0 | 0% | 33.3% |
 | red meat cuts | 25 | 11 | 3 | 7 | 0 | 66.7% | 34.8% |
 | sauces and condiments | 27 | 18 | 1 | 6 | 1 | 73.1% | 63% |
-| snacks used as ingredients | 13 | 2 | 1 | 5 | 0 | 37.5% | 30% |
-| spice blends | 8 | 4 | 0 | 3 | 0 | 57.1% | 62.5% |
+| snacks used as ingredients | 13 | 3 | 1 | 4 | 0 | 50% | 40% |
+| spice blends | 8 | 5 | 0 | 2 | 0 | 71.4% | 75% |
 | spices | 35 | 25 | 1 | 5 | 0 | 83.9% | 74.3% |
-| vegetables | 56 | 41 | 1 | 7 | 2 | 82.4% | 67.9% |
+| vegetables | 56 | 42 | 1 | 6 | 2 | 84.3% | 69.6% |
 
 ## 5. Missing, by priority
 
-### P1 — 13
+### P1 — 2
 
 | Concept | Category | Terms probed |
 |---|---|---|
-| sahlab powder | baking | سحلب · sahlab |
-| kunafa dough | bread and bakery | كنافة · kunafa · konafa |
-| chocolate spread | breakfast | نوتيلا · chocolate spread |
-| whipping cream | dairy and eggs | كريمة خفق · whipping cream |
-| kidney | offal | كلاوي · kidney · kalawi |
-| tripe | offal | كرشة · tripe · kersha |
-| carob drink | packaged pantry | خروب · carob · kharoub |
-| orzo / lesan asfour | pasta and noodles | لسان عصفور · orzo |
 | mixed dried fruit / yameesh | ramadan and eid | ياميش · yameesh |
 | sharbat | ramadan and eid | شربات · sugar syrup · sharbat |
-| plain biscuits | snacks used as ingredients | بسكويت سادة · biscuits |
-| shawarma spice | spice blends | بهارات شاورما · shawarma spice |
-| fried onions, ready | vegetables | بصل مقلي · crispy onions |
 
 ### P2 — 66
 
