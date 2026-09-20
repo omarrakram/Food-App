@@ -1373,8 +1373,9 @@ organise.
 
 ### The 13 newly discovered P1 gaps, classified
 
-Ten earn rows. Three do not, and saying so is the point of classifying rather
-than implementing.
+**Eleven earn rows. Two do not**, and saying so is the point of classifying
+rather than implementing. (An earlier draft of this section said "ten" and
+then listed eleven; the list was right and the count was wrong.)
 
 | Concept | Verdict |
 |---|---|
@@ -1495,6 +1496,89 @@ Still open, and deliberately not guessed:
 - **`كريمة خفق` vs `كريمة طهي`** — is whipping cream a separate purchase in an
   Egyptian kitchen, or does one product do both jobs?
 - **`صوص طماطم`** — new. It reaches both ketchup and passata.
+
+---
+
+## 9j. Stage 2D-A: the census was measuring one thing and reporting two
+
+### The defect
+
+The census had a `form` and `brand` label, and a labelled concept left the
+denominator. So the LABEL became the pass mark: deciding that `بامية مجمدة` is
+a form of okra made it stop counting as a gap, whether or not anyone typing it
+ever reached okra. That is the same shape as the `MUST_NOT_SUGGEST` assertion
+Stage 0 replaced — a classification that excuses itself.
+
+Two metrics now, kept apart:
+
+- **Ontology coverage** — is the concept honestly represented? A frozen okra
+  correctly has no row, and counting it as a gap would make the score fall
+  every time the ontology is applied properly.
+- **Input coverage** — if a user types these words, do they get there? Every
+  `form` and `brand` entry now names the base slug its terms must reach, in an
+  `expects` column. Those expectations are **authored, never read back from the
+  resolver**: deriving them from current behaviour would make the check
+  vacuous. An unmet expectation fails the audit.
+
+### What that immediately exposed
+
+| | |
+|---|---:|
+| Ontology coverage | **71.3%** (310 of 435 actionable) |
+| Input coverage, concepts | **48.8%** (244 of 500) |
+| Input coverage, terms | **63.6%** (776 of 1220) |
+| Declared forms whose aliasing is BROKEN | **62** |
+
+**The gap between 71% and 49% is the whole point of splitting the metric.**
+
+And the cause is one thing: **`NOISE_WORDS` is entirely English.** `frozen`,
+`canned`, `dried`, `fresh`, `whole`, `peeled` are stripped; `مجمدة`, `معلب`,
+`ناشف`, `طازج`, `حب`, `مقشر`, `مدخنة`, `مخلل`, `سادة` are not. In an
+Arabic-first app.
+
+**This also corrects a claim I made in Stage 2B.** That commit said all four
+frozen forms "already resolve to the fresh row, because مجمدة is a noise word".
+That was wrong. The probe behind it fell back to the English term when the
+Arabic one failed, so `frozen molokhia` resolved and `ملوخية مجمدة` did not —
+and the OR hid it. The per-term audit cannot make that mistake.
+
+### Census integrity, strengthened
+
+- **Stable `id` per concept**, so identity does not depend on term order.
+- **Any shared term is a duplicate**, compared RAW rather than normalised —
+  normalisation is what makes a form a form (`frozen strawberry` normalises to
+  `strawberry`), and keying on it flagged 20 working pairs as duplicates.
+- Four real duplicates removed (`tomato paste`, `instant noodles`, `ghee`
+  twice over), and `kunafa nabulsia` dropped as a form of a concept we do not
+  have.
+
+### The tomato cluster, audited as asked
+
+`tomato-paste` and `tomato-sauce` **shared one Arabic name**, `صلصة طماطم`, so
+first-writer-wins silently decided which one it meant. And `صوص طماطم` was an
+alias of `ketchup`.
+
+| Term | Now |
+|---|---|
+| `صلصة طماطم` | `tomato-paste` — صلصة IS the concentrated paste |
+| `صوص طماطم` | **nothing.** A bottle on an Egyptian table is ketchup; the same phrase in a recipe is cooked sauce. Neither row owns it. |
+| `كاتشب`, `هاينز` | `ketchup` — the brand under the generic |
+| `passata`, `بيوريه طماطم` | `tomato-sauce`, now named `صوص طماطم مطبوخ` |
+| `معجون طماطم` | `tomato-paste` |
+
+### Other corrections
+
+- `whipping cream` moved from cheese to dairy.
+- Six `form` labels were wrong and became honest verdicts: `fish fillet` and
+  `frozen fish fillet` are **ambiguous** (species-unspecified — Egyptians buy
+  فيليه بلطي, not "fillet"); `tuna steak`, `watermelon seeds` and `white
+  radish` are **missing**; `sesame snaps` is a **dish**.
+
+### A finding to carry forward
+
+Noise-word stripping means `dried X` ≡ `X`. Right for `dried mint` and `dried
+molokhia`; **wrong for `لومي` (dried lime), which is not lime.** Neither row
+exists yet, so nothing is broken today. Recorded before one of them is added.
 
 ---
 

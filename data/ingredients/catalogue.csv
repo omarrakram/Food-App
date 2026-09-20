@@ -139,7 +139,7 @@ ice-cream,ice cream,آيس كريم,frozen,g,,dairy,ايس كريم|آيس كر�
 icing-sugar,icing sugar,سكر بودرة,pantry,g,,,سكر بودرة|powdered sugar,0,0
 jam,jam,مربى,pantry,g,,,مربى|meraba|mrabba|marmalade|مربي|meraba faraola,0,0
 kashkaval,kashkaval,جبنة قشقوان,dairy,g,,dairy,قشقوان|kashkawan|kashkawal|gebna kashkawan,0,1
-ketchup,ketchup,كاتشب,sauces,ml,,,كاتشب|catsup|صوص طماطم,0,0
+ketchup,ketchup,كاتشب,sauces,ml,,,كاتشب|catsup|كتشب|هاينز|heinz ketchup,0,0
 kidney-beans,kidney beans,فاصوليا حمراء,protein,g,,,red beans|فاصوليا حمراء|rajma,0,0
 kiwi,kiwi,كيوي,fruit,piece,80,,كيوي|kiwifruit,0,1
 kofta,kofta,كفتة,protein,g,60,,kufta|كفتة|كفته,0,1
@@ -271,8 +271,8 @@ thyme-dried,thyme,زعتر,spices,g,,,زعتر|zaatar|zatar,1,0
 tilapia,tilapia,بلطي,protein,g,300,fish,fish|bolti|بلطى|سمك,0,1
 toast-bread,toast bread,عيش توست,bakery,slice,30,gluten,toast|white bread|sandwich bread|توست,0,1
 tofu,tofu,توفو,protein,g,,soy,توفو|bean curd,0,1
-tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,salsa|tomato puree|صلصه|salsa tamatem|salsa tomatem,1,0
-tomato-sauce,tomato sauce,صلصة طماطم,sauces,g,,,passata|صوص طماطم مطبوخ,0,0
+tomato-paste,tomato paste,صلصة طماطم,sauces,tbsp,16,,salsa|tomato puree|صلصه|salsa tamatem|salsa tomatem|معجون طماطم|tomato concentrate,1,0
+tomato-sauce,tomato sauce,صوص طماطم مطبوخ,sauces,g,,,passata|بيوريه طماطم|tomato passata|صلصة مطبوخة,0,0
 tomatoes,tomatoes,طماطم,vegetables,piece,120,,tomato|oota|طماطم حمراء|قوطة|outa|tamatem|auta,0,1
 tortilla,tortilla,تورتيلا,bakery,piece,60,gluten,تورتيلا|wrap|خبز تورتيلا,0,1
 trotters,trotters,كوارع,protein,g,,,كوارع|kawareh|kaware|kawari3|أكارع|cow feet|calf trotters,0,1

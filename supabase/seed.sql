@@ -3186,7 +3186,11 @@ values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'كاتشب') on conflict do not
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'catsup') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
-values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'صوص طماطم') on conflict do nothing;
+values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'كتشب') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'هاينز') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('e884a28e-6f3d-5cf0-b6d5-9569fdf97f8d', 'heinz ketchup') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('1bfd2e36-1e4e-584e-8a7b-8af0913707fb', 'kidney-beans', 'kidney beans', 'فاصوليا حمراء', 'protein', 'g', null, false, false)
 on conflict (slug) do update set
@@ -6158,6 +6162,10 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d25879ab-da91-515e-babe-3284473de9ba', 'salsa tamatem') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('d25879ab-da91-515e-babe-3284473de9ba', 'salsa tomatem') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d25879ab-da91-515e-babe-3284473de9ba', 'معجون طماطم') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('d25879ab-da91-515e-babe-3284473de9ba', 'tomato concentrate') on conflict do nothing;
 insert into public.ingredient_price_estimates (
   ingredient_id, country, currency, unit, quantity,
   estimated_low_minor, estimated_avg_minor, estimated_high_minor, origin, last_updated)
@@ -6170,7 +6178,7 @@ on conflict (ingredient_id, country, unit, quantity) do update set
   last_updated = excluded.last_updated;
 
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'tomato-sauce', 'tomato sauce', 'صلصة طماطم', 'sauces', 'g', null, false, false)
+values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'tomato-sauce', 'tomato sauce', 'صوص طماطم مطبوخ', 'sauces', 'g', null, false, false)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -6183,7 +6191,11 @@ on conflict (slug) do update set
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'passata') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
-values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'صوص طماطم مطبوخ') on conflict do nothing;
+values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'بيوريه طماطم') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'tomato passata') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('19bc7acd-f4cd-5aa4-9934-0e3bee41439b', 'صلصة مطبوخة') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('e40147a0-afff-5cc5-809e-690b81481ae3', 'tomatoes', 'tomatoes', 'طماطم', 'vegetables', 'piece', 120, false, true)
 on conflict (slug) do update set
