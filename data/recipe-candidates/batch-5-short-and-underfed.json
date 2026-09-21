@@ -1,0 +1,565 @@
+{
+  "batch": "batch-5-short-and-underfed",
+  "intent": "28 candidates against the four measured deficits rather than against a percentage. THREE LAMB and FOUR SEAFOOD-OR-FISH, because lamb is 4 recipes of 201 and seafood is 4. SEVEN at five core lines or fewer, because honest short recipes are 29 against a ~44 target. Two breakfast/street snacks, because breakfast is 37 against 145 lunches. Nineteen are Egyptian, which is the natural consequence of going after those deficits rather than the aim: not one of these is a foreign dish relabelled, and `shorbet-2ar3` was just reclassified OUT of Egyptian in the same stage for exactly that reason. Fourteen candidates exist partly to use catalogue rows no recipe touches: lamb-chops, lamb-shank, crab, lupini-beans, artichoke, purslane, chard, turnip, roqaq, barley, ricotta, sumac, coconut-milk, dried-apricot. Nothing already tried is in the pool.",
+  "candidates": [
+    {
+      "slug": "riyash-danny-mashwiya",
+      "name": "Grilled Lamb Chops",
+      "nameAr": "ريش ضاني مشوية",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "lamb-chops",
+        "garlic",
+        "cumin",
+        "olive-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Lamb chops",
+        "Grilled lamb chops",
+        "Lamb cutlets"
+      ],
+      "note": "Four lamb recipes in 201, and the lamb-chops row has none. Five minutes a side over real heat."
+    },
+    {
+      "slug": "moza-danny",
+      "name": "Braised Lamb Shank",
+      "nameAr": "موزة ضاني",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "lamb-shank",
+        "onions",
+        "tomato-paste",
+        "bay-leaf",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Lamb shank",
+        "Braised lamb shank",
+        "Lamb shank stew"
+      ],
+      "note": "Friday lunch, a cheap cut and almost no work. The lamb-shank row is unused. A veal shank was tried in batch 4 and got osso buco; this is a different cut, a different search and a different dish."
+    },
+    {
+      "slug": "kabooria",
+      "name": "Crab in Tomato and Garlic",
+      "nameAr": "كابوريا بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "crab",
+        "tomatoes",
+        "garlic",
+        "coriander",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Crab in tomato sauce",
+        "Crab",
+        "Blue crab"
+      ],
+      "note": "Alexandria in summer. The crab row is used by nothing at all."
+    },
+    {
+      "slug": "gambari-bel-salsa",
+      "name": "Prawns in Tomato Sauce",
+      "nameAr": "جمبري بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "shrimp",
+        "tomatoes",
+        "tomato-paste",
+        "garlic",
+        "coriander",
+        "salt"
+      ],
+      "searchNames": [
+        "Prawns in tomato sauce",
+        "Shrimp in tomato",
+        "Gambari"
+      ],
+      "note": "Distinct from the garlic-butter pan of prawns already here: this one is a sauce you eat with rice or bread."
+    },
+    {
+      "slug": "samak-makli",
+      "name": "Fried Bolti",
+      "nameAr": "سمك بلطي مقلي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "tilapia",
+        "flour",
+        "cumin",
+        "sunflower-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Fried tilapia",
+        "Fried fish",
+        "Samak makli"
+      ],
+      "note": "The fish Egypt actually eats, floured and deep fried. Grilled mullet and sayadeya are both in the catalogue; fried bolti is neither."
+    },
+    {
+      "slug": "termes",
+      "name": "Lupini Beans",
+      "nameAr": "ترمس",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "lupini-beans",
+        "salt",
+        "water",
+        "lemon"
+      ],
+      "searchNames": [
+        "Lupini beans",
+        "Termes",
+        "Lupin beans"
+      ],
+      "note": "Four lines, no cooking beyond a long soak, and the lupini row has no recipe. Street food you eat out of a paper cone."
+    },
+    {
+      "slug": "hommos-el-sham",
+      "name": "Hot Chickpeas with Cumin",
+      "nameAr": "حمص الشام",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chickpeas",
+        "cumin",
+        "lemon",
+        "salt",
+        "water"
+      ],
+      "searchNames": [
+        "Hot chickpeas",
+        "Chickpea snack",
+        "Hommos el sham"
+      ],
+      "note": "Boiled chickpeas in their own broth with cumin and lemon. Winter street food, five lines, and nothing like the hummus dip already here."
+    },
+    {
+      "slug": "beid-masloo2-bel-kammun",
+      "name": "Boiled Eggs with Cumin and Salt",
+      "nameAr": "بيض مسلوق بالكمون",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "eggs",
+        "cumin",
+        "salt"
+      ],
+      "searchNames": [
+        "Boiled eggs",
+        "Hard boiled eggs",
+        "Egg with cumin"
+      ],
+      "note": "Three lines. Breakfast is 37 recipes against 145 lunches, and this is what half of Egypt eats on the way to work."
+    },
+    {
+      "slug": "arnabeet-makli",
+      "name": "Fried Cauliflower",
+      "nameAr": "قرنبيط مقلي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "cauliflower",
+        "flour",
+        "cumin",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Fried cauliflower",
+        "Cauliflower fritters",
+        "Arnabeet"
+      ],
+      "note": "Five lines. The roasted cauliflower with tahini in the catalogue is a different dish in every respect but the vegetable."
+    },
+    {
+      "slug": "ardi-shoki-bel-zeit",
+      "name": "Artichokes in Oil and Lemon",
+      "nameAr": "أرضي شوكي بالزيت",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "artichoke",
+        "olive-oil",
+        "lemon",
+        "garlic",
+        "coriander",
+        "salt"
+      ],
+      "searchNames": [
+        "Artichokes in oil",
+        "Braised artichokes",
+        "Artichoke hearts"
+      ],
+      "note": "Spring, and the artichoke row has no recipe."
+    },
+    {
+      "slug": "rigla-bel-zeit",
+      "name": "Purslane with Garlic",
+      "nameAr": "رجلة بالزيت والتوم",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "purslane",
+        "garlic",
+        "olive-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Purslane",
+        "Purslane salad",
+        "Rigla"
+      ],
+      "note": "Rural Egyptian green, five lines, and the purslane row is unused. Photography is the risk here, not the recipe."
+    },
+    {
+      "slug": "selk-bel-3ads",
+      "name": "Chard and Lentils",
+      "nameAr": "سلق بالعدس",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chard",
+        "lentils",
+        "onions",
+        "garlic",
+        "olive-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Chard and lentils",
+        "Swiss chard with lentils",
+        "Lentil chard soup"
+      ],
+      "note": "The chard row has no recipe. A thick pot rather than a soup, which is what separates it from the four lentil soups already here."
+    },
+    {
+      "slug": "lift-bel-lahma",
+      "name": "Turnips with Beef",
+      "nameAr": "لفت باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "turnip",
+        "beef-cubes",
+        "onions",
+        "tomato-paste",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Turnip stew",
+        "Braised turnips with beef",
+        "Turnip and beef"
+      ],
+      "note": "Winter stew, and the turnip row is used by nothing."
+    },
+    {
+      "slug": "koronb-bel-lahma",
+      "name": "Braised Cabbage with Beef",
+      "nameAr": "كرنب باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "cabbage",
+        "beef-cubes",
+        "onions",
+        "tomato-paste",
+        "cumin",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Cabbage and beef stew",
+        "Braised cabbage with meat"
+      ],
+      "note": "Not the stuffed cabbage already in the catalogue — this is cabbage braised down with beef until it goes sweet."
+    },
+    {
+      "slug": "sabanekh-bel-lahma",
+      "name": "Spinach with Beef",
+      "nameAr": "سبانخ باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "spinach",
+        "beef-cubes",
+        "onions",
+        "tomato-paste",
+        "garlic",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Spinach and beef stew",
+        "Spinach with meat",
+        "Sabanekh"
+      ],
+      "note": "One of the handful of stews on rotation in most Egyptian houses."
+    },
+    {
+      "slug": "kabab-mashwi",
+      "name": "Grilled Beef Kebab",
+      "nameAr": "كباب مشوي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "beef-cubes",
+        "onions",
+        "cumin",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Beef kebab",
+        "Grilled beef skewers",
+        "Kebab"
+      ],
+      "note": "Chunks on a skewer, not mince. Five lines. Grilled kofta was searched for in batch 4 and found nothing; this is a different dish and a different search."
+    },
+    {
+      "slug": "farkha-mahshiya",
+      "name": "Stuffed Roast Chicken",
+      "nameAr": "فرخة محشية بالأرز",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "whole-chicken",
+        "rice",
+        "onions",
+        "butter",
+        "cinnamon",
+        "nuts-mix",
+        "salt"
+      ],
+      "searchNames": [
+        "Stuffed roast chicken",
+        "Chicken stuffed with rice",
+        "Roast chicken with rice stuffing"
+      ],
+      "note": "The festive version of the bird already in the catalogue: stuffed with spiced rice rather than rubbed with cumin."
+    },
+    {
+      "slug": "roqaq-bel-lahma",
+      "name": "Roqaq Pie with Minced Beef",
+      "nameAr": "رقاق باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "roqaq",
+        "ground-beef",
+        "onions",
+        "butter",
+        "milk",
+        "salt"
+      ],
+      "searchNames": [
+        "Roqaq",
+        "Egyptian layered pastry pie",
+        "Roqaq bel lahma"
+      ],
+      "note": "Eid food. Layers of dried roqaq sheets soaked in milk and butter over spiced mince, and the roqaq row has no recipe."
+    },
+    {
+      "slug": "kofta-bel-tahina",
+      "name": "Kofta Baked in Tahini",
+      "nameAr": "كفتة بالطحينة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "ground-beef",
+        "onions",
+        "parsley",
+        "tahini",
+        "lemon",
+        "garlic",
+        "salt"
+      ],
+      "searchNames": [
+        "Kofta with tahini sauce",
+        "Meatballs in tahini",
+        "Kofta bel tahina"
+      ],
+      "note": "The third kofta in the catalogue and genuinely the third dish: the tagine is tomato and potato, the salsa is a stovetop tomato sauce, this one bakes under tahini."
+    },
+    {
+      "slug": "beef-shawarma",
+      "name": "Beef Shawarma",
+      "nameAr": "شاورما لحمة",
+      "cuisine": "levantine",
+      "coreIngredients": [
+        "beef-steak",
+        "onions",
+        "vinegar",
+        "cumin",
+        "cinnamon",
+        "garlic",
+        "salt"
+      ],
+      "searchNames": [
+        "Beef shawarma",
+        "Shawarma meat",
+        "Lamb shawarma"
+      ],
+      "note": "Chicken shawarma is here; beef is the other half of every shawarma counter and a different marinade."
+    },
+    {
+      "slug": "dajaj-mosakhan",
+      "name": "Sumac Chicken with Onions",
+      "nameAr": "مسخن",
+      "cuisine": "levantine",
+      "coreIngredients": [
+        "chicken-thigh",
+        "onions",
+        "sumac",
+        "olive-oil",
+        "baladi-bread",
+        "nuts-mix"
+      ],
+      "searchNames": [
+        "Musakhan",
+        "Sumac chicken",
+        "Palestinian chicken"
+      ],
+      "note": "A kilo of onions, sumac and bread underneath to catch the juices. Nothing in the catalogue uses sumac as the main seasoning."
+    },
+    {
+      "slug": "lamb-curry",
+      "name": "Lamb Curry",
+      "nameAr": "كاري ضاني",
+      "cuisine": "indian",
+      "coreIngredients": [
+        "lamb",
+        "onions",
+        "yogurt",
+        "curry-powder",
+        "ginger",
+        "garlic",
+        "salt"
+      ],
+      "searchNames": [
+        "Lamb curry",
+        "Mutton curry",
+        "Rogan josh"
+      ],
+      "note": "Lamb again, from the other direction, and genuinely cooked in Egyptian homes."
+    },
+    {
+      "slug": "fish-curry",
+      "name": "Fish Curry",
+      "nameAr": "كاري سمك",
+      "cuisine": "indian",
+      "coreIngredients": [
+        "tilapia",
+        "coconut-milk",
+        "turmeric",
+        "ginger",
+        "garlic",
+        "coriander",
+        "salt"
+      ],
+      "searchNames": [
+        "Fish curry",
+        "Fish in coconut curry"
+      ],
+      "note": "Fish is 11 of 201 recipes. This one is a sauce rather than a grill or a bake."
+    },
+    {
+      "slug": "lamb-tagine-apricot",
+      "name": "Lamb Tagine with Apricots",
+      "nameAr": "طاجن ضاني بالمشمش",
+      "cuisine": "mediterranean",
+      "coreIngredients": [
+        "lamb",
+        "dried-apricot",
+        "onions",
+        "cinnamon",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Lamb tagine",
+        "Moroccan lamb tagine",
+        "Lamb with apricots"
+      ],
+      "note": "Third lamb candidate on purpose. Sweet-savoury, slow, and it uses the dried-apricot row for something other than a compote."
+    },
+    {
+      "slug": "prawn-pasta",
+      "name": "Prawn and Garlic Pasta",
+      "nameAr": "مكرونة بالجمبري",
+      "cuisine": "italian",
+      "coreIngredients": [
+        "pasta",
+        "shrimp",
+        "garlic",
+        "chili-flakes",
+        "olive-oil",
+        "parsley",
+        "salt"
+      ],
+      "searchNames": [
+        "Prawn pasta",
+        "Shrimp pasta",
+        "Spaghetti with prawns"
+      ],
+      "note": "Seafood and a weeknight pasta at the same time. The garlic prawns already here are a pan dish with no pasta in them."
+    },
+    {
+      "slug": "spinach-ricotta-pasta",
+      "name": "Spinach and Ricotta Pasta",
+      "nameAr": "مكرونة بالسبانخ والريكوتا",
+      "cuisine": "italian",
+      "coreIngredients": [
+        "pasta",
+        "spinach",
+        "ricotta",
+        "garlic",
+        "olive-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Spinach ricotta pasta",
+        "Pasta with ricotta and spinach"
+      ],
+      "note": "A substantial vegetarian main that is not a legume, and the ricotta row is unused."
+    },
+    {
+      "slug": "baked-fish-potatoes",
+      "name": "Baked Fish with Potatoes",
+      "nameAr": "سمك بالبطاطس في الفرن",
+      "cuisine": "mediterranean",
+      "coreIngredients": [
+        "sea-bass",
+        "potatoes",
+        "lemon",
+        "olive-oil",
+        "garlic",
+        "oregano",
+        "salt"
+      ],
+      "searchNames": [
+        "Baked fish with potatoes",
+        "Fish and potato bake",
+        "Oven baked fish"
+      ],
+      "note": "One tray, fish and its side together. Distinct from the sayadeya rice and from the grilled bream."
+    },
+    {
+      "slug": "shorbet-sha3eer",
+      "name": "Barley and Vegetable Soup",
+      "nameAr": "شوربة شعير بالخضار",
+      "cuisine": "mediterranean",
+      "coreIngredients": [
+        "barley",
+        "carrots",
+        "celery",
+        "onions",
+        "stock-cube",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Barley soup",
+        "Vegetable barley soup",
+        "Pearl barley soup"
+      ],
+      "note": "Cheap, filling, keeps for days, and the barley row has no recipe."
+    }
+  ]
+}
