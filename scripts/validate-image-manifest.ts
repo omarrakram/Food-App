@@ -16,6 +16,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { RECIPE_CATALOGUE } from '../src/features/recipes/catalogue.generated.ts';
+import { commonsKey } from './lib/commons-photography.ts';
 
 /**
  * What the bytes actually are, read from their own header.
@@ -173,19 +174,19 @@ function main(): void {
   // A photograph refused on review must never come back — including by hand.
   const rejectedPath = join(ROOT, 'data', 'images', 'rejected.json');
   if (existsSync(rejectedPath)) {
+    // `commonsKey` is shared with the fetcher on purpose. These two used to
+    // normalise differently — the validator to underscores, the fetcher not at
+    // all — and the disagreement made 15 refusals inert in acquisition while
+    // still failing here, which costs a whole run to discover.
     const refused = new Map(
       (
         JSON.parse(readFileSync(rejectedPath, 'utf8')) as {
           files: { title: string; reason: string }[];
         }
-      ).files.map((entry) => [
-        entry.title.replace(/^File:/, '').replace(/ /g, '_').toLowerCase(),
-        entry.reason,
-      ]),
+      ).files.map((entry) => [commonsKey(entry.title), entry.reason]),
     );
     for (const image of manifest.images) {
-      const name = decodeURIComponent(image.originalUrl.split('/').pop() ?? '').toLowerCase();
-      const reason = refused.get(name);
+      const reason = refused.get(commonsKey(image.originalUrl.split('/').pop() ?? ''));
       if (reason) {
         problems.push(`${image.recipeSlug}: uses a photograph refused on review — ${reason}`);
       }

@@ -181,7 +181,41 @@ export function rejectedTitles(rejectedPath: string): Map<string, string> {
   const parsed = JSON.parse(readFileSync(rejectedPath, 'utf8')) as {
     files: { title: string; reason: string }[];
   };
-  return new Map(parsed.files.map((entry) => [entry.title.toLowerCase(), entry.reason]));
+  return new Map(parsed.files.map((entry) => [commonsKey(entry.title), entry.reason]));
+}
+
+/**
+ * ONE SPELLING FOR A COMMONS FILE, because there are three in circulation.
+ *
+ * The API returns `File:Chickens in market.jpg`. A source-page URL spells the
+ * same file `File:Chickens_in_market.jpg`. An original-file URL spells it
+ * `Chickens_in_market.jpg`, sometimes percent-escaped. `rejected.json` is
+ * written by hand during review, so which one lands in it depends on whether
+ * the reviewer copied the title or the link.
+ *
+ * That was not hypothetical. This function exists because the lookup used to
+ * be `entry.title.toLowerCase()` against the API's spelling, and 15 of the 61
+ * refusals on the list — every one recorded during batch 3, all derived from
+ * source-page URLs — therefore matched nothing at all. The fetcher went
+ * straight back to `File:Chickens in market.jpg`, a butcher's window of raw
+ * poultry, for the batch-4 drumstick candidate. The refusal list had been
+ * quietly inert for a third of its entries.
+ *
+ * The validators were not fooled, because they normalised to underscores
+ * before comparing and caught it. That is why the gate is separate from the
+ * thing it gates. But a refusal that only stops a photograph at the gate has
+ * already cost the acquisition run, so the fetcher has to agree — hence one
+ * function, used by all three.
+ */
+export function commonsKey(title: string): string {
+  let value = title.trim();
+  if (value.startsWith('File:')) value = value.slice('File:'.length);
+  try {
+    value = decodeURIComponent(value);
+  } catch {
+    // A stray % that is not an escape sequence. Compare it as written.
+  }
+  return value.replace(/_/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -572,7 +606,7 @@ async function* candidatesFor(
       for (const candidate of found) {
         if (seen.has(candidate.url) || !usable(candidate, subject)) continue;
         seen.add(candidate.url);
-        const why = refused.get(candidate.title.toLowerCase());
+        const why = refused.get(commonsKey(candidate.title));
         if (why) {
           note(`${candidate.title}: refused on review — ${why}`);
           continue;

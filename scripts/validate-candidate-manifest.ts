@@ -26,6 +26,8 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { commonsKey } from './lib/commons-photography.ts';
+
 /**
  * What the bytes actually are, read from their own header.
  *
@@ -219,17 +221,14 @@ function main(): void {
   // A photograph refused on review must never come back — including by hand,
   // and including through the candidate door.
   if (existsSync(REJECTED)) {
+    // Shared with the fetcher and the production validator; see `commonsKey`.
     const refused = new Map(
       (
         JSON.parse(readFileSync(REJECTED, 'utf8')) as { files: { title: string; reason: string }[] }
-      ).files.map((entry) => [
-        entry.title.replace(/^File:/, '').replace(/ /g, '_').toLowerCase(),
-        entry.reason,
-      ]),
+      ).files.map((entry) => [commonsKey(entry.title), entry.reason]),
     );
     for (const image of manifest.images) {
-      const name = decodeURIComponent(image.originalUrl.split('/').pop() ?? '').toLowerCase();
-      const reason = refused.get(name);
+      const reason = refused.get(commonsKey(image.originalUrl.split('/').pop() ?? ''));
       if (reason) {
         problems.push(`${image.candidateSlug}: uses a photograph refused on review — ${reason}`);
       }
