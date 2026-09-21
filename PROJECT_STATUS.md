@@ -823,22 +823,29 @@ implementation with two drivers, and the candidate driver stages into
 `npm run images:promote` is the only door into production, takes dish names,
 and refuses any dish that has no recipe.
 
-| | Before | Batch 1 | Batch 2 | Batch 3 | Batch 4 |
-|---|---:|---:|---:|---:|---:|
-| Recipes | 161 | 172 | 182 | 192 | **200** |
-| Photographs | 67 (41.6%) | 79 (45.9%) | 89 (48.9%) | 98 (51.0%) | **106 (53.0%)** |
-| ≤5 TOTAL ingredient lines | 4 | 15 | 22 | 26 | **28** |
-| Egyptian | 36 (22.4%) | 43 (25.0%) | 48 (26.4%) | 53 (27.6%) | **59 (29.5%)** |
+| | Before | Batch 1 | Batch 2 | Batch 3 | Batch 4 | Batch 5 |
+|---|---:|---:|---:|---:|---:|---:|
+| Recipes | 161 | 172 | 182 | 192 | 200 | **205** |
+| Photographs | 67 (41.6%) | 79 (45.9%) | 89 (48.9%) | 98 (51.0%) | 106 (53.0%) | **111 (54.1%)** |
+| ≤5 TOTAL ingredient lines | 4 | 15 | 22 | 26 | 28 | **29** |
+| Egyptian | 36 (22.4%) | 43 (25.0%) | 48 (26.4%) | 53 (27.6%) | 59 (29.5%) | **61 (29.8%)** |
+
+Batch 5 is the flattest column in the table, and it is an honest one. Four
+photographs of eighteen survived review, and none of the four dishes came in
+at five lines — fried cauliflower and fried bolti are both six once the water,
+the salt and the frying oil are on the page where they belong. The ≤5 count
+moved by one because Stage 3P.4 wrote `eish-baladi`, not because batch 5 found
+a short dish.
 
 "≤5" counts every line, including salt and oil. Nothing is laundered through
 staple, optional or garnish flags.
 
 ### Why the human review step is not optional
 
-Across four batches, 93 distinct dishes were proposed and **99 photographs
+Across five batches, 121 distinct dishes were proposed and **119 photographs
 passed every mechanical check** — licence, size, format, category,
-no-duplicate, pork-and-alcohol. A person then looked at all 99 and refused
-**58**:
+no-duplicate, pork-and-alcohol. A person then looked at all 119 and refused
+**71**:
 
 - a live Nile tilapia swimming in an aquarium, for baked tilapia;
 - whole plucked chickens hanging in a butcher's window, for chicken livers;
@@ -854,17 +861,30 @@ no-duplicate, pork-and-alcohol. A person then looked at all 99 and refused
   marinated drumsticks on a cold grill rack, Chinese lacquered squab for
   hamam mahshi, osso buco on risotto for a braised shank, and a shop window
   in Nicosia with a bystander's face and beer-brand parasols reflected across
-  the bread.
+  the bread;
+- and from batch 5, where fourteen of eighteen went: a market tray of raw live
+  blue crabs, a sliced aspic terrine with ham set in gelatine for boiled eggs
+  with cumin, a lamb shank standing in an Indian curry, a camera date stamp
+  burned across the bottom of a plate of prawn pasta, and a saucepan of gruel
+  held between two people's hands for barley soup.
 
-One of the 45 was refused **after** it had been promoted. `firakh-bel-forn` is
+Batch 5 also produced the closest call so far. `kabab-mashwi` came back as a
+good studio photograph of a grilled kebab on flatbread — and it is MINCED
+meat, one hand-moulded cylinder, where the candidate is cubed beef on a
+skewer. Mince against cubes is the whole difference between kofta and kabab.
+Rewriting the candidate to match would have produced a recipe and a
+photograph; it would also have meant the photograph chose the dish, which
+inverts the pipeline. Refused.
+
+One dish was refused **after** it had already been promoted. `firakh-bel-forn` is
 a whole bird roasted breast-down; at thumbnail size its photograph read as
 roast chicken, and at full size it is two jointed leg quarters with grill bars
 charred across them. The promotion was reversed, the file added to
 `rejected.json`, and the recipe went back onto the branded fallback rather
-than keeping a picture of a different preparation. Photo coverage is 51.0%
-rather than 51.6% because of it, which is the trade this project has already
-decided: the floor is 41.6% and a wrong photograph is not a way to stay above
-it.
+than keeping a picture of a different preparation. Photo coverage stood at
+51.0% rather than 51.6% because of it, which is the trade this project has
+already decided: the floor is 41.6%, and a wrong photograph is not a way to
+stay above it.
 
 Every refusal is in `data/images/rejected.json` with its reason. The refusal is
 permanent, applies to production as well as candidates, and both validators
@@ -885,18 +905,31 @@ validators caught it because they normalised first; the fix is one
 `commonsKey` shared by the fetcher and both validators, and a test that
 asserts every entry is reachable from all four spellings Commons uses.
 
-### Three outcomes, not two
+### Four outcomes, not two
 
 A candidate can also be **held**: the photograph is fine and the dish cannot be
-written. There are three. Batch 3 found a good photograph of black bean soup
-for a recipe the ingredient catalogue cannot express — there is no black-bean
-row, so the recipe would have been a kidney-bean soup wearing it. Batch 4 added
-two more: `eish-baladi`, whose photograph is the best bread picture this
-pipeline has found but whose ingredients would be `pita-bread`'s because there
-is one `flour` row and no wholemeal and no bran; and `eggah-bel-batates`, a
-potato omelette whose ingredients are exactly `tortilla-espanola`'s.
+written yet. Batch 3 found a good photograph of black bean soup for a recipe
+the ingredient catalogue cannot express — there is no black-bean row, so the
+recipe would have been a kidney-bean soup wearing it. Batch 5 added `termes`,
+where the blocker is TIME rather than vocabulary: debittering raw lupini runs
+three to seven days of boiling and water changes, `prepMinutes` includes
+waiting, and a recipe is capped at 600 minutes. Trimming the soak to fit would
+be hiding it, and "until it stops tasting bitter" is a toxicity endpoint, not a
+doneness one.
 
-A hold also has to survive a machine. Batch 4's acquisition silently deleted
+A hold is "not yet", so it has to be able to end. `eish-baladi` was held
+through batch 4 because there was one `flour` row and no wholemeal and no
+bran; Stage 3P.4 added both rows on their own merits and the bread is a recipe
+with its photograph on it. That is a hold working.
+
+**Retired** is the fourth state, and it is terminal. `eggah-bel-batates` is a
+potato omelette whose ingredients are potatoes, eggs, onions, oil and salt —
+`tortilla-espanola` line for line — and no amount of catalogue growth changes
+that. Calling it held would have left a queue entry that can never be cleared;
+calling it refused would have blamed a photograph that is perfectly good. The
+state model grew a terminal outcome instead.
+
+A hold has to survive a machine, too. Batch 4's acquisition silently deleted
 the one on `black-bean-soup`, because the fetcher rewrites the whole manifest
 and did not know the field existed — the photograph stayed staged and the
 decision did not. The fetcher now carries holds through, and the accounting
@@ -930,18 +963,18 @@ branch):
 |---|---|---|
 | Typecheck, app AND build scripts | `npm run typecheck` | **pass**, 0 errors. Do not substitute `npx tsc --noEmit`; it silently skips `scripts/` — see **CI** below |
 | Lint | `npx eslint . --max-warnings=0` | **pass**, 0 errors, 0 warnings |
-| Unit + component tests | `npm test` | **pass**, 975/975 across 73 suites, 2 projects |
+| Unit + component tests | `npm test` | **pass**, 988/988 across 74 suites, 2 projects |
 | Database + RLS suite | `./scripts/db-test.sh` | **pass**, 290 assertions across nine files |
 | Edge function types | `npm run fn:check` | **pass** |
 | Edge function tests | `npm run fn:test` | **pass**, 5/5 |
 | Catalogue / price / recipe / type drift | `ingredients:import --check`, `prices:import --check`, `recipes:import --check`, `db:types:check` | **pass** |
 | Web production bundle | `npx expo export --platform web` | **pass** |
-| Image manifest | `npm run images:check` | **pass**, **106 of 200 (53.0%)** — was 67 of 161 (41.6%) before the Stage 3P preflight; licence, attribution, header bytes, SHA-256, no reuse, none refused on review, and recipe/seed credits agree with the manifest in both directions |
-| Candidate image manifest | `npm run images:check-candidates` | **pass** — 3 staged and held, 93 declared candidates, 23 with no acceptable image. Staged photography is committed photography, so it is held to the same licence standard |
-| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 200 recipes, **6** pairs at or above 0.7 Jaccard over distinguishing ingredients (salt and water excluded since Stage 3P.2), **zero ORDINARY staple flags**. All six were reviewed one by one and all six are distinct dishes |
-| Coverage census | `npm run audit:coverage` | **pass** — 525 concepts, ontology 89.8%, input 77.6%, **zero declared forms whose aliasing is broken** |
+| Image manifest | `npm run images:check` | **pass**, **111 of 205 (54.1%)** — was 67 of 161 (41.6%) before the Stage 3P preflight; licence, attribution, header bytes, SHA-256, no reuse, none refused on review, and recipe/seed credits agree with the manifest in both directions |
+| Candidate image manifest | `npm run images:check-candidates` | **pass** — 2 staged and held, 1 retired, 121 declared candidates, 33 with no acceptable image. Staged photography is committed photography, so it is held to the same licence standard |
+| Dataset spread + staple flags | `npm run recipes:audit` | reports only — 205 recipes, **6** pairs at or above 0.7 Jaccard over distinguishing ingredients (salt and water excluded since Stage 3P.2), **zero ORDINARY staple flags**. All six were reviewed one by one and all six are distinct dishes |
+| Coverage census | `npm run audit:coverage` | **pass** — 527 concepts, ontology 90.1%, input 77.8%, **zero declared forms whose aliasing is broken** |
 | Ingredient families | `npm run audit:families` | reports only — 1 declared, 85 inferred |
-| Price backlog | `npm run audit:prices` | reports only — **77.2%** of required slots priced, 112 gaps ranked |
+| Price backlog | `npm run audit:prices` | reports only — **77.1%** of required slots priced, 115 gaps ranked |
 | Whole-app browser walk | `npm run smoke:web` | **pass**, 236 interaction checks across every screen with no page errors, in DEMO MODE so the social screens have something in them. Includes the narrow-viewport pass and the DOM-nesting audit over 12 screens |
 | Offset pagination | `npm run audit:pagination` | **pass**, 6 assertions |
 | The published Pages build | `npm run smoke:web -- --base <url>` | **cannot be run from this sandbox** — `omarrakram.github.io` is blocked by the egress proxy, verified by probing it. The same commit, built with the same command and the same `EXPO_WEB_BASE_URL`, is driven locally instead |

@@ -13,20 +13,20 @@ does that survey.
 | | |
 |---|---:|
 | Ingredients with a surveyed price | 69 |
-| Distinct ingredients in required slots | 178 |
-| Required ingredient slots | 1506 |
-| Slots with a price | 1162 (**77.2%**) |
-| Unpriced ingredients in required slots | 112 |
+| Distinct ingredients in required slots | 181 |
+| Required ingredient slots | 1536 |
+| Slots with a price | 1184 (**77.1%**) |
+| Unpriced ingredients in required slots | 115 |
 
 ## What each tranche buys
 
 | Survey the top… | Slot coverage becomes |
 |---|---:|
-| 10 | 83.3% |
-| 20 | 87.4% |
-| 30 | 89.8% |
-| 50 | 93.3% |
-| all 112 | 100% |
+| 10 | 83.2% |
+| 20 | 86.9% |
+| 30 | 89.6% |
+| 50 | 93.2% |
+| all 115 | 100% |
 
 **The target is ≥95%.** Reaching it does not need all of them.
 
@@ -40,31 +40,31 @@ does that survey.
 | 4 | `ginger` | vegetables | 16 | 0 | 32 |
 | 5 | `parmesan` | dairy | 9 | 1 | 31 |
 | 6 | `dill` | vegetables | 7 | 3 | 26 |
-| 7 | `yeast` | pantry | 6 | 3 | 21 |
+| 7 | `yeast` | pantry | 7 | 3 | 22.5 |
 | 8 | `kidney-beans` | protein | 4 | 0 | 20 |
 | 9 | `lamb` | protein | 4 | 0 | 20 |
 | 10 | `sesame-oil` | pantry | 12 | 0 | 18 |
 | 11 | `cheddar` | dairy | 6 | 0 | 18 |
 | 12 | `chili-pepper` | vegetables | 5 | 2 | 18 |
 | 13 | `mixed-spice` | spices | 8 | 3 | 16 |
-| 14 | `soy-sauce` | sauces | 15 | 0 | 15 |
-| 15 | `baking-powder` | pantry | 7 | 1 | 14.5 |
-| 16 | `phyllo` | bakery | 5 | 1 | 14 |
-| 17 | `basil` | vegetables | 3 | 2 | 14 |
-| 18 | `falafel-mix` | protein | 2 | 1 | 14 |
-| 19 | `cornflour` | carbs | 6 | 0 | 12 |
-| 20 | `avocado` | vegetables | 4 | 1 | 12 |
-| 21 | `breadcrumbs` | bakery | 4 | 1 | 12 |
-| 22 | `pita-bread` | bakery | 4 | 1 | 12 |
-| 23 | `oregano` | spices | 7 | 2 | 11.5 |
-| 24 | `cabbage` | vegetables | 5 | 0 | 10 |
-| 25 | `tortilla` | bakery | 5 | 0 | 10 |
-| 26 | `cauliflower` | vegetables | 3 | 1 | 10 |
-| 27 | `corn` | vegetables | 3 | 1 | 10 |
-| 28 | `beef-steak` | protein | 2 | 0 | 10 |
-| 29 | `tofu` | protein | 2 | 0 | 10 |
-| 30 | `calamari` | protein | 1 | 1 | 9 |
-| 31 | `green-lentils` | protein | 1 | 1 | 9 |
+| 14 | `cauliflower` | vegetables | 4 | 2 | 16 |
+| 15 | `soy-sauce` | sauces | 15 | 0 | 15 |
+| 16 | `baking-powder` | pantry | 7 | 1 | 14.5 |
+| 17 | `phyllo` | bakery | 5 | 1 | 14 |
+| 18 | `basil` | vegetables | 3 | 2 | 14 |
+| 19 | `falafel-mix` | protein | 2 | 1 | 14 |
+| 20 | `green-lentils` | protein | 2 | 1 | 14 |
+| 21 | `cornflour` | carbs | 6 | 0 | 12 |
+| 22 | `avocado` | vegetables | 4 | 1 | 12 |
+| 23 | `breadcrumbs` | bakery | 4 | 1 | 12 |
+| 24 | `pita-bread` | bakery | 4 | 1 | 12 |
+| 25 | `oregano` | spices | 7 | 2 | 11.5 |
+| 26 | `cabbage` | vegetables | 5 | 0 | 10 |
+| 27 | `tortilla` | bakery | 5 | 0 | 10 |
+| 28 | `corn` | vegetables | 3 | 1 | 10 |
+| 29 | `beef-steak` | protein | 2 | 0 | 10 |
+| 30 | `tofu` | protein | 2 | 0 | 10 |
+| 31 | `calamari` | protein | 1 | 1 | 9 |
 | 32 | `herring` | protein | 1 | 1 | 9 |
 | 33 | `mullet` | protein | 1 | 1 | 9 |
 | 34 | `sea-bream` | protein | 1 | 1 | 9 |
@@ -75,7 +75,7 @@ does that survey.
 | 39 | `green-beans` | vegetables | 2 | 1 | 8 |
 | 40 | `sweet-potato` | vegetables | 2 | 1 | 8 |
 | 41 | `vanilla` | spices | 7 | 1 | 7.5 |
-| 42 | `sumac` | spices | 4 | 1 | 6 |
+| 42 | `sumac` | spices | 5 | 1 | 6.5 |
 | 43 | `celery` | vegetables | 3 | 0 | 6 |
 | 44 | `noodles` | carbs | 3 | 0 | 6 |
 | 45 | `egg-yolk` | dairy | 2 | 0 | 6 |
@@ -109,43 +109,46 @@ does that survey.
 | 73 | `almonds` | pantry | 2 | 0 | 3 |
 | 74 | `cocoa` | pantry | 2 | 0 | 3 |
 | 75 | `peanuts` | pantry | 2 | 0 | 3 |
-| 76 | `pistachios` | pantry | 2 | 0 | 3 |
-| 77 | `buttermilk` | dairy | 1 | 0 | 3 |
-| 78 | `cream-cheese` | dairy | 1 | 0 | 3 |
-| 79 | `labneh` | dairy | 1 | 0 | 3 |
-| 80 | `thyme-dried` | spices | 4 | 0 | 2 |
-| 81 | `hot-sauce` | sauces | 2 | 0 | 2 |
-| 82 | `mustard` | sauces | 2 | 0 | 2 |
-| 83 | `tomato-sauce` | sauces | 2 | 0 | 2 |
-| 84 | `baguette` | bakery | 1 | 0 | 2 |
-| 85 | `cornmeal` | carbs | 1 | 0 | 2 |
-| 86 | `couscous` | carbs | 1 | 0 | 2 |
-| 87 | `dried-apricot` | fruit | 1 | 0 | 2 |
-| 88 | `freekeh` | carbs | 1 | 0 | 2 |
-| 89 | `lasagne-sheets` | carbs | 1 | 0 | 2 |
-| 90 | `mango` | fruit | 1 | 0 | 2 |
-| 91 | `olives` | vegetables | 1 | 0 | 2 |
-| 92 | `oranges` | fruit | 1 | 0 | 2 |
-| 93 | `orzo` | carbs | 1 | 0 | 2 |
-| 94 | `pineapple` | fruit | 1 | 0 | 2 |
-| 95 | `prunes` | fruit | 1 | 0 | 2 |
-| 96 | `puff-pastry` | bakery | 1 | 0 | 2 |
-| 97 | `pumpkin` | vegetables | 1 | 0 | 2 |
-| 98 | `radish` | vegetables | 1 | 0 | 2 |
-| 99 | `rocket` | vegetables | 1 | 0 | 2 |
-| 100 | `semolina` | carbs | 1 | 0 | 2 |
-| 101 | `sesame-seeds` | spices | 3 | 0 | 1.5 |
-| 102 | `brown-sugar` | pantry | 1 | 0 | 1.5 |
-| 103 | `chocolate` | pantry | 1 | 0 | 1.5 |
-| 104 | `coconut-flakes` | pantry | 1 | 0 | 1.5 |
-| 105 | `coffee` | pantry | 1 | 0 | 1.5 |
-| 106 | `pine-nuts` | pantry | 1 | 0 | 1.5 |
-| 107 | `rose-water` | pantry | 1 | 0 | 1.5 |
-| 108 | `sahlab` | pantry | 1 | 0 | 1.5 |
-| 109 | `cardamom` | spices | 2 | 0 | 1 |
-| 110 | `garlic-powder` | spices | 2 | 0 | 1 |
-| 111 | `white-pepper` | spices | 2 | 0 | 1 |
-| 112 | `ketchup` | sauces | 1 | 0 | 1 |
+| 76 | `pine-nuts` | pantry | 2 | 0 | 3 |
+| 77 | `pistachios` | pantry | 2 | 0 | 3 |
+| 78 | `buttermilk` | dairy | 1 | 0 | 3 |
+| 79 | `cream-cheese` | dairy | 1 | 0 | 3 |
+| 80 | `labneh` | dairy | 1 | 0 | 3 |
+| 81 | `thyme-dried` | spices | 4 | 0 | 2 |
+| 82 | `hot-sauce` | sauces | 2 | 0 | 2 |
+| 83 | `mustard` | sauces | 2 | 0 | 2 |
+| 84 | `tomato-sauce` | sauces | 2 | 0 | 2 |
+| 85 | `baguette` | bakery | 1 | 0 | 2 |
+| 86 | `chard` | vegetables | 1 | 0 | 2 |
+| 87 | `cornmeal` | carbs | 1 | 0 | 2 |
+| 88 | `couscous` | carbs | 1 | 0 | 2 |
+| 89 | `dried-apricot` | fruit | 1 | 0 | 2 |
+| 90 | `freekeh` | carbs | 1 | 0 | 2 |
+| 91 | `lasagne-sheets` | carbs | 1 | 0 | 2 |
+| 92 | `mango` | fruit | 1 | 0 | 2 |
+| 93 | `olives` | vegetables | 1 | 0 | 2 |
+| 94 | `oranges` | fruit | 1 | 0 | 2 |
+| 95 | `orzo` | carbs | 1 | 0 | 2 |
+| 96 | `pineapple` | fruit | 1 | 0 | 2 |
+| 97 | `prunes` | fruit | 1 | 0 | 2 |
+| 98 | `puff-pastry` | bakery | 1 | 0 | 2 |
+| 99 | `pumpkin` | vegetables | 1 | 0 | 2 |
+| 100 | `radish` | vegetables | 1 | 0 | 2 |
+| 101 | `rocket` | vegetables | 1 | 0 | 2 |
+| 102 | `semolina` | carbs | 1 | 0 | 2 |
+| 103 | `sesame-seeds` | spices | 3 | 0 | 1.5 |
+| 104 | `brown-sugar` | pantry | 1 | 0 | 1.5 |
+| 105 | `chocolate` | pantry | 1 | 0 | 1.5 |
+| 106 | `coconut-flakes` | pantry | 1 | 0 | 1.5 |
+| 107 | `coffee` | pantry | 1 | 0 | 1.5 |
+| 108 | `rose-water` | pantry | 1 | 0 | 1.5 |
+| 109 | `sahlab` | pantry | 1 | 0 | 1.5 |
+| 110 | `wheat-bran` | pantry | 1 | 0 | 1.5 |
+| 111 | `whole-wheat-flour` | pantry | 1 | 0 | 1.5 |
+| 112 | `cardamom` | spices | 2 | 0 | 1 |
+| 113 | `garlic-powder` | spices | 2 | 0 | 1 |
+| 114 | `white-pepper` | spices | 2 | 0 | 1 |
+| 115 | `ketchup` | sauces | 1 | 0 | 1 |
 
 ## Method
 
