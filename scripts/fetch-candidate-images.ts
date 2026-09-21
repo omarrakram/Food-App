@@ -96,6 +96,8 @@ type CandidateManifest = {
    * re-running.
    */
   held?: { candidateSlug: string; batch: string; reason: string }[];
+  /** Resolved duplicates, carried through for the same reason as `held`. */
+  retired?: { candidateSlug: string; batch: string; reason: string }[];
 };
 
 const MANIFEST_COMMENT =
@@ -253,6 +255,9 @@ async function main(): Promise<void> {
     // Every hold survives, except for a dish that has since been published —
     // that one is resolved, and keeping it would contradict the manifest.
     held: (manifest.held ?? []).sort((a, b) => a.candidateSlug.localeCompare(b.candidateSlug)),
+    retired: (manifest.retired ?? []).sort((a, b) =>
+      a.candidateSlug.localeCompare(b.candidateSlug),
+    ),
   };
 
   writeFileSync(MANIFEST, `${JSON.stringify(merged, null, 2)}\n`);

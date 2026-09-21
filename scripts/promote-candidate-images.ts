@@ -55,6 +55,8 @@ type CandidateManifest = {
    * or the next batch promotion quietly undoes the decision that made it.
    */
   held?: { candidateSlug: string; batch: string; reason: string }[];
+  /** Resolved duplicates. Terminal — these never become promotable. */
+  retired?: { candidateSlug: string; batch: string; reason: string }[];
 };
 type Manifest = {
   images: (Photo & { recipeSlug: string })[];
@@ -104,6 +106,9 @@ function main(): void {
   const byCandidate = new Map(staged.images.map((entry) => [entry.candidateSlug, entry]));
   const alreadyLive = new Set(live.images.map((entry) => entry.recipeSlug));
   const held = new Map((staged.held ?? []).map((entry) => [entry.candidateSlug, entry.reason]));
+  const retired = new Map(
+    (staged.retired ?? []).map((entry) => [entry.candidateSlug, entry.reason]),
+  );
 
   const promoted: string[] = [];
   const problems: string[] = [];
@@ -114,6 +119,11 @@ function main(): void {
       // Not an error: a batch promotes what survived review, and the ones with
       // no acceptable image are exactly what this preflight is for.
       console.log(`  – ${slug}: nothing staged, skipping`);
+      continue;
+    }
+    const gone = retired.get(slug);
+    if (gone) {
+      console.log(`  – ${slug}: retired, skipping — ${gone}`);
       continue;
     }
     const hold = held.get(slug);

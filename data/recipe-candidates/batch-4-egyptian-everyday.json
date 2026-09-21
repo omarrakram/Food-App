@@ -43,9 +43,9 @@
       "note": "What Egypt eats in spring while the beans are green, and the row exists for exactly this with no recipe on it."
     },
     {
-      "slug": "shorbet-firakh-baladi",
+      "slug": "shorbet-firakh",
       "name": "Egyptian Chicken Soup",
-      "nameAr": "شوربة فراخ بلدي",
+      "nameAr": "شوربة فراخ",
       "cuisine": "egyptian",
       "coreIngredients": [
         "chicken-drumstick",
@@ -61,7 +61,7 @@
         "Chicken broth soup",
         "Egyptian chicken soup"
       ],
-      "note": "A real gap: 192 recipes and not one plain chicken soup, which is the thing an Egyptian kitchen makes when somebody is ill."
+      "note": "A real gap: 192 recipes and not one plain chicken soup, which is the thing an Egyptian kitchen makes when somebody is ill. RENAMED in Stage 3P.4. Proposed as شوربة فراخ بلدي, which claims baladi chicken — a product the catalogue cannot distinguish from any other drumstick. The soup is still Egyptian; the cinnamon and the lisan asfour are what make it so, not the bird."
     },
     {
       "slug": "tagen-batates-bel-lahma",
@@ -475,7 +475,7 @@
       "note": "What goes beside the roast at a family lunch. Distinct from the vermicelli rice and the baked ruz moammar already in the catalogue."
     },
     {
-      "slug": "spaghetti-bolognese",
+      "slug": "pasta-minced-beef",
       "name": "Pasta in Minced Beef Sauce",
       "nameAr": "مكرونة باللحمة المفرومة",
       "cuisine": "italian",
@@ -493,7 +493,7 @@
         "Pasta meat sauce",
         "Ragu pasta"
       ],
-      "note": "Not an Egyptian dish and completely normal in an Egyptian kitchen. The catalogue has plain tomato macaroni and bechamel and nothing with a meat sauce."
+      "note": "Not an Egyptian dish and completely normal in an Egyptian kitchen. The catalogue has plain tomato macaroni and bechamel and nothing with a meat sauce. RENAMED in Stage 3P.4. Proposed as spaghetti-bolognese and written without a soffritto, pork, wine or milk — so it is a minced-beef tomato pasta, not ragu alla bolognese, and the slug now says that. Cuisine stays Italian: it is Italian-descended home cooking, and calling it Egyptian to move a percentage is the move this project does not make."
     },
     {
       "slug": "beef-stroganoff",

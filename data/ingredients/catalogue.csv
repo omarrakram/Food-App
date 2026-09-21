@@ -74,7 +74,7 @@ chicken-thigh,chicken thighs,أوراك فراخ,protein,g,130,,,chicken thigh|�
 chicken-wings,chicken wings,أجنحة فراخ,protein,g,40,,,wings|اجنحة|جوانح,0,1
 chickpeas,chickpeas,حمص,pantry,g,,,,garbanzo|hummus beans|حمص حب|homos|hommos|hommus|حمص ناشف,0,0
 chili-flakes,chili flakes,شطة,spices,tsp,2,,,shatta|red pepper flakes|شطه|shata|shatta nashfa|whole dried chili|شطة مجففة,0,0
-chili-pepper,chili pepper,شطة خضراء,vegetables,piece,15,,,chilli|hot pepper|فلفل حار|فلفل أخضر حار|felfel har|shatta khadra|filfil har,0,1
+chili-pepper,chili pepper,شطة خضراء,vegetables,piece,15,,,chilli|hot pepper|فلفل حار|فلفل أخضر حار|felfel har|shatta khadra|filfil har|شطة كاملة,0,1
 chili-powder,chili powder,شطة مطحونة,spices,g,,,,red pepper powder|shatta mat7ouna|shatta matehouna,1,0
 chocolate,chocolate,شوكولاتة,pantry,g,,dairy|soy,,شوكولاتة|شيكولاتة|chocolate bar,0,0
 chocolate-chips,chocolate chips,شوكولاتة شيبس,pantry,g,,,dairy|nuts,شوكولاتة شيبس|chocolate chips|chips شوكولاتة|choc chips|رقائق شوكولاتة,0,0
@@ -131,11 +131,11 @@ fenugreek,fenugreek,حلبة,spices,g,,,,حلبة|helba|hilba|7elba,1,0
 figs,figs,تين,fruit,piece,50,,,fig|تين|teen,0,1
 fish-spice,fish spice mix,تتبيلة سمك,spices,g,,,,تتبيلة سمك|fish spice|بهارات سمك|fish seasoning,0,0
 flaxseed,flaxseed,بذر الكتان,pantry,g,,,,بذرة الكتان|linseed,0,0
-flour,flour,دقيق,pantry,g,,gluten,,all purpose flour|plain flour|دقيق فاخر|da2ee2|dakik|da2ik|دقيق كيك|cake flour,1,0
+flour,flour,دقيق,pantry,g,,gluten,,all purpose flour|plain flour|دقيق فاخر|da2ee2|dakik|da2ik|دقيق كيك|cake flour|دقيق قمح|wheat flour,1,0
 food-colouring,food colouring,ألوان طعام,pantry,ml,,,,ألوان طعام|لون طعام|food coloring|food dye|صبغة طعام|alwan taam|الوان الطعام,0,0
 freekeh,freekeh,فريك,carbs,g,,gluten,,فريك|frikeh|farik,0,0
 fried-onions,fried onions,بصل مقلي,vegetables,g,,,gluten,بصل مقلي|crispy onions|بصل محمر|basal me2li|fried onion,0,0
-frozen-fries,frozen fries,بطاطس مجمدة,frozen,g,,,,بطاطس محمرة|french fries|شيبسي,0,0
+frozen-fries,frozen fries,بطاطس محمرة,frozen,g,,,,french fries|شيبسي|بطاطس شيبسي|batates mohammara,0,0
 frozen-mixed-veg,frozen mixed vegetables,خضار مشكل مجمد,frozen,g,,,,خضار مجمد|mixed veg,0,0
 garlic,garlic,ثوم,vegetables,clove,5,,,toum|tom|garlic cloves|فص ثوم|thoum|tuum|fass toum,1,0
 garlic-powder,garlic powder,ثوم بودرة,spices,g,,,,ثوم بودرة|garlic granules|toum bodra|thoum bodra,1,0
@@ -367,11 +367,13 @@ watercress,watercress,بقدونس مائي,vegetables,g,,,,cress|حريف|رش�
 watermelon,watermelon,بطيخ,fruit,g,,,,بطيخ|batikh|batteekh|battikh|bateekh,0,1
 watermelon-seeds,watermelon seeds,لب بطيخ,pantry,g,,,,لب بطيخ|watermelon seeds|لب احمر|lib batikh,0,0
 wheat-berries,wheat berries,قمح,carbs,g,,gluten,,قمح|wheat|حب القمح|قمح للبليلة|belila wheat|whole wheat berries,0,0
+wheat-bran,wheat bran,ردة,pantry,g,,gluten,,bran|نخالة قمح|نخالة|redda|nokhala,0,0
 whipping-cream,whipping cream,كريمة خفق,dairy,ml,,dairy,,كريمة خفق|whipping cream|كريمة للخفق|heavy whipping cream|krema khaf2,0,1
 white-beans,white beans,فاصوليا بيضاء,pantry,g,,,,fasolia|cannellini|فاصوليا,0,0
 white-cheese,white cheese,جبنة بيضاء,dairy,g,,dairy,,feta|gebna beida|domiati|جبنه بيضاء|جبنة فيتا|gebna bayda|gebna beda|gibna beida|istanbouly|إسطنبولي|istambouli|baramili|برميلي|gebna baramili|دمياطي|فيتا,0,1
 white-pepper,white pepper,فلفل أبيض,spices,g,,,,فلفل ابيض|felfel abyad|filfil abyad,1,0
 whole-chicken,whole chicken,فرخة,protein,piece,1200,,,farkha|فرخه|farkha kamla|فرخة كاملة|whole bird|farkha baladi|فرخة بلدي,0,1
+whole-wheat-flour,whole wheat flour,دقيق قمح كامل,pantry,g,,gluten,,wholemeal flour|whole meal flour|wholewheat flour|brown flour|دقيق أسمر|da2ee2 asmar|da2ee2 amh kamel,0,0
 worcestershire,worcestershire sauce,صوص ورشستر,sauces,ml,,fish,,ورشستر|worcester,0,0
 yeast,yeast,خميرة,pantry,g,,,,خميرة|khamira|instant yeast|خميرة فورية,1,0
 yogurt,yogurt,زبادي,dairy,g,105,dairy,,zabady|plain yoghurt|زبادى|zabadi|zabadi baladi,0,1

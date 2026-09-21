@@ -57,6 +57,7 @@ type Manifest = {
   images: Record_[];
   skipped: { candidateSlug: string; batch: string; reason: string }[];
   held?: { candidateSlug: string; batch: string; reason: string }[];
+  retired?: { candidateSlug: string; batch: string; reason: string }[];
 };
 
 function batches(): Batch[] {
@@ -125,6 +126,9 @@ function main(): void {
   const skippedBySlug = new Map(staged.skipped.map((entry) => [entry.candidateSlug, entry.reason]));
   const refused = refusedByHand();
   const heldBySlug = new Map((staged.held ?? []).map((entry) => [entry.candidateSlug, entry.reason]));
+  const retiredBySlug = new Map(
+    (staged.retired ?? []).map((entry) => [entry.candidateSlug, entry.reason]),
+  );
 
   const lines: string[] = [
     '# Candidate photography — review before any of this ships',
@@ -162,8 +166,12 @@ function main(): void {
     const done = batch.candidates.filter(
       (entry) => !byslug.has(entry.slug) && live.has(entry.slug),
     );
+    const retired = batch.candidates.filter(
+      (entry) => !live.has(entry.slug) && retiredBySlug.has(entry.slug),
+    );
     const without = batch.candidates.filter(
-      (entry) => !byslug.has(entry.slug) && !live.has(entry.slug),
+      (entry) =>
+        !byslug.has(entry.slug) && !live.has(entry.slug) && !retiredBySlug.has(entry.slug),
     );
 
     lines.push(
@@ -174,6 +182,7 @@ function main(): void {
       `**${batch.candidates.length} candidates: ${done.length} reviewed and shipped, ` +
         `${withImage.length} waiting to be looked at, ` +
         `${held.length > 0 ? `${held.length} held, ` : ''}` +
+        `${retired.length > 0 ? `${retired.length} retired, ` : ''}` +
         `${without.length} with nothing acceptable.**`,
       '',
     );
@@ -219,6 +228,27 @@ function main(): void {
         '- [ ] This is a photograph of this dish, and I would put it on the card.',
         '',
       );
+    }
+
+    if (retired.length > 0) {
+      lines.push(
+        `### Retired (${retired.length})`,
+        '',
+        'Looked at, photograph fine, and the dish will never be written — the',
+        'catalogue already has it under another name. Unlike a hold, this does not',
+        'become promotable when the catalogue grows, because nothing is missing.',
+        'Kept out of `rejected.json` because the file itself is good; the',
+        'provenance is preserved in the candidate manifest so the decision stays',
+        'legible.',
+        '',
+        '| Dish | Why it is retired |',
+        '|---|---|',
+      );
+      for (const candidate of retired) {
+        const reason = retiredBySlug.get(candidate.slug)!;
+        lines.push(`| ${candidate.name} (\`${candidate.slug}\`) | ${reason.replace(/\|/g, '\\|')} |`);
+      }
+      lines.push('');
     }
 
     if (held.length > 0) {
@@ -269,7 +299,8 @@ function main(): void {
   const waiting = staged.images.filter((entry) => !heldBySlug.has(entry.candidateSlug)).length;
   console.log(
     `PHOTO_CANDIDATE_REVIEW.md written: of ${total} candidate(s), ${shipped} promoted, ` +
-      `${waiting} waiting to be looked at, ${heldBySlug.size} held.`,
+      `${waiting} waiting to be looked at, ${heldBySlug.size} held, ` +
+      `${retiredBySlug.size} retired.`,
   );
 }
 

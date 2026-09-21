@@ -117,6 +117,7 @@ function main(): void {
     images: CandidateImageRecord[];
     skipped: { candidateSlug: string; reason: string }[];
     held?: { candidateSlug: string; batch: string; reason: string }[];
+    retired?: { candidateSlug: string; batch: string; reason: string }[];
   };
 
   const declared = declaredCandidates();
@@ -218,6 +219,34 @@ function main(): void {
     }
   }
 
+  // RETIRED candidates: the terminal outcome, and the opposite of a hold.
+  //
+  // A hold says "not yet": the photograph is fine and the catalogue cannot
+  // carry the dish, so it becomes promotable when the catalogue changes.
+  // `eish-baladi` was one and is now a recipe. A RETIREMENT says "not ever":
+  // `eggah-bel-batates` is potatoes, eggs, onions, oil and salt, which is
+  // `tortilla-espanola` line for line, and no amount of catalogue growth makes
+  // that a different dish.
+  //
+  // Collapsing the two would have been the easy thing and the wrong one. A
+  // retirement left in `held` reads as a backlog item, and the next person to
+  // look would try to unblock it; put in `rejected.json` it would bar a
+  // perfectly good photograph from every future batch. So a retired entry
+  // keeps its provenance, keeps nothing staged, and is checked for both.
+  for (const gone of manifest.retired ?? []) {
+    const where = gone.candidateSlug || '(no slug)';
+    if (!declared.has(gone.candidateSlug)) {
+      problems.push(`${where}: retired, but no candidate by that slug in data/recipe-candidates/`);
+    }
+    if (seen.has(gone.candidateSlug)) {
+      problems.push(`${where}: retired, but a photograph is still staged for it`);
+    }
+    if (manifest.held?.some((hold) => hold.candidateSlug === gone.candidateSlug)) {
+      problems.push(`${where}: cannot be both held and retired`);
+    }
+    if (!gone.reason?.trim()) problems.push(`${where}: retired with no reason recorded`);
+  }
+
   // A photograph refused on review must never come back — including by hand,
   // and including through the candidate door.
   if (existsSync(REJECTED)) {
@@ -278,10 +307,12 @@ function main(): void {
   }
 
   const held = manifest.held?.length ?? 0;
+  const retired = manifest.retired?.length ?? 0;
   console.log(
     `Candidate image manifest is valid: ${manifest.images.length} staged of ` +
       `${declared.size} declared candidate(s), ${manifest.skipped.length} with no acceptable image` +
-      `${held > 0 ? `, ${held} held` : ''}. None of them is published.`,
+      `${held > 0 ? `, ${held} held` : ''}${retired > 0 ? `, ${retired} retired` : ''}. ` +
+      'None of them is published.',
   );
 }
 

@@ -7002,11 +7002,11 @@
     ]
   },
   {
-    "slug": "shorbet-firakh-baladi",
+    "slug": "shorbet-firakh",
     "title": "Egyptian Chicken Soup",
-    "titleAr": "شوربة فراخ بلدي",
-    "description": "Drumsticks simmered slowly with onion, carrot and bay until the broth is clear, then the meat pulled off the bone and dropped back in with a handful of orzo. The skimming in the first ten minutes is the whole difference between a clear soup and a grey one.",
-    "descriptionAr": "دبابيس فراخ بتتسلق على مهلها مع بصل وجزر وورق لورا لحد ما الشوربة تصفّى، وبعدين اللحمة تتشال من على العضم وترجع فيها مع حفنة لسان عصفور. رفع الزفرة في أول عشر دقايق هو الفرق كله بين شوربة صافية وشوربة رمادية.",
+    "titleAr": "شوربة فراخ",
+    "description": "Drumsticks simmered slowly with onion, carrot and bay until the broth is clear, then the meat pulled off the bone and dropped back in with a handful of orzo. What makes it Egyptian rather than generic is the cinnamon in the pot and the lisan asfour at the end; what makes it good is the skimming in the first ten minutes.",
+    "descriptionAr": "دبابيس فراخ بتتسلق على مهلها مع بصل وجزر وورق لورا لحد ما الشوربة تصفّى، وبعدين اللحمة تتشال من على العضم وترجع فيها مع حفنة لسان عصفور. اللي بيخليها مصرية مش أي شوربة فراخ هو القرفة في الحلة ولسان العصفور في الآخر؛ واللي بيخليها حلوة هو رفع الزفرة في أول عشر دقايق.",
     "cuisine": "egyptian",
     "mealTypes": [
       "lunch",
@@ -7167,7 +7167,7 @@
       "dinner"
     ],
     "difficulty": "medium",
-    "prepMinutes": 40,
+    "prepMinutes": 55,
     "cookMinutes": 55,
     "servings": 6,
     "nutrition": {
@@ -7438,150 +7438,6 @@
         "minutes": 15,
         "uses": [
           "lemon"
-        ],
-        "safety": null,
-        "safetyAr": null
-      }
-    ]
-  },
-  {
-    "slug": "shorbet-2ar3",
-    "title": "Pumpkin Soup",
-    "titleAr": "شوربة قرع عسلي",
-    "description": "Pumpkin softened with onion and garlic in butter, simmered until a knife meets no resistance, then blended smooth. It needs no cream — the pumpkin does that by itself once it is properly soft.",
-    "descriptionAr": "قرع عسلي بيسيح مع بصل وتوم في زبدة، ويتسوّى لحد ما السكينة تدخل فيه من غير أي مقاومة، وبعدين يتضرب في الخلاط لحد ما ينعم. مش محتاج كريمة — القرع بيعمل كده لوحده أول ما يطرى صح.",
-    "cuisine": "egyptian",
-    "mealTypes": [
-      "lunch",
-      "dinner"
-    ],
-    "difficulty": "easy",
-    "prepMinutes": 15,
-    "cookMinutes": 30,
-    "servings": 4,
-    "nutrition": {
-      "calories": 160,
-      "protein": 3,
-      "carbs": 20,
-      "fat": 8,
-      "fiber": 3
-    },
-    "dietTags": [
-      "vegetarian",
-      "halal"
-    ],
-    "allergens": [
-      "dairy"
-    ],
-    "appliances": [
-      "stove",
-      "blender"
-    ],
-    "tags": [
-      "egyptian",
-      "healthy",
-      "comfort",
-      "budget",
-      "beginner"
-    ],
-    "image": null,
-    "ingredients": [
-      {
-        "slug": "pumpkin",
-        "quantity": 900,
-        "unit": "g",
-        "prep": "cut into chunks"
-      },
-      {
-        "slug": "onions",
-        "quantity": 1,
-        "unit": "piece",
-        "prep": "chopped"
-      },
-      {
-        "slug": "garlic",
-        "quantity": 3,
-        "unit": "clove",
-        "prep": "crushed"
-      },
-      {
-        "slug": "butter",
-        "quantity": 30,
-        "unit": "g",
-        "prep": null
-      },
-      {
-        "slug": "stock-cube",
-        "quantity": 1,
-        "unit": "piece",
-        "prep": null
-      },
-      {
-        "slug": "water",
-        "quantity": 900,
-        "unit": "ml",
-        "prep": null,
-        "staple": true
-      },
-      {
-        "slug": "salt",
-        "quantity": 1,
-        "unit": "tsp",
-        "prep": null,
-        "staple": true
-      }
-    ],
-    "steps": [
-      {
-        "text": "Peel the pumpkin and cut it into rough chunks.",
-        "textAr": "قشّر القرع وقطّعه قطع خشنة.",
-        "minutes": 10,
-        "uses": [
-          "pumpkin"
-        ],
-        "safety": "A whole pumpkin rolls and its skin is hard. Cut one flat slice off a side first and stand it on that face before you do anything else — a knife skidding off a curved skin goes straight into your other hand.",
-        "safetyAr": "القرعة بتتدحرج وقشرتها قاسية. اقطع منها شريحة مستوية من جنب واوقفها على الوش ده قبل أي حاجة تانية — السكينة اللي بتزحلق من على قشرة مقوّسة بتروح في إيدك التانية على طول."
-      },
-      {
-        "text": "Soften the onion and garlic in the butter over a low flame for six to eight minutes. Do not let them colour; a browned onion makes the whole soup taste of caramel.",
-        "textAr": "سوّي البصل والتوم في الزبدة على نار هادية من ست لتمن دقايق. متسبهمش ياخدوا لون؛ البصل اللي بيتحمّر بيخلي الشوربة كلها طعمها كراميل.",
-        "minutes": 8,
-        "uses": [
-          "onions",
-          "garlic",
-          "butter"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Add the pumpkin, the water and the crumbled stock cube. Bring it to a simmer and give it 20 to 25 minutes, until a knife slides into a chunk with no resistance at all.",
-        "textAr": "ضيف القرع والماية ومكعب المرقة مفتّت. سيبها تغلي على نار هادية من ٢٠ لـ ٢٥ دقيقة، لحد ما السكينة تدخل في القطعة من غير أي مقاومة خالص.",
-        "minutes": 25,
-        "uses": [
-          "pumpkin",
-          "water",
-          "stock-cube"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Blend it smooth.",
-        "textAr": "اضربها في الخلاط لحد ما تنعم.",
-        "minutes": 6,
-        "uses": [
-          "pumpkin"
-        ],
-        "safety": "Hot liquid in a blender turns to steam and can force the lid off. Let it cool for a few minutes, fill the jug half full at most, hold the lid down through a folded cloth, and start on the lowest speed.",
-        "safetyAr": "السوائل السخنة في الخلاط بتتحول لبخار وممكن تطيّر الغطا. سيبها تبرد كام دقيقة، واملا الإبريق نصه على الأكتر، واضغط على الغطا من خلال فوطة مطوية، وابدأ على أبطأ سرعة."
-      },
-      {
-        "text": "Salt it at the end — the stock cube has already done most of it — and loosen it with a little more water if it has gone thicker than you want.",
-        "textAr": "ملّحها في الآخر — مكعب المرقة عمل أغلب الشغل — وخفّفها بشوية ماية زيادة لو تقلت أكتر من اللي انت عايزه.",
-        "minutes": 4,
-        "uses": [
-          "salt"
         ],
         "safety": null,
         "safetyAr": null
@@ -7877,6 +7733,139 @@
         "minutes": 3,
         "uses": [
           "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "eish-baladi",
+    "title": "Baladi Flatbread",
+    "titleAr": "عيش بلدي",
+    "description": "Five lines, and four of them are not negotiable. It is whole wheat, not white — that is what makes it baladi rather than pita. The dough is wetter than feels sensible, the bran on the tray is not decoration, and the oven has to be hotter than you want it, because the pocket is blown open by steam in the first ninety seconds or it never opens at all.",
+    "descriptionAr": "خمس سطور، وأربعة منهم مش قابلين للتفاوض. دقيق قمح كامل مش أبيض — ده اللي بيخليه بلدي مش عيش شامي. العجينة أطرى من اللي هيريحك، والردة على الصينية مش زينة، والفرن لازم يكون أسخن من اللي انت عايزه، لأن الجيب بيتفتح بالبخار في أول تسعين ثانية أو ما بيتفتحش خالص.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 105,
+    "cookMinutes": 15,
+    "servings": 8,
+    "nutrition": {
+      "calories": 220,
+      "protein": 8,
+      "carbs": 45,
+      "fat": 2,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "egyptian",
+      "budget",
+      "vegan",
+      "oven",
+      "breakfast"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "whole-wheat-flour",
+        "quantity": 600,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 460,
+        "unit": "ml",
+        "prep": "lukewarm",
+        "staple": true
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "wheat-bran",
+        "quantity": 60,
+        "unit": "g",
+        "prep": "for dusting"
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Stir the yeast into the lukewarm water and leave it a minute, then work in the flour and the salt. The dough should be noticeably wetter and stickier than a bread dough you would knead on a board — closer to a thick batter you can just about handle with a wet hand. Do not add flour to firm it up; the water is what turns to steam later.",
+        "textAr": "قلّب الخميرة في الماية الدافية وسيبها دقيقة، وبعدين ادخّل الدقيق والملح. العجينة لازم تبقى أطرى وألزق بوضوح من عجينة عيش عادية بتعجنها على لوح — أقرب لخليط تقيل تقدر تمسكه بإيد مبلولة بالعافية. متضيفش دقيق عشان تشدها؛ الماية دي هي اللي هتبقى بخار بعدين.",
+        "minutes": 12,
+        "uses": [
+          "yeast",
+          "water",
+          "whole-wheat-flour",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover it and leave it an hour, until it has roughly doubled and the surface is full of bubbles.",
+        "textAr": "غطّيها وسيبها ساعة، لحد ما تقرب تبقى الضعف ويبقى وشها مليان فقاقيع.",
+        "minutes": 60,
+        "uses": [
+          "whole-wheat-flour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Scatter half the bran over a tray. Divide the dough into eight with wet hands, drop each piece onto the bran, turn it so it is coated all over, and press it out to about a centimetre thick. Leave them 30 minutes. The bran is not decoration — it stops a dough this wet gluing itself to the tray, and it is what gives the finished loaf its floury back.",
+        "textAr": "رشّ نص الردة على صينية. قسّم العجينة تمن قطع بإيد مبلولة، نزّل كل قطعة على الردة، لفّها لحد ما تتغطي من كل ناحية، واضغطها لحد ما تبقى سمك سنتيمتر تقريباً. سيبهم ٣٠ دقيقة. الردة مش زينة — هي اللي بتمنع عجينة بالطراوة دي إنها تتلزق في الصينية، وهي اللي بتدي الرغيف ضهره المدقّق.",
+        "minutes": 35,
+        "uses": [
+          "wheat-bran",
+          "whole-wheat-flour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Meanwhile heat the oven as hot as it goes, with an empty baking tray or a stone on the top shelf for at least 20 minutes. A domestic oven at 250°C is at the bottom end of what this bread wants; a cooler oven bakes a flat biscuit instead of a pocket.",
+        "textAr": "في نفس الوقت سخّن الفرن على آخر درجة عنده، ومعاه صينية فاضية أو حجر على الرف الفوقاني على الأقل ٢٠ دقيقة. فرن البيت على ٢٥٠°م ده أقل حاجة العيش ده عايزها؛ الفرن الأبرد بيخبز بسكويتة مفرودة مش جيب.",
+        "minutes": 20,
+        "uses": [
+          "whole-wheat-flour"
+        ],
+        "safety": "An empty tray left at 250°C for twenty minutes holds far more heat than a tray with food in it, and it does not look any different. Use dry cloths — a damp one carries the heat straight through to your hand — and slide the loaves on rather than reaching over the tray.",
+        "safetyAr": "الصينية الفاضية اللي قعدت على ٢٥٠°م عشرين دقيقة بتشيل حرارة أكتر بكتير من صينية فيها أكل، وشكلها مش بيفرق. استعمل فوط ناشفة — الفوطة المبلولة بتوصّل الحرارة لإيدك على طول — ونزّل الأرغفة بالزحلقة بدل ما تمدّ إيدك فوق الصينية."
+      },
+      {
+        "text": "Slide two loaves at a time onto the hot tray and bake five to seven minutes. They should balloon almost completely within the first two minutes; take them out while they are still pale with brown blisters, not evenly browned. Stack them under a cloth as they come out — the trapped steam is what softens them back down.",
+        "textAr": "نزّل رغيفين في المرة على الصينية السخنة واخبزهم من خمسة لسبع دقايق. المفروض ينفخوا بالكامل تقريباً في أول دقيقتين؛ طلّعهم وهما لسه فاتحين وعليهم بقع بنية، مش دهبانين بالتساوي. رصّهم فوق بعض تحت فوطة أول ما يطلعوا — البخار المحبوس هو اللي بيرجّعهم طريين.",
+        "minutes": 15,
+        "uses": [
+          "whole-wheat-flour"
         ],
         "safety": null,
         "safetyAr": null

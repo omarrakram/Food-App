@@ -31,17 +31,17 @@ rather than a real parent concept.
 |---|---|---|
 | `seed` | pantry, seasoning | `chia`, `coriander-ground`, `fennel-seed`, `melon-seeds`, `mustard-seed`, `nigella`, `pumpkin-seeds`, `sesame-seeds`, `sunflower-seeds`, `watermelon-seeds` |
 | `bean` | pantry, produce, protein | `fava-beans`, `green-beans`, `green-fava-beans`, `kidney-beans`, `lupini-beans`, `white-beans` |
+| `دقيق` | pantry, protein, staple | `almond-flour`, `cornmeal`, `falafel-mix`, `flour`, `rice-flour`, `whole-wheat-flour` |
 | `لبن` | dairy, seasoning | `buttermilk`, `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
 | `cream` | dairy, frozen | `clotted-cream`, `cream`, `ice-cream`, `sour-cream`, `whipping-cream` |
 | `milk` | dairy, seasoning | `coconut-milk`, `condensed-milk`, `evaporated-milk`, `milk`, `powdered-milk` |
 | `oil` | pantry, seasoning | `corn-oil`, `olive-oil`, `palm-oil`, `sesame-oil`, `sunflower-oil` |
-| `دقيق` | pantry, protein, staple | `almond-flour`, `cornmeal`, `falafel-mix`, `flour`, `rice-flour` |
 | `زيت` | pantry, seasoning | `corn-oil`, `olive-oil`, `palm-oil`, `sesame-oil`, `sunflower-oil` |
+| `flour` | pantry, staple | `almond-flour`, `flour`, `rice-flour`, `whole-wheat-flour` |
 | `pepper` | produce, seasoning | `bell-pepper`, `black-pepper`, `chili-pepper`, `white-pepper` |
 | `vinegar` | pantry, seasoning | `balsamic-vinegar`, `rice-vinegar`, `vinegar`, `vinegar-apple` |
 | `بصل` | produce, seasoning | `fried-onions`, `green-onion`, `onion-powder`, `onions` |
 | `فول` | pantry, produce, protein | `fava-beans`, `green-fava-beans`, `peanuts`, `soybeans` |
-| `flour` | pantry, staple | `almond-flour`, `flour`, `rice-flour` |
 | `pea` | frozen, pantry, protein | `black-eyed-peas`, `green-peas`, `split-peas` |
 | `water` | other, pantry | `orange-blossom`, `rose-water`, `water` |
 | `ثوم` | produce, seasoning | `garlic`, `garlic-powder`, `spring-garlic` |

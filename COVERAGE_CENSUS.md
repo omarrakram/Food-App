@@ -16,16 +16,16 @@ not replace real-user testing.
 
 | | | |
 |---|---:|---:|
-| **Concepts** | **525** | |
-| Represented by their own row | 362 | 69% |
-| Reachable through an alias | 25 | 4.8% |
+| **Concepts** | **527** | |
+| Represented by their own row | 365 | 69.3% |
+| Reachable through an alias | 25 | 4.7% |
 | Missing | 33 | 6.3% |
-| Ambiguous | 11 | 2.1% |
-| Correctly not a row — dish | 26 | 5% |
-| Correctly not a row — form | 66 | 12.6% |
+| Ambiguous | 10 | 1.9% |
+| Correctly not a row — dish | 26 | 4.9% |
+| Correctly not a row — form | 66 | 12.5% |
 | Correctly not a row — brand | 2 | 0.4% |
 
-**Honest ontology coverage: 387 of the 431 actionable concepts (89.8%).** Actionable excludes dishes, forms and brands,
+**Honest ontology coverage: 390 of the 433 actionable concepts (90.1%).** Actionable excludes dishes, forms and brands,
 which are correctly not rows.
 
 ## 2. Input coverage
@@ -36,19 +36,19 @@ fails this audit.
 
 | | | |
 |---|---:|---:|
-| Concepts in scope (all but dishes) | 499 | |
-| Concepts whose every term lands correctly | 387 | 77.6% |
-| Terms probed | 1218 | |
-| Terms landing correctly | 1052 | 86.4% |
+| Concepts in scope (all but dishes) | 501 | |
+| Concepts whose every term lands correctly | 390 | 77.8% |
+| Terms probed | 1224 | |
+| Terms landing correctly | 1061 | 86.7% |
 | **Declared forms/brands whose aliasing is BROKEN** | **0** | |
 
-Catalogue: **378 canonical ingredients**, **1698 aliases**.
+Catalogue: **380 canonical ingredients**, **1714 aliases**.
 
 ## 3. By category
 
 | Category | Concepts | Represented | Alias | Missing | Ambiguous | Ontology | Input |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| baking | 33 | 24 | 2 | 4 | 0 | 86.7% | 71.9% |
+| baking | 35 | 26 | 2 | 4 | 0 | 87.5% | 73.5% |
 | bread and bakery | 24 | 13 | 2 | 3 | 0 | 83.3% | 76.2% |
 | breakfast | 15 | 9 | 2 | 0 | 0 | 100% | 81.8% |
 | canned and jarred | 18 | 7 | 1 | 0 | 0 | 100% | 94.4% |
@@ -75,7 +75,7 @@ Catalogue: **378 canonical ingredients**, **1698 aliases**.
 | snacks used as ingredients | 13 | 4 | 1 | 2 | 0 | 71.4% | 60% |
 | spice blends | 8 | 7 | 0 | 0 | 0 | 100% | 100% |
 | spices | 35 | 29 | 1 | 1 | 0 | 96.8% | 85.7% |
-| vegetables | 56 | 46 | 1 | 1 | 2 | 94% | 78.6% |
+| vegetables | 56 | 47 | 1 | 1 | 1 | 96% | 80.4% |
 
 ## 5. Missing, by priority
 
@@ -141,7 +141,6 @@ Catalogue: **378 canonical ingredients**, **1698 aliases**.
 | escalope | red meat cuts | — (nothing) | veal, chicken-breast |
 | صوص طماطم (bare phrase) | sauces and condiments | — (nothing) | ketchup, tomato-sauce |
 | green pepper | vegetables | bell-pepper | bell-pepper, chili-pepper |
-| potatoes | vegetables | frozen-fries, potatoes | — |
 
 ## 7. Dish terms that resolve to an ingredient anyway
 

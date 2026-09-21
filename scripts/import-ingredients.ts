@@ -190,7 +190,15 @@ function parse(text: string): Entry[] {
     // alias "whole rice" normalises to "rice" — "whole" is a noise word — so
     // brown rice quietly took over the word "rice" and every rice recipe lost
     // its price.
-    for (const term of [name, ...aliases]) {
+    // ARABIC NAMES GO THROUGH THE SAME DOOR, added in Stage 3P.4. The list was
+    // `[name, ...aliases]` — English name and aliases — so an Arabic CANONICAL
+    // name was never checked against anything. `بطاطس مجمدة` (frozen fries)
+    // normalises to `بطاطس`, which is the Arabic name of `potatoes`, and the
+    // shipped catalogue therefore resolved the ordinary Egyptian word for
+    // potato to a bag of frozen chips. The coverage audit had been calling the
+    // `potatoes` concept ambiguous for exactly this reason and nobody read the
+    // row.
+    for (const term of [name, nameAr, ...aliases]) {
       const key = normaliseIngredientName(term);
       if (!key) continue;
       const owner = claimedTerms.get(key);

@@ -421,6 +421,20 @@
       "acquiredAt": "2026-09-13T15:35:10.912Z"
     },
     {
+      "recipeSlug": "eish-baladi",
+      "path": "eish-baladi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bread_mohanad.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Bread_mohanad.JPG",
+      "creator": "Mohanad5ayman",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Mohanad5ayman · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 178565,
+      "sha256": "cfa2d0ca66d53ac292e8b6ee49636f78787e3934dfc0f9e39bf879c43f75054a",
+      "acquiredAt": "2026-09-21T12:14:23.615Z"
+    },
+    {
       "recipeSlug": "fattoush",
       "path": "fattoush.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Fattoush.JPG",
@@ -1051,6 +1065,20 @@
       "acquiredAt": "2026-09-13T15:36:49.536Z"
     },
     {
+      "recipeSlug": "pasta-minced-beef",
+      "path": "pasta-minced-beef.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tagliatelle_al_rag%C3%B9_%28image_modified%29.jpg",
+      "creator": "Ivan Vighetto",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 786,
+      "bytes": 322510,
+      "sha256": "1992697283ce6fa4d8666ce2d1a1e01d04818be0834d5f4b9db51124e5ad4bc3",
+      "acquiredAt": "2026-09-21T12:15:24.591Z"
+    },
+    {
       "recipeSlug": "pasta-pomodoro",
       "path": "pasta-pomodoro.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Spaghettata.JPG",
@@ -1261,8 +1289,8 @@
       "acquiredAt": "2026-09-21T12:14:29.999Z"
     },
     {
-      "recipeSlug": "shorbet-firakh-baladi",
-      "path": "shorbet-firakh-baladi.jpg",
+      "recipeSlug": "shorbet-firakh",
+      "path": "shorbet-firakh.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg",
       "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Chicken_Noodle_Soup.jpg",
       "creator": "Hoyabird8",
@@ -1301,20 +1329,6 @@
       "bytes": 444572,
       "sha256": "0aaad64eff64b981ffc304982d7e96c5698afd3c99d8223bbf495ffc63bb300a",
       "acquiredAt": "2026-09-13T15:37:49.456Z"
-    },
-    {
-      "recipeSlug": "spaghetti-bolognese",
-      "path": "spaghetti-bolognese.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tagliatelle_al_rag%C3%B9_%28image_modified%29.jpg",
-      "creator": "Ivan Vighetto",
-      "license": "CC-BY-SA-3.0",
-      "attribution": "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 786,
-      "bytes": 322510,
-      "sha256": "1992697283ce6fa4d8666ce2d1a1e01d04818be0834d5f4b9db51124e5ad4bc3",
-      "acquiredAt": "2026-09-21T12:15:24.591Z"
     },
     {
       "recipeSlug": "spanakorizo",

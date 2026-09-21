@@ -223,6 +223,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Sharon Chen from Austin, United States · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:5-Minute_Egg_Drop_Soup-5_(32079790121).jpg",
   },
+  "eish-baladi": {
+    source: require('../../../assets/recipes/eish-baladi.jpg') as number,
+    creator: "Mohanad5ayman",
+    license: "CC-BY-SA-4.0",
+    attribution: "Mohanad5ayman · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Bread_mohanad.JPG",
+  },
   "fattoush": {
     source: require('../../../assets/recipes/fattoush.jpg') as number,
     creator: "Unknown",
@@ -538,6 +545,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Joey Doll · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tortiglioni_con_ceci.jpg",
   },
+  "pasta-minced-beef": {
+    source: require('../../../assets/recipes/pasta-minced-beef.jpg') as number,
+    creator: "Ivan Vighetto",
+    license: "CC-BY-SA-3.0",
+    attribution: "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
+  },
   "pasta-pomodoro": {
     source: require('../../../assets/recipes/pasta-pomodoro.jpg') as number,
     creator: "Dr.Conati",
@@ -643,8 +657,8 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Wald1siedel · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG",
   },
-  "shorbet-firakh-baladi": {
-    source: require('../../../assets/recipes/shorbet-firakh-baladi.jpg') as number,
+  "shorbet-firakh": {
+    source: require('../../../assets/recipes/shorbet-firakh.jpg') as number,
     creator: "Hoyabird8",
     license: "CC-BY-SA-3.0",
     attribution: "Hoyabird8 · CC-BY-SA-3.0 · Wikimedia Commons",
@@ -663,13 +677,6 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
-  },
-  "spaghetti-bolognese": {
-    source: require('../../../assets/recipes/spaghetti-bolognese.jpg') as number,
-    creator: "Ivan Vighetto",
-    license: "CC-BY-SA-3.0",
-    attribution: "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
-    sourcePage: "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
   },
   "spanakorizo": {
     source: require('../../../assets/recipes/spanakorizo.jpg') as number,

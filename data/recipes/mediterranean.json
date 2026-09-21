@@ -3549,5 +3549,148 @@
         "safetyAr": "السلطانيات بتطلع سخنة جداً والشوربة اللي تحت الجبنة بتحتفظ بالحرارة دي مدة طويلة. استعمل فوطة، حطهم على أطباق، وقول لأي حد بياكل يكسر القشرة ويستنى دقيقة قبل أول معلقة."
       }
     ]
+  },
+  {
+    "slug": "shorbet-2ar3",
+    "title": "Pumpkin Soup",
+    "titleAr": "شوربة قرع عسلي",
+    "description": "Pumpkin softened with onion and garlic in butter, simmered until a knife meets no resistance, then blended smooth. It needs no cream — the pumpkin does that by itself once it is properly soft. Not an Egyptian dish, despite being cooked in Egyptian kitchens all winter; nothing in the formula is particular to the country.",
+    "descriptionAr": "قرع عسلي بيسيح مع بصل وتوم في زبدة، ويتسوّى لحد ما السكينة تدخل فيه من غير أي مقاومة، وبعدين يتضرب في الخلاط لحد ما ينعم. مش محتاج كريمة — القرع بيعمل كده لوحده أول ما يطرى صح. دي مش أكلة مصرية رغم إنها بتتعمل في المطابخ المصرية طول الشتا؛ مفيش حاجة في مكوناتها تخص البلد.",
+    "cuisine": "mediterranean",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 160,
+      "protein": 3,
+      "carbs": 20,
+      "fat": 8,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove",
+      "blender"
+    ],
+    "tags": [
+      "healthy",
+      "comfort",
+      "budget",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "pumpkin",
+        "quantity": 900,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "butter",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 900,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Peel the pumpkin and cut it into rough chunks.",
+        "textAr": "قشّر القرع وقطّعه قطع خشنة.",
+        "minutes": 10,
+        "uses": [
+          "pumpkin"
+        ],
+        "safety": "A whole pumpkin rolls and its skin is hard. Cut one flat slice off a side first and stand it on that face before you do anything else — a knife skidding off a curved skin goes straight into your other hand.",
+        "safetyAr": "القرعة بتتدحرج وقشرتها قاسية. اقطع منها شريحة مستوية من جنب واوقفها على الوش ده قبل أي حاجة تانية — السكينة اللي بتزحلق من على قشرة مقوّسة بتروح في إيدك التانية على طول."
+      },
+      {
+        "text": "Soften the onion and garlic in the butter over a low flame for six to eight minutes. Do not let them colour; a browned onion makes the whole soup taste of caramel.",
+        "textAr": "سوّي البصل والتوم في الزبدة على نار هادية من ست لتمن دقايق. متسبهمش ياخدوا لون؛ البصل اللي بيتحمّر بيخلي الشوربة كلها طعمها كراميل.",
+        "minutes": 8,
+        "uses": [
+          "onions",
+          "garlic",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the pumpkin, the water and the crumbled stock cube. Bring it to a simmer and give it 20 to 25 minutes, until a knife slides into a chunk with no resistance at all.",
+        "textAr": "ضيف القرع والماية ومكعب المرقة مفتّت. سيبها تغلي على نار هادية من ٢٠ لـ ٢٥ دقيقة، لحد ما السكينة تدخل في القطعة من غير أي مقاومة خالص.",
+        "minutes": 25,
+        "uses": [
+          "pumpkin",
+          "water",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blend it smooth.",
+        "textAr": "اضربها في الخلاط لحد ما تنعم.",
+        "minutes": 6,
+        "uses": [
+          "pumpkin"
+        ],
+        "safety": "Hot liquid in a blender turns to steam and can force the lid off. Let it cool for a few minutes, fill the jug half full at most, hold the lid down through a folded cloth, and start on the lowest speed.",
+        "safetyAr": "السوائل السخنة في الخلاط بتتحول لبخار وممكن تطيّر الغطا. سيبها تبرد كام دقيقة، واملا الإبريق نصه على الأكتر، واضغط على الغطا من خلال فوطة مطوية، وابدأ على أبطأ سرعة."
+      },
+      {
+        "text": "Salt it at the end — the stock cube has already done most of it — and loosen it with a little more water if it has gone thicker than you want.",
+        "textAr": "ملّحها في الآخر — مكعب المرقة عمل أغلب الشغل — وخفّفها بشوية ماية زيادة لو تقلت أكتر من اللي انت عايزه.",
+        "minutes": 4,
+        "uses": [
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

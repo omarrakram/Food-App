@@ -1765,6 +1765,8 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('17c794db-92ee-54f2-9083-58f18bbb3774', 'shatta khadra') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('17c794db-92ee-54f2-9083-58f18bbb3774', 'filfil har') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('17c794db-92ee-54f2-9083-58f18bbb3774', 'شطة كاملة') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('d442863d-1403-58eb-9144-9f39fe485618', 'chili-powder', 'chili powder', 'شطة مطحونة', 'spices', 'g', null, true, false)
 on conflict (slug) do update set
@@ -3039,6 +3041,10 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('7c337e3e-26fe-5688-93b0-2548578356ef', 'دقيق كيك') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('7c337e3e-26fe-5688-93b0-2548578356ef', 'cake flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7c337e3e-26fe-5688-93b0-2548578356ef', 'دقيق قمح') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('7c337e3e-26fe-5688-93b0-2548578356ef', 'wheat flour') on conflict do nothing;
 insert into public.ingredient_price_estimates (
   ingredient_id, country, currency, unit, quantity,
   estimated_low_minor, estimated_avg_minor, estimated_high_minor, origin, last_updated)
@@ -3118,7 +3124,7 @@ values ('591ac59b-c6f9-53b6-a0d6-b46fadd89add', 'basal me2li') on conflict do no
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('591ac59b-c6f9-53b6-a0d6-b46fadd89add', 'fried onion') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
-values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'frozen-fries', 'frozen fries', 'بطاطس مجمدة', 'frozen', 'g', null, false, false)
+values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'frozen-fries', 'frozen fries', 'بطاطس محمرة', 'frozen', 'g', null, false, false)
 on conflict (slug) do update set
   name = excluded.name,
   name_ar = excluded.name_ar,
@@ -3129,11 +3135,13 @@ on conflict (slug) do update set
   is_perishable = excluded.is_perishable;
 
 insert into public.ingredient_aliases (ingredient_id, alias)
-values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'بطاطس محمرة') on conflict do nothing;
-insert into public.ingredient_aliases (ingredient_id, alias)
 values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'french fries') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'شيبسي') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'بطاطس شيبسي') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('c854dd08-4fa4-57f6-b7e9-71c4538c9c56', 'batates mohammara') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('5ac2601f-223e-5618-b86b-5d173d00de5a', 'frozen-mixed-veg', 'frozen mixed vegetables', 'خضار مشكل مجمد', 'frozen', 'g', null, false, false)
 on conflict (slug) do update set
@@ -8350,6 +8358,29 @@ values ('70558d7d-564e-58db-a483-6d5405bffb31', 'belila wheat') on conflict do n
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('70558d7d-564e-58db-a483-6d5405bffb31', 'whole wheat berries') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'wheat-bran', 'wheat bran', 'ردة', 'pantry', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'gluten') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'bran') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'نخالة قمح') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'نخالة') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'redda') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('077530b2-e085-5a16-96a0-48041785bb50', 'nokhala') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('67f6a1a3-97a4-56b9-941e-7a74f204521c', 'whipping-cream', 'whipping cream', 'كريمة خفق', 'dairy', 'ml', null, false, true)
 on conflict (slug) do update set
   name = excluded.name,
@@ -8498,6 +8529,33 @@ insert into public.ingredient_aliases (ingredient_id, alias)
 values ('af4273f5-3e5d-5772-b7c4-32f2f6214a53', 'farkha baladi') on conflict do nothing;
 insert into public.ingredient_aliases (ingredient_id, alias)
 values ('af4273f5-3e5d-5772-b7c4-32f2f6214a53', 'فرخة بلدي') on conflict do nothing;
+insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'whole-wheat-flour', 'whole wheat flour', 'دقيق قمح كامل', 'pantry', 'g', null, false, false)
+on conflict (slug) do update set
+  name = excluded.name,
+  name_ar = excluded.name_ar,
+  category = excluded.category,
+  default_unit = excluded.default_unit,
+  grams_per_piece = excluded.grams_per_piece,
+  is_common_staple = excluded.is_common_staple,
+  is_perishable = excluded.is_perishable;
+
+insert into public.ingredient_allergens (ingredient_id, allergen)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'gluten') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'wholemeal flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'whole meal flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'wholewheat flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'brown flour') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'دقيق أسمر') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'da2ee2 asmar') on conflict do nothing;
+insert into public.ingredient_aliases (ingredient_id, alias)
+values ('0cef8f93-348d-5b8d-a1f8-4b2a35786d70', 'da2ee2 amh kamel') on conflict do nothing;
 insert into public.ingredients (id, slug, name, name_ar, category, default_unit, grams_per_piece, is_common_staple, is_perishable)
 values ('aa89a89e-1449-5d2a-ae9b-cc93b44689b3', 'worcestershire', 'worcestershire sauce', 'صوص ورشستر', 'sauces', 'ml', null, false, false)
 on conflict (slug) do update set
@@ -12843,6 +12901,88 @@ values ('beaf639e-6216-5ddf-9529-6c58558f7e9d', '8549e1f7-6878-5200-8e88-879718a
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('cdbb3112-0a27-5de1-b1c0-1c2811d14e89', '8549e1f7-6878-5200-8e88-879718a4195a', 4, 'Serve with lemon wedges and, if you like, fried bread croutons.', 'قدّمها مع فصوص ليمون، ولو حبيت، عيش محمّر مكعبات.', 2, null, null, '{"lemon"}');
 
+-- Baladi Flatbread
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'eish-baladi', 'Baladi Flatbread', 'عيش بلدي',
+  'Five lines, and four of them are not negotiable. It is whole wheat, not white — that is what makes it baladi rather than pita. The dough is wetter than feels sensible, the bran on the tray is not decoration, and the oven has to be hotter than you want it, because the pocket is blown open by steam in the first ninety seconds or it never opens at all.', 'خمس سطور، وأربعة منهم مش قابلين للتفاوض. دقيق قمح كامل مش أبيض — ده اللي بيخليه بلدي مش عيش شامي. العجينة أطرى من اللي هيريحك، والردة على الصينية مش زينة، والفرن لازم يكون أسخن من اللي انت عايزه، لأن الجيب بيتفتح بالبخار في أول تسعين ثانية أو ما بيتفتحش خالص.',
+  'curated/eish-baladi.jpg', 'openly_licensed', 'Mohanad5ayman',
+  'CC-BY-SA-4.0', 'Mohanad5ayman · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Bread_mohanad.JPG',
+  null, 'curated', 'egyptian', 'medium',
+  105, 15, 8,
+  220, 8, 45,
+  2, 7, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'breakfast');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'halal');
+delete from public.recipe_allergens where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_allergens (recipe_id, allergen) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'gluten');
+delete from public.recipe_appliances where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_appliances (recipe_id, appliance) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'oven');
+delete from public.recipe_tags where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_tags (recipe_id, tag) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'oven');
+insert into public.recipe_tags (recipe_id, tag) values ('6f18acc4-5aed-5727-9e89-871955ae2be8', 'breakfast');
+
+delete from public.recipe_ingredients where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('cca37ca7-fec8-57b7-abd5-39cb0ff41d42', '6f18acc4-5aed-5727-9e89-871955ae2be8', (select id from public.ingredients where slug = 'whole-wheat-flour' limit 1), 'whole-wheat-flour', 'whole wheat flour', 600, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ea026c50-5a2d-57b9-8c58-470469c0ae5f', '6f18acc4-5aed-5727-9e89-871955ae2be8', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 460, 'ml', 'lukewarm', false, false, true, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('f6f74929-db0c-51da-bf6b-6df8e08db084', '6f18acc4-5aed-5727-9e89-871955ae2be8', (select id from public.ingredients where slug = 'yeast' limit 1), 'yeast', 'yeast', 7, 'g', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('a396f2f8-c9d8-50e7-8e23-7a89e55bd0d4', '6f18acc4-5aed-5727-9e89-871955ae2be8', (select id from public.ingredients where slug = 'wheat-bran' limit 1), 'wheat-bran', 'wheat bran', 60, 'g', 'for dusting', false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9b827341-262f-5824-92c3-fb3326d95c79', '6f18acc4-5aed-5727-9e89-871955ae2be8', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 5);
+
+delete from public.recipe_steps where recipe_id = '6f18acc4-5aed-5727-9e89-871955ae2be8';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('79946874-1b2f-59c3-904d-99d8e3e69d90', '6f18acc4-5aed-5727-9e89-871955ae2be8', 1, 'Stir the yeast into the lukewarm water and leave it a minute, then work in the flour and the salt. The dough should be noticeably wetter and stickier than a bread dough you would knead on a board — closer to a thick batter you can just about handle with a wet hand. Do not add flour to firm it up; the water is what turns to steam later.', 'قلّب الخميرة في الماية الدافية وسيبها دقيقة، وبعدين ادخّل الدقيق والملح. العجينة لازم تبقى أطرى وألزق بوضوح من عجينة عيش عادية بتعجنها على لوح — أقرب لخليط تقيل تقدر تمسكه بإيد مبلولة بالعافية. متضيفش دقيق عشان تشدها؛ الماية دي هي اللي هتبقى بخار بعدين.', 12, null, null, '{"yeast","water","whole wheat flour","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('37a720d7-87ab-52c4-84b9-9e29a79d4c12', '6f18acc4-5aed-5727-9e89-871955ae2be8', 2, 'Cover it and leave it an hour, until it has roughly doubled and the surface is full of bubbles.', 'غطّيها وسيبها ساعة، لحد ما تقرب تبقى الضعف ويبقى وشها مليان فقاقيع.', 60, null, null, '{"whole wheat flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('734f3360-03fd-5195-a0f9-b15f90cd3235', '6f18acc4-5aed-5727-9e89-871955ae2be8', 3, 'Scatter half the bran over a tray. Divide the dough into eight with wet hands, drop each piece onto the bran, turn it so it is coated all over, and press it out to about a centimetre thick. Leave them 30 minutes. The bran is not decoration — it stops a dough this wet gluing itself to the tray, and it is what gives the finished loaf its floury back.', 'رشّ نص الردة على صينية. قسّم العجينة تمن قطع بإيد مبلولة، نزّل كل قطعة على الردة، لفّها لحد ما تتغطي من كل ناحية، واضغطها لحد ما تبقى سمك سنتيمتر تقريباً. سيبهم ٣٠ دقيقة. الردة مش زينة — هي اللي بتمنع عجينة بالطراوة دي إنها تتلزق في الصينية، وهي اللي بتدي الرغيف ضهره المدقّق.', 35, null, null, '{"wheat bran","whole wheat flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c5ed584d-fb8b-5047-b3b9-11c144a4c55d', '6f18acc4-5aed-5727-9e89-871955ae2be8', 4, 'Meanwhile heat the oven as hot as it goes, with an empty baking tray or a stone on the top shelf for at least 20 minutes. A domestic oven at 250°C is at the bottom end of what this bread wants; a cooler oven bakes a flat biscuit instead of a pocket.', 'في نفس الوقت سخّن الفرن على آخر درجة عنده، ومعاه صينية فاضية أو حجر على الرف الفوقاني على الأقل ٢٠ دقيقة. فرن البيت على ٢٥٠°م ده أقل حاجة العيش ده عايزها؛ الفرن الأبرد بيخبز بسكويتة مفرودة مش جيب.', 20, 'An empty tray left at 250°C for twenty minutes holds far more heat than a tray with food in it, and it does not look any different. Use dry cloths — a damp one carries the heat straight through to your hand — and slide the loaves on rather than reaching over the tray.', 'الصينية الفاضية اللي قعدت على ٢٥٠°م عشرين دقيقة بتشيل حرارة أكتر بكتير من صينية فيها أكل، وشكلها مش بيفرق. استعمل فوط ناشفة — الفوطة المبلولة بتوصّل الحرارة لإيدك على طول — ونزّل الأرغفة بالزحلقة بدل ما تمدّ إيدك فوق الصينية.', '{"whole wheat flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('2f908dbc-bd1d-5a6a-881d-efdf5e9fdc91', '6f18acc4-5aed-5727-9e89-871955ae2be8', 5, 'Slide two loaves at a time onto the hot tray and bake five to seven minutes. They should balloon almost completely within the first two minutes; take them out while they are still pale with brown blisters, not evenly browned. Stack them under a cloth as they come out — the trapped steam is what softens them back down.', 'نزّل رغيفين في المرة على الصينية السخنة واخبزهم من خمسة لسبع دقايق. المفروض ينفخوا بالكامل تقريباً في أول دقيقتين؛ طلّعهم وهما لسه فاتحين وعليهم بقع بنية، مش دهبانين بالتساوي. رصّهم فوق بعض تحت فوطة أول ما يطلعوا — البخار المحبوس هو اللي بيرجّعهم طريين.', 15, null, null, '{"whole wheat flour"}');
+
 -- Fattah with Beef
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -17038,7 +17178,7 @@ values ('8ab172c2-9784-52c0-a7ab-1694e33c11ff', 'mahshi-cosa', 'Stuffed Courgett
   'curated/mahshi-cosa.jpg', 'openly_licensed', 'Bazel',
   'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:Kousa_Mahshi.jpg',
   null, 'curated', 'egyptian', 'medium',
-  40, 55, 6,
+  55, 55, 6,
   280, 6, 48,
   8, 4, null, true)
 on conflict (id) do update set
@@ -19287,6 +19427,92 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('f373c8e6-954b-5f76-96ba-c1cb2dc32f0d', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 2, 'Add the chickpeas, crush a third of them, then add the stock and 900ml water.', 'ضيف الحمص، اهرس تلته، وبعدين ضيف المرقة و٩٠٠ مل مية.', 5, null, null, '{"chickpeas","stock cube","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('51e2be45-5fdc-581c-8a11-e9d728f6b984', 'f06c23b5-f6e5-5aa5-9209-e0e150211cf4', 3, 'Add the pasta and cook 12 minutes until it is thick enough to hold a spoon upright.', 'ضيف المكرونة واطبخها ١٢ دقيقة لحد ما تتقل وتقف فيها المعلقة.', 15, null, null, '{"pasta","salt"}');
+
+-- Pasta in Minced Beef Sauce
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'pasta-minced-beef', 'Pasta in Minced Beef Sauce', 'مكرونة باللحمة المفرومة',
+  'Deliberately NOT ragu alla bolognese, and renamed so it stops pretending: there is no soffritto of carrot and celery, no pork, no wine and no milk, and the base is fried tomato paste rather than a little tomato at the end. It is the minced-beef pasta sauce that gets made on a weeknight. The two steps everybody rushes are the two that matter — browning the mince instead of letting it grey in its own water, and frying the paste until it darkens.', 'دي مش راجو بولونيزي بالمعنى الأصلي، واتغير اسمها عشان تبطّل تدّعي: مفيش جزر وكرفس، ولا لحمة خنزير، ولا نبيت، ولا لبن، والأساس صلصة طماطم متحمّرة مش شوية طماطم في الآخر. دي صلصة المكرونة باللحمة المفرومة اللي بتتعمل في أي يوم. الخطوتين اللي كل الناس بتستعجل فيهم هما الاتنين المهمين — تحمير اللحمة بدل ما تتسلق في مياتها، وتحمير الصلصة لحد ما لونها يغمق.',
+  'curated/pasta-minced-beef.jpg', 'openly_licensed', 'Ivan Vighetto',
+  'CC-BY-SA-3.0', 'Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg',
+  null, 'curated', 'italian', 'easy',
+  10, 50, 4,
+  560, 30, 76,
+  16, 5, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'halal');
+delete from public.recipe_allergens where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_allergens (recipe_id, allergen) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'gluten');
+delete from public.recipe_appliances where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_appliances (recipe_id, appliance) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'stove');
+delete from public.recipe_tags where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_tags (recipe_id, tag) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'high-protein');
+insert into public.recipe_tags (recipe_id, tag) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('a46b91e7-e0f8-534d-a358-6be84087bfdf', 'batch-cook');
+
+delete from public.recipe_ingredients where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7da0976d-baac-584b-b848-1e81b751a286', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'pasta' limit 1), 'pasta', 'pasta', 400, 'g', null, false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d964e3bd-c927-54ba-b569-72611342188e', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'ground-beef' limit 1), 'ground-beef', 'ground beef', 400, 'g', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2b3a9c83-ae2e-5727-8dad-80da972814fe', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'finely chopped', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('b300efc3-5756-56c2-9d66-2ef2518d11ca', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 3, 'clove', 'crushed', false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('0df4c74f-444c-5a35-a9cd-5cc8bd0affa4', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'tomato-paste' limit 1), 'tomato-paste', 'tomato paste', 5, 'tbsp', null, false, false, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('324d2ff8-f2ac-55e7-8163-7e76703c6933', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 1, 'piece', null, false, false, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('0c81e00d-405d-58e0-a975-a60290d287f4', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 45, 'ml', null, false, false, false, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('b8808f71-4464-5a92-86bd-7b604c49d0d8', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 400, 'ml', null, false, false, true, 'For the sauce. The pot you boil the pasta in is on top of this.', 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('1a41adce-ddc3-5c87-b6cc-60c0936d6150', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
+
+delete from public.recipe_steps where recipe_id = 'a46b91e7-e0f8-534d-a358-6be84087bfdf';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c86cff80-e66a-51eb-84b9-a3e8a344a8c8', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', 1, 'Soften the onion in the oil over a medium flame for six or seven minutes, then add the garlic for one minute more.', 'سوّي البصل في الزيت على نار متوسطة ست أو سبع دقايق، وبعدين ضيف التوم دقيقة كمان.', 8, null, null, '{"onions","garlic","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('3c4c8d77-61ab-5045-832d-ecedf550f89b', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', 2, 'Turn the heat up, add the mince and break it apart with a spoon. Let it actually BROWN — about eight minutes, and stop stirring it constantly. Mince that has greyed has boiled in its own water, and no amount of simmering afterwards puts that flavour back.', 'زوّد النار، ضيف اللحمة المفرومة وفتّتها بالمعلقة. سيبها تتحمّر بجد — حوالي تمن دقايق، وبطّل تقليب كل شوية. اللحمة اللي بقت رمادية اتسلقت في مياتها، ومفيش غليان بعد كده هيرجّع الطعم ده.', 9, null, null, '{"ground beef"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c5323779-80df-5dd3-91ba-882401ed6120', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', 3, 'Add the tomato paste and fry it for two minutes until it darkens, then pour in the water and drop in the bay leaf.', 'ضيف الصلصة وحمّرها دقيقتين لحد ما لونها يغمق، وبعدين صبّ الماية وحط ورقة اللورا.', 4, null, null, '{"tomato paste","water","bay leaf"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('62e9ca01-7acb-503e-8759-998cbe0308f3', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', 4, 'Simmer it uncovered for 35 minutes, stirring now and then. It is ready when the fat comes back out and sits in an orange film on top.', 'سيبها تغلي مكشوفة ٣٥ دقيقة، وقلّب كل شوية. بتبقى جاهزة لما الزيت يطلع تاني ويعمل طبقة برتقالي على الوش.', 35, 'Minced beef must reach 71°C / 160°F. Browning the mince is for flavour and does not get it there; the 35-minute simmer does, with a large margin.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف. تحمير اللحمة ده للطعم ومش بيوصّلها؛ الغليان الهادي بتاع الـ٣٥ دقيقة هو اللي بيوصّلها، وبفرق كبير.', '{"ground beef"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('31ff27b6-e9c7-59c3-805c-e836e2b45388', 'a46b91e7-e0f8-534d-a358-6be84087bfdf', 5, 'Boil the pasta in well-salted water, drain it, and turn it through the sauce in the pan rather than spooning sauce over a plate of bare pasta.', 'اسلق المكرونة في مياه مملّحة كويس، صفّيها، وقلّبها في الصلصة في الطاسة بدل ما تحط الصلصة بالمعلقة على مكرونة ناشفة في الطبق.', 12, null, null, '{"pasta","salt"}');
 
 -- Tomato and Basil Pasta
 insert into public.recipes (
@@ -21815,10 +22041,10 @@ insert into public.recipes (
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
 values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'shorbet-2ar3', 'Pumpkin Soup', 'شوربة قرع عسلي',
-  'Pumpkin softened with onion and garlic in butter, simmered until a knife meets no resistance, then blended smooth. It needs no cream — the pumpkin does that by itself once it is properly soft.', 'قرع عسلي بيسيح مع بصل وتوم في زبدة، ويتسوّى لحد ما السكينة تدخل فيه من غير أي مقاومة، وبعدين يتضرب في الخلاط لحد ما ينعم. مش محتاج كريمة — القرع بيعمل كده لوحده أول ما يطرى صح.',
+  'Pumpkin softened with onion and garlic in butter, simmered until a knife meets no resistance, then blended smooth. It needs no cream — the pumpkin does that by itself once it is properly soft. Not an Egyptian dish, despite being cooked in Egyptian kitchens all winter; nothing in the formula is particular to the country.', 'قرع عسلي بيسيح مع بصل وتوم في زبدة، ويتسوّى لحد ما السكينة تدخل فيه من غير أي مقاومة، وبعدين يتضرب في الخلاط لحد ما ينعم. مش محتاج كريمة — القرع بيعمل كده لوحده أول ما يطرى صح. دي مش أكلة مصرية رغم إنها بتتعمل في المطابخ المصرية طول الشتا؛ مفيش حاجة في مكوناتها تخص البلد.',
   'curated/shorbet-2ar3.jpg', 'openly_licensed', 'Wald1siedel',
   'CC-BY-SA-4.0', 'Wald1siedel · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG',
-  null, 'curated', 'egyptian', 'easy',
+  null, 'curated', 'mediterranean', 'easy',
   15, 30, 4,
   160, 3, 20,
   8, 3, null, true)
@@ -21858,7 +22084,6 @@ delete from public.recipe_appliances where recipe_id = 'a5c16c63-728e-5c55-b71c-
 insert into public.recipe_appliances (recipe_id, appliance) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'stove');
 insert into public.recipe_appliances (recipe_id, appliance) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'blender');
 delete from public.recipe_tags where recipe_id = 'a5c16c63-728e-5c55-b71c-be081c148d06';
-insert into public.recipe_tags (recipe_id, tag) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'egyptian');
 insert into public.recipe_tags (recipe_id, tag) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'healthy');
 insert into public.recipe_tags (recipe_id, tag) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'comfort');
 insert into public.recipe_tags (recipe_id, tag) values ('a5c16c63-728e-5c55-b71c-be081c148d06', 'budget');
@@ -21988,9 +22213,9 @@ insert into public.recipes (
   image_url, source, cuisine, difficulty,
   prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
   created_by, is_public)
-values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'shorbet-firakh-baladi', 'Egyptian Chicken Soup', 'شوربة فراخ بلدي',
-  'Drumsticks simmered slowly with onion, carrot and bay until the broth is clear, then the meat pulled off the bone and dropped back in with a handful of orzo. The skimming in the first ten minutes is the whole difference between a clear soup and a grey one.', 'دبابيس فراخ بتتسلق على مهلها مع بصل وجزر وورق لورا لحد ما الشوربة تصفّى، وبعدين اللحمة تتشال من على العضم وترجع فيها مع حفنة لسان عصفور. رفع الزفرة في أول عشر دقايق هو الفرق كله بين شوربة صافية وشوربة رمادية.',
-  'curated/shorbet-firakh-baladi.jpg', 'openly_licensed', 'Hoyabird8',
+values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'shorbet-firakh', 'Egyptian Chicken Soup', 'شوربة فراخ',
+  'Drumsticks simmered slowly with onion, carrot and bay until the broth is clear, then the meat pulled off the bone and dropped back in with a handful of orzo. What makes it Egyptian rather than generic is the cinnamon in the pot and the lisan asfour at the end; what makes it good is the skimming in the first ten minutes.', 'دبابيس فراخ بتتسلق على مهلها مع بصل وجزر وورق لورا لحد ما الشوربة تصفّى، وبعدين اللحمة تتشال من على العضم وترجع فيها مع حفنة لسان عصفور. اللي بيخليها مصرية مش أي شوربة فراخ هو القرفة في الحلة ولسان العصفور في الآخر؛ واللي بيخليها حلوة هو رفع الزفرة في أول عشر دقايق.',
+  'curated/shorbet-firakh.jpg', 'openly_licensed', 'Hoyabird8',
   'CC-BY-SA-3.0', 'Hoyabird8 · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg',
   null, 'curated', 'egyptian', 'easy',
   15, 60, 6,
@@ -22020,52 +22245,52 @@ on conflict (id) do update set
   fiber_g = excluded.fiber_g,
   is_public = excluded.is_public;
 
-delete from public.recipe_meal_types where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'lunch');
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'dinner');
-delete from public.recipe_diet_tags where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
-insert into public.recipe_diet_tags (recipe_id, diet) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'halal');
-delete from public.recipe_allergens where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
-insert into public.recipe_allergens (recipe_id, allergen) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'gluten');
-delete from public.recipe_appliances where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
-insert into public.recipe_appliances (recipe_id, appliance) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'stove');
-delete from public.recipe_tags where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
-insert into public.recipe_tags (recipe_id, tag) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'egyptian');
-insert into public.recipe_tags (recipe_id, tag) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'comfort');
-insert into public.recipe_tags (recipe_id, tag) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'budget');
-insert into public.recipe_tags (recipe_id, tag) values ('64b405d3-dce9-5093-9750-d51d4e189a73', 'high-protein');
+delete from public.recipe_meal_types where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'halal');
+delete from public.recipe_allergens where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
+insert into public.recipe_allergens (recipe_id, allergen) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'gluten');
+delete from public.recipe_appliances where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
+insert into public.recipe_appliances (recipe_id, appliance) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'stove');
+delete from public.recipe_tags where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
+insert into public.recipe_tags (recipe_id, tag) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 'high-protein');
 
-delete from public.recipe_ingredients where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
+delete from public.recipe_ingredients where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('d2f96ae7-65e6-5f52-8e0b-f8a7525d4267', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'chicken-drumstick' limit 1), 'chicken-drumstick', 'chicken drumsticks', 800, 'g', null, false, false, false, null, 1);
+values ('acdacc72-8175-58f8-b9b4-9e88cec2e0e0', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'chicken-drumstick' limit 1), 'chicken-drumstick', 'chicken drumsticks', 800, 'g', null, false, false, false, null, 1);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('0f8f3a29-342e-5f50-a033-a89965ca2b6a', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'halved', false, false, false, null, 2);
+values ('23579d56-e015-57e3-8cb6-d8688949e719', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'halved', false, false, false, null, 2);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('90784585-c580-587b-aac3-87aa4e134e9c', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'carrots' limit 1), 'carrots', 'carrots', 2, 'piece', 'cut into chunks', false, false, false, null, 3);
+values ('5c9e5f45-9806-53c6-bf95-0cfd2c19c1e5', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'carrots' limit 1), 'carrots', 'carrots', 2, 'piece', 'cut into chunks', false, false, false, null, 3);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('80681568-4e3e-57ee-8ef0-d78eb5d4246f', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'celery' limit 1), 'celery', 'celery', 100, 'g', 'chopped', false, false, false, null, 4);
+values ('9909e031-126d-5a00-a46c-5f53bffdb942', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'celery' limit 1), 'celery', 'celery', 100, 'g', 'chopped', false, false, false, null, 4);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('7446ddf2-71c5-56f3-816f-f1c7f9584783', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'orzo' limit 1), 'orzo', 'orzo', 80, 'g', null, false, false, false, null, 5);
+values ('4c817784-bf3d-5986-87bd-450ebce1aeca', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'orzo' limit 1), 'orzo', 'orzo', 80, 'g', null, false, false, false, null, 5);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('ba70ffdb-ec14-52e3-84b7-dcd815795b07', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 2, 'piece', null, false, false, false, null, 6);
+values ('2d5216e8-95d4-5ef5-a447-508566e288a0', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 2, 'piece', null, false, false, false, null, 6);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('ffed1192-6f6d-59df-8cc8-c88f3f06857e', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, false, false, false, null, 7);
+values ('e67dacb4-3d50-5253-ae75-03ff85313dd3', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'cinnamon' limit 1), 'cinnamon', 'cinnamon', 1, 'tsp', null, false, false, false, null, 7);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('af8dc32c-f943-53e5-8f00-9c20c874d2b3', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 2000, 'ml', null, false, false, true, null, 8);
+values ('a891b1ee-a764-51ae-acc4-40058edb24eb', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 2000, 'ml', null, false, false, true, null, 8);
 insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('2012a27f-6d1b-5c1c-83cc-29c50ebb9ce9', '64b405d3-dce9-5093-9750-d51d4e189a73', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
+values ('65781332-a207-5552-8e0a-49dc51b0987e', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
 
-delete from public.recipe_steps where recipe_id = '64b405d3-dce9-5093-9750-d51d4e189a73';
+delete from public.recipe_steps where recipe_id = 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436';
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('935b98b5-032c-59d9-9d5a-393bf795d018', '64b405d3-dce9-5093-9750-d51d4e189a73', 1, 'Put the drumsticks in a big pot with the water, bring it up slowly, and skim off the grey foam that rises in the first few minutes. Skimming is what makes the broth clear instead of cloudy.', 'حط الدبابيس في حلة كبيرة مع الماية، سخّنها بالراحة، وارفع الزفرة الرمادية اللي بتطلع في أول كام دقيقة. رفع الزفرة هو اللي بيخلي الشوربة صافية مش عكرة.', 12, 'Raw chicken: wash your hands, the board and anything the packaging touched before you touch anything else, and never rinse the pieces under the tap — that sprays bacteria around the sink.', 'فراخ نية: اغسل إيدك واللوح وأي حاجة لمست الكيس قبل ما تلمس أي حاجة تانية، وعمرك ما تغسل القطع تحت الحنفية — ده بيرشّ البكتيريا في الحوض كله.', '{"chicken drumsticks","water"}');
+values ('5bb458c3-4916-5f10-b98e-3ddd4206a67e', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 1, 'Put the drumsticks in a big pot with the water, bring it up slowly, and skim off the grey foam that rises in the first few minutes. Skimming is what makes the broth clear instead of cloudy.', 'حط الدبابيس في حلة كبيرة مع الماية، سخّنها بالراحة، وارفع الزفرة الرمادية اللي بتطلع في أول كام دقيقة. رفع الزفرة هو اللي بيخلي الشوربة صافية مش عكرة.', 12, 'Raw chicken: wash your hands, the board and anything the packaging touched before you touch anything else, and never rinse the pieces under the tap — that sprays bacteria around the sink.', 'فراخ نية: اغسل إيدك واللوح وأي حاجة لمست الكيس قبل ما تلمس أي حاجة تانية، وعمرك ما تغسل القطع تحت الحنفية — ده بيرشّ البكتيريا في الحوض كله.', '{"chicken drumsticks","water"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('60058e85-9977-5614-8cfb-af1d586aecf9', '64b405d3-dce9-5093-9750-d51d4e189a73', 2, 'Add the onion halves, the carrots, the celery, the bay and the cinnamon, and hold it at the barest simmer for 45 minutes. A rolling boil emulsifies the fat and turns the broth grey.', 'ضيف نصين البصلة والجزر والكرفس وورق اللورا والقرفة، وسيبها على أهدى غليان ٤٥ دقيقة. الغليان القوي بيدوّب الدهن في الشوربة ويخليها رمادية.', 45, null, null, '{"onions","carrots","celery","bay leaf","cinnamon"}');
+values ('54f784b8-466f-5eb4-b9a4-6e81f5e61525', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 2, 'Add the onion halves, the carrots, the celery, the bay and the cinnamon, and hold it at the barest simmer for 45 minutes. A rolling boil emulsifies the fat and turns the broth grey.', 'ضيف نصين البصلة والجزر والكرفس وورق اللورا والقرفة، وسيبها على أهدى غليان ٤٥ دقيقة. الغليان القوي بيدوّب الدهن في الشوربة ويخليها رمادية.', 45, null, null, '{"onions","carrots","celery","bay leaf","cinnamon"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('168e6acf-7a50-574f-8161-dab7e215cf38', '64b405d3-dce9-5093-9750-d51d4e189a73', 3, 'Lift the drumsticks out, pull the meat off the bones in pieces and drop it back in. Fish out the bay leaves.', 'شيل الدبابيس، فصّل اللحمة عن العضم قطع ورجّعها في الحلة. وشيل ورق اللورا.', 8, 'Chicken must reach 74°C / 165°F. An hour at a simmer takes it far past that, so the risk in this recipe is not undercooking — it is the raw meat you handled at the start, and the board and knife that touched it.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف. ساعة على نار هادية بتوصّلها لأبعد من كده بكتير، فالخطر في الوصفة دي مش إنها ما تستويش — الخطر هو اللحمة النية اللي لمستها في الأول، واللوح والسكينة اللي اتلمسوا بيها.', '{"chicken drumsticks"}');
+values ('d343cdeb-4ad8-5436-93c9-831a389b6b0d', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 3, 'Lift the drumsticks out, pull the meat off the bones in pieces and drop it back in. Fish out the bay leaves.', 'شيل الدبابيس، فصّل اللحمة عن العضم قطع ورجّعها في الحلة. وشيل ورق اللورا.', 8, 'Chicken must reach 74°C / 165°F. An hour at a simmer takes it far past that, so the risk in this recipe is not undercooking — it is the raw meat you handled at the start, and the board and knife that touched it.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف. ساعة على نار هادية بتوصّلها لأبعد من كده بكتير، فالخطر في الوصفة دي مش إنها ما تستويش — الخطر هو اللحمة النية اللي لمستها في الأول، واللوح والسكينة اللي اتلمسوا بيها.', '{"chicken drumsticks"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('ce301b37-6698-5893-94fe-a82808bb276c', '64b405d3-dce9-5093-9750-d51d4e189a73', 4, 'Add the orzo and give it eight minutes, until it is soft but still separate. It keeps swelling in the hot broth, so take the pot off the heat while it still looks a little underdone.', 'ضيف لسان العصفور وادّيه تمن دقايق، لحد ما يطرى وهو لسه مفرفط. بيفضل ينتفخ في الشوربة السخنة، فنزّل الحلة من على النار وهو لسه شكله ناقص شوية.', 9, null, null, '{"orzo"}');
+values ('5e880735-7efe-5c27-8780-4f0dc7ad6e55', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 4, 'Add the orzo and give it eight minutes, until it is soft but still separate. It keeps swelling in the hot broth, so take the pot off the heat while it still looks a little underdone.', 'ضيف لسان العصفور وادّيه تمن دقايق، لحد ما يطرى وهو لسه مفرفط. بيفضل ينتفخ في الشوربة السخنة، فنزّل الحلة من على النار وهو لسه شكله ناقص شوية.', 9, null, null, '{"orzo"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('42289b1c-06ff-52fa-a58d-c5129fb844ab', '64b405d3-dce9-5093-9750-d51d4e189a73', 5, 'Salt it at the end and let it settle five minutes before serving.', 'ملّحها في الآخر وسيبها ترتاح خمس دقايق قبل التقديم.', 5, null, null, '{"salt"}');
+values ('a1293cd9-199b-590d-a842-842c5f75a61c', 'a11793f8-61c3-5ba9-bb9d-fbe956e7a436', 5, 'Salt it at the end and let it settle five minutes before serving.', 'ملّحها في الآخر وسيبها ترتاح خمس دقايق قبل التقديم.', 5, null, null, '{"salt"}');
 
 -- Orzo Soup with Chicken Broth
 insert into public.recipes (
@@ -22552,92 +22777,6 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('e5672bae-0615-55e7-8a95-7d93bc70e454', '598b5a53-9e26-51f0-83a9-f74adb6ce1c1', 2, 'Warm the garlic and chilli in the oil on low until the garlic is pale gold, not brown.', 'سخّن التوم والشطة في الزيت على نار هادية لحد ما التوم يبقى دهبي فاتح، مش بنّي.', 4, null, null, '{"garlic","chili flakes","olive oil"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('4b3180c2-6adc-5b15-af31-99a143b9cb35', '598b5a53-9e26-51f0-83a9-f74adb6ce1c1', 3, 'Toss the pasta in with a splash of its water and keep tossing until the sauce turns creamy.', 'قلّب المكرونة معاهم مع شوية من ميتها وفضل تقلّب لحد ما الصلصة تبقى كريمية.', 3, null, null, '{"parsley"}');
-
--- Pasta in Minced Beef Sauce
-insert into public.recipes (
-  id, slug, title, title_ar, description, description_ar,
-  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
-  image_url, source, cuisine, difficulty,
-  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
-  created_by, is_public)
-values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'spaghetti-bolognese', 'Pasta in Minced Beef Sauce', 'مكرونة باللحمة المفرومة',
-  'The two steps everybody rushes are the two that matter: browning the mince properly instead of letting it grey in its own water, and frying the tomato paste until it darkens. Thirty-five minutes of simmering after that does the rest on its own.', 'الخطوتين اللي كل الناس بتستعجل فيهم هما الاتنين المهمين: تحمير اللحمة المفرومة صح بدل ما تتسلق في مياتها وتبقى رمادية، وتحمير الصلصة لحد ما لونها يغمق. خمسة وتلاتين دقيقة غليان هادي بعد كده بيعملوا الباقي لوحدهم.',
-  'curated/spaghetti-bolognese.jpg', 'openly_licensed', 'Ivan Vighetto',
-  'CC-BY-SA-3.0', 'Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg',
-  null, 'curated', 'italian', 'easy',
-  10, 50, 4,
-  560, 30, 76,
-  16, 5, null, true)
-on conflict (id) do update set
-  title = excluded.title,
-  title_ar = excluded.title_ar,
-  description = excluded.description,
-  description_ar = excluded.description_ar,
-  image_path = excluded.image_path,
-  image_source = excluded.image_source,
-  image_creator = excluded.image_creator,
-  image_license = excluded.image_license,
-  image_attribution = excluded.image_attribution,
-  image_source_url = excluded.image_source_url,
-  image_url = excluded.image_url,
-  cuisine = excluded.cuisine,
-  difficulty = excluded.difficulty,
-  prep_minutes = excluded.prep_minutes,
-  cook_minutes = excluded.cook_minutes,
-  base_servings = excluded.base_servings,
-  calories = excluded.calories,
-  protein_g = excluded.protein_g,
-  carbs_g = excluded.carbs_g,
-  fat_g = excluded.fat_g,
-  fiber_g = excluded.fiber_g,
-  is_public = excluded.is_public;
-
-delete from public.recipe_meal_types where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'lunch');
-insert into public.recipe_meal_types (recipe_id, meal_type) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'dinner');
-delete from public.recipe_diet_tags where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_diet_tags (recipe_id, diet) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'halal');
-delete from public.recipe_allergens where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_allergens (recipe_id, allergen) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'gluten');
-delete from public.recipe_appliances where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_appliances (recipe_id, appliance) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'stove');
-delete from public.recipe_tags where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_tags (recipe_id, tag) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'comfort');
-insert into public.recipe_tags (recipe_id, tag) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'high-protein');
-insert into public.recipe_tags (recipe_id, tag) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'budget');
-insert into public.recipe_tags (recipe_id, tag) values ('b6ad1446-ddea-586a-abc8-9b83cd36e835', 'batch-cook');
-
-delete from public.recipe_ingredients where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('8bf7a93a-d02c-579e-afb5-088e688aadd0', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'pasta' limit 1), 'pasta', 'pasta', 400, 'g', null, false, false, false, null, 1);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('b682da0d-6be9-5e60-941e-7b1b5c6a16c6', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'ground-beef' limit 1), 'ground-beef', 'ground beef', 400, 'g', null, false, false, false, null, 2);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('b9ff63be-ee03-5b07-b9da-2e74866db7e5', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'finely chopped', false, false, false, null, 3);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('49f77027-376f-50c0-b80b-21a3789165a2', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 3, 'clove', 'crushed', false, false, false, null, 4);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('c1300b10-7092-57c0-ada5-ea6fac307adb', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'tomato-paste' limit 1), 'tomato-paste', 'tomato paste', 5, 'tbsp', null, false, false, false, null, 5);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('43c6e757-c334-5157-8f39-5317c8f1e7c4', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'bay-leaf' limit 1), 'bay-leaf', 'bay leaf', 1, 'piece', null, false, false, false, null, 6);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('7132d698-3bef-51a1-94f5-fcde5122a25d', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 45, 'ml', null, false, false, false, null, 7);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('b98a2ece-3ec3-56d4-a3ad-92c46135b514', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 400, 'ml', null, false, false, true, null, 8);
-insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
-values ('2a2b1f24-13f5-5e04-8891-ade26756a113', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
-
-delete from public.recipe_steps where recipe_id = 'b6ad1446-ddea-586a-abc8-9b83cd36e835';
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('c40edca6-22b8-5237-8eff-b485ada278ad', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', 1, 'Soften the onion in the oil over a medium flame for six or seven minutes, then add the garlic for one minute more.', 'سوّي البصل في الزيت على نار متوسطة ست أو سبع دقايق، وبعدين ضيف التوم دقيقة كمان.', 8, null, null, '{"onions","garlic","olive oil"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('42c85381-e1e8-545f-b4f4-8b658f54a8cb', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', 2, 'Turn the heat up, add the mince and break it apart with a spoon. Let it actually BROWN — about eight minutes, and stop stirring it constantly. Mince that has greyed has boiled in its own water, and no amount of simmering afterwards puts that flavour back.', 'زوّد النار، ضيف اللحمة المفرومة وفتّتها بالمعلقة. سيبها تتحمّر بجد — حوالي تمن دقايق، وبطّل تقليب كل شوية. اللحمة اللي بقت رمادية اتسلقت في مياتها، ومفيش غليان بعد كده هيرجّع الطعم ده.', 9, null, null, '{"ground beef"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('e3c8d4c8-dfbe-5163-b1bf-45f666f17ee6', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', 3, 'Add the tomato paste and fry it for two minutes until it darkens, then pour in the water and drop in the bay leaf.', 'ضيف الصلصة وحمّرها دقيقتين لحد ما لونها يغمق، وبعدين صبّ الماية وحط ورقة اللورا.', 4, null, null, '{"tomato paste","water","bay leaf"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('b6e2a148-46cb-5af7-821a-03afb04aa702', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', 4, 'Simmer it uncovered for 35 minutes, stirring now and then. It is ready when the fat comes back out and sits in an orange film on top.', 'سيبها تغلي مكشوفة ٣٥ دقيقة، وقلّب كل شوية. بتبقى جاهزة لما الزيت يطلع تاني ويعمل طبقة برتقالي على الوش.', 35, 'Minced beef must reach 71°C / 160°F. Browning the mince is for flavour and does not get it there; the 35-minute simmer does, with a large margin.', 'اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف. تحمير اللحمة ده للطعم ومش بيوصّلها؛ الغليان الهادي بتاع الـ٣٥ دقيقة هو اللي بيوصّلها، وبفرق كبير.', '{"ground beef"}');
-insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
-values ('870502aa-4b04-59f8-86c3-5661ee2f993e', 'b6ad1446-ddea-586a-abc8-9b83cd36e835', 5, 'Boil the pasta in well-salted water, drain it, and turn it through the sauce in the pan rather than spooning sauce over a plate of bare pasta.', 'اسلق المكرونة في مياه مملّحة كويس، صفّيها، وقلّبها في الصلصة في الطاسة بدل ما تحط الصلصة بالمعلقة على مكرونة ناشفة في الطبق.', 12, null, null, '{"pasta","salt"}');
 
 -- Spinach and Cheese Triangles
 insert into public.recipes (

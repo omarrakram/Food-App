@@ -15,36 +15,6 @@
       "bytes": 181513,
       "sha256": "b815add8d6155ad4dcbb6bef30d674d390ee458a50bfb5181730aadb926643ae",
       "acquiredAt": "2026-09-20T13:36:38.336Z"
-    },
-    {
-      "candidateSlug": "eggah-bel-batates",
-      "batch": "batch-4-egyptian-everyday",
-      "path": "eggah-bel-batates.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_potato_omelette.jpg",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/A_potato_omelette.jpg",
-      "creator": "Richard Avery",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Richard Avery · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 800,
-      "height": 1422,
-      "bytes": 581419,
-      "sha256": "9845459d09258df607134c827ff2a31d4476d57d562f0ebab7e276df45f75f6e",
-      "acquiredAt": "2026-09-21T12:15:13.196Z"
-    },
-    {
-      "candidateSlug": "eish-baladi",
-      "batch": "batch-4-egyptian-everyday",
-      "path": "eish-baladi.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bread_mohanad.JPG",
-      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Bread_mohanad.JPG",
-      "creator": "Mohanad5ayman",
-      "license": "CC-BY-SA-4.0",
-      "attribution": "Mohanad5ayman · CC-BY-SA-4.0 · Wikimedia Commons",
-      "width": 1000,
-      "height": 667,
-      "bytes": 178565,
-      "sha256": "cfa2d0ca66d53ac292e8b6ee49636f78787e3934dfc0f9e39bf879c43f75054a",
-      "acquiredAt": "2026-09-21T12:14:23.615Z"
     }
   ],
   "skipped": [
@@ -169,16 +139,20 @@
       "candidateSlug": "black-bean-soup",
       "batch": "batch-3-egyptian-weeknight",
       "reason": "The photograph is fine — a thick, dark bean purée dusted with paprika — but it is a photograph of BLACK beans and the ingredient catalogue has no black-bean row. The recipe this candidate would become is a kidney-bean soup, and putting this picture on it would illustrate a different legume. Held rather than refused: nothing is wrong with the file, and it becomes promotable the day a black-bean row exists. Not written into rejected.json for the same reason — that list is permanent and global."
-    },
+    }
+  ],
+  "retired": [
     {
       "candidateSlug": "eggah-bel-batates",
       "batch": "batch-4-egyptian-everyday",
-      "reason": "A good photograph of a thick set potato omelette. The dish is the problem: its ingredients are potatoes, eggs, onions, oil and salt, which is exactly `tortilla-espanola`, already in the catalogue. Writing an Egyptian one that differs only by using sunflower oil instead of olive oil is the fake-national-variant move in reverse. Held rather than refused — the file is fine and would suit any future recipe this catalogue cannot yet express."
-    },
-    {
-      "candidateSlug": "eish-baladi",
-      "batch": "batch-4-egyptian-everyday",
-      "reason": "The photograph is exactly right — a pile of puffed, bran-dusted baladi loaves, the best bread picture this pipeline has found. The CATALOGUE is what cannot carry the recipe: there is one `flour` row and no wholemeal flour and no bran, so the ingredient list would be flour, yeast, water, salt — which is `pita-bread` minus its oil, a 0.80 near-duplicate. Baladi bread IS its wholemeal flour and its bran dusting; writing it with white flour would be a different bread wearing the name. Held rather than refused: nothing is wrong with the file. Whether wholemeal flour earns a canonical row is an ontology question, and one recipe is not enough to answer it — this is now the second dish waiting on that decision."
+      "reason": "A good photograph of a thick set potato omelette, and the dish is already in the catalogue: its ingredients are potatoes, eggs, onions, oil and salt, which is `tortilla-espanola` line for line. An Egyptian one differing only by using sunflower oil instead of olive oil would be a nationality relabel, not a recipe. RETIRED rather than held: this does not become writable when the catalogue grows, because nothing is missing — the concept is taken. Not in rejected.json either, because the photograph is fine and refusing it there would bar a good file from every future batch.",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_potato_omelette.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/A_potato_omelette.jpg",
+      "creator": "Richard Avery",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Richard Avery · CC-BY-SA-4.0 · Wikimedia Commons",
+      "sha256": "9845459d09258df607134c827ff2a31d4476d57d562f0ebab7e276df45f75f6e",
+      "reviewedAt": "2026-09-21T12:15:13.196Z"
     }
   ]
 }

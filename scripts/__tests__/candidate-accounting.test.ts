@@ -35,6 +35,7 @@ const staging = read('data', 'images', 'candidate-manifest.json') as {
   images: { candidateSlug: string }[];
   skipped: { candidateSlug: string }[];
   held?: { candidateSlug: string; reason: string }[];
+  retired?: { candidateSlug: string; reason: string; sha256?: string; license?: string }[];
 };
 const production = read('data', 'images', 'manifest.json') as {
   images: { recipeSlug: string }[];
@@ -46,6 +47,7 @@ const rejected = read('data', 'images', 'rejected.json') as {
 const staged = new Set(staging.images.map((entry) => entry.candidateSlug));
 const skipped = new Set(staging.skipped.map((entry) => entry.candidateSlug));
 const held = new Set((staging.held ?? []).map((entry) => entry.candidateSlug));
+const retired = new Set((staging.retired ?? []).map((entry) => entry.candidateSlug));
 const published = new Set(production.images.map((entry) => entry.recipeSlug));
 const refused = new Set(rejected.files.map((entry) => entry.rejectedFor));
 
@@ -87,7 +89,11 @@ describe('candidate accounting', () => {
       .map(([slug]) => slug)
       .filter(
         (slug) =>
-          !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+          !published.has(slug) &&
+          !staged.has(slug) &&
+          !skipped.has(slug) &&
+          !refused.has(slug) &&
+          !retired.has(slug),
       );
 
     expect(unaccounted).toEqual([]);
@@ -112,7 +118,11 @@ describe('candidate accounting', () => {
         .map((entry) => entry.slug)
         .filter(
           (slug) =>
-            !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+            !published.has(slug) &&
+            !staged.has(slug) &&
+            !skipped.has(slug) &&
+            !refused.has(slug) &&
+            !retired.has(slug),
         );
       expect({ batch: batch.batch, missing }).toEqual({ batch: batch.batch, missing: [] });
     }
@@ -133,8 +143,48 @@ describe('candidate accounting', () => {
      * is the point: a hold is a human decision, and losing one should take an
      * edit rather than a re-run.
      */
-    const PLACED = ['black-bean-soup', 'eggah-bel-batates', 'eish-baladi'];
+    const PLACED = ['black-bean-soup'];
     expect([...held].sort()).toEqual(PLACED);
+  });
+
+  it('keeps retirement terminal and separate from a hold', () => {
+    /**
+     * A HOLD IS "NOT YET". A RETIREMENT IS "NOT EVER".
+     *
+     * `eish-baladi` was held because the catalogue had no wholemeal flour and
+     * no bran; both are rows now and it is a recipe, which is a hold working.
+     * `eggah-bel-batates` is potatoes, eggs, onions, oil and salt — which is
+     * `tortilla-espanola` line for line — and no amount of catalogue growth
+     * changes that, so it is retired rather than parked.
+     *
+     * Collapsing the two would make the backlog lie in one direction or the
+     * other: a retirement left in `held` invites somebody to try to unblock
+     * it, and moved to `rejected.json` it would bar a good photograph from
+     * every future batch.
+     */
+    const RETIRED = ['eggah-bel-batates'];
+    expect([...retired].sort()).toEqual(RETIRED);
+
+    // Terminal means nothing staged and nothing published.
+    for (const slug of retired) {
+      expect({ slug, staged: staged.has(slug), published: published.has(slug) }).toEqual({
+        slug,
+        staged: false,
+        published: false,
+      });
+    }
+    // And the two states never overlap.
+    expect([...retired].filter((slug) => held.has(slug))).toEqual([]);
+  });
+
+  it('keeps the provenance of a retired photograph', () => {
+    // The file leaves the working tree, so the record is all that is left of
+    // what was decided and about which photograph.
+    for (const entry of staging.retired ?? []) {
+      expect(entry.reason.trim().length).toBeGreaterThan(40);
+      expect(entry.sha256).toMatch(/^[0-9a-f]{64}$/);
+      expect(entry.license).toBeTruthy();
+    }
   });
 
   it('never holds a dish whose photograph is already published', () => {

@@ -2526,11 +2526,11 @@
     ]
   },
   {
-    "slug": "spaghetti-bolognese",
+    "slug": "pasta-minced-beef",
     "title": "Pasta in Minced Beef Sauce",
     "titleAr": "مكرونة باللحمة المفرومة",
-    "description": "The two steps everybody rushes are the two that matter: browning the mince properly instead of letting it grey in its own water, and frying the tomato paste until it darkens. Thirty-five minutes of simmering after that does the rest on its own.",
-    "descriptionAr": "الخطوتين اللي كل الناس بتستعجل فيهم هما الاتنين المهمين: تحمير اللحمة المفرومة صح بدل ما تتسلق في مياتها وتبقى رمادية، وتحمير الصلصة لحد ما لونها يغمق. خمسة وتلاتين دقيقة غليان هادي بعد كده بيعملوا الباقي لوحدهم.",
+    "description": "Deliberately NOT ragu alla bolognese, and renamed so it stops pretending: there is no soffritto of carrot and celery, no pork, no wine and no milk, and the base is fried tomato paste rather than a little tomato at the end. It is the minced-beef pasta sauce that gets made on a weeknight. The two steps everybody rushes are the two that matter — browning the mince instead of letting it grey in its own water, and frying the paste until it darkens.",
+    "descriptionAr": "دي مش راجو بولونيزي بالمعنى الأصلي، واتغير اسمها عشان تبطّل تدّعي: مفيش جزر وكرفس، ولا لحمة خنزير، ولا نبيت، ولا لبن، والأساس صلصة طماطم متحمّرة مش شوية طماطم في الآخر. دي صلصة المكرونة باللحمة المفرومة اللي بتتعمل في أي يوم. الخطوتين اللي كل الناس بتستعجل فيهم هما الاتنين المهمين — تحمير اللحمة بدل ما تتسلق في مياتها، وتحمير الصلصة لحد ما لونها يغمق.",
     "cuisine": "italian",
     "mealTypes": [
       "lunch",
@@ -2611,7 +2611,9 @@
         "quantity": 400,
         "unit": "ml",
         "prep": null,
-        "staple": true
+        "staple": true,
+        "notes": "For the sauce. The pot you boil the pasta in is on top of this.",
+        "notesAr": "للصلصة. الحلة اللي هتسلق فيها المكرونة زيادة على دي."
       },
       {
         "slug": "salt",

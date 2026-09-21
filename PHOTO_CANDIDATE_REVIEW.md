@@ -173,36 +173,37 @@ substitute — it tells the user something false about what they are cooking.
 
 30 candidates, 24 of them Egyptian — eighty per cent, against a two-thirds target — because the catalogue is 27.6% Egyptian and the goal is past 30%. Weighted hard to substantial everyday food rather than to whatever is easy to keep under five lines: seven one-pot or oven meals built on meat or poultry, four legume and vegetable mains, three soups people actually make for lunch, two fish, two breakfasts, two breads. Nothing already tried is here. The nine twice-refused dishes from batches 1 and 2, the exhausted batch-3 rejects, belila, gibna-bel-tamatem, sogo2-bel-salsa and the held black-bean-soup are all out of the pool and stay in history only. Eleven candidates also exist to use catalogue rows no recipe touches: black-eyed-peas, green-fava-beans, pumpkin, walnuts, herring, pigeon, veal, chicken-drumstick, molasses, green-peas, semit.
 
-**30 candidates: 8 reviewed and shipped, 0 waiting to be looked at, 2 held, 20 with nothing acceptable.**
+**30 candidates: 9 reviewed and shipped, 0 waiting to be looked at, 1 retired, 20 with nothing acceptable.**
 
-### Already promoted (8)
+### Already promoted (9)
 
 Reviewed, written as recipes, and now on a card. Their photographs live in
 `assets/recipes/` and are validated by `npm run images:check`.
 
 | Dish | Creator | Licence |
 |---|---|---|
-| Egyptian Chicken Soup (`shorbet-firakh-baladi`) | Hoyabird8 | CC-BY-SA-3.0 |
+| Egyptian Chicken Soup (`shorbet-firakh`) | Hoyabird8 | CC-BY-SA-3.0 |
 | Stuffed Courgettes (`mahshi-cosa`) | Bazel | CC0-1.0 |
 | Smoked Herring with Onion and Lemon (`renga`) | Christopher Bertram (user: bristoleast) | CC-BY-SA-3.0 |
+| Baladi Flatbread (`eish-baladi`) | Mohanad5ayman | CC-BY-SA-4.0 |
 | Pumpkin Soup (`shorbet-2ar3`) | Wald1siedel | CC-BY-SA-4.0 |
 | Layered Ghee Pastry (`feteer-meshaltet`) | Mohamed Ouda | CC-BY-SA-4.0 |
 | Meatballs in Tomato Sauce (`kofta-bel-salsa`) | HaJunkiyada | CC-BY-SA-4.0 |
-| Pasta in Minced Beef Sauce (`spaghetti-bolognese`) | Ivan Vighetto | CC-BY-SA-3.0 |
+| Pasta in Minced Beef Sauce (`pasta-minced-beef`) | Ivan Vighetto | CC-BY-SA-3.0 |
 | Green Beans in Tomato with Beef (`green-bean-stew`) | E4024 | CC-BY-SA-4.0 |
 
-### Held (2)
+### Retired (1)
 
-Looked at, and nothing is wrong with the photograph — the dish is the
-problem. These stay staged and unpublished until whatever is blocking them
-is resolved, which is why they are not in `rejected.json`: that list is
-permanent and global, and refusing a good file there would keep it out of
-every future batch as well.
+Looked at, photograph fine, and the dish will never be written — the
+catalogue already has it under another name. Unlike a hold, this does not
+become promotable when the catalogue grows, because nothing is missing.
+Kept out of `rejected.json` because the file itself is good; the
+provenance is preserved in the candidate manifest so the decision stays
+legible.
 
-| Dish | Why it is held |
+| Dish | Why it is retired |
 |---|---|
-| Baladi Flatbread (`eish-baladi`) | The photograph is exactly right — a pile of puffed, bran-dusted baladi loaves, the best bread picture this pipeline has found. The CATALOGUE is what cannot carry the recipe: there is one `flour` row and no wholemeal flour and no bran, so the ingredient list would be flour, yeast, water, salt — which is `pita-bread` minus its oil, a 0.80 near-duplicate. Baladi bread IS its wholemeal flour and its bran dusting; writing it with white flour would be a different bread wearing the name. Held rather than refused: nothing is wrong with the file. Whether wholemeal flour earns a canonical row is an ontology question, and one recipe is not enough to answer it — this is now the second dish waiting on that decision. |
-| Potato Eggah (`eggah-bel-batates`) | A good photograph of a thick set potato omelette. The dish is the problem: its ingredients are potatoes, eggs, onions, oil and salt, which is exactly `tortilla-espanola`, already in the catalogue. Writing an Egyptian one that differs only by using sunflower oil instead of olive oil is the fake-national-variant move in reverse. Held rather than refused — the file is fine and would suit any future recipe this catalogue cannot yet express. |
+| Potato Eggah (`eggah-bel-batates`) | A good photograph of a thick set potato omelette, and the dish is already in the catalogue: its ingredients are potatoes, eggs, onions, oil and salt, which is `tortilla-espanola` line for line. An Egyptian one differing only by using sunflower oil instead of olive oil would be a nationality relabel, not a recipe. RETIRED rather than held: this does not become writable when the catalogue grows, because nothing is missing — the concept is taken. Not in rejected.json either, because the photograph is fine and refusing it there would bar a good file from every future batch. |
 
 ### No acceptable image (20)
 
