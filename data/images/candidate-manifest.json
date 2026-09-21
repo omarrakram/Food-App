@@ -2,6 +2,81 @@
   "comment": "Photography STAGED against dishes that are not yet recipes. Nothing here is visible to the app: these files are not bundled and not indexed. A staged photograph reaches production only through `npm run images:promote`, by name, after its recipe exists — and a human has looked at the picture. Provenance is recorded to the same standard as production because the licence obligations attach on acquisition, not on promotion.",
   "images": [
     {
+      "candidateSlug": "ardi-shoki-bel-zeit",
+      "batch": "batch-5-short-and-underfed",
+      "path": "ardi-shoki-bel-zeit.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Fried_Artichoke_Hearts.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/08/Fried_Artichoke_Hearts.JPG",
+      "creator": "Calbear22",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 174918,
+      "sha256": "58aee7520954c83f114da1064cbba4311d9b0fdeda6e8f757e35a46da41651d3",
+      "acquiredAt": "2026-09-21T14:09:40.607Z"
+    },
+    {
+      "candidateSlug": "arnabeet-makli",
+      "batch": "batch-5-short-and-underfed",
+      "path": "arnabeet-makli.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Israeli_fried_cauliflower.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Israeli_fried_cauliflower.jpg",
+      "creator": "Yallayallaletsgo",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Yallayallaletsgo · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 678,
+      "height": 711,
+      "bytes": 167655,
+      "sha256": "03d0652d7f5b78783d2902d74cee56e1916d4aade942614e05a1728396e4e8a8",
+      "acquiredAt": "2026-09-21T14:09:37.161Z"
+    },
+    {
+      "candidateSlug": "baked-fish-potatoes",
+      "batch": "batch-5-short-and-underfed",
+      "path": "baked-fish-potatoes.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Roasted_roach.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Roasted_roach.jpg",
+      "creator": "Игоревич",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 390889,
+      "sha256": "ccb80f5a27ab425082c98ddd498a626aae10366715588241e6802cc507704dde",
+      "acquiredAt": "2026-09-21T14:11:03.928Z"
+    },
+    {
+      "candidateSlug": "beef-shawarma",
+      "batch": "batch-5-short-and-underfed",
+      "path": "beef-shawarma.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Beef_shawarma_Rice_servings.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Beef_shawarma_Rice_servings.jpg",
+      "creator": "P1898",
+      "license": "CC-BY-4.0",
+      "attribution": "P1898 · CC-BY-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1471,
+      "bytes": 504596,
+      "sha256": "b82d048f0e49b3d44a2ca8f1a507f31d473467841c73a012f999846d508bbfd6",
+      "acquiredAt": "2026-09-21T14:10:35.492Z"
+    },
+    {
+      "candidateSlug": "beid-masloo2-bel-kammun",
+      "batch": "batch-5-short-and-underfed",
+      "path": "beid-masloo2-bel-kammun.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aspic_ouvert_-_1.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Aspic_ouvert_-_1.JPG",
+      "creator": "Clément Bucco-Lechat",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Clément Bucco-Lechat · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 167342,
+      "sha256": "0ea463f080b068fa84b5a947b941f8971fe9a492ec410f05022442f89d5028cf",
+      "acquiredAt": "2026-09-21T14:09:36.480Z"
+    },
+    {
       "candidateSlug": "black-bean-soup",
       "batch": "batch-3-egyptian-weeknight",
       "path": "black-bean-soup.jpg",
@@ -15,6 +90,201 @@
       "bytes": 181513,
       "sha256": "b815add8d6155ad4dcbb6bef30d674d390ee458a50bfb5181730aadb926643ae",
       "acquiredAt": "2026-09-20T13:36:38.336Z"
+    },
+    {
+      "candidateSlug": "dajaj-mosakhan",
+      "batch": "batch-5-short-and-underfed",
+      "path": "dajaj-mosakhan.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mushakhan_Dish.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Mushakhan_Dish.jpg",
+      "creator": "Kokaly",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Kokaly · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 662,
+      "bytes": 352143,
+      "sha256": "16bda8a727b1c9fb4c3a5ebb971bb28e71965cec13904695392d0bf4883b9382",
+      "acquiredAt": "2026-09-21T14:10:35.993Z"
+    },
+    {
+      "candidateSlug": "farkha-mahshiya",
+      "batch": "batch-5-short-and-underfed",
+      "path": "farkha-mahshiya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Stuffed_roast_chicken.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Stuffed_roast_chicken.jpg",
+      "creator": "James D Kirk",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "James D Kirk · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 631,
+      "bytes": 346122,
+      "sha256": "c7df6ea97661b850647f6f45163482467803157018e111ac541879e0ba4063a3",
+      "acquiredAt": "2026-09-21T14:10:18.889Z"
+    },
+    {
+      "candidateSlug": "fish-curry",
+      "batch": "batch-5-short-and-underfed",
+      "path": "fish-curry.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kari_Ikan_Sri_Lanka.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Kari_Ikan_Sri_Lanka.jpg",
+      "creator": "Mdsheth1986",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Mdsheth1986 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 248528,
+      "sha256": "edf64809dc03b9095a48eb85ccd634f5c5de75075235d0ca8e08dec48b940064",
+      "acquiredAt": "2026-09-21T14:10:45.222Z"
+    },
+    {
+      "candidateSlug": "kabab-mashwi",
+      "batch": "batch-5-short-and-underfed",
+      "path": "kabab-mashwi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Beef_Kebab_and_Pita.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Beef_Kebab_and_Pita.jpg",
+      "creator": "Cyapoj",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Cyapoj · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 321089,
+      "sha256": "5d2c32273ca8fc3054b5322d0bc34294a323db1c6e98590bda52c4a6a938397c",
+      "acquiredAt": "2026-09-21T14:10:13.657Z"
+    },
+    {
+      "candidateSlug": "kabooria",
+      "batch": "batch-5-short-and-underfed",
+      "path": "kabooria.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Blue_crab_at_a_USA_market.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Blue_crab_at_a_USA_market.jpg",
+      "creator": "3steph14",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "3steph14 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 1778,
+      "bytes": 420399,
+      "sha256": "13c9e01b6a0cc165f351c6e02dd753a6edcd6134ffdab33b68d6c0af17b1ba87",
+      "acquiredAt": "2026-09-21T14:09:06.003Z"
+    },
+    {
+      "candidateSlug": "lamb-curry",
+      "batch": "batch-5-short-and-underfed",
+      "path": "lamb-curry.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rogan_josh-dal_makhani-lacha_parantha.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/23/Rogan_josh-dal_makhani-lacha_parantha.jpg",
+      "creator": "Aashita Kawatra",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Aashita Kawatra · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 239897,
+      "sha256": "0b8088da52a0545f4fe83ebcace4f2feb9076ced4965c17b7b451456a7236607",
+      "acquiredAt": "2026-09-21T14:10:41.861Z"
+    },
+    {
+      "candidateSlug": "moza-danny",
+      "batch": "batch-5-short-and-underfed",
+      "path": "moza-danny.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lamb_shank_with_curry.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Lamb_shank_with_curry.jpg",
+      "creator": "Geoffreyrabbit",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Geoffreyrabbit · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 210516,
+      "sha256": "3b94a88872b26da54e31889cb456c6f790f2c7a46d6893693e10e18f060e1ce7",
+      "acquiredAt": "2026-09-21T14:08:59.580Z"
+    },
+    {
+      "candidateSlug": "prawn-pasta",
+      "batch": "batch-5-short-and-underfed",
+      "path": "prawn-pasta.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shrimp_pasta.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/50/Shrimp_pasta.jpg",
+      "creator": "FranHogan",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "FranHogan · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 781,
+      "bytes": 264345,
+      "sha256": "57cc3b5b927535c5dde3f1cbeabce6f6f8a33821b920b04333ec6cd5f99a01e3",
+      "acquiredAt": "2026-09-21T14:10:56.411Z"
+    },
+    {
+      "candidateSlug": "riyash-danny-mashwiya",
+      "batch": "batch-5-short-and-underfed",
+      "path": "riyash-danny-mashwiya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chuletillas-El-Mazuco.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Chuletillas-El-Mazuco.jpg",
+      "creator": "Mike Cowlishaw",
+      "license": "CC-BY-3.0",
+      "attribution": "Mike Cowlishaw · CC-BY-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 800,
+      "bytes": 291341,
+      "sha256": "d0f936705edecf50064d7f3aad8613b1cd4f416c51e90dd1fe3ed4fe3b662581",
+      "acquiredAt": "2026-09-21T14:08:53.126Z"
+    },
+    {
+      "candidateSlug": "samak-makli",
+      "batch": "batch-5-short-and-underfed",
+      "path": "samak-makli.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:02036jfCuisine_of_Bulacanfvf_01.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2b/02036jfCuisine_of_Bulacanfvf_01.jpg",
+      "creator": "Judgefloro",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 493135,
+      "sha256": "276d8fdb141c785f6d4bfdc105a30a7aac3b7038f619a2512b864c106b2993b2",
+      "acquiredAt": "2026-09-21T14:09:25.177Z"
+    },
+    {
+      "candidateSlug": "selk-bel-3ads",
+      "batch": "batch-5-short-and-underfed",
+      "path": "selk-bel-3ads.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Red_Chard_and_Lentils_Soup_(10076154906).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/df/Red_Chard_and_Lentils_Soup_%2810076154906%29.jpg",
+      "creator": "Cajsa Lilliehook from Portland",
+      "license": "CC-BY-SA-2.0",
+      "attribution": "Cajsa Lilliehook from Portland · CC-BY-SA-2.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 868,
+      "bytes": 333620,
+      "sha256": "2cf1f4e47f80388eb68a904bc9cff3d4a87cd7ecdf761ccbe8f70531493b5170",
+      "acquiredAt": "2026-09-21T14:09:50.659Z"
+    },
+    {
+      "candidateSlug": "shorbet-sha3eer",
+      "batch": "batch-5-short-and-underfed",
+      "path": "shorbet-sha3eer.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ary-7sowa.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Ary-7sowa.jpg",
+      "creator": "Lucyin",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Lucyin · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 960,
+      "height": 1280,
+      "bytes": 326951,
+      "sha256": "a4522d47e695bf05a594e00c794d8f3be6271c6e2f80e7b20c165d1d73f16d89",
+      "acquiredAt": "2026-09-21T14:11:06.695Z"
+    },
+    {
+      "candidateSlug": "termes",
+      "batch": "batch-5-short-and-underfed",
+      "path": "termes.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lupinus_albus.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Lupinus_albus.JPG",
+      "creator": "Calapito",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 750,
+      "bytes": 220691,
+      "sha256": "59aa812876a43760a4a72a53b5814c06527dfdf8dc069fdb764d43752b14f479",
+      "acquiredAt": "2026-09-21T14:09:28.053Z"
     }
   ],
   "skipped": [
@@ -39,6 +309,11 @@
       "reason": "no relevant openly-licensed image found"
     },
     {
+      "candidateSlug": "gambari-bel-salsa",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
       "candidateSlug": "gibna-areesh",
       "batch": "batch-3-egyptian-weeknight",
       "reason": "no relevant openly-licensed image found"
@@ -59,8 +334,33 @@
       "reason": "refused on human review — see data/images/rejected.json"
     },
     {
+      "candidateSlug": "hommos-el-sham",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "kofta-bel-tahina",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
       "candidateSlug": "kofta-mashwiya",
       "batch": "batch-4-egyptian-everyday",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "koronb-bel-lahma",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "lamb-tagine-apricot",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "lift-bel-lahma",
+      "batch": "batch-5-short-and-underfed",
       "reason": "no relevant openly-licensed image found"
     },
     {
@@ -89,8 +389,23 @@
       "reason": "refused on human review — see data/images/rejected.json"
     },
     {
+      "candidateSlug": "rigla-bel-zeit",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "roqaq-bel-lahma",
+      "batch": "batch-5-short-and-underfed",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
       "candidateSlug": "roz-bel-khalta",
       "batch": "batch-4-egyptian-everyday",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "sabanekh-bel-lahma",
+      "batch": "batch-5-short-and-underfed",
       "reason": "no relevant openly-licensed image found"
     },
     {
@@ -111,6 +426,11 @@
     {
       "candidateSlug": "sogo2-bel-salsa",
       "batch": "batch-2-short-mains",
+      "reason": "no relevant openly-licensed image found"
+    },
+    {
+      "candidateSlug": "spinach-ricotta-pasta",
+      "batch": "batch-5-short-and-underfed",
       "reason": "no relevant openly-licensed image found"
     },
     {

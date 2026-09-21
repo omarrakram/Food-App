@@ -233,3 +233,351 @@ substitute — it tells the user something false about what they are cooking.
 | Chicken and Sweetcorn Soup (`chicken-corn-soup`) | File:Chicken corn soup.jpg: refused on review — A beige pool in a red bowl on a checked tablecloth, with a glass of amber liquid, a plastic bottle and somebody's arm in frame. Neither the chicken nor the corn is visible. |
 | Potato and Leek Soup (`potato-leek-soup`) | File:Mon Plaisir, Covent Garden, London (3717184145).jpg: refused on review — A restaurant tureen of pale green soup with a cream quenelle and croutons, on a doily, with a wine glass behind. The file names a Covent Garden restaurant rather than a dish, so the identity cannot be confirmed — and neither the cream nor the croutons are in this recipe. |
 
+## batch-5-short-and-underfed
+
+28 candidates against the four measured deficits rather than against a percentage. THREE LAMB and FOUR SEAFOOD-OR-FISH, because lamb is 4 recipes of 201 and seafood is 4. SEVEN at five core lines or fewer, because honest short recipes are 29 against a ~44 target. Two breakfast/street snacks, because breakfast is 37 against 145 lunches. Nineteen are Egyptian, which is the natural consequence of going after those deficits rather than the aim: not one of these is a foreign dish relabelled, and `shorbet-2ar3` was just reclassified OUT of Egyptian in the same stage for exactly that reason. Fourteen candidates exist partly to use catalogue rows no recipe touches: lamb-chops, lamb-shank, crab, lupini-beans, artichoke, purslane, chard, turnip, roqaq, barley, ricotta, sumac, coconut-milk, dried-apricot. Nothing already tried is in the pool.
+
+**28 candidates: 0 reviewed and shipped, 18 waiting to be looked at, 10 with nothing acceptable.**
+
+### Grilled Lamb Chops · ريش ضاني مشوية
+
+`riyash-danny-mashwiya` · egyptian · `lamb-chops`, `garlic`, `cumin`, `olive-oil`, `lemon`, `salt`
+
+Four lamb recipes in 201, and the lamb-chops row has none. Five minutes a side over real heat.
+
+![Grilled Lamb Chops](assets/recipe-candidates/riyash-danny-mashwiya.jpg)
+
+| | |
+|---|---|
+| Creator | Mike Cowlishaw |
+| Licence | CC-BY-3.0 |
+| Attribution | Mike Cowlishaw · CC-BY-3.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Chuletillas-El-Mazuco.jpg |
+| Size | 1000×800, 285 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Braised Lamb Shank · موزة ضاني
+
+`moza-danny` · egyptian · `lamb-shank`, `onions`, `tomato-paste`, `bay-leaf`, `water`, `salt`
+
+Friday lunch, a cheap cut and almost no work. The lamb-shank row is unused. A veal shank was tried in batch 4 and got osso buco; this is a different cut, a different search and a different dish.
+
+![Braised Lamb Shank](assets/recipe-candidates/moza-danny.jpg)
+
+| | |
+|---|---|
+| Creator | Geoffreyrabbit |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Geoffreyrabbit · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Lamb_shank_with_curry.jpg |
+| Size | 1000×667, 206 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Crab in Tomato and Garlic · كابوريا بالصلصة
+
+`kabooria` · egyptian · `crab`, `tomatoes`, `garlic`, `coriander`, `sunflower-oil`, `salt`
+
+Alexandria in summer. The crab row is used by nothing at all.
+
+![Crab in Tomato and Garlic](assets/recipe-candidates/kabooria.jpg)
+
+| | |
+|---|---|
+| Creator | 3steph14 |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | 3steph14 · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Blue_crab_at_a_USA_market.jpg |
+| Size | 1000×1778, 411 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Fried Bolti · سمك بلطي مقلي
+
+`samak-makli` · egyptian · `tilapia`, `flour`, `cumin`, `sunflower-oil`, `lemon`, `salt`
+
+The fish Egypt actually eats, floured and deep fried. Grilled mullet and sayadeya are both in the catalogue; fried bolti is neither.
+
+![Fried Bolti](assets/recipe-candidates/samak-makli.jpg)
+
+| | |
+|---|---|
+| Creator | Judgefloro |
+| Licence | CC0-1.0 |
+| Attribution | _none required_ |
+| Source | https://commons.wikimedia.org/wiki/File:02036jfCuisine_of_Bulacanfvf_01.jpg |
+| Size | 1000×750, 482 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Lupini Beans · ترمس
+
+`termes` · egyptian · `lupini-beans`, `salt`, `water`, `lemon`
+
+Four lines, no cooking beyond a long soak, and the lupini row has no recipe. Street food you eat out of a paper cone.
+
+![Lupini Beans](assets/recipe-candidates/termes.jpg)
+
+| | |
+|---|---|
+| Creator | Calapito |
+| Licence | CC0-1.0 |
+| Attribution | _none required_ |
+| Source | https://commons.wikimedia.org/wiki/File:Lupinus_albus.JPG |
+| Size | 1000×750, 216 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Boiled Eggs with Cumin and Salt · بيض مسلوق بالكمون
+
+`beid-masloo2-bel-kammun` · egyptian · `eggs`, `cumin`, `salt`
+
+Three lines. Breakfast is 37 recipes against 145 lunches, and this is what half of Egypt eats on the way to work.
+
+![Boiled Eggs with Cumin and Salt](assets/recipe-candidates/beid-masloo2-bel-kammun.jpg)
+
+| | |
+|---|---|
+| Creator | Clément Bucco-Lechat |
+| Licence | CC-BY-SA-3.0 |
+| Attribution | Clément Bucco-Lechat · CC-BY-SA-3.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Aspic_ouvert_-_1.JPG |
+| Size | 1000×750, 163 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Fried Cauliflower · قرنبيط مقلي
+
+`arnabeet-makli` · egyptian · `cauliflower`, `flour`, `cumin`, `sunflower-oil`, `salt`
+
+Five lines. The roasted cauliflower with tahini in the catalogue is a different dish in every respect but the vegetable.
+
+![Fried Cauliflower](assets/recipe-candidates/arnabeet-makli.jpg)
+
+| | |
+|---|---|
+| Creator | Yallayallaletsgo |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Yallayallaletsgo · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Israeli_fried_cauliflower.jpg |
+| Size | 678×711, 164 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Artichokes in Oil and Lemon · أرضي شوكي بالزيت
+
+`ardi-shoki-bel-zeit` · egyptian · `artichoke`, `olive-oil`, `lemon`, `garlic`, `coriander`, `salt`
+
+Spring, and the artichoke row has no recipe.
+
+![Artichokes in Oil and Lemon](assets/recipe-candidates/ardi-shoki-bel-zeit.jpg)
+
+| | |
+|---|---|
+| Creator | Calbear22 |
+| Licence | CC0-1.0 |
+| Attribution | _none required_ |
+| Source | https://commons.wikimedia.org/wiki/File:Fried_Artichoke_Hearts.JPG |
+| Size | 1000×750, 171 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Chard and Lentils · سلق بالعدس
+
+`selk-bel-3ads` · egyptian · `chard`, `lentils`, `onions`, `garlic`, `olive-oil`, `lemon`, `salt`
+
+The chard row has no recipe. A thick pot rather than a soup, which is what separates it from the four lentil soups already here.
+
+![Chard and Lentils](assets/recipe-candidates/selk-bel-3ads.jpg)
+
+| | |
+|---|---|
+| Creator | Cajsa Lilliehook from Portland |
+| Licence | CC-BY-SA-2.0 |
+| Attribution | Cajsa Lilliehook from Portland · CC-BY-SA-2.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Red_Chard_and_Lentils_Soup_(10076154906).jpg |
+| Size | 1000×868, 326 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Grilled Beef Kebab · كباب مشوي
+
+`kabab-mashwi` · egyptian · `beef-cubes`, `onions`, `cumin`, `sunflower-oil`, `salt`
+
+Chunks on a skewer, not mince. Five lines. Grilled kofta was searched for in batch 4 and found nothing; this is a different dish and a different search.
+
+![Grilled Beef Kebab](assets/recipe-candidates/kabab-mashwi.jpg)
+
+| | |
+|---|---|
+| Creator | Cyapoj |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Cyapoj · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Beef_Kebab_and_Pita.jpg |
+| Size | 1000×667, 314 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Stuffed Roast Chicken · فرخة محشية بالأرز
+
+`farkha-mahshiya` · egyptian · `whole-chicken`, `rice`, `onions`, `butter`, `cinnamon`, `nuts-mix`, `salt`
+
+The festive version of the bird already in the catalogue: stuffed with spiced rice rather than rubbed with cumin.
+
+![Stuffed Roast Chicken](assets/recipe-candidates/farkha-mahshiya.jpg)
+
+| | |
+|---|---|
+| Creator | James D Kirk |
+| Licence | CC-BY-SA-2.0 |
+| Attribution | James D Kirk · CC-BY-SA-2.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Stuffed_roast_chicken.jpg |
+| Size | 1000×631, 338 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Beef Shawarma · شاورما لحمة
+
+`beef-shawarma` · levantine · `beef-steak`, `onions`, `vinegar`, `cumin`, `cinnamon`, `garlic`, `salt`
+
+Chicken shawarma is here; beef is the other half of every shawarma counter and a different marinade.
+
+![Beef Shawarma](assets/recipe-candidates/beef-shawarma.jpg)
+
+| | |
+|---|---|
+| Creator | P1898 |
+| Licence | CC-BY-4.0 |
+| Attribution | P1898 · CC-BY-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Beef_shawarma_Rice_servings.jpg |
+| Size | 1000×1471, 493 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Sumac Chicken with Onions · مسخن
+
+`dajaj-mosakhan` · levantine · `chicken-thigh`, `onions`, `sumac`, `olive-oil`, `baladi-bread`, `nuts-mix`
+
+A kilo of onions, sumac and bread underneath to catch the juices. Nothing in the catalogue uses sumac as the main seasoning.
+
+![Sumac Chicken with Onions](assets/recipe-candidates/dajaj-mosakhan.jpg)
+
+| | |
+|---|---|
+| Creator | Kokaly |
+| Licence | CC-BY-SA-3.0 |
+| Attribution | Kokaly · CC-BY-SA-3.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Mushakhan_Dish.jpg |
+| Size | 1000×662, 344 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Lamb Curry · كاري ضاني
+
+`lamb-curry` · indian · `lamb`, `onions`, `yogurt`, `curry-powder`, `ginger`, `garlic`, `salt`
+
+Lamb again, from the other direction, and genuinely cooked in Egyptian homes.
+
+![Lamb Curry](assets/recipe-candidates/lamb-curry.jpg)
+
+| | |
+|---|---|
+| Creator | Aashita Kawatra |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Aashita Kawatra · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Rogan_josh-dal_makhani-lacha_parantha.jpg |
+| Size | 1000×750, 234 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Fish Curry · كاري سمك
+
+`fish-curry` · indian · `tilapia`, `coconut-milk`, `turmeric`, `ginger`, `garlic`, `coriander`, `salt`
+
+Fish is 11 of 201 recipes. This one is a sauce rather than a grill or a bake.
+
+![Fish Curry](assets/recipe-candidates/fish-curry.jpg)
+
+| | |
+|---|---|
+| Creator | Mdsheth1986 |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Mdsheth1986 · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Kari_Ikan_Sri_Lanka.jpg |
+| Size | 1000×750, 243 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Prawn and Garlic Pasta · مكرونة بالجمبري
+
+`prawn-pasta` · italian · `pasta`, `shrimp`, `garlic`, `chili-flakes`, `olive-oil`, `parsley`, `salt`
+
+Seafood and a weeknight pasta at the same time. The garlic prawns already here are a pan dish with no pasta in them.
+
+![Prawn and Garlic Pasta](assets/recipe-candidates/prawn-pasta.jpg)
+
+| | |
+|---|---|
+| Creator | FranHogan |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | FranHogan · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Shrimp_pasta.jpg |
+| Size | 1000×781, 258 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Baked Fish with Potatoes · سمك بالبطاطس في الفرن
+
+`baked-fish-potatoes` · mediterranean · `sea-bass`, `potatoes`, `lemon`, `olive-oil`, `garlic`, `oregano`, `salt`
+
+One tray, fish and its side together. Distinct from the sayadeya rice and from the grilled bream.
+
+![Baked Fish with Potatoes](assets/recipe-candidates/baked-fish-potatoes.jpg)
+
+| | |
+|---|---|
+| Creator | Игоревич |
+| Licence | CC0-1.0 |
+| Attribution | _none required_ |
+| Source | https://commons.wikimedia.org/wiki/File:Roasted_roach.jpg |
+| Size | 1000×750, 382 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### Barley and Vegetable Soup · شوربة شعير بالخضار
+
+`shorbet-sha3eer` · mediterranean · `barley`, `carrots`, `celery`, `onions`, `stock-cube`, `water`, `salt`
+
+Cheap, filling, keeps for days, and the barley row has no recipe.
+
+![Barley and Vegetable Soup](assets/recipe-candidates/shorbet-sha3eer.jpg)
+
+| | |
+|---|---|
+| Creator | Lucyin |
+| Licence | CC-BY-SA-4.0 |
+| Attribution | Lucyin · CC-BY-SA-4.0 · Wikimedia Commons |
+| Source | https://commons.wikimedia.org/wiki/File:Ary-7sowa.jpg |
+| Size | 960×1280, 319 KB |
+
+- [ ] This is a photograph of this dish, and I would put it on the card.
+
+### No acceptable image (10)
+
+These keep nothing. A generic photograph of something else is not a
+substitute — it tells the user something false about what they are cooking.
+
+| Dish | Why |
+|---|---|
+| Prawns in Tomato Sauce (`gambari-bel-salsa`) | no relevant openly-licensed image found |
+| Hot Chickpeas with Cumin (`hommos-el-sham`) | no relevant openly-licensed image found |
+| Purslane with Garlic (`rigla-bel-zeit`) | no relevant openly-licensed image found |
+| Turnips with Beef (`lift-bel-lahma`) | no relevant openly-licensed image found |
+| Braised Cabbage with Beef (`koronb-bel-lahma`) | no relevant openly-licensed image found |
+| Spinach with Beef (`sabanekh-bel-lahma`) | no relevant openly-licensed image found |
+| Roqaq Pie with Minced Beef (`roqaq-bel-lahma`) | no relevant openly-licensed image found |
+| Kofta Baked in Tahini (`kofta-bel-tahina`) | no relevant openly-licensed image found |
+| Lamb Tagine with Apricots (`lamb-tagine-apricot`) | no relevant openly-licensed image found |
+| Spinach and Ricotta Pasta (`spinach-ricotta-pasta`) | no relevant openly-licensed image found |
+
