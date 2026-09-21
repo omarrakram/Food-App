@@ -1496,6 +1496,12 @@ Still open, and deliberately not guessed:
 - **`كريمة خفق` vs `كريمة طهي`** — is whipping cream a separate purchase in an
   Egyptian kitchen, or does one product do both jobs?
 - **`صوص طماطم`** — new. It reaches both ketchup and passata.
+- **Wholemeal flour (`دقيق بر`) and bran (`ردة`)** — NOT rows, and two dishes
+  are now waiting on them. `eish-baladi` is defined by both and cannot be
+  written with the single `flour` row without becoming `pita-bread`; a future
+  baladi-bread-adjacent dish would hit the same wall. Held rather than added,
+  because one recipe does not earn a canonical row — but two is the point at
+  which the question deserves a real answer in an ontology pass.
 
 **From the Stage 3 recipe batches.** Dish titles, not ingredient rows, and
 none of them blocks anything — but a transliteration nobody checked is exactly
@@ -2019,6 +2025,9 @@ estimates being wrong is itself part of the record.
 | **3P.1. Provenance and prose** | The image manifest made authoritative over recipe/seed image blocks, with a gate in both directions; the appliance list corrected where `other` meant none; a gate against ingredients that exist only in step prose | 79 recipes were crediting Wikimedia photographs as our own CC0 work — all corrected at the pipeline; the prose gate found **33** recipes hiding water |
 | **3P.2. Truthfulness hardening** | The near-duplicate metric stopped counting salt and water as distinguishing; `kebda-eskandarani` rebuilt around a 71°C endpoint and its real identity; `cacio-e-pepe` renamed to what it is; time and tag semantics defined, audited and gated; an animal-protein safety sweep | Corrected duplicate count **9 → 6** (the old 8 was an artifact); timing gate at `max(step) > total` and `sum > total×1.25 + 5`; `quick` ⇒ ≤40 min, `beginner` ⇒ easy |
 | **3. Batches 1–3** | Three rounds of the full loop: 71 candidate declarations covering **63 distinct dishes** (8 re-proposed after a refusal), 76 photographs downloaded and looked at, **30** approved and promoted, 1 held, 31 recipes written | 161 → **192** recipes; photo coverage 41.6% → **51.0%**; ≤5-line recipes 14 → **26**; Egyptian 46 → **53** (27.6%) |
+| **3P.3. The photographs that were never taken** | All 94 recipes on the branded fallback were claiming an "Akla kitchen" CC0 asset that does not exist; both gates now refuse an orphaned claim whatever its `source` says. Three safety endpoints stopped offering a way to skip the thermometer. `quick` moved from 40 minutes to 30, where Home's own fast rail already was | Recipes claiming a photograph **192 → 98**; quick-tagged 86 → **82**; zero phantom paths in the seed |
+| **3P.3a. An inert refusal list** | The fetcher compared raw strings while `rejected.json` held three spellings of a Commons name. One shared `commonsKey` now normalises for the fetcher and both validators | **15 of 61** refusals matched nothing; batch 4 walked back to a photograph refused a batch earlier |
+| **4. Batch 4** | 30 candidates, 24 Egyptian. 23 staged, 7 found nothing, **8 approved**, 13 refused, 2 held. The harshest round: three rejects were raw ingredients rather than food, four were another country's version of the same dish | 192 → **200** recipes; photo coverage 51.0% → **53.0%**; ≤5-line 26 → **28**; Egyptian 53 → **59** (29.5%) |
 
 **Where the ingredient phase stopped, and why it is not 90%.** 89.8% is 0.2
 short of the target deliberately. Three rows would have crossed it — cake mix,
@@ -2032,8 +2041,8 @@ real users type, not more rows.
 
 | Stage | Work | Measured exit condition |
 | --- | --- | --- |
-| **3. Recipes, batch by batch** (in progress, 3 of ~6 batches done) | Each batch is: declare the dish identities → run the candidate acquisition → a human reviews `PHOTO_CANDIDATE_REVIEW.md` → write recipes for the dishes that survived → promote their photographs in the same batch. A dish may also be **held**: photograph fine, dish not writable yet | Per batch: photo coverage **never below 41.6%**, and rising toward 60% (**51.0%** after batch 3). Overall: ≤5-ingredient recipes ≥44 (**26**); Egyptian ≥30% (**27.6%**); recipes ~300 (**192**) |
-| **4. Prices** | The ranked backlog in `PRICE_BACKLOG.md`, re-ranked after each recipe batch because new recipes change which gaps block an estimate | Slot coverage **≥95%** (**76.9%** after batch 3; the top 50 of 108 reach 93.3%) |
+| **3. Recipes, batch by batch** (in progress, 4 of ~6 batches done) | Each batch is: declare the dish identities → run the candidate acquisition → a human reviews `PHOTO_CANDIDATE_REVIEW.md` → write recipes for the dishes that survived → promote their photographs in the same batch. A dish may also be **held**: photograph fine, dish not writable yet | Per batch: photo coverage **never below 41.6%**, and rising toward 60% (**53.0%** after batch 4). Overall: ≤5-ingredient recipes ≥44 (**28**); Egyptian ≥30% (**29.5%**); recipes ~300 (**200**) |
+| **5. Prices** | The ranked backlog in `PRICE_BACKLOG.md`, re-ranked after each recipe batch because new recipes change which gaps block an estimate | Slot coverage **≥95%** (**77.2%** after batch 4; the top 50 of 112 reach 93.3%) |
 | **5. Unknown-ingredient handling** | `ingredientId: string \| null` in types; custom-ingredient affordance in the picker and pantry; local tally of unmatched terms | A typed unknown is visibly distinct, still never matches a recipe, and is counted |
 | **6. Long tail, only if asked for** | P2 rows only where the holdout shows real users typing them | Do not start before Stage 8. The census is a discovery set and may not justify its own expansion |
 | **7. Native-speaker review** | The carried-forward questions in §9i, and the Arabic recipe text from every Stage 3 batch | Each item answered or explicitly deferred with a reason. `rekab` stays unguessed until somebody knows |
@@ -2068,13 +2077,15 @@ size: batches of 12–24, not 500.
   partner or delivery concept.
 - It does not attach a photograph to a recipe to protect a percentage. A dish
   with no honest photograph either waits for one or is replaced in the batch by
-  another dish that goes through the same preflight. Across batches 1–3, 76
+  another dish that goes through the same preflight. Across batches 1–4, 99
   photographs passed every mechanical check and reached a person; that person
-  refused **45 of them** — a live tilapia in an aquarium, a full English
+  refused **58 of them** — a live tilapia in an aquarium, a full English
   breakfast, a painted restaurant sign reading BROILER-BAR, hotel buffet trays,
   branded bottles with the vendor's phone number on them, an app watermark,
-  pork twice. The gap between 76 and 30 is the argument for the preflight, and
-  one of the 45 was refused on a SECOND look after it had already been
+  pork twice, and in batch 4 three photographs of raw ingredients — dried
+  beans, fava pods on the farm, uncooked drumsticks on a cold rack. The gap
+  between 99 and 38 is the argument for the preflight, and
+  one of the 58 was refused on a SECOND look after it had already been
   promoted: `firakh-bel-forn`, where a thumbnail hid the grill bars charred
   across two jointed leg quarters that were standing in for a whole roast bird.
   The recipe stayed and went back onto the branded fallback.
