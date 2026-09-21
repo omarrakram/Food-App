@@ -118,6 +118,25 @@ describe('candidate accounting', () => {
     }
   });
 
+  it('keeps every hold a human has placed', () => {
+    /**
+     * A HOLD MUST SURVIVE A MACHINE RE-RUNNING.
+     *
+     * `fetch-candidate-images.ts` rewrites the whole manifest on every
+     * acquisition, and it used to emit only `comment`, `images` and
+     * `skipped` — so batch 4's run silently deleted the hold a reviewer had
+     * placed on `black-bean-soup` during batch 3. The photograph stayed
+     * staged; the decision about it did not, and the next
+     * `images:promote --batch` would have shipped it.
+     *
+     * This pins the holds by name. Adding one means adding it here too, which
+     * is the point: a hold is a human decision, and losing one should take an
+     * edit rather than a re-run.
+     */
+    const PLACED = ['black-bean-soup', 'eggah-bel-batates', 'eish-baladi'];
+    expect([...held].sort()).toEqual(PLACED);
+  });
+
   it('never holds a dish whose photograph is already published', () => {
     // A hold says "this is not going out yet". If it is already out, the hold
     // is stale and the page is describing a decision that no longer applies.

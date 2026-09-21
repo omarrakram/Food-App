@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| Recipes in the catalogue | 192 |
-| With a photograph | 99 (52%) |
-| Without | 93 (48%) |
+| Recipes in the catalogue | 200 |
+| With a photograph | 106 (53%) |
+| Without | 94 (47%) |
 
 Shooting all of them is a large spend and most of it would be wasted — a
 recipe nobody is served does not need a picture. These 30 are the ones that
@@ -44,10 +44,10 @@ collections. See `scripts/audit-photography.ts` for the weighting.
 | 24 | Egyptian Falafel | `taameya` | egyptian | 35 min | 10 | 60% | 60% staple ingredients; Egyptian — launch market; in Discover: budget, high-protein |
 | 25 | Tuna, Lemon and Caper Pasta | `pasta-tuna-lemon` | italian | 17 min | 9 | 56% | 17 min — inside Home's 30-minute rail; in Discover: quick, budget, high-protein |
 | 26 | White Bean Salad with Egg | `turkish-white-bean-salad` | turkish | 20 min | 9 | 44% | 20 min — inside Home's 30-minute rail; in Discover: healthy, high-protein, budget, quick |
-| 27 | Warm Oats with Banana | `oatmeal-banana` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, budget |
-| 28 | Soft Scrambled Eggs | `scrambled-eggs-soft` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, high-protein |
-| 29 | Grilled Mullet with Cumin | `samak-mashwi-mullet` | egyptian | 37 min | 7 | 57% | Egyptian — launch market; in Discover: high-protein, healthy |
-| 30 | Tuna and White Bean Salad | `tuna-white-bean-salad` | mediterranean | 8 min | 7 | 43% | 8 min — inside Home's 30-minute rail; in Discover: quick, high-protein, budget, healthy |
+| 27 | Whole Chicken in the Oven with Cumin | `firakh-bel-forn` | egyptian | 95 min | 5 | 60% | 60% staple ingredients; only 5 required ingredients; Egyptian — launch market; in Discover: high-protein |
+| 28 | Warm Oats with Banana | `oatmeal-banana` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, budget |
+| 29 | Soft Scrambled Eggs | `scrambled-eggs-soft` | american | 9 min | 5 | 40% | 9 min — inside Home's 30-minute rail; only 5 required ingredients; in Discover: quick, high-protein |
+| 30 | Grilled Mullet with Cumin | `samak-mashwi-mullet` | egyptian | 37 min | 7 | 57% | Egyptian — launch market; in Discover: high-protein, healthy |
 
 ## How to use this
 
@@ -58,4 +58,4 @@ collections. See `scripts/audit-photography.ts` for the weighting.
 3. Re-run `npm run audit:photos`. Photographed recipes drop out and the next
    30 surface.
 
-_63 further unphotographed recipes fall below this cut._
+_64 further unphotographed recipes fall below this cut._

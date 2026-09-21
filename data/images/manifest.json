@@ -435,6 +435,20 @@
       "acquiredAt": "2026-09-13T15:35:22.970Z"
     },
     {
+      "recipeSlug": "feteer-meshaltet",
+      "path": "feteer-meshaltet.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Egyptian-food-16.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/Egyptian-food-16.jpg",
+      "creator": "Mohamed Ouda",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Mohamed Ouda · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 667,
+      "bytes": 225597,
+      "sha256": "3c2e0bf473021aae1d985f95a7355cc064e9f2c097120b85456f2f2857bbee36",
+      "acquiredAt": "2026-09-21T12:14:55.109Z"
+    },
+    {
       "recipeSlug": "focaccia",
       "path": "focaccia.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Focaccia_with_Crumb.jpg",
@@ -545,6 +559,20 @@
       "bytes": 292889,
       "sha256": "d9cc5483eb67551ca31ce456ae437952089de33321b8114b5afaf484c8d81fba",
       "acquiredAt": "2026-09-13T15:35:41.164Z"
+    },
+    {
+      "recipeSlug": "green-bean-stew",
+      "path": "green-bean-stew.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Taze_fasulye.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Taze_fasulye.jpg",
+      "creator": "E4024",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "E4024 · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 249862,
+      "sha256": "9d22d4bc8c44115ceb9fedb5a27ac27a7e7a86f26bde1fe3e38f76c224e4fd17",
+      "acquiredAt": "2026-09-21T12:15:39.534Z"
     },
     {
       "recipeSlug": "grilled-halloumi",
@@ -687,6 +715,20 @@
       "acquiredAt": "2026-09-13T15:35:53.549Z"
     },
     {
+      "recipeSlug": "kofta-bel-salsa",
+      "path": "kofta-bel-salsa.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Meatballs_in_tomato_sauce.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Liat_Portal_for_Foodie_Disorder_-_Meatballs_in_tomato_sauce.jpg",
+      "creator": "HaJunkiyada",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 800,
+      "height": 1067,
+      "bytes": 599892,
+      "sha256": "6659e8314aafbbf66996ad176490d2cb8eb89ba7f141d63fc77f0260bdae7ba3",
+      "acquiredAt": "2026-09-21T12:15:18.366Z"
+    },
+    {
       "recipeSlug": "koshari",
       "path": "koshari.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Egyptian_food_Koshary.jpg",
@@ -769,6 +811,20 @@
       "bytes": 210336,
       "sha256": "38ee35e560f17098feb6e7c3d11a5ab2a604e4e4ecceee866157adacdca6ebae",
       "acquiredAt": "2026-09-13T15:36:21.930Z"
+    },
+    {
+      "recipeSlug": "mahshi-cosa",
+      "path": "mahshi-cosa.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kousa_Mahshi.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Kousa_Mahshi.jpg",
+      "creator": "Bazel",
+      "license": "CC0-1.0",
+      "attribution": null,
+      "width": 1000,
+      "height": 641,
+      "bytes": 199214,
+      "sha256": "5340728c19e1fd667e50422afe645641b140f4de6e62ccc6bbd48a7ab58ce58f",
+      "acquiredAt": "2026-09-21T12:14:08.116Z"
     },
     {
       "recipeSlug": "makarona-bel-salsa",
@@ -1051,6 +1107,20 @@
       "acquiredAt": "2026-09-20T09:49:04.111Z"
     },
     {
+      "recipeSlug": "renga",
+      "path": "renga.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Buckling.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/3/30/Buckling.jpg",
+      "creator": "Christopher Bertram (user: bristoleast)",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Christopher Bertram (user: bristoleast) · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 315304,
+      "sha256": "b8f6933c88b4bbd9e896afc871e147d60a061950047e7c06e11de096d36ea55e",
+      "acquiredAt": "2026-09-21T12:14:17.146Z"
+    },
+    {
       "recipeSlug": "risotto-mushroom",
       "path": "risotto-mushroom.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:-2019-12-22_Mushroom_Risotto_with_onion_and_herbs_finished_with_Parmesan_and_Mushroom,_Trimingham.JPG",
@@ -1177,6 +1247,34 @@
       "acquiredAt": "2026-09-13T15:37:36.064Z"
     },
     {
+      "recipeSlug": "shorbet-2ar3",
+      "path": "shorbet-2ar3.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cd/K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG",
+      "creator": "Wald1siedel",
+      "license": "CC-BY-SA-4.0",
+      "attribution": "Wald1siedel · CC-BY-SA-4.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 696,
+      "bytes": 227166,
+      "sha256": "da6a5e6444ecbc79018630aba858173a8bc6f23d91371e24b765b40e736fac87",
+      "acquiredAt": "2026-09-21T12:14:29.999Z"
+    },
+    {
+      "recipeSlug": "shorbet-firakh-baladi",
+      "path": "shorbet-firakh-baladi.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Chicken_Noodle_Soup.jpg",
+      "creator": "Hoyabird8",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Hoyabird8 · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 750,
+      "bytes": 238822,
+      "sha256": "fb55426b65feed46c776d5b25e56491c7212bf9f2904471be061fd9d37dbff9f",
+      "acquiredAt": "2026-09-21T12:13:59.418Z"
+    },
+    {
       "recipeSlug": "shorbet-tamatem",
       "path": "shorbet-tamatem.jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Tomato_soup,_plant-based_(44040252791).jpg",
@@ -1203,6 +1301,20 @@
       "bytes": 444572,
       "sha256": "0aaad64eff64b981ffc304982d7e96c5698afd3c99d8223bbf495ffc63bb300a",
       "acquiredAt": "2026-09-13T15:37:49.456Z"
+    },
+    {
+      "recipeSlug": "spaghetti-bolognese",
+      "path": "spaghetti-bolognese.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
+      "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tagliatelle_al_rag%C3%B9_%28image_modified%29.jpg",
+      "creator": "Ivan Vighetto",
+      "license": "CC-BY-SA-3.0",
+      "attribution": "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
+      "width": 1000,
+      "height": 786,
+      "bytes": 322510,
+      "sha256": "1992697283ce6fa4d8666ce2d1a1e01d04818be0834d5f4b9db51124e5ad4bc3",
+      "acquiredAt": "2026-09-21T12:15:24.591Z"
     },
     {
       "recipeSlug": "spanakorizo",

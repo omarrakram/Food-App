@@ -3243,5 +3243,162 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "green-bean-stew",
+    "title": "Green Beans and Potato in Tomato",
+    "titleAr": "فاصوليا خضراء بالطماطم",
+    "description": "Cooked well past bright green on purpose. This is not a crisp-bean dish: the beans go soft enough to cut with the side of a spoon and the tomato reduces around them into something you mop up with bread. Better warm than hot, and better the next day.",
+    "descriptionAr": "بتتطبخ لأبعد من اللون الأخضر الفاقع عن قصد. دي مش أكلة فاصوليا مقرمشة: الفاصوليا بتطرى لدرجة إنك تقطعها بجنب المعلقة، والطماطم بتتكتّف حواليها لحاجة تلمّها بالعيش. أحلى دافية من سخنة، وأحلى في اليوم التاني.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 45,
+    "servings": 4,
+    "nutrition": {
+      "calories": 240,
+      "protein": 5,
+      "carbs": 30,
+      "fat": 13,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "healthy",
+      "vegan",
+      "budget",
+      "comfort",
+      "batch-cook"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "green-beans",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "trimmed"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Top and tail the beans and snap the long ones in half. Cut the potatoes into chunks about the same size as the bean pieces, so the two finish together.",
+        "textAr": "شيل أطراف الفاصوليا واكسر الطويلة نصين. قطّع البطاطس قطع في حجم قطع الفاصوليا تقريباً، عشان الاتنين يستووا مع بعض.",
+        "minutes": 12,
+        "uses": [
+          "green-beans",
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Soften the onion in the oil for six minutes, then add the garlic for one more.",
+        "textAr": "سوّي البصل في الزيت ست دقايق، وبعدين ضيف التوم دقيقة كمان.",
+        "minutes": 7,
+        "uses": [
+          "onions",
+          "garlic",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the chopped tomatoes and the tomato paste and cook them down for eight minutes, until the oil separates out and pools at the edge of the pan.",
+        "textAr": "ضيف الطماطم المقطّعة والصلصة واطبخهم تمن دقايق، لحد ما الزيت ينفصل ويتجمّع على حرف الطاسة.",
+        "minutes": 8,
+        "uses": [
+          "tomatoes",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the beans, the potatoes, the water and the salt. Bring it to a simmer, cover it, and give it 35 to 40 minutes.",
+        "textAr": "ضيف الفاصوليا والبطاطس والماية والملح. سيبها تغلي، غطّيها، وادّيها من ٣٥ لـ ٤٠ دقيقة.",
+        "minutes": 38,
+        "uses": [
+          "green-beans",
+          "potatoes",
+          "water",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Check it: the beans should give completely and the sauce should coat them rather than sit under them. If there is still water in the bottom, take the lid off and give it five more minutes.",
+        "textAr": "بصّ عليها: الفاصوليا لازم تبقى طرية خالص والصلصة تغلّفها مش تبقى تحتها. لو لسه فيه مياه في القاع، شيل الغطا وادّيها خمس دقايق كمان.",
+        "minutes": 5,
+        "uses": [
+          "green-beans"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

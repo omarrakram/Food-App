@@ -2524,5 +2524,159 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "spaghetti-bolognese",
+    "title": "Pasta in Minced Beef Sauce",
+    "titleAr": "مكرونة باللحمة المفرومة",
+    "description": "The two steps everybody rushes are the two that matter: browning the mince properly instead of letting it grey in its own water, and frying the tomato paste until it darkens. Thirty-five minutes of simmering after that does the rest on its own.",
+    "descriptionAr": "الخطوتين اللي كل الناس بتستعجل فيهم هما الاتنين المهمين: تحمير اللحمة المفرومة صح بدل ما تتسلق في مياتها وتبقى رمادية، وتحمير الصلصة لحد ما لونها يغمق. خمسة وتلاتين دقيقة غليان هادي بعد كده بيعملوا الباقي لوحدهم.",
+    "cuisine": "italian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 10,
+    "cookMinutes": 50,
+    "servings": 4,
+    "nutrition": {
+      "calories": 560,
+      "protein": 30,
+      "carbs": 76,
+      "fat": 16,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "high-protein",
+      "budget",
+      "batch-cook"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "pasta",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "ground-beef",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 5,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "bay-leaf",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 400,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Soften the onion in the oil over a medium flame for six or seven minutes, then add the garlic for one minute more.",
+        "textAr": "سوّي البصل في الزيت على نار متوسطة ست أو سبع دقايق، وبعدين ضيف التوم دقيقة كمان.",
+        "minutes": 8,
+        "uses": [
+          "onions",
+          "garlic",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Turn the heat up, add the mince and break it apart with a spoon. Let it actually BROWN — about eight minutes, and stop stirring it constantly. Mince that has greyed has boiled in its own water, and no amount of simmering afterwards puts that flavour back.",
+        "textAr": "زوّد النار، ضيف اللحمة المفرومة وفتّتها بالمعلقة. سيبها تتحمّر بجد — حوالي تمن دقايق، وبطّل تقليب كل شوية. اللحمة اللي بقت رمادية اتسلقت في مياتها، ومفيش غليان بعد كده هيرجّع الطعم ده.",
+        "minutes": 9,
+        "uses": [
+          "ground-beef"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the tomato paste and fry it for two minutes until it darkens, then pour in the water and drop in the bay leaf.",
+        "textAr": "ضيف الصلصة وحمّرها دقيقتين لحد ما لونها يغمق، وبعدين صبّ الماية وحط ورقة اللورا.",
+        "minutes": 4,
+        "uses": [
+          "tomato-paste",
+          "water",
+          "bay-leaf"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Simmer it uncovered for 35 minutes, stirring now and then. It is ready when the fat comes back out and sits in an orange film on top.",
+        "textAr": "سيبها تغلي مكشوفة ٣٥ دقيقة، وقلّب كل شوية. بتبقى جاهزة لما الزيت يطلع تاني ويعمل طبقة برتقالي على الوش.",
+        "minutes": 35,
+        "uses": [
+          "ground-beef"
+        ],
+        "safety": "Minced beef must reach 71°C / 160°F. Browning the mince is for flavour and does not get it there; the 35-minute simmer does, with a large margin.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف. تحمير اللحمة ده للطعم ومش بيوصّلها؛ الغليان الهادي بتاع الـ٣٥ دقيقة هو اللي بيوصّلها، وبفرق كبير."
+      },
+      {
+        "text": "Boil the pasta in well-salted water, drain it, and turn it through the sauce in the pan rather than spooning sauce over a plate of bare pasta.",
+        "textAr": "اسلق المكرونة في مياه مملّحة كويس، صفّيها، وقلّبها في الصلصة في الطاسة بدل ما تحط الصلصة بالمعلقة على مكرونة ناشفة في الطبق.",
+        "minutes": 12,
+        "uses": [
+          "pasta",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

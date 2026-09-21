@@ -13,20 +13,20 @@ does that survey.
 | | |
 |---|---:|
 | Ingredients with a surveyed price | 69 |
-| Distinct ingredients in required slots | 174 |
-| Required ingredient slots | 1448 |
-| Slots with a price | 1114 (**76.9%**) |
-| Unpriced ingredients in required slots | 108 |
+| Distinct ingredients in required slots | 178 |
+| Required ingredient slots | 1506 |
+| Slots with a price | 1162 (**77.2%**) |
+| Unpriced ingredients in required slots | 112 |
 
 ## What each tranche buys
 
 | Survey the top… | Slot coverage becomes |
 |---|---:|
-| 10 | 83.1% |
+| 10 | 83.3% |
 | 20 | 87.4% |
-| 30 | 89.6% |
+| 30 | 89.8% |
 | 50 | 93.3% |
-| all 108 | 100% |
+| all 112 | 100% |
 
 **The target is ≥95%.** Reaching it does not need all of them.
 
@@ -34,11 +34,11 @@ does that survey.
 
 | # | Ingredient | Category | Required slots | Recipes it alone unblocks | Score |
 |---|---|---|---:|---:|---:|
-| 1 | `mint` | vegetables | 11 | 7 | 50 |
-| 2 | `stock-cube` | pantry | 13 | 5 | 39.5 |
-| 3 | `ginger` | vegetables | 16 | 0 | 32 |
-| 4 | `parmesan` | dairy | 9 | 1 | 31 |
-| 5 | `ghee` | dairy | 8 | 1 | 28 |
+| 1 | `mint` | vegetables | 12 | 8 | 56 |
+| 2 | `stock-cube` | pantry | 14 | 5 | 41 |
+| 3 | `ghee` | dairy | 9 | 2 | 35 |
+| 4 | `ginger` | vegetables | 16 | 0 | 32 |
+| 5 | `parmesan` | dairy | 9 | 1 | 31 |
 | 6 | `dill` | vegetables | 7 | 3 | 26 |
 | 7 | `yeast` | pantry | 6 | 3 | 21 |
 | 8 | `kidney-beans` | protein | 4 | 0 | 20 |
@@ -54,94 +54,98 @@ does that survey.
 | 18 | `falafel-mix` | protein | 2 | 1 | 14 |
 | 19 | `cornflour` | carbs | 6 | 0 | 12 |
 | 20 | `avocado` | vegetables | 4 | 1 | 12 |
-| 21 | `pita-bread` | bakery | 4 | 1 | 12 |
-| 22 | `oregano` | spices | 7 | 2 | 11.5 |
-| 23 | `cabbage` | vegetables | 5 | 0 | 10 |
-| 24 | `tortilla` | bakery | 5 | 0 | 10 |
-| 25 | `cauliflower` | vegetables | 3 | 1 | 10 |
-| 26 | `corn` | vegetables | 3 | 1 | 10 |
-| 27 | `beef-steak` | protein | 2 | 0 | 10 |
-| 28 | `tofu` | protein | 2 | 0 | 10 |
-| 29 | `calamari` | protein | 1 | 1 | 9 |
-| 30 | `green-lentils` | protein | 1 | 1 | 9 |
-| 31 | `mullet` | protein | 1 | 1 | 9 |
-| 32 | `sea-bream` | protein | 1 | 1 | 9 |
-| 33 | `whole-chicken` | protein | 1 | 1 | 9 |
-| 34 | `turmeric` | spices | 9 | 1 | 8.5 |
-| 35 | `mayonnaise` | sauces | 4 | 1 | 8 |
-| 36 | `mushroom` | vegetables | 4 | 0 | 8 |
-| 37 | `sweet-potato` | vegetables | 2 | 1 | 8 |
-| 38 | `vanilla` | spices | 7 | 1 | 7.5 |
-| 39 | `sumac` | spices | 4 | 1 | 6 |
-| 40 | `breadcrumbs` | bakery | 3 | 0 | 6 |
-| 41 | `noodles` | carbs | 3 | 0 | 6 |
-| 42 | `egg-yolk` | dairy | 2 | 0 | 6 |
-| 43 | `halloumi` | dairy | 2 | 0 | 6 |
-| 44 | `capers` | vegetables | 1 | 1 | 6 |
-| 45 | `strawberry` | fruit | 1 | 1 | 6 |
-| 46 | `nutmeg` | spices | 3 | 1 | 5.5 |
-| 47 | `chia` | pantry | 1 | 1 | 5.5 |
-| 48 | `rosemary` | spices | 2 | 1 | 5 |
-| 49 | `bacon-beef` | protein | 1 | 0 | 5 |
-| 50 | `chicken-wings` | protein | 1 | 0 | 5 |
-| 51 | `edamame` | protein | 1 | 0 | 5 |
-| 52 | `mussels` | protein | 1 | 0 | 5 |
-| 53 | `pastrami` | protein | 1 | 0 | 5 |
-| 54 | `salmon` | protein | 1 | 0 | 5 |
-| 55 | `sardines` | protein | 1 | 0 | 5 |
-| 56 | `sea-bass` | protein | 1 | 0 | 5 |
-| 57 | `split-peas` | protein | 1 | 0 | 5 |
-| 58 | `vinegar-apple` | pantry | 3 | 0 | 4.5 |
-| 59 | `hibiscus` | spices | 1 | 1 | 4.5 |
-| 60 | `basmati-rice` | carbs | 2 | 0 | 4 |
-| 61 | `broccoli` | vegetables | 2 | 0 | 4 |
-| 62 | `celery` | vegetables | 2 | 0 | 4 |
-| 63 | `cherry-tomato` | vegetables | 2 | 0 | 4 |
-| 64 | `pickles` | vegetables | 2 | 0 | 4 |
-| 65 | `raisins` | fruit | 2 | 0 | 4 |
-| 66 | `chili-powder` | spices | 7 | 0 | 3.5 |
-| 67 | `curry-powder` | spices | 7 | 0 | 3.5 |
-| 68 | `coconut-milk` | sauces | 3 | 0 | 3 |
-| 69 | `pomegranate-molasses` | sauces | 3 | 0 | 3 |
-| 70 | `almonds` | pantry | 2 | 0 | 3 |
-| 71 | `cocoa` | pantry | 2 | 0 | 3 |
-| 72 | `peanuts` | pantry | 2 | 0 | 3 |
-| 73 | `pistachios` | pantry | 2 | 0 | 3 |
-| 74 | `buttermilk` | dairy | 1 | 0 | 3 |
-| 75 | `cream-cheese` | dairy | 1 | 0 | 3 |
-| 76 | `labneh` | dairy | 1 | 0 | 3 |
-| 77 | `thyme-dried` | spices | 4 | 0 | 2 |
-| 78 | `hot-sauce` | sauces | 2 | 0 | 2 |
-| 79 | `mustard` | sauces | 2 | 0 | 2 |
-| 80 | `tomato-sauce` | sauces | 2 | 0 | 2 |
-| 81 | `baguette` | bakery | 1 | 0 | 2 |
-| 82 | `cornmeal` | carbs | 1 | 0 | 2 |
-| 83 | `couscous` | carbs | 1 | 0 | 2 |
-| 84 | `dried-apricot` | fruit | 1 | 0 | 2 |
-| 85 | `freekeh` | carbs | 1 | 0 | 2 |
-| 86 | `green-beans` | vegetables | 1 | 0 | 2 |
-| 87 | `lasagne-sheets` | carbs | 1 | 0 | 2 |
-| 88 | `mango` | fruit | 1 | 0 | 2 |
-| 89 | `olives` | vegetables | 1 | 0 | 2 |
-| 90 | `oranges` | fruit | 1 | 0 | 2 |
-| 91 | `pineapple` | fruit | 1 | 0 | 2 |
-| 92 | `prunes` | fruit | 1 | 0 | 2 |
-| 93 | `puff-pastry` | bakery | 1 | 0 | 2 |
-| 94 | `radish` | vegetables | 1 | 0 | 2 |
-| 95 | `rocket` | vegetables | 1 | 0 | 2 |
-| 96 | `semolina` | carbs | 1 | 0 | 2 |
-| 97 | `sesame-seeds` | spices | 3 | 0 | 1.5 |
-| 98 | `brown-sugar` | pantry | 1 | 0 | 1.5 |
-| 99 | `chocolate` | pantry | 1 | 0 | 1.5 |
-| 100 | `coconut-flakes` | pantry | 1 | 0 | 1.5 |
-| 101 | `coffee` | pantry | 1 | 0 | 1.5 |
-| 102 | `pine-nuts` | pantry | 1 | 0 | 1.5 |
-| 103 | `rose-water` | pantry | 1 | 0 | 1.5 |
-| 104 | `sahlab` | pantry | 1 | 0 | 1.5 |
-| 105 | `cardamom` | spices | 2 | 0 | 1 |
-| 106 | `garlic-powder` | spices | 2 | 0 | 1 |
-| 107 | `white-pepper` | spices | 2 | 0 | 1 |
-| 108 | `ketchup` | sauces | 1 | 0 | 1 |
+| 21 | `breadcrumbs` | bakery | 4 | 1 | 12 |
+| 22 | `pita-bread` | bakery | 4 | 1 | 12 |
+| 23 | `oregano` | spices | 7 | 2 | 11.5 |
+| 24 | `cabbage` | vegetables | 5 | 0 | 10 |
+| 25 | `tortilla` | bakery | 5 | 0 | 10 |
+| 26 | `cauliflower` | vegetables | 3 | 1 | 10 |
+| 27 | `corn` | vegetables | 3 | 1 | 10 |
+| 28 | `beef-steak` | protein | 2 | 0 | 10 |
+| 29 | `tofu` | protein | 2 | 0 | 10 |
+| 30 | `calamari` | protein | 1 | 1 | 9 |
+| 31 | `green-lentils` | protein | 1 | 1 | 9 |
+| 32 | `herring` | protein | 1 | 1 | 9 |
+| 33 | `mullet` | protein | 1 | 1 | 9 |
+| 34 | `sea-bream` | protein | 1 | 1 | 9 |
+| 35 | `whole-chicken` | protein | 1 | 1 | 9 |
+| 36 | `turmeric` | spices | 9 | 1 | 8.5 |
+| 37 | `mayonnaise` | sauces | 4 | 1 | 8 |
+| 38 | `mushroom` | vegetables | 4 | 0 | 8 |
+| 39 | `green-beans` | vegetables | 2 | 1 | 8 |
+| 40 | `sweet-potato` | vegetables | 2 | 1 | 8 |
+| 41 | `vanilla` | spices | 7 | 1 | 7.5 |
+| 42 | `sumac` | spices | 4 | 1 | 6 |
+| 43 | `celery` | vegetables | 3 | 0 | 6 |
+| 44 | `noodles` | carbs | 3 | 0 | 6 |
+| 45 | `egg-yolk` | dairy | 2 | 0 | 6 |
+| 46 | `halloumi` | dairy | 2 | 0 | 6 |
+| 47 | `capers` | vegetables | 1 | 1 | 6 |
+| 48 | `strawberry` | fruit | 1 | 1 | 6 |
+| 49 | `nutmeg` | spices | 3 | 1 | 5.5 |
+| 50 | `chia` | pantry | 1 | 1 | 5.5 |
+| 51 | `rosemary` | spices | 2 | 1 | 5 |
+| 52 | `bacon-beef` | protein | 1 | 0 | 5 |
+| 53 | `chicken-drumstick` | protein | 1 | 0 | 5 |
+| 54 | `chicken-wings` | protein | 1 | 0 | 5 |
+| 55 | `edamame` | protein | 1 | 0 | 5 |
+| 56 | `mussels` | protein | 1 | 0 | 5 |
+| 57 | `pastrami` | protein | 1 | 0 | 5 |
+| 58 | `salmon` | protein | 1 | 0 | 5 |
+| 59 | `sardines` | protein | 1 | 0 | 5 |
+| 60 | `sea-bass` | protein | 1 | 0 | 5 |
+| 61 | `split-peas` | protein | 1 | 0 | 5 |
+| 62 | `vinegar-apple` | pantry | 3 | 0 | 4.5 |
+| 63 | `hibiscus` | spices | 1 | 1 | 4.5 |
+| 64 | `basmati-rice` | carbs | 2 | 0 | 4 |
+| 65 | `broccoli` | vegetables | 2 | 0 | 4 |
+| 66 | `cherry-tomato` | vegetables | 2 | 0 | 4 |
+| 67 | `pickles` | vegetables | 2 | 0 | 4 |
+| 68 | `raisins` | fruit | 2 | 0 | 4 |
+| 69 | `chili-powder` | spices | 7 | 0 | 3.5 |
+| 70 | `curry-powder` | spices | 7 | 0 | 3.5 |
+| 71 | `coconut-milk` | sauces | 3 | 0 | 3 |
+| 72 | `pomegranate-molasses` | sauces | 3 | 0 | 3 |
+| 73 | `almonds` | pantry | 2 | 0 | 3 |
+| 74 | `cocoa` | pantry | 2 | 0 | 3 |
+| 75 | `peanuts` | pantry | 2 | 0 | 3 |
+| 76 | `pistachios` | pantry | 2 | 0 | 3 |
+| 77 | `buttermilk` | dairy | 1 | 0 | 3 |
+| 78 | `cream-cheese` | dairy | 1 | 0 | 3 |
+| 79 | `labneh` | dairy | 1 | 0 | 3 |
+| 80 | `thyme-dried` | spices | 4 | 0 | 2 |
+| 81 | `hot-sauce` | sauces | 2 | 0 | 2 |
+| 82 | `mustard` | sauces | 2 | 0 | 2 |
+| 83 | `tomato-sauce` | sauces | 2 | 0 | 2 |
+| 84 | `baguette` | bakery | 1 | 0 | 2 |
+| 85 | `cornmeal` | carbs | 1 | 0 | 2 |
+| 86 | `couscous` | carbs | 1 | 0 | 2 |
+| 87 | `dried-apricot` | fruit | 1 | 0 | 2 |
+| 88 | `freekeh` | carbs | 1 | 0 | 2 |
+| 89 | `lasagne-sheets` | carbs | 1 | 0 | 2 |
+| 90 | `mango` | fruit | 1 | 0 | 2 |
+| 91 | `olives` | vegetables | 1 | 0 | 2 |
+| 92 | `oranges` | fruit | 1 | 0 | 2 |
+| 93 | `orzo` | carbs | 1 | 0 | 2 |
+| 94 | `pineapple` | fruit | 1 | 0 | 2 |
+| 95 | `prunes` | fruit | 1 | 0 | 2 |
+| 96 | `puff-pastry` | bakery | 1 | 0 | 2 |
+| 97 | `pumpkin` | vegetables | 1 | 0 | 2 |
+| 98 | `radish` | vegetables | 1 | 0 | 2 |
+| 99 | `rocket` | vegetables | 1 | 0 | 2 |
+| 100 | `semolina` | carbs | 1 | 0 | 2 |
+| 101 | `sesame-seeds` | spices | 3 | 0 | 1.5 |
+| 102 | `brown-sugar` | pantry | 1 | 0 | 1.5 |
+| 103 | `chocolate` | pantry | 1 | 0 | 1.5 |
+| 104 | `coconut-flakes` | pantry | 1 | 0 | 1.5 |
+| 105 | `coffee` | pantry | 1 | 0 | 1.5 |
+| 106 | `pine-nuts` | pantry | 1 | 0 | 1.5 |
+| 107 | `rose-water` | pantry | 1 | 0 | 1.5 |
+| 108 | `sahlab` | pantry | 1 | 0 | 1.5 |
+| 109 | `cardamom` | spices | 2 | 0 | 1 |
+| 110 | `garlic-powder` | spices | 2 | 0 | 1 |
+| 111 | `white-pepper` | spices | 2 | 0 | 1 |
+| 112 | `ketchup` | sauces | 1 | 0 | 1 |
 
 ## Method
 

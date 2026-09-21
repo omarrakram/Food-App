@@ -84,6 +84,18 @@ type CandidateManifest = {
   comment: string;
   images: CandidateImageRecord[];
   skipped: { candidateSlug: string; batch: string; reason: string }[];
+  /**
+   * Reviewed, photograph fine, dish not writable yet.
+   *
+   * CARRIED THROUGH RATHER THAN REBUILT. This driver rewrites the whole
+   * manifest on every run, and it used to write only `comment`, `images` and
+   * `skipped` — so the batch-4 acquisition silently deleted the hold on
+   * `black-bean-soup` that a human had placed a batch earlier. The photograph
+   * stayed staged, the hold did not, and the next `images:promote --batch`
+   * would have shipped it. A decision a person made has to survive a machine
+   * re-running.
+   */
+  held?: { candidateSlug: string; batch: string; reason: string }[];
 };
 
 const MANIFEST_COMMENT =
@@ -104,7 +116,7 @@ function readBatches(only: string | null): Batch[] {
 }
 
 function readManifest(): CandidateManifest {
-  if (!existsSync(MANIFEST)) return { comment: MANIFEST_COMMENT, images: [], skipped: [] };
+  if (!existsSync(MANIFEST)) return { comment: MANIFEST_COMMENT, images: [], skipped: [], held: [] };
   return JSON.parse(readFileSync(MANIFEST, 'utf8')) as CandidateManifest;
 }
 
@@ -238,6 +250,9 @@ async function main(): Promise<void> {
     ]
       .filter((entry) => !found.some((f) => f.candidateSlug === entry.candidateSlug))
       .sort((a, b) => a.candidateSlug.localeCompare(b.candidateSlug)),
+    // Every hold survives, except for a dish that has since been published —
+    // that one is resolved, and keeping it would contradict the manifest.
+    held: (manifest.held ?? []).sort((a, b) => a.candidateSlug.localeCompare(b.candidateSlug)),
   };
 
   writeFileSync(MANIFEST, `${JSON.stringify(merged, null, 2)}\n`);

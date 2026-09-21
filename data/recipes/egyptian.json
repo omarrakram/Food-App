@@ -7000,5 +7000,887 @@
         "safetyAr": null
       }
     ]
+  },
+  {
+    "slug": "shorbet-firakh-baladi",
+    "title": "Egyptian Chicken Soup",
+    "titleAr": "شوربة فراخ بلدي",
+    "description": "Drumsticks simmered slowly with onion, carrot and bay until the broth is clear, then the meat pulled off the bone and dropped back in with a handful of orzo. The skimming in the first ten minutes is the whole difference between a clear soup and a grey one.",
+    "descriptionAr": "دبابيس فراخ بتتسلق على مهلها مع بصل وجزر وورق لورا لحد ما الشوربة تصفّى، وبعدين اللحمة تتشال من على العضم وترجع فيها مع حفنة لسان عصفور. رفع الزفرة في أول عشر دقايق هو الفرق كله بين شوربة صافية وشوربة رمادية.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 60,
+    "servings": 6,
+    "nutrition": {
+      "calories": 240,
+      "protein": 22,
+      "carbs": 14,
+      "fat": 11,
+      "fiber": 2
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "comfort",
+      "budget",
+      "high-protein"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "chicken-drumstick",
+        "quantity": 800,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "halved"
+      },
+      {
+        "slug": "carrots",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "celery",
+        "quantity": 100,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "orzo",
+        "quantity": 80,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "bay-leaf",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "cinnamon",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 2000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Put the drumsticks in a big pot with the water, bring it up slowly, and skim off the grey foam that rises in the first few minutes. Skimming is what makes the broth clear instead of cloudy.",
+        "textAr": "حط الدبابيس في حلة كبيرة مع الماية، سخّنها بالراحة، وارفع الزفرة الرمادية اللي بتطلع في أول كام دقيقة. رفع الزفرة هو اللي بيخلي الشوربة صافية مش عكرة.",
+        "minutes": 12,
+        "uses": [
+          "chicken-drumstick",
+          "water"
+        ],
+        "safety": "Raw chicken: wash your hands, the board and anything the packaging touched before you touch anything else, and never rinse the pieces under the tap — that sprays bacteria around the sink.",
+        "safetyAr": "فراخ نية: اغسل إيدك واللوح وأي حاجة لمست الكيس قبل ما تلمس أي حاجة تانية، وعمرك ما تغسل القطع تحت الحنفية — ده بيرشّ البكتيريا في الحوض كله."
+      },
+      {
+        "text": "Add the onion halves, the carrots, the celery, the bay and the cinnamon, and hold it at the barest simmer for 45 minutes. A rolling boil emulsifies the fat and turns the broth grey.",
+        "textAr": "ضيف نصين البصلة والجزر والكرفس وورق اللورا والقرفة، وسيبها على أهدى غليان ٤٥ دقيقة. الغليان القوي بيدوّب الدهن في الشوربة ويخليها رمادية.",
+        "minutes": 45,
+        "uses": [
+          "onions",
+          "carrots",
+          "celery",
+          "bay-leaf",
+          "cinnamon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lift the drumsticks out, pull the meat off the bones in pieces and drop it back in. Fish out the bay leaves.",
+        "textAr": "شيل الدبابيس، فصّل اللحمة عن العضم قطع ورجّعها في الحلة. وشيل ورق اللورا.",
+        "minutes": 8,
+        "uses": [
+          "chicken-drumstick"
+        ],
+        "safety": "Chicken must reach 74°C / 165°F. An hour at a simmer takes it far past that, so the risk in this recipe is not undercooking — it is the raw meat you handled at the start, and the board and knife that touched it.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف. ساعة على نار هادية بتوصّلها لأبعد من كده بكتير، فالخطر في الوصفة دي مش إنها ما تستويش — الخطر هو اللحمة النية اللي لمستها في الأول، واللوح والسكينة اللي اتلمسوا بيها."
+      },
+      {
+        "text": "Add the orzo and give it eight minutes, until it is soft but still separate. It keeps swelling in the hot broth, so take the pot off the heat while it still looks a little underdone.",
+        "textAr": "ضيف لسان العصفور وادّيه تمن دقايق، لحد ما يطرى وهو لسه مفرفط. بيفضل ينتفخ في الشوربة السخنة، فنزّل الحلة من على النار وهو لسه شكله ناقص شوية.",
+        "minutes": 9,
+        "uses": [
+          "orzo"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Salt it at the end and let it settle five minutes before serving.",
+        "textAr": "ملّحها في الآخر وسيبها ترتاح خمس دقايق قبل التقديم.",
+        "minutes": 5,
+        "uses": [
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "mahshi-cosa",
+    "title": "Stuffed Courgettes",
+    "titleAr": "كوسة محشي",
+    "description": "Courgettes hollowed out and filled three-quarters full with rice, grated tomato and herbs, then stood in a pot under a plate and simmered until the rice swells into them. Fill them any further and they split.",
+    "descriptionAr": "كوسة متفرّغة ومتحشية تلاتة أرباعها برز وطماطم مبشورة وخضرة، وبعدين بترصّ في حلة تحت طبق وتتسوّى لحد ما الرز ينتفخ جواها. لو حشيتها أكتر من كده هتفرقع.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 40,
+    "cookMinutes": 55,
+    "servings": 6,
+    "nutrition": {
+      "calories": 280,
+      "protein": 6,
+      "carbs": 48,
+      "fat": 8,
+      "fiber": 4
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "comfort",
+      "budget",
+      "vegan"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "zucchini",
+        "quantity": 12,
+        "unit": "piece",
+        "prep": "peeled and hollowed"
+      },
+      {
+        "slug": "rice",
+        "quantity": 300,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 3,
+        "unit": "piece",
+        "prep": "grated"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "chopped"
+      },
+      {
+        "slug": "mint",
+        "quantity": 20,
+        "unit": "g",
+        "prep": "chopped"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 3,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 500,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Wash the courgettes, cut the tops off and hollow each one with a corer, leaving a wall about as thick as a coin. Work slowly — a thin patch bursts in the pot.",
+        "textAr": "اغسل الكوسة، اقطع الروس وفرّغ كل واحدة بمنقار، وسيب الحيطة بسمك قرش تقريباً. اشتغل بالراحة — أي مكان رفيع بيفتح في الحلة.",
+        "minutes": 25,
+        "uses": [
+          "zucchini"
+        ],
+        "safety": "A corer slips easily in a wet courgette. Hold it by the cut end rather than wrapping your hand round it, work the blade away from your palm, and stop short of the closed end.",
+        "safetyAr": "المنقار بيزحلق بسهولة في الكوسة المبلولة. امسكها من الناحية المقطوعة بدل ما تلفّ إيدك حواليها، وحرّك السلاح بعيد عن كفك، وقف قبل ما توصل للناحية المقفولة."
+      },
+      {
+        "text": "Mix the rinsed rice with the grated tomato, the onion, the parsley, the mint, half the oil, the cumin and half the salt.",
+        "textAr": "اخلط الرز المغسول مع الطماطم المبشورة والبصل والبقدونس والنعناع ونص الزيت والكمون ونص الملح.",
+        "minutes": 10,
+        "uses": [
+          "rice",
+          "tomatoes",
+          "onions",
+          "parsley",
+          "mint",
+          "sunflower-oil",
+          "cumin",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fill each courgette about three-quarters of the way. Rice roughly doubles, and a packed shell splits down the side while it cooks.",
+        "textAr": "احشي كل كوسة لحد تلاتة أرباعها. الرز بيبقى تقريباً الضعف، والكوسة المحشية زيادة بتفتح من جنبها وهي بتستوي.",
+        "minutes": 15,
+        "uses": [
+          "zucchini",
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stand them in a wide pot in tight layers. Stir the tomato paste into the water with the rest of the oil and the rest of the salt, and pour it over until they are just covered.",
+        "textAr": "رصّهم في حلة واسعة طبقات متلزقة. دوّب صلصة الطماطم في الماية مع باقي الزيت وباقي الملح، وصبّها عليهم لحد ما يتغطوا بالعافية.",
+        "minutes": 5,
+        "uses": [
+          "tomato-paste",
+          "water",
+          "sunflower-oil",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Weight them down with a plate so they stay put, bring it to a simmer, then cover and cook on low for 45 to 50 minutes, until the rice is soft and what is left in the pot is a thick sauce rather than water.",
+        "textAr": "حط طبق فوقهم عشان يفضلوا في مكانهم، سيبها تغلي، وبعدين غطّيها واطبخها على نار هادية من ٤٥ لـ ٥٠ دقيقة، لحد ما الرز يطرى واللي باقي في الحلة يبقى صلصة تقيلة مش مياه.",
+        "minutes": 50,
+        "uses": [
+          "rice"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "renga",
+    "title": "Smoked Herring with Onion and Lemon",
+    "titleAr": "رنجة",
+    "description": "Sham el-Nessim on a plate. The fish is already cured and already cooked — the work is boning it properly and then letting the lemon sit on it long enough to cut the salt. Five lines and no heat at all.",
+    "descriptionAr": "شم النسيم في طبق. السمكة متملّحة ومستوية خلاص — الشغل كله في تنضيفها من الشوك كويس وبعدين سيبان الليمون عليها وقت كفاية عشان يكسر الملح. خمس سطور ومن غير نار خالص.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "breakfast"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 30,
+    "cookMinutes": 0,
+    "servings": 4,
+    "nutrition": {
+      "calories": 290,
+      "protein": 22,
+      "carbs": 3,
+      "fat": 21,
+      "fiber": 0
+    },
+    "dietTags": [
+      "halal",
+      "pescatarian"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "appliances": [],
+    "tags": [
+      "egyptian",
+      "no-cook",
+      "high-protein",
+      "budget",
+      "quick"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "herring",
+        "quantity": 400,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "thinly sliced"
+      },
+      {
+        "slug": "lemon",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Pull the skin away from the head end and lift the flesh off the backbone in strips. Then go through every strip with your fingers for the fine pin bones.",
+        "textAr": "اسحب القشرة من ناحية الراس وشيل اللحمة من على الشوكة شرايح. وبعدين عدّي بصوابعك على كل شريحة وشيل الشوك الرفيع.",
+        "minutes": 12,
+        "uses": [
+          "herring"
+        ],
+        "safety": "Herring is a bony fish and the pin bones stay sharp after smoking. Check every strip by feel, not by eye, and keep the smallest pieces away from young children.",
+        "safetyAr": "الرنجة سمكة كتيرة الشوك والشوك الرفيع بيفضل ناشب حتى بعد التدخين. افحص كل شريحة باللمس مش بالنظر، وابعد أصغر القطع عن الأطفال الصغيرة."
+      },
+      {
+        "text": "Break the flesh into rough pieces on a wide plate.",
+        "textAr": "فتّت اللحمة قطع خشنة في طبق واسع.",
+        "minutes": 3,
+        "uses": [
+          "herring"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Scatter the sliced onion over it, squeeze on the lemon, pour over the oil and dust with the cumin. Turn it once, gently.",
+        "textAr": "وزّع البصل المقطّع عليها، اعصر الليمون، صبّ الزيت ورشّ الكمون. قلّبها مرة واحدة بالراحة.",
+        "minutes": 4,
+        "uses": [
+          "onions",
+          "lemon",
+          "olive-oil",
+          "cumin"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Leave it fifteen minutes before eating, so the lemon has time to take the edge off the salt. Renga is salty by design — it wants bread and something fresh beside it, not a big helping on its own.",
+        "textAr": "سيبها خمستاشر دقيقة قبل ما تاكلها، عشان الليمون ياخد وقته ويكسر الملح. الرنجة مالحة بطبيعتها — عايزة عيش وحاجة طازة جنبها، مش طبق كبير لوحدها.",
+        "minutes": 15,
+        "uses": [
+          "lemon"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "shorbet-2ar3",
+    "title": "Pumpkin Soup",
+    "titleAr": "شوربة قرع عسلي",
+    "description": "Pumpkin softened with onion and garlic in butter, simmered until a knife meets no resistance, then blended smooth. It needs no cream — the pumpkin does that by itself once it is properly soft.",
+    "descriptionAr": "قرع عسلي بيسيح مع بصل وتوم في زبدة، ويتسوّى لحد ما السكينة تدخل فيه من غير أي مقاومة، وبعدين يتضرب في الخلاط لحد ما ينعم. مش محتاج كريمة — القرع بيعمل كده لوحده أول ما يطرى صح.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 30,
+    "servings": 4,
+    "nutrition": {
+      "calories": 160,
+      "protein": 3,
+      "carbs": 20,
+      "fat": 8,
+      "fiber": 3
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove",
+      "blender"
+    ],
+    "tags": [
+      "egyptian",
+      "healthy",
+      "comfort",
+      "budget",
+      "beginner"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "pumpkin",
+        "quantity": 900,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 3,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "butter",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "stock-cube",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 900,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Peel the pumpkin and cut it into rough chunks.",
+        "textAr": "قشّر القرع وقطّعه قطع خشنة.",
+        "minutes": 10,
+        "uses": [
+          "pumpkin"
+        ],
+        "safety": "A whole pumpkin rolls and its skin is hard. Cut one flat slice off a side first and stand it on that face before you do anything else — a knife skidding off a curved skin goes straight into your other hand.",
+        "safetyAr": "القرعة بتتدحرج وقشرتها قاسية. اقطع منها شريحة مستوية من جنب واوقفها على الوش ده قبل أي حاجة تانية — السكينة اللي بتزحلق من على قشرة مقوّسة بتروح في إيدك التانية على طول."
+      },
+      {
+        "text": "Soften the onion and garlic in the butter over a low flame for six to eight minutes. Do not let them colour; a browned onion makes the whole soup taste of caramel.",
+        "textAr": "سوّي البصل والتوم في الزبدة على نار هادية من ست لتمن دقايق. متسبهمش ياخدوا لون؛ البصل اللي بيتحمّر بيخلي الشوربة كلها طعمها كراميل.",
+        "minutes": 8,
+        "uses": [
+          "onions",
+          "garlic",
+          "butter"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the pumpkin, the water and the crumbled stock cube. Bring it to a simmer and give it 20 to 25 minutes, until a knife slides into a chunk with no resistance at all.",
+        "textAr": "ضيف القرع والماية ومكعب المرقة مفتّت. سيبها تغلي على نار هادية من ٢٠ لـ ٢٥ دقيقة، لحد ما السكينة تدخل في القطعة من غير أي مقاومة خالص.",
+        "minutes": 25,
+        "uses": [
+          "pumpkin",
+          "water",
+          "stock-cube"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Blend it smooth.",
+        "textAr": "اضربها في الخلاط لحد ما تنعم.",
+        "minutes": 6,
+        "uses": [
+          "pumpkin"
+        ],
+        "safety": "Hot liquid in a blender turns to steam and can force the lid off. Let it cool for a few minutes, fill the jug half full at most, hold the lid down through a folded cloth, and start on the lowest speed.",
+        "safetyAr": "السوائل السخنة في الخلاط بتتحول لبخار وممكن تطيّر الغطا. سيبها تبرد كام دقيقة، واملا الإبريق نصه على الأكتر، واضغط على الغطا من خلال فوطة مطوية، وابدأ على أبطأ سرعة."
+      },
+      {
+        "text": "Salt it at the end — the stock cube has already done most of it — and loosen it with a little more water if it has gone thicker than you want.",
+        "textAr": "ملّحها في الآخر — مكعب المرقة عمل أغلب الشغل — وخفّفها بشوية ماية زيادة لو تقلت أكتر من اللي انت عايزه.",
+        "minutes": 4,
+        "uses": [
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "feteer-meshaltet",
+    "title": "Layered Ghee Pastry",
+    "titleAr": "فطير مشلتت",
+    "description": "Four lines: flour, ghee, water, salt. Everything else is technique — resting the dough so it will stretch to the point of transparency, and being generous enough with the ghee between the layers that they come apart in the oven instead of fusing.",
+    "descriptionAr": "أربع سطور: دقيق وسمنة وماية وملح. كل اللي باقي تكنيك — راحة العجينة عشان تقدر تتفرد لحد ما تشف، وسخاء في السمنة بين الطبقات عشان تنفصل في الفرن بدل ما تتلزق.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "breakfast",
+      "snack"
+    ],
+    "difficulty": "hard",
+    "prepMinutes": 60,
+    "cookMinutes": 25,
+    "servings": 8,
+    "nutrition": {
+      "calories": 380,
+      "protein": 6,
+      "carbs": 40,
+      "fat": 22,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "egyptian",
+      "comfort",
+      "oven",
+      "breakfast"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "ghee",
+        "quantity": 200,
+        "unit": "g",
+        "prep": "melted"
+      },
+      {
+        "slug": "water",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the flour, the salt and the water into a soft, slightly sticky dough and knead it for eight minutes until it is smooth and springs back when you press it.",
+        "textAr": "اخلط الدقيق والملح والماية لحد ما تبقى عجينة طرية ولزجة شوية، واعجنها تمن دقايق لحد ما تنعم وترجع لما تضغط عليها.",
+        "minutes": 12,
+        "uses": [
+          "flour",
+          "salt",
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Divide it into six balls, coat each one all over in melted ghee, cover them and leave them 30 minutes. This rest is not optional — an unrested dough tears the moment you try to stretch it.",
+        "textAr": "قسّمها ست كور، ادهن كل واحدة بالسمنة السايحة من كل ناحية، غطّيهم وسيبهم ٣٠ دقيقة. الراحة دي مش اختيارية — العجينة اللي ما ارتاحتش بتقطع أول ما تحاول تفردها.",
+        "minutes": 32,
+        "uses": [
+          "ghee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Heat the oven to 220°C. Grease the counter with ghee and stretch each ball out until it is almost transparent — pull from the middle outward with the BACKS of your hands, because fingertips punch holes in it.",
+        "textAr": "سخّن الفرن على ٢٢٠ درجة. ادهن الرخامة بالسمنة وافرد كل كورة لحد ما تبقى تقريباً شفافة — اسحب من النص لبره بضهر إيدك، لأن أطراف الصوابع بتخرّمها.",
+        "minutes": 15,
+        "uses": [
+          "ghee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fold each sheet into a square, brush it with ghee, and stack the squares in a greased round tin, brushing between every single layer.",
+        "textAr": "اطوي كل ورقة مربع، ادهنها سمنة، ورصّ المربعات في صينية مدوّرة مدهونة، وادهن بين كل طبقة والتانية.",
+        "minutes": 10,
+        "uses": [
+          "ghee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Bake 22 to 25 minutes, until the top is blistered and deep gold and the layers have visibly pulled apart at the edges. Brush it with the last of the ghee the moment it comes out.",
+        "textAr": "اخبزه من ٢٢ لـ ٢٥ دقيقة، لحد ما الوش يفقّع ويدهب غامق والطبقات تبان منفصلة عند الأطراف. ادهنه بآخر السمنة أول ما يطلع.",
+        "minutes": 25,
+        "uses": [
+          "ghee"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "kofta-bel-salsa",
+    "title": "Meatballs in Tomato Sauce",
+    "titleAr": "كفتة بالصلصة",
+    "description": "Browned first, then simmered — the crust is flavour, not cooking. Twenty-five minutes in the sauce is what actually cooks them through and what makes the sauce taste of meat rather than of tomato paste.",
+    "descriptionAr": "بتتحمّر الأول وبعدين تتسوّى على نار هادية — القشرة دي طعم مش استواء. الخمسة وعشرين دقيقة في الصلصة هي اللي بتسوّيها فعلاً، وهي اللي بتخلي الصلصة طعمها لحمة مش صلصة طماطم.",
+    "cuisine": "egyptian",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 20,
+    "cookMinutes": 35,
+    "servings": 4,
+    "nutrition": {
+      "calories": 420,
+      "protein": 30,
+      "carbs": 18,
+      "fat": 26,
+      "fiber": 3
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "eggs"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "egyptian",
+      "comfort",
+      "high-protein",
+      "budget"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "ground-beef",
+        "quantity": 600,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 2,
+        "unit": "piece",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "parsley",
+        "quantity": 1,
+        "unit": "bunch",
+        "prep": "finely chopped"
+      },
+      {
+        "slug": "breadcrumbs",
+        "quantity": 60,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "eggs",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "beaten"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 4,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 45,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 400,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Work the mince together with the onion, parsley, breadcrumbs, egg, half the garlic, the cumin and the salt until it holds in one mass. Wet your hands and roll walnut-sized balls.",
+        "textAr": "اعجن اللحمة المفرومة مع البصل والبقدونس والبقسماط والبيضة ونص التوم والكمون والملح لحد ما تتماسك في كتلة واحدة. بلّل إيدك ولف كور بحجم عين الجمل.",
+        "minutes": 18,
+        "uses": [
+          "ground-beef",
+          "onions",
+          "parsley",
+          "breadcrumbs",
+          "eggs",
+          "garlic",
+          "cumin",
+          "salt"
+        ],
+        "safety": "Raw minced beef: wash your hands, the bowl and the board before they touch anything else, and do not taste the mixture to check the seasoning.",
+        "safetyAr": "لحمة مفرومة نية: اغسل إيدك والسلطانية واللوح قبل ما يلمسوا أي حاجة تانية، ومتدوقش الخلطة عشان تظبط الملح."
+      },
+      {
+        "text": "Brown them in the oil in a wide pan, turning, until they have a crust all over — about six minutes. They are nowhere near cooked through at this point.",
+        "textAr": "حمّرهم في الزيت في طاسة واسعة مع التقليب، لحد ما يبقى عليهم قشرة من كل ناحية — حوالي ست دقايق. لسه بعيدين خالص عن الاستواء في النقطة دي.",
+        "minutes": 7,
+        "uses": [
+          "sunflower-oil",
+          "ground-beef"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Lift them out. Fry the rest of the garlic for under a minute, then the tomato paste for two full minutes, until it turns from tinny orange to brick red.",
+        "textAr": "شيلهم. حمّر باقي التوم أقل من دقيقة، وبعدين الصلصة دقيقتين كاملين، لحد ما لونها يتحول من برتقالي معدني لأحمر قرميدي.",
+        "minutes": 4,
+        "uses": [
+          "garlic",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Pour in the water, bring it to a simmer, return the meatballs and leave them 25 minutes, turning them once halfway.",
+        "textAr": "صبّ الماية، سيبها تغلي على نار هادية، رجّع الكفتة وسيبها ٢٥ دقيقة، وقلّبها مرة في النص.",
+        "minutes": 26,
+        "uses": [
+          "water",
+          "ground-beef"
+        ],
+        "safety": "Minced beef must reach 71°C / 160°F at the centre. Twenty-five minutes at a simmer takes a walnut-sized ball comfortably past it; if you rolled yours larger, measure the middle of the biggest one.",
+        "safetyAr": "اللحمة المفرومة لازم توصل ٧١°م / ١٦٠°ف في النص. خمسة وعشرين دقيقة على نار هادية بتوصّل الكورة اللي بحجم عين الجمل لأبعد من كده براحة؛ لو لفيتها أكبر، قيس نص أكبر واحدة."
+      },
+      {
+        "text": "Taste the sauce for salt and serve it over rice with plenty of the sauce spooned on.",
+        "textAr": "دوق الصلصة وظبط الملح، وقدّمها على الرز مع صلصة كتير فوقه.",
+        "minutes": 3,
+        "uses": [
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
   }
 ]

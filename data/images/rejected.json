@@ -305,6 +305,71 @@
       "title": "File:Roasted chicken leg piece-MB20.jpg",
       "rejectedFor": "firakh-bel-forn",
       "reason": "Two chicken leg quarters with parallel grill bars charred across them, on a bright green plastic plate. This recipe is a WHOLE bird roasted breast-down in an oven; the photograph is jointed tandoori-style grilled chicken, and the difference is the first thing anyone would see. Promoted in error on a first pass and reversed on a second look at full size — the thumbnail hid the grill marks."
+    },
+    {
+      "title": "File:Black eyed peas food.jpg",
+      "rejectedFor": "lobia-bel-zeit",
+      "reason": "A dense mass of RAW DRIED black-eyed peas filling the frame. Raw produce, not a cooked dish — the same class as the heap of dry muesli already on this list."
+    },
+    {
+      "title": "File:Freshly Picked Green Fava Beans from a Libyan Farm.jpg",
+      "rejectedFor": "ful-akhdar",
+      "reason": "Two hands holding freshly picked green fava bean PODS under an olive tree. The ingredient on the farm, not the dish in a pan."
+    },
+    {
+      "title": "File:Chicken Drumsticks on a Grill.jpg",
+      "rejectedFor": "dababees-bel-forn",
+      "reason": "Two dozen RAW marinated drumsticks laid out on a cold grill rack, skin still pink. This is the prep step, not the meal, and raw poultry on a recipe card is worse than no photograph."
+    },
+    {
+      "title": "File:Chinese squab.jpg",
+      "rejectedFor": "hamam-mahshi",
+      "reason": "Chinese roast squab: deep lacquered mahogany skin, dipping sauces, an unidentifiable amber drink behind it. Egyptian hamam mahshi is a small pale-gold bird stuffed with rice or freek. Same bird, different cuisine's dish."
+    },
+    {
+      "title": "File:Osso buco, Breckenheim.jpg",
+      "rejectedFor": "moza-bel-forn",
+      "reason": "Osso buco — a cross-cut veal shank on saffron risotto with a wine glass and a bread basket in frame. Egyptian moza is a whole braised shank; this is the Milanese dish, and the risotto is half the plate."
+    },
+    {
+      "title": "File:Vegetable udon noodle soup.jpg",
+      "rejectedFor": "shorbet-khodar",
+      "reason": "A pan of Japanese udon noodle soup: wheat noodles, broccoli, mushrooms and courgette in a soy-brown broth. Not an Egyptian vegetable soup, and two of its main components are not in this recipe."
+    },
+    {
+      "title": "File:Simit vendor next to checkpoint, Nicosia.jpg",
+      "rejectedFor": "semit",
+      "reason": "Shot through a shop window in Nicosia. Street reflections cover most of the frame — a bystander's face, exchange-bureau signage, and beer-brand parasols — and the bread is behind glass."
+    },
+    {
+      "title": "File:Asian glazed chicken on fried rice (6107408438).jpg",
+      "rejectedFor": "firakh-bel-roz",
+      "reason": "Glazed chicken thighs on egg fried rice with gyoza and a ramekin of soy dipping sauce. An Asian plate, not chicken cooked on top of the rice."
+    },
+    {
+      "title": "File:Beef stroganoff with pasta.jpg",
+      "rejectedFor": "beef-stroganoff",
+      "reason": "A dim, orange-cast close-up where egg noodles fill most of the frame and the beef is barely findable. The recipe has no pasta in it, and the photograph is too murky to read as food."
+    },
+    {
+      "title": "File:Baked potato with baked beans and cheese - The Verandah 2026-08-25.jpg",
+      "rejectedFor": "baked-potato-cheese",
+      "reason": "A jacket potato buried under BAKED BEANS and grated cheese, with a side salad and a juice jug. The beans are half the dish and this recipe does not contain them."
+    },
+    {
+      "title": "File:Chicken corn soup.jpg",
+      "rejectedFor": "chicken-corn-soup",
+      "reason": "A beige pool in a red bowl on a checked tablecloth, with a glass of amber liquid, a plastic bottle and somebody's arm in frame. Neither the chicken nor the corn is visible."
+    },
+    {
+      "title": "File:Mon Plaisir, Covent Garden, London (3717184145).jpg",
+      "rejectedFor": "potato-leek-soup",
+      "reason": "A restaurant tureen of pale green soup with a cream quenelle and croutons, on a doily, with a wine glass behind. The file names a Covent Garden restaurant rather than a dish, so the identity cannot be confirmed — and neither the cream nor the croutons are in this recipe."
+    },
+    {
+      "title": "File:Potato and egg curry.jpg",
+      "rejectedFor": "batates-bel-beid",
+      "reason": "An Indian potato-and-egg curry in a big aluminium pot on a dirty outdoor surface. Turmeric gravy and fried egg balls; not the Egyptian pan of potatoes with eggs broken over them."
     }
   ]
 }

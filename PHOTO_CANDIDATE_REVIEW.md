@@ -110,7 +110,7 @@ substitute — it tells the user something false about what they are cooking.
 
 30 candidates: 20 new and 10 second attempts at batch-2 dishes that were refused once. Fifteen of the thirty are Egyptian — half the pool — because the catalogue is 26.4% Egyptian against a ≥30% goal, and none of them is a foreign dish wearing an Egyptian name to move the number. The weighting is to real meals: a baked tilapia, white beans with beef, a tray of torly, chicken livers, two breakfasts built on cheese and eggs. The nine dishes refused twice in batches 1 and 2 are NOT here — they are retired from automated attempts and kept in the backlog for a human with a known-good source. Belila, gibna-bel-tamatem and sogo2-bel-salsa found nothing twice and are deferred.
 
-**30 candidates: 9 reviewed and shipped, 1 waiting to be looked at, 20 with nothing acceptable.**
+**30 candidates: 9 reviewed and shipped, 0 waiting to be looked at, 1 held, 20 with nothing acceptable.**
 
 ### Already promoted (9)
 
@@ -129,23 +129,17 @@ Reviewed, written as recipes, and now on a card. Their photographs live in
 | Macaroni in Red Sauce (`makarona-bel-salsa`) | 10Rosso | CC-BY-2.0 |
 | Fried Aubergine with Garlic and Vinegar (`betingan-mely`) | HaJunkiyada | CC-BY-SA-4.0 |
 
-### Spiced Bean Soup · شوربة فاصوليا بالكمون
+### Held (1)
 
-`black-bean-soup` · mexican · `kidney-beans`, `onions`, `garlic`, `cumin`, `water`, `salt`
+Looked at, and nothing is wrong with the photograph — the dish is the
+problem. These stay staged and unpublished until whatever is blocking them
+is resolved, which is why they are not in `rejected.json`: that list is
+permanent and global, and refusing a good file there would keep it out of
+every future batch as well.
 
-A tin of beans into a blender. Six lines, one pot, under half an hour.
-
-![Spiced Bean Soup](assets/recipe-candidates/black-bean-soup.jpg)
-
-| | |
+| Dish | Why it is held |
 |---|---|
-| Creator | J Doll |
-| Licence | CC-BY-3.0 |
-| Attribution | J Doll · CC-BY-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Black_Bean_Soup_(140491813).jpeg |
-| Size | 1000×667, 177 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
+| Spiced Bean Soup (`black-bean-soup`) | The photograph is fine — a thick, dark bean purée dusted with paprika — but it is a photograph of BLACK beans and the ingredient catalogue has no black-bean row. The recipe this candidate would become is a kidney-bean soup, and putting this picture on it would illustrate a different legume. Held rather than refused: nothing is wrong with the file, and it becomes promotable the day a black-bean row exists. Not written into rejected.json for the same reason — that list is permanent and global. |
 
 ### No acceptable image (20)
 
@@ -179,434 +173,62 @@ substitute — it tells the user something false about what they are cooking.
 
 30 candidates, 24 of them Egyptian — eighty per cent, against a two-thirds target — because the catalogue is 27.6% Egyptian and the goal is past 30%. Weighted hard to substantial everyday food rather than to whatever is easy to keep under five lines: seven one-pot or oven meals built on meat or poultry, four legume and vegetable mains, three soups people actually make for lunch, two fish, two breakfasts, two breads. Nothing already tried is here. The nine twice-refused dishes from batches 1 and 2, the exhausted batch-3 rejects, belila, gibna-bel-tamatem, sogo2-bel-salsa and the held black-bean-soup are all out of the pool and stay in history only. Eleven candidates also exist to use catalogue rows no recipe touches: black-eyed-peas, green-fava-beans, pumpkin, walnuts, herring, pigeon, veal, chicken-drumstick, molasses, green-peas, semit.
 
-**30 candidates: 0 reviewed and shipped, 23 waiting to be looked at, 7 with nothing acceptable.**
+**30 candidates: 8 reviewed and shipped, 0 waiting to be looked at, 2 held, 20 with nothing acceptable.**
 
-### Black-Eyed Peas in Tomato and Oil · لوبيا بالزيت
+### Already promoted (8)
 
-`lobia-bel-zeit` · egyptian · `black-eyed-peas`, `tomatoes`, `onions`, `garlic`, `olive-oil`, `salt`
+Reviewed, written as recipes, and now on a card. Their photographs live in
+`assets/recipes/` and are validated by `npm run images:check`.
 
-The cheapest hot lunch in this list and the black-eyed-pea row is used by nothing. One pot, no meat, keeps for days.
+| Dish | Creator | Licence |
+|---|---|---|
+| Egyptian Chicken Soup (`shorbet-firakh-baladi`) | Hoyabird8 | CC-BY-SA-3.0 |
+| Stuffed Courgettes (`mahshi-cosa`) | Bazel | CC0-1.0 |
+| Smoked Herring with Onion and Lemon (`renga`) | Christopher Bertram (user: bristoleast) | CC-BY-SA-3.0 |
+| Pumpkin Soup (`shorbet-2ar3`) | Wald1siedel | CC-BY-SA-4.0 |
+| Layered Ghee Pastry (`feteer-meshaltet`) | Mohamed Ouda | CC-BY-SA-4.0 |
+| Meatballs in Tomato Sauce (`kofta-bel-salsa`) | HaJunkiyada | CC-BY-SA-4.0 |
+| Pasta in Minced Beef Sauce (`spaghetti-bolognese`) | Ivan Vighetto | CC-BY-SA-3.0 |
+| Green Beans in Tomato with Beef (`green-bean-stew`) | E4024 | CC-BY-SA-4.0 |
 
-![Black-Eyed Peas in Tomato and Oil](assets/recipe-candidates/lobia-bel-zeit.jpg)
+### Held (2)
 
-| | |
+Looked at, and nothing is wrong with the photograph — the dish is the
+problem. These stay staged and unpublished until whatever is blocking them
+is resolved, which is why they are not in `rejected.json`: that list is
+permanent and global, and refusing a good file there would keep it out of
+every future batch as well.
+
+| Dish | Why it is held |
 |---|---|
-| Creator | Kuttykrishnan Photos |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:Black_eyed_peas_food.jpg |
-| Size | 1000×450, 177 KB |
+| Baladi Flatbread (`eish-baladi`) | The photograph is exactly right — a pile of puffed, bran-dusted baladi loaves, the best bread picture this pipeline has found. The CATALOGUE is what cannot carry the recipe: there is one `flour` row and no wholemeal flour and no bran, so the ingredient list would be flour, yeast, water, salt — which is `pita-bread` minus its oil, a 0.80 near-duplicate. Baladi bread IS its wholemeal flour and its bran dusting; writing it with white flour would be a different bread wearing the name. Held rather than refused: nothing is wrong with the file. Whether wholemeal flour earns a canonical row is an ontology question, and one recipe is not enough to answer it — this is now the second dish waiting on that decision. |
+| Potato Eggah (`eggah-bel-batates`) | A good photograph of a thick set potato omelette. The dish is the problem: its ingredients are potatoes, eggs, onions, oil and salt, which is exactly `tortilla-espanola`, already in the catalogue. Writing an Egyptian one that differs only by using sunflower oil instead of olive oil is the fake-national-variant move in reverse. Held rather than refused — the file is fine and would suit any future recipe this catalogue cannot yet express. |
 
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Green Fava Beans with Garlic and Coriander · فول أخضر بالتوم والكزبرة
-
-`ful-akhdar` · egyptian · `green-fava-beans`, `garlic`, `coriander`, `sunflower-oil`, `lemon`, `salt`
-
-What Egypt eats in spring while the beans are green, and the row exists for exactly this with no recipe on it.
-
-![Green Fava Beans with Garlic and Coriander](assets/recipe-candidates/ful-akhdar.jpg)
-
-| | |
-|---|---|
-| Creator | Mhmd.abdrzg |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Mhmd.abdrzg · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Freshly_Picked_Green_Fava_Beans_from_a_Libyan_Farm.jpg |
-| Size | 1000×1333, 799 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Egyptian Chicken Soup · شوربة فراخ بلدي
-
-`shorbet-firakh-baladi` · egyptian · `chicken-drumstick`, `onions`, `carrots`, `bay-leaf`, `cinnamon`, `water`, `salt`
-
-A real gap: 192 recipes and not one plain chicken soup, which is the thing an Egyptian kitchen makes when somebody is ill.
-
-![Egyptian Chicken Soup](assets/recipe-candidates/shorbet-firakh-baladi.jpg)
-
-| | |
-|---|---|
-| Creator | Hoyabird8 |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Hoyabird8 · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg |
-| Size | 1000×750, 233 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Stuffed Courgettes · كوسة محشي
-
-`mahshi-cosa` · egyptian · `zucchini`, `rice`, `tomatoes`, `onions`, `parsley`, `tomato-paste`, `salt`
-
-Only cabbage mahshi exists. Courgette is the one most households actually make, and the two are not the same dish on a plate.
-
-![Stuffed Courgettes](assets/recipe-candidates/mahshi-cosa.jpg)
-
-| | |
-|---|---|
-| Creator | Bazel |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:Kousa_Mahshi.jpg |
-| Size | 1000×641, 195 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Smoked Herring with Onion and Lemon · رنجة
-
-`renga` · egyptian · `herring`, `onions`, `lemon`, `olive-oil`, `cumin`
-
-Sham el-Nessim on a plate. Five lines, no cooking, and the herring row is used by nothing.
-
-![Smoked Herring with Onion and Lemon](assets/recipe-candidates/renga.jpg)
-
-| | |
-|---|---|
-| Creator | Christopher Bertram (user: bristoleast) |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Christopher Bertram (user: bristoleast) · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Buckling.jpg |
-| Size | 1000×750, 308 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Baladi Flatbread · عيش بلدي
-
-`eish-baladi` · egyptian · `flour`, `yeast`, `water`, `salt`
-
-Four lines and the single most-eaten thing in the country. The catalogue bakes pita and focaccia and not this.
-
-![Baladi Flatbread](assets/recipe-candidates/eish-baladi.jpg)
-
-| | |
-|---|---|
-| Creator | Mohanad5ayman |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Mohanad5ayman · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Bread_mohanad.JPG |
-| Size | 1000×667, 174 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Pumpkin Soup · شوربة قرع عسلي
-
-`shorbet-2ar3` · egyptian · `pumpkin`, `onions`, `garlic`, `stock-cube`, `water`, `salt`
-
-Winter, cheap, and the pumpkin row has no recipe at all.
-
-![Pumpkin Soup](assets/recipe-candidates/shorbet-2ar3.jpg)
-
-| | |
-|---|---|
-| Creator | Wald1siedel |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Wald1siedel · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG |
-| Size | 1000×696, 222 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Potatoes and Eggs · بطاطس بالبيض
-
-`batates-bel-beid` · egyptian · `potatoes`, `eggs`, `onions`, `sunflower-oil`, `salt`
-
-Five lines, one pan, and it is what an Egyptian kitchen makes when the fridge is nearly empty. Breakfast is still the thinnest meal type.
-
-![Potatoes and Eggs](assets/recipe-candidates/batates-bel-beid.jpg)
-
-| | |
-|---|---|
-| Creator | Enigma410 |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Enigma410 · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Potato_and_egg_curry.jpg |
-| Size | 1000×750, 290 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Stuffed Pigeon · حمام محشي
-
-`hamam-mahshi` · egyptian · `pigeon`, `rice`, `onions`, `butter`, `cinnamon`, `salt`
-
-The dish Egyptians take visitors out for, and the pigeon row has no recipe. Harder photography, worth one attempt.
-
-![Stuffed Pigeon](assets/recipe-candidates/hamam-mahshi.jpg)
-
-| | |
-|---|---|
-| Creator | Ernesto Andrade from Fremont, United States |
-| Licence | CC-BY-2.0 |
-| Attribution | Ernesto Andrade from Fremont, United States · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Chinese_squab.jpg |
-| Size | 1000×1333, 285 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Oven-Braised Veal Shank · موزة في الفرن
-
-`moza-bel-forn` · egyptian · `veal`, `onions`, `tomato-paste`, `bay-leaf`, `water`, `salt`
-
-Friday lunch. Long, cheap cut, almost no work, and the veal row is used by nothing.
-
-![Oven-Braised Veal Shank](assets/recipe-candidates/moza-bel-forn.jpg)
-
-| | |
-|---|---|
-| Creator | Gerda Arendt |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:Osso_buco,_Breckenheim.jpg |
-| Size | 1000×750, 268 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Oven Chicken Drumsticks · دبابيس فراخ في الفرن
-
-`dababees-bel-forn` · egyptian · `chicken-drumstick`, `garlic`, `paprika`, `sunflower-oil`, `lemon`, `salt`
-
-The cheapest chicken there is, one tray. The drumstick row was argued over at length in the ontology work and still has no recipe.
-
-![Oven Chicken Drumsticks](assets/recipe-candidates/dababees-bel-forn.jpg)
-
-| | |
-|---|---|
-| Creator | ArtoftheArtist IAm |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | ArtoftheArtist IAm · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Chicken_Drumsticks_on_a_Grill.jpg |
-| Size | 1000×853, 403 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Layered Ghee Pastry · فطير مشلتت
-
-`feteer-meshaltet` · egyptian · `flour`, `ghee`, `water`, `salt`
-
-Four lines. The cheese feteer in the catalogue is the stuffed one; this is the plain layered bread it is built from.
-
-![Layered Ghee Pastry](assets/recipe-candidates/feteer-meshaltet.jpg)
-
-| | |
-|---|---|
-| Creator | Mohamed Ouda |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Mohamed Ouda · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Egyptian-food-16.jpg |
-| Size | 1000×667, 220 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Vegetable Soup · شوربة خضار
-
-`shorbet-khodar` · egyptian · `carrots`, `potatoes`, `zucchini`, `green-peas`, `stock-cube`, `water`, `salt`
-
-Ordinary on purpose: it is the soup that gets made on a weeknight, and nothing in the catalogue answers it.
-
-![Vegetable Soup](assets/recipe-candidates/shorbet-khodar.jpg)
-
-| | |
-|---|---|
-| Creator | Jennifer |
-| Licence | CC-BY-2.0 |
-| Attribution | Jennifer · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Vegetable_udon_noodle_soup.jpg |
-| Size | 1000×667, 248 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Sesame Bread Rings · سميط
-
-`semit` · egyptian · `flour`, `yeast`, `sesame-seeds`, `water`, `salt`
-
-Street bread, five lines, and the semit row is unused. Identity risk on review: Turkish simit is the same shape and a different bread.
-
-![Sesame Bread Rings](assets/recipe-candidates/semit.jpg)
-
-| | |
-|---|---|
-| Creator | Nicosia Turkish Municipality |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Nicosia Turkish Municipality · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Simit_vendor_next_to_checkpoint,_Nicosia.jpg |
-| Size | 1000×630, 180 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### One-Pot Chicken and Rice · فراخ بالأرز
-
-`firakh-bel-roz` · egyptian · `chicken-thigh`, `rice`, `onions`, `cinnamon`, `water`, `salt`
-
-Chicken cooked on top of the rice so the rice takes the fat. One pot, six lines, feeds a family.
-
-![One-Pot Chicken and Rice](assets/recipe-candidates/firakh-bel-roz.jpg)
-
-| | |
-|---|---|
-| Creator | jeffreyw |
-| Licence | CC-BY-2.0 |
-| Attribution | jeffreyw · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Asian_glazed_chicken_on_fried_rice_(6107408438).jpg |
-| Size | 1000×639, 263 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Potato Eggah · عجة بالبطاطس
-
-`eggah-bel-batates` · egyptian · `eggs`, `potatoes`, `onions`, `sunflower-oil`, `salt`
-
-Five lines. The baladi eggah in the catalogue is the herb one; this is the thick potato one, and they are different meals.
-
-![Potato Eggah](assets/recipe-candidates/eggah-bel-batates.jpg)
-
-| | |
-|---|---|
-| Creator | Richard Avery |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Richard Avery · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:A_potato_omelette.jpg |
-| Size | 800×1422, 568 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Meatballs in Tomato Sauce · كفتة بالصلصة
-
-`kofta-bel-salsa` · egyptian · `ground-beef`, `onions`, `tomato-paste`, `garlic`, `water`, `salt`
-
-Stovetop, thirty minutes, eaten over rice. Distinct from the baked kofta tagine and from the stewed beef already here.
-
-![Meatballs in Tomato Sauce](assets/recipe-candidates/kofta-bel-salsa.jpg)
-
-| | |
-|---|---|
-| Creator | HaJunkiyada |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Meatballs_in_tomato_sauce.jpg |
-| Size | 800×1067, 586 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Pasta in Minced Beef Sauce · مكرونة باللحمة المفرومة
-
-`spaghetti-bolognese` · italian · `pasta`, `ground-beef`, `tomato-paste`, `onions`, `garlic`, `water`, `salt`
-
-Not an Egyptian dish and completely normal in an Egyptian kitchen. The catalogue has plain tomato macaroni and bechamel and nothing with a meat sauce.
-
-![Pasta in Minced Beef Sauce](assets/recipe-candidates/spaghetti-bolognese.jpg)
-
-| | |
-|---|---|
-| Creator | Ivan Vighetto |
-| Licence | CC-BY-SA-3.0 |
-| Attribution | Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg |
-| Size | 1000×786, 315 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Beef in Cream Sauce · لحمة بالكريمة
-
-`beef-stroganoff` · american · `beef-cubes`, `onions`, `mushroom`, `cream`, `butter`, `salt`
-
-On the menu of nearly every Cairo family restaurant and made at home from cooking cream. Substantial, and nothing in the catalogue uses cream as a sauce.
-
-![Beef in Cream Sauce](assets/recipe-candidates/beef-stroganoff.jpg)
-
-| | |
-|---|---|
-| Creator | benketaro |
-| Licence | CC-BY-2.0 |
-| Attribution | benketaro · CC-BY-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Beef_stroganoff_with_pasta.jpg |
-| Size | 1000×750, 189 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Baked Potato with Cheese · بطاطس بالجبنة في الفرن
-
-`baked-potato-cheese` · american · `potatoes`, `roumy-cheese`, `butter`, `black-pepper`, `salt`
-
-Five lines and an oven. Made here with roumy, which is the hard cheese an Egyptian fridge actually holds.
-
-![Baked Potato with Cheese](assets/recipe-candidates/baked-potato-cheese.jpg)
-
-| | |
-|---|---|
-| Creator | Andy Li |
-| Licence | CC0-1.0 |
-| Attribution | _none required_ |
-| Source | https://commons.wikimedia.org/wiki/File:Baked_potato_with_baked_beans_and_cheese_-_The_Verandah_2026-08-25.jpg |
-| Size | 1000×753, 205 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Chicken and Sweetcorn Soup · شوربة فراخ بالذرة
-
-`chicken-corn-soup` · asian · `chicken-breast`, `corn`, `cornflour`, `stock-cube`, `water`, `salt`
-
-Ordered constantly in Egypt and made at home from a tin. The sweetcorn row is unused.
-
-![Chicken and Sweetcorn Soup](assets/recipe-candidates/chicken-corn-soup.jpg)
-
-| | |
-|---|---|
-| Creator | Balaji Kasirajan |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | Balaji Kasirajan · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Chicken_corn_soup.jpg |
-| Size | 1000×563, 219 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Potato and Leek Soup · شوربة بطاطس وكرات
-
-`potato-leek-soup` · mediterranean · `potatoes`, `leek`, `butter`, `stock-cube`, `water`, `salt`
-
-Six lines, one pot, blended or not. The leek row is used by nothing.
-
-![Potato and Leek Soup](assets/recipe-candidates/potato-leek-soup.jpg)
-
-| | |
-|---|---|
-| Creator | Ewan Munro from London, UK |
-| Licence | CC-BY-SA-2.0 |
-| Attribution | Ewan Munro from London, UK · CC-BY-SA-2.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Mon_Plaisir,_Covent_Garden,_London_(3717184145).jpg |
-| Size | 1000×667, 194 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### Green Beans in Tomato with Beef · فاصوليا خضراء باللحمة
-
-`green-bean-stew` · levantine · `green-beans`, `beef-cubes`, `tomatoes`, `tomato-paste`, `onions`, `garlic`, `salt`
-
-Cooked from Beirut to Cairo and the green-bean row has no recipe. A different bean and a different dish from the white-bean stew that found nothing in batch 3.
-
-![Green Beans in Tomato with Beef](assets/recipe-candidates/green-bean-stew.jpg)
-
-| | |
-|---|---|
-| Creator | E4024 |
-| Licence | CC-BY-SA-4.0 |
-| Attribution | E4024 · CC-BY-SA-4.0 · Wikimedia Commons |
-| Source | https://commons.wikimedia.org/wiki/File:Taze_fasulye.jpg |
-| Size | 1000×750, 244 KB |
-
-- [ ] This is a photograph of this dish, and I would put it on the card.
-
-### No acceptable image (7)
+### No acceptable image (20)
 
 These keep nothing. A generic photograph of something else is not a
 substitute — it tells the user something false about what they are cooking.
 
 | Dish | Why |
 |---|---|
+| Black-Eyed Peas in Tomato and Oil (`lobia-bel-zeit`) | File:Black eyed peas food.jpg: refused on review — A dense mass of RAW DRIED black-eyed peas filling the frame. Raw produce, not a cooked dish — the same class as the heap of dry muesli already on this list. |
+| Green Fava Beans with Garlic and Coriander (`ful-akhdar`) | File:Freshly Picked Green Fava Beans from a Libyan Farm.jpg: refused on review — Two hands holding freshly picked green fava bean PODS under an olive tree. The ingredient on the farm, not the dish in a pan. |
 | Potato and Beef Tagine (`tagen-batates-bel-lahma`) | no relevant openly-licensed image found |
 | Grilled Kofta Skewers (`kofta-mashwiya`) | no relevant openly-licensed image found |
 | Baked Fish in Tahini Sauce (`samak-bel-tahina`) | no relevant openly-licensed image found |
 | Tahini with Black Honey (`tahina-bel-asal-eswed`) | no relevant openly-licensed image found |
 | Circassian Chicken with Walnuts (`sharkasiya`) | no relevant openly-licensed image found |
+| Potatoes and Eggs (`batates-bel-beid`) | File:Potato and egg curry.jpg: refused on review — An Indian potato-and-egg curry in a big aluminium pot on a dirty outdoor surface. Turmeric gravy and fried egg balls; not the Egyptian pan of potatoes with eggs broken over them. |
+| Stuffed Pigeon (`hamam-mahshi`) | File:Chinese squab.jpg: refused on review — Chinese roast squab: deep lacquered mahogany skin, dipping sauces, an unidentifiable amber drink behind it. Egyptian hamam mahshi is a small pale-gold bird stuffed with rice or freek. Same bird, different cuisine's dish. |
+| Oven-Braised Veal Shank (`moza-bel-forn`) | File:Osso buco, Breckenheim.jpg: refused on review — Osso buco — a cross-cut veal shank on saffron risotto with a wine glass and a bread basket in frame. Egyptian moza is a whole braised shank; this is the Milanese dish, and the risotto is half the plate. |
+| Oven Chicken Drumsticks (`dababees-bel-forn`) | File:Chicken Drumsticks on a Grill.jpg: refused on review — Two dozen RAW marinated drumsticks laid out on a cold grill rack, skin still pink. This is the prep step, not the meal, and raw poultry on a recipe card is worse than no photograph. |
+| Vegetable Soup (`shorbet-khodar`) | File:Vegetable udon noodle soup.jpg: refused on review — A pan of Japanese udon noodle soup: wheat noodles, broccoli, mushrooms and courgette in a soy-brown broth. Not an Egyptian vegetable soup, and two of its main components are not in this recipe. |
+| Sesame Bread Rings (`semit`) | File:Simit vendor next to checkpoint, Nicosia.jpg: refused on review — Shot through a shop window in Nicosia. Street reflections cover most of the frame — a bystander's face, exchange-bureau signage, and beer-brand parasols — and the bread is behind glass. |
+| One-Pot Chicken and Rice (`firakh-bel-roz`) | File:Asian glazed chicken on fried rice (6107408438).jpg: refused on review — Glazed chicken thighs on egg fried rice with gyoza and a ramekin of soy dipping sauce. An Asian plate, not chicken cooked on top of the rice. |
 | Peas and Beef Stew (`besela-bel-lahma`) | no relevant openly-licensed image found |
 | Festive Rice with Nuts and Raisins (`roz-bel-khalta`) | no relevant openly-licensed image found |
+| Beef in Cream Sauce (`beef-stroganoff`) | File:Beef stroganoff with pasta.jpg: refused on review — A dim, orange-cast close-up where egg noodles fill most of the frame and the beef is barely findable. The recipe has no pasta in it, and the photograph is too murky to read as food. |
+| Baked Potato with Cheese (`baked-potato-cheese`) | File:Baked potato with baked beans and cheese - The Verandah 2026-08-25.jpg: refused on review — A jacket potato buried under BAKED BEANS and grated cheese, with a side salad and a juice jug. The beans are half the dish and this recipe does not contain them. |
+| Chicken and Sweetcorn Soup (`chicken-corn-soup`) | File:Chicken corn soup.jpg: refused on review — A beige pool in a red bowl on a checked tablecloth, with a glass of amber liquid, a plastic bottle and somebody's arm in frame. Neither the chicken nor the corn is visible. |
+| Potato and Leek Soup (`potato-leek-soup`) | File:Mon Plaisir, Covent Garden, London (3717184145).jpg: refused on review — A restaurant tureen of pale green soup with a cream quenelle and croutons, on a doily, with a wine glass behind. The file names a Covent Garden restaurant rather than a dish, so the identity cannot be confirmed — and neither the cream nor the croutons are in this recipe. |
 

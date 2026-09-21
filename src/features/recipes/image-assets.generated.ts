@@ -230,6 +230,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: null,
     sourcePage: "https://commons.wikimedia.org/wiki/File:Fattoush.JPG",
   },
+  "feteer-meshaltet": {
+    source: require('../../../assets/recipes/feteer-meshaltet.jpg') as number,
+    creator: "Mohamed Ouda",
+    license: "CC-BY-SA-4.0",
+    attribution: "Mohamed Ouda · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Egyptian-food-16.jpg",
+  },
   "focaccia": {
     source: require('../../../assets/recipes/focaccia.jpg') as number,
     creator: "Fred Benenson",
@@ -285,6 +292,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-4.0",
     attribution: "User:Jpatokal · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Greece_Food_Horiatiki.JPG",
+  },
+  "green-bean-stew": {
+    source: require('../../../assets/recipes/green-bean-stew.jpg') as number,
+    creator: "E4024",
+    license: "CC-BY-SA-4.0",
+    attribution: "E4024 · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Taze_fasulye.jpg",
   },
   "grilled-halloumi": {
     source: require('../../../assets/recipes/grilled-halloumi.jpg') as number,
@@ -356,6 +370,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Amaiursancho5 · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Kibbeh_Bil_Sanieh.jpg",
   },
+  "kofta-bel-salsa": {
+    source: require('../../../assets/recipes/kofta-bel-salsa.jpg') as number,
+    creator: "HaJunkiyada",
+    license: "CC-BY-SA-4.0",
+    attribution: "HaJunkiyada · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Meatballs_in_tomato_sauce.jpg",
+  },
   "koshari": {
     source: require('../../../assets/recipes/koshari.jpg') as number,
     creator: "Dina Said",
@@ -397,6 +418,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-2.0",
     attribution: "Shixart1985 · CC-BY-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Delicious_stuffed_cabbage_rolls_prepared_in_a_pot.jpg",
+  },
+  "mahshi-cosa": {
+    source: require('../../../assets/recipes/mahshi-cosa.jpg') as number,
+    creator: "Bazel",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Kousa_Mahshi.jpg",
   },
   "makarona-bel-salsa": {
     source: require('../../../assets/recipes/makarona-bel-salsa.jpg') as number,
@@ -538,6 +566,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "SajjadF · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Potato_salad_(1).jpg",
   },
+  "renga": {
+    source: require('../../../assets/recipes/renga.jpg') as number,
+    creator: "Christopher Bertram (user: bristoleast)",
+    license: "CC-BY-SA-3.0",
+    attribution: "Christopher Bertram (user: bristoleast) · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Buckling.jpg",
+  },
   "risotto-mushroom": {
     source: require('../../../assets/recipes/risotto-mushroom.jpg') as number,
     creator: "Kolforn ( Kolforn ) I'd appreciate if you could mail me (Kolforn@gmail.com) if you want to use this picture out of the Wikimedia project scope. This file is licensed under the Creative Commons Attribution-Share Alike 4.0 International license. You are free: to share – to copy, distribute and transmit the work to remix – to adapt the work Under the following conditions: attribution – You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. share alike – If you remix, transform, or build upon the material, you must distribute your contributions under the same or compatible license as the original. https://creativecommons.org/licenses/by-sa/4.0 CC BY-SA 4.0 Creative Commons Attribution-Share Alike 4.0 true true",
@@ -601,6 +636,20 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Garrett Ziegler · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tavuk_%C5%9Ei%C5%9F.jpg",
   },
+  "shorbet-2ar3": {
+    source: require('../../../assets/recipes/shorbet-2ar3.jpg') as number,
+    creator: "Wald1siedel",
+    license: "CC-BY-SA-4.0",
+    attribution: "Wald1siedel · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:K%C3%BCrbissuppe_mit_Kern%C3%B6l.JPG",
+  },
+  "shorbet-firakh-baladi": {
+    source: require('../../../assets/recipes/shorbet-firakh-baladi.jpg') as number,
+    creator: "Hoyabird8",
+    license: "CC-BY-SA-3.0",
+    attribution: "Hoyabird8 · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Chicken_Noodle_Soup.jpg",
+  },
   "shorbet-tamatem": {
     source: require('../../../assets/recipes/shorbet-tamatem.jpg') as number,
     creator: "Ella Olsson from Stockholm, Sweden",
@@ -614,6 +663,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "matsuyuki · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Spaghetti_aglio_olio_e_peperoncino_by_matsuyuki_retouched.jpg",
+  },
+  "spaghetti-bolognese": {
+    source: require('../../../assets/recipes/spaghetti-bolognese.jpg') as number,
+    creator: "Ivan Vighetto",
+    license: "CC-BY-SA-3.0",
+    attribution: "Ivan Vighetto · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Tagliatelle_al_rag%C3%B9_(image_modified).jpg",
   },
   "spanakorizo": {
     source: require('../../../assets/recipes/spanakorizo.jpg') as number,
