@@ -8852,6 +8852,87 @@ values ('90b417dd-6ec8-503f-ba20-6ec7ef288ce3', '84d97246-547e-506b-b5fa-aa61139
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('abc0c048-b92e-57a5-bc10-80582b9ae62e', '84d97246-547e-506b-b5fa-aa61139e6781', 3, 'Add the cauliflower, cover, and cook 12 minutes more without stirring much.', 'ضيف القرنبيط، غطّي، واطبخ ١٢ دقيقة كمان من غير تقليب كتير.', 12, null, null, '{"cauliflower","salt","coriander"}');
 
+-- Fried Cauliflower
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'arnabeet-makli', 'Fried Cauliflower', 'قرنبيط مقلي',
+  'Florets boiled briefly, dipped in a loose cumin batter and fried until the coating crackles. The boil is the whole trick: it cooks the middle so the outside does not have to burn waiting for it.', 'زهرة بتتسلق شوية، وبعدين تتغمس في عجينة سايحة بالكمون وتتقلي لحد ما القشرة تقرمش. السلق هو السر كله: بيسوّي القلب عشان الوش ميحترقش وهو مستنيه.',
+  'curated/arnabeet-makli.jpg', 'openly_licensed', 'Yallayallaletsgo',
+  'CC-BY-SA-4.0', 'Yallayallaletsgo · CC-BY-SA-4.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Israeli_fried_cauliflower.jpg',
+  null, 'curated', 'egyptian', 'easy',
+  10, 25, 4,
+  260, 6, 28,
+  14, 4, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'dinner');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'snack');
+delete from public.recipe_diet_tags where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'halal');
+delete from public.recipe_allergens where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_allergens (recipe_id, allergen) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'gluten');
+delete from public.recipe_appliances where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_appliances (recipe_id, appliance) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'stove');
+delete from public.recipe_tags where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_tags (recipe_id, tag) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 'comfort');
+
+delete from public.recipe_ingredients where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('bebb7fa4-50cc-51c6-a9a7-d0ce464169e5', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'cauliflower' limit 1), 'cauliflower', 'cauliflower', 800, 'g', 'cut into florets', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('e864cea9-c817-548a-9286-67abc0942036', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'flour' limit 1), 'flour', 'flour', 120, 'g', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('079d26be-4680-56bd-bc81-6575d2b555e6', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9daeac2d-46d5-5571-91bf-acce92712189', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 500, 'ml', 'for frying', false, false, true, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('302c937c-c837-5ea6-b0b7-e72216bd1aa6', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 150, 'ml', null, false, false, true, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('55c90321-5095-5583-81f0-3191701220f4', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 6);
+
+delete from public.recipe_steps where recipe_id = '9d708c3d-ac3b-5605-a9c2-f587aedc1abc';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('132e0399-4e05-5de7-965f-dc75b15622e9', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 1, 'Cut the cauliflower into florets and boil them in salted water for five minutes, until a knife meets a little resistance. Drain them well and spread them out to dry.', 'قطّع القرنبيط زهرات واسلقه في مية بملح خمس دقايق، لحد ما السكينة تدخل بشوية مقاومة. صفّيه كويس وافرده يجف.', 8, null, null, '{"cauliflower","water","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('01470623-cd2c-5ae4-886b-4d49283e57f9', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 2, 'Whisk the flour, the cumin and a teaspoon of salt with enough water to make a batter that coats a spoon and drips off it slowly.', 'اخفق الدقيق والكمون وملعقة ملح صغيرة مع مية بالقد اللي يعمل عجينة سايحة تغطي المعلقة وتنقّط منها بالراحة.', 5, null, null, '{"flour","cumin","salt","water"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('dd5e87e6-a5d1-51ec-9dd7-362373dfdf33', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 3, 'Heat the oil until a drop of batter rises and sizzles at once — about 180°C. Dip the florets and fry them in batches for three to four minutes, until deep gold.', 'سخّن الزيت لحد ما نقطة من العجينة تطلع وتشيّط على طول — حوالي ١٨٠°م. اغمس الزهرات واقليها على دفعات تلات لأربع دقايق لحد ما تبقى دهبي غامق.', 17, 'Dry the florets before they go near the oil — water makes hot fat spit. Never fill the pan more than halfway, and never leave it on the heat unattended.', 'نشّف الزهرات قبل ما تقرّبها من الزيت — المية بتخلي الزيت السخن ينطّ. متملاش الحلة أكتر من نصها، ومتسبهاش على النار من غير ما حد واقف عندها.', '{"vegetable oil","flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('47ec5567-d01e-5eb7-a758-3c637ca9c1a5', '9d708c3d-ac3b-5605-a9c2-f587aedc1abc', 4, 'Lift them onto paper and salt them while they are still hot.', 'شيلها على ورق وملّحها وهي لسه سخنة.', 2, null, null, '{"salt"}');
+
 -- Fresh Lemonade with Mint
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -12240,6 +12321,90 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('da8aeaa6-095a-5d91-987c-2348aece42dd', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', 1, 'Squeeze the water out of the grated cucumber.', 'اعصر المية من الخيار المبشور.', 3, null, null, '{"cucumber"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('4e4629b5-362c-56ae-a6d9-b40d66aa4300', '796ea599-eed2-586b-a95a-82f2fe1b0aa8', 2, 'Stir everything into the yogurt and chill until needed.', 'قلّب كل حاجة في الزبادي وسيبها في التلاجة لحد ما تحتاجها.', 3, null, null, '{"yogurt","mint","cumin","chili powder","salt"}');
+
+-- Sumac Chicken with Onions
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'dajaj-mosakhan', 'Sumac Chicken with Onions', 'دجاج مسخن',
+  'A kilo of onions cooked down with enough sumac to turn them dark red, chicken roasted on top, and bread underneath to take the juices. The bread is part of the dish, not something served beside it.', 'كيلو بصل بيستوّي براحته مع سماق كتير لحد ما يبقى أحمر غامق، والفراخ بتتشوي فوقه، والعيش تحت بيشرب العصارة. العيش جزء من الأكلة نفسها، مش حاجة بتتقدّم جنبها.',
+  'curated/dajaj-mosakhan.jpg', 'openly_licensed', 'Kokaly',
+  'CC-BY-SA-3.0', 'Kokaly · CC-BY-SA-3.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Mushakhan_Dish.jpg',
+  null, 'curated', 'levantine', 'medium',
+  15, 60, 4,
+  620, 42, 45,
+  30, 5, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'halal');
+delete from public.recipe_allergens where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_allergens (recipe_id, allergen) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'gluten');
+insert into public.recipe_allergens (recipe_id, allergen) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'nuts');
+delete from public.recipe_appliances where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_appliances (recipe_id, appliance) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'oven');
+insert into public.recipe_appliances (recipe_id, appliance) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'stove');
+delete from public.recipe_tags where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_tags (recipe_id, tag) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'high-protein');
+insert into public.recipe_tags (recipe_id, tag) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'oven');
+insert into public.recipe_tags (recipe_id, tag) values ('b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 'sunday-lunch');
+
+delete from public.recipe_ingredients where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('62cd562a-efb1-543e-bb2b-2eb4772e15f6', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'chicken-thigh' limit 1), 'chicken-thigh', 'chicken thighs', 900, 'g', 'bone in, skin on', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('4eed2433-0f6f-58ff-a648-807494334738', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 5, 'piece', 'sliced thin', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('de325f39-0ac1-5ec6-816a-77f8b22252d1', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'sumac' limit 1), 'sumac', 'sumac', 30, 'g', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('a875bdd3-c1e2-5de4-a2dc-e4e83ca08ea2', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 120, 'ml', null, false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('67975f4d-fbf6-5b64-ab04-4e6e63f5d698', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'baladi-bread' limit 1), 'baladi-bread', 'baladi bread', 4, 'piece', null, false, false, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('83be489a-3769-590b-8eff-bb7f6f29ab61', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'pine-nuts' limit 1), 'pine-nuts', 'pine nuts', 50, 'g', null, false, false, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('04549dfe-0732-5a9d-aa0b-7308d31896be', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 7);
+
+delete from public.recipe_steps where recipe_id = 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('5f5110cf-28aa-5f2e-84e8-6222f590cceb', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 1, 'Slice the onions thin and cook them slowly in three quarters of the olive oil until soft and sweet, about twenty minutes. They should collapse, not brown.', 'قطّع البصل شرايح رفيعة وسوّيه على نار هادية في تلات أرباع زيت الزيتون لحد ما يطرى ويحلى، حوالي عشرين دقيقة. المفروض يذبل مش يتحمّر.', 22, null, null, '{"onions","olive oil"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('5f472956-2f63-5702-afbd-a3f925ef20c3', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 2, 'Stir in the sumac and half the salt and take the pan off the heat. The onions will go dark red.', 'قلّب السماق ونص الملح وارفع الطاسة من على النار. البصل هيبقى أحمر غامق.', 3, null, null, '{"sumac","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('3759ee1b-da2e-558b-b21b-0d825b32da60', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 3, 'Rub the chicken with the rest of the oil and salt and roast it at 200°C for thirty minutes, skin up.', 'ادهن الفراخ بباقي الزيت والملح واشويها على ٢٠٠°م تلاتين دقيقة، والجلدة لفوق.', 32, 'Poultry must reach 74°C / 165°F at the thickest part of the thigh, away from the bone. Measure it with a thermometer.', 'الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن مكان في الورك، بعيد عن العضمة. قيسها بترمومتر.', '{"chicken thighs","olive oil","salt"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('d8531b24-3f3b-50ff-b51e-ca9a32c080b4', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 4, 'Lay the bread in the tin, spread the onions over it, set the chicken on top and return it for ten minutes so the bread drinks the juices.', 'افرد العيش في الصينية، وزّع البصل فوقه، حط الفراخ فوق وارجّعها الفرن عشر دقايق عشان العيش يشرب العصارة.', 12, null, null, '{"baladi bread","onions","chicken thighs"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('e85606fd-43f4-5c4c-ab26-03ce5e71397a', 'b13c47f6-af81-5e44-b5c7-14ad15a71fe0', 5, 'Toast the pine nuts in a dry pan until gold — they turn in seconds — and scatter them over.', 'حمّص الصنوبر في طاسة ناشفة لحد ما يدهّب — بيتحول في ثواني — ورشّه فوق.', 4, null, null, '{"pine nuts"}');
 
 -- Lentils with Tempered Spices
 insert into public.recipes (
@@ -21112,6 +21277,85 @@ values ('a95410c2-6f6f-52aa-a7a5-06eddf3c7bea', 'a3063827-91ff-5d17-808f-4e3ae92
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('6d4226d8-7f08-585c-b144-e08bd9235396', 'a3063827-91ff-5d17-808f-4e3ae92be279', 2, 'Stir everything into the yogurt and chill until you need it.', 'قلّب كل حاجة في الزبادي وسيبها في التلاجة لحد ما تحتاجها.', 5, null, null, '{"yogurt","garlic","mint","olive oil"}');
 
+-- Fried Bolti
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'samak-makli', 'Fried Bolti', 'سمك بلطي مقلي',
+  'Whole bolti slashed to the bone, dusted in cumin flour and fried. The slashes are not decoration — they are how the heat reaches the thick part of the fish before the skin blackens.', 'بلطي صحيح مشرّح لحد العضم، متربّت بدقيق بالكمون ومقلي. التشريح مش شكل — ده اللي بيخلي السخونية توصل للمكان التخين في السمكة قبل ما القشرة تسوّد.',
+  'curated/samak-makli.jpg', 'openly_licensed', 'Judgefloro',
+  'CC0-1.0', null, 'https://commons.wikimedia.org/wiki/File:02036jfCuisine_of_Bulacanfvf_01.jpg',
+  null, 'curated', 'egyptian', 'medium',
+  20, 18, 4,
+  470, 44, 14,
+  26, 1, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'pescatarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'halal');
+delete from public.recipe_allergens where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_allergens (recipe_id, allergen) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'fish');
+insert into public.recipe_allergens (recipe_id, allergen) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'gluten');
+delete from public.recipe_appliances where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_appliances (recipe_id, appliance) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'stove');
+delete from public.recipe_tags where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_tags (recipe_id, tag) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'egyptian');
+insert into public.recipe_tags (recipe_id, tag) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'high-protein');
+insert into public.recipe_tags (recipe_id, tag) values ('6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 'comfort');
+
+delete from public.recipe_ingredients where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('8fbfe9b1-a9b2-5292-82c9-33bcae9e317e', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'tilapia' limit 1), 'tilapia', 'tilapia', 1200, 'g', 'gutted and scaled, whole', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('949d5d99-4537-5ecc-b411-ce87279b25f1', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'flour' limit 1), 'flour', 'flour', 100, 'g', null, false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('305d8a8d-eacd-5777-97f0-fef0d2c3b657', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 2, 'tsp', null, false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9cdf3bd9-ed59-5375-b1cf-ae348ecb4da5', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 2, 'piece', 'halved', false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('e5fbe426-0a53-5b12-a38d-be3b44fb4d07', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'sunflower-oil' limit 1), 'sunflower-oil', 'vegetable oil', 700, 'ml', 'for frying', false, false, true, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('2fbc776b-38f1-53b4-a1df-f2fccb75865a', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 6);
+
+delete from public.recipe_steps where recipe_id = '6d4361fd-ee82-5445-aef7-cf66d50ec8c3';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('1dd6a191-62a4-565a-8166-a57299c6b10b', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 1, 'Have the fish gutted and scaled, or do it yourself. Rinse them, then cut three deep slashes through to the bone on each side.', 'خلّي السمك يتنضّف ويتقشّر، أو نضّفه بنفسك. اغسله وبعدين اعمل تلات تشريحات غويطة لحد العضم على كل جنب.', 10, 'Keep raw fish cold until it goes in the pan, and wash the board, the knife and your hands before they touch anything else.', 'سيب السمك الني في البرد لحد ما ينزل الطاسة، واغسل اللوح والسكينة وإيديك قبل ما يلمسوا أي حاجة تانية.', '{"tilapia"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c0c0a5f9-2618-50d9-b6bf-540a51a5a8e7', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 2, 'Rub salt and half the cumin into the slashes and leave the fish ten minutes. Mix the rest of the cumin through the flour.', 'ادعك الملح ونص الكمون جوه التشريحات وسيب السمك عشر دقايق. اخلط باقي الكمون مع الدقيق.', 12, null, null, '{"salt","cumin","flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('168c435c-c7e5-5acc-907e-e357abcdaf45', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 3, 'Heat oil deep enough to come halfway up a fish. Coat each one in the flour, shake off what does not hold, and fry six to seven minutes a side.', 'سخّن زيت غويط بالقد اللي يوصل لنص السمكة. غطّي كل واحدة بالدقيق، وانفض اللي مش ثابت، واقليها ست لسبع دقايق على كل وش.', 15, 'Cook fish until it flakes and is opaque all the way to the bone — 63°C at the thickest part. Lower each one in away from you; a wet fish spits.', 'اقلي السمك لحد ما يتفتّت ويبقى معتم لحد العضم — ٦٣°م في أتخن مكان. نزّل كل سمكة بعيد عنك؛ السمكة المبلولة بتنطّط الزيت.', '{"vegetable oil","flour"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('c6529977-bde7-5cf3-bbd3-1bc5330c125f', '6d4361fd-ee82-5445-aef7-cf66d50ec8c3', 4, 'Serve straight out of the pan with the lemon halves.', 'قدّمه على طول من الطاسة مع نص الليمونة.', 2, null, null, '{"lemon"}');
+
 -- Grilled Mullet with Cumin
 insert into public.recipes (
   id, slug, title, title_ar, description, description_ar,
@@ -21443,6 +21687,94 @@ insert into public.recipe_steps (id, recipe_id, step_number, instruction, instru
 values ('cec17e7f-25ca-5c38-ac38-1d6ba752c8cf', 'efcd3105-0846-561f-a397-d4234c6b09de', 2, 'Cook in butter on the lowest heat, stirring constantly, for 5 minutes.', 'اطبخه في الزبدة على أهدى نار مع التقليب المستمر ٥ دقايق.', 5, null, null, '{"butter"}');
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('8ec73b48-a1fe-5e84-8645-632eb6833779', 'efcd3105-0846-561f-a397-d4234c6b09de', 3, 'Take it off while it still looks slightly underdone — it keeps cooking.', 'ارفعه وهو لسه شكله مش مستوي تمامًا — بيفضل يستوي.', 1, 'Cook eggs until the whites are completely set. Runny yolks are only safe with pasteurised eggs.', 'اطبخ البيض لحد ما البياض يستوي تمامًا. الصفار السايح مأمون بس مع البيض المبستر.', '{"salt","black pepper","green onion"}');
+
+-- Chard and Lentils
+insert into public.recipes (
+  id, slug, title, title_ar, description, description_ar,
+  image_path, image_source, image_creator, image_license, image_attribution, image_source_url,
+  image_url, source, cuisine, difficulty,
+  prep_minutes, cook_minutes, base_servings, calories, protein_g, carbs_g, fat_g, fiber_g,
+  created_by, is_public)
+values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'selk-bel-3ads', 'Chard and Lentils', 'عدس بالسلق',
+  'Brown lentils simmered until tender but still whole, with chard folded in stems first so the stalks soften while the leaves stay green. Thick enough to eat with bread, not a soup.', 'عدس بني بيتسوّى لحد ما يستوي ويفضل حبة حبة، والسلق بينزل عليه العيدان الأول عشان تطرى والورق يفضل أخضر. تقيل بحيث يتاكل بالعيش، مش شوربة.',
+  'curated/selk-bel-3ads.jpg', 'openly_licensed', 'Cajsa Lilliehook from Portland',
+  'CC-BY-SA-2.0', 'Cajsa Lilliehook from Portland · CC-BY-SA-2.0 · Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:Red_Chard_and_Lentils_Soup_(10076154906).jpg',
+  null, 'curated', 'levantine', 'easy',
+  15, 45, 4,
+  320, 15, 42,
+  12, 11, null, true)
+on conflict (id) do update set
+  title = excluded.title,
+  title_ar = excluded.title_ar,
+  description = excluded.description,
+  description_ar = excluded.description_ar,
+  image_path = excluded.image_path,
+  image_source = excluded.image_source,
+  image_creator = excluded.image_creator,
+  image_license = excluded.image_license,
+  image_attribution = excluded.image_attribution,
+  image_source_url = excluded.image_source_url,
+  image_url = excluded.image_url,
+  cuisine = excluded.cuisine,
+  difficulty = excluded.difficulty,
+  prep_minutes = excluded.prep_minutes,
+  cook_minutes = excluded.cook_minutes,
+  base_servings = excluded.base_servings,
+  calories = excluded.calories,
+  protein_g = excluded.protein_g,
+  carbs_g = excluded.carbs_g,
+  fat_g = excluded.fat_g,
+  fiber_g = excluded.fiber_g,
+  is_public = excluded.is_public;
+
+delete from public.recipe_meal_types where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'lunch');
+insert into public.recipe_meal_types (recipe_id, meal_type) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'dinner');
+delete from public.recipe_diet_tags where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_diet_tags (recipe_id, diet) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'vegetarian');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'vegan');
+insert into public.recipe_diet_tags (recipe_id, diet) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'halal');
+delete from public.recipe_allergens where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+delete from public.recipe_appliances where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_appliances (recipe_id, appliance) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'stove');
+delete from public.recipe_tags where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_tags (recipe_id, tag) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'budget');
+insert into public.recipe_tags (recipe_id, tag) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'vegan');
+insert into public.recipe_tags (recipe_id, tag) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'healthy');
+insert into public.recipe_tags (recipe_id, tag) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'comfort');
+insert into public.recipe_tags (recipe_id, tag) values ('d706bfd6-ef9e-5e7e-be94-60daf91ad536', 'batch-cook');
+
+delete from public.recipe_ingredients where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9bfe9a04-2f37-5350-99d6-4e8130b99ace', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'green-lentils' limit 1), 'green-lentils', 'green lentils', 250, 'g', 'rinsed', false, false, false, null, 1);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('76da76dd-f414-5ba2-b775-e0cc6136aa66', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'chard' limit 1), 'chard', 'chard', 500, 'g', 'stems and leaves separated', false, false, false, null, 2);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('ea7cc58b-a923-5a21-b634-90e75a5981b0', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'onions' limit 1), 'onions', 'onions', 1, 'piece', 'sliced', false, false, false, null, 3);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('05e8f142-9156-5b32-a322-a72dc4759707', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'garlic' limit 1), 'garlic', 'garlic', 4, 'clove', 'sliced', false, false, false, null, 4);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('7749b088-149f-5bb4-8fd9-2eefd8875afc', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'olive-oil' limit 1), 'olive-oil', 'olive oil', 60, 'ml', null, false, false, false, null, 5);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('9ecdcb22-a2d5-56e9-854d-5a0cb8e890ae', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'cumin' limit 1), 'cumin', 'cumin', 1, 'tsp', null, false, false, false, null, 6);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('d4ece914-a032-5d9e-9773-ea0843105742', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'lemon' limit 1), 'lemon', 'lemon', 1, 'piece', 'juiced', false, false, false, null, 7);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('fe296baf-58ed-5157-ba9b-4d22e4459ff6', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'water' limit 1), 'water', 'water', 1000, 'ml', null, false, false, true, null, 8);
+insert into public.recipe_ingredients (id, recipe_id, ingredient_id, slug, name, quantity, unit, preparation, is_optional, is_garnish, is_pantry_staple, notes, sort_order)
+values ('0a262e42-d5e0-5446-bb9c-079c9b9296ce', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', (select id from public.ingredients where slug = 'salt' limit 1), 'salt', 'salt', 2, 'tsp', null, false, false, true, null, 9);
+
+delete from public.recipe_steps where recipe_id = 'd706bfd6-ef9e-5e7e-be94-60daf91ad536';
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('8d216494-c622-5e2f-85af-2f18e47ff8e2', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', 1, 'Rinse the lentils and simmer them in the water until tender but still holding their shape, about thirty minutes. Do not salt them yet — salt early keeps them firm.', 'اغسل العدس وسيبه يغلي على نار هادية في المية لحد ما يستوي ويفضل محافظ على شكله، حوالي تلاتين دقيقة. متملّحوش دلوقتي — الملح بدري بيخليه ناشف.', 32, null, null, '{"green lentils","water"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('5ab07d0f-a80e-5f07-9b19-5442f3f0801b', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', 2, 'Meanwhile pull the chard leaves off the stems. Slice the stems a finger wide and shred the leaves.', 'في الوقت ده شيل ورق السلق من على العيدان. قطّع العيدان بعرض صباع وقطّع الورق شرايح.', 8, null, null, '{"chard"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('3f19365d-f8e3-5809-8f1e-7418362a9893', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', 3, 'Fry the onion in the olive oil until soft and gold, add the garlic and cumin for a minute, then the chard stems for three more.', 'حمّر البصل في زيت الزيتون لحد ما يطرى ويدهّب، حط التوم والكمون دقيقة، وبعدين عيدان السلق تلات دقايق كمان.', 12, null, null, '{"onions","olive oil","garlic","cumin","chard"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('05532023-c09e-5f34-8639-b11c4d4aab70', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', 4, 'Tip the pan into the lentils with the salt, add the leaves and cook five minutes more, until they collapse into the pot.', 'فرّغ الطاسة على العدس مع الملح، ضيف الورق وسيبه خمس دقايق كمان لحد ما يذبل في الحلة.', 6, null, null, '{"salt","chard"}');
+insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
+values ('5bbe2345-4430-5c1c-bfb4-4bdc5297a5b2', 'd706bfd6-ef9e-5e7e-be94-60daf91ad536', 5, 'Take it off the heat and stir the lemon juice through. Off the heat, or the lemon turns flat.', 'ارفعها من على النار وقلّب عصير الليمون جواها. بعد النار، وإلا طعم الليمون هيروح.', 2, null, null, '{"lemon"}');
 
 -- Cold Sesame Noodles
 insert into public.recipes (

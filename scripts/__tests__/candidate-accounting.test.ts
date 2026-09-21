@@ -142,8 +142,15 @@ describe('candidate accounting', () => {
      * This pins the holds by name. Adding one means adding it here too, which
      * is the point: a hold is a human decision, and losing one should take an
      * edit rather than a re-run.
+     *
+     * `termes` joined the list in batch 5. The photograph is right and the
+     * dish is real; what cannot be written is its TIME. Debittering raw
+     * lupini runs three to seven days, `prepMinutes` includes waiting, and
+     * the catalogue's believable-bounds test caps a recipe at 600 minutes.
+     * Shaving the soak to fit would be hiding it, so the dish waits for a
+     * time model that can say "five days, mostly unattended".
      */
-    const PLACED = ['black-bean-soup'];
+    const PLACED = ['black-bean-soup', 'termes'];
     expect([...held].sort()).toEqual(PLACED);
   });
 

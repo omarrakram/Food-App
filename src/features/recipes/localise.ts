@@ -112,6 +112,9 @@ const PREPARATION_AR: Record<string, string> = {
   'rinsed until the water runs clear': 'مغسول لحد ما المية تصفّى',
   'washed and roughly chopped': 'مغسول ومقطّع خشن',
   wedges: 'فصوص',
+  'bone in, skin on': 'بالعضم وبالجلد',
+  'gutted and scaled, whole': 'منضّف ومقشّر وصحيح',
+  'stems and leaves separated': 'العيدان مفصولة عن الورق',
 };
 
 /** Every preparation phrase this module can translate. Used by the tests. */

@@ -114,6 +114,150 @@
     ]
   },
   {
+    "slug": "dajaj-mosakhan",
+    "title": "Sumac Chicken with Onions",
+    "titleAr": "دجاج مسخن",
+    "description": "A kilo of onions cooked down with enough sumac to turn them dark red, chicken roasted on top, and bread underneath to take the juices. The bread is part of the dish, not something served beside it.",
+    "descriptionAr": "كيلو بصل بيستوّي براحته مع سماق كتير لحد ما يبقى أحمر غامق، والفراخ بتتشوي فوقه، والعيش تحت بيشرب العصارة. العيش جزء من الأكلة نفسها، مش حاجة بتتقدّم جنبها.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 15,
+    "cookMinutes": 60,
+    "servings": 4,
+    "nutrition": {
+      "calories": 620,
+      "protein": 42,
+      "carbs": 45,
+      "fat": 30,
+      "fiber": 5
+    },
+    "dietTags": [
+      "halal"
+    ],
+    "allergens": [
+      "gluten",
+      "nuts"
+    ],
+    "appliances": [
+      "oven",
+      "stove"
+    ],
+    "tags": [
+      "comfort",
+      "high-protein",
+      "oven",
+      "sunday-lunch"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "chicken-thigh",
+        "quantity": 900,
+        "unit": "g",
+        "prep": "bone in, skin on"
+      },
+      {
+        "slug": "onions",
+        "quantity": 5,
+        "unit": "piece",
+        "prep": "sliced thin"
+      },
+      {
+        "slug": "sumac",
+        "quantity": 30,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 120,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "baladi-bread",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": null
+      },
+      {
+        "slug": "pine-nuts",
+        "quantity": 50,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Slice the onions thin and cook them slowly in three quarters of the olive oil until soft and sweet, about twenty minutes. They should collapse, not brown.",
+        "textAr": "قطّع البصل شرايح رفيعة وسوّيه على نار هادية في تلات أرباع زيت الزيتون لحد ما يطرى ويحلى، حوالي عشرين دقيقة. المفروض يذبل مش يتحمّر.",
+        "minutes": 22,
+        "uses": [
+          "onions",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Stir in the sumac and half the salt and take the pan off the heat. The onions will go dark red.",
+        "textAr": "قلّب السماق ونص الملح وارفع الطاسة من على النار. البصل هيبقى أحمر غامق.",
+        "minutes": 3,
+        "uses": [
+          "sumac",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Rub the chicken with the rest of the oil and salt and roast it at 200°C for thirty minutes, skin up.",
+        "textAr": "ادهن الفراخ بباقي الزيت والملح واشويها على ٢٠٠°م تلاتين دقيقة، والجلدة لفوق.",
+        "minutes": 32,
+        "uses": [
+          "chicken-thigh",
+          "olive-oil",
+          "salt"
+        ],
+        "safety": "Poultry must reach 74°C / 165°F at the thickest part of the thigh, away from the bone. Measure it with a thermometer.",
+        "safetyAr": "الفراخ لازم توصل ٧٤°م / ١٦٥°ف في أتخن مكان في الورك، بعيد عن العضمة. قيسها بترمومتر."
+      },
+      {
+        "text": "Lay the bread in the tin, spread the onions over it, set the chicken on top and return it for ten minutes so the bread drinks the juices.",
+        "textAr": "افرد العيش في الصينية، وزّع البصل فوقه، حط الفراخ فوق وارجّعها الفرن عشر دقايق عشان العيش يشرب العصارة.",
+        "minutes": 12,
+        "uses": [
+          "baladi-bread",
+          "onions",
+          "chicken-thigh"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Toast the pine nuts in a dry pan until gold — they turn in seconds — and scatter them over.",
+        "textAr": "حمّص الصنوبر في طاسة ناشفة لحد ما يدهّب — بيتحول في ثواني — ورشّه فوق.",
+        "minutes": 4,
+        "uses": [
+          "pine-nuts"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
     "slug": "fatteh-hummus",
     "title": "Chickpea Fatteh with Yogurt",
     "titleAr": "فتة حمص بالزبادي",
@@ -535,6 +679,264 @@
           "salt",
           "olive-oil",
           "parsley"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "green-bean-stew",
+    "title": "Green Beans and Potato in Tomato",
+    "titleAr": "فاصوليا خضراء بالطماطم",
+    "description": "Cooked well past bright green on purpose. This is not a crisp-bean dish: the beans go soft enough to cut with the side of a spoon and the tomato reduces around them into something you mop up with bread. Better warm than hot, and better the next day.",
+    "descriptionAr": "بتتطبخ لأبعد من اللون الأخضر الفاقع عن قصد. دي مش أكلة فاصوليا مقرمشة: الفاصوليا بتطرى لدرجة إنك تقطعها بجنب المعلقة، والطماطم بتتكتّف حواليها لحاجة تلمّها بالعيش. أحلى دافية من سخنة، وأحلى في اليوم التاني.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 45,
+    "servings": 4,
+    "nutrition": {
+      "calories": 240,
+      "protein": 5,
+      "carbs": 30,
+      "fat": 13,
+      "fiber": 7
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "healthy",
+      "vegan",
+      "budget",
+      "comfort",
+      "batch-cook"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "green-beans",
+        "quantity": 700,
+        "unit": "g",
+        "prep": "trimmed"
+      },
+      {
+        "slug": "potatoes",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "cut into chunks"
+      },
+      {
+        "slug": "tomatoes",
+        "quantity": 4,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "tomato-paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "prep": null
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "chopped"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "crushed"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 300,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Top and tail the beans and snap the long ones in half. Cut the potatoes into chunks about the same size as the bean pieces, so the two finish together.",
+        "textAr": "شيل أطراف الفاصوليا واكسر الطويلة نصين. قطّع البطاطس قطع في حجم قطع الفاصوليا تقريباً، عشان الاتنين يستووا مع بعض.",
+        "minutes": 12,
+        "uses": [
+          "green-beans",
+          "potatoes"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Soften the onion in the oil for six minutes, then add the garlic for one more.",
+        "textAr": "سوّي البصل في الزيت ست دقايق، وبعدين ضيف التوم دقيقة كمان.",
+        "minutes": 7,
+        "uses": [
+          "onions",
+          "garlic",
+          "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the chopped tomatoes and the tomato paste and cook them down for eight minutes, until the oil separates out and pools at the edge of the pan.",
+        "textAr": "ضيف الطماطم المقطّعة والصلصة واطبخهم تمن دقايق، لحد ما الزيت ينفصل ويتجمّع على حرف الطاسة.",
+        "minutes": 8,
+        "uses": [
+          "tomatoes",
+          "tomato-paste"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Add the beans, the potatoes, the water and the salt. Bring it to a simmer, cover it, and give it 35 to 40 minutes.",
+        "textAr": "ضيف الفاصوليا والبطاطس والماية والملح. سيبها تغلي، غطّيها، وادّيها من ٣٥ لـ ٤٠ دقيقة.",
+        "minutes": 38,
+        "uses": [
+          "green-beans",
+          "potatoes",
+          "water",
+          "salt"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Check it: the beans should give completely and the sauce should coat them rather than sit under them. If there is still water in the bottom, take the lid off and give it five more minutes.",
+        "textAr": "بصّ عليها: الفاصوليا لازم تبقى طرية خالص والصلصة تغلّفها مش تبقى تحتها. لو لسه فيه مياه في القاع، شيل الغطا وادّيها خمس دقايق كمان.",
+        "minutes": 5,
+        "uses": [
+          "green-beans"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "grilled-halloumi",
+    "title": "Grilled Halloumi with Lemon",
+    "titleAr": "حلومي مشوي",
+    "description": "Halloumi is the cheese that does not melt, which is the whole point of it. Dry it properly, do not move it in the pan, and eat it the moment it comes off.",
+    "descriptionAr": "الحلومي هي الجبنة اللي ما بتسيحش، وده كل الموضوع. نشّفها كويس، متحركهاش في الطاسة، وكلها أول ما تنزل من على النار.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "snack"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 5,
+    "cookMinutes": 6,
+    "servings": 4,
+    "nutrition": {
+      "calories": 350,
+      "protein": 21,
+      "carbs": 3,
+      "fat": 28,
+      "fiber": 0
+    },
+    "dietTags": [
+      "vegetarian",
+      "halal"
+    ],
+    "allergens": [
+      "dairy"
+    ],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "quick",
+      "high-protein",
+      "beginner",
+      "low-carb"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "halloumi",
+        "quantity": 400,
+        "unit": "g",
+        "prep": "sliced thick"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 20,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "cut into wedges"
+      },
+      {
+        "slug": "mint",
+        "quantity": 10,
+        "unit": "g",
+        "prep": "torn"
+      }
+    ],
+    "steps": [
+      {
+        "text": "Slice the halloumi a centimetre thick and pat every piece properly dry. Wet halloumi steams in the pan instead of colouring, and that is the whole difference.",
+        "textAr": "قطّع الحلومي سمك سنتي ونشّف كل قطعة كويس. الحلومي المبلول بيتبخّر في الطاسة بدل ما ياخد لون، وده كل الفرق.",
+        "minutes": 4,
+        "uses": [
+          "halloumi"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Brush with the oil and lay the slices in a hot dry pan. Leave them alone for 2 to 3 minutes a side — moving them early tears the crust off.",
+        "textAr": "ادهنها بالزيت وحط الشرايح في طاسة ناشفة سخنة. سيبها من دقيقتين لـ ٣ على كل وش — لو حركتها بدري القشرة هتتقشر.",
+        "minutes": 6,
+        "uses": [
+          "olive-oil",
+          "halloumi"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Squeeze the lemon over while it is still hot and scatter the mint. Eat it straight away; halloumi turns rubbery as it cools.",
+        "textAr": "اعصر الليمون عليها وهي لسه سخنة ورش النعناع. كلها على طول؛ الحلومي بيبقى زي الأستيك لما يبرد.",
+        "minutes": 1,
+        "uses": [
+          "lemon",
+          "mint"
         ],
         "safety": null,
         "safetyAr": null
@@ -2216,6 +2618,124 @@
     ]
   },
   {
+    "slug": "pita-bread",
+    "title": "Pocket Flatbread",
+    "titleAr": "عيش شامي",
+    "description": "Five pantry things and a very hot oven. The pocket is not a trick — it is steam, and it only happens if the oven is hotter than feels sensible.",
+    "descriptionAr": "خمس حاجات من الدولاب وفرن سخن جداً. الجيب مش حيلة — ده بخار، ومش بيحصل غير لو الفرن أسخن من اللي انت شايفه معقول.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner",
+      "breakfast"
+    ],
+    "difficulty": "medium",
+    "prepMinutes": 105,
+    "cookMinutes": 15,
+    "servings": 8,
+    "nutrition": {
+      "calories": 210,
+      "protein": 6,
+      "carbs": 40,
+      "fat": 3,
+      "fiber": 2
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "appliances": [
+      "oven"
+    ],
+    "tags": [
+      "budget",
+      "vegan",
+      "batch-cook",
+      "oven"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "flour",
+        "quantity": 500,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "water",
+        "quantity": 320,
+        "unit": "ml",
+        "prep": "lukewarm",
+        "staple": true
+      },
+      {
+        "slug": "yeast",
+        "quantity": 7,
+        "unit": "g",
+        "prep": null
+      },
+      {
+        "slug": "salt",
+        "quantity": 10,
+        "unit": "g",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "sunflower-oil",
+        "quantity": 30,
+        "unit": "ml",
+        "prep": null
+      }
+    ],
+    "steps": [
+      {
+        "text": "Mix the flour, yeast and salt, add the water and the oil, and knead for 8 minutes until the dough is smooth and springs back when you press it.",
+        "textAr": "اخلط الدقيق والخميرة والملح، ضيف المية والزيت، واعجن ٨ دقايق لحد ما العجينة تبقى ناعمة وترجع لما تكبس عليها.",
+        "minutes": 12,
+        "uses": [
+          "flour",
+          "yeast",
+          "salt",
+          "water",
+          "sunflower-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Cover and leave 75 minutes until doubled. Divide into eight, roll each into a ball, and rest them 15 minutes — dough that has not rested fights the rolling pin.",
+        "textAr": "غطيها وسيبها ٧٥ دقيقة لحد ما تبقى الضعف. قسّمها تمانية، كوّر كل واحدة، وسيبهم يرتاحوا ١٥ دقيقة — العجينة اللي مرتحتش بتقاوم النشابة.",
+        "minutes": 85,
+        "uses": [],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Heat the oven as high as it goes with a tray inside it, at least 250°C. The tray must be searing before any bread touches it.",
+        "textAr": "سخّن الفرن على آخره وفيه صينية جوه، على الأقل ٢٥٠ درجة. الصينية لازم تبقى نار قبل ما أي عيش يلمسها.",
+        "minutes": 20,
+        "uses": [],
+        "safety": "A tray at 250°C stays dangerous long after the oven is off. Use dry cloths — a damp one carries the heat straight through to your hand.",
+        "safetyAr": "الصينية على ٢٥٠°م بتفضل خطر حتى بعد ما تطفي الفرن. استعمل فوط ناشفة — المبلولة بتوصّل الحرارة لإيدك على طول."
+      },
+      {
+        "text": "Roll each ball to about 5mm and slide two at a time onto the hot tray. They balloon in 3 to 4 minutes. Take them out the moment they puff, before they colour, and stack them under a cloth so they stay soft.",
+        "textAr": "افرد كل كورة لحوالي ٥ مم وزحلق اتنين في المرة على الصينية السخنة. هينفخوا في ٣ لـ ٤ دقايق. طلعهم أول ما ينفخوا قبل ما ياخدوا لون، وركّبهم فوق بعض تحت فوطة عشان يفضلوا طريين.",
+        "minutes": 15,
+        "uses": [
+          "flour"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
     "slug": "salatet-rocca",
     "title": "Rocket, Sumac and Onion Salad",
     "titleAr": "سلطة جرجير بالسماق",
@@ -2313,6 +2833,162 @@
           "rocket",
           "lemon",
           "olive-oil"
+        ],
+        "safety": null,
+        "safetyAr": null
+      }
+    ]
+  },
+  {
+    "slug": "selk-bel-3ads",
+    "title": "Chard and Lentils",
+    "titleAr": "عدس بالسلق",
+    "description": "Brown lentils simmered until tender but still whole, with chard folded in stems first so the stalks soften while the leaves stay green. Thick enough to eat with bread, not a soup.",
+    "descriptionAr": "عدس بني بيتسوّى لحد ما يستوي ويفضل حبة حبة، والسلق بينزل عليه العيدان الأول عشان تطرى والورق يفضل أخضر. تقيل بحيث يتاكل بالعيش، مش شوربة.",
+    "cuisine": "levantine",
+    "mealTypes": [
+      "lunch",
+      "dinner"
+    ],
+    "difficulty": "easy",
+    "prepMinutes": 15,
+    "cookMinutes": 45,
+    "servings": 4,
+    "nutrition": {
+      "calories": 320,
+      "protein": 15,
+      "carbs": 42,
+      "fat": 12,
+      "fiber": 11
+    },
+    "dietTags": [
+      "vegetarian",
+      "vegan",
+      "halal"
+    ],
+    "allergens": [],
+    "appliances": [
+      "stove"
+    ],
+    "tags": [
+      "budget",
+      "vegan",
+      "healthy",
+      "comfort",
+      "batch-cook"
+    ],
+    "image": null,
+    "ingredients": [
+      {
+        "slug": "green-lentils",
+        "quantity": 250,
+        "unit": "g",
+        "prep": "rinsed"
+      },
+      {
+        "slug": "chard",
+        "quantity": 500,
+        "unit": "g",
+        "prep": "stems and leaves separated"
+      },
+      {
+        "slug": "onions",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "sliced"
+      },
+      {
+        "slug": "garlic",
+        "quantity": 4,
+        "unit": "clove",
+        "prep": "sliced"
+      },
+      {
+        "slug": "olive-oil",
+        "quantity": 60,
+        "unit": "ml",
+        "prep": null
+      },
+      {
+        "slug": "cumin",
+        "quantity": 1,
+        "unit": "tsp",
+        "prep": null
+      },
+      {
+        "slug": "lemon",
+        "quantity": 1,
+        "unit": "piece",
+        "prep": "juiced"
+      },
+      {
+        "slug": "water",
+        "quantity": 1000,
+        "unit": "ml",
+        "prep": null,
+        "staple": true
+      },
+      {
+        "slug": "salt",
+        "quantity": 2,
+        "unit": "tsp",
+        "prep": null,
+        "staple": true
+      }
+    ],
+    "steps": [
+      {
+        "text": "Rinse the lentils and simmer them in the water until tender but still holding their shape, about thirty minutes. Do not salt them yet — salt early keeps them firm.",
+        "textAr": "اغسل العدس وسيبه يغلي على نار هادية في المية لحد ما يستوي ويفضل محافظ على شكله، حوالي تلاتين دقيقة. متملّحوش دلوقتي — الملح بدري بيخليه ناشف.",
+        "minutes": 32,
+        "uses": [
+          "green-lentils",
+          "water"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Meanwhile pull the chard leaves off the stems. Slice the stems a finger wide and shred the leaves.",
+        "textAr": "في الوقت ده شيل ورق السلق من على العيدان. قطّع العيدان بعرض صباع وقطّع الورق شرايح.",
+        "minutes": 8,
+        "uses": [
+          "chard"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Fry the onion in the olive oil until soft and gold, add the garlic and cumin for a minute, then the chard stems for three more.",
+        "textAr": "حمّر البصل في زيت الزيتون لحد ما يطرى ويدهّب، حط التوم والكمون دقيقة، وبعدين عيدان السلق تلات دقايق كمان.",
+        "minutes": 12,
+        "uses": [
+          "onions",
+          "olive-oil",
+          "garlic",
+          "cumin",
+          "chard"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Tip the pan into the lentils with the salt, add the leaves and cook five minutes more, until they collapse into the pot.",
+        "textAr": "فرّغ الطاسة على العدس مع الملح، ضيف الورق وسيبه خمس دقايق كمان لحد ما يذبل في الحلة.",
+        "minutes": 6,
+        "uses": [
+          "salt",
+          "chard"
+        ],
+        "safety": null,
+        "safetyAr": null
+      },
+      {
+        "text": "Take it off the heat and stir the lemon juice through. Off the heat, or the lemon turns flat.",
+        "textAr": "ارفعها من على النار وقلّب عصير الليمون جواها. بعد النار، وإلا طعم الليمون هيروح.",
+        "minutes": 2,
+        "uses": [
+          "lemon"
         ],
         "safety": null,
         "safetyAr": null
@@ -3020,382 +3696,6 @@
         "textAr": "سيبها على نار هادية جدًا ٥٠ دقيقة، وبعدين سيبها ترتاح قبل ما تفرّغها.",
         "minutes": 50,
         "uses": [],
-        "safety": null,
-        "safetyAr": null
-      }
-    ]
-  },
-  {
-    "slug": "grilled-halloumi",
-    "title": "Grilled Halloumi with Lemon",
-    "titleAr": "حلومي مشوي",
-    "description": "Halloumi is the cheese that does not melt, which is the whole point of it. Dry it properly, do not move it in the pan, and eat it the moment it comes off.",
-    "descriptionAr": "الحلومي هي الجبنة اللي ما بتسيحش، وده كل الموضوع. نشّفها كويس، متحركهاش في الطاسة، وكلها أول ما تنزل من على النار.",
-    "cuisine": "levantine",
-    "mealTypes": [
-      "lunch",
-      "dinner",
-      "snack"
-    ],
-    "difficulty": "easy",
-    "prepMinutes": 5,
-    "cookMinutes": 6,
-    "servings": 4,
-    "nutrition": {
-      "calories": 350,
-      "protein": 21,
-      "carbs": 3,
-      "fat": 28,
-      "fiber": 0
-    },
-    "dietTags": [
-      "vegetarian",
-      "halal"
-    ],
-    "allergens": [
-      "dairy"
-    ],
-    "appliances": [
-      "stove"
-    ],
-    "tags": [
-      "quick",
-      "high-protein",
-      "beginner",
-      "low-carb"
-    ],
-    "image": null,
-    "ingredients": [
-      {
-        "slug": "halloumi",
-        "quantity": 400,
-        "unit": "g",
-        "prep": "sliced thick"
-      },
-      {
-        "slug": "olive-oil",
-        "quantity": 20,
-        "unit": "ml",
-        "prep": null
-      },
-      {
-        "slug": "lemon",
-        "quantity": 1,
-        "unit": "piece",
-        "prep": "cut into wedges"
-      },
-      {
-        "slug": "mint",
-        "quantity": 10,
-        "unit": "g",
-        "prep": "torn"
-      }
-    ],
-    "steps": [
-      {
-        "text": "Slice the halloumi a centimetre thick and pat every piece properly dry. Wet halloumi steams in the pan instead of colouring, and that is the whole difference.",
-        "textAr": "قطّع الحلومي سمك سنتي ونشّف كل قطعة كويس. الحلومي المبلول بيتبخّر في الطاسة بدل ما ياخد لون، وده كل الفرق.",
-        "minutes": 4,
-        "uses": [
-          "halloumi"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Brush with the oil and lay the slices in a hot dry pan. Leave them alone for 2 to 3 minutes a side — moving them early tears the crust off.",
-        "textAr": "ادهنها بالزيت وحط الشرايح في طاسة ناشفة سخنة. سيبها من دقيقتين لـ ٣ على كل وش — لو حركتها بدري القشرة هتتقشر.",
-        "minutes": 6,
-        "uses": [
-          "olive-oil",
-          "halloumi"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Squeeze the lemon over while it is still hot and scatter the mint. Eat it straight away; halloumi turns rubbery as it cools.",
-        "textAr": "اعصر الليمون عليها وهي لسه سخنة ورش النعناع. كلها على طول؛ الحلومي بيبقى زي الأستيك لما يبرد.",
-        "minutes": 1,
-        "uses": [
-          "lemon",
-          "mint"
-        ],
-        "safety": null,
-        "safetyAr": null
-      }
-    ]
-  },
-  {
-    "slug": "pita-bread",
-    "title": "Pocket Flatbread",
-    "titleAr": "عيش شامي",
-    "description": "Five pantry things and a very hot oven. The pocket is not a trick — it is steam, and it only happens if the oven is hotter than feels sensible.",
-    "descriptionAr": "خمس حاجات من الدولاب وفرن سخن جداً. الجيب مش حيلة — ده بخار، ومش بيحصل غير لو الفرن أسخن من اللي انت شايفه معقول.",
-    "cuisine": "levantine",
-    "mealTypes": [
-      "lunch",
-      "dinner",
-      "breakfast"
-    ],
-    "difficulty": "medium",
-    "prepMinutes": 105,
-    "cookMinutes": 15,
-    "servings": 8,
-    "nutrition": {
-      "calories": 210,
-      "protein": 6,
-      "carbs": 40,
-      "fat": 3,
-      "fiber": 2
-    },
-    "dietTags": [
-      "vegetarian",
-      "vegan",
-      "halal"
-    ],
-    "allergens": [
-      "gluten"
-    ],
-    "appliances": [
-      "oven"
-    ],
-    "tags": [
-      "budget",
-      "vegan",
-      "batch-cook",
-      "oven"
-    ],
-    "image": null,
-    "ingredients": [
-      {
-        "slug": "flour",
-        "quantity": 500,
-        "unit": "g",
-        "prep": null
-      },
-      {
-        "slug": "water",
-        "quantity": 320,
-        "unit": "ml",
-        "prep": "lukewarm",
-        "staple": true
-      },
-      {
-        "slug": "yeast",
-        "quantity": 7,
-        "unit": "g",
-        "prep": null
-      },
-      {
-        "slug": "salt",
-        "quantity": 10,
-        "unit": "g",
-        "prep": null,
-        "staple": true
-      },
-      {
-        "slug": "sunflower-oil",
-        "quantity": 30,
-        "unit": "ml",
-        "prep": null
-      }
-    ],
-    "steps": [
-      {
-        "text": "Mix the flour, yeast and salt, add the water and the oil, and knead for 8 minutes until the dough is smooth and springs back when you press it.",
-        "textAr": "اخلط الدقيق والخميرة والملح، ضيف المية والزيت، واعجن ٨ دقايق لحد ما العجينة تبقى ناعمة وترجع لما تكبس عليها.",
-        "minutes": 12,
-        "uses": [
-          "flour",
-          "yeast",
-          "salt",
-          "water",
-          "sunflower-oil"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Cover and leave 75 minutes until doubled. Divide into eight, roll each into a ball, and rest them 15 minutes — dough that has not rested fights the rolling pin.",
-        "textAr": "غطيها وسيبها ٧٥ دقيقة لحد ما تبقى الضعف. قسّمها تمانية، كوّر كل واحدة، وسيبهم يرتاحوا ١٥ دقيقة — العجينة اللي مرتحتش بتقاوم النشابة.",
-        "minutes": 85,
-        "uses": [],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Heat the oven as high as it goes with a tray inside it, at least 250°C. The tray must be searing before any bread touches it.",
-        "textAr": "سخّن الفرن على آخره وفيه صينية جوه، على الأقل ٢٥٠ درجة. الصينية لازم تبقى نار قبل ما أي عيش يلمسها.",
-        "minutes": 20,
-        "uses": [],
-        "safety": "A tray at 250°C stays dangerous long after the oven is off. Use dry cloths — a damp one carries the heat straight through to your hand.",
-        "safetyAr": "الصينية على ٢٥٠°م بتفضل خطر حتى بعد ما تطفي الفرن. استعمل فوط ناشفة — المبلولة بتوصّل الحرارة لإيدك على طول."
-      },
-      {
-        "text": "Roll each ball to about 5mm and slide two at a time onto the hot tray. They balloon in 3 to 4 minutes. Take them out the moment they puff, before they colour, and stack them under a cloth so they stay soft.",
-        "textAr": "افرد كل كورة لحوالي ٥ مم وزحلق اتنين في المرة على الصينية السخنة. هينفخوا في ٣ لـ ٤ دقايق. طلعهم أول ما ينفخوا قبل ما ياخدوا لون، وركّبهم فوق بعض تحت فوطة عشان يفضلوا طريين.",
-        "minutes": 15,
-        "uses": [
-          "flour"
-        ],
-        "safety": null,
-        "safetyAr": null
-      }
-    ]
-  },
-  {
-    "slug": "green-bean-stew",
-    "title": "Green Beans and Potato in Tomato",
-    "titleAr": "فاصوليا خضراء بالطماطم",
-    "description": "Cooked well past bright green on purpose. This is not a crisp-bean dish: the beans go soft enough to cut with the side of a spoon and the tomato reduces around them into something you mop up with bread. Better warm than hot, and better the next day.",
-    "descriptionAr": "بتتطبخ لأبعد من اللون الأخضر الفاقع عن قصد. دي مش أكلة فاصوليا مقرمشة: الفاصوليا بتطرى لدرجة إنك تقطعها بجنب المعلقة، والطماطم بتتكتّف حواليها لحاجة تلمّها بالعيش. أحلى دافية من سخنة، وأحلى في اليوم التاني.",
-    "cuisine": "levantine",
-    "mealTypes": [
-      "lunch",
-      "dinner"
-    ],
-    "difficulty": "easy",
-    "prepMinutes": 15,
-    "cookMinutes": 45,
-    "servings": 4,
-    "nutrition": {
-      "calories": 240,
-      "protein": 5,
-      "carbs": 30,
-      "fat": 13,
-      "fiber": 7
-    },
-    "dietTags": [
-      "vegetarian",
-      "vegan",
-      "halal"
-    ],
-    "allergens": [],
-    "appliances": [
-      "stove"
-    ],
-    "tags": [
-      "healthy",
-      "vegan",
-      "budget",
-      "comfort",
-      "batch-cook"
-    ],
-    "image": null,
-    "ingredients": [
-      {
-        "slug": "green-beans",
-        "quantity": 700,
-        "unit": "g",
-        "prep": "trimmed"
-      },
-      {
-        "slug": "potatoes",
-        "quantity": 400,
-        "unit": "g",
-        "prep": "cut into chunks"
-      },
-      {
-        "slug": "tomatoes",
-        "quantity": 4,
-        "unit": "piece",
-        "prep": "chopped"
-      },
-      {
-        "slug": "tomato-paste",
-        "quantity": 2,
-        "unit": "tbsp",
-        "prep": null
-      },
-      {
-        "slug": "onions",
-        "quantity": 1,
-        "unit": "piece",
-        "prep": "chopped"
-      },
-      {
-        "slug": "garlic",
-        "quantity": 4,
-        "unit": "clove",
-        "prep": "crushed"
-      },
-      {
-        "slug": "olive-oil",
-        "quantity": 60,
-        "unit": "ml",
-        "prep": null
-      },
-      {
-        "slug": "water",
-        "quantity": 300,
-        "unit": "ml",
-        "prep": null,
-        "staple": true
-      },
-      {
-        "slug": "salt",
-        "quantity": 2,
-        "unit": "tsp",
-        "prep": null,
-        "staple": true
-      }
-    ],
-    "steps": [
-      {
-        "text": "Top and tail the beans and snap the long ones in half. Cut the potatoes into chunks about the same size as the bean pieces, so the two finish together.",
-        "textAr": "شيل أطراف الفاصوليا واكسر الطويلة نصين. قطّع البطاطس قطع في حجم قطع الفاصوليا تقريباً، عشان الاتنين يستووا مع بعض.",
-        "minutes": 12,
-        "uses": [
-          "green-beans",
-          "potatoes"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Soften the onion in the oil for six minutes, then add the garlic for one more.",
-        "textAr": "سوّي البصل في الزيت ست دقايق، وبعدين ضيف التوم دقيقة كمان.",
-        "minutes": 7,
-        "uses": [
-          "onions",
-          "garlic",
-          "olive-oil"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Add the chopped tomatoes and the tomato paste and cook them down for eight minutes, until the oil separates out and pools at the edge of the pan.",
-        "textAr": "ضيف الطماطم المقطّعة والصلصة واطبخهم تمن دقايق، لحد ما الزيت ينفصل ويتجمّع على حرف الطاسة.",
-        "minutes": 8,
-        "uses": [
-          "tomatoes",
-          "tomato-paste"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Add the beans, the potatoes, the water and the salt. Bring it to a simmer, cover it, and give it 35 to 40 minutes.",
-        "textAr": "ضيف الفاصوليا والبطاطس والماية والملح. سيبها تغلي، غطّيها، وادّيها من ٣٥ لـ ٤٠ دقيقة.",
-        "minutes": 38,
-        "uses": [
-          "green-beans",
-          "potatoes",
-          "water",
-          "salt"
-        ],
-        "safety": null,
-        "safetyAr": null
-      },
-      {
-        "text": "Check it: the beans should give completely and the sauce should coat them rather than sit under them. If there is still water in the bottom, take the lid off and give it five more minutes.",
-        "textAr": "بصّ عليها: الفاصوليا لازم تبقى طرية خالص والصلصة تغلّفها مش تبقى تحتها. لو لسه فيه مياه في القاع، شيل الغطا وادّيها خمس دقايق كمان.",
-        "minutes": 5,
-        "uses": [
-          "green-beans"
-        ],
         "safety": null,
         "safetyAr": null
       }

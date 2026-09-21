@@ -4,9 +4,9 @@
 
 | | |
 |---|---|
-| Recipes in the catalogue | 200 |
-| With a photograph | 106 (53%) |
-| Without | 94 (47%) |
+| Recipes in the catalogue | 205 |
+| With a photograph | 111 (54%) |
+| Without | 94 (46%) |
 
 Shooting all of them is a large spend and most of it would be wasted — a
 recipe nobody is served does not need a picture. These 30 are the ones that

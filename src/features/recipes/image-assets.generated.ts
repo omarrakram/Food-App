@@ -20,6 +20,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     attribution: "Sapanabehl · CC-BY-SA-4.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Aloo_Ghobi.jpg",
   },
+  "arnabeet-makli": {
+    source: require('../../../assets/recipes/arnabeet-makli.jpg') as number,
+    creator: "Yallayallaletsgo",
+    license: "CC-BY-SA-4.0",
+    attribution: "Yallayallaletsgo · CC-BY-SA-4.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Israeli_fried_cauliflower.jpg",
+  },
   "aseer-limon": {
     source: require('../../../assets/recipes/aseer-limon.jpg') as number,
     creator: "HarshLight",
@@ -194,6 +201,13 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-2.0",
     attribution: "Sonia Goyal · CC-BY-SA-2.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Cucumber-raita.jpg",
+  },
+  "dajaj-mosakhan": {
+    source: require('../../../assets/recipes/dajaj-mosakhan.jpg') as number,
+    creator: "Kokaly",
+    license: "CC-BY-SA-3.0",
+    attribution: "Kokaly · CC-BY-SA-3.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Mushakhan_Dish.jpg",
   },
   "dal-tadka": {
     source: require('../../../assets/recipes/dal-tadka.jpg') as number,
@@ -628,6 +642,20 @@ export const LOCAL_RECIPE_IMAGES: Record<string, LocalRecipeImage> = {
     license: "CC-BY-SA-3.0",
     attribution: "Gilabrand · CC-BY-SA-3.0 · Wikimedia Commons",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Tahina.JPG",
+  },
+  "samak-makli": {
+    source: require('../../../assets/recipes/samak-makli.jpg') as number,
+    creator: "Judgefloro",
+    license: "CC0-1.0",
+    attribution: null,
+    sourcePage: "https://commons.wikimedia.org/wiki/File:02036jfCuisine_of_Bulacanfvf_01.jpg",
+  },
+  "selk-bel-3ads": {
+    source: require('../../../assets/recipes/selk-bel-3ads.jpg') as number,
+    creator: "Cajsa Lilliehook from Portland",
+    license: "CC-BY-SA-2.0",
+    attribution: "Cajsa Lilliehook from Portland · CC-BY-SA-2.0 · Wikimedia Commons",
+    sourcePage: "https://commons.wikimedia.org/wiki/File:Red_Chard_and_Lentils_Soup_(10076154906).jpg",
   },
   "shakshuka": {
     source: require('../../../assets/recipes/shakshuka.jpg') as number,
