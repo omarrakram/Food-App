@@ -1,0 +1,596 @@
+{
+  "batch": "batch-4-egyptian-everyday",
+  "intent": "30 candidates, 24 of them Egyptian — eighty per cent, against a two-thirds target — because the catalogue is 27.6% Egyptian and the goal is past 30%. Weighted hard to substantial everyday food rather than to whatever is easy to keep under five lines: seven one-pot or oven meals built on meat or poultry, four legume and vegetable mains, three soups people actually make for lunch, two fish, two breakfasts, two breads. Nothing already tried is here. The nine twice-refused dishes from batches 1 and 2, the exhausted batch-3 rejects, belila, gibna-bel-tamatem, sogo2-bel-salsa and the held black-bean-soup are all out of the pool and stay in history only. Eleven candidates also exist to use catalogue rows no recipe touches: black-eyed-peas, green-fava-beans, pumpkin, walnuts, herring, pigeon, veal, chicken-drumstick, molasses, green-peas, semit.",
+  "candidates": [
+    {
+      "slug": "lobia-bel-zeit",
+      "name": "Black-Eyed Peas in Tomato and Oil",
+      "nameAr": "لوبيا بالزيت",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "black-eyed-peas",
+        "tomatoes",
+        "onions",
+        "garlic",
+        "olive-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Black-eyed peas",
+        "Lobia",
+        "Black eyed bean stew"
+      ],
+      "note": "The cheapest hot lunch in this list and the black-eyed-pea row is used by nothing. One pot, no meat, keeps for days."
+    },
+    {
+      "slug": "ful-akhdar",
+      "name": "Green Fava Beans with Garlic and Coriander",
+      "nameAr": "فول أخضر بالتوم والكزبرة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "green-fava-beans",
+        "garlic",
+        "coriander",
+        "sunflower-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Green fava beans",
+        "Ful akhdar",
+        "Fresh fava beans"
+      ],
+      "note": "What Egypt eats in spring while the beans are green, and the row exists for exactly this with no recipe on it."
+    },
+    {
+      "slug": "shorbet-firakh-baladi",
+      "name": "Egyptian Chicken Soup",
+      "nameAr": "شوربة فراخ بلدي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chicken-drumstick",
+        "onions",
+        "carrots",
+        "bay-leaf",
+        "cinnamon",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Chicken soup",
+        "Chicken broth soup",
+        "Egyptian chicken soup"
+      ],
+      "note": "A real gap: 192 recipes and not one plain chicken soup, which is the thing an Egyptian kitchen makes when somebody is ill."
+    },
+    {
+      "slug": "tagen-batates-bel-lahma",
+      "name": "Potato and Beef Tagine",
+      "nameAr": "طاجن بطاطس باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "potatoes",
+        "beef-cubes",
+        "tomatoes",
+        "tomato-paste",
+        "onions",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Potato beef stew",
+        "Beef and potato casserole",
+        "Tagine batates"
+      ],
+      "note": "The clay-pot dinner. Distinct from the stuffed potatoes and from the kofta tagine already in the catalogue: this one is chunks of beef and potato under tomato."
+    },
+    {
+      "slug": "mahshi-cosa",
+      "name": "Stuffed Courgettes",
+      "nameAr": "كوسة محشي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "zucchini",
+        "rice",
+        "tomatoes",
+        "onions",
+        "parsley",
+        "tomato-paste",
+        "salt"
+      ],
+      "searchNames": [
+        "Stuffed zucchini",
+        "Stuffed courgette",
+        "Mahshi kousa"
+      ],
+      "note": "Only cabbage mahshi exists. Courgette is the one most households actually make, and the two are not the same dish on a plate."
+    },
+    {
+      "slug": "kofta-mashwiya",
+      "name": "Grilled Kofta Skewers",
+      "nameAr": "كفتة مشوية",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "ground-beef",
+        "onions",
+        "parsley",
+        "cumin",
+        "salt"
+      ],
+      "searchNames": [
+        "Kofta kebab",
+        "Grilled kofta",
+        "Minced meat skewers"
+      ],
+      "note": "Five lines and a grill. The catalogue has baked kofta in a tagine and stewed beef, and nothing off a skewer."
+    },
+    {
+      "slug": "renga",
+      "name": "Smoked Herring with Onion and Lemon",
+      "nameAr": "رنجة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "herring",
+        "onions",
+        "lemon",
+        "olive-oil",
+        "cumin"
+      ],
+      "searchNames": [
+        "Smoked herring",
+        "Renga",
+        "Kipper"
+      ],
+      "note": "Sham el-Nessim on a plate. Five lines, no cooking, and the herring row is used by nothing."
+    },
+    {
+      "slug": "samak-bel-tahina",
+      "name": "Baked Fish in Tahini Sauce",
+      "nameAr": "سمك بالطحينة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "tilapia",
+        "tahini",
+        "lemon",
+        "garlic",
+        "cumin",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Fish with tahini",
+        "Baked fish tahini sauce",
+        "Samke harra"
+      ],
+      "note": "The other thing Egypt does with bolti besides grilling it. Sayadeya is fish with rice; this is fish under a tahini sauce that splits if you rush it."
+    },
+    {
+      "slug": "eish-baladi",
+      "name": "Baladi Flatbread",
+      "nameAr": "عيش بلدي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "flour",
+        "yeast",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Egyptian bread",
+        "Baladi bread",
+        "Aish baladi"
+      ],
+      "note": "Four lines and the single most-eaten thing in the country. The catalogue bakes pita and focaccia and not this."
+    },
+    {
+      "slug": "tahina-bel-asal-eswed",
+      "name": "Tahini with Black Honey",
+      "nameAr": "طحينة بالعسل الأسود",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "tahini",
+        "molasses"
+      ],
+      "searchNames": [
+        "Tahini with molasses",
+        "Black honey tahini",
+        "Tahina asal eswed"
+      ],
+      "note": "Two lines, eaten with bread for breakfast across the country, and the black-molasses row is used by almost nothing."
+    },
+    {
+      "slug": "shorbet-2ar3",
+      "name": "Pumpkin Soup",
+      "nameAr": "شوربة قرع عسلي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "pumpkin",
+        "onions",
+        "garlic",
+        "stock-cube",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Pumpkin soup",
+        "Butternut squash soup"
+      ],
+      "note": "Winter, cheap, and the pumpkin row has no recipe at all."
+    },
+    {
+      "slug": "sharkasiya",
+      "name": "Circassian Chicken with Walnuts",
+      "nameAr": "شركسية",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chicken-breast",
+        "walnuts",
+        "rice",
+        "onions",
+        "garlic",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Circassian chicken",
+        "Cerkez tavugu",
+        "Chicken walnut sauce"
+      ],
+      "note": "Came through the Ottoman kitchens and stayed; it is on Cairo menus as شركسية. Substantial, and the walnut row is unused."
+    },
+    {
+      "slug": "batates-bel-beid",
+      "name": "Potatoes and Eggs",
+      "nameAr": "بطاطس بالبيض",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "potatoes",
+        "eggs",
+        "onions",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Potato and egg",
+        "Fried potato with eggs",
+        "Potato omelette"
+      ],
+      "note": "Five lines, one pan, and it is what an Egyptian kitchen makes when the fridge is nearly empty. Breakfast is still the thinnest meal type."
+    },
+    {
+      "slug": "hamam-mahshi",
+      "name": "Stuffed Pigeon",
+      "nameAr": "حمام محشي",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "pigeon",
+        "rice",
+        "onions",
+        "butter",
+        "cinnamon",
+        "salt"
+      ],
+      "searchNames": [
+        "Stuffed pigeon",
+        "Hamam mahshi",
+        "Squab"
+      ],
+      "note": "The dish Egyptians take visitors out for, and the pigeon row has no recipe. Harder photography, worth one attempt."
+    },
+    {
+      "slug": "moza-bel-forn",
+      "name": "Oven-Braised Veal Shank",
+      "nameAr": "موزة في الفرن",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "veal",
+        "onions",
+        "tomato-paste",
+        "bay-leaf",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Braised veal shank",
+        "Osso buco",
+        "Lamb shank braised"
+      ],
+      "note": "Friday lunch. Long, cheap cut, almost no work, and the veal row is used by nothing."
+    },
+    {
+      "slug": "dababees-bel-forn",
+      "name": "Oven Chicken Drumsticks",
+      "nameAr": "دبابيس فراخ في الفرن",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chicken-drumstick",
+        "garlic",
+        "paprika",
+        "sunflower-oil",
+        "lemon",
+        "salt"
+      ],
+      "searchNames": [
+        "Chicken drumsticks",
+        "Roasted chicken drumsticks",
+        "Baked drumsticks"
+      ],
+      "note": "The cheapest chicken there is, one tray. The drumstick row was argued over at length in the ontology work and still has no recipe."
+    },
+    {
+      "slug": "feteer-meshaltet",
+      "name": "Layered Ghee Pastry",
+      "nameAr": "فطير مشلتت",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "flour",
+        "ghee",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Feteer meshaltet",
+        "Egyptian layered pastry",
+        "Feteer"
+      ],
+      "note": "Four lines. The cheese feteer in the catalogue is the stuffed one; this is the plain layered bread it is built from."
+    },
+    {
+      "slug": "shorbet-khodar",
+      "name": "Vegetable Soup",
+      "nameAr": "شوربة خضار",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "carrots",
+        "potatoes",
+        "zucchini",
+        "green-peas",
+        "stock-cube",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Vegetable soup",
+        "Mixed vegetable soup"
+      ],
+      "note": "Ordinary on purpose: it is the soup that gets made on a weeknight, and nothing in the catalogue answers it."
+    },
+    {
+      "slug": "semit",
+      "name": "Sesame Bread Rings",
+      "nameAr": "سميط",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "flour",
+        "yeast",
+        "sesame-seeds",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Simit",
+        "Sesame bread ring",
+        "Semit"
+      ],
+      "note": "Street bread, five lines, and the semit row is unused. Identity risk on review: Turkish simit is the same shape and a different bread."
+    },
+    {
+      "slug": "firakh-bel-roz",
+      "name": "One-Pot Chicken and Rice",
+      "nameAr": "فراخ بالأرز",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "chicken-thigh",
+        "rice",
+        "onions",
+        "cinnamon",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Chicken and rice",
+        "One pot chicken rice",
+        "Chicken pilaf"
+      ],
+      "note": "Chicken cooked on top of the rice so the rice takes the fat. One pot, six lines, feeds a family."
+    },
+    {
+      "slug": "besela-bel-lahma",
+      "name": "Peas and Beef Stew",
+      "nameAr": "بسلة باللحمة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "green-peas",
+        "beef-cubes",
+        "tomato-paste",
+        "onions",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Peas and meat stew",
+        "Green pea stew",
+        "Bisilla"
+      ],
+      "note": "One of the four or five stews on rotation in most Egyptian houses, and the green-pea row has no recipe."
+    },
+    {
+      "slug": "eggah-bel-batates",
+      "name": "Potato Eggah",
+      "nameAr": "عجة بالبطاطس",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "eggs",
+        "potatoes",
+        "onions",
+        "sunflower-oil",
+        "salt"
+      ],
+      "searchNames": [
+        "Potato omelette",
+        "Eggah",
+        "Egyptian potato omelette"
+      ],
+      "note": "Five lines. The baladi eggah in the catalogue is the herb one; this is the thick potato one, and they are different meals."
+    },
+    {
+      "slug": "kofta-bel-salsa",
+      "name": "Meatballs in Tomato Sauce",
+      "nameAr": "كفتة بالصلصة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "ground-beef",
+        "onions",
+        "tomato-paste",
+        "garlic",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Meatballs in tomato sauce",
+        "Kofta in sauce",
+        "Beef meatballs tomato"
+      ],
+      "note": "Stovetop, thirty minutes, eaten over rice. Distinct from the baked kofta tagine and from the stewed beef already here."
+    },
+    {
+      "slug": "roz-bel-khalta",
+      "name": "Festive Rice with Nuts and Raisins",
+      "nameAr": "أرز بالخلطة",
+      "cuisine": "egyptian",
+      "coreIngredients": [
+        "rice",
+        "nuts-mix",
+        "raisins",
+        "butter",
+        "cinnamon",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Rice with nuts and raisins",
+        "Egyptian festive rice",
+        "Roz bel khalta"
+      ],
+      "note": "What goes beside the roast at a family lunch. Distinct from the vermicelli rice and the baked ruz moammar already in the catalogue."
+    },
+    {
+      "slug": "spaghetti-bolognese",
+      "name": "Pasta in Minced Beef Sauce",
+      "nameAr": "مكرونة باللحمة المفرومة",
+      "cuisine": "italian",
+      "coreIngredients": [
+        "pasta",
+        "ground-beef",
+        "tomato-paste",
+        "onions",
+        "garlic",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Spaghetti bolognese",
+        "Pasta meat sauce",
+        "Ragu pasta"
+      ],
+      "note": "Not an Egyptian dish and completely normal in an Egyptian kitchen. The catalogue has plain tomato macaroni and bechamel and nothing with a meat sauce."
+    },
+    {
+      "slug": "beef-stroganoff",
+      "name": "Beef in Cream Sauce",
+      "nameAr": "لحمة بالكريمة",
+      "cuisine": "american",
+      "coreIngredients": [
+        "beef-cubes",
+        "onions",
+        "mushroom",
+        "cream",
+        "butter",
+        "salt"
+      ],
+      "searchNames": [
+        "Beef stroganoff",
+        "Beef in cream sauce"
+      ],
+      "note": "On the menu of nearly every Cairo family restaurant and made at home from cooking cream. Substantial, and nothing in the catalogue uses cream as a sauce."
+    },
+    {
+      "slug": "baked-potato-cheese",
+      "name": "Baked Potato with Cheese",
+      "nameAr": "بطاطس بالجبنة في الفرن",
+      "cuisine": "american",
+      "coreIngredients": [
+        "potatoes",
+        "roumy-cheese",
+        "butter",
+        "black-pepper",
+        "salt"
+      ],
+      "searchNames": [
+        "Baked potato",
+        "Jacket potato cheese",
+        "Loaded baked potato"
+      ],
+      "note": "Five lines and an oven. Made here with roumy, which is the hard cheese an Egyptian fridge actually holds."
+    },
+    {
+      "slug": "chicken-corn-soup",
+      "name": "Chicken and Sweetcorn Soup",
+      "nameAr": "شوربة فراخ بالذرة",
+      "cuisine": "asian",
+      "coreIngredients": [
+        "chicken-breast",
+        "corn",
+        "cornflour",
+        "stock-cube",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Chicken sweetcorn soup",
+        "Chicken and corn soup"
+      ],
+      "note": "Ordered constantly in Egypt and made at home from a tin. The sweetcorn row is unused."
+    },
+    {
+      "slug": "potato-leek-soup",
+      "name": "Potato and Leek Soup",
+      "nameAr": "شوربة بطاطس وكرات",
+      "cuisine": "mediterranean",
+      "coreIngredients": [
+        "potatoes",
+        "leek",
+        "butter",
+        "stock-cube",
+        "water",
+        "salt"
+      ],
+      "searchNames": [
+        "Potato leek soup",
+        "Leek and potato soup"
+      ],
+      "note": "Six lines, one pot, blended or not. The leek row is used by nothing."
+    },
+    {
+      "slug": "green-bean-stew",
+      "name": "Green Beans in Tomato with Beef",
+      "nameAr": "فاصوليا خضراء باللحمة",
+      "cuisine": "levantine",
+      "coreIngredients": [
+        "green-beans",
+        "beef-cubes",
+        "tomatoes",
+        "tomato-paste",
+        "onions",
+        "garlic",
+        "salt"
+      ],
+      "searchNames": [
+        "Green bean stew",
+        "Loubia bi zeit",
+        "Green beans with meat"
+      ],
+      "note": "Cooked from Beirut to Cairo and the green-bean row has no recipe. A different bean and a different dish from the white-bean stew that found nothing in batch 3."
+    }
+  ]
+}

@@ -54,14 +54,68 @@ describe('candidate accounting', () => {
     expect(candidates.size).toBeGreaterThan(50);
   });
 
-  it('leaves no candidate in no state at all', () => {
-    // Promoted, staged, mechanically unfindable, or refused by a person.
-    const unaccounted = [...candidates.keys()].filter(
-      (slug) =>
-        !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+  it('leaves no candidate in no state at all, once its batch has been acquired', () => {
+    // Promoted, staged, held, mechanically unfindable, or refused by a person.
+    //
+    // A SIXTH STATE IS LEGITIMATE and has to be said out loud: a batch that
+    // has just been declared and whose acquisition has not run yet. Every one
+    // of its dishes is genuinely "not attempted", and that is the one time the
+    // review page's "_not attempted yet_" is true rather than a hole.
+    //
+    // It is distinguishable rather than assumed. The fetcher writes a
+    // `skipped` entry for anything it cannot find, so once acquisition has run
+    // over a batch, every dish in it lands in some list. A batch with no
+    // footprint at all — nothing staged, skipped, held or published — has not
+    // been run. A batch with a partial footprint has, and a dish missing from
+    // it is the defect this test exists for.
+    const unrun = new Set(
+      batches
+        .filter((batch) =>
+          batch.candidates.every(
+            (entry) =>
+              !published.has(entry.slug) &&
+              !staged.has(entry.slug) &&
+              !skipped.has(entry.slug) &&
+              !held.has(entry.slug),
+          ),
+        )
+        .map((batch) => batch.batch),
     );
 
+    const unaccounted = [...candidates.entries()]
+      .filter(([, batch]) => !unrun.has(batch))
+      .map(([slug]) => slug)
+      .filter(
+        (slug) =>
+          !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+      );
+
     expect(unaccounted).toEqual([]);
+  });
+
+  it('does not let the unrun-batch exemption swallow a real gap', () => {
+    // The exemption is per batch, so it cannot hide a dish in a batch that HAS
+    // been acquired — which is every batch but the newest.
+    const acquired = batches.filter((batch) =>
+      batch.candidates.some(
+        (entry) =>
+          published.has(entry.slug) ||
+          staged.has(entry.slug) ||
+          skipped.has(entry.slug) ||
+          held.has(entry.slug),
+      ),
+    );
+    expect(acquired.length).toBeGreaterThanOrEqual(3);
+
+    for (const batch of acquired) {
+      const missing = batch.candidates
+        .map((entry) => entry.slug)
+        .filter(
+          (slug) =>
+            !published.has(slug) && !staged.has(slug) && !skipped.has(slug) && !refused.has(slug),
+        );
+      expect({ batch: batch.batch, missing }).toEqual({ batch: batch.batch, missing: [] });
+    }
   });
 
   it('never holds a dish whose photograph is already published', () => {

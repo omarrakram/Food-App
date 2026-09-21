@@ -169,3 +169,47 @@ substitute — it tells the user something false about what they are cooking.
 | Cabbage and Carrot Slaw (`coleslaw`) | File:A_traditional_coleslaw_with_added_honey,_mixed_nuts,_dried_apricots_%26_mustard_seed_for_serving.JPG: refused on review — A murky kitchen snapshot: the used mixing bowl and a smeared spoon fill the top of the frame and an unidentifiable dark bottle sits at the edge. Second refusal for this slug. |
 | Crumbed Chicken Cutlet (`chicken-katsu`) | File:Bento_of_tonkatsu,_jiaozi,_California_Rolls_and_rice_with_black_sesame.jpg: refused on review — A takeaway styrofoam bento sitting on a computer keyboard, and the cutlet is tonkatsu - pork. Second refusal for this slug. |
 
+## batch-4-egyptian-everyday
+
+30 candidates, 24 of them Egyptian — eighty per cent, against a two-thirds target — because the catalogue is 27.6% Egyptian and the goal is past 30%. Weighted hard to substantial everyday food rather than to whatever is easy to keep under five lines: seven one-pot or oven meals built on meat or poultry, four legume and vegetable mains, three soups people actually make for lunch, two fish, two breakfasts, two breads. Nothing already tried is here. The nine twice-refused dishes from batches 1 and 2, the exhausted batch-3 rejects, belila, gibna-bel-tamatem, sogo2-bel-salsa and the held black-bean-soup are all out of the pool and stay in history only. Eleven candidates also exist to use catalogue rows no recipe touches: black-eyed-peas, green-fava-beans, pumpkin, walnuts, herring, pigeon, veal, chicken-drumstick, molasses, green-peas, semit.
+
+**30 candidates: 0 reviewed and shipped, 0 waiting to be looked at, 30 with nothing acceptable.**
+
+### No acceptable image (30)
+
+These keep nothing. A generic photograph of something else is not a
+substitute — it tells the user something false about what they are cooking.
+
+| Dish | Why |
+|---|---|
+| Black-Eyed Peas in Tomato and Oil (`lobia-bel-zeit`) | _not attempted yet_ |
+| Green Fava Beans with Garlic and Coriander (`ful-akhdar`) | _not attempted yet_ |
+| Egyptian Chicken Soup (`shorbet-firakh-baladi`) | _not attempted yet_ |
+| Potato and Beef Tagine (`tagen-batates-bel-lahma`) | _not attempted yet_ |
+| Stuffed Courgettes (`mahshi-cosa`) | _not attempted yet_ |
+| Grilled Kofta Skewers (`kofta-mashwiya`) | _not attempted yet_ |
+| Smoked Herring with Onion and Lemon (`renga`) | _not attempted yet_ |
+| Baked Fish in Tahini Sauce (`samak-bel-tahina`) | _not attempted yet_ |
+| Baladi Flatbread (`eish-baladi`) | _not attempted yet_ |
+| Tahini with Black Honey (`tahina-bel-asal-eswed`) | _not attempted yet_ |
+| Pumpkin Soup (`shorbet-2ar3`) | _not attempted yet_ |
+| Circassian Chicken with Walnuts (`sharkasiya`) | _not attempted yet_ |
+| Potatoes and Eggs (`batates-bel-beid`) | _not attempted yet_ |
+| Stuffed Pigeon (`hamam-mahshi`) | _not attempted yet_ |
+| Oven-Braised Veal Shank (`moza-bel-forn`) | _not attempted yet_ |
+| Oven Chicken Drumsticks (`dababees-bel-forn`) | _not attempted yet_ |
+| Layered Ghee Pastry (`feteer-meshaltet`) | _not attempted yet_ |
+| Vegetable Soup (`shorbet-khodar`) | _not attempted yet_ |
+| Sesame Bread Rings (`semit`) | _not attempted yet_ |
+| One-Pot Chicken and Rice (`firakh-bel-roz`) | _not attempted yet_ |
+| Peas and Beef Stew (`besela-bel-lahma`) | _not attempted yet_ |
+| Potato Eggah (`eggah-bel-batates`) | _not attempted yet_ |
+| Meatballs in Tomato Sauce (`kofta-bel-salsa`) | _not attempted yet_ |
+| Festive Rice with Nuts and Raisins (`roz-bel-khalta`) | _not attempted yet_ |
+| Pasta in Minced Beef Sauce (`spaghetti-bolognese`) | _not attempted yet_ |
+| Beef in Cream Sauce (`beef-stroganoff`) | _not attempted yet_ |
+| Baked Potato with Cheese (`baked-potato-cheese`) | _not attempted yet_ |
+| Chicken and Sweetcorn Soup (`chicken-corn-soup`) | _not attempted yet_ |
+| Potato and Leek Soup (`potato-leek-soup`) | _not attempted yet_ |
+| Green Beans in Tomato with Beef (`green-bean-stew`) | _not attempted yet_ |
+
