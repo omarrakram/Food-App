@@ -115,6 +115,21 @@ export const env = {
     // somebody's `.env.local` turns itself off when they add their keys.
     !Boolean(supabaseUrl && supabasePublishableKey),
 
+  /**
+   * The development merchant catalogue in `data/commerce-demo/`.
+   *
+   * TWO conditions, both required: the flag is set, and the environment is not
+   * production. Same shape as `demoMode` above, and for the same reason — a
+   * flag alone is one mistake away from shipping fixtures to real customers.
+   *
+   * It deliberately does NOT also require "no Supabase project", which
+   * `demoMode` does. Exercising checkout against a development backend is the
+   * whole point of having a demo catalogue, and that needs a real database.
+   * Production is the boundary that matters here, not the presence of one.
+   */
+  useDemoMerchantCatalogue:
+    boolFlag(process.env.EXPO_PUBLIC_DEMO_MERCHANT, false) && appEnv !== 'production',
+
   enableGroceryOrdering: boolFlag(process.env.EXPO_PUBLIC_ENABLE_GROCERY_ORDERING, false),
   enableSocialAuth: boolFlag(process.env.EXPO_PUBLIC_ENABLE_SOCIAL_AUTH, false),
 

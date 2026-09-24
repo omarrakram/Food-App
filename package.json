@@ -52,7 +52,8 @@
     "audit:prices": "node --experimental-strip-types --no-warnings scripts/audit-prices.ts",
     "audit:families": "node --experimental-strip-types --no-warnings scripts/audit-families.ts",
     "audit:photos": "node --experimental-strip-types --no-warnings scripts/audit-photography.ts",
-    "audit:testids": "node --experimental-strip-types --no-warnings scripts/audit-testids.ts"
+    "audit:testids": "node --experimental-strip-types --no-warnings scripts/audit-testids.ts",
+    "commerce:demo": "node --experimental-strip-types --no-warnings scripts/import-commerce-demo.ts"
   },
   "jest": {
     "projects": [

@@ -58,6 +58,38 @@ export type SourcingRequest = {
   readonly locationId: string;
 };
 
+/**
+ * Why a candidate scored as it did.
+ *
+ * Stable codes rather than prose, so the UI translates them and the ranking
+ * stays explainable in both languages. "We picked this because" is not a
+ * nicety here: the whole reason no model chooses a SKU is that the choice has
+ * to be auditable.
+ */
+export const CANDIDATE_REASONS = [
+  // Mapping correctness — "is this SKU this ingredient?"
+  'verified_mapping',
+  'manual_mapping',
+  'exact_sku_mapping',
+  'name_match_mapping',
+  'category_fallback_mapping',
+  // Purchasability — "can anyone buy it?"
+  'in_stock',
+  'low_stock',
+  'stock_unknown',
+  'out_of_stock',
+  // Eligibility — "may THIS user have it?"
+  'dietary_eligible',
+  'eligibility_unknown',
+  // Fit and price
+  'exact_quantity_fit',
+  'smallest_overbuy',
+  'overbuy',
+  'pack_size_unknown',
+  'lowest_effective_cost',
+] as const;
+export type CandidateReason = (typeof CANDIDATE_REASONS)[number];
+
 export type ProductCandidate = {
   readonly product: MerchantProduct;
   readonly mapping: IngredientProductMapping;
@@ -68,30 +100,88 @@ export type ProductCandidate = {
    * unit does not convert. A null here means "ask the user", never "assume 1".
    */
   readonly packsNeeded: number | null;
-  /** Deterministic score. Explained by `reasons`, never by a model. */
+  /** What this candidate actually costs: packs x unit price, in minor units. */
+  readonly effectiveCostMinor: number | null;
+  /** Deterministic integer score. Explained by `reasons`, never by a model. */
   readonly score: number;
-  readonly reasons: readonly string[];
+  readonly reasons: readonly CandidateReason[];
 };
 
+/**
+ * Five outcomes, because "we could not get you this" has four different
+ * causes and they need four different sentences.
+ *
+ * Collapsing them was the first version's mistake: an ingredient whose only
+ * product is out of stock came back `unmapped`, which reads as "we do not
+ * stock this" when the truth is "we stock it and it has run out". One of
+ * those is a catalogue gap for us to fix; the other is a Tuesday.
+ */
 export const SOURCING_STATUSES = [
-  /** A confident mapping exists and it is in stock. */
+  /** Trusted mapping, eligible for this user, and buyable right now. */
   'matched',
-  /** Candidates exist but none clears the confidence bar. The user chooses. */
+  /** Buyable candidates exist, but we are not sure enough to choose for them. */
   'needs_confirmation',
-  /** Mapped, but the merchant has none right now. */
-  'out_of_stock',
-  /** No mapping exists for this ingredient at this merchant. */
+  /** Eligible mappings exist; none can be bought right now. */
+  'no_purchasable_match',
+  /** Mappings exist; every one is excluded for THIS user. */
+  'no_eligible_match',
+  /** No usable mapping exists for this ingredient at this merchant. */
   'unmapped',
 ] as const;
 export type SourcingStatus = (typeof SOURCING_STATUSES)[number];
 
+/**
+ * THREE INDEPENDENT AXES, and keeping them apart is the point.
+ *
+ *   mapping        — does this SKU represent this ingredient?
+ *   eligibility    — may THIS user receive it?
+ *   purchasability — can anyone buy it right now?
+ *
+ * A manual or verified mapping is an assertion about the FIRST axis only. It
+ * says a human confirmed that Brand X Milk 1L is milk. It says nothing about
+ * whether this particular cook can have it, and nothing about whether the
+ * merchant has any. Letting verification override the other two would mean a
+ * hand-checked mapping could hand somebody an allergen.
+ */
+export const EXCLUSION_AXES = ['mapping', 'eligibility', 'purchasability'] as const;
+export type ExclusionAxis = (typeof EXCLUSION_AXES)[number];
+
+export const EXCLUSION_REASONS = [
+  /** A human refused this mapping. Kept rather than deleted. */
+  'blocked',
+  /** Carries an allergen this user must avoid. */
+  'allergen',
+  /** The merchant has delisted it. */
+  'delisted',
+] as const;
+export type ExclusionReason = (typeof EXCLUSION_REASONS)[number];
+
+export type CandidateExclusion = {
+  readonly productId: string;
+  readonly axis: ExclusionAxis;
+  readonly reason: ExclusionReason;
+};
+
 export type SourcedLine = {
   readonly requested: SourcingLine;
   readonly status: SourcingStatus;
-  /** Ranked best-first. Empty when `unmapped`. */
+  /**
+   * Ranked best-first, and only ever things this user could actually pick:
+   * correctly mapped, eligible, and on the catalogue. Out-of-stock survivors
+   * ARE listed, so the UI can say "usually this one, currently unavailable"
+   * rather than pretending the ingredient was never mapped.
+   */
   readonly candidates: readonly ProductCandidate[];
-  /** Non-null only when `status === 'matched'`. */
+  /**
+   * Non-null only when `status === 'matched'`.
+   *
+   * Never an out-of-stock product, whatever its mapping score. Relevance and
+   * purchasability are different questions, and the strongest mapping in the
+   * catalogue is still not something anybody can put in a bag.
+   */
   readonly chosen: ProductCandidate | null;
+  /** What was thrown out and on which axis. For debugging and for trust. */
+  readonly exclusions: readonly CandidateExclusion[];
 };
 
 export type SourcingResult = {
@@ -138,15 +228,7 @@ export type OrderSubmission =
   /** The merchant now has it — in their dashboard queue, or via their API. */
   | { readonly kind: 'accepted_for_fulfilment'; readonly merchantReference: string | null }
   /** The merchant cannot take it at all right now (closed, outside area). */
-  | { readonly kind: 'refused'; readonly reason: string }
-  /**
-   * The partner runs their own checkout and wants the customer in their app.
-   *
-   * Unreachable under Model 2 and present for the B2B shape only. An adapter
-   * that returns this must never be paired with an AKALT-captured payment —
-   * that would take the customer's money twice.
-   */
-  | { readonly kind: 'handoff'; readonly url: string };
+  | { readonly kind: 'refused'; readonly reason: string };
 
 export interface FulfilmentAdapter {
   readonly merchantId: string;

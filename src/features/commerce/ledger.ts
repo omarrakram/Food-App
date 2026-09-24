@@ -1,6 +1,5 @@
 import type {
   AdjustmentKind,
-  CommissionBasis,
   OrderAdjustment,
   OrderCharge,
   OrderFinancials,
@@ -58,7 +57,11 @@ export type LedgerInput = {
 /** The commercial terms from the merchant agreement. */
 export type MerchantTerms = {
   readonly commissionRateBasisPoints: number;
-  readonly commissionBasis: CommissionBasis;
+  /**
+   * The merchant owns the rider, so normally they keep what the customer paid
+   * for delivery. It is a term in the agreement, not a law, and the settlement
+   * maths reads it.
+   */
   readonly merchantKeepsDeliveryFee: boolean;
 };
 
@@ -184,11 +187,15 @@ export function settleOrder(input: LedgerInput, terms: MerchantTerms): OrderFina
 
   const keptDeliveryFee = terms.merchantKeepsDeliveryFee ? input.charge.deliveryFeeMinor : 0;
 
-  const commissionBase =
-    terms.commissionBasis === 'goods_and_delivery'
-      ? goodsFulfilled + keptDeliveryFee
-      : goodsFulfilled;
-  const commission = applyBasisPoints(commissionBase, terms.commissionRateBasisPoints);
+  /**
+   * Commission is charged on NET FULFILLED MERCHANDISE and nothing else.
+   *
+   * Not on delivery, not on the service fee, and not on goods that were
+   * removed, substituted away or refunded — `goodsFulfilled` already has those
+   * netted out, which is the whole reason it is computed from the adjustment
+   * fold rather than read off the original basket.
+   */
+  const commission = applyBasisPoints(goodsFulfilled, terms.commissionRateBasisPoints);
 
   /** What the merchant has earned, whoever is currently holding the cash. */
   const merchantEntitlement = goodsFulfilled + keptDeliveryFee - commission;

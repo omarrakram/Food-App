@@ -1,0 +1,26 @@
+{
+  "comment": "A DEVELOPMENT CATALOGUE, NOT A SUPERMARKET. No company named here exists and no agreement stands behind it. See README.md.",
+  "merchant": {
+    "slug": "akalt-demo-market",
+    "name": "AKALT Demo Market (development only)",
+    "nameAr": "سوق أكلت التجريبي (للتطوير فقط)",
+    "country": "EG",
+    "currency": "EGP",
+    "fulfilmentMode": "dashboard",
+    "commissionRateBasisPoints": 1000,
+    "merchantKeepsDeliveryFee": true,
+    "isEnabled": false,
+    "isDemo": true
+  },
+  "location": {
+    "externalId": "demo-branch-1",
+    "name": "Demo Branch — Maadi",
+    "nameAr": "فرع التجربة — المعادي",
+    "city": "Cairo",
+    "deliveryAreas": ["Maadi", "Degla", "Sarayat El Maadi"],
+    "deliveryFeeMinor": 2500,
+    "minimumOrderMinor": 10000,
+    "estimatedDeliveryMinutes": 55,
+    "isAcceptingOrders": false
+  }
+}

@@ -3,10 +3,15 @@
 The transaction layer. Everything between "I'm missing cooking cream" and
 "somebody rang the doorbell".
 
-**Status: Commerce-1 (foundation).** Types, state machines and the money
-ledger, with tests. No screens, no database migration, no adapter
-implementations, no payment provider. Nothing in this directory is reachable
-from the running app yet.
+**Status: Commerce-2.** Types, state machines, the money ledger, pack maths,
+the sourcing engine, the schema and an isolated development catalogue — all
+with tests. No screens and no payment provider yet, and the migration has NOT
+been applied to hosted Supabase.
+
+The product this serves is AKALT's own: the customer decides what to eat,
+AKALT works out what they are missing, sources it from one merchant, takes the
+payment, and the merchant's own rider delivers it. The experience never leaves
+AKALT.
 
 ---
 
@@ -21,14 +26,19 @@ from the running app yet.
 
 `features/recipes`, `features/pantry`, `features/ingredients` and
 `features/pricing` must never import from `features/commerce` or
-`types/commerce`. `scripts/__tests__/commerce-layering.test.ts` enforces it and fails on a
-single import.
+`types/commerce`. `scripts/__tests__/commerce-layering.test.ts` enforces it and
+fails on a single import.
 
-This is the B2B option, written down as a test. What a Breadfast or a Rabbit
-would license is the food intelligence plus a `CatalogueAdapter` against their
-catalogue — their checkout, their money, their orders stay theirs. The day a
-recipe engine reaches for a SKU, that stops being a configuration change and
-becomes a rewrite.
+The reason is AKALT's own correctness, not anybody else's integration. Food
+intelligence answers "what can this person cook?" from facts about food.
+Commerce answers "what will this cost and who is bringing it?" from facts
+about one merchant's shelf. Those change for different reasons, at different
+speeds, and a recipe engine that reaches for a SKU starts failing when a
+supermarket delists a product — which is a genuinely absurd way for a recipe
+to break.
+
+The violation is always small and reasonable at the time: one import of
+`MerchantProduct` into a ranking function because the price was right there.
 
 ---
 
@@ -118,24 +128,106 @@ Three rules worth knowing before changing anything here:
 
 ---
 
+## Sourcing: which product to buy
+
+`sourcing.ts`. **No model decides this.** Not because a model would guess
+badly, but because a wrong SKU is a different order of trust failure from a
+wrong recipe suggestion: it is somebody's money, spent on the wrong thing,
+delivered to their door. The ranking is integer arithmetic over observable
+facts, it explains itself through `reasons`, and it gives the same answer
+twice.
+
+### Three independent questions, answered in order
+
+| axis | question | who settles it |
+|---|---|---|
+| **mapping correctness** | does this SKU represent this ingredient? | a human, via `isVerified` / `source: 'manual'` / `isBlocked` |
+| **user eligibility** | may THIS user receive it? | the product's allergen data vs the user's |
+| **purchasability** | can anyone buy it right now? | `isActive`, `availability` |
+
+**A manual or verified mapping settles the FIRST axis only.** A human
+confirming that Brand X Milk 1L is milk has said nothing about whether this
+cook can drink it, and nothing about whether the shop has any. If verification
+could override the other two, a hand-checked mapping would be a route to
+handing somebody an allergen — so it overrides the confidence bar and nothing
+else. Four tests hold that line, one per override it must not perform.
+
+Only what survives all three is scored, so no combination of price, stock and
+pack fit can float an ineligible product to the top. Safety is never a ranking
+weight — the same rule `features/recipes/rank.ts` already follows.
+
+**`null` allergen data is not an absence of allergens.** `[]` is a merchant
+declaring none; `null` is nobody having said anything. For a cook with
+allergies a `null` candidate is offered but never auto-selected, because the
+day we integrate a catalogue without allergen data, treating the two alike
+would make every unlabelled product silently safe for everybody. The demo
+CSV refuses a blank cell for exactly this reason: `none` and `unknown` both
+have to be typed.
+
+**Then the score**, in descending order of how bad it is to get wrong:
+
+| | weight | |
+|---|---:|---|
+| verified mapping | 1000 | a human checked this SKU is this ingredient |
+| mapping source | 0–400 | manual pin > exact SKU > name match > category |
+| confidence | 0–50 | refines within a source tier, never across one |
+| availability | 0–200 | in stock > low > unknown > out |
+| pack fit | 0–150 | less waste is better |
+| price | 0–100 | cheapest **effective cost**, not cheapest shelf price |
+
+Two details that matter more than they look:
+
+**Effective cost, not shelf price.** Two 450 g packs at 50.00 is dearer than
+one 1 kg pack at 90.00, and the shelf price says the opposite. The comparison
+is `packs × unit price`, which needs the pack maths done first.
+
+**A manual mapping is trusted regardless of confidence.** `confidence` is a
+*matcher* score, and nothing computed one for a row a human created by
+choosing the product. Gating the pin on it would mean refusing the mapping we
+are surest of.
+
+Ties break on score, then effective cost, then packs, then product id. That
+last one is not decoration: without it two equal products come back in
+whatever order the database chose, the list reshuffles on refresh, and the
+suite passes on Tuesday and fails on Wednesday.
+
+### Five outcomes, because "no" has four causes
+
+| status | means |
+|---|---|
+| `matched` | trusted, eligible, buyable — `chosen` is set |
+| `needs_confirmation` | buyable options exist; confidence is low, or eligibility is unknown |
+| `no_purchasable_match` | eligible mappings exist; none can be bought right now |
+| `no_eligible_match` | mappings exist; every one is ruled out for this user |
+| `unmapped` | no usable mapping at this merchant |
+
+An out-of-stock product is **never** `chosen`, whatever its mapping score.
+`SourcedLine.exclusions` records what was dropped and on which axis.
+
+## Pack maths
+
+`pack-maths.ts`. 500 g of chicken against a 450 g pack and a 1 kg pack.
+Conversion is **not** reimplemented — `features/pricing/units.ts` already
+reduces everything to grams and already knows a per-bunch weight says nothing
+about a clove.
+
+When it cannot tell, it says so. There is no branch that assumes one pack:
+`kind: 'unknown'` means the UI asks, because guessing here spends real money.
+
 ## Ports
 
 `ports.ts` splits what `features/grocery/provider.ts` had as one interface:
 
-| | owns | V1 implementation |
+| | owns | implementation |
 |---|---|---|
-| `CatalogueAdapter` | read: locations, products, prices, stock | Commerce-2 |
+| `CatalogueAdapter` | read: locations, products, prices, stock | `demo-adapter.ts`, then the partner's |
 | `FulfilmentAdapter` | write: hand a paid order to whoever picks it | Commerce-7, `mode: 'dashboard'` |
 
-The old `GroceryProvider` is **superseded and must be retired** — see below.
-It was built well, for Model 1: `createCart()` had the retailer create the
-cart, `checkout()` returned `{ kind: 'completed' }` documented as *"the
-provider handled payment"*, and `getOrderStatus()` polled them. Under Model 2
-AKALT owns the cart, the checkout, the money and the order record.
-
-Its read half survives almost unchanged as `CatalogueAdapter`. Its write half
-does not survive at all — except as `OrderSubmission.kind === 'handoff'`,
-which is kept for the B2B shape and is unreachable under Model 2.
+The split earns its keep because the two halves change for different reasons:
+a catalogue is re-read constantly and cached, an order is submitted once and
+must not be. `features/grocery/provider.ts` is **superseded and retired in
+Commerce-3** — it assumed the retailer owned the cart, the checkout and the
+money, which is not the model.
 
 ---
 
@@ -151,6 +243,12 @@ stores is a later product, not a V1 constraint on the schema.
 
 **No rider model, no GPS, no live tracking.** The merchant owns the rider.
 
+**No handoff checkout.** The customer is never sent to another app to pay.
+
+**No commission "basis" setting.** Commission is charged on net fulfilled
+merchandise, full stop. A second option could only ever produce an invoice
+that disagrees with the agreement.
+
 ---
 
 ## Map
@@ -161,4 +259,31 @@ stores is a later product, not a V1 constraint on the schema.
 | `fulfilment-state.ts` | goods state machine + who may move it |
 | `payment-state.ts` | money state machine + who may move it |
 | `ledger.ts` | adjustments, the authorisation ceiling, settlement |
+| `pack-maths.ts` | how many packs the cook actually has to buy |
+| `sourcing.ts` | which product to buy, and why |
 | `ports.ts` | `CatalogueAdapter`, `FulfilmentAdapter`, the sourcing contract |
+| `demo-adapter.ts` | a catalogue adapter over the development fixtures, and its guard |
+| `demo-catalogue.generated.ts` | generated from `data/commerce-demo/` |
+
+The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`.
+It has **not** been applied to hosted Supabase.
+
+## Keeping the demo catalogue out of production
+
+Four independent guards, because a fixture that reaches a real customer is the
+worst outcome available to this layer:
+
+1. `env.useDemoMerchantCatalogue` requires an explicit
+   `EXPO_PUBLIC_DEMO_MERCHANT` flag **and** a non-production build — the same
+   shape as `env.demoMode`.
+2. `assertDemoCatalogueAllowed()` runs at **every** entry point, not just the
+   adapter's constructor, so no bare function skips the class. It throws
+   rather than returning an empty catalogue: empty looks exactly like a
+   merchant that is out of everything, which is the one failure nobody
+   investigates.
+3. The merchant row is `isDemo: true` and `isEnabled: false`, and says
+   "development only" in both languages.
+4. Nothing outside `features/commerce` may import the generated catalogue.
+
+(2) is asserted by `__tests__/demo-guard.test.ts`, which mocks the env module
+with the flag off. (3) and (4) by `scripts/__tests__/commerce-demo-isolation.test.ts`.

@@ -7,6 +7,19 @@
 import { cleanup, configure } from '@testing-library/react-native';
 
 /**
+ * The development merchant catalogue, on for the test run.
+ *
+ * `env.useDemoMerchantCatalogue` needs this flag AND a non-production build.
+ * A test run is non-production by definition, so setting the flag here is what
+ * lets the commerce suites source against a catalogue shaped like a real shelf
+ * instead of against hand-built fixtures only.
+ *
+ * The guard itself is NOT weakened by this — `demo-guard.test.ts` mocks the
+ * env module with the flag off and asserts every entry point throws.
+ */
+process.env.EXPO_PUBLIC_DEMO_MERCHANT = 'true';
+
+/**
  * `MessageChannel` in the web test environment.
  *
  * React's scheduler reaches for it to yield between units of work, and jsdom

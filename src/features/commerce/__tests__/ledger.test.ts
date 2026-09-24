@@ -68,10 +68,12 @@ function ledger(over: Partial<LedgerInput> = {}): LedgerInput {
   };
 }
 
-/** 8% on goods; the merchant runs the rider so they keep the delivery fee. */
+/**
+ * The development assumption: 10% on net fulfilled merchandise. The merchant
+ * runs the rider, so they keep the delivery fee.
+ */
 const TERMS: MerchantTerms = {
-  commissionRateBasisPoints: 800,
-  commissionBasis: 'goods',
+  commissionRateBasisPoints: 1_000,
   merchantKeepsDeliveryFee: true,
 };
 
@@ -195,9 +197,9 @@ describe('settlement, prepaid', () => {
     const result = settleOrder(ledger(), TERMS);
 
     expect(result.goodsFulfilledMinor).toBe(20_000);
-    expect(result.commissionMinor).toBe(1_600); // 8% of 200.00
+    expect(result.commissionMinor).toBe(2_000); // 10% of 200.00
     expect(result.settlementDirection).toBe('akalt_owes_merchant');
-    expect(result.settlementAmountMinor).toBe(20_900); // 20,000 + 2,500 − 1,600
+    expect(result.settlementAmountMinor).toBe(20_500); // 20,000 + 2,500 − 2,000
     expect(result.refundDueMinor).toBe(0);
   });
 
@@ -209,9 +211,11 @@ describe('settlement, prepaid', () => {
     expect(result.goodsFulfilledMinor).toBe(15_000);
     expect(result.refundDueMinor).toBe(5_000);
     // Commission follows the goods down — we do not take a cut of something
-    // the merchant never handed over.
-    expect(result.commissionMinor).toBe(1_200);
-    expect(result.settlementAmountMinor).toBe(16_300);
+    // the merchant never handed over. THIS is what "net fulfilled
+    // merchandise" means, and it is why the base is folded from the
+    // adjustments rather than read off the original basket.
+    expect(result.commissionMinor).toBe(1_500);
+    expect(result.settlementAmountMinor).toBe(16_000);
   });
 
   it('charges a goodwill credit to AKALT, not to the merchant', () => {
@@ -220,7 +224,7 @@ describe('settlement, prepaid', () => {
 
     expect(result.amountDueMinor).toBe(22_500); // the customer pays less
     expect(result.goodsFulfilledMinor).toBe(20_000); // the merchant delivered it all
-    expect(result.settlementAmountMinor).toBe(20_900); // and is paid in full
+    expect(result.settlementAmountMinor).toBe(20_500); // and is paid in full
     // We collected 1,000 less and paid out the same: our apology, our margin.
   });
 
@@ -230,20 +234,20 @@ describe('settlement, prepaid', () => {
 
     expect(result.amountDueMinor).toBe(21_000);
     expect(result.goodsFulfilledMinor).toBe(20_000);
-    expect(result.settlementAmountMinor).toBe(20_900);
+    expect(result.settlementAmountMinor).toBe(20_500);
   });
 });
 
 describe('settlement, cash on delivery', () => {
   it('REVERSES the direction, because the merchant is holding the cash', () => {
-    // The rider took 235.00 at the door. The merchant has earned 209.00, so
-    // they owe us the 26.00 difference — our service fee plus our commission.
+    // The rider took 235.00 at the door. The merchant has earned 205.00, so
+    // they owe us the 30.00 difference — our service fee plus our commission.
     // A settlement model that assumes money only ever flows from AKALT to the
     // merchant invoices the wrong party here, every time.
     const result = settleOrder(ledger({ paymentMethod: 'cash_on_delivery' }), TERMS);
 
     expect(result.settlementDirection).toBe('merchant_owes_akalt');
-    expect(result.settlementAmountMinor).toBe(2_600);
+    expect(result.settlementAmountMinor).toBe(3_000);
     // And it decomposes exactly into the two things AKALT is owed, which is
     // what makes the figure defensible in a reconciliation dispute.
     expect(result.commissionMinor + charge().serviceFeeMinor).toBe(
@@ -267,23 +271,30 @@ describe('settlement, cash on delivery', () => {
 });
 
 describe('commission arithmetic', () => {
-  it('can be charged on goods and delivery together when the agreement says so', () => {
-    const result = settleOrder(ledger(), {
-      ...TERMS,
-      commissionBasis: 'goods_and_delivery',
-    });
-    expect(result.commissionMinor).toBe(1_800); // 8% of 225.00
+  it('never touches the delivery or service fee', () => {
+    // 10% of the 200.00 of merchandise, not of the 235.00 the customer paid.
+    // There is no setting that changes this: a second basis option could only
+    // ever produce an invoice that disagrees with the agreement.
+    const result = settleOrder(ledger(), TERMS);
+    expect(result.commissionMinor).toBe(2_000);
+
+    const biggerFees = settleOrder(
+      ledger({ charge: charge({ deliveryFeeMinor: 9_900, serviceFeeMinor: 5_000 }) }),
+      TERMS,
+    );
+    expect(biggerFees.commissionMinor).toBe(2_000);
   });
 
   it('rounds to the nearest piastre rather than always down', () => {
-    // 3.33 EGP at 8% is 0.2664. Always flooring is a systematic transfer from
-    // us to the merchant across thousands of orders; always ceiling is the
-    // reverse. Neither is defensible as an accident.
+    // 3.35 EGP at 10% is 0.335 — 34 piastres rounded, 33 floored. Always
+    // flooring is a systematic transfer from us to the merchant across
+    // thousands of orders; always ceiling is the reverse. Neither is
+    // defensible as an accident.
     const result = settleOrder(
-      ledger({ charge: charge({ itemsSubtotalMinor: 333 }) }),
+      ledger({ charge: charge({ itemsSubtotalMinor: 335 }) }),
       TERMS,
     );
-    expect(result.commissionMinor).toBe(27);
+    expect(result.commissionMinor).toBe(34);
   });
 
   it('takes no commission on an order with nothing left in it', () => {

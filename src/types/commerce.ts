@@ -47,19 +47,15 @@ export type CommerceActor = (typeof COMMERCE_ACTORS)[number];
 // --- Merchant --------------------------------------------------------------
 
 /**
- * How orders reach a merchant.
+ * How a placed order reaches the people who will pick it.
  *
- * V1 ships `dashboard` only: the merchant works our own AKALT Merchant
- * Dashboard and moves the order along by hand. `api` and `handoff` are named
- * now because they change who owns the order record, which is a schema
- * question, not a UI one.
+ * V1 ships `dashboard`: the merchant works our own AKALT Merchant Dashboard
+ * and moves the order along by hand. `api` exists for a future chain that has
+ * a system of its own to push into. Both keep the order record — and the
+ * customer — inside AKALT.
  */
-export const MERCHANT_FULFILMENT_MODES = ['dashboard', 'api', 'handoff'] as const;
+export const MERCHANT_FULFILMENT_MODES = ['dashboard', 'api'] as const;
 export type MerchantFulfilmentMode = (typeof MERCHANT_FULFILMENT_MODES)[number];
-
-/** What AKALT's commission is charged on. A commercial term, so it is data. */
-export const COMMISSION_BASES = ['goods', 'goods_and_delivery'] as const;
-export type CommissionBasis = (typeof COMMISSION_BASES)[number];
 
 export type Merchant = {
   id: string;
@@ -70,11 +66,15 @@ export type Merchant = {
   currency: CurrencyCode;
   fulfilmentMode: MerchantFulfilmentMode;
   /**
-   * Basis points, so 250 = 2.50%. An integer for the same reason money is an
-   * integer: a rate stored as 0.025 drifts once it meets a rounding boundary.
+   * Basis points, so 1000 = 10.00%. An integer for the same reason money is an
+   * integer: a rate stored as 0.10 drifts once it meets a rounding boundary.
+   *
+   * Charged on NET FULFILLED MERCHANDISE only — never on delivery or service
+   * fees, and never on goods that were removed, substituted away or refunded.
+   * There is deliberately no "basis" setting: a second option would only ever
+   * produce an invoice that disagrees with the agreement.
    */
   commissionRateBasisPoints: number;
-  commissionBasis: CommissionBasis;
   /**
    * Whether the merchant keeps the delivery fee the customer paid.
    *
@@ -84,6 +84,14 @@ export type Merchant = {
   merchantKeepsDeliveryFee: boolean;
   /** False until a signed agreement exists. Never default this to true. */
   isEnabled: boolean;
+  /**
+   * A development catalogue, not a supermarket.
+   *
+   * Written on the row rather than inferred from a slug, so nothing can
+   * mistake it for a partner by reading the data. `isDemo && isEnabled` is
+   * refused in production builds.
+   */
+  isDemo: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -164,6 +172,18 @@ export type IngredientProductMapping = {
   source: MappingSource;
   /** True once a human has checked it. Verified mappings outrank scored ones. */
   isVerified: boolean;
+  verifiedAt: string | null;
+  verifiedBy: string | null;
+  /**
+   * A mapping a human has REFUSED.
+   *
+   * Kept rather than deleted, for the same reason `data/images/rejected.json`
+   * is kept: a matcher that re-derives its candidates will happily propose the
+   * same wrong product again next week. A blocked row is the only durable way
+   * to say "not this one, ever" — and buying somebody the wrong thing is the
+   * fastest way to lose them.
+   */
+  isBlocked: boolean;
   createdAt: string;
   updatedAt: string;
 };

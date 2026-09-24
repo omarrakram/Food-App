@@ -1,0 +1,32 @@
+external_id,sku,name,name_ar,brand,pack_quantity,pack_unit,price_minor,availability,allergens,is_active
+dm-chk-500,DM-CHK-500,Fresh Chicken Breast 500g,صدور فراخ طازة ٥٠٠ جم,Demo Farms,500,g,9000,in_stock,none,1
+dm-chk-1000,DM-CHK-1000,Fresh Chicken Breast 1kg,صدور فراخ طازة ١ كجم,Demo Farms,1,kg,17000,in_stock,none,1
+dm-chk-mar-500,DM-CHK-MAR-500,Marinated Chicken Breast 500g,صدور فراخ متبلة ٥٠٠ جم,Demo Farms,500,g,10500,in_stock,dairy,1
+dm-rice-1000,DM-RICE-1000,Egyptian Short Grain Rice 1kg,رز مصري ١ كجم,Demo Mills,1,kg,4500,in_stock,none,1
+dm-rice-5000,DM-RICE-5000,Egyptian Short Grain Rice 5kg,رز مصري ٥ كجم,Demo Mills,5,kg,21000,in_stock,none,1
+dm-tom-1000,DM-TOM-1000,Fresh Tomatoes 1kg,طماطم طازة ١ كجم,,1,kg,2200,in_stock,none,1
+dm-tom-500,DM-TOM-500,Fresh Tomatoes 500g,طماطم طازة ٥٠٠ جم,,500,g,1300,low_stock,none,1
+dm-oni-1000,DM-ONI-1000,Yellow Onions 1kg,بصل أصفر ١ كجم,,1,kg,1800,in_stock,none,1
+dm-milk-1000,DM-MILK-1000,Full Cream Milk 1L,لبن كامل الدسم ١ لتر,Demo Dairy,1,l,4000,in_stock,dairy,1
+dm-milk-250,DM-MILK-250,Full Cream Milk 250ml,لبن كامل الدسم ٢٥٠ مل,Demo Dairy,250,ml,1400,in_stock,dairy,1
+dm-egg-12,DM-EGG-12,Table Eggs 12 pieces,بيض مائدة ١٢ بيضة,Demo Farms,12,piece,9000,in_stock,eggs,1
+dm-egg-30,DM-EGG-30,Table Eggs 30 pieces,بيض مائدة ٣٠ بيضة,Demo Farms,30,piece,20500,in_stock,eggs,1
+dm-flour-1000,DM-FLOUR-1000,All Purpose Flour 1kg,دقيق فاخر ١ كجم,Demo Mills,1,kg,3200,in_stock,gluten,1
+dm-sunoil-1000,DM-SUNOIL-1000,Sunflower Oil 1L,زيت عباد الشمس ١ لتر,Demo Oils,1,l,8500,in_stock,none,1
+dm-sunoil-2700,DM-SUNOIL-2700,Sunflower Oil 2.7L,زيت عباد الشمس ٢.٧ لتر,Demo Oils,2.7,l,21500,in_stock,none,1
+dm-olive-500,DM-OLIVE-500,Extra Virgin Olive Oil 500ml,زيت زيتون بكر ٥٠٠ مل,Demo Groves,500,ml,19000,in_stock,none,1
+dm-pasta-400,DM-PASTA-400,Spaghetti 400g,مكرونة اسباجتي ٤٠٠ جم,Demo Pasta,400,g,2400,in_stock,gluten,1
+dm-cream-200,DM-CREAM-200,Cooking Cream 200ml,كريمة طهي ٢٠٠ مل,Demo Dairy,200,ml,5500,in_stock,dairy,1
+dm-cream-500,DM-CREAM-500,Cooking Cream 500ml,كريمة طهي ٥٠٠ مل,Demo Dairy,500,ml,12000,out_of_stock,dairy,1
+dm-parm-100,DM-PARM-100,Grated Parmesan 100g,جبنة بارميزان مبشورة ١٠٠ جم,Demo Dairy,100,g,14000,in_stock,dairy,1
+dm-lentil-500,DM-LENTIL-500,Red Lentils 500g,عدس أحمر ٥٠٠ جم,Demo Mills,500,g,3800,in_stock,none,1
+dm-garlic-200,DM-GARLIC-200,Garlic 200g,توم ٢٠٠ جم,,200,g,2600,in_stock,none,1
+dm-pot-2000,DM-POT-2000,Potatoes 2kg,بطاطس ٢ كجم,,2,kg,3400,in_stock,none,1
+dm-yog-1000,DM-YOG-1000,Plain Yoghurt 1kg,زبادي سادة ١ كجم,Demo Dairy,1,kg,6000,in_stock,dairy,1
+dm-butter-200,DM-BUTTER-200,Butter 200g,زبدة ٢٠٠ جم,Demo Dairy,200,g,11000,in_stock,dairy,1
+dm-moz-250,DM-MOZ-250,Mozzarella 250g,موتزاريلا ٢٥٠ جم,Demo Dairy,250,g,9500,in_stock,dairy,1
+dm-cumin-100,DM-CUMIN-100,Ground Cumin 100g,كمون مطحون ١٠٠ جم,Demo Spices,100,g,2800,in_stock,none,1
+dm-chick-400,DM-CHICK-400,Canned Chickpeas 400g,حمص معلب ٤٠٠ جم,Demo Cans,400,g,2900,in_stock,none,1
+dm-sugar-1000,DM-SUGAR-1000,White Sugar 1kg,سكر أبيض ١ كجم,Demo Mills,1,kg,3600,in_stock,none,1
+dm-legacy-chk,DM-LEGACY-CHK,Discontinued Chicken Pack,عبوة فراخ موقوفة,Demo Farms,500,g,7000,unknown,none,0
+dm-bakery-baladi,DM-BAK-BALADI,Baladi Bread 5 loaves,عيش بلدي ٥ أرغفة,,5,piece,1500,in_stock,unknown,1

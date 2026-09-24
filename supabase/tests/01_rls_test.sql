@@ -367,11 +367,11 @@ $$;
 -- --- Disabled grocery providers are invisible ------------------------------
 
 \echo ''
-\echo 'grocery providers'
+\echo 'merchants'
 
 reset role;
-insert into public.grocery_providers (slug, name, country, is_enabled)
-values ('mock-provider', 'Mock Provider', 'EG', false);
+insert into public.merchants (slug, name, country, is_enabled)
+values ('mock-merchant', 'Mock Merchant', 'EG', false);
 
 set role authenticated;
 set request.jwt.claim.sub = '11111111-1111-1111-1111-111111111111';
@@ -379,8 +379,8 @@ set request.jwt.claim.sub = '11111111-1111-1111-1111-111111111111';
 do $$
 begin
   perform pg_temp.assert(
-    (select count(*) from public.grocery_providers) = 0,
-    'disabled grocery providers are not visible to clients (including the seeded mock)');
+    (select count(*) from public.merchants) = 0,
+    'disabled merchants are not visible to clients (including the seeded demo one)');
 end
 $$;
 

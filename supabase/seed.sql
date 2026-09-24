@@ -25692,13 +25692,14 @@ values ('214d28ce-7e18-5951-9593-b5847cca6e74', 'fb263053-2fce-5a00-8f75-60270e2
 
 -- === Grocery providers =====================================================
 --
--- The mock provider exists so the adapter layer can be exercised end to end
--- in development. It is seeded DISABLED: no client can see it, and no real
--- provider is registered because none has a commercial agreement yet.
+-- The demo merchant exists so the ordering flow can be exercised end to end
+-- in development. It is seeded DISABLED and flagged is_demo, so no client
+-- can see it and nothing can mistake it for a partner by reading the row.
+-- No real merchant is seeded because none has a commercial agreement yet.
 -- See PROJECT_STATUS.md § Required credentials.
 
-insert into public.grocery_providers (id, slug, name, country, is_enabled, integration)
-values ('ff86b7c3-2d99-5bc3-886c-b085fcd555e2', 'mock', 'Mock Provider (development only)', 'EG', false, 'mock')
-on conflict (slug) do update set name = excluded.name, is_enabled = excluded.is_enabled;
+insert into public.merchants (id, slug, name, country, is_enabled, is_demo, fulfilment_mode)
+values ('24fdd3b9-add8-56c7-8b06-85124cdfc491', 'akalt-demo-market', 'AKALT Demo Market (development only)', 'EG', false, true, 'dashboard')
+on conflict (slug) do update set name = excluded.name, is_enabled = excluded.is_enabled, is_demo = excluded.is_demo;
 
 commit;
