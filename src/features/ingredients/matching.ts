@@ -391,10 +391,18 @@ function matchOne(
     ? normaliseIngredientName(resolved.name)
     : normaliseIngredientName(recipeIngredient.name);
 
+  // The recipe line's OWN slug is authoritative — the type says so, and it is
+  // what the importer validated against the catalogue. `resolved` is the
+  // name-based fallback for an AI-proposed line that never had one.
+  const slug = recipeIngredient.slug ?? resolved?.slug ?? null;
+
   if (index.expired.has(key) || index.outOfStock.has(key)) {
     return {
       recipeIngredientId: recipeIngredient.id,
       name: recipeIngredient.name,
+      slug,
+      quantity: recipeIngredient.quantity,
+      unit: recipeIngredient.unit,
       isAvailable: false,
       matchedVia: null,
       availableVia: null,
@@ -413,6 +421,9 @@ function matchOne(
   return {
     recipeIngredientId: recipeIngredient.id,
     name: recipeIngredient.name,
+    slug,
+    quantity: recipeIngredient.quantity,
+    unit: recipeIngredient.unit,
     isAvailable,
     matchedVia,
     availableVia: isAvailable ? (index.sourceByName.get(key) ?? 'pantry') : null,

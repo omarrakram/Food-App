@@ -78,6 +78,7 @@ const LINE: SourcingLine = {
   ingredientSlug: 'chicken-breast',
   quantity: 500,
   unit: 'g',
+  amount: 'measured',
   sourceRecipeId: 'recipe-1',
 };
 
@@ -362,9 +363,9 @@ describe('the same basket ranks the same way twice', () => {
 describe('sourcing a whole basket', () => {
   it('counts what the cook still has to resolve', () => {
     const lines: SourcingLine[] = [
-      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', sourceRecipeId: 'r1' },
-      { ingredientSlug: 'cream', quantity: 200, unit: 'ml', sourceRecipeId: 'r1' },
-      { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', sourceRecipeId: 'r1' },
+      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: 'r1' },
+      { ingredientSlug: 'cream', quantity: 200, unit: 'ml', amount: 'measured', sourceRecipeId: 'r1' },
+      { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', amount: 'measured', sourceRecipeId: 'r1' },
     ];
 
     const result = sourceRequest(

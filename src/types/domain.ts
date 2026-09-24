@@ -453,6 +453,23 @@ export function totalMinutes(recipe: Pick<Recipe, 'prepMinutes' | 'cookMinutes'>
 export type IngredientMatch = {
   recipeIngredientId: string;
   name: string;
+  /**
+   * The canonical slug, and the AMOUNT the recipe asked for.
+   *
+   * These three used to be dropped here, and dropping them made
+   * `missingIngredients` — the list the UI renders as YOU NEED — unable to be
+   * handed to anything that needs to buy the ingredient: no slug to look a
+   * product up by, no amount to decide how many packs. The fix is a wider
+   * PROJECTION of the recipe line that produced this match, not a second
+   * quantity model; `matchOne` already holds the `RecipeIngredient` and simply
+   * was not passing these through.
+   *
+   * Null exactly where the recipe line is null: an unresolvable AI-proposed
+   * ingredient has no slug, and "salt, to taste" has no number.
+   */
+  slug: string | null;
+  quantity: number | null;
+  unit: Unit | null;
   /** True when the user's pantry (or supplied list) covers this ingredient. */
   isAvailable: boolean;
   /** How the NAME matched — exact, or through an alias the user typed. */

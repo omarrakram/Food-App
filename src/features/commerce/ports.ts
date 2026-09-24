@@ -43,11 +43,30 @@ import type { Availability, Unit } from '@/types/domain';
  * anywhere. The moment a recipe references a SKU, the food intelligence stops
  * being licensable and starts being one supermarket's inventory system.
  */
+/**
+ * How much of this is actually asked for.
+ *
+ * Recipes do not all speak in grams, and pretending they do is how a basket
+ * ends up with a kilo of something the recipe wanted a pinch of. Each case
+ * gets a name so the UI can say the honest sentence and the pack maths can
+ * refuse to guess.
+ */
+export const REQUIREMENT_AMOUNTS = [
+  /** A real number and a real unit: 500 g, 2 pieces. */
+  'measured',
+  /** "To taste." The cook needs some; nobody can say how much. */
+  'to_taste',
+  /** The recipe gives no amount at all. */
+  'unspecified',
+] as const;
+export type RequirementAmount = (typeof REQUIREMENT_AMOUNTS)[number];
+
 export type SourcingLine = {
   readonly ingredientSlug: string;
-  /** How much the recipe calls for. Null when the recipe does not quantify. */
+  /** Null unless `amount === 'measured'`. */
   readonly quantity: number | null;
   readonly unit: Unit | null;
+  readonly amount: RequirementAmount;
   /** Which recipe asked for it, so the cart can explain itself. */
   readonly sourceRecipeId: string | null;
 };
@@ -86,6 +105,8 @@ export const CANDIDATE_REASONS = [
   'smallest_overbuy',
   'overbuy',
   'pack_size_unknown',
+  /** The recipe gave no amount, so one pack is the honest minimum. */
+  'amount_unspecified',
   'lowest_effective_cost',
 ] as const;
 export type CandidateReason = (typeof CANDIDATE_REASONS)[number];

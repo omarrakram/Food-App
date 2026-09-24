@@ -156,6 +156,7 @@ function scoreCandidate(
   isSmallestOverbuy: boolean,
   priceRank: number,
   hasRestrictions: boolean,
+  unmeasured: boolean,
 ): { score: number; reasons: CandidateReason[] } {
   const reasons: CandidateReason[] = [];
   let score = 0;
@@ -179,7 +180,9 @@ function scoreCandidate(
     reasons.push(eligibility === 'unknown' ? 'eligibility_unknown' : 'dietary_eligible');
   }
 
-  if (surplusRatio === null) {
+  if (unmeasured) {
+    reasons.push('amount_unspecified');
+  } else if (surplusRatio === null) {
     reasons.push('pack_size_unknown');
   } else {
     score += Math.round(PACK_FIT_WEIGHT * (1 - clamp01(surplusRatio)));
@@ -244,7 +247,25 @@ export function sourceLine(
   const perPiece = context.perPieceFor(line.ingredientSlug);
 
   // Pass one: pack arithmetic, and what each option actually costs.
+  //
+  // An unmeasured requirement — "salt, to taste", or a line the recipe never
+  // quantified — resolves to ONE PACK rather than to nothing. The cook needs
+  // some and one is the honest minimum; returning no quantity would leave a
+  // line that cannot go in a basket, and computing a number from a recipe that
+  // did not give one would be an invention.
+  const unmeasured = line.amount !== 'measured';
+
   const measured = usable.map((entry) => {
+    if (unmeasured) {
+      return {
+        ...entry,
+        packs: 1,
+        // Waste is unknowable without an amount to compare against.
+        surplusRatio: null,
+        effectiveCostMinor: entry.input.product.price.amountMinor,
+      };
+    }
+
     const calculation = packsNeeded(
       { quantity: line.quantity, unit: line.unit },
       { quantity: entry.input.product.packQuantity, unit: entry.input.product.packUnit },
@@ -287,6 +308,7 @@ export function sourceLine(
       entry.surplusRatio !== null && entry.surplusRatio === leastOverbuy,
       priceRankOf(entry.effectiveCostMinor, cheapest, dearest),
       hasRestrictions,
+      unmeasured,
     );
 
     return {
