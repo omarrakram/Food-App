@@ -18,8 +18,14 @@
 --
 -- NOT APPLIED TO HOSTED SUPABASE.
 
-create type public.diet_compatibility as enum ('compatible', 'incompatible');
-
+-- No `diet_compatibility` enum. One was written here and never used — the
+-- column below is a boolean, which is what a two-valued verdict is, and the
+-- third state is the ABSENCE of a row rather than a third value. An enum would
+-- have been a second way to say the same thing, and dead schema outlives
+-- whoever wrote it. The TypeScript side keeps its string union
+-- (`DietCompatibility`) because a union reads better at a call site than
+-- `true`; the mapping happens where the row is read, as it does for every
+-- other boolean column here.
 create table public.merchant_product_diets (
   merchant_product_id uuid not null references public.merchant_products (id) on delete cascade,
   -- Reuses `public.dietary_preference`, the SAME enum the app's recipes and
