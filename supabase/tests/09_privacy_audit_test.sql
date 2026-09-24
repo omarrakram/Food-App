@@ -53,6 +53,12 @@ $$;
 -- A table with RLS and no policy at all is readable by nobody, which is safe
 -- but usually a mistake. The ones that genuinely have no read policy are
 -- listed here so that adding another is a deliberate act.
+--
+--   payment_events — the raw callback bodies the payment provider sends us.
+--     Only the service role reads them, inside `record_payment_event`. They
+--     are evidence, not customer-facing data, and a payload we did not write
+--     is not something to expose through a policy on a guess about its
+--     contents.
 do $$
 declare
   silent text;
@@ -63,6 +69,7 @@ begin
    where n.nspname = 'public'
      and c.relkind = 'r'
      and c.relrowsecurity
+     and c.relname not in ('payment_events')
      and not exists (
        select 1 from pg_policies p
        where p.tablename = c.relname and p.cmd in ('SELECT', 'ALL')

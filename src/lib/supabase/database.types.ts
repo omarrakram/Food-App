@@ -527,6 +527,9 @@ export type OrderRow = {
   /** The cart revision the draft was built from. */
   cart_revision: number | null;
   checkout_idempotency_key: string | null;
+  /** After this, `begin_payment` refuses. Written by `create_order_draft`. */
+  draft_expires_at: string | null;
+  paid_at: string | null;
   placed_at: string | null;
   created_at: string;
   updated_at: string;
@@ -544,6 +547,80 @@ export type IngredientPriceEstimateRow = {
   estimated_high_minor: number;
   origin: string;
   last_updated: string;
+};
+
+/**
+ * How far along ONE attempt to pay is.
+ *
+ * Deliberately not the same vocabulary as `payment_state`. That column answers
+ * where the money is, for the whole order. This one answers what happened when
+ * we tried, for a single attempt — and an order can sit in `failed` while a
+ * `succeeded` intent is thirty seconds away.
+ *
+ * (No apostrophes in this block on purpose: `db:types:check` reads string
+ * literals with a naive quote pair, and a lone apostrophe in a comment shifts
+ * every literal after it.)
+ */
+export type PaymentIntentStateEnum =
+  | 'requires_action'
+  | 'processing'
+  | 'succeeded'
+  | 'failed'
+  | 'cancelled'
+  | 'expired';
+
+/**
+ * One attempt to pay for one order. READ-ONLY from the client.
+ *
+ * `begin_payment`, `record_payment_event` and `cancel_payment_intent` are the
+ * only writers, and only the last two can say a payment succeeded. There is no
+ * insert or update policy for a client to use.
+ */
+export type PaymentIntentRow = {
+  id: string;
+  order_id: string;
+  user_id: string;
+  provider: PaymentProviderEnum;
+  method: PaymentMethodEnum;
+  /** Copied from the order when the attempt began. Never sent by the client. */
+  amount_minor: number;
+  currency: string;
+  state: PaymentIntentStateEnum;
+  provider_intention_id: string | null;
+  provider_order_id: string | null;
+  provider_reference: string | null;
+  /**
+   * Client-facing by design: the checkout URL carries it beside a public key.
+   * The secret key and the HMAC secret never reach the database.
+   */
+  checkout_client_secret: string | null;
+  checkout_url: string | null;
+  idempotency_key: string;
+  failure_code: string | null;
+  failure_message: string | null;
+  refunded_minor: number;
+  provider_metadata: Record<string, unknown>;
+  expires_at: string | null;
+  settled_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+/**
+ * The append-only provider callback log.
+ *
+ * Typed for the edge function; no client query reads it, and it has no read
+ * policy at all — the payloads are raw provider bodies.
+ */
+export type PaymentEventRow = {
+  id: string;
+  payment_intent_id: string | null;
+  provider: PaymentProviderEnum;
+  kind: string;
+  provider_event_id: string;
+  disposition: string;
+  payload: Record<string, unknown>;
+  received_at: string;
 };
 
 type Table<Row, Insert = Partial<Row>, Update = Partial<Row>> = {
@@ -653,6 +730,10 @@ export type Database = {
       // Read-only: `create_order_draft` is the only writer, and there is no
       // insert or update policy for a client to use.
       orders: Table<OrderRow, never, never>;
+      // Same rule, and the stakes are higher: a client that could write here
+      // could write itself a succeeded payment.
+      payment_intents: Table<PaymentIntentRow, never, never>;
+      payment_events: Table<PaymentEventRow, never, never>;
       carts: Table<
         CartRow,
         Omit<CartRow, 'id' | 'created_at' | 'updated_at' | 'revision'> & { id?: string }
@@ -706,6 +787,17 @@ export type Database = {
         Returns: SubmissionStatusEnum;
       };
       unpublish_recipe: { Args: { target: string; reason: string }; Returns: undefined };
+      /**
+       * Starts one attempt to pay. The AMOUNT IS DERIVED FROM THE ORDER —
+       * there is deliberately no way to name it here.
+       */
+      begin_payment: {
+        Args: { p_order_id: string; p_method: PaymentMethodEnum; p_idempotency_key: string };
+        Returns: PaymentIntentRow;
+      };
+      cancel_payment_intent: { Args: { p_intent_id: string }; Returns: undefined };
+      /** True only when the basket cleared is the one that was actually paid for. */
+      clear_paid_cart: { Args: { p_order_id: string }; Returns: boolean };
       /** Returns the new order's id. Every figure is derived server-side. */
       create_order_draft: {
         Args: {
@@ -759,6 +851,7 @@ export type Database = {
       payment_method: PaymentMethodEnum;
       payment_provider: PaymentProviderEnum;
       substitution_preference: SubstitutionPreferenceEnum;
+      payment_intent_state: PaymentIntentStateEnum;
     };
     CompositeTypes: Record<string, never>;
   };

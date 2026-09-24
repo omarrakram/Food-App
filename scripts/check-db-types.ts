@@ -158,9 +158,24 @@ function typeFileTokens(source: string): Set<string> {
   return new Set(source.match(/[A-Za-z_][A-Za-z0-9_]*/g) ?? []);
 }
 
+/**
+ * TypeScript comments, removed.
+ *
+ * Literals are found by pairing quotes, and prose contains apostrophes. One
+ * "the order's answer" in a docblock shifts every pair after it by one, so an
+ * enum further down the file reads as absent and the check fails for a reason
+ * that has nothing to do with the schema. Comments are stripped for the same
+ * reason the SQL side strips them: a comment is not code.
+ */
+function stripTsComments(source: string): string {
+  return source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+}
+
 /** String literals in the types file, for checking enum values. */
 function typeFileLiterals(source: string): Set<string> {
-  return new Set([...source.matchAll(/'([^']*)'/g)].map((match) => match[1]!));
+  return new Set(
+    [...stripTsComments(source).matchAll(/'([^']*)'/g)].map((match) => match[1]!),
+  );
 }
 
 /** `dietary_preference` -> `DietaryPreference`, how the types name their enums. */
