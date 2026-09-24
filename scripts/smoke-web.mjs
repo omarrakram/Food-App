@@ -118,13 +118,25 @@ async function resolveExportPath(pathname) {
       return false;
     }
   };
+  /**
+   * The one dynamic segment in a directory, by PARAM NAME.
+   *
+   * Expo writes `[id]` and `[id].html` side by side — a directory for the
+   * route's children and a file for the route itself. Those are ONE route, so
+   * counting entries says "ambiguous" and refuses to resolve anything. Only
+   * two different names — `[id]` and `[slug]` — would be a real ambiguity, and
+   * guessing there would make the smoke test pass against the wrong page.
+   */
   const dynamicChild = async (directory) => {
     try {
       const entries = await readdir(directory);
-      // Only when it is UNAMBIGUOUS. Two dynamic siblings would mean guessing,
-      // and a guess here would make the smoke test pass against the wrong page.
-      const matches = entries.filter((entry) => /^\[[^\]]+\](\.html)?$/.test(entry));
-      return matches.length === 1 ? matches[0] : null;
+      const names = new Set();
+      for (const entry of entries) {
+        const match = /^(\[[^\]]+\])(\.html)?$/.exec(entry);
+        if (match) names.add(match[1]);
+      }
+      const [only] = [...names];
+      return names.size === 1 ? only : null;
     } catch {
       return null;
     }
@@ -142,6 +154,9 @@ async function resolveExportPath(pathname) {
       const dynamic = await dynamicChild(current);
       if (dynamic) {
         const resolved = join(current, dynamic);
+        // `.html` first: that IS the route. The same-named directory beside it
+        // holds the route's children, not the route.
+        if (await isFile(`${resolved}.html`)) return `${resolved}.html`;
         if (await isFile(resolved)) return resolved;
         if (await isFile(join(resolved, 'index.html'))) return join(resolved, 'index.html');
       }
