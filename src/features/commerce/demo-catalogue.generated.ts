@@ -64,10 +64,10 @@ export const DEMO_LOCATION = {
   "name": "Demo Branch — Maadi",
   "nameAr": "فرع التجربة — المعادي",
   "city": "Cairo",
-  "deliveryAreas": [
-    "Maadi",
-    "Degla",
-    "Sarayat El Maadi"
+  "deliveryAreaKeys": [
+    "demo-maadi",
+    "demo-degla",
+    "demo-sarayat"
   ],
   "deliveryFeeMinor": 2500,
   "minimumOrderMinor": 10000,

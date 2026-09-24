@@ -105,8 +105,14 @@ export type MerchantLocation = {
   name: string;
   nameAr: string | null;
   city: string | null;
-  /** Districts this branch delivers to. Empty means "not yet configured". */
-  deliveryAreas: readonly string[];
+  /**
+   * The canonical area keys this branch serves.
+   *
+   * EMPTY MEANS NO COVERAGE, not "delivers everywhere" — the inverse default
+   * would accept an Aswan order for a Maadi branch, most confidently for a
+   * merchant nobody had configured yet.
+   */
+  deliveryAreaKeys: readonly string[];
   deliveryFee: Money | null;
   /** Below this the merchant will not accept an order. Null means no floor. */
   minimumOrder: Money | null;
@@ -461,17 +467,54 @@ export type OrderCharge = {
   discountMinor: number;
 };
 
+/**
+ * A place AKALT can be asked to deliver to, by KEY.
+ *
+ * The canonical identity of a district, separate from what it is called. The
+ * customer picks one of these; they never type it. Deliverability then
+ * compares keys, which is exact, instead of comparing text, which is how
+ * "Maadi Degla" comes to equal "Degla" and somebody's dinner is promised to
+ * the wrong side of Cairo.
+ */
+export type DeliveryArea = {
+  /** Stable, lowercase, hyphenated. The identity; the names are labels. */
+  key: string;
+  governorate: string;
+  nameEn: string;
+  nameAr: string;
+  /** A development-only area, so a demo branch can serve somewhere unreal. */
+  isDemo: boolean;
+};
+
+/**
+ * Where somebody's dinner goes.
+ *
+ * Shaped for Egypt rather than for a postal system. A courier here finds a
+ * door by building, floor and landmark — "behind the Shell station" is not a
+ * nicety, it is how the address resolves — and then telephones. There are no
+ * coordinates: pretending an address is a point is exactly how the landmark
+ * stops being collected.
+ */
 export type DeliveryAddress = {
   id: string;
   userId: string | null;
+  /** "Home", "Mum's". Optional, and only ever a label. */
   label: string | null;
-  line1: string;
-  line2: string | null;
-  district: string | null;
-  city: string;
+  /** The person at the door, who is often not the account holder. */
+  recipientName: string;
+  /** E.164. The UI takes what an Egyptian types and stores one canonical form. */
+  phone: string;
+  /** The SELECTED area. Deliverability reads this and nothing else. */
+  areaKey: string;
+  street: string;
+  building: string;
+  floor: string | null;
+  apartment: string | null;
+  landmark: string | null;
   country: CountryCode;
-  /** Free text. Egyptian addresses are directions more often than coordinates. */
+  /** Anything else the courier should know. Never parsed. */
   notes: string | null;
+  isDefault: boolean;
   createdAt: string;
   updatedAt: string;
 };

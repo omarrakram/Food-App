@@ -96,7 +96,7 @@ export const DEMO_LOCATION_SNAPSHOT: MerchantLocation = (() => {
     name: DEMO_LOCATION.name,
     nameAr: DEMO_LOCATION.nameAr,
     city: DEMO_LOCATION.city,
-    deliveryAreas: DEMO_LOCATION.deliveryAreas,
+    deliveryAreaKeys: DEMO_LOCATION.deliveryAreaKeys,
     deliveryFee: { amountMinor: DEMO_LOCATION.deliveryFeeMinor, currency: 'EGP' },
     minimumOrder: { amountMinor: DEMO_LOCATION.minimumOrderMinor, currency: 'EGP' },
     estimatedDeliveryMinutes: DEMO_LOCATION.estimatedDeliveryMinutes,
