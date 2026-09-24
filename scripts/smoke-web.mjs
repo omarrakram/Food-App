@@ -1051,7 +1051,78 @@ async function main() {
           check('removing a line removes it', remaining === cartLines - 1, `${remaining} left`);
         }
 
-        // --- The same journey in Arabic --------------------------------------
+        // --- The two states a happy basket never shows -----------------------
+      /*
+        OUT OF STOCK and RULED OUT FOR THIS COOK are the two answers most
+        likely to be got wrong, because neither appears on a recipe that
+        sources cleanly. The demo catalogue carries one row for each on
+        purpose — see `data/commerce-demo/README.md` — and this is where a
+        person actually looks at them.
+      */
+      const KOFTA = '7afce514-e93f-559b-b243-c5f50563058e';
+      await page.goto(`${BASE}/recipe/${KOFTA}`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1800);
+      if (await tap('recipe-get-missing', { optional: true })) {
+        await page.waitForTimeout(900);
+        const koftaText = await page.evaluate(() => document.body.innerText);
+        check(
+          'an ingredient the shop has none of says out of stock, not unavailable',
+          /Out of stock/i.test(koftaText),
+        );
+        check(
+          'and does not offer it as if it could be bought',
+          !/Add 0 to cart/i.test(koftaText),
+        );
+        await shot('26a-no-purchasable-match');
+      }
+
+      // A coeliac cook. The only pasta in the catalogue is wheat, so the line
+      // must be refused rather than substituted — and refused in a sentence
+      // that does not name the product it just ruled out.
+      await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1400);
+      const allergySet = await tap('pref-allergen-gluten', { optional: true });
+      check('an allergy can be declared', allergySet);
+      await page.waitForTimeout(900);
+
+      if (allergySet) {
+        await page.goto(`${BASE}/recipe/${KOSHARI}`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1800);
+        if (await tap('recipe-get-missing', { optional: true })) {
+          await page.waitForTimeout(900);
+          const coeliacText = await page.evaluate(() => document.body.innerText);
+          check(
+            'a line every option of which conflicts with an allergy is refused',
+            /Not suitable for you/i.test(coeliacText),
+          );
+          check(
+            'and the refused product is not named as a suggestion',
+            !/Pasta 400/i.test(coeliacText),
+            coeliacText.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          const coeliacAdd = await page
+            .locator('[data-testid="recipe-add-to-cart"]')
+            .first()
+            .innerText()
+            .catch(() => '');
+          const coeliacCount = Number(/(\d+)/.exec(coeliacAdd)?.[1] ?? '0');
+          check(
+            'declaring an allergy reduces what the button will add',
+            coeliacCount < addable,
+            `${coeliacCount} with the allergy vs ${addable} without`,
+          );
+          await shot('26b-no-eligible-match');
+        }
+
+        // Put the cook back the way we found them, so later sections are not
+        // quietly running as a coeliac.
+        await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1400);
+        await tap('pref-allergen-gluten', { optional: true });
+        await page.waitForTimeout(700);
+      }
+
+      // --- The same journey in Arabic --------------------------------------
         await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
         await page.waitForTimeout(1200);
         if (await tap('language-choice-ar', { optional: true })) {
