@@ -1,0 +1,31 @@
+// Dependencies for THIS function, kept in THIS directory on purpose.
+//
+// The hosted bundler resolves a function's configuration from the function's
+// own directory. A shared `supabase/functions/deno.json` is found by the local
+// `deno` CLI, which walks up from the entry point — but it is not what the
+// deploy reads, so every bare specifier in the graph arrives unmapped:
+//
+//   Relative import path "zod" not prefixed with / or ./ or ../
+//
+// `zod` was simply the first one reported. `@anthropic-ai/sdk` and
+// `@supabase/supabase-js` are equally unresolvable and fail next.
+//
+// The versions are pinned exactly, to what `supabase/functions/deno.lock`
+// already resolved. `scripts/check-function-imports.ts` asserts that these
+// files agree with each other and with the shared config, and that every bare
+// specifier reachable from either entry point has a mapping here — which is
+// the check that would have caught this before a deploy did.
+{
+  "imports": {
+    "@anthropic-ai/sdk": "npm:@anthropic-ai/sdk@0.125.0",
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2.116.0",
+    "zod": "npm:zod@4.6.2"
+  },
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "esnext"
+    ],
+    "strict": true
+  }
+}

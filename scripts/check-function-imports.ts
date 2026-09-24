@@ -19,12 +19,24 @@
  * the config by hand. This closes it by reading the graph the way the deploy
  * does — from the function directory, with only that directory's config.
  */
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const FUNCTIONS_DIR = join(ROOT, 'supabase', 'functions');
-const FUNCTIONS = ['ai-suggest', 'ai-interpret'];
+/**
+ * Discovered, not listed.
+ *
+ * This was a hand-maintained array, which meant a new function was silently
+ * exempt from the very check that exists to stop a deploy failing on an
+ * unresolved import. Reading the directory is the same amount of code and
+ * cannot fall behind.
+ */
+const FUNCTIONS = readdirSync(FUNCTIONS_DIR, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
+  .map((entry) => entry.name)
+  .filter((name) => existsSync(join(FUNCTIONS_DIR, name, 'index.ts')))
+  .sort();
 
 const problems: string[] = [];
 const note = (message: string) => problems.push(message);

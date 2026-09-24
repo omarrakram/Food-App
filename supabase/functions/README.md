@@ -34,7 +34,45 @@ injected by the platform.
 ```bash
 supabase functions deploy ai-suggest
 supabase functions deploy ai-interpret
+supabase functions deploy payments-begin
+
+# THE WEBHOOK TAKES NO JWT. Paymob has no Supabase token; its HMAC signature
+# is the authentication, and it is verified before a single field of the body
+# is read. Deploying this WITH jwt verification silently breaks every payment
+# callback — the provider retries, gets 401, and the order never settles.
+supabase functions deploy payments-webhook --no-verify-jwt
 ```
+
+`payments-simulate` is NOT deployed. It refuses to run in a deployment unless
+`ALLOW_PAYMENT_SIMULATOR=true`, and there is no reason for that to be true
+anywhere a customer can reach.
+
+## Payment
+
+| function | who calls it | what authenticates it |
+|---|---|---|
+| `payments-begin` | the app | the customer's JWT |
+| `payments-webhook` | Paymob | the HMAC-SHA512 signature |
+| `payments-simulate` | the app, demo orders only | the customer's JWT, plus a demo-merchant order |
+
+Secrets, none of which may ever appear in the app bundle or in
+`EXPO_PUBLIC_*`:
+
+```
+PAYMOB_SECRET_KEY            # "Token <this>" on the Intention API
+PAYMOB_PUBLIC_KEY            # safe client-side; goes in the checkout URL
+PAYMOB_HMAC_SECRET           # verifies every callback
+PAYMOB_CARD_INTEGRATION_ID
+PAYMOB_WALLET_INTEGRATION_ID
+PAYMOB_BASE_URL              # optional; defaults to https://accept.paymob.com
+APP_BASE_URL                 # where the customer is sent back to
+```
+
+A partially configured environment throws at the first payment rather than
+silently falling back: half a key is worse than none. With NO Paymob variables
+at all, `payments-begin` still serves demo-merchant orders through the
+simulator and refuses real ones with `payment_unavailable` — it never invents
+a payment.
 
 ## Local
 
