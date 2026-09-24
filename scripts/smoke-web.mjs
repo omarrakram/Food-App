@@ -310,6 +310,23 @@ async function main() {
     await page.screenshot({ path: join(OUT, `${name}.png`) });
   };
 
+  /**
+   * A screenshot of a element that is not at the top of the page.
+   *
+   * `shot` photographs the viewport wherever it happens to be, which for a
+   * long page means the bottom. The sourced product rows sit under YOU NEED,
+   * halfway up a recipe, so a plain screenshot of that screen is evidence of
+   * the summary panel and of nothing else.
+   */
+  const shotAt = async (selector, name) => {
+    const element = page.locator(selector).first();
+    if ((await element.count()) === 0) return false;
+    await element.scrollIntoViewIfNeeded().catch(() => {});
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: join(OUT, `${name}.png`) });
+    return true;
+  };
+
   const locate = (testId) => page.locator(`[data-testid="${testId}"]`).first();
 
   const visible = async (testId, timeout = 6000) => {
@@ -997,6 +1014,9 @@ async function main() {
         `${addable} of ${sourcedRows} — gap=${claimsGap} all=${claimsAll}`,
       );
       await shot('24-recipe-sourcing');
+      // The rows themselves, not just the panel that summarises them.
+      const rowShot = await shotAt('[data-testid="recipe-you-need"]', '24a-you-need-rows');
+      check('the product rows under YOU NEED can be looked at', rowShot);
 
       const before = errorCount();
       // Guarded, because with nothing addable the button is correctly dead and
@@ -1103,11 +1123,27 @@ async function main() {
           'an ingredient this shop does not carry says so',
           /Not sold here|مش موجود هنا/i.test(koftaText),
         );
+        /*
+          THE GAP IS EXPLAINED WITHOUT RECOMMENDING A PURCHASE.
+
+          This sentence covers lines that were REFUSED — an allergy conflict,
+          an unpublished allergen list, a mapping we are not sure of — as well
+          as ones merely unmapped. It used to read "you can still cook this,
+          just buy the rest yourself", which applied to a refusal is AKALT
+          recommending the product it had just declined to add. So: it must
+          say we could not add them, and it must NOT tell the cook to go and
+          buy them.
+        */
         check(
-          'and the recipe still says it can be cooked',
-          /still cook this|لسه تقدر تعمل/i.test(koftaText),
+          'the gap is explained as something WE could not do',
+          /could not add the remaining|مقدرناش نضيفها/i.test(koftaText),
+        );
+        check(
+          'and never tells the cook to buy the refused items themselves',
+          !/buy the rest yourself|هتجيب الباقي بنفسك/i.test(koftaText),
         );
         await shot('26a-no-purchasable-match');
+        await shotAt('[data-testid="recipe-you-need"]', '26c-you-need-rows');
       }
 
       // A coeliac cook. The only pasta in the catalogue is wheat, so the line
@@ -1214,6 +1250,7 @@ async function main() {
           if (await tap('recipe-get-missing', { optional: true })) {
             await page.waitForTimeout(900);
             await shot('28-recipe-sourcing-arabic');
+            await shotAt('[data-testid="recipe-you-need"]', '28a-you-need-rows-arabic');
             check('the sourcing panel is Arabic too', await visible('recipe-sourcing', 5000));
 
             // The other half of the surface: the product rows under YOU NEED,

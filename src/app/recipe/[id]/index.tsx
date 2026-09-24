@@ -630,7 +630,10 @@ export default function RecipeDetailScreen() {
             ) : null}
 
             {missing.length > 0 ? (
-              <View style={{ gap: theme.spacing.xs, marginTop: theme.spacing.lg }}>
+              <View
+                style={{ gap: theme.spacing.xs, marginTop: theme.spacing.lg }}
+                testID="recipe-you-need"
+              >
                 <View
                   style={{ flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm }}
                 >
@@ -858,10 +861,28 @@ export default function RecipeDetailScreen() {
                           total: formatNumber(missing.length),
                         })}
                 </Text>
+                {/*
+                  WHY THE GAP EXISTS, WITHOUT RECOMMENDING ANYTHING.
+
+                  The lines this sentence covers are not one thing. Some are
+                  merely unmapped; others were refused because every option
+                  conflicts with an allergy the cook declared, or because
+                  nobody published allergen data for them, or because we are
+                  not confident the product is the ingredient. Telling the cook
+                  to "buy the rest yourself" is a purchase recommendation, and
+                  applied to those it reads as AKALT suggesting a product it
+                  had just refused. The ROW says why for each one; this says
+                  only that we could not do it automatically.
+                */}
                 {addableCount < missing.length ? (
-                  <Text variant="caption" color="textTertiary">
-                    {t('commerce.recipeStillWorks')}
-                  </Text>
+                  <>
+                    <Text variant="caption" color="textTertiary">
+                      {t('commerce.partialBody')}
+                    </Text>
+                    <Text variant="caption" color="textTertiary">
+                      {t('commerce.partialAside')}
+                    </Text>
+                  </>
                 ) : null}
 
                 <Button

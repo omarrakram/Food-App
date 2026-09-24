@@ -940,6 +940,16 @@ export const en = {
   'commerce.sourcingFrom': 'From {merchant}',
   'commerce.partial': '{ready} of {total} can be added now',
   'commerce.noneReady': 'Nothing here can be added yet',
+  /*
+    NEUTRAL ON PURPOSE. This sits under a list that can include a product
+    excluded for somebody's allergy, one whose allergen data nobody published,
+    and one we are not sure we matched correctly. "Just buy the rest yourself"
+    used to sit here, and applied to those lines it reads as AKALT recommending
+    a purchase it had just refused to make.
+  */
+  'commerce.partialBody': 'We could not add the remaining ingredients automatically.',
+  'commerce.partialAside':
+    'You can still use the recipe and check the remaining ingredients yourself.',
   'commerce.statusNeedsConfirmation': 'Choose a product',
   'commerce.statusNeedsConfirmationBody': 'We are not sure which product matches this.',
   'commerce.statusNoPurchasable': 'Out of stock',
@@ -951,7 +961,6 @@ export const en = {
   'commerce.packSizeUnknown': 'Pack size unknown — we cannot say how much to buy.',
   'commerce.unsourceable': 'Cannot be ordered yet',
   'commerce.unsourceableBody': 'We do not know this ingredient well enough to shop for it.',
-  'commerce.recipeStillWorks': 'You can still cook this — just buy the rest yourself.',
   'commerce.hide': 'Hide products',
   'commerce.addedToCart_one': 'Added 1 item to your cart',
   'commerce.addedToCart_other': 'Added {count} items to your cart',
