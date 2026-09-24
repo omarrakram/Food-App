@@ -3,14 +3,21 @@
 The transaction layer. Everything between "I'm missing cooking cream" and
 "somebody rang the doorbell".
 
-**Status: Commerce-3.** Types, state machines, the money ledger, pack maths,
+**Status: Commerce-4.** Types, state machines, the money ledger, pack maths,
 the sourcing engine, the schema, an isolated development catalogue, the cart
-repositories, and the two screens that use them — the recipe detail's sourcing
-panel and the cart itself. All with tests.
+repositories, delivery addresses, deliverability by area key, cart
+revalidation, the single checkout gate, and an unpaid order draft written by a
+`security definer` function. Plus the screens: the recipe detail's sourcing
+panel, the cart, the address list and form, and the checkout review. All with
+tests.
 
-**No payment provider, no checkout, no merchant dashboard, no order.** The cart
-is where the journey currently stops, and the checkout button says so on its
-face. The migration has NOT been applied to hosted Supabase.
+**No payment provider, no captured money, no merchant dashboard, no placed
+order.** The journey stops at an UNPAID DRAFT: a real `orders` row in
+`draft`/`unpaid`, priced by the server, that a payment provider could later be
+pointed at. It is not a payment, not a stock reservation, and the merchant has
+not been told — the review screen says all three rather than showing a
+reference number and letting it read as a receipt. The migrations have NOT
+been applied to hosted Supabase.
 
 The product this serves is AKALT's own: the customer decides what to eat,
 AKALT works out what they are missing, sources it from one merchant, takes the
@@ -278,7 +285,8 @@ pantry cannot yet support the subtraction; nothing structural blocks it.
 
 **No re-pricing at the cart.** Totals come from the snapshot taken when a line
 was added. A moved shelf price is shown on the line that moved and reconciled
-at checkout, which does not exist.
+at checkout, where `revalidateCart` re-totals from the current shelf and the
+customer has to look at the new number before a draft can be built.
 
 ---
 
@@ -302,14 +310,44 @@ at checkout, which does not exist.
 | `supabase-cart-repository.ts` | the same cart for a signed-in user |
 | `cart-view.ts` | the cart joined to the catalogue and totalled |
 | `display.ts` | merchant, branch and product names, per language |
+| `address-repository.ts` | delivery addresses, and the area registry they pick from |
+| `delivery-areas.ts` | `canDeliver`: branch coverage, compared by KEY |
+| `pending-cart.ts` | the guest basket parked at sign-in |
+| `migrate-guest-cart.ts` | migrate · merge · park — never discard |
+| `revalidation.ts` | what is still true, immediately before an order exists |
+| `checkout-readiness.ts` | the ONE gate: `canProceedToDraft`, and why not |
+| `order-draft.ts` | the client side of `create_order_draft`, and its refusals |
 | `hooks.ts` | the only React in here: binds the engines to cache and prefs |
 
-Screens: `src/app/recipe/[id]/index.tsx` (the sourcing panel) and
-`src/app/cart.tsx`. The one shared component is
+Screens: `src/app/recipe/[id]/index.tsx` (the sourcing panel),
+`src/app/cart.tsx`, `src/app/addresses/` (list and form) and
+`src/app/checkout.tsx`. The one shared component is
 `src/components/commerce/sourced-line.tsx`.
 
-The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`.
-It has **not** been applied to hosted Supabase.
+The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`
+and `20260925090000_commerce_checkout.sql`. Neither has been applied to hosted
+Supabase.
+
+## Three things the checkout will not do
+
+**The client never names a price.** `create_order_draft` takes a cart revision,
+an address id and an idempotency key. Everything financial — line prices, the
+subtotal, the delivery fee, the commission rate — is read from the database
+inside the function, against a cart row locked `for update`. A client that can
+name a price can name zero.
+
+**An acceptance belongs to one revision.** Every cart mutation bumps
+`carts.revision` through a trigger. A customer's "yes, I have seen the new
+prices" is recorded against the revision it produced, and the moment the basket
+moves again it stops counting. An old "I accept" must never carry a change
+nobody looked at.
+
+**Deliverability is a key comparison.** An address carries an `area_key` chosen
+from a registry; a branch declares the keys it covers. Nothing reads the
+street, the building or the landmark, because deriving a district from typed
+text is how "Maadi Degla" comes to equal "Degla" and an order is accepted that
+nobody can deliver. An empty coverage list means NO coverage, never
+"everywhere".
 
 ## What the screens promise
 

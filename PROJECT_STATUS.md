@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-24 |
-| **Current phase** | **COMMERCE-3 — supermarket ordering, up to the cart.** The recipe screen sources its missing ingredients against one merchant branch and a cart holds what was chosen. No payment provider, no checkout, no merchant dashboard, no order; the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migration has **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **COMMERCE-4 — supermarket ordering, up to an unpaid order draft.** The recipe screen sources its missing ingredients against one merchant branch, a cart holds what was chosen, an address says where it would go, a branch says whether it reaches that area, the basket is revalidated against the current shelf, and a `security definer` function writes a server-priced order in `draft`/`unpaid`. No payment provider, no captured money, no merchant dashboard, no placed order; the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migrations have **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -15,7 +15,7 @@ previous session's context.
 
 ## Commerce (supermarket ordering)
 
-The transaction layer, built in three phases and stopping deliberately short of
+The transaction layer, built in four phases and stopping deliberately short of
 money. `src/features/commerce/README.md` is the reference; this is the status.
 
 | phase | what landed |
@@ -25,16 +25,23 @@ money. `src/features/commerce/README.md` is the reference; this is the status.
 | **Commerce-3A** | the quantity pipeline: `IngredientMatch` now carries `slug`, `quantity` and `unit`, so YOU NEED can be handed to a shop |
 | **Commerce-3B–D** | the old `features/grocery` placeholder retired, cart repositories (local + Supabase), merchant/branch selection |
 | **Commerce-3E–F** | the recipe screen's sourcing panel, and the cart |
+| **Commerce-3.1** | product-level dietary eligibility from published metadata only (unknown never means safe), and Western numerals across the merchant surface by presentation normalisation |
+| **Commerce-4** | delivery addresses, deliverability by area key, the guest-cart conflict, cart revalidation, the single checkout gate, and the unpaid order draft |
 
 **What a user can do today** (with `EXPO_PUBLIC_DEMO_MERCHANT` on, in a
 non-production build, in Egypt): open a recipe, tap *Get missing ingredients*,
-see a product under each missing line or one of four reasons there is not one,
-add the confirmed ones to a cart, adjust quantities, and read a total. The
-checkout button is dead and says so.
+see a product under each missing line or one of five reasons there is not one,
+add the confirmed ones to a cart, adjust quantities, read a total, save a
+delivery address and be told immediately whether the branch reaches that area,
+and open a checkout review that re-prices the basket from the current shelf and
+says exactly what is still in the way. A signed-in account can go one step
+further and have the server write an unpaid draft.
 
-**What nobody can do:** pay. No payment provider is configured, no order row is
-ever written, no merchant is ever notified, and no migration has been applied
-to the hosted database.
+**What nobody can do:** pay. No payment provider is configured, no money is
+captured, no merchant is ever notified, and no migration has been applied to
+the hosted database. A draft is not a purchase — no provider was called, no
+stock is held, and the shop has not been told — and the review screen says all
+three rather than showing a reference number and letting it read as a receipt.
 
 **Three rules the screens keep**, each of which was a way the UI could lie:
 commerce is revealed rather than rendered by default; a bulk add admits only

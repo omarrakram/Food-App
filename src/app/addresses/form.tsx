@@ -131,9 +131,18 @@ export default function AddressFormScreen() {
     }
     setErrors([]);
 
+    // The same fallback `ScreenHeader` uses: this screen is reachable by a
+    // direct link from checkout, so there is not always somewhere to go back
+    // to — and a save that appears to do nothing is worse than a save that
+    // lands somewhere sensible.
+    const leave = () => {
+      if (router.canGoBack()) router.back();
+      else router.replace('/addresses');
+    };
+
     const onDone = () => {
       toast.show({ message: t('common.saved'), tone: 'success' });
-      router.back();
+      leave();
     };
     const onError = (error: unknown) =>
       toast.show({ message: t(presentError(error).bodyKey), tone: 'danger' });
@@ -186,7 +195,7 @@ export default function AddressFormScreen() {
             ))}
           </View>
           {has('area_required') ? (
-            <Text variant="footnote" color="danger" testID="address-area-error">
+            <Text variant="footnote" color="danger" testID="address-missing-area">
               {t('address.error.area_required')}
             </Text>
           ) : null}
@@ -271,7 +280,10 @@ export default function AddressFormScreen() {
             variant="ghost"
             onPress={() =>
               remove.mutate(existing.id, {
-                onSuccess: () => router.back(),
+                onSuccess: () => {
+                  if (router.canGoBack()) router.back();
+                  else router.replace('/addresses');
+                },
                 onError: (error) =>
                   toast.show({ message: t(presentError(error).bodyKey), tone: 'danger' }),
               })

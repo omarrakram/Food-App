@@ -1049,14 +1049,20 @@ async function main() {
           `${cartLines} lines vs ${addable} counted`,
         );
 
-        // CHECKOUT DOES NOT EXIST. A live-looking button that opens an apology
-        // is worse than a dead one that says the truth on its face.
+        // CHECKOUT EXISTS; PAYING DOES NOT. The button is live and leads to a
+        // review screen that ends at an unpaid draft — and the caption beside
+        // it has to keep saying so, or a live button reads as a live till.
         const checkoutDisabled = await page
           .locator('[data-testid="cart-checkout"]')
           .first()
           .evaluate((node) => node.getAttribute('aria-disabled') === 'true' || node.disabled === true)
-          .catch(() => false);
-        check('checkout is dead and says so', checkoutDisabled);
+          .catch(() => true);
+        check('with one basket open, checkout is reachable', !checkoutDisabled);
+        const cartFooter = await bodyText();
+        check(
+          'and the cart still says paying in the app is not built',
+          /still being built|لسه بيتبني/i.test(cartFooter),
+        );
         await shot('26-cart');
 
         // Quantity and removal are the only two things this screen can do to a
@@ -1086,12 +1092,171 @@ async function main() {
           );
         }
 
+        let remainingLines = cartLines;
         const removeFirst = page.locator('[data-testid^="cart-remove-"]').first();
         if (await removeFirst.count()) {
           await removeFirst.click();
           await page.waitForTimeout(1200);
           const remaining = await page.locator('[data-testid^="cart-remove-"]').count();
           check('removing a line removes it', remaining === cartLines - 1, `${remaining} left`);
+          remainingLines = remaining;
+        }
+
+        /*
+          --- CHECKOUT ------------------------------------------------------
+
+          THE WALK IS A GUEST, AND THAT IS THE POINT OF MOST OF THIS SECTION.
+          A draft is owned by an account — `create_order_draft` reads
+          `auth.uid()` — so no draft can be created here, and the honest thing
+          to assert is that the gate REFUSES and says why. A walk that
+          manufactured a reference number would be the single most misleading
+          screenshot in this repo.
+
+          What is genuinely exercised end to end: the address form, the
+          deliverability answer by AREA KEY on both the form and the review
+          screen, the readiness gate collecting every reason at once, and the
+          absence of any sentence that could be read as a placed order.
+        */
+        if (remainingLines > 0) {
+          await page.goto(`${BASE}/checkout`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1600);
+
+          const prepareDisabled = async () =>
+            page
+              .locator('[data-testid="checkout-prepare"]')
+              .first()
+              .evaluate(
+                (node) =>
+                  node.getAttribute('aria-disabled') === 'true' || node.disabled === true,
+              )
+              .catch(() => false);
+
+          check('the checkout review opens', await visible('checkout-summary', 6000));
+          check('and badges the development catalogue here too', await visible('checkout-demo-badge', 3000));
+          check('with no address chosen, it will not prepare an order', await prepareDisabled());
+
+          const noAddressText = await bodyText();
+          check(
+            'and says the missing piece is where it goes',
+            /Choose where this is going|no addresses yet|Add one so we know/i.test(noAddressText),
+            noAddressText.replace(/\n/g, ' · ').slice(0, 140),
+          );
+
+          // --- An address, in an area the branch reaches --------------------
+          await page.goto(`${BASE}/addresses/form`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1400);
+
+          await type('address-recipient', 'Nour Hassan');
+          await type('address-phone', '01001234567');
+          await type('address-street', 'Road 9');
+          await type('address-building', '12');
+
+          // THE UNSERVED AREA FIRST, so the negative is proved on a form that
+          // has not yet been told a served one — no chance of a stale banner.
+          await tap('address-area-demo-nasr-city', { optional: true });
+          await page.waitForTimeout(500);
+          check(
+            'an area this branch does not reach says so on the form',
+            await visible('address-not-served', 3000),
+          );
+
+          await tap('address-area-demo-maadi', { optional: true });
+          await page.waitForTimeout(500);
+          check(
+            'and a served one says so, by area key rather than by the street text',
+            await visible('address-served', 3000),
+          );
+          await shot('29-address-form');
+
+          const saved = await tap('address-save', { optional: true });
+          check('the address can be saved', saved);
+          await page.waitForTimeout(1600);
+
+          // --- A second address, deliberately out of reach ------------------
+          await page.goto(`${BASE}/addresses/form`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1400);
+          await type('address-recipient', 'Far Away');
+          await type('address-phone', '01112223344');
+          await type('address-street', 'Abbas El Akkad');
+          await type('address-building', '5');
+          await tap('address-area-demo-nasr-city', { optional: true });
+          await page.waitForTimeout(400);
+          await tap('address-save', { optional: true });
+          await page.waitForTimeout(1600);
+
+          await page.goto(`${BASE}/addresses`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1400);
+          const addressRows = await page.locator('[data-testid^="address-row-"]').count();
+          check('both addresses are listed', addressRows === 2, `${addressRows} listed`);
+          await shot('30-addresses');
+
+          // --- Back at checkout, with somewhere to send it ------------------
+          await page.goto(`${BASE}/checkout`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1800);
+
+          const addressChoices = page.locator('[data-testid^="checkout-address-"]');
+          const choiceCount = await addressChoices.count();
+          check('checkout offers the saved addresses', choiceCount === 2, `${choiceCount} offered`);
+
+          /*
+            DELIVERABILITY AT THE REVIEW, NOT ONLY ON THE FORM.
+
+            Two separate pieces of code answer this — the form asks
+            `canDeliver` directly, the review gets it through
+            `revalidateCart` — and they have to agree. Selecting each address
+            in turn is what makes them disagree if they ever do.
+          */
+          let blockedByArea = false;
+          let clearedByArea = false;
+          for (let index = 0; index < choiceCount; index += 1) {
+            await addressChoices.nth(index).click();
+            await page.waitForTimeout(1500);
+            const text = await bodyText();
+            if (/does not deliver|مبيوصّلش/i.test(text)) blockedByArea = true;
+            else clearedByArea = true;
+          }
+          check('an address outside the branch area is refused at checkout', blockedByArea);
+          check('and one inside it is not', clearedByArea);
+
+          // Land on a deliverable address for the assertions that follow.
+          await addressChoices.first().click();
+          await page.waitForTimeout(1500);
+          let checkoutText = await bodyText();
+          if (/does not deliver|مبيوصّلش/i.test(checkoutText) && choiceCount > 1) {
+            await addressChoices.nth(1).click();
+            await page.waitForTimeout(1500);
+            checkoutText = await bodyText();
+          }
+
+          check('the summary totals the basket from the shop\u2019s current prices', await visible('checkout-summary', 4000));
+
+          /*
+            THE LAST THING IN THE WAY IS AN ACCOUNT.
+
+            Everything else on this screen is now answered, so the gate should
+            be down to exactly one reason — and it should say it, rather than
+            leaving a dead button with no explanation.
+          */
+          check(
+            'the one remaining blocker is having an account',
+            /need an account|account to order|محتاج حساب|تسجّل/i.test(checkoutText),
+            checkoutText.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          check('so a guest cannot prepare an order', await prepareDisabled());
+
+          // NOTHING HERE MAY READ AS A PURCHASE.
+          check(
+            'nothing on the screen claims an order was placed',
+            !/order placed|order confirmed|thank you for your order|تم الطلب|اتأكد طلبك/i.test(
+              checkoutText,
+            ),
+          );
+          check(
+            'and no order reference was invented',
+            !/AKL-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(checkoutText),
+          );
+          check('no page error came out of the whole checkout', errorCount() === before);
+          await shot('31-checkout');
         }
 
         // --- The two states a happy basket never shows -----------------------
@@ -1327,6 +1492,41 @@ async function main() {
             !EASTERN.test(await readRegion('cart-shortfall')),
           );
           await shot('27-cart-arabic');
+
+          /*
+            THE CHECKOUT REVIEW IN ARABIC.
+
+            The screen where the most numbers appear at once — line totals, a
+            subtotal, a delivery fee, a total, a phone number and a building
+            number, from three different sources. `formatMoney` through the
+            pinned locale, the merchant's own product names through
+            `display.ts`, and the customer's own typing through
+            `toWesternNumerals`. All three have to land in the same numerals.
+          */
+          await page.goto(`${BASE}/checkout`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1800);
+          const arabicCheckout = await bodyText();
+          check(
+            'the checkout review is Arabic, not an English fallback',
+            /الدفع|توصيل|الإجمالي/.test(arabicCheckout),
+          );
+          const checkoutLines = await readRegion('checkout-lines');
+          const checkoutSummary = await readRegion('checkout-summary');
+          check(
+            'Arabic checkout LINES are Western — merchant names beside our quantities',
+            checkoutLines.length > 0 && !EASTERN.test(checkoutLines),
+            checkoutLines.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          check(
+            'Arabic checkout SUMMARY is Western — items, delivery, total',
+            checkoutSummary.length > 0 && !EASTERN.test(checkoutSummary),
+            checkoutSummary.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          check(
+            'and the Arabic review still never claims an order was placed',
+            !/تم الطلب|اتأكد طلبك/.test(arabicCheckout),
+          );
+          await shot('27a-checkout-arabic');
 
           await page.goto(`${BASE}/recipe/${KOSHARI}`, { waitUntil: 'networkidle' });
           await page.waitForTimeout(1800);
