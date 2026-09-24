@@ -361,14 +361,30 @@ touching the order. A late failure after a success returns
 settled by the simulator and a real one only by Paymob. There is no argument, no
 flag and no session setting a client could use to cross that line.
 
+### Why Paymob, factually
+
+Several Egyptian providers handle cards and wallets. Paymob is the V1 choice
+because its Intention model maps onto the architecture we already had, its
+hosted checkout keeps card entry out of the AKALT client — significantly
+reducing our PCI exposure, though not eliminating scope — its card and wallet
+flows fit the payment UX we built, its webhook-based server truth fits a model
+where the client is never believed, and it is now implemented and tested.
+
 ### Paymob captures in one step
 
 Worth stating because the state machine allows both. Paymob does offer
 auth-then-capture, but it needs its own integration id and is card-only — it
-cannot hold a wallet payment, and wallets are most of the Egyptian market. So
-a verified success goes `authorising -> captured`, and nothing pretends we are
-holding funds we have already taken. Voids and refunds are real operations
-against a captured transaction, so nothing is lost by being honest about it.
+cannot hold a wallet payment. So a verified success goes
+`authorising -> captured`, and nothing pretends we are holding funds we have
+already taken. Voids and refunds are real operations against a captured
+transaction, so nothing is lost by being honest about it.
+
+### Two callbacks, one endpoint
+
+`notification_url` on the Intention is card-only; a wallet integration uses the
+processed callback configured on the integration in Paymob's dashboard. Both
+must point at `payments-webhook` — the deployment checklist in
+`supabase/functions/README.md` is the place that says so.
 
 ## Three things the checkout will not do
 

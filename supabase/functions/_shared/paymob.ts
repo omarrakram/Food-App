@@ -1,23 +1,41 @@
 /**
  * Paymob.
  *
- * WHY PAYMOB, AND WHAT IT ACTUALLY DOES — because the integration has to match
- * reality rather than the state machine we would have preferred.
+ * WHY PAYMOB IS THE V1 CHOICE. Not a claim that nothing else in Egypt could
+ * do this — several providers handle cards and wallets — but a statement of
+ * fit:
  *
- *   ONE INTEGRATION, CARDS AND WALLETS. Egypt's grocery customers pay by card,
- *   by Vodafone Cash / Orange Money / Etisalat wallet, and at kiosks. Paymob
- *   covers all of them behind one Intention, which is the difference between
- *   one integration and four.
+ *   THE INTENTION MODEL FITS THE ARCHITECTURE we already had. One server-side
+ *   object, our own reference on it, a signed callback about it: that maps
+ *   onto `payment_intents` and `record_payment_event` with nothing left over.
  *
- *   HOSTED CHECKOUT. The customer is sent to Paymob's own page. No card field
- *   ever exists in AKALT's bundle, which keeps us out of PCI scope entirely.
+ *   HOSTED CHECKOUT keeps card entry out of the AKALT client. Sensitive card
+ *   data never reaches our bundle, which significantly reduces AKALT's PCI
+ *   exposure — it does not eliminate scope, and nothing here should be read as
+ *   a compliance opinion.
  *
- *   IT CAPTURES IMMEDIATELY. Paymob does offer an auth-then-capture flow, but
- *   it needs its own integration id and is CARD ONLY — it cannot hold a wallet
- *   payment. Since wallets are in scope for V1, the honest model is one-step
- *   capture: the order goes `authorising -> captured`, and we do not pretend to
- *   be holding funds we have already taken. Voids and refunds are real
- *   operations against a captured transaction, so nothing is lost by saying so.
+ *   CARD AND WALLET both fit the V1 payment UX as two integration ids behind
+ *   one flow, which is the flow the checkout screen already has.
+ *
+ *   WEBHOOK-BASED SERVER TRUTH fits a payment model where the client is never
+ *   believed. The signature is the authority.
+ *
+ *   AND IT IS BUILT AND TESTED, which is now its own reason.
+ *
+ * WHAT IT ACTUALLY DOES, because the integration has to match reality rather
+ * than the state machine we would have preferred:
+ *
+ *   IT CAPTURES IMMEDIATELY on the integrations we use. Paymob does offer
+ *   auth-then-capture, but it needs its own integration id and is card only —
+ *   it cannot hold a wallet payment. Since wallets are in scope for V1, the
+ *   honest model is one-step capture: the order goes `authorising -> captured`
+ *   and we do not pretend to be holding funds we have already taken.
+ *
+ *   `notification_url` IS CARD ONLY. Paymob accepts a per-intention callback
+ *   URL for card integrations and ignores it for wallets, whose processed
+ *   callback is configured on the integration itself in their dashboard. Both
+ *   must point at `payments-webhook` — see `createIntention` and the
+ *   deployment checklist in supabase/functions/README.md.
  *
  *   SIGNED CALLBACKS. Every callback carries an HMAC-SHA512 over a fixed,
  *   ordered list of fields. That signature is the only thing in this
@@ -102,7 +120,15 @@ export type IntentionInput = {
     readonly amountMinor: number;
     readonly quantity: number;
   }[];
+  /**
+   * Where the signed callback should go, for CARD integrations.
+   *
+   * A wallet integration ignores this and uses the processed-callback URL
+   * configured against the integration in the Paymob dashboard. Both must
+   * arrive at `payments-webhook`; only one of them is set from here.
+   */
   readonly notificationUrl: string;
+  /** Where the customer's browser lands afterwards. UX only, never proof. */
   readonly redirectionUrl: string;
 };
 
@@ -119,6 +145,13 @@ export type Intention = {
  * callback as `obj.order.merchant_order_id`, and matching on it is what lets a
  * signed callback find the attempt it belongs to without trusting anything
  * else in the body.
+ *
+ * `notification_url` IS SENT FOR CARDS ONLY. Paymob documents it as supported
+ * with card integration ids; a wallet integration ignores it and uses the
+ * processed-callback URL configured on the integration in their dashboard.
+ * Sending it anyway would not break anything, but it would read as though
+ * wallet callbacks were configured here — and they are not, which is exactly
+ * the kind of quiet assumption that makes a wallet payment never settle.
  */
 export async function createIntention(
   config: PaymobConfig,
@@ -144,7 +177,7 @@ export async function createIntention(
       currency: input.currency,
       payment_methods: [integrationId],
       special_reference: input.reference,
-      notification_url: input.notificationUrl,
+      ...(input.method === 'card' ? { notification_url: input.notificationUrl } : {}),
       redirection_url: input.redirectionUrl,
       items: input.items.map((item) => ({
         name: item.name,
@@ -311,6 +344,80 @@ export function failureFrom(obj: Record<string, unknown>): {
   return {
     code: code === null ? null : String(code),
     message: message === null || typeof message === 'boolean' ? null : String(message),
+  };
+}
+
+/**
+ * THE CALLBACK, REDUCED TO EVIDENCE.
+ *
+ * The signed body Paymob sends carries a great deal we did not ask for: the
+ * billing block echoed back (name, email, phone, street, city, country), the
+ * merchant's own profile, and on some integrations a saved-card token. Storing
+ * it whole made `payment_events` a second, unindexed, never-expiring copy of
+ * the customer's contact details sitting behind a table with no read policy —
+ * which is a bad place for them to be discovered later.
+ *
+ * So this is an ALLOW-LIST, not a redaction list. A field nobody named does
+ * not survive, which means a provider adding one next quarter does not
+ * silently start being retained.
+ *
+ * WHAT IS KEPT, and why each one:
+ *
+ *   the provider ids       to find the transaction in their dashboard
+ *   the outcome flags      to explain a state transition afterwards
+ *   the amounts            to prove what was charged against what we asked
+ *   the response codes     to answer "why was this declined"
+ *   the source type        to know it was a card or a wallet
+ *   the timestamps         to order events that arrived out of order
+ *
+ * WHAT IS NOT: the billing block, the customer email and phone (we already
+ * hold the address on the order, where it belongs), anything token-shaped, and
+ * every provider internal that would not appear in a dispute.
+ *
+ * This is deliberately ENOUGH TO INVESTIGATE A DISPUTED TRANSITION without
+ * being a customer record. If a genuine dispute later needs the raw body, it
+ * is retrievable from Paymob against the transaction id kept here — which is a
+ * better place for it than a table of ours.
+ */
+export function sanitiseCallback(body: Record<string, unknown>): Record<string, unknown> {
+  const obj = (body.obj ?? {}) as Record<string, unknown>;
+  const order = (obj.order ?? {}) as Record<string, unknown>;
+  const source = (obj.source_data ?? {}) as Record<string, unknown>;
+  const data = (obj.data ?? {}) as Record<string, unknown>;
+
+  const pick = <T,>(value: T): T | null => (value === undefined ? null : value);
+
+  return {
+    type: pick(body.type),
+    transactionId: pick(obj.id),
+    providerOrderId: pick(order.id),
+    // Our own payment intent id, echoed back. The correlation key.
+    merchantOrderId: pick(order.merchant_order_id),
+    integrationId: pick(obj.integration_id),
+
+    amountCents: pick(obj.amount_cents),
+    currency: pick(obj.currency),
+
+    success: pick(obj.success),
+    pending: pick(obj.pending),
+    isVoided: pick(obj.is_voided),
+    isRefunded: pick(obj.is_refunded),
+    isCapture: pick(obj.is_capture),
+    isAuth: pick(obj.is_auth),
+    is3dSecure: pick(obj.is_3d_secure),
+    errorOccured: pick(obj.error_occured),
+    hasParentTransaction: pick(obj.has_parent_transaction),
+
+    // Already masked by Paymob — the last four digits. Never a full pan.
+    sourceType: pick(source.type),
+    sourceSubType: pick(source.sub_type),
+    maskedPan: pick(source.pan),
+
+    responseCode: pick(data.txn_response_code),
+    acquirerResponseCode: pick(data.acq_response_code),
+    responseMessage: pick(data.message),
+
+    createdAt: pick(obj.created_at),
   };
 }
 

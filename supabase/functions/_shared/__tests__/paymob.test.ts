@@ -6,6 +6,7 @@ import {
   hmacPayload,
   metadataFrom,
   outcomeFrom,
+  sanitiseCallback,
   signHmac,
   verifyHmac,
 } from '../paymob.ts';
@@ -173,4 +174,145 @@ Deno.test('metadata is an allow-list, and never the whole body', () => {
     'sourceSubType',
     'sourceType',
   ]);
+});
+
+/**
+ * WHAT WE KEEP OF A CALLBACK.
+ *
+ * The signed body echoes the billing block, the customer's email and phone,
+ * and on some integrations a saved-card token. `payment_events` has no read
+ * policy and no expiry, so anything stored there is stored for good — which
+ * makes "what did we keep" a data-protection question rather than a logging
+ * one.
+ *
+ * These are written as an ALLOW-LIST test: not "is the token gone" but "is the
+ * output exactly the set of keys we named". A redaction test passes while a
+ * provider quietly adds a field; this one does not.
+ */
+
+/** A body shaped like Paymob's, with everything it really sends. */
+function fullCallback(): Record<string, unknown> {
+  return {
+    type: 'TRANSACTION',
+    obj: {
+      id: 987654,
+      amount_cents: 13000,
+      currency: 'EGP',
+      success: true,
+      pending: false,
+      is_voided: false,
+      is_refunded: false,
+      is_capture: false,
+      is_auth: false,
+      is_3d_secure: true,
+      error_occured: false,
+      has_parent_transaction: false,
+      integration_id: 4242,
+      created_at: '2026-09-26T10:00:00.000000',
+      profile_id: 555,
+      owner: 1234,
+      order: {
+        id: 555111,
+        merchant_order_id: 'intent-1',
+        // Paymob echoes the whole billing block back on the order.
+        shipping_data: {
+          first_name: 'Nour',
+          last_name: 'Hassan',
+          email: 'nour@example.com',
+          phone_number: '+201001234567',
+          street: 'Road 9',
+          building: '12',
+          city: 'Cairo',
+          country: 'EG',
+        },
+      },
+      source_data: {
+        pan: '2346',
+        sub_type: 'MasterCard',
+        type: 'card',
+      },
+      data: {
+        txn_response_code: 'APPROVED',
+        acq_response_code: '00',
+        message: 'Approved',
+        card_num: '5123456789012346',
+      },
+      // The two that must never be retained.
+      token: 'tok_live_should_never_be_stored',
+      payment_key_claims: { billing_data: { email: 'nour@example.com' } },
+    },
+  };
+}
+
+Deno.test('the stored event is exactly the allow-list, and nothing more', () => {
+  const stored = sanitiseCallback(fullCallback());
+
+  assertEquals(Object.keys(stored).sort(), [
+    'acquirerResponseCode',
+    'amountCents',
+    'createdAt',
+    'currency',
+    'errorOccured',
+    'hasParentTransaction',
+    'integrationId',
+    'is3dSecure',
+    'isAuth',
+    'isCapture',
+    'isRefunded',
+    'isVoided',
+    'maskedPan',
+    'merchantOrderId',
+    'pending',
+    'providerOrderId',
+    'responseCode',
+    'responseMessage',
+    'sourceSubType',
+    'sourceType',
+    'success',
+    'transactionId',
+    'type',
+  ]);
+});
+
+Deno.test('nothing token-shaped or customer-shaped survives', () => {
+  const stored = JSON.stringify(sanitiseCallback(fullCallback()));
+
+  // The token and the full card number, which are the two that would matter.
+  assertEquals(stored.includes('tok_live_should_never_be_stored'), false);
+  assertEquals(stored.includes('5123456789012346'), false);
+
+  // The customer's own details. We already hold the delivery address on the
+  // order, where it belongs and where deleting an account removes it.
+  assertEquals(stored.includes('nour@example.com'), false);
+  assertEquals(stored.includes('+201001234567'), false);
+  assertEquals(stored.includes('Nour'), false);
+  assertEquals(stored.includes('Road 9'), false);
+  assertEquals(stored.includes('payment_key_claims'), false);
+  assertEquals(stored.includes('profile_id'), false);
+});
+
+Deno.test('but everything a disputed transition needs is still there', () => {
+  const stored = sanitiseCallback(fullCallback());
+
+  assertEquals(stored.transactionId, 987654);
+  assertEquals(stored.providerOrderId, 555111);
+  assertEquals(stored.merchantOrderId, 'intent-1');
+  assertEquals(stored.integrationId, 4242);
+  assertEquals(stored.amountCents, 13000);
+  assertEquals(stored.currency, 'EGP');
+  assertEquals(stored.success, true);
+  assertEquals(stored.responseCode, 'APPROVED');
+  assertEquals(stored.acquirerResponseCode, '00');
+  assertEquals(stored.sourceType, 'card');
+  // Masked already, by them. Enough to tell two cards apart in a dispute.
+  assertEquals(stored.maskedPan, '2346');
+  assertEquals(stored.createdAt, '2026-09-26T10:00:00.000000');
+});
+
+Deno.test('a field the provider did not send is null, not missing', () => {
+  // So a stored event always has the same shape, whatever arrived.
+  const stored = sanitiseCallback({ obj: { id: 1 } });
+  assertEquals(stored.currency, null);
+  assertEquals(stored.maskedPan, null);
+  assertEquals(stored.transactionId, 1);
 });

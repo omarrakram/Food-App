@@ -4,6 +4,7 @@ import {
   metadataFrom,
   outcomeFrom,
   paymobConfig,
+  sanitiseCallback,
   verifyHmac,
 } from '../_shared/paymob.ts';
 
@@ -25,6 +26,11 @@ import {
  *                        it is the only evidence somebody was charged for
  *                        nothing.
  *   A FORGED BODY        rejected before anything is read out of it.
+ *
+ * WHAT IT STORES is `sanitiseCallback(body)` — an allow-list of the provider
+ * ids, amounts, outcome flags and response codes. Not the billing block, not
+ * the customer contact details we already hold on the order, and nothing
+ * token-shaped.
  *
  * IT ALWAYS ANSWERS 200 once the signature is good. A provider that receives a
  * 500 retries, and retrying a duplicate forever is a self-inflicted outage —
@@ -123,7 +129,10 @@ Deno.serve(async (request: Request): Promise<Response> => {
     p_provider_reference: eventId,
     p_failure_code: failure.code,
     p_failure_message: failure.message,
-    p_payload: body,
+    // AN ALLOW-LIST, not the raw body. The signed callback echoes the billing
+    // block and, on some integrations, a saved-card token; none of that is
+    // evidence about a payment and all of it would sit in a table forever.
+    p_payload: sanitiseCallback(body),
   });
 
   if (error) {
