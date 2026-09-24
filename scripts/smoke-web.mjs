@@ -974,22 +974,27 @@ async function main() {
         .innerText()
         .catch(() => '');
       const addable = Number(/(\d+)/.exec(addLabel)?.[1] ?? '0');
+      /*
+        THE INVARIANT, not a particular pantry.
+
+        This section inherits whatever the earlier ones left in the pantry and
+        the basics, so how many of koshari's ingredients are missing is not
+        fixed — and an assertion demanding a partial basket would fail for a
+        reason that says nothing about commerce. What must hold in EVERY state
+        is that the summary sentence agrees with the number on the button: a
+        short count has to be explained, and a full one must not invent a gap.
+      */
       check(
-        'the button counts only what it will actually add',
-        addable > 0 && addable < sourcedRows,
+        'the button never offers to add more than there are answers',
+        addable <= sourcedRows,
         `${addLabel.replace(/\n/g, ' ').trim()} of ${sourcedRows} rows`,
       );
+      const claimsGap = /can be added now|ينفع يتضافوا/i.test(sourcingText);
+      const claimsAll = /ready to add|جاهزة للإضافة/i.test(sourcingText);
       check(
-        'and the gap is stated rather than left to be inferred',
-        /can be added now|ينفع يتضافوا/i.test(sourcingText),
-        sourcingText.replace(/\n/g, ' · ').slice(0, 120),
-      );
-
-      // An unmapped ingredient is a sentence, not a missing row: the recipe
-      // still works, the cook just buys that one themselves.
-      check(
-        'an ingredient this shop does not carry says so',
-        /Not sold here|Cannot be ordered|مش موجود هنا|مينفعش يتطلب/i.test(sourcingText),
+        'and the summary sentence agrees with that number',
+        addable < sourcedRows ? claimsGap : claimsAll,
+        `${addable} of ${sourcedRows} — gap=${claimsGap} all=${claimsAll}`,
       );
       await shot('24-recipe-sourcing');
 
@@ -1014,7 +1019,10 @@ async function main() {
         check('the cart badges itself as a demo too', await visible('cart-demo-badge', 3000));
         check('and totals the basket', await visible('cart-totals', 3000));
 
-        const cartLines = await page.locator('[data-testid^="cart-quantity-"]').count();
+        // `cart-remove-`, not `cart-quantity-`. The stepper puts its testID on
+        // the container AND on `-decrement` and `-increment`, so a prefix count
+        // over it reports three elements per line and never matches anything.
+        const cartLines = await page.locator('[data-testid^="cart-remove-"]').count();
         check(
           'the cart holds exactly the lines the button counted',
           cartLines === addable,
@@ -1062,7 +1070,7 @@ async function main() {
         if (await removeFirst.count()) {
           await removeFirst.click();
           await page.waitForTimeout(1200);
-          const remaining = await page.locator('[data-testid^="cart-quantity-"]').count();
+          const remaining = await page.locator('[data-testid^="cart-remove-"]').count();
           check('removing a line removes it', remaining === cartLines - 1, `${remaining} left`);
         }
 
@@ -1087,6 +1095,17 @@ async function main() {
         check(
           'and does not offer it as if it could be bought',
           !/Add 0 to cart/i.test(koftaText),
+        );
+        // Nothing in the catalogue claims to be ground beef, parsley or tomato
+        // paste. That is a sentence under the ingredient, not a missing row:
+        // the recipe still works, the cook buys those themselves.
+        check(
+          'an ingredient this shop does not carry says so',
+          /Not sold here|مش موجود هنا/i.test(koftaText),
+        );
+        check(
+          'and the recipe still says it can be cooked',
+          /still cook this|لسه تقدر تعمل/i.test(koftaText),
         );
         await shot('26a-no-purchasable-match');
       }
@@ -1149,10 +1168,26 @@ async function main() {
             'the cart is Arabic, not an English fallback',
             /العربة|المجموع|الإجمالي/.test(arabicCart),
           );
+          /*
+            WESTERN NUMERALS IN OUR OWN CHROME — and only there.
+
+            `ar-EG-u-nu-latn` is pinned app-wide so an interpolated count and
+            an `Intl`-formatted price cannot disagree on the same row. That
+            governs what THIS APP formats. A merchant's product name is the
+            merchant's text: real Egyptian catalogues write «رز مصري ١ كجم»,
+            and rewriting a shop's own product name to suit our numeral policy
+            would be putting words in their mouth. So this reads the totals
+            block, which is entirely ours.
+          */
+          const totalsText = await page
+            .locator('[data-testid="cart-totals"]')
+            .first()
+            .innerText()
+            .catch(() => '');
           check(
-            'and keeps Western numerals so counts and prices agree',
-            !/[٠-٩]/.test(arabicCart),
-            arabicCart.replace(/\n/g, ' · ').slice(0, 120),
+            'and our own numbers are Western, whatever the merchant calls a pack',
+            totalsText.length > 0 && !/[٠-٩]/.test(totalsText),
+            totalsText.replace(/\n/g, ' · ').slice(0, 120),
           );
           await shot('27-cart-arabic');
 
