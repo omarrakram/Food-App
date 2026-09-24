@@ -1188,11 +1188,39 @@ async function main() {
             'a product with no published dietary data is ASKED about, never assumed',
             /Cannot be confirmed for you/i.test(veganText),
           );
-          check(
-            'and an explicitly compatible product is still offered normally',
-            /AKALT Demo Market/i.test(veganText),
-          );
           await shotAt('[data-testid="recipe-you-need"]', '26d-vegan-dietary-gate');
+        }
+
+        /*
+          AND A COMPATIBLE PRODUCT IS STILL OFFERED.
+
+          Asserted on koshari, by COMPARING WITH ITSELF. Both of its sourced
+          products — red lentils and spaghetti — are published
+          `vegan:compatible`, so declaring the diet must not change how many
+          lines can be added. Comparing the same recipe with and without the
+          diet is state-independent in a way that looking for a product name
+          is not: this section inherits a pantry it does not control, and the
+          first attempt at this check failed because rice had been ticked off
+          two sections earlier and was simply not on the list.
+
+          Over-refusal is the other way to get a safety gate wrong, and it is
+          the way that looks like success.
+        */
+        await page.goto(`${BASE}/recipe/${KOSHARI}`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1800);
+        if (await tap('recipe-get-missing', { optional: true })) {
+          await page.waitForTimeout(900);
+          const veganKoshari = await page
+            .locator('[data-testid="recipe-add-to-cart"]')
+            .first()
+            .innerText()
+            .catch(() => '');
+          const veganAddable = Number(/(\d+)/.exec(veganKoshari)?.[1] ?? '-1');
+          check(
+            'a diet does not refuse products the shop calls compatible',
+            veganAddable === addable,
+            `${veganAddable} as a vegan vs ${addable} with no diet`,
+          );
         }
 
         await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
