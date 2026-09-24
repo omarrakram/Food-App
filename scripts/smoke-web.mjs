@@ -1146,6 +1146,61 @@ async function main() {
         await shotAt('[data-testid="recipe-you-need"]', '26c-you-need-rows');
       }
 
+      /*
+        A VEGAN, WHICH IS A DIFFERENT GATE FROM AN ALLERGY.
+
+        Chicken fried rice is the fixture because it exercises all three
+        dietary states in one screen against the demo catalogue:
+
+          chicken   `vegan:incompatible`  → refused outright
+          eggs, oil publish nothing       → UNKNOWN, so asked about
+          rice      `vegan:compatible`    → matched and addable
+
+        Both halves matter. A build that refused everything unpublished would
+        pass a check that only looked for the refusal, and a build that
+        assumed unpublished meant safe would pass one that only looked for the
+        match. Run BEFORE the allergy pass and reset afterwards, so neither
+        preference bleeds into the other.
+      */
+      const CHICKEN_FRIED_RICE = '9d4ee2dd-68bd-5927-b993-b9f224c54a6a';
+      await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(1400);
+      const veganSet = await tap('pref-diet-vegan', { optional: true });
+      check('an eating style can be declared', veganSet);
+      await page.waitForTimeout(900);
+
+      if (veganSet) {
+        await page.goto(`${BASE}/recipe/${CHICKEN_FRIED_RICE}`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1800);
+        if (await tap('recipe-get-missing', { optional: true })) {
+          await page.waitForTimeout(900);
+          const veganText = await page.evaluate(() => document.body.innerText);
+
+          check(
+            'a product the shop says is not vegan is refused for a vegan',
+            /Not suitable for you/i.test(veganText),
+          );
+          check(
+            'and the refusal reads allergies OR diet, since either can cause it',
+            /allergies or your diet/i.test(veganText),
+          );
+          check(
+            'a product with no published dietary data is ASKED about, never assumed',
+            /Cannot be confirmed for you/i.test(veganText),
+          );
+          check(
+            'and an explicitly compatible product is still offered normally',
+            /AKALT Demo Market/i.test(veganText),
+          );
+          await shotAt('[data-testid="recipe-you-need"]', '26d-vegan-dietary-gate');
+        }
+
+        await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1400);
+        await tap('pref-diet-none', { optional: true });
+        await page.waitForTimeout(700);
+      }
+
       // A coeliac cook. The only pasta in the catalogue is wheat, so the line
       // must be refused rather than substituted — and refused in a sentence
       // that does not name the product it just ruled out.
@@ -1182,51 +1237,6 @@ async function main() {
             `${coeliacCount} with the allergy vs ${addable} without`,
           );
           await shot('26b-no-eligible-match');
-        }
-
-        /*
-          A VEGAN, WHICH IS A DIFFERENT GATE FROM AN ALLERGY.
-
-          Chicken is explicitly `vegan:incompatible` in the demo catalogue, so
-          it must be refused outright. Most of the catalogue publishes NOTHING
-          about diet, and unknown is not compatible — those lines must be asked
-          about rather than either hidden or quietly added. Both halves matter:
-          a build that refused everything would also pass a naive check.
-        */
-        await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
-        await page.waitForTimeout(1400);
-        await tap('pref-allergen-gluten', { optional: true }); // clear the allergy first
-        await page.waitForTimeout(600);
-        const veganSet = await tap('pref-diet-vegan', { optional: true });
-        check('an eating style can be declared', veganSet);
-        await page.waitForTimeout(900);
-
-        if (veganSet) {
-          await page.goto(`${BASE}/recipe/${KOFTA}`, { waitUntil: 'networkidle' });
-          await page.waitForTimeout(1800);
-          if (await tap('recipe-get-missing', { optional: true })) {
-            await page.waitForTimeout(900);
-            const veganText = await page.evaluate(() => document.body.innerText);
-
-            check(
-              'a product the shop says is not vegan is refused for a vegan',
-              /Not suitable for you|مش مناسب ليك/i.test(veganText),
-            );
-            check(
-              'a product with no published dietary data is ASKED about, not assumed',
-              /Cannot be confirmed for you|مش قادرين نتأكد/i.test(veganText),
-            );
-            check(
-              'and the refusal names allergies OR diet, since either can cause it',
-              /allergies or your diet|حساسيتك أو لنظامك/i.test(veganText),
-            );
-            await shotAt('[data-testid="recipe-you-need"]', '26d-vegan-dietary-gate');
-          }
-
-          await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
-          await page.waitForTimeout(1400);
-          await tap('pref-diet-none', { optional: true });
-          await page.waitForTimeout(700);
         }
 
         // Put the cook back the way we found them, so later sections are not
