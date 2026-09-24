@@ -11,6 +11,14 @@ import type { Allergen, Availability, Unit } from '@/types/domain';
 import type { MappingSource, ProductDietaryProfile } from '@/types/commerce';
 
 export type DemoProductRow = {
+  /**
+   * THE SAME UUID THE SQL FIXTURE USES, derived from the external id.
+   *
+   * Every id column in the real schema is a uuid, so a readable string here
+   * meant a signed-in customer could never put a demo product in a Supabase
+   * cart and the checkout RPC could not be exercised by the app at all.
+   */
+  readonly id: string;
   readonly externalId: string;
   readonly sku: string | null;
   readonly name: string;
@@ -47,6 +55,7 @@ export type DemoMappingRow = {
 };
 
 export const DEMO_MERCHANT = {
+  "id": "8e5bc3cb-60a2-ada1-af40-28c97aab6675",
   "slug": "akalt-demo-market",
   "name": "AKALT Demo Market (development only)",
   "nameAr": "سوق أكلت التجريبي (للتطوير فقط)",
@@ -60,6 +69,8 @@ export const DEMO_MERCHANT = {
 } as const;
 
 export const DEMO_LOCATION = {
+  "id": "263a2817-7406-2a71-3dd4-56ec4505fd38",
+  "merchantId": "8e5bc3cb-60a2-ada1-af40-28c97aab6675",
   "externalId": "demo-branch-1",
   "name": "Demo Branch — Maadi",
   "nameAr": "فرع التجربة — المعادي",
@@ -77,6 +88,7 @@ export const DEMO_LOCATION = {
 
 export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
   {
+    id: '1924a0d5-3a34-ec00-d85d-d6de769c2b9a',
     externalId: 'dm-chk-500',
     sku: 'DM-CHK-500',
     name: 'Fresh Chicken Breast 500g',
@@ -91,6 +103,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'e0b50df4-7458-6d37-f524-4a313f54a894',
     externalId: 'dm-chk-1000',
     sku: 'DM-CHK-1000',
     name: 'Fresh Chicken Breast 1kg',
@@ -105,6 +118,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '9018c228-8aeb-a097-be2a-0b89a3982e58',
     externalId: 'dm-chk-mar-500',
     sku: 'DM-CHK-MAR-500',
     name: 'Marinated Chicken Breast 500g',
@@ -119,6 +133,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '9881326b-4e7b-2816-bfa0-3f30ff8cb94c',
     externalId: 'dm-rice-1000',
     sku: 'DM-RICE-1000',
     name: 'Egyptian Short Grain Rice 1kg',
@@ -133,6 +148,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '3c2a149a-4ec1-4cae-bb7d-e0bde0f425e4',
     externalId: 'dm-rice-5000',
     sku: 'DM-RICE-5000',
     name: 'Egyptian Short Grain Rice 5kg',
@@ -147,6 +163,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'c94c1607-7b01-58c6-c7e0-5d3dbeb7e220',
     externalId: 'dm-tom-1000',
     sku: 'DM-TOM-1000',
     name: 'Fresh Tomatoes 1kg',
@@ -161,6 +178,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'e28f568c-6bb9-ed9a-3520-98075bacbb16',
     externalId: 'dm-tom-500',
     sku: 'DM-TOM-500',
     name: 'Fresh Tomatoes 500g',
@@ -175,6 +193,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'f2b53ada-7c34-e5ba-2b76-73f7ca605c67',
     externalId: 'dm-oni-1000',
     sku: 'DM-ONI-1000',
     name: 'Yellow Onions 1kg',
@@ -189,6 +208,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '54723f6b-f88e-3314-6070-cf7f16676141',
     externalId: 'dm-milk-1000',
     sku: 'DM-MILK-1000',
     name: 'Full Cream Milk 1L',
@@ -203,6 +223,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'c12ab8f1-e946-68e3-501e-2fef9c2c6eb0',
     externalId: 'dm-milk-250',
     sku: 'DM-MILK-250',
     name: 'Full Cream Milk 250ml',
@@ -217,6 +238,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '28cf61e9-3e9f-1a9c-1896-4a0147944c5b',
     externalId: 'dm-egg-12',
     sku: 'DM-EGG-12',
     name: 'Table Eggs 12 pieces',
@@ -231,6 +253,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'aab5fcd5-3393-7e2e-8120-cb340f622a83',
     externalId: 'dm-egg-30',
     sku: 'DM-EGG-30',
     name: 'Table Eggs 30 pieces',
@@ -245,6 +268,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '32281c88-e426-1abc-7803-21c2ed068f28',
     externalId: 'dm-flour-1000',
     sku: 'DM-FLOUR-1000',
     name: 'All Purpose Flour 1kg',
@@ -259,6 +283,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'c34e0be5-6f72-4cb8-1bda-ffea33f09161',
     externalId: 'dm-sunoil-1000',
     sku: 'DM-SUNOIL-1000',
     name: 'Sunflower Oil 1L',
@@ -273,6 +298,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'c6247433-6d5a-0db4-e263-eb5dec908235',
     externalId: 'dm-sunoil-2700',
     sku: 'DM-SUNOIL-2700',
     name: 'Sunflower Oil 2.7L',
@@ -287,6 +313,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'f37a99d2-a3de-c134-4c0b-60d822da3d27',
     externalId: 'dm-olive-500',
     sku: 'DM-OLIVE-500',
     name: 'Extra Virgin Olive Oil 500ml',
@@ -301,6 +328,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '2aa70494-9dbe-c72e-3093-920c0b225ce9',
     externalId: 'dm-pasta-400',
     sku: 'DM-PASTA-400',
     name: 'Spaghetti 400g',
@@ -315,6 +343,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '93595e98-5f4f-dc33-7763-98d23e5ba0df',
     externalId: 'dm-cream-200',
     sku: 'DM-CREAM-200',
     name: 'Cooking Cream 200ml',
@@ -329,6 +358,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'fb95fae6-7a3e-dfbf-a295-9df38d2ec8fb',
     externalId: 'dm-cream-500',
     sku: 'DM-CREAM-500',
     name: 'Cooking Cream 500ml',
@@ -343,6 +373,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '7b2c80bc-4ece-f02c-cb21-9daf5e93d32a',
     externalId: 'dm-parm-100',
     sku: 'DM-PARM-100',
     name: 'Grated Parmesan 100g',
@@ -357,6 +388,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'bb1b2397-a5c6-fb4a-a645-3a6b18c1c22b',
     externalId: 'dm-lentil-500',
     sku: 'DM-LENTIL-500',
     name: 'Red Lentils 500g',
@@ -371,6 +403,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '353e62cb-0e53-4abe-5118-436c5d2fec1e',
     externalId: 'dm-garlic-200',
     sku: 'DM-GARLIC-200',
     name: 'Garlic 200g',
@@ -385,6 +418,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '385e5fc6-ec3b-d3f2-69bd-1d9e3173c0bc',
     externalId: 'dm-pot-2000',
     sku: 'DM-POT-2000',
     name: 'Potatoes 2kg',
@@ -399,6 +433,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'eeac8474-f695-191d-e2de-c7d2154f9790',
     externalId: 'dm-yog-1000',
     sku: 'DM-YOG-1000',
     name: 'Plain Yoghurt 1kg',
@@ -413,6 +448,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: 'dd71d9c9-f4d1-50c1-bcac-635a4ad3d55d',
     externalId: 'dm-butter-200',
     sku: 'DM-BUTTER-200',
     name: 'Butter 200g',
@@ -427,6 +463,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '81cba757-c565-67ab-66c3-0a14c3a60330',
     externalId: 'dm-moz-250',
     sku: 'DM-MOZ-250',
     name: 'Mozzarella 250g',
@@ -441,6 +478,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '1ed6459a-389c-06fd-90d0-f7419f26f09c',
     externalId: 'dm-cumin-100',
     sku: 'DM-CUMIN-100',
     name: 'Ground Cumin 100g',
@@ -455,6 +493,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '66870ac1-fd86-2cf5-a370-3a195c734b29',
     externalId: 'dm-chick-400',
     sku: 'DM-CHICK-400',
     name: 'Canned Chickpeas 400g',
@@ -469,6 +508,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '9c8717f1-0001-3b50-9a19-b022abb935e7',
     externalId: 'dm-sugar-1000',
     sku: 'DM-SUGAR-1000',
     name: 'White Sugar 1kg',
@@ -483,6 +523,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: true,
   },
   {
+    id: '5fd0c841-d400-e859-6440-a3946c346788',
     externalId: 'dm-legacy-chk',
     sku: 'DM-LEGACY-CHK',
     name: 'Discontinued Chicken Pack',
@@ -497,6 +538,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     isActive: false,
   },
   {
+    id: '5d6e70ce-18e8-0b64-38c0-786263fd4b4f',
     externalId: 'dm-bakery-baladi',
     sku: 'DM-BAK-BALADI',
     name: 'Baladi Bread 5 loaves',

@@ -25690,16 +25690,18 @@ values ('c5cf9e5c-d9b6-508e-99e9-871e24c9ab89', 'fb263053-2fce-5a00-8f75-60270e2
 insert into public.recipe_steps (id, recipe_id, step_number, instruction, instruction_ar, duration_minutes, safety_note, safety_note_ar, ingredient_refs)
 values ('214d28ce-7e18-5951-9593-b5847cca6e74', 'fb263053-2fce-5a00-8f75-60270e254280', 3, 'Crumble the cheese over and serve straight from the pan.', 'فتّت الجبنة فوق وقدّمه من الطاسة على طول.', 1, null, null, '{"white cheese"}');
 
--- === Grocery providers =====================================================
+-- === Merchants =============================================================
 --
--- The demo merchant exists so the ordering flow can be exercised end to end
--- in development. It is seeded DISABLED and flagged is_demo, so no client
--- can see it and nothing can mistake it for a partner by reading the row.
--- No real merchant is seeded because none has a commercial agreement yet.
--- See PROJECT_STATUS.md § Required credentials.
-
-insert into public.merchants (id, slug, name, country, is_enabled, is_demo, fulfilment_mode)
-values ('24fdd3b9-add8-56c7-8b06-85124cdfc491', 'akalt-demo-market', 'AKALT Demo Market (development only)', 'EG', false, true, 'dashboard')
-on conflict (slug) do update set name = excluded.name, is_enabled = excluded.is_enabled, is_demo = excluded.is_demo;
+-- NO MERCHANT IS SEEDED HERE, and that is deliberate.
+--
+-- No real merchant has a commercial agreement yet, so there is none to seed.
+-- The development one lives in supabase/fixtures/commerce-demo.generated.sql
+-- along with its branch, its catalogue and its mappings, all sharing the ids
+-- the bundled TypeScript uses. This file used to carry a lone merchant row
+-- with an id of its own, which meant two rows claimed to be the same shop
+-- and the one the app knew about was not the one the database had.
+--
+-- Load the fixture with `npm run db:local`. It refuses to run against a
+-- database that has a real merchant in it.
 
 commit;

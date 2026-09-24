@@ -14,6 +14,10 @@ import { locationDisplayName, merchantDisplayName, productDisplayName } from '..
 import type { SourcingLine } from '../ports';
 import { sourceLine, sourceRequest, type SourcingContext } from '../sourcing';
 
+/** The merchant's readable key → the uuid everything downstream carries. */
+const idFor = (externalId: string): string =>
+  DEMO_PRODUCTS.find((row) => row.externalId === externalId)!.id;
+
 /**
  * End to end against the development catalogue.
  *
@@ -155,7 +159,7 @@ describe('an allergy changes the basket, not the ranking', () => {
     expect(line.status).toBe('no_eligible_match');
     expect(line.chosen).toBeNull();
     expect(line.exclusions).toEqual([
-      { productId: 'dm-parm-100', axis: 'eligibility', reason: 'allergen' },
+      { productId: idFor('dm-parm-100'), axis: 'eligibility', reason: 'allergen' },
     ]);
   });
 });
@@ -303,18 +307,18 @@ describe('merchant text is normalised for display and untouched in storage', () 
    * edit the CSV, and that is the one thing we must not do.
    */
   const allProducts = () =>
-    new DemoCatalogueAdapter().getProducts(DEMO_PRODUCTS.map((row) => row.externalId));
+    new DemoCatalogueAdapter().getProducts(DEMO_PRODUCTS.map((row) => row.id));
 
   it('keeps the merchant spelling in the catalogue, Eastern numerals included', async () => {
     const products = await allProducts();
-    const rice = products.find((product) => product.id === 'dm-rice-1000');
+    const rice = products.find((product) => product.externalId === 'dm-rice-1000');
     expect(rice?.nameAr).toBe('رز مصري ١ كجم');
     expect(hasEasternNumerals(rice!.nameAr!)).toBe(true);
   });
 
   it('renders it with Western numerals and the same words', async () => {
     const products = await allProducts();
-    const rice = products.find((product) => product.id === 'dm-rice-1000')!;
+    const rice = products.find((product) => product.externalId === 'dm-rice-1000')!;
     expect(productDisplayName(rice, 'ar')).toBe('رز مصري 1 كجم');
     expect(productDisplayName(rice, 'en')).toBe(rice.name);
   });

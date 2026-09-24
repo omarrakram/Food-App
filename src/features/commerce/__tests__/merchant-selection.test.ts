@@ -18,7 +18,9 @@ describe('with the demo catalogue on', () => {
     expect(selected?.isDemo).toBe(true);
     expect(selected?.merchant.slug).toBe('akalt-demo-market');
     // A BRANCH, not just a chain.
-    expect(selected?.location.id).toBe('demo-location');
+    // The branch's id is a derived uuid now (so the same row can exist in a
+    // local database); its EXTERNAL id is the readable key the fixture uses.
+    expect(selected?.location.externalId).toBe('demo-branch-1');
     expect(selected?.location.city).toBe('Cairo');
   });
 

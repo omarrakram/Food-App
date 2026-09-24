@@ -7,6 +7,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from '@/components/ui/toast';
 import { LocalAddressRepository } from '@/features/commerce/address-repository';
 import { LocalCartRepository } from '@/features/commerce/cart-repository';
+import {
+  DEMO_LOCATION_SNAPSHOT,
+  DEMO_MERCHANT_SNAPSHOT,
+} from '@/features/commerce/demo-adapter';
 import { LocalOrderDraftRepository } from '@/features/commerce/order-draft';
 import { parkPendingCart } from '@/features/commerce/pending-cart';
 import { RepositoryProvider, type Repositories } from '@/features/data/repositories';
@@ -139,12 +143,18 @@ const PARKED: Cart = {
 };
 
 async function seedCurrentCart() {
+  // The REAL branch and a REAL product id, so `useCartView` resolves the cart
+  // to the selected merchant. A made-up merchant id renders the
+  // "this cart cannot be opened" state instead, and the conflict banner lives
+  // on the ready one.
   await new LocalCartRepository().addLines([
     {
-      merchantId: 'demo-merchant',
-      locationId: 'demo-location',
+      merchantId: DEMO_MERCHANT_SNAPSHOT.id,
+      locationId: DEMO_LOCATION_SNAPSHOT.id,
       currency: 'EGP',
-      merchantProductId: 'dm-rice-1kg',
+      // Any product id: the catalogue read is allowed to miss, and a line
+      // whose product is unknown still renders. What must match is the BRANCH.
+      merchantProductId: '11111111-1111-4111-8111-111111111111',
       quantity: 1,
       unitPrice: { amountMinor: 5_500, currency: 'EGP' },
       sourceIngredientSlug: 'rice',

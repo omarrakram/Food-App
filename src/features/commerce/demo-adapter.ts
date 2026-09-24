@@ -31,8 +31,20 @@ import type { SourcingCandidateInput } from './sourcing';
  * one flag is one mistake away from being flipped.
  */
 
-const MERCHANT_ID = 'demo-merchant';
-const LOCATION_ID = 'demo-location';
+/*
+  THE IDS COME FROM THE GENERATED CATALOGUE, and they are uuids.
+
+  They used to be the readable strings `demo-merchant` and `demo-location`,
+  which was pleasant and made the whole fixture unusable against the real
+  schema: every id column there is a `uuid`, so a signed-in customer could
+  never put a demo product into their Supabase cart and `create_order_draft`
+  could not be reached by the app at all. `scripts/import-commerce-demo.ts`
+  now derives a stable uuid per row and writes the SAME one into
+  `supabase/fixtures/commerce-demo.generated.sql`, so the bundled catalogue and
+  a local database agree about what a product IS.
+*/
+const MERCHANT_ID = DEMO_MERCHANT.id;
+const LOCATION_ID = DEMO_LOCATION.id;
 const TIMESTAMP = '2026-09-23T09:00:00.000Z';
 
 export class DemoCatalogueUnavailableError extends Error {
@@ -106,10 +118,10 @@ export const DEMO_LOCATION_SNAPSHOT: MerchantLocation = (() => {
   };
 })();
 
-/** The product id IS the external id here. A demo has no other identity. */
+/** The id is the derived uuid; the external id stays as the merchant's own key. */
 function toProduct(row: (typeof DEMO_PRODUCTS)[number]): MerchantProduct {
   return {
-    id: row.externalId,
+    id: row.id,
     merchantId: MERCHANT_ID,
     locationId: LOCATION_ID,
     externalId: row.externalId,
@@ -131,7 +143,9 @@ function toMapping(row: (typeof DEMO_MAPPINGS)[number]): IngredientProductMappin
   return {
     id: `${row.ingredientSlug}::${row.productExternalId}`,
     ingredientSlug: row.ingredientSlug,
-    merchantProductId: row.productExternalId,
+    // The UUID, not the merchant's own key: this is the id a cart line and an
+    // order item carry, and both of those are `uuid` columns.
+    merchantProductId: idFor(row.productExternalId),
     confidence: row.confidence,
     source: row.source,
     isVerified: row.isVerified,
@@ -143,16 +157,29 @@ function toMapping(row: (typeof DEMO_MAPPINGS)[number]): IngredientProductMappin
   };
 }
 
-const PRODUCTS_BY_ID = new Map(DEMO_PRODUCTS.map((row) => [row.externalId, toProduct(row)]));
+/**
+ * The merchant's own key → our id.
+ *
+ * `mappings.csv` is written by a human against the merchant's external ids,
+ * which is the readable thing to maintain. Everything downstream of this file
+ * speaks in uuids, so the translation happens here, once.
+ */
+const ID_BY_EXTERNAL_ID = new Map(DEMO_PRODUCTS.map((row) => [row.externalId, row.id]));
+
+function idFor(externalId: string): string {
+  return ID_BY_EXTERNAL_ID.get(externalId) ?? externalId;
+}
+
+const PRODUCTS_BY_ID = new Map(DEMO_PRODUCTS.map((row) => [row.id, toProduct(row)]));
 
 /** `null` is carried through, not flattened — see `DemoProductRow.allergens`. */
 const ALLERGENS_BY_ID = new Map<string, readonly Allergen[] | null>(
-  DEMO_PRODUCTS.map((row) => [row.externalId, row.allergens]),
+  DEMO_PRODUCTS.map((row) => [row.id, row.allergens]),
 );
 
 /** Same rule, same reason: a merchant who said nothing must arrive as null. */
 const DIETS_BY_ID = new Map<string, ProductDietaryProfile | null>(
-  DEMO_PRODUCTS.map((row) => [row.externalId, row.diets]),
+  DEMO_PRODUCTS.map((row) => [row.id, row.diets]),
 );
 
 /** Allergens by product id, `null` carried through — see `DemoProductRow`. */
@@ -234,7 +261,7 @@ export function demoCandidatesFor(ingredientSlug: string): readonly SourcingCand
   const out: SourcingCandidateInput[] = [];
   for (const row of DEMO_MAPPINGS) {
     if (row.ingredientSlug !== ingredientSlug) continue;
-    const product = PRODUCTS_BY_ID.get(row.productExternalId);
+    const product = PRODUCTS_BY_ID.get(idFor(row.productExternalId));
     if (!product) continue;
 
     out.push({
@@ -243,10 +270,10 @@ export function demoCandidatesFor(ingredientSlug: string): readonly SourcingCand
       // `?? []` would be wrong here and dangerously so: it would turn "the
       // merchant published nothing" into "the merchant declared none". The
       // map already holds null for that case and null is what must travel.
-      productAllergens: ALLERGENS_BY_ID.get(row.productExternalId) ?? null,
+      productAllergens: ALLERGENS_BY_ID.get(idFor(row.productExternalId)) ?? null,
       // `?? null` for the same reason again: an id the map does not hold and a
       // merchant who published nothing are both "we do not know".
-      productDiets: DIETS_BY_ID.get(row.productExternalId) ?? null,
+      productDiets: DIETS_BY_ID.get(idFor(row.productExternalId)) ?? null,
     });
   }
   return out;
