@@ -399,6 +399,8 @@ export type CartRow = {
   merchant_id: string;
   merchant_location_id: string;
   currency: string;
+  /** Bumped by the `cart_lines_bump_revision` trigger. Never written by us. */
+  revision: number;
   created_at: string;
   updated_at: string;
 };
@@ -523,7 +525,10 @@ export type Database = {
         Omit<ShoppingListItemRow, 'id' | 'created_at' | 'updated_at'> & { id?: string }
       >;
       ingredient_price_estimates: Table<IngredientPriceEstimateRow>;
-      carts: Table<CartRow, Omit<CartRow, 'id' | 'created_at' | 'updated_at'> & { id?: string }>;
+      carts: Table<
+        CartRow,
+        Omit<CartRow, 'id' | 'created_at' | 'updated_at' | 'revision'> & { id?: string }
+      >;
       cart_lines: Table<
         CartLineRow,
         Omit<CartLineRow, 'id' | 'added_at'> & { id?: string; added_at?: string }

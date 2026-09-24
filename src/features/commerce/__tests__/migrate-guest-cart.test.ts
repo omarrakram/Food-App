@@ -42,6 +42,8 @@ function cart(over: Partial<Cart> = {}): Cart {
     merchantId: 'merchant-a',
     locationId: 'location-a',
     currency: 'EGP',
+    revision: 1,
+    deliveryFeeSnapshot: null,
     lines: [line()],
     createdAt: '2026-09-25T09:00:00.000Z',
     updatedAt: '2026-09-25T09:00:00.000Z',

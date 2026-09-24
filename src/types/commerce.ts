@@ -289,6 +289,20 @@ export type Cart = {
   locationId: string;
   currency: CurrencyCode;
   lines: readonly CartLine[];
+  /**
+   * BUMPED ON EVERY CHANGE, and the thing a validation verdict is ABOUT.
+   *
+   * Validating one basket and ordering another is the race this closes: the
+   * order draft is refused unless the revision it was built from is still the
+   * cart's. Written by a database trigger rather than by callers, because the
+   * caller who forgets is the caller who introduces the bug.
+   */
+  revision: number;
+  /**
+   * The delivery fee the customer last saw, so a change can be shown rather
+   * than absorbed. Null until a fee has been quoted to them.
+   */
+  deliveryFeeSnapshot: Money | null;
   createdAt: string;
   updatedAt: string;
 };

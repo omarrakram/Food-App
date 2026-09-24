@@ -159,6 +159,9 @@ export class SupabaseCartRepository implements CartRepository {
       merchantId: row.merchant_id,
       locationId: row.merchant_location_id,
       currency: row.currency as CurrencyCode,
+      // Maintained by the `cart_lines_bump_revision` trigger, never by us.
+      revision: row.revision,
+      deliveryFeeSnapshot: null,
       lines: (data ?? []).map((line) => toLine(line, row.currency as CurrencyCode)),
       createdAt: row.created_at,
       updatedAt: row.updated_at,

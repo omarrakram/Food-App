@@ -136,6 +136,8 @@ export class LocalCartRepository implements CartRepository {
         : {
             id: LOCAL_CART_ID,
             userId: null,
+            revision: 0,
+            deliveryFeeSnapshot: null,
             merchantId: first.merchantId,
             locationId: first.locationId,
             currency: first.currency,
@@ -147,6 +149,11 @@ export class LocalCartRepository implements CartRepository {
     const next: Cart = {
       ...base,
       lines: mergeLines(base.lines, inputs),
+      // Mirrors the database trigger. Every mutation moves the revision, so a
+      // validation taken against the old one is recognisably stale — the
+      // guest cart has to obey the same rule as the server's or the same race
+      // reappears for signed-out users.
+      revision: base.revision + 1,
       updatedAt: nowISO(),
     };
 
@@ -164,7 +171,7 @@ export class LocalCartRepository implements CartRepository {
         ? cart.lines.filter((line) => line.id !== lineId)
         : cart.lines.map((line) => (line.id === lineId ? { ...line, quantity } : line));
 
-    return this.persist({ ...cart, lines, updatedAt: nowISO() });
+    return this.persist({ ...cart, lines, revision: cart.revision + 1, updatedAt: nowISO() });
   }
 
   async removeLine(lineId: string): Promise<Cart | null> {
@@ -173,6 +180,7 @@ export class LocalCartRepository implements CartRepository {
     return this.persist({
       ...cart,
       lines: cart.lines.filter((line) => line.id !== lineId),
+      revision: cart.revision + 1,
       updatedAt: nowISO(),
     });
   }

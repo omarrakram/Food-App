@@ -61,6 +61,8 @@ function cart(lines: readonly CartLine[]): Cart {
     merchantId: DEMO_MERCHANT_SNAPSHOT.id,
     locationId: DEMO_LOCATION_SNAPSHOT.id,
     currency: 'EGP',
+    revision: 1,
+    deliveryFeeSnapshot: null,
     lines,
     createdAt: TIMESTAMP,
     updatedAt: TIMESTAMP,
