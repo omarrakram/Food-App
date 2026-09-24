@@ -32,6 +32,11 @@ export const StorageKeys = {
   demoSubmissions: 'akla.demo.submissions',
   /** Demo-mode notification feed. */
   demoNotifications: 'akla.demo.notifications',
+  /**
+   * A guest cart that could not be merged at sign-in, parked for the user to
+   * resolve. Keyed by user id inside the record — see `pending-cart.ts`.
+   */
+  pendingCart: 'akla.cart.pending',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];

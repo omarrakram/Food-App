@@ -26,6 +26,7 @@ import { SupabaseSubmissionsRepository } from '@/features/submissions/supabase-r
 import { getSupabase } from '@/lib/supabase/client';
 import { logError } from '@/lib/logger';
 
+import { migrateGuestCart } from '@/features/commerce/migrate-guest-cart';
 import { migrateGuestData } from './migrate-guest-data';
 import { RepositoryProvider } from './repositories';
 
@@ -97,6 +98,15 @@ export function SupabaseBridge({ children }: { children: ReactNode }) {
 
       try {
         const result = await migrateGuestData(userId, remote);
+
+        // The cart migrates separately because it is the one thing that
+        // cannot always be merged: one cart, one merchant, so two baskets
+        // from two branches is a question only the user can answer. A
+        // `parked` outcome leaves the account's cart active and puts the
+        // guest's aside for an explicit choice — see `migrate-guest-cart.ts`.
+        // Like everything else here it never blocks sign-in.
+        const cartOutcome = await migrateGuestCart(userId, remote.cart);
+
         const server = await fetchRemotePreferences(supabase, userId);
 
         if (server) {
@@ -108,7 +118,7 @@ export function SupabaseBridge({ children }: { children: ReactNode }) {
           }
         }
 
-        if (result.migrated) {
+        if (result.migrated || cartOutcome.kind !== 'nothing_to_migrate') {
           await queryClient.invalidateQueries();
         }
         return { migrated: result.migrated };
