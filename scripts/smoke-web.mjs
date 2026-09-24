@@ -1184,6 +1184,51 @@ async function main() {
           await shot('26b-no-eligible-match');
         }
 
+        /*
+          A VEGAN, WHICH IS A DIFFERENT GATE FROM AN ALLERGY.
+
+          Chicken is explicitly `vegan:incompatible` in the demo catalogue, so
+          it must be refused outright. Most of the catalogue publishes NOTHING
+          about diet, and unknown is not compatible — those lines must be asked
+          about rather than either hidden or quietly added. Both halves matter:
+          a build that refused everything would also pass a naive check.
+        */
+        await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1400);
+        await tap('pref-allergen-gluten', { optional: true }); // clear the allergy first
+        await page.waitForTimeout(600);
+        const veganSet = await tap('pref-diet-vegan', { optional: true });
+        check('an eating style can be declared', veganSet);
+        await page.waitForTimeout(900);
+
+        if (veganSet) {
+          await page.goto(`${BASE}/recipe/${KOFTA}`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1800);
+          if (await tap('recipe-get-missing', { optional: true })) {
+            await page.waitForTimeout(900);
+            const veganText = await page.evaluate(() => document.body.innerText);
+
+            check(
+              'a product the shop says is not vegan is refused for a vegan',
+              /Not suitable for you|مش مناسب ليك/i.test(veganText),
+            );
+            check(
+              'a product with no published dietary data is ASKED about, not assumed',
+              /Cannot be confirmed for you|مش قادرين نتأكد/i.test(veganText),
+            );
+            check(
+              'and the refusal names allergies OR diet, since either can cause it',
+              /allergies or your diet|حساسيتك أو لنظامك/i.test(veganText),
+            );
+            await shotAt('[data-testid="recipe-you-need"]', '26d-vegan-dietary-gate');
+          }
+
+          await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1400);
+          await tap('pref-diet-none', { optional: true });
+          await page.waitForTimeout(700);
+        }
+
         // Put the cook back the way we found them, so later sections are not
         // quietly running as a coeliac.
         await page.goto(`${BASE}/settings/preferences`, { waitUntil: 'networkidle' });
@@ -1260,6 +1305,23 @@ async function main() {
               .locator('[data-testid^="recipe-sourced-"]')
               .allInnerTexts()
               .catch(() => []);
+            /*
+              THE 356-LINE CASE, ON A SCREEN.
+
+              Recipe prose is content somebody typed, not something the app
+              formats, and a great deal of the Arabic was written with
+              Arabic-Indic digits. `localise.ts` normalises at the display
+              boundary; this is the proof a reader sees the result.
+            */
+            const stepsText = await page.evaluate(() => document.body.innerText);
+            check(
+              'Arabic recipe STEPS are Western — the 356-line content case',
+              stepsText.length > 0 && !/[\u0660-\u0669\u06F0-\u06F9]/.test(stepsText),
+              (stepsText.match(/[\u0660-\u0669\u06F0-\u06F9][^\n]{0,40}/g) ?? [])
+                .slice(0, 3)
+                .join(' · '),
+            );
+
             check(
               'and its product rows are Western throughout — name, packs, price',
               sourcedArabic.length > 0 && !/[٠-٩۰-۹]/.test(sourcedArabic.join(' · ')),
