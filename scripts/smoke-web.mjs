@@ -1060,8 +1060,8 @@ async function main() {
         check('with one basket open, checkout is reachable', !checkoutDisabled);
         const cartFooter = await bodyText();
         check(
-          'and the cart still says paying in the app is not built',
-          /still being built|لسه بيتبني/i.test(cartFooter),
+          'and the cart still promises nothing is charged before the total is seen',
+          /Nothing is charged until|مش هيتخصم منك حاجة قبل/i.test(cartFooter),
         );
         await shot('26-cart');
 
@@ -1257,6 +1257,44 @@ async function main() {
           );
           check('no page error came out of the whole checkout', errorCount() === before);
           await shot('31-checkout');
+
+          /*
+            --- PAYMENT, AS FAR AS A GUEST CAN GO -------------------------
+
+            Which is not far, and that is the assertion. A payment belongs to
+            an account: `begin_payment` reads `auth.uid()`, and this walk has
+            none. So the payment screen is reachable, renders, and says it
+            cannot find an order — and, the part that matters, says NOTHING
+            that could be read as a receipt.
+
+            Every other state of this screen is driven in
+            `src/app/__tests__/payment-screen.test.tsx`, against a repository
+            that answers what the server would. The four states are checked
+            there; that the route exists and is honest is checked here.
+          */
+          await page.goto(`${BASE}/payment/00000000-0000-4000-8000-000000000000`, {
+            waitUntil: 'networkidle',
+          });
+          await page.waitForTimeout(1500);
+
+          const paymentText = await bodyText();
+          check('the payment screen is reachable', await visible('payment-missing', 6000));
+          check(
+            'and a guest is told there is no such order, not shown a payment form',
+            /could not find that order|مالقيناش الطلب/i.test(paymentText),
+          );
+          check(
+            'nothing on it reads as a receipt',
+            !/order placed|order confirmed|payment confirmed|تم الطلب|الدفع اتأكد/i.test(
+              paymentText,
+            ),
+          );
+          check(
+            'and no order reference was invented here either',
+            !/AKL-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(paymentText),
+          );
+          check('the payment screen raises no page error', errorCount() === before);
+          await shot('32-payment-guest');
         }
 
         // --- The two states a happy basket never shows -----------------------

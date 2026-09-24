@@ -1,8 +1,15 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 import { toAppError } from '@/lib/errors';
-import type { Database } from '@/lib/supabase/database.types';
+import type { Database, PaymentIntentRow } from '@/lib/supabase/database.types';
+import type {
+  OrderFulfilmentState,
+  PaymentMethod,
+  PaymentState,
+} from '@/types/commerce';
 import type { CurrencyCode, Money } from '@/types/domain';
+
+import type { PaymentAttempt, PaymentIntentState } from './payment-intent';
 
 /**
  * THE UNPAID ORDER DRAFT.
@@ -81,8 +88,103 @@ export class OrderDraftRefused extends Error {
   }
 }
 
+/**
+ * The order as the payment screen needs it.
+ *
+ * Small on purpose. The full `Order` type carries items, adjustments,
+ * substitutions and events; a screen asking "has this been paid for" needs
+ * none of them, and fetching them would make the status poll expensive.
+ */
+export type OrderSummary = {
+  readonly id: string;
+  readonly reference: string;
+  readonly currency: CurrencyCode;
+  readonly itemsSubtotal: Money;
+  readonly deliveryFee: Money;
+  readonly total: Money;
+  readonly payment: PaymentState;
+  readonly fulfilment: OrderFulfilmentState;
+  readonly paymentMethod: PaymentMethod | null;
+  /** After this, `begin_payment` refuses. Read, never recomputed. */
+  readonly draftExpiresAt: string | null;
+  readonly paidAt: string | null;
+  readonly createdAt: string;
+};
+
+/** What the client asks for. Notice there is no amount: there cannot be one. */
+export type BeginPaymentRequest = {
+  readonly orderId: string;
+  readonly method: 'card' | 'wallet';
+  /** Stable across retries of the SAME attempt; new for a new attempt. */
+  readonly idempotencyKey: string;
+};
+
+export type BeginPaymentResult = {
+  readonly intentId: string;
+  readonly provider: string;
+  readonly amountMinor: number;
+  readonly currency: string;
+  /** Where to send the customer. Everything that matters happens there. */
+  readonly checkoutUrl: string;
+};
+
+/** Every way beginning a payment can be refused, named. */
+export const PAYMENT_REFUSALS = [
+  'not_authenticated',
+  'order_not_found',
+  'already_paid',
+  'payment_in_flight',
+  'attempt_in_flight',
+  'order_not_payable',
+  'draft_expired',
+  'merchant_not_enabled',
+  'merchant_not_accepting',
+  'product_delisted',
+  'product_out_of_stock',
+  'price_changed',
+  'amount_not_payable',
+  'method_not_supported',
+  'idempotency_key_reused',
+  /** The provider could not be reached, or is not configured. */
+  'payment_unavailable',
+  'unknown',
+] as const;
+export type PaymentRefusal = (typeof PAYMENT_REFUSALS)[number];
+
+export class PaymentRefused extends Error {
+  constructor(readonly refusal: PaymentRefusal) {
+    super(`payment refused: ${refusal}`);
+    this.name = 'PaymentRefused';
+  }
+}
+
+export function paymentRefusalFrom(value: unknown): PaymentRefusal {
+  const text = typeof value === 'string' ? value : JSON.stringify(value ?? '');
+  for (const refusal of PAYMENT_REFUSALS) {
+    if (refusal !== 'unknown' && text.includes(refusal)) return refusal;
+  }
+  return 'unknown';
+}
+
 export interface OrderDraftRepository {
   create(request: OrderDraftRequest): Promise<OrderDraft>;
+  get(orderId: string): Promise<OrderSummary | null>;
+  /** Every attempt against this order, newest first. History, not a status. */
+  attempts(orderId: string): Promise<readonly PaymentAttempt[]>;
+  /** One attempt by id, subject to RLS. An id from a URL proves nothing. */
+  attempt(intentId: string): Promise<PaymentAttempt | null>;
+  beginPayment(request: BeginPaymentRequest): Promise<BeginPaymentResult>;
+  cancelPayment(intentId: string): Promise<void>;
+  /**
+   * The simulator, for demo-merchant orders only.
+   *
+   * On the interface rather than tucked behind a cast because the alternative
+   * is a screen reaching past the repository, and a payment screen that knows
+   * which implementation it has is a payment screen that can be lied to.
+   */
+  simulatePayment(intentId: string, outcome: 'succeeded' | 'failed' | 'pending'): Promise<void>;
+  /** True only when the basket cleared was the one actually paid for. */
+  clearPaidCart(orderId: string): Promise<boolean>;
 }
 
 /**
@@ -113,6 +215,37 @@ export class LocalOrderDraftRepository implements OrderDraftRepository {
   async create(): Promise<OrderDraft> {
     throw new OrderDraftRefused('not_authenticated');
   }
+
+  // A guest has no orders, so reading is EMPTY rather than an error: a screen
+  // that asks "do I have an order" and gets a thrown exception has to special-
+  // case guests everywhere. Anything that would MOVE money refuses instead.
+  async get(): Promise<OrderSummary | null> {
+    return null;
+  }
+
+  async attempts(): Promise<readonly PaymentAttempt[]> {
+    return [];
+  }
+
+  async attempt(): Promise<PaymentAttempt | null> {
+    return null;
+  }
+
+  async beginPayment(): Promise<BeginPaymentResult> {
+    throw new PaymentRefused('not_authenticated');
+  }
+
+  async cancelPayment(): Promise<void> {
+    throw new PaymentRefused('not_authenticated');
+  }
+
+  async simulatePayment(): Promise<void> {
+    throw new PaymentRefused('not_authenticated');
+  }
+
+  async clearPaidCart(): Promise<boolean> {
+    return false;
+  }
 }
 
 export class SupabaseOrderDraftRepository implements OrderDraftRepository {
@@ -137,9 +270,7 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
     // will be asked to pay.
     const { data, error: readError } = await this.client
       .from('orders')
-      .select(
-        'id, reference, currency, items_subtotal_minor, delivery_fee_minor, created_at',
-      )
+      .select('id, reference, currency, items_subtotal_minor, delivery_fee_minor, created_at')
       .eq('id', orderId)
       .eq('user_id', this.userId)
       .single();
@@ -160,4 +291,144 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
       createdAt: data.created_at,
     };
   }
+
+  async get(orderId: string): Promise<OrderSummary | null> {
+    const { data, error } = await this.client
+      .from('orders')
+      // One literal, not a concatenation: supabase-js infers the row type from
+      // the select string, and a `+` turns that into `string` and the result
+      // into an error union.
+      .select('id, reference, currency, items_subtotal_minor, delivery_fee_minor, payment_state, fulfilment_state, payment_method, draft_expires_at, paid_at, created_at')
+      .eq('id', orderId)
+      .eq('user_id', this.userId)
+      .maybeSingle();
+
+    if (error) throw toAppError(error, 'database');
+    if (!data) return null;
+
+    const currency = data.currency as CurrencyCode;
+    return {
+      id: data.id,
+      reference: data.reference,
+      currency,
+      itemsSubtotal: { amountMinor: data.items_subtotal_minor, currency },
+      deliveryFee: { amountMinor: data.delivery_fee_minor, currency },
+      total: {
+        amountMinor: data.items_subtotal_minor + data.delivery_fee_minor,
+        currency,
+      },
+      payment: data.payment_state,
+      fulfilment: data.fulfilment_state,
+      paymentMethod: data.payment_method,
+      draftExpiresAt: data.draft_expires_at,
+      paidAt: data.paid_at,
+      createdAt: data.created_at,
+    };
+  }
+
+  async attempts(orderId: string): Promise<readonly PaymentAttempt[]> {
+    // RLS restricts this to the caller's own attempts; the filter states the
+    // intent without making anybody read a policy to see it.
+    const { data, error } = await this.client
+      .from('payment_intents')
+      .select('*')
+      .eq('order_id', orderId)
+      .eq('user_id', this.userId)
+      .order('created_at', { ascending: false });
+
+    if (error) throw toAppError(error, 'database');
+    return (data ?? []).map(toAttempt);
+  }
+
+  async attempt(intentId: string): Promise<PaymentAttempt | null> {
+    const { data, error } = await this.client
+      .from('payment_intents')
+      .select('*')
+      .eq('id', intentId)
+      .eq('user_id', this.userId)
+      .maybeSingle();
+
+    if (error) throw toAppError(error, 'database');
+    return data ? toAttempt(data) : null;
+  }
+
+  /**
+   * Begins a payment THROUGH THE EDGE FUNCTION, never by calling the RPC here.
+   *
+   * The function runs `begin_payment` with the caller's own JWT — so the
+   * database still answers ownership and derives the amount — and then uses the
+   * provider secret key, which is the part that cannot exist in this bundle.
+   */
+  async beginPayment(request: BeginPaymentRequest): Promise<BeginPaymentResult> {
+    const { data, error } = await this.client.functions.invoke('payments-begin', {
+      body: {
+        orderId: request.orderId,
+        method: request.method,
+        idempotencyKey: request.idempotencyKey,
+      },
+    });
+
+    if (error) {
+      // `functions.invoke` puts the body on the error for a non-2xx, and the
+      // refusal code is in it. A generic "something went wrong" here would
+      // throw away the one thing the screen can act on.
+      const context = (error as { context?: { body?: unknown } }).context?.body;
+      throw new PaymentRefused(paymentRefusalFrom(context ?? error.message));
+    }
+
+    const result = data as Record<string, unknown> | null;
+    if (!result || typeof result.checkoutUrl !== 'string') {
+      throw new PaymentRefused(paymentRefusalFrom(result));
+    }
+
+    return {
+      intentId: String(result.intentId),
+      provider: String(result.provider),
+      amountMinor: Number(result.amountMinor),
+      currency: String(result.currency),
+      checkoutUrl: result.checkoutUrl,
+    };
+  }
+
+  async cancelPayment(intentId: string): Promise<void> {
+    const { error } = await this.client.rpc('cancel_payment_intent', {
+      p_intent_id: intentId,
+    });
+    if (error) throw new PaymentRefused(paymentRefusalFrom(error.message));
+  }
+
+  async simulatePayment(
+    intentId: string,
+    outcome: 'succeeded' | 'failed' | 'pending',
+  ): Promise<void> {
+    const { error } = await this.client.functions.invoke('payments-simulate', {
+      body: { intentId, outcome },
+    });
+    if (error) throw new PaymentRefused(paymentRefusalFrom(error.message));
+  }
+
+  async clearPaidCart(orderId: string): Promise<boolean> {
+    const { data, error } = await this.client.rpc('clear_paid_cart', {
+      p_order_id: orderId,
+    });
+    if (error) throw toAppError(error, 'database');
+    return data === true;
+  }
+}
+
+function toAttempt(row: PaymentIntentRow): PaymentAttempt {
+  return {
+    id: row.id,
+    orderId: row.order_id,
+    provider: row.provider,
+    method: row.method,
+    amountMinor: row.amount_minor,
+    currency: row.currency as CurrencyCode,
+    state: row.state as PaymentIntentState,
+    checkoutUrl: row.checkout_url,
+    failureCode: row.failure_code,
+    failureMessage: row.failure_message,
+    createdAt: row.created_at,
+    settledAt: row.settled_at,
+  };
 }

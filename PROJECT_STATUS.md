@@ -6,7 +6,7 @@ previous session's context.
 | | |
 |---|---|
 | **Last updated** | 2026-09-24 |
-| **Current phase** | **COMMERCE-4 — supermarket ordering, up to an unpaid order draft.** The recipe screen sources its missing ingredients against one merchant branch, a cart holds what was chosen, an address says where it would go, a branch says whether it reaches that area, the basket is revalidated against the current shelf, and a `security definer` function writes a server-priced order in `draft`/`unpaid`. No payment provider, no captured money, no merchant dashboard, no placed order; the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migrations have **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Current phase** | **COMMERCE-5 — supermarket ordering, through payment.** The recipe screen sources its missing ingredients against one merchant branch, a cart holds what was chosen, an address says where it would go, a branch says whether it reaches that area, the basket is revalidated against the current shelf, and a `security definer` function writes a server-priced order in `draft`/`unpaid`, and a payment-intent layer takes it from there: `begin_payment` derives the amount from the order, Paymob is reached only from an edge function holding the secret key, and a signed webhook is the only thing that can say a payment happened. No merchant dashboard, no cash on delivery, no refund operations, no rider. **No Paymob credentials are configured**, the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migrations have **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -15,8 +15,8 @@ previous session's context.
 
 ## Commerce (supermarket ordering)
 
-The transaction layer, built in four phases and stopping deliberately short of
-money. `src/features/commerce/README.md` is the reference; this is the status.
+The transaction layer. `src/features/commerce/README.md` is the reference; this
+is the status.
 
 | phase | what landed |
 |---|---|
@@ -27,6 +27,7 @@ money. `src/features/commerce/README.md` is the reference; this is the status.
 | **Commerce-3E–F** | the recipe screen's sourcing panel, and the cart |
 | **Commerce-3.1** | product-level dietary eligibility from published metadata only (unknown never means safe), and Western numerals across the merchant surface by presentation normalisation |
 | **Commerce-4** | delivery addresses, deliverability by area key, the guest-cart conflict, cart revalidation, the single checkout gate, and the unpaid order draft |
+| **Commerce-5** | the demo catalogue as real rows (so the RPCs can be exercised as the app calls them), payment intents, `begin_payment`, the Paymob integration, the signed webhook, draft expiry and revision-safe cart clearing |
 
 **What a user can do today** (with `EXPO_PUBLIC_DEMO_MERCHANT` on, in a
 non-production build, in Egypt): open a recipe, tap *Get missing ingredients*,
@@ -37,11 +38,19 @@ and open a checkout review that re-prices the basket from the current shelf and
 says exactly what is still in the way. A signed-in account can go one step
 further and have the server write an unpaid draft.
 
-**What nobody can do:** pay. No payment provider is configured, no money is
-captured, no merchant is ever notified, and no migration has been applied to
-the hosted database. A draft is not a purchase — no provider was called, no
-stock is held, and the shop has not been told — and the review screen says all
-three rather than showing a reference number and letting it read as a receipt.
+**What nobody can do:** pay for real. No Paymob credentials are configured, so
+`payments-begin` refuses a real order with `payment_unavailable` rather than
+inventing anything; a demo-merchant order goes through the simulator instead,
+which says in as many words that no money moves. No migration has been applied
+to the hosted database and no merchant is ever notified — a paid order stops at
+`placed`, which is where the merchant queue begins and Commerce-6 picks up.
+
+**The rule the payment layer is built around:** the client cannot move money.
+Not the amount, not the state, not the moment an order reaches the merchant.
+`begin_payment` derives the amount from the order against a locked row;
+`record_payment_event` is the only thing that can say a payment succeeded and
+only the service role may call it; and a duplicate provider callback is a no-op
+because `payment_events` is unique on the provider's own event id.
 
 **Three rules the screens keep**, each of which was a way the UI could lie:
 commerce is revealed rather than rendered by default; a bulk add admits only

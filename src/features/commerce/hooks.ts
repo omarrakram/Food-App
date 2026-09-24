@@ -23,9 +23,14 @@ import {
 import { selectMerchant, type SelectedMerchant } from './merchant-selection';
 import {
   OrderDraftRefused,
+  PaymentRefused,
+  paymentRefusalFrom,
+  type BeginPaymentRequest,
   type OrderDraft,
   type OrderDraftFailure,
+  type PaymentRefusal,
 } from './order-draft';
+import { paymentStatus, type PaymentStatus } from './payment-intent';
 import { clearPendingCart, readPendingCart } from './pending-cart';
 import type { SourcedLine, SourcingResult } from './ports';
 import { requirementsFor, type RequirementsResult } from './requirements';
@@ -678,4 +683,208 @@ export function useCheckout(addressId: string | null) {
       });
     },
   };
+}
+
+// --- Paying ------------------------------------------------------------------
+
+/**
+ * How often the status screen asks again while a payment is in flight.
+ *
+ * FOUR SECONDS, and only while the answer can still change. The webhook is the
+ * authority and it arrives on its own schedule; this is the customer watching a
+ * screen, not a reconciliation loop. Polling harder would not make the provider
+ * answer sooner and would make a stalled payment expensive.
+ */
+const CONFIRMING_POLL_MS = 4_000;
+
+export function useOrder(orderId: string | null, refetchInterval: number | false = false) {
+  const { orders, scopeKey } = useRepositories();
+
+  return useQuery({
+    queryKey: queryKeys.order(scopeKey, orderId ?? 'none'),
+    enabled: orderId !== null,
+    refetchInterval,
+    queryFn: async () => {
+      if (!orderId) return null;
+      try {
+        return await orders.get(orderId);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+/**
+ * Everything the payment screen needs, as one verdict.
+ *
+ * The order and its attempts are read separately and folded by
+ * `paymentStatus`, which is pure and tested on its own. Nothing here decides
+ * whether money moved — it renders what the server already decided.
+ */
+export function usePaymentStatus(orderId: string | null): {
+  readonly order: ReturnType<typeof useOrder>['data'];
+  readonly status: PaymentStatus | null;
+  readonly isLoading: boolean;
+  readonly refetch: () => void;
+} {
+  const { orders, scopeKey } = useRepositories();
+  const queryClient = useQueryClient();
+
+  /*
+    POLLING IS REACT QUERY'S JOB, not a `setInterval` of ours.
+
+    An interval in an effect was the first version, and it leaked: the timer
+    outlived the tree in tests and kept the process alive. `refetchInterval`
+    is owned by the query, started and cleared with it, and paused while the
+    app is in the background — which also means a phone in a pocket is not
+    quietly asking a payment provider anything.
+  */
+  const [confirming, setConfirming] = useState(false);
+  const interval = confirming ? CONFIRMING_POLL_MS : false;
+  const order = useOrder(orderId, interval);
+
+  const attempts = useQuery({
+    queryKey: queryKeys.paymentAttempts(scopeKey, orderId ?? 'none'),
+    enabled: orderId !== null,
+    refetchInterval: interval,
+    queryFn: async () => {
+      if (!orderId) return [];
+      try {
+        return await orders.attempts(orderId);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+
+  const status = useMemo(() => {
+    if (!order.data) return null;
+    return paymentStatus({
+      paymentState: order.data.payment,
+      fulfilmentState: order.data.fulfilment,
+      draftExpiresAt: order.data.draftExpiresAt,
+      attempts: attempts.data ?? [],
+      now: new Date(),
+    });
+  }, [order.data, attempts.data]);
+
+  const refetch = useCallback(() => {
+    if (!orderId) return;
+    void queryClient.invalidateQueries({ queryKey: queryKeys.order(scopeKey, orderId) });
+    void queryClient.invalidateQueries({
+      queryKey: queryKeys.paymentAttempts(scopeKey, orderId),
+    });
+  }, [queryClient, scopeKey, orderId]);
+
+  /*
+    ONLY WHILE THE ANSWER CAN CHANGE.
+
+    `confirming` is the one view where the server may move underneath us, so it
+    is the only one that polls. A settled order polls never — re-asking whether
+    a captured payment is still captured is pure cost.
+  */
+  const shouldPoll = status?.view === 'confirming';
+  if (shouldPoll !== confirming) setConfirming(shouldPoll);
+
+  return {
+    order: order.data,
+    status,
+    isLoading: order.isLoading || attempts.isLoading,
+    refetch,
+  };
+}
+
+/**
+ * One attempt, by id.
+ *
+ * For the simulator, which is handed an intent id and has to find the order it
+ * belongs to. Read through the repository so RLS answers ownership: an id from
+ * a URL is not evidence of anything.
+ */
+export function usePaymentAttempt(intentId: string | null) {
+  const { orders, scopeKey } = useRepositories();
+
+  return useQuery({
+    queryKey: ['akla', 'payment-attempt', scopeKey, intentId ?? 'none'] as const,
+    enabled: intentId !== null,
+    queryFn: async () => {
+      if (!intentId) return null;
+      try {
+        return await orders.attempt(intentId);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+export function usePaymentActions(orderId: string | null) {
+  const { orders, cart, scopeKey } = useRepositories();
+  const queryClient = useQueryClient();
+  const [refusal, setRefusal] = useState<PaymentRefusal | null>(null);
+
+  const invalidate = useCallback(() => {
+    if (!orderId) return;
+    void queryClient.invalidateQueries({ queryKey: queryKeys.order(scopeKey, orderId) });
+    void queryClient.invalidateQueries({
+      queryKey: queryKeys.paymentAttempts(scopeKey, orderId),
+    });
+  }, [queryClient, scopeKey, orderId]);
+
+  const onRefused = (error: unknown) => {
+    setRefusal(error instanceof PaymentRefused ? error.refusal : paymentRefusalFrom(error));
+    invalidate();
+  };
+
+  const begin = useMutation({
+    mutationFn: (request: BeginPaymentRequest) => orders.beginPayment(request),
+    onSuccess: () => {
+      setRefusal(null);
+      invalidate();
+    },
+    onError: onRefused,
+  });
+
+  const cancel = useMutation({
+    mutationFn: (intentId: string) => orders.cancelPayment(intentId),
+    onSuccess: invalidate,
+    onError: onRefused,
+  });
+
+  /** The simulator. Reachable only for a demo-merchant order; see order-draft.ts. */
+  const simulate = useMutation({
+    mutationFn: ({
+      intentId,
+      outcome,
+    }: {
+      intentId: string;
+      outcome: 'succeeded' | 'failed' | 'pending';
+    }) => orders.simulatePayment(intentId, outcome),
+    onSuccess: invalidate,
+    onError: onRefused,
+  });
+
+  /**
+   * Clears the basket that was actually paid for.
+   *
+   * REVISION-SAFE, and the database is what makes it so: if the customer
+   * rebuilt their cart while the payment was in flight, `clear_paid_cart`
+   * returns false and the newer basket survives. Called after a confirmed
+   * payment, never when one merely starts.
+   */
+  const clearPaidBasket = useMutation({
+    mutationFn: async () => {
+      if (!orderId) return false;
+      const cleared = await orders.clearPaidCart(orderId);
+      if (cleared) {
+        // Only when something actually went. Invalidating a cart we did not
+        // touch would flicker a basket the customer is still building.
+        void queryClient.invalidateQueries({ queryKey: queryKeys.cart(scopeKey) });
+      }
+      return cleared;
+    },
+  });
+
+  return { begin, cancel, simulate, clearPaidBasket, refusal, cartRepository: cart };
 }

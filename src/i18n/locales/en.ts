@@ -996,7 +996,7 @@ export const en = {
   'cart.priceChangedBody': 'Some items cost a different amount than when you added them.',
   'cart.priceWas': 'was {amount}',
   'cart.checkoutSoonBody':
-    'Paying inside the app is still being built. Your cart is saved until it is.',
+    'Nothing is charged until you have seen the total and chosen how to pay.',
   'cart.error': 'We could not load your cart.',
 
   // --- Checkout ------------------------------------------------------------
@@ -1008,9 +1008,9 @@ export const en = {
   'checkout.merchandise': 'Items',
   'checkout.delivery': 'Delivery',
   'checkout.total': 'Total',
-  'checkout.continueToPayment': 'Payment is not ready yet',
+  'checkout.continueToPayment': 'Continue to payment',
   'checkout.continueToPaymentBody':
-    'Paying inside the app is still being built. Nothing has been charged and the shop has not been told.',
+    'Nothing has been charged yet, and the shop has not been told.',
   'checkout.prepareDraft': 'Prepare order',
   'checkout.draftReady': 'Checkout ready',
   'checkout.draftReadyBody':
@@ -1081,6 +1081,82 @@ export const en = {
     'The shop has not published enough about {name} to say it suits you.',
   'validation.issue.below_minimum': 'Your basket is below this shop\u2019s minimum.',
   'validation.issue.empty_cart': 'Your cart is empty.',
+
+  // --- Paying ---------------------------------------------------------------
+  // LANGUAGE RULE: nothing here says the order was placed, received or sent to
+  // the shop until the SERVER says the payment was captured. Before that the
+  // only honest words are about the attempt, not the order.
+  'payment.title': 'Payment',
+  'payment.method': 'How would you like to pay?',
+  'payment.method.card': 'Card',
+  'payment.method.cardHint': 'Visa, Mastercard or Meeza',
+  'payment.method.wallet': 'Mobile wallet',
+  'payment.method.walletHint': 'Vodafone Cash, Orange Money, Etisalat or WE',
+  'payment.continue': 'Continue securely',
+  'payment.continueBody':
+    'You will finish paying on the payment provider\u2019s own page. AKALT never sees your card.',
+  'payment.opening': 'Opening the payment page\u2026',
+  'payment.openAgain': 'Open the payment page again',
+
+  'payment.confirming': 'Confirming your payment',
+  'payment.confirmingBody':
+    'We are waiting for the bank to confirm. Do not pay again \u2014 if this went through, we will show it here.',
+  'payment.confirmingResume': 'If you closed the payment page, you can open it again.',
+  'payment.cancelAttempt': 'I did not pay',
+  'payment.cancelAttemptBody':
+    'Use this only if you closed the payment page without paying. It lets you start again.',
+
+  'payment.confirmed': 'Payment confirmed',
+  'payment.confirmedBody':
+    'We have your money and your order is with the shop. They will start picking it.',
+  'payment.confirmedWaiting':
+    'We have your money. Your order is being sent to the shop.',
+  'payment.reference': 'Order {reference}',
+  'payment.paidTotal': 'Paid {amount}',
+
+  'payment.failedTitle': 'Payment did not go through',
+  'payment.failedBody': 'Nothing was charged. You can try again.',
+  'payment.retry': 'Try again',
+  'payment.backToCheckout': 'Back to checkout',
+
+  'payment.expiredTitle': 'This order has expired',
+  'payment.expiredBody':
+    'Prices and stock move, so we only hold an unpaid order for a short time. Your basket is still here.',
+  'payment.backToCart': 'Back to my cart',
+
+  'payment.failure.insufficient_funds': 'There were not enough funds.',
+  'payment.failure.declined': 'Your bank declined it.',
+  'payment.failure.cancelled_by_customer': 'You cancelled the payment.',
+  'payment.failure.simulated_decline': 'Simulated decline.',
+
+  // --- Why a payment could not start ----------------------------------------
+  'payment.refused.not_authenticated': 'You need to be signed in to pay.',
+  'payment.refused.order_not_found': 'We could not find that order.',
+  'payment.refused.already_paid': 'This order is already paid for.',
+  'payment.refused.payment_in_flight': 'A payment is already being confirmed.',
+  'payment.refused.attempt_in_flight': 'A payment is already being confirmed.',
+  'payment.refused.order_not_payable': 'This order cannot be paid for.',
+  'payment.refused.draft_expired': 'This order expired before it was paid for.',
+  'payment.refused.merchant_not_enabled': 'This shop is unavailable.',
+  'payment.refused.merchant_not_accepting': 'This shop stopped taking orders.',
+  'payment.refused.product_delisted': 'Something in your order is no longer sold.',
+  'payment.refused.product_out_of_stock': 'Something in your order has run out.',
+  'payment.refused.price_changed': 'A price changed. Check your order before paying.',
+  'payment.refused.amount_not_payable': 'There is nothing to pay.',
+  'payment.refused.method_not_supported': 'That way of paying is not available yet.',
+  'payment.refused.idempotency_key_reused': 'Something went wrong starting the payment.',
+  'payment.refused.payment_unavailable':
+    'Payments are unavailable right now. Nothing was charged.',
+  'payment.refused.unknown': 'We could not start the payment. Nothing was charged.',
+
+  // --- The simulator --------------------------------------------------------
+  'payment.simulator.title': 'Simulated payment',
+  'payment.simulator.body':
+    'This is the development shop, so there is no real payment page and no money moves. Choose what the provider should say.',
+  'payment.simulator.succeed': 'Simulate a successful payment',
+  'payment.simulator.fail': 'Simulate a declined payment',
+  'payment.simulator.pending': 'Simulate a pending payment',
+  'payment.simulator.amount': 'Amount: {amount}',
 
   // --- The parked guest cart ------------------------------------------------
   'cart.conflictTitle': 'You already have a cart from another shop',

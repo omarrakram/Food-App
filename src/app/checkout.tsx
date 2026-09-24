@@ -280,6 +280,7 @@ export default function CheckoutScreen() {
                   iconTone={chosen === address.id ? 'primary' : 'neutral'}
                   title={toWesternNumerals(address.label ?? address.recipientName)}
                   subtitle={addressSummary(address, areas.data ?? [], language)}
+                  selected={chosen === address.id}
                   onPress={() => setAddressId(address.id)}
                   testID={`checkout-address-${address.id}`}
                 />
@@ -499,10 +500,18 @@ export default function CheckoutScreen() {
         {draft ? (
           <>
             {/*
-              PAYMENT IS NOT BUILT. A live-looking button that opens an apology
-              is worse than a dead one that says so on its face.
+              THE DRAFT EXISTS; PAYING IS THE NEXT SCREEN. Choosing a method and
+              being sent to the provider happens there rather than here, so this
+              screen stays about the ORDER and that one stays about the MONEY —
+              and a customer who backs out of payment lands somewhere that still
+              makes sense.
             */}
-            <Button label={t('checkout.continueToPayment')} disabled size="lg" testID="checkout-pay" />
+            <Button
+              label={t('checkout.continueToPayment')}
+              size="lg"
+              onPress={() => router.push(`/payment/${draft.id}`)}
+              testID="checkout-pay"
+            />
             <Text variant="caption" color="textTertiary" style={{ textAlign: 'center' }}>
               {t('checkout.continueToPaymentBody')}
             </Text>

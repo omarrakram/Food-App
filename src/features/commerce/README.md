@@ -3,7 +3,7 @@
 The transaction layer. Everything between "I'm missing cooking cream" and
 "somebody rang the doorbell".
 
-**Status: Commerce-4.** Types, state machines, the money ledger, pack maths,
+**Status: Commerce-5.** Types, state machines, the money ledger, pack maths,
 the sourcing engine, the schema, an isolated development catalogue, the cart
 repositories, delivery addresses, deliverability by area key, cart
 revalidation, the single checkout gate, and an unpaid order draft written by a
@@ -11,13 +11,16 @@ revalidation, the single checkout gate, and an unpaid order draft written by a
 panel, the cart, the address list and form, and the checkout review. All with
 tests.
 
-**No payment provider, no captured money, no merchant dashboard, no placed
-order.** The journey stops at an UNPAID DRAFT: a real `orders` row in
-`draft`/`unpaid`, priced by the server, that a payment provider could later be
-pointed at. It is not a payment, not a stock reservation, and the merchant has
-not been told — the review screen says all three rather than showing a
-reference number and letting it read as a receipt. The migrations have NOT
-been applied to hosted Supabase.
+Plus payment: a payment-intent layer, a `begin_payment` RPC that derives the
+amount from the order, the Paymob integration behind three edge functions, and
+a signed webhook that is the only thing in the system able to say a payment
+happened.
+
+**No merchant dashboard, no cash on delivery, no refund operations, no rider.**
+A paid order reaches `placed` and stops there, which is where the merchant
+queue begins and where Commerce-6 picks up. **No Paymob credentials are
+configured and the migrations have NOT been applied to hosted Supabase** — the
+whole of this runs against `npm run db:local` and the simulator.
 
 The product this serves is AKALT's own: the customer decides what to eat,
 AKALT works out what they are missing, sources it from one merchant, takes the
@@ -316,17 +319,56 @@ customer has to look at the new number before a draft can be built.
 | `migrate-guest-cart.ts` | migrate · merge · park — never discard |
 | `revalidation.ts` | what is still true, immediately before an order exists |
 | `checkout-readiness.ts` | the ONE gate: `canProceedToDraft`, and why not |
-| `order-draft.ts` | the client side of `create_order_draft`, and its refusals |
+| `order-draft.ts` | the client side of the order RPCs, and every refusal they can give |
+| `payment-intent.ts` | one attempt to pay, and what the customer is told about it |
 | `hooks.ts` | the only React in here: binds the engines to cache and prefs |
 
 Screens: `src/app/recipe/[id]/index.tsx` (the sourcing panel),
-`src/app/cart.tsx`, `src/app/addresses/` (list and form) and
-`src/app/checkout.tsx`. The one shared component is
+`src/app/cart.tsx`, `src/app/addresses/` (list and form),
+`src/app/checkout.tsx` and `src/app/payment/`. The one shared component is
 `src/components/commerce/sourced-line.tsx`.
 
-The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`
-and `20260925090000_commerce_checkout.sql`. Neither has been applied to hosted
-Supabase.
+Server-side: `supabase/functions/payments-begin`, `payments-webhook` and
+`payments-simulate`, with the provider itself in `_shared/paymob.ts`.
+
+The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`,
+`20260925090000_commerce_checkout.sql` and `20260926090000_payment.sql`. None
+of them has been applied to hosted Supabase.
+
+`npm run db:local` builds a throwaway database with all of it plus the demo
+catalogue as real rows, which is the only way the RPCs can be exercised the way
+the app calls them.
+
+## Four things the payment layer will not do
+
+**The client cannot name an amount.** `begin_payment` takes an order, a method
+and an idempotency key. Everything financial is read from the order inside the
+function, against a row locked `for update`.
+
+**The client cannot say a payment happened.** `orders` has a select policy and
+no update policy; `payment_intents` has neither insert nor update. The only
+writer is `record_payment_event`, and only the service role may call it —
+reached from the webhook, after an HMAC-SHA512 signature over twenty fields has
+verified in constant time.
+
+**A duplicate callback cannot charge twice.** `payment_events` is unique on
+`(provider, kind, provider_event_id)`, and that constraint IS the guard: the
+second delivery inserts nothing and the function returns `duplicate` without
+touching the order. A late failure after a success returns
+`ignored_out_of_order`; a settled attempt is settled.
+
+**Which provider is read off the merchant.** A demo merchant can only ever be
+settled by the simulator and a real one only by Paymob. There is no argument, no
+flag and no session setting a client could use to cross that line.
+
+### Paymob captures in one step
+
+Worth stating because the state machine allows both. Paymob does offer
+auth-then-capture, but it needs its own integration id and is card-only — it
+cannot hold a wallet payment, and wallets are most of the Egyptian market. So
+a verified success goes `authorising -> captured`, and nothing pretends we are
+holding funds we have already taken. Voids and refunds are real operations
+against a captured transaction, so nothing is lost by being honest about it.
 
 ## Three things the checkout will not do
 

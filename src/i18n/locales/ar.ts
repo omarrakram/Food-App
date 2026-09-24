@@ -937,7 +937,7 @@ export const ar: Record<RawTranslationKey, string> = {
   'cart.priceChanged': 'الأسعار اتغيرت',
   'cart.priceChangedBody': 'في حاجات سعرها دلوقتي غير لما ضفتها.',
   'cart.priceWas': 'كان {amount}',
-  'cart.checkoutSoonBody': 'الدفع جوه التطبيق لسه بيتبني. عربتك محفوظة لحد ما يجهز.',
+  'cart.checkoutSoonBody': 'مش هيتخصم منك حاجة قبل ما تشوف الإجمالي وتختار تدفع إزاي.',
   'cart.error': 'مقدرناش نحمّل العربة.',
 
   // --- Checkout ------------------------------------------------------------
@@ -949,8 +949,8 @@ export const ar: Record<RawTranslationKey, string> = {
   'checkout.merchandise': 'المنتجات',
   'checkout.delivery': 'التوصيل',
   'checkout.total': 'الإجمالي',
-  'checkout.continueToPayment': 'الدفع لسه مش جاهز',
-  'checkout.continueToPaymentBody': 'الدفع جوه التطبيق لسه بيتبني. مفيش حاجة اتخصمت والمحل ماتبلغش.',
+  'checkout.continueToPayment': 'كمّل للدفع',
+  'checkout.continueToPaymentBody': 'لسه مفيش حاجة اتخصمت، والمحل ماتبلغش.',
   'checkout.prepareDraft': 'جهّز الطلب',
   'checkout.draftReady': 'الطلب جاهز',
   'checkout.draftReadyBody': 'طلبك اتجهّز ومستني الدفع. مفيش حاجة اتخصمت، والمحل مااتبعتلوش حاجة.',
@@ -1015,6 +1015,75 @@ export const ar: Record<RawTranslationKey, string> = {
   'validation.issue.eligibility_unknown': 'المحل مكتبش معلومات كفاية عن {name} نقول بيها إنه يناسبك.',
   'validation.issue.below_minimum': 'العربة أقل من الحد الأدنى للمحل.',
   'validation.issue.empty_cart': 'العربة فاضية.',
+
+  // --- Paying ---------------------------------------------------------------
+  'payment.title': 'الدفع',
+  'payment.method': 'عايز تدفع إزاي؟',
+  'payment.method.card': 'كارت',
+  'payment.method.cardHint': 'فيزا أو ماستركارد أو ميزة',
+  'payment.method.wallet': 'محفظة الموبايل',
+  'payment.method.walletHint': 'فودافون كاش أو أورنج موني أو اتصالات أو وي',
+  'payment.continue': 'كمّل الدفع بأمان',
+  'payment.continueBody': 'هتكمّل الدفع على صفحة شركة الدفع نفسها. أكلت مبتشوفش الكارت بتاعك.',
+  'payment.opening': 'بنفتح صفحة الدفع…',
+  'payment.openAgain': 'افتح صفحة الدفع تاني',
+
+  'payment.confirming': 'بنأكد الدفع',
+  'payment.confirmingBody':
+    'مستنيين تأكيد من البنك. متدفعش تاني — لو الدفع تم هيظهر هنا.',
+  'payment.confirmingResume': 'لو قفلت صفحة الدفع، تقدر تفتحها تاني.',
+  'payment.cancelAttempt': 'أنا مدفعتش',
+  'payment.cancelAttemptBody':
+    'استخدم دي بس لو قفلت صفحة الدفع من غير ما تدفع. هتسمحلك تبدأ من الأول.',
+
+  'payment.confirmed': 'الدفع اتأكد',
+  'payment.confirmedBody': 'فلوسك وصلتنا وطلبك عند المحل. هيبدأوا يجهزوه.',
+  'payment.confirmedWaiting': 'فلوسك وصلتنا. طلبك في طريقه للمحل.',
+  'payment.reference': 'طلب {reference}',
+  'payment.paidTotal': 'اتدفع {amount}',
+
+  'payment.failedTitle': 'الدفع ماتمّش',
+  'payment.failedBody': 'مااتخصمش أي حاجة. تقدر تجرب تاني.',
+  'payment.retry': 'جرّب تاني',
+  'payment.backToCheckout': 'ارجع للدفع',
+
+  'payment.expiredTitle': 'الطلب ده خلصت مدته',
+  'payment.expiredBody':
+    'الأسعار والمخزون بيتغيروا، عشان كده بنحجز الطلب غير المدفوع لفترة قصيرة بس. عربتك لسه موجودة.',
+  'payment.backToCart': 'ارجع لعربتي',
+
+  'payment.failure.insufficient_funds': 'الرصيد مش كفاية.',
+  'payment.failure.declined': 'البنك رفض العملية.',
+  'payment.failure.cancelled_by_customer': 'إنت لغيت الدفع.',
+  'payment.failure.simulated_decline': 'رفض تجريبي.',
+
+  // --- Why a payment could not start ----------------------------------------
+  'payment.refused.not_authenticated': 'لازم تسجّل دخولك عشان تدفع.',
+  'payment.refused.order_not_found': 'مالقيناش الطلب ده.',
+  'payment.refused.already_paid': 'الطلب ده مدفوع خلاص.',
+  'payment.refused.payment_in_flight': 'في دفعة بيتم تأكيدها بالفعل.',
+  'payment.refused.attempt_in_flight': 'في دفعة بيتم تأكيدها بالفعل.',
+  'payment.refused.order_not_payable': 'الطلب ده مينفعش يتدفع.',
+  'payment.refused.draft_expired': 'الطلب ده خلصت مدته قبل ما يتدفع.',
+  'payment.refused.merchant_not_enabled': 'المحل ده مش متاح.',
+  'payment.refused.merchant_not_accepting': 'المحل بطّل ياخد طلبات.',
+  'payment.refused.product_delisted': 'في حاجة في طلبك مابقتش تتباع.',
+  'payment.refused.product_out_of_stock': 'في حاجة في طلبك خلصت.',
+  'payment.refused.price_changed': 'في سعر اتغير. راجع طلبك قبل ما تدفع.',
+  'payment.refused.amount_not_payable': 'مفيش حاجة تتدفع.',
+  'payment.refused.method_not_supported': 'طريقة الدفع دي لسه مش متاحة.',
+  'payment.refused.idempotency_key_reused': 'حصلت مشكلة وإحنا بنبدأ الدفع.',
+  'payment.refused.payment_unavailable': 'الدفع مش متاح دلوقتي. مااتخصمش أي حاجة.',
+  'payment.refused.unknown': 'مقدرناش نبدأ الدفع. مااتخصمش أي حاجة.',
+
+  // --- The simulator --------------------------------------------------------
+  'payment.simulator.title': 'دفع تجريبي',
+  'payment.simulator.body':
+    'ده المحل التجريبي، فمفيش صفحة دفع حقيقية ومفيش فلوس بتتحرك. اختار شركة الدفع تقول إيه.',
+  'payment.simulator.succeed': 'جرّب دفعة ناجحة',
+  'payment.simulator.fail': 'جرّب دفعة مرفوضة',
+  'payment.simulator.pending': 'جرّب دفعة معلّقة',
+  'payment.simulator.amount': 'المبلغ: {amount}',
 
   // --- The parked guest cart ------------------------------------------------
   'cart.conflictTitle': 'عندك عربة من محل تاني',

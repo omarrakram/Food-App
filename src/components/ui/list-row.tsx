@@ -19,6 +19,15 @@ export type ListRowProps = {
   onPress?: () => void;
   showChevron?: boolean;
   toggle?: { value: boolean; onChange: (next: boolean) => void };
+  /**
+   * This row is the chosen one in a set.
+   *
+   * Rendered as `accessibilityState.selected` rather than only as a filled
+   * icon: a radio list whose selection is visible only in a glyph tells a
+   * screen-reader user nothing about which payment method they are about to
+   * use.
+   */
+  selected?: boolean;
   destructive?: boolean;
   disabled?: boolean;
   style?: ViewStyle;
@@ -36,6 +45,7 @@ export function ListRow({
   onPress,
   showChevron,
   toggle,
+  selected,
   destructive = false,
   disabled = false,
   style,
@@ -125,7 +135,7 @@ export function ListRow({
       testID={testID}
       accessibilityRole="button"
       accessibilityLabel={subtitle ? `${title}. ${subtitle}` : title}
-      accessibilityState={{ disabled }}
+      accessibilityState={selected === undefined ? { disabled } : { disabled, selected }}
       disabled={disabled}
       onPress={onPress}
       haptic="selection"

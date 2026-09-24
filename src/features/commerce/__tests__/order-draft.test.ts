@@ -2,6 +2,9 @@ import {
   LocalOrderDraftRepository,
   ORDER_DRAFT_FAILURES,
   OrderDraftRefused,
+  PAYMENT_REFUSALS,
+  PaymentRefused,
+  paymentRefusalFrom,
   refusalFrom,
   SupabaseOrderDraftRepository,
   type OrderDraftFailure,
@@ -152,5 +155,126 @@ describe('SupabaseOrderDraftRepository', () => {
     await expect(
       new SupabaseOrderDraftRepository(supabase, 'user-1').create(REQUEST),
     ).rejects.toMatchObject({ failure: 'unknown' });
+  });
+});
+
+/**
+ * BEGINNING A PAYMENT: what crosses the boundary.
+ *
+ * Asserted here rather than by pressing the button on the screen, because
+ * here is where the boundary actually is. The question is not "does the
+ * button work" — it is "can anything the client sends name a price", and the
+ * answer has to be no by construction.
+ */
+describe('beginPayment', () => {
+  /** A supabase-js shape with only the calls this path makes. */
+  function client(outcome: { data?: unknown; error?: unknown }) {
+    const invoked: { name: string; body: unknown }[] = [];
+    return {
+      invoked,
+      supabase: {
+        functions: {
+          invoke: (name: string, options: { body: unknown }) => {
+            invoked.push({ name, body: options.body });
+            return Promise.resolve({ data: outcome.data ?? null, error: outcome.error ?? null });
+          },
+        },
+      } as never,
+    };
+  }
+
+  const REQUEST = { orderId: 'order-1', method: 'card' as const, idempotencyKey: 'attempt-1' };
+
+  it('goes through the edge function, never straight to the provider', async () => {
+    const { supabase, invoked } = client({
+      data: {
+        intentId: 'intent-1',
+        provider: 'paymob',
+        amountMinor: 13_000,
+        currency: 'EGP',
+        checkoutUrl: 'https://accept.paymob.com/unifiedcheckout/?x=1',
+      },
+    });
+
+    await new SupabaseOrderDraftRepository(supabase, 'user-1').beginPayment(REQUEST);
+    expect(invoked).toHaveLength(1);
+    expect(invoked[0]!.name).toBe('payments-begin');
+  });
+
+  // THE HEADLINE OF THE WHOLE PHASE. There is no field here that could carry
+  // a price, and this fails the moment somebody adds one.
+  it('sends an order, a method and a key — and nothing that could name a price', async () => {
+    const { supabase, invoked } = client({
+      data: {
+        intentId: 'intent-1',
+        provider: 'paymob',
+        amountMinor: 13_000,
+        currency: 'EGP',
+        checkoutUrl: 'https://accept.paymob.com/unifiedcheckout/?x=1',
+      },
+    });
+
+    await new SupabaseOrderDraftRepository(supabase, 'user-1').beginPayment(REQUEST);
+
+    const body = invoked[0]!.body as Record<string, unknown>;
+    expect(Object.keys(body).sort()).toEqual(['idempotencyKey', 'method', 'orderId']);
+    for (const key of Object.keys(body)) {
+      expect(key).not.toMatch(/amount|price|total|minor|currency|commission|fee/i);
+    }
+  });
+
+  it('returns the checkout URL the server produced', async () => {
+    const { supabase } = client({
+      data: {
+        intentId: 'intent-1',
+        provider: 'paymob',
+        amountMinor: 13_000,
+        currency: 'EGP',
+        checkoutUrl: 'https://accept.paymob.com/unifiedcheckout/?publicKey=pk&clientSecret=cs',
+      },
+    });
+
+    const result = await new SupabaseOrderDraftRepository(supabase, 'user-1').beginPayment(REQUEST);
+    expect(result.checkoutUrl).toContain('unifiedcheckout');
+    expect(result.amountMinor).toBe(13_000);
+  });
+
+  it('turns a refusal into a named reason a screen can say out loud', async () => {
+    const { supabase } = client({
+      error: { message: 'x', context: { body: { error: 'payment_refused', reason: 'draft_expired' } } },
+    });
+
+    await expect(
+      new SupabaseOrderDraftRepository(supabase, 'user-1').beginPayment(REQUEST),
+    ).rejects.toMatchObject({ refusal: 'draft_expired' });
+  });
+
+  // NEVER OPTIMISTIC. A response with no checkout URL is not a payment that
+  // half-started; it is a payment that did not start.
+  it('refuses rather than inventing a checkout when the server returns nothing', async () => {
+    const { supabase } = client({ data: { intentId: 'intent-1' } });
+    await expect(
+      new SupabaseOrderDraftRepository(supabase, 'user-1').beginPayment(REQUEST),
+    ).rejects.toBeInstanceOf(PaymentRefused);
+  });
+
+  it('a guest is refused before anything is sent', async () => {
+    await expect(new LocalOrderDraftRepository().beginPayment()).rejects.toMatchObject({
+      refusal: 'not_authenticated',
+    });
+  });
+});
+
+describe('paymentRefusalFrom', () => {
+  it.each(PAYMENT_REFUSALS.filter((refusal) => refusal !== 'unknown'))(
+    'reads %s back out of a server response',
+    (refusal) => {
+      expect(paymentRefusalFrom({ error: 'payment_refused', reason: refusal })).toBe(refusal);
+    },
+  );
+
+  it('falls back to unknown rather than guessing', () => {
+    expect(paymentRefusalFrom('connection reset')).toBe('unknown');
+    expect(paymentRefusalFrom(null)).toBe('unknown');
   });
 });

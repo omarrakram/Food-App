@@ -223,4 +223,101 @@ begin
 end;
 $$;
 
+-- --- And on, through payment -------------------------------------------------
+--
+-- THE WHOLE CHAIN, against the catalogue the app bundles:
+--
+--   cart -> address -> draft -> begin_payment -> verified callback -> placed
+--
+-- The callback step runs as the SERVICE ROLE, because that is who the webhook
+-- is. Everything before and after it runs as the customer. If any step needed
+-- a privilege the app does not have, that is the finding.
+
+do $$
+declare
+  v_order  uuid;
+  v_intent public.payment_intents%rowtype;
+  v_row    public.orders%rowtype;
+  v_result text;
+  v_fee    integer;
+begin
+  select id into v_order from public.orders
+   where user_id = 'b0000000-0000-4000-8000-00000000000a';
+  select delivery_fee_minor into v_fee
+    from public.merchant_locations where id = pg_temp.branch();
+
+  -- The provider is read off the MERCHANT, and this one is the demo merchant.
+  v_intent := public.begin_payment(v_order, 'card', 'e2e-pay-1');
+
+  perform pg_temp.assert(v_intent.amount_minor = 16200 + v_fee,
+    format('the attempt is for the order total, which the client never named — %s',
+           16200 + v_fee));
+  perform pg_temp.assert(v_intent.provider = 'demo',
+    'and can only be settled by the simulator, because the shop is a demo one');
+
+  select * into v_row from public.orders where id = v_order;
+  perform pg_temp.assert(v_row.fulfilment_state = 'pending',
+    'the order is waiting on the provider');
+  perform pg_temp.assert(
+    v_row.fulfilment_state not in ('placed', 'accepted', 'picking', 'ready'),
+    'and the merchant STILL cannot see it, because nobody has paid');
+
+  -- --- The callback. This is the only thing that can say a payment happened.
+  set role postgres;
+  v_result := public.record_payment_event('demo', 'transaction', 'e2e-evt-1',
+                v_intent.id, 'succeeded', v_intent.amount_minor, 'e2e-txn-1',
+                null, null, '{"simulated": true}'::jsonb);
+  set role authenticated;
+
+  perform pg_temp.assert(v_result = 'applied', 'a verified success is applied');
+
+  select * into v_row from public.orders where id = v_order;
+  perform pg_temp.assert(v_row.payment_state = 'captured',
+    'the order is captured');
+  perform pg_temp.assert(v_row.captured_minor = v_intent.amount_minor,
+    'for exactly the amount the server derived');
+  perform pg_temp.assert(v_row.fulfilment_state = 'placed',
+    'AND ONLY NOW is it eligible for the merchant queue');
+  perform pg_temp.assert(v_row.paid_at is not null and v_row.placed_at is not null,
+    'with both timestamps written');
+
+  -- --- The basket that was paid for ----------------------------------------
+  perform pg_temp.assert(public.clear_paid_cart(v_order) = true,
+    'the paid basket is cleared');
+  perform pg_temp.assert(
+    (select count(*) from public.carts
+      where user_id = 'b0000000-0000-4000-8000-00000000000a') = 0,
+    'and is gone');
+
+  -- --- A newer basket is not this order''s basket ---------------------------
+  insert into public.carts (id, user_id, merchant_id, merchant_location_id, currency)
+  values ('b1000000-0000-4000-8000-000000000002',
+          'b0000000-0000-4000-8000-00000000000a',
+          pg_temp.shop(), pg_temp.branch(), 'EGP');
+  insert into public.cart_lines (cart_id, merchant_product_id, quantity, unit_price_minor)
+  values ('b1000000-0000-4000-8000-000000000002', pg_temp.product('dm-oni-1000'), 1,
+          pg_temp.price('dm-oni-1000'));
+
+  perform pg_temp.assert(public.clear_paid_cart(v_order) = false,
+    'a basket built after the payment is NOT cleared by it');
+  perform pg_temp.assert(
+    (select count(*) from public.cart_lines
+      where cart_id = 'b1000000-0000-4000-8000-000000000002') = 1,
+    'and survives intact');
+
+  -- --- The callback arrives again ------------------------------------------
+  set role postgres;
+  v_result := public.record_payment_event('demo', 'transaction', 'e2e-evt-1',
+                v_intent.id, 'succeeded', v_intent.amount_minor, 'e2e-txn-1',
+                null, null, '{"simulated": true}'::jsonb);
+  set role authenticated;
+
+  perform pg_temp.assert(v_result = 'duplicate',
+    'the same callback twice is a duplicate');
+  perform pg_temp.assert(
+    (select captured_minor from public.orders where id = v_order) = v_intent.amount_minor,
+    'and nothing was captured a second time');
+end;
+$$;
+
 reset role;

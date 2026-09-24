@@ -62,6 +62,14 @@ export const queryKeys = {
   cart: (userId: string) => ['akla', 'cart', userId] as const,
   addresses: (userId: string) => ['akla', 'addresses', userId] as const,
   deliveryAreas: (userId: string) => ['akla', 'delivery-areas', userId] as const,
+  order: (userId: string, orderId: string) => ['akla', 'order', userId, orderId] as const,
+  /**
+   * Payment attempts for one order. Separate from the order itself because the
+   * status screen refetches this while a payment is in flight and the order
+   * only when the answer could have changed.
+   */
+  paymentAttempts: (userId: string, orderId: string) =>
+    ['akla', 'payment-attempts', userId, orderId] as const,
   /**
    * A validation verdict is ABOUT a revision, so the revision is in the key.
    * Caching it under the cart alone would serve a verdict for a basket that
