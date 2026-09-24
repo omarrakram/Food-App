@@ -59,6 +59,14 @@ const STATUS_COPY: Record<Exclude<SourcingStatus, 'matched'>, Copy> = {
   },
 };
 
+/** Known product, unpublished allergen or dietary data. Not a mapping doubt. */
+const UNLABELLED_COPY: Copy = {
+  title: 'commerce.statusUnlabelled',
+  body: 'commerce.statusUnlabelledBody',
+  icon: 'help-circle-outline',
+  tone: 'attention',
+};
+
 /** An ingredient the sourcer was never even asked about. */
 const UNSOURCEABLE_COPY: Copy = {
   title: 'commerce.unsourceable',
@@ -105,6 +113,24 @@ export function UnsourceableLineRow({ testID }: { testID?: string }) {
   return <StatusNote copy={UNSOURCEABLE_COPY} testID={testID} />;
 }
 
+/**
+ * `needs_confirmation` HAS TWO CAUSES and they need different sentences.
+ *
+ * Either we cannot tell which product the ingredient means, or we know the
+ * product perfectly well and the shop has not published enough to say it suits
+ * this cook. The sourcer already distinguishes them — an unlabelled candidate
+ * carries `eligibility_unknown` — and telling somebody with an allergy that we
+ * are unsure of the MATCH, when the real gap is the label, sends them to look
+ * at the wrong thing.
+ */
+function copyFor(line: SourcedLine): Copy {
+  const status = line.status as Exclude<SourcingStatus, 'matched'>;
+  if (status !== 'needs_confirmation') return STATUS_COPY[status];
+
+  const unlabelled = line.candidates[0]?.reasons.includes('eligibility_unknown') ?? false;
+  return unlabelled ? UNLABELLED_COPY : STATUS_COPY.needs_confirmation;
+}
+
 export type SourcedLineRowProps = {
   line: SourcedLine;
   merchantName: string;
@@ -117,12 +143,7 @@ export function SourcedLineRow({ line, merchantName, testID }: SourcedLineRowPro
   const indent = useIndent();
 
   if (line.status !== 'matched' || !line.chosen) {
-    return (
-      <StatusNote
-        copy={STATUS_COPY[line.status as Exclude<SourcingStatus, 'matched'>]}
-        testID={testID}
-      />
-    );
+    return <StatusNote copy={copyFor(line)} testID={testID} />;
   }
 
   const chosen = line.chosen;

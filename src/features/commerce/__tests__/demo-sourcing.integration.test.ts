@@ -29,6 +29,7 @@ import { sourceLine, sourceRequest, type SourcingContext } from '../sourcing';
 
 const CONTEXT: SourcingContext = {
   avoidAllergens: [],
+  requireDiets: [],
   perPieceFor: (slug) => perPieceWeightFor(INGREDIENTS_BY_SLUG.get(slug) ?? null),
 };
 

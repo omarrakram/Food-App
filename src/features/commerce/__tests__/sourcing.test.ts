@@ -1,6 +1,7 @@
 import type {
   IngredientProductMapping,
   MerchantProduct,
+  ProductDietaryProfile,
 } from '@/types/commerce';
 import type { Allergen, Availability } from '@/types/domain';
 
@@ -63,13 +64,20 @@ function candidate(
   productOver: Partial<MerchantProduct> = {},
   mappingOver: Partial<IngredientProductMapping> = {},
   productAllergens: readonly Allergen[] | null = [],
+  productDiets: ProductDietaryProfile | null = null,
 ): SourcingCandidateInput {
   const p = product(productOver);
-  return { product: p, mapping: mapping({ merchantProductId: p.id, ...mappingOver }), productAllergens };
+  return {
+    product: p,
+    mapping: mapping({ merchantProductId: p.id, ...mappingOver }),
+    productAllergens,
+    productDiets,
+  };
 }
 
 const CONTEXT: SourcingContext = {
   avoidAllergens: [],
+  requireDiets: [],
   perPieceFor: () => null,
 };
 

@@ -4,6 +4,7 @@ import type {
   Merchant,
   MerchantLocation,
   MerchantProduct,
+  ProductDietaryProfile,
 } from '@/types/commerce';
 import type { Allergen, Availability } from '@/types/domain';
 
@@ -149,6 +150,11 @@ const ALLERGENS_BY_ID = new Map<string, readonly Allergen[] | null>(
   DEMO_PRODUCTS.map((row) => [row.externalId, row.allergens]),
 );
 
+/** Same rule, same reason: a merchant who said nothing must arrive as null. */
+const DIETS_BY_ID = new Map<string, ProductDietaryProfile | null>(
+  DEMO_PRODUCTS.map((row) => [row.externalId, row.diets]),
+);
+
 export class DemoCatalogueAdapter implements CatalogueAdapter {
   readonly merchantId = MERCHANT_ID;
 
@@ -226,6 +232,9 @@ export function demoCandidatesFor(ingredientSlug: string): readonly SourcingCand
       // merchant published nothing" into "the merchant declared none". The
       // map already holds null for that case and null is what must travel.
       productAllergens: ALLERGENS_BY_ID.get(row.productExternalId) ?? null,
+      // `?? null` for the same reason again: an id the map does not hold and a
+      // merchant who published nothing are both "we do not know".
+      productDiets: DIETS_BY_ID.get(row.productExternalId) ?? null,
     });
   }
   return out;

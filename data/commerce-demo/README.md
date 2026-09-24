@@ -42,6 +42,26 @@ survey and must never be rendered as a live price outside development.
 
 Regenerate the bundled TypeScript with `npm run commerce:demo`.
 
+### The diets column
+
+Same discipline, different question. A blank cell is **refused**. `unknown`
+means the merchant publishes no dietary data — the common case in a real
+catalogue, and it must be easy to say honestly. Otherwise write explicit
+verdicts:
+
+```
+vegetarian:compatible|vegan:incompatible|halal:compatible
+```
+
+A diet left **out of the list** is unknown for that product: a merchant who
+publishes vegan and is silent on halal has not certified it halal.
+
+`none` is **refused outright**. It reads as "no diets apply", which is exactly
+the misreading that would turn an unlabelled product into a safe one.
+
+A canonical ingredient's diet is never inherited. `tomatoes` is vegan; a
+particular tin of them may not be, and only the merchant can say.
+
 ### The allergens column
 
 A blank cell is **refused by the importer**. Write `none` when the merchant
@@ -67,6 +87,10 @@ a state nobody has ever looked at.
 | `dm-bakery-baladi` — allergens `unknown` | `needs_confirmation` for anybody with an allergy set. Unlabelled is not safe |
 | `dm-legacy-chk` — `is_active: 0` | a delisted row the catalogue still carries and the sourcer must ignore |
 | `dm-pasta-400` — the only pasta, `gluten` | `no_eligible_match` for a coeliac: every option conflicts, and none is offered anyway |
+| `dm-chk-500` — `vegan:incompatible`, `halal:compatible` | a dietary refusal that is not an allergy |
+| `dm-milk-1000` — `vegetarian:compatible`, `vegan:incompatible` | the pair a lazy implementation collapses: dairy is one but not the other |
+| `dm-pasta-400` — publishes vegan, silent on halal | UNKNOWN per diet, not per product: partial publication is the normal case |
+| the other 16 products — `diets: unknown` | the majority. A real catalogue publishes little, and the demo must not flatter itself |
 
 Ingredients with no mapping at all — tomato paste, vinegar, chilli flakes —
 are what produce `unmapped`, and there is nothing to add for that: it is the

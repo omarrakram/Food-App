@@ -28,6 +28,7 @@ import type {
   Availability,
   CountryCode,
   CurrencyCode,
+  DietaryPreference,
   Money,
   Unit,
 } from './domain';
@@ -144,6 +145,60 @@ export type MerchantProduct = {
   /** When this row was last read from the merchant. Staleness is visible. */
   fetchedAt: string;
 };
+
+/**
+ * WHAT A MERCHANT SAYS ABOUT A PRODUCT AND A DIET.
+ *
+ * A CANONICAL INGREDIENT AND A PACKAGED SKU ARE NOT THE SAME QUESTION.
+ * `tomatoes` is vegan; a particular brand of tinned tomatoes may carry a
+ * flavouring that is not. `bread` is vegetarian; a bakery's loaf may be
+ * brushed with an animal fat nobody would guess from the name. The food layer
+ * answers "is this ingredient compatible with this diet"; only the merchant
+ * can answer "is this PRODUCT compatible", and only if they publish it.
+ *
+ * NOTHING HERE IS EVER INFERRED. Not from the product name, not from the
+ * brand, not from the canonical ingredient it maps to, not by a model. The
+ * whole value of this field is that it carries a statement somebody made.
+ */
+export type DietCompatibility = 'compatible' | 'incompatible';
+
+/**
+ * The diets a merchant can make a statement about.
+ *
+ * DERIVED from `DietaryPreference` rather than redeclared, so the app has one
+ * dietary vocabulary and not two that drift. `none` and `other` are dropped
+ * because neither is a claim a product can satisfy or violate.
+ * `__tests__/product-diets.test.ts` fails if a new diet is added to the app
+ * without a decision being made here.
+ */
+export type ProductDiet = Exclude<DietaryPreference, 'none' | 'other'>;
+
+export const PRODUCT_DIETS = [
+  'vegetarian',
+  'vegan',
+  'pescatarian',
+  'halal',
+  'keto',
+] as const satisfies readonly ProductDiet[];
+
+/**
+ * A merchant's published dietary verdicts for one product.
+ *
+ * THREE STATES, and the third is the one that matters:
+ *
+ *   `null`                          the merchant publishes no dietary data at
+ *                                   all for this product
+ *   diet absent from a non-null map they publish dietary data, but said
+ *                                   nothing about THIS diet
+ *   `'compatible'`                  they say it is fine
+ *   `'incompatible'`                they say it is not
+ *
+ * The first two are both UNKNOWN, and unknown is not safe — it is unlabelled.
+ * They are kept distinct anyway because "this merchant publishes nothing" and
+ * "this merchant publishes a lot and is silent on halal" are different facts
+ * about a catalogue, and the second is worth chasing.
+ */
+export type ProductDietaryProfile = Partial<Record<ProductDiet, DietCompatibility>>;
 
 // --- Ingredient → product mapping ------------------------------------------
 

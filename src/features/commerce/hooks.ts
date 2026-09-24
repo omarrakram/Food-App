@@ -16,7 +16,7 @@ import type { AddCartLineInput } from './cart-repository';
 import { selectMerchant, type SelectedMerchant } from './merchant-selection';
 import type { SourcedLine, SourcingResult } from './ports';
 import { requirementsFor, type RequirementsResult } from './requirements';
-import { sourceRequest, type SourcingContext } from './sourcing';
+import { requiredDietsFor, sourceRequest, type SourcingContext } from './sourcing';
 
 /**
  * Commerce hooks.
@@ -33,10 +33,13 @@ export function useSelectedMerchant(): SelectedMerchant | null {
 }
 
 /**
- * The user's hard exclusions, straight from their allergen preferences.
+ * The user's hard exclusions, straight from their own preferences.
  *
- * Read here rather than passed in, so no screen can source a basket while
- * forgetting to apply somebody's allergies.
+ * BOTH AXES, read here rather than passed in, so no screen can source a basket
+ * while forgetting somebody's allergies or their diet. The eating style and
+ * the diet flags are separate fields because a halal keto vegetarian is an
+ * ordinary person; `requiredDietsFor` folds them into the one list the sourcer
+ * asks about.
  */
 function useSourcingContext(): SourcingContext {
   const { preferences } = usePreferences();
@@ -44,9 +47,10 @@ function useSourcingContext(): SourcingContext {
   return useMemo(
     () => ({
       avoidAllergens: preferences.allergens,
+      requireDiets: requiredDietsFor(preferences.dietaryPreference, preferences.dietFlags),
       perPieceFor: (slug: string) => perPieceWeightFor(INGREDIENTS_BY_SLUG.get(slug) ?? null),
     }),
-    [preferences.allergens],
+    [preferences.allergens, preferences.dietaryPreference, preferences.dietFlags],
   );
 }
 

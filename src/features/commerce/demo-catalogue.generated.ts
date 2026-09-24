@@ -8,7 +8,7 @@
 // is flagged `isDemo` and is never enabled, so nothing can mistake it for a
 // partner by reading the data.
 import type { Allergen, Availability, Unit } from '@/types/domain';
-import type { MappingSource } from '@/types/commerce';
+import type { MappingSource, ProductDietaryProfile } from '@/types/commerce';
 
 export type DemoProductRow = {
   readonly externalId: string;
@@ -27,6 +27,13 @@ export type DemoProductRow = {
    * with allergies rather than assuming it is safe.
    */
   readonly allergens: readonly Allergen[] | null;
+  /**
+   * NULL MEANS THE MERCHANT PUBLISHES NO DIETARY DATA. A diet missing from a
+   * non-null map means they publish some and said nothing about that one.
+   * Both are UNKNOWN, and unknown is never compatible: see dietVerdict in
+   * features/commerce/sourcing.ts.
+   */
+  readonly diets: ProductDietaryProfile | null;
   readonly isActive: boolean;
 };
 
@@ -80,6 +87,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 9000,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'incompatible', vegan: 'incompatible', pescatarian: 'incompatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -93,6 +101,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 17000,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'incompatible', vegan: 'incompatible', pescatarian: 'incompatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -106,6 +115,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 10500,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: { vegetarian: 'incompatible', vegan: 'incompatible', pescatarian: 'incompatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -119,6 +129,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 4500,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -132,6 +143,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 21000,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -145,6 +157,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 2200,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -158,6 +171,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 1300,
     availability: 'low_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -171,6 +185,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 1800,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -184,6 +199,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 4000,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: { vegetarian: 'compatible', vegan: 'incompatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -197,6 +213,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 1400,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: null,
     isActive: true,
   },
   {
@@ -210,6 +227,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 9000,
     availability: 'in_stock',
     allergens: ['eggs'],
+    diets: null,
     isActive: true,
   },
   {
@@ -223,6 +241,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 20500,
     availability: 'in_stock',
     allergens: ['eggs'],
+    diets: null,
     isActive: true,
   },
   {
@@ -236,6 +255,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 3200,
     availability: 'in_stock',
     allergens: ['gluten'],
+    diets: { vegetarian: 'compatible', vegan: 'compatible' },
     isActive: true,
   },
   {
@@ -249,6 +269,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 8500,
     availability: 'in_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -262,6 +283,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 21500,
     availability: 'in_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -275,6 +297,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 19000,
     availability: 'in_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -288,6 +311,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 2400,
     availability: 'in_stock',
     allergens: ['gluten'],
+    diets: { vegetarian: 'compatible', vegan: 'compatible' },
     isActive: true,
   },
   {
@@ -301,6 +325,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 5500,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: { vegetarian: 'compatible', vegan: 'incompatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -314,6 +339,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 12000,
     availability: 'out_of_stock',
     allergens: ['dairy'],
+    diets: null,
     isActive: true,
   },
   {
@@ -327,6 +353,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 14000,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: null,
     isActive: true,
   },
   {
@@ -340,6 +367,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 3800,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -353,6 +381,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 2600,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -366,6 +395,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 3400,
     availability: 'out_of_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -379,6 +409,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 6000,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: null,
     isActive: true,
   },
   {
@@ -392,6 +423,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 11000,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: { vegetarian: 'compatible', vegan: 'incompatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -405,6 +437,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 9500,
     availability: 'in_stock',
     allergens: ['dairy'],
+    diets: null,
     isActive: true,
   },
   {
@@ -418,6 +451,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 2800,
     availability: 'in_stock',
     allergens: [],
+    diets: { vegetarian: 'compatible', vegan: 'compatible', pescatarian: 'compatible', halal: 'compatible' },
     isActive: true,
   },
   {
@@ -431,6 +465,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 2900,
     availability: 'in_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -444,6 +479,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 3600,
     availability: 'in_stock',
     allergens: [],
+    diets: null,
     isActive: true,
   },
   {
@@ -457,6 +493,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 7000,
     availability: 'unknown',
     allergens: [],
+    diets: null,
     isActive: false,
   },
   {
@@ -470,6 +507,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     priceMinor: 1500,
     availability: 'in_stock',
     allergens: null,
+    diets: null,
     isActive: true,
   },
 ];

@@ -184,6 +184,13 @@ export const EXCLUSION_REASONS = [
   'blocked',
   /** Carries an allergen this user must avoid. */
   'allergen',
+  /**
+   * The merchant says this product is not compatible with a diet this user
+   * keeps. A SEPARATE reason from `allergen`: one is a medical hazard and the
+   * other is a commitment, they are refused for different reasons, and an
+   * operator reading an exclusion log needs to know which.
+   */
+  'diet',
   /** The merchant has delisted it. */
   'delisted',
 ] as const;

@@ -952,10 +952,21 @@ export const en = {
     'You can still use the recipe and check the remaining ingredients yourself.',
   'commerce.statusNeedsConfirmation': 'Choose a product',
   'commerce.statusNeedsConfirmationBody': 'We are not sure which product matches this.',
+  /*
+    `needs_confirmation` has TWO causes and they are not the same sentence. One
+    is "we cannot tell which product this is"; the other is "we know the
+    product and the shop has not said whether it suits you". Telling somebody
+    with an allergy that we are unsure of the MATCH, when the real gap is the
+    label, points them at the wrong question.
+  */
+  'commerce.statusUnlabelled': 'Cannot be confirmed for you',
+  'commerce.statusUnlabelledBody':
+    'The shop has not published enough about this to say it fits your allergies or diet.',
   'commerce.statusNoPurchasable': 'Out of stock',
   'commerce.statusNoPurchasableBody': 'The shop stocks this but has none right now.',
   'commerce.statusNoEligible': 'Not suitable for you',
-  'commerce.statusNoEligibleBody': 'Every option here conflicts with your allergies.',
+  'commerce.statusNoEligibleBody':
+    'Every option here conflicts with your allergies or your diet.',
   'commerce.statusUnmapped': 'Not sold here',
   'commerce.statusUnmappedBody': 'This shop does not carry this ingredient.',
   'commerce.packSizeUnknown': 'Pack size unknown — we cannot say how much to buy.',

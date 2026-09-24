@@ -4,8 +4,10 @@ import {
   type IngredientProductMapping,
   type MappingSource,
   type MerchantProduct,
+  type ProductDiet,
+  type ProductDietaryProfile,
 } from '@/types/commerce';
-import type { Allergen, Availability } from '@/types/domain';
+import type { Allergen, Availability, DietFlag, EatingStyle } from '@/types/domain';
 
 import { packsNeeded } from './pack-maths';
 import type {
@@ -105,11 +107,30 @@ export type SourcingCandidateInput = {
    * excluded: it can be offered, it cannot be chosen for them.
    */
   readonly productAllergens: readonly Allergen[] | null;
+  /**
+   * The merchant's own dietary verdicts, and the same rule as allergens: a
+   * diet they said nothing about is UNKNOWN, never compatible.
+   *
+   * Deliberately NOT derived from the canonical ingredient. `tomatoes` being
+   * vegan says nothing about whether a particular tin of them is — that is a
+   * fact about a recipe formulation only the merchant has. Inferring it from
+   * the mapping would make every SKU inherit the ingredient's diet and quietly
+   * defeat the whole field.
+   */
+  readonly productDiets: ProductDietaryProfile | null;
 };
 
 export type SourcingContext = {
   /** Hard exclusions. Never a ranking weight. */
   readonly avoidAllergens: readonly Allergen[];
+  /**
+   * The diets this cook keeps, as hard constraints.
+   *
+   * Built by `requiredDietsFor` from the user's eating style and diet flags,
+   * so there is one dietary vocabulary in the app rather than a commerce
+   * dialect of it.
+   */
+  readonly requireDiets: readonly ProductDiet[];
   /** Per-piece weight for a canonical ingredient, for the pack arithmetic. */
   readonly perPieceFor: (ingredientSlug: string) => PerPieceWeight | null;
 };
@@ -129,12 +150,78 @@ function purchasabilityExcluded(input: SourcingCandidateInput): boolean {
 export type EligibilityVerdict = 'eligible' | 'ineligible' | 'unknown';
 
 /**
+ * The user's hard dietary constraints, in the product vocabulary.
+ *
+ * The app already models diet as two independent things — an exclusive eating
+ * style and orthogonal flags — because a halal keto vegetarian is an ordinary
+ * person. Both are constraints a PRODUCT can violate, so both come through
+ * here. `none` is not a constraint and is dropped.
+ *
+ * EVERY DECLARED DIET IS TREATED AS HARD, keto included. Ranking them by how
+ * serious they are would mean inventing a second taxonomy on top of the user's
+ * own words, and deciding on somebody's behalf that their diet is the
+ * negotiable kind. Erring towards asking is the cheaper mistake.
+ */
+export function requiredDietsFor(
+  style: EatingStyle,
+  flags: readonly DietFlag[],
+): readonly ProductDiet[] {
+  const diets: ProductDiet[] = [];
+  if (style !== 'none') diets.push(style);
+  for (const flag of flags) diets.push(flag);
+  return diets;
+}
+
+/**
  * (2) User eligibility. Never overridden by a manual or verified mapping.
  *
- * Returns `unknown` — not `eligible` — when the user has restrictions and the
- * merchant has published no allergen data. The distinction is the whole point.
+ * TWO AXES, ONE VERDICT: allergens and diet. They are asked separately because
+ * they fail for different reasons and are published in different places, and
+ * combined with a strict precedence:
+ *
+ *   ineligible  beats  unknown  beats  eligible
+ *
+ * A product the merchant calls incompatible with this cook's diet is excluded
+ * even if its allergen data is missing — there is no point asking about a
+ * product already ruled out. And a product with a clean allergen list but no
+ * published verdict on veganism is UNKNOWN, not safe: the whole reason this
+ * function exists is that silence is not a claim.
  */
 export function eligibilityOf(
+  input: SourcingCandidateInput,
+  context: SourcingContext,
+): EligibilityVerdict {
+  return eligibilityDetail(input, context).verdict;
+}
+
+/**
+ * The verdict AND which axis produced it.
+ *
+ * The exclusion log needs the second part. An operator reading "this product
+ * was withheld" has to know whether it was a medical hazard or a dietary
+ * commitment, because those are chased in different directions: one is a
+ * missing allergen declaration, the other a missing dietary one.
+ */
+export function eligibilityDetail(
+  input: SourcingCandidateInput,
+  context: SourcingContext,
+): { verdict: EligibilityVerdict; reason: 'allergen' | 'diet' | null } {
+  const allergen = allergenVerdict(input, context);
+  if (allergen === 'ineligible') return { verdict: 'ineligible', reason: 'allergen' };
+
+  const diet = dietVerdict(input, context);
+  if (diet === 'ineligible') return { verdict: 'ineligible', reason: 'diet' };
+
+  const verdict = allergen === 'unknown' || diet === 'unknown' ? 'unknown' : 'eligible';
+  return { verdict, reason: null };
+}
+
+/** Whether this cook has told us anything that could rule a product out. */
+export function hasDietaryRestrictions(context: SourcingContext): boolean {
+  return context.avoidAllergens.length > 0 || context.requireDiets.length > 0;
+}
+
+function allergenVerdict(
   input: SourcingCandidateInput,
   context: SourcingContext,
 ): EligibilityVerdict {
@@ -145,6 +232,30 @@ export function eligibilityOf(
     context.avoidAllergens.includes(allergen),
   );
   return clashes ? 'ineligible' : 'eligible';
+}
+
+/**
+ * Per diet, and UNKNOWN IS NOT SAFE.
+ *
+ * A merchant who publishes nothing gives `null`; one who publishes a dietary
+ * section but is silent on the diet we are asking about gives a map without
+ * that key. Both are unknown, and both mean the product may be offered and
+ * must not be chosen for the cook.
+ */
+function dietVerdict(
+  input: SourcingCandidateInput,
+  context: SourcingContext,
+): EligibilityVerdict {
+  if (context.requireDiets.length === 0) return 'eligible';
+  if (input.productDiets === null) return 'unknown';
+
+  let unknown = false;
+  for (const diet of context.requireDiets) {
+    const verdict = input.productDiets[diet];
+    if (verdict === 'incompatible') return 'ineligible';
+    if (verdict === undefined) unknown = true;
+  }
+  return unknown ? 'unknown' : 'eligible';
 }
 
 // --- Scoring ---------------------------------------------------------------
@@ -225,9 +336,15 @@ export function sourceLine(
       continue;
     }
 
-    const eligibility = eligibilityOf(input, context);
+    const { verdict: eligibility, reason } = eligibilityDetail(input, context);
     if (eligibility === 'ineligible') {
-      exclusions.push({ productId: input.product.id, axis: 'eligibility', reason: 'allergen' });
+      exclusions.push({
+        productId: input.product.id,
+        axis: 'eligibility',
+        // `reason` is non-null whenever the verdict is ineligible; the fallback
+        // exists so a future axis cannot silently log the wrong cause.
+        reason: reason ?? 'allergen',
+      });
       continue;
     }
 
@@ -298,7 +415,10 @@ export function sourceLine(
     .filter((ratio): ratio is number => ratio !== null && ratio > 0);
   const leastOverbuy = overbuys.length > 0 ? Math.min(...overbuys) : null;
 
-  const hasRestrictions = context.avoidAllergens.length > 0;
+  // BOTH AXES. This read `avoidAllergens.length > 0` alone, which meant a
+  // vegan with no allergies got no eligibility reason on any candidate — the
+  // explainability guarantee had a hole exactly where the new gate applies.
+  const hasRestrictions = hasDietaryRestrictions(context);
 
   const candidates: ProductCandidate[] = measured.map((entry) => {
     const { score, reasons } = scoreCandidate(

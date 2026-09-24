@@ -19,6 +19,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { INGREDIENT_CATALOGUE } from '../src/features/ingredients/catalogue.ts';
+import { PRODUCT_DIETS } from '../src/types/commerce.ts';
 import { ALLERGENS, UNITS } from '../src/types/domain.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -101,6 +102,8 @@ type DemoProduct = {
   availability: string;
   /** null when the merchant publishes no allergen data. Not the same as []. */
   allergens: string[] | null;
+  /** null when the merchant publishes no dietary data at all. */
+  diets: Record<string, string> | null;
   isActive: boolean;
 };
 
@@ -115,7 +118,7 @@ type DemoMapping = {
 
 const PRODUCT_COLUMNS = [
   'external_id', 'sku', 'name', 'name_ar', 'brand', 'pack_quantity',
-  'pack_unit', 'price_minor', 'availability', 'allergens', 'is_active',
+  'pack_unit', 'price_minor', 'availability', 'allergens', 'diets', 'is_active',
 ] as const;
 
 const MAPPING_COLUMNS = [
@@ -129,8 +132,11 @@ function parseProducts(): DemoProduct[] {
     const at = `products.csv:${offset + 2}`;
     const [
       externalId, sku, name, nameAr, brand, packQuantity,
-      packUnit, priceMinor, availability, allergens, isActive,
-    ] = cells as [string, string, string, string, string, string, string, string, string, string, string];
+      packUnit, priceMinor, availability, allergens, diets, isActive,
+    ] = cells as [
+      string, string, string, string, string, string,
+      string, string, string, string, string, string,
+    ];
 
     if (!/^[a-z0-9-]+$/.test(externalId)) throw new ImportError(`${at} — bad external_id "${externalId}"`);
     if (seen.has(externalId)) throw new ImportError(`${at} — duplicate external_id "${externalId}"`);
@@ -171,6 +177,59 @@ function parseProducts(): DemoProduct[] {
       }
     }
 
+    /*
+      THE SAME DISCIPLINE AS ALLERGENS, for the same reason.
+
+      A blank cell is refused. `unknown` means the merchant publishes no
+      dietary data, which is the common case in a real catalogue and must be
+      easy to state honestly. `none` is refused outright: it reads as "no
+      dietary restrictions apply", which is precisely the misreading that
+      would turn an unlabelled product into a safe one.
+    */
+    if (diets === '') {
+      throw new ImportError(
+        `${at} — diets is empty. Write "unknown" when the merchant publishes ` +
+          'no dietary data, or a list like ' +
+          '"vegan:incompatible|halal:compatible". A blank cell cannot say ' +
+          'which, and treating unknown as compatible is how a vegan is sold ' +
+          'something that is not.',
+      );
+    }
+    if (diets === 'none') {
+      throw new ImportError(
+        `${at} — "none" is not a dietary verdict. It reads as "no diets ` +
+          'apply", which is the one thing this column must never be able to ' +
+          'mean. Use "unknown", or name each diet explicitly.',
+      );
+    }
+
+    let parsedDiets: Record<string, string> | null = null;
+    if (diets !== 'unknown') {
+      parsedDiets = {};
+      for (const entry of diets.split('|').map((part) => part.trim()).filter(Boolean)) {
+        const [diet, verdict] = entry.split(':').map((part) => part.trim());
+        if (!diet || !verdict) {
+          throw new ImportError(`${at} — "${entry}" is not "diet:compatible|incompatible"`);
+        }
+        if (!(PRODUCT_DIETS as readonly string[]).includes(diet)) {
+          throw new ImportError(`${at} — "${diet}" is not a known diet`);
+        }
+        if (verdict !== 'compatible' && verdict !== 'incompatible') {
+          throw new ImportError(
+            `${at} — "${verdict}" is not a verdict. Write compatible or incompatible; ` +
+              'leave the diet out entirely to mean the merchant did not say.',
+          );
+        }
+        if (parsedDiets[diet] !== undefined) {
+          throw new ImportError(`${at} — "${diet}" appears twice`);
+        }
+        parsedDiets[diet] = verdict;
+      }
+      if (Object.keys(parsedDiets).length === 0) {
+        throw new ImportError(`${at} — diets lists no verdicts. Write "unknown" instead.`);
+      }
+    }
+
     const price = Number(priceMinor);
     if (!Number.isInteger(price) || price < 0) {
       throw new ImportError(`${at} — price_minor "${priceMinor}" must be a non-negative integer`);
@@ -195,6 +254,7 @@ function parseProducts(): DemoProduct[] {
       priceMinor: price,
       availability,
       allergens: parsedAllergens,
+      diets: parsedDiets,
       isActive: isActive === '1',
     };
   });
@@ -276,6 +336,13 @@ function render(
         `    priceMinor: ${p.priceMinor},\n` +
         `    availability: '${p.availability}',\n` +
         `    allergens: ${p.allergens === null ? 'null' : `[${p.allergens.map((a) => `'${a}'`).join(', ')}]`},\n` +
+        `    diets: ${
+          p.diets === null
+            ? 'null'
+            : `{ ${Object.entries(p.diets)
+                .map(([diet, verdict]) => `${diet}: '${verdict}'`)
+                .join(', ')} }`
+        },\n` +
         `    isActive: ${p.isActive},\n` +
         `  },`,
     )
@@ -305,7 +372,7 @@ function render(
 // is flagged \`isDemo\` and is never enabled, so nothing can mistake it for a
 // partner by reading the data.
 import type { Allergen, Availability, Unit } from '@/types/domain';
-import type { MappingSource } from '@/types/commerce';
+import type { MappingSource, ProductDietaryProfile } from '@/types/commerce';
 
 export type DemoProductRow = {
   readonly externalId: string;
@@ -324,6 +391,13 @@ export type DemoProductRow = {
    * with allergies rather than assuming it is safe.
    */
   readonly allergens: readonly Allergen[] | null;
+  /**
+   * NULL MEANS THE MERCHANT PUBLISHES NO DIETARY DATA. A diet missing from a
+   * non-null map means they publish some and said nothing about that one.
+   * Both are UNKNOWN, and unknown is never compatible: see dietVerdict in
+   * features/commerce/sourcing.ts.
+   */
+  readonly diets: ProductDietaryProfile | null;
   readonly isActive: boolean;
 };
 

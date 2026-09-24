@@ -68,6 +68,7 @@ describe('the recipe amount survives the whole way', () => {
   it('passes the amount through to the pack arithmetic', () => {
     const context: SourcingContext = {
       avoidAllergens: [],
+      requireDiets: [],
       perPieceFor: (slug) => perPieceWeightFor(INGREDIENTS_BY_SLUG.get(slug) ?? null),
     };
 
@@ -114,7 +115,7 @@ describe('amounts a recipe did not give', () => {
     // One is the honest minimum: the cook needs some, and computing a number
     // from a recipe that gave none would be an invention. Returning nothing
     // would leave a line that cannot go in a basket at all.
-    const context: SourcingContext = { avoidAllergens: [], perPieceFor: () => null };
+    const context: SourcingContext = { avoidAllergens: [], requireDiets: [], perPieceFor: () => null };
     const { lines } = requirementsFor(
       [match({ slug: 'cumin', name: 'Cumin', quantity: 1, unit: 'to_taste' })],
       'r-1',
@@ -242,6 +243,7 @@ describe('pairing a result back to the recipe row it came from', () => {
   it('survives sourcing, so the result can be paired with no positional guess', () => {
     const context: SourcingContext = {
       avoidAllergens: [],
+      requireDiets: [],
       perPieceFor: (slug) => perPieceWeightFor(INGREDIENTS_BY_SLUG.get(slug) ?? null),
     };
 

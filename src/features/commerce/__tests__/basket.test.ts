@@ -59,10 +59,10 @@ function candidate(
   productOver: Partial<MerchantProduct> = {},
   mappingOver: Partial<IngredientProductMapping> = {},
 ): SourcingCandidateInput {
-  return { product: product(productOver), mapping: mapping(mappingOver), productAllergens: [] };
+  return { product: product(productOver), mapping: mapping(mappingOver), productAllergens: [], productDiets: null };
 }
 
-const CONTEXT: SourcingContext = { avoidAllergens: [], perPieceFor: () => null };
+const CONTEXT: SourcingContext = { avoidAllergens: [], requireDiets: [], perPieceFor: () => null };
 
 function line(over: Partial<SourcingLine> = {}): SourcingLine {
   return {
@@ -104,10 +104,10 @@ describe('only a matched line may be added without asking', () => {
       [
         {
           line: line(),
-          candidates: [{ ...candidate(), productAllergens: null }],
+          candidates: [{ ...candidate(), productAllergens: null, productDiets: null }],
         },
       ],
-      { avoidAllergens: ['gluten'], perPieceFor: () => null },
+      { avoidAllergens: ['gluten'], requireDiets: [], perPieceFor: () => null },
     );
 
     expect(result.lines[0]?.status).toBe('needs_confirmation');
@@ -126,8 +126,8 @@ describe('only a matched line may be added without asking', () => {
 
   it('never adds a line every option of which conflicts with an allergy', () => {
     const result = resultOf(
-      [{ line: line(), candidates: [{ ...candidate(), productAllergens: ['gluten'] }] }],
-      { avoidAllergens: ['gluten'], perPieceFor: () => null },
+      [{ line: line(), candidates: [{ ...candidate(), productAllergens: ['gluten'], productDiets: null }] }],
+      { avoidAllergens: ['gluten'], requireDiets: [], perPieceFor: () => null },
     );
 
     expect(result.lines[0]?.status).toBe('no_eligible_match');

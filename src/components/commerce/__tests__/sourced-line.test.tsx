@@ -20,6 +20,19 @@ import { SourcedLineRow, UnsourceableLineRow } from '../sourced-line';
 
 jest.mock('@expo/vector-icons', () => ({ Ionicons: () => null }));
 
+/*
+  LANGUAGE IS SHARED STATE IN THIS FILE.
+
+  `I18nProvider` hydrates from AsyncStorage, which the mock keeps for the whole
+  run — so the Arabic tests below used to leave every test written after them
+  rendering in Arabic, and a new English assertion would fail for a reason that
+  has nothing to do with what it is testing. Each test starts from English and
+  says so itself if it wants otherwise.
+*/
+beforeEach(async () => {
+  await setItem(StorageKeys.languagePreference, 'en');
+});
+
 function product(over: Partial<MerchantProduct> = {}): MerchantProduct {
   return {
     id: 'prod-a',
@@ -202,5 +215,71 @@ describe('Arabic', () => {
     // and a price formatted by `Intl` cannot disagree on the same row.
     expect(await screen.findByText(/45/)).toBeTruthy();
     expect(screen.queryByText(/٤٥/)).toBeNull();
+  });
+});
+
+describe('the two reasons we ask rather than choose', () => {
+  /*
+    `needs_confirmation` covers a mapping we are unsure of AND a product whose
+    allergen or dietary data the shop never published. Those are different
+    problems with different next steps, and a cook with a restriction who is
+    told "we are not sure which product matches" will go looking at the wrong
+    thing entirely.
+  */
+  it('says the MATCH is uncertain when that is the doubt', async () => {
+    const line = sourced({
+      status: 'needs_confirmation',
+      chosen: null,
+      candidates: [candidate({ reasons: ['name_match_mapping', 'in_stock'] })],
+    });
+    await render(<SourcedLineRow line={line} merchantName="Seoudi" />);
+
+    expect(screen.getByText('Choose a product')).toBeTruthy();
+    expect(screen.queryByText(/allergies or diet/i)).toBeNull();
+  });
+
+  it('says the LABEL is missing when the shop published nothing about it', async () => {
+    const line = sourced({
+      status: 'needs_confirmation',
+      chosen: null,
+      candidates: [candidate({ reasons: ['verified_mapping', 'eligibility_unknown'] })],
+    });
+    await render(<SourcedLineRow line={line} merchantName="Seoudi" />);
+
+    expect(screen.getByText('Cannot be confirmed for you')).toBeTruthy();
+    expect(screen.getByText(/allergies or diet/i)).toBeTruthy();
+    expect(screen.queryByText('Choose a product')).toBeNull();
+  });
+
+  it('never prices or names a product it cannot vouch for', async () => {
+    const line = sourced({
+      status: 'needs_confirmation',
+      chosen: null,
+      candidates: [candidate({ reasons: ['eligibility_unknown'] })],
+    });
+    await render(<SourcedLineRow line={line} merchantName="Seoudi" />);
+
+    expect(screen.queryByText(/Juhayna/)).toBeNull();
+    expect(screen.queryByText(/45/)).toBeNull();
+  });
+});
+
+describe('a refusal on dietary grounds', () => {
+  it('reads as allergies OR diet, because either can be the cause', async () => {
+    await render(
+      <SourcedLineRow
+        line={sourced({
+          status: 'no_eligible_match',
+          chosen: null,
+          exclusions: [{ productId: 'prod-a', axis: 'eligibility', reason: 'diet' }],
+        })}
+        merchantName="Seoudi"
+      />,
+    );
+
+    expect(screen.getByText('Not suitable for you')).toBeTruthy();
+    expect(screen.getByText(/allergies or your diet/i)).toBeTruthy();
+    // And still never names the product it just refused.
+    expect(screen.queryByText(/Juhayna/)).toBeNull();
   });
 });
