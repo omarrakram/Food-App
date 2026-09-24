@@ -489,6 +489,13 @@ export type PaymentStateEnum =
 export type PaymentMethodEnum = 'card' | 'wallet' | 'cash_on_delivery';
 export type PaymentProviderEnum = 'demo' | 'paymob' | 'fawry' | 'cash';
 export type SubstitutionPreferenceEnum = 'contact_me' | 'best_match' | 'remove';
+export type SubstitutionDecisionEnum =
+  | 'pending_customer'
+  | 'approved'
+  | 'rejected'
+  | 'auto_approved'
+  | 'removed';
+export type MerchantRoleEnum = 'admin' | 'operator';
 
 /**
  * An order row, READ-ONLY from the client.
@@ -524,6 +531,11 @@ export type OrderRow = {
   delivery_snapshot: Record<string, unknown>;
   contact_phone: string;
   customer_note: string | null;
+  /** The merchant's own rider. AKALT has no riders and no rider accounts. */
+  rider_name: string | null;
+  rider_phone: string | null;
+  delivered_at: string | null;
+  rejected_reason: string | null;
   /** The cart revision the draft was built from. */
   cart_revision: number | null;
   checkout_idempotency_key: string | null;
@@ -622,6 +634,110 @@ export type PaymentEventRow = {
   payload: Record<string, unknown>;
   received_at: string;
 };
+
+/**
+ * Somebody who works in the shop.
+ *
+ * READ-ONLY from the client, and only your own row: a merchant staff list is
+ * not something another member needs. Rows are created out of band for V1.
+ */
+export type MerchantMembershipRow = {
+  id: string;
+  merchant_id: string;
+  user_id: string;
+  /** Null means every branch of this merchant. */
+  merchant_location_id: string | null;
+  role: MerchantRoleEnum;
+  created_at: string;
+  updated_at: string;
+};
+
+/** One line of an order. Read-only: written by `create_order_draft`. */
+export type OrderItemRow = {
+  id: string;
+  order_id: string;
+  merchant_product_id: string | null;
+  product_name: string;
+  product_name_ar: string | null;
+  sku: string | null;
+  pack_quantity: number | null;
+  pack_unit: MeasurementUnitEnum | null;
+  quantity: number;
+  unit_price_minor: number;
+  line_total_minor: number;
+  source_ingredient_slug: string | null;
+  source_recipe_id: string | null;
+};
+
+/**
+ * What happened instead of the line that was ordered.
+ *
+ * The original `order_items` row is never deleted; this sits beside it. Read
+ * only — `report_item_unavailable` and `decide_substitution` are the writers.
+ */
+export type OrderSubstitutionRow = {
+  id: string;
+  order_id: string;
+  order_item_id: string;
+  original_product_id: string | null;
+  original_product_name: string;
+  original_unit_price_minor: number;
+  replacement_product_id: string | null;
+  replacement_product_name: string | null;
+  replacement_unit_price_minor: number | null;
+  unit_price_delta_minor: number;
+  quantity: number;
+  decision: SubstitutionDecisionEnum;
+  decided_at: string | null;
+  decided_by: string | null;
+  proposed_by: CommerceActorEnum;
+  reason: string | null;
+  /** After this, silence becomes a removal rather than a stalled order. */
+  expires_at: string | null;
+  created_at: string;
+};
+
+/** Append-only. An order's financial position is a fold over these. */
+export type OrderAdjustmentRow = {
+  id: string;
+  order_id: string;
+  order_item_id: string | null;
+  kind: AdjustmentKindEnum;
+  /** Signed minor units. Negative reduces what the customer owes. */
+  amount_minor: number;
+  reason: string | null;
+  actor: CommerceActorEnum;
+  actor_id: string | null;
+  created_at: string;
+};
+
+/** The audit trail. Every status change appends one. */
+export type OrderEventRow = {
+  id: string;
+  order_id: string;
+  kind: OrderEventKindEnum;
+  actor: CommerceActorEnum;
+  actor_id: string | null;
+  from_value: string | null;
+  to_value: string | null;
+  note: string | null;
+  at: string;
+};
+
+export type CommerceActorEnum = 'customer' | 'merchant' | 'akalt' | 'system';
+export type AdjustmentKindEnum =
+  | 'substitution'
+  | 'item_removed'
+  | 'quantity_reduced'
+  | 'order_cancelled'
+  | 'fee_waived'
+  | 'goodwill';
+export type OrderEventKindEnum =
+  | 'fulfilment_state'
+  | 'payment_state'
+  | 'adjustment'
+  | 'substitution'
+  | 'note';
 
 type Table<Row, Insert = Partial<Row>, Update = Partial<Row>> = {
   Row: Row;
@@ -733,6 +849,11 @@ export type Database = {
       // Same rule, and the stakes are higher: a client that could write here
       // could write itself a succeeded payment.
       payment_intents: Table<PaymentIntentRow, never, never>;
+      merchant_memberships: Table<MerchantMembershipRow, never, never>;
+      order_items: Table<OrderItemRow, never, never>;
+      order_substitutions: Table<OrderSubstitutionRow, never, never>;
+      order_adjustments: Table<OrderAdjustmentRow, never, never>;
+      order_events: Table<OrderEventRow, never, never>;
       payment_events: Table<PaymentEventRow, never, never>;
       carts: Table<
         CartRow,
@@ -796,6 +917,42 @@ export type Database = {
         Returns: PaymentIntentRow;
       };
       cancel_payment_intent: { Args: { p_intent_id: string }; Returns: undefined };
+      /** The ONLY way a fulfilment status changes. Idempotent. */
+      advance_fulfilment: {
+        Args: {
+          p_order_id: string;
+          p_to: OrderFulfilmentStateEnum;
+          p_reason?: string | null;
+          p_rider_name?: string | null;
+          p_rider_phone?: string | null;
+        };
+        Returns: OrderFulfilmentStateEnum;
+      };
+      report_item_unavailable: {
+        Args: {
+          p_order_item_id: string;
+          p_replacement_product_id?: string | null;
+          p_reason?: string | null;
+        };
+        Returns: string;
+      };
+      decide_substitution: {
+        Args: { p_substitution_id: string; p_accept: boolean };
+        Returns: SubstitutionDecisionEnum;
+      };
+      /** Five distinct facts; a calculated refund is not a paid one. */
+      order_refund_position: {
+        Args: { p_order_id: string };
+        Returns: {
+          currency: string;
+          captured_minor: number;
+          items_subtotal_minor: number;
+          fulfilled_goods_minor: number;
+          amount_due_minor: number;
+          refunded_minor: number;
+          refund_required_minor: number;
+        }[];
+      };
       /** True only when the basket cleared is the one that was actually paid for. */
       clear_paid_cart: { Args: { p_order_id: string }; Returns: boolean };
       /** Returns the new order's id. Every figure is derived server-side. */
@@ -852,6 +1009,11 @@ export type Database = {
       payment_provider: PaymentProviderEnum;
       substitution_preference: SubstitutionPreferenceEnum;
       payment_intent_state: PaymentIntentStateEnum;
+      substitution_decision: SubstitutionDecisionEnum;
+      merchant_role: MerchantRoleEnum;
+      commerce_actor: CommerceActorEnum;
+      adjustment_kind: AdjustmentKindEnum;
+      order_event_kind: OrderEventKindEnum;
     };
     CompositeTypes: Record<string, never>;
   };

@@ -519,7 +519,13 @@ function renderSql(
         `  (${sql(p.id)}, ${sql(p.externalId)}, ${sql(p.sku)}, ${sql(p.name)}, ` +
         `${sql(p.nameAr)}, ${sql(p.brand)}, ${p.packQuantity ?? 'null'}, ` +
         `${p.packUnit === null ? 'null' : `${sql(p.packUnit)}::public.measurement_unit`}, ` +
-        `${p.priceMinor}, ${sql(p.availability)}::public.availability_status, ${p.isActive})`,
+        `${p.priceMinor}, ${sql(p.availability)}::public.availability_status, ${p.isActive}, ` +
+        // THE DISTINCTION THE CHILD TABLE CANNOT HOLD. A product with no
+        // allergen rows is either one the merchant declared free of them or
+        // one they published nothing about, and for an allergic customer those
+        // are opposite answers. The CSV has said which since Commerce-3.1;
+        // this is what carries it into the database.
+        `${p.allergens !== null})`,
     )
     .join(',\n');
 
@@ -658,18 +664,21 @@ on conflict do nothing;
 -- --- What it "sells" -------------------------------------------------------
 insert into public.merchant_products (
   id, merchant_location_id, external_id, sku, name, name_ar, brand,
-  pack_quantity, unit, price_minor, currency, availability, is_active
+  pack_quantity, unit, price_minor, currency, availability, is_active,
+  allergens_published
 )
 select v.id::uuid, ${sql(locationId)}::uuid, v.external_id, v.sku, v.name, v.name_ar, v.brand,
-       v.pack_quantity, v.unit, v.price_minor, ${sql(String(m.currency))}, v.availability, v.is_active
+       v.pack_quantity, v.unit, v.price_minor, ${sql(String(m.currency))}, v.availability,
+       v.is_active, v.allergens_published
   from (values
 ${productValues}
   ) as v (id, external_id, sku, name, name_ar, brand, pack_quantity, unit,
-          price_minor, availability, is_active)
+          price_minor, availability, is_active, allergens_published)
 on conflict (id) do update set
-  price_minor  = excluded.price_minor,
-  availability = excluded.availability,
-  is_active    = excluded.is_active;
+  price_minor         = excluded.price_minor,
+  availability        = excluded.availability,
+  is_active           = excluded.is_active,
+  allergens_published = excluded.allergens_published;
 
 -- --- Safety metadata -------------------------------------------------------
 --

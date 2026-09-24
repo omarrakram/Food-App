@@ -392,6 +392,14 @@ export const SUBSTITUTION_DECISIONS = [
   'approved',
   'rejected',
   'auto_approved',
+  /**
+   * Nothing suitable existed, so the line came off.
+   *
+   * Distinct from `rejected`, which is the customer turning down an offer. A
+   * shop with no safe, equal-or-cheaper replacement never made one — and the
+   * difference is what the customer reads when they ask what happened.
+   */
+  'removed',
 ] as const;
 export type SubstitutionDecision = (typeof SUBSTITUTION_DECISIONS)[number];
 
@@ -604,6 +612,26 @@ export type Order = {
 
   createdAt: string;
   updatedAt: string;
+};
+
+/**
+ * Somebody who works in the shop.
+ *
+ * Deliberately two roles. The question this answers — may this person act for
+ * this merchant, at this branch — needs no more, and an RBAC system would be a
+ * month of work to answer it worse.
+ */
+export const MERCHANT_ROLES = ['admin', 'operator'] as const;
+export type MerchantRole = (typeof MERCHANT_ROLES)[number];
+
+export type MerchantMembership = {
+  id: string;
+  merchantId: string;
+  userId: string;
+  /** Null means every branch of this merchant. */
+  locationId: string | null;
+  role: MerchantRole;
+  createdAt: string;
 };
 
 // --- Settlement ------------------------------------------------------------

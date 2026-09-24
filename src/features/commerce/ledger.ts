@@ -150,9 +150,9 @@ export function checkAdjustment(
  * means charging somebody for a tomato they did not get.
  */
 export function substitutionAdjustmentMinor(substitution: OrderSubstitution): number {
-  if (substitution.decision === 'rejected') {
-    // Rejected: the customer gets neither the original nor the replacement,
-    // so the whole line comes off.
+  if (substitution.decision === 'rejected' || substitution.decision === 'removed') {
+    // The customer turned the offer down, or there was never a safe
+    // equal-or-cheaper one to make. Either way the line comes off whole.
     return -(substitution.originalUnitPrice.amountMinor * substitution.quantity);
   }
   if (substitution.replacementProductId === null) {

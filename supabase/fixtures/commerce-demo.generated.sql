@@ -89,48 +89,51 @@ on conflict do nothing;
 -- --- What it "sells" -------------------------------------------------------
 insert into public.merchant_products (
   id, merchant_location_id, external_id, sku, name, name_ar, brand,
-  pack_quantity, unit, price_minor, currency, availability, is_active
+  pack_quantity, unit, price_minor, currency, availability, is_active,
+  allergens_published
 )
 select v.id::uuid, '263a2817-7406-2a71-3dd4-56ec4505fd38'::uuid, v.external_id, v.sku, v.name, v.name_ar, v.brand,
-       v.pack_quantity, v.unit, v.price_minor, 'EGP', v.availability, v.is_active
+       v.pack_quantity, v.unit, v.price_minor, 'EGP', v.availability,
+       v.is_active, v.allergens_published
   from (values
-  ('1924a0d5-3a34-ec00-d85d-d6de769c2b9a', 'dm-chk-500', 'DM-CHK-500', 'Fresh Chicken Breast 500g', 'صدور فراخ طازة ٥٠٠ جم', 'Demo Farms', 500, 'g'::public.measurement_unit, 9000, 'in_stock'::public.availability_status, true),
-  ('e0b50df4-7458-6d37-f524-4a313f54a894', 'dm-chk-1000', 'DM-CHK-1000', 'Fresh Chicken Breast 1kg', 'صدور فراخ طازة ١ كجم', 'Demo Farms', 1, 'kg'::public.measurement_unit, 17000, 'in_stock'::public.availability_status, true),
-  ('9018c228-8aeb-a097-be2a-0b89a3982e58', 'dm-chk-mar-500', 'DM-CHK-MAR-500', 'Marinated Chicken Breast 500g', 'صدور فراخ متبلة ٥٠٠ جم', 'Demo Farms', 500, 'g'::public.measurement_unit, 10500, 'in_stock'::public.availability_status, true),
-  ('9881326b-4e7b-2816-bfa0-3f30ff8cb94c', 'dm-rice-1000', 'DM-RICE-1000', 'Egyptian Short Grain Rice 1kg', 'رز مصري ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 4500, 'in_stock'::public.availability_status, true),
-  ('3c2a149a-4ec1-4cae-bb7d-e0bde0f425e4', 'dm-rice-5000', 'DM-RICE-5000', 'Egyptian Short Grain Rice 5kg', 'رز مصري ٥ كجم', 'Demo Mills', 5, 'kg'::public.measurement_unit, 21000, 'in_stock'::public.availability_status, true),
-  ('c94c1607-7b01-58c6-c7e0-5d3dbeb7e220', 'dm-tom-1000', 'DM-TOM-1000', 'Fresh Tomatoes 1kg', 'طماطم طازة ١ كجم', null, 1, 'kg'::public.measurement_unit, 2200, 'in_stock'::public.availability_status, true),
-  ('e28f568c-6bb9-ed9a-3520-98075bacbb16', 'dm-tom-500', 'DM-TOM-500', 'Fresh Tomatoes 500g', 'طماطم طازة ٥٠٠ جم', null, 500, 'g'::public.measurement_unit, 1300, 'low_stock'::public.availability_status, true),
-  ('f2b53ada-7c34-e5ba-2b76-73f7ca605c67', 'dm-oni-1000', 'DM-ONI-1000', 'Yellow Onions 1kg', 'بصل أصفر ١ كجم', null, 1, 'kg'::public.measurement_unit, 1800, 'in_stock'::public.availability_status, true),
-  ('54723f6b-f88e-3314-6070-cf7f16676141', 'dm-milk-1000', 'DM-MILK-1000', 'Full Cream Milk 1L', 'لبن كامل الدسم ١ لتر', 'Demo Dairy', 1, 'l'::public.measurement_unit, 4000, 'in_stock'::public.availability_status, true),
-  ('c12ab8f1-e946-68e3-501e-2fef9c2c6eb0', 'dm-milk-250', 'DM-MILK-250', 'Full Cream Milk 250ml', 'لبن كامل الدسم ٢٥٠ مل', 'Demo Dairy', 250, 'ml'::public.measurement_unit, 1400, 'in_stock'::public.availability_status, true),
-  ('28cf61e9-3e9f-1a9c-1896-4a0147944c5b', 'dm-egg-12', 'DM-EGG-12', 'Table Eggs 12 pieces', 'بيض مائدة ١٢ بيضة', 'Demo Farms', 12, 'piece'::public.measurement_unit, 9000, 'in_stock'::public.availability_status, true),
-  ('aab5fcd5-3393-7e2e-8120-cb340f622a83', 'dm-egg-30', 'DM-EGG-30', 'Table Eggs 30 pieces', 'بيض مائدة ٣٠ بيضة', 'Demo Farms', 30, 'piece'::public.measurement_unit, 20500, 'in_stock'::public.availability_status, true),
-  ('32281c88-e426-1abc-7803-21c2ed068f28', 'dm-flour-1000', 'DM-FLOUR-1000', 'All Purpose Flour 1kg', 'دقيق فاخر ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 3200, 'in_stock'::public.availability_status, true),
-  ('c34e0be5-6f72-4cb8-1bda-ffea33f09161', 'dm-sunoil-1000', 'DM-SUNOIL-1000', 'Sunflower Oil 1L', 'زيت عباد الشمس ١ لتر', 'Demo Oils', 1, 'l'::public.measurement_unit, 8500, 'in_stock'::public.availability_status, true),
-  ('c6247433-6d5a-0db4-e263-eb5dec908235', 'dm-sunoil-2700', 'DM-SUNOIL-2700', 'Sunflower Oil 2.7L', 'زيت عباد الشمس ٢.٧ لتر', 'Demo Oils', 2.7, 'l'::public.measurement_unit, 21500, 'in_stock'::public.availability_status, true),
-  ('f37a99d2-a3de-c134-4c0b-60d822da3d27', 'dm-olive-500', 'DM-OLIVE-500', 'Extra Virgin Olive Oil 500ml', 'زيت زيتون بكر ٥٠٠ مل', 'Demo Groves', 500, 'ml'::public.measurement_unit, 19000, 'in_stock'::public.availability_status, true),
-  ('2aa70494-9dbe-c72e-3093-920c0b225ce9', 'dm-pasta-400', 'DM-PASTA-400', 'Spaghetti 400g', 'مكرونة اسباجتي ٤٠٠ جم', 'Demo Pasta', 400, 'g'::public.measurement_unit, 2400, 'in_stock'::public.availability_status, true),
-  ('93595e98-5f4f-dc33-7763-98d23e5ba0df', 'dm-cream-200', 'DM-CREAM-200', 'Cooking Cream 200ml', 'كريمة طهي ٢٠٠ مل', 'Demo Dairy', 200, 'ml'::public.measurement_unit, 5500, 'in_stock'::public.availability_status, true),
-  ('fb95fae6-7a3e-dfbf-a295-9df38d2ec8fb', 'dm-cream-500', 'DM-CREAM-500', 'Cooking Cream 500ml', 'كريمة طهي ٥٠٠ مل', 'Demo Dairy', 500, 'ml'::public.measurement_unit, 12000, 'out_of_stock'::public.availability_status, true),
-  ('7b2c80bc-4ece-f02c-cb21-9daf5e93d32a', 'dm-parm-100', 'DM-PARM-100', 'Grated Parmesan 100g', 'جبنة بارميزان مبشورة ١٠٠ جم', 'Demo Dairy', 100, 'g'::public.measurement_unit, 14000, 'in_stock'::public.availability_status, true),
-  ('bb1b2397-a5c6-fb4a-a645-3a6b18c1c22b', 'dm-lentil-500', 'DM-LENTIL-500', 'Red Lentils 500g', 'عدس أحمر ٥٠٠ جم', 'Demo Mills', 500, 'g'::public.measurement_unit, 3800, 'in_stock'::public.availability_status, true),
-  ('353e62cb-0e53-4abe-5118-436c5d2fec1e', 'dm-garlic-200', 'DM-GARLIC-200', 'Garlic 200g', 'توم ٢٠٠ جم', null, 200, 'g'::public.measurement_unit, 2600, 'in_stock'::public.availability_status, true),
-  ('385e5fc6-ec3b-d3f2-69bd-1d9e3173c0bc', 'dm-pot-2000', 'DM-POT-2000', 'Potatoes 2kg', 'بطاطس ٢ كجم', null, 2, 'kg'::public.measurement_unit, 3400, 'out_of_stock'::public.availability_status, true),
-  ('eeac8474-f695-191d-e2de-c7d2154f9790', 'dm-yog-1000', 'DM-YOG-1000', 'Plain Yoghurt 1kg', 'زبادي سادة ١ كجم', 'Demo Dairy', 1, 'kg'::public.measurement_unit, 6000, 'in_stock'::public.availability_status, true),
-  ('dd71d9c9-f4d1-50c1-bcac-635a4ad3d55d', 'dm-butter-200', 'DM-BUTTER-200', 'Butter 200g', 'زبدة ٢٠٠ جم', 'Demo Dairy', 200, 'g'::public.measurement_unit, 11000, 'in_stock'::public.availability_status, true),
-  ('81cba757-c565-67ab-66c3-0a14c3a60330', 'dm-moz-250', 'DM-MOZ-250', 'Mozzarella 250g', 'موتزاريلا ٢٥٠ جم', 'Demo Dairy', 250, 'g'::public.measurement_unit, 9500, 'in_stock'::public.availability_status, true),
-  ('1ed6459a-389c-06fd-90d0-f7419f26f09c', 'dm-cumin-100', 'DM-CUMIN-100', 'Ground Cumin 100g', 'كمون مطحون ١٠٠ جم', 'Demo Spices', 100, 'g'::public.measurement_unit, 2800, 'in_stock'::public.availability_status, true),
-  ('66870ac1-fd86-2cf5-a370-3a195c734b29', 'dm-chick-400', 'DM-CHICK-400', 'Canned Chickpeas 400g', 'حمص معلب ٤٠٠ جم', 'Demo Cans', 400, 'g'::public.measurement_unit, 2900, 'in_stock'::public.availability_status, true),
-  ('9c8717f1-0001-3b50-9a19-b022abb935e7', 'dm-sugar-1000', 'DM-SUGAR-1000', 'White Sugar 1kg', 'سكر أبيض ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 3600, 'in_stock'::public.availability_status, true),
-  ('5fd0c841-d400-e859-6440-a3946c346788', 'dm-legacy-chk', 'DM-LEGACY-CHK', 'Discontinued Chicken Pack', 'عبوة فراخ موقوفة', 'Demo Farms', 500, 'g'::public.measurement_unit, 7000, 'unknown'::public.availability_status, false),
-  ('5d6e70ce-18e8-0b64-38c0-786263fd4b4f', 'dm-bakery-baladi', 'DM-BAK-BALADI', 'Baladi Bread 5 loaves', 'عيش بلدي ٥ أرغفة', null, 5, 'piece'::public.measurement_unit, 1500, 'in_stock'::public.availability_status, true)
+  ('1924a0d5-3a34-ec00-d85d-d6de769c2b9a', 'dm-chk-500', 'DM-CHK-500', 'Fresh Chicken Breast 500g', 'صدور فراخ طازة ٥٠٠ جم', 'Demo Farms', 500, 'g'::public.measurement_unit, 9000, 'in_stock'::public.availability_status, true, true),
+  ('e0b50df4-7458-6d37-f524-4a313f54a894', 'dm-chk-1000', 'DM-CHK-1000', 'Fresh Chicken Breast 1kg', 'صدور فراخ طازة ١ كجم', 'Demo Farms', 1, 'kg'::public.measurement_unit, 17000, 'in_stock'::public.availability_status, true, true),
+  ('9018c228-8aeb-a097-be2a-0b89a3982e58', 'dm-chk-mar-500', 'DM-CHK-MAR-500', 'Marinated Chicken Breast 500g', 'صدور فراخ متبلة ٥٠٠ جم', 'Demo Farms', 500, 'g'::public.measurement_unit, 10500, 'in_stock'::public.availability_status, true, true),
+  ('9881326b-4e7b-2816-bfa0-3f30ff8cb94c', 'dm-rice-1000', 'DM-RICE-1000', 'Egyptian Short Grain Rice 1kg', 'رز مصري ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 4500, 'in_stock'::public.availability_status, true, true),
+  ('3c2a149a-4ec1-4cae-bb7d-e0bde0f425e4', 'dm-rice-5000', 'DM-RICE-5000', 'Egyptian Short Grain Rice 5kg', 'رز مصري ٥ كجم', 'Demo Mills', 5, 'kg'::public.measurement_unit, 21000, 'in_stock'::public.availability_status, true, true),
+  ('c94c1607-7b01-58c6-c7e0-5d3dbeb7e220', 'dm-tom-1000', 'DM-TOM-1000', 'Fresh Tomatoes 1kg', 'طماطم طازة ١ كجم', null, 1, 'kg'::public.measurement_unit, 2200, 'in_stock'::public.availability_status, true, true),
+  ('e28f568c-6bb9-ed9a-3520-98075bacbb16', 'dm-tom-500', 'DM-TOM-500', 'Fresh Tomatoes 500g', 'طماطم طازة ٥٠٠ جم', null, 500, 'g'::public.measurement_unit, 1300, 'low_stock'::public.availability_status, true, true),
+  ('f2b53ada-7c34-e5ba-2b76-73f7ca605c67', 'dm-oni-1000', 'DM-ONI-1000', 'Yellow Onions 1kg', 'بصل أصفر ١ كجم', null, 1, 'kg'::public.measurement_unit, 1800, 'in_stock'::public.availability_status, true, true),
+  ('54723f6b-f88e-3314-6070-cf7f16676141', 'dm-milk-1000', 'DM-MILK-1000', 'Full Cream Milk 1L', 'لبن كامل الدسم ١ لتر', 'Demo Dairy', 1, 'l'::public.measurement_unit, 4000, 'in_stock'::public.availability_status, true, true),
+  ('c12ab8f1-e946-68e3-501e-2fef9c2c6eb0', 'dm-milk-250', 'DM-MILK-250', 'Full Cream Milk 250ml', 'لبن كامل الدسم ٢٥٠ مل', 'Demo Dairy', 250, 'ml'::public.measurement_unit, 1400, 'in_stock'::public.availability_status, true, true),
+  ('28cf61e9-3e9f-1a9c-1896-4a0147944c5b', 'dm-egg-12', 'DM-EGG-12', 'Table Eggs 12 pieces', 'بيض مائدة ١٢ بيضة', 'Demo Farms', 12, 'piece'::public.measurement_unit, 9000, 'in_stock'::public.availability_status, true, true),
+  ('aab5fcd5-3393-7e2e-8120-cb340f622a83', 'dm-egg-30', 'DM-EGG-30', 'Table Eggs 30 pieces', 'بيض مائدة ٣٠ بيضة', 'Demo Farms', 30, 'piece'::public.measurement_unit, 20500, 'in_stock'::public.availability_status, true, true),
+  ('32281c88-e426-1abc-7803-21c2ed068f28', 'dm-flour-1000', 'DM-FLOUR-1000', 'All Purpose Flour 1kg', 'دقيق فاخر ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 3200, 'in_stock'::public.availability_status, true, true),
+  ('c34e0be5-6f72-4cb8-1bda-ffea33f09161', 'dm-sunoil-1000', 'DM-SUNOIL-1000', 'Sunflower Oil 1L', 'زيت عباد الشمس ١ لتر', 'Demo Oils', 1, 'l'::public.measurement_unit, 8500, 'in_stock'::public.availability_status, true, true),
+  ('c6247433-6d5a-0db4-e263-eb5dec908235', 'dm-sunoil-2700', 'DM-SUNOIL-2700', 'Sunflower Oil 2.7L', 'زيت عباد الشمس ٢.٧ لتر', 'Demo Oils', 2.7, 'l'::public.measurement_unit, 21500, 'in_stock'::public.availability_status, true, true),
+  ('f37a99d2-a3de-c134-4c0b-60d822da3d27', 'dm-olive-500', 'DM-OLIVE-500', 'Extra Virgin Olive Oil 500ml', 'زيت زيتون بكر ٥٠٠ مل', 'Demo Groves', 500, 'ml'::public.measurement_unit, 19000, 'in_stock'::public.availability_status, true, true),
+  ('2aa70494-9dbe-c72e-3093-920c0b225ce9', 'dm-pasta-400', 'DM-PASTA-400', 'Spaghetti 400g', 'مكرونة اسباجتي ٤٠٠ جم', 'Demo Pasta', 400, 'g'::public.measurement_unit, 2400, 'in_stock'::public.availability_status, true, true),
+  ('93595e98-5f4f-dc33-7763-98d23e5ba0df', 'dm-cream-200', 'DM-CREAM-200', 'Cooking Cream 200ml', 'كريمة طهي ٢٠٠ مل', 'Demo Dairy', 200, 'ml'::public.measurement_unit, 5500, 'in_stock'::public.availability_status, true, true),
+  ('fb95fae6-7a3e-dfbf-a295-9df38d2ec8fb', 'dm-cream-500', 'DM-CREAM-500', 'Cooking Cream 500ml', 'كريمة طهي ٥٠٠ مل', 'Demo Dairy', 500, 'ml'::public.measurement_unit, 12000, 'out_of_stock'::public.availability_status, true, true),
+  ('7b2c80bc-4ece-f02c-cb21-9daf5e93d32a', 'dm-parm-100', 'DM-PARM-100', 'Grated Parmesan 100g', 'جبنة بارميزان مبشورة ١٠٠ جم', 'Demo Dairy', 100, 'g'::public.measurement_unit, 14000, 'in_stock'::public.availability_status, true, true),
+  ('bb1b2397-a5c6-fb4a-a645-3a6b18c1c22b', 'dm-lentil-500', 'DM-LENTIL-500', 'Red Lentils 500g', 'عدس أحمر ٥٠٠ جم', 'Demo Mills', 500, 'g'::public.measurement_unit, 3800, 'in_stock'::public.availability_status, true, true),
+  ('353e62cb-0e53-4abe-5118-436c5d2fec1e', 'dm-garlic-200', 'DM-GARLIC-200', 'Garlic 200g', 'توم ٢٠٠ جم', null, 200, 'g'::public.measurement_unit, 2600, 'in_stock'::public.availability_status, true, true),
+  ('385e5fc6-ec3b-d3f2-69bd-1d9e3173c0bc', 'dm-pot-2000', 'DM-POT-2000', 'Potatoes 2kg', 'بطاطس ٢ كجم', null, 2, 'kg'::public.measurement_unit, 3400, 'out_of_stock'::public.availability_status, true, true),
+  ('eeac8474-f695-191d-e2de-c7d2154f9790', 'dm-yog-1000', 'DM-YOG-1000', 'Plain Yoghurt 1kg', 'زبادي سادة ١ كجم', 'Demo Dairy', 1, 'kg'::public.measurement_unit, 6000, 'in_stock'::public.availability_status, true, true),
+  ('dd71d9c9-f4d1-50c1-bcac-635a4ad3d55d', 'dm-butter-200', 'DM-BUTTER-200', 'Butter 200g', 'زبدة ٢٠٠ جم', 'Demo Dairy', 200, 'g'::public.measurement_unit, 11000, 'in_stock'::public.availability_status, true, true),
+  ('81cba757-c565-67ab-66c3-0a14c3a60330', 'dm-moz-250', 'DM-MOZ-250', 'Mozzarella 250g', 'موتزاريلا ٢٥٠ جم', 'Demo Dairy', 250, 'g'::public.measurement_unit, 9500, 'in_stock'::public.availability_status, true, true),
+  ('1ed6459a-389c-06fd-90d0-f7419f26f09c', 'dm-cumin-100', 'DM-CUMIN-100', 'Ground Cumin 100g', 'كمون مطحون ١٠٠ جم', 'Demo Spices', 100, 'g'::public.measurement_unit, 2800, 'in_stock'::public.availability_status, true, true),
+  ('66870ac1-fd86-2cf5-a370-3a195c734b29', 'dm-chick-400', 'DM-CHICK-400', 'Canned Chickpeas 400g', 'حمص معلب ٤٠٠ جم', 'Demo Cans', 400, 'g'::public.measurement_unit, 2900, 'in_stock'::public.availability_status, true, true),
+  ('9c8717f1-0001-3b50-9a19-b022abb935e7', 'dm-sugar-1000', 'DM-SUGAR-1000', 'White Sugar 1kg', 'سكر أبيض ١ كجم', 'Demo Mills', 1, 'kg'::public.measurement_unit, 3600, 'in_stock'::public.availability_status, true, true),
+  ('5fd0c841-d400-e859-6440-a3946c346788', 'dm-legacy-chk', 'DM-LEGACY-CHK', 'Discontinued Chicken Pack', 'عبوة فراخ موقوفة', 'Demo Farms', 500, 'g'::public.measurement_unit, 7000, 'unknown'::public.availability_status, false, true),
+  ('5d6e70ce-18e8-0b64-38c0-786263fd4b4f', 'dm-bakery-baladi', 'DM-BAK-BALADI', 'Baladi Bread 5 loaves', 'عيش بلدي ٥ أرغفة', null, 5, 'piece'::public.measurement_unit, 1500, 'in_stock'::public.availability_status, true, false)
   ) as v (id, external_id, sku, name, name_ar, brand, pack_quantity, unit,
-          price_minor, availability, is_active)
+          price_minor, availability, is_active, allergens_published)
 on conflict (id) do update set
-  price_minor  = excluded.price_minor,
-  availability = excluded.availability,
-  is_active    = excluded.is_active;
+  price_minor         = excluded.price_minor,
+  availability        = excluded.availability,
+  is_active           = excluded.is_active,
+  allergens_published = excluded.allergens_published;
 
 -- --- Safety metadata -------------------------------------------------------
 --
