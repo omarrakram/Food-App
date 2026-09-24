@@ -12,6 +12,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useAuth } from '@/features/auth/auth-provider';
+import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useUnreadTotal } from '@/features/messages/hooks';
 import { useUnreadNotifications } from '@/features/notifications/hooks';
@@ -57,6 +58,21 @@ const PRIMARY_ROWS: DrawerRow[] = [
   },
   { key: 'saved', labelKey: 'tabs.saved', icon: 'bookmark-outline', href: '/saved' },
 ];
+
+/**
+ * The cart, which exists only where a branch does.
+ *
+ * Kept out of `PRIMARY_ROWS` and rendered conditionally for the same reason
+ * Friends was: a row leading to a shop that cannot serve this country is a
+ * promise the app cannot keep. `isOrderingAvailable` is the single answer to
+ * that question and every commerce entry point asks it.
+ */
+const CART_ROW: DrawerRow = {
+  key: 'cart',
+  labelKey: 'cart.title',
+  icon: 'bag-handle-outline',
+  href: '/cart',
+};
 
 /** Social and community. */
 const SOCIAL_ROWS: DrawerRow[] = [
@@ -199,6 +215,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
   const unread = useUnreadTotal();
   const unreadNotifications = useUnreadNotifications();
   const canModerate = useCanModerate();
+  const orderingAvailable = isOrderingAvailable(preferences.country);
 
   /**
    * A closed drawer must not be readable by assistive technology.
@@ -310,6 +327,7 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
       {PRIMARY_ROWS.map((row) => (
         <Row key={row.key} row={row} onNavigate={go} />
       ))}
+      {orderingAvailable ? <Row row={CART_ROW} onNavigate={go} /> : null}
 
       {SOCIAL_ROWS.length > 0 ? (
         <>

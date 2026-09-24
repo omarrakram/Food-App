@@ -13,7 +13,6 @@ import { RecipeShareSheet } from '@/components/recipe/share-sheet';
 import { Button, IconButton } from '@/components/ui/button';
 import { ScreenFooter, ScreenScroll } from '@/components/ui/screen';
 import { Divider } from '@/components/ui/section';
-import { Sheet } from '@/components/ui/sheet';
 import { Skeleton } from '@/components/ui/skeleton';
 import { EmptyState } from '@/components/ui/states';
 import { Stepper } from '@/components/ui/stepper';
@@ -29,12 +28,22 @@ import { formatQuantity, scaleQuantity } from '@/features/pricing/units';
 import { useRecipe } from '@/features/recipes/hooks';
 import { useIsSaved, useRecordHistory, useToggleSave } from '@/features/saved/hooks';
 import { useShoppingMutations } from '@/features/shopping/hooks';
-import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
+import { SourcedLineRow, UnsourceableLineRow } from '@/components/commerce/sourced-line';
+import { toCartInputs, useCartMutations, useRecipeSourcing } from '@/features/commerce/hooks';
+import { merchantDisplayName } from '@/features/commerce/display';
+import type { SourcedLine } from '@/features/commerce/ports';
 import { useI18n } from '@/i18n';
+import { presentError } from '@/lib/errors';
 import { divideMoney, formatMoney } from '@/lib/format/money';
 import { RecipeImage } from '@/components/recipe/recipe-image';
 import { useTheme } from '@/theme';
 import type { IngredientMatch, Recipe } from '@/types/domain';
+
+/**
+ * A stable empty list, so the sourcing hook's memo is not invalidated on every
+ * render while the recipe is still loading.
+ */
+const NO_MATCHES: readonly IngredientMatch[] = [];
 
 /**
  * One fact in the strip under the title.
@@ -190,7 +199,7 @@ function IngredientLine({
 
 export default function RecipeDetailScreen() {
   const theme = useTheme();
-  const { t, formatNumber, locale } = useI18n();
+  const { t, formatNumber, locale, language } = useI18n();
   const recipeText = useRecipeText();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -207,9 +216,16 @@ export default function RecipeDetailScreen() {
 
   const row = useRowDirection();
   const [servings, setServings] = useState<number | null>(null);
-  const [orderSheetOpen, setOrderSheetOpen] = useState(false);
+  /**
+   * Commerce is REVEALED, not rendered by default.
+   *
+   * The page is a recipe. Somebody who opened it to cook from what they have
+   * should not have to scroll past a shop to reach the method, so the products
+   * appear when they are asked for and the default view is unchanged.
+   */
+  const [showSourcing, setShowSourcing] = useState(false);
+  const cart = useCartMutations();
   const [sharing, setSharing] = useState(false);
-  const orderingAvailable = isOrderingAvailable(preferences.country);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
 
   const effectiveServings = servings ?? recipe?.baseServings ?? preferences.householdSize;
@@ -255,6 +271,40 @@ export default function RecipeDetailScreen() {
     return recipe.allergens.filter((allergen) => preferences.allergens.includes(allergen));
   }, [recipe, preferences.allergens]);
 
+  /*
+    YOU NEED, and what a shop could do about it.
+
+    Hoisted above the early returns because hooks cannot be called after one.
+    While the recipe is loading this sources an empty list, which selects a
+    branch and does nothing else.
+  */
+  const missing = useMemo(() => match?.missingIngredients ?? NO_MATCHES, [match]);
+  const sourcing = useRecipeSourcing(recipe?.id ?? '', missing);
+
+  /*
+    A product belongs UNDER THE ROW THAT ASKED FOR IT.
+
+    Keyed by the recipe ingredient id that `requirementsFor` echoed onto the
+    line, not by the canonical slug: one recipe can want tomatoes twice, fresh
+    and tinned, and a slug key would put the tin under the fresh row.
+  */
+  const sourcedByIngredient = useMemo(() => {
+    const byId = new Map<string, SourcedLine>();
+    for (const line of sourcing?.result.lines ?? []) {
+      if (line.requested.requestLineId) byId.set(line.requested.requestLineId, line);
+    }
+    return byId;
+  }, [sourcing]);
+
+  /** Rows the app cannot even name canonically, so no shop can be asked. */
+  const unsourceableIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const entry of sourcing?.requirements.unsourceable ?? []) {
+      if (entry.requestLineId) ids.add(entry.requestLineId);
+    }
+    return ids;
+  }, [sourcing]);
+
   if (isLoading) {
     return (
       <ScreenScroll padded={false} edges={{ top: false }}>
@@ -281,8 +331,9 @@ export default function RecipeDetailScreen() {
   }
 
   const priced = toPricedAmount(estimate);
+  const merchantName = sourcing ? merchantDisplayName(sourcing.merchant.merchant, language) : '';
+  const addableCount = sourcing?.addable.length ?? 0;
   const perServing = divideMoney(priced.money, Math.max(1, effectiveServings));
-  const missing = match.missingIngredients;
 
   const handleAddMissing = () => {
     const inputs = missing
@@ -302,6 +353,37 @@ export default function RecipeDetailScreen() {
           tone: 'success',
           action: { label: t('common.seeAll'), onPress: () => router.push('/shopping-list') },
         }),
+    });
+  };
+
+  /**
+   * Adds ONLY what the sourcer called `matched`.
+   *
+   * Never a `needs_confirmation` line, never an out-of-stock one, never one
+   * ruled out by an allergy and never an unmapped one. A bulk action that
+   * quietly resolved an ambiguous mapping on the user's behalf would be the
+   * app deciding what somebody eats, which is exactly what the three-axis
+   * split in `sourcing.ts` exists to prevent.
+   */
+  const handleAddToCart = () => {
+    if (!sourcing || sourcing.addable.length === 0) return;
+
+    const inputs = toCartInputs(sourcing, sourcing.addable, recipe.id);
+    if (inputs.length === 0) return;
+
+    cart.addLines.mutate(inputs, {
+      onSuccess: (outcome) =>
+        toast.show({
+          // Replacing the basket is the louder message of the two, so it wins
+          // the toast: the user needs to know the other shop's items are gone.
+          message: outcome.replacedMerchant
+            ? t('cart.replacedMerchant')
+            : t('commerce.addedToCart', { count: outcome.addedLines }),
+          tone: outcome.replacedMerchant ? 'warning' : 'success',
+          action: { label: t('commerce.viewCart'), onPress: () => router.push('/cart') },
+        }),
+      onError: (error) =>
+        toast.show({ message: t(presentError(error).bodyKey), tone: 'danger' }),
     });
   };
 
@@ -562,15 +644,32 @@ export default function RecipeDetailScreen() {
                     {formatNumber(missing.length)}
                   </Text>
                 </View>
-                {missing.map((entry) => (
-                  <IngredientLine
-                    key={entry.recipeIngredientId}
-                    recipe={recipe}
-                    match={entry}
-                    servings={effectiveServings}
-                    muted={false}
-                  />
-                ))}
+                {missing.map((entry) => {
+                  const sourced = sourcedByIngredient.get(entry.recipeIngredientId);
+                  return (
+                    <View key={entry.recipeIngredientId} style={{ gap: 4 }}>
+                      <IngredientLine
+                        recipe={recipe}
+                        match={entry}
+                        servings={effectiveServings}
+                        muted={false}
+                      />
+                      {showSourcing && sourcing ? (
+                        sourced ? (
+                          <SourcedLineRow
+                            line={sourced}
+                            merchantName={merchantName}
+                            testID={`recipe-sourced-${entry.recipeIngredientId}`}
+                          />
+                        ) : unsourceableIds.has(entry.recipeIngredientId) ? (
+                          <UnsourceableLineRow
+                            testID={`recipe-unsourceable-${entry.recipeIngredientId}`}
+                          />
+                        ) : null
+                      ) : null}
+                    </View>
+                  );
+                })}
               </View>
             ) : null}
           </View>
@@ -673,25 +772,126 @@ export default function RecipeDetailScreen() {
             ) : null}
 
             {/*
-              The same rule the shopping list already follows, and this screen
-              did not: an active-looking button that opens a sheet saying
-              "not available yet" is a tap spent to learn nothing, and two
-              screens disagreeing about whether ordering exists is worse than
-              either answer. No provider is configured for any country yet —
-              `enabledProvidersFor` returns none — so the unavailable state
-              says so on its face and cannot be pressed. The sheet and the
-              provider registry stay for when one is.
+              THE SHOP, WHICH IS OPT-IN AND HONEST ABOUT ITSELF.
+
+              Three states, and no button that looks alive and is not. With no
+              branch selectable the control says so and cannot be pressed —
+              the same rule the shopping list follows, because two screens
+              disagreeing about whether ordering exists is worse than either
+              answer. With one, the first tap reveals the products; only then
+              is there anything to add.
             */}
-            <Button
-              label={orderingAvailable ? t('recipe.orderIngredients') : t('shopping.orderComingSoon')}
-              icon="bag-handle-outline"
-              variant="ghost"
-              onPress={orderingAvailable ? () => setOrderSheetOpen(true) : undefined}
-              disabled={!orderingAvailable}
-              size="md"
-              fullWidth
-              testID="recipe-order"
-            />
+            {missing.length === 0 ? null : !sourcing ? (
+              <Button
+                label={t('shopping.orderComingSoon')}
+                icon="bag-handle-outline"
+                variant="ghost"
+                disabled
+                size="md"
+                fullWidth
+                testID="recipe-order"
+              />
+            ) : !showSourcing ? (
+              <Button
+                label={t('commerce.getMissing')}
+                icon="bag-handle-outline"
+                variant="secondary"
+                onPress={() => setShowSourcing(true)}
+                size="md"
+                fullWidth
+                testID="recipe-get-missing"
+              />
+            ) : (
+              <View
+                style={{
+                  gap: theme.spacing.sm,
+                  padding: theme.spacing.lg,
+                  borderRadius: theme.radius.lg,
+                  borderWidth: 1,
+                  borderColor: theme.colors.border,
+                  backgroundColor: theme.colors.surface,
+                }}
+                testID="recipe-sourcing"
+              >
+                {/*
+                  THE DEMO BADGE IS NOT DECORATION. This catalogue is fixture
+                  data with invented prices, and anything that looks like a
+                  supermarket without saying it is not one is a lie the user
+                  cannot detect from the inside.
+                */}
+                {sourcing.merchant.isDemo ? (
+                  <View style={{ gap: 2 }} testID="recipe-demo-badge">
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: theme.spacing.xs,
+                      }}
+                    >
+                      <Ionicons name="flask-outline" size={14} color={theme.colors.warningSoftText} />
+                      <Text variant="footnote" style={{ color: theme.colors.warningSoftText }}>
+                        {t('commerce.demoBadge')}
+                      </Text>
+                    </View>
+                    <Text variant="caption" color="textTertiary">
+                      {t('commerce.demoBody')}
+                    </Text>
+                  </View>
+                ) : (
+                  <Text variant="footnote" color="textSecondary">
+                    {t('commerce.sourcingFrom', { merchant: merchantName })}
+                  </Text>
+                )}
+
+                {/*
+                  PARTIAL FULFILMENT IS SAID OUT LOUD. "Add 3 to cart" under a
+                  list of seven missing ingredients reads as a complete answer
+                  unless the screen states the gap.
+                */}
+                <Text variant="footnote" color={addableCount === 0 ? 'textSecondary' : 'text'}>
+                  {addableCount === 0
+                    ? t('commerce.noneReady')
+                    : addableCount === missing.length
+                      ? t('commerce.allReady', { count: addableCount })
+                      : t('commerce.partial', {
+                          ready: formatNumber(addableCount),
+                          total: formatNumber(missing.length),
+                        })}
+                </Text>
+                {addableCount < missing.length ? (
+                  <Text variant="caption" color="textTertiary">
+                    {t('commerce.recipeStillWorks')}
+                  </Text>
+                ) : null}
+
+                <Button
+                  label={t('commerce.addToCart', { count: addableCount })}
+                  icon="cart-outline"
+                  onPress={handleAddToCart}
+                  disabled={addableCount === 0}
+                  loading={cart.addLines.isPending}
+                  size="lg"
+                  fullWidth
+                  testID="recipe-add-to-cart"
+                />
+                <View style={{ flexDirection: row, gap: theme.spacing.sm }}>
+                  <Button
+                    label={t('commerce.viewCart')}
+                    variant="ghost"
+                    onPress={() => router.push('/cart')}
+                    size="md"
+                    testID="recipe-view-cart"
+                  />
+                  <Button
+                    label={t('commerce.hide')}
+                    variant="ghost"
+                    onPress={() => setShowSourcing(false)}
+                    size="md"
+                    testID="recipe-hide-sourcing"
+                  />
+                </View>
+              </View>
+            )}
           </View>
         </View>
       </ScreenScroll>
@@ -705,30 +905,6 @@ export default function RecipeDetailScreen() {
           testID="recipe-start-cooking"
         />
       </ScreenFooter>
-
-      <Sheet
-        visible={orderSheetOpen}
-        onClose={() => setOrderSheetOpen(false)}
-        title={t('recipe.orderComingSoon')}
-        scrollable={false}
-      >
-        <View style={{ gap: theme.spacing.md }}>
-          <Text variant="body" color="textSecondary">
-            {orderingAvailable
-              ? t('grocery.notAvailableBody', { country: t(`country.${preferences.country}` as const) })
-              : t('recipe.orderComingSoonBody')}
-          </Text>
-          <Button
-            label={t('recipe.addMissingToList', { count: missing.length })}
-            onPress={() => {
-              handleAddMissing();
-              setOrderSheetOpen(false);
-            }}
-            disabled={missing.length === 0}
-            size="lg"
-          />
-        </View>
-      </Sheet>
 
       <RecipeShareSheet
         visible={sharing}

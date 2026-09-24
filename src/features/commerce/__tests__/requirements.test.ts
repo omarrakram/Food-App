@@ -143,7 +143,7 @@ describe('what cannot be bought at all', () => {
 
     expect(lines).toEqual([]);
     expect(unsourceable).toEqual([
-      { name: 'Smoked paprika aioli', reason: 'no_canonical_ingredient' },
+      { name: 'Smoked paprika aioli', reason: 'no_canonical_ingredient', requestLineId: 'ri-1' },
     ]);
   });
 });
@@ -202,5 +202,63 @@ describe('what the pantry does and does not tell us', () => {
       'r-1',
     );
     expect(lines[0]?.quantity).toBe(500);
+  });
+});
+
+describe('pairing a result back to the recipe row it came from', () => {
+  it('echoes the recipe ingredient id onto every line', () => {
+    const { lines } = requirementsFor([match({ recipeIngredientId: 'ri-42' })], 'r-1');
+    expect(lines[0]?.requestLineId).toBe('ri-42');
+  });
+
+  it('keeps two rows of the same ingredient apart', () => {
+    // Fresh tomatoes and tinned tomatoes both canonicalise to `tomatoes`, so
+    // the slug is NOT a key. A screen pairing by slug would put one line's
+    // product under the other line's ingredient.
+    const { lines } = requirementsFor(
+      [
+        match({ recipeIngredientId: 'ri-fresh', slug: 'tomatoes', quantity: 3, unit: 'piece' }),
+        match({ recipeIngredientId: 'ri-tinned', slug: 'tomatoes', quantity: 400, unit: 'g' }),
+      ],
+      'r-1',
+    );
+
+    expect(lines.map((line) => line.requestLineId)).toEqual(['ri-fresh', 'ri-tinned']);
+    expect(lines.map((line) => line.quantity)).toEqual([3, 400]);
+  });
+
+  it('carries the id onto an ingredient that cannot be sourced at all', () => {
+    const { lines, unsourceable } = requirementsFor(
+      [match({ recipeIngredientId: 'ri-odd', slug: null, name: 'Saffron dust' })],
+      'r-1',
+    );
+
+    expect(lines).toHaveLength(0);
+    expect(unsourceable).toEqual([
+      { name: 'Saffron dust', reason: 'no_canonical_ingredient', requestLineId: 'ri-odd' },
+    ]);
+  });
+
+  it('survives sourcing, so the result can be paired with no positional guess', () => {
+    const context: SourcingContext = {
+      avoidAllergens: [],
+      perPieceFor: (slug) => perPieceWeightFor(INGREDIENTS_BY_SLUG.get(slug) ?? null),
+    };
+
+    const { lines } = requirementsFor(
+      [
+        match({ recipeIngredientId: 'ri-a', slug: 'cream', quantity: 200, unit: 'ml' }),
+        match({ recipeIngredientId: 'ri-b', slug: 'parmesan', quantity: 50, unit: 'g' }),
+      ],
+      'r-1',
+    );
+
+    const result = sourceRequest(
+      { lines, merchantId: 'merchant-demo', locationId: 'location-demo' },
+      demoCandidatesFor,
+      context,
+    );
+
+    expect(result.lines.map((line) => line.requested.requestLineId)).toEqual(['ri-a', 'ri-b']);
   });
 });

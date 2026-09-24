@@ -68,6 +68,19 @@ export type SourcingLine = {
   readonly amount: RequirementAmount;
   /** Which recipe asked for it, so the cart can explain itself. */
   readonly sourceRecipeId: string | null;
+  /**
+   * The CALLER'S handle for this line, echoed back on the result untouched.
+   *
+   * Sourcing never reads it. It exists because the slug is not a key: one
+   * recipe can ask for tomatoes twice — fresh and tinned — and a screen that
+   * paired results to rows by slug would put the tin under the fresh line.
+   * Pairing by position would work today and break the first time either the
+   * requirement builder or the sourcer stopped preserving order, and it would
+   * break silently, by showing the right product under the wrong ingredient.
+   *
+   * Null when the caller has nothing to pair against.
+   */
+  readonly requestLineId: string | null;
 };
 
 export type SourcingRequest = {

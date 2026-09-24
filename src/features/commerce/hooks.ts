@@ -7,8 +7,11 @@ import { usePreferences } from '@/features/preferences/preferences-provider';
 import { perPieceWeightFor } from '@/features/pricing/units';
 import { toAppError } from '@/lib/errors';
 import { queryKeys } from '@/lib/query/client';
+import type { Cart, MerchantProduct } from '@/types/commerce';
 import type { IngredientMatch } from '@/types/domain';
 
+import { addableLines } from './basket';
+import { buildCartView, type CartView } from './cart-view';
 import type { AddCartLineInput } from './cart-repository';
 import { selectMerchant, type SelectedMerchant } from './merchant-selection';
 import type { SourcedLine, SourcingResult } from './ports';
@@ -87,11 +90,7 @@ export function useRecipeSourcing(
       merchant,
       requirements,
       result,
-      // ONLY `matched`. Anything needing confirmation, anything out of stock,
-      // anything ruled out for this user and anything unmapped is deliberately
-      // excluded — a bulk action must never quietly add a line the cook has
-      // not seen.
-      addable: result.lines.filter((line) => line.status === 'matched'),
+      addable: addableLines(result),
     };
   }, [merchant, context, missing, recipeId]);
 }
@@ -177,6 +176,9 @@ export function toCartInputs(
 
   for (const line of lines) {
     const chosen = line.chosen;
+    // Both guards are `addableLines`' rules restated at the point money is
+    // committed. Callers are supposed to pass addable lines; this makes a
+    // caller that does not fail quietly rather than expensively.
     if (!chosen || chosen.packsNeeded === null) continue;
 
     inputs.push({
@@ -193,3 +195,97 @@ export function toCartInputs(
 
   return inputs;
 }
+
+/**
+ * Why a cart cannot be shown, when it cannot.
+ *
+ * `unknown_merchant` is the one that matters: a cart whose branch is no longer
+ * selectable — the demo catalogue switched off, a partner withdrawn — must not
+ * render as an ordinary basket, because none of its prices can be trusted and
+ * none of its lines can be ordered.
+ */
+export type CartProblem = 'unknown_merchant';
+
+export type CartState =
+  | { readonly kind: 'loading' }
+  | { readonly kind: 'error'; readonly error: unknown; readonly refetch: () => void }
+  | { readonly kind: 'empty' }
+  | { readonly kind: 'problem'; readonly problem: CartProblem; readonly cart: Cart }
+  | { readonly kind: 'ready'; readonly view: CartView; readonly isRefreshing: boolean };
+
+/**
+ * The catalogue rows for a cart's lines.
+ *
+ * Separate from the cart query because they have different lifetimes: the cart
+ * is the user's own durable state, these are a read of somebody else's shelf
+ * that is stale the moment it lands.
+ */
+function useCartProducts(
+  merchant: SelectedMerchant | null,
+  cart: Cart | null | undefined,
+): { products: ReadonlyMap<string, MerchantProduct>; isFetching: boolean } {
+  const ids = useMemo(
+    () => (cart ? cart.lines.map((line) => line.merchantProductId) : []),
+    [cart],
+  );
+
+  const enabled = Boolean(merchant) && ids.length > 0 && cart?.merchantId === merchant?.merchant.id;
+
+  const query = useQuery({
+    queryKey: queryKeys.merchantProducts(merchant?.location.id ?? 'none', ids),
+    enabled,
+    queryFn: async () => {
+      if (!merchant) return [] as readonly MerchantProduct[];
+      try {
+        return await merchant.catalogue.getProducts(ids);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+
+  const products = useMemo(() => {
+    const map = new Map<string, MerchantProduct>();
+    for (const product of query.data ?? []) map.set(product.id, product);
+    return map;
+  }, [query.data]);
+
+  return { products, isFetching: query.isFetching };
+}
+
+/**
+ * Everything the cart screen needs, as one discriminated state.
+ *
+ * TOTALS ARE COMPUTED FROM THE SNAPSHOT PRICES, not from the catalogue read.
+ * The snapshot is what the user was shown when they added the line, and
+ * silently re-totalling a basket underneath somebody is how a shop loses an
+ * argument about what they agreed to pay. A changed price is SURFACED per line
+ * instead; reconciling it belongs to checkout, which does not exist yet.
+ */
+export function useCartView(): CartState {
+  const merchant = useSelectedMerchant();
+  const { data: cart, isLoading, isError, error, refetch } = useCart();
+  const { products, isFetching } = useCartProducts(merchant, cart);
+
+  const refetchCart = useCallback(() => {
+    void refetch();
+  }, [refetch]);
+
+  return useMemo<CartState>(() => {
+    if (isLoading) return { kind: 'loading' };
+    if (isError) return { kind: 'error', error, refetch: refetchCart };
+    if (!cart || cart.lines.length === 0) return { kind: 'empty' };
+
+    if (!merchant || merchant.merchant.id !== cart.merchantId) {
+      return { kind: 'problem', problem: 'unknown_merchant', cart };
+    }
+
+    return {
+      kind: 'ready',
+      isRefreshing: isFetching,
+      view: buildCartView(cart, merchant, products),
+    };
+  }, [cart, isLoading, isError, error, refetchCart, merchant, products, isFetching]);
+}
+
+export type { CartLineView, CartView } from './cart-view';

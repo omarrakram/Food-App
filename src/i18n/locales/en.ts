@@ -223,10 +223,6 @@ export const en = {
   'recipe.unsaveRecipe': 'Saved',
   'recipe.addMissingToList': 'Add {count} missing to shopping list',
   'recipe.addedToList': 'Added to your shopping list',
-  'recipe.orderIngredients': 'Order ingredients',
-  'recipe.orderComingSoon': 'Ordering is coming soon',
-  'recipe.orderComingSoonBody':
-    'We are still finalising delivery partners. You can add everything to your shopping list in the meantime.',
   'recipe.servingsAdjust': 'Servings',
   'recipe.safetyTitle': 'Cook it safely',
   'recipe.allergenWarning': 'Contains {allergens}',
@@ -578,8 +574,6 @@ export const en = {
   'shopping.estimatedTotal': 'Estimated total',
   'shopping.estimatedTotalNote': 'Estimate only — final store prices may differ.',
   'shopping.orderComingSoon': 'Ordering — coming soon',
-  'shopping.orderAll': 'Order ingredients',
-  'shopping.orderUnavailable': 'Delivery partners are not live yet',
   'shopping.mergedNotice': 'Combined with what was already on your list',
 
   // --- Profile / settings -------------------------------------------------
@@ -932,12 +926,66 @@ export const en = {
   'price.incompleteExplainer':
     'Some ingredients have no price in our data, so this total is lower than the real cost. We will not guess a figure to fill the gap.',
 
-  // --- Grocery ordering (future) -----------------------------------------
-  'grocery.title': 'Order ingredients',
-  'grocery.notAvailableTitle': 'Not available yet',
-  'grocery.notAvailableBody':
-    'We are working on delivery partners in {country}. Until then your shopping list is ready to take to the shop.',
-  'grocery.notifyMe': 'Tell me when it is ready',
+  // --- Commerce ------------------------------------------------------------
+  'commerce.getMissing': 'Get missing ingredients',
+  'commerce.addToCart_one': 'Add 1 to cart',
+  'commerce.addToCart_other': 'Add {count} to cart',
+  'commerce.viewCart': 'View cart',
+  'commerce.demoBadge': 'Demo shop — not a real supermarket',
+  'commerce.demoBody': 'These products and prices are development data. Nothing here can be ordered.',
+  'commerce.need': 'Need {amount}',
+  'commerce.needSome': 'Need some',
+  'commerce.packs_one': '1 pack',
+  'commerce.packs_other': '{count} packs',
+  'commerce.sourcingFrom': 'From {merchant}',
+  'commerce.partial': '{ready} of {total} can be added now',
+  'commerce.noneReady': 'Nothing here can be added yet',
+  'commerce.statusNeedsConfirmation': 'Choose a product',
+  'commerce.statusNeedsConfirmationBody': 'We are not sure which product matches this.',
+  'commerce.statusNoPurchasable': 'Out of stock',
+  'commerce.statusNoPurchasableBody': 'The shop stocks this but has none right now.',
+  'commerce.statusNoEligible': 'Not suitable for you',
+  'commerce.statusNoEligibleBody': 'Every option here conflicts with your allergies.',
+  'commerce.statusUnmapped': 'Not sold here',
+  'commerce.statusUnmappedBody': 'This shop does not carry this ingredient.',
+  'commerce.packSizeUnknown': 'Pack size unknown — we cannot say how much to buy.',
+  'commerce.unsourceable': 'Cannot be ordered yet',
+  'commerce.unsourceableBody': 'We do not know this ingredient well enough to shop for it.',
+  'commerce.recipeStillWorks': 'You can still cook this — just buy the rest yourself.',
+  'commerce.hide': 'Hide products',
+  'commerce.addedToCart_one': 'Added 1 item to your cart',
+  'commerce.addedToCart_other': 'Added {count} items to your cart',
+  'commerce.allReady_one': '1 item ready to add',
+  'commerce.allReady_other': 'All {count} items ready to add',
+
+  // --- Cart ----------------------------------------------------------------
+  'cart.title': 'Cart',
+  'cart.empty': 'Your cart is empty',
+  'cart.emptyBody': 'Find a recipe and add what you are missing.',
+  'cart.browse': 'Find something to cook',
+  'cart.subtotal': 'Subtotal',
+  'cart.deliveryFee': 'Delivery',
+  'cart.total': 'Total',
+  'cart.items_one': '1 item',
+  'cart.items_other': '{count} items',
+  'cart.remove': 'Remove',
+  'cart.clear': 'Empty cart',
+  'cart.minimumShortfall': 'Add {amount} more to order',
+  'cart.replacedMerchant': 'Your cart was replaced — it can only hold one shop at a time.',
+  'cart.priceChanged': 'Prices changed',
+  'cart.priceChangedBody': 'Some items cost a different amount than when you added them.',
+  'cart.priceWas': 'was {amount}',
+  'cart.checkoutSoon': 'Checkout is not ready yet',
+  'cart.checkoutSoonBody':
+    'Paying inside the app is still being built. Your cart is saved until it is.',
+  'cart.error': 'We could not load your cart.',
+  'cart.quantity': 'Quantity',
+  'cart.unknownProduct': 'No longer listed',
+  'cart.unknownMerchant': 'This cart cannot be opened',
+  'cart.unknownMerchantBody':
+    'It was filled from a shop this app can no longer reach, so none of its prices can be trusted.',
+  'cart.eachPrice': '{amount} each',
+  'cart.lineFrom': 'For {recipe}',
 } as const;
 
 /** Every literal key present in the dictionary, plural variants included. */

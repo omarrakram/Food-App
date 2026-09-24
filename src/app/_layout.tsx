@@ -148,6 +148,7 @@ function RootNavigator() {
         <Stack.Screen name="recipe" />
         <Stack.Screen name="search" options={{ animation: 'fade_from_bottom' }} />
         <Stack.Screen name="shopping-list" />
+        <Stack.Screen name="cart" />
         <Stack.Screen name="friends" />
         <Stack.Screen name="messages" />
         <Stack.Screen name="submit" />

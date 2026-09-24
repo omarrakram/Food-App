@@ -67,6 +67,16 @@ export const queryKeys = {
    */
   recipeSourcing: (userId: string, recipeId: string, locationId: string) =>
     ['akla', 'sourcing', userId, recipeId, locationId] as const,
+  /**
+   * The catalogue rows behind a cart's lines.
+   *
+   * Keyed by branch AND by the set of products, so adding a line refetches
+   * rather than serving a list that is missing the thing just added. Sorted,
+   * because the same basket reached by two different orders of taps is the
+   * same basket.
+   */
+  merchantProducts: (locationId: string, productIds: readonly string[]) =>
+    ['akla', 'merchant-products', locationId, [...productIds].sort().join(',')] as const,
 
   priceEstimates: (country: string) => ['akla', 'prices', country] as const,
 } as const;

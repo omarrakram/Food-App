@@ -32,6 +32,8 @@ export type UnsourceableReason = (typeof UNSOURCEABLE_REASONS)[number];
 export type UnsourceableRequirement = {
   readonly name: string;
   readonly reason: UnsourceableReason;
+  /** The caller's handle for the row, so a screen can annotate it in place. */
+  readonly requestLineId: string | null;
 };
 
 export type RequirementsResult = {
@@ -107,12 +109,26 @@ export function requirementsFor(
 
   for (const match of missing) {
     if (!match.slug) {
-      unsourceable.push({ name: match.name, reason: 'no_canonical_ingredient' });
+      unsourceable.push({
+        name: match.name,
+        reason: 'no_canonical_ingredient',
+        requestLineId: match.recipeIngredientId,
+      });
       continue;
     }
 
     const { quantity, unit, amount } = amountFor(match);
-    lines.push({ ingredientSlug: match.slug, quantity, unit, amount, sourceRecipeId });
+    lines.push({
+      ingredientSlug: match.slug,
+      quantity,
+      unit,
+      amount,
+      sourceRecipeId,
+      // The recipe row this came from. Carried so the screen can put the
+      // product under the ingredient it belongs to rather than guessing from
+      // the slug, which is not unique within a recipe.
+      requestLineId: match.recipeIngredientId,
+    });
   }
 
   return { lines, unsourceable };

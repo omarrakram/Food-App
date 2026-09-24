@@ -25,9 +25,9 @@ const CONTEXT: SourcingContext = {
 
 /** What "YOU NEED" hands to commerce for a chicken pasta. */
 const MISSING: SourcingLine[] = [
-  { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: 'r-alfredo' },
-  { ingredientSlug: 'cream', quantity: 200, unit: 'ml', amount: 'measured', sourceRecipeId: 'r-alfredo' },
-  { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', amount: 'measured', sourceRecipeId: 'r-alfredo' },
+  { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: 'r-alfredo', requestLineId: null },
+  { ingredientSlug: 'cream', quantity: 200, unit: 'ml', amount: 'measured', sourceRecipeId: 'r-alfredo', requestLineId: null },
+  { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', amount: 'measured', sourceRecipeId: 'r-alfredo', requestLineId: null },
 ];
 
 describe('the missing-ingredients basket', () => {
@@ -78,7 +78,7 @@ describe('the missing-ingredients basket', () => {
 describe('the shelf is not tidy, and the engine copes', () => {
   it('skips the 500ml cream because it is out of stock', () => {
     const line = sourceLine(
-      { ingredientSlug: 'cream', quantity: 400, unit: 'ml', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'cream', quantity: 400, unit: 'ml', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('cream'),
       CONTEXT,
     );
@@ -92,7 +92,7 @@ describe('the shelf is not tidy, and the engine copes', () => {
 
   it('never offers the delisted chicken pack', () => {
     const line = sourceLine(
-      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('chicken-breast'),
       CONTEXT,
     );
@@ -104,7 +104,7 @@ describe('the shelf is not tidy, and the engine copes', () => {
     // Olive oil was blocked as a stand-in for butter. It is still a row in the
     // catalogue, which is the point — a deleted mapping would be re-derived.
     const line = sourceLine(
-      { ingredientSlug: 'butter', quantity: 100, unit: 'g', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'butter', quantity: 100, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('butter'),
       CONTEXT,
     );
@@ -118,7 +118,7 @@ describe('an allergy changes the basket, not the ranking', () => {
     const dairyFree: SourcingContext = { ...CONTEXT, avoidAllergens: ['dairy'] };
 
     const line = sourceLine(
-      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'chicken-breast', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('chicken-breast'),
       dairyFree,
     );
@@ -132,7 +132,7 @@ describe('an allergy changes the basket, not the ranking', () => {
     const dairyFree: SourcingContext = { ...CONTEXT, avoidAllergens: ['dairy'] };
 
     const line = sourceLine(
-      { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'parmesan', quantity: 50, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('parmesan'),
       dairyFree,
     );
@@ -153,7 +153,7 @@ describe('an allergy changes the basket, not the ranking', () => {
 describe('the bigger pack wins when it actually costs less', () => {
   it('prefers 1kg of chicken over two 500g packs for a 900g recipe', () => {
     const line = sourceLine(
-      { ingredientSlug: 'chicken-breast', quantity: 900, unit: 'g', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'chicken-breast', quantity: 900, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('chicken-breast'),
       CONTEXT,
     );
@@ -201,7 +201,7 @@ describe('a product with no published allergen data', () => {
     // this is the path that stops every unlabelled product becoming safe for
     // everybody by default.
     const line = sourceLine(
-      { ingredientSlug: 'baladi-bread', quantity: 2, unit: 'piece', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'baladi-bread', quantity: 2, unit: 'piece', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('baladi-bread'),
       { ...CONTEXT, avoidAllergens: ['gluten'] },
     );
@@ -213,7 +213,7 @@ describe('a product with no published allergen data', () => {
 
   it('is chosen normally for a cook with no restrictions', () => {
     const line = sourceLine(
-      { ingredientSlug: 'baladi-bread', quantity: 2, unit: 'piece', amount: 'measured', sourceRecipeId: null },
+      { ingredientSlug: 'baladi-bread', quantity: 2, unit: 'piece', amount: 'measured', sourceRecipeId: null, requestLineId: null },
       demoCandidatesFor('baladi-bread'),
       CONTEXT,
     );

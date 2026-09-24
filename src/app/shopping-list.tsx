@@ -13,11 +13,9 @@ import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState, ErrorState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
-import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
 import { CATEGORY_ORDER } from '@/features/pantry/repository';
 import { useIngredientName } from '@/features/ingredients/display';
 import { formatQuantity } from '@/features/pricing/units';
-import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useShoppingList, useShoppingMutations, useShoppingTotal } from '@/features/shopping/hooks';
 import { useI18n } from '@/i18n';
 import { presentError } from '@/lib/errors';
@@ -97,17 +95,12 @@ export default function ShoppingListScreen() {
   const { t } = useI18n();
   const toast = useToast();
 
-  const { preferences } = usePreferences();
   const { data: items, isLoading, isError, error, refetch } = useShoppingList();
-  // Asks the provider registry rather than a flag: ordering is available only
-  // when a real provider is registered, enabled AND serves this country.
-  const orderingAvailable = isOrderingAvailable(preferences.country);
   const { add, toggle, remove, clearChecked } = useShoppingMutations();
   const total = useShoppingTotal(items);
 
   const [addOpen, setAddOpen] = useState(false);
   const [newItem, setNewItem] = useState('');
-  const [orderOpen, setOrderOpen] = useState(false);
 
   const grouped = useMemo(() => {
     if (!items) return [];
@@ -276,18 +269,22 @@ export default function ShoppingListScreen() {
               ) : null}
 
               {/*
-                Ordering is a future feature: the only provider that exists is
-                a mock, and `enabledProvidersFor` never returns it. An active
-                ghost button that opens a sheet saying "not available" is a
-                tap spent to learn nothing, so the unavailable state says so on
-                its face and cannot be pressed.
+                ORDERING A HAND-WRITTEN LIST IS NOT BUILT, and a branch
+                existing does not change that.
+
+                The recipe screen can order because every line there is a
+                canonical ingredient with an amount — that is what
+                `requirementsFor` needs. This list is free text somebody typed
+                in a supermarket aisle: "the good cheese", "2 things of
+                yoghurt". Matching those to SKUs by name is precisely the
+                guessing the canonical layer exists to prevent, so the button
+                says what is true and cannot be pressed.
               */}
               <Button
-                label={orderingAvailable ? t('shopping.orderAll') : t('shopping.orderComingSoon')}
+                label={t('shopping.orderComingSoon')}
                 icon="bag-handle-outline"
                 variant="ghost"
-                onPress={orderingAvailable ? () => setOrderOpen(true) : undefined}
-                disabled={!orderingAvailable}
+                disabled
                 size="md"
                 fullWidth
                 testID="shopping-order"
@@ -321,19 +318,6 @@ export default function ShoppingListScreen() {
           onSubmitEditing={handleAdd}
           testID="shopping-add-input"
         />
-      </Sheet>
-
-      <Sheet
-        visible={orderOpen}
-        onClose={() => setOrderOpen(false)}
-        title={t('grocery.notAvailableTitle')}
-        scrollable={false}
-      >
-        <Text variant="body" color="textSecondary">
-          {orderingAvailable
-            ? t('shopping.orderUnavailable')
-            : t('grocery.notAvailableBody', { country: t(`country.${preferences.country}` as const) })}
-        </Text>
       </Sheet>
     </>
   );
