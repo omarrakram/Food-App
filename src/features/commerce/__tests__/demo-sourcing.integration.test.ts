@@ -222,3 +222,59 @@ describe('a product with no published allergen data', () => {
     expect(line.chosen?.packsNeeded).toBe(1);
   });
 });
+
+describe('every sourcing state is reachable in a build somebody can open', () => {
+  /**
+   * NON-VACUITY FOR THE DEMO CATALOGUE.
+   *
+   * A state that exists only in a unit test against hand-built fixtures is a
+   * state nobody has ever looked at — no copy written for it, no layout, no
+   * screenshot. The awkward rows in `data/commerce-demo/products.csv` exist to
+   * make all five reachable, and this fails the moment one of them is tidied
+   * away.
+   */
+  it('produces all five statuses from real rows', () => {
+    const coeliac: SourcingContext = { ...CONTEXT, avoidAllergens: ['gluten'] };
+
+    const statuses = {
+      // Rice: two pack sizes, both in stock, no allergens.
+      matched: sourceLine(
+        { ingredientSlug: 'rice', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
+        demoCandidatesFor('rice'),
+        coeliac,
+      ).status,
+      // Baladi bread: the bakery publishes no allergen data at all.
+      needs_confirmation: sourceLine(
+        { ingredientSlug: 'baladi-bread', quantity: 2, unit: 'piece', amount: 'measured', sourceRecipeId: null, requestLineId: null },
+        demoCandidatesFor('baladi-bread'),
+        coeliac,
+      ).status,
+      // Potatoes: the only potato row, and it is out of stock.
+      no_purchasable_match: sourceLine(
+        { ingredientSlug: 'potatoes', quantity: 500, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
+        demoCandidatesFor('potatoes'),
+        CONTEXT,
+      ).status,
+      // Pasta: the only pasta row, and it is wheat.
+      no_eligible_match: sourceLine(
+        { ingredientSlug: 'pasta', quantity: 400, unit: 'g', amount: 'measured', sourceRecipeId: null, requestLineId: null },
+        demoCandidatesFor('pasta'),
+        coeliac,
+      ).status,
+      // Tomato paste: nothing in the catalogue claims to be it.
+      unmapped: sourceLine(
+        { ingredientSlug: 'tomato-paste', quantity: 2, unit: 'tbsp', amount: 'measured', sourceRecipeId: null, requestLineId: null },
+        demoCandidatesFor('tomato-paste'),
+        CONTEXT,
+      ).status,
+    };
+
+    expect(statuses).toEqual({
+      matched: 'matched',
+      needs_confirmation: 'needs_confirmation',
+      no_purchasable_match: 'no_purchasable_match',
+      no_eligible_match: 'no_eligible_match',
+      unmapped: 'unmapped',
+    });
+  });
+});

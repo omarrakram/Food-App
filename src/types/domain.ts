@@ -513,7 +513,12 @@ export type RecipeMatch = {
 
 /**
  * Shaped now for a future where each line maps onto a real store product.
- * The `store*` fields stay null until a `GroceryProvider` fills them in.
+ *
+ * The `store*` fields are RESERVED AND STILL NULL. They predate
+ * `features/commerce`, which does not use them — a cart is its own type with
+ * its own table, because a basket bound to one branch is not a shopping list.
+ * They are kept because removing them is a migration for no gain, and because
+ * a list line that has been matched to a SKU is still a plausible future.
  */
 /** Stock state a store reports for a product. */
 export type Availability = 'in_stock' | 'low_stock' | 'out_of_stock' | 'unknown';

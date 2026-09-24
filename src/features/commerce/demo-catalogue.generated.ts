@@ -364,7 +364,7 @@ export const DEMO_PRODUCTS: readonly DemoProductRow[] = [
     packQuantity: 2,
     packUnit: 'kg',
     priceMinor: 3400,
-    availability: 'in_stock',
+    availability: 'out_of_stock',
     allergens: [],
     isActive: true,
   },

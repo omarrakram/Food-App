@@ -3,10 +3,14 @@
 The transaction layer. Everything between "I'm missing cooking cream" and
 "somebody rang the doorbell".
 
-**Status: Commerce-2.** Types, state machines, the money ledger, pack maths,
-the sourcing engine, the schema and an isolated development catalogue — all
-with tests. No screens and no payment provider yet, and the migration has NOT
-been applied to hosted Supabase.
+**Status: Commerce-3.** Types, state machines, the money ledger, pack maths,
+the sourcing engine, the schema, an isolated development catalogue, the cart
+repositories, and the two screens that use them — the recipe detail's sourcing
+panel and the cart itself. All with tests.
+
+**No payment provider, no checkout, no merchant dashboard, no order.** The cart
+is where the journey currently stops, and the checkout button says so on its
+face. The migration has NOT been applied to hosted Supabase.
 
 The product this serves is AKALT's own: the customer decides what to eat,
 AKALT works out what they are missing, sources it from one merchant, takes the
@@ -211,8 +215,16 @@ Conversion is **not** reimplemented — `features/pricing/units.ts` already
 reduces everything to grams and already knows a per-bunch weight says nothing
 about a clove.
 
-When it cannot tell, it says so. There is no branch that assumes one pack:
-`kind: 'unknown'` means the UI asks, because guessing here spends real money.
+When it cannot tell, it says so. There is no branch in `pack-maths.ts` that
+assumes one pack: `kind: 'unknown'` means somebody upstream decides, because
+guessing here spends real money.
+
+Two callers decide differently, on purpose. An UNMEASURED requirement — "salt,
+to taste" — is given one pack by `sourcing.ts`, because one pack is the
+smallest thing the shop will sell rather than an estimate of an amount. A
+MEASURED requirement the merchant never sized keeps `packsNeeded: null`: one
+pack might be 200 g against a 500 g recipe line, so the row refuses to price
+it and `addableLines()` refuses to add it.
 
 ## Ports
 
@@ -253,6 +265,21 @@ stores is a later product, not a V1 constraint on the schema.
 merchandise, full stop. A second option could only ever produce an invoice
 that disagrees with the agreement.
 
+**No sourcing of the hand-written shopping list.** The recipe screen can order
+because every line there is a canonical ingredient with an amount, which is
+what `requirementsFor` needs. `/shopping-list` is free text somebody typed in
+an aisle — "the good cheese", "2 things of yoghurt" — and matching that to
+SKUs by name is the guessing the canonical layer exists to prevent. Its order
+button is dead and says so.
+
+**No deficit sourcing.** The cook is asked to buy the FULL recipe amount, not
+the amount they are short. `requirements.ts` documents the five reasons the
+pantry cannot yet support the subtraction; nothing structural blocks it.
+
+**No re-pricing at the cart.** Totals come from the snapshot taken when a line
+was added. A moved shelf price is shown on the line that moved and reconciled
+at checkout, which does not exist.
+
 ---
 
 ## Map
@@ -268,9 +295,49 @@ that disagrees with the agreement.
 | `ports.ts` | `CatalogueAdapter`, `FulfilmentAdapter`, the sourcing contract |
 | `demo-adapter.ts` | a catalogue adapter over the development fixtures, and its guard |
 | `demo-catalogue.generated.ts` | generated from `data/commerce-demo/` |
+| `requirements.ts` | `missingIngredients` → sourcing lines, with the amount |
+| `basket.ts` | what a bulk add may put in a cart without asking |
+| `merchant-selection.ts` | which merchant and which branch, or none |
+| `cart-repository.ts` | the cart interface + the local implementation |
+| `supabase-cart-repository.ts` | the same cart for a signed-in user |
+| `cart-view.ts` | the cart joined to the catalogue and totalled |
+| `display.ts` | merchant, branch and product names, per language |
+| `hooks.ts` | the only React in here: binds the engines to cache and prefs |
+
+Screens: `src/app/recipe/[id]/index.tsx` (the sourcing panel) and
+`src/app/cart.tsx`. The one shared component is
+`src/components/commerce/sourced-line.tsx`.
 
 The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`.
 It has **not** been applied to hosted Supabase.
+
+## What the screens promise
+
+Three rules, each of which was a way the UI could quietly lie:
+
+**Commerce is revealed, not rendered.** The recipe page is a recipe. Somebody
+who opened it to cook from what they have does not scroll past a shop to reach
+the method, so the products appear on the tap of one button and the default
+view is unchanged.
+
+**Every add is one the cook could have seen.** `addableLines()` admits only
+`matched` lines with a pack count. A `needs_confirmation`, an out-of-stock, an
+allergy exclusion and an unmapped ingredient are four different questions, and
+answering any of them silently on somebody's behalf is the failure the
+three-axis split exists to prevent. `packsNeeded === null` on a matched line
+means the merchant never published a pack size, so one pack might be 200 g
+against a 500 g requirement — the row refuses to price it and the button
+refuses to add it.
+
+**Partial fulfilment is said out loud.** "Add 8 to cart" under a list of eleven
+reads as a complete answer unless the screen states the gap.
+
+And a fourth that is about the data rather than the words: a product is paired
+to the recipe row that asked for it by `SourcingLine.requestLineId`, never by
+canonical slug. A recipe can want tomatoes twice — fresh and tinned — and a
+slug key would put the tin under the fresh line.
+
+---
 
 ## Keeping the demo catalogue out of production
 

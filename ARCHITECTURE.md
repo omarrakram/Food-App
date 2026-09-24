@@ -170,36 +170,54 @@ changing.
 
 ---
 
-## 6. Grocery provider architecture
+## 6. Commerce
 
-The app must never be shaped around one supermarket. All store interaction
-goes through `GroceryProvider` (`src/features/grocery/`):
+`features/grocery` and its `GroceryProvider` interface are **gone**, retired in
+Commerce-3B. They were a placeholder written before the business model existed
+and shaped around being a front end for somebody else's store: one interface
+that searched a catalogue, made a cart, took a payment and reported an order
+status, as if those were one system with one owner. They are not. The customer
+pays AKALT; the merchant picks, packs and delivers. Two systems, two contracts.
 
-```ts
-interface GroceryProvider {
-  readonly id: string;
-  readonly country: CountryCode;
-  searchCatalogue(query, options): Promise<StoreProduct[]>;
-  matchIngredient(ingredient): Promise<StoreProductMatch | null>;
-  checkAvailability(productIds): Promise<AvailabilityMap>;
-  createCart(items): Promise<CartResult>;
-  checkout(cartId): Promise<CheckoutResult>;
-  getOrderStatus(orderId): Promise<OrderStatus>;
-}
-```
+The replacement lives in `src/features/commerce/`, which has its own README.
+The parts that matter architecturally:
 
-V1 registers only `MockGroceryProvider`, which returns clearly-labelled fake
-data for development and is never reachable in production builds. `Order
-ingredients` is present in the UI but explains that delivery partners are not
-live yet.
+**One rule, enforced by a test.** `features/recipes`, `features/pantry`,
+`features/ingredients` and `features/pricing` may never import
+`features/commerce` or `types/commerce`.
+`scripts/__tests__/commerce-layering.test.ts` fails on a single import, and
+the same test keeps the commerce engines free of React so they can run in an
+edge function or a merchant dashboard. `hooks.ts` is the one exemption, by
+name.
 
-**No real provider is implemented, and no fake API endpoints exist.** Each
-provider requires a commercial agreement before credentials can be issued —
-see PROJECT_STATUS.md § Required credentials.
+**Two ports, not one.** `CatalogueAdapter` reads a merchant's shelf;
+`FulfilmentAdapter` submits an order to them. They are separate because a
+merchant can have one and not the other — a catalogue we scrape and orders we
+send by WhatsApp is a real integration shape.
 
-`ShoppingListItem` already carries `supermarketId`, `storeProductId`, `sku`,
-`livePriceMinor` and `availability`, all null in V1, so enabling ordering does
-not require a schema migration on the client's core type.
+**Two state machines, not one.** Where the goods are (`fulfilment-state.ts`)
+and where the money is (`payment-state.ts`) are different questions with
+different actors and independent failure modes. `canEnterMerchantQueue()` is
+the only place the two are joined.
+
+**Money is a fold, never a column.** `order_adjustments` is append-only and
+the financial position is computed from it, so "why is this order worth 340
+rather than 400" always has an answer.
+
+**One bridge between food and shelves.** `IngredientProductMapping`, keyed by
+the canonical ingredient slug rather than an ingredient UUID, so the mapping
+table can be rebuilt or handed to a partner without carrying our primary keys.
+
+**Status.** Built to the cart and stopped there: no payment provider, no
+checkout, no order row, no merchant dashboard. The only catalogue is a
+quarantined development fixture in `data/commerce-demo/`, guarded four
+independent ways, and the commerce migration has not been applied to hosted
+Supabase.
+
+`ShoppingListItem` still carries its reserved `supermarketId`,
+`storeProductId`, `sku`, `livePriceMinor` and `availability` columns, all null.
+They predate the commerce layer and are not what it uses — the cart is its own
+table — but they are harmless and removing them is a migration for no gain.
 
 ---
 

@@ -70,14 +70,22 @@ with per-step ingredients and safety notes.
 
 **Done when:** changing servings rescales every quantity and the cost. ✅
 
-## Phase 8 — Budget engine and grocery adapters ◐
+## Phase 8 — Budget engine ✅
 
 Pricing engine, deterministic costing and the estimate/live distinction are
-**done**. Remaining: `src/features/grocery/` with the `GroceryProvider`
-interface and a mock implementation.
+done.
 
-**Done when:** the app can be pointed at a different provider by changing one
-registration, and no supermarket name appears outside `features/grocery/`.
+The "grocery adapters" half of this phase was **cancelled, not completed**.
+`src/features/grocery/` and its `GroceryProvider` interface were written before
+the business model existed and assumed AKALT would be a front end for somebody
+else's store — one interface that searched, carted, paid and tracked, as if
+those were one system with one owner. The model is the opposite: the customer
+pays AKALT and the merchant fulfils. Commerce-3B deleted the placeholder; the
+real thing is `src/features/commerce/`, with its own README.
+
+**Done when:** a recipe's cost is deterministic, estimates are visibly
+estimates, and the price book can be swapped without touching the budget
+engine. ✅
 
 ## Phase 9 — Saved recipes and shopping list ✅
 

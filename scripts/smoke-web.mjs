@@ -32,7 +32,7 @@
 
 import { spawn } from 'node:child_process';
 import { createReadStream, existsSync } from 'node:fs';
-import { mkdir, readFile, rm, stat } from 'node:fs/promises';
+import { mkdir, readdir, readFile, rm, stat } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
 import { extname, join, resolve } from 'node:path';
@@ -92,25 +92,89 @@ async function loadChromium() {
   );
 }
 
+/**
+ * Resolves a URL path against the export, dynamic routes included.
+ *
+ * Expo writes a dynamic route as a literal `[id].html`, so `/recipe/<uuid>`
+ * matches no file and a naive server 404s it — which silently made every
+ * direct link to a recipe untestable, including the share links this app
+ * sends. Walking the path and falling back to the single `[param]` sibling at
+ * each level is what the real router does, and it is what a shared link needs.
+ */
+async function resolveExportPath(pathname) {
+  const segments = decodeURIComponent(pathname).split('/').filter(Boolean);
+
+  const isFile = async (candidate) => {
+    try {
+      return (await stat(candidate)).isFile();
+    } catch {
+      return false;
+    }
+  };
+  const isDirectory = async (candidate) => {
+    try {
+      return (await stat(candidate)).isDirectory();
+    } catch {
+      return false;
+    }
+  };
+  const dynamicChild = async (directory) => {
+    try {
+      const entries = await readdir(directory);
+      // Only when it is UNAMBIGUOUS. Two dynamic siblings would mean guessing,
+      // and a guess here would make the smoke test pass against the wrong page.
+      const matches = entries.filter((entry) => /^\[[^\]]+\](\.html)?$/.test(entry));
+      return matches.length === 1 ? matches[0] : null;
+    } catch {
+      return null;
+    }
+  };
+
+  let current = DIST;
+  for (const [index, segment] of segments.entries()) {
+    const last = index === segments.length - 1;
+    const literal = join(current, segment);
+
+    if (last) {
+      if (await isFile(literal)) return literal;
+      if (await isFile(`${literal}.html`)) return `${literal}.html`;
+      if (await isFile(join(literal, 'index.html'))) return join(literal, 'index.html');
+      const dynamic = await dynamicChild(current);
+      if (dynamic) {
+        const resolved = join(current, dynamic);
+        if (await isFile(resolved)) return resolved;
+        if (await isFile(join(resolved, 'index.html'))) return join(resolved, 'index.html');
+      }
+      return null;
+    }
+
+    if (await isDirectory(literal)) {
+      current = literal;
+      continue;
+    }
+    const dynamic = await dynamicChild(current);
+    if (dynamic && (await isDirectory(join(current, dynamic)))) {
+      current = join(current, dynamic);
+      continue;
+    }
+    return null;
+  }
+
+  return isFile(join(DIST, 'index.html')) ? join(DIST, 'index.html') : null;
+}
+
 /** Expo's static export writes one HTML file per route, plus assets. */
 function serveDist() {
   const server = createServer(async (req, res) => {
     const url = new URL(req.url ?? '/', 'http://127.0.0.1');
-    const path = join(DIST, decodeURIComponent(url.pathname));
+    const file = await resolveExportPath(url.pathname);
 
-    // `/budget` and `/budget.html` are the same page; `/` is index.html.
-    for (const attempt of [path, `${path}.html`, join(path, 'index.html')]) {
-      try {
-        if ((await stat(attempt)).isFile()) {
-          res.writeHead(200, {
-            'content-type': MIME[extname(attempt)] ?? 'application/octet-stream',
-          });
-          createReadStream(attempt).pipe(res);
-          return;
-        }
-      } catch {
-        // Fall through to the next candidate.
-      }
+    if (file) {
+      res.writeHead(200, {
+        'content-type': MIME[extname(file)] ?? 'application/octet-stream',
+      });
+      createReadStream(file).pipe(res);
+      return;
     }
 
     res.writeHead(404, { 'content-type': 'text/plain' });
@@ -802,25 +866,38 @@ async function main() {
       await page.waitForTimeout(1800);
       check('a result opens its recipe', await visible('recipe-start-cooking', 6000));
 
-      // Two screens must not disagree about whether ordering exists. The
-      // shopping list already said "coming soon" and could not be pressed;
-      // this one showed an active "Order ingredients" that opened a sheet
-      // saying the same thing — a tap spent to learn nothing.
-      const orderLabel = await page
-        .locator('[data-testid="recipe-order"]')
-        .first()
-        .innerText()
-        .catch(() => '');
-      const orderDisabled = await page
-        .locator('[data-testid="recipe-order"]')
-        .first()
-        .evaluate((node) => node.getAttribute('aria-disabled') === 'true' || node.disabled === true)
-        .catch(() => false);
+      // ORDERING NEVER LOOKS FUNCTIONAL WHEN IT IS NOT, and never looks
+      // unavailable when it is. Exactly one of the two controls exists: the
+      // dead "coming soon" button where no branch can be selected, or the
+      // live "get missing ingredients" where one can. Both at once, or
+      // neither, means the screen and `isOrderingAvailable` disagree.
+      const orderCount = await page.locator('[data-testid="recipe-order"]').count();
+      const getMissingCount = await page.locator('[data-testid="recipe-get-missing"]').count();
       check(
-        'ordering is shown as unavailable rather than looking functional',
-        /coming soon|قريبًا|قريبا/i.test(orderLabel) && orderDisabled,
-        `${orderLabel.replace(/\n/g, ' ').trim()} · disabled=${orderDisabled}`,
+        'the recipe offers exactly one ordering control',
+        orderCount + getMissingCount === 1,
+        `coming-soon=${orderCount} get-missing=${getMissingCount}`,
       );
+
+      if (orderCount === 1) {
+        const orderLabel = await page
+          .locator('[data-testid="recipe-order"]')
+          .first()
+          .innerText()
+          .catch(() => '');
+        const orderDisabled = await page
+          .locator('[data-testid="recipe-order"]')
+          .first()
+          .evaluate(
+            (node) => node.getAttribute('aria-disabled') === 'true' || node.disabled === true,
+          )
+          .catch(() => false);
+        check(
+          'ordering is shown as unavailable rather than looking functional',
+          /coming soon|قريبًا|قريبا/i.test(orderLabel) && orderDisabled,
+          `${orderLabel.replace(/\n/g, ' ').trim()} · disabled=${orderDisabled}`,
+        );
+      }
       await shot('07-recipe-detail');
 
       if (await tap('recipe-start-cooking', { optional: true })) {
@@ -829,6 +906,186 @@ async function main() {
         await shot('08-cooking-mode');
         await tap('cooking-next', { optional: true });
         check('cooking mode advances a step', true);
+      }
+    }
+
+    // --- Commerce: the shop under the recipe, and the cart it fills -------
+    /*
+      THE WHOLE POINT OF THIS SECTION is that a demo catalogue must never be
+      mistakable for a supermarket, and that a bulk "add to cart" must never
+      quietly buy something the cook has not seen. Both are invisible to a
+      unit test in the only way that matters: whether they are on the screen.
+
+      Koshari is the fixture because it is genuinely partial against the demo
+      catalogue — rice, lentils, pasta, onions, garlic, cumin, oil and
+      chickpeas map; tomato paste, vinegar and chilli flakes do not. A recipe
+      that sourced perfectly would never show the gap, which is the part most
+      likely to be got wrong.
+    */
+    console.log('\n▸ commerce');
+    const KOSHARI = 'f4006404-ffca-56e7-8916-e180f5615378';
+    await page.goto(`${BASE}/recipe/${KOSHARI}`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(1800);
+
+    const commerceOpen = await tap('recipe-get-missing', { optional: true });
+    check('a recipe with a selectable branch offers to fetch the missing items', commerceOpen);
+
+    if (commerceOpen) {
+      await page.waitForTimeout(900);
+      check('the products appear only after being asked for', await visible('recipe-sourcing', 5000));
+
+      // A fixture basket that looks like a real one is the failure the badge
+      // exists to prevent, and a badge nobody can see is not a guarantee.
+      check('the development catalogue names itself', await visible('recipe-demo-badge', 3000));
+      const sourcingText = await page
+        .locator('[data-testid="recipe-sourcing"]')
+        .first()
+        .innerText()
+        .catch(() => '');
+      check(
+        'and says in words that nothing here can be ordered',
+        /not a real supermarket|development data|مش سوبر ماركت|بيانات تطوير/i.test(sourcingText),
+        sourcingText.replace(/\n/g, ' · ').slice(0, 120),
+      );
+
+      const sourcedRows = await page.locator('[data-testid^="recipe-sourced-"]').count();
+      check('each missing ingredient gets its own answer', sourcedRows > 0, `${sourcedRows} rows`);
+
+      // PARTIAL FULFILMENT IS SAID OUT LOUD. "Add 8 to cart" under a list of
+      // eleven reads as a complete answer unless the screen states the gap.
+      const addLabel = await page
+        .locator('[data-testid="recipe-add-to-cart"]')
+        .first()
+        .innerText()
+        .catch(() => '');
+      const addable = Number(/(\d+)/.exec(addLabel)?.[1] ?? '0');
+      check(
+        'the button counts only what it will actually add',
+        addable > 0 && addable < sourcedRows,
+        `${addLabel.replace(/\n/g, ' ').trim()} of ${sourcedRows} rows`,
+      );
+      check(
+        'and the gap is stated rather than left to be inferred',
+        /can be added now|ينفع يتضافوا/i.test(sourcingText),
+        sourcingText.replace(/\n/g, ' · ').slice(0, 120),
+      );
+
+      // An unmapped ingredient is a sentence, not a missing row: the recipe
+      // still works, the cook just buys that one themselves.
+      check(
+        'an ingredient this shop does not carry says so',
+        /Not sold here|Cannot be ordered|مش موجود هنا|مينفعش يتطلب/i.test(sourcingText),
+      );
+      await shot('24-recipe-sourcing');
+
+      const before = errorCount();
+      // Guarded, because with nothing addable the button is correctly dead and
+      // clicking a dead button proves nothing either way.
+      const added = addable > 0 && (await tap('recipe-add-to-cart', { optional: true }));
+      check('the addable lines can be added', added, `${addable} addable`);
+      await page.waitForTimeout(1400);
+      check('adding to the cart raises no page error', errorCount() === before);
+      await shot('25-added-to-cart');
+
+      // Everything below needs a basket. Without one there is nothing to
+      // total, re-price or empty, and asserting on an empty cart would only
+      // prove the empty state.
+      if (added) {
+        // --- The cart -------------------------------------------------------
+        await page.goto(`${BASE}/cart`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1600);
+
+        check('the cart holds what was added', await visible('cart-lines', 6000));
+        check('the cart badges itself as a demo too', await visible('cart-demo-badge', 3000));
+        check('and totals the basket', await visible('cart-totals', 3000));
+
+        const cartLines = await page.locator('[data-testid^="cart-quantity-"]').count();
+        check(
+          'the cart holds exactly the lines the button counted',
+          cartLines === addable,
+          `${cartLines} lines vs ${addable} counted`,
+        );
+
+        // CHECKOUT DOES NOT EXIST. A live-looking button that opens an apology
+        // is worse than a dead one that says the truth on its face.
+        const checkoutDisabled = await page
+          .locator('[data-testid="cart-checkout"]')
+          .first()
+          .evaluate((node) => node.getAttribute('aria-disabled') === 'true' || node.disabled === true)
+          .catch(() => false);
+        check('checkout is dead and says so', checkoutDisabled);
+        await shot('26-cart');
+
+        // Quantity and removal are the only two things this screen can do to a
+        // basket, and both were the sort of thing that renders and then does
+        // nothing.
+        const beforeTotals = await page
+          .locator('[data-testid="cart-totals"]')
+          .first()
+          .innerText()
+          .catch(() => '');
+        const plus = page.locator('[data-testid$="-increment"]').first();
+        if (await plus.count()) {
+          await plus.click();
+          await page.waitForTimeout(1400);
+          const afterTotals = await page
+            .locator('[data-testid="cart-totals"]')
+            .first()
+            .innerText()
+            .catch(() => '');
+          // The number has to MOVE. A stepper that renders, accepts the tap and
+          // leaves the total where it was is the failure mode a screenshot
+          // cannot see.
+          check(
+            'changing a quantity re-totals the basket',
+            afterTotals !== beforeTotals && afterTotals.length > 0,
+            `${beforeTotals.replace(/\n/g, ' ')} -> ${afterTotals.replace(/\n/g, ' ')}`,
+          );
+        }
+
+        const removeFirst = page.locator('[data-testid^="cart-remove-"]').first();
+        if (await removeFirst.count()) {
+          await removeFirst.click();
+          await page.waitForTimeout(1200);
+          const remaining = await page.locator('[data-testid^="cart-quantity-"]').count();
+          check('removing a line removes it', remaining === cartLines - 1, `${remaining} left`);
+        }
+
+        // --- The same journey in Arabic --------------------------------------
+        await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
+        await page.waitForTimeout(1200);
+        if (await tap('language-choice-ar', { optional: true })) {
+          await page.waitForTimeout(1200);
+          await page.goto(`${BASE}/cart`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1600);
+          const arabicCart = await bodyText();
+          check(
+            'the cart is Arabic, not an English fallback',
+            /العربة|المجموع|الإجمالي/.test(arabicCart),
+          );
+          check(
+            'and keeps Western numerals so counts and prices agree',
+            !/[٠-٩]/.test(arabicCart),
+            arabicCart.replace(/\n/g, ' · ').slice(0, 120),
+          );
+          await shot('27-cart-arabic');
+
+          await page.goto(`${BASE}/recipe/${KOSHARI}`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1800);
+          if (await tap('recipe-get-missing', { optional: true })) {
+            await page.waitForTimeout(900);
+            await shot('28-recipe-sourcing-arabic');
+            check('the sourcing panel is Arabic too', await visible('recipe-sourcing', 5000));
+          }
+
+          // Back to English so the sections after this one read as they always
+          // have. A smoke run that leaves the app in Arabic makes every later
+          // assertion about English copy a language test by accident.
+          await page.goto(`${BASE}/settings/language`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1200);
+          await tap('language-choice-en', { optional: true });
+          await page.waitForTimeout(1000);
+        }
       }
     }
 

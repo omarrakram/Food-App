@@ -5,13 +5,42 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-20 |
-| **Current phase** | **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Last updated** | 2026-09-24 |
+| **Current phase** | **COMMERCE-3 — supermarket ordering, up to the cart.** The recipe screen sources its missing ingredients against one merchant branch and a cart holds what was chosen. No payment provider, no checkout, no merchant dashboard, no order; the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migration has **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
 
 ---
+
+## Commerce (supermarket ordering)
+
+The transaction layer, built in three phases and stopping deliberately short of
+money. `src/features/commerce/README.md` is the reference; this is the status.
+
+| phase | what landed |
+|---|---|
+| **Commerce-1** | types, the two state machines (goods and money), the append-only adjustments ledger, the schema |
+| **Commerce-2** | ingredient → SKU mapping, the ranking engine with its three independent gates, pack maths, the quarantined demo catalogue |
+| **Commerce-3A** | the quantity pipeline: `IngredientMatch` now carries `slug`, `quantity` and `unit`, so YOU NEED can be handed to a shop |
+| **Commerce-3B–D** | the old `features/grocery` placeholder retired, cart repositories (local + Supabase), merchant/branch selection |
+| **Commerce-3E–F** | the recipe screen's sourcing panel, and the cart |
+
+**What a user can do today** (with `EXPO_PUBLIC_DEMO_MERCHANT` on, in a
+non-production build, in Egypt): open a recipe, tap *Get missing ingredients*,
+see a product under each missing line or one of four reasons there is not one,
+add the confirmed ones to a cart, adjust quantities, and read a total. The
+checkout button is dead and says so.
+
+**What nobody can do:** pay. No payment provider is configured, no order row is
+ever written, no merchant is ever notified, and no migration has been applied
+to the hosted database.
+
+**Three rules the screens keep**, each of which was a way the UI could lie:
+commerce is revealed rather than rendered by default; a bulk add admits only
+lines the cook could have seen (never an unconfirmed mapping, an out-of-stock
+product, an allergy exclusion, or an unsized pack); and partial fulfilment is
+stated rather than left to be inferred from a smaller number on a button.
 
 ## UI/UX upgrade
 
@@ -1092,7 +1121,9 @@ server says the viewer holds the role.
 | `profile/handle.ts` | Handle folding and validation, mirroring the DB constraints |
 | `storage/images.ts` | Upload rules, resize targets, generated object paths |
 | `search/interpret.ts` | Deterministic constraint extraction, incl. exclusions |
-| `grocery/` | `GroceryProvider` adapter + registry + mock |
+| `commerce/sourcing.ts` | Which merchant product to buy for an ingredient, and why |
+| `commerce/basket.ts` | What a bulk add may put in a cart without asking |
+| `commerce/ledger.ts` | Order adjustments, the authorisation ceiling, settlement |
 | `ai/schema.ts` | The model contract; generates its own JSON Schema |
 
 ### Data, and where it lives

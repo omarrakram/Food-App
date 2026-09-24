@@ -21,7 +21,7 @@ dm-cream-500,DM-CREAM-500,Cooking Cream 500ml,كريمة طهي ٥٠٠ مل,Demo
 dm-parm-100,DM-PARM-100,Grated Parmesan 100g,جبنة بارميزان مبشورة ١٠٠ جم,Demo Dairy,100,g,14000,in_stock,dairy,1
 dm-lentil-500,DM-LENTIL-500,Red Lentils 500g,عدس أحمر ٥٠٠ جم,Demo Mills,500,g,3800,in_stock,none,1
 dm-garlic-200,DM-GARLIC-200,Garlic 200g,توم ٢٠٠ جم,,200,g,2600,in_stock,none,1
-dm-pot-2000,DM-POT-2000,Potatoes 2kg,بطاطس ٢ كجم,,2,kg,3400,in_stock,none,1
+dm-pot-2000,DM-POT-2000,Potatoes 2kg,بطاطس ٢ كجم,,2,kg,3400,out_of_stock,none,1
 dm-yog-1000,DM-YOG-1000,Plain Yoghurt 1kg,زبادي سادة ١ كجم,Demo Dairy,1,kg,6000,in_stock,dairy,1
 dm-butter-200,DM-BUTTER-200,Butter 200g,زبدة ٢٠٠ جم,Demo Dairy,200,g,11000,in_stock,dairy,1
 dm-moz-250,DM-MOZ-250,Mozzarella 250g,موتزاريلا ٢٥٠ جم,Demo Dairy,250,g,9500,in_stock,dairy,1

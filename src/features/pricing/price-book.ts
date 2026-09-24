@@ -8,9 +8,14 @@ import type { CountryCode, CurrencyCode, Unit } from '@/types/domain';
  * came from.
  *
  * V1 ships bundled estimates for Egypt so budgeting works offline and before
- * any store integration exists. `PriceBook` is an interface precisely so a
- * live `GroceryProvider` can be dropped in later without touching the budget
- * engine — see `src/features/commerce/`.
+ * any store integration exists. `PriceBook` is an interface precisely so live
+ * merchant prices can be dropped in later without touching the budget engine.
+ *
+ * They have NOT been: `features/commerce` prices a CART, and this prices a
+ * RECIPE. Nothing stops a future price book reading a merchant catalogue, but
+ * it would be a new implementation of this interface rather than a change to
+ * this one, and it would have to keep `source: 'estimate'` honest for every
+ * ingredient the merchant does not stock.
  */
 
 export type PriceQuote = {
