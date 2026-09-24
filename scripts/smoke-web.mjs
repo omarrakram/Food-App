@@ -1169,25 +1169,43 @@ async function main() {
             /العربة|المجموع|الإجمالي/.test(arabicCart),
           );
           /*
-            WESTERN NUMERALS IN OUR OWN CHROME — and only there.
+            WESTERN NUMERALS ACROSS THE WHOLE ARABIC COMMERCE SURFACE.
 
-            `ar-EG-u-nu-latn` is pinned app-wide so an interpolated count and
-            an `Intl`-formatted price cannot disagree on the same row. That
-            governs what THIS APP formats. A merchant's product name is the
-            merchant's text: real Egyptian catalogues write «رز مصري ١ كجم»,
-            and rewriting a shop's own product name to suit our numeral policy
-            would be putting words in their mouth. So this reads the totals
-            block, which is entirely ours.
+            Two mechanisms have to agree here, and each was wrong once. What
+            the APP formats — counts, prices, totals, the minimum-order line —
+            is Western because the locale is pinned to `ar-EG-u-nu-latn`. What
+            the MERCHANT wrote is Western because `display.ts` normalises its
+            digits as it renders them, while the catalogue keeps «رز مصري ١ كجم»
+            exactly as published.
+
+            So this reads the surfaces rather than trusting either mechanism:
+            the product names and pack sizes in the lines, and the subtotal,
+            delivery, total and shortfall in the totals block.
           */
-          const totalsText = await page
-            .locator('[data-testid="cart-totals"]')
-            .first()
-            .innerText()
-            .catch(() => '');
+          const EASTERN = /[\u0660-\u0669\u06F0-\u06F9]/;
+          const readRegion = async (testId) =>
+            page
+              .locator(`[data-testid="${testId}"]`)
+              .first()
+              .innerText()
+              .catch(() => '');
+
+          const linesText = await readRegion('cart-lines');
+          const totalsText = await readRegion('cart-totals');
+
           check(
-            'and our own numbers are Western, whatever the merchant calls a pack',
-            totalsText.length > 0 && !/[٠-٩]/.test(totalsText),
-            totalsText.replace(/\n/g, ' · ').slice(0, 120),
+            'Arabic cart LINES are Western — merchant product names and pack sizes',
+            linesText.length > 0 && !EASTERN.test(linesText),
+            linesText.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          check(
+            'Arabic cart TOTALS are Western — subtotal, delivery, total',
+            totalsText.length > 0 && !EASTERN.test(totalsText),
+            totalsText.replace(/\n/g, ' · ').slice(0, 160),
+          );
+          check(
+            'and the minimum-order message counts in Western numerals too',
+            !EASTERN.test(await readRegion('cart-shortfall')),
           );
           await shot('27-cart-arabic');
 
@@ -1197,6 +1215,19 @@ async function main() {
             await page.waitForTimeout(900);
             await shot('28-recipe-sourcing-arabic');
             check('the sourcing panel is Arabic too', await visible('recipe-sourcing', 5000));
+
+            // The other half of the surface: the product rows under YOU NEED,
+            // where a merchant's own pack size sits beside our pack count and
+            // our price. That row is where the two numeral systems collided.
+            const sourcedArabic = await page
+              .locator('[data-testid^="recipe-sourced-"]')
+              .allInnerTexts()
+              .catch(() => []);
+            check(
+              'and its product rows are Western throughout — name, packs, price',
+              sourcedArabic.length > 0 && !/[٠-٩۰-۹]/.test(sourcedArabic.join(' · ')),
+              sourcedArabic.join(' · ').replace(/\n/g, ' ').slice(0, 160),
+            );
           }
 
           // Back to English so the sections after this one read as they always

@@ -1,7 +1,16 @@
 import { INGREDIENTS_BY_SLUG } from '@/features/ingredients/catalogue';
 import { perPieceWeightFor } from '@/features/pricing/units';
 
-import { DemoCatalogueAdapter, demoCandidatesFor } from '../demo-adapter';
+import { hasEasternNumerals } from '@/lib/format/numerals';
+
+import {
+  DEMO_LOCATION_SNAPSHOT,
+  DEMO_MERCHANT_SNAPSHOT,
+  DemoCatalogueAdapter,
+  demoCandidatesFor,
+} from '../demo-adapter';
+import { DEMO_PRODUCTS } from '../demo-catalogue.generated';
+import { locationDisplayName, merchantDisplayName, productDisplayName } from '../display';
 import type { SourcingLine } from '../ports';
 import { sourceLine, sourceRequest, type SourcingContext } from '../sourcing';
 
@@ -276,5 +285,53 @@ describe('every sourcing state is reachable in a build somebody can open', () =>
       no_eligible_match: 'no_eligible_match',
       unmapped: 'unmapped',
     });
+  });
+});
+
+describe('merchant text is normalised for display and untouched in storage', () => {
+  /**
+   * THE TWO HALVES OF ONE PROMISE.
+   *
+   * AKALT renders 0–9 in both languages; a merchant's catalogue is their
+   * record of their own product. Both hold because normalisation happens at
+   * display time and nowhere else — so this asserts the stored row STILL
+   * carries what the merchant published, and that the display layer renders it
+   * Western anyway.
+   *
+   * The first half matters most: the easy "fix" for the numeral rule is to
+   * edit the CSV, and that is the one thing we must not do.
+   */
+  const allProducts = () =>
+    new DemoCatalogueAdapter().getProducts(DEMO_PRODUCTS.map((row) => row.externalId));
+
+  it('keeps the merchant spelling in the catalogue, Eastern numerals included', async () => {
+    const products = await allProducts();
+    const rice = products.find((product) => product.id === 'dm-rice-1000');
+    expect(rice?.nameAr).toBe('رز مصري ١ كجم');
+    expect(hasEasternNumerals(rice!.nameAr!)).toBe(true);
+  });
+
+  it('renders it with Western numerals and the same words', async () => {
+    const products = await allProducts();
+    const rice = products.find((product) => product.id === 'dm-rice-1000')!;
+    expect(productDisplayName(rice, 'ar')).toBe('رز مصري 1 كجم');
+    expect(productDisplayName(rice, 'en')).toBe(rice.name);
+  });
+
+  it('leaves no Eastern numeral anywhere on the displayed catalogue', async () => {
+    // Every product, both languages. A single row that skipped the display
+    // layer would show up here rather than in a screenshot somebody squints at.
+    const products = await allProducts();
+    const offenders = products.flatMap((product) =>
+      (['en', 'ar'] as const)
+        .map((language) => productDisplayName(product, language))
+        .filter(hasEasternNumerals),
+    );
+    expect(offenders).toEqual([]);
+  });
+
+  it('and the branch name is normalised the same way', () => {
+    expect(hasEasternNumerals(locationDisplayName(DEMO_LOCATION_SNAPSHOT, 'ar'))).toBe(false);
+    expect(hasEasternNumerals(merchantDisplayName(DEMO_MERCHANT_SNAPSHOT, 'ar'))).toBe(false);
   });
 });

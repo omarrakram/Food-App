@@ -142,3 +142,51 @@ describe('the commerce type module stays a leaf', () => {
     expect(specifiers).toEqual(['./domain']);
   });
 });
+
+/**
+ * MERCHANT TEXT REACHES THE SCREEN THROUGH ONE DOOR.
+ *
+ * `features/commerce/display.ts` is where a merchant's own words become the
+ * app's words. It is the only place that knows both rules at once: show the
+ * trade name the merchant published, and render its digits 0–9 like the rest
+ * of the app. A screen that reaches for `product.name` directly skips both —
+ * it shows the English name to an Arabic reader AND puts «١ كجم» next to
+ * «2 عبوات» — and that is exactly how it was already wrong once.
+ *
+ * So no component or screen may read those fields itself. The rule is checked
+ * by grep rather than by types because the fields are legitimately public:
+ * `sourcing.ts` compares names, the importer writes them, and tests assert on
+ * the stored value on purpose. It is the RENDERING that has one door.
+ */
+describe('nothing renders a merchant name except the display layer', () => {
+  const UI_DIRS = ['src/components/commerce', 'src/app'];
+
+  /** `product.name`, `merchant.nameAr`, `location.name`… in UI code. */
+  const DIRECT_READ =
+    /\b(?:product|merchant|location|chosen\.product)\s*\.\s*(?:name|nameAr|brand)\b/;
+
+  it('reads merchant text through display.ts, never off the row', () => {
+    const offenders: string[] = [];
+
+    for (const dir of UI_DIRS) {
+      for (const file of sourceFilesIn(dir)) {
+        if (file.includes('__tests__')) continue;
+        const source = readFileSync(file, 'utf8');
+        // Only files that touch commerce at all; `recipe.name` and the like
+        // are a different vocabulary with no merchant behind them.
+        if (!/@\/features\/commerce|@\/types\/commerce/.test(source)) continue;
+
+        source.split('\n').forEach((line, index) => {
+          if (!DIRECT_READ.test(line)) return;
+          // The display layer is imported and called BY these files; a call
+          // like `productDisplayName(chosen.product, language)` is the fix,
+          // not the violation.
+          if (/DisplayName\s*\(/.test(line)) return;
+          offenders.push(`${file.replace(ROOT, '')}:${index + 1} ${line.trim()}`);
+        });
+      }
+    }
+
+    expect(offenders).toEqual([]);
+  });
+});

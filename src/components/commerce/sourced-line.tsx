@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { PriceTag } from '@/components/recipe/price-tag';
 import { Text } from '@/components/ui/text';
+import { productDisplayName } from '@/features/commerce/display';
 import type { SourcedLine, SourcingStatus } from '@/features/commerce/ports';
 import { useI18n } from '@/i18n';
 import type { TranslationKey } from '@/i18n/locales/en';
@@ -112,7 +113,7 @@ export type SourcedLineRowProps = {
 
 export function SourcedLineRow({ line, merchantName, testID }: SourcedLineRowProps) {
   const theme = useTheme();
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const indent = useIndent();
 
   if (line.status !== 'matched' || !line.chosen) {
@@ -140,7 +141,7 @@ export function SourcedLineRow({ line, merchantName, testID }: SourcedLineRowPro
     return (
       <View style={indent} testID={testID}>
         <Text variant="footnote" numberOfLines={2}>
-          {chosen.product.name}
+          {productDisplayName(chosen.product, language)}
         </Text>
         <Text variant="caption" color="textTertiary">
           {t('commerce.packSizeUnknown')}
@@ -165,7 +166,7 @@ export function SourcedLineRow({ line, merchantName, testID }: SourcedLineRowPro
   return (
     <View style={indent} testID={testID}>
       <Text variant="footnote" numberOfLines={2}>
-        {chosen.product.name}
+        {productDisplayName(chosen.product, language)}
       </Text>
       <View
         style={{
