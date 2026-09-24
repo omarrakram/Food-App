@@ -155,6 +155,18 @@ const DIETS_BY_ID = new Map<string, ProductDietaryProfile | null>(
   DEMO_PRODUCTS.map((row) => [row.externalId, row.diets]),
 );
 
+/** Allergens by product id, `null` carried through — see `DemoProductRow`. */
+export function demoAllergensFor(productId: string): readonly Allergen[] | null {
+  assertDemoCatalogueAllowed();
+  return ALLERGENS_BY_ID.get(productId) ?? null;
+}
+
+/** Dietary verdicts by product id. Absent and null are both "they did not say". */
+export function demoDietsFor(productId: string): ProductDietaryProfile | null {
+  assertDemoCatalogueAllowed();
+  return DIETS_BY_ID.get(productId) ?? null;
+}
+
 export class DemoCatalogueAdapter implements CatalogueAdapter {
   readonly merchantId = MERCHANT_ID;
 

@@ -3,7 +3,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { toAppError } from '@/lib/errors';
 import type { CartLineRow, CartRow, Database } from '@/lib/supabase/database.types';
 import type { Cart, CartLine } from '@/types/commerce';
-import type { CurrencyCode } from '@/types/domain';
+import type { CurrencyCode, Money } from '@/types/domain';
 
 import {
   mergeLines,
@@ -111,6 +111,28 @@ export class SupabaseCartRepository implements CartRepository {
     const { error } = await this.client.from('cart_lines').delete().eq('id', lineId);
     if (error) throw toAppError(error, 'database');
     return this.getOrDrop();
+  }
+
+  async refreshPrices(prices: ReadonlyMap<string, Money>): Promise<Cart | null> {
+    const cart = await this.get();
+    if (!cart) return null;
+
+    for (const line of cart.lines) {
+      const now = prices.get(line.merchantProductId);
+      if (!now || now.amountMinor === line.unitPriceSnapshot.amountMinor) continue;
+
+      const { error } = await this.client
+        .from('cart_lines')
+        .update({ unit_price_minor: now.amountMinor })
+        .eq('id', line.id);
+
+      if (error) throw toAppError(error, 'database');
+    }
+
+    // Re-read rather than patch in memory: the revision is written by the
+    // `cart_lines_bump_revision` trigger, so the database is the only place
+    // that knows what it now is.
+    return this.get();
   }
 
   async clear(): Promise<void> {

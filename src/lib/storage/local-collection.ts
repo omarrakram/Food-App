@@ -74,4 +74,5 @@ export const LocalCollectionKeys = {
   history: 'akla.local.history',
   aiRecipes: 'akla.local.aiRecipes',
   cart: 'akla.local.cart',
+  addresses: 'akla.local.addresses',
 } as const;

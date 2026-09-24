@@ -37,6 +37,8 @@ function merchant(over: Partial<MerchantLocation> = {}): SelectedMerchant {
       checkAvailability: () => Promise.resolve({}),
     },
     candidatesFor: () => [],
+    allergensFor: () => null,
+    dietsFor: () => null,
     isDemo: true,
   };
 }

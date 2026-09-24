@@ -110,6 +110,19 @@ function tablesFromSql(sql: string): Map<string, Set<string>> {
     tables.get(match[1]!)?.add(match[2]!);
   }
 
+  // A RENAME IS THE DRIFT THIS FILE EXISTS FOR — the docblock says so: a
+  // renamed column type-checks perfectly and fails at runtime. Without this
+  // the old name is still expected and the new one is never required, which
+  // is precisely backwards.
+  const renamed =
+    /alter table (?:if exists )?public\.(\w+)\s+rename column (\w+)\s+to\s+(\w+)/gi;
+  while ((match = renamed.exec(sql)) !== null) {
+    const columns = tables.get(match[1]!);
+    if (!columns) continue;
+    columns.delete(match[2]!);
+    columns.add(match[3]!);
+  }
+
   const dropped = /alter table (?:if exists )?public\.(\w+)\s+drop column (?:if exists )?(\w+)/gi;
   while ((match = dropped.exec(sql)) !== null) {
     tables.get(match[1]!)?.delete(match[2]!);

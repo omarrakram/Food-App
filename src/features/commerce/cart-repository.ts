@@ -45,6 +45,15 @@ export interface CartRepository {
   get(): Promise<Cart | null>;
   addLines(inputs: readonly AddCartLineInput[]): Promise<AddToCartOutcome>;
   setQuantity(lineId: string, quantity: number): Promise<Cart | null>;
+  /**
+   * Writes the CURRENT shelf prices into the cart's snapshots.
+   *
+   * The mechanical half of "I have seen the new prices": the customer agreed
+   * to these numbers, so these become the numbers the cart claims. Bumps the
+   * revision like any other mutation, which is what the acceptance is then
+   * bound to.
+   */
+  refreshPrices(prices: ReadonlyMap<string, Money>): Promise<Cart | null>;
   removeLine(lineId: string): Promise<Cart | null>;
   clear(): Promise<void>;
 }
@@ -180,6 +189,21 @@ export class LocalCartRepository implements CartRepository {
     return this.persist({
       ...cart,
       lines: cart.lines.filter((line) => line.id !== lineId),
+      revision: cart.revision + 1,
+      updatedAt: nowISO(),
+    });
+  }
+
+  async refreshPrices(prices: ReadonlyMap<string, Money>): Promise<Cart | null> {
+    const cart = await this.get();
+    if (!cart) return null;
+
+    return this.persist({
+      ...cart,
+      lines: cart.lines.map((line) => {
+        const now = prices.get(line.merchantProductId);
+        return now ? { ...line, unitPriceSnapshot: now } : line;
+      }),
       revision: cart.revision + 1,
       updatedAt: nowISO(),
     });

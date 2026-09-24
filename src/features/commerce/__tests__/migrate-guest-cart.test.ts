@@ -95,6 +95,9 @@ class FakeRemoteCart implements CartRepository {
   setQuantity() {
     return Promise.resolve(this.state);
   }
+  refreshPrices() {
+    return Promise.resolve(this.state);
+  }
   removeLine() {
     return Promise.resolve(this.state);
   }

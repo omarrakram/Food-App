@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useRepositories } from '@/features/data/repositories';
 import { INGREDIENTS_BY_SLUG } from '@/features/ingredients/catalogue';
@@ -7,16 +7,35 @@ import { usePreferences } from '@/features/preferences/preferences-provider';
 import { perPieceWeightFor } from '@/features/pricing/units';
 import { toAppError } from '@/lib/errors';
 import { queryKeys } from '@/lib/query/client';
+import { newId } from '@/lib/storage/local-collection';
 import type { Cart, MerchantProduct } from '@/types/commerce';
 import type { IngredientMatch } from '@/types/domain';
 
+import type { AddressInput } from './address-repository';
 import { addableLines } from './basket';
-import { buildCartView, type CartView } from './cart-view';
 import type { AddCartLineInput } from './cart-repository';
+import { buildCartView, type CartView } from './cart-view';
+import {
+  acceptanceIsCurrent,
+  checkoutReadiness,
+  type ReviewAcceptance,
+} from './checkout-readiness';
 import { selectMerchant, type SelectedMerchant } from './merchant-selection';
+import {
+  OrderDraftRefused,
+  type OrderDraft,
+  type OrderDraftFailure,
+} from './order-draft';
+import { clearPendingCart, readPendingCart } from './pending-cart';
 import type { SourcedLine, SourcingResult } from './ports';
 import { requirementsFor, type RequirementsResult } from './requirements';
-import { requiredDietsFor, sourceRequest, type SourcingContext } from './sourcing';
+import { revalidateCart } from './revalidation';
+import {
+  requiredDietsFor,
+  sourceRequest,
+  type SourcingCandidateInput,
+  type SourcingContext,
+} from './sourcing';
 
 /**
  * Commerce hooks.
@@ -293,3 +312,370 @@ export function useCartView(): CartState {
 }
 
 export type { CartLineView, CartView } from './cart-view';
+
+// --- Addresses --------------------------------------------------------------
+
+export function useAddresses() {
+  const { addresses, scopeKey } = useRepositories();
+
+  return useQuery({
+    queryKey: queryKeys.addresses(scopeKey),
+    queryFn: async () => {
+      try {
+        return await addresses.list();
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+/**
+ * The areas an address can be in.
+ *
+ * Reference data: it changes when a merchant signs a new district, not when
+ * the user does anything, so it is cached hard and refetched rarely.
+ */
+export function useDeliveryAreas() {
+  const { addresses, scopeKey } = useRepositories();
+
+  return useQuery({
+    queryKey: queryKeys.deliveryAreas(scopeKey),
+    staleTime: 60 * 60 * 1000,
+    queryFn: async () => {
+      try {
+        return await addresses.listAreas();
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+export function useAddressMutations() {
+  const { addresses, scopeKey } = useRepositories();
+  const queryClient = useQueryClient();
+  const key = queryKeys.addresses(scopeKey);
+
+  const invalidate = useCallback(() => {
+    void queryClient.invalidateQueries({ queryKey: key });
+  }, [queryClient, key]);
+
+  const create = useMutation({
+    mutationFn: (input: AddressInput) => addresses.create(input),
+    onSuccess: invalidate,
+  });
+
+  const update = useMutation({
+    mutationFn: ({ id, input }: { id: string; input: AddressInput }) =>
+      addresses.update(id, input),
+    onSuccess: invalidate,
+  });
+
+  const remove = useMutation({
+    mutationFn: (id: string) => addresses.remove(id),
+    onSuccess: invalidate,
+  });
+
+  return { create, update, remove };
+}
+
+// --- The parked guest cart ---------------------------------------------------
+
+/**
+ * The conflict from sign-in, if there is one.
+ *
+ * Read on the CART surface and resolved there. Checkout cannot begin while it
+ * is open — which basket the customer means is an open question until they
+ * say, and validating one of two candidates is meaningless.
+ */
+export function usePendingCart() {
+  const { scopeKey, isRemote } = useRepositories();
+
+  return useQuery({
+    queryKey: ['akla', 'pending-cart', scopeKey] as const,
+    // Only a signed-in account can have one: it is parked BY signing in.
+    enabled: isRemote,
+    queryFn: () => readPendingCart(scopeKey),
+  });
+}
+
+export function usePendingCartActions() {
+  const { cart, scopeKey, isRemote } = useRepositories();
+  const queryClient = useQueryClient();
+
+  const invalidate = useCallback(() => {
+    void queryClient.invalidateQueries({ queryKey: ['akla', 'pending-cart', scopeKey] });
+    void queryClient.invalidateQueries({ queryKey: queryKeys.cart(scopeKey) });
+  }, [queryClient, scopeKey]);
+
+  /** Keep what the account already had; the parked basket is dropped. */
+  const keepCurrent = useMutation({
+    mutationFn: () => clearPendingCart(),
+    onSuccess: invalidate,
+  });
+
+  /**
+   * Take the parked basket instead.
+   *
+   * Replays its lines through `addLines`, which replaces by branch under the
+   * one-cart-one-merchant rule. The parked PRICES are carried so the restored
+   * cart looks like the one the guest left — they are not checkout truth, and
+   * revalidation re-reads the shelf before any order exists.
+   */
+  const switchToPending = useMutation({
+    mutationFn: async () => {
+      if (!isRemote) throw new Error('no account to switch a cart for');
+      const pending = await readPendingCart(scopeKey);
+      if (!pending) return;
+
+      await cart.addLines(
+        pending.lines.map((line) => ({
+          merchantId: pending.merchantId,
+          locationId: pending.locationId,
+          currency: pending.currency,
+          merchantProductId: line.merchantProductId,
+          quantity: line.quantity,
+          unitPrice: line.unitPriceSnapshot,
+          sourceIngredientSlug: line.sourceIngredientSlug,
+          sourceRecipeId: line.sourceRecipeId,
+        })),
+      );
+      // Only after the replacement has succeeded.
+      await clearPendingCart();
+    },
+    onSuccess: invalidate,
+  });
+
+  return { keepCurrent, switchToPending };
+}
+
+// --- Checkout ----------------------------------------------------------------
+
+/**
+ * The one place the checkout question is asked.
+ *
+ * Pulls the cart, the chosen address, the branch and a fresh catalogue read,
+ * runs the domain revalidation against them, and hands the result to the
+ * single readiness gate. Screens render the verdict; they do not recompute it.
+ */
+export function useCheckout(addressId: string | null) {
+  const { scopeKey, isRemote, cart: cartRepository, orders } = useRepositories();
+  const merchant = useSelectedMerchant();
+  const context = useSourcingContext();
+  const { data: cart } = useCart();
+  const { data: addresses } = useAddresses();
+  const { data: pending } = usePendingCart();
+  const queryClient = useQueryClient();
+
+  const [held, setAcceptance] = useState<ReviewAcceptance | null>(null);
+
+  const address = useMemo(
+    () => addresses?.find((entry) => entry.id === addressId) ?? null,
+    [addresses, addressId],
+  );
+
+  const productIds = useMemo(
+    () => (cart ? cart.lines.map((line) => line.merchantProductId) : []),
+    [cart],
+  );
+
+  /**
+   * A FRESH read of every product in the basket.
+   *
+   * Keyed by revision as well as by ids: a validation verdict belongs to a
+   * revision, so caching the read across revisions would let a stale answer
+   * survive a change to the very basket it describes.
+   */
+  const catalogue = useQuery({
+    queryKey: queryKeys.cartValidation(scopeKey, cart?.revision ?? -1),
+    enabled: Boolean(merchant && cart && cart.lines.length > 0),
+    queryFn: async () => {
+      if (!merchant) return [] as readonly SourcingCandidateInput[];
+      const products = await merchant.catalogue.getProducts(productIds);
+      return products.map((product) => ({
+        product,
+        // The mapping is not what is being judged here — eligibility and
+        // purchasability are — so a synthetic verified mapping keeps the
+        // shared gate honest without pretending to re-derive matching.
+        mapping: {
+          id: `revalidate-${product.id}`,
+          ingredientSlug: '',
+          merchantProductId: product.id,
+          confidence: 1,
+          source: 'manual' as const,
+          isVerified: true,
+          verifiedAt: null,
+          verifiedBy: null,
+          isBlocked: false,
+          createdAt: product.fetchedAt,
+          updatedAt: product.fetchedAt,
+        },
+        productAllergens: merchant.allergensFor(product.id),
+        productDiets: merchant.dietsFor(product.id),
+      }));
+    },
+  });
+
+  const validation = useMemo(() => {
+    if (!cart || !merchant || !catalogue.data) return null;
+    return revalidateCart({
+      cart,
+      revision: cart.revision,
+      merchant: merchant.merchant,
+      location: merchant.location,
+      products: new Map(catalogue.data.map((entry) => [entry.product.id, entry])),
+      address,
+      context,
+    });
+  }, [cart, merchant, catalogue.data, address, context]);
+
+  /**
+   * AN ACCEPTANCE BELONGS TO ONE REVISION.
+   *
+   * Filtered here during render rather than cleared in an effect. An effect
+   * would leave one render in which a stale acceptance was still live, and
+   * that render is the one where the CTA is enabled for a basket the customer
+   * has not seen the prices of.
+   */
+  const acceptance = acceptanceIsCurrent(held, cart ?? null) ? held : null;
+
+  const readiness = useMemo(
+    () =>
+      checkoutReadiness({
+        isAuthenticated: isRemote,
+        hasPendingCartConflict: Boolean(pending),
+        cart: cart ?? null,
+        address,
+        validation,
+        acceptance,
+      }),
+    [isRemote, pending, cart, address, validation, acceptance],
+  );
+
+  /**
+   * "I have seen the new prices."
+   *
+   * Refreshes the cart's snapshots to what the shelf now says, which bumps the
+   * revision, and records the acceptance against THAT revision. Validation
+   * then runs again on the new basket, and is what decides whether it can
+   * proceed — this only removes the review, never a blocker.
+   */
+  const acceptChanges = useMutation({
+    mutationFn: async () => {
+      if (!cart || !catalogue.data) return;
+      const shelf = new Map(
+        catalogue.data.map((entry) => [entry.product.id, entry.product.price] as const),
+      );
+
+      const refreshed = await cartRepository.refreshPrices(shelf);
+      if (!refreshed) return;
+      setAcceptance({ revision: refreshed.revision, acceptedAt: new Date().toISOString() });
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.cart(scopeKey) });
+    },
+  });
+
+  /**
+   * ONE ATTEMPT, ONE KEY.
+   *
+   * Regenerated when the basket or the destination changes — that is a
+   * different order — and held otherwise, so a double tap, a dropped response
+   * or an app resumed from the background all resolve to the draft that
+   * already exists rather than to a second one.
+   *
+   * A ref rather than state: it must not re-render anything, and it must
+   * survive a render that state would not.
+   */
+  const attempt = useRef<{ revision: number; addressId: string; key: string } | null>(null);
+  const idempotencyKeyFor = useCallback((revision: number, id: string) => {
+    const held = attempt.current;
+    if (held && held.revision === revision && held.addressId === id) return held.key;
+    const key = newId();
+    attempt.current = { revision, addressId: id, key };
+    return key;
+  }, []);
+
+  /**
+   * The outcome of the last attempt, TAGGED WITH THE ATTEMPT IT BELONGS TO.
+   *
+   * Same reasoning as the acceptance: a draft describes one basket going to
+   * one address, so it is filtered during render rather than cleared in an
+   * effect. A reference number left on screen after the basket changed is a
+   * receipt for something that is no longer being bought.
+   */
+  const [outcome, setOutcome] = useState<{
+    readonly revision: number;
+    readonly addressId: string | null;
+    readonly draft: OrderDraft | null;
+    readonly refusal: OrderDraftFailure | null;
+  } | null>(null);
+
+  const current =
+    outcome && outcome.revision === cart?.revision && outcome.addressId === addressId
+      ? outcome
+      : null;
+  const draft = current?.draft ?? null;
+  const refusal = current?.refusal ?? null;
+
+  /**
+   * Ask the server for the draft.
+   *
+   * CLIENT VALIDATION IS UX; this is where authority is. Everything the
+   * readiness gate concluded is re-derived inside `create_order_draft` against
+   * locked rows, and a refusal from there is the truth even when the screen
+   * said the order was ready.
+   */
+  const prepareDraft = useMutation({
+    mutationFn: async (): Promise<OrderDraft> => {
+      if (!readiness.canProceedToDraft || readiness.revision === null || !address) {
+        throw new OrderDraftRefused('unknown');
+      }
+      return orders.create({
+        cartRevision: readiness.revision,
+        addressId: address.id,
+        idempotencyKey: idempotencyKeyFor(readiness.revision, address.id),
+        customerNote: null,
+      });
+    },
+    onSuccess: (created) => {
+      setOutcome({
+        revision: cart?.revision ?? -1,
+        addressId,
+        draft: created,
+        refusal: null,
+      });
+    },
+    onError: (error) => {
+      setOutcome({
+        revision: cart?.revision ?? -1,
+        addressId,
+        draft: null,
+        refusal: error instanceof OrderDraftRefused ? error.failure : 'unknown',
+      });
+      // The server disagreed with the screen. Re-read the shelf so the customer
+      // is shown WHY rather than left looking at the verdict that was wrong.
+      void queryClient.invalidateQueries({ queryKey: queryKeys.cart(scopeKey) });
+    },
+  });
+
+  return {
+    merchant,
+    cart: cart ?? null,
+    address,
+    validation,
+    readiness,
+    acceptance,
+    acceptChanges,
+    prepareDraft,
+    draft,
+    refusal,
+    isValidating: catalogue.isFetching,
+    revalidate: () => {
+      void queryClient.invalidateQueries({
+        queryKey: queryKeys.cartValidation(scopeKey, cart?.revision ?? -1),
+      });
+    },
+  };
+}

@@ -55,8 +55,9 @@ export type CartView = {
  * The snapshot is what the user was shown when they added the line, and
  * silently re-totalling a basket underneath somebody is how a shop loses an
  * argument about what they agreed to pay. A changed price is SURFACED per
- * line instead; reconciling it is checkout's job, and checkout does not exist
- * yet.
+ * line instead; reconciling it belongs to checkout, where `revalidateCart`
+ * re-totals from the current shelf and the customer has to look at the new
+ * number before a draft can be built.
  *
  * `products` may be empty — the catalogue read can fail or still be in
  * flight — and the cart is fully renderable without it. Nothing here depends

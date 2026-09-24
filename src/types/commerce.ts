@@ -571,8 +571,17 @@ export type Order = {
 
   fulfilment: OrderFulfilmentState;
   payment: PaymentState;
-  paymentMethod: PaymentMethod;
-  paymentProvider: PaymentProvider;
+  /**
+   * NULL UNTIL A PAYMENT PATH IS CHOSEN, which a draft has not done.
+   *
+   * Modelled as absence rather than as a placeholder enum value: 'none' or
+   * 'unselected' would be a value every `switch` has to remember to exclude,
+   * and the one that forgets is the one that charges somebody. The database
+   * carries the same shape, with a constraint that refuses null the moment
+   * `payment_state` moves past `unpaid`.
+   */
+  paymentMethod: PaymentMethod | null;
+  paymentProvider: PaymentProvider | null;
   /** The provider's id for the transaction, for reconciliation. */
   paymentReference: string | null;
 

@@ -14,7 +14,13 @@ import { Stepper } from '@/components/ui/stepper';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
 import { merchantDisplayName, productDisplayName } from '@/features/commerce/display';
-import { useCartMutations, useCartView, type CartLineView } from '@/features/commerce/hooks';
+import {
+  useCartMutations,
+  useCartView,
+  usePendingCart,
+  usePendingCartActions,
+  type CartLineView,
+} from '@/features/commerce/hooks';
 import { formatQuantity } from '@/features/pricing/units';
 import { useI18n } from '@/i18n';
 import { presentError } from '@/lib/errors';
@@ -27,10 +33,10 @@ import type { Money, PricedAmount } from '@/types/domain';
  *
  * One basket, one branch — see `cart-repository.ts` for why that is a property
  * of the thing rather than a simplification. This screen's whole job is to be
- * truthful about a basket that cannot yet be bought: every price here is a
+ * truthful about a basket that cannot yet be PAID for: every price here is a
  * snapshot taken when the line was added, the catalogue may have moved since,
- * and checkout does not exist. All three of those are said on the screen
- * rather than discovered later.
+ * and the checkout this leads to ends at an unpaid draft. All three of those
+ * are said on the screen rather than discovered later.
  */
 
 /** Merchant prices are live reads. Never an estimate, never a `~`. */
@@ -127,6 +133,80 @@ function TotalRow({ label, value, strong = false }: { label: string; value: stri
   );
 }
 
+/**
+ * THE TWO-BASKET QUESTION, ASKED ON THE CART.
+ *
+ * Signing in with a guest basket that belongs to a different branch parks the
+ * guest one rather than discarding it — see `migrate-guest-cart.ts`. Which
+ * basket the customer meant is then an open question, and it is asked HERE,
+ * on the surface where a basket is understood, rather than three screens later
+ * inside checkout. Nothing downstream is allowed to run while it is open:
+ * `checkoutReadiness` blocks on it too, so the CTA below is not the only guard.
+ */
+function PendingCartConflict({
+  count,
+  merchantName,
+  onKeep,
+  onSwitch,
+  isBusy,
+}: {
+  count: number;
+  merchantName: string;
+  onKeep: () => void;
+  onSwitch: () => void;
+  isBusy: boolean;
+}) {
+  const theme = useTheme();
+  const { t } = useI18n();
+  const row = useRowDirection();
+
+  return (
+    <View
+      style={{
+        gap: theme.spacing.sm,
+        padding: theme.spacing.lg,
+        borderRadius: theme.radius.lg,
+        backgroundColor: theme.colors.warningSoft,
+      }}
+      testID="cart-conflict"
+    >
+      <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.xs }}>
+        <Ionicons name="swap-horizontal-outline" size={16} color={theme.colors.warningSoftText} />
+        <Text variant="headline" style={{ color: theme.colors.warningSoftText }}>
+          {t('cart.conflictTitle')}
+        </Text>
+      </View>
+      <Text variant="footnote" style={{ color: theme.colors.warningSoftText }}>
+        {t('cart.conflictBody')}
+      </Text>
+      <Text variant="caption" style={{ color: theme.colors.warningSoftText }}>
+        {t('cart.conflictCurrent', { merchant: merchantName })}
+      </Text>
+      <Text variant="caption" style={{ color: theme.colors.warningSoftText }}>
+        {t('cart.conflictPrevious', { items: t('cart.items', { count }) })}
+      </Text>
+      <View style={{ flexDirection: row, gap: theme.spacing.sm }}>
+        <Button
+          label={t('cart.conflictKeep')}
+          variant="secondary"
+          size="sm"
+          disabled={isBusy}
+          onPress={onKeep}
+          testID="cart-conflict-keep"
+        />
+        <Button
+          label={t('cart.conflictSwitch')}
+          variant="secondary"
+          size="sm"
+          disabled={isBusy}
+          onPress={onSwitch}
+          testID="cart-conflict-switch"
+        />
+      </View>
+    </View>
+  );
+}
+
 export default function CartScreen() {
   const theme = useTheme();
   const { t, locale, language } = useI18n();
@@ -136,6 +216,8 @@ export default function CartScreen() {
 
   const state = useCartView();
   const { setQuantity, removeLine, clear } = useCartMutations();
+  const { data: pending } = usePendingCart();
+  const { keepCurrent, switchToPending } = usePendingCartActions();
 
   const showError = (error: unknown) =>
     toast.show({ message: t(presentError(error).bodyKey), tone: 'danger' });
@@ -232,6 +314,16 @@ export default function CartScreen() {
           </Text>
         )}
 
+        {pending ? (
+          <PendingCartConflict
+            count={pending.lines.length}
+            merchantName={merchantName}
+            isBusy={keepCurrent.isPending || switchToPending.isPending}
+            onKeep={() => keepCurrent.mutate(undefined, { onError: showError })}
+            onSwitch={() => switchToPending.mutate(undefined, { onError: showError })}
+          />
+        ) : null}
+
         {changed > 0 ? (
           <View style={{ gap: 2 }} testID="cart-price-changed">
             <View style={{ flexDirection: row, alignItems: 'center', gap: theme.spacing.xs }}>
@@ -307,12 +399,22 @@ export default function CartScreen() {
 
       <ScreenFooter>
         {/*
-          CHECKOUT DOES NOT EXIST. A live-looking button that opens an apology
-          is worse than a dead one that says the truth on its face, and this
-          screen is not going to be the place somebody first learns they cannot
-          actually pay.
+          CHECKOUT EXISTS; PAYMENT DOES NOT. The button leads to a review
+          screen that can produce an unpaid draft and says so — it is not a
+          route to a payment sheet, and the caption below keeps that true from
+          here rather than letting somebody discover it at the end.
+
+          DISABLED WHILE TWO BASKETS ARE OPEN. Validating one of two candidate
+          baskets is meaningless, so the question above has to be answered
+          first.
         */}
-        <Button label={t('cart.checkoutSoon')} disabled size="lg" testID="cart-checkout" />
+        <Button
+          label={t('cart.checkout')}
+          size="lg"
+          disabled={Boolean(pending)}
+          onPress={() => router.push('/checkout')}
+          testID="cart-checkout"
+        />
         <Text variant="caption" color="textTertiary" style={{ textAlign: 'center' }}>
           {t('cart.checkoutSoonBody')}
         </Text>

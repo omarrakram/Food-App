@@ -393,6 +393,43 @@ export type RecipeHistoryRow = {
   occurred_at: string;
 };
 
+export type DeliveryAddressRow = {
+  id: string;
+  user_id: string;
+  label: string | null;
+  recipient_name: string;
+  /** E.164. The column has a check constraint; the client normalises. */
+  phone: string;
+  /** References `delivery_areas.key`. Null only on a half-finished row. */
+  area_key: string | null;
+  street: string;
+  building: string;
+  floor: string | null;
+  apartment: string | null;
+  landmark: string | null;
+  country: string;
+  notes: string | null;
+  is_default: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type DeliveryAreaRow = {
+  key: string;
+  governorate: string;
+  name_en: string;
+  name_ar: string;
+  is_demo: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type MerchantLocationAreaRow = {
+  merchant_location_id: string;
+  area_key: string;
+  created_at: string;
+};
+
 export type CartRow = {
   id: string;
   user_id: string;
@@ -414,6 +451,85 @@ export type CartLineRow = {
   quantity: number;
   unit_price_minor: number;
   added_at: string;
+};
+
+/**
+ * Commerce enums, as the database declares them.
+ *
+ * Restated here rather than imported from `@/types/commerce` on purpose: this
+ * file describes the WIRE, and `db:types:check` verifies these literals
+ * against the migrations. A domain type that drifts from the column is exactly
+ * the bug that check exists to catch, and it cannot catch it if both sides are
+ * the same declaration.
+ */
+export type OrderFulfilmentStateEnum =
+  | 'draft'
+  | 'pending'
+  | 'placed'
+  | 'accepted'
+  | 'picking'
+  | 'ready'
+  | 'dispatched'
+  | 'delivered'
+  | 'rejected'
+  | 'cancelled'
+  | 'failed'
+  | 'undeliverable';
+
+export type PaymentStateEnum =
+  | 'unpaid'
+  | 'authorising'
+  | 'authorised'
+  | 'captured'
+  | 'partially_refunded'
+  | 'refunded'
+  | 'voided'
+  | 'failed';
+
+export type PaymentMethodEnum = 'card' | 'wallet' | 'cash_on_delivery';
+export type PaymentProviderEnum = 'demo' | 'paymob' | 'fawry' | 'cash';
+export type SubstitutionPreferenceEnum = 'contact_me' | 'best_match' | 'remove';
+
+/**
+ * An order row, READ-ONLY from the client.
+ *
+ * `create_order_draft` is the only writer — the insert policy that used to let
+ * a client name its own totals was dropped in the checkout migration — so this
+ * has no Insert or Update type. Everything financial here is the server's
+ * arithmetic, not ours.
+ */
+export type OrderRow = {
+  id: string;
+  reference: string;
+  user_id: string;
+  merchant_id: string;
+  merchant_location_id: string;
+  fulfilment_state: OrderFulfilmentStateEnum;
+  payment_state: PaymentStateEnum;
+  /** Null until a payment path is chosen. A draft has not chosen one. */
+  payment_method: PaymentMethodEnum | null;
+  payment_provider: PaymentProviderEnum | null;
+  payment_reference: string | null;
+  substitution_preference: SubstitutionPreferenceEnum;
+  currency: string;
+  items_subtotal_minor: number;
+  delivery_fee_minor: number;
+  service_fee_minor: number;
+  discount_minor: number;
+  captured_minor: number;
+  refunded_minor: number;
+  commission_rate_basis_points: number;
+  merchant_keeps_delivery_fee: boolean;
+  delivery_address_id: string | null;
+  delivery_snapshot: Record<string, unknown>;
+  contact_phone: string;
+  customer_note: string | null;
+  /** The cart revision the draft was built from. */
+  cart_revision: number | null;
+  checkout_idempotency_key: string | null;
+  placed_at: string | null;
+  created_at: string;
+  updated_at: string;
 };
 
 export type IngredientPriceEstimateRow = {
@@ -525,6 +641,18 @@ export type Database = {
         Omit<ShoppingListItemRow, 'id' | 'created_at' | 'updated_at'> & { id?: string }
       >;
       ingredient_price_estimates: Table<IngredientPriceEstimateRow>;
+      delivery_addresses: Table<
+        DeliveryAddressRow,
+        Omit<DeliveryAddressRow, 'id' | 'created_at' | 'updated_at' | 'is_default'> & {
+          id?: string;
+          is_default?: boolean;
+        }
+      >;
+      delivery_areas: Table<DeliveryAreaRow, DeliveryAreaRow>;
+      merchant_location_areas: Table<MerchantLocationAreaRow, MerchantLocationAreaRow>;
+      // Read-only: `create_order_draft` is the only writer, and there is no
+      // insert or update policy for a client to use.
+      orders: Table<OrderRow, never, never>;
       carts: Table<
         CartRow,
         Omit<CartRow, 'id' | 'created_at' | 'updated_at' | 'revision'> & { id?: string }
@@ -578,6 +706,16 @@ export type Database = {
         Returns: SubmissionStatusEnum;
       };
       unpublish_recipe: { Args: { target: string; reason: string }; Returns: undefined };
+      /** Returns the new order's id. Every figure is derived server-side. */
+      create_order_draft: {
+        Args: {
+          p_cart_revision: number;
+          p_address_id: string;
+          p_idempotency_key: string;
+          p_customer_note?: string | null;
+        };
+        Returns: string;
+      };
       unread_notification_count: { Args: Record<string, never>; Returns: number };
       mark_all_notifications_read: { Args: Record<string, never>; Returns: undefined };
       moderation_queue: {
@@ -616,6 +754,11 @@ export type Database = {
       moderation_action: ModerationActionEnum;
       app_role: AppRoleEnum;
       notification_kind: NotificationKindEnum;
+      order_fulfilment_state: OrderFulfilmentStateEnum;
+      payment_state: PaymentStateEnum;
+      payment_method: PaymentMethodEnum;
+      payment_provider: PaymentProviderEnum;
+      substitution_preference: SubstitutionPreferenceEnum;
     };
     CompositeTypes: Record<string, never>;
   };

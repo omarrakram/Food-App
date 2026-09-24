@@ -1,12 +1,14 @@
 import { env } from '@/lib/config/env';
-import type { Merchant, MerchantLocation } from '@/types/commerce';
-import type { CountryCode } from '@/types/domain';
+import type { Merchant, MerchantLocation, ProductDietaryProfile } from '@/types/commerce';
+import type { Allergen, CountryCode } from '@/types/domain';
 
 import {
   DEMO_LOCATION_SNAPSHOT,
   DEMO_MERCHANT_SNAPSHOT,
   DemoCatalogueAdapter,
+  demoAllergensFor,
   demoCandidatesFor,
+  demoDietsFor,
 } from './demo-adapter';
 import type { CatalogueAdapter } from './ports';
 import type { SourcingCandidateInput } from './sourcing';
@@ -32,6 +34,16 @@ export type SelectedMerchant = {
   readonly catalogue: CatalogueAdapter;
   /** Candidate products for one canonical ingredient at this branch. */
   readonly candidatesFor: (ingredientSlug: string) => readonly SourcingCandidateInput[];
+  /**
+   * Safety metadata BY PRODUCT, for revalidation.
+   *
+   * Sourcing reaches these through a candidate; revalidation starts from a
+   * cart line and has only a product id, so the same facts have to be
+   * reachable that way too. Null carries through untouched — an unpublished
+   * allergen list must never arrive as an empty one.
+   */
+  readonly allergensFor: (productId: string) => readonly Allergen[] | null;
+  readonly dietsFor: (productId: string) => ProductDietaryProfile | null;
   /**
    * True when this is the development catalogue rather than a partner.
    *
@@ -80,6 +92,8 @@ export function selectMerchant(country: CountryCode): SelectedMerchant | null {
     location: DEMO_LOCATION_SNAPSHOT,
     catalogue,
     candidatesFor: demoCandidatesFor,
+    allergensFor: demoAllergensFor,
+    dietsFor: demoDietsFor,
     isDemo: true,
   };
 }

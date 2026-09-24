@@ -41,10 +41,8 @@ create index delivery_areas_governorate_idx on public.delivery_areas (governorat
 -- the reference is enforced: an area key that does not exist cannot be
 -- declared as covered, and deleting an area in use fails loudly.
 create table public.merchant_location_areas (
-  merchant_location_id uuid not null
-    references public.merchant_locations (id) on delete cascade,
-  area_key             text not null
-    references public.delivery_areas (key) on delete restrict,
+  merchant_location_id uuid not null references public.merchant_locations (id) on delete cascade,
+  area_key             text not null references public.delivery_areas (key) on delete restrict,
   created_at           timestamptz not null default now(),
 
   primary key (merchant_location_id, area_key)
@@ -70,10 +68,9 @@ alter table public.merchant_locations drop column delivery_areas;
 
 alter table public.delivery_addresses rename column line1 to street;
 
-alter table public.delivery_addresses
-  drop column line2,
-  drop column district,
-  drop column city;
+alter table public.delivery_addresses drop column line2;
+alter table public.delivery_addresses drop column district;
+alter table public.delivery_addresses drop column city;
 
 alter table public.delivery_addresses
   -- The person at the door is often not the account holder.

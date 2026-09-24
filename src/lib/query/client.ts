@@ -60,6 +60,15 @@ export const queryKeys = {
   shoppingList: (userId: string) => ['akla', 'shopping', userId] as const,
 
   cart: (userId: string) => ['akla', 'cart', userId] as const,
+  addresses: (userId: string) => ['akla', 'addresses', userId] as const,
+  deliveryAreas: (userId: string) => ['akla', 'delivery-areas', userId] as const,
+  /**
+   * A validation verdict is ABOUT a revision, so the revision is in the key.
+   * Caching it under the cart alone would serve a verdict for a basket that
+   * has since changed — the exact staleness the revision exists to expose.
+   */
+  cartValidation: (userId: string, revision: number) =>
+    ['akla', 'cart-validation', userId, revision] as const,
   /**
    * Sourcing is scoped by BRANCH as well as recipe: stock, price and pack
    * sizes all differ per location, so one cache entry per recipe would serve

@@ -23,7 +23,12 @@ import {
   LocalProfileRepository,
   type ProfileRepository,
 } from '@/features/profile/repository';
+import { LocalAddressRepository, type AddressRepository } from '@/features/commerce/address-repository';
 import { LocalCartRepository, type CartRepository } from '@/features/commerce/cart-repository';
+import {
+  LocalOrderDraftRepository,
+  type OrderDraftRepository,
+} from '@/features/commerce/order-draft';
 import { LocalRecipeRepository, type RecipeRepository } from '@/features/recipes/repository';
 import {
   LocalHistoryRepository,
@@ -57,6 +62,8 @@ export type Repositories = {
   history: HistoryRepository;
   shopping: ShoppingRepository;
   cart: CartRepository;
+  addresses: AddressRepository;
+  orders: OrderDraftRepository;
   submissions: SubmissionsRepository;
   notifications: NotificationsRepository;
   /** 'local' for guests, otherwise the Supabase user id. */
@@ -108,6 +115,8 @@ export function RepositoryProvider({
       history: new LocalHistoryRepository(),
       shopping: new LocalShoppingRepository(),
       cart: new LocalCartRepository(),
+      addresses: new LocalAddressRepository(),
+      orders: new LocalOrderDraftRepository(),
       submissions: env.demoMode
         ? new DemoSubmissionsRepository()
         : new LocalSubmissionsRepository(),
