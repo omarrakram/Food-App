@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { useI18n, type Language } from '@/i18n';
+import { toWesternNumerals } from '@/lib/format/numerals';
 
 import { resolveIngredient } from './matching';
 
@@ -21,8 +22,11 @@ import { resolveIngredient } from './matching';
  * leaving them alone.
  */
 export function ingredientDisplayName(name: string, language: Language): string {
-  if (language !== 'ar') return name;
-  return resolveIngredient(name)?.nameAr ?? name;
+  // Numerals normalised here too, for the same reason as recipe prose and
+  // merchant names: an ingredient a USER typed ("٢ بصلة") is content the app
+  // did not format, and the catalogue is not the only source of these strings.
+  if (language !== 'ar') return toWesternNumerals(name);
+  return toWesternNumerals(resolveIngredient(name)?.nameAr ?? name);
 }
 
 /** `ingredientDisplayName` bound to the active language. */

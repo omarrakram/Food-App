@@ -1,3 +1,4 @@
+import { hasEasternNumerals, toWesternNumerals } from '@/lib/format/numerals';
 import { resolveIngredient } from '@/features/ingredients/matching';
 
 import { RECIPE_FIXTURES } from '../fixtures';
@@ -129,8 +130,21 @@ describe('falling back', () => {
   it('reads the Arabic field in Arabic', () => {
     const recipe = koshari;
     expect(recipeTitle(recipe, 'ar')).toBe('كشري');
-    expect(stepInstruction(recipe.steps[0]!, 'ar')).toBe(recipe.steps[0]!.instructionAr);
     expect(preparationLabel('finely chopped', 'ar')).toBe('مفروم ناعم');
+
+    /*
+      THE ARABIC FIELD, WITH ITS NUMERALS NORMALISED.
+
+      This used to assert byte equality with `instructionAr`, which stopped
+      being true when the display boundary started rendering 0–9 — see
+      `western-numerals.test.ts`. The thing it was actually protecting is that
+      Arabic reads the ARABIC field rather than falling back to English, so
+      that is what it asserts now, plus the one transformation that is allowed.
+    */
+    const rendered = stepInstruction(recipe.steps[0]!, 'ar');
+    expect(rendered).not.toBe(recipe.steps[0]!.instruction);
+    expect(rendered).toBe(toWesternNumerals(recipe.steps[0]!.instructionAr!));
+    expect(hasEasternNumerals(rendered)).toBe(false);
   });
 
   it('leaves a missing safety note missing rather than inventing one', () => {

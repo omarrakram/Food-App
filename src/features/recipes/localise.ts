@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { useI18n, type Language } from '@/i18n';
+import { toWesternNumerals } from '@/lib/format/numerals';
 import type { Recipe, RecipeStep } from '@/types/domain';
 
 /**
@@ -120,34 +121,63 @@ const PREPARATION_AR: Record<string, string> = {
 /** Every preparation phrase this module can translate. Used by the tests. */
 export const KNOWN_PREPARATIONS: readonly string[] = Object.keys(PREPARATION_AR);
 
+/*
+  WESTERN NUMERALS, APPLIED WHERE RECIPE TEXT BECOMES SCREEN TEXT.
+
+  AKALT renders 0–9 in both languages. Anything the app FORMATS already obeys
+  that, because the locale is pinned to `ar-EG-u-nu-latn`. Recipe prose is not
+  formatted by the app — it is content, written by a person — and a great deal
+  of the Arabic was typed with Arabic-Indic digits: «حوالي ١٥ دقيقة» next to a
+  «15 min» chip the app rendered itself, in the same screen.
+
+  NORMALISED HERE, at the single boundary all five accessors pass through, and
+  NOT in the data. Three reasons:
+
+    1. Recipes do not only come from the bundled catalogue. They come from
+       Supabase and from the AI edge function at runtime, and neither goes
+       anywhere near the importer. Fixing the generated file would leave both
+       of those still wrong, which is the worst outcome: the bug survives in
+       exactly the paths nobody screenshots.
+    2. The source keeps what the author wrote.
+    3. One rule in one place, the same shape as `features/commerce/display.ts`
+       does for merchant text.
+
+  `toWesternNumerals` touches digits only — never a letter, never wording.
+  It is a no-op for the overwhelming majority of strings, so calling it on
+  every accessor costs nothing and cannot be forgotten on one of them.
+*/
+
 export function recipeTitle(recipe: Pick<Recipe, 'title' | 'titleAr'>, language: Language): string {
-  return (language === 'ar' ? recipe.titleAr : null) ?? recipe.title;
+  return toWesternNumerals((language === 'ar' ? recipe.titleAr : null) ?? recipe.title);
 }
 
 export function recipeDescription(
   recipe: Pick<Recipe, 'description' | 'descriptionAr'>,
   language: Language,
 ): string {
-  return (language === 'ar' ? recipe.descriptionAr : null) ?? recipe.description;
+  return toWesternNumerals(
+    (language === 'ar' ? recipe.descriptionAr : null) ?? recipe.description,
+  );
 }
 
 export function stepInstruction(
   step: Pick<RecipeStep, 'instruction' | 'instructionAr'>,
   language: Language,
 ): string {
-  return (language === 'ar' ? step.instructionAr : null) ?? step.instruction;
+  return toWesternNumerals((language === 'ar' ? step.instructionAr : null) ?? step.instruction);
 }
 
 export function stepSafetyNote(
   step: Pick<RecipeStep, 'safetyNote' | 'safetyNoteAr'>,
   language: Language,
 ): string | null {
-  return (language === 'ar' ? step.safetyNoteAr : null) ?? step.safetyNote;
+  const note = (language === 'ar' ? step.safetyNoteAr : null) ?? step.safetyNote;
+  return note === null ? null : toWesternNumerals(note);
 }
 
 export function preparationLabel(preparation: string, language: Language): string {
-  if (language !== 'ar') return preparation;
-  return PREPARATION_AR[preparation.trim().toLowerCase()] ?? preparation;
+  if (language !== 'ar') return toWesternNumerals(preparation);
+  return toWesternNumerals(PREPARATION_AR[preparation.trim().toLowerCase()] ?? preparation);
 }
 
 /** The whole set, bound to the active language. */
