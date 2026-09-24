@@ -29,7 +29,7 @@ import { formatQuantity, scaleQuantity } from '@/features/pricing/units';
 import { useRecipe } from '@/features/recipes/hooks';
 import { useIsSaved, useRecordHistory, useToggleSave } from '@/features/saved/hooks';
 import { useShoppingMutations } from '@/features/shopping/hooks';
-import { isOrderingAvailable } from '@/features/grocery/registry';
+import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
 import { useI18n } from '@/i18n';
 import { divideMoney, formatMoney } from '@/lib/format/money';
 import { RecipeImage } from '@/components/recipe/recipe-image';

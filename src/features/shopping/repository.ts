@@ -71,7 +71,7 @@ export function buildShoppingItem(
     sourceRecipeIds: input.sourceRecipeId ? [input.sourceRecipeId] : [],
     estimatedCost: null,
 
-    // Reserved for grocery-provider integration. See src/features/grocery/.
+    // Reserved for merchant integration. See src/features/commerce/.
     supermarketId: null,
     storeProductId: null,
     sku: null,

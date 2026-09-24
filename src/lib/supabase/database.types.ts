@@ -393,6 +393,27 @@ export type RecipeHistoryRow = {
   occurred_at: string;
 };
 
+export type CartRow = {
+  id: string;
+  user_id: string;
+  merchant_id: string;
+  merchant_location_id: string;
+  currency: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CartLineRow = {
+  id: string;
+  cart_id: string;
+  merchant_product_id: string;
+  source_ingredient_slug: string | null;
+  source_recipe_id: string | null;
+  quantity: number;
+  unit_price_minor: number;
+  added_at: string;
+};
+
 export type IngredientPriceEstimateRow = {
   id: string;
   ingredient_id: string;
@@ -502,6 +523,11 @@ export type Database = {
         Omit<ShoppingListItemRow, 'id' | 'created_at' | 'updated_at'> & { id?: string }
       >;
       ingredient_price_estimates: Table<IngredientPriceEstimateRow>;
+      carts: Table<CartRow, Omit<CartRow, 'id' | 'created_at' | 'updated_at'> & { id?: string }>;
+      cart_lines: Table<
+        CartLineRow,
+        Omit<CartLineRow, 'id' | 'added_at'> & { id?: string; added_at?: string }
+      >;
       ai_usage_events: Table<{
         id: string;
         user_id: string | null;

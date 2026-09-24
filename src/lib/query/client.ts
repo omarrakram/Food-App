@@ -59,6 +59,15 @@ export const queryKeys = {
 
   shoppingList: (userId: string) => ['akla', 'shopping', userId] as const,
 
+  cart: (userId: string) => ['akla', 'cart', userId] as const,
+  /**
+   * Sourcing is scoped by BRANCH as well as recipe: stock, price and pack
+   * sizes all differ per location, so one cache entry per recipe would serve
+   * a Maadi answer to somebody ordering in Zamalek.
+   */
+  recipeSourcing: (userId: string, recipeId: string, locationId: string) =>
+    ['akla', 'sourcing', userId, recipeId, locationId] as const,
+
   priceEstimates: (country: string) => ['akla', 'prices', country] as const,
 } as const;
 

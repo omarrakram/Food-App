@@ -169,6 +169,10 @@ async function main() {
         EXPO_OFFLINE: '1',
         EXPO_PUBLIC_APP_ENV: process.env.EXPO_PUBLIC_APP_ENV ?? 'preview',
         EXPO_PUBLIC_DEMO_MODE: process.env.EXPO_PUBLIC_DEMO_MODE ?? 'true',
+        // The development merchant catalogue, so the walk can exercise the
+        // commerce path. `env.useDemoMerchantCatalogue` also requires a
+        // non-production build, so this flag cannot open it in production.
+        EXPO_PUBLIC_DEMO_MERCHANT: process.env.EXPO_PUBLIC_DEMO_MERCHANT ?? 'true',
       },
     });
   }

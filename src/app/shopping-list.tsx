@@ -13,7 +13,7 @@ import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState, ErrorState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { useToast } from '@/components/ui/toast';
-import { isOrderingAvailable } from '@/features/grocery/registry';
+import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
 import { CATEGORY_ORDER } from '@/features/pantry/repository';
 import { useIngredientName } from '@/features/ingredients/display';
 import { formatQuantity } from '@/features/pricing/units';

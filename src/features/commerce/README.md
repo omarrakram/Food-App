@@ -216,7 +216,8 @@ When it cannot tell, it says so. There is no branch that assumes one pack:
 
 ## Ports
 
-`ports.ts` splits what `features/grocery/provider.ts` had as one interface:
+`ports.ts` splits what the retired `features/grocery/provider.ts` had as one
+interface:
 
 | | owns | implementation |
 |---|---|---|
@@ -225,9 +226,12 @@ When it cannot tell, it says so. There is no branch that assumes one pack:
 
 The split earns its keep because the two halves change for different reasons:
 a catalogue is re-read constantly and cached, an order is submitted once and
-must not be. `features/grocery/provider.ts` is **superseded and retired in
-Commerce-3** — it assumed the retailer owned the cart, the checkout and the
-money, which is not the model.
+must not be.
+
+`features/grocery/` is **deleted** as of Commerce-3B. It assumed the retailer
+owned the cart, the checkout and the money, which is not the model.
+`isOrderingAvailable` now lives in `merchant-selection.ts` and answers the
+question honestly: can we select a branch to source against?
 
 ---
 

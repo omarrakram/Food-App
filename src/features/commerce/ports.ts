@@ -12,11 +12,10 @@ import type { Availability, Unit } from '@/types/domain';
 /**
  * The commerce ports.
  *
- * `features/grocery/provider.ts` — which this supersedes — put catalogue
- * lookup and order placement behind ONE interface, and it had to, because it
- * assumed the retailer owned the cart, the checkout and the money. Under
- * Model 2 AKALT owns all three, so the two halves now have genuinely different
- * owners and genuinely different lifetimes, and they are split accordingly:
+ * The retired `features/grocery/provider.ts` put catalogue lookup and order
+ * placement behind ONE interface, and it had to: it assumed the retailer owned
+ * the cart, the checkout and the money. AKALT owns all three, so the two
+ * halves have genuinely different owners and lifetimes, and they are split:
  *
  *   CatalogueAdapter  — READ. What does this merchant sell, for how much, and
  *                       is it in stock? Every merchant needs one.

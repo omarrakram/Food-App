@@ -106,14 +106,22 @@ describe('commerce obeys the same layering rule as every other feature', () => {
   });
 
   it('keeps the engines free of React', () => {
-    // Everything in this directory is arithmetic and rules over plain values,
-    // so it runs identically on the client, inside an edge function and in the
-    // merchant dashboard. A React import here would quietly make one of those
-    // three impossible.
+    // The ranking, the pack arithmetic, the ledger and the state machines are
+    // rules over plain values, so they run identically on the client, inside
+    // an edge function and in the merchant dashboard. A React import in any of
+    // them quietly makes two of those three impossible.
+    //
+    // `hooks.ts` is exempt BY NAME, and only it. Binding the engines to the
+    // cache and to the user's preferences is what that file is for, and every
+    // other feature in this codebase has the same file for the same reason.
+    // Exempting by name rather than by a pattern means the next module that
+    // wants React has to argue for itself here.
+    const BINDING_LAYER = 'hooks.ts';
     const offenders: string[] = [];
 
     for (const file of sourceFilesIn('src/features/commerce')) {
       if (file.includes('__tests__')) continue;
+      if (file.endsWith(BINDING_LAYER)) continue;
       for (const specifier of importsIn(file)) {
         if (specifier === 'react' || specifier === 'react-native') {
           offenders.push(`${file.replace(ROOT, '')} -> ${specifier}`);

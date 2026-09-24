@@ -10,7 +10,7 @@ import type { CountryCode, CurrencyCode, Unit } from '@/types/domain';
  * V1 ships bundled estimates for Egypt so budgeting works offline and before
  * any store integration exists. `PriceBook` is an interface precisely so a
  * live `GroceryProvider` can be dropped in later without touching the budget
- * engine — see `src/features/grocery/`.
+ * engine — see `src/features/commerce/`.
  */
 
 export type PriceQuote = {

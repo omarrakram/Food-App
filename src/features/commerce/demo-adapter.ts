@@ -62,7 +62,14 @@ export function assertDemoCatalogueAllowed(): void {
   if (!env.useDemoMerchantCatalogue) throw new DemoCatalogueUnavailableError();
 }
 
-function merchant(): Merchant {
+/**
+ * The branch identity, resolved once.
+ *
+ * The adapter's methods are async because a real catalogue's will be. WHICH
+ * branch this is, is not — so merchant selection reads these directly rather
+ * than awaiting a promise to learn the name of a constant.
+ */
+export const DEMO_MERCHANT_SNAPSHOT: Merchant = (() => {
   return {
     id: MERCHANT_ID,
     slug: DEMO_MERCHANT.slug,
@@ -78,9 +85,9 @@ function merchant(): Merchant {
     createdAt: TIMESTAMP,
     updatedAt: TIMESTAMP,
   };
-}
+})();
 
-function location(): MerchantLocation {
+export const DEMO_LOCATION_SNAPSHOT: MerchantLocation = (() => {
   return {
     id: LOCATION_ID,
     merchantId: MERCHANT_ID,
@@ -96,7 +103,7 @@ function location(): MerchantLocation {
     createdAt: TIMESTAMP,
     updatedAt: TIMESTAMP,
   };
-}
+})();
 
 /** The product id IS the external id here. A demo has no other identity. */
 function toProduct(row: (typeof DEMO_PRODUCTS)[number]): MerchantProduct {
@@ -150,11 +157,11 @@ export class DemoCatalogueAdapter implements CatalogueAdapter {
   }
 
   getMerchant(): Promise<Merchant> {
-    return Promise.resolve(merchant());
+    return Promise.resolve(DEMO_MERCHANT_SNAPSHOT);
   }
 
   listLocations(options?: { readonly city?: string }): Promise<readonly MerchantLocation[]> {
-    const only = location();
+    const only = DEMO_LOCATION_SNAPSHOT;
     if (options?.city && options.city !== only.city) return Promise.resolve([]);
     return Promise.resolve([only]);
   }
