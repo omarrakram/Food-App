@@ -90,32 +90,69 @@ describe('no recipe shows an Eastern numeral to a reader', () => {
   });
 });
 
-describe('the boundary, not the data, is what was fixed', () => {
-  it('still reads the numerals the authors actually typed', () => {
-    // If this ever reaches zero, somebody "fixed" the numerals by editing the
-    // catalogue — which leaves every recipe from Supabase and from the AI
-    // still wrong, because neither goes through the importer. The gate above
-    // would keep passing and the bug would be back in the paths nobody looks
-    // at. So the source is EXPECTED to be full of Arabic-Indic digits.
-    const stored = RECIPE_CATALOGUE.flatMap((recipe) =>
-      recipe.steps.flatMap((step) =>
-        [step.instructionAr, step.safetyNoteAr].filter((text): text is string => Boolean(text)),
-      ),
+/**
+ * THE CONTRACT IS ABOUT THE BOUNDARY, NOT ABOUT THE DATA.
+ *
+ * Whatever recipe text ARRIVES, what a reader SEES uses 0–9. That has to hold
+ * for the bundled catalogue (above), and equally for a recipe fetched from
+ * Supabase or written by the AI edge function, neither of which passes through
+ * the importer — which is why the fix lives at the display boundary and not in
+ * the generated file.
+ *
+ * These cases feed the boundary directly, so none of them depends on what the
+ * bundled dataset happens to contain. Cleaning the source later changes
+ * nothing here, and it should not: dirty data must never become part of the
+ * contract.
+ */
+describe('whatever enters the boundary, Western numerals come out', () => {
+  /** Stands in for a step from Supabase, from the model, or from an editor. */
+  const step = (instructionAr: string) => ({ instruction: 'Simmer for 15 minutes.', instructionAr });
+
+  it('normalises Arabic-Indic digits', () => {
+    expect(stepInstruction(step('سيبها على نار هادية ١٥ دقيقة.'), 'ar')).toBe(
+      'سيبها على نار هادية 15 دقيقة.',
     );
-    expect(stored.filter(hasEasternNumerals).length).toBeGreaterThan(0);
   });
 
-  it('converts a step that arrived at runtime, not through the importer', () => {
-    // The Supabase and AI paths, which the importer never sees.
-    const fromTheModel = {
-      instruction: 'Simmer for 15 minutes.',
-      instructionAr: 'سيبها على نار هادية ١٥ دقيقة.',
-    };
-    expect(stepInstruction(fromTheModel, 'ar')).toBe('سيبها على نار هادية 15 دقيقة.');
+  it('normalises Extended Arabic-Indic (Persian/Urdu) digits', () => {
+    expect(stepInstruction(step('بگذارید ۲۰ دقیقه بماند.'), 'ar')).toBe(
+      'بگذارید 20 دقیقه بماند.',
+    );
   });
 
-  it('leaves the Arabic words exactly as written', () => {
-    const step = { instruction: 'x', instructionAr: 'اتركها ٥ دقائق وقلّبها' };
-    expect(stepInstruction(step, 'ar')).toBe('اتركها 5 دقائق وقلّبها');
+  it('leaves text that is ALREADY Western exactly as it is', () => {
+    // The case that matters once the dataset is cleaned: normalisation must be
+    // a no-op, not a second transformation.
+    const clean = 'اتركها 5 دقائق وقلّبها';
+    expect(stepInstruction(step(clean), 'ar')).toBe(clean);
+  });
+
+  it('changes digits and nothing else — not one Arabic letter', () => {
+    const rendered = stepInstruction(step('اتركها ٥ دقائق وقلّبها'), 'ar');
+    expect(rendered).toBe('اتركها 5 دقائق وقلّبها');
+    // Same words, same order, same diacritics; only the numeral moved.
+    expect(rendered.replace(/[0-9]/g, '#')).toBe('اتركها # دقائق وقلّبها');
+  });
+
+  it('holds for a safety note, where the number is the whole point', () => {
+    const note = { safetyNote: null, safetyNoteAr: 'لازم توصل ٧٤°م قبل ما تقدّم.' };
+    expect(stepSafetyNote(note, 'ar')).toBe('لازم توصل 74°م قبل ما تقدّم.');
+  });
+
+  it('holds for a title and a description too', () => {
+    expect(recipeTitle({ title: 'x', titleAr: 'كشري ٢ نفر' }, 'ar')).toBe('كشري 2 نفر');
+    expect(
+      recipeDescription({ description: 'x', descriptionAr: 'يكفي ٤ أشخاص' }, 'ar'),
+    ).toBe('يكفي 4 أشخاص');
+  });
+
+  it('holds for an ingredient name a user typed themselves', () => {
+    expect(ingredientDisplayName('٢ بصلة', 'ar')).toBe('2 بصلة');
+  });
+
+  it('is idempotent, so a cleaned dataset renders identically', () => {
+    const once = stepInstruction(step('سيبها ١٠ دقايق'), 'ar');
+    expect(stepInstruction(step(once), 'ar')).toBe(once);
+    expect(hasEasternNumerals(once)).toBe(false);
   });
 });
