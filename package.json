@@ -40,6 +40,7 @@
     "db:test": "./scripts/db-test.sh",
     "db:local": "./scripts/db-local.sh",
     "smoke:web": "node scripts/smoke-web.mjs",
+    "walk:merchant": "node scripts/merchant-walk.mjs",
     "recipes:audit": "node --experimental-strip-types --no-warnings scripts/audit-recipes.ts",
     "images:fetch": "node --experimental-strip-types --no-warnings scripts/fetch-recipe-images.ts",
     "images:fetch-candidates": "node --experimental-strip-types --no-warnings scripts/fetch-candidate-images.ts",

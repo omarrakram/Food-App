@@ -31,11 +31,11 @@
  */
 
 import { spawn } from 'node:child_process';
-import { createReadStream, existsSync } from 'node:fs';
-import { mkdir, readdir, readFile, rm, stat } from 'node:fs/promises';
-import { createServer } from 'node:http';
-import { createRequire } from 'node:module';
-import { extname, join, resolve } from 'node:path';
+import { existsSync } from 'node:fs';
+import { mkdir, readFile, rm } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+
+import { loadChromium, serveDist as serveExport } from './lib/web-export.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
@@ -46,162 +46,12 @@ const OUT = process.env.SMOKE_OUT ?? join(ROOT, '.smoke');
 const PORT = Number(process.env.SMOKE_PORT ?? 0);
 const KEEP = process.argv.includes('--keep');
 
-const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.svg': 'image/svg+xml',
-  '.ttf': 'font/ttf',
-  '.woff2': 'font/woff2',
-  '.ico': 'image/x-icon',
-  '.map': 'application/json; charset=utf-8',
-};
 
 const log = (...args) => console.log('•', ...args);
 
-/** Locates Playwright without making it a dependency of the app. */
-async function loadChromium() {
-  const candidates = [
-    process.env.PLAYWRIGHT_CORE,
-    'playwright-core',
-    'playwright',
-    join(ROOT, 'node_modules/playwright-core/index.mjs'),
-    join(ROOT, '../node_modules/playwright-core/index.mjs'),
-  ].filter(Boolean);
-
-  const require_ = createRequire(import.meta.url);
-  for (const candidate of candidates) {
-    try {
-      const specifier = candidate.startsWith('/')
-        ? candidate
-        : require_.resolve(candidate, { paths: [ROOT] });
-      const mod = await import(specifier);
-      if (mod.chromium) return mod.chromium;
-      if (mod.default?.chromium) return mod.default.chromium;
-    } catch {
-      // Try the next candidate.
-    }
-  }
-  throw new Error(
-    'Playwright not found. Install it with `npm i -D playwright-core` (and ' +
-      '`npx playwright install chromium`), or point PLAYWRIGHT_CORE at an ' +
-      'existing playwright-core entry point.',
-  );
-}
-
-/**
- * Resolves a URL path against the export, dynamic routes included.
- *
- * Expo writes a dynamic route as a literal `[id].html`, so `/recipe/<uuid>`
- * matches no file and a naive server 404s it — which silently made every
- * direct link to a recipe untestable, including the share links this app
- * sends. Walking the path and falling back to the single `[param]` sibling at
- * each level is what the real router does, and it is what a shared link needs.
- */
-async function resolveExportPath(pathname) {
-  const segments = decodeURIComponent(pathname).split('/').filter(Boolean);
-
-  const isFile = async (candidate) => {
-    try {
-      return (await stat(candidate)).isFile();
-    } catch {
-      return false;
-    }
-  };
-  const isDirectory = async (candidate) => {
-    try {
-      return (await stat(candidate)).isDirectory();
-    } catch {
-      return false;
-    }
-  };
-  /**
-   * The one dynamic segment in a directory, by PARAM NAME.
-   *
-   * Expo writes `[id]` and `[id].html` side by side — a directory for the
-   * route's children and a file for the route itself. Those are ONE route, so
-   * counting entries says "ambiguous" and refuses to resolve anything. Only
-   * two different names — `[id]` and `[slug]` — would be a real ambiguity, and
-   * guessing there would make the smoke test pass against the wrong page.
-   */
-  const dynamicChild = async (directory) => {
-    try {
-      const entries = await readdir(directory);
-      const names = new Set();
-      for (const entry of entries) {
-        const match = /^(\[[^\]]+\])(\.html)?$/.exec(entry);
-        if (match) names.add(match[1]);
-      }
-      const [only] = [...names];
-      return names.size === 1 ? only : null;
-    } catch {
-      return null;
-    }
-  };
-
-  let current = DIST;
-  for (const [index, segment] of segments.entries()) {
-    const last = index === segments.length - 1;
-    const literal = join(current, segment);
-
-    if (last) {
-      if (await isFile(literal)) return literal;
-      if (await isFile(`${literal}.html`)) return `${literal}.html`;
-      if (await isFile(join(literal, 'index.html'))) return join(literal, 'index.html');
-      const dynamic = await dynamicChild(current);
-      if (dynamic) {
-        const resolved = join(current, dynamic);
-        // `.html` first: that IS the route. The same-named directory beside it
-        // holds the route's children, not the route.
-        if (await isFile(`${resolved}.html`)) return `${resolved}.html`;
-        if (await isFile(resolved)) return resolved;
-        if (await isFile(join(resolved, 'index.html'))) return join(resolved, 'index.html');
-      }
-      return null;
-    }
-
-    if (await isDirectory(literal)) {
-      current = literal;
-      continue;
-    }
-    const dynamic = await dynamicChild(current);
-    if (dynamic && (await isDirectory(join(current, dynamic)))) {
-      current = join(current, dynamic);
-      continue;
-    }
-    return null;
-  }
-
-  return isFile(join(DIST, 'index.html')) ? join(DIST, 'index.html') : null;
-}
-
-/** Expo's static export writes one HTML file per route, plus assets. */
+/** The export, served, with Expo's dynamic-route shapes resolved. */
 function serveDist() {
-  const server = createServer(async (req, res) => {
-    const url = new URL(req.url ?? '/', 'http://127.0.0.1');
-    const file = await resolveExportPath(url.pathname);
-
-    if (file) {
-      res.writeHead(200, {
-        'content-type': MIME[extname(file)] ?? 'application/octet-stream',
-      });
-      createReadStream(file).pipe(res);
-      return;
-    }
-
-    res.writeHead(404, { 'content-type': 'text/plain' });
-    res.end('not found');
-  });
-
-  return new Promise((resolveServer, reject) => {
-    server.once('error', reject);
-    server.listen(PORT, '127.0.0.1', () =>
-      resolveServer({ server, base: `http://127.0.0.1:${server.address().port}` }),
-    );
-  });
+  return serveExport(DIST, PORT);
 }
 
 function run(command, args, options = {}) {
@@ -231,7 +81,7 @@ function remoteBase() {
 }
 
 async function main() {
-  const chromium = await loadChromium();
+  const chromium = await loadChromium(ROOT);
   const REMOTE = remoteBase();
 
   if (!REMOTE && (!existsSync(DIST) || !process.argv.includes('--no-export'))) {

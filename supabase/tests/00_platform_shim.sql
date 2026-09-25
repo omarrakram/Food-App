@@ -36,14 +36,27 @@ create table if not exists auth.users (
   created_at          timestamptz not null default now()
 );
 
--- Supabase derives the caller from the request JWT. In tests we set the same
--- GUC by hand: `set local request.jwt.claim.sub = '<uuid>'`.
+-- Supabase derives the caller from the request JWT. Two GUCs, because two
+-- things set them:
+--
+--   `request.jwt.claim.sub`   what the SQL tests set by hand, and what older
+--                             PostgREST wrote per claim.
+--   `request.jwt.claims`      the whole claim set as JSON, which is what
+--                             PostgREST 9+ actually sets — and therefore what
+--                             a real request arrives with.
+--
+-- This is Supabase's own definition rather than a simplification of it. The
+-- browser walk drives the app through a real PostgREST, and with only the
+-- first GUC every authenticated request would read as anonymous.
 create or replace function auth.uid()
 returns uuid
 language sql
 stable
 as $$
-  select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid;
+  select coalesce(
+    nullif(current_setting('request.jwt.claim.sub', true), ''),
+    nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub'
+  )::uuid;
 $$;
 
 grant usage on schema auth to anon, authenticated, service_role;
