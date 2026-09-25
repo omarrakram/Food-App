@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useRepositories } from '@/features/data/repositories';
+import { getSupabase } from '@/lib/supabase/client';
 import { INGREDIENTS_BY_SLUG } from '@/features/ingredients/catalogue';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { perPieceWeightFor } from '@/features/pricing/units';
@@ -20,7 +21,13 @@ import {
   checkoutReadiness,
   type ReviewAcceptance,
 } from './checkout-readiness';
-import { selectMerchant, type SelectedMerchant } from './merchant-selection';
+import {
+  demoMerchant,
+  UNKNOWN_SAFETY,
+  type CandidateIndex,
+  type SelectedMerchant,
+} from './merchant-selection';
+import { findDatabaseMerchant } from './supabase-merchant-directory';
 import {
   OrderDraftRefused,
   PaymentRefused,
@@ -50,10 +57,90 @@ import {
  * pack arithmetic and no eligibility rule lives here.
  */
 
+/** Nothing found, and nothing to show. An ordinary answer, not an error. */
+const NO_CANDIDATES: CandidateIndex = new Map();
+
+export type MerchantSelectionState = {
+  readonly merchant: SelectedMerchant | null;
+  readonly isLoading: boolean;
+  readonly isError: boolean;
+  readonly error: unknown;
+  readonly refetch: () => void;
+};
+
+/**
+ * WHICH SHOP, and it is now a question with a network answer.
+ *
+ * Until pilot enablement this was a pure function over build configuration:
+ * the real-partner branch returned null unconditionally, so the only
+ * selectable merchant was the bundled fixture. A supermarket could be fully
+ * configured in Postgres and the app could not see it.
+ *
+ * THE ORDER IS DELIBERATE. A real enabled merchant always wins; the demo
+ * catalogue is the fallback, and `demoMerchant` returns null in a production
+ * build whatever anybody sets. The two can never both be selected.
+ *
+ * A GUEST GETS NULL, because every merchant reference table is behind RLS
+ * scoped to `authenticated`. That is the conservative reading of somebody
+ * else's prices and it is not ours to relax — see PILOT_READINESS.md.
+ */
+export function useMerchantSelection(): MerchantSelectionState {
+  const { preferences } = usePreferences();
+  const { scopeKey, isRemote } = useRepositories();
+  const { data: addresses } = useAddresses();
+
+  /*
+    THE AREA THE CUSTOMER ACTUALLY WANTS, when they have told us one.
+
+    A preference, not a filter: a branch that does not serve this area is still
+    selectable, because the customer may be about to add a different address
+    and the deliverability check at checkout is the authority either way. What
+    it stops is picking a branch on the other side of the country for somebody
+    whose only saved address is in Maadi.
+  */
+  const areaKey = useMemo(() => {
+    const list = addresses ?? [];
+    return (list.find((entry) => entry.isDefault) ?? list[0])?.areaKey ?? null;
+  }, [addresses]);
+
+  const query = useQuery({
+    queryKey: queryKeys.merchantSelection(scopeKey, preferences.country, areaKey ?? 'none'),
+    // Which shop serves this person changes when an agreement is signed, not
+    // when they tap something.
+    staleTime: 5 * 60 * 1000,
+    queryFn: async (): Promise<SelectedMerchant | null> => {
+      const client = isRemote ? getSupabase() : null;
+      if (client) {
+        try {
+          const found = await findDatabaseMerchant(client, {
+            country: preferences.country,
+            areaKey,
+          });
+          if (found) return found;
+        } catch (error) {
+          throw toAppError(error, 'database');
+        }
+      }
+      return demoMerchant(preferences.country);
+    },
+  });
+
+  const refetch = useCallback(() => {
+    void query.refetch();
+  }, [query]);
+
+  return {
+    merchant: query.data ?? null,
+    isLoading: query.isLoading,
+    isError: query.isError,
+    error: query.error,
+    refetch,
+  };
+}
+
 /** The branch we are sourcing against, or null when ordering is not possible. */
 export function useSelectedMerchant(): SelectedMerchant | null {
-  const { preferences } = usePreferences();
-  return useMemo(() => selectMerchant(preferences.country), [preferences.country]);
+  return useMerchantSelection().merchant;
 }
 
 /**
@@ -86,41 +173,91 @@ export type RecipeSourcing = {
   readonly addable: readonly SourcedLine[];
 };
 
+export type RecipeSourcingState = {
+  /** Null while loading, on error, and when no branch can be selected. */
+  readonly data: RecipeSourcing | null;
+  readonly isLoading: boolean;
+  readonly isError: boolean;
+  readonly error: unknown;
+  /** True when there is simply no shop here. Not a failure — an answer. */
+  readonly isUnavailable: boolean;
+  readonly refetch: () => void;
+};
+
 /**
  * Sources one recipe's missing ingredients against the selected branch.
  *
- * Returns null — rather than an empty result — when no branch can be selected,
- * so a screen renders its "not available here" state instead of an empty
- * basket that looks like a shop with nothing in it.
+ * THE RANKING IS STILL PURE AND SYNCHRONOUS. What became asynchronous is
+ * getting the candidates: a bundled fixture can answer "what do you have for
+ * cream" out of an array, and a supermarket with forty thousand SKUs cannot.
+ * So the candidates for exactly the slugs this recipe needs are fetched once,
+ * indexed, and handed to the same `sourceRequest` engine as before.
+ *
+ * FOUR DISTINCT STATES, because a screen that cannot tell them apart shows the
+ * wrong sentence three times out of four: still loading, no shop here, the
+ * read failed, and a real result.
  */
 export function useRecipeSourcing(
   recipeId: string,
   missing: readonly IngredientMatch[],
-): RecipeSourcing | null {
-  const merchant = useSelectedMerchant();
+): RecipeSourcingState {
+  const selection = useMerchantSelection();
   const context = useSourcingContext();
+  const merchant = selection.merchant;
 
-  return useMemo(() => {
-    if (!merchant) return null;
+  const requirements = useMemo(() => requirementsFor(missing, recipeId), [missing, recipeId]);
 
-    const requirements = requirementsFor(missing, recipeId);
+  const slugs = useMemo(
+    () => [...new Set(requirements.lines.map((line) => line.ingredientSlug))].sort(),
+    [requirements],
+  );
+
+  const candidates = useQuery({
+    queryKey: queryKeys.sourcingCandidates(merchant?.location.id ?? 'none', slugs),
+    enabled: Boolean(merchant) && slugs.length > 0,
+    queryFn: async (): Promise<CandidateIndex> => {
+      if (!merchant) return NO_CANDIDATES;
+      try {
+        return await merchant.candidatesFor(slugs);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+
+  // A recipe with nothing missing asks the shop nothing, and must still get a
+  // result rather than a permanent loading state.
+  const index = slugs.length === 0 ? NO_CANDIDATES : candidates.data;
+
+  const data = useMemo(() => {
+    if (!merchant || !index) return null;
+
     const result = sourceRequest(
       {
         lines: requirements.lines,
         merchantId: merchant.merchant.id,
         locationId: merchant.location.id,
       },
-      merchant.candidatesFor,
+      (slug) => index.get(slug) ?? [],
       context,
     );
 
-    return {
-      merchant,
-      requirements,
-      result,
-      addable: addableLines(result),
-    };
-  }, [merchant, context, missing, recipeId]);
+    return { merchant, requirements, result, addable: addableLines(result) };
+  }, [merchant, index, requirements, context]);
+
+  const refetch = useCallback(() => {
+    selection.refetch();
+    void candidates.refetch();
+  }, [selection, candidates]);
+
+  return {
+    data,
+    isLoading: selection.isLoading || (Boolean(merchant) && slugs.length > 0 && candidates.isLoading),
+    isError: selection.isError || candidates.isError,
+    error: selection.error ?? candidates.error,
+    isUnavailable: !selection.isLoading && !selection.isError && merchant === null,
+    refetch,
+  };
 }
 
 export function useCart() {
@@ -498,6 +635,9 @@ export function useCheckout(addressId: string | null) {
     queryFn: async () => {
       if (!merchant) return [] as readonly SourcingCandidateInput[];
       const products = await merchant.catalogue.getProducts(productIds);
+      // A product missing from this index is UNKNOWN on both axes, which is
+      // the safe direction: unpublished never means safe.
+      const safety = await merchant.safetyFor(products.map((product) => product.id));
       return products.map((product) => ({
         product,
         // The mapping is not what is being judged here — eligibility and
@@ -516,8 +656,8 @@ export function useCheckout(addressId: string | null) {
           createdAt: product.fetchedAt,
           updatedAt: product.fetchedAt,
         },
-        productAllergens: merchant.allergensFor(product.id),
-        productDiets: merchant.dietsFor(product.id),
+        productAllergens: safety.get(product.id)?.allergens ?? UNKNOWN_SAFETY.allergens,
+        productDiets: safety.get(product.id)?.diets ?? UNKNOWN_SAFETY.diets,
       }));
     },
   });

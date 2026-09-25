@@ -931,6 +931,10 @@ export const en = {
   'commerce.addToCart_one': 'Add 1 to cart',
   'commerce.addToCart_other': 'Add {count} to cart',
   'commerce.viewCart': 'View cart',
+  'commerce.findingShop': 'Finding a shop near you\u2026',
+  'commerce.noShopHere': 'No shop delivers here yet',
+  'commerce.noShopHereBody':
+    'We have not signed a supermarket for your area. You can still build the list and shop it yourself.',
   'commerce.demoBadge': 'Demo shop — not a real supermarket',
   'commerce.demoBody': 'These products and prices are development data. Nothing here can be ordered.',
   'commerce.need': 'Need {amount}',

@@ -279,7 +279,8 @@ export default function RecipeDetailScreen() {
     branch and does nothing else.
   */
   const missing = useMemo(() => match?.missingIngredients ?? NO_MATCHES, [match]);
-  const sourcing = useRecipeSourcing(recipe?.id ?? '', missing);
+  const sourcingState = useRecipeSourcing(recipe?.id ?? '', missing);
+  const sourcing = sourcingState.data;
 
   /*
     A product belongs UNDER THE ROW THAT ASKED FOR IT.
@@ -784,7 +785,37 @@ export default function RecipeDetailScreen() {
               answer. With one, the first tap reveals the products; only then
               is there anything to add.
             */}
-            {missing.length === 0 ? null : !sourcing ? (
+            {/*
+              FOUR ANSWERS, NOT TWO.
+
+              Selecting a shop is a database read now, so "we are still
+              asking", "there is no shop here" and "the read failed" are three
+              different things and used to be one disabled button. A customer
+              told "coming soon" while the app is mid-request learns something
+              false about the product.
+            */}
+            {missing.length === 0 ? null : sourcingState.isLoading ? (
+              <Button
+                label={t('commerce.findingShop')}
+                icon="bag-handle-outline"
+                variant="ghost"
+                loading
+                disabled
+                size="md"
+                fullWidth
+                testID="recipe-sourcing-loading"
+              />
+            ) : sourcingState.isError ? (
+              <Button
+                label={t('common.retry')}
+                icon="refresh-outline"
+                variant="secondary"
+                size="md"
+                fullWidth
+                onPress={sourcingState.refetch}
+                testID="recipe-sourcing-retry"
+              />
+            ) : !sourcing ? (
               <Button
                 label={t('shopping.orderComingSoon')}
                 icon="bag-handle-outline"

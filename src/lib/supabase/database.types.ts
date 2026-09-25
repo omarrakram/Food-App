@@ -424,6 +424,104 @@ export type DeliveryAreaRow = {
   updated_at: string;
 };
 
+/**
+ * A merchant, as the reference tables hold one.
+ *
+ * READ-ONLY to every client, and there is deliberately no insert or update
+ * type: `is_enabled` is the flag that turns a row into a live partner, and a
+ * client that could write it could sign its own agreement.
+ */
+export type MerchantRow = {
+  id: string;
+  slug: string;
+  name: string;
+  name_ar: string | null;
+  country: string;
+  currency: string;
+  fulfilment_mode: MerchantFulfilmentModeEnum;
+  commission_rate_basis_points: number;
+  merchant_keeps_delivery_fee: boolean;
+  is_enabled: boolean;
+  is_demo: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type MerchantLocationRow = {
+  id: string;
+  merchant_id: string;
+  external_id: string;
+  name: string;
+  name_ar: string | null;
+  country: string;
+  city: string | null;
+  delivery_fee_minor: number | null;
+  minimum_order_minor: number | null;
+  estimated_delivery_minutes: number | null;
+  is_accepting_orders: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+/** Which SKU is which canonical ingredient. Keyed on the ingredient ROW, not the slug. */
+export type IngredientProductMappingRow = {
+  id: string;
+  ingredient_id: string;
+  merchant_product_id: string;
+  confidence: number;
+  source: MappingSourceEnum;
+  is_verified: boolean;
+  verified_at: string | null;
+  verified_by: string | null;
+  is_blocked: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type MerchantProductAllergenRow = {
+  merchant_product_id: string;
+  allergen: AllergenEnum;
+};
+
+/**
+ * The merchant's own dietary verdict for one product.
+ *
+ * Absent is NOT `is_compatible: false` — absent is "they did not say", which
+ * the sourcing gates treat as unknown and never as compatible.
+ */
+export type MerchantProductDietRow = {
+  merchant_product_id: string;
+  diet: DietaryPreferenceEnum;
+  is_compatible: boolean;
+  source_note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+/**
+ * The canonical ingredient catalogue.
+ *
+ * The commerce layer reads only `slug` and `id` from it — a mapping keys on
+ * the ingredient ROW while everything above speaks in slugs — but the whole
+ * row is described here because `db:types:check` holds a named table to every
+ * column the migrations give it, and a partial description is how a column
+ * quietly stops being covered.
+ */
+export type IngredientRow = {
+  id: string;
+  slug: string;
+  name: string;
+  name_ar: string | null;
+  category: IngredientCategoryEnum;
+  default_unit: MeasurementUnitEnum;
+  grams_per_piece: number | null;
+  is_common_staple: boolean;
+  is_perishable: boolean;
+  image_url: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type MerchantLocationAreaRow = {
   merchant_location_id: string;
   area_key: string;
@@ -495,6 +593,9 @@ export type SubstitutionDecisionEnum =
   | 'rejected'
   | 'auto_approved'
   | 'removed';
+export type MerchantFulfilmentModeEnum = 'dashboard' | 'api';
+/** How a SKU came to be mapped to a canonical ingredient. */
+export type MappingSourceEnum = 'manual' | 'sku_exact' | 'name_match' | 'category_fallback';
 export type MerchantRoleEnum = 'admin' | 'operator';
 /**
  * One attempt to send money back. `abandoned` means automatic retry has
@@ -879,6 +980,15 @@ export type Database = {
         }
       >;
       delivery_areas: Table<DeliveryAreaRow, DeliveryAreaRow>;
+      // Reference data behind the "enabled merchant" policies. Every one is
+      // read-only: a client that could write `is_enabled` or a price would be
+      // a client that could sign an agreement or set its own bill.
+      merchants: Table<MerchantRow, never, never>;
+      merchant_locations: Table<MerchantLocationRow, never, never>;
+      ingredient_product_mappings: Table<IngredientProductMappingRow, never, never>;
+      merchant_product_allergens: Table<MerchantProductAllergenRow, never, never>;
+      merchant_product_diets: Table<MerchantProductDietRow, never, never>;
+      ingredients: Table<IngredientRow, never, never>;
       merchant_location_areas: Table<MerchantLocationAreaRow, MerchantLocationAreaRow>;
       // Read-only: `create_order_draft` is the only writer, and there is no
       // insert or update policy for a client to use.

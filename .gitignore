@@ -73,3 +73,5 @@ coverage/
 google-play-service-account.json
 *.keystore
 credentials.json
+.walk-pilot/
+.env.staging

@@ -12,7 +12,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { PressScale } from '@/components/ui/press-scale';
 import { Text } from '@/components/ui/text';
 import { useAuth } from '@/features/auth/auth-provider';
-import { isOrderingAvailable } from '@/features/commerce/merchant-selection';
+import { useMerchantSelection } from '@/features/commerce/hooks';
 import { usePreferences } from '@/features/preferences/preferences-provider';
 import { useUnreadTotal } from '@/features/messages/hooks';
 import { useUnreadNotifications } from '@/features/notifications/hooks';
@@ -215,7 +215,15 @@ export function AppDrawerContent({ navigation }: DrawerContentComponentProps) {
   const unread = useUnreadTotal();
   const unreadNotifications = useUnreadNotifications();
   const canModerate = useCanModerate();
-  const orderingAvailable = isOrderingAvailable(preferences.country);
+  /*
+    THE CART ENTRY IS SHOWN ONLY WHEN THERE IS A SHOP.
+
+    Selecting one is a database read now, so this is briefly unknown on a cold
+    start and the entry is hidden until it is known. Hiding then revealing is
+    the right way round: offering a cart and then withdrawing it is a promise
+    the app could not keep, and it is the failure this gate exists to prevent.
+  */
+  const orderingAvailable = useMerchantSelection().merchant !== null;
 
   /**
    * A closed drawer must not be readable by assistive technology.

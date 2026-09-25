@@ -102,6 +102,26 @@ export const queryKeys = {
   merchantProducts: (locationId: string, productIds: readonly string[]) =>
     ['akla', 'merchant-products', locationId, [...productIds].sort().join(',')] as const,
 
+  /**
+   * WHICH merchant and branch this account is sourcing against.
+   *
+   * Keyed by scope as well as country, because a signed-in customer reads the
+   * merchant tables through RLS and a guest cannot read them at all — so the
+   * two must never share an answer. The area key is in the key because it
+   * changes which branch is preferred.
+   */
+  merchantSelection: (userId: string, country: string, areaKey: string) =>
+    ['akla', 'merchant-selection', userId, country, areaKey] as const,
+
+  /**
+   * Candidate products for a set of canonical ingredients at one branch.
+   *
+   * Sorted slugs, for the same reason `merchantProducts` sorts ids: the same
+   * recipe reached twice is the same question.
+   */
+  sourcingCandidates: (locationId: string, slugs: readonly string[]) =>
+    ['akla', 'sourcing-candidates', locationId, [...slugs].sort().join(',')] as const,
+
   priceEstimates: (country: string) => ['akla', 'prices', country] as const,
 } as const;
 

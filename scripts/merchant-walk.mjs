@@ -51,44 +51,17 @@
  * Any of them missing is a clear message and a non-zero exit, never a pass.
  */
 
-import { spawn, spawnSync } from 'node:child_process';
-import { createHmac } from 'node:crypto';
+import { spawn } from 'node:child_process';
 import { existsSync, writeFileSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
-import { createServer } from 'node:http';
-import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
+import { startLocalStack } from './lib/local-stack.mjs';
 import { loadChromium, serveDist } from './lib/web-export.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
 const OUT = process.env.WALK_OUT ?? join(ROOT, '.walk');
-
-const PGHOST = process.env.PGHOST ?? '/tmp';
-const PGPORT = process.env.PGPORT ?? '55432';
-const PGUSER = process.env.PGUSER ?? 'postgres';
-const DB = process.env.WALK_DB ?? 'akla_walk';
-
-// Fixed, because the API base URL is baked into the bundle at export time.
-const PGRST_PORT = Number(process.env.WALK_PGRST_PORT ?? 3301);
-const API_PORT = Number(process.env.WALK_API_PORT ?? 3310);
-const BEGIN_PORT = Number(process.env.WALK_BEGIN_PORT ?? 3311);
-const SIMULATE_PORT = Number(process.env.WALK_SIMULATE_PORT ?? 3312);
-
-/**
- * The JWT secret for this run.
- *
- * Local, throwaway, and shared between PostgREST, the proxy and the edge
- * functions — which is what makes the signature check real rather than
- * decorative. It is regenerated every run so nothing here can ever be a
- * credential that outlives the process.
- */
-const JWT_SECRET = `akalt-walk-${Math.random().toString(36).slice(2)}-${Date.now()}`;
-
-const API_BASE = `http://127.0.0.1:${API_PORT}`;
-// How supabase-js derives its storage key: `sb-<first label of host>-auth-token`.
-const STORAGE_KEY = `sb-${new URL(API_BASE).hostname.split('.')[0]}-auth-token`;
 
 const CUSTOMER = '9a1c0000-0000-4000-8000-000000000001';
 const MANAGER = '9a1c0000-0000-4000-8000-000000000002';
@@ -100,10 +73,9 @@ const EMAILS = {
 };
 
 const log = (...args) => console.log('•', ...args);
-const children = [];
-const servers = [];
 
-// --- Small process and SQL helpers -----------------------------------------
+let stack = null;
+let site = null;
 
 function run(command, args, options = {}) {
   return new Promise((resolveRun, reject) => {
@@ -115,286 +87,31 @@ function run(command, args, options = {}) {
   });
 }
 
-function background(command, args, options = {}) {
-  const child = spawn(command, args, { cwd: ROOT, stdio: 'ignore', ...options });
-  children.push(child);
-  return child;
-}
-
-/** One SQL statement, answered as trimmed text. Throws on a database error. */
-function sql(statement, { db = DB } = {}) {
-  const result = spawnSync(
-    'psql',
-    ['-h', PGHOST, '-p', PGPORT, '-U', PGUSER, '-d', db, '-v', 'ON_ERROR_STOP=1', '-At', '-c', statement],
-    { encoding: 'utf8' },
-  );
-  if (result.status !== 0) {
-    throw new Error(`psql failed: ${(result.stderr || result.stdout || '').trim()}`);
-  }
-  return result.stdout.trim();
-}
-
-function which(binary, override) {
-  if (override && existsSync(override)) return override;
-  const found = spawnSync('sh', ['-c', `command -v ${binary}`], { encoding: 'utf8' });
-  return found.status === 0 ? found.stdout.trim() : null;
-}
-
-async function waitFor(check, description, attempts = 60) {
-  for (let index = 0; index < attempts; index += 1) {
-    try {
-      if (await check()) return;
-    } catch {
-      // Not up yet.
-    }
-    await new Promise((r) => setTimeout(r, 250));
-  }
-  throw new Error(`timed out waiting for ${description}`);
-}
-
-// --- Tokens ------------------------------------------------------------------
-
-function sign(claims) {
-  const encode = (value) => Buffer.from(JSON.stringify(value)).toString('base64url');
-  const head = encode({ alg: 'HS256', typ: 'JWT' });
-  const body = encode(claims);
-  const signature = createHmac('sha256', JWT_SECRET).update(`${head}.${body}`).digest('base64url');
-  return `${head}.${body}.${signature}`;
-}
-
-const DAY = 24 * 60 * 60;
-const tokenFor = (role, sub) =>
-  sign({
-    role,
-    ...(sub ? { sub, email: EMAILS[sub] } : {}),
-    iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + DAY,
-  });
-
-const ANON_TOKEN = tokenFor('anon');
-const SERVICE_TOKEN = tokenFor('service_role');
-
-/** Verifies a bearer token the same way PostgREST will. Not decoration. */
-function verify(token) {
-  const parts = (token ?? '').split('.');
-  if (parts.length !== 3) return null;
-  const expected = createHmac('sha256', JWT_SECRET)
-    .update(`${parts[0]}.${parts[1]}`)
-    .digest('base64url');
-  if (expected !== parts[2]) return null;
-  const claims = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf8'));
-  if (typeof claims.exp === 'number' && claims.exp * 1000 < Date.now()) return null;
-  return claims;
-}
-
-function sessionFor(userId) {
-  const now = Math.floor(Date.now() / 1000);
-  return JSON.stringify({
-    access_token: tokenFor('authenticated', userId),
-    token_type: 'bearer',
-    expires_in: DAY,
-    expires_at: now + DAY,
-    refresh_token: `walk-refresh-${userId}`,
-    user: {
-      id: userId,
-      aud: 'authenticated',
-      role: 'authenticated',
-      email: EMAILS[userId],
-      app_metadata: { provider: 'email' },
-      user_metadata: {},
-      created_at: new Date().toISOString(),
-    },
-  });
-}
-
-// --- The API the browser talks to -------------------------------------------
-
-/**
- * One origin in front of PostgREST and the two edge functions.
- *
- * The app expects Supabase's shape — `/rest/v1`, `/functions/v1/<name>`,
- * `/auth/v1` — and this is the smallest thing that provides it. It ROUTES; it
- * does not decide anything. The one place it answers on its own is
- * `/auth/v1/user`, where it verifies the bearer token's signature and then
- * reads the user out of Postgres, because `payments-simulate` calls
- * `auth.getUser()` and there is no GoTrue here to ask.
- */
-function startApi() {
-  const cors = {
-    'access-control-allow-origin': '*',
-    'access-control-allow-headers':
-      'authorization, apikey, content-type, x-client-info, x-application-name, prefer, accept-profile, content-profile, range',
-    'access-control-allow-methods': 'GET, POST, PATCH, DELETE, OPTIONS, HEAD',
-    'access-control-expose-headers': 'content-range, content-location',
-  };
-
-  const server = createServer(async (request, response) => {
-    if (request.method === 'OPTIONS') {
-      response.writeHead(204, cors);
-      response.end();
-      return;
-    }
-
-    const url = new URL(request.url ?? '/', API_BASE);
-    let target = null;
-
-    if (url.pathname.startsWith('/rest/v1/')) {
-      target = `http://127.0.0.1:${PGRST_PORT}${url.pathname.slice('/rest/v1'.length)}${url.search}`;
-    } else if (url.pathname === '/functions/v1/payments-begin') {
-      target = `http://127.0.0.1:${BEGIN_PORT}/`;
-    } else if (url.pathname === '/functions/v1/payments-simulate') {
-      target = `http://127.0.0.1:${SIMULATE_PORT}/`;
-    }
-
-    if (url.pathname === '/auth/v1/user') {
-      const claims = verify((request.headers.authorization ?? '').replace(/^Bearer /i, ''));
-      if (!claims?.sub) {
-        response.writeHead(401, { ...cors, 'content-type': 'application/json' });
-        response.end(JSON.stringify({ message: 'invalid token' }));
-        return;
-      }
-      const email = sql(
-        `select coalesce(email, '') from auth.users where id = '${claims.sub}'`,
-      );
-      response.writeHead(200, { ...cors, 'content-type': 'application/json' });
-      response.end(
-        JSON.stringify({
-          id: claims.sub,
-          aud: 'authenticated',
-          role: 'authenticated',
-          email,
-          app_metadata: {},
-          user_metadata: {},
-          created_at: new Date().toISOString(),
-        }),
-      );
-      return;
-    }
-
-    if (!target) {
-      response.writeHead(404, { ...cors, 'content-type': 'text/plain' });
-      response.end('no route');
-      return;
-    }
-
-    const chunks = [];
-    for await (const chunk of request) chunks.push(chunk);
-    const body = chunks.length > 0 ? Buffer.concat(chunks) : undefined;
-
-    const headers = { ...request.headers };
-    delete headers.host;
-    delete headers['content-length'];
-    delete headers.connection;
-
-    try {
-      const upstream = await fetch(target, { method: request.method, headers, body });
-      const text = await upstream.text();
-      const out = { ...cors, 'content-type': upstream.headers.get('content-type') ?? 'application/json' };
-      const range = upstream.headers.get('content-range');
-      if (range) out['content-range'] = range;
-      response.writeHead(upstream.status, out);
-      response.end(text);
-    } catch (error) {
-      response.writeHead(502, { ...cors, 'content-type': 'text/plain' });
-      response.end(String(error));
-    }
-  });
-
-  servers.push(server);
-  return new Promise((resolveServer, reject) => {
-    server.once('error', reject);
-    server.listen(API_PORT, '127.0.0.1', () => resolveServer(API_BASE));
-  });
-}
-
-/**
- * One edge function, on its own port.
- *
- * `Deno.serve()` takes no port from the environment and both functions call it
- * at module scope, so a wrapper swaps it for one that pins the port before
- * importing the real entry point. The function's own code is untouched — this
- * is the deployed file, running.
- */
-function startFunction(name, port, env) {
-  const entry = join(tmpdir(), `akalt-walk-${name}.ts`);
-  writeFileSync(
-    entry,
-    [
-      `const original = Deno.serve;`,
-      `// deno-lint-ignore no-explicit-any`,
-      `(Deno as any).serve = (a: any, b?: any) =>`,
-      `  typeof a === 'function'`,
-      `    ? original({ port: ${port} }, a)`,
-      `    : original({ ...a, port: ${port} }, b);`,
-      `await import('${join(ROOT, 'supabase/functions', name, 'index.ts')}');`,
-      '',
-    ].join('\n'),
-  );
-
-  return background(
-    process.env.DENO_BIN ?? 'deno',
-    [
-      'run',
-      '--quiet',
-      '--allow-net',
-      '--allow-env',
-      '--allow-read',
-      '--config',
-      join(ROOT, 'supabase/functions', name, 'deno.json'),
-      entry,
-    ],
-    { env: { ...process.env, ...env } },
-  );
-}
-
-function stopEverything() {
-  for (const child of children) {
-    try {
-      child.kill('SIGTERM');
-    } catch {
-      // Already gone.
-    }
-  }
-  for (const server of servers) {
-    try {
-      server.close();
-    } catch {
-      // Already closed.
-    }
-  }
-}
-
 // --- The walk ----------------------------------------------------------------
 
 async function main() {
-  const postgrest = which('postgrest', process.env.POSTGREST_BIN);
-  if (!postgrest) {
-    throw new Error(
-      'postgrest is not on PATH. This walk drives the app through a REAL ' +
-        'PostgREST so that RLS is genuinely in the loop; without it there is ' +
-        'nothing honest to run. Install it, or set POSTGREST_BIN.',
-    );
-  }
-  if (!which('deno', process.env.DENO_BIN)) {
-    throw new Error('deno is not on PATH. The walk runs two edge functions. Set DENO_BIN.');
-  }
-
   const chromium = await loadChromium(ROOT);
   await mkdir(OUT, { recursive: true });
 
-  // --- 1. A database with everything in it ----------------------------------
-  log(`building ${DB}…`);
-  await run('./scripts/db-local.sh', [], {
-    env: { ...process.env, PGHOST, PGPORT, PGUSER, DB },
-    stdio: 'ignore',
+  // --- 1. The stack ----------------------------------------------------------
+  log('building the walk database…');
+  stack = await startLocalStack({
+    db: process.env.WALK_DB ?? 'akla_walk',
+    fixtures: ['supabase/fixtures/merchant-staff.sql'],
+    functions: ['payments-begin', 'payments-simulate'],
+    emails: EMAILS,
+    pgrstPort: Number(process.env.WALK_PGRST_PORT ?? 3301),
+    apiPort: Number(process.env.WALK_API_PORT ?? 3310),
+    firstFunctionPort: Number(process.env.WALK_BEGIN_PORT ?? 3311),
   });
-  spawnSync(
-    'psql',
-    ['-h', PGHOST, '-p', PGPORT, '-U', PGUSER, '-d', DB, '-v', 'ON_ERROR_STOP=1', '-q',
-     '-c', "set akalt.local_fixture = 'yes'", '-f', 'supabase/fixtures/merchant-staff.sql'],
-    { cwd: ROOT, encoding: 'utf8' },
-  );
 
+  const { apiBase, anonToken, sessionFor, sql, storageKey, tokenFor } = stack;
+  const API_BASE = apiBase;
+  const ANON_TOKEN = anonToken;
+  const STORAGE_KEY = storageKey;
+  log('postgrest and the edge functions are up');
+
+  // --- 2. A basket to work -----------------------------------------------------
   const merchantId = sql(`select id from public.merchants where is_demo limit 1`);
   const branchId = sql(
     `select id from public.merchant_locations where merchant_id = '${merchantId}' limit 1`,
@@ -407,8 +124,9 @@ async function main() {
     Seeded rather than assembled through the recipe screens: what this walk is
     about starts at the cart, and driving twelve taps of ingredient sourcing to
     get there would make a merchant-dashboard failure look like a sourcing one.
-    These are the same rows the app itself writes — `/cart` reads them through
-    the same repository, and the checkout that follows is entirely real.
+    (`walk:pilot` is the one that drives sourcing, against a real database
+    merchant.) These are the same rows the app itself writes — `/cart` reads
+    them through the same repository, and the checkout that follows is real.
   */
   sql(`
     insert into public.carts (id, user_id, merchant_id, merchant_location_id, currency)
@@ -423,44 +141,6 @@ async function main() {
      limit 3
     on conflict do nothing;
   `);
-
-  // --- 2. The stack ----------------------------------------------------------
-  const config = join(tmpdir(), 'akalt-walk-postgrest.conf');
-  writeFileSync(
-    config,
-    [
-      `db-uri = "postgres://${PGUSER}@/${DB}?host=${PGHOST}&port=${PGPORT}"`,
-      'db-schemas = "public"',
-      'db-anon-role = "anon"',
-      `jwt-secret = "${JWT_SECRET}"`,
-      `server-port = ${PGRST_PORT}`,
-      'server-host = "127.0.0.1"',
-      '',
-    ].join('\n'),
-  );
-  background(postgrest, [config]);
-  await waitFor(
-    async () => (await fetch(`http://127.0.0.1:${PGRST_PORT}/delivery_areas?limit=1`)).ok,
-    'postgrest',
-  );
-  log('postgrest up');
-
-  await startApi();
-
-  const functionEnv = {
-    SUPABASE_URL: API_BASE,
-    SUPABASE_ANON_KEY: ANON_TOKEN,
-    SUPABASE_SERVICE_ROLE_KEY: SERVICE_TOKEN,
-    APP_BASE_URL: 'http://127.0.0.1:0',
-  };
-  startFunction('payments-begin', BEGIN_PORT, functionEnv);
-  startFunction('payments-simulate', SIMULATE_PORT, functionEnv);
-  await waitFor(async () => {
-    const begin = await fetch(`http://127.0.0.1:${BEGIN_PORT}/`, { method: 'OPTIONS' });
-    const simulate = await fetch(`http://127.0.0.1:${SIMULATE_PORT}/`, { method: 'OPTIONS' });
-    return begin.status < 500 && simulate.status < 500;
-  }, 'the edge functions', 240);
-  log('edge functions up');
 
   // --- 3. The bundle, pointed at it ------------------------------------------
   if (!existsSync(DIST) || !process.argv.includes('--no-export')) {
@@ -499,8 +179,7 @@ async function main() {
     });
   }
 
-  const site = await serveDist(DIST, 0);
-  servers.push(site.server);
+  site = await serveDist(DIST, 0);
   log(`serving the export on ${site.base}`);
 
   // --- 4. The browser --------------------------------------------------------
@@ -877,7 +556,7 @@ async function main() {
 
   // The scheduler raises it and the executor settles it — the same two
   // functions cron calls, run here by hand because there is no cron.
-  sql(`select public.queue_due_refunds(10)`, { db: DB });
+  sql(`select public.queue_due_refunds(10)`);
   const refundId = sql(`select id from public.refund_attempts where order_id = '${orderId}'`);
   check('queue_due_refunds raised an attempt', Boolean(refundId));
   sql(`select public.claim_refund_attempts(10)`);
@@ -965,5 +644,6 @@ try {
   console.error(String(error?.stack ?? error));
   process.exitCode = 1;
 } finally {
-  stopEverything();
+  stack?.stop();
+  site?.server?.close();
 }
