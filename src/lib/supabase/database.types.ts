@@ -431,6 +431,91 @@ export type DeliveryAreaRow = {
  * type: `is_enabled` is the flag that turns a row into a live partner, and a
  * client that could write it could sign its own agreement.
  */
+// --- The public catalogue surface -------------------------------------------
+//
+// `20260930090000_public_catalogue.sql` exposes these as views so a GUEST can
+// discover a shop without the raw merchant tables being opened up. Each row
+// type below is exactly the view's column list — commission terms, fulfilment
+// mode, slugs, branch external ids and `verified_by` are absent from the views
+// and therefore absent here, which is the point.
+
+export type PublicMerchantRow = {
+  id: string;
+  name: string;
+  name_ar: string | null;
+  country: string;
+  currency: string;
+};
+
+export type PublicMerchantLocationRow = {
+  id: string;
+  merchant_id: string;
+  name: string;
+  name_ar: string | null;
+  country: string;
+  city: string | null;
+  delivery_fee_minor: number | null;
+  minimum_order_minor: number | null;
+  estimated_delivery_minutes: number | null;
+  is_accepting_orders: boolean;
+};
+
+export type PublicMerchantLocationAreaRow = {
+  merchant_location_id: string;
+  area_key: string;
+};
+
+/** Active and priced only; the view filters both. */
+export type PublicMerchantProductRow = {
+  id: string;
+  merchant_location_id: string;
+  external_id: string;
+  sku: string | null;
+  name: string;
+  name_ar: string | null;
+  brand: string | null;
+  pack_quantity: number | null;
+  unit: MeasurementUnitEnum | null;
+  price_minor: number | null;
+  currency: string;
+  availability: AvailabilityStatusEnum;
+  image_url: string | null;
+  is_active: boolean;
+  allergens_published: boolean;
+  fetched_at: string;
+};
+
+export type PublicMerchantProductAllergenRow = {
+  merchant_product_id: string;
+  allergen: AllergenEnum;
+};
+
+export type PublicMerchantProductDietRow = {
+  merchant_product_id: string;
+  diet: DietaryPreferenceEnum;
+  is_compatible: boolean;
+};
+
+/** Blocked mappings are filtered out by the view; the flag is always false. */
+export type PublicIngredientProductMappingRow = {
+  id: string;
+  ingredient_id: string;
+  merchant_product_id: string;
+  confidence: number;
+  source: MappingSourceEnum;
+  is_verified: boolean;
+  verified_at: string | null;
+  is_blocked: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+/** Identity only: sourcing speaks in slugs, mappings key on the row. */
+export type PublicIngredientRow = {
+  id: string;
+  slug: string;
+};
+
 export type MerchantRow = {
   id: string;
   slug: string;
@@ -1029,6 +1114,20 @@ export type Database = {
       // every relation it resolves, views included — omitting it collapses the
       // whole `Tables` union and every `.update()` in the app types as `never`.
       public_profiles: { Row: PublicProfileRow; Relationships: [] };
+      public_merchants: { Row: PublicMerchantRow; Relationships: [] };
+      public_merchant_locations: { Row: PublicMerchantLocationRow; Relationships: [] };
+      public_merchant_location_areas: { Row: PublicMerchantLocationAreaRow; Relationships: [] };
+      public_merchant_products: { Row: PublicMerchantProductRow; Relationships: [] };
+      public_merchant_product_allergens: {
+        Row: PublicMerchantProductAllergenRow;
+        Relationships: [];
+      };
+      public_merchant_product_diets: { Row: PublicMerchantProductDietRow; Relationships: [] };
+      public_ingredient_product_mappings: {
+        Row: PublicIngredientProductMappingRow;
+        Relationships: [];
+      };
+      public_ingredients: { Row: PublicIngredientRow; Relationships: [] };
     };
     Functions: {
       delete_own_account: { Args: Record<string, never>; Returns: undefined };

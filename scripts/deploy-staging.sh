@@ -75,12 +75,51 @@ if [[ ${#MISSING[@]} -gt 0 ]]; then
 fi
 
 # --- 2. Not production -------------------------------------------------------
+#
+# TWO REFS ARE WRITTEN DOWN HERE, on purpose.
+#
+# A guard that lives only in a variable somebody sets is a guard that is absent
+# the one time it matters — the tired evening deploy with a half-copied
+# `.env.staging`. These are the actual project refs for this product, and the
+# list can only ever REFUSE: no value here enables anything, and the allow-list
+# does not replace the environment file, it agrees with it.
+readonly PRODUCTION_REFS=(
+  "qriymxsnrphytzopigwb"   # AKALT production. NEVER.
+)
+readonly STAGING_REFS=(
+  "ufnrjgnvfbpsxsnnyssl"   # AKALT staging.
+)
+
+for ref in "${PRODUCTION_REFS[@]}"; do
+  if [[ "${SUPABASE_STAGING_PROJECT_REF}" == "${ref}" ]]; then
+    die "${ref} is the PRODUCTION project. This script will never deploy to it."
+  fi
+done
 
 if [[ -n "${SUPABASE_PRODUCTION_PROJECT_REF:-}" ]]; then
   if [[ "${SUPABASE_STAGING_PROJECT_REF}" == "${SUPABASE_PRODUCTION_PROJECT_REF}" ]]; then
     die "the staging ref equals the production ref. Refusing."
   fi
 fi
+
+# An unrecognised ref is not refused — a second staging project is a
+# reasonable thing to have — but it is said out loud and confirmed, because
+# "which project am I actually pointed at" is the question this whole section
+# exists to answer.
+KNOWN=false
+for ref in "${STAGING_REFS[@]}"; do
+  [[ "${SUPABASE_STAGING_PROJECT_REF}" == "${ref}" ]] && KNOWN=true
+done
+if ! ${KNOWN}; then
+  printf '\n\033[33mWARNING: %s is not a project ref this script knows about.\033[0m\n' \
+    "${SUPABASE_STAGING_PROJECT_REF}"
+  ${DRY_RUN} || {
+    read -r -p 'Type the project ref to continue: ' CONFIRM
+    [[ "${CONFIRM}" == "${SUPABASE_STAGING_PROJECT_REF}" ]] || die "not confirmed."
+  }
+fi
+
+say "Target project: ${SUPABASE_STAGING_PROJECT_REF}"
 
 case "${SUPABASE_STAGING_DB_URL}" in
   *"${SUPABASE_STAGING_PROJECT_REF}"*) ;;
@@ -122,6 +161,18 @@ ${DRY_RUN} || assert_sandbox
 
 say "Linking to ${SUPABASE_STAGING_PROJECT_REF}"
 run supabase link --project-ref "${SUPABASE_STAGING_PROJECT_REF}"
+
+# CONFIRM WHAT WE ARE ACTUALLY LINKED TO, after linking and before the first
+# mutation. `supabase link` can succeed against a different project than the
+# one you meant if a stale `.temp/project-ref` is in the way, and every command
+# after this point writes.
+if ! ${DRY_RUN}; then
+  LINKED="$(cat supabase/.temp/project-ref 2>/dev/null || echo '')"
+  if [[ -n "${LINKED}" && "${LINKED}" != "${SUPABASE_STAGING_PROJECT_REF}" ]]; then
+    die "the CLI is linked to ${LINKED}, not ${SUPABASE_STAGING_PROJECT_REF}. Stopping before any write."
+  fi
+  say "Confirmed linked project: ${LINKED:-${SUPABASE_STAGING_PROJECT_REF}}"
+fi
 
 say "Applying migrations"
 run supabase db push --db-url "${SUPABASE_STAGING_DB_URL}"

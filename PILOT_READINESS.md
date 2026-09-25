@@ -163,3 +163,53 @@ unfinished". It is not.
    staging, and re-run `walk:pilot` against it.
 6. Then production, and run the pilot with R1–R4 handled by a person, daily,
    on purpose.
+
+---
+
+## 5. Two decisions, locked
+
+Recorded here because both are policy rather than implementation, and both
+will look like arbitrary code to whoever reads it next.
+
+### D1. A guest may discover the shop. A guest may not order.
+
+**Decided.** Merchant reference tables stay `authenticated`-only. Discovery
+goes through a small set of views —
+`supabase/migrations/20260930090000_public_catalogue.sql` — granted to `anon`
+and carrying only customer-facing columns: merchant and branch name, service
+area, product identity, name, Arabic name, price, pack size, availability,
+image, brand, and the published-allergens flag.
+
+Absent from every view, and therefore unreachable through them: commission
+terms, the delivery-fee split, fulfilment mode, slugs, `is_enabled`, `is_demo`,
+a branch's own external key, and who verified a mapping. Memberships,
+payments, refunds, orders and settlement have no view at all.
+
+Checkout is untouched: `create_order_draft`, `begin_payment` and every commerce
+write remain `authenticated`-only, and `checkout-readiness.ts` blocks a guest
+with `not_authenticated`. This supersedes R11.
+
+Proved by `supabase/tests/16_public_catalogue_test.sql`, which asserts each
+view's **exact column list** — so widening the surface fails a test rather than
+happening quietly — and by the guest phase of `npm run walk:pilot`.
+
+### D2. Allergen data: the gate does not move, the explanation arrives.
+
+**Decided.** UNKNOWN MUST NOT MEAN SAFE is unchanged and unchangeable here. A
+product a merchant has published nothing about is never chosen automatically
+for a customer with a declared allergy.
+
+What is new is that the customer is told why. The gate is silent by
+construction — it simply declines — and from the inside that is
+indistinguishable from a thin catalogue or a bug.
+`features/commerce/allergen-policy.ts` computes whether the shelf offered for
+this basket is fully labelled, partly labelled or not labelled at all, and the
+sourcing panel says so in the customer's own language. It can only ever add a
+sentence; there is deliberately no outcome that widens what the sourcer will
+choose.
+
+**For the first controlled pilot**, if the partner's feed carries no allergen
+data, automatic supermarket ordering is materially narrower for customers with
+declared allergies — and may be scoped to customers without them until the
+retailer publishes. That is a PILOT LIMITATION, recorded as such, and not a
+permanent product rule. B3 above is the conversation that ends it.

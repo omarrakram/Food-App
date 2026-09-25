@@ -135,7 +135,21 @@ export async function startLocalStack(options) {
   }
 
   // --- 2. Tokens -------------------------------------------------------------
-  const jwtSecret = `akalt-walk-${Math.random().toString(36).slice(2)}-${Date.now()}`;
+  /*
+    A FIXED LOCAL SECRET, and it has to be fixed.
+
+    It was randomised per run, which was tidier and quietly broke `--no-export`:
+    the ANON KEY IS BAKED INTO THE BUNDLE at export time, so reusing yesterday's
+    `dist/` against today's secret makes every request a
+    `JWSError JWSInvalidSignature` — which surfaces in the app as a generic
+    "something went wrong" and looks exactly like a broken query.
+
+    This is a test harness: 127.0.0.1, a database that is dropped and rebuilt on
+    every run, and a process that exits. `WALK_JWT_SECRET` overrides it for
+    anyone who wants rotation, and nothing in this repository ships it.
+  */
+  const jwtSecret =
+    process.env.WALK_JWT_SECRET ?? 'akalt-local-walk-secret-not-a-credential-000000';
 
   const sign = (claims) => {
     const encode = (value) => Buffer.from(JSON.stringify(value)).toString('base64url');

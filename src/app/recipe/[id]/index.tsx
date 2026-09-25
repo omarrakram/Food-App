@@ -853,6 +853,34 @@ export default function RecipeDetailScreen() {
                   supermarket without saying it is not one is a lie the user
                   cannot detect from the inside.
                 */}
+                {/*
+                  WHY THIS BASKET IS NARROWER THAN SOMEBODY ELSE'S.
+
+                  The safety gate declines silently — it simply does not choose
+                  an unlabelled product for somebody with a declared allergy —
+                  and silence reads as a thin catalogue or a bug. This is the
+                  actual reason, in their language, at the moment it applies.
+                  It never unlocks anything; see allergen-policy.ts.
+                */}
+                {sourcing.allergenNotice === 'none' ? null : (
+                  <View
+                    style={{
+                      gap: 2,
+                      padding: theme.spacing.md,
+                      borderRadius: theme.radius.md,
+                      backgroundColor: theme.colors.warningSoft,
+                    }}
+                    testID={`recipe-allergen-${sourcing.allergenNotice}`}
+                  >
+                    <Text variant="footnote" style={{ color: theme.colors.warningSoftText }}>
+                      {t(`commerce.allergen.${sourcing.allergenNotice}`)}
+                    </Text>
+                    <Text variant="caption" style={{ color: theme.colors.warningSoftText }}>
+                      {t(`commerce.allergen.${sourcing.allergenNotice}Body`)}
+                    </Text>
+                  </View>
+                )}
+
                 {sourcing.merchant.isDemo ? (
                   <View style={{ gap: 2 }} testID="recipe-demo-badge">
                     <View

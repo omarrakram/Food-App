@@ -1,7 +1,7 @@
 import type {
   Cart,
   IngredientProductMapping,
-  Merchant,
+  PublicMerchant,
   MerchantFulfilmentMode,
   MerchantLocation,
   MerchantProduct,
@@ -243,7 +243,15 @@ export type ProductQuery = {
 export interface CatalogueAdapter {
   readonly merchantId: string;
 
-  getMerchant(): Promise<Merchant>;
+  /**
+   * The merchant, as a CUSTOMER may see one.
+   *
+   * Narrowed from `Merchant` when the public catalogue surface landed: an
+   * adapter reading `public_merchants` genuinely does not have the commission
+   * rate, and a signature that claimed otherwise would have forced the one
+   * honest implementation to invent numbers.
+   */
+  getMerchant(): Promise<PublicMerchant>;
   listLocations(options?: { readonly city?: string }): Promise<readonly MerchantLocation[]>;
   searchProducts(query: ProductQuery): Promise<readonly MerchantProduct[]>;
   getProducts(productIds: readonly string[]): Promise<readonly MerchantProduct[]>;

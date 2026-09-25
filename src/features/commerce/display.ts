@@ -1,6 +1,6 @@
 import { toWesternNumerals } from '@/lib/format/numerals';
 import type { Language } from '@/i18n';
-import type { Merchant, MerchantLocation, MerchantProduct } from '@/types/commerce';
+import type { PublicMerchant, MerchantLocation, MerchantProduct } from '@/types/commerce';
 
 /**
  * The name to SHOW for a merchant, a branch or a product.
@@ -30,7 +30,7 @@ import type { Merchant, MerchantLocation, MerchantProduct } from '@/types/commer
  * text becomes user-visible text, which is what makes that guarantee hold.
  */
 
-export function merchantDisplayName(merchant: Merchant, language: Language): string {
+export function merchantDisplayName(merchant: PublicMerchant, language: Language): string {
   const stored = language === 'ar' ? (merchant.nameAr ?? merchant.name) : merchant.name;
   return toWesternNumerals(stored);
 }

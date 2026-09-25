@@ -13,6 +13,11 @@ import type { Cart, MerchantProduct } from '@/types/commerce';
 import type { IngredientMatch } from '@/types/domain';
 
 import type { AddressInput } from './address-repository';
+import {
+  allergenCoverage,
+  allergenNotice,
+  type AllergenNotice,
+} from './allergen-policy';
 import { addableLines } from './basket';
 import type { AddCartLineInput } from './cart-repository';
 import { buildCartView, type CartView } from './cart-view';
@@ -80,13 +85,14 @@ export type MerchantSelectionState = {
  * catalogue is the fallback, and `demoMerchant` returns null in a production
  * build whatever anybody sets. The two can never both be selected.
  *
- * A GUEST GETS NULL, because every merchant reference table is behind RLS
- * scoped to `authenticated`. That is the conservative reading of somebody
- * else's prices and it is not ours to relax — see PILOT_READINESS.md.
+ * A GUEST GETS AN ANSWER. Discovery reads the `public_*` views, which are
+ * granted to `anon` and carry only customer-facing columns — so somebody
+ * deciding whether AKALT is worth an account can see the shop, the shelf and
+ * the prices. Creating an order is still `authenticated`-only; nothing about
+ * that moved.
  */
 export function useMerchantSelection(): MerchantSelectionState {
   const { preferences } = usePreferences();
-  const { scopeKey, isRemote } = useRepositories();
   const { data: addresses } = useAddresses();
 
   /*
@@ -104,12 +110,14 @@ export function useMerchantSelection(): MerchantSelectionState {
   }, [addresses]);
 
   const query = useQuery({
-    queryKey: queryKeys.merchantSelection(scopeKey, preferences.country, areaKey ?? 'none'),
+    queryKey: queryKeys.merchantSelection(preferences.country, areaKey ?? 'none'),
     // Which shop serves this person changes when an agreement is signed, not
     // when they tap something.
     staleTime: 5 * 60 * 1000,
     queryFn: async (): Promise<SelectedMerchant | null> => {
-      const client = isRemote ? getSupabase() : null;
+      // NOT gated on a session. The views are public; a guest reads the same
+      // rows a customer does, and gets the same shop.
+      const client = getSupabase();
       if (client) {
         try {
           const found = await findDatabaseMerchant(client, {
@@ -171,6 +179,14 @@ export type RecipeSourcing = {
   readonly result: SourcingResult;
   /** Lines safe to add without asking: matched, eligible, purchasable. */
   readonly addable: readonly SourcedLine[];
+  /**
+   * Whether this customer needs telling why their basket is narrower.
+   *
+   * The safety gate is silent by construction — it simply declines to choose —
+   * and from the inside that is indistinguishable from a thin catalogue or a
+   * bug. See `allergen-policy.ts`.
+   */
+  readonly allergenNotice: AllergenNotice;
 };
 
 export type RecipeSourcingState = {
@@ -242,7 +258,16 @@ export function useRecipeSourcing(
       context,
     );
 
-    return { merchant, requirements, result, addable: addableLines(result) };
+    // Every candidate the shelf offered for this basket, published or not.
+    const coverage = allergenCoverage([...index.values()].flat());
+
+    return {
+      merchant,
+      requirements,
+      result,
+      addable: addableLines(result),
+      allergenNotice: allergenNotice(context.avoidAllergens.length > 0, coverage),
+    };
   }, [merchant, index, requirements, context]);
 
   const refetch = useCallback(() => {

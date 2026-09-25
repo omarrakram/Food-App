@@ -103,15 +103,16 @@ export const queryKeys = {
     ['akla', 'merchant-products', locationId, [...productIds].sort().join(',')] as const,
 
   /**
-   * WHICH merchant and branch this account is sourcing against.
+   * WHICH merchant and branch we are sourcing against.
    *
-   * Keyed by scope as well as country, because a signed-in customer reads the
-   * merchant tables through RLS and a guest cannot read them at all — so the
-   * two must never share an answer. The area key is in the key because it
-   * changes which branch is preferred.
+   * NOT keyed by account, deliberately. Since the public catalogue surface
+   * landed, a guest and a signed-in customer in the same area get the same
+   * answer out of the same views — so sharing the entry means signing in does
+   * not re-ask a question whose answer has not changed. The area key is in the
+   * key because it changes which branch is preferred.
    */
-  merchantSelection: (userId: string, country: string, areaKey: string) =>
-    ['akla', 'merchant-selection', userId, country, areaKey] as const,
+  merchantSelection: (country: string, areaKey: string) =>
+    ['akla', 'merchant-selection', country, areaKey] as const,
 
   /**
    * Candidate products for a set of canonical ingredients at one branch.

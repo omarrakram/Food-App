@@ -59,10 +59,22 @@ if (!REF || !DB_URL || !API || !SERVICE_KEY) {
   process.exit(1);
 }
 
-if (env.SUPABASE_PRODUCTION_PROJECT_REF && env.SUPABASE_PRODUCTION_PROJECT_REF === REF) {
-  console.error('That is the production project ref. Refusing to run.');
+/*
+  WRITTEN DOWN, not left to a variable.
+
+  This script only reads, so pointing it at production would be embarrassing
+  rather than destructive — but the ref belongs in one place, the same place
+  `deploy-staging.sh` keeps it, so that "which project is which" is never a
+  thing somebody has to remember.
+*/
+const PRODUCTION_REFS = ['qriymxsnrphytzopigwb'];
+
+if (PRODUCTION_REFS.includes(REF) || env.SUPABASE_PRODUCTION_PROJECT_REF === REF) {
+  console.error(`${REF} is the production project. Refusing to run.`);
   process.exit(1);
 }
+
+console.log(`Verifying staging project ${REF}`);
 
 const results = [];
 const check = (name, ok, detail = '') => {

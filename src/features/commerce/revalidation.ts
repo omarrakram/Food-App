@@ -1,5 +1,10 @@
 import { multiplyMoney } from '@/lib/format/money';
-import type { Cart, Merchant, MerchantLocation, MerchantProduct } from '@/types/commerce';
+import type {
+  Cart,
+  MerchantLocation,
+  MerchantProduct,
+  PublicMerchant,
+} from '@/types/commerce';
 import type { Money } from '@/types/domain';
 
 import { canDeliver, type DeliverabilityReason } from './delivery-areas';
@@ -95,7 +100,7 @@ export type CartValidationResult = {
 export type RevalidationInput = {
   readonly cart: Cart;
   readonly revision: number;
-  readonly merchant: Merchant;
+  readonly merchant: PublicMerchant;
   readonly location: MerchantLocation;
   /** Fresh catalogue rows, by product id. A missing id is a delisted product. */
   readonly products: ReadonlyMap<string, SourcingCandidateInput>;

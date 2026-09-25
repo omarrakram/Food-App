@@ -58,13 +58,44 @@ export type CommerceActor = (typeof COMMERCE_ACTORS)[number];
 export const MERCHANT_FULFILMENT_MODES = ['dashboard', 'api'] as const;
 export type MerchantFulfilmentMode = (typeof MERCHANT_FULFILMENT_MODES)[number];
 
-export type Merchant = {
+/**
+ * A merchant, as a CUSTOMER may see one.
+ *
+ * The subset that reaches a browsing visitor, and the reason it is a type
+ * rather than a convention: `public_merchants` is a view with exactly these
+ * columns in it, so anything the consumer app needs that is NOT here is
+ * something a guest cannot be shown — and the compiler says so at the call
+ * site rather than the database saying so at run time.
+ *
+ * Commission terms, fulfilment mode and the slug are deliberately absent. They
+ * exist on `Merchant`, which is what the merchant-facing and server-side code
+ * reads through the authenticated tables.
+ */
+export type PublicMerchant = {
   id: string;
-  slug: string;
   name: string;
   nameAr: string | null;
   country: CountryCode;
   currency: CurrencyCode;
+  /**
+   * True by construction on the public surface: the view's WHERE clause is
+   * `is_enabled`. Kept as a field rather than assumed, because revalidation
+   * asks the question and an assumption is not an answer.
+   */
+  isEnabled: boolean;
+  /**
+   * A development catalogue, not a supermarket.
+   *
+   * Written on the row rather than inferred from a slug, so nothing can
+   * mistake it for a partner by reading the data. `isDemo && isEnabled` is
+   * refused in production builds, and the public view excludes demo rows
+   * outright.
+   */
+  isDemo: boolean;
+};
+
+export type Merchant = PublicMerchant & {
+  slug: string;
   fulfilmentMode: MerchantFulfilmentMode;
   /**
    * Basis points, so 1000 = 10.00%. An integer for the same reason money is an
@@ -83,16 +114,6 @@ export type Merchant = {
    * not a law, and the settlement maths reads it.
    */
   merchantKeepsDeliveryFee: boolean;
-  /** False until a signed agreement exists. Never default this to true. */
-  isEnabled: boolean;
-  /**
-   * A development catalogue, not a supermarket.
-   *
-   * Written on the row rather than inferred from a slug, so nothing can
-   * mistake it for a partner by reading the data. `isDemo && isEnabled` is
-   * refused in production builds.
-   */
-  isDemo: boolean;
   createdAt: string;
   updatedAt: string;
 };

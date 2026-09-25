@@ -137,6 +137,30 @@ async function main() {
   const browser = await chromium.launch(executablePath ? { executablePath } : {});
 
   const problems = [];
+
+  /*
+    TWO CONTEXTS, IN ORDER: a guest first, then the same person signed in.
+
+    A separate context rather than clearing storage, because the question the
+    guest half answers is "what does somebody with NOTHING see" — and a context
+    that once held a session is not that.
+  */
+  const guestContext = await browser.newContext({ viewport: { width: 420, height: 900 } });
+  /*
+    ONBOARDING IS ALREADY DONE for the guest, and that is a harness decision
+    rather than a shortcut around a gate. Choosing a language and a household
+    size is three screens that have nothing to do with whether a signed-out
+    visitor can see a shop, and driving them would make a discovery failure
+    look like an onboarding one. Guest mode itself is still entered through the
+    app's own front door below.
+  */
+  await guestContext.addInitScript(() => {
+    try {
+      window.localStorage.setItem('akla.onboarding.completed', 'true');
+    } catch {
+      // A context with storage blocked would fail every check anyway.
+    }
+  });
   const context = await browser.newContext({ viewport: { width: 420, height: 900 } });
   await context.addInitScript(
     ([key, value]) => {
@@ -149,15 +173,39 @@ async function main() {
     [storageKey, sessionFor(CUSTOMER)],
   );
 
-  const page = await context.newPage();
-  page.on('pageerror', (error) => problems.push(`pageerror: ${error.message}`));
-  page.on('console', (message) => {
-    if (message.type() !== 'error') return;
-    const text = message.text();
-    if (/realtime|websocket|ERR_(BLOCKED|NAME_NOT_RESOLVED|CONNECTION)/i.test(text)) return;
-    if (/images\.unsplash\.com|Failed to load resource/.test(text)) return;
-    problems.push(`console: ${text.slice(0, 200)}`);
-  });
+  /*
+    EVERY API CALL THE PAGE MAKES THAT DID NOT SUCCEED.
+
+    The screens report "something went wrong" and retry, which is right for a
+    customer and useless for a walk: a failing read and a missing row look
+    identical from the outside. This is what turns a red check into a
+    diagnosis.
+  */
+  const apiFailures = [];
+
+  let page = await guestContext.newPage();
+  const watch = (target) => {
+    target.on('response', (response) => {
+      const url = response.url();
+      if (!url.startsWith(apiBase)) return;
+      if (response.status() < 400) return;
+      void response
+        .text()
+        .then((body) =>
+          apiFailures.push(`${response.status()} ${url.slice(apiBase.length)} ${body.slice(0, 200)}`),
+        )
+        .catch(() => {});
+    });
+    target.on('pageerror', (error) => problems.push(`pageerror: ${error.message}`));
+    target.on('console', (message) => {
+      if (message.type() !== 'error') return;
+      const text = message.text();
+      if (/realtime|websocket|ERR_(BLOCKED|NAME_NOT_RESOLVED|CONNECTION)/i.test(text)) return;
+      if (/images\.unsplash\.com|Failed to load resource/.test(text)) return;
+      problems.push(`console: ${text.slice(0, 200)}`);
+    });
+  };
+  watch(page);
 
   const checks = [];
   let failures = 0;
@@ -169,7 +217,17 @@ async function main() {
       void page
         .evaluate(() => document.body.innerText)
         .then((text) =>
-          writeFileSync(join(OUT, `failure-${failures}.txt`), `${page.url()}\n\n${text}`),
+          writeFileSync(
+            join(OUT, `failure-${failures}.txt`),
+            [
+              page.url(),
+              '',
+              '--- failed API calls ---',
+              ...apiFailures.slice(-10),
+              '',
+              text,
+            ].join('\n'),
+          ),
         )
         .catch(() => {});
     }
@@ -211,6 +269,89 @@ async function main() {
     }
   };
 
+  const recipeId = sql(`select id from public.recipes where slug = '${RECIPE_SLUG}' limit 1`);
+  check('the seed carries the recipe this walk sources', Boolean(recipeId), recipeId);
+
+  // === 0. A GUEST, WITH NO ACCOUNT AT ALL ====================================
+  /*
+    THE DECISION THIS PROVES. Merchant reference tables are `authenticated`
+    -only, so until the public catalogue views existed a signed-out visitor was
+    told there was no shop. Somebody deciding whether AKALT is worth an account
+    has to be able to see the shop, the shelf and the prices — and must still
+    be stopped at the till.
+  */
+  log('guest: discovery, with no account at all');
+
+  // A first-time visitor lands on the welcome screen and has to choose to look
+  // around. That is the app's own front door and the walk goes through it
+  // rather than around it.
+  await go('/welcome');
+  check('a first-time visitor is offered a look around', await visible('welcome-guest', 20_000));
+  await tap('welcome-guest');
+  await page.waitForTimeout(1500);
+
+  await go(`/recipe/${recipeId}`);
+
+  check('a guest sees a shop behind the recipe', await visible('recipe-get-missing', 25_000));
+  await tap('recipe-get-missing');
+  check('and can open the sourcing panel', await visible('recipe-sourcing', 20_000));
+
+  const guestPanel = await bodyText();
+  check('which names the merchant', guestPanel.includes(merchantName), merchantName);
+  check(
+    'and shows real prices off the public views',
+    /Olive Oil 750ml|Onions 1kg|Table Eggs 12 pieces/.test(guestPanel),
+  );
+  await shot('00-guest-sourcing');
+
+  // A guest may fill a basket — it is local, and Commerce-4 migrates it on
+  // sign-in. What they may not do is turn it into an order.
+  await tap('recipe-add-to-cart');
+  await page.waitForTimeout(1500);
+  await go('/cart');
+  check('a guest can build a basket', await visible('cart-lines'));
+
+  // AND IS STOPPED AT THE TILL. Looking is public; ordering is not.
+  await tap('cart-checkout');
+  const guestCheckout = await bodyText();
+  check('the guest reaches checkout with a real basket', !(await visible('checkout-empty', 2000)));
+  check(
+    'but cannot place an order without an account',
+    (await visible('checkout-blocked', 4000)) &&
+      /account/i.test(guestCheckout),
+  );
+  await shot('00-guest-checkout');
+
+  /*
+    AND NOTHING THEY SAW CAME FROM THE RAW TABLES.
+
+    Asked through the same door the browser uses — PostgREST, with the same
+    anon key — rather than through psql, because what matters is what an HTTP
+    caller holding the public key can reach.
+  */
+  const rawProbe = await fetch(`${apiBase}/rest/v1/merchants?select=id`, {
+    headers: { apikey: anonToken, Authorization: `Bearer ${anonToken}` },
+  });
+  const rawRows = await rawProbe.json().catch(() => null);
+  check(
+    'the raw merchants table is still closed to the anon key',
+    rawProbe.ok && Array.isArray(rawRows) && rawRows.length === 0,
+    `HTTP ${rawProbe.status}, ${Array.isArray(rawRows) ? rawRows.length : '?'} rows`,
+  );
+
+  const staffProbe = await fetch(`${apiBase}/rest/v1/merchant_memberships?select=id`, {
+    headers: { apikey: anonToken, Authorization: `Bearer ${anonToken}` },
+  });
+  const staffRows = await staffProbe.json().catch(() => null);
+  check(
+    'and so is the staff list',
+    Array.isArray(staffRows) && staffRows.length === 0,
+  );
+
+  await page.close();
+  page = await context.newPage();
+  watch(page);
+
   // === 1. AN ADDRESS IN AN AREA THE BRANCH SERVES ============================
   log('customer: an address, in an area the branch actually serves');
   await go('/addresses/form');
@@ -248,8 +389,6 @@ async function main() {
 
   // === 2. SOURCING AGAINST THE DATABASE SHELF ================================
   log('customer: sourcing a recipe against the database merchant');
-  const recipeId = sql(`select id from public.recipes where slug = '${RECIPE_SLUG}' limit 1`);
-  check('the seed carries the recipe this walk sources', Boolean(recipeId), recipeId);
   await go(`/recipe/${recipeId}`);
 
   check('the recipe opens with a shop behind it', await visible('recipe-get-missing', 25_000));

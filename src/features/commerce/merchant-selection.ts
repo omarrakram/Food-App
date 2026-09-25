@@ -1,5 +1,5 @@
 import { env } from '@/lib/config/env';
-import type { Merchant, MerchantLocation, ProductDietaryProfile } from '@/types/commerce';
+import type { MerchantLocation, ProductDietaryProfile, PublicMerchant } from '@/types/commerce';
 import type { Allergen, CountryCode } from '@/types/domain';
 
 import {
@@ -77,7 +77,16 @@ export type SafetyIndex = ReadonlyMap<string, ProductSafety>;
 export const UNKNOWN_SAFETY: ProductSafety = { allergens: null, diets: null };
 
 export type SelectedMerchant = {
-  readonly merchant: Merchant;
+  /**
+   * The CUSTOMER-FACING subset, deliberately.
+   *
+   * A guest reaches this through `public_merchants`, a view whose columns are
+   * exactly these. Typing it as the full `Merchant` would have compiled, and
+   * would have meant every screen could reach for a commission rate that the
+   * public path cannot supply — so the narrow type is the boundary, stated
+   * where the compiler can hold it.
+   */
+  readonly merchant: PublicMerchant;
   readonly location: MerchantLocation;
   readonly catalogue: CatalogueAdapter;
   /** Candidate products for these canonical ingredients at this branch. */

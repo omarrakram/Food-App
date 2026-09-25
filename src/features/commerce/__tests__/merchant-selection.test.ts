@@ -20,7 +20,9 @@ describe('with the demo catalogue on', () => {
 
     expect(selected).not.toBeNull();
     expect(selected?.isDemo).toBe(true);
-    expect(selected?.merchant.slug).toBe('akalt-demo-market');
+    // The name, not the slug: `SelectedMerchant.merchant` is the CUSTOMER
+    // -facing subset now, and a slug is not part of it on the public path.
+    expect(selected?.merchant.name).toBe('AKALT Demo Market (development only)');
     // A BRANCH, not just a chain.
     // The branch's id is a derived uuid now (so the same row can exist in a
     // local database); its EXTERNAL id is the readable key the fixture uses.

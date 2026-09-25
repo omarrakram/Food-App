@@ -931,6 +931,15 @@ export const en = {
   'commerce.addToCart_one': 'Add 1 to cart',
   'commerce.addToCart_other': 'Add {count} to cart',
   'commerce.viewCart': 'View cart',
+  'commerce.allergen.absent': 'This shop has not published allergen information',
+  'commerce.allergen.absentBody':
+    'You have told us about an allergy, so we will not choose anything for you '
+    + 'that the shop has not labelled. You can still add items yourself after '
+    + 'checking. We are working with the shop to get this published.',
+  'commerce.allergen.partial': 'Some products here are not labelled',
+  'commerce.allergen.partialBody':
+    'We only pick the ones the shop has published allergen information for. '
+    + 'The rest are shown, but we will not add them for you.',
   'commerce.findingShop': 'Finding a shop near you\u2026',
   'commerce.noShopHere': 'No shop delivers here yet',
   'commerce.noShopHereBody':
