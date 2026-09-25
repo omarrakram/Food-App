@@ -31,6 +31,11 @@ Put 2–5 in `.env.staging` (copy `.env.staging.example`). It is git-ignored.
 
 ## 1. Deploy
 
+The Supabase CLI is the only tool needed and installs from npm
+(`npm i -g supabase` — 2.118.0 at time of writing). **Docker is not required**:
+`db push --db-url` connects directly, and `functions deploy` bundles with the
+CLI's own bundler.
+
 ```bash
 cp .env.staging.example .env.staging     # then fill it in
 ./scripts/deploy-staging.sh              # migrations + functions + secrets
