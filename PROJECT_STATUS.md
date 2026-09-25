@@ -5,8 +5,8 @@ previous session's context.
 
 | | |
 |---|---|
-| **Last updated** | 2026-09-24 |
-| **Current phase** | **COMMERCE-6 — supermarket ordering, through fulfilment.** The recipe screen sources its missing ingredients against one merchant branch, a cart holds what was chosen, an address says where it would go, a branch says whether it reaches that area, the basket is revalidated against the current shelf, and a `security definer` function writes a server-priced order in `draft`/`unpaid`, and a payment-intent layer takes it from there: `begin_payment` derives the amount from the order, Paymob is reached only from an edge function holding the secret key, and a signed webhook is the only thing that can say a payment happened. Then the shop: staff memberships, a queue only paid orders reach, a server-authoritative transition function, substitutions that can never cost the customer more, and a refund position that is calculated without being paid. No cash on delivery, no refund EXECUTION, no AKALT riders, no settlement payouts. **No Paymob credentials are configured**, the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migrations have **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
+| **Last updated** | 2026-09-25 |
+| **Current phase** | **COMMERCE-7 — hand-off ready for a supermarket pilot, with the gaps named.** The recipe screen sources its missing ingredients against one merchant branch, a cart holds what was chosen, an address says where it would go, a branch says whether it reaches that area, the basket is revalidated against the current shelf, and a `security definer` function writes a server-priced order in `draft`/`unpaid`. `begin_payment` derives the amount from the order, Paymob is reached only from an edge function holding the secret key, and a signed webhook is the only thing that can say a payment happened. Then the shop: staff memberships and an invitation flow, a queue only paid orders reach, a server-authoritative transition function, substitutions that can never cost the customer more — and now refunds that actually execute, on a schedule that actually runs. **`PILOT_READINESS.md` is the honest answer to "can we run a real order tomorrow": no, for five specific reasons, the largest being that `selectMerchant()` is static and no client code path can reach a real supermarket's rows.** No cash on delivery, no AKALT riders, no settlement payouts. **No Paymob credentials are configured**, the only catalogue is a quarantined development fixture that badges itself on every screen, and the commerce migrations have **not** been applied to hosted Supabase. See `src/features/commerce/README.md`. Before that: **CORE JOURNEY UX — numerals, onboarding, ingredient picker, budget, pantry and shopping list landed.** Design system refreshed to cobalt/cream/near-black; Home, recipe results and recipe detail redesigned. See "UI/UX upgrade". Naming is ON HOLD at the founder's instruction — `REBRAND_STRATEGY.md` records three completed rounds and no chosen name. |
 | **App name** | Akla (working name, being retired — naming on hold, see `REBRAND_STRATEGY.md`) |
 | **Stack** | Expo SDK 57 · React Native 0.86 · React 19.2 · Expo Router 57 · TypeScript 6 (strict) · Supabase · TanStack Query 5 · Zod 4 · Anthropic (Claude) via Edge Functions |
 | **Launch market** | Egypt · EGP · English and Arabic, both complete **including the food itself** (see "Localisation") |
@@ -29,6 +29,7 @@ is the status.
 | **Commerce-4** | delivery addresses, deliverability by area key, the guest-cart conflict, cart revalidation, the single checkout gate, and the unpaid order draft |
 | **Commerce-5** | the demo catalogue as real rows (so the RPCs can be exercised as the app calls them), payment intents, `begin_payment`, the Paymob integration, the signed webhook, draft expiry and revision-safe cart clearing |
 | **Commerce-6** | merchant memberships and RLS, the queue, `advance_fulfilment`, substitutions with a never-dearer price policy, refund-required accounting, customer order tracking, and stuck-payment reconciliation |
+| **Commerce-7** | refunds that execute (derived amounts, partial and repeated, idempotent across both provider routes, an ambiguous answer never retried), the five SQL jobs and two HTTP ones on `pg_cron` with a run log, merchant invitations and scope-safe access management, and a browser walk that drives the real dashboard against a real Postgres through a real PostgREST |
 
 **What a user can do today** (with `EXPO_PUBLIC_DEMO_MERCHANT` on, in a
 non-production build, in Egypt): open a recipe, tap *Get missing ingredients*,
@@ -39,12 +40,18 @@ and open a checkout review that re-prices the basket from the current shelf and
 says exactly what is still in the way. A signed-in account can go one step
 further and have the server write an unpaid draft.
 
-**What nobody can do:** pay for real. No Paymob credentials are configured, so
-`payments-begin` refuses a real order with `payment_unavailable` rather than
-inventing anything; a demo-merchant order goes through the simulator instead,
-which says in as many words that no money moves. No migration has been applied
-to the hosted database and no merchant is ever notified — a paid order stops at
-`placed`, which is where the merchant queue begins and Commerce-6 picks up.
+**What nobody can do:** pay for real, or order from a real shop. No Paymob
+credentials are configured, so `payments-begin` refuses a real order with
+`payment_unavailable` rather than inventing anything; a demo-merchant order goes
+through the simulator instead, which says in as many words that no money moves.
+No migration has been applied to the hosted database. And `selectMerchant()` is
+static — the only branch the app can select is the bundled development
+catalogue, which ships `isAcceptingOrders: false`, so checkout refuses. That
+refusal is asserted in the browser walk rather than worked around, and it is
+blocker B1 in `PILOT_READINESS.md`.
+
+**Read `PILOT_READINESS.md` before planning anything commercial.** Five
+blockers, ten risks, and the shortest honest path to a first real order.
 
 **The rule the payment layer is built around:** the client cannot move money.
 Not the amount, not the state, not the moment an order reaches the merchant.
