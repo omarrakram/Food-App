@@ -652,6 +652,33 @@ export type MerchantMembershipRow = {
   updated_at: string;
 };
 
+/**
+ * A product on one branch's shelf. READ-ONLY from the client.
+ *
+ * `allergens_published` is the field the child table cannot express: a product
+ * with no rows in `merchant_product_allergens` is either one the merchant
+ * declared free of them or one they published nothing about, and for somebody
+ * with an allergy those are opposite answers.
+ */
+export type MerchantProductRow = {
+  id: string;
+  merchant_location_id: string;
+  external_id: string;
+  sku: string | null;
+  name: string;
+  name_ar: string | null;
+  brand: string | null;
+  unit: MeasurementUnitEnum | null;
+  pack_quantity: number | null;
+  price_minor: number | null;
+  currency: string;
+  availability: AvailabilityStatusEnum;
+  image_url: string | null;
+  is_active: boolean;
+  allergens_published: boolean;
+  fetched_at: string;
+};
+
 /** One line of an order. Read-only: written by `create_order_draft`. */
 export type OrderItemRow = {
   id: string;
@@ -850,6 +877,7 @@ export type Database = {
       // could write itself a succeeded payment.
       payment_intents: Table<PaymentIntentRow, never, never>;
       merchant_memberships: Table<MerchantMembershipRow, never, never>;
+      merchant_products: Table<MerchantProductRow, never, never>;
       order_items: Table<OrderItemRow, never, never>;
       order_substitutions: Table<OrderSubstitutionRow, never, never>;
       order_adjustments: Table<OrderAdjustmentRow, never, never>;

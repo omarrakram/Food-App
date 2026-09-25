@@ -697,6 +697,28 @@ export function useCheckout(addressId: string | null) {
  */
 const CONFIRMING_POLL_MS = 4_000;
 
+/**
+ * Every order this account has.
+ *
+ * A DRAFT IS AN ORDER TOO, and it is listed: an unpaid one the customer
+ * abandoned is a thing they may want to look at, and hiding it would make the
+ * history disagree with the database.
+ */
+export function useCustomerOrders() {
+  const { orders, scopeKey } = useRepositories();
+
+  return useQuery({
+    queryKey: queryKeys.orders(scopeKey),
+    queryFn: async () => {
+      try {
+        return await orders.list();
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
 export function useOrder(orderId: string | null, refetchInterval: number | false = false) {
   const { orders, scopeKey } = useRepositories();
 
@@ -815,6 +837,55 @@ export function usePaymentAttempt(intentId: string | null) {
       } catch (error) {
         throw toAppError(error, 'database');
       }
+    },
+  });
+}
+
+/**
+ * What happened to one order, for the customer.
+ *
+ * Polls slowly while the order is live and not at all once it is finished.
+ * A customer watching a picking screen is worth one read a minute; a delivered
+ * order is worth none.
+ */
+export function useOrderTracking(orderId: string | null) {
+  const { orders, scopeKey } = useRepositories();
+  const [live, setLive] = useState(false);
+
+  const query = useQuery({
+    queryKey: ['akla', 'order-tracking', scopeKey, orderId ?? 'none'] as const,
+    enabled: orderId !== null,
+    refetchInterval: live ? 60_000 : false,
+    queryFn: async () => {
+      if (!orderId) return null;
+      try {
+        return await orders.tracking(orderId);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+
+  const state = query.data?.order.fulfilment;
+  const shouldPoll =
+    state !== undefined &&
+    !['delivered', 'rejected', 'cancelled', 'failed', 'draft'].includes(state);
+  if (shouldPoll !== live) setLive(shouldPoll);
+
+  return query;
+}
+
+export function useSubstitutionDecision(orderId: string | null) {
+  const { orders, scopeKey } = useRepositories();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ substitutionId, accept }: { substitutionId: string; accept: boolean }) =>
+      orders.decideSubstitution(substitutionId, accept),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: ['akla', 'order-tracking', scopeKey, orderId ?? 'none'],
+      });
     },
   });
 }

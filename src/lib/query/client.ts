@@ -63,6 +63,13 @@ export const queryKeys = {
   addresses: (userId: string) => ['akla', 'addresses', userId] as const,
   deliveryAreas: (userId: string) => ['akla', 'delivery-areas', userId] as const,
   order: (userId: string, orderId: string) => ['akla', 'order', userId, orderId] as const,
+  /** Every order the customer has, newest first. */
+  orders: (userId: string) => ['akla', 'orders', userId] as const,
+  merchantMemberships: (userId: string) => ['akla', 'merchant', 'memberships', userId] as const,
+  merchantQueue: (userId: string, view: string) =>
+    ['akla', 'merchant', 'queue', userId, view] as const,
+  merchantOrder: (userId: string, orderId: string) =>
+    ['akla', 'merchant', 'order', userId, orderId] as const,
   /**
    * Payment attempts for one order. Separate from the order itself because the
    * status screen refetches this while a payment is in flight and the order

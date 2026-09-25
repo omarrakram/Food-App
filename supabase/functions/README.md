@@ -62,6 +62,20 @@ Both then go through the same HMAC verification and the same
 The redirect the customer's browser follows (`redirection_url`) is UX. It is
 never proof of anything and nothing reads payment state from it.
 
+`payments-reconcile` takes the service-role key in its Authorization header
+and has no user path. Deploy it only behind a scheduler (or call it from one),
+never as a public route:
+
+```bash
+supabase functions deploy payments-reconcile --no-verify-jwt
+```
+
+It asks Paymob about attempts that have been abnormal for more than fifteen
+minutes and applies the answer through `record_payment_event` — the same
+function, the same duplicate guard, the same state rules. With no Paymob
+credentials it reports how many attempts it WOULD have asked about and stops;
+it never reports "all clear" it has not earned.
+
 `payments-simulate` is NOT deployed. It refuses to run in a deployment unless
 `ALLOW_PAYMENT_SIMULATOR=true`, and there is no reason for that to be true
 anywhere a customer can reach.
@@ -73,6 +87,7 @@ anywhere a customer can reach.
 | `payments-begin` | the app | the customer's JWT |
 | `payments-webhook` | Paymob | the HMAC-SHA512 signature |
 | `payments-simulate` | the app, demo orders only | the customer's JWT, plus a demo-merchant order |
+| `payments-reconcile` | a scheduler | the service-role key |
 
 Secrets, none of which may ever appear in the app bundle or in
 `EXPO_PUBLIC_*`:

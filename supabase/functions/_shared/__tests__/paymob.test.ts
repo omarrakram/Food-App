@@ -316,3 +316,33 @@ Deno.test('a field the provider did not send is null, not missing', () => {
   assertEquals(stored.maskedPan, null);
   assertEquals(stored.transactionId, 1);
 });
+
+/**
+ * RECONCILIATION reads the same transaction shape the webhook does.
+ *
+ * The point of these is that a reconciled payment is not a different kind of
+ * payment: the same `outcomeFrom`, the same `sanitiseCallback`, the same
+ * duplicate guard downstream. If a lookup ever started being interpreted
+ * differently from a callback, an order could settle twice with two different
+ * stories about it.
+ */
+Deno.test('a looked-up transaction is read exactly like a callback', () => {
+  const looked = { ...(fullCallback().obj as Record<string, unknown>) };
+  assertEquals(outcomeFrom(looked), 'succeeded');
+
+  const stored = sanitiseCallback({ type: 'RECONCILIATION', obj: looked });
+  assertEquals(stored.type, 'RECONCILIATION');
+  assertEquals(stored.transactionId, 987654);
+  assertEquals(stored.merchantOrderId, 'intent-1');
+  // And the same things stay out of it.
+  assertEquals(JSON.stringify(stored).includes('tok_live_should_never_be_stored'), false);
+  assertEquals(JSON.stringify(stored).includes('nour@example.com'), false);
+});
+
+Deno.test('a transaction the provider still calls pending stays pending', () => {
+  // The one answer reconciliation must NOT convert into a decision. An attempt
+  // the provider is still holding might succeed, and writing it off would
+  // invite a second payment for the same basket.
+  const looked = { ...(fullCallback().obj as Record<string, unknown>), success: false, pending: true };
+  assertEquals(outcomeFrom(looked), 'pending');
+});

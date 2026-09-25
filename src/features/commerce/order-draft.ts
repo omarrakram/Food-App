@@ -166,9 +166,63 @@ export function paymentRefusalFrom(value: unknown): PaymentRefusal {
   return 'unknown';
 }
 
+/** One thing the shop could not supply, and what happened instead. */
+export type OrderSubstitutionView = {
+  readonly id: string;
+  /** Which line it belongs to. Matching on the NAME would pair the wrong one
+   *  the first time an order contains two lines of the same product. */
+  readonly orderItemId: string;
+  readonly originalProductName: string;
+  readonly originalUnitPrice: Money;
+  readonly replacementProductName: string | null;
+  readonly replacementUnitPrice: Money | null;
+  readonly quantity: number;
+  readonly decision:
+    | 'pending_customer'
+    | 'approved'
+    | 'rejected'
+    | 'auto_approved'
+    | 'removed';
+  readonly expiresAt: string | null;
+};
+
+/**
+ * What happened to an order, for the customer.
+ *
+ * `events` are the REAL rows the database wrote. The tracking screen renders
+ * them rather than animating a guess: a customer told their order is being
+ * picked while it sits in a queue remembers that.
+ */
+export type OrderTracking = {
+  readonly order: OrderSummary;
+  readonly items: readonly {
+    readonly id: string;
+    readonly name: string;
+    readonly nameAr: string | null;
+    readonly quantity: number;
+    readonly lineTotal: Money;
+  }[];
+  readonly substitutions: readonly OrderSubstitutionView[];
+  readonly events: readonly {
+    readonly id: string;
+    readonly kind: string;
+    readonly to: string | null;
+    readonly note: string | null;
+    readonly at: string;
+  }[];
+  /** Five facts, kept apart. A calculated refund is not a paid one. */
+  readonly captured: Money;
+  readonly fulfilledGoods: Money;
+  readonly refunded: Money;
+  readonly refundRequired: Money;
+  readonly riderName: string | null;
+};
+
 export interface OrderDraftRepository {
   create(request: OrderDraftRequest): Promise<OrderDraft>;
   get(orderId: string): Promise<OrderSummary | null>;
+  /** Every order this account has, newest first. Paid ones and the rest. */
+  list(): Promise<readonly OrderSummary[]>;
   /** Every attempt against this order, newest first. History, not a status. */
   attempts(orderId: string): Promise<readonly PaymentAttempt[]>;
   /** One attempt by id, subject to RLS. An id from a URL proves nothing. */
@@ -185,6 +239,15 @@ export interface OrderDraftRepository {
   simulatePayment(intentId: string, outcome: 'succeeded' | 'failed' | 'pending'): Promise<void>;
   /** True only when the basket cleared was the one actually paid for. */
   clearPaidCart(orderId: string): Promise<boolean>;
+  /**
+   * What happened to this order, as the customer may see it.
+   *
+   * The SAME reads the merchant makes, answered by the same RLS from the other
+   * side: `orders: owner reads` rather than the membership policy.
+   */
+  tracking(orderId: string): Promise<OrderTracking | null>;
+  /** Take the replacement, or have the line removed and refunded. */
+  decideSubstitution(substitutionId: string, accept: boolean): Promise<void>;
 }
 
 /**
@@ -223,6 +286,10 @@ export class LocalOrderDraftRepository implements OrderDraftRepository {
     return null;
   }
 
+  async list(): Promise<readonly OrderSummary[]> {
+    return [];
+  }
+
   async attempts(): Promise<readonly PaymentAttempt[]> {
     return [];
   }
@@ -245,6 +312,14 @@ export class LocalOrderDraftRepository implements OrderDraftRepository {
 
   async clearPaidCart(): Promise<boolean> {
     return false;
+  }
+
+  async tracking(): Promise<OrderTracking | null> {
+    return null;
+  }
+
+  async decideSubstitution(): Promise<void> {
+    throw new PaymentRefused('not_authenticated');
   }
 }
 
@@ -324,6 +399,38 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
       paidAt: data.paid_at,
       createdAt: data.created_at,
     };
+  }
+
+  async list(): Promise<readonly OrderSummary[]> {
+    const { data, error } = await this.client
+      .from('orders')
+      .select('id, reference, currency, items_subtotal_minor, delivery_fee_minor, payment_state, fulfilment_state, payment_method, draft_expires_at, paid_at, created_at')
+      .eq('user_id', this.userId)
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error) throw toAppError(error, 'database');
+
+    return (data ?? []).map((row) => {
+      const currency = row.currency as CurrencyCode;
+      return {
+        id: row.id,
+        reference: row.reference,
+        currency,
+        itemsSubtotal: { amountMinor: row.items_subtotal_minor, currency },
+        deliveryFee: { amountMinor: row.delivery_fee_minor, currency },
+        total: {
+          amountMinor: row.items_subtotal_minor + row.delivery_fee_minor,
+          currency,
+        },
+        payment: row.payment_state,
+        fulfilment: row.fulfilment_state,
+        paymentMethod: row.payment_method,
+        draftExpiresAt: row.draft_expires_at,
+        paidAt: row.paid_at,
+        createdAt: row.created_at,
+      };
+    });
   }
 
   async attempts(orderId: string): Promise<readonly PaymentAttempt[]> {
@@ -413,6 +520,76 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
     });
     if (error) throw toAppError(error, 'database');
     return data === true;
+  }
+
+  async tracking(orderId: string): Promise<OrderTracking | null> {
+    const summary = await this.get(orderId);
+    if (!summary) return null;
+
+    const [items, subs, events, position, rider] = await Promise.all([
+      this.client.from('order_items').select('*').eq('order_id', orderId),
+      this.client
+        .from('order_substitutions')
+        .select('*')
+        .eq('order_id', orderId)
+        .order('created_at', { ascending: true }),
+      this.client
+        .from('order_events')
+        .select('*')
+        .eq('order_id', orderId)
+        .order('at', { ascending: true }),
+      this.client.rpc('order_refund_position', { p_order_id: orderId }),
+      this.client.from('orders').select('rider_name').eq('id', orderId).maybeSingle(),
+    ]);
+
+    const currency = summary.currency;
+    const financial = (position.data ?? [])[0];
+    const money = (amountMinor: number): Money => ({ amountMinor, currency });
+
+    return {
+      order: summary,
+      items: (items.data ?? []).map((item) => ({
+        id: item.id,
+        name: item.product_name,
+        nameAr: item.product_name_ar,
+        quantity: item.quantity,
+        lineTotal: money(item.line_total_minor),
+      })),
+      substitutions: (subs.data ?? []).map((sub) => ({
+        id: sub.id,
+        orderItemId: sub.order_item_id,
+        originalProductName: sub.original_product_name,
+        originalUnitPrice: money(sub.original_unit_price_minor),
+        replacementProductName: sub.replacement_product_name,
+        replacementUnitPrice:
+          sub.replacement_unit_price_minor === null
+            ? null
+            : money(sub.replacement_unit_price_minor),
+        quantity: sub.quantity,
+        decision: sub.decision,
+        expiresAt: sub.expires_at,
+      })),
+      events: (events.data ?? []).map((event) => ({
+        id: event.id,
+        kind: event.kind,
+        to: event.to_value,
+        note: event.note,
+        at: event.at,
+      })),
+      captured: money(financial?.captured_minor ?? 0),
+      fulfilledGoods: money(financial?.fulfilled_goods_minor ?? 0),
+      refunded: money(financial?.refunded_minor ?? 0),
+      refundRequired: money(financial?.refund_required_minor ?? 0),
+      riderName: rider.data?.rider_name ?? null,
+    };
+  }
+
+  async decideSubstitution(substitutionId: string, accept: boolean): Promise<void> {
+    const { error } = await this.client.rpc('decide_substitution', {
+      p_substitution_id: substitutionId,
+      p_accept: accept,
+    });
+    if (error) throw toAppError(error, 'database');
   }
 }
 

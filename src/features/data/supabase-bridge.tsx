@@ -22,6 +22,7 @@ import {
 } from '@/features/saved/supabase-repository';
 import { SupabaseAddressRepository } from '@/features/commerce/address-repository';
 import { SupabaseOrderDraftRepository } from '@/features/commerce/order-draft';
+import { SupabaseMerchantRepository } from '@/features/merchant/repository';
 import { SupabaseCartRepository } from '@/features/commerce/supabase-cart-repository';
 import { SupabaseShoppingRepository } from '@/features/shopping/supabase-repository';
 import { SupabaseSubmissionsRepository } from '@/features/submissions/supabase-repository';
@@ -65,6 +66,7 @@ export function SupabaseBridge({ children }: { children: ReactNode }) {
       cart: new SupabaseCartRepository(supabase, userId),
       addresses: new SupabaseAddressRepository(supabase, userId),
       orders: new SupabaseOrderDraftRepository(supabase, userId),
+      merchant: new SupabaseMerchantRepository(supabase, userId),
       submissions: new SupabaseSubmissionsRepository(supabase, userId),
       notifications: new SupabaseNotificationsRepository(supabase, userId),
     };

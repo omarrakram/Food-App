@@ -17,6 +17,7 @@ import { RepositoryProvider, type Repositories } from '@/features/data/repositor
 import { LocalFriendsRepository } from '@/features/friends/repository';
 import { LocalMessagesRepository } from '@/features/messages/repository';
 import { LocalNotificationsRepository } from '@/features/notifications/repository';
+import { LocalMerchantRepository } from '@/features/merchant/repository';
 import { LocalPantryRepository } from '@/features/pantry/repository';
 import { PreferencesProvider } from '@/features/preferences/preferences-provider';
 import { LocalProfileRepository } from '@/features/profile/repository';
@@ -81,6 +82,7 @@ function remoteRepositories(): Omit<
     addresses: new LocalAddressRepository(),
     orders: new LocalOrderDraftRepository(),
     submissions: new LocalSubmissionsRepository(),
+    merchant: new LocalMerchantRepository(),
     notifications: new LocalNotificationsRepository(),
   };
 }

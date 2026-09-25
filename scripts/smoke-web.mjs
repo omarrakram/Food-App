@@ -1295,6 +1295,36 @@ async function main() {
           );
           check('the payment screen raises no page error', errorCount() === before);
           await shot('32-payment-guest');
+
+          /*
+            --- THE MERCHANT DASHBOARD, AND WHO MAY OPEN IT ----------------
+
+            Reachable by URL, and that is exactly why it is worth walking: the
+            gate must be the MEMBERSHIP, not the address. A guest gets told
+            the account does not work for a shop, and sees no queue — which is
+            also what RLS would give them if the screen forgot to check.
+          */
+          await page.goto(`${BASE}/merchant`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1500);
+
+          check(
+            'the merchant dashboard refuses an account that works for no shop',
+            await visible('merchant-no-access', 6000),
+          );
+          const merchantText = await bodyText();
+          check(
+            'and shows no queue at all',
+            !/AKL-[0-9A-Z]{4}-[0-9A-Z]{4}/.test(merchantText),
+          );
+          check('the dashboard raises no page error', errorCount() === before);
+          await shot('33-merchant-no-access');
+
+          // --- Order history, which a guest has none of ---------------------
+          await page.goto(`${BASE}/orders`, { waitUntil: 'networkidle' });
+          await page.waitForTimeout(1400);
+          check('order history is reachable', await visible('orders-empty', 6000));
+          check('and is empty for somebody who has never paid', errorCount() === before);
+          await shot('34-orders-empty');
         }
 
         // --- The two states a happy basket never shows -----------------------

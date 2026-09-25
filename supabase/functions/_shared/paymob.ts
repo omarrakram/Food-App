@@ -215,6 +215,43 @@ export async function createIntention(
   };
 }
 
+/**
+ * What the provider says about a transaction we have lost track of.
+ *
+ * THE RECONCILIATION PATH, and it exists because Commerce-5 left a real hole:
+ * an attempt stuck in `processing` because a callback never arrived is
+ * indistinguishable, from our side, from one that is still in flight. The
+ * webhook remains the primary truth; this is what asks when the webhook did
+ * not come.
+ *
+ * ASKED RARELY AND ONLY ABOUT ABNORMAL ATTEMPTS. Polling every attempt would
+ * be a self-inflicted rate limit and would tell us nothing the callback was
+ * not already about to say.
+ */
+export async function fetchTransactionByReference(
+  config: PaymobConfig,
+  merchantOrderId: string,
+): Promise<Record<string, unknown> | null> {
+  const url = new URL('/api/acceptance/transactions', config.baseUrl);
+  url.searchParams.set('merchant_order_id', merchantOrderId);
+
+  const response = await fetch(url.toString(), {
+    headers: { Authorization: `Token ${config.secretKey}` },
+  });
+
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    const detail = await response.text().catch(() => '');
+    throw new Error(`paymob lookup failed: ${response.status} ${detail.slice(0, 300)}`);
+  }
+
+  const body = (await response.json()) as Record<string, unknown>;
+  // The endpoint answers either a transaction or a paginated list of them.
+  const results = Array.isArray(body.results) ? (body.results as Record<string, unknown>[]) : null;
+  if (results) return results[0] ?? null;
+  return body.id === undefined ? null : body;
+}
+
 /** Where the customer goes. The public key is public; the client secret is scoped to one intention. */
 export function checkoutUrl(config: PaymobConfig, clientSecret: string): string {
   const url = new URL('/unifiedcheckout/', config.baseUrl);

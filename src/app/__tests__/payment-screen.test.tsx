@@ -20,6 +20,7 @@ import { RepositoryProvider, type Repositories } from '@/features/data/repositor
 import { LocalFriendsRepository } from '@/features/friends/repository';
 import { LocalMessagesRepository } from '@/features/messages/repository';
 import { LocalNotificationsRepository } from '@/features/notifications/repository';
+import { LocalMerchantRepository } from '@/features/merchant/repository';
 import { LocalPantryRepository } from '@/features/pantry/repository';
 import { PreferencesProvider } from '@/features/preferences/preferences-provider';
 import { LocalProfileRepository } from '@/features/profile/repository';
@@ -112,6 +113,7 @@ function orderRepository(
   return {
     create: () => Promise.reject(new Error('not used')),
     get: () => Promise.resolve(order),
+    list: () => Promise.resolve([order]),
     attempts: () => Promise.resolve(attempts),
     attempt: (id) => Promise.resolve(attempts.find((entry) => entry.id === id) ?? null),
     beginPayment:
@@ -120,6 +122,8 @@ function orderRepository(
     cancelPayment: () => Promise.resolve(),
     simulatePayment: () => Promise.resolve(),
     clearPaidCart: () => Promise.resolve(true),
+    tracking: () => Promise.resolve(null),
+    decideSubstitution: () => Promise.resolve(),
   };
 }
 
@@ -139,6 +143,7 @@ function repositories(
     addresses: new LocalAddressRepository(),
     orders,
     submissions: new LocalSubmissionsRepository(),
+    merchant: new LocalMerchantRepository(),
     notifications: new LocalNotificationsRepository(),
   };
 }

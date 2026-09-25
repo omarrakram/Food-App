@@ -3,7 +3,7 @@
 The transaction layer. Everything between "I'm missing cooking cream" and
 "somebody rang the doorbell".
 
-**Status: Commerce-5.** Types, state machines, the money ledger, pack maths,
+**Status: Commerce-6.** Types, state machines, the money ledger, pack maths,
 the sourcing engine, the schema, an isolated development catalogue, the cart
 repositories, delivery addresses, deliverability by area key, cart
 revalidation, the single checkout gate, and an unpaid order draft written by a
@@ -16,11 +16,16 @@ amount from the order, the Paymob integration behind three edge functions, and
 a signed webhook that is the only thing in the system able to say a payment
 happened.
 
-**No merchant dashboard, no cash on delivery, no refund operations, no rider.**
-A paid order reaches `placed` and stops there, which is where the merchant
-queue begins and where Commerce-6 picks up. **No Paymob credentials are
-configured and the migrations have NOT been applied to hosted Supabase** — the
-whole of this runs against `npm run db:local` and the simulator.
+Plus the merchant side: staff memberships, a queue that only paid orders
+reach, a server-authoritative transition function, substitutions with a price
+policy, and a refund position that is calculated without being paid.
+
+**No cash on delivery, no refund EXECUTION, no AKALT riders, no settlement
+payouts.** A rejected order or a removed line produces a `refund_required`
+figure and nothing pays it — which is the single thing standing between this
+and a pilot. **No Paymob credentials are configured and the migrations have NOT
+been applied to hosted Supabase** — the whole of this runs against
+`npm run db:local` and the simulator.
 
 The product this serves is AKALT's own: the customer decides what to eat,
 AKALT works out what they are missing, sources it from one merchant, takes the
@@ -320,6 +325,8 @@ customer has to look at the new number before a draft can be built.
 | `revalidation.ts` | what is still true, immediately before an order exists |
 | `checkout-readiness.ts` | the ONE gate: `canProceedToDraft`, and why not |
 | `order-draft.ts` | the client side of the order RPCs, and every refusal they can give |
+| `../merchant/queue.ts` | five columns, and the actions the machine allows in each |
+| `../merchant/repository.ts` | the shop's reads; every write is an RPC |
 | `payment-intent.ts` | one attempt to pay, and what the customer is told about it |
 | `hooks.ts` | the only React in here: binds the engines to cache and prefs |
 
@@ -328,8 +335,39 @@ Screens: `src/app/recipe/[id]/index.tsx` (the sourcing panel),
 `src/app/checkout.tsx` and `src/app/payment/`. The one shared component is
 `src/components/commerce/sourced-line.tsx`.
 
-Server-side: `supabase/functions/payments-begin`, `payments-webhook` and
-`payments-simulate`, with the provider itself in `_shared/paymob.ts`.
+Merchant screens: `src/app/merchant/` (the queue and one order). Customer
+tracking: `src/app/orders/`.
+
+Server-side: `supabase/functions/payments-begin`, `payments-webhook`,
+`payments-simulate` and `payments-reconcile`, with the provider itself in
+`_shared/paymob.ts`.
+
+## The merchant rules
+
+**A shop cannot see an unpaid order.** The queue policy is "paid, and mine",
+written once as `merchant_may_see_order` and used by every merchant-facing
+policy — five copies of a security model eventually disagree. Nothing was added
+for `delivery_addresses`, `payment_intents` or `payment_events`: what the shop
+needs to deliver is the snapshot frozen on the order.
+
+**A status is not a column a dashboard writes.** There is no update policy on
+`orders`. `advance_fulfilment` is the only way, it checks the merchant's half
+of the state machine, and it is idempotent — two pickers tapping ACCEPT is a
+shop, not an attack.
+
+**A replacement may be equal or cheaper, never dearer.** We hold a captured
+amount and there is no flow in this phase that could raise it, so a more
+expensive product is not "approved with a surcharge" — it is not a
+replacement. An unsafe one is never offered whatever the customer's preference
+says, and `product_suits_customer` treats unpublished allergen data as unsafe
+rather than as reassurance.
+
+**READY needs every line settled.** A customer still waiting to be asked must
+not find their order on a motorbike with the question unanswered. An
+unanswered question expires into a removal, never into keeping the sale.
+
+**Five financial facts, kept apart:** captured, fulfilled goods, amount due,
+refund required, refunded. A refund is not refunded because we calculated it.
 
 The schema lives in `supabase/migrations/20260923090000_commerce_foundation.sql`,
 `20260925090000_commerce_checkout.sql` and `20260926090000_payment.sql`. None

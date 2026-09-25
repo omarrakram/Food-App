@@ -89,6 +89,15 @@ function tablesFromSql(sql: string): Map<string, Set<string>> {
       const trimmed = line.trim();
       // Skip table-level constraints; they are not columns.
       if (/^(primary key|foreign key|unique|constraint|check|exclude)\b/i.test(trimmed)) continue;
+      /*
+        And skip the CONTINUATION of a multi-line one.
+
+        `check (a >= 0\n and b >= 0)` has a second line starting with `and`,
+        which matches the column pattern perfectly and produced a column called
+        `and`. It went unnoticed because the word appeared somewhere in a
+        comment in the types file, and the token scan used to read comments.
+      */
+      if (/^(and|or|not|references|on|deferrable|initially)\b/i.test(trimmed)) continue;
       const column = /^(\w+)\s+[a-z]/i.exec(trimmed);
       if (column) columns.add(column[1]!);
     }
@@ -102,6 +111,22 @@ function tablesFromSql(sql: string): Map<string, Set<string>> {
   const views = /create (?:or replace )?view public\.(\w+)\b/gi;
   while ((match = views.exec(sql)) !== null) {
     if (!tables.has(match[1]!)) tables.set(match[1]!, new Set());
+  }
+
+  /*
+    A TABLE RENAME, before anything else touches the map.
+
+    `merchant_products` is `store_products` renamed, and until this existed the
+    check reported that the client queries a table no migration creates — which
+    is true of the name and false of the table. Applied first so a later
+    `add column` against the new name lands on the row it belongs to.
+  */
+  const renamedTables = /alter table (?:if exists )?public\.(\w+)\s+rename to (\w+)/gi;
+  while ((match = renamedTables.exec(sql)) !== null) {
+    const columns = tables.get(match[1]!);
+    if (!columns) continue;
+    tables.delete(match[1]!);
+    tables.set(match[2]!, columns);
   }
 
   // `alter table ... add column` counts too.
@@ -153,11 +178,6 @@ function enumsFromSql(sql: string): Map<string, string[]> {
   return enums;
 }
 
-/** Every identifier the types file mentions, which is all we need to match on. */
-function typeFileTokens(source: string): Set<string> {
-  return new Set(source.match(/[A-Za-z_][A-Za-z0-9_]*/g) ?? []);
-}
-
 /**
  * TypeScript comments, removed.
  *
@@ -169,6 +189,18 @@ function typeFileTokens(source: string): Set<string> {
  */
 function stripTsComments(source: string): string {
   return source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+}
+
+/**
+ * Every identifier the types file DECLARES, which is all we need to match on.
+ *
+ * Comments are stripped for the same reason the literals are: a column named
+ * only in a docblock counted as described, so removing the field it documents
+ * changed nothing and the check quietly stopped covering it. Prose is not a
+ * type.
+ */
+function typeFileTokens(source: string): Set<string> {
+  return new Set(stripTsComments(source).match(/[A-Za-z_][A-Za-z0-9_]*/g) ?? []);
 }
 
 /** String literals in the types file, for checking enum values. */
