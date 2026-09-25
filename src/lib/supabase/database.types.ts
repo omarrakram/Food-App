@@ -496,6 +496,16 @@ export type SubstitutionDecisionEnum =
   | 'auto_approved'
   | 'removed';
 export type MerchantRoleEnum = 'admin' | 'operator';
+/**
+ * One attempt to send money back. `abandoned` means automatic retry has
+ * stopped and a person must check the provider — not that the debt is gone.
+ */
+export type RefundAttemptStateEnum =
+  | 'pending'
+  | 'processing'
+  | 'succeeded'
+  | 'failed'
+  | 'abandoned';
 
 /**
  * An order row, READ-ONLY from the client.
@@ -981,6 +991,72 @@ export type Database = {
           refund_required_minor: number;
         }[];
       };
+      /**
+       * The ledger position joined to the most recent refund attempt.
+       *
+       * `attempt_state` is `refund_attempt_state` widened to text because the
+       * left join can produce no attempt at all; the app narrows it against
+       * REFUND_ATTEMPT_STATES rather than trusting the column.
+       */
+      order_refund_status: {
+        Args: { p_order_id: string };
+        Returns: {
+          currency: string;
+          captured_minor: number;
+          refunded_minor: number;
+          refund_required_minor: number;
+          attempt_state: string | null;
+          attempt_amount_minor: number | null;
+          needs_review: boolean;
+          last_error_code: string | null;
+          requested_at: string | null;
+          settled_at: string | null;
+        }[];
+      };
+      /** Queues a refund. The amount is derived server-side; there is no way to name one. */
+      request_refund: {
+        Args: { p_order_id: string; p_reason?: string | null; p_idempotency_key?: string | null };
+        Returns: string;
+      };
+      /** Merchant staff for one merchant. Managers and AKALT admins only. */
+      merchant_staff: {
+        Args: { p_merchant: string };
+        Returns: {
+          membership_id: string;
+          user_id: string;
+          email: string;
+          role: MerchantRoleEnum;
+          merchant_location_id: string | null;
+          created_at: string;
+        }[];
+      };
+      /** Invitations addressed to the caller's own email address. */
+      my_merchant_invites: {
+        Args: Record<string, never>;
+        Returns: {
+          id: string;
+          token: string;
+          merchant_id: string;
+          merchant_name: string;
+          merchant_location_id: string | null;
+          role: MerchantRoleEnum;
+          expires_at: string;
+        }[];
+      };
+      /** Returns the invitation id and its token. Sending it is the caller's job. */
+      invite_merchant_staff: {
+        Args: {
+          p_merchant: string;
+          p_email: string;
+          p_role?: MerchantRoleEnum;
+          p_location?: string | null;
+        };
+        Returns: { id: string; token: string; expires_at: string }[];
+      };
+      /** The email on the account must match the invitation. Returns the membership id. */
+      accept_merchant_invite: { Args: { p_token: string }; Returns: string };
+      revoke_merchant_invite: { Args: { p_invite_id: string }; Returns: boolean };
+      revoke_merchant_access: { Args: { p_membership_id: string }; Returns: boolean };
       /** True only when the basket cleared is the one that was actually paid for. */
       clear_paid_cart: { Args: { p_order_id: string }; Returns: boolean };
       /** Returns the new order's id. Every figure is derived server-side. */

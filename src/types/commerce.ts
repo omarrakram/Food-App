@@ -661,3 +661,69 @@ export type OrderFinancials = {
   /** Always non-negative; read it together with `settlementDirection`. */
   settlementAmountMinor: number;
 };
+
+// --- Refunds ---------------------------------------------------------------
+
+/**
+ * How far one attempt to send money back has got.
+ *
+ * `abandoned` is the one worth reading twice: it does NOT mean the refund was
+ * cancelled or the debt written off. It means automatic retry has stopped —
+ * either the tries ran out, or the provider's answer did not say whether the
+ * money moved — and a person has to look. The debt itself is unchanged, and
+ * `refundRequiredMinor` still shows it.
+ */
+export const REFUND_ATTEMPT_STATES = [
+  'pending',
+  'processing',
+  'succeeded',
+  'failed',
+  'abandoned',
+] as const;
+export type RefundAttemptState = (typeof REFUND_ATTEMPT_STATES)[number];
+
+/**
+ * Where one order's refund stands, as the database answers it.
+ *
+ * The three money fields are independent facts, not three views of one:
+ * `capturedMinor` is history, `refundedMinor` is what has actually gone back,
+ * and `refundRequiredMinor` is what is still owed. A failed attempt moves none
+ * of them, which is why failure cannot hide.
+ */
+export type OrderRefundStatus = {
+  currency: CurrencyCode;
+  capturedMinor: number;
+  refundedMinor: number;
+  refundRequiredMinor: number;
+  /** The most recent attempt, if there has ever been one. */
+  attemptState: RefundAttemptState | null;
+  attemptAmountMinor: number | null;
+  /** Automatic retry is off for this one. Somebody has to check the provider. */
+  needsReview: boolean;
+  lastErrorCode: string | null;
+  requestedAt: string | null;
+  settledAt: string | null;
+};
+
+// --- Merchant access -------------------------------------------------------
+
+export type MerchantStaffMember = {
+  membershipId: string;
+  userId: string;
+  email: string;
+  role: MerchantRole;
+  /** Null means every branch of this merchant. */
+  locationId: string | null;
+  createdAt: string;
+};
+
+/** An invitation waiting to be accepted. The token is the capability. */
+export type MerchantInvite = {
+  id: string;
+  token: string;
+  merchantId: string;
+  merchantName: string;
+  locationId: string | null;
+  role: MerchantRole;
+  expiresAt: string;
+};

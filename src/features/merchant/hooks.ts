@@ -166,3 +166,83 @@ export function useMerchantActions(orderId: string | null) {
 
   return { advance, reportUnavailable };
 }
+
+/**
+ * The staff list for one shop.
+ *
+ * Fails CLOSED and quietly. An operator's `merchant_staff` call returns an
+ * empty set rather than an error, because RLS and the function's own check
+ * both refuse them — so the screen has nothing to render, which is the correct
+ * outcome and does not need an error banner explaining that they are not a
+ * manager.
+ */
+export function useMerchantStaff(merchantId: string | null) {
+  const { merchant, scopeKey, isRemote } = useRepositories();
+
+  return useQuery({
+    queryKey: ['akla', 'merchant', 'staff', scopeKey, merchantId ?? 'none'] as const,
+    enabled: isRemote && merchantId !== null,
+    queryFn: async () => {
+      if (!merchantId) return [];
+      try {
+        return await merchant.staff(merchantId);
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+/** Invitations waiting for the signed-in account. Cheap, and usually empty. */
+export function useMyMerchantInvites() {
+  const { merchant, scopeKey, isRemote } = useRepositories();
+
+  return useQuery({
+    queryKey: ['akla', 'merchant', 'my-invites', scopeKey] as const,
+    enabled: isRemote,
+    staleTime: 60_000,
+    queryFn: async () => {
+      try {
+        return await merchant.myInvites();
+      } catch (error) {
+        throw toAppError(error, 'database');
+      }
+    },
+  });
+}
+
+export function useMerchantStaffActions(merchantId: string | null) {
+  const { merchant } = useRepositories();
+  const queryClient = useQueryClient();
+
+  const invalidate = useCallback(() => {
+    void queryClient.invalidateQueries({ queryKey: ['akla', 'merchant'] });
+  }, [queryClient]);
+
+  const invite = useMutation({
+    mutationFn: (input: { email: string; role?: 'admin' | 'operator'; locationId?: string | null }) => {
+      if (!merchantId) throw new Error('no merchant');
+      return merchant.invite({ merchantId, ...input });
+    },
+    onSuccess: invalidate,
+  });
+
+  const revokeInvite = useMutation({
+    mutationFn: (inviteId: string) => merchant.revokeInvite(inviteId),
+    onSuccess: invalidate,
+  });
+
+  const revokeAccess = useMutation({
+    mutationFn: (membershipId: string) => merchant.revokeAccess(membershipId),
+    onSuccess: invalidate,
+  });
+
+  const acceptInvite = useMutation({
+    mutationFn: (token: string) => merchant.acceptInvite(token),
+    // Accepting changes what this account may SEE, not just what is on screen,
+    // so the whole cache goes rather than the merchant slice of it.
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+
+  return { invite, revokeInvite, revokeAccess, acceptInvite };
+}

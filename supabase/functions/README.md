@@ -41,6 +41,12 @@ supabase functions deploy payments-begin
 # is read. Deploying this WITH jwt verification silently breaks every payment
 # callback — the provider retries, gets 401, and the order never settles.
 supabase functions deploy payments-webhook --no-verify-jwt
+
+# Service-role only. Both check the Authorization header against
+# SUPABASE_SERVICE_ROLE_KEY themselves, and both are driven by cron rather than
+# by a person — see "Scheduling" below.
+supabase functions deploy payments-reconcile
+supabase functions deploy refunds-execute
 ```
 
 ### Both integrations must reach the webhook
@@ -117,6 +123,70 @@ silently falling back: half a key is worse than none. With NO Paymob variables
 at all, `payments-begin` still serves demo-merchant orders through the
 simulator and refuses real ones with `payment_unavailable` — it never invents
 a payment.
+
+## Scheduling
+
+Five jobs have to run without anybody remembering to run them:
+
+| job | interval | what it is |
+|---|---|---|
+| `resolve_expired_substitutions` | every minute | the customer's 20 minutes to answer actually ends |
+| `expire_stale_drafts` | 5 minutes | an unpaid draft stops being priceable |
+| `queue_due_refunds` | 5 minutes | an order that owes money gets a refund attempt |
+| `sweep_stalled_refunds` | 10 minutes | a refund the provider never answered goes to a person |
+| `trim_job_runs` | daily | the run log does not grow forever |
+
+plus two that have to leave the database, because both need the Paymob secret:
+
+| job | interval | function |
+|---|---|---|
+| `refunds-execute` | 5 minutes | sends the claimed refunds |
+| `payments-reconcile` | 10 minutes | asks about attempts the webhook never came back on |
+
+`supabase/migrations/20260928090200_scheduled_jobs.sql` schedules all seven with
+`pg_cron` **if the extension is present**, and does nothing if it is not — the
+test suite runs against a plain Postgres, and a migration that required the
+platform would not apply there.
+
+### What the migration deliberately does NOT contain
+
+A hosted URL or a secret. Migrations are in git and get applied to more than
+one project, so `edge_job_endpoints` is created EMPTY and the two HTTP jobs
+report `not_configured` until an operator fills it in. On a fresh project:
+
+```sql
+-- 1. Enable the platform extensions (Dashboard → Database → Extensions, or:)
+create extension if not exists pg_cron;
+create extension if not exists pg_net;
+create extension if not exists supabase_vault;
+
+-- 2. Put the service-role key in Vault. NOT in a table, not in a migration.
+select vault.create_secret('<SUPABASE_SERVICE_ROLE_KEY>', 'service_role_key');
+
+-- 3. Point the two HTTP jobs at THIS project's functions.
+insert into public.edge_job_endpoints (name, url, secret_name) values
+  ('refunds-execute',
+   'https://<project-ref>.supabase.co/functions/v1/refunds-execute',
+   'service_role_key'),
+  ('payments-reconcile',
+   'https://<project-ref>.supabase.co/functions/v1/payments-reconcile',
+   'service_role_key');
+
+-- 4. Re-run the scheduling block if pg_cron was installed after the migration.
+--    (Re-applying 20260928090200_scheduled_jobs.sql is safe; it unschedules
+--    before it schedules.)
+```
+
+### Checking it is alive
+
+```sql
+select * from public.job_health();
+```
+
+One row per job: when it last ran, how it went, what it touched, and how many
+errors in the last day. `not_configured` on the two HTTP jobs means step 3 has
+not been done. Nothing else reports a scheduler that has silently stopped, so
+this is worth a look before every pilot day.
 
 ## Local
 

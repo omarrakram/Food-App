@@ -10,6 +10,7 @@ import { SkeletonList } from '@/components/ui/skeleton';
 import { EmptyState } from '@/components/ui/states';
 import { Text } from '@/components/ui/text';
 import { useOrderTracking, useSubstitutionDecision } from '@/features/commerce/hooks';
+import { refundAmountMinor, refundView } from '@/features/commerce/refund';
 import { useI18n } from '@/i18n';
 import { formatMoney } from '@/lib/format/money';
 import { toWesternNumerals } from '@/lib/format/numerals';
@@ -66,9 +67,40 @@ export default function OrderTrackingScreen() {
     );
   }
 
-  const { order, items, substitutions, events, captured, fulfilledGoods, refunded, refundRequired, riderName } =
-    tracking.data;
+  const {
+    order,
+    items,
+    substitutions,
+    events,
+    captured,
+    fulfilledGoods,
+    refunded,
+    refundRequired,
+    refund,
+    riderName,
+  } = tracking.data;
   const waiting = substitutions.filter((sub) => sub.decision === 'pending_customer');
+
+  /*
+    WHAT TO SAY ABOUT THE MONEY COMING BACK.
+
+    `refundView` reads the ledger AND the attempt, which is the only way to
+    tell "we owe you and nobody has started" from "we tried and it did not
+    work" — and those need different sentences. The amount is picked to match
+    the sentence: `completed` is about what went back, everything else is about
+    what is still owed.
+  */
+  const view = refundView(refund);
+  const refundLine = {
+    amountMinor: refundAmountMinor(refund, view),
+    currency: refundRequired.currency,
+  };
+  const refundTone =
+    view === 'completed'
+      ? theme.colors.successSoftText
+      : view === 'failed'
+        ? theme.colors.dangerSoftText
+        : theme.colors.warningSoftText;
 
   return (
     <ScreenScroll bottomInset={theme.spacing.huge} contentGap={theme.spacing.lg}>
@@ -232,22 +264,27 @@ export default function OrderTrackingScreen() {
         <Text variant="footnote" color="textSecondary">
           {t('orders.fulfilled', { amount: formatMoney(fulfilledGoods, { locale }) })}
         </Text>
-        {refundRequired.amountMinor > 0 ? (
+        {view === 'none' ? null : (
           <>
-            <Text
-              variant="headline"
-              style={{ color: theme.colors.warningSoftText }}
-              testID="order-refund-pending"
-            >
-              {t('orders.refundPending', { amount: formatMoney(refundRequired, { locale }) })}
+            <Text variant="headline" style={{ color: refundTone }} testID={`order-refund-${view}`}>
+              {t(`orders.refund.${view}`, { amount: formatMoney(refundLine, { locale }) })}
             </Text>
-            {/* CALCULATED IS NOT PAID, and the customer is told so plainly. */}
-            <Text variant="caption" style={{ color: theme.colors.warningSoftText }}>
-              {t('orders.refundPendingBody')}
+            {/*
+              CALCULATED IS NOT PAID. `refunded` only moves when a provider
+              confirms it, so the only view that claims money has gone back is
+              the one derived from that number.
+            */}
+            <Text variant="caption" style={{ color: refundTone }}>
+              {t(`orders.refund.${view}Body`)}
             </Text>
           </>
-        ) : null}
-        {refunded.amountMinor > 0 ? (
+        )}
+        {/*
+          Both numbers, when both are real. A customer who has had 20 of 60
+          back needs to see the 20 as well as the 40, or the screen reads as
+          though the first refund never happened.
+        */}
+        {refunded.amountMinor > 0 && view !== 'completed' ? (
           <Text variant="footnote" style={{ color: theme.colors.successSoftText }}>
             {t('orders.refunded', { amount: formatMoney(refunded, { locale }) })}
           </Text>

@@ -2,10 +2,12 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 
 import { toAppError } from '@/lib/errors';
 import type { Database, PaymentIntentRow } from '@/lib/supabase/database.types';
-import type {
-  OrderFulfilmentState,
-  PaymentMethod,
-  PaymentState,
+import {
+  REFUND_ATTEMPT_STATES,
+  type OrderFulfilmentState,
+  type OrderRefundStatus,
+  type PaymentMethod,
+  type PaymentState,
 } from '@/types/commerce';
 import type { CurrencyCode, Money } from '@/types/domain';
 
@@ -215,6 +217,15 @@ export type OrderTracking = {
   readonly fulfilledGoods: Money;
   readonly refunded: Money;
   readonly refundRequired: Money;
+  /**
+   * The refund as an EVENT rather than an arithmetic result.
+   *
+   * `refundRequired` above says what the ledger owes. This says whether
+   * anybody has tried to pay it, and how that went — which is the difference
+   * between a screen that says "you are owed 45.00" forever and one that says
+   * "we are sending it back". Null until the first attempt exists.
+   */
+  readonly refund: OrderRefundStatus | null;
   readonly riderName: string | null;
 };
 
@@ -526,7 +537,7 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
     const summary = await this.get(orderId);
     if (!summary) return null;
 
-    const [items, subs, events, position, rider] = await Promise.all([
+    const [items, subs, events, position, refund, rider] = await Promise.all([
       this.client.from('order_items').select('*').eq('order_id', orderId),
       this.client
         .from('order_substitutions')
@@ -539,6 +550,7 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
         .eq('order_id', orderId)
         .order('at', { ascending: true }),
       this.client.rpc('order_refund_position', { p_order_id: orderId }),
+      this.client.rpc('order_refund_status', { p_order_id: orderId }),
       this.client.from('orders').select('rider_name').eq('id', orderId).maybeSingle(),
     ]);
 
@@ -580,6 +592,7 @@ export class SupabaseOrderDraftRepository implements OrderDraftRepository {
       fulfilledGoods: money(financial?.fulfilled_goods_minor ?? 0),
       refunded: money(financial?.refunded_minor ?? 0),
       refundRequired: money(financial?.refund_required_minor ?? 0),
+      refund: toRefundStatus((refund.data ?? [])[0], currency),
       riderName: rider.data?.rider_name ?? null,
     };
   }
@@ -606,6 +619,49 @@ function toAttempt(row: PaymentIntentRow): PaymentAttempt {
     failureCode: row.failure_code,
     failureMessage: row.failure_message,
     createdAt: row.created_at,
+    settledAt: row.settled_at,
+  };
+}
+
+/**
+ * The refund row, as the app reads it.
+ *
+ * `attempt_state` comes back as plain text rather than the enum, because the
+ * left join that produces it may have no row at all — so the narrowing happens
+ * here, once, against the list the types declare, rather than in every screen
+ * that wants to know whether a refund is moving.
+ */
+function toRefundStatus(
+  row:
+    | {
+        currency: string;
+        captured_minor: number;
+        refunded_minor: number;
+        refund_required_minor: number;
+        attempt_state: string | null;
+        attempt_amount_minor: number | null;
+        needs_review: boolean;
+        last_error_code: string | null;
+        requested_at: string | null;
+        settled_at: string | null;
+      }
+    | undefined,
+  fallbackCurrency: CurrencyCode,
+): OrderRefundStatus | null {
+  if (!row) return null;
+
+  const state = REFUND_ATTEMPT_STATES.find((value) => value === row.attempt_state) ?? null;
+
+  return {
+    currency: (row.currency as CurrencyCode) ?? fallbackCurrency,
+    capturedMinor: row.captured_minor,
+    refundedMinor: row.refunded_minor,
+    refundRequiredMinor: row.refund_required_minor,
+    attemptState: state,
+    attemptAmountMinor: row.attempt_amount_minor,
+    needsReview: row.needs_review === true,
+    lastErrorCode: row.last_error_code,
+    requestedAt: row.requested_at,
     settledAt: row.settled_at,
   };
 }

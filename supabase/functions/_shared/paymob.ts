@@ -444,6 +444,9 @@ export function sanitiseCallback(body: Record<string, unknown>): Record<string, 
     is3dSecure: pick(obj.is_3d_secure),
     errorOccured: pick(obj.error_occured),
     hasParentTransaction: pick(obj.has_parent_transaction),
+    // The transaction a refund or void reverses. Without it, a child event is
+    // an amount with nothing to attach it to.
+    parentTransactionId: pick(obj.parent_transaction),
 
     // Already masked by Paymob — the last four digits. Never a full pan.
     sourceType: pick(source.type),
@@ -474,5 +477,171 @@ export function metadataFrom(obj: Record<string, unknown>): Record<string, unkno
     maskedPan: source.pan ?? null,
     is3dSecure: obj.is_3d_secure ?? null,
     integrationId: obj.integration_id ?? null,
+  };
+}
+
+/**
+ * WHICH KIND OF EVENT THIS CALLBACK IS.
+ *
+ * Paymob does not send typed events. Every callback is `type: "TRANSACTION"`,
+ * and what actually happened is spelled out in a handful of booleans on the
+ * transaction itself — which is why `outcomeFrom` reads `success` and
+ * `pending` rather than a status string.
+ *
+ * A REFUND ARRIVES AS A CHILD TRANSACTION. Performing a refund against a
+ * transaction creates a new transaction whose `has_parent_transaction` is true
+ * and whose `is_refunded` is true; the same is true of a void, with
+ * `is_voided`. Both carry their own `id`, which is why the duplicate guard in
+ * `record_payment_event` keys on it and cannot confuse a refund with the
+ * payment it reverses.
+ *
+ * THE PARENT ALSO RE-NOTIFIES on some integrations, with `is_refunded` set on
+ * the ORIGINAL transaction and no parent of its own. That is deliberately read
+ * as an ordinary transaction event: its id is the id we already stored, so the
+ * unique constraint turns it into a duplicate and it changes nothing. Reading
+ * it as a refund is how one refund gets applied twice.
+ */
+export function callbackKind(obj: Record<string, unknown>): 'transaction' | 'refund' | 'void' {
+  const child = obj.has_parent_transaction === true;
+  if (!child) return 'transaction';
+  if (obj.is_refunded === true) return 'refund';
+  if (obj.is_voided === true) return 'void';
+  return 'transaction';
+}
+
+export type RefundOutcome = {
+  /**
+   * `ambiguous` is not a synonym for failure and must never be retried. It
+   * means we do not know whether the money moved — which is the one state
+   * where trying again can pay somebody twice.
+   */
+  readonly outcome: 'succeeded' | 'failed' | 'ambiguous';
+  /** The provider's id for the refund transaction, when it gave us one. */
+  readonly reference: string | null;
+  readonly code: string | null;
+  readonly message: string | null;
+};
+
+/**
+ * Send money back.
+ *
+ * THE CONTRACT, verified against Paymob's current integration reference rather
+ * than recalled:
+ *
+ *   POST {base}/api/acceptance/void_refund/refund
+ *   Authorization: Token {PAYMOB_SECRET_KEY}      -- the literal word `Token`
+ *   { "transaction_id": <the original transaction>, "amount_cents": <minor> }
+ *
+ * `amount_cents` is what makes a PARTIAL refund partial; omitting it is not
+ * how you refund in full, so it is always sent. The transaction id is the one
+ * from the verified callback — never an order id, never our own reference.
+ *
+ * There is a sibling endpoint, `/void_refund/void`, which cancels a payment
+ * before settlement and is CARD ONLY. AKALT never calls it: wallets are in
+ * scope for V1, a flow that works for one payment method and silently fails
+ * for the other is worse than a flow that always refunds, and the accounting
+ * for a void we did not initiate is flagged for a human in
+ * `record_payment_event`.
+ *
+ * THE RESPONSE SHAPE IS NOT DOCUMENTED by Paymob. What comes back in practice
+ * is the refund transaction — the same object a callback carries — so this
+ * reads `success` and `id` defensively and treats anything it cannot
+ * understand as AMBIGUOUS rather than as either outcome. That is the whole
+ * reason the third case exists: Paymob's own guidance is not to auto-retry
+ * after a timeout or an unclear answer, and this function is where that
+ * guidance is obeyed.
+ */
+export async function refundTransaction(
+  config: PaymobConfig,
+  transactionId: string,
+  amountMinor: number,
+): Promise<RefundOutcome> {
+  const numericId = Number.parseInt(transactionId, 10);
+  if (!Number.isFinite(numericId) || numericId <= 0) {
+    // Not ambiguous: nothing was sent, so nothing can have moved.
+    return {
+      outcome: 'failed',
+      reference: null,
+      code: 'no_transaction_id',
+      message: 'the payment attempt carries no usable provider transaction id',
+    };
+  }
+  if (!Number.isInteger(amountMinor) || amountMinor <= 0) {
+    return {
+      outcome: 'failed',
+      reference: null,
+      code: 'bad_amount',
+      message: 'refund amount must be a positive integer in minor units',
+    };
+  }
+
+  let response: Response;
+  try {
+    response = await fetch(`${config.baseUrl}/api/acceptance/void_refund/refund`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${config.secretKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ transaction_id: numericId, amount_cents: amountMinor }),
+    });
+  } catch (error) {
+    // The request may have arrived. We cannot know.
+    return {
+      outcome: 'ambiguous',
+      reference: null,
+      code: 'network_error',
+      message: String(error).slice(0, 300),
+    };
+  }
+
+  const text = await response.text().catch(() => '');
+
+  if (!response.ok) {
+    // 4xx is Paymob refusing: a definite answer, and safe to retry later.
+    // 5xx is Paymob failing to answer, which is not the same thing at all.
+    return {
+      outcome: response.status >= 500 ? 'ambiguous' : 'failed',
+      reference: null,
+      code: `http_${response.status}`,
+      message: text.slice(0, 300),
+    };
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = JSON.parse(text) as Record<string, unknown>;
+  } catch {
+    return {
+      outcome: 'ambiguous',
+      reference: null,
+      code: 'unreadable_response',
+      message: text.slice(0, 300),
+    };
+  }
+
+  const reference = body.id === undefined || body.id === null ? null : String(body.id);
+
+  if (body.success === true) {
+    return { outcome: 'succeeded', reference, code: null, message: null };
+  }
+
+  if (body.success === false) {
+    const failure = failureFrom(body);
+    return {
+      outcome: 'failed',
+      reference,
+      code: failure.code ?? 'refund_refused',
+      message: failure.message,
+    };
+  }
+
+  // 200, readable, and it did not say. That is exactly the case that must not
+  // be guessed at in either direction.
+  return {
+    outcome: 'ambiguous',
+    reference,
+    code: 'no_success_flag',
+    message: text.slice(0, 300),
   };
 }

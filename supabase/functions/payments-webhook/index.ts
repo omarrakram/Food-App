@@ -1,5 +1,6 @@
 import { serviceClient } from '../_shared/auth.ts';
 import {
+  callbackKind,
   failureFrom,
   metadataFrom,
   outcomeFrom,
@@ -68,7 +69,11 @@ Deno.serve(async (request: Request): Promise<Response> => {
   }
 
   const obj = (body.obj ?? {}) as Record<string, unknown>;
-  const kind = typeof body.type === 'string' ? body.type : 'transaction';
+  // NOT `body.type`, which is `TRANSACTION` for a payment, a refund and a void
+  // alike. Paymob says which of the three happened in the booleans on the
+  // transaction, and getting this wrong means a refund callback is applied as
+  // a second payment — see `callbackKind`.
+  const kind = callbackKind(obj);
 
   // The HMAC arrives as a query parameter on the callback URL, and Paymob also
   // places it in the body on some integrations. Both are checked against the
@@ -142,7 +147,7 @@ Deno.serve(async (request: Request): Promise<Response> => {
     return new Response('could not record', { status: 500 });
   }
 
-  if (disposition === 'applied' && outcome === 'succeeded' && intentId) {
+  if (disposition === 'applied' && outcome === 'succeeded' && kind === 'transaction' && intentId) {
     // Attach the provider facts worth keeping. An allow-list, never the raw
     // body: the raw body is in `payment_events`, where nobody can read it.
     await admin

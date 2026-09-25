@@ -1213,6 +1213,46 @@ export const en = {
   'merchant.blocked.order_not_paid': 'This order has not been paid for.',
   'merchant.blocked.unknown': 'That could not be done.',
 
+  // --- Refunds, as the customer reads them ------------------------------------
+  // Five sentences for five different situations. The one that matters most is
+  // `failed`: the debt is still there, and the customer is told that before
+  // they are told anything went wrong.
+  'orders.refund.due': 'Refund owed: {amount}',
+  'orders.refund.dueBody': 'We owe this back to you. It is queued to be sent.',
+  'orders.refund.processing': 'Refund on its way: {amount}',
+  'orders.refund.processingBody': 'We have asked for it to be returned the way you paid.',
+  'orders.refund.partial': 'Still owed: {amount}',
+  'orders.refund.partialBody': 'Part of your money has already gone back. The rest is queued.',
+  'orders.refund.completed': 'Refunded: {amount}',
+  'orders.refund.completedBody': 'This has gone back to the way you paid.',
+  'orders.refund.failed': 'Refund owed: {amount}',
+  'orders.refund.failedBody':
+    'Sending it back did not work. Your money is not lost \u2014 we are sorting it out.',
+
+  // --- Merchant staff and access ----------------------------------------------
+  'merchant.staff.title': 'Who works here',
+  'merchant.staff.open': 'Staff and access',
+  'merchant.staff.empty': 'Nobody yet',
+  'merchant.staff.emptyBody': 'Invite the people who will work orders on this account.',
+  'merchant.staff.role.admin': 'Manager',
+  'merchant.staff.role.operator': 'Picker',
+  'merchant.staff.invite': 'Invite someone',
+  'merchant.staff.email': 'Their email address',
+  'merchant.staff.send': 'Create the invitation',
+  'merchant.staff.token': 'Their code: {token}',
+  'merchant.staff.tokenBody':
+    'It works once, only for that email address, and only for seven days.',
+  'merchant.staff.remove': 'Remove',
+  'merchant.staff.notAllowed': 'Only a manager can change who works here.',
+  'merchant.staff.branch': 'This branch only',
+  'merchant.staff.allBranches': 'Every branch',
+  'merchant.invite.waiting': '{merchant} asked you to work on their orders',
+  'merchant.invite.accept': 'Accept',
+  'merchant.invite.code': 'Have an invitation code?',
+  'merchant.invite.enterCode': 'Invitation code',
+  'merchant.invite.use': 'Use it',
+  'merchant.invite.rejected': 'That code did not work. Check it, or ask for a new one.',
+
   // --- Customer order tracking -----------------------------------------------
   'orders.title': 'My orders',
   'orders.empty': 'No orders yet',

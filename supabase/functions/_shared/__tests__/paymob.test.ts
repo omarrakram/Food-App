@@ -1,11 +1,14 @@
 import { assertEquals } from 'jsr:@std/assert@^1.0.0';
 
 import {
+  callbackKind,
   failureFrom,
   HMAC_FIELDS,
   hmacPayload,
   metadataFrom,
   outcomeFrom,
+  type PaymobConfig,
+  refundTransaction,
   sanitiseCallback,
   signHmac,
   verifyHmac,
@@ -262,6 +265,7 @@ Deno.test('the stored event is exactly the allow-list, and nothing more', () => 
     'isVoided',
     'maskedPan',
     'merchantOrderId',
+    'parentTransactionId',
     'pending',
     'providerOrderId',
     'responseCode',
@@ -345,4 +349,210 @@ Deno.test('a transaction the provider still calls pending stays pending', () => 
   // invite a second payment for the same basket.
   const looked = { ...(fullCallback().obj as Record<string, unknown>), success: false, pending: true };
   assertEquals(outcomeFrom(looked), 'pending');
+});
+
+// --- Refunds ----------------------------------------------------------------
+
+Deno.test('callbackKind reads a payment, a refund and a void apart', () => {
+  assertEquals(callbackKind({ success: true }), 'transaction');
+  assertEquals(
+    callbackKind({ has_parent_transaction: true, is_refunded: true, success: true }),
+    'refund',
+  );
+  assertEquals(
+    callbackKind({ has_parent_transaction: true, is_voided: true, success: true }),
+    'void',
+  );
+});
+
+Deno.test('a refunded PARENT transaction is not a refund event', () => {
+  // The original transaction re-notifying with is_refunded set. Reading this as
+  // a refund would apply the reversal a second time; its id is the payment's
+  // own id, so as a transaction it is caught by the duplicate guard instead.
+  assertEquals(
+    callbackKind({ has_parent_transaction: false, is_refunded: true, success: true }),
+    'transaction',
+  );
+});
+
+Deno.test('a child transaction that is neither refunded nor voided is a transaction', () => {
+  assertEquals(callbackKind({ has_parent_transaction: true, success: true }), 'transaction');
+});
+
+function refundConfig(): PaymobConfig {
+  return {
+    baseUrl: 'https://accept.paymob.test',
+    secretKey: 'sk_test',
+    publicKey: 'pk_test',
+    hmacSecret: 'hmac',
+    cardIntegrationId: 1,
+    walletIntegrationId: 2,
+  };
+}
+
+/** Swaps global fetch for one call, and puts it back afterwards. */
+async function withFetch(
+  handler: (request: Request) => Response | Promise<Response>,
+  run: () => Promise<void>,
+): Promise<void> {
+  const original = globalThis.fetch;
+  globalThis.fetch = ((input: string | URL | Request, init?: RequestInit) =>
+    Promise.resolve(handler(new Request(input as string, init)))) as typeof fetch;
+  try {
+    await run();
+  } finally {
+    globalThis.fetch = original;
+  }
+}
+
+Deno.test('refundTransaction sends the verified Paymob contract', async () => {
+  let seen: { url: string; auth: string | null; body: unknown } | null = null;
+
+  await withFetch(
+    async (request) => {
+      seen = {
+        url: request.url,
+        auth: request.headers.get('Authorization'),
+        body: await request.json(),
+      };
+      return new Response(JSON.stringify({ id: 991, success: true }), { status: 200 });
+    },
+    async () => {
+      const result = await refundTransaction(refundConfig(), '4455', 2500);
+      assertEquals(result.outcome, 'succeeded');
+      assertEquals(result.reference, '991');
+    },
+  );
+
+  assertEquals(seen!.url, 'https://accept.paymob.test/api/acceptance/void_refund/refund');
+  // The literal word `Token`, not `Bearer`. Getting this wrong is a 401 that
+  // reads like a bad key.
+  assertEquals(seen!.auth, 'Token sk_test');
+  assertEquals(seen!.body, { transaction_id: 4455, amount_cents: 2500 });
+});
+
+Deno.test('a partial refund sends the partial amount, not the whole transaction', async () => {
+  let body: unknown = null;
+  await withFetch(
+    async (request) => {
+      body = await request.json();
+      return new Response(JSON.stringify({ id: 1, success: true }), { status: 200 });
+    },
+    async () => {
+      await refundTransaction(refundConfig(), '10', 750);
+    },
+  );
+  assertEquals(body, { transaction_id: 10, amount_cents: 750 });
+});
+
+Deno.test('a refusal is a failure, and retryable', async () => {
+  await withFetch(
+    () =>
+      new Response(JSON.stringify({ id: 12, success: false, data: { message: 'no balance' } }), {
+        status: 200,
+      }),
+    async () => {
+      const result = await refundTransaction(refundConfig(), '10', 100);
+      assertEquals(result.outcome, 'failed');
+      assertEquals(result.message, 'no balance');
+    },
+  );
+});
+
+Deno.test('a 4xx is a definite no', async () => {
+  await withFetch(
+    () => new Response('bad request', { status: 400 }),
+    async () => {
+      const result = await refundTransaction(refundConfig(), '10', 100);
+      assertEquals(result.outcome, 'failed');
+      assertEquals(result.code, 'http_400');
+    },
+  );
+});
+
+Deno.test('a 5xx is AMBIGUOUS, because the refund may still have happened', async () => {
+  await withFetch(
+    () => new Response('boom', { status: 502 }),
+    async () => {
+      const result = await refundTransaction(refundConfig(), '10', 100);
+      assertEquals(result.outcome, 'ambiguous');
+    },
+  );
+});
+
+Deno.test('a torn connection is ambiguous, never a failure', async () => {
+  const original = globalThis.fetch;
+  globalThis.fetch = (() => Promise.reject(new Error('connection reset'))) as typeof fetch;
+  try {
+    const result = await refundTransaction(refundConfig(), '10', 100);
+    assertEquals(result.outcome, 'ambiguous');
+    assertEquals(result.code, 'network_error');
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+Deno.test('a 200 that does not say whether it worked is ambiguous', async () => {
+  await withFetch(
+    () => new Response(JSON.stringify({ id: 5 }), { status: 200 }),
+    async () => {
+      const result = await refundTransaction(refundConfig(), '10', 100);
+      assertEquals(result.outcome, 'ambiguous');
+      assertEquals(result.code, 'no_success_flag');
+    },
+  );
+});
+
+Deno.test('unreadable JSON is ambiguous rather than a guess', async () => {
+  await withFetch(
+    () => new Response('<html>gateway</html>', { status: 200 }),
+    async () => {
+      const result = await refundTransaction(refundConfig(), '10', 100);
+      assertEquals(result.outcome, 'ambiguous');
+      assertEquals(result.code, 'unreadable_response');
+    },
+  );
+});
+
+Deno.test('nothing is sent without a usable transaction id or amount', async () => {
+  let called = 0;
+  await withFetch(
+    () => {
+      called += 1;
+      return new Response('{}', { status: 200 });
+    },
+    async () => {
+      const noId = await refundTransaction(refundConfig(), '', 100);
+      assertEquals(noId.outcome, 'failed');
+      assertEquals(noId.code, 'no_transaction_id');
+
+      const noAmount = await refundTransaction(refundConfig(), '10', 0);
+      assertEquals(noAmount.outcome, 'failed');
+      assertEquals(noAmount.code, 'bad_amount');
+    },
+  );
+  // AND IT IS A FAILURE, NOT AN AMBIGUITY: nothing left the process, so
+  // nothing can have moved, so retrying is safe.
+  assertEquals(called, 0);
+});
+
+Deno.test('sanitiseCallback keeps the parent transaction and no billing block', () => {
+  const kept = sanitiseCallback({
+    type: 'TRANSACTION',
+    obj: {
+      id: 9,
+      parent_transaction: 4,
+      has_parent_transaction: true,
+      is_refunded: true,
+      amount_cents: 500,
+      order: { id: 3, merchant_order_id: 'intent-1' },
+      billing_data: { email: 'someone@example.com', phone_number: '+20100' },
+      source_data: { pan: '1234', type: 'card', sub_type: 'Visa' },
+    },
+  });
+
+  assertEquals(kept.parentTransactionId, 4);
+  assertEquals(kept.isRefunded, true);
+  assertEquals('billing_data' in kept, false);
+  assertEquals(JSON.stringify(kept).includes('someone@example.com'), false);
 });

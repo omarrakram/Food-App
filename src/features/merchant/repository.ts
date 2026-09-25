@@ -9,7 +9,10 @@ import type {
   OrderSubstitutionRow,
 } from '@/lib/supabase/database.types';
 import type {
+  MerchantInvite,
   MerchantMembership,
+  MerchantRole,
+  MerchantStaffMember,
   OrderFulfilmentState,
   SubstitutionDecision,
   SubstitutionPreference,
@@ -131,6 +134,34 @@ export interface MerchantRepository {
   }): Promise<string>;
   /** Replacements the shop may legitimately offer for this line. */
   replacementsFor(orderItemId: string): Promise<readonly ReplacementOption[]>;
+
+  // --- Staff ---------------------------------------------------------------
+  // All five are answered by the server. The dashboard cannot decide who may
+  // manage staff any more than it can decide an order's status: every one of
+  // these refuses for an operator, refuses across merchants, and refuses to
+  // widen a branch admin's scope, and it does so in the database.
+
+  /** Everybody who may act for this shop. Managers and AKALT admins only. */
+  staff(merchantId: string): Promise<readonly MerchantStaffMember[]>;
+  /**
+   * Invite somebody by email.
+   *
+   * Returns the token, because delivering it is the caller's problem in the
+   * pilot — read out, or pasted into a message. A function that pretended to
+   * send email would turn an undelivered invitation into an invisible one.
+   */
+  invite(input: {
+    readonly merchantId: string;
+    readonly email: string;
+    readonly role?: MerchantRole;
+    readonly locationId?: string | null;
+  }): Promise<{ readonly id: string; readonly token: string; readonly expiresAt: string }>;
+  revokeInvite(inviteId: string): Promise<void>;
+  revokeAccess(membershipId: string): Promise<void>;
+  /** Invitations addressed to the signed-in account's own email. */
+  myInvites(): Promise<readonly MerchantInvite[]>;
+  /** Take one up. The server checks the email; the token alone is not enough. */
+  acceptInvite(token: string): Promise<string>;
 }
 
 export type ReplacementOption = {
@@ -161,6 +192,24 @@ export class LocalMerchantRepository implements MerchantRepository {
   }
   async replacementsFor(): Promise<readonly ReplacementOption[]> {
     return [];
+  }
+  async staff(): Promise<readonly MerchantStaffMember[]> {
+    return [];
+  }
+  async invite(): Promise<{ id: string; token: string; expiresAt: string }> {
+    throw new Error('merchant actions need an account');
+  }
+  async revokeInvite(): Promise<void> {
+    throw new Error('merchant actions need an account');
+  }
+  async revokeAccess(): Promise<void> {
+    throw new Error('merchant actions need an account');
+  }
+  async myInvites(): Promise<readonly MerchantInvite[]> {
+    return [];
+  }
+  async acceptInvite(): Promise<string> {
+    throw new Error('merchant actions need an account');
   }
 }
 
@@ -459,5 +508,70 @@ export class SupabaseMerchantRepository implements MerchantRepository {
         };
       })
       .sort((a, b) => Number(b.offerable) - Number(a.offerable) || a.name.localeCompare(b.name));
+  }
+
+  // --- Staff ---------------------------------------------------------------
+
+  async staff(merchantId: string): Promise<readonly MerchantStaffMember[]> {
+    const { data, error } = await this.client.rpc('merchant_staff', { p_merchant: merchantId });
+    if (error) throw toAppError(error, 'database');
+    return (data ?? []).map((row) => ({
+      membershipId: row.membership_id,
+      userId: row.user_id,
+      email: row.email,
+      role: row.role,
+      locationId: row.merchant_location_id,
+      createdAt: row.created_at,
+    }));
+  }
+
+  async invite(input: {
+    readonly merchantId: string;
+    readonly email: string;
+    readonly role?: MerchantRole;
+    readonly locationId?: string | null;
+  }): Promise<{ id: string; token: string; expiresAt: string }> {
+    const { data, error } = await this.client.rpc('invite_merchant_staff', {
+      p_merchant: input.merchantId,
+      p_email: input.email,
+      p_role: input.role ?? 'operator',
+      p_location: input.locationId ?? null,
+    });
+    if (error) throw toAppError(error, 'database');
+    const row = (data ?? [])[0];
+    if (!row) throw new Error('invite_failed');
+    return { id: row.id, token: row.token, expiresAt: row.expires_at };
+  }
+
+  async revokeInvite(inviteId: string): Promise<void> {
+    const { error } = await this.client.rpc('revoke_merchant_invite', { p_invite_id: inviteId });
+    if (error) throw toAppError(error, 'database');
+  }
+
+  async revokeAccess(membershipId: string): Promise<void> {
+    const { error } = await this.client.rpc('revoke_merchant_access', {
+      p_membership_id: membershipId,
+    });
+    if (error) throw toAppError(error, 'database');
+  }
+
+  async myInvites(): Promise<readonly MerchantInvite[]> {
+    const { data, error } = await this.client.rpc('my_merchant_invites', {});
+    if (error) throw toAppError(error, 'database');
+    return (data ?? []).map((row) => ({
+      id: row.id,
+      token: row.token,
+      merchantId: row.merchant_id,
+      merchantName: row.merchant_name,
+      locationId: row.merchant_location_id,
+      role: row.role,
+      expiresAt: row.expires_at,
+    }));
+  }
+
+  async acceptInvite(token: string): Promise<string> {
+    const { data, error } = await this.client.rpc('accept_merchant_invite', { p_token: token });
+    if (error) throw toAppError(error, 'database');
+    return data as string;
   }
 }
