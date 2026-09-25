@@ -4,7 +4,9 @@
 supermarket, tomorrow?
 
 **Answer: no — and the reasons are specific, small in number, and none of them
-is in the commerce engine.** What Commerce-4 through Commerce-7 built works:
+is in the commerce engine.** (Updated after pilot enablement: B1 is resolved,
+four blockers remain, and every one of the four needs something engineering
+cannot produce on its own.) What Commerce-4 through Commerce-7 built works:
 the money, the state machines, the access control and the refunds are done and
 proved. What is missing is everything between that engine and an actual shop.
 
@@ -19,38 +21,24 @@ the real screens (`npm run walk:merchant`, 45 checks).
 
 ## 1. Blockers — a pilot cannot start until these are done
 
-### B1. The app cannot select a real merchant. *(the big one)*
+### ~~B1. The app cannot select a real merchant.~~ **RESOLVED**
 
-`features/commerce/merchant-selection.ts` is static:
+`selectMerchant` now reads `merchants` and `merchant_locations` through
+`findDatabaseMerchant`: enabled, non-demo, in this country, at a branch that is
+accepting orders and that serves an area — preferring the one that serves the
+customer's own saved address. The bundled fixture is the fallback and still
+refuses to construct in a production build, so the two can never both be live.
 
-```ts
-function enabledPartnerFor(_country: CountryCode): SelectedMerchant | null {
-  if (!env.enableGroceryOrdering) return null;
-  return null;                       // ← there is no other branch
-}
-```
+Proved by `npm run walk:pilot` — 24 checks, 0 page errors — against a real
+Postgres through a real PostgREST with the bundled catalogue switched off:
+address in a served area, recipe sourced against the branch's shelf, cart,
+checkout, server-priced draft.
 
-Every commerce screen goes through `selectMerchant()`, and the only thing it
-can return is the BUNDLED demo catalogue. A real supermarket's rows can exist
-in `merchants` and `merchant_locations` — the schema, the RLS, the pricing and
-the fulfilment functions all read them — and **no client code path can reach
-them.**
-
-Compounding it, `data/commerce-demo/merchant.json` ships
-`isAcceptingOrders: false` and a test holds it there, so the one branch the app
-CAN select refuses checkout. That is correct: it is what stops a build ever
-treating the fixture as a partner. The browser walk asserts the refusal rather
-than working around it.
-
-So the customer journey `cart → checkout → pay` cannot be completed by anybody,
-against anything, today.
-
-**What it needs:** `selectMerchant` reading `merchants` + `merchant_locations`
-from the database, asynchronously, with the demo snapshot as a fallback rather
-than the only case. Everything downstream — sourcing, cart, revalidation,
-checkout — already takes a merchant and a location as arguments, so the change
-is at the top rather than throughout. Estimate: one focused phase, not a
-rewrite.
+**One thing it does NOT do, and it is a decision rather than an omission.**
+Every merchant reference table is behind RLS scoped to `authenticated`, so a
+signed-out guest gets no shop at all. Loosening that publishes a partner's
+catalogue and prices to anyone with the anon key, which is theirs to agree to,
+not ours to assume — see R11.
 
 ### B2. There is no way to load a real catalogue
 
@@ -120,6 +108,7 @@ worked.
 | R8 | **Arabic copy for the Commerce-7 strings has not been reviewed by a native speaker.** Refund and staff wording is mine. | Read it before launch; it is 30 strings. |
 | R9 | **Scale is untested.** One branch, one queue, no load test. | A pilot is one branch. Revisit before the second. |
 | R10 | **Rider name and phone are free text.** No verification, no format check. | The shop types what the shop knows. Wrong is better than absent. |
+| R11 | **A guest cannot see a real shop.** Merchant reference tables are `authenticated`-only, so signed-out visitors get "no shop delivers here yet" rather than a catalogue. | Ordering requires an account anyway. Opening it up is a one-line policy change AND a commercial decision about publishing a partner's prices — ask them, do not default it. |
 
 ---
 
@@ -160,11 +149,17 @@ unfinished". It is not.
 
 ## 4. The shortest honest path to a pilot
 
-1. **B1** — make `selectMerchant` read the database. Nothing else can start
-   until a real merchant is selectable.
-2. **B3** — agree the allergen position with the supermarket. It changes what
-   B2 has to import.
-3. **B2** — build the catalogue ingestion their feed actually needs.
-4. **B5** — deploy, with **B4**'s credentials, and make one real 10 EGP charge
-   and one real refund against it before any customer sees the app.
-5. Run the pilot with R1–R4 handled by a person, daily, on purpose.
+1. ~~**B1**~~ — done.
+2. **B5 (staging first)** — a staging Supabase project and **B4**'s Paymob
+   SANDBOX credentials. `STAGING.md` is the runbook and names exactly what is
+   needed; `scripts/deploy-staging.sh` and `scripts/verify-staging.mjs` do the
+   rest. Make one sandbox card payment, one sandbox wallet payment and one
+   sandbox refund before anything else is believed.
+3. **B3** — agree the allergen position with the supermarket. Send them
+   `CATALOGUE_FEED_SPEC.md`; the answer changes what B2 has to import.
+4. **B2** — build the importer for the format they actually send. Not a
+   generic framework: their file, their fields.
+5. Configure the partner's merchant, branch, delivery areas and catalogue in
+   staging, and re-run `walk:pilot` against it.
+6. Then production, and run the pilot with R1–R4 handled by a person, daily,
+   on purpose.
