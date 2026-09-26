@@ -18,6 +18,7 @@
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
   // `scripts/` and `supabase/functions/` are Node and Deno programs. They are
   // type-checked by their own configs, because React Native module resolution
-  // cannot resolve Node built-ins or Deno's URL imports.
-  "exclude": ["node_modules", "dist", "coverage", "scripts", "supabase/functions"]
+  // cannot resolve Node built-ins or Deno's URL imports. `popspot/` is a
+  // separate Vite web project with its own package.json and tsconfig.
+  "exclude": ["node_modules", "dist", "coverage", "scripts", "supabase/functions", "popspot"]
 }

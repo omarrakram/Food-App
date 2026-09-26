@@ -7,7 +7,15 @@ module.exports = defineConfig([
   expoConfig,
   prettierConfig,
   {
-    ignores: ['dist/*', '.expo/*', 'node_modules/*', 'supabase/functions/*', 'coverage/*'],
+    ignores: [
+      'dist/*',
+      '.expo/*',
+      'node_modules/*',
+      'supabase/functions/*',
+      'coverage/*',
+      // A separate Vite web project with its own toolchain.
+      'popspot/*',
+    ],
   },
   {
     rules: {

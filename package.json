@@ -74,6 +74,7 @@
           "/.expo/",
           "/dist/",
           "/supabase/functions/",
+          "/popspot/",
           "\\.web\\.test\\.[jt]sx?$"
         ],
         "transformIgnorePatterns": [
