@@ -65,11 +65,11 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
 
   gsap.set(s1, { visibility: 'visible' });
   hidden([s2, s3, s4, s5, s6], chrome, cursor, $('bag-1'), $('s3-add-1'));
-  gsap.set(chrome, { color: 'var(--ink)' });
+  gsap.set([...chrome, cursor], { color: 'var(--ink)' });
   gsap.set($('bag-dot'), { opacity: 0 });
   gsap.set(cursor, { x: 70 * cw, y: 50 * ch });
-  const inkChrome = (t: number) => tl.set(chrome, { color: 'var(--ink)' }, t);
-  const paperChrome = (t: number) => tl.set(chrome, { color: 'var(--paper)' }, t);
+  const inkChrome = (t: number) => tl.set([...chrome, cursor], { color: 'var(--ink)' }, t);
+  const paperChrome = (t: number) => tl.set([...chrome, cursor], { color: 'var(--paper)' }, t);
   const click = (t: number) => {
     tl.set(ring, { opacity: 1, scale: 0.6 }, t);
     tl.to(ring, { scale: 2.4, opacity: 0, duration: 0.35, ease: 'expo.out' }, t);
@@ -84,9 +84,10 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const metaLines = Array.from($('s1-meta').children);
   const origin = `${L.word.cx} ${L.word.cy}`;
   hidden([plateK, plateR, photo], metaLines);
-  // the photograph lives in a band that travels up the word and settles on its middle
-  const band = H * 0.4;
-  gsap.set(wipe, { attr: { y: H, height: band } });
+  // the photograph lives in a band that travels along the word, in reading
+  // direction, and settles on its middle
+  if (L.portrait) gsap.set(wipe, { attr: { x: 0, width: W, y: H, height: H * 0.4 } });
+  else gsap.set(wipe, { attr: { x: -W * 0.42, width: W * 0.42, y: 0, height: H } });
 
   hide(cover, B.stamp);
   show([plateK, plateR, ...chrome], B.stamp);
@@ -101,7 +102,7 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   tl.set(plateR, { x: 0, y: 0 }, B.snap);
 
   show(photo, B.snap);
-  tl.to(wipe, { attr: { y: H * 0.3 }, duration: 0.78, ease: 'expo.out' }, B.snap + 0.04);
+  tl.to(wipe, { attr: L.portrait ? { y: H * 0.3 } : { x: W * 0.3 }, duration: 0.78, ease: 'expo.out' }, B.snap + 0.04);
   tl.fromTo(photo, { y: 4 * ch }, { y: -4 * ch, duration: 1.45, ease: 'sine.inOut' }, B.snap);
   metaLines.forEach((line, i) => show(line, 0.8 + i * 0.07));
   tl.fromTo(s1.querySelector('svg'), { scale: 1 }, { scale: 1.025, transformOrigin: '58% 50%', duration: 1.4, ease: 'sine.inOut' }, B.snap);
@@ -133,11 +134,13 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   // the type is placed, not animated: slid in, left alone, slid out
   tl.fromTo(w1, { x: 60 * cw }, { x: 0, duration: 0.5, ease: 'expo.out' }, B.words);
   tl.fromTo([w2, w2i], { x: -60 * cw }, { x: 0, duration: 0.5, ease: 'expo.out' }, B.words + 0.12);
-  tl.to(w1, { x: -1.6 * cw, duration: 1.05 }, B.words + 0.5);
-  tl.to([w2, w2i], { x: 1.6 * cw, duration: 0.93 }, B.words + 0.62);
+  const exit1 = B.nothing - 0.56;
+  const exit2 = B.nothing - 0.5;
+  tl.to(w1, { x: -1.6 * cw, duration: exit1 - (B.words + 0.5) }, B.words + 0.5);
+  tl.to([w2, w2i], { x: 1.6 * cw, duration: exit2 - (B.words + 0.62) }, B.words + 0.62);
   show(un, 2.62);
-  tl.to(w1, { x: -110 * cw, duration: 0.34, ease: 'expo.in' }, B.nothing - 0.56);
-  tl.to([w2, w2i], { x: 110 * cw, duration: 0.34, ease: 'expo.in' }, B.nothing - 0.5);
+  tl.to(w1, { x: -110 * cw, duration: 0.34, ease: 'expo.in' }, exit1);
+  tl.to([w2, w2i], { x: 110 * cw, duration: 0.34, ease: 'expo.in' }, exit2);
   hide(un, B.nothing - 0.3);
   // silence, then two words
   show(n1, B.nothing);
@@ -289,12 +292,21 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   // ================================================================ CURSOR
   const cx = (v: number) => v * cw;
   const cy = (v: number) => v * ch;
+  // click targets are measured, so copy edits never desync the choreography
+  const stageRect = root.getBoundingClientRect();
+  const target = (el: HTMLElement, fx = 0.3, fy = 0.55) => {
+    const r = el.getBoundingClientRect();
+    return { x: r.left - stageRect.left + r.width * fx, y: r.top - stageRect.top + r.height * fy };
+  };
+  const addAt = target($('s3-add'));
+  const sizeAt = target($('s5-size-M'), 0.5, 0.6);
+  if (!cursorLive) {
   show(cursor, B.cat01 + 0.12);
   tl.fromTo(cursor, { x: cx(92), y: cy(68) }, { x: cx(60), y: cy(47), duration: 0.8, ease: 'power3.out' }, B.cat01 + 0.12);
   // the garment answers the pointer by a few pixels
   tl.to(tee, { x: -0.9 * cw, y: -0.5 * ch, duration: 0.8, ease: 'power3.out' }, B.cat01 + 0.66);
   tl.to(cursor, { x: cx(70), y: cy(58), duration: 0.9, ease: 'power2.inOut' }, B.cat109);
-  tl.to(cursor, { x: cx(17), y: cy(77.6), duration: 0.5, ease: 'power3.inOut' }, B.add - 0.52);
+  tl.to(cursor, { x: addAt.x, y: addAt.y, duration: 0.5, ease: 'power3.inOut' }, B.add - 0.52);
   click(B.add);
   tl.set($('s3-add-0'), { visibility: 'hidden' }, B.add + 0.02);
   tl.set($('s3-add-1'), { visibility: 'visible' }, B.add + 0.02);
@@ -307,15 +319,16 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   // S5: the pointer crosses the garment; a band of red plate follows it
   show(cursor, B.print + 0.35);
   tl.fromTo(cursor, { x: cx(98), y: cy(40) }, { x: cx(8), y: cy(44), duration: 1.3, ease: 'sine.inOut' }, B.print + 0.35);
-  tl.to(cursor, { x: cx(15.6), y: cy(82.4), duration: 0.42, ease: 'power3.inOut' }, B.print + 1.4);
+  tl.to(cursor, { x: sizeAt.x, y: sizeAt.y, duration: 0.42, ease: 'power3.inOut' }, B.print + 1.4);
   click(B.print + 1.84);
   tl.set($('s5-size-M'), { color: 'var(--red)' }, B.print + 1.86);
   hide(cursor, B.strip);
+  }
 
   const bandW = 0.11;
   const updateBand = () => {
     const t = tl.time();
-    if (t < B.print + 0.35 || t > B.strip) return;
+    if (t < B.print + (cursorLive ? 0.15 : 0.35) || t > B.strip) return;
     const x = gsap.getProperty(cursor, 'x') as number;
     const y = gsap.getProperty(cursor, 'y') as number;
     const r = prod.getBoundingClientRect();
@@ -377,14 +390,23 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
         grain.style.transform = `translate(${(h % 256) - 128}px, ${((h >>> 8) % 256) - 128}px)`;
       }
     }
-    if (!cursorLive) {
-      const x = gsap.getProperty(cursor, 'x') as number;
-      const y = gsap.getProperty(cursor, 'y') as number;
-      xy.textContent = `X ${String(Math.round((x / W) * 1080)).padStart(4, '0')} Y ${String(Math.round((y / H) * 1920)).padStart(4, '0')}`;
-    }
+    if (!cursorLive) writeXY();
     scanT.textContent = `SCAN ${((gsap.getProperty(scan, 'x') as number) / W).toFixed(3)}`;
     updateBand();
   });
 
-  return tl;
+  function writeXY() {
+    const x = gsap.getProperty(cursor, 'x') as number;
+    const y = gsap.getProperty(cursor, 'y') as number;
+    const [rw, rh] = L.portrait ? [1080, 1920] : [W, H];
+    xy.textContent = `X ${String(Math.round((x / W) * rw)).padStart(4, '0')} Y ${String(Math.round((y / H) * rh)).padStart(4, '0')}`;
+  }
+
+  /** live pointer (site mode): coordinates + the red plate band */
+  const pointer = () => {
+    writeXY();
+    updateBand();
+  };
+
+  return { tl, pointer };
 }

@@ -12,6 +12,6 @@ export const credits = {
   concept: 'UNOFFICIAL DIGITAL CONCEPT',
   role: 'DESIGN + DEVELOPMENT',
   author: 'OMAR AKRAM',
-  disclaimer: 'INDEPENDENT CONCEPT — NOT AFFILIATED WITH NOTHING PERSONAL',
+  disclaimer: 'NOT AFFILIATED WITH NOTHING PERSONAL',
   rights: 'Brand names, products and photography remain the property of their respective owners.',
 };

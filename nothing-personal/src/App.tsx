@@ -2,7 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { loadAssets, type Assets } from './lib/assets';
 import { computeLayout, type Layout } from './lib/layout';
 import { buildTimeline, DURATION } from './lib/timeline';
-import { grainTexture } from './lib/grain';
+import { runSite, TRACK_VH } from './lib/site';
+import { grainTexture, inkTexture } from './lib/grain';
 import { Hook, Manifesto, Catalogue, Separation, Detail, Ending, Chrome } from './Scenes';
 
 const params = new URLSearchParams(location.search);
@@ -24,6 +25,7 @@ async function fontsReady() {
 function stageSize() {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
+  if (!SHOWCASE) return { W: vw, H: vh };
   const W = Math.floor(Math.min(vw, (vh * 9) / 16));
   return { W, H: Math.round((W * 16) / 9) };
 }
@@ -38,6 +40,7 @@ declare global {
       seek: (t: number) => void;
       play: () => void;
       pause: () => void;
+      time: () => number;
     };
   }
 }
@@ -48,11 +51,14 @@ export function App() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [time, setTime] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const prepRef = useRef<number | null>(null);
 
   // load fonts + images, then measure
   useEffect(() => {
+    if (!SHOWCASE && 'scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (!SHOWCASE) window.scrollTo(0, 0);
     let alive = true;
     Promise.all([fontsReady(), loadAssets()]).then(([, a]) => {
       if (!alive) return;
@@ -60,10 +66,13 @@ export function App() {
       setAssets(a);
       setL(computeLayout(W, H));
     });
+    let id = 0;
     const onResize = () => {
-      if (!document.fonts) return;
-      const { W, H } = stageSize();
-      setL((prev) => (prev && prev.W === W && prev.H === H ? prev : computeLayout(W, H)));
+      clearTimeout(id);
+      id = window.setTimeout(() => {
+        const { W, H } = stageSize();
+        setL((prev) => (!prev || (prev.W === W && prev.H === H) ? prev : computeLayout(W, H)));
+      }, 150);
     };
     window.addEventListener('resize', onResize);
     return () => {
@@ -76,21 +85,28 @@ export function App() {
   useLayoutEffect(() => {
     if (!assets || !L || !stageRef.current) return;
     const prev = tlRef.current;
-    const at = prev ? prev.time() : SEEK ?? 0;
+    const at = prev ? prev.time() : (SEEK ?? 0);
     const wasPlaying = prev ? prev.isActive() : false;
     prev?.kill();
-    const tl = buildTimeline({ root: stageRef.current, L, cursorLive: false });
-    tl.eventCallback('onComplete', () => setPhase('done'));
+    const { tl, pointer } = buildTimeline({ root: stageRef.current, L, cursorLive: !SHOWCASE });
     tlRef.current = tl;
-    tl.time(at, false);
-    if (wasPlaying) tl.play();
     window.__np = {
       ready: true,
       duration: DURATION,
-      seek: (t) => tl.pause(t, false),
-      play: () => tl.play(),
-      pause: () => tl.pause(),
+      seek: (t) => void tl.pause(t, false),
+      play: () => void tl.play(),
+      pause: () => void tl.pause(),
+      time: () => tl.time(),
     };
+
+    if (!SHOWCASE) {
+      tl.time(at, false);
+      return runSite(stageRef.current, trackRef.current!, tl, pointer, L);
+    }
+
+    tl.eventCallback('onComplete', () => setPhase('done'));
+    tl.time(at, false);
+    if (wasPlaying) tl.play();
     if (SEEK !== null && !prev) setPhase('paused');
     else if (AUTOPLAY && !prev) start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,8 +124,9 @@ export function App() {
     }, PREP_MS);
   };
 
-  // keys: R replay · SPACE play/pause · ESC reset
+  // showcase keys: R replay · SPACE play/pause · ESC reset · ←/→ step
   useEffect(() => {
+    if (!SHOWCASE) return;
     const onKey = (e: KeyboardEvent) => {
       const tl = tlRef.current;
       if (!tl) return;
@@ -129,8 +146,10 @@ export function App() {
         tl.pause(0);
         setPhase('idle');
       } else if (e.key === 'Enter' && phase === 'idle') start();
-      else if (e.key === 'ArrowRight' && tl.paused()) tl.time(Math.min(DURATION, tl.time() + (e.shiftKey ? 1 : 1 / 30)));
-      else if (e.key === 'ArrowLeft' && tl.paused()) tl.time(Math.max(0, tl.time() - (e.shiftKey ? 1 : 1 / 30)));
+      else if (e.key === 'ArrowRight' && tl.paused())
+        tl.time(Math.min(DURATION, tl.time() + (e.shiftKey ? 1 : 1 / 30)));
+      else if (e.key === 'ArrowLeft' && tl.paused())
+        tl.time(Math.max(0, tl.time() - (e.shiftKey ? 1 : 1 / 30)));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -143,41 +162,53 @@ export function App() {
     return () => clearInterval(id);
   }, [phase]);
 
-  if (!assets || !L) return <div className="shell-showcase" />;
+  if (!assets || !L) return <div className={SHOWCASE ? 'shell-showcase' : 'site-blank'} />;
+
+  const stage = (
+    <div
+      className="stage"
+      ref={stageRef}
+      style={{ width: L.W, height: L.H, ['--ink-tex' as string]: `url(${inkTexture()})` }}
+      data-landscape={L.portrait ? undefined : ''}
+    >
+      <Hook assets={assets} L={L} />
+      <Manifesto assets={assets} L={L} />
+      <Catalogue assets={assets} L={L} />
+      <Separation assets={assets} L={L} />
+      <Detail assets={assets} L={L} />
+      <Ending assets={assets} L={L} />
+      <Chrome assets={assets} />
+      <div className="grain" style={{ backgroundImage: `url(${grainTexture()})` }} />
+      {SAFE && (
+        <div className="safe">
+          <div style={{ left: 0, right: 0, top: 0, height: '8.5%' }} />
+          <div style={{ left: 0, right: 0, bottom: 0, height: '21%' }} />
+          <div style={{ right: 0, top: '38%', bottom: '21%', width: '13%' }} />
+        </div>
+      )}
+      {SHOWCASE && phase === 'idle' && SEEK === null && !AUTOPLAY && (
+        <button className="start" onClick={start}>
+          <span>START — ENTER</span>
+        </button>
+      )}
+    </div>
+  );
+
+  if (!SHOWCASE) {
+    return (
+      <div className="site" ref={trackRef} style={{ height: `${TRACK_VH}vh` }}>
+        {stage}
+      </div>
+    );
+  }
 
   const hudVisible = phase === 'paused' || phase === 'done' || phase === 'idle';
   return (
-    <div className="shell-showcase" data-mode={SHOWCASE ? 'showcase' : 'site'}>
-      <div
-        className="stage"
-        ref={stageRef}
-        style={{ width: L.W, height: L.H }}
-        data-portrait={L.portrait ? '' : undefined}
-      >
-        <Hook assets={assets} L={L} />
-        <Manifesto assets={assets} L={L} />
-        <Catalogue assets={assets} L={L} />
-        <Separation assets={assets} L={L} />
-        <Detail assets={assets} L={L} />
-        <Ending assets={assets} L={L} />
-        <Chrome />
-        <div className="grain" style={{ backgroundImage: `url(${grainTexture()})` }} />
-        {SAFE && (
-          <div className="safe">
-            <div style={{ left: 0, right: 0, top: 0, height: '8.5%' }} />
-            <div style={{ left: 0, right: 0, bottom: 0, height: '21%' }} />
-            <div style={{ right: 0, top: '38%', bottom: '21%', width: '13%' }} />
-          </div>
-        )}
-        {phase === 'idle' && SEEK === null && !AUTOPLAY && (
-          <button className="start" onClick={start}>
-            <span>START — ENTER</span>
-          </button>
-        )}
-      </div>
+    <div className="shell-showcase">
+      {stage}
       {hudVisible && SEEK === null && !AUTOPLAY && (
         <div className="hud">
-          {time.toFixed(2)} / {DURATION.toFixed(2)} — R replay · space play/pause · esc reset · ←/→ step
+          {`${time.toFixed(2)} / ${DURATION.toFixed(2)}\nR  replay\nSPACE  play / pause\nESC  reset\n← →  step`}
         </div>
       )}
     </div>

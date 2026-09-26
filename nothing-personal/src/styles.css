@@ -70,6 +70,12 @@ img {
   cursor: none;
 }
 .stage {
+  --fs-mono: 1.75cqw;
+  --fs-mono-l: 1.9cqw;
+  --fs-micro: 1.6cqw;
+  --fs-nano: 1.45cqw;
+  --fs-navbrand: 2.2cqw;
+  --ch-size: 3.2cqw;
   position: relative;
   overflow: hidden;
   container-type: size;
@@ -124,7 +130,7 @@ img {
 .s1-meta {
   right: 6cqw;
   top: 11.5cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   text-align: right;
   color: var(--ink);
 }
@@ -141,7 +147,7 @@ img {
 .s1-count {
   left: 7cqw;
   top: 51.5cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--grey);
 }
 
@@ -193,7 +199,7 @@ img {
 .s2-meta {
   left: 6.3cqw;
   top: 11.5cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--grey-2);
 }
 .s2-n1 {
@@ -248,8 +254,15 @@ img {
 .s3-jorts img {
   width: 100%;
 }
+/* white product backgrounds disappear into the paper (on the transformed
+   wrapper: a transform isolates blending from anything inside it) */
+.s3-tee,
+.s3-jorts,
+.s5-prod {
+  mix-blend-mode: multiply;
+}
 .s3-label {
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--ink);
 }
 .s3-name {
@@ -272,17 +285,24 @@ img {
   background-clip: text;
 }
 .s3-b-label {
-  left: 52cqw;
-  top: 39cqh;
+  left: 46cqw;
+  top: 33.5cqh;
 }
 .s3-b-name {
-  left: 51.5cqw;
-  top: 45.4cqh;
+  left: 45.5cqw;
+  top: 39.9cqh;
 }
 .s3-jorts {
   left: 19cqw;
   top: 10.5cqh;
   width: 116cqw;
+}
+.s3-raw,
+.s6-author-r {
+  -webkit-mask-image: var(--ink-tex);
+  mask-image: var(--ink-tex);
+  -webkit-mask-size: 160px;
+  mask-size: 160px;
 }
 .s3-raw {
   left: 5cqw;
@@ -294,7 +314,7 @@ img {
 .s3-info {
   left: 6.3cqw;
   top: 61cqh;
-  font-size: 1.9cqw;
+  font-size: var(--fs-mono-l);
   color: var(--ink);
 }
 .s3-add {
@@ -351,13 +371,13 @@ img {
   position: absolute;
   top: 16cqh;
   left: 1.4cqw;
-  font-size: 1.6cqw;
+  font-size: var(--fs-micro);
   color: var(--red);
 }
 .s4-label {
   left: 6.3cqw;
   top: 11.5cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--paper);
 }
 
@@ -384,7 +404,7 @@ img {
 .s5-band {
   position: absolute;
   inset: 0;
-  background: var(--paper);
+  background: #fff;
 }
 .s5-band img {
   width: 100%;
@@ -392,7 +412,7 @@ img {
 .s5-info {
   left: 6.3cqw;
   top: 64cqh;
-  font-size: 1.9cqw;
+  font-size: var(--fs-mono-l);
   color: var(--ink);
 }
 .s5-sizes span {
@@ -413,20 +433,34 @@ img {
 .s6-logo {
   left: 6.3cqw;
   top: 40cqh;
-  width: 70cqw;
-  filter: invert(1);
+  width: 62cqw;
   transform-origin: 0 0;
+}
+.logo-mask {
+  background: currentColor;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+}
+.nav-logo {
+  height: 2.4cqw;
+}
+.stage[data-landscape] .nav-logo {
+  height: 1.05cqw;
 }
 .s6-concept {
   left: 6.6cqw;
   top: 36cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--grey-2);
 }
 .s6-by {
   left: 6.6cqw;
   top: 47.6cqh;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
   color: var(--grey);
 }
 .s6-author-wrap {
@@ -445,7 +479,7 @@ img {
 .s6-disc {
   left: 6.6cqw;
   top: 66cqh;
-  font-size: 1.6cqw;
+  font-size: var(--fs-micro);
   color: var(--grey);
 }
 
@@ -464,14 +498,14 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 1.75cqw;
+  font-size: var(--fs-mono);
 }
 .nav-brand {
   font-family: var(--display);
   font-stretch: 100%;
   font-weight: 700;
   letter-spacing: 0.02em;
-  font-size: 2.2cqw;
+  font-size: var(--fs-navbrand);
 }
 .nav-links > span {
   margin-left: 3.2cqw;
@@ -498,7 +532,7 @@ img {
   position: absolute;
   left: 5.5cqw;
   bottom: 2.6cqh;
-  font-size: 1.6cqw;
+  font-size: var(--fs-micro);
 }
 .tc-right {
   left: auto;
@@ -515,26 +549,26 @@ img {
 .cursor .ch-h,
 .cursor .ch-v {
   position: absolute;
-  background: var(--ink);
+  background: currentColor;
 }
 .cursor .ch-h {
   left: -1.6cqw;
   top: 0;
-  width: 3.2cqw;
+  width: var(--ch-size);
   height: 1px;
 }
 .cursor .ch-v {
   top: -1.6cqw;
   left: 0;
   width: 1px;
-  height: 3.2cqw;
+  height: var(--ch-size);
 }
 .cursor .ch-xy {
   position: absolute;
   left: 1.6cqw;
   top: 1cqw;
-  font-size: 1.45cqw;
-  color: var(--ink);
+  font-size: var(--fs-nano);
+  color: currentColor;
 }
 .cursor .ch-ring {
   position: absolute;
@@ -573,7 +607,8 @@ img {
   position: fixed;
   left: 16px;
   bottom: 14px;
-  font: 11px/1.5 var(--mono);
+  white-space: pre;
+  font: 10px/1.6 var(--mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #8d877d;
@@ -584,7 +619,8 @@ img {
   inset: 0;
   z-index: 90;
   display: grid;
-  place-items: center;
+  place-items: end center;
+  padding-bottom: 30cqh;
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -595,4 +631,245 @@ img {
 .start span {
   border: 1px solid rgba(232, 227, 217, 0.5);
   padding: 12px 16px 11px;
+}
+
+/* ---------- site mode ---------- */
+.site {
+  position: relative;
+  background: var(--ink);
+}
+.site .stage {
+  position: sticky;
+  top: 0;
+}
+.site-blank {
+  min-height: 100vh;
+  background: var(--ink);
+}
+.site-only {
+  display: none;
+}
+.site .site-only {
+  display: block;
+}
+.site .hit {
+  pointer-events: auto;
+  cursor: none;
+}
+.site .hit:hover {
+  color: var(--red);
+}
+.site .stage {
+  cursor: none;
+}
+.site .nav-links > span {
+  pointer-events: auto;
+  cursor: none;
+  background: linear-gradient(var(--red), var(--red)) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+.site .nav-links > span:hover {
+  background-size: 100% 1px;
+}
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 2.6cqh;
+  transform: translateX(-50%);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.3em;
+  opacity: 0;
+}
+.s6-rights {
+  margin-top: 1.4em;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.cursor.is-hot .ch-ring {
+  opacity: 1 !important;
+  transform: scale(1.4);
+}
+
+/* ---------- landscape (desktop) composition ---------- */
+.stage[data-landscape] {
+  --fs-mono: 0.74cqw;
+  --fs-mono-l: 0.8cqw;
+  --fs-micro: 0.68cqw;
+  --fs-nano: 0.64cqw;
+  --fs-navbrand: 0.95cqw;
+  --ch-size: 1.3cqw;
+}
+.stage[data-landscape] .nav {
+  top: 3.6cqh;
+  left: 3cqw;
+  right: 3cqw;
+}
+.stage[data-landscape] .nav-links > span {
+  margin-left: 2.2cqw;
+}
+.stage[data-landscape] .tc {
+  left: 3cqw;
+  bottom: 3.4cqh;
+}
+.stage[data-landscape] .tc-right {
+  left: auto;
+  right: 3cqw;
+}
+.stage[data-landscape] .cursor .ch-xy {
+  left: 0.8cqw;
+  top: 0.5cqw;
+}
+.stage[data-landscape] .cursor .ch-ring {
+  left: -0.7cqw;
+  top: -0.7cqw;
+  width: 1.4cqw;
+  height: 1.4cqw;
+}
+/* S1 */
+.stage[data-landscape] .s1-nothing {
+  left: 3.2cqw;
+  top: 26cqh;
+  font-size: 2.9cqw;
+}
+.stage[data-landscape] .s1-meta {
+  right: 3cqw;
+  top: 13cqh;
+}
+/* S2 */
+.stage[data-landscape] .s2-meta {
+  left: 3.2cqw;
+  top: 13cqh;
+}
+.stage[data-landscape] .s2-word {
+  left: 3cqw;
+}
+.stage[data-landscape] .s2-w1 {
+  top: 27cqh;
+}
+.stage[data-landscape] .s2-w2 {
+  top: 45cqh;
+}
+.stage[data-landscape] .s2-un {
+  left: 3.3cqw;
+  top: 68cqh;
+  font-size: 2.4cqw;
+}
+.stage[data-landscape] .s2-clip {
+  left: 62cqw;
+  top: 14cqh;
+  width: 26cqw;
+  height: 72cqh;
+}
+.stage[data-landscape] .s2-inner {
+  left: -62cqw;
+  top: -14cqh;
+}
+.stage[data-landscape] .s2-n1 {
+  left: 3cqw;
+  top: 34cqh;
+}
+.stage[data-landscape] .s2-n2 {
+  left: 3.4cqw;
+  top: 62cqh;
+  font-size: 2.8cqw;
+}
+/* S3 */
+.stage[data-landscape] .s3-num {
+  font-size: 104cqh;
+}
+.stage[data-landscape] .s3-zero,
+.stage[data-landscape] .s3-one {
+  top: 10cqh;
+}
+.stage[data-landscape] .s3-zero {
+  left: 8cqw;
+}
+.stage[data-landscape] .s3-one {
+  left: 35cqw;
+}
+.stage[data-landscape] .s3-tee {
+  left: 7.5cqw;
+  top: 27cqh;
+  width: 27cqw;
+}
+.stage[data-landscape] .s3-name {
+  font-size: 3.6cqw;
+}
+.stage[data-landscape] .s3-a-label {
+  left: 70cqw;
+  top: 62cqh;
+}
+.stage[data-landscape] .s3-a-name {
+  left: 76cqw;
+  top: 61.6cqh;
+}
+.stage[data-landscape] .s3-b-label {
+  left: 84cqw;
+  top: 70cqh;
+}
+.stage[data-landscape] .s3-b-name {
+  left: 83.7cqw;
+  top: 75cqh;
+}
+.stage[data-landscape] .s3-jorts {
+  left: 38cqw;
+  top: -4cqh;
+  width: 56cqw;
+}
+.stage[data-landscape] .s3-raw {
+  left: 26cqw;
+  top: 44cqh;
+  font-size: 22cqw;
+}
+.stage[data-landscape] .s3-info {
+  left: 3.2cqw;
+  top: 58cqh;
+}
+/* S4 */
+.stage[data-landscape] .s4-word {
+  left: 2.5cqw;
+}
+.stage[data-landscape] .s4-word > div {
+  display: inline;
+}
+.stage[data-landscape] .s4-label {
+  left: 3.2cqw;
+  top: 13cqh;
+}
+/* S5 */
+.stage[data-landscape] .s5-prod {
+  left: 30cqw;
+  top: 12cqh;
+  width: 36cqw;
+}
+.stage[data-landscape] .s5-num {
+  right: -4cqw;
+  top: 26cqh;
+  font-size: 92cqh;
+}
+.stage[data-landscape] .s5-info {
+  left: 3.2cqw;
+  top: 56cqh;
+}
+/* S6 */
+.stage[data-landscape] .s6-brand,
+.stage[data-landscape] .s6-logo {
+  left: 3cqw;
+  top: 36cqh;
+}
+.stage[data-landscape] .s6-concept {
+  left: 3.2cqw;
+  top: 36cqh;
+}
+.stage[data-landscape] .s6-by {
+  left: 3.2cqw;
+  top: 44cqh;
+}
+.stage[data-landscape] .s6-author-wrap {
+  left: 3cqw;
+  top: 47cqh;
+}
+.stage[data-landscape] .s6-disc {
+  left: 3.2cqw;
+  top: 72cqh;
 }

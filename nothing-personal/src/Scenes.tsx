@@ -11,6 +11,41 @@ interface Props {
 const STRIPS = 7;
 export const STRIP_COUNT = STRIPS;
 
+/**
+ * The official logo when it has been downloaded, drawn through its alpha so
+ * it takes the colour of the scene; otherwise the name, set in type.
+ */
+function Wordmark({ assets, className, style, k, children }: {
+  assets: Assets;
+  className: string;
+  style?: CSSProperties;
+  k?: string;
+  children: string;
+}) {
+  const logo = assets.logo;
+  if (!logo) {
+    return (
+      <div className={className} data-k={k} style={style}>
+        {children}
+      </div>
+    );
+  }
+  return (
+    <div
+      className={`${className} logo-mask`}
+      data-k={k}
+      role="img"
+      aria-label="Nothing Personal"
+      style={{
+        ...style,
+        aspectRatio: `${logo.w} / ${logo.h}`,
+        WebkitMaskImage: `url(${logo.src})`,
+        maskImage: `url(${logo.src})`,
+      }}
+    />
+  );
+}
+
 function WordText({ L, fill }: { L: Layout; fill?: string }) {
   const w = L.word;
   return (
@@ -29,6 +64,9 @@ function WordText({ L, fill }: { L: Layout; fill?: string }) {
 
 export function Hook({ assets, L }: Props) {
   const hook = assets.hook!;
+  // auto-exposure: whatever photograph arrives, it prints into the red at
+  // the same density
+  const exposure = Math.min(1.9, Math.max(0.85, 0.6 / Math.max(0.05, hook.mean)));
   return (
     <section className="scene s1" data-k="s1">
       <svg className="s1-svg" viewBox={`0 0 ${L.W} ${L.H}`} aria-label="Personal.">
@@ -49,6 +87,7 @@ export function Hook({ assets, L }: Props) {
         <g clipPath="url(#s1-clip)" style={{ mixBlendMode: 'multiply' }}>
           <g clipPath="url(#s1-wipe)">
             <g data-k="s1-ph">
+              <g data-k="s1-ph-in">
               <image
                 href={hook.src}
                 x={-L.W * 0.1}
@@ -56,8 +95,9 @@ export function Hook({ assets, L }: Props) {
                 width={L.W * 1.2}
                 height={L.H * 1.2}
                 preserveAspectRatio="xMidYMid slice"
-                style={{ filter: 'grayscale(1) contrast(1.35) brightness(1.55)' }}
+                style={{ filter: `grayscale(1) contrast(1.3) brightness(${exposure.toFixed(2)})` }}
               />
+              </g>
             </g>
           </g>
         </g>
@@ -85,7 +125,6 @@ export function Manifesto({ assets, L }: Props) {
     <section className="scene s2" data-k="s2">
       <div className="abs mono s2-meta">
         <div>NP — MANIFESTO</div>
-        <div>P. 02 / 05</div>
       </div>
       <div className="abs display s2-word s2-w1" data-k="s2-w1" style={fs}>
         UNBOTHERED
@@ -117,8 +156,8 @@ export function Manifesto({ assets, L }: Props) {
 
 function Digits({ L, layer, bg }: { L: Layout; layer: number; bg: string }) {
   const fs = L.fs.digits;
-  const step = L.H * 0.3;
-  const top0 = L.H * 0.085;
+  const step = L.H * 0.235;
+  const top0 = L.H * 0.1;
   const zoom = 1.45;
   const bw = L.W * zoom;
   const bh = L.H * zoom;
@@ -126,13 +165,15 @@ function Digits({ L, layer, bg }: { L: Layout; layer: number; bg: string }) {
   return (
     <div className="fill" data-k={`s3-109-${layer}`}>
       {['1', '0', '9'].map((d, i) => {
-        const top = top0 + i * step;
+        const top = L.portrait ? top0 + i * step : L.H * 0.17;
+        const x = L.portrait ? left : L.W * 0.06 + i * L.digitStep;
         const style: CSSProperties = {
+          left: x,
           fontSize: fs,
           top,
           background: bg,
           backgroundSize: `${bw}px ${bh}px, auto`,
-          backgroundPosition: `${-(bw - L.W) / 2 - left}px ${-(bh - L.H) / 2 - top}px, 0 0`,
+          backgroundPosition: `${-(bw - L.W) / 2 - x}px ${-(bh - L.H) / 2 - top}px, 0 0`,
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
         };
@@ -161,7 +202,7 @@ export function Catalogue({ assets, L }: Props) {
           0
         </div>
         <div className="abs s3-tee" data-k="s3-tee">
-          <img src={assets.p01!.src} alt="" />
+          <img data-k="s3-tee-in" src={assets.p01!.src} alt="" />
         </div>
         <div className="abs display s3-num s3-zero s3-zero-front" data-k="s3-0f">
           0
@@ -203,10 +244,9 @@ export function Catalogue({ assets, L }: Props) {
         <div className="abs mono s3-info" data-k="s3-info">
           <div>{p98.code}</div>
           <div>{p98.type}</div>
-          <div>{p98.name}</div>
           <div>{p98.price}</div>
           <div>{p98.sizes.join('  ')}</div>
-          <div className="s3-add" data-k="s3-add">
+          <div className="s3-add hit" data-k="s3-add">
             <span className="bag-n">
               <i data-k="s3-add-0">[ ADD + ]</i>
               <i data-k="s3-add-1" className="red">
@@ -286,13 +326,15 @@ export function Detail({ assets }: Props) {
         <div>&nbsp;</div>
         <div className="s5-sizes">
           {p.sizes.map((s) => (
-            <span key={s} data-k={`s5-size-${s}`}>
+            <span key={s} className="hit" data-k={`s5-size-${s}`}>
               {s}
             </span>
           ))}
         </div>
         <div>&nbsp;</div>
-        <div>[ ADD ]</div>
+        <div className="hit" data-k="s5-add">
+          [ ADD ]
+        </div>
       </div>
     </section>
   );
@@ -301,13 +343,14 @@ export function Detail({ assets }: Props) {
 export function Ending({ assets, L }: Props) {
   return (
     <section className="scene s6" data-k="s6">
-      {assets.logo ? (
-        <img className="abs s6-logo" data-k="s6-brand" src={assets.logo.src} alt="Nothing Personal" />
-      ) : (
-        <div className="abs display s6-brand" data-k="s6-brand" style={{ fontSize: L.fs.brand }}>
-          {credits.brand}
-        </div>
-      )}
+      <Wordmark
+        assets={assets}
+        k="s6-brand"
+        className={assets.logo ? 'abs s6-logo' : 'abs display s6-brand'}
+        style={assets.logo ? undefined : { fontSize: L.fs.brand }}
+      >
+        {credits.brand}
+      </Wordmark>
       <div className="abs mono s6-concept" data-k="s6-concept">
         {credits.concept}
       </div>
@@ -323,18 +366,20 @@ export function Ending({ assets, L }: Props) {
         </div>
       </div>
       <div className="abs mono s6-disc" data-k="s6-disc">
-        <div>{credits.disclaimer.split(' — ')[0]}</div>
-        <div>{credits.disclaimer.split(' — ')[1]}</div>
+        <div>{credits.disclaimer}</div>
+        <div className="site-only s6-rights">{credits.rights}</div>
       </div>
     </section>
   );
 }
 
-export function Chrome() {
+export function Chrome({ assets }: { assets: Assets }) {
   return (
     <div className="chrome" data-k="chrome">
       <div className="nav" data-k="nav">
-        <div className="nav-brand">NOTHING PERSONAL</div>
+        <Wordmark assets={assets} className={assets.logo ? 'nav-logo' : 'nav-brand'}>
+          NOTHING PERSONAL
+        </Wordmark>
         <div className="mono nav-links">
           <span>SHOP</span>
           <span>ARCHIVE</span>
@@ -354,6 +399,9 @@ export function Chrome() {
       </div>
       <div className="mono tc tc-right" data-k="tc-r">
         UNOFFICIAL CONCEPT
+      </div>
+      <div className="mono site-only scroll-hint" data-k="hint">
+        SCROLL
       </div>
       <div className="cursor" data-k="cursor">
         <div className="ch-h" />

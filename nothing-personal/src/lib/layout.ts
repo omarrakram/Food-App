@@ -17,6 +17,8 @@ export interface Layout {
     author: number;
     digits: number;
   };
+  /** S3: advance of one numeral at fs.digits, px */
+  digitStep: number;
 }
 
 function measure(text: string, fs: number) {
@@ -42,7 +44,7 @@ function capRatio() {
 }
 
 export function computeLayout(W: number, H: number): Layout {
-  const portrait = H >= W;
+  const portrait = H >= W * 1.1;
   const cap = capRatio();
   let word: Layout['word'];
   if (portrait) {
@@ -50,10 +52,12 @@ export function computeLayout(W: number, H: number): Layout {
     const fs = fit('PERSONAL.', H * 1.08);
     word = { fs, cx: W * 0.585, cy: H * 0.5, cap: cap * fs, rot: -90 };
   } else {
-    const fs = fit('PERSONAL.', W * 1.02);
-    word = { fs, cx: W * 0.5, cy: H * 0.56, cap: cap * fs, rot: 0 };
+    // runs across the frame, bleeding past both sides
+    const fs = fit('PERSONAL.', W * 1.04);
+    word = { fs, cx: W * 0.5, cy: H * 0.6, cap: cap * fs, rot: 0 };
   }
-  const measureW = portrait ? W * 0.885 : W * 0.6;
+  const measureW = portrait ? W * 0.885 : Math.min(W * 0.56, H * 1.05);
+  const digits = portrait ? (H * 0.215) / cap : (H * 0.66) / cap;
   return {
     W,
     H,
@@ -63,10 +67,11 @@ export function computeLayout(W: number, H: number): Layout {
     fs: {
       unbothered: fit('UNBOTHERED', measureW),
       nothing: fit('NOTHING,', measureW),
-      disconnect: portrait ? fit('NECT', W * 0.88) : fit('DISCONNECT', W * 0.96),
-      brand: fit('NOTHING PERSONAL.', W * 0.87),
-      author: fit('OMAR AKRAM', W * 0.875),
-      digits: portrait ? (H * 0.29) / cap : (H * 0.62) / cap,
+      disconnect: portrait ? fit('NECT', W * 0.8) : fit('DISCONNECT', W * 0.95),
+      brand: fit('NOTHING PERSONAL.', portrait ? W * 0.8 : W * 0.62),
+      author: fit('OMAR AKRAM', portrait ? W * 0.8 : W * 0.6),
+      digits,
     },
+    digitStep: measure('0', 100) * digits * 1.02,
   };
 }

@@ -49,11 +49,30 @@ export interface Asset {
   h: number;
   pos: string;
   ink?: string;
+  /** mean luminance 0..1 of the opaque pixels, for auto-exposure */
+  mean: number;
 }
 export type Assets = Record<SlotKey, Asset | null>;
 
 const base = import.meta.env.BASE_URL + 'np/';
 const present = new Set(realFiles);
+
+function meanLuminance(img: HTMLImageElement) {
+  const c = document.createElement('canvas');
+  c.width = 48;
+  c.height = 48;
+  const ctx = c.getContext('2d', { willReadFrequently: true })!;
+  ctx.drawImage(img, 0, 0, 48, 48);
+  const p = ctx.getImageData(0, 0, 48, 48).data;
+  let sum = 0;
+  let n = 0;
+  for (let i = 0; i < p.length; i += 4) {
+    if (p[i + 3] < 128) continue;
+    sum += (0.2126 * p[i] + 0.7152 * p[i + 1] + 0.0722 * p[i + 2]) / 255;
+    n++;
+  }
+  return n ? sum / n : 0.5;
+}
 
 function load(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -125,7 +144,14 @@ export async function loadAssets(): Promise<Assets> {
       for (const [src, real] of tries) {
         try {
           const img = await load(src);
-          const a: Asset = { src, real, w: img.naturalWidth, h: img.naturalHeight, pos: slot.pos };
+          const a: Asset = {
+            src,
+            real,
+            w: img.naturalWidth,
+            h: img.naturalHeight,
+            pos: slot.pos,
+            mean: meanLuminance(img),
+          };
           if (slot.ink) a.ink = await inkPlate(img, [222, 42, 27]);
           out[key] = a;
           return;
