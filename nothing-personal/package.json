@@ -1,0 +1,30 @@
+{
+  "name": "nothing-personal-concept",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/fetch-assets.mjs && vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "assets": "node scripts/fetch-assets.mjs --force",
+    "render": "node scripts/render.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "gsap": "^3.15.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "playwright-core": "^1.56.1",
+    "typescript": "5.9",
+    "vite": "^8.3.1"
+  }
+}

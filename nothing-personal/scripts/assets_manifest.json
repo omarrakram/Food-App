@@ -1,0 +1,61 @@
+{
+  "brand": "Nothing Personal",
+  "purpose": "Unofficial concept website / TikTok showcase reference assets",
+  "assets": [
+    {
+      "filename": "01_campaign_hero.jpg",
+      "role": "Main hero / masked PERSONAL typography",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/2F349B09-A5BE-4922-A9E6-F1717B086D30.jpg?v=1778349343&width=3840"
+    },
+    {
+      "filename": "02_campaign_portrait.jpg",
+      "role": "Manifesto / DISCONNECT signature interaction",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/3F13E67C-D7AB-4C69-B3E5-F7F6E3B62D0C.jpg?height=4030&v=1778350180"
+    },
+    {
+      "filename": "03_official_logo.png",
+      "role": "Official Nothing Personal logo asset",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/Nothing_Personal_-22_copy.png?v=1758836304&width=3840"
+    },
+    {
+      "filename": "04_black_boxy.png",
+      "role": "Product / catalogue scene",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/51.png?v=1774801076&width=1200"
+    },
+    {
+      "filename": "05_white_tank.png",
+      "role": "Editorial cutout / typography layering",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/DECKEDOUTSUMMER262786.png?v=1781785457&width=1200"
+    },
+    {
+      "filename": "06_denim_white_tank.png",
+      "role": "Catalogue / editorial composition",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/201.png?v=1758871719&width=1200"
+    },
+    {
+      "filename": "07_male_white_tee.png",
+      "role": "Male silhouette / alternate editorial frame",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/Nothingpersonalsummer20260977.png?v=1778079859&width=1200"
+    },
+    {
+      "filename": "08_product_extra_206.png",
+      "role": "Extra product visual",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/206.png?v=1774801534&width=1024"
+    },
+    {
+      "filename": "09_product_extra_244.png",
+      "role": "Extra product visual",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/244.png?v=1764262736&width=1024"
+    },
+    {
+      "filename": "10_product_extra_187.png",
+      "role": "Extra editorial/product visual",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/187.png?v=1758710450&width=2560"
+    },
+    {
+      "filename": "11_product_extra_20.png",
+      "role": "Extra product visual",
+      "url": "https://www.nothing-personal.com/cdn/shop/files/20_8b43e350-331c-43b3-910d-59ddca5e8335.png?v=1765796941&width=1024"
+    }
+  ]
+}

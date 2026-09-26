@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>standins</title></head>
+<body style="margin:0;background:#888">
+<script src="./renderer.js"></script>
+<script src="./garments.js"></script>
+<script>
+  window.runJob = (job) => {
+    const g = window.NPGarments[job.garment];
+    const c = window.NPRender.render({
+      W: job.W, H: job.H, view: job.view, seed: job.seed || 7,
+      silhouette: g.silhouette, interior: g.interior, raised: g.raised, seams: g.seams,
+      bumps: g.bumps, stitches: g.stitches, fray: g.fray, folds: g.folds,
+      material: Object.assign({}, g.material, job.material || {}),
+      background: job.background || null, light: job.light,
+    });
+    return c.toDataURL(job.type === 'jpg' ? 'image/jpeg' : 'image/png', 0.92);
+  };
+</script>
+</body></html>

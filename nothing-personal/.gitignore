@@ -1,0 +1,6 @@
+node_modules/
+dist/
+out/
+# Official brand imagery is downloaded locally by scripts/fetch-assets.mjs and
+# is not redistributed with this concept.
+public/np/real/
