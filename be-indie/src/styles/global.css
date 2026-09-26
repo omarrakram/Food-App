@@ -1,0 +1,57 @@
+:root {
+  --ink: #101118;
+  --paper: #ece7db;
+  --paper-2: #e2dccd;
+  --indigo: #141c3f;
+  --denim: #2a3d78;
+  --wash: #9fb3d4;
+  --grey: #8b8e96;
+  --electric: #2342ff;
+  --thread: #d6c49e;
+  --signal: #ff5a1f;
+  --f-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
+  --f-body: 'Hanken Grotesk Variable', 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+img {
+  user-select: none;
+}
+.d {
+  font-family: var(--f-display);
+  font-stretch: 62%;
+  font-weight: 900;
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  font-kerning: normal;
+}
+.m {
+  font-family: var(--f-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  white-space: pre;
+}
+::selection {
+  background: var(--electric);
+  color: var(--paper);
+}

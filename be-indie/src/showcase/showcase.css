@@ -1,0 +1,20 @@
+.sc-viewport {
+  position: fixed;
+  inset: 0;
+  background: #07080c;
+  overflow: hidden;
+}
+.sc-stage {
+  position: absolute;
+  top: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: #101118;
+  isolation: isolate;
+}
+.sc-stage .full {
+  position: absolute;
+  inset: 0;
+}
