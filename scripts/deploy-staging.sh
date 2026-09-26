@@ -81,46 +81,39 @@ if [[ ${#MISSING[@]} -gt 0 ]]; then
   die "these are blank in .env.staging: ${MISSING[*]}"
 fi
 
-# --- 1b. The two that are compared as strings at run time --------------------
+# --- 1b. The two URLs, which are not the same kind of thing -------------------
 #
-# A CORS allow-list is matched against the browser's `Origin` header EXACTLY.
-# `https://x.dev/` never equals `https://x.dev`, and the failure is a blocked
-# request with no server-side trace — so a trailing slash or a path is refused
-# here, where the message can say why, rather than at 2am in a browser console.
+# APP_BASE_URL IS A BASE URL AND MAY CARRY A PATH. The deployed preview is a
+# GitHub Pages PROJECT site — `https://omarrakram.github.io/Food-App` — and
+# `payments-begin` appends `/payment/<orderId>` to whatever this is.
+#
+# ALLOWED_ORIGINS IS A LIST OF BROWSER `Origin` HEADER VALUES, which are
+# `scheme://host[:port]` and nothing else. `_shared/http.ts` compares them with
+# `includes()`, so an entry carrying a path or a trailing slash can never match
+# anything and the only symptom is a blocked request with no server-side trace.
+#
+# The relation between them is therefore not equality. It is: THE ORIGIN OF
+# APP_BASE_URL MUST BE ON THE ALLOW-LIST — the page the customer is redirected
+# back to is the page that then calls the functions.
+#
+# All of that is judged by the WHATWG URL parser in
+# `scripts/lib/staging-config.mjs`, shared with `verify-staging.mjs`, rather
+# than by shell pattern matching. `new URL(x).origin` is the same
+# serialisation the browser puts in the header; a regex is a guess at it.
 
-case "${APP_BASE_URL}" in
-  https://*|http://localhost*|http://127.0.0.1*) ;;
-  *) die "APP_BASE_URL must be an https origin (or localhost): got '${APP_BASE_URL}'" ;;
-esac
-case "${APP_BASE_URL}" in
-  */) die "APP_BASE_URL must not end in '/': got '${APP_BASE_URL}'" ;;
-esac
+command -v node >/dev/null || die "node is required to validate APP_BASE_URL / ALLOWED_ORIGINS."
 
-IFS=',' read -r -a ORIGIN_LIST <<< "${ALLOWED_ORIGINS}"
-for raw_origin in "${ORIGIN_LIST[@]}"; do
-  entry="$(printf '%s' "${raw_origin}" | tr -d '[:space:]')"
-  [[ -n "${entry}" ]] || continue
-  case "${entry}" in
-    https://*|http://localhost*|http://127.0.0.1*) ;;
-    *) die "ALLOWED_ORIGINS entry is not an https origin (or localhost): '${entry}'" ;;
-  esac
-  case "${entry}" in
-    */) die "ALLOWED_ORIGINS entry must not end in '/': '${entry}' — an Origin header never does" ;;
-  esac
-  # scheme://host[:port] and nothing after it.
-  if [[ "${entry#*://}" == */* ]]; then
-    die "ALLOWED_ORIGINS entry must be an origin, not a URL with a path: '${entry}'"
-  fi
-done
+# On success: two lines, the normalised values. On failure: the reasons.
+# The normalised values are what get deployed, so what reaches Supabase is what
+# was checked rather than what was typed.
+CONFIG_CHECK="$(node scripts/lib/staging-config.mjs check "${APP_BASE_URL}" "${ALLOWED_ORIGINS}")" \
+  || die "${CONFIG_CHECK}"
 
-# The browser that Paymob redirects back to APP_BASE_URL is the same browser
-# that then calls the functions. If that origin is not on the allow-list, the
-# customer lands on a page that cannot read its own order.
-case ",${ALLOWED_ORIGINS// /}," in
-  *",${APP_BASE_URL},"*) ;;
-  *) die "APP_BASE_URL (${APP_BASE_URL}) is not in ALLOWED_ORIGINS. The page the
-customer returns to would be unable to call the functions." ;;
-esac
+{ read -r APP_BASE_URL; read -r ALLOWED_ORIGINS; } <<< "${CONFIG_CHECK}"
+
+say "App base URL: ${APP_BASE_URL}"
+printf '    customers return to %s/payment/<orderId>\n' "${APP_BASE_URL}"
+printf '    browser Origin allow-list: %s\n' "${ALLOWED_ORIGINS}"
 
 # --- 2. Not production -------------------------------------------------------
 #

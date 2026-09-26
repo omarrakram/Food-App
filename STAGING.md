@@ -21,13 +21,14 @@ These are the things engineering cannot produce:
 | 3 | The staging project's ref, DB URL, API URL, publishable key, service-role key | Dashboard → Project Settings |
 | 4 | **Paymob SANDBOX credentials**: secret key, public key, HMAC secret, card integration id, wallet integration id | Paymob merchant dashboard, test mode |
 | 5 | An **Anthropic API key** for staging | console.anthropic.com |
-| 6 | The **origin the staging web build is served from** — for `APP_BASE_URL` and `ALLOWED_ORIGINS` | wherever you deploy the export |
+| 6 | The **URL the staging web build is served from** — for `APP_BASE_URL` and `ALLOWED_ORIGINS` | wherever you deploy the export |
 | 7 | Permission to create the first merchant staff account | you |
 
 Put 2–6 in `.env.staging` (copy `.env.staging.example`). It is git-ignored.
 
 Item 6 is not a credential and is easy to skip, so it is listed with the rest:
-both values fail silently when absent, in opposite directions. See § 3.
+both values fail silently when absent, in opposite directions. It is **one**
+piece of information that produces **two different values** — see § 3.
 
 **Do not reuse production values for any of them.**
 
@@ -51,11 +52,13 @@ The script refuses to run if:
 * the project ref is a known production ref, or matches
   `SUPABASE_PRODUCTION_PROJECT_REF` if that is set;
 * the CLI ends up linked to a different project than the one you named;
-* `APP_BASE_URL` or an `ALLOWED_ORIGINS` entry is not a bare origin — a
-  trailing slash or a path can never match a browser's `Origin` header, and the
-  only symptom would be a blocked request with nothing in any log;
-* `APP_BASE_URL` is not itself on the allow-list, which would leave the page
-  the customer returns to unable to call the functions;
+* `APP_BASE_URL` is not a valid https base URL (a **path is fine**, a query,
+  a fragment, credentials or a non-https scheme off localhost are not);
+* an `ALLOWED_ORIGINS` entry is not a **bare origin** — a trailing slash or a
+  path can never match a browser's `Origin` header, and the only symptom would
+  be a blocked request with nothing in any log;
+* the **origin of** `APP_BASE_URL` is not on the allow-list, which would leave
+  the page the customer returns to unable to call the functions;
 * the database already contains an enabled non-demo merchant it did not put
   there (a sign you are pointed at the wrong project).
 
@@ -129,6 +132,43 @@ version of this runbook named a `PAYMOB_REDIRECTION_URL`; no code has ever read
 one, and it has been removed rather than wired up — a per-order return
 destination cannot come from a single static URL.)
 
+### `APP_BASE_URL` is a base URL. `ALLOWED_ORIGINS` is not.
+
+They are filled in from the same fact — where the staging build is served —
+and they are still **not the same string**, which is worth being explicit about
+because getting it wrong produces no error anywhere.
+
+| | `APP_BASE_URL` | `ALLOWED_ORIGINS` |
+|---|---|---|
+| What it is | The base URL the app is **served from** | The browser `Origin` header values allowed to **call the functions** |
+| Read by | `payments-begin`, which appends `/payment/<orderId>` | `_shared/http.ts`, which compares with exact string equality |
+| Path allowed? | **Yes** | **Never** — an `Origin` header is `scheme://host[:port]` and nothing more |
+| Trailing slash? | Stripped; write it without one | Never |
+| How many | One | A comma-separated list |
+
+The deployed preview is a **GitHub Pages project site**, served under the
+repository name, so it is exactly the case where the two differ:
+
+```
+APP_BASE_URL=https://omarrakram.github.io/Food-App
+ALLOWED_ORIGINS=https://omarrakram.github.io
+```
+
+`payments-begin` then builds
+`https://omarrakram.github.io/Food-App/payment/<orderId>`, and the browser that
+lands there sends `Origin: https://omarrakram.github.io`. Putting the `/Food-App`
+into `ALLOWED_ORIGINS` would match nothing; dropping it from `APP_BASE_URL`
+would redirect the customer to a page the Pages site does not serve.
+
+A site at a domain root simply has the two the same
+(`https://akalt-staging.pages.dev` for both), which is why the distinction is
+easy to miss until it is a project site.
+
+The rule the deploy script and the verifier enforce is therefore **the origin
+of `APP_BASE_URL` must be on the allow-list** — not that the two are equal.
+Both use `scripts/lib/staging-config.mjs`, which asks the WHATWG URL parser
+rather than matching strings, so they cannot disagree about what is valid.
+
 The **processed callbacks** do need the dashboard, and they need it twice. In
 Paymob's dashboard, **test mode**:
 
@@ -145,11 +185,12 @@ callback was never configured simply never settles, and it fails silently.
 
 ### And the app has to be allowed to call the functions
 
-`ALLOWED_ORIGINS` must contain the staging web build's origin. In a deployment
-with no allow-list, `_shared/http.ts` refuses every browser origin — so the
-page the customer is redirected back to would load and then be unable to ask
-the server anything. The native app is unaffected (no `Origin` header), and so
-is `payments-webhook` (Paymob is server-to-server).
+`ALLOWED_ORIGINS` must contain the staging web build's origin — the origin,
+not the base URL; see the table above. In a deployment with no allow-list,
+`_shared/http.ts` refuses every browser origin — so the page the customer is
+redirected back to would load and then be unable to ask the server anything.
+The native app is unaffected (no `Origin` header), and so is
+`payments-webhook` (Paymob is server-to-server).
 
 ## 4. Verify
 

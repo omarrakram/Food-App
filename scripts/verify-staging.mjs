@@ -23,6 +23,8 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+import { looksLikeProduction, validateAppConfig } from './lib/staging-config.mjs';
+
 const ROOT = resolve(import.meta.dirname, '..');
 const ENV_FILE = join(ROOT, '.env.staging');
 
@@ -117,45 +119,45 @@ async function main() {
   */
   section('app configuration (local file, not read back from Supabase)');
 
-  const appBaseUrl = (env.APP_BASE_URL ?? '').trim();
-  const allowedOrigins = (env.ALLOWED_ORIGINS ?? '')
-    .split(',')
-    .map((entry) => entry.trim())
-    .filter(Boolean);
+  /*
+    THE TWO ARE NOT THE SAME KIND OF VALUE, which is the mistake this section
+    used to make. APP_BASE_URL is a base URL and MAY carry a path — the
+    deployed preview is a GitHub Pages project site at
+    `https://omarrakram.github.io/Food-App`. ALLOWED_ORIGINS holds browser
+    `Origin` header values, which are `scheme://host[:port]` and never carry
+    one. The relation is that the ORIGIN OF APP_BASE_URL is on the allow-list.
 
-  const originShaped = (value) =>
-    /^(https:\/\/|http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$|http:\/\/(localhost|127\.0\.0\.1):)/.test(
-      value,
-    ) &&
-    !value.endsWith('/') &&
-    !value.slice(value.indexOf('://') + 3).includes('/');
-
-  check('APP_BASE_URL is set', Boolean(appBaseUrl), appBaseUrl || 'blank');
-  if (appBaseUrl) {
-    check(
-      'and is a bare origin — no trailing slash, no path',
-      originShaped(appBaseUrl),
-      appBaseUrl,
-    );
-    check(
-      'it is not a production-looking host',
-      !/(^|\.)akalt\.app$/.test(new URL(appBaseUrl).hostname),
-      new URL(appBaseUrl).hostname,
-    );
-  }
-
-  check('ALLOWED_ORIGINS is set', allowedOrigins.length > 0, `${allowedOrigins.length} origin(s)`);
-  for (const origin of allowedOrigins) {
-    // Compared to the browser's `Origin` header EXACTLY. A trailing slash or a
-    // path means it can never match, and the only symptom is a blocked request.
-    check(`ALLOWED_ORIGINS entry is a bare origin: ${origin}`, originShaped(origin));
-  }
+    Judged by `scripts/lib/staging-config.mjs`, the same module
+    `deploy-staging.sh` uses, so the two cannot disagree about what is valid.
+  */
+  const config = validateAppConfig({
+    appBaseUrl: env.APP_BASE_URL,
+    allowedOrigins: env.ALLOWED_ORIGINS,
+  });
 
   check(
-    'APP_BASE_URL is itself on the allow-list',
-    Boolean(appBaseUrl) && allowedOrigins.includes(appBaseUrl),
-    'the page the customer returns to has to be able to call the functions',
+    'APP_BASE_URL and ALLOWED_ORIGINS are a valid pair',
+    config.problems.length === 0,
+    config.problems.length === 0
+      ? `${config.appBaseUrl} · Origin allow-list: ${config.allowedOrigins.join(', ')}`
+      : '',
   );
+  for (const problem of config.problems) {
+    // Problems are multi-line on purpose — the cross-check spells out the
+    // corrected pair — so every line is printed, not just the first.
+    for (const line of problem.split('\n')) console.log(`     ${line}`);
+  }
+
+  if (config.problems.length === 0) {
+    console.log(`     customers return to ${config.redirectExample}`);
+    // A staging deploy pointed at the production host would send a real
+    // customer's browser into the live app carrying a staging order id.
+    check(
+      'APP_BASE_URL is not a production host',
+      !looksLikeProduction(config.appBaseUrl),
+      new URL(config.appBaseUrl).hostname,
+    );
+  }
 
   /*
     NOT CHECKED, and worth saying: whether the DEPLOYED functions actually
