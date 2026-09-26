@@ -96,6 +96,76 @@ function sql(statement) {
 const section = (title) => console.log(`\n▸ ${title}`);
 
 async function main() {
+  /*
+    THE LOCAL FILE FIRST, before anything that needs the network.
+
+    Every check below this one shells out to psql or fetches the project, so a
+    database that is unreachable — wrong password, wrong host, a network policy
+    — used to take the local configuration checks down with it. Those are the
+    ones somebody can act on without leaving their laptop, so they go first.
+  */
+  // --- The app's own configuration -------------------------------------------
+  /*
+    LOCAL ONLY, AND READ-ONLY.
+
+    Supabase does not hand a function's environment back, and asking for it is
+    not something this script should want to do — so these check the file the
+    deploy will be run FROM, which is the only copy anybody can fix. They are
+    here because both variables fail silently in opposite directions: a missing
+    APP_BASE_URL sends a paying customer to the wrong app, and a missing
+    ALLOWED_ORIGINS makes every browser call fail with nothing in any log.
+  */
+  section('app configuration (local file, not read back from Supabase)');
+
+  const appBaseUrl = (env.APP_BASE_URL ?? '').trim();
+  const allowedOrigins = (env.ALLOWED_ORIGINS ?? '')
+    .split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
+  const originShaped = (value) =>
+    /^(https:\/\/|http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$|http:\/\/(localhost|127\.0\.0\.1):)/.test(
+      value,
+    ) &&
+    !value.endsWith('/') &&
+    !value.slice(value.indexOf('://') + 3).includes('/');
+
+  check('APP_BASE_URL is set', Boolean(appBaseUrl), appBaseUrl || 'blank');
+  if (appBaseUrl) {
+    check(
+      'and is a bare origin — no trailing slash, no path',
+      originShaped(appBaseUrl),
+      appBaseUrl,
+    );
+    check(
+      'it is not a production-looking host',
+      !/(^|\.)akalt\.app$/.test(new URL(appBaseUrl).hostname),
+      new URL(appBaseUrl).hostname,
+    );
+  }
+
+  check('ALLOWED_ORIGINS is set', allowedOrigins.length > 0, `${allowedOrigins.length} origin(s)`);
+  for (const origin of allowedOrigins) {
+    // Compared to the browser's `Origin` header EXACTLY. A trailing slash or a
+    // path means it can never match, and the only symptom is a blocked request.
+    check(`ALLOWED_ORIGINS entry is a bare origin: ${origin}`, originShaped(origin));
+  }
+
+  check(
+    'APP_BASE_URL is itself on the allow-list',
+    Boolean(appBaseUrl) && allowedOrigins.includes(appBaseUrl),
+    'the page the customer returns to has to be able to call the functions',
+  );
+
+  /*
+    NOT CHECKED, and worth saying: whether the DEPLOYED functions actually
+    carry these values. `supabase secrets list` shows names and digests, never
+    values, and a name being present says nothing about it being right. The
+    proof is a sandbox payment that returns the customer to the staging app
+    rather than to production.
+  */
+  console.log('   … whether the deployed functions carry them: not readable, by design.');
+
   // --- Schema ----------------------------------------------------------------
   section('the migrations');
 

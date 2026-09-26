@@ -21,9 +21,13 @@ These are the things engineering cannot produce:
 | 3 | The staging project's ref, DB URL, API URL, publishable key, service-role key | Dashboard → Project Settings |
 | 4 | **Paymob SANDBOX credentials**: secret key, public key, HMAC secret, card integration id, wallet integration id | Paymob merchant dashboard, test mode |
 | 5 | An **Anthropic API key** for staging | console.anthropic.com |
-| 6 | Permission to create the first merchant staff account | you |
+| 6 | The **origin the staging web build is served from** — for `APP_BASE_URL` and `ALLOWED_ORIGINS` | wherever you deploy the export |
+| 7 | Permission to create the first merchant staff account | you |
 
-Put 2–5 in `.env.staging` (copy `.env.staging.example`). It is git-ignored.
+Put 2–6 in `.env.staging` (copy `.env.staging.example`). It is git-ignored.
+
+Item 6 is not a credential and is easy to skip, so it is listed with the rest:
+both values fail silently when absent, in opposite directions. See § 3.
 
 **Do not reuse production values for any of them.**
 
@@ -44,7 +48,14 @@ cp .env.staging.example .env.staging     # then fill it in
 The script refuses to run if:
 
 * `.env.staging` is missing or has blanks;
-* the project ref matches `SUPABASE_PRODUCTION_PROJECT_REF`, if that is set;
+* the project ref is a known production ref, or matches
+  `SUPABASE_PRODUCTION_PROJECT_REF` if that is set;
+* the CLI ends up linked to a different project than the one you named;
+* `APP_BASE_URL` or an `ALLOWED_ORIGINS` entry is not a bare origin — a
+  trailing slash or a path can never match a browser's `Origin` header, and the
+  only symptom would be a blocked request with nothing in any log;
+* `APP_BASE_URL` is not itself on the allow-list, which would leave the page
+  the customer returns to unable to call the functions;
 * the database already contains an enabled non-demo merchant it did not put
   there (a sign you are pointed at the wrong project).
 
@@ -52,7 +63,9 @@ It does, in order:
 
 1. `supabase link` to the staging ref,
 2. `supabase db push` — every migration in `supabase/migrations/`,
-3. `supabase secrets set` — the function environment, from `.env.staging`,
+3. `supabase secrets set` — the function environment, from `.env.staging`
+   (including `APP_BASE_URL` and `ALLOWED_ORIGINS`, which are not secrets but
+   are function environment, which on Supabase is the same mechanism),
 4. `supabase functions deploy` — all seven, with `payments-webhook`
    `--no-verify-jwt` because Paymob has no Supabase token and its HMAC is the
    authentication.
@@ -86,19 +99,57 @@ Realtime is handled by `20260929090000_realtime.sql`, which adds `orders` and
 
 ## 3. Paymob sandbox
 
-In Paymob's dashboard, **test mode**:
+### First, the distinction everything else here depends on
+
+Paymob sends **two** things after a payment, to two different places, and they
+are not both evidence.
+
+| | Where it goes | What it is |
+|---|---|---|
+| **Processed callback** (server → server) | `payments-webhook` | **THE ONLY PROOF A PAYMENT HAPPENED.** Signed with an HMAC over twenty ordered fields, verified before a single field of the body is read, and the only route by which an order becomes `captured` and reaches the merchant queue. |
+| **Response callback** (the customer's browser) | `<APP_BASE_URL>/payment/<orderId>` | **UX, AND NEVER PROOF.** It is where the browser lands. It is under the customer's control, it can be edited, replayed, or never followed at all, and the app treats arriving there as a request to *ask the server* what happened — not as an answer. |
+
+A customer who closes the tab has still paid. A customer who reaches the return
+page has not necessarily paid anything. The app's payment screen polls the
+order's real state either way, which is why the redirect can be wrong without
+costing money — and why the webhook cannot.
+
+### Where each one is configured
+
+The redirect is **not** a dashboard setting for AKALT and there is no
+environment variable for it. `payments-begin` builds it per order from
+`APP_BASE_URL` and sends it as the Intention's `redirection_url`:
+
+```
+redirection_url = <APP_BASE_URL>/payment/<orderId>
+```
+
+So setting `APP_BASE_URL` in `.env.staging` is the whole of it. (An earlier
+version of this runbook named a `PAYMOB_REDIRECTION_URL`; no code has ever read
+one, and it has been removed rather than wired up — a per-order return
+destination cannot come from a single static URL.)
+
+The **processed callbacks** do need the dashboard, and they need it twice. In
+Paymob's dashboard, **test mode**:
 
 | Setting | Value |
 |---|---|
-| Card integration → transaction processed callback | `https://<ref>.supabase.co/functions/v1/payments-webhook` |
-| Card integration → transaction response callback | `PAYMOB_REDIRECTION_URL` |
+| **Card** integration → transaction processed callback | `https://<ref>.supabase.co/functions/v1/payments-webhook` |
 | **Wallet** integration → transaction processed callback | `https://<ref>.supabase.co/functions/v1/payments-webhook` |
-| Wallet integration → transaction response callback | `PAYMOB_REDIRECTION_URL` |
+| Either integration → transaction *response* callback | Leave as Paymob's default, or set it to `<APP_BASE_URL>/payment` — `payments-begin` overrides it per order anyway. |
 
 **Both integrations, separately.** The per-intention `notification_url` AKALT
 sends is documented for CARD integrations; a wallet integration ignores it and
 uses the URL configured against the integration itself. A wallet payment whose
 callback was never configured simply never settles, and it fails silently.
+
+### And the app has to be allowed to call the functions
+
+`ALLOWED_ORIGINS` must contain the staging web build's origin. In a deployment
+with no allow-list, `_shared/http.ts` refuses every browser origin — so the
+page the customer is redirected back to would load and then be unable to ask
+the server anything. The native app is unaffected (no `Origin` header), and so
+is `payments-webhook` (Paymob is server-to-server).
 
 ## 4. Verify
 

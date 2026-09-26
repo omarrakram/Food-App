@@ -58,6 +58,13 @@ REQUIRED=(
   SUPABASE_STAGING_URL
   SUPABASE_STAGING_PUBLISHABLE_KEY
   SUPABASE_STAGING_SERVICE_ROLE_KEY
+  # Not secrets, and required anyway — both fail SILENTLY when absent. Without
+  # APP_BASE_URL, `payments-begin` falls back to the caller's Origin and then
+  # to a hard-coded production URL, so a staging payment can send the customer
+  # into the production app. Without ALLOWED_ORIGINS, a deployed function
+  # refuses every browser origin and the hosted web build cannot call it.
+  APP_BASE_URL
+  ALLOWED_ORIGINS
   PAYMOB_SECRET_KEY
   PAYMOB_PUBLIC_KEY
   PAYMOB_HMAC_SECRET
@@ -73,6 +80,47 @@ done
 if [[ ${#MISSING[@]} -gt 0 ]]; then
   die "these are blank in .env.staging: ${MISSING[*]}"
 fi
+
+# --- 1b. The two that are compared as strings at run time --------------------
+#
+# A CORS allow-list is matched against the browser's `Origin` header EXACTLY.
+# `https://x.dev/` never equals `https://x.dev`, and the failure is a blocked
+# request with no server-side trace — so a trailing slash or a path is refused
+# here, where the message can say why, rather than at 2am in a browser console.
+
+case "${APP_BASE_URL}" in
+  https://*|http://localhost*|http://127.0.0.1*) ;;
+  *) die "APP_BASE_URL must be an https origin (or localhost): got '${APP_BASE_URL}'" ;;
+esac
+case "${APP_BASE_URL}" in
+  */) die "APP_BASE_URL must not end in '/': got '${APP_BASE_URL}'" ;;
+esac
+
+IFS=',' read -r -a ORIGIN_LIST <<< "${ALLOWED_ORIGINS}"
+for raw_origin in "${ORIGIN_LIST[@]}"; do
+  entry="$(printf '%s' "${raw_origin}" | tr -d '[:space:]')"
+  [[ -n "${entry}" ]] || continue
+  case "${entry}" in
+    https://*|http://localhost*|http://127.0.0.1*) ;;
+    *) die "ALLOWED_ORIGINS entry is not an https origin (or localhost): '${entry}'" ;;
+  esac
+  case "${entry}" in
+    */) die "ALLOWED_ORIGINS entry must not end in '/': '${entry}' — an Origin header never does" ;;
+  esac
+  # scheme://host[:port] and nothing after it.
+  if [[ "${entry#*://}" == */* ]]; then
+    die "ALLOWED_ORIGINS entry must be an origin, not a URL with a path: '${entry}'"
+  fi
+done
+
+# The browser that Paymob redirects back to APP_BASE_URL is the same browser
+# that then calls the functions. If that origin is not on the allow-list, the
+# customer lands on a page that cannot read its own order.
+case ",${ALLOWED_ORIGINS// /}," in
+  *",${APP_BASE_URL},"*) ;;
+  *) die "APP_BASE_URL (${APP_BASE_URL}) is not in ALLOWED_ORIGINS. The page the
+customer returns to would be unable to call the functions." ;;
+esac
 
 # --- 2. Not production -------------------------------------------------------
 #
@@ -129,10 +177,19 @@ esac
 command -v supabase >/dev/null || die "the supabase CLI is not installed. https://supabase.com/docs/guides/cli"
 command -v psql >/dev/null || die "psql is not installed; the guard below needs it."
 
-say "Guard: is this database already somebody's production?"
-EXISTING="$(psql "${SUPABASE_STAGING_DB_URL}" -At -c "
-  select count(*) from information_schema.tables
-   where table_schema = 'public' and table_name = 'merchants'" 2>/dev/null || echo 0)"
+# A DRY RUN CONNECTS TO NOTHING. This guard opened a real database connection
+# even under `--dry-run`, which made "print what you would do" not quite true —
+# and the whole point of the flag is that somebody can read the plan before
+# anything reaches the network.
+if ${DRY_RUN}; then
+  say "Guard: skipped (dry run connects to nothing)"
+  EXISTING="0"
+else
+  say "Guard: is this database already somebody's production?"
+  EXISTING="$(psql "${SUPABASE_STAGING_DB_URL}" -At -c "
+    select count(*) from information_schema.tables
+     where table_schema = 'public' and table_name = 'merchants'" 2>/dev/null || echo 0)"
+fi
 
 if [[ "${EXISTING}" == "1" ]]; then
   LIVE="$(psql "${SUPABASE_STAGING_DB_URL}" -At -c "
@@ -180,9 +237,15 @@ run supabase db push --db-url "${SUPABASE_STAGING_DB_URL}"
 # --- 4. Function secrets -----------------------------------------------------
 # NEVER echoed. `supabase secrets set` reads them from here and they go no
 # further; nothing below prints a value.
+#
+# APP_BASE_URL and ALLOWED_ORIGINS are not secrets — they are public facts
+# about where the app is served — but they are function ENVIRONMENT, which on
+# Supabase is the same mechanism, so they are set here with everything else.
 
 say "Setting Edge Function secrets"
 run supabase secrets set \
+  APP_BASE_URL="${APP_BASE_URL}" \
+  ALLOWED_ORIGINS="${ALLOWED_ORIGINS}" \
   PAYMOB_BASE_URL="${PAYMOB_BASE_URL:-https://accept.paymob.com}" \
   PAYMOB_SECRET_KEY="${PAYMOB_SECRET_KEY}" \
   PAYMOB_PUBLIC_KEY="${PAYMOB_PUBLIC_KEY}" \
