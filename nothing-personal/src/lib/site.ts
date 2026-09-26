@@ -37,7 +37,8 @@ export function runSite(
       end: 'bottom bottom',
       scrub: 0.7,
       animation: tl.tweenFromTo(INTRO_END, DURATION, { paused: true, ease: 'none' }),
-      onUpdate: (self) => gsap.to(hint, { opacity: self.progress > 0.01 ? 0 : 0.8, duration: 0.3, overwrite: true }),
+      onUpdate: (self) =>
+        gsap.to(hint, { opacity: self.progress > 0.01 ? 0 : 0.8, duration: 0.3, overwrite: true }),
     });
     gsap.to(hint, { opacity: 0.8, duration: 0.6, delay: 0.2 });
   };
@@ -85,7 +86,11 @@ export function runSite(
     gsap.set([$('s3-add-0'), $('bag-0')], { visibility: 'hidden' });
     gsap.set([$('s3-add-1'), $('bag-1')], { visibility: 'visible' });
     gsap.set($('bag-dot'), { opacity: 1 });
-    gsap.fromTo($('cursor-ring'), { opacity: 1, scale: 0.6 }, { opacity: 0, scale: 2.4, duration: 0.35, ease: 'expo.out' });
+    gsap.fromTo(
+      $('cursor-ring'),
+      { opacity: 1, scale: 0.6 },
+      { opacity: 0, scale: 2.4, duration: 0.35, ease: 'expo.out' },
+    );
   };
   const sizes = Array.from(stage.querySelectorAll<HTMLElement>('[data-k^="s5-size-"]'));
   const onClick = (e: MouseEvent) => {

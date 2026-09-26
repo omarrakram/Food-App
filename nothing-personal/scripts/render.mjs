@@ -34,15 +34,23 @@ function ffmpegPath() {
 
 function browserOptions() {
   if (process.env.CHROME) return { executablePath: process.env.CHROME };
-  if (existsSync('/opt/pw-browsers/chromium')) return { executablePath: '/opt/pw-browsers/chromium' };
+  if (existsSync('/opt/pw-browsers/chromium'))
+    return { executablePath: '/opt/pw-browsers/chromium' };
   return { channel: 'chrome' };
 }
 
-const server = await createServer({ root, logLevel: 'error', server: { port: 5199, strictPort: false } });
+const server = await createServer({
+  root,
+  logLevel: 'error',
+  server: { port: 5199, strictPort: false },
+});
 await server.listen();
 const url = server.resolvedUrls.local[0] + 'showcase?t=0';
 
-const browser = await chromium.launch({ ...browserOptions(), args: ['--force-color-profile=srgb'] });
+const browser = await chromium.launch({
+  ...browserOptions(),
+  args: ['--force-color-profile=srgb'],
+});
 const page = await browser.newPage({ viewport: { width: 540, height: 960 }, deviceScaleFactor: 2 });
 page.on('pageerror', (e) => console.error('[page]', e.message));
 await page.goto(url, { waitUntil: 'domcontentloaded' });
@@ -52,10 +60,30 @@ const duration = to ? Number(to) : await page.evaluate(() => window.__np.duratio
 const ff = spawn(
   ffmpegPath(),
   [
-    '-y', '-loglevel', 'error',
-    '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '14', '-pix_fmt', 'yuv420p',
-    '-vf', 'scale=1080:1920:flags=lanczos', '-movflags', '+faststart', out,
+    '-y',
+    '-loglevel',
+    'error',
+    '-f',
+    'image2pipe',
+    '-framerate',
+    String(fps),
+    '-c:v',
+    'mjpeg',
+    '-i',
+    '-',
+    '-c:v',
+    'libx264',
+    '-preset',
+    'slow',
+    '-crf',
+    '14',
+    '-pix_fmt',
+    'yuv420p',
+    '-vf',
+    'scale=1080:1920:flags=lanczos',
+    '-movflags',
+    '+faststart',
+    out,
   ],
   { stdio: ['pipe', 'inherit', 'inherit'] },
 );

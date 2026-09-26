@@ -7,7 +7,8 @@ import { grainTexture, inkTexture } from './lib/grain';
 import { Hook, Manifesto, Catalogue, Separation, Detail, Ending, Chrome } from './Scenes';
 
 const params = new URLSearchParams(location.search);
-const SHOWCASE = location.pathname.replace(/\/+$/, '').endsWith('/showcase') || params.has('showcase');
+const SHOWCASE =
+  location.pathname.replace(/\/+$/, '').endsWith('/showcase') || params.has('showcase');
 const AUTOPLAY = params.has('autoplay');
 const SEEK = params.has('t') ? Number(params.get('t')) : null;
 const SAFE = params.has('safe');

@@ -78,7 +78,11 @@ function load(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.decoding = 'async';
-    img.onload = () => img.decode().then(() => resolve(img), () => resolve(img));
+    img.onload = () =>
+      img.decode().then(
+        () => resolve(img),
+        () => resolve(img),
+      );
     img.onerror = () => reject(new Error(src));
     img.src = src;
   });

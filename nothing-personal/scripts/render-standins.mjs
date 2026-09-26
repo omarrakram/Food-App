@@ -15,16 +15,28 @@ const jobs = {
   product_linen: { garment: 'shirt', W: 1200, H: 1320, view: { cx: 500, cy: 556, s: 1.14, r: 0 } },
   product_jorts: { garment: 'jorts', W: 1200, H: 1200, view: { cx: 500, cy: 500, s: 1.14, r: 0 } },
   campaign_flatlay: {
-    garment: 'tee', type: 'jpg', W: 1080, H: 1920,
-    view: { cx: 520, cy: 610, s: 1.32, r: -0.07 }, background: paper,
+    garment: 'tee',
+    type: 'jpg',
+    W: 1080,
+    H: 1920,
+    view: { cx: 520, cy: 610, s: 1.32, r: -0.07 },
+    background: paper,
   },
   campaign_jorts: {
-    garment: 'jorts', type: 'jpg', W: 1080, H: 1920,
-    view: { cx: 500, cy: 520, s: 1.3, r: 0.05 }, background: paper,
+    garment: 'jorts',
+    type: 'jpg',
+    W: 1080,
+    H: 1920,
+    view: { cx: 500, cy: 520, s: 1.3, r: 0.05 },
+    background: paper,
   },
   campaign_linen: {
-    garment: 'shirt', type: 'jpg', W: 1080, H: 1920,
-    view: { cx: 480, cy: 600, s: 1.36, r: 0.06 }, background: paper,
+    garment: 'shirt',
+    type: 'jpg',
+    W: 1080,
+    H: 1920,
+    view: { cx: 480, cy: 600, s: 1.36, r: 0.06 },
+    background: paper,
   },
 };
 
@@ -37,7 +49,12 @@ const page = await browser.newPage();
 await page.goto('file://' + resolve(root, 'tools/standins/index.html'));
 for (const [name, job] of Object.entries(jobs)) {
   if (only.length && !only.includes(name)) continue;
-  const j = { ...job, W: Math.round(job.W * scale), H: Math.round(job.H * scale), view: { ...job.view, s: job.view.s * scale } };
+  const j = {
+    ...job,
+    W: Math.round(job.W * scale),
+    H: Math.round(job.H * scale),
+    view: { ...job.view, s: job.view.s * scale },
+  };
   const t = Date.now();
   const url = await page.evaluate((jj) => window.runJob(jj), j);
   const ext = job.type === 'jpg' ? 'jpg' : 'png';

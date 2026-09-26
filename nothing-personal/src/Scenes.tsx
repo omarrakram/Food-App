@@ -15,7 +15,13 @@ export const STRIP_COUNT = STRIPS;
  * The official logo when it has been downloaded, drawn through its alpha so
  * it takes the colour of the scene; otherwise the name, set in type.
  */
-function Wordmark({ assets, className, style, k, children }: {
+function Wordmark({
+  assets,
+  className,
+  style,
+  k,
+  children,
+}: {
   assets: Assets;
   className: string;
   style?: CSSProperties;
@@ -88,15 +94,17 @@ export function Hook({ assets, L }: Props) {
           <g clipPath="url(#s1-wipe)">
             <g data-k="s1-ph">
               <g data-k="s1-ph-in">
-              <image
-                href={hook.src}
-                x={-L.W * 0.1}
-                y={-L.H * 0.1}
-                width={L.W * 1.2}
-                height={L.H * 1.2}
-                preserveAspectRatio="xMidYMid slice"
-                style={{ filter: `grayscale(1) contrast(1.3) brightness(${exposure.toFixed(2)})` }}
-              />
+                <image
+                  href={hook.src}
+                  x={-L.W * 0.1}
+                  y={-L.H * 0.1}
+                  width={L.W * 1.2}
+                  height={L.H * 1.2}
+                  preserveAspectRatio="xMidYMid slice"
+                  style={{
+                    filter: `grayscale(1) contrast(1.3) brightness(${exposure.toFixed(2)})`,
+                  }}
+                />
               </g>
             </g>
           </g>
@@ -277,7 +285,11 @@ export function Separation({ assets, L }: Props) {
           data-k={`s4-strip-${i}`}
           style={{ left: `${(i * 100) / STRIPS}cqw`, width: `calc(${100 / STRIPS}cqw + 0.5px)` }}
         >
-          <div className="s4-frame" data-k={`s4-img-${i}`} style={{ left: `${(-i * 100) / STRIPS}cqw` }}>
+          <div
+            className="s4-frame"
+            data-k={`s4-img-${i}`}
+            style={{ left: `${(-i * 100) / STRIPS}cqw` }}
+          >
             <img src={img.src} alt="" style={{ objectPosition: img.pos }} />
           </div>
           <div className="fill s4-dim" data-k={`s4-dim-${i}`} />

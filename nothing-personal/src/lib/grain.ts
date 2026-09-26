@@ -36,7 +36,7 @@ export function inkTexture() {
   const ctx = c.getContext('2d')!;
   const img = ctx.createImageData(size, size);
   let s = 90210;
-  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296;
   for (let i = 0; i < size * size; i++) {
     const r = rnd();
     // ~7% voids, some partial

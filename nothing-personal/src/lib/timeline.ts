@@ -55,7 +55,8 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } });
   const show = (el: Element | Element[], t: number) => tl.set(el, { visibility: 'visible' }, t);
   const hide = (el: Element | Element[], t: number) => tl.set(el, { visibility: 'hidden' }, t);
-  const hidden = (...els: (Element | Element[])[]) => gsap.set(els.flat(), { visibility: 'hidden' });
+  const hidden = (...els: (Element | Element[])[]) =>
+    gsap.set(els.flat(), { visibility: 'hidden' });
 
   const [s1, s2, s3, s4, s5, s6] = ['s1', 's2', 's3', 's4', 's5', 's6'].map($);
   const nav = $('nav');
@@ -94,22 +95,51 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   // plates land out of register, drift one frame, then snap
   tl.set(plateK, { x: 1.7 * cw, y: -0.9 * ch }, B.stamp);
   tl.set(plateR, { x: -0.5 * cw, y: 0.25 * ch }, B.stamp);
-  tl.fromTo(plateR, { scale: 1.045, svgOrigin: origin }, { scale: 1, svgOrigin: origin, duration: 0.14, ease: 'expo.out' }, B.stamp);
-  tl.fromTo(plateK, { scale: 1.06, svgOrigin: origin }, { scale: 1.01, svgOrigin: origin, duration: 0.14, ease: 'expo.out' }, B.stamp);
+  tl.fromTo(
+    plateR,
+    { scale: 1.045, svgOrigin: origin },
+    { scale: 1, svgOrigin: origin, duration: 0.14, ease: 'expo.out' },
+    B.stamp,
+  );
+  tl.fromTo(
+    plateK,
+    { scale: 1.06, svgOrigin: origin },
+    { scale: 1.01, svgOrigin: origin, duration: 0.14, ease: 'expo.out' },
+    B.stamp,
+  );
   tl.set(plateK, { x: 0.9 * cw, y: -0.45 * ch }, B.stamp + 0.09);
   tl.set(plateR, { x: 0.15 * cw, y: 0 }, B.stamp + 0.09);
   tl.set(plateK, { x: 0, y: 0, scale: 1 }, B.snap);
   tl.set(plateR, { x: 0, y: 0 }, B.snap);
 
   show(photo, B.snap);
-  tl.to(wipe, { attr: L.portrait ? { y: H * 0.3 } : { x: W * 0.3 }, duration: 0.78, ease: 'expo.out' }, B.snap + 0.04);
+  tl.to(
+    wipe,
+    { attr: L.portrait ? { y: H * 0.3 } : { x: W * 0.3 }, duration: 0.78, ease: 'expo.out' },
+    B.snap + 0.04,
+  );
   tl.fromTo(photo, { y: 4 * ch }, { y: -4 * ch, duration: 1.45, ease: 'sine.inOut' }, B.snap);
   metaLines.forEach((line, i) => show(line, 0.8 + i * 0.07));
-  tl.fromTo(s1.querySelector('svg'), { scale: 1 }, { scale: 1.025, transformOrigin: '58% 50%', duration: 1.4, ease: 'sine.inOut' }, B.snap);
+  tl.fromTo(
+    s1.querySelector('svg'),
+    { scale: 1 },
+    { scale: 1.025, transformOrigin: '58% 50%', duration: 1.4, ease: 'sine.inOut' },
+    B.snap,
+  );
 
   // the sheet is pulled away; S2 was underneath
   show(s2, B.pull - 0.02);
-  tl.to(s1, { y: -H * 1.05, rotation: -1.6, transformOrigin: '0% 100%', duration: 0.44, ease: 'expo.inOut' }, B.pull);
+  tl.to(
+    s1,
+    {
+      y: -H * 1.05,
+      rotation: -1.6,
+      transformOrigin: '0% 100%',
+      duration: 0.44,
+      ease: 'expo.inOut',
+    },
+    B.pull,
+  );
   hide(s1, B.pull + 0.46);
   paperChrome(B.pull + 0.2);
 
@@ -128,8 +158,18 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const w2i = $('s2-w2i');
   const clipFrom = 80 * ch;
   const clipTo = -104 * ch;
-  tl.fromTo(clip, { y: clipFrom }, { y: clipTo, duration: 1.95, ease: 'power1.inOut' }, B.words - 0.05);
-  tl.fromTo(inner, { y: -clipFrom }, { y: -clipTo, duration: 1.95, ease: 'power1.inOut' }, B.words - 0.05);
+  tl.fromTo(
+    clip,
+    { y: clipFrom },
+    { y: clipTo, duration: 1.95, ease: 'power1.inOut' },
+    B.words - 0.05,
+  );
+  tl.fromTo(
+    inner,
+    { y: -clipFrom },
+    { y: -clipTo, duration: 1.95, ease: 'power1.inOut' },
+    B.words - 0.05,
+  );
   tl.fromTo(clipImg, { yPercent: -14 }, { yPercent: 0, duration: 1.95 }, B.words - 0.05);
   // the type is placed, not animated: slid in, left alone, slid out
   tl.fromTo(w1, { x: 60 * cw }, { x: 0, duration: 0.5, ease: 'expo.out' }, B.words);
@@ -185,9 +225,19 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const raw = $('s3-raw');
   const infoLines = Array.from($('s3-info').children);
   hidden(raw, infoLines);
-  tl.fromTo($('s3-jorts'), { y: 2.5 * ch, scale: 1.03 }, { y: 0, scale: 1, duration: 0.9, ease: 'expo.out' }, B.catRaw);
+  tl.fromTo(
+    $('s3-jorts'),
+    { y: 2.5 * ch, scale: 1.03 },
+    { y: 0, scale: 1, duration: 0.9, ease: 'expo.out' },
+    B.catRaw,
+  );
   show(raw, B.catRaw + 0.2);
-  tl.fromTo(raw, { scale: 1.28, rotation: -10 }, { scale: 1, rotation: -7, duration: 0.08, ease: 'power4.out' }, B.catRaw + 0.2);
+  tl.fromTo(
+    raw,
+    { scale: 1.28, rotation: -10 },
+    { scale: 1, rotation: -7, duration: 0.08, ease: 'power4.out' },
+    B.catRaw + 0.2,
+  );
   infoLines.forEach((l, i) => show(l, B.catRaw + 0.32 + i * 0.045));
 
   // ================================================================ S4 SEPARATION
@@ -207,7 +257,11 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   tl.fromTo(strips, { scale: 1.04 }, { scale: 1, duration: 0.6, ease: 'expo.out' }, B.cut);
   // hairline cuts open between the planes
   strips.forEach((s, i) => {
-    tl.to(s, { clipPath: 'inset(0% 1.5% 0% 1.5%)', duration: 0.22, ease: 'expo.out' }, B.cuts + Math.abs(i - mid) * 0.03);
+    tl.to(
+      s,
+      { clipPath: 'inset(0% 1.5% 0% 1.5%)', duration: 0.22, ease: 'expo.out' },
+      B.cuts + Math.abs(i - mid) * 0.03,
+    );
   });
   // planes narrow into slats; alternate slats travel in opposite directions;
   // the garment plane holds still
@@ -215,34 +269,72 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const slide = [1.4, -1.1, 0.7, 0, -0.8, 1.2, -1.5];
   strips.forEach((s, i) => {
     const d = B.separate + Math.abs(i - mid) * 0.05;
-    tl.to(s, { clipPath: i === mid ? 'inset(0% 1.5% 0% 1.5%)' : 'inset(0% 31% 0% 31%)', duration: 1.05, ease: 'expo.inOut' }, d);
+    tl.to(
+      s,
+      {
+        clipPath: i === mid ? 'inset(0% 1.5% 0% 1.5%)' : 'inset(0% 31% 0% 31%)',
+        duration: 1.05,
+        ease: 'expo.inOut',
+      },
+      d,
+    );
     if (i === mid) return;
     tl.to(s, { y: drift[i] * ch, duration: 1.1, ease: 'expo.inOut' }, d);
     tl.to(imgs[i], { x: slide[i] * cw, duration: 1.1, ease: 'expo.inOut' }, d);
     // keep breathing while the scan travels
-    tl.to(s, { y: drift[i] * 1.22 * ch, duration: B.collapse - d - 1.1 + 0.2, ease: 'none' }, d + 1.1);
+    tl.to(
+      s,
+      { y: drift[i] * 1.22 * ch, duration: B.collapse - d - 1.1 + 0.2, ease: 'none' },
+      d + 1.1,
+    );
   });
   // the photograph recedes so the type can come forward
   const dims = Array.from({ length: STRIP_COUNT }, (_, i) => $(`s4-dim-${i}`));
-  tl.to(dims.filter((_, i) => i !== mid), { opacity: 0.18, duration: 0.9, ease: 'power2.inOut' }, B.separate + 0.1);
-  tl.to(dims[mid], { opacity: 0, duration: 0.3 }, B.collapse);
+  tl.to(
+    dims.filter((_, i) => i !== mid),
+    { opacity: 0.18, duration: 0.9, ease: 'power2.inOut' },
+    B.separate + 0.1,
+  );
   // the red plate slips out of register
   ghosts.forEach((g, i) => {
     const dx = (i % 2 ? -1 : 1) * 1.1 * cw + slide[i] * cw;
-    tl.to(g, { opacity: 0.8, x: dx, y: (i % 2 ? 0.5 : -0.5) * ch, duration: 0.55, ease: 'power2.out' }, B.separate + 0.25);
+    tl.to(
+      g,
+      { opacity: 0.8, x: dx, y: (i % 2 ? 0.5 : -0.5) * ch, duration: 0.55, ease: 'power2.out' },
+      B.separate + 0.25,
+    );
   });
   // a scan crosses to the garment
   show(scan, B.separate + 0.08);
-  tl.fromTo(scan, { x: 0 }, { x: 50 * cw, duration: 1.12, ease: 'power2.inOut' }, B.separate + 0.08);
+  tl.fromTo(
+    scan,
+    { x: 0 },
+    { x: 50 * cw, duration: 1.12, ease: 'power2.inOut' },
+    B.separate + 0.08,
+  );
 
   // collapse toward the product
   strips.forEach((s, i) => {
     if (i === mid) return;
     const order = Math.abs(i - mid);
-    tl.to(s, { x: (mid - i) * (100 / STRIP_COUNT) * cw, y: 0, clipPath: 'inset(0% 50% 0% 50%)', duration: 0.42, ease: 'expo.in' }, B.collapse + (3 - order) * 0.05);
+    tl.to(
+      s,
+      {
+        x: (mid - i) * (100 / STRIP_COUNT) * cw,
+        y: 0,
+        clipPath: 'inset(0% 50% 0% 50%)',
+        duration: 0.42,
+        ease: 'expo.in',
+      },
+      B.collapse + (3 - order) * 0.05,
+    );
     hide(s, B.collapse + 0.6);
   });
-  tl.to(ghosts.filter((_, i) => i !== mid), { opacity: 0, duration: 0.2 }, B.collapse);
+  tl.to(
+    ghosts.filter((_, i) => i !== mid),
+    { opacity: 0, duration: 0.2 },
+    B.collapse,
+  );
   hide(scan, B.collapse + 0.05);
   // the surviving plane prints in red
   tl.to(ghosts[mid], { opacity: 1, x: 0, y: 0, duration: 0.01 }, B.redplate);
@@ -256,9 +348,14 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const sr = s4.getBoundingClientRect();
   const pr = prod.getBoundingClientRect();
   // garment bounds inside the product image (stand-in render geometry)
-  const gScale = pr.width / 1200 * 1.14;
+  const gScale = (pr.width / 1200) * 1.14;
   const geom: PortalGeom = {
-    rect: { x: (mid * 100 * cw) / STRIP_COUNT + 1.5 * cw / STRIP_COUNT, y: 0, w: (100 * cw) / STRIP_COUNT * 0.97, h: H },
+    rect: {
+      x: (mid * 100 * cw) / STRIP_COUNT + (1.5 * cw) / STRIP_COUNT,
+      y: 0,
+      w: ((100 * cw) / STRIP_COUNT) * 0.97,
+      h: H,
+    },
     scale: gScale * 1.03,
     cx: pr.left - sr.left + pr.width / 2,
     cy: pr.top - sr.top + pr.height / 2 + (TEE_BOX.chestY - 556) * gScale,
@@ -272,7 +369,11 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   tl.set(s5, { clipPath: portalPolygon(geom, 0, 0, 1) }, B.morph);
   hide(strips[mid], B.morph + 0.02);
   tl.to(pState, { my: 1, duration: 0.3, ease: 'power3.inOut', onUpdate: applyPortal }, B.morph);
-  tl.to(pState, { mx: 1, duration: 0.42, ease: 'expo.inOut', onUpdate: applyPortal }, B.morph + 0.08);
+  tl.to(
+    pState,
+    { mx: 1, duration: 0.42, ease: 'expo.inOut', onUpdate: applyPortal },
+    B.morph + 0.08,
+  );
   tl.to(pState, { g: 18, duration: 0.74, ease: 'power4.in', onUpdate: applyPortal }, B.portal);
   tl.set(s5, { clipPath: 'none' }, B.print - 0.08);
   hide(s4, B.print - 0.08);
@@ -301,28 +402,42 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   const addAt = target($('s3-add'));
   const sizeAt = target($('s5-size-M'), 0.5, 0.6);
   if (!cursorLive) {
-  show(cursor, B.cat01 + 0.12);
-  tl.fromTo(cursor, { x: cx(92), y: cy(68) }, { x: cx(60), y: cy(47), duration: 0.8, ease: 'power3.out' }, B.cat01 + 0.12);
-  // the garment answers the pointer by a few pixels
-  tl.to(tee, { x: -0.9 * cw, y: -0.5 * ch, duration: 0.8, ease: 'power3.out' }, B.cat01 + 0.66);
-  tl.to(cursor, { x: cx(70), y: cy(58), duration: 0.9, ease: 'power2.inOut' }, B.cat109);
-  tl.to(cursor, { x: addAt.x, y: addAt.y, duration: 0.5, ease: 'power3.inOut' }, B.add - 0.52);
-  click(B.add);
-  tl.set($('s3-add-0'), { visibility: 'hidden' }, B.add + 0.02);
-  tl.set($('s3-add-1'), { visibility: 'visible' }, B.add + 0.02);
-  tl.set($('bag-0'), { visibility: 'hidden' }, B.add + 0.1);
-  tl.set($('bag-1'), { visibility: 'visible' }, B.add + 0.1);
-  tl.set($('bag-dot'), { opacity: 1 }, B.add + 0.1);
-  tl.to(cursor, { x: cx(30), y: cy(70), duration: 0.35, ease: 'power2.out' }, B.add + 0.08);
-  hide(cursor, B.cut);
+    show(cursor, B.cat01 + 0.12);
+    tl.fromTo(
+      cursor,
+      { x: cx(92), y: cy(68) },
+      { x: cx(60), y: cy(47), duration: 0.8, ease: 'power3.out' },
+      B.cat01 + 0.12,
+    );
+    // the garment answers the pointer by a few pixels
+    tl.to(tee, { x: -0.9 * cw, y: -0.5 * ch, duration: 0.8, ease: 'power3.out' }, B.cat01 + 0.66);
+    tl.to(cursor, { x: cx(70), y: cy(58), duration: 0.9, ease: 'power2.inOut' }, B.cat109);
+    tl.to(cursor, { x: addAt.x, y: addAt.y, duration: 0.5, ease: 'power3.inOut' }, B.add - 0.52);
+    click(B.add);
+    tl.set($('s3-add-0'), { visibility: 'hidden' }, B.add + 0.02);
+    tl.set($('s3-add-1'), { visibility: 'visible' }, B.add + 0.02);
+    tl.set($('bag-0'), { visibility: 'hidden' }, B.add + 0.1);
+    tl.set($('bag-1'), { visibility: 'visible' }, B.add + 0.1);
+    tl.set($('bag-dot'), { opacity: 1 }, B.add + 0.1);
+    tl.to(cursor, { x: cx(30), y: cy(70), duration: 0.35, ease: 'power2.out' }, B.add + 0.08);
+    hide(cursor, B.cut);
 
-  // S5: the pointer crosses the garment; a band of red plate follows it
-  show(cursor, B.print + 0.35);
-  tl.fromTo(cursor, { x: cx(98), y: cy(40) }, { x: cx(8), y: cy(44), duration: 1.3, ease: 'sine.inOut' }, B.print + 0.35);
-  tl.to(cursor, { x: sizeAt.x, y: sizeAt.y, duration: 0.42, ease: 'power3.inOut' }, B.print + 1.4);
-  click(B.print + 1.84);
-  tl.set($('s5-size-M'), { color: 'var(--red)' }, B.print + 1.86);
-  hide(cursor, B.strip);
+    // S5: the pointer crosses the garment; a band of red plate follows it
+    show(cursor, B.print + 0.35);
+    tl.fromTo(
+      cursor,
+      { x: cx(98), y: cy(40) },
+      { x: cx(8), y: cy(44), duration: 1.3, ease: 'sine.inOut' },
+      B.print + 0.35,
+    );
+    tl.to(
+      cursor,
+      { x: sizeAt.x, y: sizeAt.y, duration: 0.42, ease: 'power3.inOut' },
+      B.print + 1.4,
+    );
+    click(B.print + 1.84);
+    tl.set($('s5-size-M'), { color: 'var(--red)' }, B.print + 1.86);
+    hide(cursor, B.strip);
   }
 
   const bandW = 0.11;
@@ -364,7 +479,12 @@ export function buildTimeline({ root, L, cursorLive }: Ctx) {
   show([author, authorR], stamp);
   tl.set(authorR, { x: -1.4 * cw, y: 0.7 * ch }, stamp);
   tl.set(author, { x: 1.1 * cw, y: -0.5 * ch }, stamp);
-  tl.fromTo([author, authorR], { scale: 1.05 }, { scale: 1, duration: 0.14, ease: 'expo.out', transformOrigin: '0% 50%' }, stamp);
+  tl.fromTo(
+    [author, authorR],
+    { scale: 1.05 },
+    { scale: 1, duration: 0.14, ease: 'expo.out', transformOrigin: '0% 50%' },
+    stamp,
+  );
   tl.set(authorR, { x: -0.6 * cw, y: 0.25 * ch }, stamp + 0.08);
   tl.set(author, { x: 0.3 * cw, y: -0.1 * ch }, stamp + 0.08);
   // it never fully registers: a sliver of red stays
